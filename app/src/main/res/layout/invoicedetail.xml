@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_marginBottom="45dp">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Customer Name"
+        android:padding="2dp"
+        android:textStyle="bold"
+        android:id="@+id/customernamtxt"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:id="@+id/invoicenbtxt"
+        android:padding="2dp"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/customernamtxt"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:id="@+id/invoiceduetxt"
+        android:padding="2dp"
+        android:layout_toRightOf="@+id/invoicenbtxt"
+        android:layout_marginLeft="3dp"
+        android:layout_below="@+id/customernamtxt"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:padding="2dp"
+        android:id="@+id/invoicepricetxt"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_below="@+id/name"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+
+        android:id="@+id/statustxt"
+        android:padding="2dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/invoicepricetxt"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status :"
+        android:id="@+id/invoicestatus"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/invoicenbtxt"
+        android:textColor="@color/gray"
+        android:padding="2dp"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending"
+        android:id="@+id/invoicesttsuspend"
+        android:layout_toRightOf="@+id/invoicestatus"
+        android:layout_marginLeft="5dp"
+        android:padding="2dp"
+        android:layout_below="@+id/invoiceduetxt"
+        android:textColor="@color/red"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_below="@+id/invoicesttsuspend"
+        android:layout_marginTop="10dp"
+        >
+
+    </View>
+</RelativeLayout>

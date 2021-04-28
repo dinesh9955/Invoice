@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="grey">#F4F4F4</color>
+    <color name="dark_blue">#1B60FB</color>
+    <color name="black">#000000</color>
+    <color name="d_grey">#c5c5c5</color>
+    <color name="dark_grey">#7D7D7D</color>
+    <color name="white">#FFFFFF</color>
+    <color name="light_grey">#ECECEC</color>
+    <color name="light_blue">#6695FF</color>
+    <color name="green">#80c904</color>
+
+
+    <color name="darkblue">#1B60FB</color>
+    <color name="darkbluefont">#002C90</color>
+    <color name="background">#F4F4F4</color>
+    <color name="selectiongreen">#32D736</color>
+    <color name="lightwhite">#C5E6FF</color>
+    <color name="lightpurple">#6695FF</color>
+    <color name="lightbutton">#DFE8FD</color>
+
+    <color name="red">#FF0000</color>
+    <color name="blue">#0000FF</color>
+    <color name="lightgray">#DCDCDC</color>
+    <color name="darkgray">#7D7D7D</color>
+    <color name="gray">#AAAAAA</color>
+    <color name="bluecolor">#656565</color>
+    <color name="yellowtheme">#ffff00</color>
+    <color name="splash">#F4FAFD</color>
+    <color name="transparent">#00ff001C</color>
+    <color name="golden">#D9BE09</color>
+    <color name="bottom">#777777</color>
+
+    <color name="one">#2dc795</color>
+    <color name="two">#09BB9F</color>
+    <color name="three">#15607A</color>
+    <color name="four">#1D81A2</color>
+    <color name="five">#15A4CD</color>
+
+    <color name="selectioncolor">#80D9BE09</color>
+
+    <color name="liteblue">#00B3FA</color>
+    <color name="fragmentfont">#312D2C</color>
+    <color name="sidemenublue">#00315E</color>
+    <color name="locationtxtcolor">#919782</color>
+    <color name="proptitletxtcolor">#312D2C</color>
+    <color name="recycler_view_item_swipe_left_background">#00BB00</color>
+    <color name="recycler_view_itemleftRed_background">#FF0000</color>
+</resources>

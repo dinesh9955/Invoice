@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Details.Company_Details_Fragment"
+    android:background="@color/white">
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/sv"
+        android:layout_marginTop="?actionBarSize">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="@color/darkgray"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="?actionBarSize"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:id="@+id/name"/>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/placeholder_big"
+                app:riv_corner_radius="200dp"
+                android:layout_below="@+id/name"
+                android:scaleType="centerCrop"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:id="@+id/image"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price"
+                android:textColor="@color/lightpurple"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/image"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:id="@+id/price"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/price"
+                android:layout_marginTop="60dp"
+                android:padding="5dp"
+                android:id="@+id/category"
+                android:textColor="@color/gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Measurement Unit"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/category"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:id="@+id/measurement"
+                android:textColor="@color/gray"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/measurement"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:id="@+id/description"
+                android:textColor="@color/gray"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Taxable"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/description"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:id="@+id/taxable"
+                android:textColor="@color/gray"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:gravity="center"
+                android:layout_marginBottom="90dp"/>
+
+
+
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/avibackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"/>
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_centerInParent="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="gone"
+        app:indicatorName="BallClipRotatePulseIndicator"
+
+        />
+    <include layout="@layout/bottom_navigation">
+    </include>
+
+</RelativeLayout>

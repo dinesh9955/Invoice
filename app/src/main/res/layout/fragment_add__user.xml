@@ -1,0 +1,446 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.receipt.invoice.stock.sirproject.User.Add_User"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/bluerelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="0dp"
+                android:layout_marginBottom="50dp"
+                >
+
+                <TextView
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COMPANY SETUP"
+                    android:textColor="@color/darkblue"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="?actionBarSize"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/heading">
+                </TextView>
+
+                <TextView
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You need to complete the company setup in order\nto make the most of the SIR app."
+                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/heading"
+                    android:layout_marginTop="30dp"
+                    android:textSize="12sp"
+                    android:id="@+id/description"/>
+
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="70dp"
+                    android:id="@+id/uploadimage"
+                    android:src="@drawable/upload_company_logo"
+                    android:layout_below="@+id/description"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload photo"
+                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/uploadimage"
+                    android:layout_marginTop="20dp"
+                    android:textSize="12sp"
+                    android:id="@+id/imagedescription"
+                    android:layout_centerHorizontal="true"/>
+
+                <EditText
+                    android:layout_marginTop="?actionBarSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imagedescription"
+                    android:hint="Name"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/username"/>
+
+                <EditText
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/username"
+                    android:hint="Email Address"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/useremail"
+                    android:inputType="textEmailAddress"/>
+
+                <EditText
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/useremail"
+                    android:hint="Password"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/password"
+                    android:inputType="textPassword"/>
+
+
+                <com.isapanah.awesomespinner.AwesomeSpinner
+
+                    android:id="@+id/userrole"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:spinnerDirection="ltr"
+                    app:spinnerHint="Select Company"
+                    android:layout_below="@+id/password"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittextshape"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/accessrights"
+                    android:layout_below="@+id/userrole"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="ACCESS RIGHTS"
+                    android:textColor="@color/lightpurple"
+                    />
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bluerelative"
+                android:background="@color/white"
+                android:layout_alignParentStart="true"
+                android:id="@+id/rleft"
+                >
+
+                <CheckBox
+                    android:id="@+id/chkinvoices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Invoices"
+                    android:textColor="@color/dark_grey"
+                    android:textAlignment="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+                <CheckBox
+                    android:id="@+id/chkestimates"
+                    android:layout_below="@id/chkinvoices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Estimates"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+
+
+                <CheckBox
+                    android:id="@+id/chkreceipts"
+                    android:layout_below="@id/chkestimates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Receipts"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+
+
+
+                <CheckBox
+                    android:id="@+id/chkpurchase"
+                    android:layout_below="@id/chkreceipts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Purchase Order"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+
+
+                <CheckBox
+                    android:id="@+id/chkproducts"
+                    android:layout_below="@id/chkpurchase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Products"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+
+                <CheckBox
+                    android:id="@+id/chkcustomers"
+                    android:layout_below="@id/chkproducts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Customers"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+                <CheckBox
+                    android:id="@+id/chkcredit"
+                    android:layout_below="@id/chkcustomers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Credit Notes"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+
+
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bluerelative"
+                android:background="@color/white"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/rright"
+                >
+
+                <CheckBox
+                    android:id="@+id/chkpayments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Payments Voucher"
+                    android:textColor="@color/dark_grey"
+                    android:textAlignment="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+                <CheckBox
+                    android:id="@+id/chkstock"
+                    android:layout_below="@id/chkpayments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Stock"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+
+
+                <CheckBox
+                    android:id="@+id/chktaxes"
+                    android:layout_below="@id/chkstock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Taxes"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+
+
+
+                <CheckBox
+                    android:id="@+id/chksubadmin"
+                    android:layout_below="@id/chktaxes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Sub-Admin"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+
+
+                <CheckBox
+                android:id="@+id/chkservices"
+                android:layout_below="@id/chksubadmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/ITEMS"
+                android:textAlignment="center"
+                android:textColor="@color/dark_grey"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                >
+            </CheckBox>
+
+                <CheckBox
+                    android:id="@+id/chksuppliers"
+                    android:layout_below="@id/chkservices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Suppliers"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+
+                <CheckBox
+                    android:id="@+id/chkdebit"
+                    android:layout_below="@id/chksuppliers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="Debit Notes"
+                    android:textAlignment="center"
+                    android:textColor="@color/dark_grey"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    >
+                </CheckBox>
+
+
+            </RelativeLayout>
+
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Add new user"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:layout_below="@+id/rleft"
+                android:layout_marginTop="30dp"
+                android:id="@+id/adduser"
+                android:background="@drawable/buttonshape"
+                style="?android:attr/borderlessButtonStyle"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:text="@string/Termsconditionsapply"
+                android:textColor="@color/dark_grey"
+                android:textSize="12sp"
+                android:layout_below="@id/adduser"
+                android:id="@+id/txtterms"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="USD 3.99 one-time payment per additional user(for assigning additional users)."
+                android:textColor="@color/dark_grey"
+                android:textSize="8sp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/txtterms"
+                android:id="@+id/txtdescription"
+                android:layout_marginBottom="80dp"
+                />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/avibackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"/>
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_centerInParent="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="gone"
+        app:indicatorName="BallClipRotatePulseIndicator"
+
+        />
+
+
+</RelativeLayout>

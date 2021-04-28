@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="com.receipt.invoice.stock.sirproject.Home.Home_Activity">
+
+    <include layout="@layout/toolbar">
+    </include>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        android:fillViewport="true"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:id="@+id/bluerelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/home_white_curve"
+                android:paddingBottom="20dp"
+                android:elevation="10dp"
+                >
+
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/menu_icon"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/menu"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hello"
+                    android:layout_below="@+id/menu"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:id="@+id/hello"
+                    android:textColor="@color/darkgray"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_below="@+id/hello"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="7dp"
+                    android:id="@+id/description"
+                    android:textColor="@color/darkgray"
+                    android:textSize="15sp"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A quick look at your key business activities"
+                    android:layout_below="@+id/description"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/darkgray"
+                    android:id="@+id/quick"
+                    android:textSize="12sp"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_below="@+id/quick"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/businessactivitiesRV"
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:layout_marginTop="100dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Unpaid invoices"
+                    android:textSize="14dp"
+                    android:textColor="@color/darkgray"
+                    android:id="@+id/txtinvoice"
+                    android:visibility="gone"
+
+
+                    />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/invoiceoverdueRV"
+                android:layout_below="@+id/bluerelative">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+
+                android:layout_marginTop="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No OverDue Invoices"
+                android:textSize="14dp"
+                android:textColor="@color/darkgray"
+                android:layout_below="@+id/bluerelative"
+
+                />
+
+            <RelativeLayout
+
+                android:elevation="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:paddingTop="25dp"
+                android:paddingBottom="25dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/customers"
+                android:layout_below="@+id/invoiceoverdueRV"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/white_curve">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Customers"
+                    android:id="@+id/customerstxt"
+                    android:textColor="@color/darkgray"
+                    android:textSize="12sp"
+
+                    />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See all"
+                    android:id="@+id/seeall"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/darkgray"
+android:visibility="gone"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/recycleCustomers"
+                    android:layout_below="@+id/customerstxt"
+
+                    >
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:layout_marginTop="100dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Customers"
+                    android:textSize="14dp"
+                    android:textColor="@color/darkgray"
+                    android:visibility="gone"
+                    android:id="@+id/no_customer"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:elevation="10dp"
+                android:layout_marginBottom="90dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:paddingTop="25dp"
+                android:paddingBottom="25dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/vendors"
+                android:layout_below="@+id/customers"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/white_curve">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vendors"
+                    android:id="@+id/vendorstxt"
+                    android:textColor="@color/darkgray"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See all"
+                    android:id="@+id/vendorsseeall"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/darkgray"
+                    android:visibility="gone"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/recyclerVinder"
+                    android:layout_below="@+id/vendorstxt">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+
+                    android:layout_marginTop="100dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Vendors"
+                    android:textSize="14dp"
+                    android:textColor="@color/darkgray"
+                    android:id="@+id/txtNo"
+                    android:visibility="gone"
+
+
+                    />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/avibackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"/>
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_centerInParent="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="gone"
+        app:indicatorName="BallClipRotatePulseIndicator"
+
+        />
+    <include layout="@layout/bottom_navigation">
+    </include>
+
+</RelativeLayout>

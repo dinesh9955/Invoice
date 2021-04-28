@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/relativelayoutshade"
+    tools:context="com.receipt.invoice.stock.sirproject.SignupSignin.Verification_Code_Activity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/r100"
+
+        >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/r1"
+        android:background="@drawable/signupbackgroundshape"
+        android:elevation="10dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_btn"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:tint="@color/dark_blue"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:id="@+id/imgback"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/imgback"
+            android:text="VERIFICATION"
+            android:textSize="26dp"
+            android:textColor="@color/dark_blue"
+            android:id="@+id/txtverification"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtverification"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:text="We have sent a verification code to your email addrress.Please enter the code below to proceed."
+            android:textSize="16dp"
+            android:id="@+id/txtverificationdes"
+            />
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:layout_below="@id/txtverificationdes"
+            android:layout_marginLeft="55dp"
+            android:gravity="center"
+            android:maxLength="1"
+            android:inputType="number"
+            android:background="@drawable/white_edittext_outline"
+            android:id="@+id/edv1"
+            />
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/txtverificationdes"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:maxLength="1"
+            android:inputType="number"
+            android:background="@drawable/white_edittext_outline"
+            android:layout_toRightOf="@id/edv1"
+            android:id="@+id/edv2"
+            />
+
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
+            android:layout_below="@id/txtverificationdes"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:maxLength="1"
+            android:inputType="number"
+            android:background="@drawable/white_edittext_outline"
+            android:layout_toRightOf="@id/edv2"
+            android:id="@+id/edv3"
+            />
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
+            android:layout_below="@id/txtverificationdes"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:maxLength="1"
+            android:inputType="number"
+            android:background="@drawable/white_edittext_outline"
+            android:layout_toRightOf="@id/edv3"
+            android:id="@+id/edv4"
+            />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="37dp"
+            android:layout_toRightOf="@id/edv4"
+            android:layout_below="@id/txtverificationdes"
+            android:src="@drawable/code_success"
+            android:id="@+id/imgsucess"
+            android:visibility="gone"
+
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edv4"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/buttonshape"
+            android:text="Proceed"
+            android:layout_marginBottom="90dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:id="@+id/btnverify"
+            />
+
+    </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Didn't receive the code?"
+            android:layout_marginTop="80dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="14dp"
+            android:textColor="@color/dark_grey"
+            android:id="@+id/txtcode"
+            android:layout_below="@id/r1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/txtcode"
+            android:text="Re-send the code"
+            android:textColor="@color/dark_blue"
+            android:id="@+id/txtresendcode"
+            />
+
+
+
+    </RelativeLayout>
+
+
+
+
+    </ScrollView>
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/avibackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"/>
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_centerInParent="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="gone"
+        app:indicatorName="BallClipRotatePulseIndicator"
+
+        />
+</RelativeLayout>

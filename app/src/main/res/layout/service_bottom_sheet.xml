@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/createbottomsheet_curve">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Items"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/dark_blue"
+        android:id="@+id/txtservices"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/search_icon"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Search Items"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/txtservices"
+        android:id="@+id/search_service"
+        android:padding="10dp"
+        android:background="@drawable/edittextshape"
+        android:elevation="3dp"
+        android:maxLines="1"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add New"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/dark_blue"
+            android:id="@+id/add_service_new"
+            android:layout_below="@+id/search_service"
+            android:padding="5dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_services"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="45dp"
+        android:layout_below="@+id/add_service_new">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

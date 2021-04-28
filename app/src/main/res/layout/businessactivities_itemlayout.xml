@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:background="@drawable/businessactivites_curve"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="10dp"
+    android:elevation="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invoices"
+        android:id="@+id/invoicestxt"
+        android:textColor="@color/lightwhite"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$ 2680.0"
+        android:id="@+id/amount"
+        android:layout_below="@+id/invoicestxt"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        />
+
+
+    <ImageView
+        android:src="@drawable/invoices_dash_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/price"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:layout_centerVertical="true"/>
+
+
+
+</RelativeLayout>

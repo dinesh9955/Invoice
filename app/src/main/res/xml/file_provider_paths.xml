@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+<!--    <external-path-->
+<!--        name="my_images"-->
+<!--        path="Android/data/com.example.tedpicker/files/Pictures" />-->
+<!--    -->
+
+    <files-path name="files" path="." />
+    <external-path name="external_files" path="."/>
+
+    <!-- replace com.androidwave.filepicker with your package name -->
+</paths>
+

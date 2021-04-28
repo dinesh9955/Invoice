@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Stock.Update_Stock"
+    android:background="@color/white">
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp">
+
+            <TextView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="If your company is running out of stock, then hurry up and update it from here."
+                android:layout_marginTop="?actionBarSize"
+                android:id="@+id/description"
+                android:textColor="@color/darkgray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
+
+            <com.isapanah.awesomespinner.AwesomeSpinner
+                android:id="@+id/companyspinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:spinnerDirection="ltr"
+                app:spinnerHint="Select Company"
+                android:layout_below="@+id/description"
+                android:layout_marginTop="?actionBarSize"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittextshape"
+                />
+
+            <com.isapanah.awesomespinner.AwesomeSpinner
+                android:visibility="gone"
+                android:id="@+id/vendorspinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:spinnerDirection="ltr"
+                app:spinnerHint="Select Vendor"
+                android:layout_below="@+id/companyspinner"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittextshape"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Warehouse (s)"
+                android:layout_marginTop="?actionBarSize"
+                android:id="@+id/selectwarehouse"
+                android:textColor="@color/lightpurple"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/vendorspinner"
+                android:padding="5dp"
+                />
+
+            <com.isapanah.awesomespinner.AwesomeSpinner
+                android:id="@+id/productspinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:spinnerDirection="ltr"
+                app:spinnerHint="Select Product"
+                android:layout_below="@+id/selectwarehouse"
+                android:layout_marginTop="?actionBarSize"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittextshape"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity of Product"
+                android:id="@+id/quantitydescription"
+                android:layout_below="@+id/productspinner"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/lightpurple"
+                android:textSize="12sp"/>
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/quantitydescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Quantity"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="12dp"
+                android:padding="15dp"
+                android:background="@drawable/edittextshape"
+                android:elevation="2dp"
+                android:id="@+id/quantity"
+                android:inputType="numberDecimal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price Per Unit"
+                android:id="@+id/pricedescription"
+                android:layout_below="@+id/quantity"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/lightpurple"
+                android:textSize="12sp"
+                android:visibility="gone"/>
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/pricedescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Price Per Unit"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="12dp"
+                android:padding="15dp"
+                android:background="@drawable/edittextshape"
+                android:elevation="2dp"
+                android:id="@+id/price"
+                android:inputType="numberDecimal"
+                android:visibility="gone"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Update"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:layout_below="@+id/price"
+                android:layout_marginTop="30dp"
+                android:id="@+id/update"
+                android:background="@drawable/buttonshape"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_marginBottom="90dp"
+
+                />
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/avibackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"/>
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_centerInParent="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="gone"
+        app:indicatorName="BallClipRotatePulseIndicator"
+
+        />
+
+</RelativeLayout>

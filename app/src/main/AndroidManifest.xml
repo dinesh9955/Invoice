@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.receipt.invoice.stock.sirproject">
+
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:name=".Model.GlobalVariabal"
+        android:allowBackup="true"
+        android:icon="@mipmap/app_icon"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/app_icon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="stateHidden|adjustPan">
+
+        <activity
+            android:name=".Invoice.ViewInvoice_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings" />
+
+
+        <activity
+            android:name=".Receipts.ViewReceipt_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name=".Splash_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".Notes.ViewCreditNote_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
+
+        <activity
+            android:name=".Notes.CreateNotesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
+
+        <activity
+            android:name=".Receipts.EditReceiptActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash">
+
+        </activity>
+
+        <activity
+            android:name=".Xyz"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash">
+
+        </activity>
+
+
+
+        <activity
+            android:name=".OnBoardings.OnBoarding_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings" />
+        <activity
+            android:name=".SignupSignin.Signup_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings" />
+        <activity
+            android:name=".SignupSignin.Signin_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings" />
+        <activity
+            android:name=".ForgotResetPassword.ResetPassword_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings" />
+        <activity
+            android:name=".ForgotResetPassword.ForgotPassword_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings" />
+        <activity
+            android:name=".SignupSignin.Verification_Code_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings" />
+        <activity
+            android:name=".Home.Settings_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings" />
+        <activity
+            android:name=".Home.Go_Premium_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/GoPremium" />
+        <activity
+            android:name=".Home.Home_Activity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings" >
+
+        </activity>
+        <activity
+            android:name=".Estimate.EstimateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Invoice.Create_Invoice_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+        <activity
+            android:name=".Invoice.ConvertToReceiptsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+        <activity
+            android:name=".Invoice.InvoiceToReceiptsWebview"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+        <activity
+            android:name=".Notes.CreditNotesViewActivityWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+
+        <activity
+            android:name=".Notes.EditCreditNotesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+
+        <!--
+   <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+        -->
+        <!--
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.com.mvc.imagepicker.provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+        -->
+        <!--
+ <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.mvc.imagepicker.provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"
+                tools:replace="android:resource" />
+        </provider>
+        -->
+        <activity
+            android:name=".Customer.Customer_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Vendor.Vendor_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Company.Companies_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Details.Company_Details_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Details.User_Detail_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Details.Product_Detail_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Details.Customer_Detail_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Details.Vendor_Detail_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Tax.Tax_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Service.Service_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Product.Product_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".User.User_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Details.Service_Detail_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Stock.Stock_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Tax.Tax_Edit"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Details.Stock_Products_Detail"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Invoice.Add_Item_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Invoice.InvoiceViewActivityWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+        <activity
+            android:name=".Receipts.ReceiptViewActivityWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+        <activity
+            android:name=".Invoice.EditInvoiceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+
+        <activity
+            android:name=".Receipts.ReceiptsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+        <activity
+            android:name=".Estimate.EstimateViewActivityWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+        <activity
+            android:name=".Estimate.EditEstimateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+
+        <activity
+            android:name=".Receipts.EditEditReceiptActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+        <activity
+            android:name=".Estimate.ViewEstimate_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+        <activity
+            android:name=".Invoice.ChooseTemplate"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+
+        <activity
+            android:name=".Abc"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
+    </application>
+
+</manifest>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_marginBottom="45dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="General Sales Tax"
+        android:textStyle="bold"
+        android:id="@+id/taxname"
+        android:layout_marginLeft="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="13%"
+        android:id="@+id/taxpercent"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/taxname"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inclusive"
+        android:id="@+id/companyname"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/taxpercent"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="edit"
+        android:id="@+id/edit"
+        android:layout_below="@+id/taxpercent"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/lightpurple"
+        android:textSize="10sp"
+        android:layout_marginTop="5dp"
+        android:padding="3dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_below="@+id/companyname"
+        android:layout_marginTop="30dp">
+
+    </View>
+
+
+
+</RelativeLayout>

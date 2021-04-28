@@ -1,0 +1,300 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context="com.receipt.invoice.stock.sirproject.Product.Add_Product">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+
+                android:id="@+id/bluerelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="30dp"
+                android:elevation="10dp"
+                android:layout_marginBottom="50dp"
+                >
+
+                <TextView
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COMPANY SETUP"
+                    android:textColor="@color/darkblue"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="?actionBarSize"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/heading">
+                </TextView>
+
+                <TextView
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You need to complete the company setup in order\nto make the most of the SIR app."
+                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/heading"
+                    android:layout_marginTop="30dp"
+                    android:textSize="12sp"
+                    android:id="@+id/description"/>
+
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="70dp"
+                    android:id="@+id/uploadimage"
+                    android:src="@drawable/upload_company_logo"
+                    android:layout_below="@+id/description"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload product image"
+                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/uploadimage"
+                    android:layout_marginTop="20dp"
+                    android:textSize="12sp"
+                    android:id="@+id/imagedescription"
+                    android:layout_centerHorizontal="true"/>
+
+                <EditText
+                    android:layout_marginTop="?actionBarSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imagedescription"
+                    android:hint="Product Name"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/productname"/>
+
+                <EditText
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/productname"
+                    android:hint="Per Unit Price"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:inputType="numberDecimal"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/productprice"
+                    />
+
+                <EditText
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/productprice"
+                    android:hint="Re Order Level"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:inputType="number"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/reorderlevel"
+                    />
+
+
+                <com.isapanah.awesomespinner.AwesomeSpinner
+                    android:id="@+id/productcategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:spinnerDirection="ltr"
+                    app:spinnerHint="Product Category"
+                    android:layout_below="@+id/reorderlevel"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittextshape"
+                    />
+
+                <EditText
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/productcategory"
+                    android:hint="Other Category if not listed"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/othercategory"
+                    />
+                <com.isapanah.awesomespinner.AwesomeSpinner
+                    android:id="@+id/measurementunit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:spinnerDirection="ltr"
+                    app:spinnerHint="Measurement Unit"
+                    android:layout_below="@+id/othercategory"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittextshape"
+                    />
+
+
+                <EditText
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/measurementunit"
+                    android:hint="Other Measurementunit"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:visibility="gone"
+                    android:id="@+id/mesurementunitedittxt"
+                    />
+
+                <EditText
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_below="@+id/mesurementunitedittxt"
+                    android:hint="Product Description"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/productdescription"
+                    android:gravity="start"
+                    android:maxHeight="150dp"
+                    />
+                <com.isapanah.awesomespinner.AwesomeSpinner
+                    android:id="@+id/selectcompany"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:spinnerDirection="ltr"
+                    app:spinnerHint="Select Company"
+                    android:layout_below="@+id/productdescription"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittextshape"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/selectwarehouse"
+                    android:layout_below="@+id/selectcompany"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="Select Warehouse (s)"
+                    android:textColor="@color/lightpurple"
+                    android:alpha="0"
+                    android:visibility="gone"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/taxable"
+                    android:layout_below="@+id/selectwarehouse"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="TAXABLE"
+                    android:textColor="@color/lightpurple"
+                    />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/radiogroup"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/taxable">
+                    <RadioButton
+                        android:id="@+id/ryes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/d_grey"
+                        android:buttonTint="@color/lightpurple"
+                        android:text="Yes" />
+                    <RadioButton
+                        android:textColor="@color/d_grey"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No"
+                        android:buttonTint="@color/lightpurple"
+                        android:layout_marginLeft="80dp"
+                        android:id="@+id/rno"
+                        />
+                </RadioGroup>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Add product"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/radiogroup"
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/addprodduct"
+                    android:background="@drawable/buttonshape"
+                    android:layout_marginBottom="20dp"
+
+                    />
+
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/avibackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"/>
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_centerInParent="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="gone"
+        app:indicatorName="BallClipRotatePulseIndicator"
+
+        />
+</RelativeLayout>

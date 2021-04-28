@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/createdialog_curve"
+        android:id="@+id/r1"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/viewinvoice"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Invoice"
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_below="@+id/filtericon"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/dark_blue"
+                android:id="@+id/viewinvoicebotom"
+                />
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/viewinvoicebotom"
+                android:layout_marginTop="15dp">
+
+            </View>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/viewinvoice"
+            android:id="@+id/viewicetemplate"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change Templates"
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/filtericon"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/dark_blue"
+                android:id="@+id/viewinvoicetemplate"
+                />
+            <View
+                android:id="@+id/viewa"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/viewinvoicetemplate"
+                android:layout_marginTop="15dp">
+
+            </View>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/viewicetemplate"
+            android:id="@+id/viewiceduplicate"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Duplicate Invoice"
+                android:textSize="15sp"
+                android:layout_marginStart="10dp"
+                android:padding="10dp"
+                android:layout_below="@+id/filtericon"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/dark_blue"
+                android:id="@+id/duplicateinvoitxt"
+                />
+            <View
+                android:id="@+id/duplicate"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/duplicateinvoitxt"
+                android:layout_marginTop="15dp">
+
+            </View>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/viewiceduplicate"
+            android:id="@+id/shareinvoice"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Share Invoice"
+                android:textSize="15sp"
+                android:layout_marginStart="10dp"
+                android:padding="10dp"
+                android:layout_below="@+id/filtericon"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/dark_blue"
+                android:id="@+id/shareinvoicetxt"
+                />
+            <View
+                android:id="@+id/duplicatedt"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/shareinvoicetxt"
+
+                android:layout_marginTop="15dp">
+
+            </View>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/viewinvoicerecipts"
+            android:layout_below="@+id/shareinvoice"
+            android:gravity="left"
+
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:padding="10dp"
+                android:layout_below="@+id/shareinvoice"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/dark_blue"
+                android:text="Convert To Receipts"
+
+                android:id="@+id/recepitsviewtxt"
+                />
+            <View
+                android:id="@+id/view11"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_below="@+id/recepitsviewtxt"
+                android:layout_marginTop="15dp">
+
+            </View>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

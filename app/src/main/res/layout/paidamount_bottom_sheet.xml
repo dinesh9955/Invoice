@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/createbottomsheet_curve"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Paid Amount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/dark_blue"
+        android:id="@+id/txtpaid"
+        />
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Enter amount"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="20dp"
+    android:textColor="@color/dark_blue"
+    android:layout_below="@id/txtpaid"
+    android:id="@+id/txtamount"
+    />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/txtamount"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Amount"
+        android:inputType="numberDecimal"
+        android:textColorHint="@color/d_grey"
+        android:textSize="14dp"
+        android:paddingTop="0dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/edamount"
+        android:background="@drawable/edittextshape"
+        android:elevation="2dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter date"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/dark_blue"
+        android:layout_below="@id/edamount"
+        android:id="@+id/txtdate"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/txtdate"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Date"
+android:layout_alignParentLeft="true"
+        android:padding="10dp"
+        android:textColorHint="@color/d_grey"
+        android:textSize="14dp"
+        android:paddingTop="0dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/eddate"
+        android:background="@drawable/edittextshape"
+        android:elevation="2dp"
+        />
+
+    <com.isapanah.awesomespinner.AwesomeSpinner
+        android:id="@+id/selectpaymentmode"
+        android:layout_below="@id/eddate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:spinnerDirection="ltr"
+        app:spinnerHint="Select Payment Mode"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/edittextshape"
+        />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectpaymentmode"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/buttonshape"
+        android:text="Done"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:id="@+id/btndone2"
+        android:layout_marginBottom="200dp"
+        />
+
+
+</RelativeLayout>

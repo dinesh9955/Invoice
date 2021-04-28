@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jorge Rowe"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:id="@+id/invoicename"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="$360.00"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:id="@+id/invoiceamount"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
+        android:layout_below="@id/invoicename"
+        android:text="Invoice #345632 | 10/08/2018"
+        android:id="@+id/invoicenum"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:textSize="12dp"
+        android:layout_below="@id/invoiceamount"
+        android:text="Paid"
+        android:textColor="@color/green"
+        android:id="@+id/invoicestatus"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="12dp"
+        android:layout_below="@id/invoicestatus"
+        android:text="78 Andover Rd.Eugene,OR 97402"
+        android:id="@+id/invoiceaddress"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_below="@+id/invoiceaddress"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+    </View>
+
+
+
+
+</RelativeLayout>

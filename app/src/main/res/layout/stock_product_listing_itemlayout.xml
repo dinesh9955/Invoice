@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_marginBottom="45dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/sir_app_logo"
+        app:riv_corner_radius="100dp"
+        android:id="@+id/image"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Company Name"
+        android:textStyle="bold"
+        android:id="@+id/productname"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/productcurrency"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantity: 56"
+        android:id="@+id/productquantity"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/productname"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/productcurrency"
+        android:layout_marginRight="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Value: 256 SAR"
+        android:id="@+id/productvalue"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/productquantity"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/productcurrency"
+        android:layout_marginRight="5dp"
+        />
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Re Order Level: "
+        android:id="@+id/status"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/productvalue"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status: "
+        android:id="@+id/statuss"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/status"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="In stock"
+        android:id="@+id/statusvalue"
+        android:layout_toRightOf="@+id/statuss"
+        android:layout_marginLeft="0dp"
+        android:layout_below="@+id/status"
+        android:textColor="@color/green"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/productcurrency"
+        android:layout_marginRight="5dp"
+        />
+
+
+
+
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12302"
+        android:id="@+id/productstock"
+        android:layout_toRightOf="@+id/status"
+        android:layout_marginLeft="0dp"
+        android:layout_below="@+id/productvalue"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/productcurrency"
+        android:layout_marginRight="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:text="120.00"
+        android:textStyle="bold"
+        android:id="@+id/productcurrency"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/lightpurple"
+        android:textSize="18sp"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/productcurrency"
+        android:layout_marginRight="20dp"
+        android:text="Qatari Rial"
+        android:id="@+id/productcurrencyunit"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/lightpurple"
+        android:textSize="10sp"
+        android:padding="3dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_below="@+id/statuss"
+        android:layout_marginTop="30dp">
+
+    </View>
+
+
+</RelativeLayout>

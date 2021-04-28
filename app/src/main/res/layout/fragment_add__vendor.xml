@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:id="@+id/bluerelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="30dp"
+                android:elevation="10dp"
+                android:layout_marginBottom="50dp"
+                >
+
+                <TextView
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COMPANY SETUP"
+                    android:textColor="@color/darkblue"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="?actionBarSize"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/heading">
+                </TextView>
+
+                <TextView
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You need to complete the company setup in order\nto make the most of the SIR app."
+                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/heading"
+                    android:layout_marginTop="30dp"
+                    android:textSize="12sp"
+                    android:id="@+id/description"/>
+
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="70dp"
+                    android:id="@+id/uploadimage"
+                    android:src="@drawable/upload_company_logo"
+                    android:layout_below="@+id/description"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload supplier/company logo"
+                    android:layout_marginLeft="20dp"
+                    android:layout_below="@+id/uploadimage"
+                    android:layout_marginTop="20dp"
+                    android:textSize="12sp"
+                    android:id="@+id/imagedescription"
+                    android:layout_centerHorizontal="true"/>
+
+                <RadioGroup
+                    android:visibility="gone"
+                    android:id="@+id/customergroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imagedescription"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:id="@+id/type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Supplier Type:   "
+                        android:textSize="12sp"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/individual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Individual"
+                        android:layout_gravity="start"
+                        android:textSize="12sp"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/company"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Company"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="12sp"
+                        android:checked="true"
+
+                        />
+
+
+                </RadioGroup>
+
+
+                <com.isapanah.awesomespinner.AwesomeSpinner
+                    android:id="@+id/selectcompany"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:spinnerDirection="ltr"
+                    app:spinnerHint="Select Company"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittextshape"
+                    android:layout_below="@+id/customergroup"
+
+                    />
+
+                <EditText
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/selectcompany"
+                    android:hint="Supplier/Company Name"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/name"/>
+
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name"
+                    android:hint="Supplier/Company Email Address"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/email"
+                    android:inputType="textEmailAddress"/>
+
+
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/email"
+                    android:hint="Contact Person"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/contactperson"
+                    android:inputType="textEmailAddress"/>
+
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/contactperson"
+                    android:hint="Phone Number"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/phone"
+                    android:inputType="phone"/>
+
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/phone"
+                    android:hint="Mobile Number"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/mobile"
+                    android:inputType="phone"/>
+
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/mobile"
+                    android:hint="Website"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/website"
+                    />
+
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_below="@+id/website"
+                    android:hint="Supplier/Company Address"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12dp"
+                    android:padding="15dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:id="@+id/CompanyAddress"
+                    android:gravity="start"
+                    android:maxHeight="150dp"
+                    />
+
+
+                <com.isapanah.awesomespinner.AwesomeSpinner
+                    android:visibility="gone"
+                    android:id="@+id/defaultcurrency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:spinnerDirection="ltr"
+                    app:spinnerHint="Choose Default Currency"
+                    android:layout_below="@+id/CompanyAddress"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittextshape"
+                    />
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Add supplier"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:layout_below="@+id/defaultcurrency"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/add"
+                    android:background="@drawable/buttonshape"
+                    style="?android:attr/borderlessButtonStyle"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contacts"
+                    android:layout_below="@+id/add"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="IMPORT SUPPLIER FROM CONTACT"
+                    android:textColor="@color/lightpurple"
+                    android:drawableRight="@drawable/import_contact"
+                    android:layout_marginBottom="10dp"
+
+                    />
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/avibackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"/>
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_centerInParent="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="gone"
+        app:indicatorName="BallClipRotatePulseIndicator"
+
+        />
+
+</RelativeLayout>

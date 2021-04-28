@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Invoice.TemplateInvoice">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/awesomeSpinner_margin"
+        android:text="Choose Template"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+ />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView2"
+        android:layout_margin="@dimen/awesomeSpinner_margin"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:id="@+id/semilayout"
+            android:layout_width="match_parent"
+
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/awesomeSpinner_margin"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <WebView
+                android:layout_width="0dp"
+                android:id="@+id/selectionimg1"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/awesomeSpinner_margin"
+                android:layout_weight="1"
+                android:background="@drawable/signaturebgwhite"
+                android:src="@drawable/temp_img2">
+
+            </WebView>
+
+            <WebView
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:id="@+id/selectionimg2"
+                android:layout_margin="@dimen/awesomeSpinner_margin"
+
+                android:layout_weight="1"
+                android:background="@drawable/signaturebgwhite"
+                android:src="@drawable/temp_img2">
+
+            </WebView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/semilayout2"
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/awesomeSpinner_margin"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <WebView
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:id="@+id/selectionimg3"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/awesomeSpinner_margin"
+                android:layout_weight="1"
+                android:background="@drawable/signaturebgwhite"
+                android:src="@drawable/temp_img2">
+
+            </WebView>
+
+            <WebView
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:id="@+id/selectionimg4"
+                android:layout_gravity="center"
+                android:state_pressed="true"
+                android:layout_margin="@dimen/awesomeSpinner_margin"
+                android:layout_weight="1"
+                android:background="@drawable/signaturebgwhite"
+                android:src="@drawable/temp_img2">
+
+            </WebView>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
+

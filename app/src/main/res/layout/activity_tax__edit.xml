@@ -1,0 +1,129 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.receipt.invoice.stock.sirproject.Tax.Add_Tax"
+    android:background="@color/white">
+
+    <include layout="@layout/toolbar">
+
+    </include>
+    <com.isapanah.awesomespinner.AwesomeSpinner
+        android:id="@+id/selectcompany"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:spinnerDirection="ltr"
+        app:spinnerHint="Select Company"
+        android:layout_marginTop="?actionBarSize"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/edittextshape"
+        />
+
+    <EditText
+        android:layout_below="@+id/selectcompany"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tax Name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="12dp"
+        android:padding="15dp"
+        android:background="@drawable/edittextshape"
+        android:elevation="2dp"
+        android:id="@+id/taxname"/>
+
+    <EditText
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/taxname"
+        android:hint="Tax Rate(%)"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="12dp"
+        android:padding="15dp"
+        android:background="@drawable/edittextshape"
+        android:elevation="2dp"
+        android:id="@+id/taxpercent" />
+
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/taxcalculation"
+        android:layout_below="@+id/taxpercent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Tax Calculation"
+        android:textColor="@color/lightpurple"
+        />
+
+    <RadioGroup
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/radiogroup"
+        android:orientation="horizontal"
+        android:layout_below="@id/taxcalculation">
+        <RadioButton
+            android:id="@+id/rinclusive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/d_grey"
+            android:buttonTint="@color/lightpurple"
+            android:text="Inclusive" />
+
+        <RadioButton
+            android:textColor="@color/d_grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exclusive"
+            android:buttonTint="@color/lightpurple"
+            android:layout_marginLeft="80dp"
+            android:id="@+id/rexclusive"
+            />
+
+    </RadioGroup>
+
+
+    <Button
+        android:layout_below="@+id/taxpercent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="save"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:layout_marginTop="?actionBarSize"
+        android:id="@+id/add"
+        android:background="@drawable/buttonshape"
+        style="?android:attr/borderlessButtonStyle"
+        />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/avibackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"/>
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_centerInParent="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="gone"
+        app:indicatorName="BallClipRotatePulseIndicator"
+
+        />
+    <include layout="@layout/bottom_navigation">
+    </include>
+</RelativeLayout>

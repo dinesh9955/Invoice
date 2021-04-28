@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    tools:context="com.receipt.invoice.stock.sirproject.OnBoardings.OnBooarding_Fragment1">
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="100dp"
+       android:layout_centerHorizontal="true"
+       android:text="BUSINESS INSIGHTS"
+       android:textColor="@color/dark_blue"
+       android:textSize="26dp"
+       android:id="@+id/txtonboardheading1"
+       />
+
+   <TextView
+       android:visibility="gone"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/txtonboardheading1"
+       android:layout_centerHorizontal="true"
+       android:layout_marginTop="40dp"
+       android:text="Lorem ipsum dolar sit amit,Consectuer\nsadipscing elitr,sed diam nonumy eirmod"
+       android:textSize="12dp"
+
+       android:id="@+id/txtonboardingdes1"
+       />
+
+   <ImageView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="40dp"
+       android:layout_below="@id/txtonboardingdes1"
+       android:src="@drawable/welcome_01"
+       android:layout_centerInParent="true"
+       android:id="@+id/imgonboard1"
+       />
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

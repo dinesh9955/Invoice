@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="45dp"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="h"
+        android:textStyle="bold"
+        android:id="@+id/helper"
+        android:textColor="@color/transparent"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile App Development"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/helper"
+        android:layout_marginLeft="11dp"
+        android:id="@+id/servicename"
+        android:layout_toLeftOf="@+id/servicecurrency"
+        android:layout_marginRight="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Software Developmet"
+        android:id="@+id/servicecompany"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/servicename"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Milestone"
+        android:id="@+id/servicecategory"
+        android:layout_toRightOf="@+id/helper"
+        android:layout_marginLeft="11dp"
+        android:layout_below="@+id/servicecompany"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/servicecurrency"
+        android:layout_marginRight="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:text="120.00"
+        android:textStyle="bold"
+        android:id="@+id/servicecurrency"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/lightpurple"
+        android:textSize="18sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/servicecurrency"
+        android:layout_marginRight="20dp"
+        android:text="Qatari Rial"
+        android:id="@+id/servicecurrencyunit"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/lightpurple"
+        android:textSize="10sp"
+        android:padding="3dp"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Milestone"
+        android:id="@+id/serviceDesc"
+        android:layout_toRightOf="@+id/helper"
+        android:layout_marginLeft="11dp"
+        android:layout_below="@+id/servicecategory"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/servicecurrency"
+        android:layout_marginRight="5dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_below="@+id/servicecategory"
+        android:layout_marginTop="30dp">
+
+    </View>
+
+
+
+
+
+</RelativeLayout>

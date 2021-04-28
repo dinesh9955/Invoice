@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Customer.Customer_Activity"
+    android:background="@color/white">
+
+    <!--<include layout="@layout/toolbar">
+    </include>-->
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <include layout="@layout/toolbar" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            app:tabMode="fixed"
+            android:alpha="1"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            app:tabBackground="@color/white"
+            app:tabGravity="fill"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            app:tabTextColor="@color/darkgray"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.crystalviewpager.widgets.CrystalViewPager
+        android:layout_below="@id/appbar"
+        android:id="@+id/viewPagerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</RelativeLayout>

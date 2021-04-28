@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/createdialog_curve"
+        android:id="@+id/r1"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/main"
+            android:gravity="center"
+             android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filter "
+                android:textSize="24sp"
+
+                android:background="@drawable/filtersortidev"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/dark_blue"
+                android:id="@+id/filtericon"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filter "
+                android:textSize="24sp"
+                android:layout_below="@+id/filtericon"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/dark_blue"
+                android:id="@+id/txtcredit"
+                />
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/txtcredit"
+                android:layout_marginTop="15dp">
+
+            </View>
+
+        </LinearLayout>
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Unpaid Invoices"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/main"
+                android:textColor="@color/dark_blue"
+                android:id="@+id/unpaidinvoicetxt"
+                />
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/unpaidinvoicetxt"
+            android:layout_marginTop="15dp">
+        </View>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Paid Invoices"
+                android:layout_centerInParent="true"
+                android:textSize="20sp"
+                android:layout_below="@+id/view1"
+                android:textColor="@color/dark_blue"
+                android:id="@+id/paidinvoicetxt"
+                />
+        <View
+            android:id="@+id/viewr1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/paidinvoicetxt"
+            android:layout_marginTop="15dp">
+        </View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="By Date"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/viewr1"
+                android:textSize="20sp"
+                android:textColor="@color/dark_blue"
+                android:id="@+id/bydateinvoicetxt"
+                />
+        <View
+            android:id="@+id/viewfr1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/bydateinvoicetxt"
+            android:layout_marginTop="15dp">
+        </View>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="All"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/viewfr1"
+                android:textSize="20sp"
+                android:textColor="@color/dark_blue"
+                android:id="@+id/allinvoicetxt"
+                />
+        <View
+            android:id="@+id/viewdfr1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/allinvoicetxt"
+            android:layout_marginTop="15dp">
+        </View>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Cancel"
+                android:layout_centerInParent="true"
+                android:textSize="20sp"
+                android:layout_below="@+id/viewdfr1"
+                android:textColor="@color/dark_blue"
+                android:id="@+id/cancelinvoicetxt"
+                />
+
+
+        <View
+            android:id="@+id/viewdfrff1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/cancelinvoicetxt"
+            android:layout_marginTop="15dp">
+        </View>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

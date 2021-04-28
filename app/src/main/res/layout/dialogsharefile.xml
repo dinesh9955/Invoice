@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/r"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+
+        android:background="@drawable/createdialog_curve">
+
+
+        <TextView
+
+            android:id="@+id/txtheadvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Choose A Option"
+            android:textColor="@color/light_blue"
+            android:textSize="20sp"
+
+            />
+
+        <TextView
+
+            android:id="@+id/txtpdfvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtheadvalue"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Send  As Link"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+
+            />
+
+        <TextView
+
+            android:id="@+id/txtsharefvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtpdfvalue"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Send  As PDF"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+
+            />
+
+        <TextView
+
+            android:id="@+id/txtcancelvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtsharefvalue"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="Cancel"
+            android:textColor="@color/light_blue"
+            android:textSize="15dp"
+
+            />
+
+
+    </RelativeLayout>
+</RelativeLayout>

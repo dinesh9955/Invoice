@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">SIR Invoices</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="facebook_app_id">1296888023851596</string>
+    <string name="fb_login_protocol_scheme">fb1296888023851596</string>
+
+    <string name="internet_error">Check your Internet Connection</string>
+    <string name="condiotn">Terms &amp; Conditions</string>
+    <string name="connection_not_found">You must have a connection to the internet</string>
+    <string name="GOPREMIUM">GO PREMIUM</string>
+    <string name="AnnualPlan">Annual Plan *</string>
+    <string name="dollaryear">$ 35.99/year</string>
+    <string name="ValuePlan">Value Plan *</string>
+    <string name="dollarmonth">$ 3.99/month</string>
+    <string name="Restore">Restore</string>
+    <string name="Purchases">Purchases</string>
+    <string name="Termsconditionsapply">*Terms &amp; conditions apply:</string>
+    <string name="USD1199">USD 11.99</string>
+    <string name="oneimepaymentforcreatinganewcompany">\u0020 one-time payment for creating a new company with the same credentials</string>
+    <string name="USD399">USD 3.99</string>
+    <string name="onetimepaymentperadditionaluser">\u0020 one-time payment per additional user (for assigning additional users)</string>
+    <string name="Skipsubscription">Skip subscription</string>
+    <string name="trytheappforaperiodof14days">Try the app for a period of 14-days</string>
+    <string name="startfreetrial">Start free trial</string>
+
+    <string name="Customizeyourexperience">Customize your experience</string>
+    <string name="InviteFriends">Invite Friends</string>
+    <string name="Customize">Customize</string>
+    <string name="FAQs">FAQs</string>
+    <string name="Language">Language</string>
+    <string name="Abouttheapp">About the app</string>
+    <string name="Ratetheapp">Rate the app</string>
+    <string name="TermsofUse">Terms of Use</string>
+    <string name="PrivacyPolicy">Privacy Policy</string>
+    <string name="Support">Support</string>
+
+    <string name="CreditNo">Credit Note No.</string>
+    <string name="ReceiptNo">Receipt No.</string>
+    <string name="InvoiceNo">Invoice No.</string>
+    <string name="EstiateNo">Estimate No.</string>
+
+    <string name="DueDate">Due Date</string>
+
+    <string name="ReceiptDate">Receipt Date</string>
+    <string name="Date">Date</string>
+    <string name="InvoiceTo">Recipient</string>
+    <string name="ITEMS">ITEMS</string>
+    <string name="INVOICEITEMS">INVOICE ITEMS</string>
+    <string name="template">Choose Template</string>
+    <string name="choose_color">Choose Color</string>
+
+    <string name="additem">Add products</string>
+    <string name="SubTotal">Sub Total</string>
+    <string name="Discount">Discount</string>
+    <string name="Tax">Tax</string>
+    <string name="createinvoice">Create Invoice</string>
+    <string name="createreceipt">Create Receipt</string>
+    <string name="createcredit">Create Credit Note</string>
+    <string name="createestimate">Create Estimate</string>
+
+</resources>

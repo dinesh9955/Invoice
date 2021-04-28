@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+
+
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/invoiceoverdue_curve"
+        >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/user_03"
+            app:riv_corner_radius="100dp"
+            android:id="@+id/image"
+            android:layout_centerVertical="true"/>
+
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Invoice Overdue"
+            android:id="@+id/invoiceoverduetxt"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/invoiceoverduetxt"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/image"
+            android:text="Kenneth Erickson"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Systems Inc."
+            android:layout_below="@+id/name"
+            android:textColor="@color/white"
+            android:layout_marginBottom="30dp"
+            android:id="@+id/companyname"/>
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/invoice_overdue_icon"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"/>
+
+</RelativeLayout>

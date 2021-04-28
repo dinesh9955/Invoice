@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="View Invoice"
+        android:textAllCaps="false"
+        android:textColor="@color/dark_blue"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnviewinvoice"
+        android:background="@drawable/cancelbuttonshape"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Clear Data"
+        android:textAllCaps="false"
+        android:textColor="@color/red"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/btnviewinvoice"
+        android:id="@+id/btnclear"
+        android:background="@drawable/cancelbuttonshape"
+        android:layout_marginBottom="20dp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:layout_below="@+id/btnclear"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btndotcancel"
+        android:background="@drawable/buttonshape"
+        android:layout_marginBottom="40dp"
+        />
+
+
+
+</RelativeLayout>
