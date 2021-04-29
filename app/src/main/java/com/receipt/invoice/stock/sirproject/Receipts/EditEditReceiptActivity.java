@@ -1284,7 +1284,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(EditEditReceiptActivity.this, "Something went wrongng, try again!");
+                        Constant.ErrorToast(EditEditReceiptActivity.this, "Something went wrong, try again!");
                     }
                 }
             });
@@ -2556,7 +2556,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEditReceiptActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditEditReceiptActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2661,7 +2661,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEditReceiptActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditEditReceiptActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2880,7 +2880,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEditReceiptActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditEditReceiptActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -2987,7 +2987,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEditReceiptActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditEditReceiptActivity.this, "Something went wrong, try again!");
                 }
             }
         });

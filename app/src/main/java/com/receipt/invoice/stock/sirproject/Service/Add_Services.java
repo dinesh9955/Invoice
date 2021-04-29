@@ -470,7 +470,7 @@ public class Add_Services extends Fragment {
                     avibackground.setVisibility(View.GONE);
 
                     if(responseBody.length == 0){
-                        Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }else{
                         String response = new String(responseBody);
                         Log.e("addserviceResp",response);
@@ -530,7 +530,7 @@ public class Add_Services extends Fragment {
                         }
                     }
                     else {
-                        Constant.ErrorToast(getActivity(),"Something went wrongng, try again!");
+                        Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                     }
 
                 }

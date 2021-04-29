@@ -212,7 +212,7 @@ public class Add_Item_Activity extends AppCompatActivity {
                     }
                 }
                 else {
-                    Constant.ErrorToast(Add_Item_Activity.this,"Something went wrongng, try again!");
+                    Constant.ErrorToast(Add_Item_Activity.this,"Something went wrong, try again!");
                 }
 
                 avi.smoothToHide();

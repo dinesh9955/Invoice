@@ -72,14 +72,20 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.View
         String product_price = product_service_list.getProduct_price();
        String cruncycode=product_service_list.getCurrency_code();
        String pricsestr=product_service_list.getEditproductproce();
+        int value = 0;
+        try{
+           value = (int) Double.parseDouble(tempQuantity.get(i));
+       }catch (Exception e){
 
-        viewHolderForCat.quantity.setText(""+editpriceval.get(i) + " "+cruncycode+" x "+tempQuantity.get(i));
+       }
+
+        viewHolderForCat.quantity.setText(""+editpriceval.get(i) + " "+cruncycode+" x "+value);
 
         String productid=product_service_list.getProduct_id();
         String productprice=product_service_list.getProduct_price();
         String product_quantity=product_service_list.getQuantity();
 
-        Double productresul=Double.parseDouble(tempQuantity.get(i))*Double.parseDouble(editpriceval.get(i));
+        Double productresul= Double.parseDouble(tempQuantity.get(i))*Double.parseDouble(editpriceval.get(i));
 //        Log.e("productid detailed" ,productid);
 
         DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");

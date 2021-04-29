@@ -401,7 +401,7 @@ public class List_of_Invoices extends Fragment {
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -525,7 +525,7 @@ public class List_of_Invoices extends Fragment {
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -602,7 +602,7 @@ public class List_of_Invoices extends Fragment {
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }
                 }
             });
@@ -671,7 +671,7 @@ public class List_of_Invoices extends Fragment {
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }
                 }
             });

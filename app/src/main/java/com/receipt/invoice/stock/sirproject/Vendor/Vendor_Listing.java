@@ -278,7 +278,7 @@ public class Vendor_Listing extends Fragment {
                     }
                 }
                 else {
-                    Constant.ErrorToast(getActivity(),"Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                 }
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);

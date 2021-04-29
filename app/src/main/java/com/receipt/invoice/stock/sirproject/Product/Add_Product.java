@@ -712,7 +712,7 @@ public class Add_Product extends Fragment implements Select_Warehouse_Adapter.Ca
                     avibackground.setVisibility(View.GONE);
 
                     if(responseBody.length == 0){
-                        Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }else{
                         String response = new String(responseBody);
                         Log.e("addproductResp", response);
@@ -775,7 +775,7 @@ public class Add_Product extends Fragment implements Select_Warehouse_Adapter.Ca
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }
 
                 }

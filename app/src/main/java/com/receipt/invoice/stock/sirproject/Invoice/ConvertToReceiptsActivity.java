@@ -1004,7 +1004,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Something went wrongng, try again!");
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Something went wrong, try again!");
                     }
                 }
             });
@@ -1931,7 +1931,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(ConvertToReceiptsActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(ConvertToReceiptsActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2035,7 +2035,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(ConvertToReceiptsActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(ConvertToReceiptsActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2253,7 +2253,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(ConvertToReceiptsActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(ConvertToReceiptsActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -2359,7 +2359,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(ConvertToReceiptsActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(ConvertToReceiptsActivity.this, "Something went wrong, try again!");
                 }
             }
         });

@@ -59,6 +59,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import com.mikhaellopez.circleview.CircleView;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
@@ -703,7 +704,7 @@ public class Add_Company extends Fragment {
                         }
                     }
 //                    else {
-//                        Constant.ErrorToast(getActivity(),"Something went wrongng, try again!");
+//                        Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
 //                    }
                     avi.smoothToHide();
                     avibackground.setVisibility(View.GONE);
@@ -725,31 +726,41 @@ public class Add_Company extends Fragment {
         RecyclerView mRecyclerView = (RecyclerView) dialog.findViewById(R.id.color_picker);
         //                mRecyclerView.setHasFixedSize(true);
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("#dd4f42");
-        arrayList.add("#16a05d");
-        arrayList.add("#64a4e2");
-        arrayList.add("#64a4e2");
-        arrayList.add("#fd7138");
-        arrayList.add("#e12c64");
-        arrayList.add("#f7cd56");
-        arrayList.add("#00d12f");
-        arrayList.add("#fb00ff");
-        arrayList.add("#018bfa");
-        arrayList.add("#159f5c");
-        arrayList.add("#32b1ff");
-        arrayList.add("#51d25f");
-        arrayList.add("#076cb1");
-        arrayList.add("#04aa6d");
-        arrayList.add("#d9eee1");
-        arrayList.add("#ffc0c7");
-        arrayList.add("#d9eee1");
-        arrayList.add("#96d4d4");
-        arrayList.add("#86858a");
-        arrayList.add("#cbc3a0");
-        arrayList.add("#ffc0c7");
-        arrayList.add("#a2b8c6");
-        arrayList.add("#50405b");
-        arrayList.add("#362e2c");
+        arrayList.add("#fcd578");
+        arrayList.add("#999999");
+        arrayList.add("#599d29");
+        arrayList.add("#cdcdcd");
+        arrayList.add("#d086f2");
+
+        arrayList.add("#737ef9");
+        arrayList.add("#d4fb7c");
+        arrayList.add("#8d8d8d");
+        arrayList.add("#fd42ff");
+        arrayList.add("#f2ec08");
+
+        arrayList.add("#fe319a");
+        arrayList.add("#f5827a");
+        arrayList.add("#919000");
+        arrayList.add("#49beee");
+        arrayList.add("#874fee");
+
+        arrayList.add("#f3a78c");
+        arrayList.add("#f07a5c");
+        arrayList.add("#bb771a");
+        arrayList.add("#fc89fb");
+        arrayList.add("#88fe00");
+
+        arrayList.add("#da417a");
+        arrayList.add("#ee5931");
+        arrayList.add("#f5b432");
+        arrayList.add("#73c449");
+        arrayList.add("#38aff8");
+
+        arrayList.add("#e57ca4");
+        arrayList.add("#f4a884");
+        arrayList.add("#fbd986");
+        arrayList.add("#b7e19d");
+        arrayList.add("#76d9ee");
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 5));
 
@@ -794,7 +805,7 @@ public class Add_Company extends Fragment {
 
         @Override
         public void onBindViewHolder(final ColorAdapter.ViewHolder viewHolder, final int i) {
-            viewHolder.textViewName.setSolidColor(Color.parseColor(cnames.get(i)));
+            viewHolder.textViewName.setCircleColor(Color.parseColor(cnames.get(i)));
             viewHolder.textViewName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -814,13 +825,13 @@ public class Add_Company extends Fragment {
 
         public class ViewHolder extends RecyclerView.ViewHolder{
             View view11 = null;
-            CircleTextView textViewName;
+            CircleView textViewName;
             RelativeLayout realtive1;
             public ViewHolder(View itemView) {
                 super(itemView);
                 view11 = itemView;
                 //  realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
-                textViewName = (CircleTextView) itemView.findViewById(R.id.textView);
+                textViewName = (CircleView) itemView.findViewById(R.id.textView);
 
                 //  CircleTextView  mCircleTextView = (CircleTextView) findViewById(R.id.textView); //change with your id
 

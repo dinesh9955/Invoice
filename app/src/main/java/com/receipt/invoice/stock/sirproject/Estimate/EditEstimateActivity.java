@@ -2606,7 +2606,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2711,7 +2711,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2939,7 +2939,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3046,7 +3046,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
                 }
             }
         });

@@ -318,7 +318,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
     // customer information
     String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
     String Selectedcompanyname, taxrname;
-//    int newinvoice_count;
+    //    int newinvoice_count;
     private AVLoadingIndicatorView avi;
     private SignaturePad signaturePad;
     private Button btnclear1;
@@ -350,11 +350,11 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         if (invoiceId != null) {
             Log.e("invoiceId", invoiceId);
         }
-		
-		
-  
-		
-		
+
+
+
+
+
 //        invoice_count = getIntent().getStringExtra("invoice_count");
 //        if (invoice_count != null) {
 //            Log.e("invoice_count", invoice_count);
@@ -483,7 +483,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 //                defaultClick = 1;
                 Intent intent = new Intent(EditInvoiceActivity.this, ChooseTemplate.class);
                 intent.putExtra("companycolor", companycolor);
-               // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivityForResult(intent, 121);
             }
         });
@@ -529,9 +529,6 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
     private void getinvoicedata() {
 
-
-
-
         String token = Constant.GetSharedPreferences(EditInvoiceActivity.this, Constant.ACCESS_TOKEN);
         Call<InvoiceResponseDto> resposresult = apiInterface.getInvoiceDetail(token, invoiceId);
         resposresult.enqueue(new Callback<InvoiceResponseDto>() {
@@ -566,6 +563,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                 sltcustonernamedto = invoiceCustomerDto.getCustomerName();
 
+                Log.e(TAG, "sltcustonernamedto"+sltcustonernamedto);
+
                 customer_name = sltcustonernamedto;
                 invoicerecipnt.setText(sltcustonernamedto);
                 sltcustomer_addressdto = invoiceCustomerDto.getAddress();
@@ -599,7 +598,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 companylogopath = companyDto.getLogo();
                 companylogopathdto = companyDto.getLogo();
                 companylogopathdtodt = company_image_pathdto + companylogopathdto;
-               // new DownloadsImagefromweblogoCom().execute(companylogopathdtodt);
+                // new DownloadsImagefromweblogoCom().execute(companylogopathdtodt);
 
                 selectedCompanyId = companyDto.getCompanyId();
                 Log.e("selectedCompanyId", selectedCompanyId);
@@ -641,7 +640,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
 
 
-              //  invoicenum.setText("Inv #" + newinvoice_count);
+                //  invoicenum.setText("Inv #" + newinvoice_count);
 
 
 
@@ -659,7 +658,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 invoicecompanyiddto = invoiceDtoInvoice.getCompanyId();
                 Log.e("invoicecompanyiddto", invoicecompanyiddto);
                 customer_id = invoiceDtoInvoice.getCustomerId();
-
+                Log.e(TAG, "customer_idA"+customer_id);
                 paymentmode = invoiceDtoInvoice.getPaidAmountPaymentMethod();
 
                 txtdays.setText(credit_termsdto);
@@ -788,9 +787,9 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                     }
 
                 }
-            //    products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
+                //    products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
 
-              //  products_adapter.update(product_bottom, tempList, tempQuantity, producprice);
+                //  products_adapter.update(product_bottom, tempList, tempQuantity, producprice);
 
                 productsRecycler.setAdapter(products_adapter);
 
@@ -862,7 +861,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
 
                         if(!title.equals("Paid Amount")) {
-                          //  netamountvaluedto = listobj.getValue();
+                            //  netamountvaluedto = listobj.getValue();
                             Double netamountvaludbl = Double.parseDouble(netamountvaluedto);
 
                             Log.e(TAG , "netamountvaludbl "+netamountvaludbl);
@@ -890,7 +889,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         Discountamountstrdto = listobj.getValue();
 
 
-                       // discount.setText(Utility.getRemoveDoubleMinus("-"+Discountamountstrdto) + cruncycode);
+                        // discount.setText(Utility.getRemoveDoubleMinus("-"+Discountamountstrdto) + cruncycode);
 
                         discount.setText(""+Discountamountstrdto+currency_codedto);
 //                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
@@ -1009,8 +1008,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         addservice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    createbottomsheet_services();
-                    bottomSheetDialog2.show();
+                createbottomsheet_services();
+                bottomSheetDialog2.show();
 
             }
         });
@@ -1258,6 +1257,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             params.add("invoice_date", invoice_date);
             params.add("due_date", invoice_due_date);
             params.add("customer_id", customer_id);
+            Log.e(TAG, "customer_idBB"+customer_id);
             params.add("notes", strnotes);
             params.add("ref_no", ref_no);
             params.add("paid_amount_payment_method", paymentmode);
@@ -1342,6 +1342,36 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
             }
 
+
+
+            Log.e(TAG, "selectedtaxtAAA "+selectedtaxt.size());
+
+            if (selectedtaxt.size() > 0) {
+                for (int i = 0; i < selectedtaxt.size(); i++) {
+
+                    Log.e(TAG, "selectedtaxtAAA1 "+selectedtaxt.get(i).getTaxtype());
+                    Log.e(TAG, "selectedtaxtAAA2 "+selectedtaxt.get(i).getTaxrate());
+                    Log.e(TAG, "selectedtaxtAAA3 "+selectedtaxt.get(i).getTaxname());
+                    Log.e(TAG, "selectedtaxtAAA4 "+invoicetaxamount);
+
+
+                    //off exclusive
+                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive);
+                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                    }else{
+
+                    }
+
+                }
+            } else {
+
+            }
+
+
+
             if (selectedUriList.size() > 0) {
                 for (int k = 0; k < selectedUriList.size(); k++) {
                     try {
@@ -1357,11 +1387,12 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                 }
             }
+
             String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "invoice/dduplicate", params, new AsyncHttpResponseHandler() {
+            client.post(Constant.BASE_URL + "invoice/duplicate", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -1416,7 +1447,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrongng, try again!");
+                        Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
                     }
                 }
             });
@@ -1531,15 +1562,15 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
         if(requestCode == 121){
 
-                SavePref pref = new SavePref();
-                pref.SavePref(EditInvoiceActivity.this);
+            SavePref pref = new SavePref();
+            pref.SavePref(EditInvoiceActivity.this);
 
-                selectedTemplate = pref.getTemplate();
-                Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
+            selectedTemplate = pref.getTemplate();
+            Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
 
-                if(selectedTemplate != 0){
-                    itemstxtTemplate.setText("Template "+selectedTemplate);
-                }
+            if(selectedTemplate != 0){
+                itemstxtTemplate.setText("Template "+selectedTemplate);
+            }
         }
 
 
@@ -1832,7 +1863,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                                 }
                             }, mYear, mMonth, mDay);
-                   // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                    // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                     datePickerDialog.show();
                 }
             });
@@ -1935,7 +1966,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                         intent.putExtra("subtotalamt", Subtotalamount);
                         intent.putExtra("due_date", invoice_due_date);
-                        intent.putExtra("customer_id", customer_id);
+                        //intent.putExtra("customer_id", customer_id);
                         intent.putExtra("grossamount", Grossamount_str);
 //                        intent.putExtra("invoice_no", invoicenumberdto);
                         intent.putExtra("invoice_no", invoicenum.getText().toString());
@@ -1981,7 +2012,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         intent.putExtra("rate_list", rate);
                         intent.putExtra("attchemnt", attchmentimage);
 
-                       // Log.e(TAG)
+                        // Log.e(TAG)
 
 
                         startActivity(intent);
@@ -2129,7 +2160,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-					if(strdiscount.equalsIgnoreCase("Percentage")){
+                    if(strdiscount.equalsIgnoreCase("Percentage")){
                         eddisount.setHint("Enter Discount in %");
                     }
                     if(strdiscount.equalsIgnoreCase("Amount")){
@@ -2733,7 +2764,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2838,7 +2869,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3013,30 +3044,30 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 //                        for (int i = 0; i < customer.length(); i++) {
 //                            JSONObject item = customer.getJSONObject(i);
 
-                            tax_list_array.clear();
+                        tax_list_array.clear();
 
-                            tax_list_array = new ArrayList<Tax_List>();
+                        tax_list_array = new ArrayList<Tax_List>();
 
-                            JSONArray tax_list = data.getJSONArray("tax");
+                        JSONArray tax_list = data.getJSONArray("tax");
 
-                            for (int j = 0; j < tax_list.length(); j++) {
-                             //   Tax_List student = new Gson().fromJson(tax_list.get(j).toString(), Tax_List.class);
-                                JSONObject jsonObject1 = tax_list.getJSONObject(j);
+                        for (int j = 0; j < tax_list.length(); j++) {
+                            //   Tax_List student = new Gson().fromJson(tax_list.get(j).toString(), Tax_List.class);
+                            JSONObject jsonObject1 = tax_list.getJSONObject(j);
 //                                String name = jsonObject1.getString("name");
-                                Tax_List student = new Tax_List();
-                                student.setTax_id(jsonObject1.getString("tax_id"));
-                                student.setTax_name(jsonObject1.getString("name"));
-                                student.setCompany_name(jsonObject1.getString("company_name"));
-                                student.setTax_rate(jsonObject1.getString("rate"));
-                                student.setCompanyid(jsonObject1.getString("company_id"));
-                                student.setType(jsonObject1.getString("type"));
-                                student.setTax_name(jsonObject1.getString("name"));
-                                tax_list_array.add(student);
+                            Tax_List student = new Tax_List();
+                            student.setTax_id(jsonObject1.getString("tax_id"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            student.setCompany_name(jsonObject1.getString("company_name"));
+                            student.setTax_rate(jsonObject1.getString("rate"));
+                            student.setCompanyid(jsonObject1.getString("company_id"));
+                            student.setType(jsonObject1.getString("type"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            tax_list_array.add(student);
 
 
-                            }
-                            Log.e("Taxt array", tax_list_array.toString());
                         }
+                        Log.e("Taxt array", tax_list_array.toString());
+                    }
 
 
 //                    }
@@ -3067,7 +3098,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3102,7 +3133,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         for (int i = 0; i < customer.length(); i++) {
                             JSONObject item = customer.getJSONObject(i);
 
-                            customer_id = item.getString("customer_id");
+                            String customer_idBB = item.getString("customer_id");
+                            Log.e(TAG, "customer_idBB "+customer_idBB);
                             customer_name = item.getString("customer_name");
                             custoner_contact_name = item.getString("contact_name");
                             String image = item.getString("image");
@@ -3127,7 +3159,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                             customer_list.setCustomer_website(customer_website);
                             customer_list.setCustomer_phone(customer_contact);
 
-                            customer_list.setCustomer_id(customer_id);
+                            customer_list.setCustomer_id(customer_idBB);
                             customer_list.setCustomer_name(customer_name);
                             customer_list.setCustomer_contact_person(custoner_contact_name);
                             customer_list.setCustomer_image_path(image_path);
@@ -3174,7 +3206,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3197,13 +3229,15 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             bottomSheetDialog.dismiss();
 
             // createbottomsheet_customers();
+
             invoicerecipnt.setText(customer_list.getCustomer_name());
             customer_name = customer_list.getCustomer_name();
-
+            customer_id = customer_list.getCustomer_id();
         } else {
             // createbottomsheet_customers();
             invoicerecipnt.setText(customer_list.getCustomer_name());
             customer_name = customer_list.getCustomer_name();
+            customer_id = customer_list.getCustomer_id();
         }
         selected.add(customer_list);
 
@@ -3235,11 +3269,11 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
 
+
         double balanceamount = 0.0;
         Double netamountvalue = 0.0;
         Double Totatlvalue = 0.0;
         Double subtotalvalue = 0.0;
-
 
         if (tempList.size() > 0) {
 
@@ -3265,7 +3299,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 subtotalvalue = 0.0;
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
-               // Totatlvalue = total_price * Double.parseDouble(strdiscountvalue) / 100;
+                // Totatlvalue = total_price * Double.parseDouble(strdiscountvalue) / 100;
                 Totatlvalue = total_price * Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode)) / 100;
 
                 discount.setText("-"+formatter.format(Totatlvalue) + cruncycode);
@@ -3289,13 +3323,28 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 }
 
                 netamountvalue = subtotalvalue;
-                double  strdiscountval=Double.parseDouble(strdiscountvalue);
+                double strdiscountval=Double.parseDouble(strdiscountvalue);
 
                 discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
-            } else {
+                }
+
+                else if (strdiscount.equals("")) {
+                try {
+                    subtotalvalue = total_price - Double.parseDouble(Utility.getReplaceCurrency(discount.getText().toString(), cruncycode).replace("Rs", ""));
+                }catch (Exception e){
+
+                }
+
+
+
+//                double strdiscountval=Double.parseDouble(strdiscountvalue);
+//
+//                discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
+
+                }else {
 
                 discount.setText("0");
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
@@ -3303,10 +3352,11 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
             }
 
+            Double Totatlvalue1 = 0.0;
             if (selectedtaxt.size() > 0) {
                 if (taxtypeclusive.equals("Inclusive")) { // exclude
                     //netamountvalue = 0.0;
-                    Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
+                    Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
 
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
                     String subStrinng = taxrname + "" + taxtrateamt + "%";
@@ -3320,7 +3370,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                 } else { // include
 
-                    Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
+                    Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
 
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
@@ -3345,9 +3395,22 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                 Double shipingvalue = Double.parseDouble(freight_cost);
 
+
+                Log.e(TAG, "discountAAA "+Discountamountstrdto);
+                Log.e(TAG, "SubtotalamountdtoAAA "+Subtotalamountdto);
+
+
+                Log.e(TAG, "discountAAA "+strdiscountvalue);
+                Log.e(TAG, "SubtotalamountdtoAAA "+subtotalvalue);
+
+
+                netamountvalue = subtotalvalue + Totatlvalue1 + subtotalvalue;
+
+
                 freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
-                balance.setText(formatter.format(balanceamount) + cruncycode);
+                balance.setText(formatter.format(netamountvalue) + cruncycode);
                 netamount.setText(formatter.format(balanceamount) + cruncycode);
+
             }
             if (paidamountstr.isEmpty()) {
                 //
@@ -3421,10 +3484,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         if (type.equalsIgnoreCase("del"))
         {
 
-                producprice.remove(str);
-                tempList.remove(str);
-                tempQuantity.remove(str);
-                totalpriceproduct.remove(str);
+            producprice.remove(str);
+            tempList.remove(str);
+            tempQuantity.remove(str);
+            totalpriceproduct.remove(str);
 
             Log.e(TAG, "producprice.size() "+producprice.size());
             Log.e(TAG, "tempList.size() "+tempList.size());
@@ -3680,8 +3743,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
 
 //            if (s_r.equals("1")) {
-                signatureofinvoicemaker = imageFile;
-                signature_of_issuer = imageFile.getAbsolutePath();
+            signatureofinvoicemaker = imageFile;
+            signature_of_issuer = imageFile.getAbsolutePath();
 //            }
 //            if (s_r.equals("2")) {
 //                signaturinvoicereceiver = imageFile;
@@ -3753,8 +3816,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 //                signature_of_issuer = imageFile.getAbsolutePath();
 //            }
 //            if (s_r.equals("2")) {
-                signaturinvoicereceiver = imageFile;
-                signatureofreceiverst = imageFile.getAbsolutePath();
+            signaturinvoicereceiver = imageFile;
+            signatureofreceiverst = imageFile.getAbsolutePath();
 //            }
 
             String imagepath = imageFile.getAbsolutePath();
@@ -4102,7 +4165,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
 
     String  sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
-   // String  taxamount = "";
+    // String  taxamount = "";
     String shippingzone = "";
 
     String cruncycode = "", Shiping_tostr = "", companyimagelogopath = "";

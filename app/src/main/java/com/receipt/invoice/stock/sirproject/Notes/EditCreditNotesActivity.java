@@ -1383,7 +1383,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(EditCreditNotesActivity.this, "Something went wrongng, try again!");
+                        Constant.ErrorToast(EditCreditNotesActivity.this, "Something went wrong, try again!");
                     }
                 }
             });
@@ -2695,7 +2695,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditCreditNotesActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditCreditNotesActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2800,7 +2800,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditCreditNotesActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditCreditNotesActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3029,7 +3029,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditCreditNotesActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditCreditNotesActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3136,7 +3136,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditCreditNotesActivity.this, "Something went wrongng, try again!");
+                    Constant.ErrorToast(EditCreditNotesActivity.this, "Something went wrong, try again!");
                 }
             }
         });

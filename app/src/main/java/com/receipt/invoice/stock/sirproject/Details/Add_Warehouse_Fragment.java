@@ -194,7 +194,7 @@ public class Add_Warehouse_Fragment extends Fragment {
 
                     }
                     else {
-                       // Constant.ErrorToast(getActivity(),"Something went wrongng, try again!");
+                       // Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                     }
 
                 }

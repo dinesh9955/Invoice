@@ -1161,7 +1161,7 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }
                 }
             });
@@ -2652,7 +2652,7 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
 
@@ -2755,7 +2755,7 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
 
@@ -2988,7 +2988,7 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -3133,7 +3133,7 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -3197,13 +3197,19 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
 
     }
 
-    @SuppressLint("SetTextI18n")
+
+
+
+    @SuppressLint({"SetTextI18n", "LongLogTag"})
     private void calculateTotalAmount(Double total_price) {
+        Log.e(TAG,  "total_price: "+total_price);
 
         double balanceamount = 0.0;
         Double netamountvalue = 0.0;
         Double Totatlvalue = 0.0;
         Double subtotalvalue = 0.0;
+
+
 
 
         if (tempList.size() > 0) {
@@ -3230,7 +3236,11 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                 subtotalvalue = 0.0;
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
-                Totatlvalue = total_price * Double.parseDouble(strdiscountvalue) / 100;
+
+                Log.e(TAG , "total_priceAA "+total_price);
+                Log.e(TAG , "strdiscountvalueAA "+strdiscountvalue);
+
+                Totatlvalue = total_price * Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode)) / 100;
 
 
                 discount.setText("-"+formatter.format(Totatlvalue) + cruncycode);
@@ -3252,8 +3262,9 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                 }catch (Exception e){
 
                 }
+
                 netamountvalue = subtotalvalue;
-                double strdiscountval = Double.parseDouble(strdiscountvalue);
+                double  strdiscountval=Double.parseDouble(strdiscountvalue);
 
                 discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
@@ -3266,103 +3277,46 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
             }
+
+
+            Log.e(TAG, "selectedtaxt.size() "+selectedtaxt.size());
+
             if (selectedtaxt.size() > 0) {
-                if (!taxtypeclusive.equals("Inclusive")) {
-                    if (taxtype.equalsIgnoreCase("P")) {
-                        netamountvalue = 0.0;
-                        Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
+                if (taxtypeclusive.equals("Inclusive")) { // exclude
+                    //netamountvalue = 0.0;
+                    Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
 
-                        tax.setText(formatter.format(Totatlvalue1) + cruncycode);
+                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
+                    String subStrinng = taxrname + "" + taxtrateamt + "%";
 
-                    //    String taxtpercentage = taxtrateamt.substring(0, 2);
-//                        String tatxnamesub = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub + taxtpercentage + "%";
-//
-//
-//                        txttax.setText("(" + subStrinng + "Incl" + ")"); //Dont do any change
-                        String subStrinng = taxrname+"" + taxtrateamt + "%";
+                    txttax.setText("(" + subStrinng + "Incl" + ")"); //Dont do any change
 
-                        txttax.setText("(" + subStrinng + "Incl" + ")"); //Dont do any change
+                    netamountvalue = subtotalvalue + Totatlvalue1;
 
-                        netamountvalue = subtotalvalue;
-                        netamount.setText(formatter.format(subtotalvalue) + cruncycode);
-                        balance.setText(formatter.format(subtotalvalue) + cruncycode);
+                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
+                    balance.setText(formatter.format(netamountvalue) + cruncycode);
 
+                } else { // include
 
-                    } else {
-                        netamountvalue = 0.0;
-                       // String taxtpercentage1 = taxtrateamt.substring(0, 4);
-//                        String tatxnamesub1 = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub1 + taxtpercentage1;
-//
-//
-//                        txttax.setText("(" + subStrinng + "Incl" + ")");
+                    Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
 
-                        String subStrinng = taxrname+"" + taxtrateamt + "";
+                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
-                        txttax.setText("(" + subStrinng + "Incl" + ")");
+                    String subStrinng = taxrname + "" + taxtrateamt + "%";
 
+                    txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
 
-                        Double amomnt = Double.parseDouble(taxtrateamt);
+                    netamountvalue = subtotalvalue + Totatlvalue1;
 
-                        netamountvalue = subtotalvalue;
+                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
+                    balance.setText(formatter.format(netamountvalue) + cruncycode);
 
-                        tax.setText(amomnt + cruncycode);
-                        netamount.setText(subtotalvalue + cruncycode);
-                        balance.setText(subtotalvalue + cruncycode);
-                    }
-                } else {
-                    if (taxtype.equalsIgnoreCase("P")) {
-                        netamountvalue = 0.0;
-                        Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
-
-                        tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-
-                       // String taxtpercentage = taxtrateamt.substring(0, 2);
-//                        String tatxnamesub = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub + taxtpercentage + "%";
-//
-//
-//                        txttax.setText("(" + subStrinng + ")"); //Dont do any change
-
-
-                        String subStrinng = taxrname+"" + taxtrateamt + "%";
-
-                        txttax.setText("(" + subStrinng + ")"); //Dont do any change
-
-                        netamountvalue = subtotalvalue + Totatlvalue1;
-
-                        netamount.setText(formatter.format(netamountvalue) + cruncycode);
-                        balance.setText(formatter.format(netamountvalue) + cruncycode);
-
-
-                    } else {
-
-                        netamountvalue = 0.0;
-                      //  String taxtpercentage1 = taxtrateamt.substring(0, 4);
-//                        String tatxnamesub1 = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub1 + taxtpercentage1;
-//
-//
-//                        txttax.setText("(" + subStrinng + ")");
-
-                        String subStrinng = taxrname+"" + taxtrateamt + "";
-
-
-                        txttax.setText("(" + subStrinng + ")");
-
-
-                        Double amomnt = Double.parseDouble(taxtrateamt);
-                        Double taxamountvalue = subtotalvalue + amomnt;
-
-                        netamountvalue = taxamountvalue;
-                        tax.setText(formatter.format(amomnt) + cruncycode);
-                        netamount.setText(formatter.format(taxamountvalue) + cruncycode);
-                        balance.setText(formatter.format(taxamountvalue) + cruncycode);
-                    }
                 }
-
             }
+
+
+
+
             if (freight_cost.equals("")) {
 
 
@@ -3405,47 +3359,68 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
     }
 
 
+
+
+
+
+
     @Override
     public void onPostExecutecall2(Service_list selected_item, String s, String price) {
 
+//        producprice.add(price);
+//        tempList.add(selected_item);
+//        tempQuantity.add(s);
+//
+//        Log.e(TAG, "tempQuantityAA "+s);
+//        total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
+//
+//        double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
+//
+//        totalpriceproduct.add(String.valueOf(newPrice));
+//        calculateTotalAmount(total_price);
+//
+//        products_adapter.notifyDataSetChanged();
 
-//        producprice.add(String.valueOf(price));
+
+
 
         Product_list product_list = new Product_list();
         product_list.setProduct_name(selected_item.getService_name());
         product_list.setProduct_id(selected_item.getService_id());
         product_list.setCurrency_code(selected_item.getCuurency_code());
-
         product_list.setProduct_description(selected_item.getService_description());
-
         product_list.setProduct_measurement_unit(selected_item.getMeasurement_unit());
-
         product_list.setProduct_price(selected_item.getService_price());
 
         producprice.add(selected_item.getService_price());
         tempList.add(product_list);
-
-
         tempQuantity.add(s);
 
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
+        double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
+        totalpriceproduct.add(String.valueOf(newPrice));
 
-        totalpriceproduct.add(String.valueOf( Double.parseDouble(price) * Double.parseDouble(s) ));
+        Log.e(TAG, "tempQuantityBB "+total_price);
+
+
+
         calculateTotalAmount(total_price);
 
         products_adapter.notifyDataSetChanged();
 
         bottomSheetDialog2.dismiss();
 
+
+
     }
+
 
 
     // clear button clear the data
 
+
     @Override
     public void onClick(int str,String type) {
-
-
 
         producprice.remove(str);
         tempList.remove(str);
@@ -3454,20 +3429,35 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
 
         products_adapter.notifyDataSetChanged();
 
+        Log.e(TAG, "ccAAA "+tempList.size());
+        Log.e(TAG, "ccBBB "+tempQuantity.size());
+
+
+        double total_price2 = 0;
+
         if(tempList.size() > 0){
             if(tempQuantity.size() > 0){
                 for(int i = 0 ; i < tempList.size() ; i++){
-                    total_price = Double.parseDouble(tempList.get(i).getProduct_price()) * Double.parseDouble(tempQuantity.get(i));
+                    Log.e(TAG, "ccDDD "+tempList.get(i).getProduct_price() + " DDDD "+ tempQuantity.get(i));
+                    total_price2 = total_price2 + Double.parseDouble(tempList.get(i).getProduct_price()) * Double.parseDouble(tempQuantity.get(i));
                 }
             }
         }
 
+        Log.e(TAG, "productCal "+total_price2);
+
         if(tempList.size() == 0) {
-            total_price = 0.0;
+            total_price2 = 0.0;
         }
 
+        total_price = total_price2;
+
         calculateTotalAmount(total_price);
+
     }
+
+
+
 
     @Override
     public void onPostExecutecall3(String taxnamst, String taxnamss, String type) {

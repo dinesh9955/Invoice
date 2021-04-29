@@ -263,7 +263,7 @@ public class Tax_Edit extends AppCompatActivity {
                         }
                     }
                     else {
-                        Constant.ErrorToast(Tax_Edit.this,"Something went wrongng, try again!");
+                        Constant.ErrorToast(Tax_Edit.this,"Something went wrong, try again!");
                     }
                 }
             });

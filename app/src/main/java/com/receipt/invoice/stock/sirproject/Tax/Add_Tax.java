@@ -272,7 +272,7 @@ public class Add_Tax extends Fragment {
                         }
                     }
                     else {
-                        Constant.ErrorToast(getActivity(),"Something went wrongng, try again!");
+                        Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                     }
                 }
             });

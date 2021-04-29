@@ -1065,6 +1065,10 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
             Log.e(TAG, "selectedtaxtAAA "+selectedtaxt.size());
 
+            //default = "" , off = Exclisive , on = Inclisive,
+            Log.e(TAG, "taxtypeclusiveAAA "+taxtypeclusive);
+
+
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
 
@@ -1136,7 +1140,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "invoice/add", params, new AsyncHttpResponseHandler() {
+            client.post(Constant.BASE_URL + "invoice/axdd", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -1194,7 +1198,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }
                 }
             });
@@ -2685,7 +2689,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
 
@@ -2788,7 +2792,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
 
@@ -3030,7 +3034,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -3175,7 +3179,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -3493,6 +3497,9 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
         calculateTotalAmount(total_price);
 
     }
+
+
+
 
     @Override
     public void onPostExecutecall3(String taxnamst, String taxnamss, String type) {

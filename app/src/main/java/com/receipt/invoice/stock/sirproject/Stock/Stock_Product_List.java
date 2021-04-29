@@ -276,7 +276,7 @@ public class Stock_Product_List extends Fragment {
                     }
                 }
                 else {
-                    Constant.ErrorToast(getActivity(),"Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                 }
 
             }

@@ -182,7 +182,7 @@ public class ViewInvoice_Activity extends AppCompatActivity {
             company_id = getIntent().getStringExtra("company_id");
             date = getIntent().getStringExtra("invoice_date");
             due_date = getIntent().getStringExtra("due_date");
-            customer_id = getIntent().getStringExtra("customer_id");
+           // customer_id = getIntent().getStringExtra("customer_id");
               invoicenobystr = getIntent().getStringExtra("invoice_no");
 
 //            invoicenovalue = Integer.parseInt(invoicenobystr) + 1;

@@ -262,7 +262,7 @@ public class Update_Stock extends Fragment implements Select_Warehouse_Adapter.C
                         }
                     }
                     else {
-                        Constant.ErrorToast(getActivity(),"Something went wrongng, try again!");
+                        Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                     }
 
                 }
@@ -467,7 +467,7 @@ public class Update_Stock extends Fragment implements Select_Warehouse_Adapter.C
                     }
                 }
                 else {
-                    Constant.ErrorToast(getActivity(),"Something went wrongng, try again!");
+                    Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                 }
 
             }
@@ -561,7 +561,7 @@ public class Update_Stock extends Fragment implements Select_Warehouse_Adapter.C
                         }
                     }
                     else {
-                        Constant.ErrorToast(getActivity(),"Something went wrongng, try again!");
+                        Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                     }
 
                 }
