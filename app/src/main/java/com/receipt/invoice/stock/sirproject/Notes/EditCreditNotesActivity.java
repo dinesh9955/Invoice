@@ -1725,7 +1725,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                     if (taxswitch.isChecked()) {
 
                         statusSwitch1 = taxswitch.getTextOn().toString();
-                        taxtypeclusive = "Exclisive";
+                        taxtypeclusive = "Exclusive";
                     } else {
                         statusSwitch1 = taxswitch.getTextOn().toString();
                         taxtypeclusive = "Inclusive";

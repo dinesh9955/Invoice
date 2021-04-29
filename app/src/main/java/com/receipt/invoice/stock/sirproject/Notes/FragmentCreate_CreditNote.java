@@ -1060,15 +1060,25 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
 
-                    //off exclusive
-                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
-                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive);
-                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
-                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
-                    }else{
+                    params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                    params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                    params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+                    params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
 
-                    }
+
+
+//                    //off exclusive
+//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+//                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive);
+//                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+//                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+//                    }else if (taxtypeclusive.equalsIgnoreCase("Exclusive")) {
+//                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive);
+//                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+//                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+//                    }
 
 
 //                    if (selectedtaxt.get(i).getTaxtype().equals("p")) {
@@ -1616,7 +1626,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                         taxtypeclusive = "Inclusive";
                     } else {
                         statusSwitch1 = taxswitch.getTextOn().toString();
-                        taxtypeclusive = "Exclisive";
+                        taxtypeclusive = "Exclusive";
                     }
                     calculateTotalAmount(total_price);
                     bottomSheetDialog3.dismiss();

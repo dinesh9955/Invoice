@@ -1312,7 +1312,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     if (taxswitch.isChecked()) {
 
                         statusSwitch1 = taxswitch.getTextOn().toString();
-                        taxtypeclusive = "Exclisive";
+                        taxtypeclusive = "Exclusive";
                     } else {
                         statusSwitch1 = taxswitch.getTextOn().toString();
                         taxtypeclusive = "Inclusive";

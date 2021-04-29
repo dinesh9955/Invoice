@@ -1663,7 +1663,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     if (taxswitch.isChecked()) {
 
                         statusSwitch1 = taxswitch.getTextOn().toString();
-                        taxtypeclusive = "Exclisive";
+                        taxtypeclusive = "Exclusive";
                     } else {
                         statusSwitch1 = taxswitch.getTextOn().toString();
                         taxtypeclusive = "Inclusive";

@@ -1640,7 +1640,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                     if (taxswitch.isChecked()) {
 
                         statusSwitch1 = taxswitch.getTextOn().toString();
-                        taxtypeclusive = "Exclisive";
+                        taxtypeclusive = "Exclusive";
                     } else {
                         statusSwitch1 = taxswitch.getTextOn().toString();
                         taxtypeclusive = "Inclusive";
