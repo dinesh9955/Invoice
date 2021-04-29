@@ -233,6 +233,7 @@ public class Customer_Listing extends Fragment {
 
                                 Customer_list customer_list = new Customer_list();
 
+                                customer_list.setCompany_id(selectedCompanyId);
                                 customer_list.setCustomer_id(customer_id);
                                 customer_list.setCustomer_name(customer_name);
                                 customer_list.setCustomer_contact_person(customer_contact_person);

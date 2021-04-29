@@ -3498,7 +3498,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
     }
 
     @Override
-    public void onPostExecutecall3(String taxnamst, String taxnamss, String type) {
+    public void onPostExecutecall3(String taxID, String taxnamst, String taxnamss, String type) {
         selectedtaxt.clear();
         Log.e("income rate", taxnamst);
         Log.e("taxnamss_rate", taxnamss);

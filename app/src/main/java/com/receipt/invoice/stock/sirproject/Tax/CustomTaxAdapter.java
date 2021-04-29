@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class CustomTaxAdapter  extends RecyclerView.Adapter<CustomTaxAdapter.ViewHolderForCat> {
 
+    private static final String TAG = "CustomTaxAdapter" ;
     private Context mcontext ;
     ArrayList<Tax_List> mlist=new ArrayList<>();
 
@@ -27,9 +28,10 @@ public class CustomTaxAdapter  extends RecyclerView.Adapter<CustomTaxAdapter.Vie
 
     String taxname,taxvalue;
 
+    String taxID= "";
 
     private int selectedPos = -100;
-    public CustomTaxAdapter(Context mcontext , ArrayList<Tax_List>list, CustomTaxAdapter.Callback callback){
+    public CustomTaxAdapter(Context mcontext , ArrayList<Tax_List> list, CustomTaxAdapter.Callback callback){
         this.mcontext = mcontext;
         mlist=list;
         this.callback = callback;
@@ -54,14 +56,25 @@ public class CustomTaxAdapter  extends RecyclerView.Adapter<CustomTaxAdapter.Vie
         taxvalue = service_list.getTax_rate();
         String typestr=service_list.getType();
         Log.e("type",typestr);
+
+        Log.e(TAG, "AAAAA00 "+service_list.getTax_id()+"  "+taxID);
+
+        if(taxID == service_list.getTax_id()){
+            //viewHolderForCat.imgincome.setVisibility(View.VISIBLE);
+            selectedPos = viewHolderForCat.getAdapterPosition();
+        }else{
+            selectedPos = -100;
+          //  viewHolderForCat.imgincome.setVisibility(View.INVISIBLE);
+        }
+
         if (taxname != null)
         {
-            viewHolderForCat.txtincome.setText(taxname);
+            viewHolderForCat.txtincome.setText(taxname.toUpperCase());
         }
 
         if (typestr.equals("P"))
         {
-                viewHolderForCat.txtincomepercent.setText(taxvalue + "%");
+                viewHolderForCat.txtincomepercent.setText(taxvalue + " %");
         }
         else
             {
@@ -79,6 +92,7 @@ public class CustomTaxAdapter  extends RecyclerView.Adapter<CustomTaxAdapter.Vie
             @Override
             public void onClick(View view) {
 
+                taxID = service_list.getTax_id();
                String taxnamsts = service_list.getTax_name();
                 String taxvlstr = service_list.getTax_rate();
                 String typestr = service_list.getType();
@@ -95,7 +109,8 @@ public class CustomTaxAdapter  extends RecyclerView.Adapter<CustomTaxAdapter.Vie
                 notifyDataSetChanged();
 
 
-                callback.onPostExecutecall3(taxnamsts,taxvlstr,typestr);
+
+                callback.onPostExecutecall3(taxID, taxnamsts,taxvlstr,typestr);
 
 
 
@@ -108,6 +123,12 @@ public class CustomTaxAdapter  extends RecyclerView.Adapter<CustomTaxAdapter.Vie
     public int getItemCount() {
         return mlist.size();
         //return 2;
+    }
+
+    public void updateTaxSelect(String taxID) {
+        this.taxID = taxID;
+        Log.e(TAG, "taxID" + taxID);
+        notifyDataSetChanged();
     }
 
 
@@ -139,7 +160,7 @@ public class CustomTaxAdapter  extends RecyclerView.Adapter<CustomTaxAdapter.Vie
 
     public interface Callback{
 
-        void onPostExecutecall3(String taxnamst,String taxnamss,String type);
+        void onPostExecutecall3(String taxID, String taxnamst,String taxnamss,String type);
     }
 
 }

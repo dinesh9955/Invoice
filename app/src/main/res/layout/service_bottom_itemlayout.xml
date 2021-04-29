@@ -60,6 +60,24 @@
         android:layout_marginRight="5dp"
         />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unit:Day"
+        android:id="@+id/serviceunit2"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/serviceunit"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/productcurrency"
+        android:layout_marginRight="5dp"
+        android:visibility="gone"
+        />
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

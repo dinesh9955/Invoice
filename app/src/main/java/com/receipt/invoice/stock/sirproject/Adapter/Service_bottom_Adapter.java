@@ -108,14 +108,24 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
         {
             viewHolderForCat.servicedescription.setText("Quantity Available:"+" "+service_quantity);
         }
+
+
+        viewHolderForCat.serviceunit.setText(""+" "+service_description);
+
+
         if (measurement_unit.equals("") || measurement_unit.equals("null"))
         {
-            viewHolderForCat.serviceunit.setText("");
+            viewHolderForCat.serviceunit2.setText("");
+            viewHolderForCat.serviceunit2.setVisibility(View.GONE);
         }
         else
         {
-            viewHolderForCat.serviceunit.setText("Unit:"+" "+measurement_unit);
+            viewHolderForCat.serviceunit2.setText("Unit:"+" "+measurement_unit);
+            viewHolderForCat.serviceunit2.setVisibility(View.VISIBLE);
         }
+
+
+
 
         viewHolderForCat.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +154,7 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
     public class ViewHolderForCat extends RecyclerView.ViewHolder {
 
 
-        TextView servicename,servicedescription,servicecurrency,servicecurrencyunit,serviceunit;
+        TextView servicename,servicedescription,servicecurrency,servicecurrencyunit,serviceunit ,serviceunit2 ;
         RoundedImageView image;
 
 
@@ -157,7 +167,9 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
             servicecurrencyunit = itemView.findViewById(R.id.servicecurrencyunit);
             serviceunit = itemView.findViewById(R.id.serviceunit);
             image = itemView.findViewById(R.id.image);
+            serviceunit2 = itemView.findViewById(R.id.serviceunit2);
 
+            serviceunit2.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
             servicename.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
             servicedescription.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Light.otf"));
             serviceunit.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Light.otf"));
@@ -210,7 +222,7 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
                     sh_price = Double.parseDouble(edprice.getText().toString());
                     shquentityedt= Integer.parseInt(edquantity.getText().toString());
 
-                    callback.onPostExecutecall2(mlist.get(i),String.valueOf(shquentityedt),String.valueOf(sh_price));
+                    callback.onPostExecutecall2(mlist.get(i), String.valueOf(shquentityedt),String.valueOf(sh_price));
                     mybuilder.dismiss();
                 }catch (Exception e){
 

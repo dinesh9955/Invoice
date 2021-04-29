@@ -104,6 +104,15 @@ public class Customer_list implements Serializable {
 
     String shipping_firstname;
 
+
+    public String getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(String company_id) {
+        this.company_id = company_id;
+    }
+
     public String getShipping_firstname() {
         return shipping_firstname;
     }

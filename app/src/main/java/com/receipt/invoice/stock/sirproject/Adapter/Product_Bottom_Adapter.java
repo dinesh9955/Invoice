@@ -107,7 +107,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
         }
         else
         {
-            viewHolderForCat.productquantity.setText("Quantity: "+quantity);
+            viewHolderForCat.productquantity.setText("Quantity Available: "+quantity);
         }
         if (product_price.equals("") || product_price.equals("null"))
         {
@@ -260,40 +260,45 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
         btnok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mybuilder.dismiss();
 
-                int en_quantity = Integer.parseInt(edquantity.getText().toString());
+                try {
 
+                    int en_quantity = Integer.parseInt(edquantity.getText().toString());
 
-                if (sh_quantity < en_quantity)
-                {
-                   // mybuilder.show();
-                    Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity");
-                    mybuilder.dismiss();
-                    callback.closeDialog();
-                    if(bottomSheetDialog != null){
-                        bottomSheetDialog.dismiss();
+                    if (sh_quantity < en_quantity)
+                    {
+                        // mybuilder.show();
+                        Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity");
+                        mybuilder.dismiss();
+                        callback.closeDialog();
+                        if(bottomSheetDialog != null){
+                            bottomSheetDialog.dismiss();
+                        }
                     }
-                }
-                else
-                {
-                    // sh_price = Integer.parseInt(edprice.getText().toString());
-                    sh_price = Double.parseDouble(edprice.getText().toString());
+                    else
+                    {
+                        sh_price = Double.parseDouble(edprice.getText().toString().trim());
 
-                    double multiply = en_quantity * sh_price;
+                        double multiply = en_quantity * sh_price;
 /*
                     mlist.get(i).setUpdatePrice(String.valueOf(multiply));
 */
 
-                    String s_multiply = String.valueOf(multiply);
+                        String s_multiply = String.valueOf(multiply);
 /*
                     mlist.get(i).setUsedQuantity(String.valueOf(en_quantity));
 */
-                    callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
+                        callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
 
-                    mybuilder.dismiss();
+                        mybuilder.dismiss();
+
+                    }
+
+                }catch (Exception e){
 
                 }
+
+
 
             }
         });

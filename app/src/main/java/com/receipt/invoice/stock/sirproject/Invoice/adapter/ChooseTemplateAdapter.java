@@ -64,13 +64,13 @@ public class ChooseTemplateAdapter extends RecyclerView.Adapter<ChooseTemplateAd
     @Override
     public void onBindViewHolder(final ChooseTemplateAdapter.ViewHolder viewHolder, final int i) {
 
-        viewHolder.webView.getSettings().setAllowFileAccess(true);
+//        viewHolder.webView.getSettings().setAllowFileAccess(true);
         viewHolder.webView.setWebChromeClient(new WebChromeClient());
         viewHolder.webView.getSettings().setSupportZoom(false);
         viewHolder.webView.getSettings().setBuiltInZoomControls(false);
         viewHolder.webView.getSettings().setDisplayZoomControls(false);
 
-        viewHolder.webView.getSettings().setLoadsImagesAutomatically(true);
+        //viewHolder.webView.getSettings().setLoadsImagesAutomatically(true);
         viewHolder.webView.getSettings().setJavaScriptEnabled(true);
         viewHolder.webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
         viewHolder.webView.getSettings().setLoadWithOverviewMode(true);

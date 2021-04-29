@@ -15,7 +15,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/sir_app_logo"
+        android:src="@drawable/placeholder_big"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

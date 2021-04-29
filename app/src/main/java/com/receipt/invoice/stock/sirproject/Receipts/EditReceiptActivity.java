@@ -3527,7 +3527,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
     }
 
     @Override
-    public void onPostExecutecall3(String taxnamst, String taxnamss, String type) {
+    public void onPostExecutecall3(String taxID, String taxnamst, String taxnamss, String type) {
         selectedtaxt.clear();
         Log.e("income rate", taxnamst);
         Log.e("taxnamss_rate", taxnamss);

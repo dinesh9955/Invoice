@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.receipt.invoice.stock.sirproject.Customer.Customer_Detail_Activity2;
 import com.receipt.invoice.stock.sirproject.Details.Customer_Detail_Activity;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.R;
@@ -61,6 +62,7 @@ public class Customer_Listing_Adapter extends RecyclerView.Adapter<Customer_List
 
         Customer_list customer_list = mlist.get(i);
 
+        final String company_id = customer_list.getCompany_id();
         final String customer_id = customer_list.getCustomer_id();
         final String customer_name = customer_list.getCustomer_name();
         final String customer_contact_person = customer_list.getCustomer_contact_person();
@@ -112,12 +114,13 @@ public class Customer_Listing_Adapter extends RecyclerView.Adapter<Customer_List
                 .into(viewHolderForCat.image);
 
 
+        viewHolderForCat.details.setVisibility(View.VISIBLE);
         viewHolderForCat.details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mcontext,Customer_Detail_Activity.class);
+                Intent intent = new Intent(mcontext, Customer_Detail_Activity2.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-               // intent.putExtra("customer_id",customer_id);
+                intent.putExtra("company_id",company_id);
                 intent.putExtra("customer_id",customer_id);
                 intent.putExtra("customer_name",customer_name);
                 intent.putExtra("customer_contact_person",customer_contact_person);

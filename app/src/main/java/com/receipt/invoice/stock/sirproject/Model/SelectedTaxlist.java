@@ -34,8 +34,17 @@ public class SelectedTaxlist {
         this.taxamount = taxamount;
     }
 
+    public String taxID;
     public String taxname;
     public String taxrate;
     public String taxtype;
     public String taxamount;
+
+    public String getTaxID() {
+        return taxID;
+    }
+
+    public void setTaxID(String taxID) {
+        this.taxID = taxID;
+    }
 }

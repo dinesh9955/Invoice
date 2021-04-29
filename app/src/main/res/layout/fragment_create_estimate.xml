@@ -613,7 +613,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
-                android:text="Upload Estimate Image"
+                android:text="Upload Estimate Images"
                 android:textColor="@color/lightpurple"
                 android:textSize="16sp" />
 

@@ -275,7 +275,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
     //    int invoicenovalue;
     // Company logo path
     String companylogopath = "", Subtotalamount = "";
-    String taxtypeclusive = "", taxtype = "", taxtrateamt = "";
+    String taxtypeclusive = "", taxtype = "", taxtrateamt = "" , taxID = "";
     //    int selectedItemOfMySpinner;
     // customer information
     String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
@@ -902,12 +902,9 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
     private void showUriList(List<Uri> uriList) {
 
-
+        attchmentimage.clear();
         for (Uri uri : uriList) {
-
-
             attchmentimage.add(uri.toString());
-
             attachmenttxtimg.setVisibility(View.VISIBLE);
         }
         int sizen = attchmentimage.size();
@@ -1584,6 +1581,11 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
             imgincome = view.findViewById(R.id.txttax);
 
+            if(taxtypeclusive.equalsIgnoreCase("Inclusive")){
+                taxswitch.setChecked(true);
+            }else{
+                taxswitch.setChecked(false);
+            }
 
         /*    txtincomepercent.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
             txtincometax.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
@@ -1602,6 +1604,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             taxrecycler.setAdapter(customTaxAdapter);
             customTaxAdapter.notifyDataSetChanged();
 
+            customTaxAdapter.updateTaxSelect(taxID);
 
             btndone.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3203,9 +3206,13 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
     @Override
     public void onPostExecutecall(Product_list selected_item, String s, String price) {
 
+        bottomSheetDialog.dismiss();
+
         producprice.add(price);
         tempList.add(selected_item);
         tempQuantity.add(s);
+
+        Log.e(TAG, "tempQuantityAA "+s);
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
 
         double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
@@ -3215,7 +3222,6 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
         products_adapter.notifyDataSetChanged();
 
-        bottomSheetDialog.dismiss();
 
 
     }
@@ -3305,27 +3311,26 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             Log.e(TAG, "selectedtaxt.size() "+selectedtaxt.size());
 
             if (selectedtaxt.size() > 0) {
-                if (taxtypeclusive.equals("Inclusive")) { // exclude
+                if (taxtypeclusive.equals("Inclusive")) { // exclude on
                     //netamountvalue = 0.0;
-                    Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
-
+                    Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-                    String subStrinng = taxrname + "" + taxtrateamt + "%";
+                    String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
 
-                    txttax.setText("(" + subStrinng + "Incl" + ")"); //Dont do any change
+                    txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
 
                     netamountvalue = subtotalvalue + Totatlvalue1;
 
                     netamount.setText(formatter.format(netamountvalue) + cruncycode);
                     balance.setText(formatter.format(netamountvalue) + cruncycode);
 
-                } else { // include
+                } else { // include off
 
-                    Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
+                    Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
 
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
-                    String subStrinng = taxrname + "" + taxtrateamt + "%";
+                    String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
 
                     txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
 
@@ -3386,7 +3391,6 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
 
 
-
     @SuppressLint("LongLogTag")
     @Override
     public void onPostExecutecall2(Service_list selected_item, String s, String price) {
@@ -3416,7 +3420,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
         product_list.setProduct_measurement_unit(selected_item.getMeasurement_unit());
         product_list.setProduct_price(selected_item.getService_price());
 
-        producprice.add(selected_item.getService_price());
+        producprice.add(price);
         tempList.add(product_list);
         tempQuantity.add(s);
 
@@ -3463,8 +3467,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
         if(tempList.size() > 0){
             if(tempQuantity.size() > 0){
                 for(int i = 0 ; i < tempList.size() ; i++){
-                    Log.e(TAG, "ccDDD "+tempList.get(i).getProduct_price() + " DDDD "+ tempQuantity.get(i));
-                    total_price2 = total_price2 + Double.parseDouble(tempList.get(i).getProduct_price()) * Double.parseDouble(tempQuantity.get(i));
+                    Log.e(TAG, "ccDDD "+producprice.get(i) + " DDDD "+ tempQuantity.get(i));
+                    total_price2 = total_price2 + Double.parseDouble(producprice.get(i)) * Double.parseDouble(tempQuantity.get(i));
                 }
             }
         }
@@ -3484,11 +3488,14 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
 
     @Override
-    public void onPostExecutecall3(String taxnamst, String taxnamss, String type) {
+    public void onPostExecutecall3(String taxID, String taxnamst, String taxnamss, String type) {
         selectedtaxt.clear();
         Log.e("income rate", taxnamst);
         Log.e("taxnamss_rate", taxnamss);
         Log.e("type rate", type);
+        this.taxID = taxID;
+        Log.e(TAG, "taxID" + taxID);
+
         taxtype = type;
         taxrname = taxnamst;
         taxtrateamt = taxnamss;
