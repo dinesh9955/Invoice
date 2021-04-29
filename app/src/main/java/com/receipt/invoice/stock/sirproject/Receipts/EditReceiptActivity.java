@@ -1142,7 +1142,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
     private void createinvoicewithdetail(File file) {
         avi.smoothToShow();
         if (customer_name.equals("")) {
-            Constant.ErrorToast(EditReceiptActivity.this, "Select A  Customer");
+            Constant.ErrorToast(EditReceiptActivity.this, "Select A Customer");
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
             Constant.ErrorToast(EditReceiptActivity.this, "Select Valid Receipt No");
 

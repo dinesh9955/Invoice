@@ -1111,7 +1111,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
     private void createinvoicewithdetail(File file) {
         avi.smoothToShow();
         if (customer_name.equals("")) {
-            Constant.ErrorToast(EditEstimateActivity.this, "Select A  Customer");
+            Constant.ErrorToast(EditEstimateActivity.this, "Select A Customer");
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
             Constant.ErrorToast(EditEstimateActivity.this, "Select Valid Estimate No");
 
@@ -1790,7 +1790,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         Constant.ErrorToast(EditEstimateActivity.this, "Select Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(EditEstimateActivity.this, "Select A  Customer");
+                        Constant.ErrorToast(EditEstimateActivity.this, "Select A Customer");
                         bottomSheetDialog2.dismiss();
 //                    } else if (credit_terms.equals("")) {
 //                        Constant.ErrorToast(EditEstimateActivity.this, "Select Credit Tearm");

@@ -1222,7 +1222,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
     private void createinvoicewithdetail(File file) {
         avi.smoothToShow();
         if (customer_name.equals("")) {
-            Constant.ErrorToast(EditInvoiceActivity.this, "Select A  Customer");
+            Constant.ErrorToast(EditInvoiceActivity.this, "Select A Customer");
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
             Constant.ErrorToast(EditInvoiceActivity.this, "Select Valid Invoice No");
 
@@ -1939,7 +1939,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         Constant.ErrorToast(EditInvoiceActivity.this, "Select Invoice Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(EditInvoiceActivity.this, "Select A  Customer");
+                        Constant.ErrorToast(EditInvoiceActivity.this, "Select A Customer");
                         bottomSheetDialog2.dismiss();
                     } else if (credit_terms.equals("")) {
                         Constant.ErrorToast(EditInvoiceActivity.this, "Select Credit Term");

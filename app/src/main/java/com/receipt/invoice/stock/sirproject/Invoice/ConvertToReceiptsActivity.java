@@ -857,7 +857,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
 
         if (customer_name.equals("")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A  Customer");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Customer");
         } else if (invoice_date.equals("")) {
             Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Date");
 
@@ -1354,7 +1354,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select a Company");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A  Customer");
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Customer");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Date");

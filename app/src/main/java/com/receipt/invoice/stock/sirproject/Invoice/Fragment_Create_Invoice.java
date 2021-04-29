@@ -205,6 +205,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
     Button selectcompany;
 
 
+
+
     //days bottom sheet
     Button btndone2;
     Button btnviewinvoice, btnclear, btndotcancel;
@@ -245,7 +247,6 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
     //For Intent
     String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "";
-    String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
     String invoice_no = "", invoice_due_date = "", invoice_date = "", credit_terms = "", reference_no = "";
     String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "";
     String s_r = "0";
@@ -253,6 +254,14 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
 
     String Selectedcustomer_id="";
+    String customer_id = "";
+    String customer_name = "";
+
+    String custoner_contact_name = "";
+    String customer_email = "";
+    String customer_contact = "";
+    String customer_address =  "";
+    String customer_website = "";
 
     ArrayList<String> rate = new ArrayList<>();
 
@@ -273,7 +282,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
     String strnotes, ref_no, freight_cost = "", strpaid_amount = "", Blanceamountstr = "";
     String Paymentamountdate = "", paymentmode = "", signatureofreceiverst = "", paidamountstr = "", netamountvalue = "";
     // customer detail
-    String shippingfirstname, shippinglastname, shippingaddress1, shippingaddress2, shippingcity, shippingpostcode, shippingcountry, paymentbankname, paymentcurrency, paymentiban, paymentswiftbic;
+    String shippingfirstname = "", shippinglastname, shippingaddress1, shippingaddress2, shippingcity, shippingpostcode, shippingcountry, paymentbankname, paymentcurrency, paymentiban, paymentswiftbic;
     // Date pikker date Convert To time Millissecund
     long datemillis;
     // Invoice no
@@ -284,7 +293,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
     String taxtypeclusive = "", taxtype = "", taxtrateamt = "" , taxID = "";
 //    int selectedItemOfMySpinner;
     // customer information
-    String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
+
     String Selectedcompanyname, taxrname;
     //
     String companycolor = "#ffffff";
@@ -950,7 +959,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             Constant.ErrorToast(getActivity(), "Select Invoice Date");
 
         } else if (customer_name.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select A  Customer");
+            Constant.ErrorToast(getActivity(), "Select A Customer");
 
         } else if (credit_terms.equals("")) {
             Constant.ErrorToast(getActivity(), "Select Credit Term");
@@ -1796,7 +1805,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                         Constant.ErrorToast(getActivity(), "Select Invoice Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A  Customer");
+                        Constant.ErrorToast(getActivity(), "Select A Customer");
                         bottomSheetDialog2.dismiss();
                     } else if (credit_terms.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select Credit Term");
@@ -3107,6 +3116,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                 String response = new String(responseBody);
                 Log.e("response customers", response);
 
+
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
@@ -3114,6 +3124,10 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                         JSONObject data = jsonObject.getJSONObject("data");
                         JSONArray customer = data.getJSONArray("customer");
                         String image_path = data.getString("customer_image_path");
+
+                        String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
+
+                        String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
 
 
                         for (int i = 0; i < customer.length(); i++) {
@@ -3220,12 +3234,24 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             customer_name = customer_list.getCustomer_name();
             Selectedcustomer_id=customer_list.getCustomer_id();
 
+
         } else {
             // createbottomsheet_customers();
             invoicerecipnt.setText(customer_list.getCustomer_name());
             customer_name = customer_list.getCustomer_name();
         }
         selected.add(customer_list);
+
+        customer_name = customer_list.getCustomer_name();
+        customer_id = Selectedcustomer_id;
+
+        custoner_contact_name = customer_list.getCustomer_contact_person();
+        customer_email = customer_list.getCustomer_email();
+        customer_contact = customer_list.getCustomer_name();
+        customer_address = customer_list.getCustomer_address();
+        customer_website = customer_list.getCustomer_website();
+
+
 /*
 
         for (int i = 0; i < customerinfo.size(); i++) {
@@ -3666,7 +3692,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
     String cruncycode = "", Shiping_tostr = "", companyimagelogopath = "";
 
-    String Shipingdetail;
+    String Shipingdetail = "";
 
     String encodedImage, signature_of_receiverincode, encodesignatureissure, drableimagebase64, attchmentbase64;
     String paid_amount_payment;
@@ -3872,15 +3898,15 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                 Log.e(TAG, "TOTAL "+totalpriceproduct.get(i));
                 Log.e(TAG, "TOTAL2 "+tempList.get(i).getCurrency_code());
 
-//                productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
-//                        .replaceAll("#NAME#", tempList.get(i).getProduct_name())
-//                        .replaceAll("#DESC#", tempList.get(i).getProduct_description())
-//                        .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
-//                        .replaceAll("#QUANTITY#", tempQuantity.get(i))
-//                        .replaceAll("#PRICE#", producprice.get(i) + " " + tempList.get(i).getCurrency_code())
-//                        .replaceAll("#TOTAL#", totalpriceproduct.get(i) + " " + tempList.get(i).getCurrency_code());
-//
-//                productitemlist = productitemlist + productitem;
+                productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
+                        .replaceAll("#NAME#", tempList.get(i).getProduct_name())
+                        .replaceAll("#DESC#", tempList.get(i).getProduct_description())
+                        .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
+                        .replaceAll("#QUANTITY#", tempQuantity.get(i))
+                        .replaceAll("#PRICE#", producprice.get(i) + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", totalpriceproduct.get(i) + Utility.getReplaceDollor(cruncycode));
+
+                productitemlist = productitemlist + productitem;
             }
 
             Log.e(TAG, "cruncycodeAA "+cruncycode);
@@ -4154,15 +4180,15 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     .replaceAll("DueDate", invoice_due_date)
                     .replaceAll("crTerms", credit_terms)
                     .replaceAll("refNo", strreferencenovalue)
-                    .replaceAll("GrossAm-", ""+Grossamount_str)
-                    .replaceAll("Discount-", discountvalue)
-                    .replaceAll("SubTotal-", Subtotalamount)
-                    .replaceAll("Txses-", taxtamountstr)
-                    .replaceAll("Shipping-", Shipingcosstbyct)
-                    .replaceAll("Total Amount-", netamountvalue)
-                    .replaceAll("PaidsAmount", paidamountstrrepvalue)
+                    .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
+                    .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
+                    .replaceAll("SubTotal-", ""+Utility.getReplaceCurrency(Subtotalamount, cruncycode))
+                    .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
+                    .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
+                    .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
+                    .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
-                    .replaceAll("Balance Due-", Blanceamountstr)
+                    .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
                     .replaceAll("Checkto", chektopaidmaount)
                     .replaceAll("BankName", payment_bankstr)
                     .replaceAll("Pemail", pemailpaidstr)
@@ -4256,6 +4282,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 //                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
 
                             Log.e(TAG, "FILENAME" +file);
+                            Log.e(TAG, "customer_name" +customer_name);
+
                             createinvoicewithdetail(file);
                         }
 

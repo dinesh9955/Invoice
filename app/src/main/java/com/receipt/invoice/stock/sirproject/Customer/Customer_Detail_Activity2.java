@@ -668,7 +668,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("true")){
-                                Constant.SuccessToast(activity,"Customer Added");
+                                Constant.SuccessToast(activity,"Customer Updated");
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
