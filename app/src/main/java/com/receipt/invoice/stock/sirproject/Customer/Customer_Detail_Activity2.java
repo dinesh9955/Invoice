@@ -159,6 +159,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
         CompanyAddress.setText(customer_address);
 
 
+        imagedescription.setVisibility(View.GONE);
 
 
     }
@@ -288,7 +289,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                AddCustomer();
+                AddCustomer();
             }
         });
 
@@ -296,7 +297,6 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
         uploadimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 SelectImage();
             }
         });
@@ -310,6 +310,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
                 save.setVisibility(View.VISIBLE);
                 cancel.setVisibility(View.VISIBLE);
                 editbtn.setVisibility(View.GONE);
+                imagedescription.setVisibility(View.VISIBLE);
 
                 RequestOptions options = new RequestOptions();
                 options.centerCrop();
@@ -349,6 +350,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
                 save.setVisibility(View.GONE);
                 cancel.setVisibility(View.GONE);
                 editbtn.setVisibility(View.VISIBLE);
+                imagedescription.setVisibility(View.GONE);
 
                 contacts.setEnabled(false);
                 name.setEnabled(false);
@@ -366,6 +368,15 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
                 edcity.setEnabled(false);
                 edpostcode.setEnabled(false);
                 edcountry.setEnabled(false);
+
+                RequestOptions options = new RequestOptions();
+                options.centerCrop();
+                options.circleCrop();
+                options.placeholder(R.drawable.app_icon);
+                Glide.with(activity)
+                        .load(customer_image)
+                        .apply(options)
+                        .into(uploadimage);
 
             }
         });
@@ -590,6 +601,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
         String cmobile= mobile.getText().toString();
         String cwebsite = website.getText().toString();
         String caddress = CompanyAddress.getText().toString();
+
         String f_name = edfirstname.getText().toString();
         String l_name = edlastname.getText().toString();
         String address1 = edaddress1.getText().toString();
@@ -618,7 +630,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
 
                 RequestParams params = new RequestParams();
 
-                params.add("customer_id",companyname);
+                params.add("customer_id",customer_id);
                 params.add("customer_name",companyname);
                 params.add("company_id",selectedCompanyId);
                 params.add("contact_name",cperson);
