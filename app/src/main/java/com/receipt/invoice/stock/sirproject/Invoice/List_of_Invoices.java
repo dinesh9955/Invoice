@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -13,6 +15,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -55,8 +58,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -125,6 +130,10 @@ public class List_of_Invoices extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         View view = inflater.inflate(R.layout.fragment_list_of__invoices, container, false);
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
         apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
         avi = view.findViewById(R.id.avi);
         avibackground = view.findViewById(R.id.avibackground);
@@ -869,16 +878,39 @@ public class List_of_Invoices extends Fragment {
                                     BaseurlForShareInvoice = shareInvoicelink + sharelink;
                                     //String finalurl =BaseurlForShareInvoice;
 
-                                    String[] TO = {"email@server.com"};
-                                    Uri uri = Uri.parse("mailto:email@server.com")
-                                            .buildUpon()
-                                            .appendQueryParameter("subject", subject)
-                                            .appendQueryParameter("body", txt)
-                                            .build();
-                                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
+//                                    String[] TO = {"email@server.com"};
+//                                    Uri uri = Uri.parse("mailto:email@server.com")
+//                                            .buildUpon()
+//                                            .appendQueryParameter("subject", subject)
+//                                            .appendQueryParameter("body", txt)
+//                                            .build();
+//                                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
+//
+//                                    emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+//                                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 
-                                    emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-                                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+
+                                    Bitmap icon = BitmapFactory.decodeResource(getResources(),
+                                            R.drawable.thanksimg);
+                                    Intent share = new Intent(Intent.ACTION_SEND);
+                                    share.setType("image/jpeg");
+                                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                                    icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                                    File f = new File(Environment.getExternalStorageDirectory()
+                                            + File.separator + "share.jpg");
+                                    try {
+                                        f.createNewFile();
+                                        FileOutputStream fo = new FileOutputStream(f);
+                                        fo.write(bytes.toByteArray());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    share.putExtra(Intent.EXTRA_SUBJECT, subject);
+                                    share.putExtra(Intent.EXTRA_TEXT, txt);
+
+                                    share.putExtra(Intent.EXTRA_STREAM,
+                                            Uri.parse("file:///sdcard/share.jpg"));
+                                    startActivity(Intent.createChooser(share, "Share..."));
                                 }
 
 

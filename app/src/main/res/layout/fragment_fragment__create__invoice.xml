@@ -355,7 +355,9 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/red"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:minWidth="50dp"
+                android:gravity="right"/>
 
 
             <TextView
@@ -380,7 +382,9 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:minWidth="50dp"
+                android:gravity="right"/>
 
             <TextView
                 android:id="@+id/taxvalue"
@@ -416,7 +420,9 @@
                 android:layout_marginEnd="20dp"
                 android:text="0"
                 android:textColor="@color/green"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:minWidth="50dp"
+                android:gravity="right"/>
 
             <TextView
                 android:id="@+id/txtfreight"
@@ -488,7 +494,9 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/red"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:minWidth="50dp"
+                android:gravity="right"/>
 
             <TextView
                 android:id="@+id/txtbalance"

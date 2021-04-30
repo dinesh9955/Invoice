@@ -711,6 +711,8 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 //
 //                createinvoicewithdetail();
 
+                createinvoice.setEnabled(false);
+
 
                 invoice_no = invoicenumtxt.getText().toString();
                 strnotes = ednotes.getText().toString();
@@ -954,16 +956,16 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
             Constant.ErrorToast(getActivity(), "Select a Company");
-
+            createinvoice.setEnabled(true);
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
             Constant.ErrorToast(getActivity(), "Select Valid Receipt No");
-
+            createinvoice.setEnabled(true);
         }else if (invoice_date.equals("")) {
             Constant.ErrorToast(getActivity(), "Select Date");
-
+            createinvoice.setEnabled(true);
         } else if (customer_name.equals("")) {
             Constant.ErrorToast(getActivity(), "Select A Customer");
-
+            createinvoice.setEnabled(true);
 //        } else if (credit_terms.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Credit Tearm");
 
@@ -976,7 +978,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         } else if (producprice.isEmpty()) {
             Constant.ErrorToast(getActivity(), "Select product First");
             bottomSheetDialog2.dismiss();
-
+            createinvoice.setEnabled(true);
         } else {
 
             Log.e(TAG , "strdiscountvalue " +Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
@@ -1178,6 +1180,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                         }
                         if (status.equals("false")) {
                             Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                            createinvoice.setEnabled(true);
                         }
 
 
@@ -1200,12 +1203,14 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
                                 Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                                createinvoice.setEnabled(true);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     } else {
                         Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                        createinvoice.setEnabled(true);
                     }
                 }
             });
