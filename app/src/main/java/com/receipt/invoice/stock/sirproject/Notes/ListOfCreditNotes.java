@@ -115,6 +115,9 @@ public class ListOfCreditNotes extends Fragment {
     String colorCode = "#ffffff";
     private AVLoadingIndicatorView avi;
 
+    String customerName = "";
+    String dataNo = "";
+
     public ListOfCreditNotes() {
         // Required empty public constructor
     }
@@ -186,6 +189,8 @@ public class ListOfCreditNotes extends Fragment {
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
+                                customerName = list.get(pos).getInvoicustomer_name();
+                                dataNo = list.get(pos).getInvoice_nobdt();
                                 templateSelect = list.get(pos).getTemplate_type();
                                 Log.e(TAG, "templateSelect: "+templateSelect);
                                 invoiceidbypos = list.get(pos).getInvoice_userid();
@@ -542,9 +547,9 @@ public class ListOfCreditNotes extends Fragment {
                             company_list.setPayment_currency(payment_currency);
                          //   company_list.setTemplate_type(item.getString("template_type"));
                             list.add(company_list);
-                            if (list.size() < 20) {
+                           // if (list.size() < 20) {
                                 invoicelistAdapterdt.updateList(list);
-                            }
+                          //  }
 
                         }
 
@@ -873,24 +878,43 @@ public class ListOfCreditNotes extends Fragment {
 
                             Log.e(TAG, "sharelink:: "+sharelink);
 
-                            try {
+                            Log.e(TAG, "sharelink:: "+sharelink);
+                            Log.e(TAG, "customerName:: "+customerName);
+                            Log.e(TAG, "dataNo:: "+dataNo);
 
+                            String subject = dataNo+" from "+customerName;
+                            String txt = "Your Credit note can be view, printed and download from below link." +
+                                    "\n\n" +sharelink ;
+
+                            try {
                                 if (!sharelink.endsWith(".pdf")) {
                                     Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
                                 } else {
                                     BaseurlForShareInvoice = shareInvoicelink + sharelink;
                                 }
+                                String finalurl = BaseurlForShareInvoice;
 
-                                String finalurl =BaseurlForShareInvoice;
+                                String cc = "android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.a;
+
+                                Uri imgUri=Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.a);
+
+                                String company_stamp = "/android_res/drawable/white_img.png";
+
+
+                                String company_stamp22 = "/sdcard/thanksimg.png";
+
+
 
                                 String[] TO = {"email@server.com"};
                                 Uri uri = Uri.parse("mailto:email@server.com")
                                         .buildUpon()
-                                        .appendQueryParameter("subject", "Sir Invoice")
-                                        .appendQueryParameter("body", sharelink)
+                                        .appendQueryParameter("subject", subject)
+                                        .appendQueryParameter("body", txt)
+                                        // .appendQueryParameter("image", cc)
                                         .build();
                                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
-
+                                // emailIntent.putExtra(Intent.EXTRA_STREAM, imgUri);
+                                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" +company_stamp22));
                                 emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
                                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 

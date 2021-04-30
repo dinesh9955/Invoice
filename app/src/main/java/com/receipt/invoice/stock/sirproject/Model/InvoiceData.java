@@ -87,7 +87,7 @@ public class InvoiceData {
     private String invoicedue_date;
     private String invoice_nobdt;
     private String invocestatus;
-    private String invoicustomer_name;
+    private String invoicustomer_name = "";
     private String invoiceuser_id;
     public String invoicetotlaprice;
 

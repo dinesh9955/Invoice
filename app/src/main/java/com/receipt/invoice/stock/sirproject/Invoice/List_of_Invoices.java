@@ -109,6 +109,9 @@ public class List_of_Invoices extends Fragment {
     String colorCode = "#ffffff";
     private AVLoadingIndicatorView avi;
 
+    String customerName = "";
+    String dataNo = "";
+
     public List_of_Invoices() {
         // Required empty public constructor
     }
@@ -178,6 +181,8 @@ public class List_of_Invoices extends Fragment {
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
+                                customerName = list.get(pos).getInvoicustomer_name();
+                                dataNo = list.get(pos).getInvoice_nobdt();
                                 templateSelect = list.get(pos).getTemplate_type();
                                 Log.e(TAG, "templateSelect: "+templateSelect);
                                 invoiceidbypos = list.get(pos).getInvoice_userid();
@@ -455,6 +460,8 @@ public class List_of_Invoices extends Fragment {
                     if (status.equals("true")) {
                         JSONObject data = jsonObject.getJSONObject("data");
                         JSONArray customer = data.getJSONArray("invoice");
+                        Log.e(TAG, "customerAA "+customer.length());
+
                         for (int i = 0; i < customer.length(); i++) {
                             JSONObject item = customer.getJSONObject(i);
                             invoice_idstr = item.getString("invoice_id");
@@ -466,11 +473,24 @@ public class List_of_Invoices extends Fragment {
                             String statusinvoice = item.getString("order_status_id");
                             //Log.e("customer id", customer);
                             Log.e("invoice_no", invoice_no);
-                            JSONObject customerobj = item.getJSONObject("customer");
 
-                            String customer_name = customerobj.getString("customer_name");
 
-                            Log.e("Customer name",customer_name);
+
+                            String customer_name = "";
+                            String cc = item.getString("customer");
+                            if(!cc.equalsIgnoreCase("null")){
+                              JSONObject customerobj = item.getJSONObject("customer");
+                                Log.e(TAG , "customerobj "+cc);
+                                if(customerobj != null){
+                                    customer_name = customerobj.getString("customer_name");
+                                }
+                                Log.e("customer_name_id", customer_name);
+                            }
+
+
+
+
+
                             String linkpd = item.getString("link");
                             String pdffilename = item.getString("pdf");
 
@@ -478,7 +498,6 @@ public class List_of_Invoices extends Fragment {
 
 
                             InvoiceData company_list = new InvoiceData();
-                            Log.e("customer_name id", customer_name);
 
                             company_list.setInvoice_userid(invoice_idstr);
                             company_list.setPayment_currency(payment_currency);
@@ -491,19 +510,29 @@ public class List_of_Invoices extends Fragment {
                             company_list.setInvoice_share_link(linkpd);
                             company_list.setTemplate_type(item.getString("template_type"));
                             list.add(company_list);
-                            if (list.size() < 20) {
-                                invoicelistAdapterdt.updateList(list);
-                            }
+
+                            invoicelistAdapterdt.updateList(list);
+
+                          //  if (list.size() < 20) {
+
+                           // }
 
                         }
+
+
+
 
 
                     }
 
 
+                    Log.e(TAG, "customerAAlist "+list.size());
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+
 
 
             }
@@ -828,6 +857,10 @@ public class List_of_Invoices extends Fragment {
 //                            Log.e(TAG, "pdflink: "+pdflink);
 //                            Log.e(TAG, "sahrelink: "+sahrelink);
 
+                            String subject = dataNo+" from "+customerName;
+                            String txt = "Your Invoice can be view, printed and download from below link." +
+                                    "\n\n" +sharelink ;
+
                             try {
 
                                 if (!urlPDF.endsWith(".pdf")) {
@@ -839,8 +872,8 @@ public class List_of_Invoices extends Fragment {
                                     String[] TO = {"email@server.com"};
                                     Uri uri = Uri.parse("mailto:email@server.com")
                                             .buildUpon()
-                                            .appendQueryParameter("subject", "Sir Invoice")
-                                            .appendQueryParameter("body", urlPDF)
+                                            .appendQueryParameter("subject", subject)
+                                            .appendQueryParameter("body", txt)
                                             .build();
                                     Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
 

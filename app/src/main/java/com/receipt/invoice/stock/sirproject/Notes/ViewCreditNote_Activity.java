@@ -80,6 +80,8 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
     String invoicenobystr="";
     private RequestManager requestManager;
 
+    String taxText = "";
+
     @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,6 +205,8 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
 
          //   companycolor = getIntent().getStringExtra("companycolor");
           //  selectedTemplate = getIntent().getStringExtra("selectedTemplate");
+
+            taxText = getIntent().getStringExtra("taxText");
 
             paypal_emailstr = getIntent().getStringExtra("paypal_emailstr");
             credit_terms = getIntent().getStringExtra("credit_terms");
@@ -520,7 +524,7 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
         } else {
             // null response or Exception occur
             taxtamountstr = taxamount;
-            taxtamountstrvalue = " Tax ";
+            taxtamountstrvalue = "Tax "+taxText;
         }
 
         String discountvalue = "";

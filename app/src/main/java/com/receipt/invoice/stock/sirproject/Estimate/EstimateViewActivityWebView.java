@@ -79,6 +79,8 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
     String invoicetaxvalue="",Shipingcosstbyct="";
 
     String contentAll = "";
+
+    String taxTitle = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -323,6 +325,7 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
                             double vc = Double.parseDouble(dd);
                             DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                             invoicetaxvalue = formatter.format(vc);
+                            taxTitle = title;
                         }
                         //invoicetaxvalue = listobj.getValue();
                     }
@@ -683,7 +686,7 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxvalue + currency_code;
-            taxtamountstrvalue = " Tax ";
+            taxtamountstrvalue = " Tax "+taxTitle;
         }
 
         String discountvalue = "";

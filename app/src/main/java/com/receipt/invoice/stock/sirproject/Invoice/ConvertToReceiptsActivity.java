@@ -1210,7 +1210,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             recycler_products.setLayoutManager(layoutManager);
             recycler_products.setHasFixedSize(true);
 
-            product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog);
+            product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog,"invoice");
             recycler_products.setAdapter(product_bottom_adapter);
             product_bottom_adapter.notifyDataSetChanged();
 

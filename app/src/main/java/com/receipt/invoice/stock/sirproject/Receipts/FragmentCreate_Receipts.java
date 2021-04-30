@@ -1063,7 +1063,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 
                 Log.e("product id", tempList.get(i).getProduct_id());
                 params.add("product[" + i + "]" + "[product_id]", tempList.get(i).getProduct_id());
-                params.add("product[" + i + "]" + "[price]", tempList.get(i).getProduct_price());
+                params.add("product[" + i + "]" + "[price]", producprice.get(i));
                 params.add("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
 
                 Log.e("tempListpid",tempList.get(i).getProduct_id());
@@ -1536,7 +1536,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
             recycler_products.setLayoutManager(layoutManager);
             recycler_products.setHasFixedSize(true);
 
-            product_bottom_adapter = new Product_Bottom_Adapter(getActivity(), product_bottom, this, bottomSheetDialog);
+            product_bottom_adapter = new Product_Bottom_Adapter(getActivity(), product_bottom, this, bottomSheetDialog , "receipt");
             recycler_products.setAdapter(product_bottom_adapter);
             product_bottom_adapter.notifyDataSetChanged();
 
@@ -1812,6 +1812,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                         Intent intent = new Intent(getContext(), ViewReceipt_Activity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         companycolor = "#ffffff";
+                        intent.putExtra("taxText", txttax.getText().toString());
                         intent.putExtra("companycolor", companycolor);
                         intent.putExtra("selectedTemplate", ""+selectedTemplate);
                         intent.putExtra("company_id", selectedCompanyId);
@@ -3363,7 +3364,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 
                     txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
 
-                    netamountvalue = subtotalvalue + Totatlvalue1;
+                    //netamountvalue = subtotalvalue + Totatlvalue1;
 
                     netamount.setText(formatter.format(netamountvalue) + cruncycode);
                     balance.setText(formatter.format(netamountvalue) + cruncycode);
@@ -3969,7 +3970,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxamount;
-            taxtamountstrvalue = " Tax ";
+            taxtamountstrvalue = "Tax "+txttax.getText().toString();
         }
 
         String discountvalue = "";

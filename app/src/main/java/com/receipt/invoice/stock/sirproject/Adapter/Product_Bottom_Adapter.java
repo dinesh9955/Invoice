@@ -28,6 +28,7 @@ import com.receipt.invoice.stock.sirproject.Model.Itemproductselect;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -52,12 +53,14 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
     int sh_quantity;
     double sh_price;
     String product_ida;
+    String receipt = "";
 
-    public Product_Bottom_Adapter(Context mcontext , ArrayList<Product_list>list,Callback callback, BottomSheetDialog bottomSheetDialog){
+    public Product_Bottom_Adapter(Context mcontext , ArrayList<Product_list>list,Callback callback, BottomSheetDialog bottomSheetDialog, String receipt){
         this.mcontext = mcontext;
          mlist=list;
         this.callback = callback;
         this.bottomSheetDialog = bottomSheetDialog;
+        this.receipt = receipt;
     }
 
 
@@ -115,8 +118,14 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
         }
         else
         {
-            viewHolderForCat.productcurrency.setText(product_price);
+            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            String price = formatter.format(Double.parseDouble(product_price));
+            viewHolderForCat.productcurrency.setText(price);
+//            viewHolderForCat.productcurrency.setText(product_price.replace(".00",""));
+
         }
+
+
         if (currency_code.equals("") || currency_code.equals("null"))
         {
             viewHolderForCat.productcurrencyunit.setText("");
@@ -262,37 +271,39 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
             public void onClick(View view) {
 
                 try {
-
                     int en_quantity = Integer.parseInt(edquantity.getText().toString());
 
-                    if (sh_quantity < en_quantity)
-                    {
-                        // mybuilder.show();
-                        Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity");
-                        mybuilder.dismiss();
-                        callback.closeDialog();
-                        if(bottomSheetDialog != null){
-                            bottomSheetDialog.dismiss();
+                    if(receipt.equalsIgnoreCase("invoice")){
+                        if (sh_quantity < en_quantity) {
+                            Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity");
+                            mybuilder.dismiss();
+                            callback.closeDialog();
+                            if(bottomSheetDialog != null){
+                                bottomSheetDialog.dismiss();
+                            }
+                        } else{
+                            sh_price = Double.parseDouble(edprice.getText().toString().trim());
+                            callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
+                            mybuilder.dismiss();
                         }
                     }
-                    else
-                    {
+                    else if(receipt.equalsIgnoreCase("receipt")){
                         sh_price = Double.parseDouble(edprice.getText().toString().trim());
-
-                        double multiply = en_quantity * sh_price;
-/*
-                    mlist.get(i).setUpdatePrice(String.valueOf(multiply));
-*/
-
-                        String s_multiply = String.valueOf(multiply);
-/*
-                    mlist.get(i).setUsedQuantity(String.valueOf(en_quantity));
-*/
                         callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
-
                         mybuilder.dismiss();
-
                     }
+                    else if(receipt.equalsIgnoreCase("estimate")){
+                        sh_price = Double.parseDouble(edprice.getText().toString().trim());
+                        callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
+                        mybuilder.dismiss();
+                    }
+
+                    else if(receipt.equalsIgnoreCase("creditnotes")){
+                        sh_price = Double.parseDouble(edprice.getText().toString().trim());
+                        callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
+                        mybuilder.dismiss();
+                    }
+
 
                 }catch (Exception e){
 

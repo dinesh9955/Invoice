@@ -78,7 +78,10 @@ public class ReceiptViewActivityWebView extends AppCompatActivity {
     String invoice_image_pathcompanystemp="",invoice_image_pathreceiverpath="",invoice_image_pathissuverpath="",Shiping_tostr="";
     String invoicetaxvalue="",Shipingcosstbyct="";
 
+    String taxTitle = "";
+
     String contentAll = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -353,6 +356,7 @@ public class ReceiptViewActivityWebView extends AppCompatActivity {
                             double vc = Double.parseDouble(dd);
                             DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                             invoicetaxvalue = formatter.format(vc);
+                            taxTitle = title;
                         }
                     }
 
@@ -703,7 +707,7 @@ public class ReceiptViewActivityWebView extends AppCompatActivity {
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxvalue + currency_code;
-            taxtamountstrvalue = " Tax ";
+            taxtamountstrvalue = " Tax "+taxTitle;
         }
 
         String discountvalue = "";

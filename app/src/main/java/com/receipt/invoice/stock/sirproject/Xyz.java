@@ -5,10 +5,16 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +24,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +37,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
 import com.receipt.invoice.stock.sirproject.Invoice.Fragment_Create_Invoice;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -181,6 +196,66 @@ public class Xyz extends AppCompatActivity {
     }
 
 
+    public String getURLForResource (int resourceId) {
+        //use BuildConfig.APPLICATION_ID instead of R.class.getPackage().getName() if both are not same
+        return Uri.parse("android.resource://"+R.class.getPackage().getName()+"/" +resourceId).toString();
+    }
+
+
+
+    private void shareImage(){
+
+
+
+        Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.accessories);
+
+
+        File f =  new File(getExternalCacheDir()+"/"+getResources().getString(R.string.app_name)+".png");
+        Intent shareIntent;
+
+
+        try {
+            FileOutputStream outputStream = new FileOutputStream(f);
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,outputStream);
+
+            outputStream.flush();
+            outputStream.close();
+            shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("image/*");
+            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"Hey please check this application " + "https://play.google.com/store/apps/details?id=" +getPackageName());
+            shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        startActivity(Intent.createChooser(shareIntent,"Share Picture"));
+    }
+
+
+    void share() {
+        Bitmap icon = BitmapFactory.decodeResource(getResources(),
+                R.drawable.accessories);
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/jpeg");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "temporary_file.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        share.putExtra(Intent.EXTRA_TEXT, "hello #test");
+
+        share.putExtra(Intent.EXTRA_STREAM,
+                Uri.parse("file:///sdcard/temporary_file.jpg"));
+        startActivity(Intent.createChooser(share, "Share Image"));
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -193,8 +268,225 @@ public class Xyz extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
 
-                createShortDialog();
+//                Uri uri = FileProvider.getUriForFile(this, "com.example.provider", new File(photoPath));
+//                Intent share = ShareCompat.IntentBuilder.from(Xyz.this)
+//                        .setStream(uri) // uri from FileProvider
+//                        .setType("text/html")
+//                        .getIntent()
+//                        .setAction(Intent.ACTION_SEND) //Change if needed
+//                        .setDataAndType(uri, "image/*")
+//                        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//
+//                startActivity(Intent.createChooser(share, getString(R.string.share_image)));
+//
+//                String text = "Look at my awesome picture";
+//                Uri pictureUri = Uri.parse("file://my_picture");
+//                Intent shareIntent = new Intent();
+//                shareIntent.setAction(Intent.ACTION_SEND);
+//                shareIntent.putExtra(Intent.EXTRA_TEXT, text);
+//                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+//                shareIntent.setType("image/*");
+//                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                startActivity(Intent.createChooser(shareIntent, "Share images..."));
+
+//                final Intent shareIntent = new Intent(Intent.ACTION_SEND);
+//                shareIntent.setType("image/jpg");
+//                final File photoFile = new File("temporary_file.jpg");
+//                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(photoFile));
+//                startActivity(Intent.createChooser(shareIntent, "Share image using"));
+
+
+//                Intent shareIntent;
+//                Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
+//                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+"/Share.png";
+//                OutputStream out = null;
+//                File file=new File(path);
+//                try {
+//                    out = new FileOutputStream(file);
+//                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+//                    out.flush();
+//                    out.close();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                path=file.getPath();
+//                Uri bmpUri = Uri.parse("file://"+path);
+//                shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+//                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
+//                shareIntent.putExtra(Intent.EXTRA_TEXT,"Hey please check this application " + "https://play.google.com/store/apps/details?id=" +getPackageName());
+//                shareIntent.setType("image/png");
+//                startActivity(Intent.createChooser(shareIntent,"Share with"));
+
+
+//                Uri imageUri = Uri.parse("android.resource://" + getPackageName()
+//                        + "/drawable/" + "thanksimg");
+//                Intent shareIntent = new Intent();
+//                shareIntent.setAction(Intent.ACTION_SEND);
+//                shareIntent.putExtra(Intent.EXTRA_TEXT, "Hello");
+//                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+//                shareIntent.setType("image/jpeg");
+//                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                startActivity(Intent.createChooser(shareIntent, "send"));
+
+
+//                Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ "/drawable/" + "thanksimg");
+//                Intent intent = new Intent();
+//                intent.setAction(Intent.ACTION_SEND);
+//                intent.putExtra(Intent.EXTRA_TEXT, "Hello");
+//                intent.putExtra(Intent.EXTRA_STREAM, imageUri);
+//                intent.setType("*/*");
+//                startActivity(intent);
+
+
+////                String[] TO = {email@server.com};
+////               // Uri imageUri = Uri.parse("android.resource://com.examle.tarea/" + R.drawable.thanksimg);
+//                Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ R.drawable.thanksimg);
+//
+//
+//
+//                String[] TO = {"email@server.com"};
+//                Uri uri = Uri.parse("mailto:email@server.com")
+//                        .buildUpon()
+//                        .appendQueryParameter("subject", "subject")
+//                        .appendQueryParameter("body", "txt")
+//                        .appendQueryParameter("file", "file:///sdcard/temporary_file.jpg")
+//
+//                        .build();
+//                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
+//                // emailIntent.putExtra(Intent.EXTRA_STREAM, imgUri);
+//              //  emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" +company_stamp22));
+//                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+
+
+
+
+
+
+
+
+//                Intent intent = new Intent();
+//                intent.setAction(Intent.ACTION_SEND);
+//                //intent.setType("image/jpeg");
+//                intent.putExtra(Intent.EXTRA_STREAM, imageUri);
+//                intent.putExtra(Intent.EXTRA_EMAIL, TO);
+//                intent.putExtra(Intent.EXTRA_SUBJECT, "imageUri3");
+//                intent.putExtra(Intent.EXTRA_TEXT, "imageUrddfdsfi3");
+//                startActivity(Intent.createChooser(intent, getString(R.string.facebook_app_id)));
+
+
+//                String text = "Look at my awesome picture";
+//               // Uri pictureUri = Uri.parse("file://my_picture");
+//                Intent shareIntent = new Intent();
+//                shareIntent.setAction(Intent.ACTION_SEND);
+//                shareIntent.putExtra(Intent.EXTRA_TEXT, text);
+//                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+//                shareIntent.setType("image/*");
+//                shareIntent.putExtra(Intent.EXTRA_EMAIL, "email@server.com");
+////                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//              //  startActivity(Intent.createChooser(shareIntent, "Share images..."));
+//
+//
+
+//               // Intent shareIntent;
+//                Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.thanksimg);
+//
+//
+//                Uri bmpUri = Uri.parse("file://"+bitmap);
+//                shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+//                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
+//                shareIntent.putExtra(Intent.EXTRA_TEXT,"Hey please check this application " + "https://play.google.com/store/apps/details?id=" +getPackageName());
+//                shareIntent.setType("image/png");
+//               // startActivity(Intent.createChooser(shareIntent,"Share with"));
+//
+//                shareImage();
+
+//                try {
+//
+//                    String cc = "android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.a;
+//
+//                    Uri imgUri=Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.a);
+//
+//                    String company_stamp = "android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.thanksimg;
+//                    //String imageUri = "drawable://" + R.drawable.thanksimg;
+//
+//                   // String company_stamp22 = "/sdcard/thanksimg.png";
+//
+//                    String imageUrl = getURLForResource(R.drawable.thanksimg);
+//
+//                    String company_stamp22 = getURLForResource(R.drawable.thanksimg);
+//
+//
+//
+//                    Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ "/drawable/" + "ic_launcher");
+//
+//
+//
+//                    String[] TO = {"email@server.com"};
+//                    Uri uri = Uri.parse("mailto:email@server.com")
+//                            .buildUpon()
+//                            .appendQueryParameter("subject", "subject")
+//                            .appendQueryParameter("body", "txt")
+//                            .build();
+//
+//                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
+//                    emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+//
+//                    Bitmap b = BitmapFactory.decodeResource(getResources(),R.drawable.thanksimg);
+//
+//                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//                    b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+//                    String path = MediaStore.Images.Media.insertImage(getContentResolver(), b, "Title", null);
+//                    Uri imageUri3 =  Uri.parse(path);
+//
+////                    File image = new File(Uri.parse("android.resource://" + getPackageName() + "/drawable/" + R.drawable.thanksimg).toString());
+////                    emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(image));
+//
+//                    emailIntent.putExtra(Intent.EXTRA_STREAM, imageUri3);
+//
+//                    startActivity(Intent.createChooser(emailIntent, "Share image using"));
+//
+//                    // Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
+//
+//
+//                   // emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//
+//                   // startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+//
+//
+////                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+////                    Uri screenshotUri = Uri.parse("android.resource://"+getPackageName()+"/*");
+////
+////                    sharingIntent.setType("mailto:email@server.com");
+////                    sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+//                    //startActivity(Intent.createChooser(sharingIntent, "Share image using"));
+//
+//
+////                    Bitmap b =BitmapFactory.decodeResource(getResources(),R.drawable.accessories);
+////
+////                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+////                    b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+////                    String path = MediaStore.Images.Media.insertImage(getContentResolver(), b, "Title", null);
+////                    Uri imageUri3 =  Uri.parse(path);
+//
+////                    Intent share = new Intent(Intent.ACTION_SEND, uri);
+////                    share.setType("image/jpeg");
+////                    share.putExtra(Intent.EXTRA_STREAM, imageUri3);
+////                    share.putExtra(Intent.EXTRA_SUBJECT, "imageUri3");
+////                    share.putExtra(Intent.EXTRA_TEXT, "imageUrddfdsfi3");
+////                    startActivity(Intent.createChooser(share, "Select"));
+//
+//                } catch (Exception e) {
+//                    //e.toString();
+//                }
+
+
+
+               // createShortDialog();
 
 //                Intent intent = new Intent(Xyz.this, ChooseTemplate.class);
 //                intent.putExtra("companycolor", "#ffffff");

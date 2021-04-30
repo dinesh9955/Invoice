@@ -79,6 +79,8 @@ public class ViewReceipt_Activity extends AppCompatActivity {
     String invoicenobystr="";
     private RequestManager requestManager;
 
+    String taxText = "";
+
     @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,7 +195,9 @@ public class ViewReceipt_Activity extends AppCompatActivity {
 
 //            Shipingcosstbyct.replace("++", "+").replace("RsRs", "Rs")
 
+            taxText = getIntent().getStringExtra("taxText");
            // companycolor = getIntent().getStringExtra("companycolor");
+
             selectedTemplate = getIntent().getStringExtra("selectedTemplate");
 
             paypal_emailstr = getIntent().getStringExtra("paypal_emailstr");
@@ -244,6 +248,7 @@ public class ViewReceipt_Activity extends AppCompatActivity {
 
             signature_of_receiver = getIntent().getStringExtra("signature_of_receiver");
             company_stamp = getIntent().getStringExtra("company_stamp");
+
 
 
             if (signature_of_issuer != null) {
@@ -510,7 +515,7 @@ public class ViewReceipt_Activity extends AppCompatActivity {
         } else {
             // null response or Exception occur
             taxtamountstr = taxamount;
-            taxtamountstrvalue = " Tax ";
+            taxtamountstrvalue = "Tax "+taxText;
         }
 
         String discountvalue = "";

@@ -115,7 +115,7 @@
                 android:layout_below="@+id/view"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
-                android:text="Bill to" />
+                android:text="Recipient To" />
 
             <TextView
                 android:id="@+id/invoicerecipnt"

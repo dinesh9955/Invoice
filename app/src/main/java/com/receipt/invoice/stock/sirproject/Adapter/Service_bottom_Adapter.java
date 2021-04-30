@@ -20,6 +20,7 @@ import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -88,8 +89,11 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
         }
         else
         {
-            viewHolderForCat.servicecurrency.setText(service_price.replace(".00",""));
+            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            String price = formatter.format(Double.parseDouble(service_price));
+            viewHolderForCat.servicecurrency.setText(price);
 
+//            viewHolderForCat.servicecurrency.setText(service_price.replace(".00",""));
         }
         if (service_price_unit.equals("") || service_price_unit.equals("null"))
         {
