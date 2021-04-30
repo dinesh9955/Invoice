@@ -3313,6 +3313,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
                 netamountvalue = subtotalvalue;
 
+
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
 
 
