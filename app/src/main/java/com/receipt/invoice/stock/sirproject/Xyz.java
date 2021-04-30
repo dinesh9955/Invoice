@@ -515,6 +515,21 @@ public class Xyz extends AppCompatActivity {
 //                                }, mYear, mMonth, mDay);
 //                   //     datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 //                        datePickerDialog.show();
+
+              //  Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ "/drawable/" + "ic_launcher");
+               // Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.accessories);
+
+                //Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
+
+               // Uri uri = FileProvider.getUriForFile(this, "com.example.provider", new File(photoPath));
+
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setType("image/jpeg");
+                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {""});
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "EMAIL_SUBJECT");
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "EMAIL_BODY");
+       //         emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+uri));
+                startActivity(Intent.createChooser(emailIntent, "Sharing Options"));
             }
         });
 

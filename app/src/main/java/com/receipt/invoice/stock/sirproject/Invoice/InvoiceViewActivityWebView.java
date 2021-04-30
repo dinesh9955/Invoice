@@ -459,10 +459,10 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
             }
         });
 
-        Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
+       // Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
 
-        String path = uri.toString();
-        Log.e("path", path);
+       // String path = uri.toString();
+      //  Log.e("path", path);
 
 
         String multipleimage = "";
