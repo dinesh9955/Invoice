@@ -4166,8 +4166,8 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
                         .replaceAll("#QUANTITY#", tempQuantity.get(i))
-                        .replaceAll("#PRICE#", producprice.get(i) + " " + tempList.get(i).getCurrency_code())
-                        .replaceAll("#TOTAL#", totalpriceproduct.get(i) + " " + tempList.get(i).getCurrency_code());
+                        .replaceAll("#PRICE#", producprice.get(i) + "" + tempList.get(i).getCurrency_code())
+                        .replaceAll("#TOTAL#", totalpriceproduct.get(i) + "" + tempList.get(i).getCurrency_code());
 
                 productitemlist = productitemlist + productitem;
             }

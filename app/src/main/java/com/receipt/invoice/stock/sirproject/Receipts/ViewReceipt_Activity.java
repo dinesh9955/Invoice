@@ -32,6 +32,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ViewReceipt_Activity extends AppCompatActivity {
@@ -419,15 +420,18 @@ public class ViewReceipt_Activity extends AppCompatActivity {
             for (int i = 0; i < myList.size(); i++) {
                 cruncycode = myList.get(i).getCurrency_code();
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                double producpriceRate = Double.parseDouble(producprice.get(i));
+                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
 
+                productitem = IOUtils.toString(getAssets().open("single_item.html"))
 
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", myList.get(i).getProduct_measurement_unit())
                         .replaceAll("#QUANTITY#", tempQuantity.get(i))
-                        .replaceAll("#PRICE#", producprice.get(i) + " " + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#TOTAL#", totalpriceproduct.get(i) + " " + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#PRICE#", formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
 
                 productitemlist = productitemlist + productitem;
             }

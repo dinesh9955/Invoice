@@ -33,6 +33,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ViewCreditNote_Activity extends AppCompatActivity {
@@ -69,7 +70,8 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
     String companycolor = "";
 
     String paypal_emailstr = "", sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
-    String strnotes = "",  ref_no ="", paid_amount_payment_method = "", freight_cost = "", strdiscountvalue = "", strpaid_amount = "", companylogopath = "", Grossamount_str = "", Subtotalamount = "", taxamount = "", netamountvalue = "", Blanceamountstr = "";
+    String strnotes = "",  ref_no ="", paid_amount_payment_method = "", freight_cost = "", strdiscountvalue = "", strpaid_amount = "", companylogopath = "", Grossamount_str = "",
+            Subtotalamount = "", taxamount = "", netamountvalue = "", Blanceamountstr = "";
     String shippingzone = "", Paymentamountdate = "", shippingfirstname = "", shippinglastname = "", shippingaddress1 = "", shippingaddress2 = "", shippingcity = "", shippingpostcode = "", shippingcountry;
     ArrayList<Customer_list> customerinfo;
     String hiddenpaidrow = "";
@@ -190,7 +192,12 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
 
             strnotes = getIntent().getStringExtra("notes");
             ref_no = getIntent().getStringExtra("ref_no");
-            Subtotalamount = getIntent().getStringExtra("subtotalamt");
+            if(!getIntent().getStringExtra("subtotalamt").equalsIgnoreCase("0")){
+                Subtotalamount = getIntent().getStringExtra("subtotalamt");
+            }
+
+            Log.e(TAG, "Subtotalamount:: "+Subtotalamount);
+
             paid_amount_payment_method = getIntent().getStringExtra("paid_amount_payment_method");
 
             if(paid_amount_payment_method != null){
@@ -212,6 +219,7 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
             credit_terms = getIntent().getStringExtra("credit_terms");
             freight_cost = getIntent().getStringExtra("freight_cost");
             strdiscountvalue = getIntent().getStringExtra("discount");
+            Log.e(TAG, "strdiscountvalue: "+strdiscountvalue);
             strpaid_amount = getIntent().getStringExtra("paid_amount");
             Paymentamountdate = getIntent().getStringExtra("paid_amount_date");
             shippingfirstname = getIntent().getStringExtra("shipping_firstname");
@@ -429,14 +437,18 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
 
                 //Log.e(TAG, " producprice.get(i)"+ producprice.get(i))
 
+                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                double producpriceRate = Double.parseDouble(producprice.get(i));
+                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
 
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", myList.get(i).getProduct_measurement_unit())
                         .replaceAll("#QUANTITY#", tempQuantity.get(i))
-                        .replaceAll("#PRICE#", producprice.get(i) + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#TOTAL#", totalpriceproduct.get(i) + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#PRICE#", formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
 
                 productitemlist = productitemlist + productitem;
             }
@@ -540,6 +552,23 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
             discountvalue = strdiscountvalue;
             discounttxtreplace = " Discount ";
         }
+
+
+
+        String subTotalTxt = "";
+        String subTotalValueTxt = "";
+
+
+        if(strdiscountvalue.equalsIgnoreCase("0")){
+            subTotalTxt = "";
+            subTotalValueTxt = "";
+        }else{
+            subTotalTxt = "SubTotal";
+            subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
+        }
+
+
+
         if (company_website != null) {
             // Do you work here on success
 
@@ -689,6 +718,8 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
 //            nameName = "file:///android_asset/invoice4.html";
 //        }
 
+
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
@@ -706,7 +737,7 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
                     .replaceAll("refNo", strreferencenovalue)
                     .replaceAll("GrossAm-", Utility.getReplaceDollor(Grossamount_str))
                     .replaceAll("Discount-", Utility.getReplaceDollor(discountvalue))
-                    .replaceAll("SubTotal-", Utility.getReplaceDollor(Subtotalamount))
+                    .replaceAll("SubTotal-", subTotalValueTxt)
                     .replaceAll("Txses-", Utility.getReplaceDollor(taxtamountstr))
                     .replaceAll("Shipping-", Utility.getReplaceDollor(Shipingcosstbyct.replace("++", "+").replace("RsRs", "Rs")))
                     .replaceAll("Total Amount-", Utility.getReplaceDollor(netamountvalue))
@@ -714,6 +745,7 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
                     .replaceAll("Paid Amount", paidamountstrreptxt)
                     .replaceAll("Balance Due-", Utility.getReplaceDollor(Blanceamountstr))
 //                    .replaceAll("Checkto", chektopaidmaount)
+                    .replaceAll("SubTotal", subTotalTxt)
                     .replaceAll("Checkto", "")
                     .replaceAll("BankName", payment_bankstr)
                     .replaceAll("Pemail", pemailpaidstr)

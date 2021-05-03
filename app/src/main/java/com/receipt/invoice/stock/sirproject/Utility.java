@@ -258,4 +258,29 @@ public class Utility {
         }
     }
 
+
+
+    public static String getReplaceCurrencyAndPlus(String text, String cruncycode) {
+        String res = "";
+        if(text.contains(cruncycode)){
+            res = text.replace(cruncycode, "");
+        }else{
+            res = text;
+        }
+        return getRemovePlus(res);
+    }
+
+
+    public static String getRemovePlus(String sss) {
+        String res = "";
+        if(sss.contains("++")){
+            res = sss.replace("+", "");
+        }
+        else{
+            res = sss;
+        }
+        return res;
+    }
+
+
 }

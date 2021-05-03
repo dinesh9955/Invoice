@@ -2945,7 +2945,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                             companylogopath = company_image_path + logo;
                             Log.e("companylogopath", companylogopath);
 
-                            companycolor = item.getString("color");
+                           // companycolor = item.getString("color");
+
 
                         }
 
@@ -3314,7 +3315,12 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                 netamountvalue = subtotalvalue;
 
 
-                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+//                if(Totatlvalue == 0){
+//                    subtotal.setText("0");
+//                }else{
+                    subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+//                }
+
 
 
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
@@ -3334,13 +3340,21 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                 double  strdiscountval=Double.parseDouble(strdiscountvalue);
 
                 discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
-                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+//                if(Totatlvalue == 0){
+//                    subtotal.setText("0");
+//                }else{
+                    subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+//                }
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
             } else {
 
                 discount.setText("0");
-                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+//                if(Totatlvalue == 0){
+//                    subtotal.setText("0");
+//                }else{
+                    subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+//                }
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
             }
@@ -3980,12 +3994,28 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             // Do you work here on success
             discountvalue = "";
             discounttxtreplace = "";
-
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue;
             discounttxtreplace = " Discount ";
         }
+
+
+        String subTotalTxt = "";
+        String subTotalValueTxt = "";
+
+        if(strdiscountvalue.equalsIgnoreCase("0")){
+            subTotalTxt = "";
+            subTotalValueTxt = "";
+        }else{
+            subTotalTxt = "SubTotal";
+            subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
+        }
+
+//                     .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
+//                .replaceAll("SubTotal-", ""+Utility.getReplaceCurrency(Subtotalamount, cruncycode))
+
+
         if (company_website != null) {
             // Do you work here on success
 
@@ -4020,7 +4050,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             }
             else
             {
-                Shipingcosstbyct = "+" + shipingcoast + cruncycode;
+                Shipingcosstbyct = "" + shipingcoast;
             }
 
 
@@ -4148,15 +4178,17 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                     .replaceAll("DueDate", invoice_due_date)
                     .replaceAll("crTerms", credit_terms)
                     .replaceAll("refNo", strreferencenovalue)
-                    .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
-                    .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
-                    .replaceAll("SubTotal-", ""+Utility.getReplaceCurrency(Subtotalamount, cruncycode))
-                    .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
-                    .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
-                    .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
-                    .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
+                    .replaceAll("GrossAm-", ""+Utility.getReplaceDollor(Grossamount_str))
+                    .replaceAll("Discount-", ""+Utility.getReplaceDollor(discountvalue))
+                    .replaceAll("SubTotal-", subTotalValueTxt)
+                    .replaceAll("Txses-", ""+Utility.getReplaceDollor(taxtamountstr))
+                    .replaceAll("Shipping-", ""+Utility.getReplaceDollor(Shipingcosstbyct))
+                    .replaceAll("Total Amount-", ""+Utility.getReplaceDollor(netamountvalue))
+                    .replaceAll("PaidsAmount", ""+Utility.getReplaceDollor(paidamountstrrepvalue))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
-                    .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
+                    .replaceAll("Balance Due-", ""+Utility.getReplaceDollor(Blanceamountstr))
+
+                    .replaceAll("SubTotal", subTotalTxt)
                     .replaceAll("Checkto", chektopaidmaount)
                     .replaceAll("BankName", payment_bankstr)
                     .replaceAll("Pemail", pemailpaidstr)
@@ -4198,6 +4230,13 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             e.printStackTrace();
 
         }
+
+        Log.e(TAG, "ShipingcosstbyctAAAA "+Shipingcosstbyct);
+
+        String repl =  Utility.getReplaceCurrencyAndPlus(Shipingcosstbyct, cruncycode);
+        Log.e(TAG, "ShipingcosstbyctBBBB "+repl);
+
+
 
         Log.e("ViewInvoice__",content);
 

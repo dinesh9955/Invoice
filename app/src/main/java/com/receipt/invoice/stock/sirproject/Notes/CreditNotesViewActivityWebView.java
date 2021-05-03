@@ -111,68 +111,6 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                final File savedPDFFile = FileManager.getInstance().createTempFile(getApplicationContext(), "pdf", false);
-//
-//                String content  = " <!DOCTYPE html>\n" +
-//                        "<html>\n" +
-//                        "<body>\n" +
-//                        "\n" +
-//                        "<h1>My First Heading</h1>\n" +
-//                        "<p>My first paragraph.</p>\n" +
-//                        " <a href='https://www.example.com'>This is a link</a>" +
-//                        "\n" +
-//                        "</body>\n" +
-//                        "</html> ";
-//
-//
-//                PDFUtil.generatePDFFromHTML(getApplicationContext(), savedPDFFile, contentAll , new PDFPrint.OnPDFPrintListener() {
-//                    @SuppressLint("LongLogTag")
-//                    @Override
-//                    public void onSuccess(File file) {
-//
-//                        Log.e(TAG, "file!!! "+file);
-//
-//                        // Open Pdf Viewer
-//                        // Uri pdfUri = Uri.fromFile(file);
-//
-//
-//                        //File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/example.pdf");
-////                        Intent intent = new Intent(Intent.ACTION_VIEW);
-////                        intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-////                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-////                        startActivity(intent);
-//
-//
-//
-//                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-//                        //File fileWithinMyDir = new File(pdfUri);
-//
-//                        if(file.exists()) {
-//                            Uri photoURI = FileProvider.getUriForFile(InvoiceViewActivityWebView.this,
-//                                    "com.receipt.invoice.stock.sirproject.provider",
-//                                    file);
-//                            intentShareFile.setType("application/pdf");
-//                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
-//
-//                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-//                                    "Share As Pdf");
-//                            //  intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
-//
-//                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
-//                        }
-//
-////                        Intent intentPdfViewer = new Intent(Abc.this, PDFViewerActivity.class);
-////                        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri);
-////
-////                        startActivity(intentPdfViewer);
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception exception) {
-//                        exception.printStackTrace();
-//                    }
-//                });
-
                 createWebPrintJob(invoiceweb);
             }
         });
@@ -503,12 +441,9 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
         String productitemlist ="";
         try {
             for (int i = 0; i < productsItemDtos.size(); i++) {
-
-                String desc = "";
-
-//                if(productsItemDtos.get(i).getDescription() != null){
-//                    desc
-//                }
+                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
+                double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
 
@@ -516,8 +451,8 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         .replaceAll("#DESC#", productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
                         .replaceAll("#QUANTITY#", productsItemDtos.get(i).getQuantity())
-                        .replaceAll("#PRICE#", productsItemDtos.get(i).getPrice() +"" + Utility.getReplaceDollor(currency_code))
-                        .replaceAll("#TOTAL#", productsItemDtos.get(i).getTotal() +"" + Utility.getReplaceDollor(currency_code));
+                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) +"" +Utility.getReplaceDollor(currency_code))
+                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) +"" + Utility.getReplaceDollor(currency_code));
 
                 productitemlist = productitemlist + productitem;
             }
@@ -697,6 +632,11 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
 
 
 
+
+
+
+
+
         if (strpaid_amount.equals("0")) {
             // Do you work here on success
 
@@ -733,6 +673,24 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
             discountvalue = strdiscountvalue + currency_code;
             discounttxtreplace = " Discount ";
         }
+
+
+
+        String subTotalTxt = "";
+        String subTotalValueTxt = "";
+
+
+        if(strdiscountvalue.equalsIgnoreCase("0")){
+            subTotalTxt = "";
+            subTotalValueTxt = "";
+        }else{
+            subTotalTxt = "SubTotal";
+            subTotalValueTxt = Subtotalamount + ""+ Utility.getReplaceDollor(currency_code);
+        }
+
+
+
+
         String companylogopathdto="";
 
         if(companylogopath.equals(""))
@@ -779,7 +737,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         .replaceAll("refNo", strreferencenovalue)
                         .replaceAll("GrossAm-", Grossamount_str + ""+ Utility.getReplaceDollor(currency_code))
                         .replaceAll("Discount-", ""+ Utility.getReplaceDollor(discountvalue))
-                        .replaceAll("SubTotal-", Subtotalamount + ""+ Utility.getReplaceDollor(currency_code))
+                        .replaceAll("SubTotal-", subTotalValueTxt)
                         .replaceAll("Txses-", Utility.getReplaceDollor(taxtamountstr))
                         .replaceAll("Shipping-", Utility.getReplaceDollor(Shipingcosstbyct.replace("++", "+").replace("RsRs", "Rs")))
                         .replaceAll("Total Amount-", netamountvalue + Utility.getReplaceDollor(currency_code))
@@ -787,7 +745,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         .replaceAll("Paid Amount", paidamountstrreptxt)
 //                        .replaceAll("Balance Due-", Blanceamountstr + currency_code)
                         .replaceAll("Balance Due-", Blanceamountstr + Utility.getReplaceDollor(currency_code))
-
+                        .replaceAll("SubTotal", subTotalTxt)
 //                        .replaceAll("Checkto", chektopaidmaount)
                         .replaceAll("Checkto", "")
 

@@ -1082,10 +1082,13 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
 
+                    Log.e(TAG, "selectedtaxtAAA3 "+selectedtaxt.get(i).getTaxname());
+
 
                     params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
                     params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                     params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+
                     params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
 
 //                    //off exclusive

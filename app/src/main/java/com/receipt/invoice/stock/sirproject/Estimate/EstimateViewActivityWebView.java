@@ -472,11 +472,9 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
         try {
             for (int i = 0; i < productsItemDtos.size(); i++) {
 
-                String desc = "";
-
-//                if(productsItemDtos.get(i).getDescription() != null){
-//                    desc
-//                }
+                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
+                double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
 
@@ -484,8 +482,8 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
                         .replaceAll("#DESC#", productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
                         .replaceAll("#QUANTITY#", productsItemDtos.get(i).getQuantity())
-                        .replaceAll("#PRICE#", ""+productsItemDtos.get(i).getPrice() +" " + Utility.getReplaceDollor(currency_code))
-                        .replaceAll("#TOTAL#", ""+productsItemDtos.get(i).getTotal() +" " + Utility.getReplaceDollor(currency_code));
+                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) +"" +Utility.getReplaceDollor(currency_code))
+                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) +"" + Utility.getReplaceDollor(currency_code));
 
                 productitemlist = productitemlist + productitem;
             }
