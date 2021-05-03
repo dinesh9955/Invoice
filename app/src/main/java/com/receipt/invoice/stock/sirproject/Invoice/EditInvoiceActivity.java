@@ -4700,6 +4700,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         }
 
 
+
+
         String selectedTemplate = ""+this.selectedTemplate;
 
         String name = "invoice.html";
@@ -4859,7 +4861,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                                 Log.e(TAG, "FILENAME11" +selectedUriList.get(i).toString().replace("file://", ""));
                             }
 
-                            createinvoicewithdetail(file);
+                            //createinvoicewithdetail(file);
                         }
 
                     }

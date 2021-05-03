@@ -520,8 +520,8 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
                         .replaceAll("#DESC#", ""+productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", ""+productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
                         .replaceAll("#QUANTITY#", ""+productsItemDtos.get(i).getQuantity())
-                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) +" " +Utility.getReplaceDollor(currency_code))
-                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) +" " + Utility.getReplaceDollor(currency_code));
+                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) +"" +Utility.getReplaceDollor(currency_code))
+                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) +"" + Utility.getReplaceDollor(currency_code));
 
                 productitemlist = productitemlist + productitem;
 
@@ -793,7 +793,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
                         .replaceAll("refNo", strreferencenovalue)
                         .replaceAll("GrossAm-", ""+Grossamount_str + ""+ Utility.getReplaceDollor(currency_code))
                         .replaceAll("Discount-", ""+Utility.getReplaceDollor(discountvalue))
-                        .replaceAll("SubTotal-", Subtotalamount+ " "+Utility.getReplaceDollor(currency_code))
+                        .replaceAll("SubTotal-", Subtotalamount+ ""+Utility.getReplaceDollor(currency_code))
                         .replaceAll("Txses-", Utility.getReplaceDollor(taxtamountstr))
                         .replaceAll("Shipping-", Utility.getReplaceDollor(Shipingcosstbyct.replace("++", "+").replace("RsRs", "Rs")))
                         .replaceAll("Total Amount-", netamountvalue + Utility.getReplaceDollor(currency_code))

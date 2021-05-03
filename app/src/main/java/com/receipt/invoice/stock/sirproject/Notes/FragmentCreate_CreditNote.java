@@ -1074,6 +1074,32 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                     params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
 
 
+
+//                    //off exclusive
+//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+//                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive);
+//                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+//                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+//                    }else if (taxtypeclusive.equalsIgnoreCase("Exclusive")) {
+//                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive);
+//                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+//                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+//                    }
+
+
+//                    if (selectedtaxt.get(i).getTaxtype().equals("p")) {
+//                        params.add("tax[" + i + "]" + "[type]", selectedtaxt.get(i).getTaxtype());
+//                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+//
+//                    } else {
+//                        params.add("tax[" + i + "]" + "[type]", selectedtaxt.get(i).getTaxtype());
+////                        params.add("tax[" + i + "]" + "[amount]", selectedtaxt.get(i).getTaxamount());
+//                        params.add("tax[" + i + "]" + "[amount]", invoicetaxamount);
+//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+//                    }
                 }
             } else {
 
