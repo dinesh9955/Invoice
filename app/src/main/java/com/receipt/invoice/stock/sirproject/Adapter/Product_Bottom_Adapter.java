@@ -40,6 +40,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_Adapter.ViewHolderForCat> {
 
+    private static final String TAG = "Product_Bottom_Adapter";
     private Context mcontext ;
     ArrayList<Product_list> mlist=new ArrayList<>();
 
@@ -270,38 +271,44 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
             @Override
             public void onClick(View view) {
 
+                mybuilder.dismiss();
+                callback.closeDialog();
+                if(bottomSheetDialog != null){
+                    bottomSheetDialog.dismiss();
+                }
+
                 try {
                     int en_quantity = Integer.parseInt(edquantity.getText().toString());
 
                     if(receipt.equalsIgnoreCase("invoice")){
+                        Log.e(TAG, "invoice");
                         if (sh_quantity < en_quantity) {
+                            Log.e(TAG, "invoice1");
                             Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity");
-                            mybuilder.dismiss();
-                            callback.closeDialog();
-                            if(bottomSheetDialog != null){
-                                bottomSheetDialog.dismiss();
-                            }
+
                         } else{
+                            Log.e(TAG, "invoice2");
                             sh_price = Double.parseDouble(edprice.getText().toString().trim());
                             callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
-                            mybuilder.dismiss();
+
                         }
                     }
                     else if(receipt.equalsIgnoreCase("receipt")){
+                        Log.e(TAG, "receipt");
                         sh_price = Double.parseDouble(edprice.getText().toString().trim());
                         callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
-                        mybuilder.dismiss();
+
                     }
                     else if(receipt.equalsIgnoreCase("estimate")){
+                        Log.e(TAG, "estimate");
                         sh_price = Double.parseDouble(edprice.getText().toString().trim());
                         callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
-                        mybuilder.dismiss();
                     }
 
                     else if(receipt.equalsIgnoreCase("creditnotes")){
+                        Log.e(TAG, "creditnotes");
                         sh_price = Double.parseDouble(edprice.getText().toString().trim());
                         callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
-                        mybuilder.dismiss();
                     }
 
 

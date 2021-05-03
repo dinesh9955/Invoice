@@ -1023,7 +1023,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                 }
             }
 
-            Log.e("posting params",params.toString());
+            Log.e(TAG, "posting_params"+params.toString());
 
             if (company_stampFileimage != null) {
                 try {
@@ -3385,7 +3385,6 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
                     String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
-
                     txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
 
                    // netamountvalue = subtotalvalue + Totatlvalue1;

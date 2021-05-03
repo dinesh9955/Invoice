@@ -216,6 +216,8 @@ public class ViewInvoice_Activity extends AppCompatActivity {
             freight_cost = getIntent().getStringExtra("freight_cost");
             strdiscountvalue = getIntent().getStringExtra("discount");
             strpaid_amount = getIntent().getStringExtra("paid_amount");
+            Log.e(TAG, "strpaid_amountAA "+strpaid_amount);
+
             Paymentamountdate = getIntent().getStringExtra("paid_amount_date");
             Log.e(TAG, "Paymentamountdate1 "+Paymentamountdate);
             shippingfirstname = getIntent().getStringExtra("shipping_firstname");
