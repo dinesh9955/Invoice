@@ -658,7 +658,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 invoicecompanyiddto = invoiceDtoInvoice.getCompanyId();
                 Log.e("invoicecompanyiddto", invoicecompanyiddto);
                 customer_id = invoiceDtoInvoice.getCustomerId();
-                Log.e(TAG, "customer_idA"+customer_id);
+//                Log.e(TAG, "customer_idA"+customer_id);
                 paymentmode = invoiceDtoInvoice.getPaidAmountPaymentMethod();
 
                 txtdays.setText(credit_termsdto);
@@ -953,19 +953,11 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                         selectedtaxt.add(student);
 
-//                        SelectedTaxlist student = new SelectedTaxlist();
-//
-//                        //student.setTaxID(taxID);
-//                        student.setTaxname(taxnamst);
-//                        student.setTaxrate(taxnamss);
-//                        student.setTaxtype(type);
-//                        student.setTaxamount(taxnamss);
-//                        selectedtaxt.add(student);
-
-
                     }
 
                 }
+
+
             }
 
             @Override
@@ -1290,6 +1282,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
             RequestParams params = new RequestParams();
 
+            Log.e(TAG, "freight_cost"+freight_cost);
 
             params.add("invoice_id", invoiceId);
             params.add("invoice_no", invoicenumberdto);
@@ -1305,7 +1298,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             params.add("ref_no", ref_no);
             params.add("paid_amount_payment_method", paymentmode);
             params.add("credit_terms", credit_terms);
-            params.add("freight_cost", freight_cost);
+            params.add("freight_cost", Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
             params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
             params.add("paid_amount", strpaid_amount);
             params.add("paid_amount_date", Paymentamountdate);
@@ -1411,19 +1404,6 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                             params.add("tax[" + i + "]" + "[title]", firstTax);
                         }
                     }
-
-
-
-
-//                    //off exclusive
-//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
-//                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive);
-//                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
-//                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
-//                    }else{
-//
-//                    }
 
                 }
             } else {
@@ -1860,7 +1840,6 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 public void onClick(View v) {
                     String statusSwitch1;
                     if (taxswitch.isChecked()) {
-
                         statusSwitch1 = taxswitch.getTextOn().toString();
                         taxtypeclusive = "Inclusive";
                     } else {
@@ -1964,8 +1943,6 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                             bottomSheetDialog2.dismiss();
                         }
                     }
-
-
                 }
             });
             bottomSheetDialog2 = new BottomSheetDialog(EditInvoiceActivity.this);
@@ -3433,8 +3410,13 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 if(strdiscountvalue.equalsIgnoreCase("")){
                     discount.setText("0");
                 }else{
-                    double strdiscountval = Double.parseDouble(Utility.getRemoveMinus(strdiscountvalue));
-                    discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
+                    double strdiscountval = Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+                    if(strdiscountval == 0){
+                        discount.setText("0");
+                    }else{
+                        discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
+                    }
+
                     subtotalvalue = total_price - strdiscountval;
 
                     Log.e(TAG, "total_priceXX "+total_price);
@@ -3563,63 +3545,37 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
 
 
+
     @Override
     public void onPostExecutecall2(Service_list selected_item, String s, String price) {
-
-//        Product_list product_list = new Product_list();
-//        product_list.setProduct_name(selected_item.getService_name());
-//        product_list.setProduct_id(selected_item.getService_id());
-//        product_list.setCurrency_code(selected_item.getCuurency_code());
-//
-//        product_list.setProduct_description(selected_item.getService_description());
-//
-//        product_list.setProduct_measurement_unit(selected_item.getMeasurement_unit());
-//
-//        product_list.setProduct_price(selected_item.getService_price());
-//
-//        producprice.add(selected_item.getService_price());
-//        tempList.add(product_list);
-//
-//
-//        tempQuantity.add(s);
-//
-//        total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
-//
-//
-//        totalpriceproduct.add(String.valueOf(total_price));
-//        calculateTotalAmount(total_price);
-//
-//        products_adapter.notifyDataSetChanged();
-//
-//        bottomSheetDialog2.dismiss();
+      //  producprice.add(String.valueOf(price));
 
         Product_list product_list = new Product_list();
         product_list.setProduct_name(selected_item.getService_name());
         product_list.setProduct_id(selected_item.getService_id());
         product_list.setCurrency_code(selected_item.getCuurency_code());
+
         product_list.setProduct_description(selected_item.getService_description());
+
         product_list.setProduct_measurement_unit(selected_item.getMeasurement_unit());
+
         product_list.setProduct_price(selected_item.getService_price());
 
-        producprice.add(price);
+        producprice.add(selected_item.getService_price());
         tempList.add(product_list);
         tempQuantity.add(s);
 
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
-        double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
-        totalpriceproduct.add(String.valueOf(newPrice));
-
-        Log.e(TAG, "tempQuantityBB "+total_price);
 
 
-
+        totalpriceproduct.add(String.valueOf(total_price));
         calculateTotalAmount(total_price);
 
         products_adapter.notifyDataSetChanged();
 
         bottomSheetDialog2.dismiss();
-
     }
+
 
     @Override
     public void onClick(int str,String type) {
@@ -4334,7 +4290,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
     String cruncycode = "", Shiping_tostr = "", companyimagelogopath = "";
 
-    String Shipingdetail;
+    String Shipingdetail = "";
 
     String encodedImage, signature_of_receiverincode, encodesignatureissure, drableimagebase64, attchmentbase64;
     String paid_amount_payment;
@@ -4384,6 +4340,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             }
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         for (int i = 0; i < tempList.size(); i++) {
             Log.e("product[" + i + "]" + "[price]", tempList.get(i).getProduct_price());
             Log.e("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
@@ -4814,6 +4771,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                     .replaceAll("DueDate", invoice_due_date)
                     .replaceAll("crTerms", credit_terms)
                     .replaceAll("refNo", strreferencenovalue)
+
                     .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
                     .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", ""+Utility.getReplaceCurrency(Subtotalamount, cruncycode))
@@ -4823,6 +4781,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                     .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
                     .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
+
 //                    .replaceAll("Checkto", chektopaidmaount)
                     .replaceAll("Checkto", "")
                     .replaceAll("BankName", payment_bankstr)

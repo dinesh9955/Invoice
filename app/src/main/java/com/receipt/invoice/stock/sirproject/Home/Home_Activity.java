@@ -300,7 +300,7 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
                             invoiceModel.setInvoice_id(obj_invoice.getString("invoice_id"));
                             invoiceModel.setInvoice_no(obj_invoice.getString("invoice_no"));
                             invoiceModel.setTotal(obj_invoice.getString("total"));
-                            invoiceModel.setPayment_currency(obj_invoice.getString("payment_currency"));
+                            invoiceModel.setPayment_currency(obj_invoice.getString("currency_symbol"));
                             invoiceModelArrayList.add(invoiceModel);
 
                         }

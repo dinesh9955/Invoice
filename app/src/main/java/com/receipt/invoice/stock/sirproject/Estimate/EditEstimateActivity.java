@@ -162,7 +162,13 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
     String signature_of_issuerdto = "", signature_of_receiverdto = "", company_stampdto = "";
     String due_datedto = "", datedto = "", credit_termsdto = "";
     String sltcustonernamedto = "", sltcustomer_emaildto = "", sltcustomer_contactdto = "", sltcustomer_addressdto = "", sltcustomer_websitedto = "", sltcustomer_phone_numberdto = "";
-    String invoicenumberdto = "", ref_nodto = "", paid_amount_payment_methoddto = "", strpaid_amountdto = "", companylogopathdto = "", Grossamount_strdto = "", Subtotalamountdto = "", netamountvaluedto = "", Blanceamountstrdto = "";
+
+
+    String invoicenumberdto = "", ref_nodto = "", paid_amount_payment_methoddto = "", Shippingamountdto = "",
+            strpaid_amountdto = "", companylogopathdto = "", Grossamount_strdto = "", Subtotalamountdto = "", netamountvaluedto = "", Blanceamountstrdto = "", Discountamountstrdto ="";
+
+
+
     String shipping_zonedto;
     String company_image_pathdto, customer_image_pathdto, invoiceshre_linkdto, invoice_image_pathdto, customerDtoContactName;
     ArrayList<InvoiceTotalsItemDto> grosamontdto = new ArrayList<>();
@@ -307,7 +313,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
     int invoicenovalue;
     // Company logo path
     String companylogopath = "", Subtotalamount = "";
-    String taxtypeclusive = "", taxtype = "", taxtrateamt = "";
+    String taxtypeclusive = "", taxtype = "", taxtrateamt = "", taxID = "";
     int selectedItemOfMySpinner;
     // customer information
     String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
@@ -327,6 +333,8 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
     private RequestManager requestManager;
 
     WebView invoiceweb;
+
+    String  tax_type = "", rate1 = "" , value = "" , rate_type = "";
 
 //    String templateSelect = "0";
 //    String colorCode = "#ffffff";
@@ -763,10 +771,14 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
 
+
+
                 int numsize = grosamontdto.size();
                 for (int i = 0; i < numsize; i++) {
                     listobj = grosamontdto.get(i);
                     String title = listobj.getTitle();
+                    String code = listobj.getCode();
+
                     if (title.equals("Gross Amount")) {
                         Grossamount_strdto = listobj.getValue();
 
@@ -807,6 +819,9 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                         Double strpaid_amountdbl = Double.parseDouble(strpaid_amountdto);
 
+                        Log.e(TAG , "strpaid_amountdbl "+strpaid_amountdbl);
+
+
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
                             paidamount.setText(formatter.format(strpaid_amountdbl));
                         } else {
@@ -824,9 +839,102 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                             balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
                         }
 
+
+//                        if(!title.equals("Paid Amount")) {
+//                            //  netamountvaluedto = listobj.getValue();
+//                            Double netamountvaludbl = Double.parseDouble(netamountvaluedto);
+//
+//                            Log.e(TAG , "netamountvaludbl "+netamountvaludbl);
+//
+//                            Blanceamountstrdto = listobj.getValue();
+//                            Double Blanceamountstdbl2 = Double.parseDouble(Blanceamountstrdto);
+//
+//                            Log.e(TAG , "Blanceamountstdbl2 "+Blanceamountstdbl2);
+//
+//
+//                            Double aDoubleBalance = netamountvaludbl - Blanceamountstdbl2;
+//
+//                            Log.e(TAG , "aDoubleBalance "+aDoubleBalance);
+//
+//
+//                            paidamount.setText(formatter.format(aDoubleBalance)+""+currency_codedto);
+//
+//
+//                        }
+
+                    }
+
+                    else if (title.equals("Discount")) {
+
+                        Discountamountstrdto = listobj.getValue();
+
+                        strdiscountvalue = listobj.getValue();
+
+
+                        // discount.setText(Utility.getRemoveDoubleMinus("-"+Discountamountstrdto) + cruncycode);
+
+                        discount.setText(""+Discountamountstrdto+currency_codedto);
+//                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
+//
+//                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+//                            balance.setText(formatter.format(Blanceamountstdbl));
+//                        } else {
+//                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
+//                        }
+
+                    }
+
+
+                    else if (title.equals("Freight Cost")) {
+                        Shippingamountdto = listobj.getValue();
+                        freight.setText(""+Shippingamountdto+currency_codedto);
+//                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
+//
+//                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+//                            balance.setText(formatter.format(Blanceamountstdbl));
+//                        } else {
+//                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
+//                        }
+
+                    }
+
+
+                    else if (code.equalsIgnoreCase("tax")) {
+//                        Shippingamountdto = listobj.getValue();
+//                        freight.setText(""+Shippingamountdto+currency_codedto);
+
+                        //tax = listobj.getValue();
+
+
+                        tax_type = listobj.getTax_type();
+                        value = listobj.getValue();
+
+                        txttax.setText(""+title);
+                        tax.setText(""+value+currency_codedto);
+
+                        taxrname = listobj.getTitle();
+
+                        taxtypeclusive = listobj.getTax_type();
+                        taxtrateamt = listobj.getRate();
+                        Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+                        Log.e(TAG, "taxtrateamt "+taxtrateamt);
+
+
+
+                        SelectedTaxlist student = new SelectedTaxlist();
+
+                        student.setTaxname(listobj.getTitle());
+                        student.setTaxrate(listobj.getRate());
+                        student.setTaxtype(tax_type);
+                        student.setTaxamount(value);
+
+                        selectedtaxt.add(student);
+
                     }
 
                 }
+
+
             }
 
             @Override
@@ -944,7 +1052,6 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             @Override
             public void onClick(View v) {
 
-
                 invoice_no = invoicenumtxt.getText().toString();
                 strnotes = ednotes.getText().toString();
                 ref_no = edreferenceno.getText().toString();
@@ -955,16 +1062,13 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 invoice_date = duedate.getText().toString();
                 invoice_due_date = edduedate.getText().toString();
                 invoicetaxamount = tax.getText().toString();
-                SelectedTaxlist student = new SelectedTaxlist();
-                student.setTaxamount(invoicetaxamount);
-                selectedtaxt.add(student);
+
+
                 if (multimgpath != null) {
                     for (int i = 0; i < multimgpath.size(); i++) {
                         File imgFile = new File(multimgpath.get(i));
                         // company_stampFileimage=imgFile;
                         multiple[i] = imgFile;
-
-
                     }
                 }
                 viewPDF();
@@ -1147,7 +1251,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             params.add("ref_no", ref_no);
             params.add("paid_amount_payment_method", paymentmode);
             params.add("credit_terms", credit_terms);
-            params.add("freight_cost", freight_cost);
+            params.add("freight_cost", Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
             params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
             params.add("paid_amount", strpaid_amount);
             params.add("paid_amount_date", Paymentamountdate);
@@ -1221,11 +1325,46 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                 Log.e("product id", tempList.get(i).getProduct_id());
                 params.add("product[" + i + "]" + "[product_id]", tempList.get(i).getProduct_id());
-                params.add("product[" + i + "]" + "[price]", tempList.get(i).getProduct_price());
+                params.add("product[" + i + "]" + "[price]", producprice.get(i));
                 params.add("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
 
 
             }
+
+
+
+            Log.e(TAG, "selectedtaxtAAA "+selectedtaxt.size());
+
+            if (selectedtaxt.size() > 0) {
+                for (int i = 0; i < selectedtaxt.size(); i++) {
+
+                    taxtypeclusive = selectedtaxt.get(i).getTaxtype();
+
+                    Log.e(TAG, "selectedtaxtAAA1 "+selectedtaxt.get(i).getTaxtype());
+                    Log.e(TAG, "selectedtaxtAAA2 "+selectedtaxt.get(i).getTaxrate());
+                    Log.e(TAG, "selectedtaxtAAA3 "+selectedtaxt.get(i).getTaxname());
+                    Log.e(TAG, "selectedtaxtAAA4 "+invoicetaxamount);
+                    Log.e(TAG, "selectedtaxtAAA5 "+taxtypeclusive);
+
+                    params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                    params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                    params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+                    params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+
+                    if(selectedtaxt.get(i).getTaxname().length() > 0){
+                        if(selectedtaxt.get(i).getTaxname().contains(" ")){
+                            String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                            params.add("tax[" + i + "]" + "[title]", firstTax);
+                        }
+                    }
+
+                }
+            } else {
+
+            }
+
+
+
 
             if (multiple.length > 0) {
                 for (int k = 0; k < multiple.length; k++) {
@@ -1603,6 +1742,8 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
         }
     }
 
+
+
     public void createbottomsheet_tax() {
         if (bottomSheetDialog3 != null) {
 
@@ -1613,7 +1754,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditEstimateActivity.this, Tax_Activity.class);
-                    startActivityForResult(intent, 128);
+                    startActivityForResult(intent, 126);
                     bottomSheetDialog3.dismiss();
                 }
             });
@@ -1621,6 +1762,13 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             taxrecycler = view.findViewById(R.id.taxrecycler);
             taxswitch = view.findViewById(R.id.taxswitch);
             btndone = view.findViewById(R.id.taxbtndone);
+
+            if(taxtypeclusive.equalsIgnoreCase("Inclusive")){
+                taxswitch.setChecked(true);
+            }else{
+                taxswitch.setChecked(false);
+            }
+
 
             imgincome = view.findViewById(R.id.txttax);
             taxswitch.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
@@ -1633,17 +1781,19 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             customTaxAdapter = new CustomTaxAdapter(this, tax_list_array, this);
             taxrecycler.setAdapter(customTaxAdapter);
             customTaxAdapter.notifyDataSetChanged();
+
+            customTaxAdapter.updateTaxSelect(taxID);
+
             btndone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String statusSwitch1;
                     if (taxswitch.isChecked()) {
-
-                        statusSwitch1 = taxswitch.getTextOn().toString();
-                        taxtypeclusive = "Exclusive";
-                    } else {
                         statusSwitch1 = taxswitch.getTextOn().toString();
                         taxtypeclusive = "Inclusive";
+                    } else {
+                        statusSwitch1 = taxswitch.getTextOn().toString();
+                        taxtypeclusive = "Exclusive";
                     }
                     calculateTotalAmount(total_price);
                     bottomSheetDialog3.dismiss();
@@ -1654,6 +1804,8 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             bottomSheetDialog3.setContentView(view);
         }
     }
+
+
 
     public void createbottomsheet_paid() {
         if (bottomSheetDialog2 != null) {
@@ -1805,7 +1957,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         Intent intent = new Intent(EditEstimateActivity.this, ViewEstimate_Activity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("company_id", selectedCompanyId);
-
+                        intent.putExtra("taxText", txttax.getText().toString());
                         intent.putExtra("companycolor", companycolor);
                         intent.putExtra("selectedTemplate", ""+selectedTemplate);
 
@@ -2974,7 +3126,9 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         for (int i = 0; i < customer.length(); i++) {
                             JSONObject item = customer.getJSONObject(i);
 
-                            customer_id = item.getString("customer_id");
+                            String customer_idBB = item.getString("customer_id");
+                            Log.e(TAG, "customer_idBB "+customer_idBB);
+
                             customer_name = item.getString("customer_name");
                             custoner_contact_name = item.getString("contact_name");
                             String image = item.getString("image");
@@ -2999,7 +3153,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                             customer_list.setCustomer_website(customer_website);
                             customer_list.setCustomer_phone(customer_contact);
 
-                            customer_list.setCustomer_id(customer_id);
+                            customer_list.setCustomer_id(customer_idBB);
                             customer_list.setCustomer_name(customer_name);
                             customer_list.setCustomer_contact_person(custoner_contact_name);
                             customer_list.setCustomer_image_path(image_path);
@@ -3071,11 +3225,12 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             // createbottomsheet_customers();
             invoicerecipnt.setText(customer_list.getCustomer_name());
             customer_name = customer_list.getCustomer_name();
-
+            customer_id = customer_list.getCustomer_id();
         } else {
             // createbottomsheet_customers();
             invoicerecipnt.setText(customer_list.getCustomer_name());
             customer_name = customer_list.getCustomer_name();
+            customer_id = customer_list.getCustomer_id();
         }
         selected.add(customer_list);
 
@@ -3085,31 +3240,53 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
     @Override
     public void onPostExecutecall(Product_list selected_item, String s, String price) {
 
-        Double propice = Double.parseDouble(price);
-        int propriceint = new BigDecimal(propice).setScale(0, RoundingMode.HALF_UP).intValueExact();
-        producprice.add(String.valueOf(propriceint));
+//        Double propice = Double.parseDouble(price);
+//        int propriceint = new BigDecimal(propice).setScale(0, RoundingMode.HALF_UP).intValueExact();
+//        producprice.add(String.valueOf(propriceint));
+//        tempList.add(selected_item);
+//        tempQuantity.add(s);
+//        total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
+//
+//
+//        totalpriceproduct.add(String.valueOf(total_price));
+//        calculateTotalAmount(total_price);
+//
+//        products_adapter.notifyDataSetChanged();
+//
+//        bottomSheetDialog.dismiss();
+
+
+        bottomSheetDialog.dismiss();
+
+        producprice.add(price);
         tempList.add(selected_item);
         tempQuantity.add(s);
+
+        Log.e(TAG, "tempQuantityAA "+s);
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
 
+        double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
 
-        totalpriceproduct.add(String.valueOf(total_price));
+        totalpriceproduct.add(String.valueOf(newPrice));
         calculateTotalAmount(total_price);
 
         products_adapter.notifyDataSetChanged();
 
-        bottomSheetDialog.dismiss();
-
-
     }
+
+
+
 
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
+        Log.e(TAG,  "total_price: "+total_price);
 
         double balanceamount = 0.0;
         Double netamountvalue = 0.0;
         Double Totatlvalue = 0.0;
         Double subtotalvalue = 0.0;
+
+
 
 
         if (tempList.size() > 0) {
@@ -3124,18 +3301,23 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
 
-            grosstotal.setText(formatter.format(stratingvalue) + cruncycode);
 
-            netamount.setText(formatter.format(stratingvalue) + cruncycode);
-            balance.setText(formatter.format(stratingvalue) + cruncycode);
+            grosstotal.setText(formatter.format(stratingvalue) +cruncycode);
+
+            netamount.setText(formatter.format(stratingvalue) +cruncycode);
+            balance.setText(formatter.format(stratingvalue) +cruncycode);
             subtotalvalue = total_price;
             netamountvalue = total_price;
             balanceamount = total_price;
-            if (strdiscount.equals("Percentage")) {
+            if (strdiscount.equalsIgnoreCase("Percentage")) {
                 subtotalvalue = 0.0;
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
-                Totatlvalue = total_price * Double.parseDouble(strdiscountvalue) / 100;
+
+                Log.e(TAG , "total_priceAA "+total_price);
+                Log.e(TAG , "strdiscountvalueAA "+strdiscountvalue);
+
+                Totatlvalue = total_price * Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode)) / 100;
 
 
                 discount.setText("-"+formatter.format(Totatlvalue) + cruncycode);
@@ -3148,7 +3330,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
                 //  Log.e("DissCount value", String.valueOf(Totatlvalue)+ cruncycode);
-            } else if (strdiscount.equals("Amount")) {
+            } else if (strdiscount.equalsIgnoreCase("Amount")) {
                 subtotalvalue = 0.0;
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
@@ -3159,120 +3341,112 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 }
 
                 netamountvalue = subtotalvalue;
+                double  strdiscountval=Double.parseDouble(strdiscountvalue);
 
-                double strdiscountval = Double.parseDouble(strdiscountvalue);
                 discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
             } else {
 
-                discount.setText("0");
+                Log.e(TAG , "strdiscountvalueBb "+Discountamountstrdto);
+
+
+
+                if(strdiscountvalue.equalsIgnoreCase("")){
+                    discount.setText("0");
+                }else{
+                    double strdiscountval = Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+                    if(strdiscountval == 0){
+                        discount.setText("0");
+                    }else{
+                        discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
+                    }
+
+                    subtotalvalue = total_price - strdiscountval;
+
+                    Log.e(TAG, "total_priceXX "+total_price);
+                    Log.e(TAG, "strdiscountvalXX "+strdiscountval);
+                    Log.e(TAG, "subtotalvalueXX "+subtotalvalue);
+                }
+
+
+
+
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
             }
+
+
+            Log.e(TAG, "selectedtaxt.size() "+selectedtaxt.size());
+
+            Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+            Log.e(TAG, "taxtrateamt "+taxtrateamt);
+
+
             if (selectedtaxt.size() > 0) {
-                if (taxtypeclusive.equals("Inclusive")) {
-                    if (taxtype.equals("P")) {
-                        netamountvalue = 0.0;
-                        Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
+                if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
+                    //netamountvalue = 0.0;
+                    Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
+                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
-                        tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-
-                 //       String taxtpercentage = taxtrateamt.substring(0, 2);
-//                        String tatxnamesub = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub + taxtpercentage + "%";
-                            String subStrinng = taxrname+"" + taxtrateamt + "%";
-//
-//                        txttax.setText("(" + subStrinng + "Incl" + ")"); //Dont do any change
-                      //  String subStrinng = "VAT" + taxtpercentage + "%";
-
-                        txttax.setText("(" + subStrinng + "Incl" + ")"); //Dont do any change
-
-                        netamountvalue =  Totatlvalue1 + subtotalvalue;
-
-                        netamount.setText(formatter.format(netamountvalue) + cruncycode);
-                        balance.setText(formatter.format(netamountvalue) + cruncycode);
-
-
-                    } else {
-                        netamountvalue = 0.0;
-                    //    String taxtpercentage1 = taxtrateamt.substring(0, 4);
-//                        String tatxnamesub1 = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub1 + taxtpercentage1;
-//
-//
-//                        txttax.setText("(" + subStrinng + "Incl" + ")");
-
-
-                        String subStrinng = taxrname+"" + taxtrateamt + "";
-
-                        txttax.setText("(" + subStrinng + "Incl" + ")");
-
-
-                        Double amomnt = Double.parseDouble(taxtrateamt);
-
-                        netamountvalue =  amomnt + subtotalvalue;
-
-                        tax.setText(amomnt + cruncycode);
-                        netamount.setText(netamountvalue + cruncycode);
-                        balance.setText(netamountvalue + cruncycode);
+                    if(taxrname.length() > 0){
+                        if(taxrname.contains(" ")){
+                            String firstTax = taxrname.split(" ")[0].replace("(", "");
+                            String subStrinng = firstTax + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        }else{
+                            String subStrinng = taxrname + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        }
+                    }else{
+                        String subStrinng = taxrname + " " + taxtrateamt + "%";
+                        txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
                     }
-                } else {
-                    if (taxtype.equals("P")) {
-                        netamountvalue = 0.0;
-                        Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
 
-                        tax.setText(formatter.format(Totatlvalue1) + cruncycode);
+                    // netamountvalue = subtotalvalue + Totatlvalue1;
 
-                 //       String taxtpercentage = taxtrateamt.substring(0, 2);
-//                        String tatxnamesub = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub + taxtpercentage + "%";
+                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
+                    balance.setText(formatter.format(netamountvalue) + cruncycode);
+
+                } else { // include off
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
+
+                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 //
-//
-//                        txttax.setText("(" + subStrinng + ")"); //Dont do any change
+                    Log.e(TAG, "taxrnameAAA "+taxrname);
+                    Log.e(TAG, "taxtrateamtAAA "+taxtrateamt);
 
-                        String subStrinng = taxrname+"" + taxtrateamt + "%";
-
-                        txttax.setText("(" + subStrinng + ")"); //Dont do any change
-
-
-                        netamountvalue = subtotalvalue + Totatlvalue1;
-
-                        netamount.setText(formatter.format(netamountvalue) + cruncycode);
-                        balance.setText(formatter.format(netamountvalue) + cruncycode);
-
-
-                    } else {
-
-                        netamountvalue = 0.0;
-                  //      String taxtpercentage1 = taxtrateamt.substring(0, 4);
-//                        String tatxnamesub1 = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub1 + taxtpercentage1;
-//
-//
-//                        txttax.setText("(" + subStrinng + ")");
-
-
-                        String subStrinng = taxrname+"" + taxtrateamt + "";
-
-
-                        txttax.setText("(" + subStrinng + ")");
-
-
-                        Double amomnt = Double.parseDouble(taxtrateamt);
-                       // Double taxamountvalue = subtotalvalue + amomnt;
-
-                        netamountvalue =  amomnt + subtotalvalue;
-
-                        tax.setText(formatter.format(amomnt) + cruncycode);
-                        netamount.setText(formatter.format(netamountvalue) + cruncycode);
-                        balance.setText(formatter.format(netamountvalue) + cruncycode);
+                    if(taxrname.length() > 0){
+                        if(taxrname.contains(" ")){
+                            String firstTax = taxrname.split(" ")[0].replace("(", "");
+                            String subStrinng = firstTax + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        }else{
+                            String subStrinng = taxrname + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        }
+                    }else{
+                        String subStrinng = taxrname + " " + taxtrateamt + "%";
+                        txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
                     }
+
+
+
+
+                    netamountvalue = subtotalvalue + Totatlvalue1;
+
+                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
+                    balance.setText(formatter.format(netamountvalue) + cruncycode);
+
                 }
-
             }
+//
+
+
+
             if (freight_cost.equals("")) {
 
 
@@ -3289,7 +3463,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 //
                 // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
             } else {
-                Log.e("balance", paidamountstr);
+                Log.e(TAG, "balanceAA "+paidamountstr);
                 Double paidindouble = Double.parseDouble(paidamountstr);
 
                 paidamount.setText(formatter.format(paidindouble) + cruncycode);
@@ -3315,9 +3489,12 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
     }
 
 
+
+
+
     @Override
     public void onPostExecutecall2(Service_list selected_item, String s, String price) {
-        producprice.add(String.valueOf(price));
+        //  producprice.add(String.valueOf(price));
 
         Product_list product_list = new Product_list();
         product_list.setProduct_name(selected_item.getService_name());
@@ -3332,8 +3509,6 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
         producprice.add(selected_item.getService_price());
         tempList.add(product_list);
-
-
         tempQuantity.add(s);
 
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
@@ -3346,6 +3521,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
         bottomSheetDialog2.dismiss();
     }
+
 
     @Override
     public void onClick(int str,String type) {
@@ -3365,17 +3541,24 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
             products_adapter.notifyDataSetChanged();
 
+            double total_price2 = 0;
+
             if(tempList.size() > 0){
                 if(tempQuantity.size() > 0){
                     for(int i = 0 ; i < tempList.size() ; i++){
-                        total_price = Double.parseDouble(tempList.get(i).getProduct_price()) * Double.parseDouble(tempQuantity.get(i));
+                        Log.e(TAG, "ccDDD "+producprice.get(i) + " DDDD "+ tempQuantity.get(i));
+                        total_price2 = total_price2 + Double.parseDouble(producprice.get(i)) * Double.parseDouble(tempQuantity.get(i));
                     }
                 }
             }
 
+            Log.e(TAG, "productCal "+total_price2);
+
             if(tempList.size() == 0) {
-                total_price = 0.0;
+                total_price2 = 0.0;
             }
+
+            total_price = total_price2;
 
             calculateTotalAmount(total_price);
         }
@@ -3497,24 +3680,47 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
     }
 
+
+
     @Override
     public void onPostExecutecall3(String taxID, String taxnamst, String taxnamss, String type) {
+//        selectedtaxt.clear();
+//        Log.e("income rate", taxnamst);
+//        Log.e("taxnamss_rate", taxnamss);
+//        Log.e("type rate", type);
+//        taxtype = type;
+//        taxrname = taxnamst;
+//        taxtrateamt = taxnamss;
+//        SelectedTaxlist student = new SelectedTaxlist();
+//        student.setTaxname(taxnamst);
+//        student.setTaxrate(taxnamss);
+//        student.setTaxtype(type);
+//        student.setTaxamount(taxnamss);
+//        selectedtaxt.add(student);
+
+
         selectedtaxt.clear();
-        Log.e("income rate", taxnamst);
+        Log.e(TAG, "income rate" + taxnamst);
         Log.e("taxnamss_rate", taxnamss);
         Log.e("type rate", type);
+        this.taxID = taxID;
+        Log.e(TAG, "taxID" + taxID);
+
         taxtype = type;
         taxrname = taxnamst;
         taxtrateamt = taxnamss;
         SelectedTaxlist student = new SelectedTaxlist();
+
+        //student.setTaxID(taxID);
         student.setTaxname(taxnamst);
         student.setTaxrate(taxnamss);
         student.setTaxtype(type);
         student.setTaxamount(taxnamss);
         selectedtaxt.add(student);
 
-
     }
+
+
 
     private class DownloadCompanystempweb extends AsyncTask<String, Void, Void> {
 
@@ -3955,7 +4161,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
     String cruncycode = "", Shiping_tostr = "", companyimagelogopath = "";
 
-    String Shipingdetail;
+    String Shipingdetail = "";
 
     String encodedImage, signature_of_receiverincode, encodesignatureissure, drableimagebase64, attchmentbase64;
     String paid_amount_payment;
@@ -4420,6 +4626,9 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
         String content = null;
         try {
+
+            Log.e(TAG , "ShipingdetailAAA "+Shipingdetail);
+
             content = IOUtils.toString(getAssets().open(name))
 
                     .replaceAll("Company Name", company_name)
@@ -4433,15 +4642,17 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                     .replaceAll("DueDate", invoice_due_date)
                     .replaceAll("crTerms", credit_terms)
                     .replaceAll("refNo", strreferencenovalue)
-                    .replaceAll("GrossAm-", Grossamount_str)
-                    .replaceAll("Discount-", discountvalue)
-                    .replaceAll("SubTotal-", Subtotalamount)
-                    .replaceAll("Txses-", taxtamountstr)
-                    .replaceAll("Shipping-", Shipingcosstbyct)
-                    .replaceAll("Total Amount-", netamountvalue)
-                    .replaceAll("PaidsAmount", paidamountstrrepvalue)
+
+                    .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
+                    .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
+                    .replaceAll("SubTotal-", ""+Utility.getReplaceCurrency(Subtotalamount, cruncycode))
+                    .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
+                    .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
+                    .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
+                    .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
-                    .replaceAll("Balance Due-", Blanceamountstr)
+                    .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
+
 //                    .replaceAll("Checkto", chektopaidmaount)
                     .replaceAll("Checkto", "")
                     .replaceAll("BankName", payment_bankstr)

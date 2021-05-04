@@ -710,7 +710,7 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
 //
 //                createinvoicewithdetail();
 
-                createinvoice.setEnabled(false);
+            //    createinvoice.setEnabled(false);
 
                 invoice_no = invoicenumtxt.getText().toString();
                 strnotes = ednotes.getText().toString();
@@ -1074,6 +1074,14 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
 
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
+
+
+                    Log.e(TAG, "getTaxtype "+selectedtaxt.get(i).getTaxtype());
+                    Log.e(TAG, "getTaxrate "+selectedtaxt.get(i).getTaxrate());
+                    Log.e(TAG, "getTaxname "+selectedtaxt.get(i).getTaxname());
+                    Log.e(TAG, "getTaxamount "+selectedtaxt.get(i).getTaxamount());
+                    Log.e(TAG, "invoicetaxamount "+invoicetaxamount);
+                    Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
 
                     params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
                     params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
@@ -1790,10 +1798,20 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                     } else {
 
 //                        defaultClick = 1;
+
+                        Log.e(TAG, "companycolor"+companycolor);
+                        Log.e(TAG, "selectedTemplate"+selectedTemplate);
+
+
                         Intent intent = new Intent(getContext(), ViewEstimate_Activity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("taxText", txttax.getText().toString());
-                        intent.putExtra("companycolor", companycolor);
+                        if(selectedTemplate == 0){
+                            intent.putExtra("companycolor", "#ffffff");
+                        }else{
+                            intent.putExtra("companycolor", companycolor);
+                        }
+
                         intent.putExtra("selectedTemplate", ""+selectedTemplate);
                         intent.putExtra("company_id", selectedCompanyId);
                         intent.putExtra("invoice_date", invoice_date);

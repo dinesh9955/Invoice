@@ -664,20 +664,20 @@ public class ViewEstimate_Activity extends AppCompatActivity {
         String name = "estimate.html";
         String nameName = "file:///android_asset/estimate.html";
         if(selectedTemplate.equalsIgnoreCase("0")){
+            name = "estimate.html";
+            nameName = "file:///android_asset/estimate.html";
+        }else if(selectedTemplate.equalsIgnoreCase("1")){
             name = "estimate1.html";
             nameName = "file:///android_asset/estimate1.html";
-        }else if(selectedTemplate.equalsIgnoreCase("1")){
+        }else if(selectedTemplate.equalsIgnoreCase("2")){
             name = "estimate2.html";
             nameName = "file:///android_asset/estimate2.html";
-        }else if(selectedTemplate.equalsIgnoreCase("2")){
+        }else if(selectedTemplate.equalsIgnoreCase("3")){
             name = "estimate3.html";
             nameName = "file:///android_asset/estimate3.html";
-        }else if(selectedTemplate.equalsIgnoreCase("3")){
+        }else if(selectedTemplate.equalsIgnoreCase("4")){
             name = "estimate4.html";
             nameName = "file:///android_asset/estimate4.html";
-        }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "estimate5.html";
-            nameName = "file:///android_asset/estimate5.html";
         }
 
         String content = null;

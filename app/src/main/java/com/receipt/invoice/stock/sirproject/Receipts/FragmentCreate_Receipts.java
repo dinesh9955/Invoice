@@ -711,7 +711,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 //
 //                createinvoicewithdetail();
 
-                createinvoice.setEnabled(false);
+                //createinvoice.setEnabled(false);
 
 
                 invoice_no = invoicenumtxt.getText().toString();

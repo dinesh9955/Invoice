@@ -51,19 +51,22 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
             Point point = new Point((int) e.getRawX(), (int) e.getRawY());
 
             RecyclerView.ViewHolder swipedViewHolder = recycler_invoices.findViewHolderForAdapterPosition(swipedPos);
-            View swipedItem = swipedViewHolder.itemView;
-            Rect rect = new Rect();
-            swipedItem.getGlobalVisibleRect(rect);
 
-            if (e.getAction() == MotionEvent.ACTION_DOWN || e.getAction() == MotionEvent.ACTION_UP || e.getAction() == MotionEvent.ACTION_MOVE) {
-                if (rect.top < point.y && rect.bottom > point.y)
-                    gestureDetector.onTouchEvent(e);
-                else {
-                    recoverQueue.add(swipedPos);
-                    swipedPos = -1;
-                    recoverSwipedItem();
+            if(swipedViewHolder != null){
+                View swipedItem = swipedViewHolder.itemView;
+                Rect rect = new Rect();
+                swipedItem.getGlobalVisibleRect(rect);
+                if (e.getAction() == MotionEvent.ACTION_DOWN || e.getAction() == MotionEvent.ACTION_UP || e.getAction() == MotionEvent.ACTION_MOVE) {
+                    if (rect.top < point.y && rect.bottom > point.y)
+                        gestureDetector.onTouchEvent(e);
+                    else {
+                        recoverQueue.add(swipedPos);
+                        swipedPos = -1;
+                        recoverSwipedItem();
+                    }
                 }
             }
+
             return false;
         }
     };

@@ -746,7 +746,7 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
                         .replaceAll("refNo", strreferencenovalue)
                         .replaceAll("GrossAm-", ""+Grossamount_str + ""+ Utility.getReplaceDollor(currency_code))
                         .replaceAll("Discount-", ""+Utility.getReplaceDollor(discountvalue))
-                        .replaceAll("SubTotal-", Subtotalamount+ " "+Utility.getReplaceDollor(currency_code))
+                        .replaceAll("SubTotal-", Subtotalamount+ ""+Utility.getReplaceDollor(currency_code))
                         .replaceAll("Txses-", Utility.getReplaceDollor(taxtamountstr))
                         .replaceAll("Shipping-", Utility.getReplaceDollor(Shipingcosstbyct.replace("++", "+").replace("RsRs", "Rs")))
                         .replaceAll("Total Amount-", netamountvalue + Utility.getReplaceDollor(currency_code))

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.receipt.invoice.stock.sirproject.Home.Model.InvoiceModel;
 import com.receipt.invoice.stock.sirproject.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class HomeInvoiceAdapter extends RecyclerView.Adapter<HomeInvoiceAdapter.MyViewHolder> {
@@ -39,7 +40,10 @@ public class HomeInvoiceAdapter extends RecyclerView.Adapter<HomeInvoiceAdapter.
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
         holder.invoicestxt.setText(invoiceModelArrayList.get(position).getInvoice_no());
-        holder.amount.setText(invoiceModelArrayList.get(position).getPayment_currency()+""+" "+invoiceModelArrayList.get(position).getTotal());
+
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+        double stratingvalue = Double.parseDouble(invoiceModelArrayList.get(position).getTotal());
+        holder.amount.setText(formatter.format(stratingvalue) + " "+invoiceModelArrayList.get(position).getPayment_currency());
 
 
 
