@@ -39,6 +39,16 @@ public class SelectedTaxlist {
     public String taxrate;
     public String taxtype;
     public String taxamount;
+    public String rateType = "p";
+
+
+    public String getRateType() {
+        return rateType;
+    }
+
+    public void setRateType(String rateType) {
+        this.rateType = rateType;
+    }
 
     public String getTaxID() {
         return taxID;

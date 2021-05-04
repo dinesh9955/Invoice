@@ -1060,13 +1060,13 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                 params.add("product[" + i + "]" + "[price]", producprice.get(i));
                 params.add("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
 
-                Log.e("tempListpid",tempList.get(i).getProduct_id());
-                Log.e("tempListprice",tempList.get(i).getProduct_price());
-                Log.e("tempQuantity",tempQuantity.get(i));
+//                Log.e("tempListpid",tempList.get(i).getProduct_id());
+//                Log.e("tempListprice",tempList.get(i).getProduct_price());
+//                Log.e("tempQuantity",tempQuantity.get(i));
 
 
 
-                Log.e("productdetails",params.toString());
+             //   Log.e("productdetails",params.toString());
 
 
             }
@@ -1083,24 +1083,27 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                     Log.e(TAG, "invoicetaxamount "+invoicetaxamount);
                     Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
 
-                    params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                    params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
-                    params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-                    params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+//                    params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+//                    params.add("tax[" + i + "]" + "[amount]", "5.00");
+//                    params.add("tax[" + i + "]" + "[rate]", "50.00");
+//                    params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
 
 
-//                    //off exclusive
-//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
-//                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive);
-//                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
-//                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
-//                    }else if (taxtypeclusive.equalsIgnoreCase("Exclusive")) {
-//                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive);
-//                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
-//                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
-//                    }
+                    if(selectedtaxt.get(i).getTaxtype().equalsIgnoreCase("p")){
+                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                       // params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                    }else{
+                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                    }
+
+
+
+
 
                 }
             } else {

@@ -927,6 +927,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         student.setTaxrate(listobj.getRate());
                         student.setTaxtype(tax_type);
                         student.setTaxamount(value);
+                       // student.setRateType(value);
 
                         selectedtaxt.add(student);
 
@@ -1346,17 +1347,33 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                     Log.e(TAG, "selectedtaxtAAA4 "+invoicetaxamount);
                     Log.e(TAG, "selectedtaxtAAA5 "+taxtypeclusive);
 
-                    params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                    params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
-                    params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-                    params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                    if(selectedtaxt.get(i).getRateType().equalsIgnoreCase("p")){
+                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                        // params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+                        if(selectedtaxt.get(i).getTaxname().length() > 0){
+                            if(selectedtaxt.get(i).getTaxname().contains(" ")){
+                                String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                                params.add("tax[" + i + "]" + "[title]", firstTax);
+                            }
+                        }
 
-                    if(selectedtaxt.get(i).getTaxname().length() > 0){
-                        if(selectedtaxt.get(i).getTaxname().contains(" ")){
-                            String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
-                            params.add("tax[" + i + "]" + "[title]", firstTax);
+
+                    }else{
+                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+                        if(selectedtaxt.get(i).getTaxname().length() > 0){
+                            if(selectedtaxt.get(i).getTaxname().contains(" ")){
+                                String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                                params.add("tax[" + i + "]" + "[title]", firstTax);
+                            }
                         }
                     }
+
+
+
+
 
                 }
             } else {

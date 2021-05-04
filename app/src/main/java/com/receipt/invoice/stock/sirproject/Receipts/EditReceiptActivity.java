@@ -1305,7 +1305,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
                     params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                     params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-                    params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                  //  params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
 
                     if(selectedtaxt.get(i).getTaxname().length() > 0){
                         if(selectedtaxt.get(i).getTaxname().contains(" ")){

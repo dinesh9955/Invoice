@@ -1081,12 +1081,14 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
 
+
                     Log.e(TAG, "getTaxtype "+selectedtaxt.get(i).getTaxtype());
                     Log.e(TAG, "getTaxrate "+selectedtaxt.get(i).getTaxrate());
                     Log.e(TAG, "getTaxname "+selectedtaxt.get(i).getTaxname());
                     Log.e(TAG, "getTaxamount "+selectedtaxt.get(i).getTaxamount());
                     Log.e(TAG, "invoicetaxamount "+invoicetaxamount);
                     Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+
 
                     params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
                     params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
