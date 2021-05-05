@@ -1366,6 +1366,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
+                            Constant.SuccessToast(EditReceiptActivity.this, "Duplicate Receipt created successfully");
+
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -1373,7 +1375,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
-                            }, 1500);
+                            }, 500);
 
                             JSONObject data = jsonObject.getJSONObject("data");
 //

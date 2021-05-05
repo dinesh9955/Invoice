@@ -1170,6 +1170,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
+                            Constant.SuccessToast(getActivity(), "Invoice created successfully");
+
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -1178,7 +1180,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
-                            }, 1500);
+                            }, 500);
 
                             JSONObject data = jsonObject.getJSONObject("data");
 

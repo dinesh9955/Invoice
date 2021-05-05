@@ -782,7 +782,7 @@ public class ListOfReceipts extends Fragment {
             recepitsviewtxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
 
             LinearLayout linearLayoutChangeTemp= view.findViewById(R.id.viewicetemplate);
-            linearLayoutChangeTemp.setVisibility(View.GONE);
+            linearLayoutChangeTemp.setVisibility(View.VISIBLE);
 
             viewinvoicebotom.setText("View Receipt");
             viewinvoicetemplate.setText("Edit Receipt");
@@ -818,14 +818,27 @@ public class ListOfReceipts extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Company");
-                        bottomSheetDialog.show();
-                    } else {
+                    SavePref pref = new SavePref();
+                    pref.SavePref(getActivity());
+                    pref.setTemplate(0);
 
-                        ViewTamlatemethodh();
-                        bottomSheetDialog.show();
-                    }
+                    Intent intent = new Intent(getContext(), EditEditReceiptActivity.class);
+                    intent.putExtra("invoiceID", invoiceidbypos);
+                    intent.putExtra("invoice_count", invoice_count);
+
+
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    bottomSheetDialog.dismiss();
+
+//                    if (selectedCompanyId.equals("")) {
+//                        Constant.ErrorToast(getActivity(), "Select A Company");
+//                        bottomSheetDialog.show();
+//                    } else {
+//
+//                        ViewTamlatemethodh();
+//                        bottomSheetDialog.show();
+//                    }
                 }
             });
 

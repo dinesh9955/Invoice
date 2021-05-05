@@ -1139,6 +1139,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
+                            Constant.SuccessToast(getActivity(), "Credit Note created successfully");
+
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -1147,7 +1149,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
-                            }, 1500);
+                            }, 500);
 
                             JSONObject data = jsonObject.getJSONObject("data");
 

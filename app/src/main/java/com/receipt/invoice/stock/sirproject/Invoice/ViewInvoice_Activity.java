@@ -264,6 +264,8 @@ public class ViewInvoice_Activity extends AppCompatActivity {
             company_stamp = getIntent().getStringExtra("company_stamp");
 
 
+
+
             if (signature_of_issuer != null) {
                 try {
 
@@ -515,6 +517,7 @@ public class ViewInvoice_Activity extends AppCompatActivity {
                     .replaceAll("SignatureofIssuer", signature_of_issuername)
                     .replaceAll("dataimageRecieverImage", "file://" + signature_of_receiver)
                     .replaceAll("data:imageSige_path", "file://" + signature_of_issuer);
+//                    .replaceAll("data:imageSige_path", "file://" + signature_of_issuer);
         } catch (IOException e) {
             e.printStackTrace();
         }

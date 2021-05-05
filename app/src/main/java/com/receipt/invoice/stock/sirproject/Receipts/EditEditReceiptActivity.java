@@ -78,6 +78,7 @@ import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
+import com.receipt.invoice.stock.sirproject.Estimate.EditEditEstimateActivity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
@@ -98,7 +99,9 @@ import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
+import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
+import com.receipt.invoice.stock.sirproject.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -153,8 +156,8 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
     ApiInterface apiInterface;
     String signature_of_issuerdto = "", signature_of_receiverdto = "", company_stampdto = "";
     String due_datedto = "", datedto = "", credit_termsdto = "";
-    String sltcustonernamedto = "", sltcustomer_emaildto = "", sltcustomer_contactdto = "", sltcustomer_addressdto = "", sltcustomer_websitedto = "", sltcustomer_phone_numberdto = "";
-    String invoicenumberdto = "", ref_nodto = "", paid_amount_payment_methoddto = "", strpaid_amountdto = "", companylogopathdto = "", Grossamount_strdto = "", Subtotalamountdto = "", netamountvaluedto = "", Blanceamountstrdto = "";
+    String sltcustonernamedto = "", sltcustomer_emaildto = "", sltcustomer_contactdto = "", sltcustomer_addressdto = "", sltcustomer_websitedto = "", sltcustomer_phone_numberdto = "", Shippingamountdto = "", invoicetaxvalue = "";
+    String invoicenumberdto = "", ref_nodto = "", paid_amount_payment_methoddto = "", strpaid_amountdto = "",  Grossamount_strdto = "", Subtotalamountdto = "", netamountvaluedto = "", Blanceamountstrdto = "", Discountamountstrdto ="";
     String shipping_zonedto;
     String company_image_pathdto, customer_image_pathdto, invoiceshre_linkdto, invoice_image_pathdto, customerDtoContactName;
     ArrayList<InvoiceTotalsItemDto> grosamontdto;
@@ -166,11 +169,16 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
     ReceiptDtoReceipt invoiceDtoInvoice;
     String currency_codedto;
     //3
-    String companylogopathdtodt;
+    // String companylogopathdtodt = "";
     TextView itemstxtTemplate, invoicenumtxt, duedatetxt, duedate, invoicetotxt, invoicerecipnt, itemstxt, subtotaltxt, subtotal, discounttxt, discount, txttax, tax, txtcredit, txtdays, txtreferenceno, edreferenceno, txtduedate, edduedate, txtgrossamount, grosstotal, txtfreight, freight, txtnetamount, netamount, txtpaidamount, paidamount, txtbalance, balance, s_invoice, s_receiver, c_stamp, attachmenttxt;
     Button additem, createinvoice, options, addservice;
     RecyclerView productsRecycler;
     EditText ednotes, invoicenum;
+
+    String  tax_type = "", rate1 = "" , value = "" , rate_type = "";
+
+    String taxtypeclusive = "", taxtype = "", taxtrateamt = "", taxID = "";
+
     ArrayList<Product_list> tempList = new ArrayList<Product_list>();
 
     ArrayList<String> tempQuantity = new ArrayList<String>();
@@ -254,6 +262,8 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
     ArrayList<String> paymode = new ArrayList<>();
     String selectedCompanyId = "";
     String selectwarehouseId = "";
+    int warehousePosition = 0;
+
     String paimentmodespinerstr = "";
     //customer bottom sheet
     TextView txtcustomer, txtname, txtcontactname;
@@ -300,7 +310,6 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
     int invoicenovalue;
     // Company logo path
     String companylogopath = "", Subtotalamount = "";
-    String taxtypeclusive = "", taxtype = "", taxtrateamt = "";
     int selectedItemOfMySpinner;
     // customer information
     String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
@@ -320,9 +329,9 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
     private RequestManager requestManager;
 
     WebView invoiceweb;
-
 //    String templateSelect = "0";
 //    String colorCode = "#ffffff";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -564,8 +573,11 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                 company_website = companyDto.getWebsite();
                 company_email = companyDto.getPaypalEmail();
                 companylogopath = companyDto.getLogo();
-                companylogopathdto = companyDto.getLogo();
-                companylogopathdtodt = company_image_pathdto + companylogopathdto;
+                // companylogopathdto = companyDto.getLogo();
+//                companylogopathdtodt = company_image_pathdto + companylogopathdto;
+//
+//                Log.e(TAG, "companylogopathdtodtAA "+companylogopathdtodt);
+
                 // new DownloadsImagefromweblogoCom().execute(companylogopathdtodt);
 
                 selectedCompanyId = companyDto.getCompanyId();
@@ -582,6 +594,10 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                 //invoice Data
                 invoiceDtoInvoice = data.getReceipt();
                 invoicenumberdto = invoiceDtoInvoice.getReceipt_no();
+                Log.e(TAG,"invoicenumberdto:: "+invoicenumberdto);
+
+                invoicenum.setText(""+invoicenumberdto);
+
                 // where House id
                 selectwarehouseId = invoiceDtoInvoice.getWearhouseId();
 
@@ -606,6 +622,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                     itemstxtTemplate.setText("Template "+selectedTemplate);
                 }
                 strnotes = invoiceDtoInvoice.getNotes();
+                ednotes.setText(strnotes);
                 //  credit_termsdto = invoiceDtoInvoice.getCreditTerms();
                 // credit_terms = credit_termsdto;
                 invoicecompanyiddto = invoiceDtoInvoice.getCompanyId();
@@ -750,6 +767,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                 for (int i = 0; i < numsize; i++) {
                     listobj = grosamontdto.get(i);
                     String title = listobj.getTitle();
+                    String code = listobj.getCode();
                     if (title.equals("Gross Amount")) {
                         Grossamount_strdto = listobj.getValue();
 
@@ -807,6 +825,62 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                             balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
                         }
 
+                    }
+
+                    else if (title.equals("Discount")) {
+
+                        Discountamountstrdto = listobj.getValue();
+                        strdiscountvalue = listobj.getValue();
+
+                        discount.setText(Utility.getReplaceMinus("-"+Discountamountstrdto+currency_codedto));
+//                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
+//
+//                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+//                            balance.setText(formatter.format(Blanceamountstdbl));
+//                        } else {
+//                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
+//                        }
+
+                    }
+
+
+                    else if (title.equals("Freight Cost")) {
+                        Shippingamountdto = listobj.getValue();
+                        freight.setText(""+Shippingamountdto+currency_codedto);
+//                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
+//
+//                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+//                            balance.setText(formatter.format(Blanceamountstdbl));
+//                        } else {
+//                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
+//                        }
+
+                    }
+
+                    else if (code.equalsIgnoreCase("tax")) {
+                        tax_type = listobj.getTax_type();
+                        value = listobj.getValue();
+
+                        txttax.setText(""+title);
+                        tax.setText(""+value+currency_codedto);
+
+                        taxrname = listobj.getTitle();
+
+                        taxtypeclusive = listobj.getTax_type();
+                        taxtrateamt = listobj.getRate();
+                        Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+                        Log.e(TAG, "taxtrateamt "+taxtrateamt);
+
+
+
+                        SelectedTaxlist student = new SelectedTaxlist();
+
+                        student.setTaxname(listobj.getTitle());
+                        student.setTaxrate(listobj.getRate());
+                        student.setTaxtype(tax_type);
+                        student.setTaxamount(value);
+
+                        selectedtaxt.add(student);
                     }
 
                 }
@@ -873,9 +947,9 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 //                {
 //                    Constant.ErrorToast(EditReceiptActivity.this, "Select A Where House");
 //                } else {
-//                    createbottomsheet_products();
-//                    bottomSheetDialog.show();
-//                    bottomSheetDialog2.dismiss();
+                createbottomsheet_products();
+                bottomSheetDialog.show();
+                bottomSheetDialog2.dismiss();
 //
 //                }
 
@@ -906,6 +980,8 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                 bottomSheetDialog2.show();
             }
         });
+
+        options.setEnabled(false);
         options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -938,9 +1014,9 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                 invoice_date = duedate.getText().toString();
                 invoice_due_date = edduedate.getText().toString();
                 invoicetaxamount = tax.getText().toString();
-                SelectedTaxlist student = new SelectedTaxlist();
-                student.setTaxamount(invoicetaxamount);
-                selectedtaxt.add(student);
+//                SelectedTaxlist student = new SelectedTaxlist();
+//                student.setTaxamount(invoicetaxamount);
+//                selectedtaxt.add(student);
                 if (multimgpath != null) {
                     for (int i = 0; i < multimgpath.size(); i++) {
                         File imgFile = new File(multimgpath.get(i));
@@ -1019,6 +1095,9 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
             public void onItemSelected(int position, String itemAtPosition) {
                 selectwarehouseId = cids.get(position);
                 Log.e("selectwarehouseId", selectwarehouseId);
+
+                warehousePosition = position;
+
 
             }
         });
@@ -1128,12 +1207,17 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
             params.add("receipt_date", invoice_date);
             params.add("due_date", invoice_due_date);
             params.add("customer_id", customer_id);
+            Log.e(TAG, "customer_idBB"+customer_id);
+
+            Log.e(TAG, "strdiscountvalue "+strdiscountvalue);
+            Log.e(TAG, "strpaid_amount "+strpaid_amount);
+
             params.add("notes", strnotes);
             params.add("ref_no", ref_no);
             params.add("paid_amount_payment_method", paymentmode);
             params.add("credit_terms", credit_terms);
-            params.add("freight_cost", freight_cost);
-            params.add("discount", strdiscountvalue);
+            params.add("freight_cost", Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
             params.add("paid_amount", strpaid_amount);
             params.add("paid_amount_date", Paymentamountdate);
             params.add("shipping_firstname", shippingfirstname);
@@ -1206,11 +1290,47 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
                 Log.e("product id", tempList.get(i).getProduct_id());
                 params.add("product[" + i + "]" + "[product_id]", tempList.get(i).getProduct_id());
-                params.add("product[" + i + "]" + "[price]", tempList.get(i).getProduct_price());
+                params.add("product[" + i + "]" + "[price]", producprice.get(i));
                 params.add("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
 
 
             }
+
+
+
+
+            Log.e(TAG, "selectedtaxtAAA "+selectedtaxt.size());
+
+            if (selectedtaxt.size() > 0) {
+                for (int i = 0; i < selectedtaxt.size(); i++) {
+
+                    taxtypeclusive = selectedtaxt.get(i).getTaxtype();
+
+                    Log.e(TAG, "selectedtaxtAAA1 "+selectedtaxt.get(i).getTaxtype());
+                    Log.e(TAG, "selectedtaxtAAA2 "+selectedtaxt.get(i).getTaxrate());
+                    Log.e(TAG, "selectedtaxtAAA3 "+selectedtaxt.get(i).getTaxname());
+                    Log.e(TAG, "selectedtaxtAAA4 "+invoicetaxamount);
+                    Log.e(TAG, "selectedtaxtAAA5 "+taxtypeclusive);
+
+                    params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                    params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                    params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+                    //  params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+
+                    if(selectedtaxt.get(i).getTaxname().length() > 0){
+                        if(selectedtaxt.get(i).getTaxname().contains(" ")){
+                            String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                            params.add("tax[" + i + "]" + "[title]", firstTax);
+                        }
+                    }
+
+                }
+            } else {
+
+            }
+
+
+
 
             if (multiple.length > 0) {
                 for (int k = 0; k < multiple.length; k++) {
@@ -1225,11 +1345,14 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
                 }
             }
+
+            Log.e(TAG, "paramsSS "+params.toString());
+
             String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "receipt/duplicate", params, new AsyncHttpResponseHandler() {
+            client.post(Constant.BASE_URL + "receipt/update", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -1242,6 +1365,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         JSONObject jsonObject = new JSONObject(response);
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
+                            Constant.SuccessToast(EditEditReceiptActivity.this, "Receipt updated successfully");
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -1250,7 +1374,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
-                            }, 1500);
+                            }, 500);
 
                             JSONObject data = jsonObject.getJSONObject("data");
 //
@@ -1412,6 +1536,27 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
 
 
+
+        if(requestCode == 123){
+            Log.e(TAG, "requestCode "+requestCode);
+            customer_list(selectedCompanyId);
+        }
+
+        if(requestCode == 124){
+            Log.e(TAG, "requestCode "+requestCode);
+            productget(selectedCompanyId);
+        }
+
+        if(requestCode == 125){
+            Log.e(TAG, "requestCode "+requestCode);
+            serviceget(selectedCompanyId);
+        }
+
+        if(requestCode == 126){
+            Log.e(TAG, "requestCode "+requestCode);
+            CompanyInformation(selectedCompanyId);
+        }
+
     }
 
     private void dispatchTakePictureIntent() {
@@ -1493,8 +1638,6 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
                 @Override
                 public void afterTextChanged(Editable s) {
-
-
                     if (product_bottom.size() > 0) {
                         filter(s.toString());
                     }
@@ -1506,7 +1649,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
             recycler_products.setLayoutManager(layoutManager);
             recycler_products.setHasFixedSize(true);
 
-            product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog,"receipt");
+            product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog, "receipt");
             recycler_products.setAdapter(product_bottom_adapter);
             product_bottom_adapter.notifyDataSetChanged();
             txtproducts.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
@@ -1568,15 +1711,33 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
         }
     }
 
+
+
     public void createbottomsheet_tax() {
         if (bottomSheetDialog3 != null) {
 
             View view = LayoutInflater.from(this).inflate(R.layout.tax_bottom_itemlayout, null);
 
+            TextView add_service_new = view.findViewById(R.id.add_service_new);
+            add_service_new.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(EditEditReceiptActivity.this, Tax_Activity.class);
+                    startActivityForResult(intent, 126);
+                    bottomSheetDialog3.dismiss();
+                }
+            });
 
             taxrecycler = view.findViewById(R.id.taxrecycler);
             taxswitch = view.findViewById(R.id.taxswitch);
             btndone = view.findViewById(R.id.taxbtndone);
+
+            if(taxtypeclusive.equalsIgnoreCase("Inclusive")){
+                taxswitch.setChecked(true);
+            }else{
+                taxswitch.setChecked(false);
+            }
+
 
             imgincome = view.findViewById(R.id.txttax);
             taxswitch.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
@@ -1589,17 +1750,19 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
             customTaxAdapter = new CustomTaxAdapter(this, tax_list_array, this);
             taxrecycler.setAdapter(customTaxAdapter);
             customTaxAdapter.notifyDataSetChanged();
+
+            customTaxAdapter.updateTaxSelect(taxID);
+
             btndone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String statusSwitch1;
                     if (taxswitch.isChecked()) {
-
-                        statusSwitch1 = taxswitch.getTextOn().toString();
-                        taxtypeclusive = "Exclusive";
-                    } else {
                         statusSwitch1 = taxswitch.getTextOn().toString();
                         taxtypeclusive = "Inclusive";
+                    } else {
+                        statusSwitch1 = taxswitch.getTextOn().toString();
+                        taxtypeclusive = "Exclusive";
                     }
                     calculateTotalAmount(total_price);
                     bottomSheetDialog3.dismiss();
@@ -1610,6 +1773,9 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
             bottomSheetDialog3.setContentView(view);
         }
     }
+
+
+
 
     public void createbottomsheet_paid() {
         if (bottomSheetDialog2 != null) {
@@ -1761,7 +1927,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         Intent intent = new Intent(EditEditReceiptActivity.this, ViewReceipt_Activity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("company_id", selectedCompanyId);
-
+                        intent.putExtra("taxText", txttax.getText().toString());
                         intent.putExtra("companycolor", companycolor);
                         intent.putExtra("selectedTemplate", ""+selectedTemplate);
 
@@ -1777,7 +1943,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         intent.putExtra("grossamount", Grossamount_str);
 //                        intent.putExtra("invoice_no", invoicenumberdto);
                         intent.putExtra("invoice_no", invoicenum.getText().toString());
-                        intent.putExtra("notes", strnotes);
+                        intent.putExtra("notes", ednotes.getText().toString());
                         intent.putExtra("ref_no", ref_no);
                         intent.putExtra("paid_amount_payment_method", paymentmode);
                         intent.putExtra("credit_terms", credit_terms);
@@ -1797,7 +1963,6 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         intent.putExtra("payment_currency", payment_currency);
                         intent.putExtra("payment_iban", payment_iban);
                         intent.putExtra("payment_swift_bic", payment_swift_bic);
-                        intent.putExtra("company_logo", companylogopath);
                         intent.putExtra("producprice", producprice);
                         intent.putExtra("totalpriceproduct", totalpriceproduct);
 
@@ -1890,6 +2055,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
+        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Receipt?");
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 
@@ -1964,7 +2130,12 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-
+                    if(strdiscount.equalsIgnoreCase("Percentage")){
+                        eddisount.setHint("Enter Discount in %");
+                    }
+                    if(strdiscount.equalsIgnoreCase("Amount")){
+                        eddisount.setHint("Enter Discount in Amount");
+                    }
 
                 }
 
@@ -1978,7 +2149,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
                 strdiscountvalue = eddisount.getText().toString();
                 if (strdiscountvalue.matches("")) {
-                    //Toast.makeText(EditEditReceiptActivity.this, "You did not enter a username", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(EditReceiptActivity.this, "You did not enter a username", Toast.LENGTH_SHORT).show();
                     mybuilder.dismiss();
                     return;
                 } else {
@@ -2370,11 +2541,17 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                                 cnames.add(company_name);
                                 cids.add(company_id);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditEditReceiptActivity.this, android.R.layout.simple_spinner_item, cnames);
-                                selectcompany.setAdapter(namesadapter);
+
 
                             }
                         }
+
+                        warehousePosition = wids.indexOf(selectwarehouseId);
+
+                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditEditReceiptActivity.this, android.R.layout.simple_spinner_item, cnames);
+                        selectcompany.setAdapter(namesadapter);
+
+                        selectwarehouse.setSelection(warehousePosition);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -2748,7 +2925,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
         params.add("service", "1");
         params.add("customer", "1");
         params.add("tax", "1");
-        params.add("invoice", "1");
+        params.add("receipt", "1");
         params.add("warehouse", "1");
 
 
@@ -2804,55 +2981,66 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
                             companycolor = item.getString("color");
 
+                            options.setEnabled(true);
+
                         }
 
                         JSONArray customer = data.getJSONArray("customer");
 
-                        JSONArray invoice = data.getJSONArray("invoice");
+                        JSONArray invoice = data.getJSONArray("receipt");
                         for (int i = 0; i < invoice.length(); i++) {
                             JSONObject item = invoice.getJSONObject(i);
-                            String invoice_nocompany = item.getString("invoice_no");
+                            String invoice_nocompany = item.getString("receipt_no");
 
                             /* invoicenum.setText(invoice_nocompany);*/
 //                            if (invoice_nocompany != null) {
 //                                Log.e("invoice no", invoice_nocompany);
 //                            }
 
-                            if(i == invoice.length() - 1){
-                                Log.e(TAG, "zzzz0 "+invoice_nocompany);
-                                Log.e(TAG, "zzzz1 "+i);
-                                Log.e(TAG, "zzzz2 "+invoice.length());
-
-                                String sss = getRealValue(invoice_nocompany);
-                                invoicenum.setText(sss);
-
-                                invoicenum.setEnabled(true);
-
-                            }
+//                            if(i == invoice.length() - 1){
+//                                Log.e(TAG, "zzzz0 "+invoice_nocompany);
+//                                Log.e(TAG, "zzzz1 "+i);
+//                                Log.e(TAG, "zzzz2 "+invoice.length());
+//
+//                                String sss = getRealValue(invoice_nocompany);
+//                                invoicenum.setText(sss);
+//
+//                                // invoicenum.setEnabled(true);
+//
+//                            }
 
                         }
 
 
-                        for (int i = 0; i < customer.length(); i++) {
-                            JSONObject item = customer.getJSONObject(i);
+//                        for (int i = 0; i < customer.length(); i++) {
+//                            JSONObject item = customer.getJSONObject(i);
 
-                            tax_list_array.clear();
+                        tax_list_array.clear();
 
-                            tax_list_array = new ArrayList<Tax_List>();
+                        tax_list_array = new ArrayList<Tax_List>();
 
-                            JSONArray tax_list = data.getJSONArray("tax");
+                        JSONArray tax_list = data.getJSONArray("tax");
 
-                            for (int j = 0; j < tax_list.length(); j++) {
-                                Tax_List student = new Gson().fromJson(tax_list.get(j).toString(), Tax_List.class);
-                                tax_list_array.add(student);
+                        for (int j = 0; j < tax_list.length(); j++) {
+                            JSONObject jsonObject1 = tax_list.getJSONObject(j);
+//                                String name = jsonObject1.getString("name");
+                            Tax_List student = new Tax_List();
+                            student.setTax_id(jsonObject1.getString("tax_id"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            student.setCompany_name(jsonObject1.getString("company_name"));
+                            student.setTax_rate(jsonObject1.getString("rate"));
+                            student.setCompanyid(jsonObject1.getString("company_id"));
+                            student.setType(jsonObject1.getString("type"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            tax_list_array.add(student);
 
 
-                            }
-                            Log.e("Taxt array", tax_list_array.toString());
                         }
-
-
+                        Log.e("Taxt array", tax_list_array.toString());
                     }
+
+
+//                    }
                     if (status.equals("false")) {
                         Constant.ErrorToast(EditEditReceiptActivity.this, jsonObject.getString("message"));
                     }
@@ -2911,11 +3099,10 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         JSONArray customer = data.getJSONArray("customer");
                         String image_path = data.getString("customer_image_path");
 
-
                         for (int i = 0; i < customer.length(); i++) {
                             JSONObject item = customer.getJSONObject(i);
-
-                            customer_id = item.getString("customer_id");
+                            String customer_idBB = item.getString("customer_id");
+                            Log.e(TAG, "customer_idBB "+customer_idBB);
                             customer_name = item.getString("customer_name");
                             custoner_contact_name = item.getString("contact_name");
                             String image = item.getString("image");
@@ -2940,7 +3127,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                             customer_list.setCustomer_website(customer_website);
                             customer_list.setCustomer_phone(customer_contact);
 
-                            customer_list.setCustomer_id(customer_id);
+                            customer_list.setCustomer_id(customer_idBB);
                             customer_list.setCustomer_name(customer_name);
                             customer_list.setCustomer_contact_person(custoner_contact_name);
                             customer_list.setCustomer_image_path(image_path);
@@ -3012,11 +3199,12 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
             // createbottomsheet_customers();
             invoicerecipnt.setText(customer_list.getCustomer_name());
             customer_name = customer_list.getCustomer_name();
-
+            customer_id = customer_list.getCustomer_id();
         } else {
             // createbottomsheet_customers();
             invoicerecipnt.setText(customer_list.getCustomer_name());
             customer_name = customer_list.getCustomer_name();
+            customer_id = customer_list.getCustomer_id();
         }
         selected.add(customer_list);
 
@@ -3026,31 +3214,55 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
     @Override
     public void onPostExecutecall(Product_list selected_item, String s, String price) {
 
-        Double propice = Double.parseDouble(price);
-        int propriceint = new BigDecimal(propice).setScale(0, RoundingMode.HALF_UP).intValueExact();
-        producprice.add(String.valueOf(propriceint));
+//        Double propice = Double.parseDouble(price);
+//        int propriceint = new BigDecimal(propice).setScale(0, RoundingMode.HALF_UP).intValueExact();
+//        producprice.add(String.valueOf(propriceint));
+//        tempList.add(selected_item);
+//        tempQuantity.add(s);
+//        total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
+//
+//
+//        totalpriceproduct.add(String.valueOf(total_price));
+//        calculateTotalAmount(total_price);
+//
+//        products_adapter.notifyDataSetChanged();
+//
+//        bottomSheetDialog.dismiss();
+
+
+        bottomSheetDialog.dismiss();
+
+        producprice.add(price);
         tempList.add(selected_item);
         tempQuantity.add(s);
+
+        Log.e(TAG, "tempQuantityAA "+s);
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
 
+        double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
 
-        totalpriceproduct.add(String.valueOf(total_price));
+        totalpriceproduct.add(String.valueOf(newPrice));
         calculateTotalAmount(total_price);
 
         products_adapter.notifyDataSetChanged();
 
-        bottomSheetDialog.dismiss();
-
 
     }
 
+
+
+
+
+
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
+        Log.e(TAG,  "total_price: "+total_price);
 
         double balanceamount = 0.0;
         Double netamountvalue = 0.0;
         Double Totatlvalue = 0.0;
         Double subtotalvalue = 0.0;
+
 
 
         if (tempList.size() > 0) {
@@ -3065,21 +3277,26 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
             DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
 
-            grosstotal.setText(formatter.format(stratingvalue) + cruncycode);
 
-            netamount.setText(formatter.format(stratingvalue) + cruncycode);
-            balance.setText(formatter.format(stratingvalue) + cruncycode);
+            grosstotal.setText(formatter.format(stratingvalue) +cruncycode);
+
+            netamount.setText(formatter.format(stratingvalue) +cruncycode);
+            balance.setText(formatter.format(stratingvalue) +cruncycode);
             subtotalvalue = total_price;
             netamountvalue = total_price;
             balanceamount = total_price;
-            if (strdiscount.equals("Percentage")) {
+            if (strdiscount.equalsIgnoreCase("Percentage")) {
                 subtotalvalue = 0.0;
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
-                Totatlvalue = total_price * Double.parseDouble(strdiscountvalue) / 100;
+
+                Log.e(TAG , "total_priceAA "+total_price);
+                Log.e(TAG , "strdiscountvalueAA "+strdiscountvalue);
+
+                Totatlvalue = total_price * Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode)) / 100;
 
 
-                discount.setText(formatter.format(Totatlvalue) + cruncycode);
+                discount.setText("-"+formatter.format(Totatlvalue) + cruncycode);
                 subtotalvalue = total_price - Totatlvalue;
 
 
@@ -3089,105 +3306,123 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
                 //  Log.e("DissCount value", String.valueOf(Totatlvalue)+ cruncycode);
-            } else if (strdiscount.equals("Amount")) {
+            } else if (strdiscount.equalsIgnoreCase("Amount")) {
                 subtotalvalue = 0.0;
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
-                subtotalvalue = total_price - Double.parseDouble(strdiscountvalue);
-                netamountvalue = subtotalvalue;
+                try {
+                    subtotalvalue = total_price - Double.parseDouble(strdiscountvalue.replace("Rs", ""));
+                }catch (Exception e){
 
-                double strdiscountval = Double.parseDouble(strdiscountvalue);
-                discount.setText(formatter.format(strdiscountval) + cruncycode);
+                }
+
+                netamountvalue = subtotalvalue;
+                double  strdiscountval=Double.parseDouble(strdiscountvalue);
+
+                discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
             } else {
 
-                discount.setText("0");
+                Log.e(TAG , "strdiscountvalueBb "+Discountamountstrdto);
+
+
+
+                if(strdiscountvalue.equalsIgnoreCase("")){
+                    discount.setText("0");
+                }else{
+                    double strdiscountval = Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+                    if(strdiscountval == 0){
+                        discount.setText("0");
+                    }else{
+                        discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
+                    }
+
+                    subtotalvalue = total_price - strdiscountval;
+
+                    Log.e(TAG, "total_priceXX "+total_price);
+                    Log.e(TAG, "strdiscountvalXX "+strdiscountval);
+                    Log.e(TAG, "subtotalvalueXX "+subtotalvalue);
+                }
+
+
+
+
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
             }
+
+
+            Log.e(TAG, "selectedtaxt.size() "+selectedtaxt.size());
+
+            Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+            Log.e(TAG, "taxtrateamt "+taxtrateamt);
+
+
             if (selectedtaxt.size() > 0) {
-                if (taxtypeclusive.equals("Inclusive")) {
-                    if (taxtype.equals("P")) {
-                        netamountvalue = 0.0;
-                        Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
+                if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
+                    //netamountvalue = 0.0;
+                    Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
+                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
-                        tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-
-                        String taxtpercentage = taxtrateamt.substring(0, 2);
-                        String tatxnamesub = taxrname.substring(0, 3);
-                        String subStrinng = tatxnamesub + taxtpercentage + "%";
-
-
-                        txttax.setText("(" + subStrinng + "Incl" + ")"); //Dont do any change
-                        netamountvalue = subtotalvalue;
-                        netamount.setText(formatter.format(subtotalvalue) + cruncycode);
-                        balance.setText(formatter.format(subtotalvalue) + cruncycode);
-
-
-                    } else {
-                        netamountvalue = 0.0;
-                        String taxtpercentage1 = taxtrateamt.substring(0, 4);
-                        String tatxnamesub1 = taxrname.substring(0, 3);
-                        String subStrinng = tatxnamesub1 + taxtpercentage1;
-
-
-                        txttax.setText("(" + subStrinng + "Incl" + ")");
-
-
-                        Double amomnt = Double.parseDouble(taxtrateamt);
-
-                        netamountvalue = subtotalvalue;
-
-                        tax.setText(amomnt + cruncycode);
-                        netamount.setText(subtotalvalue + cruncycode);
-                        balance.setText(subtotalvalue + cruncycode);
+                    if(taxrname.length() > 0){
+                        if(taxrname.contains(" ")){
+                            String firstTax = taxrname.split(" ")[0].replace("(", "");
+                            String subStrinng = firstTax + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        }else{
+                            String subStrinng = taxrname + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        }
+                    }else{
+                        String subStrinng = taxrname + " " + taxtrateamt + "%";
+                        txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
                     }
-                } else {
-                    if (taxtype.equals("P")) {
-                        netamountvalue = 0.0;
-                        Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
 
-                        tax.setText(formatter.format(Totatlvalue1) + cruncycode);
+                    // netamountvalue = subtotalvalue + Totatlvalue1;
 
-                        String taxtpercentage = taxtrateamt.substring(0, 2);
-                        String tatxnamesub = taxrname.substring(0, 3);
-                        String subStrinng = tatxnamesub + taxtpercentage + "%";
+                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
+                    balance.setText(formatter.format(netamountvalue) + cruncycode);
 
+                } else { // include off
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
 
-                        txttax.setText("(" + subStrinng + ")"); //Dont do any change
+                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
+//
+                    Log.e(TAG, "taxrnameAAA "+taxrname);
+                    Log.e(TAG, "taxtrateamtAAA "+taxtrateamt);
 
-
-                        netamountvalue = subtotalvalue + Totatlvalue1;
-
-                        netamount.setText(formatter.format(netamountvalue) + cruncycode);
-                        balance.setText(formatter.format(netamountvalue) + cruncycode);
-
-
-                    } else {
-
-                        netamountvalue = 0.0;
-                        String taxtpercentage1 = taxtrateamt.substring(0, 4);
-                        String tatxnamesub1 = taxrname.substring(0, 3);
-                        String subStrinng = tatxnamesub1 + taxtpercentage1;
-
-
-                        txttax.setText("(" + subStrinng + ")");
-
-
-                        Double amomnt = Double.parseDouble(taxtrateamt);
-                        Double taxamountvalue = subtotalvalue + amomnt;
-
-                        netamountvalue = taxamountvalue;
-                        tax.setText(formatter.format(amomnt) + cruncycode);
-                        netamount.setText(formatter.format(taxamountvalue) + cruncycode);
-                        balance.setText(formatter.format(taxamountvalue) + cruncycode);
+                    if(taxrname.length() > 0){
+                        if(taxrname.contains(" ")){
+                            String firstTax = taxrname.split(" ")[0].replace("(", "");
+                            String subStrinng = firstTax + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        }else{
+                            String subStrinng = taxrname + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        }
+                    }else{
+                        String subStrinng = taxrname + " " + taxtrateamt + "%";
+                        txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
                     }
+
+
+
+
+                    netamountvalue = subtotalvalue + Totatlvalue1;
+
+                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
+                    balance.setText(formatter.format(netamountvalue) + cruncycode);
+
                 }
-
             }
+//
+
+
+
             if (freight_cost.equals("")) {
 
 
@@ -3204,7 +3439,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                 //
                 // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
             } else {
-                Log.e("balance", paidamountstr);
+                Log.e(TAG, "balanceAA "+paidamountstr);
                 Double paidindouble = Double.parseDouble(paidamountstr);
 
                 paidamount.setText(formatter.format(paidindouble) + cruncycode);
@@ -3230,9 +3465,12 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
     }
 
 
+
+
+
     @Override
     public void onPostExecutecall2(Service_list selected_item, String s, String price) {
-        producprice.add(String.valueOf(price));
+        //producprice.add(String.valueOf(price));
 
         Product_list product_list = new Product_list();
         product_list.setProduct_name(selected_item.getService_name());
@@ -3247,8 +3485,6 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
         producprice.add(selected_item.getService_price());
         tempList.add(product_list);
-
-
         tempQuantity.add(s);
 
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
@@ -3267,15 +3503,39 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
         if (type.equalsIgnoreCase("del"))
         {
-            total_price = total_price - (Double.parseDouble(tempList.get(str).getProduct_price()) * Double.parseDouble(tempQuantity.get(str)));
-            //  Log.e("Total price",String.valueOf(total_price));
             producprice.remove(str);
             tempList.remove(str);
             tempQuantity.remove(str);
-            calculateTotalAmount(total_price);
-            products_adapter.notifyItemRemoved(str);
             totalpriceproduct.remove(str);
-            Log.e("tempList", String.valueOf(tempList.size()));
+
+            Log.e(TAG, "producprice.size() "+producprice.size());
+            Log.e(TAG, "tempList.size() "+tempList.size());
+            Log.e(TAG, "tempQuantity.size() "+tempQuantity.size());
+            Log.e(TAG, "totalpriceproduct.size() "+totalpriceproduct.size());
+
+            products_adapter.notifyDataSetChanged();
+
+            double total_price2 = 0;
+
+            if(tempList.size() > 0){
+                if(tempQuantity.size() > 0){
+                    for(int i = 0 ; i < tempList.size() ; i++){
+                        Log.e(TAG, "ccDDD "+producprice.get(i) + " DDDD "+ tempQuantity.get(i));
+                        total_price2 = total_price2 + Double.parseDouble(producprice.get(i)) * Double.parseDouble(tempQuantity.get(i));
+                    }
+                }
+            }
+
+            Log.e(TAG, "productCal "+total_price2);
+
+            if(tempList.size() == 0) {
+                total_price2 = 0.0;
+            }
+
+            total_price = total_price2;
+
+            calculateTotalAmount(total_price);
+
         }
         else
         {
@@ -3397,14 +3657,33 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
     @Override
     public void onPostExecutecall3(String taxID, String taxnamst, String taxnamss, String type) {
+//        selectedtaxt.clear();
+//        Log.e("income rate", taxnamst);
+//        Log.e("taxnamss_rate", taxnamss);
+//        Log.e("type rate", type);
+//        taxtype = type;
+//        taxrname = taxnamst;
+//        taxtrateamt = taxnamss;
+//        SelectedTaxlist student = new SelectedTaxlist();
+//        student.setTaxname(taxnamst);
+//        student.setTaxrate(taxnamss);
+//        student.setTaxtype(type);
+//        student.setTaxamount(taxnamss);
+//        selectedtaxt.add(student);
+
         selectedtaxt.clear();
-        Log.e("income rate", taxnamst);
+        Log.e(TAG, "income rate" + taxnamst);
         Log.e("taxnamss_rate", taxnamss);
         Log.e("type rate", type);
+        this.taxID = taxID;
+        Log.e(TAG, "taxID" + taxID);
+
         taxtype = type;
         taxrname = taxnamst;
         taxtrateamt = taxnamss;
         SelectedTaxlist student = new SelectedTaxlist();
+
+        //student.setTaxID(taxID);
         student.setTaxname(taxnamst);
         student.setTaxrate(taxnamss);
         student.setTaxtype(type);
@@ -3796,7 +4075,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                 boolean ddd = isChar(sss);
                 if(ddd == false){
                     int myValue = Integer.parseInt(sss)+1;
-                    valueIs = "XDC # "+myValue;
+                    valueIs = "Rec # "+myValue;
                 }
             }
         }
@@ -3853,7 +4132,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
     String cruncycode = "", Shiping_tostr = "", companyimagelogopath = "";
 
-    String Shipingdetail;
+    String Shipingdetail = "";
 
     String encodedImage, signature_of_receiverincode, encodesignatureissure, drableimagebase64, attchmentbase64;
     String paid_amount_payment;
@@ -3887,15 +4166,15 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
             }
         }
-        if (selected.size() < 0) {
+        if (shippingfirstname.equalsIgnoreCase("")) {
             Shiping_tostr = "";
         } else {
             Shiping_tostr = "Ship To:";
+            Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
         }
 
 
-        Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
         if (tempQuantity.size() > 0) {
             for (int i = 0; i < tempQuantity.size(); i++) {
@@ -3904,7 +4183,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
         }
 
         for (int i = 0; i < tempList.size(); i++) {
-            Log.e("product[" + i + "]" + "[price]", tempList.get(i).getProduct_price());
+            Log.e("product[" + i + "]" + "[price]", producprice.get(i));
             Log.e("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
             Log.e("product[" + i + "]" + "[product_id]", tempList.get(i).getProduct_id());
 
@@ -4064,8 +4343,8 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
                         .replaceAll("#QUANTITY#", tempQuantity.get(i))
-                        .replaceAll("#PRICE#", producprice.get(i) + "" + tempList.get(i).getCurrency_code())
-                        .replaceAll("#TOTAL#", totalpriceproduct.get(i) + "" + tempList.get(i).getCurrency_code());
+                        .replaceAll("#PRICE#", producprice.get(i) + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", totalpriceproduct.get(i) + Utility.getReplaceDollor(cruncycode));
 
                 productitemlist = productitemlist + productitem;
             }
@@ -4169,6 +4448,19 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
             discountvalue = strdiscountvalue;
             discounttxtreplace = " Discount ";
         }
+
+        String subTotalTxt = "";
+        String subTotalValueTxt = "";
+
+        if(strdiscountvalue.equalsIgnoreCase("0")){
+            subTotalTxt = "";
+            subTotalValueTxt = "";
+        }else{
+            subTotalTxt = "SubTotal";
+            subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
+        }
+
+
         if (company_website != null) {
             // Do you work here on success
 
@@ -4297,29 +4589,30 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "invoice.html";
-        String nameName = "file:///android_asset/invoice.html";
+        String name = "receipt1.html";
+        String nameName = "file:///android_asset/receipt1.html";
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "invoice.html";
-            nameName = "file:///android_asset/invoice.html";
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
         }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "invoice1.html";
-            nameName = "file:///android_asset/invoice1.html";
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "invoice2.html";
-            nameName = "file:///android_asset/invoice2.html";
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "invoice3.html";
-            nameName = "file:///android_asset/invoice3.html";
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "invoice4.html";
-            nameName = "file:///android_asset/invoice4.html";
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
         }
-
         String content = null;
         try {
-            content = IOUtils.toString(getAssets().open(name))
 
+            Log.e(TAG , "ShipingdetailAAA "+Shipingdetail);
+
+            content = IOUtils.toString(getAssets().open(name))
                     .replaceAll("Company Name", company_name)
                     .replaceAll("Address", company_address)
                     .replaceAll("Contact No.", company_contact)
@@ -4331,15 +4624,18 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                     .replaceAll("DueDate", invoice_due_date)
                     .replaceAll("crTerms", credit_terms)
                     .replaceAll("refNo", strreferencenovalue)
-                    .replaceAll("GrossAm-", Grossamount_str)
-                    .replaceAll("Discount-", discountvalue)
-                    .replaceAll("SubTotal-", Subtotalamount)
-                    .replaceAll("Txses-", taxtamountstr)
-                    .replaceAll("Shipping-", Shipingcosstbyct)
-                    .replaceAll("Total Amount-", netamountvalue)
-                    .replaceAll("PaidsAmount", paidamountstrrepvalue)
+
+                    .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
+                    .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
+                    .replaceAll("SubTotal-", subTotalValueTxt)
+                    .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
+                    .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
+                    .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
+                    .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
-                    .replaceAll("Balance Due-", Blanceamountstr)
+                    .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
+
+                    .replaceAll("SubTotal", subTotalTxt)
 //                    .replaceAll("Checkto", chektopaidmaount)
                     .replaceAll("Checkto", "")
                     .replaceAll("BankName", payment_bankstr)
@@ -4467,12 +4763,12 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
     }
 
+
     @Override
     public void closeDialog() {
         if(bottomSheetDialog != null){
             bottomSheetDialog.dismiss();
         }
     }
-
 
 }

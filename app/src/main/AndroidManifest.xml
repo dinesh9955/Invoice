@@ -340,6 +340,13 @@
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <activity
+            android:name=".Estimate.EditEditEstimateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+
+
+        <activity
             android:name=".Estimate.ViewEstimate_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"

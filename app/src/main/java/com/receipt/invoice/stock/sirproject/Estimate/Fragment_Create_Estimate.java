@@ -1144,6 +1144,8 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
+                            Constant.SuccessToast(getActivity(), "Estimate created successfully");
+
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -1152,7 +1154,7 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
-                            }, 1500);
+                            }, 500);
 
                             JSONObject data = jsonObject.getJSONObject("data");
 

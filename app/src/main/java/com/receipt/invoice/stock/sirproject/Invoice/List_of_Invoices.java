@@ -210,23 +210,23 @@ public class List_of_Invoices extends Fragment {
 
 
 
-//                underlayButtons.add(new SwipeHelper.UnderlayButton(
-//                        "Delete",
-//                        0,
-//                        Color.parseColor("#ff0000"),
-//
-//                        new SwipeHelper.UnderlayButtonClickListener() {
-//                            @Override
-//                            public void onClick(final int pos) {
-//                               String  invoiceidbypos = list.get(pos).getInvoice_userid();
-//
-//                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
-//
-//                                deleteInvoice(invoiceidbypos);
-//
-//                            }
-//                        }
-//                ));
+                underlayButtons.add(new SwipeHelper.UnderlayButton(
+                        "Mark as void",
+                        0,
+                        Color.parseColor("#ff9900"),
+
+                        new SwipeHelper.UnderlayButtonClickListener() {
+                            @Override
+                            public void onClick(final int pos) {
+                               String  invoiceidbypos = list.get(pos).getInvoice_userid();
+
+                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+
+                                markVoidInvoice(invoiceidbypos);
+
+                            }
+                        }
+                ));
 
 
             }
@@ -713,6 +713,73 @@ public class List_of_Invoices extends Fragment {
                     }
                 }
             });
+//        }
+    }
+
+
+
+
+    private void markVoidInvoice(String s) {
+
+        list.clear();
+        avi.smoothToShow();
+        RequestParams params = new RequestParams();
+//        if (invoice_idstr.equals("") || invoice_idstr.equals("null")) {
+//            Constant.ErrorToast(getActivity(), "Invoice not found");
+//        } else {
+
+        params.add("invoice_id", s);
+        params.add("void_status", "1");
+//
+//            Log.e("invoice_idupdate", invoice_idstr);
+//            Log.e("s order status", s);
+        String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.addHeader("Access-Token", token);
+        client.post(Constant.BASE_URL + "invoice/updateVoidStatus", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e("invoice status", response);
+                avi.smoothToHide();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true")) {
+
+                        parmsvalue = "All";
+                        InvoicelistData(parmsvalue);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+                    avi.smoothToHide();
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+
+                        String status = jsonObject.getString("status");
+                        if (status.equals("false")) {
+                            Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                }
+            }
+        });
 //        }
     }
 

@@ -741,7 +741,7 @@ public class List_of_Estimate extends Fragment {
             recepitsviewtxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
 
             LinearLayout linearLayoutChangeTemp= view.findViewById(R.id.viewicetemplate);
-            linearLayoutChangeTemp.setVisibility(View.GONE);
+            linearLayoutChangeTemp.setVisibility(View.VISIBLE);
 
             viewinvoicebotom.setText("View Estimate");
             viewinvoicetemplate.setText("Edit Estimate");
@@ -771,15 +771,28 @@ public class List_of_Estimate extends Fragment {
                 @Override
                 public void onClick(View v) {
 
+                    SavePref pref = new SavePref();
+                    pref.SavePref(getActivity());
+                    pref.setTemplate(0);
 
-                    if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Company");
-                        bottomSheetDialog.show();
-                    } else {
+                    Intent intent = new Intent(getContext(), EditEditEstimateActivity.class);
+                    intent.putExtra("invoiceID", invoiceidbypos);
+                    intent.putExtra("invoice_count", invoice_count);
 
-                        ViewTamlatemethodh();
-                        bottomSheetDialog.show();
-                    }
+
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    bottomSheetDialog.dismiss();
+
+
+//                    if (selectedCompanyId.equals("")) {
+//                        Constant.ErrorToast(getActivity(), "Select A Company");
+//                        bottomSheetDialog.show();
+//                    } else {
+//
+//                        ViewTamlatemethodh();
+//                        bottomSheetDialog.show();
+//                    }
                 }
             });
 

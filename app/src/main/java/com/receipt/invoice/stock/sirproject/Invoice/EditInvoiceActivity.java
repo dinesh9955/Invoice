@@ -96,6 +96,7 @@ import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Receipts.EditReceiptActivity;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
@@ -696,11 +697,14 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 signature_of_receiverdto = invoiceDtoInvoice.getSignatureOfReceiver();
                 // down load image from web signature image
 
+
+
                 if (signature_of_receiverdto.equals("")) {
 
                 } else {
                     s_r = "2";
                     String signatureofreceiverpath = invoice_image_pathdto + signature_of_receiverdto;
+                    Log.e(TAG, "signatureReceiverPathAA "+signatureofreceiverpath);
                     new Downloadsignaturereceiverweb().execute(signatureofreceiverpath);
                     imgrecsuccess.setVisibility(View.VISIBLE);
                 }
@@ -709,11 +713,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
 
                 if (signature_of_issuerdto.equals("")) {
-
-
                 } else {
                     s_r = "1";
                     String signatureofreceiverpath = invoice_image_pathdto + signature_of_issuerdto;
+                    Log.e(TAG, "signatureIssuerPathAA "+signatureofreceiverpath);
                     new Downloadsignatureissueweb().execute(signatureofreceiverpath);
                     imgsigsuccess.setVisibility(View.VISIBLE);
                 }
@@ -1460,6 +1463,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
+                            Constant.SuccessToast(EditInvoiceActivity.this, "Duplicate Invoice created successfully");
+
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -1467,7 +1472,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
-                            }, 1500);
+                            }, 500);
 
                             JSONObject data = jsonObject.getJSONObject("data");
 //
