@@ -448,6 +448,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         setFonts();
         setListeners();
 
+
         products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
 //        productsRecycler.setAdapter(products_adapter);
 
