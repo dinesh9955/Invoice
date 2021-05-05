@@ -3982,6 +3982,21 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
             discountvalue = strdiscountvalue;
             discounttxtreplace = " Discount ";
         }
+
+
+        String subTotalTxt = "";
+        String subTotalValueTxt = "";
+
+        if(strdiscountvalue.equalsIgnoreCase("0")){
+            subTotalTxt = "";
+            subTotalValueTxt = "";
+        }else{
+            subTotalTxt = "SubTotal";
+            subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
+        }
+
+
+
         if (company_website != null) {
             // Do you work here on success
 
@@ -4146,13 +4161,15 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                     .replaceAll("refNo", strreferencenovalue)
                     .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
                     .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
-                    .replaceAll("SubTotal-", ""+Utility.getReplaceCurrency(Subtotalamount, cruncycode))
+                    .replaceAll("SubTotal-", subTotalValueTxt)
                     .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
                     .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
                     .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
                     .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
                     .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
+
+                    .replaceAll("SubTotal", subTotalTxt)
                     .replaceAll("Checkto", chektopaidmaount)
                     .replaceAll("BankName", payment_bankstr)
                     .replaceAll("Pemail", pemailpaidstr)

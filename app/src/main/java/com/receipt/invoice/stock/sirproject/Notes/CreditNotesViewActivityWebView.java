@@ -745,6 +745,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         .replaceAll("Paid Amount", paidamountstrreptxt)
 //                        .replaceAll("Balance Due-", Blanceamountstr + currency_code)
                         .replaceAll("Balance Due-", Blanceamountstr + Utility.getReplaceDollor(currency_code))
+
                         .replaceAll("SubTotal", subTotalTxt)
 //                        .replaceAll("Checkto", chektopaidmaount)
                         .replaceAll("Checkto", "")

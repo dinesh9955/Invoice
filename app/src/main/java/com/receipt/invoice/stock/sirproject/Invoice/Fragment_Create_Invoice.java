@@ -4018,6 +4018,23 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             discountvalue = strdiscountvalue;
             discounttxtreplace = " Discount ";
         }
+
+
+
+
+        String subTotalTxt = "";
+        String subTotalValueTxt = "";
+
+        if(strdiscountvalue.equalsIgnoreCase("0")){
+            subTotalTxt = "";
+            subTotalValueTxt = "";
+        }else{
+            subTotalTxt = "SubTotal";
+            subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
+        }
+
+
+
         if (company_website != null) {
             // Do you work here on success
 
@@ -4192,7 +4209,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
                     .replaceAll("GrossAm-", ""+Utility.getReplaceDollor(Grossamount_str))
                     .replaceAll("Discount-", ""+Utility.getReplaceDollor(discountvalue))
-                    .replaceAll("SubTotal-", ""+Utility.getReplaceDollor(Subtotalamount))
+                    .replaceAll("SubTotal-", subTotalValueTxt)
                     .replaceAll("Txses-", ""+Utility.getReplaceDollor(taxtamountstr))
                     .replaceAll("Shipping-", ""+Utility.getReplaceDollor(Shipingcosstbyct))
                     .replaceAll("Total Amount-", ""+Utility.getReplaceDollor(netamountvalue))
@@ -4200,6 +4217,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     .replaceAll("Paid Amount", paidamountstrreptxt)
                     .replaceAll("Balance Due-", ""+Utility.getReplaceDollor(Blanceamountstr))
 
+
+                    .replaceAll("SubTotal", subTotalTxt)
                     .replaceAll("Checkto", chektopaidmaount)
                     .replaceAll("BankName", payment_bankstr)
                     .replaceAll("Pemail", pemailpaidstr)

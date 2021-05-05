@@ -159,7 +159,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
     String signature_of_issuerdto = "", signature_of_receiverdto = "", company_stampdto = "";
     String due_datedto = "", datedto = "", credit_termsdto = "";
     String sltcustonernamedto = "", sltcustomer_emaildto = "", sltcustomer_contactdto = "", sltcustomer_addressdto = "", sltcustomer_websitedto = "", sltcustomer_phone_numberdto = "", Shippingamountdto = "", invoicetaxvalue = "";
-    String invoicenumberdto = "", ref_nodto = "", paid_amount_payment_methoddto = "", strpaid_amountdto = "", companylogopathdto = "", Grossamount_strdto = "", Subtotalamountdto = "", netamountvaluedto = "", Blanceamountstrdto = "", Discountamountstrdto ="";
+    String invoicenumberdto = "", ref_nodto = "", paid_amount_payment_methoddto = "", strpaid_amountdto = "",  Grossamount_strdto = "", Subtotalamountdto = "", netamountvaluedto = "", Blanceamountstrdto = "", Discountamountstrdto ="";
     String shipping_zonedto;
     String company_image_pathdto, customer_image_pathdto, invoiceshre_linkdto, invoice_image_pathdto, customerDtoContactName;
     ArrayList<InvoiceTotalsItemDto> grosamontdto;
@@ -171,7 +171,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
     ReceiptDtoReceipt invoiceDtoInvoice;
     String currency_codedto;
     //3
-    String companylogopathdtodt;
+   // String companylogopathdtodt = "";
     TextView itemstxtTemplate, invoicenumtxt, duedatetxt, duedate, invoicetotxt, invoicerecipnt, itemstxt, subtotaltxt, subtotal, discounttxt, discount, txttax, tax, txtcredit, txtdays, txtreferenceno, edreferenceno, txtduedate, edduedate, txtgrossamount, grosstotal, txtfreight, freight, txtnetamount, netamount, txtpaidamount, paidamount, txtbalance, balance, s_invoice, s_receiver, c_stamp, attachmenttxt;
     Button additem, createinvoice, options, addservice;
     RecyclerView productsRecycler;
@@ -264,6 +264,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
     ArrayList<String> paymode = new ArrayList<>();
     String selectedCompanyId = "";
     String selectwarehouseId = "";
+    int warehousePosition = 0;
+
     String paimentmodespinerstr = "";
     //customer bottom sheet
     TextView txtcustomer, txtname, txtcontactname;
@@ -573,8 +575,11 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                 company_website = companyDto.getWebsite();
                 company_email = companyDto.getPaypalEmail();
                 companylogopath = companyDto.getLogo();
-                companylogopathdto = companyDto.getLogo();
-                companylogopathdtodt = company_image_pathdto + companylogopathdto;
+               // companylogopathdto = companyDto.getLogo();
+//                companylogopathdtodt = company_image_pathdto + companylogopathdto;
+//
+//                Log.e(TAG, "companylogopathdtodtAA "+companylogopathdtodt);
+
                 // new DownloadsImagefromweblogoCom().execute(companylogopathdtodt);
 
                 selectedCompanyId = companyDto.getCompanyId();
@@ -975,6 +980,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                 bottomSheetDialog2.show();
             }
         });
+
+        options.setEnabled(false);
         options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1088,6 +1095,9 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
             public void onItemSelected(int position, String itemAtPosition) {
                 selectwarehouseId = cids.get(position);
                 Log.e("selectwarehouseId", selectwarehouseId);
+
+                warehousePosition = position;
+
 
             }
         });
@@ -1952,7 +1962,6 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                         intent.putExtra("payment_currency", payment_currency);
                         intent.putExtra("payment_iban", payment_iban);
                         intent.putExtra("payment_swift_bic", payment_swift_bic);
-                        intent.putExtra("company_logo", companylogopath);
                         intent.putExtra("producprice", producprice);
                         intent.putExtra("totalpriceproduct", totalpriceproduct);
 
@@ -2531,11 +2540,17 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                                 cnames.add(company_name);
                                 cids.add(company_id);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditReceiptActivity.this, android.R.layout.simple_spinner_item, cnames);
-                                selectcompany.setAdapter(namesadapter);
+
 
                             }
                         }
+
+                        warehousePosition = wids.indexOf(selectwarehouseId);
+
+                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditReceiptActivity.this, android.R.layout.simple_spinner_item, cnames);
+                        selectcompany.setAdapter(namesadapter);
+
+                        selectwarehouse.setSelection(warehousePosition);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -2964,6 +2979,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                             Log.e("companylogopath", companylogopath);
 
                             companycolor = item.getString("color");
+
+                            options.setEnabled(true);
 
                         }
 
@@ -4165,7 +4182,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
         }
 
         for (int i = 0; i < tempList.size(); i++) {
-            Log.e("product[" + i + "]" + "[price]", tempList.get(i).getProduct_price());
+            Log.e("product[" + i + "]" + "[price]", producprice.get(i));
             Log.e("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
             Log.e("product[" + i + "]" + "[product_id]", tempList.get(i).getProduct_id());
 
@@ -4430,6 +4447,19 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
             discountvalue = strdiscountvalue;
             discounttxtreplace = " Discount ";
         }
+
+        String subTotalTxt = "";
+        String subTotalValueTxt = "";
+
+        if(strdiscountvalue.equalsIgnoreCase("0")){
+            subTotalTxt = "";
+            subTotalValueTxt = "";
+        }else{
+            subTotalTxt = "SubTotal";
+            subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
+        }
+
+
         if (company_website != null) {
             // Do you work here on success
 
@@ -4596,7 +4626,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
                     .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
                     .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
-                    .replaceAll("SubTotal-", ""+Utility.getReplaceCurrency(Subtotalamount, cruncycode))
+                    .replaceAll("SubTotal-", subTotalValueTxt)
                     .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
                     .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
                     .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
@@ -4604,6 +4634,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     .replaceAll("Paid Amount", paidamountstrreptxt)
                     .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
 
+                    .replaceAll("SubTotal", subTotalTxt)
 //                    .replaceAll("Checkto", chektopaidmaount)
                     .replaceAll("Checkto", "")
                     .replaceAll("BankName", payment_bankstr)

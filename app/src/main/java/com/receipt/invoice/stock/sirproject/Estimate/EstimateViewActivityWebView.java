@@ -700,6 +700,23 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
             discountvalue = strdiscountvalue + currency_code;
             discounttxtreplace = " Discount ";
         }
+
+
+        String subTotalTxt = "";
+        String subTotalValueTxt = "";
+
+
+        if(strdiscountvalue.equalsIgnoreCase("0")){
+            subTotalTxt = "";
+            subTotalValueTxt = "";
+        }else{
+            subTotalTxt = "SubTotal";
+            subTotalValueTxt = Subtotalamount + ""+ Utility.getReplaceDollor(currency_code);
+        }
+
+
+
+
         String companylogopathdto="";
 
         if(companylogopath.equals(""))
@@ -746,13 +763,15 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
                         .replaceAll("refNo", strreferencenovalue)
                         .replaceAll("GrossAm-", ""+Grossamount_str + ""+ Utility.getReplaceDollor(currency_code))
                         .replaceAll("Discount-", ""+Utility.getReplaceDollor(discountvalue))
-                        .replaceAll("SubTotal-", Subtotalamount+ ""+Utility.getReplaceDollor(currency_code))
+                        .replaceAll("SubTotal-", subTotalValueTxt)
                         .replaceAll("Txses-", Utility.getReplaceDollor(taxtamountstr))
                         .replaceAll("Shipping-", Utility.getReplaceDollor(Shipingcosstbyct.replace("++", "+").replace("RsRs", "Rs")))
                         .replaceAll("Total Amount-", netamountvalue + Utility.getReplaceDollor(currency_code))
                         .replaceAll("PaidsAmount",  Utility.getReplaceDollor(paidamountstrrepvalue))
                         .replaceAll("Paid Amount", paidamountstrreptxt)
                         .replaceAll("Balance Due-", Blanceamountstr + Utility.getReplaceDollor(currency_code))
+
+                        .replaceAll("SubTotal", subTotalTxt)
 //                        .replaceAll("Checkto", chektopaidmaount)
                         .replaceAll("Checkto", "")
 
