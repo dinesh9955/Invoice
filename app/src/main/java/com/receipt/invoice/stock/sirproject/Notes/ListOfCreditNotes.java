@@ -110,7 +110,7 @@ public class ListOfCreditNotes extends Fragment {
     String invoiceidbypos = "";
     String receipt_count, estimate_count, invoice_useriddt, invoice_count;
     String templatestr = "1";
-    String shareInvoicelink = "http://13.233.155.0/saad/app/index.php/view/invoice/";
+    String shareInvoicelink = "http://13.126.22.0/saad/app/index.php/view/invoice/";
     //  Shaare invoice lnk
     String BaseurlForShareInvoice = "";
     String invoicelistbyurl = "";
@@ -967,7 +967,7 @@ public class ListOfCreditNotes extends Fragment {
                                 if (!sharelink.endsWith(".pdf")) {
                                     Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
                                 } else {
-//                    /*              String pdfurl = "http://13.233.155.0/saad/app/uploads/invoice/pdf/" + pdflink;
+//                    /*              String pdfurl = "http://13.126.22.0/saad/app/uploads/invoice/pdf/" + pdflink;
 //                                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
 //                                    shareIntent.setType("text/plain");
 //                                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "PDF File");

@@ -83,7 +83,7 @@ public class Abc extends AppCompatActivity{
 //                pd.setProgressNumberFormat("%1d KB/%2d KB");
 //
 //                DownloadImage di = new DownloadImage(Abc.this);
-//                di.execute("http://13.233.155.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
+//                di.execute("http://13.126.22.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
 //
 //                pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
 //                    @Override
@@ -91,19 +91,19 @@ public class Abc extends AppCompatActivity{
 //                        di.cancel(true);
 //                    }
 //                });
-                //downloadImage("http://13.233.155.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
-//                DownloadFromUrl("http://13.233.155.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf", "601e40db1f4ed.pdf" );
+                //downloadImage("http://13.126.22.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
+//                DownloadFromUrl("http://13.126.22.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf", "601e40db1f4ed.pdf" );
 
-               // DownloadFile("http://13.233.155.0/saad/app/uploads/invoice/pdf/", "DCIM" , "601e40db1f4ed.pdf" );
+               // DownloadFile("http://13.126.22.0/saad/app/uploads/invoice/pdf/", "DCIM" , "601e40db1f4ed.pdf" );
 
 //                MyAsyncTasks asyncTasks = new MyAsyncTasks();
-//                asyncTasks.execute("http://13.233.155.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
+//                asyncTasks.execute("http://13.126.22.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
 
 
 
 
 //                try {
-//                    URL url = new URL("http://13.233.155.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
+//                    URL url = new URL("http://13.126.22.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
 //                    HttpURLConnection c = (HttpURLConnection) url.openConnection();
 //                    c.setRequestMethod("GET");
 //                    c.setDoOutput(true);
@@ -726,7 +726,7 @@ public class Abc extends AppCompatActivity{
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://13.233.155.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
+                URL url = new URL("http://13.126.22.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
                 //create the new connection
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 //set up some things on the connection

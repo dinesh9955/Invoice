@@ -7,7 +7,7 @@ public class RetrofitInstance {
 
 
     private static Retrofit retrofit = null;
-    private static final String BASE_URL ="http://13.233.155.0/saad/app/index.php/api/";
+    private static final String BASE_URL ="http://13.126.22.0/saad/app/index.php/api/";
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {

@@ -77,6 +77,10 @@ import cz.msebera.android.httpclient.Header;
 public class List_of_Invoices extends Fragment {
 
     private static final String TAG = "List_of_Invoices";
+
+    String voidStatus = "";
+    String colorVoid = "#ffffff";
+    String markAsVoidTxt = "Mark as void";
     // List Of Invoice Dtata
     ApiInterface apiInterface;
     ImageView avibackground;
@@ -104,7 +108,7 @@ public class List_of_Invoices extends Fragment {
     String invoiceidbypos = "";
     String receipt_count, estimate_count, invoice_useriddt, invoice_count;
     String templatestr = "1";
-    String shareInvoicelink = "http://13.233.155.0/saad/app/index.php/view/invoice/";
+    String shareInvoicelink = "http://13.126.22.0/saad/app/index.php/view/invoice/";
 //  Shaare invoice lnk
     String BaseurlForShareInvoice = "";
     String invoicelistbyurl = "";
@@ -178,6 +182,7 @@ public class List_of_Invoices extends Fragment {
         recycler_invoices.setHasFixedSize(true);
         invoicelistAdapterdt.notifyDataSetChanged();
 
+
         SwipeHelper swipeHelper = new SwipeHelper(getContext()) {
             @Override
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
@@ -210,19 +215,62 @@ public class List_of_Invoices extends Fragment {
 
 
 
+                if(list.size() > 0){
+                    voidStatus = list.get(viewHolder.getPosition()).getVoid_status();
+                }
+
+
+                Log.e(TAG, "voidStatusAA "+voidStatus);
+//
+//
+//                Log.e(TAG, "voidStatusAA "+voidStatus);
+//
+//                String colorVoid = "#ffffff";
+//
+//                //String voidPassValue = "0";
+//
+                if(voidStatus.equalsIgnoreCase("0")){
+                    colorVoid = "#ff9900";
+                    markAsVoidTxt = "Mark as void";
+                }
+                if(voidStatus.equalsIgnoreCase("1")){
+                    colorVoid = "#99cc00";
+                    markAsVoidTxt = "Mark as unvoid";
+                }
+
+
+
+                //String finalVoidPassValue = voidPassValue;
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
-                        "Mark as void",
+                        markAsVoidTxt,
                         0,
-                        Color.parseColor("#ff9900"),
+                        Color.parseColor(colorVoid),
 
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
-                               String  invoiceidbypos = list.get(pos).getInvoice_userid();
+
+                               String invoiceidbypos = list.get(pos).getInvoice_userid();
 
                                 Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
 
-                                markVoidInvoice(invoiceidbypos);
+                                String invoiceVoidStatus = list.get(pos).getVoid_status();
+
+                                String voidPassValue = "0";
+
+                                if(invoiceVoidStatus.equalsIgnoreCase("0")){
+                                    voidPassValue = "1";
+                                   // colorVoid = "#ff9900";
+                                }
+
+                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
+                                    voidPassValue = "0";
+                                    //colorVoid = "#99cc00";
+                                }
+
+
+
+                                markVoidInvoice(invoiceidbypos, voidPassValue);
 
                             }
                         }
@@ -232,6 +280,7 @@ public class List_of_Invoices extends Fragment {
             }
         };
         swipeHelper.attachToRecyclerView(recycler_invoices);
+
         ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -280,10 +329,15 @@ public class List_of_Invoices extends Fragment {
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
         itemTouchHelper.attachToRecyclerView(recycler_invoices);
+
         return view;
 
 
     }
+
+
+
+
 
     void filter(String text) {
         ArrayList<InvoiceData> temp = new ArrayList();
@@ -429,7 +483,6 @@ public class List_of_Invoices extends Fragment {
         avi.smoothToShow();
         RequestParams params = new RequestParams();
 
-
         if (paramsvalue.equals("All")) {
             params.add("company_id", selectedCompanyId);
             Log.e("comany id", selectedCompanyId);
@@ -479,6 +532,8 @@ public class List_of_Invoices extends Fragment {
                             String due_date = item.getString("due_date");
                             String total = item.getString("total");
 
+                            String void_status = item.getString("void_status");
+
                             String statusinvoice = item.getString("order_status_id");
                             //Log.e("customer id", customer);
                             Log.e("invoice_no", invoice_no);
@@ -518,9 +573,10 @@ public class List_of_Invoices extends Fragment {
                             company_list.setInvoicepdflink(pdffilename);
                             company_list.setInvoice_share_link(linkpd);
                             company_list.setTemplate_type(item.getString("template_type"));
+                            company_list.setVoid_status(void_status);
                             list.add(company_list);
 
-                            invoicelistAdapterdt.updateList(list);
+
 
                           //  if (list.size() < 20) {
 
@@ -529,8 +585,8 @@ public class List_of_Invoices extends Fragment {
                         }
 
 
-
-
+                        invoicelistAdapterdt.updateList(list);
+                        invoicelistAdapterdt.notifyDataSetChanged();
 
                     }
 
@@ -719,7 +775,7 @@ public class List_of_Invoices extends Fragment {
 
 
 
-    private void markVoidInvoice(String s) {
+    private void markVoidInvoice(String s, String voidPassValue) {
 
         list.clear();
         avi.smoothToShow();
@@ -729,7 +785,7 @@ public class List_of_Invoices extends Fragment {
 //        } else {
 
         params.add("invoice_id", s);
-        params.add("void_status", "1");
+        params.add("void_status", voidPassValue);
 //
 //            Log.e("invoice_idupdate", invoice_idstr);
 //            Log.e("s order status", s);
@@ -999,7 +1055,7 @@ public class List_of_Invoices extends Fragment {
                                 if (!urlPDF.endsWith(".pdf")) {
                                     Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
                                 } else {
-//                    /*              String pdfurl = "http://13.233.155.0/saad/app/uploads/invoice/pdf/" + pdflink;
+//                    /*              String pdfurl = "http://13.126.22.0/saad/app/uploads/invoice/pdf/" + pdflink;
 //                                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
 //                                    shareIntent.setType("text/plain");
 //                                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "PDF File");

@@ -422,7 +422,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                     multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
 
 
-                            .replaceAll("#ATTACHMENT_1#", "http://13.233.155.0/saad/app/uploads/invoice/"+invoice_imageDto.get(i).getImage());
+                            .replaceAll("#ATTACHMENT_1#", "http://13.126.22.0/saad/app/uploads/invoice/"+invoice_imageDto.get(i).getImage());
 
 
                     multipleimage = multipleimage + multipagepath;

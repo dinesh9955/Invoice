@@ -6,6 +6,16 @@ package com.receipt.invoice.stock.sirproject.Model;
 
 public class InvoiceData {
 
+    String void_status = "";
+
+    public String getVoid_status() {
+        return void_status;
+    }
+
+    public void setVoid_status(String void_status) {
+        this.void_status = void_status;
+    }
+
     String payment_currency = "";
 
     public String getPayment_currency() {
