@@ -853,14 +853,14 @@ public class List_of_Invoices extends Fragment {
             viewinvoicerecipts = view.findViewById(R.id.viewinvoicerecipts);
             viewinvoicerecipts.setVisibility(View.GONE);
             recepitsviewtxt = view.findViewById(R.id.recepitsviewtxt);
-//            if (ilnvoiceStatus.equals("2")) {
-//                viewinvoicerecipts.setVisibility(View.VISIBLE);
-//                recepitsviewtxt.setVisibility(View.VISIBLE);
-//            }
-//            if (ilnvoiceStatus.equals("1")) {
-//                recepitsviewtxt.setVisibility(View.INVISIBLE);
-//                viewinvoicerecipts.setVisibility(View.INVISIBLE);
-//            }
+            if (ilnvoiceStatus.equals("2")) {
+                viewinvoicerecipts.setVisibility(View.VISIBLE);
+                recepitsviewtxt.setVisibility(View.VISIBLE);
+            }
+            if (ilnvoiceStatus.equals("1")) {
+                recepitsviewtxt.setVisibility(View.INVISIBLE);
+                viewinvoicerecipts.setVisibility(View.INVISIBLE);
+            }
 
 
             viewinvoicebotom = view.findViewById(R.id.viewinvoicebotom);

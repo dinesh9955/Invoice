@@ -80,15 +80,12 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
+import com.receipt.invoice.stock.sirproject.Invoice.ConvertToReceiptsActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.EditInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
-import com.receipt.invoice.stock.sirproject.Invoice.ViewInvoice_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDto;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDtoInvoice;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceResponseDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
@@ -100,7 +97,6 @@ import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
-import com.receipt.invoice.stock.sirproject.Receipts.EditReceiptActivity;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
@@ -124,8 +120,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -146,7 +140,7 @@ import retrofit2.Callback;
 
 import static com.receipt.invoice.stock.sirproject.Invoice.Fragment_Create_Invoice.verifyStroagePermissions;
 
-public class EditEstimateActivity extends AppCompatActivity implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
+public class ConvertToInvoiceActivity extends AppCompatActivity implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
     private static final String TAG = "EditEstimateActivity";
     String companycolor = "#ffffff";
     int selectedTemplate = 0;
@@ -346,8 +340,8 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        setContentView(R.layout.edit_estimate_activity);
-        Constant.toolbar(EditEstimateActivity.this, "Edit Estimate");
+        setContentView(R.layout.editinvoiceactivity);
+        Constant.toolbar(ConvertToInvoiceActivity.this, "Convert to Invoice");
         invoiceweb = findViewById(R.id.invoiceweb);
 
         apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
@@ -481,7 +475,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             public void onClick(View view) {
                 Log.e(TAG, "companycolor: "+companycolor);
 //                defaultClick = 1;
-                Intent intent = new Intent(EditEstimateActivity.this, ChooseTemplate.class);
+                Intent intent = new Intent(ConvertToInvoiceActivity.this, ChooseTemplate.class);
                 intent.putExtra("companycolor", companycolor);
                 // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivityForResult(intent, 121);
@@ -530,7 +524,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
     private void getinvoicedata() {
         Log.e(TAG, "invoiceIdAAA "+invoiceId);
 
-        String token = Constant.GetSharedPreferences(EditEstimateActivity.this, Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(ConvertToInvoiceActivity.this, Constant.ACCESS_TOKEN);
         Call<EstimateResponseDto> resposresult = apiInterface.getEstimateDetail(token, invoiceId);
         resposresult.enqueue(new Callback<EstimateResponseDto>() {
             @Override
@@ -929,7 +923,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         student.setTaxrate(listobj.getRate());
                         student.setTaxtype(tax_type);
                         student.setTaxamount(value);
-                       // student.setRateType(value);
+                        // student.setRateType(value);
 
                         selectedtaxt.add(student);
 
@@ -1001,9 +995,9 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 //                {
 //                    Constant.ErrorToast(EditEstimateActivity.this, "Select A Where House");
 //                } else {
-                    createbottomsheet_products();
-                    bottomSheetDialog.show();
-                    bottomSheetDialog2.dismiss();
+                createbottomsheet_products();
+                bottomSheetDialog.show();
+                bottomSheetDialog2.dismiss();
 //
 //                }
 
@@ -1142,7 +1136,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
         selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
             public void onItemSelected(int position, String itemAtPosition) {
-                selectwarehouseId = cids.get(position);
+                selectwarehouseId = wids.get(position);
                 Log.e("selectwarehouseId", selectwarehouseId);
 
                 warehousePosition = position;
@@ -1222,41 +1216,45 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
     private void createinvoicewithdetail(File file) {
         avi.smoothToShow();
         if (customer_name.equals("")) {
-            Constant.ErrorToast(EditEstimateActivity.this, "Select A Customer");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select A Customer");
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
-            Constant.ErrorToast(EditEstimateActivity.this, "Select Valid Estimate No");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Valid Estimate No");
 
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(EditEstimateActivity.this, "Select Estimate Date");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Invoice Date");
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(EditEstimateActivity.this, "Select a Company");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select a Company");
 
-//        } else if (selectwarehouseId.equals("")) {
-//            Constant.ErrorToast(EditEstimateActivity.this, "Select A Where House");
+        } else if (selectwarehouseId.equals("")) {
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
 
-//        } else if (credit_terms.equals("")) {
-//            Constant.ErrorToast(EditEstimateActivity.this, "Select Credit Tearm");
+        } else if (credit_terms.equals("")) {
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Credit Term");
 
         }  else {
 
-            final ProgressDialog progressDialog = new ProgressDialog(EditEstimateActivity.this);
+//{"status":false,"message":{"credit_terms":"The Credit Terms field is required.","due_date":"The Due Date field is required."}}
+
+
+            final ProgressDialog progressDialog = new ProgressDialog(ConvertToInvoiceActivity.this);
             progressDialog.setMessage("Please wait");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
             RequestParams params = new RequestParams();
-            params.add("estimate_id", invoiceId);
-            params.add("estimate_no", invoicenumberdto);
-            params.add("new_estimate_no", invoicenum.getText().toString());
+          //  params.add("invoice_id", invoiceId);
+            params.add("invoice_no", invoicenum.getText().toString());
+           // params.add("new_estimate_no", invoicenum.getText().toString());
 
             params.add("company_id", selectedCompanyId);
             params.add("wearhouse_id", selectwarehouseId);
-            params.add("estimate_date", invoice_date);
+            params.add("invoice_date", invoice_date);
             params.add("due_date", invoice_due_date);
             params.add("customer_id", customer_id);
             params.add("notes", strnotes);
             params.add("ref_no", ref_no);
             params.add("paid_amount_payment_method", paymentmode);
+
             params.add("credit_terms", credit_terms);
             params.add("freight_cost", Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
             params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
@@ -1402,11 +1400,17 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                 }
             }
+
+            Log.e(TAG, "credit_termsAAA1 "+credit_terms);
+            Log.e(TAG, "invoice_due_dateAAA1 "+invoice_due_date);
+
+            Log.e(TAG, "paramsAAA1 "+params.toString());
+
             String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "estimate/duplicate", params, new AsyncHttpResponseHandler() {
+            client.post(Constant.BASE_URL + "invoice/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -1420,12 +1424,12 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(EditEstimateActivity.this, "Duplicate Estimate created successfully");
+                            Constant.SuccessToast(ConvertToInvoiceActivity.this, "Invoice created successfully");
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Intent intent = new Intent(EditEstimateActivity.this, EstimateActivity.class);
+                                    Intent intent = new Intent(ConvertToInvoiceActivity.this, Create_Invoice_Activity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
@@ -1436,7 +1440,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         }
 
                         if (status.equals("false")) {
-                            Constant.ErrorToast(EditEstimateActivity.this, jsonObject.getString("message"));
+                            Constant.ErrorToast(ConvertToInvoiceActivity.this, jsonObject.getString("message"));
                         }
 
                     } catch (JSONException e) {
@@ -1457,13 +1461,13 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                                Constant.ErrorToast(EditEstimateActivity.this, jsonObject.getString("message"));
+                                Constant.ErrorToast(ConvertToInvoiceActivity.this, jsonObject.getString("message"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Something went wrong, try again!");
                     }
                 }
             });
@@ -1472,7 +1476,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
     }
 
     private void requestStoragePermission(boolean isCamera) {
-        Dexter.withActivity(EditEstimateActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+        Dexter.withActivity(ConvertToInvoiceActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
@@ -1579,7 +1583,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
         if(requestCode == 121){
 
             SavePref pref = new SavePref();
-            pref.SavePref(EditEstimateActivity.this);
+            pref.SavePref(ConvertToInvoiceActivity.this);
 
             selectedTemplate = pref.getTemplate();
             Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
@@ -1672,7 +1676,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             add_product.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(EditEstimateActivity.this, Product_Activity.class);
+                    Intent intent = new Intent(ConvertToInvoiceActivity.this, Product_Activity.class);
                     startActivityForResult(intent, 124);
                     bottomSheetDialog.dismiss();
                 }
@@ -1723,7 +1727,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             add_service.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(EditEstimateActivity.this, Service_Activity.class);
+                    Intent intent = new Intent(ConvertToInvoiceActivity.this, Service_Activity.class);
                     startActivityForResult(intent, 125);
                     bottomSheetDialog2.dismiss();
                 }
@@ -1778,7 +1782,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             add_service_new.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(EditEstimateActivity.this, Tax_Activity.class);
+                    Intent intent = new Intent(ConvertToInvoiceActivity.this, Tax_Activity.class);
                     startActivityForResult(intent, 126);
                     bottomSheetDialog3.dismiss();
                 }
@@ -1878,7 +1882,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                     mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(EditEstimateActivity.this,
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(ConvertToInvoiceActivity.this,
                             new DatePickerDialog.OnDateSetListener() {
 
                                 @Override
@@ -1912,7 +1916,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         eddate.setError("Required");
                         eddate.requestFocus();
                     } else if (paimentmodespinerstr.equals("")) {
-                        Constant.ErrorToast(EditEstimateActivity.this, "Payment Mode Required");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Payment Mode Required");
                     } else {
                         if (paidamountstr != null) {
                             paidamount.setText(paidamountstr);
@@ -1924,7 +1928,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                 }
             });
-            bottomSheetDialog2 = new BottomSheetDialog(EditEstimateActivity.this);
+            bottomSheetDialog2 = new BottomSheetDialog(ConvertToInvoiceActivity.this);
             bottomSheetDialog2.setContentView(view);
         }
     }
@@ -1933,7 +1937,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
         if (bottomSheetDialog2 != null) {
             View view = LayoutInflater.from(this).inflate(R.layout.dots_bottomsheet, null);
             btnviewinvoice = view.findViewById(R.id.btnviewinvoice);
-            btnviewinvoice.setText("View Estimate");
+            btnviewinvoice.setText("View Invoice");
             btnclear = view.findViewById(R.id.btnclear);
             btndotcancel = view.findViewById(R.id.btndotcancel);
 
@@ -1961,25 +1965,25 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                     invoice_due_date = edduedate.getText().toString();
                     invoicetaxamount = tax.getText().toString();
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(EditEstimateActivity.this, "Select a Company");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select a Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(EditEstimateActivity.this, "Select Date");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(EditEstimateActivity.this, "Select A Customer");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select A Customer");
                         bottomSheetDialog2.dismiss();
-//                    } else if (credit_terms.equals("")) {
-//                        Constant.ErrorToast(EditEstimateActivity.this, "Select Credit Tearm");
-//                        bottomSheetDialog2.dismiss();
-//                    } else if (selectwarehouseId.equals("")) {
-//                        Constant.ErrorToast(EditEstimateActivity.this, "Select A Where House");
-//                        bottomSheetDialog2.dismiss();
+                    } else if (credit_terms.equals("")) {
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Credit Term");
+                        bottomSheetDialog2.dismiss();
+                    } else if (selectwarehouseId.equals("")) {
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
+                        bottomSheetDialog2.dismiss();
                     } else {
                         Customer_list customer_lists = selected.get(0);
                         Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
-                        Intent intent = new Intent(EditEstimateActivity.this, ViewEstimate_Activity.class);
+                        Intent intent = new Intent(ConvertToInvoiceActivity.this, EstimateToInvoiceWebview.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("company_id", selectedCompanyId);
                         intent.putExtra("taxText", txttax.getText().toString());
@@ -2094,7 +2098,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             btnclear.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
             btndotcancel.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
 
-            bottomSheetDialog2 = new BottomSheetDialog(EditEstimateActivity.this);
+            bottomSheetDialog2 = new BottomSheetDialog(ConvertToInvoiceActivity.this);
             bottomSheetDialog2.setContentView(view);
         }
     }
@@ -2204,7 +2208,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                 strdiscountvalue = eddisount.getText().toString();
                 if (strdiscountvalue.matches("")) {
-                   // Toast.makeText(EditEstimateActivity.this, "You did not enter a username", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(EditEstimateActivity.this, "You did not enter a username", Toast.LENGTH_SHORT).show();
                     mybuilder.dismiss();
                     return;
                 } else {
@@ -2276,13 +2280,15 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 }
             });
 
+
+
             btndone1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dayss = edmanual.getText().toString();
 
                     if (dayss.equals("") && credit_terms.equals("")) {
-                        Toast.makeText(EditEstimateActivity.this, "Please Select Atleast One", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ConvertToInvoiceActivity.this, "Please Select Atleast One", Toast.LENGTH_LONG).show();
                     } else if (dayss != null && credit_terms.equals("")) {
 
                         String dayswith = dayss.trim();
@@ -2322,28 +2328,35 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                             String replaceString = credit_terms.replaceAll("days", "");
                             String dayswith = replaceString.trim();
-                            Double daysvalue = Double.parseDouble(dayswith);
 
-                            Double result = toMilliSeconds(daysvalue);
+                            try {
+                                Double daysvalue = Double.parseDouble(dayswith);
 
-                            long sumresult = (long) (result + datemillis);
-                            // Creating date format
-                            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-                            Date sumresultdate = new Date(sumresult);
+                                Double result = toMilliSeconds(daysvalue);
 
-                            // Formatting Date according to the
-                            // given format
+                                long sumresult = (long) (result + datemillis);
+                                // Creating date format
+                                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+                                Date sumresultdate = new Date(sumresult);
 
-                            Log.e("Date Long", simple.format(sumresultdate));
-                            edduedate.setText(simple.format(sumresultdate));
-                            edduedate.setClickable(false);
-                            txtdays.setText(credit_terms);
+                                // Formatting Date according to the
+                                // given format
+
+                                Log.e("Date Long", simple.format(sumresultdate));
+                                edduedate.setText(simple.format(sumresultdate));
+                                edduedate.setClickable(false);
+                                txtdays.setText(credit_terms);
+                            }catch (Exception e){
+                                txtdays.setText(dayswith);
+                                edduedate.setText(duedate.getText().toString());
+                            }
+
                             bottomSheetDialog.dismiss();
                         }
 
 
                     } else if (dayss != null && credit_terms != null) {
-                        Toast.makeText(EditEstimateActivity.this, "Please Select One Value", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ConvertToInvoiceActivity.this, "Please Select One Value", Toast.LENGTH_LONG).show();
 
                     }
 
@@ -2357,6 +2370,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                     return days * 24 * 60 * 60 * 1000;
                 }
             });
+
 
 
             txtcredit1.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
@@ -2455,7 +2469,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
         switch (requestCode) {
             case REQUEST_EXTERNAL_STORAGE: {
                 if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(EditEstimateActivity.this, "Cannot write images to external storage", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConvertToInvoiceActivity.this, "Cannot write images to external storage", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -2596,14 +2610,12 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                                 cnames.add(company_name);
                                 cids.add(company_id);
 
-
-
                             }
                         }
 
                         warehousePosition = wids.indexOf(selectwarehouseId);
 
-                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditEstimateActivity.this, android.R.layout.simple_spinner_item, cnames);
+                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ConvertToInvoiceActivity.this, android.R.layout.simple_spinner_item, cnames);
                         selectcompany.setAdapter(namesadapter);
 
                         selectwarehouse.setSelection(warehousePosition);
@@ -2638,10 +2650,10 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
         RequestParams params = new RequestParams();
         if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
-            Constant.ErrorToast(EditEstimateActivity.this, "Select Company");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Company");
         } else {
             params.add("company_id", this.selectedCompanyId);
-            String token = Constant.GetSharedPreferences(EditEstimateActivity.this, Constant.ACCESS_TOKEN);
+            String token = Constant.GetSharedPreferences(ConvertToInvoiceActivity.this, Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token", token);
             client.post(Constant.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
@@ -2665,13 +2677,17 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                                 wids.add(warehouse_id);
                                 wnames.add(warehouse_name);
 
+                                Log.e(TAG,"warehouse_idAA "+warehouse_id);
                                 Log.e("warehouseNames",wnames.toString());
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditEstimateActivity.this, android.R.layout.simple_spinner_item, wnames);
-                                selectwarehouse.setAdapter(namesadapter);
 
 
                             }
+
+
+                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ConvertToInvoiceActivity.this, android.R.layout.simple_spinner_item, wnames);
+                            selectwarehouse.setAdapter(namesadapter);
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -2687,7 +2703,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                                Constant.ErrorToast(EditEstimateActivity.this, "No Warehouse Found");
+                                Constant.ErrorToast(ConvertToInvoiceActivity.this, "No Warehouse Found");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -2704,7 +2720,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
         RequestParams params = new RequestParams();
         params.add("company_id", this.selectedCompanyId);
 
-        String token = Constant.GetSharedPreferences(EditEstimateActivity.this, Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(ConvertToInvoiceActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
@@ -2762,7 +2778,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                             }
                         } else {
-                            Constant.ErrorToast(EditEstimateActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(ConvertToInvoiceActivity.this, jsonObject.getString("Product Not Found"));
                         }
                     }
 
@@ -2788,7 +2804,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
+                    Constant.ErrorToast(ConvertToInvoiceActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2864,7 +2880,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                             }
                         } else {
-                            Constant.ErrorToast(EditEstimateActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(ConvertToInvoiceActivity.this, jsonObject.getString("Product Not Found"));
                         }
                     }
 
@@ -2893,7 +2909,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
+                    Constant.ErrorToast(ConvertToInvoiceActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2921,7 +2937,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(EditEstimateActivity.this, Customer_Activity.class);
+                    Intent intent = new Intent(ConvertToInvoiceActivity.this, Customer_Activity.class);
                     startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }
@@ -3070,34 +3086,34 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 //                        for (int i = 0; i < customer.length(); i++) {
 //                            JSONObject item = customer.getJSONObject(i);
 
-                            tax_list_array.clear();
+                        tax_list_array.clear();
 
-                            tax_list_array = new ArrayList<Tax_List>();
+                        tax_list_array = new ArrayList<Tax_List>();
 
-                            JSONArray tax_list = data.getJSONArray("tax");
+                        JSONArray tax_list = data.getJSONArray("tax");
 
-                            for (int j = 0; j < tax_list.length(); j++) {
-                                JSONObject jsonObject1 = tax_list.getJSONObject(j);
+                        for (int j = 0; j < tax_list.length(); j++) {
+                            JSONObject jsonObject1 = tax_list.getJSONObject(j);
 //                                String name = jsonObject1.getString("name");
-                                Tax_List student = new Tax_List();
-                                student.setTax_id(jsonObject1.getString("tax_id"));
-                                student.setTax_name(jsonObject1.getString("name"));
-                                student.setCompany_name(jsonObject1.getString("company_name"));
-                                student.setTax_rate(jsonObject1.getString("rate"));
-                                student.setCompanyid(jsonObject1.getString("company_id"));
-                                student.setType(jsonObject1.getString("type"));
-                                student.setTax_name(jsonObject1.getString("name"));
-                                tax_list_array.add(student);
+                            Tax_List student = new Tax_List();
+                            student.setTax_id(jsonObject1.getString("tax_id"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            student.setCompany_name(jsonObject1.getString("company_name"));
+                            student.setTax_rate(jsonObject1.getString("rate"));
+                            student.setCompanyid(jsonObject1.getString("company_id"));
+                            student.setType(jsonObject1.getString("type"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            tax_list_array.add(student);
 
 
-                            }
-                            Log.e("Taxt array", tax_list_array.toString());
+                        }
+                        Log.e("Taxt array", tax_list_array.toString());
 //                        }
 
 
                     }
                     if (status.equals("false")) {
-                        Constant.ErrorToast(EditEstimateActivity.this, jsonObject.getString("message"));
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, jsonObject.getString("message"));
                     }
 
                 } catch (JSONException e) {
@@ -3117,13 +3133,13 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                         String status = jsonObject.getString("status");
                         if (status.equals("false")) {
-                            Constant.ErrorToast(EditEstimateActivity.this, jsonObject.getString("message"));
+                            Constant.ErrorToast(ConvertToInvoiceActivity.this, jsonObject.getString("message"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
+                    Constant.ErrorToast(ConvertToInvoiceActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3232,7 +3248,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
+                    Constant.ErrorToast(ConvertToInvoiceActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3798,7 +3814,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 out.close();
                 // Tell the media scanner about the new file so that it is
                 // immediately available to the user.
-                MediaScannerConnection.scanFile(EditEstimateActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                MediaScannerConnection.scanFile(ConvertToInvoiceActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
                     public void onScanCompleted(String path, Uri uri) {
                         // Log.i("ExternalStorage", "Scanned " + path + ":");
                         //    Log.i("ExternalStorage", "-> uri=" + uri);
@@ -3866,7 +3882,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 out.close();
                 // Tell the media scanner about the new file so that it is
                 // immediately available to the user.
-                MediaScannerConnection.scanFile(EditEstimateActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                MediaScannerConnection.scanFile(ConvertToInvoiceActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
                     public void onScanCompleted(String path, Uri uri) {
                         // Log.i("ExternalStorage", "Scanned " + path + ":");
                         //    Log.i("ExternalStorage", "-> uri=" + uri);
@@ -3935,7 +3951,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 out.close();
                 // Tell the media scanner about the new file so that it is
                 // immediately available to the user.
-                MediaScannerConnection.scanFile(EditEstimateActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                MediaScannerConnection.scanFile(ConvertToInvoiceActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
                     public void onScanCompleted(String path, Uri uri) {
                         // Log.i("ExternalStorage", "Scanned " + path + ":");
                         //    Log.i("ExternalStorage", "-> uri=" + uri);
@@ -4001,7 +4017,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 out.close();
                 // Tell the media scanner about the new file so that it is
                 // immediately available to the user.
-                MediaScannerConnection.scanFile(EditEstimateActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                MediaScannerConnection.scanFile(ConvertToInvoiceActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
                     public void onScanCompleted(String path, Uri uri) {
                         // Log.i("ExternalStorage", "Scanned " + path + ":");
                         //    Log.i("ExternalStorage", "-> uri=" + uri);
@@ -4783,7 +4799,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                 //if page loaded successfully then show print button
                 //findViewById(R.id.fab).setVisibility(View.VISIBLE);
-                final File savedPDFFile = FileManager.getInstance().createTempFile(EditEstimateActivity.this, "pdf", false);
+                final File savedPDFFile = FileManager.getInstance().createTempFile(ConvertToInvoiceActivity.this, "pdf", false);
 
                 PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
                     @Override

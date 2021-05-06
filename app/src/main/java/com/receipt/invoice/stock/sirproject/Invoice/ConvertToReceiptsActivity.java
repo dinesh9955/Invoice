@@ -23,10 +23,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.print.PDFPrint;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +36,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -86,6 +92,7 @@ import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.Model.GlobalVariabal;
 import com.receipt.invoice.stock.sirproject.Model.Moving;
+import com.receipt.invoice.stock.sirproject.Model.Product_Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.SelectedTaxlist;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
@@ -94,16 +101,24 @@ import com.receipt.invoice.stock.sirproject.Model.View_invoice;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Receipts.EditReceiptActivity;
+import com.receipt.invoice.stock.sirproject.Receipts.ReceiptsActivity;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
+import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
+import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
+import com.receipt.invoice.stock.sirproject.Utility;
+import com.tejpratapsingh.pdfcreator.utils.FileManager;
+import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -114,6 +129,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -122,76 +140,96 @@ import java.util.List;
 import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
+import gun0912.tedbottompicker.TedRxBottomPicker;
+import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 
+import static com.receipt.invoice.stock.sirproject.Invoice.Fragment_Create_Invoice.verifyStroagePermissions;
+
 public class ConvertToReceiptsActivity extends AppCompatActivity implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
-
-
-    private static final String TAG = "ConvertToReceiptsActivity";
-    //Api response data colllection
-    String invoiceId = "";
-    ApiInterface apiInterface;
-    String company_namedto = "", company_addressdto = "", company_contactdto = "", company_emaildto = "", company_websitedto = "", payment_currencydto = "", payment_ibandto = "", payment_swift_bicdto = "";
-    String signature_of_issuerdto = "", signature_of_receiverdto = "", company_stampdto = "";
-    String due_datedto = "", datedto = "";
-    String sltcustonernamedto = "", sltcustomer_emaildto = "", sltcustomer_contactdto = "", sltcustomer_addressdto = "", sltcustomer_websitedto = "", sltcustomer_phone_numberdto = "";
-    String invoicenumberdto = "", ref_nodto = "", paid_amount_payment_methoddto = "", strpaid_amountdto = "", companylogopathdto = "", Grossamount_strdto = "", Subtotalamountdto = "",
-            netamountvaluedto = "", Blanceamountstrdto = "" , Discountamountstrdto="" , Shippingamountdto = "";
-    String shipping_firstnamedto, shipping_lastnamedto, shipping_address_1dto, shipping_address_2dto, shipping_citydto, shipping_countrydto, shipping_postalcodedto, shipping_zonedto;
-    String company_image_pathdto, customer_image_pathdto, invoiceshre_linkdto, invoice_image_pathdto;
-    ArrayList<InvoiceTotalsItemDto> grosamontdto = new ArrayList<>();
-    ArrayList<ProductsItemDto> productsItemDtosdto;
-    ArrayList<Invoice_image> invoice_imageDto;
-    InvoiceTotalsItemDto listobj = new InvoiceTotalsItemDto();
-    InvoiceDtoInvoice invoiceDtoInvoice;
-    String currency_codedto="";
-
-    String invoicecompanyiddto, companyreceiptno;
+    private static final String TAG = "editInvoiceActivity";
+    String companycolor = "#ffffff";
+    int selectedTemplate = 0;
+//    int defaultClick = 0;
 
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static final int GALLARY_aCTION_PICK_CODE = 10;
     private static final int CAMERA_ACTION_PICK_CODE = 9;
     private static final String[] PERMISSION_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-    TextView invoicenumtxt, invoicenum, duedatetxt, duedate, invoicetotxt, invoicerecipnt, itemstxt, subtotaltxt, subtotal, discounttxt, discount, txttax, tax, txtcredit, txtreferenceno, edreferenceno, txtgrossamount, grosstotal, txtfreight, freight, txtnetamount, netamount, s_receiver, c_stamp;
+    //Api response data colllection
+    String invoiceId = "";
+    ApiInterface apiInterface;
+    String signature_of_issuerdto = "", signature_of_receiverdto = "", company_stampdto = "";
+    String due_datedto = "", datedto = "", credit_termsdto = "";
+    String sltcustonernamedto = "", sltcustomer_emaildto = "", sltcustomer_contactdto = "", sltcustomer_addressdto = "", sltcustomer_websitedto = "",
+            sltcustomer_phone_numberdto = "";
+
+    String invoicenumberdto = "", ref_nodto = "", paid_amount_payment_methoddto = "", Shippingamountdto = "",
+            strpaid_amountdto = "", Grossamount_strdto = "", Subtotalamountdto = "", netamountvaluedto = "", Blanceamountstrdto = "", Discountamountstrdto ="";
+
+    String  tax_type = "", rate1 = "" , value = "" , rate_type = "";
+
+
+    String paid_amount_date = "";
+
+    String shipping_zonedto;
+    String company_image_pathdto, customer_image_pathdto, invoiceshre_linkdto, invoice_image_pathdto, customerDtoContactName;
+    ArrayList<InvoiceTotalsItemDto> grosamontdto = new ArrayList<>();
+    ArrayList<ProductsItemDto> productsItemDtosdto;
+    ArrayList<Invoice_image> invoice_imageDto;
+    // Edti invoice With Detail Datata
+    InvoiceTotalsItemDto listobj = new InvoiceTotalsItemDto();
+    InvoiceDtoInvoice invoiceDtoInvoice;
+    String currency_codedto;
+    //3
+
+    TextView itemstxtTemplate, invoicenumtxt, duedatetxt, duedate, invoicetotxt, invoicerecipnt, itemstxt, subtotaltxt, subtotal, discounttxt, discount, txttax, tax, txtcredit, txtdays, txtreferenceno, edreferenceno, txtduedate,
+            edduedate, txtgrossamount, grosstotal, txtfreight, freight, txtnetamount, netamount, txtpaidamount, paidamount, txtbalance, balance, s_invoice, s_receiver, c_stamp, attachmenttxt;
     Button additem, createinvoice, options, addservice;
     RecyclerView productsRecycler;
-    EditText ednotes;
+    EditText ednotes, invoicenum;
     ArrayList<Product_list> tempList = new ArrayList<Product_list>();
+
     ArrayList<String> tempQuantity = new ArrayList<String>();
 
-    ArrayList<Service_list> Servicetem = new ArrayList<Service_list>();
+
     ArrayList<String> producprice = new ArrayList<String>();
     // for tax list array listin
     ArrayList<Tax_List> tax_list_array = new ArrayList<Tax_List>();
     ArrayList<SelectedTaxlist> selectedtaxt = new ArrayList<SelectedTaxlist>();
-    String invoicetaxamount="";
-    ImageView imgsigsuccess, imgrecsuccess, imgstampsuccess;
+    String invoicetaxamount;
+
+
+    ImageView imgsigsuccess, imgrecsuccess, imgstampsuccess, attachmenttxtimg;
     BottomSheetDialog bottomSheetDialog, bottomSheetDialog2, bottomSheetDialog3;
-    AwesomeSpinner selectcompany;
+    AwesomeSpinner selectcompany, selectwarehouse;
 
     Products_Adapter products_adapter;
-
+    ArrayList<Product_Service_list> names = new ArrayList<>();
+    ArrayList<String> totalpriceproduct = new ArrayList<String>();
 
     ArrayList<String> quantity = new ArrayList<>();
-    ArrayList<String> totalpriceproduct = new ArrayList<String>();
     //products bottom sheet
     TextView txtproducts;
     EditText search;
     Product_Bottom_Adapter product_bottom_adapter;
     ArrayList<Product_list> product_bottom = new ArrayList<>();
     RecyclerView recycler_services;
-
+    Double ProductTotalprice = 0.0;    //servcies bottom sheet
     TextView txtservices;
     EditText search_service;
     Service_bottom_Adapter service_bottom_adapter;
-
+    ArrayList<Taxlistbycompany> taxtlist = new ArrayList<>();
     CustomTaxAdapter customTaxAdapter;
     RecyclerView taxrecycler;
 
     //tax bottom sheet
     ArrayList<Service_list> service_bottom = new ArrayList<>();
+
+    ArrayList<Customer_list> customerinfo = new ArrayList<>();
+
     RecyclerView recycler_products;
     TextView imgincome;
 
@@ -199,24 +237,45 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
     //paid amount
     Switch taxswitch;
     Button btndone;
+    TextView txtpaid, txtamount, txtdate;
+    EditText edamount;
+    TextView eddate;
+
+    //three dots bottomsheet
+    AwesomeSpinner selectpaymentmode;
 
 
+    //days bottom sheet
+    Button btndone2;
     Button btnviewinvoice, btnclear, btndotcancel;
+    TextView txtcredit1, txtor;
+    RadioGroup radiogroup1, radiogroup2;
+    RadioButton rnone, r3days, r14days, r30days, r60days, r120days, r7days, r21days, r45days, r90days, r365days, rimmediately;
+    EditText edmanual;
 
+    //datepicker work
+    Button btndone1;
+    String dayss = "";
     DatePickerDialog.OnDateSetListener mlistener;
-
+    DatePickerDialog.OnDateSetListener mlistener2;
     Calendar myCalendar;
 
     //signaturepad
     DatePickerDialog datePickerDialog;
-
+    DatePickerDialog datePickerDialog2;
     File fileimage;
     ArrayList<String> cnames = new ArrayList<>();
     ArrayList<String> cids = new ArrayList<>();
+    ArrayList<String> wnames = new ArrayList<>();
 
-
+    //API's
+    ArrayList<String> wids = new ArrayList<>();
+    ArrayList<String> paymode = new ArrayList<>();
     String selectedCompanyId = "";
+    String selectwarehouseId = "";
+    int warehousePosition = 0;
 
+    String paimentmodespinerstr = "";
     //customer bottom sheet
     TextView txtcustomer, txtname, txtcontactname;
     EditText search_customers;
@@ -224,103 +283,98 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
     Customer_Bottom_Adapter customer_bottom_adapter;
     ArrayList<Customer_list> customer_bottom = new ArrayList<>();
     ArrayList<Customer_list> selected = new ArrayList<>();
-    String customer_name = "", taxrname = "";
 
+    String invoicecompanyiddto;
     //For Intent
     String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "";
-    String customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
-
-    String shippingfirstname, shippinglastname, shippingaddress1, shippingaddress2, shippingcity, shippingpostcode, shippingcountry;
-
-
-    String invoice_no = "", invoice_date = "", credit_terms = "", reference_no = "";
-    String signature_of_issuer="", signature_of_receiver="", company_stamp="",netamountvalue="" , company_logo="";
+    String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
+    String invoice_no = "", invoice_due_date = "", invoice_date = "", credit_terms = "", reference_no = "";
+    String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "", taxamount, netamountvalue;
     String s_r = "0";
-    String invoice_nocompany, Grossamount_str;
-   String paypal_emailstr="";
+    String  Grossamount_str;
+
 
     ArrayList<String> rate = new ArrayList<>();
 
-    ArrayList<Customer_list> customerinfo = new ArrayList<>();
+    String paypal_emailstr = "";
     // pick image from galary and
     Context applicationContext = Companies_Activity.getContextOfApplication();
     FileCompressor mCompressor;
     boolean check = true;
     String strdiscount = "", strdiscountvalue = "0";
+
     // attchment image patth
     ArrayList<String> attchmentimage = new ArrayList<String>();
     Double total_price = 0.0;
     // Image Data
-    File company_stampFileimage, signatureofinvoicemaker, signaturinvoicereceiver,company_logoFileimage;
-
-
-    String strnotes, ref_no, freight_cost = "";
-    String Paymentamountdate, paymentmode, signatureofreceiverst="";
+    File company_stampFileimage, signatureofinvoicemaker, signaturinvoicereceiver, company_logoFileimage;
+    ArrayList<String> multimgpath = new ArrayList<>();
+    File[] multiple = new File[5];
+    String strnotes, ref_no, freight_cost = "", strpaid_amount = "", Blanceamountstr = "";
+    String Paymentamountdate, paymentmode, signatureofreceiverst = "", paidamountstr = "";
     // customer detail
-    String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
+    String shippingfirstname, shippinglastname, shippingaddress1, shippingaddress2, shippingcity, shippingpostcode, shippingcountry, paymentbankname, paymentcurrency, paymentiban, paymentswiftbic;
     // Date pikker date Convert To time Millissecund
     long datemillis;
     // Invoice no
-
+    String Invoiceno = "";
     int invoicenovalue;
     // Company logo path
     String companylogopath = "", Subtotalamount = "";
-    String taxtypeclusive = "", taxtype = "", taxtrateamt = "";
+    String taxtypeclusive = "", taxtype = "", taxtrateamt = "", taxID = "";
     int selectedItemOfMySpinner;
-    String selectwarehouseId = "12";
+    // customer information
+    String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
+    String Selectedcompanyname, taxrname;
+    //    int newinvoice_count;
     private AVLoadingIndicatorView avi;
     private SignaturePad signaturePad;
     private Button btnclear1;
     private Button btnsave;
     //Radio Group button Seelect
-    int invocerecepts_no, invoiceestimatetno;
-
-
-    String compnayestimate_count, companylogopathdtodt;
-
-    private List<Uri> selectedUriList;
+    private RadioGroup radioGroup;
+    // multiple image attachemnt
+    private List<Uri> selectedUriList = new ArrayList<>();
+    //  ArrayList<String> attchmentimage=new ArrayList<>();
+    private Disposable multiImageDisposable;
+    private ViewGroup mSelectedImagesContainer;
     private RequestManager requestManager;
 
-    public ConvertToReceiptsActivity() {
-        // Required empty public constructor
-    }
+    WebView invoiceweb;
 
-    private static void hideKeyboard(FragmentActivity activity, View view) {
-
-        InputMethodManager imm = (InputMethodManager) activity
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
-    public static void verifyStroagePermissions(Activity activity) {
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSION_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
-    }
-
+//    String templateSelect = "0";
+//    String colorCode = "#ffffff";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.fragment_convert_to_receipts);
-        Constant.toolbar(ConvertToReceiptsActivity.this, "Edit Receipt");
+        Constant.toolbar(ConvertToReceiptsActivity.this, "Convert to Receipt");
+        invoiceweb = findViewById(R.id.invoiceweb);
+
         apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
         invoiceId = getIntent().getStringExtra("invoiceID");
-        companyreceiptno = getIntent().getStringExtra("companyreceiptno");
-        compnayestimate_count = getIntent().getStringExtra("compnayestimate_count");
-        invocerecepts_no = Integer.parseInt(companyreceiptno) + 1;
-        invoiceestimatetno = Integer.parseInt(companyreceiptno) + 1;
-
         if (invoiceId != null) {
             Log.e("invoiceId", invoiceId);
         }
+
+
+
+
+
+//        invoice_count = getIntent().getStringExtra("invoice_count");
+//        if (invoice_count != null) {
+//            Log.e("invoice_count", invoice_count);
+//        }
+
+//        templateSelect = getIntent().getStringExtra("templateSelect");
+//        colorCode = getIntent().getStringExtra("colorCode");
+
+//        Log.e(TAG, "selectedTemplate "+templateSelect);
+//        Log.e(TAG, "colorCode "+colorCode);
+
+        //newinvoice_count = Integer.parseInt(invoice_count) + 1;
         avi = findViewById(R.id.avi);
         invoicenumtxt = findViewById(R.id.invoicenumtxt);
         invoicenum = findViewById(R.id.invoivenum);
@@ -339,48 +393,123 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         createinvoice = findViewById(R.id.createinvoice);
         options = findViewById(R.id.options);
         productsRecycler = findViewById(R.id.productsRecycler);
+        txtcredit = findViewById(R.id.txtcredit);
+        txtdays = findViewById(R.id.txtdays);
         txtreferenceno = findViewById(R.id.txtreferenceno);
         edreferenceno = findViewById(R.id.edreferenceno);
+        txtduedate = findViewById(R.id.txtduedate);
+        edduedate = findViewById(R.id.edduedate);
         grosstotal = findViewById(R.id.grosstotal);
         txtgrossamount = findViewById(R.id.txtgrossamount);
         txtfreight = findViewById(R.id.txtfreight);
         freight = findViewById(R.id.freight);
         txtnetamount = findViewById(R.id.txtnetamount);
         netamount = findViewById(R.id.netamount);
+        txtpaidamount = findViewById(R.id.txtpaidamount);
+        paidamount = findViewById(R.id.paidamount);
+        txtbalance = findViewById(R.id.txtbalance);
+        balance = findViewById(R.id.balance);
+        s_invoice = findViewById(R.id.s_invoice);
         s_receiver = findViewById(R.id.s_receiver);
         c_stamp = findViewById(R.id.c_stamp);
         ednotes = findViewById(R.id.ednotes);
         selectcompany = findViewById(R.id.selectcompany);
+        selectwarehouse = findViewById(R.id.selectwarehouse);
         addservice = findViewById(R.id.addservice);
         imgsigsuccess = findViewById(R.id.imgsigsuccess);
         imgrecsuccess = findViewById(R.id.imgrecsuccess);
+
         imgstampsuccess = findViewById(R.id.imgstampsuccess);
+
+        attachmenttxtimg = findViewById(R.id.attachmenttxtimg);
+        attachmenttxt = findViewById(R.id.attachmenttxt);
+
+        itemstxtTemplate = findViewById(R.id.itemstxtTemplate);
+
+
+
+
         myCalendar = Calendar.getInstance();
+
         verifyStroagePermissions(this);
+
         requestManager = Glide.with(this);
         mCompressor = new FileCompressor(this);
+
+
+        s_invoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                s_r = "1";
+                createbottom_signaturepad();
+                bottomSheetDialog.show();
+
+            }
+        });
+
         bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog2 = new BottomSheetDialog(this);
         bottomSheetDialog3 = new BottomSheetDialog(this);
         setFonts();
+        setListeners();
+
 
         products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
-        //productsRecycler.setAdapter(products_adapter);
+//        productsRecycler.setAdapter(products_adapter);
+
         mlistener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                 myCalendar.set(Calendar.YEAR, i);
                 myCalendar.set(Calendar.MONTH, i1);
                 myCalendar.set(Calendar.DAY_OF_MONTH, i2);
+
+
                 updateLabel();
                 Log.e("Dateeee", i + " " + i1 + " " + i2);
 
             }
         };
+
+        mlistener2 = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                myCalendar.set(Calendar.YEAR, i);
+                myCalendar.set(Calendar.MONTH, i1);
+                myCalendar.set(Calendar.DAY_OF_MONTH, i2);
+
+                updateLabe2();
+                Log.e("Dateeee", i + " " + i1 + " " + i2);
+
+            }
+        };
+
+
+        itemstxtTemplate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG, "companycolor: "+companycolor);
+//                defaultClick = 1;
+                Intent intent = new Intent(ConvertToReceiptsActivity.this, ChooseTemplate.class);
+                intent.putExtra("companycolor", companycolor);
+                // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivityForResult(intent, 121);
+            }
+        });
+
+
         duedate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 datePickerDialog.show();
+            }
+        });
+
+        edduedate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePickerDialog2.show();
+
             }
         });
 
@@ -389,13 +518,21 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-        companyget();
-        getinvoicedata();
 
-        setListeners();
+
+        //edduedate
+        datePickerDialog2 = new DatePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener2,
+                myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
+//        companyget();
+        getinvoicedata();
+
 
 
     }
@@ -406,11 +543,8 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         String token = Constant.GetSharedPreferences(ConvertToReceiptsActivity.this, Constant.ACCESS_TOKEN);
         Call<InvoiceResponseDto> resposresult = apiInterface.getInvoiceDetail(token, invoiceId);
         resposresult.enqueue(new Callback<InvoiceResponseDto>() {
-            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<InvoiceResponseDto> call, retrofit2.Response<InvoiceResponseDto> response) {
-
-                // image path of all
 
                 company_image_pathdto = response.body().getData().getCompanyImagePath();
                 customer_image_pathdto = response.body().getData().getCustomerImagePath();
@@ -419,46 +553,69 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                 // customer data get
                 InvoiceDto data = response.body().getData();
 
+
+                List<Invoice_image> invoice_images = data.getInvoiceImage();
+
+
+                if(invoice_images != null){
+                    for(int i = 0; i < invoice_images.size() ; i++){
+                        String signatureofreceiverpath = invoice_image_pathdto + invoice_images.get(i).getImage();
+                        new DownloadInvoiceImages().execute(signatureofreceiverpath);
+                        attachmenttxtimg.setVisibility(View.VISIBLE);
+                    }
+//                    Log.e(TAG, "cccccc "+invoice_images.size());
+//                    Log.e(TAG, "cccccc "+invoice_images.get(0).getImage());
+
+                }
+
+
                 InvoiceCustomerDto invoiceCustomerDto = data.getInvoice().getCustomer();
+
+
                 sltcustonernamedto = invoiceCustomerDto.getCustomerName();
 
+                Log.e(TAG, "sltcustonernamedto"+sltcustonernamedto);
+
+                customer_name = sltcustonernamedto;
                 invoicerecipnt.setText(sltcustonernamedto);
-
-
                 sltcustomer_addressdto = invoiceCustomerDto.getAddress();
-
                 sltcustomer_phone_numberdto = invoiceCustomerDto.getPhoneNumber();
                 sltcustomer_websitedto = invoiceCustomerDto.getWebsite();
                 sltcustomer_emaildto = invoiceCustomerDto.getEmail();
                 sltcustomer_contactdto = invoiceCustomerDto.getCustomerName();
-                // Company Detail
+                customerDtoContactName = invoiceCustomerDto.getContactName();
+                customer_name = sltcustomer_contactdto;
+
+
+
+                shippingfirstname = invoiceCustomerDto.getShippingFirstname();
+                shippinglastname = invoiceCustomerDto.getShippingLastname();
+                shippingaddress1 = invoiceCustomerDto.getShippingAddress1();
+                shippingaddress2 = invoiceCustomerDto.getShippingAddress2();
+                shipping_city = invoiceCustomerDto.getShippingCity();
+                shippingaddress2 = invoiceCustomerDto.getShippingCity();
+                shippingcountry = invoiceCustomerDto.getShippingCountry();
+                shippingpostcode = (String) invoiceCustomerDto.getShippingPostcode();
+                shipping_zonedto = (String) invoiceCustomerDto.getShippingZone();
+
+
+                // Company Detai
                 InvoiceCompanyDto companyDto = data.getInvoice().getCompany();
+                Selectedcompanyname = companyDto.getName();
+                company_address = companyDto.getAddress();
+                company_contact = companyDto.getPhoneNumber();
+                company_website = companyDto.getWebsite();
+                company_email = companyDto.getPaypalEmail();
+                companylogopath = companyDto.getLogo();
 
-                company_namedto = companyDto.getName();
-                company_addressdto = companyDto.getAddress();
-                company_contactdto = companyDto.getPhoneNumber();
-                company_websitedto = companyDto.getWebsite();
-                company_emaildto = companyDto.getPaypalEmail();
-                companylogopathdto = companyDto.getLogo();
-                companylogopathdtodt = company_image_pathdto + companylogopathdto;
-
-                paypal_emailstr=companyDto.getPaypalEmail();
-                new DownloadsImagefromweblogoCom().execute(companylogopathdtodt);
-                // Set Data To arraylist
-                String customerDtoContactName = invoiceCustomerDto.getContactName();
-
-                Customer_list selectcsto = new Customer_list();
-                selectcsto.setCustomer_name(sltcustonernamedto);
-                selectcsto.setCustomer_address(sltcustomer_addressdto);
-                selectcsto.setCustomer_contact_person(customerDtoContactName);
-                selectcsto.setCustomer_phone(sltcustomer_phone_numberdto);
-                selectcsto.setCustomer_website(sltcustomer_websitedto);
-                selectcsto.setCustomer_email(sltcustomer_emaildto);
-                selected.add(selectcsto);
+                // new DownloadsImagefromweblogoCom().execute(companylogopathdtodt);
 
 
                 selectedCompanyId = companyDto.getCompanyId();
-                Log.e("selectedCompanyIddto", selectedCompanyId);
+                Log.e("selectedCompanyId", selectedCompanyId);
+
+                // all mehodh get information-------
+                warehouse_list(selectedCompanyId);
                 customer_list(selectedCompanyId);
                 CompanyInformation(selectedCompanyId);
                 productget(selectedCompanyId);
@@ -469,167 +626,205 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                 invoiceDtoInvoice = data.getInvoice();
 
                 Gson gson = new Gson();
-                String json = gson.toJson(invoiceDtoInvoice);
+                String json2 = gson.toJson(invoiceDtoInvoice);
 
-                Log.e(TAG, "jsonAA "+json);
+                Log.e(TAG, "jsonAA "+json2);
+
+                paid_amount_date = invoiceDtoInvoice.getPaidAmountDate();
+
+                Log.e(TAG, "paid_amount_date "+paid_amount_date);
 
                 invoicenumberdto = invoiceDtoInvoice.getInvoiceNo();
+                // where House id
+                selectwarehouseId = invoiceDtoInvoice.getWearhouseId();
+
+
+
+                Log.e("Selected_house",selectwarehouseId+"  ");
+
                 datedto = invoiceDtoInvoice.getInvoiceDate();
                 due_datedto = invoiceDtoInvoice.getDueDate();
                 duedate.setText(datedto);
-                strnotes = invoiceDtoInvoice.getNotes();
-                ednotes.setText(strnotes);
-//                int recepts = Integer.parseInt(companyreceiptno) + 1;
-//                invoicenum.setText("Recno #" + String.valueOf(recepts));
+                invoice_date = datedto;
+                invoice_due_date = due_datedto;
+                edduedate.setText(due_datedto);
 
 
-                String sss = getRealValue(invoicenumberdto);
-                invoicenum.setText(sss);
 
-//                invoicenum.setText("" + invoicenumberdto);
+                //  invoicenum.setText("Inv #" + newinvoice_count);
+
+
+
                 invoicenum.setClickable(false);
 
+                selectedTemplate = Integer.parseInt(invoiceDtoInvoice.getTemplate_type());
+                if(selectedTemplate != 0){
+                    itemstxtTemplate.setText("Template "+selectedTemplate);
+                }
+                strnotes = invoiceDtoInvoice.getNotes();
+                ednotes.setText(strnotes);
 
+                credit_termsdto = invoiceDtoInvoice.getCreditTerms();
+                credit_terms = credit_termsdto;
                 invoicecompanyiddto = invoiceDtoInvoice.getCompanyId();
                 Log.e("invoicecompanyiddto", invoicecompanyiddto);
-                String url = "";
+                customer_id = invoiceDtoInvoice.getCustomerId();
+//                Log.e(TAG, "customer_idA"+customer_id);
+                paymentmode = invoiceDtoInvoice.getPaidAmountPaymentMethod();
 
-                selectcompany.setSelection(1);
+                txtdays.setText(credit_termsdto);
                 ref_nodto = invoiceDtoInvoice.getRefNo();
+                ref_no = ref_nodto;
                 edreferenceno.setText(ref_nodto);
 
-                payment_swift_bicdto = invoiceDtoInvoice.getPaymentSwiftBic();
-                payment_currencydto = invoiceDtoInvoice.getPaymentCurrency();
-                payment_ibandto = invoiceDtoInvoice.getPaymentIban();
+                payment_swift_bic = invoiceDtoInvoice.getPaymentSwiftBic();
+                payment_currency = invoiceDtoInvoice.getPaymentCurrency();
+                payment_iban = invoiceDtoInvoice.getPaymentIban();
                 paid_amount_payment_methoddto = invoiceDtoInvoice.getPaidAmountPaymentMethod();
-                currency_codedto = invoiceDtoInvoice.getCurrencySymbol();
 
+                currency_codedto = invoiceDtoInvoice.getCurrencySymbol();
+                Log.e("currency_codhjkkjhkje", currency_codedto);
                 //data set in calculate amount.
+
+
                 company_stampdto = invoiceDtoInvoice.getCompanyStamp();
-                String companystemppath = invoice_image_pathdto + company_stampdto;
-                Log.e("companystemppathAA ", companystemppath);
-                if(companystemppath.toLowerCase().endsWith(".png") || companystemppath.toLowerCase().endsWith(".jpg") || companystemppath.toLowerCase().endsWith(".jpeg")){
-                    new DownloadsImagefromwebCompanystem().execute(companystemppath);
-                }
+                //  Down load image From Web Data
+                String companystempurlpath = invoice_image_pathdto + company_stampdto;
+                Log.e(TAG, "invoice_image_pathdto"+ invoice_image_pathdto);
+                Log.e(TAG, "company_stampdto"+ company_stampdto);
 
                 if (company_stampdto.equals("")) {
-
+                    Log.e(TAG, "company_stampdto1111"+ company_stampdto);
                 } else {
+                    Log.e(TAG, "company_stampdto2222"+ company_stampdto);
+                    new DownloadCompanystempweb().execute(companystempurlpath);
                     imgstampsuccess.setVisibility(View.VISIBLE);
                 }
                 signature_of_receiverdto = invoiceDtoInvoice.getSignatureOfReceiver();
+                // down load image from web signature image
+
+
+
                 if (signature_of_receiverdto.equals("")) {
 
                 } else {
+                    s_r = "2";
+                    String signatureofreceiverpath = invoice_image_pathdto + signature_of_receiverdto;
+                    Log.e(TAG, "signatureReceiverPathAA "+signatureofreceiverpath);
+                    new Downloadsignaturereceiverweb().execute(signatureofreceiverpath);
                     imgrecsuccess.setVisibility(View.VISIBLE);
                 }
-                String signatureofreceverpath = invoice_image_pathdto + signature_of_receiverdto;
-                Log.e("pathtureofreceverpath", signatureofreceverpath);
-                Log.e("path receiver", signature_of_receiverdto);
-                if(signatureofreceverpath.toLowerCase().endsWith(".png") || signatureofreceverpath.toLowerCase().endsWith(".jpg") || signatureofreceverpath.toLowerCase().endsWith(".jpeg")) {
-                    new DownloadsImagefromweb().execute(signatureofreceverpath);
+                signature_of_issuerdto = invoiceDtoInvoice.getSignatureOfMaker();
+                // signature of issueceiver from web data
+
+
+                if (signature_of_issuerdto.equals("")) {
+                } else {
+                    s_r = "1";
+                    String signatureofreceiverpath = invoice_image_pathdto + signature_of_issuerdto;
+                    Log.e(TAG, "signatureIssuerPathAA "+signatureofreceiverpath);
+                    new Downloadsignatureissueweb().execute(signatureofreceiverpath);
+                    imgsigsuccess.setVisibility(View.VISIBLE);
                 }
 
-                shipping_firstnamedto = invoiceDtoInvoice.getShippingFirstname();
-                shipping_lastnamedto = invoiceDtoInvoice.getShippingLastname();
-                shipping_address_1dto = invoiceDtoInvoice.getShippingAddress1();
-                shipping_address_2dto = invoiceDtoInvoice.getShippingAddress2();
-                shipping_citydto = invoiceDtoInvoice.getShippingCity();
-                shipping_countrydto = invoiceDtoInvoice.getShippingCountry();
-                shipping_postalcodedto = (String) invoiceDtoInvoice.getShippingPostcode();
-                shipping_zonedto = (String) invoiceDtoInvoice.getShippingZone();
+//                shippingfirstname = invoiceDtoInvoice.getShippingFirstname();
+//                shippinglastname = invoiceDtoInvoice.getShippingLastname();
+//                shippingaddress1 = invoiceDtoInvoice.getShippingAddress1();
+//                shippingaddress2 = invoiceDtoInvoice.getShippingAddress2();
+//                shipping_city = invoiceDtoInvoice.getShippingCity();
+//                shippingaddress2 = invoiceDtoInvoice.getShippingCity();
+//                shippingcountry = invoiceDtoInvoice.getShippingCountry();
+//                shippingpostcode = (String) invoiceDtoInvoice.getShippingPostcode();
+//                shipping_zonedto = (String) invoiceDtoInvoice.getShippingZone();
+
+                Log.e("shippingfirstname", shippingfirstname);
+
+                // Add Custmoer detail
+                Customer_list selectcsto = new Customer_list();
+                selectcsto.setCustomer_name(sltcustonernamedto);
+                selectcsto.setCustomer_address(sltcustomer_addressdto);
+                selectcsto.setCustomer_contact_person(customerDtoContactName);
+                selectcsto.setCustomer_phone(sltcustomer_phone_numberdto);
+                selectcsto.setCustomer_website(sltcustomer_websitedto);
+                selectcsto.setCustomer_email(sltcustomer_emaildto);
+
+                selectcsto.setShipping_firstname(shippingfirstname);
+                selectcsto.setShipping_lastname(shippinglastname);
+                selectcsto.setShipping_address_1(shippingaddress1);
+                selectcsto.setShipping_address_2(shippingaddress2);
+                Log.e("shippingfirstname", shippingfirstname);
+                Log.e("shippinglastname", shippinglastname);
+                selectcsto.setShipping_city(shipping_city);
+                selectcsto.setShipping_country(shippingcountry);
+                selectcsto.setShipping_postcode(shippingpostcode);
+                selectcsto.setShipping_zone(shipping_zonedto);
+
+
+                selected.add(selectcsto);
+
                 // calculate amount data
-
-
 
                 if(invoiceDtoInvoice.getTotals() != null){
                     grosamontdto = new ArrayList<InvoiceTotalsItemDto>(invoiceDtoInvoice.getTotals());
                 }
 
-                Log.e(TAG, "invoiceDtoInvoice.getTotals() "+invoiceDtoInvoice.getTotals());
-
                 productsItemDtosdto = new ArrayList<ProductsItemDto>(invoiceDtoInvoice.getProducts());
                 invoice_imageDto = new ArrayList<Invoice_image>(data.getInvoiceImage());
-              //  Log.e("product", productsItemDtosdto.toString());
-
-                //Gson gson = new Gson();
-                String json2 = gson.toJson(productsItemDtosdto);
-
-                Log.e(TAG, "jsonAA "+json2);
+                Log.e(TAG, "product:::: "+invoice_imageDto.size());
 
                 if (productsItemDtosdto.size() > 0) {
                     for (int i = 0; i < productsItemDtosdto.size(); i++) {
                         Product_list product_list = new Product_list();
                         product_list.setProduct_name(productsItemDtosdto.get(i).getName());
-
-                        product_list.setCurrency_code(currency_codedto);
                         product_list.setProduct_id(productsItemDtosdto.get(i).getProductId());
+                        product_list.setCurrency_code(currency_codedto);
 
+                        product_list.setProduct_description(productsItemDtosdto.get(i).getDescription());
 
                         product_list.setProduct_measurement_unit(productsItemDtosdto.get(i).getMeasurementUnit());
 
-                        product_list.setProduct_description(productsItemDtosdto.get(i).getDescription());
-                        product_list.setProduct_price(productsItemDtosdto.get(i).getPrice());
-//                        Log.e("price", productsItemDtosdto.get(i).getPrice());
-//                        Log.e("Quentity", productsItemDtosdto.get(i).getQuantity());
+                        product_list.setProduct_price(productsItemDtosdto.get(i).getTotal());
+                        Log.e("price", productsItemDtosdto.get(i).getPrice());
+                        Log.e("Quentity", productsItemDtosdto.get(i).getQuantity());
                         producprice.add(productsItemDtosdto.get(i).getPrice());
                         tempList.add(product_list);
+
                         tempQuantity.add(productsItemDtosdto.get(i).getQuantity());
                         total_price = total_price + (Double.parseDouble(productsItemDtosdto.get(i).getPrice()) * Double.parseDouble(productsItemDtosdto.get(i).getQuantity()));
                         totalpriceproduct.add(String.valueOf(total_price));
+
                         calculateTotalAmount(total_price);
+
+                        Log.e("total_price", String.valueOf(total_price));
+
                     }
 
                 }
+                //    products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
 
-
-
-
+                //  products_adapter.update(product_bottom, tempList, tempQuantity, producprice);
 
                 productsRecycler.setAdapter(products_adapter);
+
+                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
 
                 int numsize = grosamontdto.size();
                 for (int i = 0; i < numsize; i++) {
                     listobj = grosamontdto.get(i);
                     String title = listobj.getTitle();
+                    String code = listobj.getCode();
 
-                    Log.e(TAG, "titleSS "+title + " "+listobj.getValue());
-
-//                    if (title.equals("Gross Amount")) {
-//                        Grossamount_strdto = listobj.getValue();
-//                        Double Grossamoundb=Double.parseDouble(Grossamount_strdto);
-//                        int Grossamoint = new BigDecimal(Grossamoundb).setScale(0, RoundingMode.HALF_UP).intValueExact();
-//
-//                        grosstotal.setText(Grossamoint + currency_codedto);
-//
-//                    } else if (title.equals("Sub Total")) {
-//
-//                        Subtotalamountdto = listobj.getValue();
-//                        Double Subtotalamoundbl=Double.parseDouble(Subtotalamountdto);
-//                        int Subtotalamountint = new BigDecimal(Subtotalamoundbl).setScale(0, RoundingMode.HALF_UP).intValueExact();
-//
-//                        subtotal.setText(Subtotalamountint + currency_codedto);
-//                    } else if (title.equals("Grand Total")) {
-//                        netamountvaluedto = listobj.getValue();
-//                        Double netamountvaluedbl=Double.parseDouble(netamountvaluedto);
-//                        int netamountvaluedblint = new BigDecimal(netamountvaluedbl).setScale(0, RoundingMode.HALF_UP).intValueExact();
-//
-//
-//                        netamount.setText(netamountvaluedblint + currency_codedto);
-//                    }
-
-
-
-                     if (title.equals("Gross Amount")) {
+                    if (title.equals("Gross Amount")) {
                         Grossamount_strdto = listobj.getValue();
 
                         Double Grossamount_strdtodbl = Double.parseDouble(Grossamount_strdto);
 
 
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            grosstotal.setText(""+Grossamount_strdtodbl);
+                            grosstotal.setText(formatter.format(Grossamount_strdtodbl));
                         } else {
-                            grosstotal.setText(""+Grossamount_strdtodbl + currency_codedto);
+                            grosstotal.setText(formatter.format(Grossamount_strdtodbl) + currency_codedto);
                         }
                     } else if (title.equals("Sub Total")) {
 
@@ -637,9 +832,9 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                         Double Subtotalamountdbl = Double.parseDouble(Subtotalamountdto);
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            subtotal.setText(""+Subtotalamountdbl);
+                            subtotal.setText(formatter.format(Subtotalamountdbl));
                         } else {
-                            subtotal.setText(""+Subtotalamountdbl + currency_codedto);
+                            subtotal.setText(formatter.format(Subtotalamountdbl) + currency_codedto);
                         }
 
                     } else if (title.equals("Grand Total")) {
@@ -649,15 +844,71 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
 
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            netamount.setText(""+netamountvaludbl);
+                            netamount.setText(formatter.format(netamountvaludbl));
                         } else {
-                            netamount.setText(""+netamountvaludbl+ currency_codedto);
+                            netamount.setText(formatter.format(netamountvaludbl) + currency_codedto);
                         }
+                    } else if (title.equals("Paid Amount")) {
+
+                        strpaid_amountdto = listobj.getValue();
+                        strpaid_amount = strpaid_amountdto;
+
+                        Double strpaid_amountdbl = Double.parseDouble(strpaid_amountdto);
+
+                        Log.e(TAG , "strpaid_amountdbl "+strpaid_amountdbl);
+
+
+                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                            paidamount.setText(formatter.format(strpaid_amountdbl));
+                        } else {
+                            paidamount.setText(formatter.format(strpaid_amountdbl) + currency_codedto);
+                        }
+
+                    } else if (title.equals("Remaining Balance")) {
+
+                        Blanceamountstrdto = listobj.getValue();
+                        Double Blanceamountstdbl = Double.parseDouble(Blanceamountstrdto);
+
+                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                            balance.setText(formatter.format(Blanceamountstdbl));
+                        } else {
+                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
+                        }
+
+
+//                        if(!title.equals("Paid Amount")) {
+//                            //  netamountvaluedto = listobj.getValue();
+//                            Double netamountvaludbl = Double.parseDouble(netamountvaluedto);
+//
+//                            Log.e(TAG , "netamountvaludbl "+netamountvaludbl);
+//
+//                            Blanceamountstrdto = listobj.getValue();
+//                            Double Blanceamountstdbl2 = Double.parseDouble(Blanceamountstrdto);
+//
+//                            Log.e(TAG , "Blanceamountstdbl2 "+Blanceamountstdbl2);
+//
+//
+//                            Double aDoubleBalance = netamountvaludbl - Blanceamountstdbl2;
+//
+//                            Log.e(TAG , "aDoubleBalance "+aDoubleBalance);
+//
+//
+//                            paidamount.setText(formatter.format(aDoubleBalance)+""+currency_codedto);
+//
+//
+//                        }
+
                     }
 
                     else if (title.equals("Discount")) {
 
                         Discountamountstrdto = listobj.getValue();
+
+                        strdiscountvalue = listobj.getValue();
+
+
+                        // discount.setText(Utility.getRemoveDoubleMinus("-"+Discountamountstrdto) + cruncycode);
+
                         discount.setText(""+Discountamountstrdto+currency_codedto);
 //                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
 //
@@ -683,10 +934,41 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                     }
 
+
+                    else if (code.equalsIgnoreCase("tax")) {
+//                        Shippingamountdto = listobj.getValue();
+//                        freight.setText(""+Shippingamountdto+currency_codedto);
+
+                        //tax = listobj.getValue();
+
+
+                        tax_type = listobj.getTax_type();
+                        value = listobj.getValue();
+
+                        txttax.setText(""+title);
+                        tax.setText(""+value+currency_codedto);
+
+                        taxrname = listobj.getTitle();
+
+                        taxtypeclusive = listobj.getTax_type();
+                        taxtrateamt = listobj.getRate();
+                        Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+                        Log.e(TAG, "taxtrateamt "+taxtrateamt);
+
+
+
+                        SelectedTaxlist student = new SelectedTaxlist();
+
+                        student.setTaxname(listobj.getTitle());
+                        student.setTaxrate(listobj.getRate());
+                        student.setTaxtype(tax_type);
+                        student.setTaxamount(value);
+
+                        selectedtaxt.add(student);
+
+                    }
+
                 }
-
-
-
 
 
             }
@@ -698,6 +980,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         });
 
     }
+
 
     private void setFonts() {
         invoicenumtxt.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
@@ -722,23 +1005,34 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         freight.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
         txtnetamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
         netamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        txtpaidamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        paidamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        txtbalance.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        balance.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        s_invoice.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
         s_receiver.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
         c_stamp.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
+        attachmenttxt.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
         ednotes.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/Ubuntu-Regular.ttf"));
+        txtcredit.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+        txtdays.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
         txtreferenceno.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
         edreferenceno.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        txtduedate.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+        edduedate.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+
+
     }
 
     private void setListeners() {
-
 
         additem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (selectwarehouseId.equals("")) {
+                if (selectwarehouseId.equals(""))
+                {
                     Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Warehouse");
-
                 } else {
                     createbottomsheet_products();
                     bottomSheetDialog.show();
@@ -752,13 +1046,8 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         addservice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (selectwarehouseId.equals("")) {
-                    Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Warehouse");
-                    bottomSheetDialog2.dismiss();
-                } else {
-                    createbottomsheet_services();
-                    bottomSheetDialog2.show();
-                }
+                createbottomsheet_services();
+                bottomSheetDialog2.show();
 
             }
         });
@@ -771,6 +1060,15 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             }
         });
 
+        paidamount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createbottomsheet_paid();
+                bottomSheetDialog2.show();
+            }
+        });
+
+        options.setEnabled(false);
         options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -778,25 +1076,44 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                 bottomSheetDialog2.show();
             }
         });
+        txtdays.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createbottomsheet_days();
+                bottomSheetDialog.show();
+
+            }
+        });
+
+
         createinvoice.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("LongLogTag")
             @Override
             public void onClick(View v) {
+
+
                 invoice_no = invoicenumtxt.getText().toString();
                 strnotes = ednotes.getText().toString();
                 ref_no = edreferenceno.getText().toString();
 
                 strdiscountvalue = discount.getText().toString();
+                strpaid_amount = paidamount.getText().toString();
 
                 invoice_date = duedate.getText().toString();
-
+                invoice_due_date = edduedate.getText().toString();
                 invoicetaxamount = tax.getText().toString();
-                SelectedTaxlist student = new SelectedTaxlist();
-                student.setTaxamount(invoicetaxamount);
-                selectedtaxt.add(student);
-                createinvoicewithdetail();
 
-                        //Log.e(TAG, "invocerecepts_no "+invoicenum.getText());
+
+
+                if (multimgpath.size() > 0) {
+                    for (int i = 0; i < multimgpath.size(); i++) {
+                        File imgFile = new File(multimgpath.get(i));
+                        // company_stampFileimage=imgFile;
+                        multiple[i] = imgFile;
+
+
+                    }
+                }
+                viewPDF();
             }
         });
 
@@ -832,6 +1149,47 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             }
         });
 
+        attachmenttxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                multiimagepicker();
+
+            }
+        });
+
+
+        selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+            @Override
+            public void onItemSelected(int position, String itemAtPosition) {
+                selectedCompanyId = cids.get(position);
+
+
+                selectedItemOfMySpinner = selectcompany.getSelectedItemPosition();
+
+                Log.e("selectedCompany", selectedCompanyId);
+                warehouse_list(selectedCompanyId);
+                productget(selectedCompanyId);
+                serviceget(selectedCompanyId);
+                customer_list(selectedCompanyId);
+                CompanyInformation(selectedCompanyId);
+
+            }
+        });
+
+        selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+            @Override
+            public void onItemSelected(int position, String itemAtPosition) {
+
+                selectwarehouseId = wids.get(position);
+                Log.e(TAG, "selectwarehouseIdAA "+ selectwarehouseId);
+
+                warehousePosition = position;
+
+            }
+        });
+
+
 
         invoicerecipnt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -851,42 +1209,120 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
     }
 
+    private void multiimagepicker() {
 
-    private void createinvoicewithdetail() {
+
+        multiImageDisposable = TedRxBottomPicker.with(this)
+                //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
+                .setPeekHeight(1600)
+                .showTitle(false)
+                .setCompleteButtonText("Done")
+                .setEmptySelectionText("No Select")
+                .setSelectMaxCount(5)
+                .setSelectMinCount(1)
+
+                .setSelectedUriList(selectedUriList)
+                .showMultiImage()
+                .subscribe(uris -> {
+                    selectedUriList = uris;
+                    showUriList(uris);
+                }, Throwable::printStackTrace);
+
+
+    }
+
+    private void showUriList(List<Uri> uriList) {
+        for (Uri uri : uriList) {
+            attchmentimage.add(uri.toString());
+            attachmenttxtimg.setVisibility(View.VISIBLE);
+        }
+        int sizen = attchmentimage.size();
+
+        attachmenttxtimg.setVisibility(View.VISIBLE);
+        String attchedmentimagepath;
+        if (attchmentimage != null) {
+            for (int i = 0; i < attchmentimage.size(); i++) {
+                attchedmentimagepath = attchmentimage.get(i);
+                try {
+
+                    String decoded = URLDecoder.decode(attchedmentimagepath, "UTF-8");
+                    String replaceString = decoded.replaceAll("file://", "");
+                    multimgpath.add(replaceString);
+
+                } catch (Exception e) {
+
+                }
+
+            }
+        } else {
+
+        }
+
+        Log.e("uri Image ", String.valueOf(attchmentimage));
+
+    }
+
+    private void createinvoicewithdetail(File file) {
+
+
+
+        if(strpaid_amount.equalsIgnoreCase("0")){
+            strpaid_amount = "";
+        }else{
+            strpaid_amount = Utility.getReplaceCurrency(strpaid_amount, cruncycode);
+        }
+        Log.e(TAG, "strpaid_amountA "+strpaid_amount);
+
         avi.smoothToShow();
-
-
         if (customer_name.equals("")) {
             Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Customer");
-        } else if (invoice_date.equals("")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Date");
+        } else if (getTrueValue(invoicenum.getText().toString()) == false) {
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Valid Invoice No");
+
+        }else if (invoice_date.equals("")) {
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Invoice Date");
 
         } else if (selectedCompanyId.equals("")) {
             Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select a Company");
 
-//        } else if (ref_no.equals("")) {
-//            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Ref number");
+        } else if (selectwarehouseId.equals("")) {
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Warehouse");
 
-        } else {
+        } else if (credit_terms.equals("")) {
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Credit Term");
 
-            final ProgressDialog progressDialog=new ProgressDialog(ConvertToReceiptsActivity.this);
+        }  else {
+
+            final ProgressDialog progressDialog = new ProgressDialog(ConvertToReceiptsActivity.this);
             progressDialog.setMessage("Please wait");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
-            RequestParams params = new RequestParams();
-            params.add("company_id", selectedCompanyId);
 
+            RequestParams params = new RequestParams();
+
+            Log.e(TAG, "freight_cost"+freight_cost);
+
+//            params.add("invoice_id", invoiceId);
+//            params.add("invoice_no", invoicenumberdto);
+//            params.add("new_invoice_no", invoicenum.getText().toString());
+
+            params.add("company_id", selectedCompanyId);
             params.add("receipt_no", invoicenum.getText().toString());
             params.add("receipt_date", invoice_date);
+
+            params.add("wearhouse_id", selectwarehouseId);
+            params.add("invoice_date", invoice_date);
+            params.add("due_date", invoice_due_date);
             params.add("customer_id", customer_id);
-            params.add("invoice_no", String.valueOf(invoicenovalue));
+            Log.e(TAG, "customer_idBB"+customer_id);
             params.add("notes", strnotes);
             params.add("ref_no", ref_no);
             params.add("paid_amount_payment_method", paymentmode);
-
-            params.add("freight_cost", freight_cost);
-            params.add("discount", strdiscountvalue);
-
+            params.add("credit_terms", credit_terms);
+            params.add("freight_cost", Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+            params.add("paid_amount", strpaid_amount);
+            params.add("paid_amount_date", Paymentamountdate);
             params.add("shipping_firstname", shippingfirstname);
             params.add("shipping_lastname", shippinglastname);
             params.add("shipping_address_1", shippingaddress1);
@@ -898,18 +1334,25 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             params.add("payment_currency", payment_currency);
             params.add("payment_iban", payment_iban);
             params.add("payment_swift_bic", payment_swift_bic);
-            params.add("invoice_id", invoiceId);
-            params.add("estimate_no", String.valueOf(invoiceestimatetno));
-                      if(company_logoFileimage !=null)
 
-            {
+
+            params.add("template_type", ""+selectedTemplate);
+
+            if (file!=null){
+                try {
+                    params.put("pdf",file);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (company_logoFileimage != null) {
                 try {
                     params.put("logo", company_logoFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-
             }
 
             if (company_stampFileimage != null) {
@@ -919,8 +1362,16 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-
             }
+            if (signatureofinvoicemaker != null) {
+                try {
+                    params.put("signature_of_maker", signatureofinvoicemaker);
+                    //  Log.e("signature_of_issuer", signatureofinvoicemaker.toString());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
             if (signaturinvoicereceiver != null) {
                 try {
                     params.put("signature_of_receiver", signaturinvoicereceiver);
@@ -929,27 +1380,81 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     e.printStackTrace();
                 }
             }
-            for (int i = 0; i < tempList.size(); i++) {
-                params.add("product[" + i + "]" + "[price]", tempList.get(i).getProduct_price());
-                params.add("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
-                params.add("product[" + i + "]" + "[product_id]", tempList.get(i).getProduct_id());
-
-
-            }
-            if (selectedtaxt.size() > 0) {
-                for (int i = 0; i < selectedtaxt.size() - 1; i++) {
-                    params.add("tax[" + i + "]" + "[type]", selectedtaxt.get(i).getTaxtype());
-                    params.add("tax[" + i + "]" + "[type]", selectedtaxt.get(i).getTaxtype());
-                          /* if (selectedtaxt.get(i).getTaxtype().equals("p"))
-                      params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-                     else
-                            params.add("tax[" + i + "[amount]", selectedtaxt.get(i).getTaxrate());
-                                    */
-                    params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+            if (company_logoFileimage != null) {
+                try {
+                    params.put("logo", company_logoFileimage);
+                    // Log.e("signature_of_issuer", signaturinvoicereceiver.toString());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
 
-            String token = Constant.GetSharedPreferences(ConvertToReceiptsActivity.this, Constant.ACCESS_TOKEN);
+            for (int i = 0; i < tempList.size(); i++) {
+
+                Log.e("product id", tempList.get(i).getProduct_id());
+                params.add("product[" + i + "]" + "[product_id]", tempList.get(i).getProduct_id());
+                params.add("product[" + i + "]" + "[price]", producprice.get(i));
+                params.add("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
+
+
+            }
+
+
+
+            Log.e(TAG, "selectedtaxtAAA "+selectedtaxt.size());
+
+            if (selectedtaxt.size() > 0) {
+                for (int i = 0; i < selectedtaxt.size(); i++) {
+
+                    taxtypeclusive = selectedtaxt.get(i).getTaxtype();
+
+                    Log.e(TAG, "selectedtaxtAAA1 "+selectedtaxt.get(i).getTaxtype());
+                    Log.e(TAG, "selectedtaxtAAA2 "+selectedtaxt.get(i).getTaxrate());
+                    Log.e(TAG, "selectedtaxtAAA3 "+selectedtaxt.get(i).getTaxname());
+                    Log.e(TAG, "selectedtaxtAAA4 "+invoicetaxamount);
+                    Log.e(TAG, "selectedtaxtAAA5 "+taxtypeclusive);
+
+
+
+                    params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                    params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                    params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+                    // params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+
+                    if(selectedtaxt.get(i).getTaxname().length() > 0){
+                        if(selectedtaxt.get(i).getTaxname().contains(" ")){
+                            String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                            params.add("tax[" + i + "]" + "[title]", firstTax);
+                        }
+                    }
+
+                }
+            } else {
+
+            }
+
+
+
+            if (selectedUriList.size() > 0) {
+                for (int k = 0; k < selectedUriList.size(); k++) {
+                    try {
+//                        params.add("invoice_image", "[" + k + "]");
+//                        params.put("fileName:", "invoice_image" + multiple[k] + ".jpg");
+//                        params.add("mimeType:", "image/jpeg");
+
+                        params.put("images[]", selectedUriList.get(k).toString().replace("file://", ""));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+
+            Log.e(TAG,  "Params: "+params.toString());
+
+            String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token", token);
@@ -957,6 +1462,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
+                    avi.smoothToHide();
                     progressDialog.dismiss();
                     Log.e("Create Invoicedata", response);
                     try {
@@ -966,20 +1472,24 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
+                            Constant.SuccessToast(ConvertToReceiptsActivity.this, "Receipt created successfully");
+
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Intent intent = new Intent(ConvertToReceiptsActivity.this, Create_Invoice_Activity.class);
+                                    Intent intent = new Intent(ConvertToReceiptsActivity.this, ReceiptsActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
-                            }, 1500);
+                            }, 500);
 
                             JSONObject data = jsonObject.getJSONObject("data");
-
-
+//
                         }
 
+                        if (status.equals("false")) {
+                            Constant.ErrorToast(ConvertToReceiptsActivity.this, jsonObject.getString("message"));
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -989,6 +1499,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    progressDialog.dismiss();
                     if (responseBody != null) {
                         String response = new String(responseBody);
                         Log.e("responsecustomersF", response);
@@ -1013,7 +1524,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
     }
 
     private void requestStoragePermission(boolean isCamera) {
-        Dexter.withActivity(this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+        Dexter.withActivity(ConvertToReceiptsActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
@@ -1066,15 +1577,16 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
     private void gallaryIntent() {
 
-        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         pickPhoto.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        startActivityForResult(pickPhoto, GALLARY_aCTION_PICK_CODE);
+        this.startActivityForResult(pickPhoto, GALLARY_aCTION_PICK_CODE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.e(TAG, "onActivityResult");
+
 
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_ACTION_PICK_CODE) {
@@ -1082,9 +1594,8 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     Uri selectedImageUri = data.getData();
                     // Get the path from the Uri
 
-                    imgstampsuccess.setVisibility(View.VISIBLE);
-                    fileimage = mCompressor.compressToFile(fileimage);
 
+                    fileimage = mCompressor.compressToFile(fileimage);
                     signature_of_receiver = getRealPathFromUri(selectedImageUri);
                     Log.e("Image Path", signature_of_receiver);
                 } catch (Exception e) {
@@ -1093,14 +1604,15 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
-
                     // Get the path from the Uri
+
+
+                    imgstampsuccess.setVisibility(View.VISIBLE);
                     company_stamp = getRealPathFromUri(selectedImage);
 
                     try {
                         company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
                         Log.e("company_stamp Path", company_stamp);
-                        imgstampsuccess.setVisibility(View.VISIBLE);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -1115,6 +1627,42 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
         }
 
+
+        if(requestCode == 121){
+
+            SavePref pref = new SavePref();
+            pref.SavePref(ConvertToReceiptsActivity.this);
+
+            selectedTemplate = pref.getTemplate();
+            Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
+
+            if(selectedTemplate != 0){
+                itemstxtTemplate.setText("Template "+selectedTemplate);
+            }
+        }
+
+
+
+
+        if(requestCode == 123){
+            Log.e(TAG, "requestCode "+requestCode);
+            customer_list(selectedCompanyId);
+        }
+
+        if(requestCode == 124){
+            Log.e(TAG, "requestCode "+requestCode);
+            productget(selectedCompanyId);
+        }
+
+        if(requestCode == 125){
+            Log.e(TAG, "requestCode "+requestCode);
+            serviceget(selectedCompanyId);
+        }
+
+        if(requestCode == 126){
+            Log.e(TAG, "requestCode "+requestCode);
+            CompanyInformation(selectedCompanyId);
+        }
 
     }
 
@@ -1213,8 +1761,6 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog,"invoice");
             recycler_products.setAdapter(product_bottom_adapter);
             product_bottom_adapter.notifyDataSetChanged();
-
-
             txtproducts.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
             bottomSheetDialog = new BottomSheetDialog(this);
             bottomSheetDialog.setContentView(view);
@@ -1232,7 +1778,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                 public void onClick(View v) {
                     Intent intent = new Intent(ConvertToReceiptsActivity.this, Service_Activity.class);
                     startActivityForResult(intent, 125);
-                    bottomSheetDialog2.dismiss();
+                    bottomSheetDialog.dismiss();
                 }
             });
             recycler_services = view.findViewById(R.id.recycler_services);
@@ -1279,23 +1825,31 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
             View view = LayoutInflater.from(this).inflate(R.layout.tax_bottom_itemlayout, null);
 
+            TextView add_service_new = view.findViewById(R.id.add_service_new);
+            add_service_new.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ConvertToReceiptsActivity.this, Tax_Activity.class);
+                    startActivityForResult(intent, 126);
+                    bottomSheetDialog3.dismiss();
+                }
+            });
 
             taxrecycler = view.findViewById(R.id.taxrecycler);
             taxswitch = view.findViewById(R.id.taxswitch);
             btndone = view.findViewById(R.id.taxbtndone);
 
+            if(taxtypeclusive.equalsIgnoreCase("Inclusive")){
+                taxswitch.setChecked(true);
+            }else{
+                taxswitch.setChecked(false);
+            }
+
+
             imgincome = view.findViewById(R.id.txttax);
-
-
-        /*    txtincomepercent.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
-            txtincometax.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-    */
             taxswitch.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
             imgincome.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
-
             btndone.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
-
-
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             taxrecycler.setLayoutManager(layoutManager);
             taxrecycler.setHasFixedSize(true);
@@ -1304,18 +1858,18 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             taxrecycler.setAdapter(customTaxAdapter);
             customTaxAdapter.notifyDataSetChanged();
 
+            customTaxAdapter.updateTaxSelect(taxID);
 
             btndone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String statusSwitch1;
                     if (taxswitch.isChecked()) {
-
-                        statusSwitch1 = taxswitch.getTextOn().toString();
-                        taxtypeclusive = "Exclusive";
-                    } else {
                         statusSwitch1 = taxswitch.getTextOn().toString();
                         taxtypeclusive = "Inclusive";
+                    } else {
+                        statusSwitch1 = taxswitch.getTextOn().toString();
+                        taxtypeclusive = "Exclusive";
                     }
                     calculateTotalAmount(total_price);
                     bottomSheetDialog3.dismiss();
@@ -1327,6 +1881,99 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         }
     }
 
+    public void createbottomsheet_paid() {
+        if (bottomSheetDialog2 != null) {
+
+            View view = LayoutInflater.from(this).inflate(R.layout.paidamount_bottom_sheet, null);
+            txtpaid = view.findViewById(R.id.txtpaid);
+            txtamount = view.findViewById(R.id.txtamount);
+            txtdate = view.findViewById(R.id.txtdate);
+            edamount = view.findViewById(R.id.edamount);
+            eddate = view.findViewById(R.id.eddate);
+            btndone2 = view.findViewById(R.id.btndone2);
+            selectpaymentmode = view.findViewById(R.id.selectpaymentmode);
+            paymode.clear();
+            paymode.add("Cash");
+            paymode.add("Cheque");
+            paymode.add("Bank");
+            paymode.add("Credit card");
+            paymode.add("Paypal");
+            paymode.add("Others");
+            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymode);
+            selectpaymentmode.setAdapter(namesadapter);
+
+
+            selectpaymentmode.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+                @Override
+                public void onItemSelected(int position, String itemAtPosition) {
+                    paimentmodespinerstr = paymode.get(position);
+                    paymentmode = paimentmodespinerstr;
+
+                }
+            });
+            txtpaid.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            txtamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            txtdate.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            edamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+            eddate.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+            btndone2.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            eddate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int mYear, mMonth, mDay;
+                    final Calendar c = Calendar.getInstance();
+                    mYear = c.get(Calendar.YEAR);
+                    mMonth = c.get(Calendar.MONTH);
+                    mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(ConvertToReceiptsActivity.this,
+                            new DatePickerDialog.OnDateSetListener() {
+
+                                @Override
+                                public void onDateSet(DatePicker view, int year,
+                                                      int monthOfYear, int dayOfMonth) {
+
+                                    eddate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+                                }
+                            }, mYear, mMonth, mDay);
+                    // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                    datePickerDialog.show();
+                }
+            });
+
+            btndone2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    paidamountstr = edamount.getText().toString();
+                    String paiddate = eddate.getText().toString();
+
+                    Paymentamountdate = paiddate;
+
+                    if (paidamountstr.isEmpty()) {
+                        edamount.setError("Required");
+                        edamount.requestFocus();
+                    } else if (paiddate.isEmpty()) {
+                        eddate.setError("Required");
+                        eddate.requestFocus();
+                    } else if (paymentmode.equals("")) {
+//                        Constant.ErrorToast(EditInvoiceActivity.this, "Payment Mode Required");
+                        Toast.makeText(ConvertToReceiptsActivity.this, "Payment Mode Required", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (paidamountstr != null) {
+                            paidamount.setText(paidamountstr);
+                            calculateTotalAmount(total_price);
+                            bottomSheetDialog2.dismiss();
+                        }
+                    }
+                }
+            });
+            bottomSheetDialog2 = new BottomSheetDialog(ConvertToReceiptsActivity.this);
+            bottomSheetDialog2.setContentView(view);
+        }
+    }
 
     public void createbottomsheet_dots() {
         if (bottomSheetDialog2 != null) {
@@ -1337,109 +1984,113 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             btndotcancel = view.findViewById(R.id.btndotcancel);
 
             btnviewinvoice.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("LongLogTag")
                 @Override
                 public void onClick(View view) {
+                    avi.smoothToShow();
+
+                    // fright cost
+                    String shipingcoast = freight.getText().toString();
                     Subtotalamount = subtotal.getText().toString();
                     Grossamount_str = grosstotal.getText().toString();
                     invoice_date = duedate.getText().toString();
+                    invoice_due_date = edduedate.getText().toString();
+                    reference_no = edreferenceno.getText().toString();
                     netamountvalue = netamount.getText().toString();
-                    invoice_no = invoicenumtxt.getText().toString();
-                    strnotes = ednotes.getText().toString();
+                    Blanceamountstr = balance.getText().toString();
+
                     ref_no = edreferenceno.getText().toString();
+
                     strdiscountvalue = discount.getText().toString();
+                    strpaid_amount = paidamount.getText().toString();
+
                     invoice_date = duedate.getText().toString();
+                    invoice_due_date = edduedate.getText().toString();
                     invoicetaxamount = tax.getText().toString();
                     if (selectedCompanyId.equals("")) {
                         Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select a Company");
                         bottomSheetDialog2.dismiss();
+                    } else if (invoice_date.equals("")) {
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Invoice Date");
+                        bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
                         Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Customer");
                         bottomSheetDialog2.dismiss();
-                    } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Date");
+                    } else if (credit_terms.equals("")) {
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Credit Term");
+                        bottomSheetDialog2.dismiss();
+                    } else if (selectwarehouseId.equals("")) {
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Warehouse");
                         bottomSheetDialog2.dismiss();
                     } else {
-
-                        Log.e(TAG , "taxamount11 "+ invoicetaxamount);
+                        Customer_list customer_lists = selected.get(0);
+                        Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
                         Intent intent = new Intent(ConvertToReceiptsActivity.this, InvoiceToReceiptsWebview.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("company_id", selectedCompanyId);
-                        intent.putExtra("invoice_date", duedate.getText().toString());
+                        intent.putExtra("taxText", txttax.getText().toString());
+                        intent.putExtra("companycolor", companycolor);
+                        intent.putExtra("selectedTemplate", ""+selectedTemplate);
+
+                        intent.putExtra("invoice_date", invoice_date);
                         intent.putExtra("netamount", netamountvalue);
-                        intent.putExtra("taxamount", ""+invoicetaxamount);
+
+                        intent.putExtra("invoicetaxamount", invoicetaxamount);
+                        intent.putExtra("blanceamount", Blanceamountstr);
+
                         intent.putExtra("subtotalamt", Subtotalamount);
-                        Log.e(TAG, "Subtotalamount "+Subtotalamount);
-                        intent.putExtra("paypal_emailstr", paypal_emailstr);
-
-                        intent.putExtra("customer_id", customer_id);
+                        intent.putExtra("due_date", invoice_due_date);
+                        //intent.putExtra("customer_id", customer_id);
                         intent.putExtra("grossamount", Grossamount_str);
+//                        intent.putExtra("invoice_no", invoicenumberdto);
                         intent.putExtra("invoice_no", invoicenum.getText().toString());
-                         Log.e(TAG, "invoice_no "+invoicenum.getText().toString());
                         intent.putExtra("notes", strnotes);
-
                         intent.putExtra("ref_no", ref_no);
                         intent.putExtra("paid_amount_payment_method", paymentmode);
                         intent.putExtra("credit_terms", credit_terms);
-                        intent.putExtra("freight_cost", freight.getText().toString());
-                       // Log.e(TAG, "freight_cost "+freight_cost);
-                        intent.putExtra("discount", strdiscountvalue);
-                        Log.e(TAG, "discountvalue "+strdiscountvalue);
-                        intent.putExtra("paid_amount_date", Paymentamountdate);
-                        intent.putExtra("shipping_firstname", shippingfirstname);
-                        intent.putExtra("shipping_lastname", shippinglastname);
-                        intent.putExtra("shipping_address_1", shippingaddress1);
-                        intent.putExtra("shipping_address_2", shippingaddress2);
-                        intent.putExtra("shipping_city", shippingcity);
-                        intent.putExtra("shipping_postcode", shippingpostcode);
-                        intent.putExtra("shipping_country", shippingcountry);
-                        intent.putExtra("payment_bank_name", payment_bank_name);
-                        intent.putExtra("payment_currency", payment_currency);
-                        intent.putExtra("payment_iban", payment_iban);
-                        intent.putExtra("payment_swift_bic", payment_swift_bic);
-
+                        intent.putExtra("freight_cost", shipingcoast);
+                        intent.putExtra("paypal_emailstr", paypal_emailstr);
+                        intent.putExtra("company_name", Selectedcompanyname);
                         intent.putExtra("company_logo", companylogopath);
-                        intent.putExtra("company_name", company_name);
+                        intent.putExtra("company_name", Selectedcompanyname);
                         intent.putExtra("company_address", company_address);
                         intent.putExtra("company_contact", company_contact);
                         intent.putExtra("company_email", company_email);
                         intent.putExtra("company_website", company_website);
+                        intent.putExtra("discount", strdiscountvalue);
+                        intent.putExtra("paid_amount", strpaid_amount);
+                        intent.putExtra("paid_amount_date", Paymentamountdate);
+                        Log.e(TAG, "Paymentamountdate2 "+Paymentamountdate);
                         intent.putExtra("payment_bank_name", payment_bank_name);
                         intent.putExtra("payment_currency", payment_currency);
                         intent.putExtra("payment_iban", payment_iban);
                         intent.putExtra("payment_swift_bic", payment_swift_bic);
-
-                        intent.putExtra("custoner_contact_name", custoner_contact_name);
-                        intent.putExtra("customer_email", customer_email);
-                        intent.putExtra("customer_contact", customer_contact);
-                        intent.putExtra("customer_address", customer_address);
-                        intent.putExtra("customer_website", customer_website);
-
+                        intent.putExtra("producprice", producprice);
+                        intent.putExtra("totalpriceproduct", totalpriceproduct);
 
                         intent.putExtra("signature_of_receiver", signatureofreceiverst);
-                        Log.e(TAG, "signatureofreceiverst "+signatureofreceiverst);
-                        intent.putExtra("company_stamp", company_stamp);
-                        Log.e(TAG, "company_stamp "+company_stamp);
+                        Log.e(TAG, "signatureofreceiverst::: "+signatureofreceiverst);
+                        //Log.e(TAG, "signature_of_receiver::: "+signatureofreceiverst);
 
+                        Log.e(TAG, "company_stamp::: "+company_stamp);
+                        intent.putExtra("company_stamp", company_stamp);
                         intent.putExtra("signature_issuer", signature_of_issuer);
                         intent.putExtra("reference_no", reference_no);
-
                         // intent.putStringArrayListExtra("products_list",products);
                         intent.putExtra("tempQuantity", tempQuantity);
-
                         intent.putExtra("tempList", tempList);
                         intent.putExtra("customerselected", selected);
-                        intent.putExtra("producprice", producprice);
-
+                        intent.putExtra("customerinfo", customerinfo);
                         intent.putExtra("quantity_list", quantity);
                         intent.putExtra("rate_list", rate);
                         intent.putExtra("attchemnt", attchmentimage);
-                        intent.putExtra("totalpriceproduct", totalpriceproduct);
+
+                        // Log.e(TAG)
 
 
                         startActivity(intent);
                         bottomSheetDialog2.dismiss();
+                        avi.hide();
                     }
 
                 }
@@ -1452,9 +2103,9 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     duedate.setText("");
                     invoicenum.setText("");
                     invoicerecipnt.setText("");
-
+                    txtdays.setText("");
                     edreferenceno.setText("");
-
+                    edduedate.setText("");
                     tempList.clear();
                     quantity.clear();
                     producprice.clear();
@@ -1466,13 +2117,16 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     tax.setText("");
                     freight.setText("");
                     netamount.setText("");
-
-
+                    paidamount.setText("");
+                    balance.setText("");
                     ednotes.setText("");
                     imgsigsuccess.setVisibility(View.INVISIBLE);
                     imgrecsuccess.setVisibility(View.INVISIBLE);
                     imgstampsuccess.setVisibility(View.INVISIBLE);
+                    attachmenttxtimg.setVisibility(View.INVISIBLE);
 
+
+                    products_adapter.notifyDataSetChanged();
 
                     bottomSheetDialog2.dismiss();
                 }
@@ -1489,7 +2143,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             btnclear.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
             btndotcancel.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
 
-            bottomSheetDialog2 = new BottomSheetDialog(this);
+            bottomSheetDialog2 = new BottomSheetDialog(ConvertToReceiptsActivity.this);
             bottomSheetDialog2.setContentView(view);
         }
     }
@@ -1541,6 +2195,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
     }
 
+
     public void discount_dialog() {
         final Dialog mybuilder = new Dialog(this);
         mybuilder.setContentView(R.layout.discount_dialog);
@@ -1578,7 +2233,12 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-
+                    if(strdiscount.equalsIgnoreCase("Percentage")){
+                        eddisount.setHint("Enter Discount in %");
+                    }
+                    if(strdiscount.equalsIgnoreCase("Amount")){
+                        eddisount.setHint("Enter Discount in Amount");
+                    }
 
                 }
 
@@ -1592,7 +2252,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                 strdiscountvalue = eddisount.getText().toString();
                 if (strdiscountvalue.matches("")) {
-                   // Toast.makeText(ConvertToReceiptsActivity.this, "You did not enter a username", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(EditInvoiceActivity.this, "You did not enter a username", Toast.LENGTH_SHORT).show();
                     mybuilder.dismiss();
                     return;
                 } else {
@@ -1605,6 +2265,182 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
     }
 
+    public void createbottomsheet_days() {
+        if (bottomSheetDialog != null) {
+            View view = LayoutInflater.from(this).inflate(R.layout.days_itemlayout, null);
+            txtcredit1 = view.findViewById(R.id.txtcredit);
+            radiogroup1 = view.findViewById(R.id.radiogroup1);
+            radiogroup2 = view.findViewById(R.id.radiogroup2);
+            rnone = view.findViewById(R.id.rnone);
+            r3days = view.findViewById(R.id.r3days);
+            r14days = view.findViewById(R.id.r14days);
+            r30days = view.findViewById(R.id.r30days);
+            r60days = view.findViewById(R.id.r60days);
+            r120days = view.findViewById(R.id.r120days);
+            rimmediately = view.findViewById(R.id.rimmediately);
+            r7days = view.findViewById(R.id.r7days);
+            r21days = view.findViewById(R.id.r21days);
+            r45days = view.findViewById(R.id.r45days);
+            r90days = view.findViewById(R.id.r90days);
+            r365days = view.findViewById(R.id.r365days);
+            txtor = view.findViewById(R.id.txtor);
+            btndone1 = view.findViewById(R.id.btndone);
+            edmanual = view.findViewById(R.id.edmanual);
+
+            radiogroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @SuppressLint("ResourceType")
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    RadioButton rb = group.findViewById(checkedId);
+                    if (null != rb && checkedId > -1) {
+
+                        credit_terms = rb.getText().toString();
+
+                    }
+
+                }
+            });
+            radiogroup2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @SuppressLint("ResourceType")
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    RadioButton rb = group.findViewById(checkedId);
+                    if (null != rb && checkedId > -1) {
+
+                        credit_terms = rb.getText().toString();
+
+                    }
+
+                }
+            });
+
+            edmanual.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    edmanual.setClickable(radiogroup1.getCheckedRadioButtonId() != -1 || radiogroup2.getCheckedRadioButtonId() != -1);
+                    credit_terms = "";
+                    radiogroup2.clearCheck();
+                    radiogroup1.clearCheck();
+                }
+            });
+
+            btndone1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dayss = edmanual.getText().toString();
+
+                    if (dayss.equals("") && credit_terms.equals("")) {
+                        Toast.makeText(ConvertToReceiptsActivity.this, "Please Select Atleast One", Toast.LENGTH_LONG).show();
+                    } else if (dayss != null && credit_terms.equals("")) {
+
+                        String dayswith = dayss.trim();
+
+                        Double daysvalue = Double.parseDouble(dayswith);
+
+                        Double resultday = toMilliSeconds(daysvalue);
+                        long sum = (long) (resultday + datemillis);
+                        // Creating date format
+                        DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+
+                        // Creating date from milliseconds
+                        // using Date() constructor
+                        Date result = new Date(sum);
+                        Log.e("Date Long", simple.format(result));
+                        edduedate.setText(simple.format(result));
+                        edduedate.setClickable(true);
+                        txtdays.setText(dayss + " " + "days");
+                        bottomSheetDialog.dismiss();
+                        edduedate.setClickable(false);
+                    } else if (credit_terms != null && dayss.equals("")) {
+                        if (credit_terms.equals("none")) {
+                            txtdays.setText(credit_terms);
+                            edduedate.setClickable(true);
+                            bottomSheetDialog.dismiss();
+                        } else if (credit_terms.equals("immediately")) {
+                            String myFormat = "yyyy-MM-dd"; //In which you need put here
+                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                            edduedate.setText(sdf.format(myCalendar.getTime()));
+                            edduedate.setClickable(false);
+                            txtdays.setText(credit_terms);
+
+                            bottomSheetDialog.dismiss();
+                        } else {
+
+
+                            String replaceString = credit_terms.replaceAll("days", "");
+                            String dayswith = replaceString.trim();
+
+                            try {
+                                Double daysvalue = Double.parseDouble(dayswith);
+
+                                Double result = toMilliSeconds(daysvalue);
+
+                                long sumresult = (long) (result + datemillis);
+                                // Creating date format
+                                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+                                Date sumresultdate = new Date(sumresult);
+
+                                // Formatting Date according to the
+                                // given format
+
+                                Log.e("Date Long", simple.format(sumresultdate));
+                                edduedate.setText(simple.format(sumresultdate));
+                                edduedate.setClickable(false);
+                                txtdays.setText(credit_terms);
+                            }catch (Exception e){
+                                txtdays.setText(dayswith);
+                                edduedate.setText(duedate.getText().toString());
+                            }
+
+                            bottomSheetDialog.dismiss();
+                        }
+
+
+                    } else if (dayss != null && credit_terms != null) {
+                        Toast.makeText(ConvertToReceiptsActivity.this, "Please Select One Value", Toast.LENGTH_LONG).show();
+
+                    }
+
+
+                    // myCalendar.set(Calendar.DAY_OF_MONTH, a);
+                    // updateLabe21();
+
+                }
+
+                private Double toMilliSeconds(Double days) {
+                    return days * 24 * 60 * 60 * 1000;
+                }
+            });
+
+
+            txtcredit1.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
+            txtor.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
+            rnone.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r3days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r14days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r30days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r60days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r120days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            rimmediately.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r7days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r21days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r45days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r90days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r365days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            edmanual.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            btndone1.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            bottomSheetDialog = new BottomSheetDialog(this);
+            bottomSheetDialog.setContentView(view);
+        }
+    }
+
+    private void updateLabe21() {
+
+        String myFormat = "dd-MMM-yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        edduedate.setText(sdf.format(myCalendar.getTime()));
+    }
 
     public void createbottom_signaturepad() {
         if (bottomSheetDialog != null) {
@@ -1638,7 +2474,6 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                 public void onClick(View view) {
                     signaturePad.clear();
                     bottomSheetDialog.dismiss();
-
                 }
             });
 
@@ -1649,14 +2484,14 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     if (addSignatureToGallery(signatureBitmap)) {
                         //  Toast.makeText(getContext(), "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-                        imgrecsuccess.setVisibility(View.VISIBLE);
+                        imgsigsuccess.setVisibility(View.VISIBLE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }
                     if (addSvgSignatureToGallery(signaturePad.getSignatureSvg())) {
                         //  Toast.makeText(getContext(), "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-                        imgrecsuccess.setVisibility(View.VISIBLE);
+                        imgsigsuccess.setVisibility(View.VISIBLE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }
@@ -1713,14 +2548,18 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             if (s_r.equals("1")) {
                 signatureofinvoicemaker = photo;
                 signature_of_issuer = photo.getAbsolutePath();
+                imgsigsuccess.setVisibility(View.VISIBLE);
+
             }
             if (s_r.equals("2")) {
                 signaturinvoicereceiver = photo;
                 signatureofreceiverst = photo.getAbsolutePath();
+                imgrecsuccess.setVisibility(View.VISIBLE);
             }
 
+//            Log.e(TAG, "signature_of_issuer"+signatureofreceiverst);
 
-            //    Log.e("Signature Of Issuer", signature_of_issuer);
+            Log.e("Signature Of Issuer", signature_of_issuer);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -1774,9 +2613,15 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
     }
 
+    private void updateLabe2() {
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        edduedate.setText(sdf.format(myCalendar.getTime()));
+    }
 
     public void companyget() {
         cnames.clear();
+
         cids.clear();
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
@@ -1798,15 +2643,10 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                                 JSONObject item = company.getJSONObject(i);
                                 company_id = item.getString("company_id");
                                 company_name = item.getString("name");
-                                company_address = item.getString("address");
-                                company_contact = item.getString("phone_number");
-                                company_email = item.getString("email");
-                                company_website = item.getString("website");
-                                payment_bank_name = item.getString("payment_bank_name");
-                                payment_currency = item.getString("payment_currency");
-                                payment_iban = item.getString("payment_iban");
-                                payment_swift_bic = item.getString("payment_swift_bic");
 
+                                companycolor = item.getString("color");
+
+                                Log.e(TAG , "companycolor:: "+companycolor);
 
                                 cnames.add(company_name);
                                 cids.add(company_id);
@@ -1841,13 +2681,85 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         });
     }
 
+    public void warehouse_list(String selectedCompanyId) {
+        wids.clear();
+        wnames.clear();
+
+        RequestParams params = new RequestParams();
+        if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Company");
+        } else {
+            params.add("company_id", this.selectedCompanyId);
+            String token = Constant.GetSharedPreferences(ConvertToReceiptsActivity.this, Constant.ACCESS_TOKEN);
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.addHeader("Access-Token", token);
+            client.post(Constant.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    String response = new String(responseBody);
+                    //Log.e("warehouseResp", response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String status = jsonObject.getString("status");
+                        if (status.equals("true")) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            JSONArray warehouse = data.getJSONArray("warehouse");
+                            for (int i = 0; i < warehouse.length(); i++) {
+                                JSONObject item = warehouse.getJSONObject(i);
+                                String warehouse_id = item.getString("warehouse_id");
+                                String company_id = item.getString("company_id");
+                                String warehouse_name = item.getString("name");
+
+                                wids.add(warehouse_id);
+                                wnames.add(warehouse_name);
+
+                                Log.e("warehouseNames", ""+wnames.toString());
+
+
+                            }
+
+                            warehousePosition = wids.indexOf(selectwarehouseId);
+
+                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ConvertToReceiptsActivity.this, android.R.layout.simple_spinner_item, wnames);
+                            selectwarehouse.setAdapter(namesadapter);
+
+                            selectwarehouse.setSelection(warehousePosition);
+                            // wearhouse_id
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    if (responseBody != null) {
+                        String response = new String(responseBody);
+                        //  Log.e("responsevendorF", response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String status = jsonObject.getString("status");
+                            if (status.equals("false")) {
+                                Constant.ErrorToast(ConvertToReceiptsActivity.this, "No Warehouse Found");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+        }
+    }
+
 
     public void productget(String selectedCompanyId) {
         product_bottom.clear();
         RequestParams params = new RequestParams();
         params.add("company_id", this.selectedCompanyId);
 
-        String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(ConvertToReceiptsActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
@@ -1855,7 +2767,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 String response = new String(responseBody);
-                // Log.e("response product", response);
+                Log.e("response product", response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -1878,14 +2790,14 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                                 String product_category = item.getString("category");
                                 String currency_code = item.getString("currency_symbol");
                                 String quantity = item.getString("quantity");
-                                String minimum = item.getString("minimum");
+
                                 String measurement_unit = item.getString("measurement_unit");
 
-
+                                String minimum = item.getString("minimum");
 
                                 Product_list product_list = new Product_list();
-                                product_list.setProduct_measurement_unit(measurement_unit);
 
+                                product_list.setProduct_measurement_unit(measurement_unit);
                                 product_list.setCompany_id(company_id);
                                 product_list.setProduct_id(product_id);
                                 product_list.setProduct_name(product_name);
@@ -1989,6 +2901,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
 
                                 Service_list service_list = new Service_list();
+
                                 service_list.setService_id(service_id);
                                 service_list.setCompany_id(company_id);
                                 service_list.setService_name(service_name);
@@ -2144,8 +3057,16 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         JSONObject data = jsonObject.getJSONObject("data");
                         String image_path = data.getString("customer_image_path");
                         Log.e("imagepath customer", image_path);
+                        Invoiceno = data.getString("invoice_count");
 
+                        invoicenovalue = Integer.parseInt(Invoiceno) + 1;
+                  /*      if (Invoiceno != null) {
 
+                            invoicenum.setText("Inv # " + invoicenovalue);
+
+                            Log.e("imagepath customer", String.valueOf(invoicenovalue));
+
+                        }*/
                         String company_image_path = data.getString("company_image_path");
                         Log.e("company_image_path", company_image_path);
 
@@ -2155,8 +3076,23 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                             JSONObject item = company.getJSONObject(i);
 
                             String logo = item.getString("logo");
+                            Selectedcompanyname = item.getString("name");
+                            company_address = item.getString("address");
+                            company_contact = item.getString("phone_number");
+                            company_email = item.getString("email");
+                            company_website = item.getString("website");
+                            payment_bank_name = item.getString("payment_bank_name");
+                            payment_currency = item.getString("payment_currency");
+                            payment_iban = item.getString("payment_iban");
+                            payment_swift_bic = item.getString("payment_swift_bic");
+                            paypal_emailstr = item.getString("paypal_email");
                             companylogopath = company_image_path + logo;
                             Log.e("companylogopath", companylogopath);
+
+                            companycolor = item.getString("color");
+
+                            options.setEnabled(true);
+
                         }
 
                         JSONArray customer = data.getJSONArray("customer");
@@ -2164,71 +3100,61 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         JSONArray invoice = data.getJSONArray("invoice");
                         for (int i = 0; i < invoice.length(); i++) {
                             JSONObject item = invoice.getJSONObject(i);
-                            invoice_nocompany = item.getString("invoice_no");
+                            String invoice_nocompany = item.getString("invoice_no");
 
                             /* invoicenum.setText(invoice_nocompany);*/
-                            if (invoice_nocompany != null) {
-                                Log.e("invoice no", invoice_nocompany);
+//                            if (invoice_nocompany != null) {
+//                                Log.e("invoice no", invoice_nocompany);
+//                            }
+
+                            if(i == invoice.length() - 1){
+                                Log.e(TAG, "zzzz0 "+invoice_nocompany);
+                                Log.e(TAG, "zzzz1 "+i);
+                                Log.e(TAG, "zzzz2 "+invoice.length());
+
+                                String sss = getRealValue(invoice_nocompany);
+                                invoicenum.setText(sss);
+
+                                invoicenum.setEnabled(true);
+
                             }
 
                         }
 
 
-                        for (int i = 0; i < customer.length(); i++) {
-                            JSONObject item = customer.getJSONObject(i);
+//                        for (int i = 0; i < customer.length(); i++) {
+//                            JSONObject item = customer.getJSONObject(i);
 
-                            customer_id = item.getString("customer_id");
-                            customer_name = item.getString("customer_name");
-                            custoner_contact_name = item.getString("contact_name");
-                            String image = item.getString("image");
-                            customer_email = item.getString("email");
-                            customer_contact = item.getString("phone_number");
-                            customer_address = item.getString("address");
-                            customer_website = item.getString("website");
-                            customer_phone_number = item.getString("phone_number");
+                        tax_list_array.clear();
 
-                            Customer_list customer_list = new Customer_list();
+                        tax_list_array = new ArrayList<Tax_List>();
 
-                            customer_list.setCustomer_email(customer_email);
-                            customer_list.setCustomer_address(customer_address);
-                            customer_list.setCustomer_website(customer_website);
-                            customer_list.setCustomer_website(customer_website);
-                            customer_list.setCustomer_phone(customer_phone_number);
+                        JSONArray tax_list = data.getJSONArray("tax");
 
-                            customer_list.setCustomer_id(customer_id);
-                            customer_list.setCustomer_name(customer_name);
-                            customer_list.setCustomer_contact_person(custoner_contact_name);
-                            customer_list.setCustomer_image_path(image_path);
-                            customer_list.setCustomer_image(image);
-                            customer_bottom.add(customer_list);
-                            tax_list_array.clear();
-
-                            tax_list_array = new ArrayList<Tax_List>();
-
-                            JSONArray tax_list = data.getJSONArray("tax");
-
-                            for (int j = 0; j < tax_list.length(); j++) {
-                               // Tax_List student = new Gson().fromJson(tax_list.get(j).toString(), Tax_List.class);
-                                JSONObject jsonObject1 = tax_list.getJSONObject(i);
+                        for (int j = 0; j < tax_list.length(); j++) {
+                            //   Tax_List student = new Gson().fromJson(tax_list.get(j).toString(), Tax_List.class);
+                            JSONObject jsonObject1 = tax_list.getJSONObject(j);
 //                                String name = jsonObject1.getString("name");
-                                Tax_List student = new Tax_List();
-                                student.setTax_id(jsonObject1.getString("tax_id"));
-                                student.setTax_name(jsonObject1.getString("name"));
-                                student.setCompany_name(jsonObject1.getString("company_name"));
-                                student.setTax_rate(jsonObject1.getString("rate"));
-                                student.setCompanyid(jsonObject1.getString("company_id"));
-                                student.setType(jsonObject1.getString("type"));
-                                student.setTax_name(jsonObject1.getString("name"));
-                                tax_list_array.add(student);
+                            Tax_List student = new Tax_List();
+                            student.setTax_id(jsonObject1.getString("tax_id"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            student.setCompany_name(jsonObject1.getString("company_name"));
+                            student.setTax_rate(jsonObject1.getString("rate"));
+                            student.setCompanyid(jsonObject1.getString("company_id"));
+                            student.setType(jsonObject1.getString("type"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            tax_list_array.add(student);
 
 
-                            }
-                            Log.e("Taxt array", tax_list_array.toString());
                         }
-
-
+                        Log.e("Taxt array", tax_list_array.toString());
                     }
 
+
+//                    }
+                    if (status.equals("false")) {
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, jsonObject.getString("message"));
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -2247,7 +3173,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                         String status = jsonObject.getString("status");
                         if (status.equals("false")) {
-                            //Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                            Constant.ErrorToast(ConvertToReceiptsActivity.this, jsonObject.getString("message"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -2265,6 +3191,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         customer_bottom.clear();
         RequestParams params = new RequestParams();
         params.add("company_id", this.selectedCompanyId);
+
 
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
@@ -2287,7 +3214,8 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         for (int i = 0; i < customer.length(); i++) {
                             JSONObject item = customer.getJSONObject(i);
 
-                            customer_id = item.getString("customer_id");
+                            String customer_idBB = item.getString("customer_id");
+                            Log.e(TAG, "customer_idBB "+customer_idBB);
                             customer_name = item.getString("customer_name");
                             custoner_contact_name = item.getString("contact_name");
                             String image = item.getString("image");
@@ -2312,7 +3240,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                             customer_list.setCustomer_website(customer_website);
                             customer_list.setCustomer_phone(customer_contact);
 
-                            customer_list.setCustomer_id(customer_id);
+                            customer_list.setCustomer_id(customer_idBB);
                             customer_list.setCustomer_name(customer_name);
                             customer_list.setCustomer_contact_person(custoner_contact_name);
                             customer_list.setCustomer_image_path(image_path);
@@ -2365,7 +3293,6 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         });
     }
 
-
     void filter3(String text) {
         ArrayList<Customer_list> temp = new ArrayList();
         for (Customer_list d : customer_bottom) {
@@ -2376,34 +3303,77 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         customer_bottom_adapter.updateList(temp);
     }
 
+    @Override
+    public void onPostExecute(Customer_list customer_list) {
+        customerinfo.add(customer_list);
+        if (bottomSheetDialog != null) {
+            bottomSheetDialog.dismiss();
+
+            // createbottomsheet_customers();
+
+            invoicerecipnt.setText(customer_list.getCustomer_name());
+            customer_name = customer_list.getCustomer_name();
+            customer_id = customer_list.getCustomer_id();
+        } else {
+            // createbottomsheet_customers();
+            invoicerecipnt.setText(customer_list.getCustomer_name());
+            customer_name = customer_list.getCustomer_name();
+            customer_id = customer_list.getCustomer_id();
+        }
+        selected.add(customer_list);
+
+    }
+
 
     @Override
     public void onPostExecutecall(Product_list selected_item, String s, String price) {
+//
+//        Double propice = Double.parseDouble(price);
+//        int propriceint = new BigDecimal(propice).setScale(0, RoundingMode.HALF_UP).intValueExact();
+//        producprice.add(String.valueOf(propriceint));
+//        tempList.add(selected_item);
+//        tempQuantity.add(s);
+//        total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
+//
+//
+//        totalpriceproduct.add(String.valueOf(total_price));
+//        calculateTotalAmount(total_price);
+//
+//        products_adapter.notifyDataSetChanged();
+//
+//        bottomSheetDialog.dismiss();
 
-        Double propice=Double.parseDouble(price);
-        int propriceint = new BigDecimal(propice).setScale(0, RoundingMode.HALF_UP).intValueExact();
-        producprice.add(String.valueOf(propriceint));
+
+        bottomSheetDialog.dismiss();
+
+        producprice.add(price);
         tempList.add(selected_item);
         tempQuantity.add(s);
+
+        Log.e(TAG, "tempQuantityAA "+s);
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
 
-        int subtotalint = new BigDecimal(total_price).setScale(0, RoundingMode.HALF_UP).intValueExact();
-        totalpriceproduct.add(String.valueOf(subtotalint));
+        double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
+
+        totalpriceproduct.add(String.valueOf(newPrice));
         calculateTotalAmount(total_price);
 
         products_adapter.notifyDataSetChanged();
 
-        bottomSheetDialog.dismiss();
-
-
     }
 
+
+
+    @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
+        Log.e(TAG,  "total_price: "+total_price);
 
         double balanceamount = 0.0;
         Double netamountvalue = 0.0;
         Double Totatlvalue = 0.0;
         Double subtotalvalue = 0.0;
+
+
 
 
         if (tempList.size() > 0) {
@@ -2413,142 +3383,157 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             Log.e("total_price", String.valueOf(this.total_price));
 
             Double stratingvalue = this.total_price;
-            grosstotal.setText(stratingvalue + cruncycode);
-            netamount.setText(stratingvalue + cruncycode);
+
+
+            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
+
+
+            grosstotal.setText(formatter.format(stratingvalue) +cruncycode);
+
+            netamount.setText(formatter.format(stratingvalue) +cruncycode);
+            balance.setText(formatter.format(stratingvalue) +cruncycode);
             subtotalvalue = total_price;
             netamountvalue = total_price;
             balanceamount = total_price;
-            if (strdiscount.equals("Percentage")) {
+            if (strdiscount.equalsIgnoreCase("Percentage")) {
                 subtotalvalue = 0.0;
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
-                Totatlvalue = total_price * Double.parseDouble(strdiscountvalue) / 100;
 
-                discount.setText(Totatlvalue + cruncycode);
+                Log.e(TAG , "total_priceAA "+total_price);
+                Log.e(TAG , "strdiscountvalueAA "+strdiscountvalue);
+
+                Totatlvalue = total_price * Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode)) / 100;
+
+
+                discount.setText("-"+formatter.format(Totatlvalue) + cruncycode);
                 subtotalvalue = total_price - Totatlvalue;
 
 
                 netamountvalue = subtotalvalue;
-                subtotal.setText(subtotalvalue + cruncycode);
-                netamount.setText(subtotalvalue + cruncycode);
 
+                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
+                balance.setText(formatter.format(subtotalvalue) + cruncycode);
                 //  Log.e("DissCount value", String.valueOf(Totatlvalue)+ cruncycode);
-            } else if (strdiscount.equals("Amount")) {
+            } else if (strdiscount.equalsIgnoreCase("Amount")) {
                 subtotalvalue = 0.0;
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
-                subtotalvalue = total_price - Double.parseDouble(strdiscountvalue.replace("Rs" , ""));
-                netamountvalue = subtotalvalue;
+                try {
+                    subtotalvalue = total_price - Double.parseDouble(strdiscountvalue.replace("Rs", ""));
+                }catch (Exception e){
 
-
-                discount.setText(strdiscountvalue + cruncycode);
-                subtotal.setText(subtotalvalue + cruncycode);
-                netamount.setText(subtotalvalue + cruncycode);
-
-            } else {
-
-                discount.setText("0");
-                subtotal.setText(stratingvalue + cruncycode);
-                netamount.setText(stratingvalue + cruncycode);
-
-            }
-            if (selectedtaxt.size() > 0) {
-                if (taxtypeclusive.equals("Inclusive")) {
-                    if (taxtype.equals("P")) {
-                        netamountvalue = 0.0;
-                        Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
-
-                        tax.setText(Totatlvalue1 + cruncycode);
-
-                        String taxtpercentage = taxtrateamt.substring(0, 2);
-//                        String tatxnamesub = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub + taxtpercentage + "%";
-//
-//
-//                        txttax.setText("(" + subStrinng + "Incl" + ")"); //Dont do any change
-
-                        String subStrinng = "VAT" + taxtpercentage + "%";
-
-                        txttax.setText("(" + subStrinng + "Incl" + ")"); //Dont do any change
-
-                        netamountvalue = subtotalvalue;
-                        netamount.setText(subtotalvalue + cruncycode);
-
-
-                    } else {
-                        netamountvalue = 0.0;
-                        String taxtpercentage1 = taxtrateamt.substring(0, 4);
-//                        String tatxnamesub1 = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub1 + taxtpercentage1;
-//
-//
-//                        txttax.setText("(" + subStrinng + "Incl" + ")");
-
-
-                        String subStrinng = "VAT" + taxtpercentage1 + "";
-
-                        txttax.setText("(" + subStrinng + "Incl" + ")");
-
-
-                        Double amomnt = Double.parseDouble(taxtrateamt);
-
-                        netamountvalue = subtotalvalue;
-
-                        tax.setText(amomnt + cruncycode);
-                        netamount.setText(subtotalvalue + cruncycode);
-
-                    }
-                } else {
-                    if (taxtype.equals("P")) {
-                        netamountvalue = 0.0;
-                        Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
-
-                        tax.setText(Totatlvalue1 + cruncycode);
-
-                        String taxtpercentage = taxtrateamt.substring(0, 2);
-//                        String tatxnamesub = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub + taxtpercentage + "%";
-//
-//
-//                        txttax.setText("(" + subStrinng + ")"); //Dont do any change
-
-                        String subStrinng = "VAT" + taxtpercentage + "%";
-
-                        txttax.setText("(" + subStrinng + ")"); //Dont do any change
-
-                        netamountvalue = subtotalvalue + Totatlvalue1;
-
-                        netamount.setText(netamountvalue + cruncycode);
-
-
-
-                    } else {
-
-                        netamountvalue = 0.0;
-                        String taxtpercentage1 = taxtrateamt.substring(0, 4);
-//                        String tatxnamesub1 = taxrname.substring(0, 3);
-//                        String subStrinng = tatxnamesub1 + taxtpercentage1;
-//
-//
-//                        txttax.setText("(" + subStrinng + ")");
-
-
-                        String subStrinng = "VAT" + taxtpercentage1 + "";
-
-
-                        txttax.setText("(" + subStrinng + ")");
-
-                        Double amomnt = Double.parseDouble(taxtrateamt);
-                        Double taxamountvalue = subtotalvalue + amomnt;
-
-                        netamountvalue = taxamountvalue;
-                        tax.setText(amomnt + cruncycode);
-                        netamount.setText(taxamountvalue + cruncycode);
-
-                    }
                 }
 
+                netamountvalue = subtotalvalue;
+                double  strdiscountval=Double.parseDouble(strdiscountvalue);
+
+                discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
+                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
+                balance.setText(formatter.format(subtotalvalue) + cruncycode);
+            } else {
+
+                Log.e(TAG , "strdiscountvalueBb "+Discountamountstrdto);
+
+
+
+                if(strdiscountvalue.equalsIgnoreCase("")){
+                    discount.setText("0");
+                }else{
+                    double strdiscountval = Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+                    if(strdiscountval == 0){
+                        discount.setText("0");
+                    }else{
+                        discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
+                    }
+
+                    subtotalvalue = total_price - strdiscountval;
+
+                    Log.e(TAG, "total_priceXX "+total_price);
+                    Log.e(TAG, "strdiscountvalXX "+strdiscountval);
+                    Log.e(TAG, "subtotalvalueXX "+subtotalvalue);
+                }
+
+
+
+
+                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
+                balance.setText(formatter.format(subtotalvalue) + cruncycode);
             }
+
+
+            Log.e(TAG, "selectedtaxt.size() "+selectedtaxt.size());
+
+            Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+            Log.e(TAG, "taxtrateamt "+taxtrateamt);
+
+
+            if (selectedtaxt.size() > 0) {
+                if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
+                    //netamountvalue = 0.0;
+                    Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
+                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
+
+                    if(taxrname.length() > 0){
+                        if(taxrname.contains(" ")){
+                            String firstTax = taxrname.split(" ")[0].replace("(", "");
+                            String subStrinng = firstTax + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        }else{
+                            String subStrinng = taxrname + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        }
+                    }else{
+                        String subStrinng = taxrname + " " + taxtrateamt + "%";
+                        txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                    }
+
+                    // netamountvalue = subtotalvalue + Totatlvalue1;
+
+                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
+                    balance.setText(formatter.format(netamountvalue) + cruncycode);
+
+                } else { // include off
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
+
+                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
+//
+                    Log.e(TAG, "taxrnameAAA "+taxrname);
+                    Log.e(TAG, "taxtrateamtAAA "+taxtrateamt);
+
+                    if(taxrname.length() > 0){
+                        if(taxrname.contains(" ")){
+                            String firstTax = taxrname.split(" ")[0].replace("(", "");
+                            String subStrinng = firstTax + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        }else{
+                            String subStrinng = taxrname + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        }
+                    }else{
+                        String subStrinng = taxrname + " " + taxtrateamt + "%";
+                        txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                    }
+
+
+
+
+                    netamountvalue = subtotalvalue + Totatlvalue1;
+
+                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
+                    balance.setText(formatter.format(netamountvalue) + cruncycode);
+
+                }
+            }
+//
+
+
+
             if (freight_cost.equals("")) {
 
 
@@ -2557,10 +3542,23 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                 Double shipingvalue = Double.parseDouble(freight_cost);
 
-                freight.setText("+" + shipingvalue + cruncycode);
-                netamount.setText(balanceamount + cruncycode);
+                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                balance.setText(formatter.format(balanceamount) + cruncycode);
+                netamount.setText(formatter.format(balanceamount) + cruncycode);
             }
+            if (paidamountstr.isEmpty()) {
+                //
+                // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
+            } else {
+                Log.e(TAG, "balanceAA "+paidamountstr);
+                Double paidindouble = Double.parseDouble(paidamountstr);
 
+                paidamount.setText(formatter.format(paidindouble) + cruncycode);
+                balanceamount = balanceamount - Double.parseDouble(paidamountstr);
+                Log.e("balance", String.valueOf(balanceamount));
+
+                balance.setText(formatter.format(balanceamount) + cruncycode);
+            }
 
 
         } else {
@@ -2568,19 +3566,22 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             subtotal.setText("0");
             discount.setText("0");
             freight.setText("0");
+            paidamount.setText("0");
             netamount.setText("0");
             tax.setText("0");
-
+            balance.setText("0");
 
         }
 
     }
 
+
+
+
+
     @Override
     public void onPostExecutecall2(Service_list selected_item, String s, String price) {
-        Double propice=Double.parseDouble(price);
-        int propriceint = new BigDecimal(propice).setScale(0, RoundingMode.HALF_UP).intValueExact();
-        producprice.add(String.valueOf(propriceint));
+        //  producprice.add(String.valueOf(price));
 
         Product_list product_list = new Product_list();
         product_list.setProduct_name(selected_item.getService_name());
@@ -2595,154 +3596,218 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
         producprice.add(selected_item.getService_price());
         tempList.add(product_list);
-
-
         tempQuantity.add(s);
 
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
 
-        int subtotalint = new BigDecimal(total_price).setScale(0, RoundingMode.HALF_UP).intValueExact();
-        totalpriceproduct.add(String.valueOf(subtotalint));
+
+        totalpriceproduct.add(String.valueOf(total_price));
         calculateTotalAmount(total_price);
 
         products_adapter.notifyDataSetChanged();
 
-        bottomSheetDialog.dismiss();
-
-
+        bottomSheetDialog2.dismiss();
     }
+
 
     @Override
     public void onClick(int str,String type) {
-        //  Log.e("Total price",String.valueOf(total_price));
+        Log.e(TAG, "onClick.size() "+str);
 
-        if(tempList.size() > 0) {
-            total_price = total_price - (Double.parseDouble(tempList.get(str).getProduct_price()) * Double.parseDouble(tempQuantity.get(str)));
+        if (type.equalsIgnoreCase("del"))
+        {
+
+            producprice.remove(str);
+            tempList.remove(str);
+            tempQuantity.remove(str);
+            totalpriceproduct.remove(str);
+
+            Log.e(TAG, "producprice.size() "+producprice.size());
+            Log.e(TAG, "tempList.size() "+tempList.size());
+            Log.e(TAG, "tempQuantity.size() "+tempQuantity.size());
+            Log.e(TAG, "totalpriceproduct.size() "+totalpriceproduct.size());
+
+            products_adapter.notifyDataSetChanged();
+
+            double total_price2 = 0;
+
+            if(tempList.size() > 0){
+                if(tempQuantity.size() > 0){
+                    for(int i = 0 ; i < tempList.size() ; i++){
+                        Log.e(TAG, "ccDDD "+producprice.get(i) + " DDDD "+ tempQuantity.get(i));
+                        total_price2 = total_price2 + Double.parseDouble(producprice.get(i)) * Double.parseDouble(tempQuantity.get(i));
+                    }
+                }
+            }
+
+            Log.e(TAG, "productCal "+total_price2);
+
+            if(tempList.size() == 0) {
+                total_price2 = 0.0;
+            }
+
+            total_price = total_price2;
+
+            calculateTotalAmount(total_price);
         }
+        else
+        {
+            final Dialog mybuilder=new Dialog(this);
+            mybuilder.setContentView(R.layout.product_itemlayout);
 
-        calculateTotalAmount(total_price);
+            TextView txtprice;
+            final EditText edquantity,edprice;
+            Button btnok,btncancel;
 
-        tempList.remove(str);
-        totalpriceproduct.remove(str);
-        producprice.remove(str);
-        tempQuantity.remove(str);
+            txtprice=mybuilder.findViewById(R.id.txtprice);
+            edquantity=mybuilder.findViewById(R.id.edquantity);
+            edprice=mybuilder.findViewById(R.id.edprice);
+            btnok=mybuilder.findViewById(R.id.btnok);
+            btncancel=mybuilder.findViewById(R.id.btncancel);
 
-        products_adapter.notifyDataSetChanged();
+            edprice.setText(""+product_bottom.get(str).getProduct_price());
 
-        Log.e("tempList", ""+String.valueOf(tempList.size()));
+//            show_quantity = edquantity.getText().toString();
+
+            edquantity.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                    if (edquantity.getText().toString().endsWith("."))
+                    {
+                        edquantity.setText(edquantity.getText().toString().replace(".",""));
+                    }
+                }
+            });
 
 
+            edquantity.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
+            btnok.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
+            btncancel.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
+            txtprice.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
+            edprice.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
+
+
+            mybuilder.show();
+            mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            Window window = mybuilder.getWindow();
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawableResource(R.color.transparent);
+
+            btnok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mybuilder.dismiss();
+
+                    int en_quantity = Integer.parseInt(edquantity.getText().toString());
+
+                    int sh_quantity = 0;
+                    double sh_price = 0.0;
+
+                    String quentityproduct= product_bottom.get(str).getQuantity();
+                    if(quentityproduct.equals("null"))
+                    {
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity");
+                        mybuilder.dismiss();
+                    }
+                    else {
+                        sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
+                    }
+
+                    if (sh_quantity < en_quantity)
+                    {
+                        mybuilder.show();
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity");
+                        mybuilder.dismiss();
+                    }
+                    else
+                    {
+                        sh_price = Double.parseDouble(edprice.getText().toString());
+                        double multiply = en_quantity * sh_price;
+                        String s_multiply = String.valueOf(multiply);
+
+                        product_bottom.get(str).setQuantity(String.valueOf(en_quantity));
+                        product_bottom.get(str).setProduct_price(String.valueOf(sh_price));
+
+                        total_price = (sh_price) * Double.parseDouble(edquantity.getText().toString());
+                        //  Log.e("Total price",String.valueOf(total_price));
+                        producprice.remove(str);
+                        tempQuantity.remove(str);
+
+                        producprice.add(str,String.valueOf(sh_price));
+                        tempList.get(str).setProduct_price(String.valueOf(sh_price));
+                        tempList.get(str).setQuantity(edquantity.getText().toString());
+                        tempQuantity.add(str,edquantity.getText().toString());
+
+                        calculateTotalAmount(total_price);
+                        products_adapter.notifyDataSetChanged();
+                        Log.e("tempList", String.valueOf(tempList.size()));
+
+                        mybuilder.dismiss();
+                    }
+
+                }
+            });
+
+            btncancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mybuilder.dismiss();
+                }
+            });
+        }
 
     }
 
     @Override
     public void onPostExecutecall3(String taxID, String taxnamst, String taxnamss, String type) {
+//        selectedtaxt.clear();
+//        Log.e("income rate", taxnamst);
+//        Log.e("taxnamss_rate", taxnamss);
+//        Log.e("type rate", type);
+//        taxtype = type;
+//        taxrname = taxnamst;
+//        taxtrateamt = taxnamss;
+//        SelectedTaxlist student = new SelectedTaxlist();
+//        student.setTaxname(taxnamst);
+//        student.setTaxrate(taxnamss);
+//        student.setTaxtype(type);
+//        student.setTaxamount(taxnamss);
+//        selectedtaxt.add(student);
+
+
         selectedtaxt.clear();
-        Log.e("income rate", taxnamst);
+        Log.e(TAG, "income rate" + taxnamst);
         Log.e("taxnamss_rate", taxnamss);
         Log.e("type rate", type);
+        this.taxID = taxID;
+        Log.e(TAG, "taxID" + taxID);
+
         taxtype = type;
+        taxrname = taxnamst;
         taxtrateamt = taxnamss;
         SelectedTaxlist student = new SelectedTaxlist();
+
+        //student.setTaxID(taxID);
         student.setTaxname(taxnamst);
         student.setTaxrate(taxnamss);
         student.setTaxtype(type);
         student.setTaxamount(taxnamss);
         selectedtaxt.add(student);
 
-
     }
 
-
-    @Override
-    public void onPostExecute(Customer_list customer_list) {
-        customerinfo.add(customer_list);
-        if (bottomSheetDialog != null) {
-            bottomSheetDialog.dismiss();
-
-            // createbottomsheet_customers();
-            invoicerecipnt.setText(customer_list.getCustomer_name());
-            customer_name = customer_list.getCustomer_name();
-
-        } else {
-            // createbottomsheet_customers();
-            invoicerecipnt.setText(customer_list.getCustomer_name());
-            customer_name = customer_list.getCustomer_name();
-        }
-        selected.add(customer_list);
-/*
-
-        for (int i = 0; i < customerinfo.size(); i++) {
-            Log.e("getShipping_firstname", customerinfo.get(i).getShipping_firstname());
-            Log.e("getCustomer_email", customerinfo.get(i).getCustomer_email());
-            Log.e("getCustomer_email", customerinfo.get(i).getCustomer_address());
-
-        }*/
-    }
-
-    private class DownloadsImagefromweb extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected Void doInBackground(String... strings) {
-            URL url = null;
-            try {
-                url = new URL(strings[0]);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            Bitmap bm = null;
-            try {
-                bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            //Create Path to save Image
-            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr"); //Creates app specific folder
-
-            if (!path.exists()) {
-                path.mkdirs();
-            }
-
-            File imageFile = new File(path, String.valueOf(System.currentTimeMillis()) + ".png"); // Imagename.png
-
-            signaturinvoicereceiver = imageFile;
-            signatureofreceiverst = imageFile.getAbsolutePath();
-
-            String imagepath = imageFile.getAbsolutePath();
-            Log.e("save image", imagepath);
-
-            FileOutputStream out = null;
-            try {
-                out = new FileOutputStream(imageFile);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-                bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
-                out.flush();
-                out.close();
-                // Tell the media scanner about the new file so that it is
-                // immediately available to the user.
-                MediaScannerConnection.scanFile(ConvertToReceiptsActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
-                    public void onScanCompleted(String path, Uri uri) {
-                        // Log.i("ExternalStorage", "Scanned " + path + ":");
-                        //    Log.i("ExternalStorage", "-> uri=" + uri);
-                    }
-                });
-            } catch (Exception e) {
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private class DownloadsImagefromwebCompanystem extends AsyncTask<String, Void, Void> {
+    private class DownloadCompanystempweb extends AsyncTask<String, Void, Void> {
 
         @Override
         protected Void doInBackground(String... strings) {
@@ -2767,7 +3832,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             }
 
 
-            File imageFile = new File(path, String.valueOf(System.currentTimeMillis()) + ".png"); // Imagename.png
+            File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
 
             company_stampFileimage = imageFile;
             company_stamp = imageFile.getAbsolutePath();
@@ -2804,7 +3869,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         }
     }
 
-    private class DownloadsImagefromweblogoCom extends AsyncTask<String, Void, Void> {
+    private class Downloadsignatureissueweb extends AsyncTask<String, Void, Void> {
 
         @Override
         protected Void doInBackground(String... strings) {
@@ -2828,13 +3893,88 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                 path.mkdirs();
             }
 
+            File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
 
-            File imageFile = new File(path, String.valueOf(System.currentTimeMillis()) + ".png"); // Imagename.png
+//            if (s_r.equals("1")) {
+            signatureofinvoicemaker = imageFile;
+            signature_of_issuer = imageFile.getAbsolutePath();
+//            }
+//            if (s_r.equals("2")) {
+//                signaturinvoicereceiver = imageFile;
+//                signatureofreceiverst = imageFile.getAbsolutePath();
+//            }
 
-            company_logoFileimage = imageFile;
-            company_logo = imageFile.getAbsolutePath();
             String imagepath = imageFile.getAbsolutePath();
-         //   Log.e("companystemp", imagepath);
+            Log.e("save image", imagepath);
+
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(imageFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
+                out.flush();
+                out.close();
+                // Tell the media scanner about the new file so that it is
+                // immediately available to the user.
+                MediaScannerConnection.scanFile(ConvertToReceiptsActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        // Log.i("ExternalStorage", "Scanned " + path + ":");
+                        //    Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
+            } catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    private class Downloadsignaturereceiverweb extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            URL url = null;
+            try {
+                url = new URL(strings[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            Bitmap bm = null;
+            try {
+                bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Create Path to save Image
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr"); //Creates app specific folder
+
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+
+            File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
+
+//            if (s_r.equals("1")) {
+//                signaturinvoicereceiver = imageFile;
+//                signature_of_issuer = imageFile.getAbsolutePath();
+//            }
+//            if (s_r.equals("2")) {
+            signaturinvoicereceiver = imageFile;
+            signatureofreceiverst = imageFile.getAbsolutePath();
+//            }
+
+            String imagepath = imageFile.getAbsolutePath();
+            Log.e("save image", imagepath);
 
             FileOutputStream out = null;
             try {
@@ -2869,7 +4009,220 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
 
 
-    @SuppressLint("LongLogTag")
+
+    private class DownloadInvoiceImages extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            URL url = null;
+            try {
+                url = new URL(strings[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            Bitmap bm = null;
+            try {
+                bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Create Path to save Image
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr"); //Creates app specific folder
+
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+
+            File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
+
+//            if (s_r.equals("1")) {
+//                signaturinvoicereceiver = imageFile;
+//                signature_of_issuer = imageFile.getAbsolutePath();
+//            }
+//            if (s_r.equals("2")) {
+//            signaturinvoicereceiver = imageFile;
+//            signatureofreceiverst = imageFile.getAbsolutePath();
+
+
+            selectedUriList.add(Uri.fromFile(imageFile));
+
+//            }
+
+            String imagepath = imageFile.getAbsolutePath();
+            Log.e("save image", imagepath);
+
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(imageFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
+                out.flush();
+                out.close();
+                // Tell the media scanner about the new file so that it is
+                // immediately available to the user.
+                MediaScannerConnection.scanFile(ConvertToReceiptsActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        // Log.i("ExternalStorage", "Scanned " + path + ":");
+                        //    Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
+            } catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
+
+
+    private class DownloadsImagefromweblogoCom extends AsyncTask<String, Void, Void> {
+
+        @SuppressLint("LongLogTag")
+        @Override
+        protected Void doInBackground(String... strings) {
+            URL url = null;
+            try {
+                url = new URL(strings[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            Bitmap bm = null;
+            try {
+                bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Create Path to save Image
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr"); //Creates app specific folder
+
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+
+
+            File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
+
+            company_logoFileimage = imageFile;
+            company_stamp = imageFile.getAbsolutePath();
+            String imagepath = imageFile.getAbsolutePath();
+            Log.e("DownloadsImagefromweblogoCom", "DownloadsImagefromweblogoCom"+imagepath);
+
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(imageFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
+                out.flush();
+                out.close();
+                // Tell the media scanner about the new file so that it is
+                // immediately available to the user.
+                MediaScannerConnection.scanFile(ConvertToReceiptsActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        // Log.i("ExternalStorage", "Scanned " + path + ":");
+                        //    Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
+            } catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//
+//        Log.e(TAG, "onRestart selectedTemplate"+defaultClick);
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        Log.e(TAG, "onResume selectedTemplate"+defaultClick);
+//
+//        if(defaultClick == 1){
+//                SavePref pref = new SavePref();
+//                pref.SavePref(editInvoiceActivity.this);
+//
+//                selectedTemplate = pref.getTemplate();
+//                Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
+//
+//                if(selectedTemplate != 0){
+//                    itemstxtTemplate.setText("Template "+selectedTemplate);
+//                }
+//            }
+//
+//    }
+
+
+
+
+    static String extractInt(String str)
+    {
+        // Replacing every non-digit number
+        // with a space(" ")
+        str = str.replaceAll("[^\\d]", " ");
+
+        // Remove extra spaces from the beginning
+        // and the ending of the string
+        str = str.trim();
+
+        // Replace all the consecutive white
+        // spaces with a single space
+        str = str.replaceAll(" +", " ");
+
+        if (str.equals(""))
+            return "-1";
+
+        return str;
+    }
+
+
+    public static boolean isNumeric(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
+    }
+
+
+    public static boolean isChar(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (Character.isDigit(c)) return false;
+        }
+        return true;
+    }
+
+
+
+
     private String getRealValue(String sss) {
         String valueIs = "";
         if(sss.toString().length() > 0){
@@ -2897,12 +4250,12 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                         Log.e(TAG , "vvvvv "+vvvvv);
 
-                        int myValue = Integer.parseInt(ii);
+                        int myValue = Integer.parseInt(ii)+1;
                         valueIs = vvvvv+myValue;
                     }
                     if(!cc.contains(" ")){
                         Log.e(TAG , "extractInt2 "+cc);
-                        int myValue = Integer.parseInt(cc);
+                        int myValue = Integer.parseInt(cc)+1;
                         String vvvvv = sss.substring(0, sss.length() - cc.length());
 
                         Log.e(TAG , "bbbbbb "+vvvvv);
@@ -2912,7 +4265,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             }else{
                 boolean ddd = isChar(sss);
                 if(ddd == false){
-                    int myValue = Integer.parseInt(sss);
+                    int myValue = Integer.parseInt(sss)+1;
                     valueIs = "Inv # "+myValue;
                 }
             }
@@ -2922,45 +4275,698 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
 
 
-    public static boolean isNumeric(String str)
-    {
-        for (char c : str.toCharArray())
-        {
-            if (!Character.isDigit(c)) return false;
+
+
+    private boolean getTrueValue(String toString) {
+        boolean b = false;
+        if(toString.length() > 0){
+            boolean gg = isNumeric(toString.toString());
+            Log.e(TAG, "gggggg "+gg);
+
+            boolean dd = isChar(toString.toString());
+            Log.e(TAG, "dddddd "+dd);
+
+            if(gg == false && dd == false){
+                Log.e(TAG, "truee ");
+                Boolean flag = Character.isDigit(toString.toString().charAt(toString.toString().length() - 1));
+                Log.e(TAG, "cccccc "+flag);
+                if(flag == true){
+                    String str = toString.toString();
+                    String cc = extractInt(str);
+                    if(cc.contains(" ")){
+                        String vv[] = cc.split(" ");
+                        Log.e(TAG , "extractInt "+vv[vv.length - 1]);
+                        b = true;
+                    }
+                    if(!cc.contains(" ")){
+                        Log.e(TAG , "extractInt2 "+cc);
+                        b = true;
+                    }
+                }
+            }else{
+                Log.e(TAG, "falsee ");
+                b = false;
+            }
         }
-        return true;
+        return b;
     }
 
 
-    public static boolean isChar(String str)
-    {
-        for (char c : str.toCharArray())
-        {
-            if (Character.isDigit(c)) return false;
+
+
+
+
+
+    String  sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
+    // String  taxamount = "";
+    String shippingzone = "";
+
+    String cruncycode = "", Shiping_tostr = "", companyimagelogopath = "";
+
+    String Shipingdetail = "";
+
+    String encodedImage, signature_of_receiverincode, encodesignatureissure, drableimagebase64, attchmentbase64;
+    String paid_amount_payment;
+
+
+
+    //////////////
+    private void viewPDF() {
+
+        drableimagebase64 = "iVBORw0KGgoAAAANSUhEUgAAAC4AAAAnCAYAAABwtnr/AAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAALqADAAQAAAABAAAAJwAAAAB8SmRPAAAAeklEQVRYCe3SQQrAIBTEUPX+d67iCbIIBSGuw/B57fzOGw++9eDN9+QO//vLJZ44FOhXgVBalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYc2r3IESll5TkQAAAAASUVORK5CYII=";
+
+
+        if (selected.size() > 0) {
+            for (int i = 0; i < selected.size(); i++) {
+                sltcustonername = selected.get(i).getCustomer_name();
+                sltcustomer_address = selected.get(i).getCustomer_address();
+                sltcustomer_email = selected.get(i).getCustomer_email();
+                sltcustomer_website = selected.get(i).getCustomer_website();
+                sltcustomer_phone_number = selected.get(i).getCustomer_phone();
+                sltcustomer_contact = selected.get(i).getCustomer_contact_person();
+
+
+                shippingfirstname = selected.get(i).getShipping_firstname();
+                shippinglastname = selected.get(i).getShipping_lastname();
+                shippingaddress1 = selected.get(i).getShipping_address_1();
+                shippingaddress2 = selected.get(i).getShipping_address_2();
+                shippingcity = selected.get(i).getShipping_city();
+                shippingcountry = selected.get(i).getShipping_country();
+                shippingpostcode = selected.get(i).getShipping_postcode();
+                shippingzone = selected.get(i).getShipping_zone();
+
+            }
         }
-        return true;
+        if (selected.size() < 0) {
+            Shiping_tostr = "";
+        } else {
+            Shiping_tostr = "Ship To:";
+            Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+
+        }
+
+
+
+        if (tempQuantity.size() > 0) {
+            for (int i = 0; i < tempQuantity.size(); i++) {
+                Log.e("value", tempQuantity.get(i));
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        for (int i = 0; i < tempList.size(); i++) {
+            Log.e("product[" + i + "]" + "[price]", producprice.get(i));
+            Log.e("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
+            Log.e("product[" + i + "]" + "[product_id]", tempList.get(i).getProduct_id());
+        }
+
+
+
+        if (paymentmode.equals("")) {
+            paid_amount_payment = "";
+        } else {
+            paid_amount_payment = paymentmode;
+
+        }
+
+        if (signature_of_issuer != null) {
+            try {
+
+                Bitmap bm3 = BitmapFactory.decodeFile(signature_of_issuer);
+                ByteArrayOutputStream baos3 = new ByteArrayOutputStream();
+                bm3.compress(Bitmap.CompressFormat.JPEG, 100, baos3); // bm is the bitmap object
+                byte[] b3 = baos3.toByteArray();
+                encodesignatureissure = Base64.encodeToString(b3, Base64.DEFAULT);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            encodesignatureissure = drableimagebase64;
+
+        }
+        // Log.e("Byte array Image", encodesignatureissure);
+
+
+        if (company_stamp != null) {
+            try {
+
+                Bitmap bm = BitmapFactory.decodeFile(company_stamp);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); // bm is the bitmap object
+                byte[] b = baos.toByteArray();
+                encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            encodedImage = drableimagebase64;
+
+        }
+        //  Log.e("Byte array Image", encodedImage);
+        if (signature_of_receiver != null) {
+            try {
+                Bitmap bm1 = BitmapFactory.decodeFile(signature_of_receiver);
+                ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
+                bm1.compress(Bitmap.CompressFormat.JPEG, 100, baos1); // bm is the bitmap object
+                byte[] b1 = baos1.toByteArray();
+                signature_of_receiverincode = Base64.encodeToString(b1, Base64.DEFAULT);
+
+                Log.e("Byte array Image", encodedImage);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            signature_of_receiverincode = drableimagebase64;
+
+        }
+
+
+
+
+        for (int i = 0; i < quantity.size(); i++) {
+            String qty = String.valueOf(quantity);
+            Log.e("logqty", qty);
+        }
+
+
+
+
+        view_invoice();
     }
 
 
 
-    static String extractInt(String str)
-    {
-        // Replacing every non-digit number
-        // with a space(" ")
-        str = str.replaceAll("[^\\d]", " ");
 
-        // Remove extra spaces from the beginning
-        // and the ending of the string
-        str = str.trim();
 
-        // Replace all the consecutive white
-        // spaces with a single space
-        str = str.replaceAll(" +", " ");
 
-        if (str.equals(""))
-            return "-1";
+    String attchedmentimagepath;
 
-        return str;
+    String Shipingcosstbyct = "";
+
+    String hiddenpaidrow = "";
+
+//    String paid_amount_payment;
+
+    public void view_invoice() {
+
+        Grossamount_str = grosstotal.getText().toString();
+
+        String shipingcoast = freight.getText().toString();
+        Subtotalamount = subtotal.getText().toString();
+        Grossamount_str = grosstotal.getText().toString();
+        invoice_date = duedate.getText().toString();
+        invoice_due_date = edduedate.getText().toString();
+        reference_no = edreferenceno.getText().toString();
+        netamountvalue = netamount.getText().toString();
+        Blanceamountstr = balance.getText().toString();
+        invoice_no = invoicenumtxt.getText().toString();
+        strnotes = ednotes.getText().toString();
+        ref_no = edreferenceno.getText().toString();
+
+        strdiscountvalue = discount.getText().toString();
+        strpaid_amount = paidamount.getText().toString();
+
+        invoice_date = duedate.getText().toString();
+        invoice_due_date = edduedate.getText().toString();
+        invoicetaxamount = tax.getText().toString();
+
+        String multipleimage = "";
+
+        String multipagepath = null;
+
+
+        if (attchmentimage != null) {
+            for (int i = 0; i < attchmentimage.size(); i++) {
+                attchedmentimagepath = attchmentimage.get(i);
+                try {
+
+                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
+
+
+                            .replaceAll("#ATTACHMENT_1#", attchmentimage.get(i));
+
+
+                    multipleimage = multipleimage + multipagepath;
+                } catch (Exception e) {
+
+                }
+
+            }
+        } else {
+            multipleimage = "";
+        }
+
+
+        String productitem = null;
+
+        String productitemlist = "";
+        try {
+            for (int i = 0; i < tempList.size(); i++) {
+                cruncycode = tempList.get(i).getCurrency_code();
+
+                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+
+
+                        .replaceAll("#NAME#", tempList.get(i).getProduct_name())
+                        .replaceAll("#DESC#", tempList.get(i).getProduct_description())
+                        .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
+                        .replaceAll("#QUANTITY#", tempQuantity.get(i))
+                        .replaceAll("#PRICE#", producprice.get(i) + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", totalpriceproduct.get(i) + Utility.getReplaceDollor(cruncycode));
+
+                productitemlist = productitemlist + productitem;
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String attachmentimage = "";
+
+        if (attchmentimage.size() < 1) {
+            attachmentimage = "";
+
+        } else {
+            attachmentimage = "Attachments";
+        }
+        String notestringvalue = "";
+        if (strnotes.equals("")) {
+            notestringvalue = "";
+        } else {
+            notestringvalue = "Notes:";
+        }
+
+        String signatureinvoice = null;
+        String companyname = "";
+        if (company_stamp.equals("")) {
+            company_stamp = "/android_res/drawable/white_img.png";
+            companyname = "";
+
+        } else {
+
+
+            companyname = "Company Stamp";
+
+
+        }
+
+        String signature_of_receivername = "";
+        if (signatureofreceiverst.equals("")) {
+            signatureofreceiverst = "/android_res/drawable/white_img.png";
+            signature_of_receivername = "";
+
+        } else {
+
+
+            signature_of_receivername = "Signature of Receiver";
+
+
+        }
+
+
+        String signature_of_issuername = "";
+        if (signature_of_issuer.equals("")) {
+            signature_of_issuer = "/android_res/drawable/white_img.png";
+            signature_of_issuername = "";
+
+        } else {
+
+            signature_of_issuername = "Signature of Issuer";
+
+
+        }
+
+        try {
+            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+                    .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
+                    .replaceAll("CompanyStamp", companyname)
+                    .replaceAll("SignatureofReceiver", signature_of_receivername)
+                    .replaceAll("SignatureofIssuer", signature_of_issuername)
+                    .replaceAll("dataimageRecieverImage", "file://" + signatureofreceiverst)
+                    .replaceAll("data:imageSige_path", "file://" + signature_of_issuer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String taxtamountstr = "";
+        String companywebsitestr = "";
+        String taxtamountstrvalue = "";
+        if (invoicetaxamount.equals("0")) {
+            // Do you work here on success
+            taxtamountstr = "";
+            taxtamountstrvalue = "";
+
+        } else {
+            // null response or Exception occur
+            taxtamountstr = invoicetaxamount;
+            taxtamountstrvalue = "Tax "+txttax.getText().toString();
+        }
+
+        String discountvalue = "";
+        String discounttxtreplace = "";
+
+        if (strdiscountvalue.equals("0")) {
+            // Do you work here on success
+            discountvalue = "";
+            discounttxtreplace = "";
+
+        } else {
+            // null response or Exception occur
+            discountvalue = strdiscountvalue;
+            discounttxtreplace = " Discount ";
+        }
+
+        String subTotalTxt = "";
+        String subTotalValueTxt = "";
+
+        if(strdiscountvalue.equalsIgnoreCase("0")){
+            subTotalTxt = "";
+            subTotalValueTxt = "";
+        }else{
+            subTotalTxt = "SubTotal";
+            subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
+        }
+
+
+        if (company_website != null) {
+            // Do you work here on success
+
+            companywebsitestr = company_website;
+        } else {
+            // null response or Exception occur
+            companywebsitestr = "0";
+        }
+        String Signatureincoicestr = "";
+
+        if (signatureinvoice != null) {
+            // Do you work here on success
+
+            Signatureincoicestr = signatureinvoice;
+        } else {
+            // null response or Exception occur
+            Signatureincoicestr = "";
+        }
+        String shipingvaluetxt = "";
+        if (shipingcoast.equals("0")) {
+            // Do you work here on success
+            Shipingcosstbyct = "";
+            shipingvaluetxt = "";
+
+
+        } else {
+            // null response or Exception occur
+
+            if (shipingcoast.startsWith("+") && shipingcoast.endsWith("Af"))
+            {
+                Shipingcosstbyct = shipingcoast;
+            }
+            else
+            {
+                Shipingcosstbyct = "+" + shipingcoast + cruncycode;
+            }
+
+
+            shipingvaluetxt = "Shipping";
+        }
+
+        if (companylogopath.equals("")) {
+            companyimagelogopath = "/android_res/drawable/white_img.png";
+
+
+        } else {
+
+
+            companyimagelogopath = companylogopath;
+
+
+        }
+        String paidamountstrrepvalue = "";
+        String paidamountstrreptxt = "";
+        String paidamountstrreplace = "";
+        String chektopaidmaount = "";
+        String payment_bankstr = "";
+        String payment_ibanstr = "";
+        String payment_currencystr = "";
+        String payment_swiftstr = "";
+        String pemailpaidstr = "";
+        String paimnetdetailstrtxt="";
+        String bycheckstrtxt="";
+        String paypalstrtxt="";
+        String bankstrtxt="";
+
+        Log.e(TAG, "strpaid_amount:: "+strpaid_amount);
+
+        if (strpaid_amount.equals("0") || strpaid_amount.equals("0.00") || strpaid_amount.equals(".00Rs") || strpaid_amount.equals(".00")) {
+            // Do you work here on success
+            paidamountstrrepvalue = "";
+            paidamountstrreptxt = "";
+            chektopaidmaount = "";
+            payment_bankstr = "";
+            payment_ibanstr = "";
+            payment_currencystr = "";
+            payment_swiftstr = "";
+            pemailpaidstr = "";
+            paimnetdetailstrtxt="";
+            bycheckstrtxt="";
+            paypalstrtxt="";
+            bankstrtxt="";
+            hiddenpaidrow="hidden";
+
+            paidamountstrrepvalue = "";
+
+        } else {
+            // null response or Exception occur
+            paidamountstrrepvalue =strpaid_amount;
+
+            paidamountstrreptxt = "Paid Amount";
+
+//            paidamountstrreptxt = "Paid Amount "+"("+Paymentamountdate+")";
+
+
+            pemailpaidstr = paypal_emailstr;
+            chektopaidmaount = paid_amount_payment;
+            payment_bankstr = payment_bank_name;
+            payment_ibanstr = payment_iban;
+            payment_currencystr = payment_currency;
+            payment_swiftstr = payment_swift_bic;
+
+            paimnetdetailstrtxt=" Payment Details ";
+            bycheckstrtxt="By cheque :";
+            paypalstrtxt="Pay Pal :";
+            bankstrtxt="Bank :";
+
+
+            hiddenpaidrow="";
+        }
+        String strreferencenovalue="";
+        String strreferencenotxtvalue="";
+
+        if (ref_no.isEmpty()) {
+            // Do you work here on success
+
+            strreferencenovalue="";
+            strreferencenotxtvalue="";
+
+        } else {
+            // null response or Exception occur
+
+            strreferencenovalue=ref_no;
+            strreferencenotxtvalue=" Reference No:";
+
+
+        }
+
+
+
+
+        String selectedTemplate = ""+this.selectedTemplate;
+
+        String name = "receipt1.html";
+        String nameName = "file:///android_asset/receipt1.html";
+        if(selectedTemplate.equalsIgnoreCase("0")){
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
+        }else if(selectedTemplate.equalsIgnoreCase("1")){
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
+        }else if(selectedTemplate.equalsIgnoreCase("2")){
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
+        }else if(selectedTemplate.equalsIgnoreCase("3")){
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
+        }else if(selectedTemplate.equalsIgnoreCase("4")){
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
+        }
+
+        String content = null;
+        try {
+            content = IOUtils.toString(getAssets().open(name))
+
+                    .replaceAll("Company Name", company_name)
+                    .replaceAll("Address", company_address)
+                    .replaceAll("Contact No.", company_contact)
+                    .replaceAll("Website", companywebsitestr)
+                    .replaceAll("Email", company_email)
+                    .replaceAll("#LOGO_IMAGE#", companyimagelogopath)
+                    .replaceAll("INV-564", invoicenum.getText().toString())
+                    .replaceAll("invD", invoice_date)
+                    .replaceAll("DueDate", invoice_due_date)
+                    .replaceAll("crTerms", credit_terms)
+                    .replaceAll("refNo", strreferencenovalue)
+
+                    .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
+                    .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
+                    .replaceAll("SubTotal-", subTotalValueTxt)
+                    .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
+                    .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
+                    .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
+                    .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
+                    .replaceAll("Paid Amount", paidamountstrreptxt)
+                    .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
+
+                    .replaceAll("SubTotal", subTotalTxt)
+//                    .replaceAll("Checkto", chektopaidmaount)
+                    .replaceAll("Checkto", "")
+                    .replaceAll("BankName", payment_bankstr)
+                    .replaceAll("Pemail", pemailpaidstr)
+                    .replaceAll("IBAN", payment_ibanstr)
+//                    .replaceAll("Currency", payment_currencystr)
+                    .replaceAll("Currency", "")
+                    .replaceAll("Swift/BICCode", payment_swiftstr)
+                    .replaceAll("Client N", sltcustonername)
+                    .replaceAll("Client A", sltcustomer_address)
+                    .replaceAll("Client C P", sltcustomer_contact)
+                    .replaceAll("Client C N", sltcustomer_phone_number)
+                    .replaceAll("Client Web", sltcustomer_website)
+                    .replaceAll("Client E", sltcustomer_email)
+                    .replaceAll("Notes-", strnotes)
+                    .replaceAll("#SIGNATURES#", Signatureincoicestr)
+                    .replaceAll("#ITEMS#", productitemlist)
+                    .replaceAll("#Shipp", Shipingdetail)
+                    .replaceAll("#ATTACHMENTS#", multipleimage)
+                    .replaceAll("Attachments", attachmentimage)
+                    .replaceAll("Notes:", notestringvalue)
+                    .replaceAll("Ship To:", Shiping_tostr)
+                    .replaceAll(" Shipping ", shipingvaluetxt)
+                    .replaceAll(" Tax ", taxtamountstrvalue)
+                    .replaceAll(" Discount ", discounttxtreplace)
+                    .replaceAll(" Reference No:", strreferencenotxtvalue)
+                    .replaceAll("hide", hiddenpaidrow)
+
+                    .replaceAll("#799f6e", companycolor)
+
+//
+//                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
+//                    .replaceAll("By cheque :", bycheckstrtxt)
+//                    .replaceAll("Pay Pal :", paypalstrtxt)
+//                    .replaceAll("Bank :", bankstrtxt)
+
+                    .replaceAll(" Payment Details ", "")
+                    .replaceAll("By cheque :", "")
+                    .replaceAll("Pay Pal :", "")
+                    .replaceAll("Bank :", "")
+
+                    .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+        Log.e("ViewInvoice__",content);
+
+        // invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
+
+
+
+
+        WebSettings webSettings = invoiceweb.getSettings();
+
+        webSettings.setJavaScriptEnabled(true);
+        invoiceweb.getSettings().setAllowFileAccess(true);
+        invoiceweb.setWebChromeClient(new WebChromeClient());
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(true);
+        invoiceweb.getSettings().setLoadsImagesAutomatically(true);
+        invoiceweb.getSettings().setJavaScriptEnabled(true);
+        invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
+        invoiceweb.getSettings().setLoadWithOverviewMode(true);
+        invoiceweb.getSettings().setUseWideViewPort(true);
+
+        invoiceweb.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+
+                //if page loaded successfully then show print button
+                //findViewById(R.id.fab).setVisibility(View.VISIBLE);
+                final File savedPDFFile = FileManager.getInstance().createTempFile(ConvertToReceiptsActivity.this, "pdf", false);
+
+                PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
+                    @Override
+                    public void onSuccess(File file) {
+                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+                        if(file.exists()) {
+//                            Uri photoURI = FileProvider.getUriForFile(getActivity(),
+//                                    "com.receipt.invoice.stock.sirproject.provider",
+//                                    file);
+//                            intentShareFile.setType("application/pdf");
+//                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
+//
+//                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+//                                    "Share As Pdf");
+//
+//                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
+
+//                            Log.e(TAG, "FILENAME" +file);
+//
+//                            Log.e(TAG, "selectedUriListQQ" +selectedUriList.size());
+
+
+                            for(int i = 0 ; i < selectedUriList.size() ; i++){
+//                                File file11 = new File(selectedUriList.get(i).getPath());//create path from uri
+//                                final String[] split = file11.getPath().split(":");//split the path.
+//                                //filePath = split[1];//assign it to a string(your choice).
+//
+//                                //File file = new File(new Uri(selectedUriList.get(i)));
+                                Log.e(TAG, "FILENAME11" +selectedUriList.get(i).toString().replace("file://", ""));
+                            }
+
+                            createinvoicewithdetail(file);
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Exception exception) {
+                        exception.printStackTrace();
+                    }
+                });
+
+            }
+        });
+
+        invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//
+//            }
+//        }, 1000);
+
     }
 
 

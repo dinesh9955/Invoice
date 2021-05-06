@@ -172,7 +172,7 @@
                 android:layout_below="@+id/shareinvoice"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/dark_blue"
-                android:text="Convert To Receipts"
+                android:text="Convert To Receipt"
 
                 android:id="@+id/recepitsviewtxt"
                 />

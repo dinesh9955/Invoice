@@ -1,7 +1,4 @@
-package com.receipt.invoice.stock.sirproject.Invoice;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+package com.receipt.invoice.stock.sirproject.Estimate;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,8 +18,10 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.bumptech.glide.RequestManager;
-import com.google.gson.Gson;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.View_invoice;
@@ -36,10 +35,10 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class InvoiceToReceiptsWebview extends AppCompatActivity {
+public class EstimateToInvoiceWebview extends AppCompatActivity {
 
 
-    private static final String TAG = "ViewInvoice_Activity";
+    private static final String TAG = "EstimateToInvoiceWebview";
     WebView invoiceweb;
 
     String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency, payment_iban, payment_swift_bic;
@@ -83,7 +82,7 @@ public class InvoiceToReceiptsWebview extends AppCompatActivity {
 
     String taxText = "";
 
-    @SuppressLint("WrongThread")
+    @SuppressLint({"WrongThread", "LongLogTag"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +108,7 @@ public class InvoiceToReceiptsWebview extends AppCompatActivity {
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Receipt");
+        titleView.setText("Preview Invoice");
 
         drableimagebase64 = "iVBORw0KGgoAAAANSUhEUgAAAC4AAAAnCAYAAABwtnr/AAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAALqADAAQAAAABAAAAJwAAAAB8SmRPAAAAeklEQVRYCe3SQQrAIBTEUPX+d67iCbIIBSGuw/B57fzOGw++9eDN9+QO//vLJZ44FOhXgVBalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYc2r3IESll5TkQAAAAASUVORK5CYII=";
 
@@ -361,6 +360,7 @@ public class InvoiceToReceiptsWebview extends AppCompatActivity {
         return attchmentbase64;
     }
 
+    @SuppressLint("LongLogTag")
     public void view_invoice() {
         invoiceweb = findViewById(R.id.invoiceweb);
 
@@ -691,23 +691,23 @@ public class InvoiceToReceiptsWebview extends AppCompatActivity {
 
         Log.e(TAG, "selectedTemplate "+selectedTemplate);
 
-        String name = "receipt1.html";
-        String nameName = "file:///android_asset/receipt1.html";
+        String name = "invoice.html";
+        String nameName = "file:///android_asset/invoice.html";
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "invoice.html";
+            nameName = "file:///android_asset/invoice.html";
         }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "invoice1.html";
+            nameName = "file:///android_asset/invoice1.html";
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "invoice2.html";
+            nameName = "file:///android_asset/invoice2.html";
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "invoice3.html";
+            nameName = "file:///android_asset/invoice3.html";
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "invoice4.html";
+            nameName = "file:///android_asset/invoice4.html";
         }
 
         String content = null;

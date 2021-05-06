@@ -728,7 +728,7 @@ public class List_of_Estimate extends Fragment {
 //            }
 //            if (ilnvoiceStatus.equals("1")) {
 //                recepitsviewtxt.setVisibility(View.INVISIBLE);
-                viewinvoicerecipts.setVisibility(View.GONE);
+                viewinvoicerecipts.setVisibility(View.VISIBLE);
 //            }
             viewinvoicebotom = view.findViewById(R.id.viewinvoicebotom);
             viewinvoicetemplate = view.findViewById(R.id.viewinvoicetemplate);
@@ -747,7 +747,7 @@ public class List_of_Estimate extends Fragment {
             viewinvoicetemplate.setText("Edit Estimate");
             duplicateinvoitxt.setText("Duplicate Estimate");
             shareinvoicetxt.setText("Share Estimate");
-            recepitsviewtxt.setText("Estimate To Receipt");
+            recepitsviewtxt.setText("Convert To Invoice");
 
             viewinvoicebotom.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1031,7 +1031,7 @@ public class List_of_Estimate extends Fragment {
                 @Override
                 public void onClick(View v) {
 //                    Fragment_Create_Invoice.defaultClick = 1;
-                    Intent intent = new Intent(getContext(), ConvertToReceiptsActivity.class);
+                    Intent intent = new Intent(getContext(), ConvertToInvoiceActivity.class);
                     intent.putExtra("invoiceID", invoiceidbypos);
                     intent.putExtra("companyreceiptno", receipt_count);
                     intent.putExtra("compnayestimate_count", estimate_count);
@@ -1039,6 +1039,8 @@ public class List_of_Estimate extends Fragment {
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getActivity().startActivity(intent);
                     bottomSheetDialog.dismiss();
+
+
                 }
             });
         }
