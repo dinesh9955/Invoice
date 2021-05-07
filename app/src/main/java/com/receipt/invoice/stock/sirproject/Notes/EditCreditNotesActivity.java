@@ -4360,7 +4360,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }

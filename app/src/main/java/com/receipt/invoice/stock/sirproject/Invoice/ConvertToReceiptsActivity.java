@@ -561,7 +561,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     for(int i = 0; i < invoice_images.size() ; i++){
                         String signatureofreceiverpath = invoice_image_pathdto + invoice_images.get(i).getImage();
                         new DownloadInvoiceImages().execute(signatureofreceiverpath);
-                        attachmenttxtimg.setVisibility(View.VISIBLE);
+                        attachmenttxtimg.setVisibility(View.GONE);
                     }
 //                    Log.e(TAG, "cccccc "+invoice_images.size());
 //                    Log.e(TAG, "cccccc "+invoice_images.get(0).getImage());
@@ -724,7 +724,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     String signatureofreceiverpath = invoice_image_pathdto + signature_of_issuerdto;
                     Log.e(TAG, "signatureIssuerPathAA "+signatureofreceiverpath);
                     new Downloadsignatureissueweb().execute(signatureofreceiverpath);
-                    imgsigsuccess.setVisibility(View.VISIBLE);
+                    imgsigsuccess.setVisibility(View.GONE);
                 }
 
 //                shippingfirstname = invoiceDtoInvoice.getShippingFirstname();
@@ -1234,11 +1234,11 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
     private void showUriList(List<Uri> uriList) {
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
-            attachmenttxtimg.setVisibility(View.VISIBLE);
+            attachmenttxtimg.setVisibility(View.GONE);
         }
         int sizen = attchmentimage.size();
 
-        attachmenttxtimg.setVisibility(View.VISIBLE);
+        attachmenttxtimg.setVisibility(View.GONE);
         String attchedmentimagepath;
         if (attchmentimage != null) {
             for (int i = 0; i < attchmentimage.size(); i++) {
@@ -2068,12 +2068,16 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         intent.putExtra("producprice", producprice);
                         intent.putExtra("totalpriceproduct", totalpriceproduct);
 
+
                         intent.putExtra("signature_of_receiver", signatureofreceiverst);
                         Log.e(TAG, "signatureofreceiverst::: "+signatureofreceiverst);
                         //Log.e(TAG, "signature_of_receiver::: "+signatureofreceiverst);
 
                         Log.e(TAG, "company_stamp::: "+company_stamp);
+                       // company_stamp = "";
                         intent.putExtra("company_stamp", company_stamp);
+
+                        signature_of_issuer = "";
                         intent.putExtra("signature_issuer", signature_of_issuer);
                         intent.putExtra("reference_no", reference_no);
                         // intent.putStringArrayListExtra("products_list",products);
@@ -2484,14 +2488,14 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     if (addSignatureToGallery(signatureBitmap)) {
                         //  Toast.makeText(getContext(), "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-                        imgsigsuccess.setVisibility(View.VISIBLE);
+                        imgsigsuccess.setVisibility(View.GONE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }
                     if (addSvgSignatureToGallery(signaturePad.getSignatureSvg())) {
                         //  Toast.makeText(getContext(), "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-                        imgsigsuccess.setVisibility(View.VISIBLE);
+                        imgsigsuccess.setVisibility(View.GONE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }
@@ -2548,13 +2552,13 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             if (s_r.equals("1")) {
                 signatureofinvoicemaker = photo;
                 signature_of_issuer = photo.getAbsolutePath();
-                imgsigsuccess.setVisibility(View.VISIBLE);
+                imgsigsuccess.setVisibility(View.GONE);
 
             }
             if (s_r.equals("2")) {
                 signaturinvoicereceiver = photo;
                 signatureofreceiverst = photo.getAbsolutePath();
-                imgrecsuccess.setVisibility(View.VISIBLE);
+                imgrecsuccess.setVisibility(View.GONE);
             }
 
 //            Log.e(TAG, "signature_of_issuer"+signatureofreceiverst);
@@ -3035,7 +3039,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         params.add("service", "1");
         params.add("customer", "1");
         params.add("tax", "1");
-        params.add("invoice", "1");
+        params.add("receipt", "1");
         params.add("warehouse", "1");
 
 
@@ -3097,10 +3101,10 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                         JSONArray customer = data.getJSONArray("customer");
 
-                        JSONArray invoice = data.getJSONArray("invoice");
+                        JSONArray invoice = data.getJSONArray("receipt");
                         for (int i = 0; i < invoice.length(); i++) {
                             JSONObject item = invoice.getJSONObject(i);
-                            String invoice_nocompany = item.getString("invoice_no");
+                            String invoice_nocompany = item.getString("receipt_no");
 
                             /* invoicenum.setText(invoice_nocompany);*/
 //                            if (invoice_nocompany != null) {
@@ -4266,7 +4270,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                 boolean ddd = isChar(sss);
                 if(ddd == false){
                     int myValue = Integer.parseInt(sss)+1;
-                    valueIs = "Inv # "+myValue;
+                    valueIs = "Rec # "+myValue;
                 }
             }
         }
@@ -4567,7 +4571,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }
@@ -4598,6 +4602,8 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
         }
 
+        company_stamp = "";
+        companyname = "";
         try {
             signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)

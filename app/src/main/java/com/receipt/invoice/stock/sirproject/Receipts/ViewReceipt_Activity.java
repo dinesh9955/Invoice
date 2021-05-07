@@ -465,7 +465,7 @@ public class ViewReceipt_Activity extends AppCompatActivity {
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }

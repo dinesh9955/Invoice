@@ -4558,7 +4558,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }

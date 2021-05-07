@@ -3914,7 +3914,7 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }

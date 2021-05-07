@@ -6,6 +6,17 @@ package com.receipt.invoice.stock.sirproject.Model;
 
 public class InvoiceData {
 
+    String is_viewed = "";
+
+
+    public String getIs_viewed() {
+        return is_viewed;
+    }
+
+    public void setIs_viewed(String is_viewed) {
+        this.is_viewed = is_viewed;
+    }
+
     String void_status = "";
 
     public String getVoid_status() {

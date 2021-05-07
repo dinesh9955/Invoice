@@ -4434,7 +4434,7 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }

@@ -125,6 +125,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -2326,10 +2327,25 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         } else {
 
 
+
+
+
                             String replaceString = credit_terms.replaceAll("days", "");
                             String dayswith = replaceString.trim();
 
+//                            invoice_date
                             try {
+
+                                String givenDateString = duedate.getText().toString();
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                                Date mDate = sdf.parse(givenDateString);
+                                long timeInMilliseconds = mDate.getTime();
+                                datemillis = timeInMilliseconds;
+
+
+                                Log.e(TAG, "datemillis: "+datemillis);
+                                Log.e(TAG, "dayswith: "+dayswith);
                                 Double daysvalue = Double.parseDouble(dayswith);
 
                                 Double result = toMilliSeconds(daysvalue);
@@ -2342,7 +2358,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                                 // Formatting Date according to the
                                 // given format
 
-                                Log.e("Date Long", simple.format(sumresultdate));
+                                Log.e(TAG, "DateLong: "+simple.format(sumresultdate));
                                 edduedate.setText(simple.format(sumresultdate));
                                 edduedate.setClickable(false);
                                 txtdays.setText(credit_terms);
@@ -2996,7 +3012,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
         params.add("service", "1");
         params.add("customer", "1");
         params.add("tax", "1");
-        params.add("estimate", "1");
+        params.add("invoice", "1");
         params.add("warehouse", "1");
 
 
@@ -3058,10 +3074,10 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
                         JSONArray customer = data.getJSONArray("customer");
 
-                        JSONArray invoice = data.getJSONArray("estimate");
+                        JSONArray invoice = data.getJSONArray("invoice");
                         for (int i = 0; i < invoice.length(); i++) {
                             JSONObject item = invoice.getJSONObject(i);
-                            String invoice_nocompany = item.getString("estimate_no");
+                            String invoice_nocompany = item.getString("invoice_no");
 
                             /* invoicenum.setText(invoice_nocompany);*/
 //                            if (invoice_nocompany != null) {
@@ -4152,7 +4168,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 boolean ddd = isChar(sss);
                 if(ddd == false){
                     int myValue = Integer.parseInt(sss)+1;
-                    valueIs = "Est # "+myValue;
+                    valueIs = "Inv # "+myValue;
                 }
             }
         }
@@ -4455,7 +4471,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }

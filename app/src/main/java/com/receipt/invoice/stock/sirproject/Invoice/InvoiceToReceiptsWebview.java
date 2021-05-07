@@ -470,7 +470,7 @@ public class InvoiceToReceiptsWebview extends AppCompatActivity {
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }

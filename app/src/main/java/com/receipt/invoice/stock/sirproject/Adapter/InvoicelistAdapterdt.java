@@ -54,6 +54,8 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
         final String invoicedue_date = company_list.getInvoicedue_date();
         final String invoicetotlaprice = company_list.getInvoicetotlaprice();
         final String strstatus = company_list.getInvocestatus();
+        final String is_viewed = company_list.getIs_viewed();
+
 
 
         if (customer_name.equals("") && customer_name.equals("null")) {
@@ -85,7 +87,6 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
             viewHolderForCat.statustxt.setText("");
         } else {
             if (strstatus.equals("2")) {
-
                 viewHolderForCat.statustxt.setText("Paid");
                 viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
 
@@ -94,6 +95,17 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
                 viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
             }
         }
+
+        if (is_viewed.equalsIgnoreCase("0")) {
+            viewHolderForCat.invoicesttsuspend.setText("Pending");
+            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#FF0000"));
+        }else{
+            viewHolderForCat.invoicesttsuspend.setText("Seen");
+            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#008000"));
+        }
+
+
+
 
 //        viewHolderForCat.statustxt.setVisibility(View.GONE);
 //        viewHolderForCat.invoicestatus.setVisibility(View.GONE);

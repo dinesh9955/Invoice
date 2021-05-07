@@ -44,8 +44,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import project.aamir.sheikh.circletextview.CircleTextView;
 
@@ -258,6 +263,11 @@ public class Xyz extends AppCompatActivity {
         startActivity(Intent.createChooser(share, "Share Image"));
     }
 
+    private Double toMilliSeconds(Double days) {
+        return days * 24 * 60 * 60 * 1000;
+    }
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -272,6 +282,51 @@ public class Xyz extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+//                String myFormat = "yyyy-MM-dd"; //In which you need put here
+//                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//               // duedate.setText(sdf.format(myCalendar.getTime()));
+//                try {
+//                    String myFormat1 = ("yyyy/MM/dd HH:mm:ss"); //In which you need put here
+//                    SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat1, Locale.US);
+//
+//                    String myDate = sdf2.format(myCalendar.getTime());
+//                    Log.e("Date Long", myDate);
+//                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//                    Date date = sdf1.parse(myDate);
+//                    datemillis = date.getTime();
+//
+//                } catch (Exception e) {
+//
+//                }
+
+                String givenDateString = "2021-05-07";
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date mDate = sdf.parse(givenDateString);
+                    long timeInMilliseconds = mDate.getTime();
+                    System.out.println("Date in milli :: " + timeInMilliseconds);
+
+                    Double daysvalue = Double.parseDouble("7");
+
+                    Double result = toMilliSeconds(daysvalue);
+
+                    long sumresult = (long) (result + timeInMilliseconds);
+                    // Creating date format
+                    DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+                    Date sumresultdate = new Date(sumresult);
+
+                    // Formatting Date according to the
+                    // given format
+
+                    Log.e(TAG, "DateLong: "+simple.format(sumresultdate));
+
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
 //                Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
 
 //                Uri uri = FileProvider.getUriForFile(this, "com.example.provider", new File(photoPath));
@@ -573,19 +628,19 @@ public class Xyz extends AppCompatActivity {
                 //share2();
               //  share3();
 
-                Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                        R.drawable.thanksimg);
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                File f = new File(Environment.getExternalStorageDirectory()
-                        + File.separator + "share.jpg");
-                try {
-                    f.createNewFile();
-                    FileOutputStream fo = new FileOutputStream(f);
-                    fo.write(bytes.toByteArray());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                Bitmap icon = BitmapFactory.decodeResource(getResources(),
+//                        R.drawable.thanksimg);
+//                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//                icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+//                File f = new File(Environment.getExternalStorageDirectory()
+//                        + File.separator + "share.jpg");
+//                try {
+//                    f.createNewFile();
+//                    FileOutputStream fo = new FileOutputStream(f);
+//                    fo.write(bytes.toByteArray());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
 
 //                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -597,13 +652,13 @@ public class Xyz extends AppCompatActivity {
 //                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 
 
-                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                emailIntent.setType("application/image");
-                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "Text text");
-                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"This is email subject");
-                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is extra text");
-                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///android_asset/note.html"));
-                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+//                emailIntent.setType("application/image");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "Text text");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"This is email subject");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is extra text");
+//                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///android_asset/note.html"));
+//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 
 
 //                String to = "test@gmail.com";

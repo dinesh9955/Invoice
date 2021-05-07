@@ -540,6 +540,7 @@ public class List_of_Invoices extends Fragment {
 
 
 
+
                             String customer_name = "";
                             String cc = item.getString("customer");
                             if(!cc.equalsIgnoreCase("null")){
@@ -574,6 +575,8 @@ public class List_of_Invoices extends Fragment {
                             company_list.setInvoice_share_link(linkpd);
                             company_list.setTemplate_type(item.getString("template_type"));
                             company_list.setVoid_status(void_status);
+                            String is_viewed = item.getString("is_viewed");
+                            company_list.setIs_viewed(is_viewed);
                             list.add(company_list);
 
 

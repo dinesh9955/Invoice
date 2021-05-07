@@ -516,14 +516,16 @@ public class List_of_Estimate extends Fragment {
                             company_list.setInvoice_share_link(linkpd);
                             company_list.setTemplate_type(item.getString("template_type"));
                             company_list.setInvocestatus(status1);
-
+                            String is_viewed = item.getString("is_viewed");
+                            company_list.setIs_viewed(is_viewed);
                             list.add(company_list);
                        //     if (list.size() < 20) {
-                                invoicelistAdapterdt.updateList(list);
+
                      //       }
 
                         }
 
+                        invoicelistAdapterdt.updateList(list);
 
                     }
 

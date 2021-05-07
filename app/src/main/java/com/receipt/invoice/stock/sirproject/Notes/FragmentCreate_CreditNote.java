@@ -3932,7 +3932,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }

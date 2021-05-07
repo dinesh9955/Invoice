@@ -3927,7 +3927,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }

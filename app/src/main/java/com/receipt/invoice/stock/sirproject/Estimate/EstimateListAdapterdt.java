@@ -95,6 +95,17 @@ public class EstimateListAdapterdt extends RecyclerView.Adapter<EstimateListAdap
             }
         }
 
+        final String is_viewed = company_list.getIs_viewed();
+
+        if (is_viewed.equalsIgnoreCase("0")) {
+            viewHolderForCat.invoicesttsuspend.setText("Pending");
+            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#FF0000"));
+        }else{
+            viewHolderForCat.invoicesttsuspend.setText("Seen");
+            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#008000"));
+        }
+
+
         viewHolderForCat.statustxt.setVisibility(View.GONE);
 //        viewHolderForCat.invoicestatus.setVisibility(View.GONE);
 //        viewHolderForCat.invoicesttsuspend.setVisibility(View.GONE);

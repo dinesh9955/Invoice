@@ -478,7 +478,7 @@ public class ViewInvoice_Activity extends AppCompatActivity {
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }

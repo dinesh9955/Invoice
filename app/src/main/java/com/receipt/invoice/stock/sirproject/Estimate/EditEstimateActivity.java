@@ -4439,7 +4439,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
         } else {
 
 
-            companyname = "Company Stamp";
+            companyname = "Company Seal";
 
 
         }
