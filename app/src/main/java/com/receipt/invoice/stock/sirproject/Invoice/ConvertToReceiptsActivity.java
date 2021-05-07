@@ -1277,10 +1277,10 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         if (customer_name.equals("")) {
             Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Customer");
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Valid Invoice No");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Valid Receipt No");
 
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Invoice Date");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Date");
 
         } else if (selectedCompanyId.equals("")) {
             Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select a Company");
@@ -1363,6 +1363,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     e.printStackTrace();
                 }
             }
+            signatureofinvoicemaker = null;
             if (signatureofinvoicemaker != null) {
                 try {
                     params.put("signature_of_maker", signatureofinvoicemaker);
@@ -2558,7 +2559,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             if (s_r.equals("2")) {
                 signaturinvoicereceiver = photo;
                 signatureofreceiverst = photo.getAbsolutePath();
-                imgrecsuccess.setVisibility(View.GONE);
+                imgrecsuccess.setVisibility(View.VISIBLE);
             }
 
 //            Log.e(TAG, "signature_of_issuer"+signatureofreceiverst);
@@ -3102,28 +3103,32 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         JSONArray customer = data.getJSONArray("customer");
 
                         JSONArray invoice = data.getJSONArray("receipt");
-                        for (int i = 0; i < invoice.length(); i++) {
-                            JSONObject item = invoice.getJSONObject(i);
-                            String invoice_nocompany = item.getString("receipt_no");
 
-                            /* invoicenum.setText(invoice_nocompany);*/
-//                            if (invoice_nocompany != null) {
-//                                Log.e("invoice no", invoice_nocompany);
-//                            }
 
-                            if(i == invoice.length() - 1){
-                                Log.e(TAG, "zzzz0 "+invoice_nocompany);
-                                Log.e(TAG, "zzzz1 "+i);
-                                Log.e(TAG, "zzzz2 "+invoice.length());
+                        if(invoice.length() == 0){
+                            invoicenum.setText("Rec # 1");
+                            //invoicenum.setEnabled(true);
+                        }else{
+                            for (int i = 0; i < invoice.length(); i++) {
+                                JSONObject item = invoice.getJSONObject(i);
+                                String invoice_nocompany = item.getString("receipt_no");
 
-                                String sss = getRealValue(invoice_nocompany);
-                                invoicenum.setText(sss);
+                                if(i == invoice.length() - 1){
+                                    Log.e(TAG, "zzzz0 "+invoice_nocompany);
+                                    Log.e(TAG, "zzzz1 "+i);
+                                    Log.e(TAG, "zzzz2 "+invoice.length());
 
-                                invoicenum.setEnabled(true);
+                                    String sss = getRealValue(invoice_nocompany);
+                                    invoicenum.setText(sss);
+
+                                    invoicenum.setEnabled(true);
+
+                                }
 
                             }
-
                         }
+
+
 
 
 //                        for (int i = 0; i < customer.length(); i++) {
@@ -4907,71 +4912,69 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
-        invoiceweb.setWebViewClient(new WebViewClient() {
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return false;
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-
-                //if page loaded successfully then show print button
-                //findViewById(R.id.fab).setVisibility(View.VISIBLE);
-                final File savedPDFFile = FileManager.getInstance().createTempFile(ConvertToReceiptsActivity.this, "pdf", false);
-
-                PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
-                    @Override
-                    public void onSuccess(File file) {
-                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-                        if(file.exists()) {
-//                            Uri photoURI = FileProvider.getUriForFile(getActivity(),
-//                                    "com.receipt.invoice.stock.sirproject.provider",
-//                                    file);
-//                            intentShareFile.setType("application/pdf");
-//                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
+//        invoiceweb.setWebViewClient(new WebViewClient() {
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                return false;
+//            }
 //
-//                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-//                                    "Share As Pdf");
-//
-//                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
-
-//                            Log.e(TAG, "FILENAME" +file);
-//
-//                            Log.e(TAG, "selectedUriListQQ" +selectedUriList.size());
-
-
-                            for(int i = 0 ; i < selectedUriList.size() ; i++){
-//                                File file11 = new File(selectedUriList.get(i).getPath());//create path from uri
-//                                final String[] split = file11.getPath().split(":");//split the path.
-//                                //filePath = split[1];//assign it to a string(your choice).
-//
-//                                //File file = new File(new Uri(selectedUriList.get(i)));
-                                Log.e(TAG, "FILENAME11" +selectedUriList.get(i).toString().replace("file://", ""));
-                            }
-
-                            createinvoicewithdetail(file);
-                        }
-
-                    }
-
-                    @Override
-                    public void onError(Exception exception) {
-                        exception.printStackTrace();
-                    }
-                });
-
-            }
-        });
-
-        invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
-//
-//        new Handler().postDelayed(new Runnable() {
 //            @Override
-//            public void run() {
+//            public void onPageFinished(WebView view, String url) {
 //
+//                //if page loaded successfully then show print button
+//                //findViewById(R.id.fab).setVisibility(View.VISIBLE);
+//                final File savedPDFFile = FileManager.getInstance().createTempFile(ConvertToReceiptsActivity.this, "pdf", false);
+//
+//                PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
+//                    @Override
+//                    public void onSuccess(File file) {
+//                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//                        if(file.exists()) {
+////                            Uri photoURI = FileProvider.getUriForFile(getActivity(),
+////                                    "com.receipt.invoice.stock.sirproject.provider",
+////                                    file);
+////                            intentShareFile.setType("application/pdf");
+////                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
+////
+////                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+////                                    "Share As Pdf");
+////
+////                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
+//
+////                            Log.e(TAG, "FILENAME" +file);
+////
+////                            Log.e(TAG, "selectedUriListQQ" +selectedUriList.size());
+//
+//                            Log.e(TAG, "selectedUriListAA "+selectedUriList.size());
+//
+//                            for(int i = 0 ; i < selectedUriList.size() ; i++){
+////                                File file11 = new File(selectedUriList.get(i).getPath());//create path from uri
+////                                final String[] split = file11.getPath().split(":");//split the path.
+////                                //filePath = split[1];//assign it to a string(your choice).
+////
+////                                //File file = new File(new Uri(selectedUriList.get(i)));
+//                                Log.e(TAG, "FILENAME11" +selectedUriList.get(i).toString().replace("file://", ""));
+//                            }
+//
+//                            createinvoicewithdetail(file);
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception exception) {
+//                        exception.printStackTrace();
+//                        Log.e(TAG, "exceptionAA "+exception.getMessage());
+//                    }
+//                });
 //
 //            }
-//        }, 1000);
+//        });
+//
+//        invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
+
+
+
+        createinvoicewithdetail(null);
 
     }
 

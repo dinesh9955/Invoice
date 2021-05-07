@@ -1219,7 +1219,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
         if (customer_name.equals("")) {
             Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select A Customer");
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
-            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Valid Estimate No");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Valid Invoice No");
 
         }else if (invoice_date.equals("")) {
             Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Invoice Date");

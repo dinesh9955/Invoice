@@ -489,7 +489,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
         }else {
 
             invoice_image_pathcompanystemp=invoice_image_path + company_stamp;
-            companyname="CompanyStamp";
+            companyname="Company Seal";
 
 
         }
@@ -518,7 +518,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
         }else {
 
             invoice_image_pathissuverpath=invoice_image_path + signature_of_issuer;
-            signature_of_issuername="SignatureofIssuer";
+            signature_of_issuername="Signature of Issuer";
 
 
         }
