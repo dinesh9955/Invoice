@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.receipt.invoice.stock.sirproject.Invoice.InvoiceCallBack;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.R;
 
@@ -23,6 +26,8 @@ import java.util.List;
 
 public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapterdt.ViewHolderForCat> {
 
+    InvoiceCallBack invoiceCallBack;
+
     private Context mcontext;
     ArrayList<InvoiceData> mlist = new ArrayList<>();
 
@@ -32,6 +37,13 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
         mlist = list;
 
     }
+
+
+    public void InvoiceCAll(InvoiceCallBack invoiceCallBack) {
+        this.invoiceCallBack = invoiceCallBack;
+
+    }
+
 
 
     @NonNull
@@ -105,27 +117,49 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
         }
 
 
-
-
-//        viewHolderForCat.statustxt.setVisibility(View.GONE);
-//        viewHolderForCat.invoicestatus.setVisibility(View.GONE);
-//        viewHolderForCat.invoicesttsuspend.setVisibility(View.GONE);
+//
+//                String invoiceStatus = "0";
+//                String invoice_useriddt = "";
+//
+//                String invoice_text = "0";
+//                int invoice_color = 0;
+//
+//                try {
+//                    invoiceStatus = mlist.get(i).getInvocestatus();
+//                    invoice_useriddt = mlist.get(i).getInvoice_userid();
+//                    Log.e("UinvoiceStatus", invoiceStatus);
+//
+//                    if (invoiceStatus.equals("1")) {
+//                        invoice_text = "Mark as unpaid";
+//                        invoice_color = R.color.red;
+//                        invoiceStatus = "2";
+//
+//
+//                    } else {
+//                        invoice_text = "Mark as Paid";
+//                        invoice_color = R.color.green;
+//                        invoiceStatus = "1";
+//
+//                    }
+//
+//                    //UpdateInvoiceStatusmethodh(invoiceStatus);
+//                } catch (Exception e) {
+//                    Log.e("MainActivity", e.getMessage());
+//                }
+//
+//
+//        String finalInvoiceStatus = invoiceStatus;
+//        viewHolderForCat.textViewLeftPaidUnPaid.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                notifyDataSetChanged();
+//                invoiceCallBack.callBack(finalInvoiceStatus);
+//
+//            }
+//        });
 
     }
 
-/*    public void removeItem(int position) {
-        data.remove(position);
-        notifyItemRemoved(position);
-    }
-
-    public void restoreItem(String item, int position) {
-        data.add(position, item);
-        notifyItemInserted(position);
-    }
-
-    public List<String> getData() {
-        return data;
-    }*/
 
 
 
@@ -150,10 +184,18 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
 
         TextView customernamtxt,invoicenbtxt,invoiceduetxt,invoicepricetxt,statustxt,invoicestatus,invoicesttsuspend;
 
+        TextView textViewLeftPaidUnPaid;
 
 
         public ViewHolderForCat(@NonNull View itemView) {
             super(itemView);
+
+//            SwipeLayout swipeLayout = (SwipeLayout)itemView.findViewById(R.id.swipe);
+//            swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
+//            swipeLayout.addDrag(SwipeLayout.DragEdge.Left, swipeLayout.findViewById(R.id.left_view));
+//            swipeLayout.addDrag(SwipeLayout.DragEdge.Right, swipeLayout.findViewById(R.id.right_view));
+//
+//            textViewLeftPaidUnPaid = itemView.findViewById(R.id.textdelete1);
 
             customernamtxt = itemView.findViewById(R.id.customernamtxt);
             invoicenbtxt = itemView.findViewById(R.id.invoicenbtxt);

@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rowitem_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_marginBottom="45dp"
+>
+
+
+    <com.daimajia.swipe.SwipeLayout xmlns:swipe="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        swipe:leftEdgeSwipeOffset="0dp"
+        swipe:rightEdgeSwipeOffset="0dp">
+
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:id="@+id/right_view"
+            android:tag="Bottom3"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/textdelete"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:text="Delete"
+                    android:textColor="@color/white"
+                    android:background="#ff0000"
+                    android:textSize="15dp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/texthide"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:text="Mark Unread"
+                    android:textColor="@color/white"
+                    android:background="#00A2FF"
+                    android:textSize="15dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+
+            android:gravity="center"
+            android:id="@+id/left_view"
+            android:tag="Bottom3"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/textdelete1"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:text="Delete"
+                    android:textColor="@color/lightpurple"
+                    android:background="#ff0000"
+                    android:textSize="15dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+          >
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/customernamtxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/image"
+                    android:padding="2dp"
+                    android:text="Customer Name"
+                    android:textStyle="bold" />
+
+                <TextView
+
+                    android:id="@+id/invoicenbtxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/customernamtxt"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/image"
+                    android:padding="2dp"
+                    android:text="Username"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/invoiceduetxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/customernamtxt"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/invoicenbtxt"
+                    android:padding="2dp"
+                    android:text="Username"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/invoicepricetxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:padding="2dp"
+                    android:text="Price"
+                    android:textColor="@color/gray"
+                    android:textSize="15sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/statustxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_below="@+id/invoicepricetxt"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:padding="2dp"
+                    android:text=""
+                    android:textColor="@color/gray"
+                    android:textSize="15sp" />
+
+                <TextView
+
+                    android:id="@+id/invoicestatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/invoicenbtxt"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/image"
+                    android:padding="2dp"
+                    android:text="Status :"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/invoicesttsuspend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/invoiceduetxt"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/invoicestatus"
+                    android:padding="2dp"
+                    android:text="Pending"
+                    android:textColor="@color/red"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/invoicesttsuspend"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/gray">
+
+                </View>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+
+
+<!--        -->
+<!--        -->
+
+<!--                <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:gravity="center"-->
+<!--            >-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textdelete"-->
+<!--                android:layout_width="70dp"-->
+<!--                android:layout_height="70dp"-->
+<!--                android:text="Delete"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="#ff0000"-->
+<!--                android:textSize="15dp"-->
+<!--                android:gravity="center"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/texthide"-->
+<!--                android:layout_width="70dp"-->
+<!--                android:layout_height="70dp"-->
+<!--                android:text="Mark Unread"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="#00A2FF"-->
+<!--                android:textSize="15dp"-->
+<!--                android:gravity="center"/>-->
+
+<!--        </LinearLayout>-->
+
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/badge_layout34244"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginRight="0dp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:visibility="visible">-->
+
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/white">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/customernamtxt"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_toRightOf="@+id/image"-->
+<!--                android:padding="2dp"-->
+<!--                android:text="Customer Name"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+
+<!--                android:id="@+id/invoicenbtxt"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/customernamtxt"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_toRightOf="@+id/image"-->
+<!--                android:padding="2dp"-->
+<!--                android:text="Username"-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="12sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/invoiceduetxt"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/customernamtxt"-->
+<!--                android:layout_marginLeft="3dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_toRightOf="@+id/invoicenbtxt"-->
+<!--                android:padding="2dp"-->
+<!--                android:text="Username"-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="12sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/invoicepricetxt"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/name"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginEnd="5dp"-->
+<!--                android:padding="2dp"-->
+<!--                android:text="Price"-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="15sp"-->
+
+<!--                />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/statustxt"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+
+<!--                android:layout_below="@+id/invoicepricetxt"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginRight="5dp"-->
+<!--                android:padding="2dp"-->
+<!--                android:text=""-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="15sp" />-->
+
+<!--            <TextView-->
+
+<!--                android:id="@+id/invoicestatus"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/invoicenbtxt"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_toRightOf="@+id/image"-->
+<!--                android:padding="2dp"-->
+<!--                android:text="Status :"-->
+<!--                android:textColor="@color/gray"-->
+<!--                android:textSize="12sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/invoicesttsuspend"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/invoiceduetxt"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_toRightOf="@+id/invoicestatus"-->
+<!--                android:padding="2dp"-->
+<!--                android:text="Pending"-->
+<!--                android:textColor="@color/red"-->
+<!--                android:textSize="12sp" />-->
+
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_below="@+id/invoicesttsuspend"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:background="@color/gray">-->
+
+<!--            </View>-->
+
+<!--        </RelativeLayout>-->
+
+
+<!--</RelativeLayout>-->
+
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:gravity="start"-->
+<!--            >-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textdelete1"-->
+<!--                android:layout_width="70dp"-->
+<!--                android:layout_height="70dp"-->
+<!--                android:text="Delete"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="#ff0000"-->
+<!--                android:textSize="15dp"-->
+<!--                android:gravity="center"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/texthide1"-->
+<!--                android:layout_width="70dp"-->
+<!--                android:layout_height="70dp"-->
+<!--                android:text="Mark Unread"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="#00A2FF"-->
+<!--                android:textSize="15dp"-->
+<!--                android:gravity="center"/>-->
+
+<!--        </LinearLayout>-->
+
+
+
+    </com.daimajia.swipe.SwipeLayout>
+</RelativeLayout>
+
+
+

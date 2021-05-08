@@ -175,6 +175,9 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
     RecyclerView productsRecycler;
     EditText ednotes, invoicenum;
 
+
+    StringBuilder stringBuilderBillTo = new StringBuilder();
+
     String  tax_type = "", rate1 = "" , value = "" , rate_type = "";
 
     String taxtypeclusive = "", taxtype = "", taxtrateamt = "", taxID = "";
@@ -4126,6 +4129,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
 
 
+
     String  sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
     // String  taxamount = "";
     String shippingzone = "";
@@ -4165,6 +4169,27 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                 shippingzone = selected.get(i).getShipping_zone();
 
             }
+
+
+            if(!sltcustonername.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustonername+"</br>");
+            }
+            if(!sltcustomer_address.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_address+"</br>");
+            }
+            if(!sltcustomer_contact.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+            }
+            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
+            }
+            if(!sltcustomer_website.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_website+"</br>");
+            }
+            if(!sltcustomer_email.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_email+"");
+            }
+
         }
         if (shippingfirstname.equalsIgnoreCase("")) {
             Shiping_tostr = "";
@@ -4644,7 +4669,8 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 //                    .replaceAll("Currency", payment_currencystr)
                     .replaceAll("Currency", "")
                     .replaceAll("Swift/BICCode", payment_swiftstr)
-                    .replaceAll("Client N", sltcustonername)
+                    
+                    .replaceAll("Client N", ""+stringBuilderBillTo)
                     .replaceAll("Client A", sltcustomer_address)
                     .replaceAll("Client C P", sltcustomer_contact)
                     .replaceAll("Client C N", sltcustomer_phone_number)

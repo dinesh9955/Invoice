@@ -68,6 +68,10 @@ public class ViewEstimate_Activity extends AppCompatActivity {
     String selectedTemplate = "";
     String companycolor = "";
 
+    StringBuilder stringBuilderBillTo = new StringBuilder();
+    StringBuilder stringBuilderShipTo = new StringBuilder();
+
+
     String paypal_emailstr = "", sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
     String strnotes = "",  ref_no ="", paid_amount_payment_method = "", freight_cost = "", strdiscountvalue = "", strpaid_amount = "", companylogopath = "", Grossamount_str = "", Subtotalamount = "", taxamount = "", netamountvalue = "", Blanceamountstr = "";
     String shippingzone = "", Paymentamountdate = "", shippingfirstname = "", shippinglastname = "", shippingaddress1 = "", shippingaddress2 = "", shippingcity = "", shippingpostcode = "", shippingcountry;
@@ -136,6 +140,27 @@ public class ViewEstimate_Activity extends AppCompatActivity {
                     shippingzone = customerselected.get(i).getShipping_zone();
 
                 }
+
+
+
+                if(!sltcustonername.equalsIgnoreCase("")){
+                    stringBuilderBillTo.append(sltcustonername+"</br>");
+                }
+                if(!sltcustomer_address.equalsIgnoreCase("")){
+                    stringBuilderBillTo.append(sltcustomer_address+"</br>");
+                }
+                if(!sltcustomer_contact.equalsIgnoreCase("")){
+                    stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+                }
+                if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+                    stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
+                }
+                if(!sltcustomer_website.equalsIgnoreCase("")){
+                    stringBuilderBillTo.append(sltcustomer_website+"</br>");
+                }
+                if(!sltcustomer_email.equalsIgnoreCase("")){
+                    stringBuilderBillTo.append(sltcustomer_email+"");
+                }
             }
 
             if (shippingfirstname.equalsIgnoreCase("")) {
@@ -143,7 +168,31 @@ public class ViewEstimate_Activity extends AppCompatActivity {
             } else {
                 Shiping_tostr = "Ship To:";
                 Log.e(TAG, "shippingfirstnameAA "+shippingfirstname);
-                Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+
+
+                if(!shippingfirstname.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingfirstname+"</br>");
+                }
+                if(!shippinglastname.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippinglastname+"</br>");
+                }
+                if(!shippingaddress1.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingaddress1+"</br>");
+                }
+                if(!shippingaddress2.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingaddress2+"</br>");
+                }
+                if(!shippingcity.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingcity+"</br>");
+                }
+                if(!shippingcountry.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingcountry+"</br>");
+                }
+                if(!shippingpostcode.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingpostcode+"");
+                }
+
+                //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
             }
 
@@ -730,16 +779,17 @@ public class ViewEstimate_Activity extends AppCompatActivity {
 //                    .replaceAll("Currency", payment_currencystr)
                     .replaceAll("Currency", "")
                     .replaceAll("Swift/BICCode", payment_swiftstr)
-                    .replaceAll("Client N", sltcustonername)
-                    .replaceAll("Client A", sltcustomer_address)
-                    .replaceAll("Client C P", sltcustomer_contact)
-                    .replaceAll("Client C N", sltcustomer_phone_number)
-                    .replaceAll("Client Web", sltcustomer_website)
-                    .replaceAll("Client E", sltcustomer_email)
+
+                    .replaceAll("Client N", ""+stringBuilderBillTo.toString())
+//                    .replaceAll("Client A", sltcustomer_address)
+//                    .replaceAll("Client C P", sltcustomer_contact)
+//                    .replaceAll("Client C N", sltcustomer_phone_number)
+//                    .replaceAll("Client Web", sltcustomer_website)
+//                    .replaceAll("Client E", sltcustomer_email)
                     .replaceAll("Notes-", strnotes)
                     .replaceAll("#SIGNATURES#", Signatureincoicestr)
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("#Shipp", Shipingdetail)
+                    .replaceAll("#Shipp", ""+stringBuilderShipTo.toString())
                     .replaceAll("#ATTACHMENTS#", multipleimage)
                     .replaceAll("Attachments", attachmentimage)
                     .replaceAll("Notes:", notestringvalue)

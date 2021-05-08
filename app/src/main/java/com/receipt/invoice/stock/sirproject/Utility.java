@@ -191,17 +191,34 @@ public class Utility {
 
     public static String getReplaceDollor(String sss) {
         String res = "";
+
         if(sss.contains("$$")){
             res = sss.replace("$$", "&#36;");
         }else{
             if(sss.contains("$")){
                 res = sss.replace("$" , "&#36;");
             }else{
-                res = sss;
+//                if(sss.contains(cruncycode)){
+////                    res = getReplaceSingleCurrency(sss , cruncycode);
+////                    res = res+""+cruncycode;
+                    res = sss;
+//                }
             }
         }
         return res;
     }
+
+    public static String getReplaceSingleCurrency(String text, String cruncycode) {
+        String res = "";
+        if(text.contains(cruncycode)){
+            res = text.replace(cruncycode, "");
+        }else{
+            res = text;
+        }
+        return res;
+    }
+
+
 
     public static String getReplaceCurrency(String text, String cruncycode) {
         String res = "";

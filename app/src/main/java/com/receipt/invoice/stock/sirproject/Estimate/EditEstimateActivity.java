@@ -339,6 +339,9 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
     String  tax_type = "", rate1 = "" , value = "" , rate_type = "";
 
+    StringBuilder stringBuilderBillTo = new StringBuilder();
+    StringBuilder stringBuilderShipTo = new StringBuilder();
+
 //    String templateSelect = "0";
 //    String colorCode = "#ffffff";
 
@@ -4226,6 +4229,26 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                 shippingzone = selected.get(i).getShipping_zone();
 
             }
+
+
+            if(!sltcustonername.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustonername+"</br>");
+            }
+            if(!sltcustomer_address.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_address+"</br>");
+            }
+            if(!sltcustomer_contact.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+            }
+            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
+            }
+            if(!sltcustomer_website.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_website+"</br>");
+            }
+            if(!sltcustomer_email.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_email+"");
+            }
         }
 
         if (shippingfirstname.equalsIgnoreCase("")) {
@@ -4709,16 +4732,17 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 //                    .replaceAll("Currency", payment_currencystr)
                     .replaceAll("Currency", "")
                     .replaceAll("Swift/BICCode", payment_swiftstr)
-                    .replaceAll("Client N", sltcustonername)
-                    .replaceAll("Client A", sltcustomer_address)
-                    .replaceAll("Client C P", sltcustomer_contact)
-                    .replaceAll("Client C N", sltcustomer_phone_number)
-                    .replaceAll("Client Web", sltcustomer_website)
-                    .replaceAll("Client E", sltcustomer_email)
+
+                    .replaceAll("Client N", ""+stringBuilderBillTo.toString())
+//                    .replaceAll("Client A", sltcustomer_address)
+//                    .replaceAll("Client C P", sltcustomer_contact)
+//                    .replaceAll("Client C N", sltcustomer_phone_number)
+//                    .replaceAll("Client Web", sltcustomer_website)
+//                    .replaceAll("Client E", sltcustomer_email)
                     .replaceAll("Notes-", ednotes.getText().toString())
                     .replaceAll("#SIGNATURES#", Signatureincoicestr)
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("#Shipp", Shipingdetail)
+                    .replaceAll("#Shipp", ""+stringBuilderShipTo.toString())
                     .replaceAll("#ATTACHMENTS#", multipleimage)
                     .replaceAll("Attachments", attachmentimage)
                     .replaceAll("Notes:", notestringvalue)
