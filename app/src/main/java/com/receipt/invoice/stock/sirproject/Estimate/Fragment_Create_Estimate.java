@@ -1114,17 +1114,42 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
             } else {
 
             }
+
+
+
+//            if (multiple.length > 0) {
+//                for (int k = 0; k < multiple.length; k++) {
+//                    try {
+//                        params.add("images", "[" + k + "]");
+//                        params.put("fileName:", "invoice_image" + multiple[k] + "");
+//                        params.add("mimeType:", "image/jpeg");
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            }
+
+
+//            try {
+//                params.put("estimate_image[0]", new File("/storage/emulated/0/Pictures/AndroidDvlpr/1620578182066.png"));
+//                  //params.put("images[1]", "/storage/emulated/0/Pictures/AndroidDvlpr/1620583777015.png");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+
+
             if (multiple.length > 0) {
                 for (int k = 0; k < multiple.length; k++) {
+                    Log.e(TAG, "multiple[k] "+multiple[k]);
                     try {
-                        params.add("invoice_image", "[" + k + "]");
-                        params.put("fileName:", "invoice_image" + multiple[k] + ".jpg");
-                        params.add("mimeType:", "image/jpeg");
-
+                        if(multiple[k] != null){
+                            params.put("estimate_image["+k+"]", multiple[k]);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
             }
 
@@ -3739,7 +3764,30 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
             Shiping_tostr = "";
         } else {
             Shiping_tostr = "Ship To:";
-            Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+
+            if(!shippingfirstname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingfirstname+"</br>");
+            }
+            if(!shippinglastname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippinglastname+"</br>");
+            }
+            if(!shippingaddress1.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress1+"</br>");
+            }
+            if(!shippingaddress2.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress2+"</br>");
+            }
+            if(!shippingcity.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcity+"</br>");
+            }
+            if(!shippingcountry.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcountry+"</br>");
+            }
+            if(!shippingpostcode.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingpostcode+"");
+            }
+
+            //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
         }
 

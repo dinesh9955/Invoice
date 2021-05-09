@@ -1237,6 +1237,8 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
     }
 
     private void showUriList(List<Uri> uriList) {
+        attchmentimage.clear();
+
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
             attachmenttxtimg.setVisibility(View.GONE);
@@ -1441,21 +1443,36 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
 
 
-            if (selectedUriList.size() > 0) {
-                for (int k = 0; k < selectedUriList.size(); k++) {
+            if (multiple.length > 0) {
+                for (int k = 0; k < multiple.length; k++) {
+                    Log.e(TAG, "multiple[k] "+multiple[k]);
                     try {
-//                        params.add("invoice_image", "[" + k + "]");
-//                        params.put("fileName:", "invoice_image" + multiple[k] + ".jpg");
-//                        params.add("mimeType:", "image/jpeg");
-
-                        params.put("images[]", selectedUriList.get(k).toString().replace("file://", ""));
-
+                        if(multiple[k] != null){
+                            params.put("images["+k+"]", multiple[k]);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
             }
+
+
+
+//            if (selectedUriList.size() > 0) {
+//                for (int k = 0; k < selectedUriList.size(); k++) {
+//                    try {
+////                        params.add("invoice_image", "[" + k + "]");
+////                        params.put("fileName:", "invoice_image" + multiple[k] + ".jpg");
+////                        params.add("mimeType:", "image/jpeg");
+//                        //params.put("images["+k+"]", multiple[k]);
+//                        params.put("images[]", selectedUriList.get(k).toString().replace("file://", ""));
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            }
 
 
             Log.e(TAG,  "Params: "+params.toString());
@@ -4090,8 +4107,15 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            avi.smoothToHide();
+        }
+
+        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            avi.smoothToShow();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
@@ -4397,7 +4421,29 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             Shiping_tostr = "";
         } else {
             Shiping_tostr = "Ship To:";
-            Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+
+            if(!shippingfirstname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingfirstname+"</br>");
+            }
+            if(!shippinglastname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippinglastname+"</br>");
+            }
+            if(!shippingaddress1.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress1+"</br>");
+            }
+            if(!shippingaddress2.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress2+"</br>");
+            }
+            if(!shippingcity.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcity+"</br>");
+            }
+            if(!shippingcountry.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcountry+"</br>");
+            }
+            if(!shippingpostcode.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingpostcode+"");
+            }
+           // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
         }
 

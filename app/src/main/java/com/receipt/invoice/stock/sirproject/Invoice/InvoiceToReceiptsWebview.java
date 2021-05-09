@@ -172,7 +172,30 @@ public class InvoiceToReceiptsWebview extends AppCompatActivity {
             } else {
                 Shiping_tostr = "Ship To:";
                 Log.e(TAG, "shippingfirstnameAA "+shippingfirstname);
-                Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+
+                if(!shippingfirstname.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingfirstname+"</br>");
+                }
+                if(!shippinglastname.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippinglastname+"</br>");
+                }
+                if(!shippingaddress1.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingaddress1+"</br>");
+                }
+                if(!shippingaddress2.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingaddress2+"</br>");
+                }
+                if(!shippingcity.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingcity+"</br>");
+                }
+                if(!shippingcountry.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingcountry+"</br>");
+                }
+                if(!shippingpostcode.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingpostcode+"");
+                }
+
+                //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
             }
 

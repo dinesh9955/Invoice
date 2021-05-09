@@ -563,7 +563,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         new DownloadInvoiceImages().execute(signatureofreceiverpath);
                         attachmenttxtimg.setVisibility(View.VISIBLE);
                     }
-//                    Log.e(TAG, "cccccc "+invoice_images.size());
+                    Log.e(TAG, "cAAccccc "+invoice_images.size());
 //                    Log.e(TAG, "cccccc "+invoice_images.get(0).getImage());
 
                 }
@@ -1232,6 +1232,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
     }
 
     private void showUriList(List<Uri> uriList) {
+
+        attchmentimage.clear();
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
             attachmenttxtimg.setVisibility(View.VISIBLE);
@@ -1431,22 +1433,42 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             }
 
 
+            Log.e(TAG, "selectedUriListAA "+selectedUriList.size());
 
-            if (selectedUriList.size() > 0) {
-                for (int k = 0; k < selectedUriList.size(); k++) {
+
+
+            if (multiple.length > 0) {
+                for (int k = 0; k < multiple.length; k++) {
+                    Log.e(TAG, "multiple[k] "+multiple[k]);
                     try {
-//                        params.add("invoice_image", "[" + k + "]");
-//                        params.put("fileName:", "invoice_image" + multiple[k] + ".jpg");
-//                        params.add("mimeType:", "image/jpeg");
-
-                        params.put("images[]", selectedUriList.get(k).toString().replace("file://", ""));
-
+                        if(multiple[k] != null){
+                            params.put("images["+k+"]", multiple[k]);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
             }
+
+//
+//            if (selectedUriList.size() > 0) {
+//                for (int k = 0; k < selectedUriList.size(); k++) {
+//                    Log.e(TAG, "selectedUriListBB "+selectedUriList.get(k));
+//                    try {
+////                        params.add("invoice_image", "[" + k + "]");
+////                        params.put("fileName:", "invoice_image" + multiple[k] + ".jpg");
+////                        params.add("mimeType:", "image/jpeg");
+//
+//                        //params.put("images["+k+"]", multiple[k]);
+//
+//                        params.put("images["+k+"]", selectedUriList.get(k).toString().replace("file://", ""));
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            }
 
 
             Log.e(TAG,  "Params: "+params.toString());
@@ -2080,6 +2102,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         intent.putExtra("quantity_list", quantity);
                         intent.putExtra("rate_list", rate);
                         intent.putExtra("attchemnt", attchmentimage);
+
+                        Log.e(TAG , "attchmentimageAAA "+attchmentimage.size());
 
                         // Log.e(TAG)
 
@@ -4005,11 +4029,15 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
 
 
-
     private class DownloadInvoiceImages extends AsyncTask<String, Void, Void> {
+
+        ProgressDialog progressDialog = new ProgressDialog(EditInvoiceActivity.this);
+
 
         @Override
         protected Void doInBackground(String... strings) {
+
+
             URL url = null;
             try {
                 url = new URL(strings[0]);
@@ -4046,7 +4074,9 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 //            }
 
             String imagepath = imageFile.getAbsolutePath();
-            Log.e("save image", imagepath);
+            Log.e(TAG , "save_image"+ imagepath);
+
+            attchmentimage.add(imagepath);
 
             FileOutputStream out = null;
             try {
@@ -4072,8 +4102,19 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            progressDialog.setMessage("Please wait");
+//            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+
+            Log.e(TAG, "onPreExecute");
+        }
+
+        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+          //  progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
@@ -4379,7 +4420,30 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             Shiping_tostr = "";
         } else {
             Shiping_tostr = "Ship To:";
-            Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+
+            if(!shippingfirstname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingfirstname+"</br>");
+            }
+            if(!shippinglastname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippinglastname+"</br>");
+            }
+            if(!shippingaddress1.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress1+"</br>");
+            }
+            if(!shippingaddress2.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress2+"</br>");
+            }
+            if(!shippingcity.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcity+"</br>");
+            }
+            if(!shippingcountry.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcountry+"</br>");
+            }
+            if(!shippingpostcode.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingpostcode+"");
+            }
+
+           // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
         }
 

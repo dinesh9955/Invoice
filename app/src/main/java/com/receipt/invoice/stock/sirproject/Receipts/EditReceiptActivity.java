@@ -1147,6 +1147,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
     }
 
     private void showUriList(List<Uri> uriList) {
+        attchmentimage.clear();
+
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
             attachmenttxtimg.setVisibility(View.VISIBLE);

@@ -1163,6 +1163,8 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
     }
 
     private void showUriList(List<Uri> uriList) {
+        attchmentimage.clear();
+
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
             attachmenttxtimg.setVisibility(View.VISIBLE);
@@ -1318,7 +1320,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
 //                        params.add("invoice_image", "[" + k + "]");
 //                        params.put("fileName:", "invoice_image" + multiple[k] + ".jpg");
 //                        params.add("mimeType:", "image/jpeg");
-
+                       // params.put("images["+k+"]", multiple[k]);
                         params.put("images[]", selectedUriList.get(k).toString().replace("file://", ""));
 
                     } catch (Exception e) {
@@ -3874,8 +3876,15 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            avi.smoothToHide();
+        }
+
+        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            avi.smoothToShow();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }

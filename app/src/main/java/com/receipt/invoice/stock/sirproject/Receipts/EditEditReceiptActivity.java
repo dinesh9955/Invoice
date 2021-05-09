@@ -177,6 +177,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
 
     StringBuilder stringBuilderBillTo = new StringBuilder();
+    StringBuilder stringBuilderShipTo = new StringBuilder();
 
     String  tax_type = "", rate1 = "" , value = "" , rate_type = "";
 
@@ -1145,6 +1146,8 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
     }
 
     private void showUriList(List<Uri> uriList) {
+        attchmentimage.clear();
+
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
             attachmenttxtimg.setVisibility(View.VISIBLE);
@@ -4195,7 +4198,29 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
             Shiping_tostr = "";
         } else {
             Shiping_tostr = "Ship To:";
-            Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+
+            if(!shippingfirstname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingfirstname+"</br>");
+            }
+            if(!shippinglastname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippinglastname+"</br>");
+            }
+            if(!shippingaddress1.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress1+"</br>");
+            }
+            if(!shippingaddress2.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress2+"</br>");
+            }
+            if(!shippingcity.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcity+"</br>");
+            }
+            if(!shippingcountry.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcountry+"</br>");
+            }
+            if(!shippingpostcode.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingpostcode+"");
+            }
+            //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
         }
 
@@ -4679,7 +4704,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                     .replaceAll("Notes-", strnotes)
                     .replaceAll("#SIGNATURES#", Signatureincoicestr)
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("#Shipp", Shipingdetail)
+                    .replaceAll("#Shipp", ""+stringBuilderShipTo.toString())
                     .replaceAll("#ATTACHMENTS#", multipleimage)
                     .replaceAll("Attachments", attachmentimage)
                     .replaceAll("Notes:", notestringvalue)

@@ -169,7 +169,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
     String company_image_pathdto, customer_image_pathdto, invoiceshre_linkdto, invoice_image_pathdto, customerDtoContactName;
     ArrayList<InvoiceTotalsItemDto> grosamontdto = new ArrayList<>();
     ArrayList<ProductsItemDto> productsItemDtosdto;
-    ArrayList<String> invoice_imageDto;
+    ArrayList<Estimate_image> invoice_imageDto;
     // Edti invoice With Detail Datata
     InvoiceTotalsItemDto listobj = new InvoiceTotalsItemDto();
     EstimateDtoEstimate invoiceDtoInvoice;
@@ -731,8 +731,22 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                     grosamontdto = new ArrayList<InvoiceTotalsItemDto>(invoiceDtoInvoice.getTotals());
                 }
 
+
+                invoice_imageDto = new ArrayList<Estimate_image>(data.getEstimateImage());
+                if(invoice_imageDto != null){
+                    for(int i = 0; i < invoice_imageDto.size() ; i++){
+                        String signatureofreceiverpath = invoice_image_pathdto + invoice_imageDto.get(i).getImage();
+                        new DownloadInvoiceImages().execute(signatureofreceiverpath);
+                        attachmenttxtimg.setVisibility(View.VISIBLE);
+                    }
+                    Log.e(TAG, "cAAccccc "+invoice_imageDto.size());
+//                    Log.e(TAG, "cccccc "+invoice_images.get(0).getImage());
+                }
+
+
+
                 productsItemDtosdto = new ArrayList<ProductsItemDto>(invoiceDtoInvoice.getProducts());
-                invoice_imageDto = new ArrayList<String>(data.getEstimateImage());
+
                 Log.e(TAG, "product:::: "+invoice_imageDto.size());
 
                 if (productsItemDtosdto.size() > 0) {
@@ -1190,6 +1204,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
     }
 
     private void showUriList(List<Uri> uriList) {
+        attchmentimage.clear();
+
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
             attachmenttxtimg.setVisibility(View.VISIBLE);
@@ -1394,17 +1410,18 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
             if (multiple.length > 0) {
                 for (int k = 0; k < multiple.length; k++) {
+                    Log.e(TAG, "multiple[k] "+multiple[k]);
                     try {
-                        params.add("invoice_image", "[" + k + "]");
-                        params.put("fileName:", "invoice_image" + multiple[k] + ".jpg");
-                        params.add("mimeType:", "image/jpeg");
-
+                        if(multiple[k] != null){
+                            params.put("images["+k+"]", multiple[k]);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
             }
+
+
 
             Log.e(TAG, "credit_termsAAA1 "+credit_terms);
             Log.e(TAG, "invoice_due_dateAAA1 "+invoice_due_date);
@@ -4057,6 +4074,102 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
     }
 
 
+
+
+
+    private class DownloadInvoiceImages extends AsyncTask<String, Void, Void> {
+
+        // ProgressDialog progressDialog = new ProgressDialog(EditInvoiceActivity.this);
+
+
+        @Override
+        protected Void doInBackground(String... strings) {
+
+
+            URL url = null;
+            try {
+                url = new URL(strings[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            Bitmap bm = null;
+            try {
+                bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Create Path to save Image
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr"); //Creates app specific folder
+
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+
+            File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
+
+//            if (s_r.equals("1")) {
+//                signaturinvoicereceiver = imageFile;
+//                signature_of_issuer = imageFile.getAbsolutePath();
+//            }
+//            if (s_r.equals("2")) {
+//            signaturinvoicereceiver = imageFile;
+//            signatureofreceiverst = imageFile.getAbsolutePath();
+
+
+//            selectedUriList.add(Uri.fromFile(imageFile));
+
+//            }
+
+            String imagepath = imageFile.getAbsolutePath();
+            Log.e(TAG , "save_image"+ imagepath);
+
+            attchmentimage.add(imagepath);
+
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(imageFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
+                out.flush();
+                out.close();
+                // Tell the media scanner about the new file so that it is
+                // immediately available to the user.
+                MediaScannerConnection.scanFile(ConvertToInvoiceActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        // Log.i("ExternalStorage", "Scanned " + path + ":");
+                        //    Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
+            } catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            progressDialog.setMessage("Please wait");
+//            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+
+            Log.e(TAG, "onPreExecute");
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //  progressDialog.dismiss();
+            //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
+
 //    @Override
 //    protected void onRestart() {
 //        super.onRestart();
@@ -4291,7 +4404,29 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             Shiping_tostr = "";
         } else {
             Shiping_tostr = "Ship To:";
-            Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+
+            if(!shippingfirstname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingfirstname+"</br>");
+            }
+            if(!shippinglastname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippinglastname+"</br>");
+            }
+            if(!shippingaddress1.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress1+"</br>");
+            }
+            if(!shippingaddress2.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress2+"</br>");
+            }
+            if(!shippingcity.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcity+"</br>");
+            }
+            if(!shippingcountry.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcountry+"</br>");
+            }
+            if(!shippingpostcode.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingpostcode+"");
+            }
+            //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
         }
 

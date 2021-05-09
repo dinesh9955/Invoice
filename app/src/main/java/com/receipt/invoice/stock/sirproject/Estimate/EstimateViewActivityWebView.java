@@ -43,7 +43,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class EstimateViewActivityWebView extends AppCompatActivity {
-    private final String TAG = "EstimateViewActivityWebView";
+    private final String TAG = "EstimateViewActivity";
     WebView invoiceweb;
     String invoiceId = "";
     String templateSelect = "";
@@ -71,7 +71,7 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
     ArrayList<InvoiceTotalsItemDto> grosamont = new ArrayList<>();
 
     ArrayList<ProductsItemDto> productsItemDtos = new ArrayList<>();
-    ArrayList<String> invoice_imageDto;
+    ArrayList<Estimate_image> invoice_imageDto;
 
     InvoiceTotalsItemDto listobj = new InvoiceTotalsItemDto();
     EstimateDtoEstimate invoiceDtoInvoice;
@@ -111,69 +111,6 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
         printimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                final File savedPDFFile = FileManager.getInstance().createTempFile(getApplicationContext(), "pdf", false);
-//
-//                String content  = " <!DOCTYPE html>\n" +
-//                        "<html>\n" +
-//                        "<body>\n" +
-//                        "\n" +
-//                        "<h1>My First Heading</h1>\n" +
-//                        "<p>My first paragraph.</p>\n" +
-//                        " <a href='https://www.example.com'>This is a link</a>" +
-//                        "\n" +
-//                        "</body>\n" +
-//                        "</html> ";
-//
-//
-//                PDFUtil.generatePDFFromHTML(getApplicationContext(), savedPDFFile, contentAll , new PDFPrint.OnPDFPrintListener() {
-//                    @SuppressLint("LongLogTag")
-//                    @Override
-//                    public void onSuccess(File file) {
-//
-//                        Log.e(TAG, "file!!! "+file);
-//
-//                        // Open Pdf Viewer
-//                        // Uri pdfUri = Uri.fromFile(file);
-//
-//
-//                        //File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/example.pdf");
-////                        Intent intent = new Intent(Intent.ACTION_VIEW);
-////                        intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-////                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-////                        startActivity(intent);
-//
-//
-//
-//                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-//                        //File fileWithinMyDir = new File(pdfUri);
-//
-//                        if(file.exists()) {
-//                            Uri photoURI = FileProvider.getUriForFile(InvoiceViewActivityWebView.this,
-//                                    "com.receipt.invoice.stock.sirproject.provider",
-//                                    file);
-//                            intentShareFile.setType("application/pdf");
-//                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
-//
-//                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-//                                    "Share As Pdf");
-//                            //  intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
-//
-//                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
-//                        }
-//
-////                        Intent intentPdfViewer = new Intent(Abc.this, PDFViewerActivity.class);
-////                        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri);
-////
-////                        startActivity(intentPdfViewer);
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception exception) {
-//                        exception.printStackTrace();
-//                    }
-//                });
-
                 createWebPrintJob(invoiceweb);
             }
         });
@@ -190,10 +127,11 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
         String token = Constant.GetSharedPreferences(EstimateViewActivityWebView.this, Constant.ACCESS_TOKEN);
         Call<EstimateResponseDto> resposresult = apiInterface.getEstimateDetail(token, invoiceId);
         resposresult.enqueue(new Callback<EstimateResponseDto>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<EstimateResponseDto> call, retrofit2.Response<EstimateResponseDto> response) {
 
-                Log.e("resss ", ""+response.body().toString());
+                Log.e(TAG, "resssAA "+ ""+response.body().toString());
                 // image path of all
                 company_image_path = response.body().getData().getCompanyImagePath();
                 customer_image_path = response.body().getData().getCustomerImagePath();
@@ -201,6 +139,8 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
                 invoice_image_path = response.body().getData().getEstimateImagePath();
                 // customer data get
                 EstimateDto data = response.body().getData();
+
+                Log.e(TAG, "resssAA "+ ""+response.body().toString());
 
                 InvoiceCustomerDto invoiceCustomerDto = data.getEstimate().getCustomer();
                 sltcustonername = invoiceCustomerDto.getCustomerName();
@@ -295,7 +235,7 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
                 }
 
                 productsItemDtos = new ArrayList<ProductsItemDto>(invoiceDtoInvoice.getProducts());
-                invoice_imageDto = new ArrayList<String>(data.getEstimateImage());
+                invoice_imageDto = new ArrayList<Estimate_image>(data.getEstimateImage());
                 Log.e("product", productsItemDtos.toString());
 
                 int numsize = grosamont.size();
@@ -383,7 +323,7 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<EstimateResponseDto> call, Throwable t) {
-
+                Log.e(TAG, "onFailurAA "+t.getMessage());
             }
         });
 
@@ -498,9 +438,8 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
                 try {
 
                     multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
-
-
-                            .replaceAll("#ATTACHMENT_1#", invoice_imageDto.get(i));
+                            .replaceAll("#ATTACHMENT_1#", "http://13.126.22.0/saad/app/uploads/estimate/"+invoice_imageDto.get(i).getImage());
+                           // .replaceAll("#ATTACHMENT_1#", invoice_imageDto.get(i));
 
 
                     multipleimage = multipleimage + multipagepath;

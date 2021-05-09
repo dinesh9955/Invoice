@@ -720,12 +720,13 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                 invoice_due_date = edduedate.getText().toString();
                 invoicetaxamount = tax.getText().toString();
 
+
                 if (multimgpath != null) {
+                    Log.e(TAG, "multimgpathAA "+multimgpath.size());
                     for (int i = 0; i < multimgpath.size(); i++) {
                         File imgFile = new File(multimgpath.get(i));
                         // company_stampFileimage=imgFile;
                         multiple[i] = imgFile;
-
 
                     }
                 }
@@ -942,7 +943,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
         }
 
-        Log.e("uri Image ", String.valueOf(attchmentimage));
+        Log.e(TAG, "uri Image "+ String.valueOf(attchmentimage));
 
     }
 
@@ -1123,11 +1124,38 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
 
             if (multiple.length > 0) {
+
+//                try {
+//                    params.put("images[]", multiple[0]);
+//                    params.put("images[]", multiple[1]);
+//                }catch (Exception e) {
+//                        e.printStackTrace();
+//                }
+
+               // params.put("company_stamp", company_stampFileimage);
+
+
+//                ArrayList<File> files = new ArrayList<>();
+//                files.add(new File("/storage/emulated/0/Pictures/AndroidDvlpr/1620578182066.png"));
+//                files.add(new File("/storage/emulated/0/Pictures/AndroidDvlpr/1620578182066.png"));
+//                files.add(new File("/storage/emulated/0/Pictures/AndroidDvlpr/1620578182066.png"));
+//
+////                for (int k = 0; k < 5; k++) {
+//                    try {
+//                        params.put("images[0]", new File("/storage/emulated/0/Pictures/AndroidDvlpr/1620578182066.png"));
+//                        params.put("images[1]", new File("/storage/emulated/0/Pictures/AndroidDvlpr/1620578182066.png"));
+//                    }catch (Exception e){
+//                        Log.e(TAG, "getMessage[k] "+e.getMessage());
+//                    }
+////                }
+
                 for (int k = 0; k < multiple.length; k++) {
                     Log.e(TAG, "multiple[k] "+multiple[k]);
+
+
                     try {
                         if(multiple[k] != null){
-                            params.put("images[]", multiple[k]);
+                            params.put("images["+k+"]", multiple[k]);
 //                            params.add("images", "[" + k + "]");
 //                            params.add("images", "[" + multiple[k] + "]");
 //                            params.put("fileName:", "" + multiple[k] + "");
@@ -1147,6 +1175,9 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     }
 
                 }
+
+
+
             }
 
 
@@ -3761,7 +3792,30 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             Shiping_tostr = "";
         } else {
             Shiping_tostr = "Ship To:";
-            Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+
+            if(!shippingfirstname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingfirstname+"</br>");
+            }
+            if(!shippinglastname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippinglastname+"</br>");
+            }
+            if(!shippingaddress1.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress1+"</br>");
+            }
+            if(!shippingaddress2.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress2+"</br>");
+            }
+            if(!shippingcity.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcity+"</br>");
+            }
+            if(!shippingcountry.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcountry+"</br>");
+            }
+            if(!shippingpostcode.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingpostcode+"");
+            }
+
+           // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
         }
 
 

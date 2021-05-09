@@ -25,7 +25,7 @@ public class EstimateDto {
     private String companyImagePath;
 
     @SerializedName("estimate_image")
-    private List<String> estimateImage;
+    private List<Estimate_image> estimateImage;
 
 
     public String getEstimateImagePath() {
@@ -76,11 +76,11 @@ public class EstimateDto {
         this.companyImagePath = companyImagePath;
     }
 
-    public List<String> getEstimateImage() {
+    public List<Estimate_image> getEstimateImage() {
         return estimateImage;
     }
 
-    public void setEstimateImage(List<String> estimateImage) {
+    public void setEstimateImage(List<Estimate_image> estimateImage) {
         this.estimateImage = estimateImage;
     }
 }
