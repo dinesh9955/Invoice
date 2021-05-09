@@ -823,7 +823,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         .replaceAll(" Shipping ",shipingvaluetxt)
                         .replaceAll(" Tax ", taxtamountstrvalue)
                         .replaceAll(" Discount ", discounttxtreplace)
-                        .replaceAll(" Reference No:", strreferencenotxtvalue)
+                        .replaceAll("Reference No:", strreferencenotxtvalue)
                         .replaceAll("hide", hiddenpaidrow)
 //                        .replaceAll(" Payment Details ", paimnetdetailstrtxt)
 //                        .replaceAll("By cheque :", bycheckstrtxt)

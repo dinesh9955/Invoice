@@ -4893,7 +4893,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     .replaceAll(" Shipping ", shipingvaluetxt)
                     .replaceAll(" Tax ", taxtamountstrvalue)
                     .replaceAll(" Discount ", discounttxtreplace)
-                    .replaceAll(" Reference No:", strreferencenotxtvalue)
+                    .replaceAll("Reference No:", strreferencenotxtvalue)
                     .replaceAll("hide", hiddenpaidrow)
 
                     .replaceAll("#799f6e", companycolor)

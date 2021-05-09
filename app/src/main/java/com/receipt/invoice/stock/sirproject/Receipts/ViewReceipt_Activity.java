@@ -711,6 +711,8 @@ public class ViewReceipt_Activity extends AppCompatActivity {
         String strreferencenovalue="";
         String strreferencenotxtvalue="";
 
+        Log.e(TAG, "ref_noAA "+ref_no);
+
         if (ref_no.isEmpty()) {
             // Do you work here on success
 
@@ -720,7 +722,7 @@ public class ViewReceipt_Activity extends AppCompatActivity {
         } else {
             // null response or Exception occur
 
-            strreferencenovalue=ref_no;
+            strreferencenovalue = ref_no;
             strreferencenotxtvalue=" Reference No:";
 
 
@@ -737,15 +739,17 @@ public class ViewReceipt_Activity extends AppCompatActivity {
             name = "receipt1.html";
             nameName = "file:///android_asset/receipt1.html";
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "invoice2.html";
-            nameName = "file:///android_asset/invoice2.html";
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "invoice3.html";
-            nameName = "file:///android_asset/invoice3.html";
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "invoice4.html";
-            nameName = "file:///android_asset/invoice4.html";
+            name = "receipt1.html";
+            nameName = "file:///android_asset/receipt1.html";
         }
+
+       Log.e(TAG, "strreferencenovalueAA "+strreferencenovalue);
 
         String content = null;
         try {
@@ -809,7 +813,7 @@ public class ViewReceipt_Activity extends AppCompatActivity {
                     .replaceAll(" Shipping ", shipingvaluetxt)
                     .replaceAll(" Tax ", taxtamountstrvalue)
                     .replaceAll(" Discount ", discounttxtreplace)
-                    .replaceAll(" Reference No:", strreferencenotxtvalue)
+                    .replaceAll("Reference No:", strreferencenotxtvalue)
                     .replaceAll("hide", hiddenpaidrow)
 
                     .replaceAll("#799f6e", companycolor)
