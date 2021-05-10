@@ -536,9 +536,11 @@ public class Utility {
         String res = "";
         if(sss.contains("++")){
             res = sss.replace("+", "");
-        }
-        else{
+        } else{
             res = sss;
+        }
+        if(!res.equalsIgnoreCase("")){
+            res = "+"+res;
         }
         return res;
     }

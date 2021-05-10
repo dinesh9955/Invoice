@@ -3523,8 +3523,24 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
 
                 freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
-                netamount.setText(formatter.format(balanceamount) + cruncycode);
+                //netamount.setText(formatter.format(balanceamount) + cruncycode);
+
+                double cc = subtotalvalue + shipingvalue;
+
+                if (selectedtaxt.size() > 0) {
+                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+                        netamount.setText(formatter.format(cc) + cruncycode);
+                        Log.e(TAG, "QQQQQQ111");
+                    }else{
+                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+                        Log.e(TAG, "QQQQQQ222");
+                    }
+                }
             }
+
+
+
+
             if (paidamountstr.isEmpty()) {
                 //
                 // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
@@ -3695,7 +3711,7 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity");
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
                     }
                     else {
                         sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
@@ -3704,7 +3720,7 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
                     if (sh_quantity < en_quantity)
                     {
                         mybuilder.show();
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity");
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else
@@ -4739,7 +4755,8 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("")) {
+        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
+
             companyimagelogopath = "/android_res/drawable/white_img.png";
 
 

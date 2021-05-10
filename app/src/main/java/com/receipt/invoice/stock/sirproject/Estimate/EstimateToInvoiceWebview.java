@@ -644,7 +644,8 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("")) {
+        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
+
             companyimagelogopath = "/android_res/drawable/white_img.png";
 
 

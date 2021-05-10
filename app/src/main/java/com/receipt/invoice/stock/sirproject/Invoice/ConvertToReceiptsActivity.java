@@ -3798,7 +3798,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity");
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else {
@@ -3808,7 +3808,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     if (sh_quantity < en_quantity)
                     {
                         mybuilder.show();
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity");
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else
@@ -4834,7 +4834,8 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("")) {
+        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
+
             companyimagelogopath = "/android_res/drawable/white_img.png";
 
 

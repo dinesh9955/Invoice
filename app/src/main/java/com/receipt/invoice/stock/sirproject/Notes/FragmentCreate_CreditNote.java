@@ -987,7 +987,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             RequestParams params = new RequestParams();
             params.add("company_id", selectedCompanyId);
 
-            params.add("wearhouse_id", selectwarehouseId);
+            params.add("warehouse_id", selectwarehouseId);
             params.add("credit_note_date", invoice_date);
             params.add("due_date", invoice_due_date);
             params.add("customer_id", Selectedcustomer_id);
@@ -4110,7 +4110,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("")) {
+        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
+
             companyimagelogopath = "/android_res/drawable/white_img.png";
 
 

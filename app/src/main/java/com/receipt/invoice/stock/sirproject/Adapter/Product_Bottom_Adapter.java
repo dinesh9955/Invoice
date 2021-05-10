@@ -158,7 +158,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                 String quentityproduct=product_list.getQuantity();
                 if(quentityproduct.equals("null"))
                 {
-                        Constant.ErrorToast((Activity) mcontext,"Insufficient Quantity");
+                        Constant.ErrorToast((Activity) mcontext,"Insufficient Quantity Available");
 
                     if(bottomSheetDialog != null){
                         bottomSheetDialog.dismiss();
@@ -284,7 +284,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                         Log.e(TAG, "invoice");
                         if (sh_quantity < en_quantity) {
                             Log.e(TAG, "invoice1");
-                            Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity");
+                            Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity Available");
 
                         } else{
                             Log.e(TAG, "invoice2");

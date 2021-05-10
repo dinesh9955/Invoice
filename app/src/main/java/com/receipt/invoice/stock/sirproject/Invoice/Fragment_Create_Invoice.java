@@ -1856,6 +1856,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                         bottomSheetDialog2.dismiss();
                     } else {
 
+
 //                        defaultClick = 1;
                         Intent intent = new Intent(getContext(), ViewInvoice_Activity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1893,6 +1894,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                         intent.putExtra("payment_currency", payment_currency);
                         intent.putExtra("payment_iban", payment_iban);
                         intent.putExtra("payment_swift_bic", payment_swift_bic);
+
+                        Log.e(TAG, "companyimagelogopathAA "+companylogopath);
                         intent.putExtra("company_logo", companylogopath);
                         intent.putExtra("company_name", Selectedcompanyname);
                         intent.putExtra("company_address", company_address);
@@ -4154,7 +4157,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("")) {
+        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
+
             companyimagelogopath = "/android_res/drawable/white_img.png";
 
 
@@ -4268,6 +4272,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
         Log.e(TAG , "Grossamount_str "+Grossamount_str);
 
+        Log.e(TAG, "companyimagelogopathAA "+companyimagelogopath);
+
         String content = null;
         try {
             content = IOUtils.toString(getActivity().getAssets().open(name))
@@ -4289,7 +4295,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     .replaceAll("Discount-", ""+Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", subTotalValueTxt)
                     .replaceAll("Txses-", ""+Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
-                    .replaceAll("Shipping-", "+"+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
+                    .replaceAll("Shipping-", ""+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
                     .replaceAll("Total Amount-", ""+Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
                     .replaceAll("PaidsAmount", ""+Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)

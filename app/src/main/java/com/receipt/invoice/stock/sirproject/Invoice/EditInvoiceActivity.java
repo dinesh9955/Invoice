@@ -3540,9 +3540,6 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
                     }
 
-
-
-
                     netamountvalue = subtotalvalue + Totatlvalue1;
 
                     netamount.setText(formatter.format(netamountvalue) + cruncycode);
@@ -3556,14 +3553,54 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
             Log.e(TAG, "freight_costBBBB "+Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
 
+
+//            if (freight_cost.equals("")) {
+//
+//
+//            } else {
+//                balanceamount = netamountvalue + Double.parseDouble(freight_cost);
+//
+//                Double shipingvalue = Double.parseDouble(freight_cost);
+//
+//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+//                balance.setText(formatter.format(balanceamount) + cruncycode);
+//                // netamount.setText(formatter.format(balanceamount) + cruncycode);
+//                Log.e(TAG, "GGGGGGGGGGG");
+//
+//                double cc = subtotalvalue + shipingvalue;
+//
+//                if (selectedtaxt.size() > 0) {
+//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+//                        netamount.setText(formatter.format(cc) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ111");
+//                    }else{
+//                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ222");
+//                    }
+//                }
+//            }
+
+            double cc = 0;
+
             if(freight_cost.isEmpty()){
-                freight.setText("0");
+                //freight.setText("0");
             }else {
                     balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
                     Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
                     freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
                     balance.setText(formatter.format(balanceamount) + cruncycode);
-                    netamount.setText(formatter.format(balanceamount) + cruncycode);
+//                    netamount.setText(formatter.format(balanceamount) + cruncycode);
+
+                cc = subtotalvalue + shipingvalue;
+                if (selectedtaxt.size() > 0) {
+                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+                        netamount.setText(formatter.format(cc) + cruncycode);
+                        Log.e(TAG, "QQQQQQ111");
+                    }else{
+                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+                        Log.e(TAG, "QQQQQQ222");
+                    }
+                }
             }
 
             if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
@@ -3573,7 +3610,19 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
                 freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
-                netamount.setText(formatter.format(balanceamount) + cruncycode);
+               // netamount.setText(formatter.format(balanceamount) + cruncycode);
+
+                cc = subtotalvalue + shipingvalue;
+                if (selectedtaxt.size() > 0) {
+                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+                        netamount.setText(formatter.format(cc) + cruncycode);
+                        Log.e(TAG, "QQQQQQ111");
+                    }else{
+                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+                        Log.e(TAG, "QQQQQQ222");
+                    }
+                }
+
             }
 
 
@@ -3628,9 +3677,12 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                 paidamount.setText(formatter.format(paidindouble) + cruncycode);
                 balanceamount = balanceamount - Double.parseDouble(Utility.getReplaceCurrency(paidamount.getText().toString(), cruncycode));
-                Log.e("balance", ""+String.valueOf(balanceamount));
+                //Log.e("balance", ""+String.valueOf(balanceamount));
 
-                balance.setText(formatter.format(balanceamount) + cruncycode);
+
+
+                double ccc = cc - paidindouble;
+                balance.setText(formatter.format(ccc) + cruncycode);
             }
 
 
@@ -3790,7 +3842,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity");
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else {
@@ -3800,7 +3852,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                     if (sh_quantity < en_quantity)
                     {
                         mybuilder.show();
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity");
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else
@@ -4826,7 +4878,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("")) {
+        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
+
             companyimagelogopath = "/android_res/drawable/white_img.png";
 
 

@@ -706,8 +706,8 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
 
         String companylogopathdto="";
 
-        if(companylogopath.equals(""))
-        {
+        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
+
             companylogopathdto= "/android_res/drawable/white_img.png";
         }
         else {

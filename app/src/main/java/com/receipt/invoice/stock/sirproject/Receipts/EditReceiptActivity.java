@@ -3442,8 +3442,26 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
                 freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
-                netamount.setText(formatter.format(balanceamount) + cruncycode);
+
+                //if()
+                Log.e(TAG, "subtotalvalueAA "+subtotalvalue);
+                Log.e(TAG, "netamountvalueAA "+netamountvalue);
+                Log.e(TAG, "balanceamountAA "+balanceamount);
+
+                double cc = subtotalvalue + shipingvalue;
+
+                if (selectedtaxt.size() > 0) {
+                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+                         netamount.setText(formatter.format(cc) + cruncycode);
+                         Log.e(TAG, "QQQQQQ111");
+                    }else{
+                         netamount.setText(formatter.format(balanceamount) + cruncycode);
+                         Log.e(TAG, "QQQQQQ222");
+                    }
+                }
             }
+
+
             if (paidamountstr.isEmpty()) {
                 //
                 // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
@@ -3613,7 +3631,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity");
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
                     }
                     else {
                         sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
@@ -3622,7 +3640,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     if (sh_quantity < en_quantity)
                     {
                         mybuilder.show();
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity");
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else
@@ -4554,7 +4572,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("")) {
+        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
+
             companyimagelogopath = "/android_res/drawable/white_img.png";
 
 

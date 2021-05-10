@@ -124,40 +124,58 @@ public class Stock_Products_Detail extends AppCompatActivity {
 
                         Log.e(TAG, "product_quantity "+product_quantity.length());
 
-                        Stock_Products stock_products = new Stock_Products();
+
 
                         if (product_quantity.length()>0){
 
-                            for (int i = 0; i<product_quantity.length(); i++){
+
+                            for (int i = 0; i<product_quantity.length(); i++) {
+                                Stock_Products stock_products = new Stock_Products();
                                 JSONObject item = product_quantity.getJSONObject(i);
                                 String total_quantity = item.getString("total_quantity");
                                 String warehousen = item.getString("warehouse");
-
-
-
-
-                                if(i == 0){
+                                if(!item.getString("warehouse_id").equalsIgnoreCase("0")){
                                     stock_products.setWarehouse(warehousen);
                                     stock_products.setImage(company_logo);
                                     stock_products.setImagepath(company_image_path);
-
-
-
+                                    stock_products.setTotal_quantity(total_quantity);
+                                    list.add(stock_products);
                                 }
 
                             }
 
-                            int v = 0;
-                            for (int i = 0; i<product_quantity.length(); i++){
-                                JSONObject item = product_quantity.getJSONObject(i);
-                                String total_quantity = item.getString("total_quantity");
-
-                                v = v + Integer.parseInt(total_quantity);
-                                stock_products.setTotal_quantity(v+"");
-                            }
 
 
-                            list.add(stock_products);
+//                            for (int i = 0; i<product_quantity.length(); i++){
+//                                JSONObject item = product_quantity.getJSONObject(i);
+//                                String total_quantity = item.getString("total_quantity");
+//                                String warehousen = item.getString("warehouse");
+//
+//
+//
+//
+//                                if(i == 0){
+//                                    stock_products.setWarehouse(warehousen);
+//                                    stock_products.setImage(company_logo);
+//                                    stock_products.setImagepath(company_image_path);
+//
+//
+//
+//                                }
+//
+//                            }
+//
+//                            int v = 0;
+//                            for (int i = 0; i<product_quantity.length(); i++){
+//                                JSONObject item = product_quantity.getJSONObject(i);
+//                                String total_quantity = item.getString("total_quantity");
+//
+//                                v = v + Integer.parseInt(total_quantity);
+//                                stock_products.setTotal_quantity(v+"");
+//                            }
+
+
+
 
                             stock_products_details_adapter = new Stock_Products_Details_Adapter(Stock_Products_Detail.this,list);
                             warehouse.setAdapter(stock_products_details_adapter);
