@@ -91,7 +91,6 @@ public class Stock_Product_List extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
-
                 if (list.size()>0){
                     filter(s.toString());
                 }

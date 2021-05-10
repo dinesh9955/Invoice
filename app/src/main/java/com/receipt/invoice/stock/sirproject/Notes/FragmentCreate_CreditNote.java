@@ -970,11 +970,15 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Where House");
 
+
+
         } else if (producprice.isEmpty()) {
             Constant.ErrorToast(getActivity(), "Select product First");
             bottomSheetDialog2.dismiss();
             createinvoice.setEnabled(true);
         } else {
+
+            Log.e(TAG, "selectwarehouseIdAA "+selectwarehouseId);
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Please wait");
@@ -1123,7 +1127,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             }
 
 
-            Log.e("postingallparams",params.toString());
+            Log.e(TAG, "postingallparams:: "+params.toString());
 
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             Log.e("token", token);

@@ -4276,8 +4276,6 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                     .replaceAll("Bank :", bankstrtxt)
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
 
