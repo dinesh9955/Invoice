@@ -1421,6 +1421,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 }
             }
 
+            params.put("estimate_id", ""+invoiceId);
+            params.put("estimate_to_invoice", "3");
 
 
             Log.e(TAG, "credit_termsAAA1 "+credit_terms);
@@ -3096,28 +3098,31 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         JSONArray customer = data.getJSONArray("customer");
 
                         JSONArray invoice = data.getJSONArray("invoice");
-                        for (int i = 0; i < invoice.length(); i++) {
-                            JSONObject item = invoice.getJSONObject(i);
-                            String invoice_nocompany = item.getString("invoice_no");
 
-                            /* invoicenum.setText(invoice_nocompany);*/
-//                            if (invoice_nocompany != null) {
-//                                Log.e("invoice no", invoice_nocompany);
-//                            }
+                        if(invoice.length() == 0){
+                            invoicenum.setText("Inv # 1");
+                            invoicenum.setEnabled(true);
+                        }else{
+                            for (int i = 0; i < invoice.length(); i++) {
+                                JSONObject item = invoice.getJSONObject(i);
+                                String invoice_nocompany = item.getString("invoice_no");
 
-                            if(i == invoice.length() - 1){
-                                Log.e(TAG, "zzzz0 "+invoice_nocompany);
-                                Log.e(TAG, "zzzz1 "+i);
-                                Log.e(TAG, "zzzz2 "+invoice.length());
+                                if(i == invoice.length() - 1){
+                                    Log.e(TAG, "zzzz0 "+invoice_nocompany);
+                                    Log.e(TAG, "zzzz1 "+i);
+                                    Log.e(TAG, "zzzz2 "+invoice.length());
 
-                                String sss = getRealValue(invoice_nocompany);
-                                invoicenum.setText(sss);
+                                    String sss = getRealValue(invoice_nocompany);
+                                    invoicenum.setText(sss);
 
-                                invoicenum.setEnabled(true);
+                                    invoicenum.setEnabled(true);
+
+                                }
 
                             }
-
                         }
+
+
 
 
 //                        for (int i = 0; i < customer.length(); i++) {

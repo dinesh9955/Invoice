@@ -278,7 +278,7 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                                 invoiceidbypos = list.get(pos).getInvoice_userid();
                                 String ilnvoiceStatus = list.get(pos).getInvocestatus();
                                 String pdflink = list.get(pos).getInvoicepdflink();
-                                String sahrelink = list.get(pos).getInvoice_share_link();
+                                String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
 //                                Log.e(TAG, "pdflink: "+pdflink);
 //                                Log.e(TAG, "sahrelink: "+sahrelink);
 
@@ -348,6 +348,22 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                             }
                         }
                 ));
+
+//
+//                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+//                        "Delete",
+//                        0,
+//                        Color.parseColor("#ff0000"),
+//
+//                        new SwipeHelper2.UnderlayButtonClickListener() {
+//                            @Override
+//                            public void onClick(final int pos) {
+//                                String  invoiceidbypos = list.get(pos).getInvoice_userid();
+//                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+//                                deleteInvoice(invoiceidbypos);
+//                            }
+//                        }
+//                ));
 
 
             }
@@ -1020,7 +1036,7 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 //                            Log.e(TAG, "sahrelink: "+sahrelink);
 
                             String subject = dataNo+" from "+customerName;
-                            String txt = "Your Invoice can be view, printed and download from below link." +
+                            String txt = "Your Invoice can be viewed, printed and downloaded from below link." +
                                     "\n\n" +sharelink ;
 
                             try {

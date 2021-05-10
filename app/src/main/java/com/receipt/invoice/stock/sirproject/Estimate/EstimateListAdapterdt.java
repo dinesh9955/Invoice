@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class EstimateListAdapterdt extends RecyclerView.Adapter<EstimateListAdapterdt.ViewHolderForCat> {
 
+    private static final String TAG = "EstimateListAdapterdt";
     private Context mcontext;
     ArrayList<InvoiceData> mlist = new ArrayList<>();
 
@@ -79,31 +81,35 @@ public class EstimateListAdapterdt extends RecyclerView.Adapter<EstimateListAdap
             viewHolderForCat.invoicepricetxt.setText(formatter.format(stratingvalue)+" "+company_list.getPayment_currency());
         }
 
+
+
+
         if (strstatus.equals("") && strstatus.equals("null")) {
             viewHolderForCat.statustxt.setText("");
         } else {
-            if (strstatus.equals("1")) {
-                viewHolderForCat.statustxt.setText("Pending");
-                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
+            Log.e(TAG, "strstatusAA "+strstatus);
+            if (strstatus.equalsIgnoreCase("1")) {
+                viewHolderForCat.invoicesttsuspend.setText("Pending");
+                viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#FF0000"));
 
             }
 
-            if (strstatus.equals("3")) {
-                viewHolderForCat.statustxt.setText("Completed");
-                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
+            if (strstatus.equalsIgnoreCase("3")) {
+                viewHolderForCat.invoicesttsuspend.setText("Completed");
+                viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#008000"));
 
             }
         }
 
-        final String is_viewed = company_list.getIs_viewed();
-
-        if (is_viewed.equalsIgnoreCase("0")) {
-            viewHolderForCat.invoicesttsuspend.setText("Pending");
-            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#FF0000"));
-        }else{
-            viewHolderForCat.invoicesttsuspend.setText("Seen");
-            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#008000"));
-        }
+//        final String is_viewed = company_list.getIs_viewed();
+//
+//        if (is_viewed.equalsIgnoreCase("1")) {
+//            viewHolderForCat.invoicesttsuspend.setText("Pending");
+//            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#FF0000"));
+//        }if (is_viewed.equalsIgnoreCase("3")) {
+//            viewHolderForCat.invoicesttsuspend.setText("Completed");
+//            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#008000"));
+//        }
 
 
         viewHolderForCat.statustxt.setVisibility(View.GONE);

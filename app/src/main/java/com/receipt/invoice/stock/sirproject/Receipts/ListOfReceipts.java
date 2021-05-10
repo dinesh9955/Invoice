@@ -203,7 +203,7 @@ public class ListOfReceipts extends Fragment {
                                 invoiceidbypos = list.get(pos).getInvoice_userid();
                                 String ilnvoiceStatus = list.get(pos).getInvocestatus();
                                 String pdflink = list.get(pos).getInvoicepdflink();
-                                String sahrelink = list.get(pos).getInvoice_share_link();
+                                String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
                                 createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
                                 invoicelistAdapterdt.notifyDataSetChanged();
                                 bottomSheetDialog.show();
@@ -881,6 +881,8 @@ public class ListOfReceipts extends Fragment {
                     txtheadvalue = mybuilder.findViewById(R.id.txtheadvalue);
 
 
+                    txtSHAREvalue.setVisibility(View.GONE);
+
                     txtheadvalue.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
                     txtPDFfvalue.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
                     txtPDFfvalue.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
@@ -899,91 +901,94 @@ public class ListOfReceipts extends Fragment {
 
 
 
-
-                    txtSHAREvalue.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            Log.e(TAG, "sharelink:: "+sharelink);
-                            Log.e(TAG, "customerName:: "+customerName);
-                            Log.e(TAG, "dataNo:: "+dataNo);
-
-                            String subject = dataNo+" from "+customerName;
-                            String txt = "Your Receipt can be view, printed and download from below link." +
-                                    "\n\n" +sharelink ;
-
-                            try {
-                                if (!sharelink.endsWith(".pdf")) {
-                                    Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
-                                } else {
-                                    BaseurlForShareInvoice = shareInvoicelink + sharelink;
-                                }
-                                Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                                        R.drawable.thanksimg);
-                                Intent share = new Intent(Intent.ACTION_SEND);
-                                share.setType("image/jpeg");
-                                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                                icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                                File f = new File(Environment.getExternalStorageDirectory()
-                                        + File.separator + "share.jpg");
-                                try {
-                                    f.createNewFile();
-                                    FileOutputStream fo = new FileOutputStream(f);
-                                    fo.write(bytes.toByteArray());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                share.putExtra(Intent.EXTRA_SUBJECT, subject);
-                                share.putExtra(Intent.EXTRA_TEXT, txt);
-
-                                share.putExtra(Intent.EXTRA_STREAM,
-                                        Uri.parse("file:///sdcard/share.jpg"));
-                                startActivity(Intent.createChooser(share, "Share..."));
-
-
-//                                String finalurl = BaseurlForShareInvoice;
 //
-//                                String cc = "android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.a;
+//                    txtSHAREvalue.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
 //
-//                                Uri imgUri=Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.a);
+//                            Log.e(TAG, "sharelink:: "+sharelink);
+//                            Log.e(TAG, "customerName:: "+customerName);
+//                            Log.e(TAG, "dataNo:: "+dataNo);
 //
-//                                String company_stamp = "/android_res/drawable/white_img.png";
+//                            String subject = dataNo+" from "+customerName;
+//                            String txt = "Your Receipt can be viewed, printed and downloaded from below link." +
+//                                    "\n\n" +sharelink ;
+//
+//                            try {
+//                                if (!sharelink.endsWith(".pdf")) {
+//                                    Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
+//                                } else {
+//                                    BaseurlForShareInvoice = shareInvoicelink + sharelink;
+//                                }
+//                                Bitmap icon = BitmapFactory.decodeResource(getResources(),
+//                                        R.drawable.thanksimg);
+//                                Intent share = new Intent(Intent.ACTION_SEND);
+//                                share.setType("image/jpeg");
+//                                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//                                icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+//                                File f = new File(Environment.getExternalStorageDirectory()
+//                                        + File.separator + "share.jpg");
+//                                try {
+//                                    f.createNewFile();
+//                                    FileOutputStream fo = new FileOutputStream(f);
+//                                    fo.write(bytes.toByteArray());
+//                                } catch (IOException e) {
+//                                    e.printStackTrace();
+//                                }
+//                                share.putExtra(Intent.EXTRA_SUBJECT, subject);
+//                                share.putExtra(Intent.EXTRA_TEXT, txt);
+//
+//                                share.putExtra(Intent.EXTRA_STREAM,
+//                                        Uri.parse("file:///sdcard/share.jpg"));
+//                                startActivity(Intent.createChooser(share, "Share..."));
 //
 //
-//                                String company_stamp22 = "/sdcard/thanksimg.png";
+////                                String finalurl = BaseurlForShareInvoice;
+////
+////                                String cc = "android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.a;
+////
+////                                Uri imgUri=Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.a);
+////
+////                                String company_stamp = "/android_res/drawable/white_img.png";
+////
+////
+////                                String company_stamp22 = "/sdcard/thanksimg.png";
+////
+////
+////
+////                                String[] TO = {"email@server.com"};
+////                                Uri uri = Uri.parse("mailto:email@server.com")
+////                                        .buildUpon()
+////                                        .appendQueryParameter("subject", subject)
+////                                        .appendQueryParameter("body", txt)
+////                                       // .appendQueryParameter("image", cc)
+////                                        .build();
+////                                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
+////                               // emailIntent.putExtra(Intent.EXTRA_STREAM, imgUri);
+////                                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" +company_stamp22));
+////                                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+////                                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+//
+//                            } catch (Exception e) {
+//                                //e.toString();
+//                                Log.e(TAG, "ERROR: "+e.getMessage());
+//                            }
 //
 //
+//                            bottomSheetDialog.dismiss();
+//                            mybuilder.dismiss();
+//                        }
+//                    });
 //
-//                                String[] TO = {"email@server.com"};
-//                                Uri uri = Uri.parse("mailto:email@server.com")
-//                                        .buildUpon()
-//                                        .appendQueryParameter("subject", subject)
-//                                        .appendQueryParameter("body", txt)
-//                                       // .appendQueryParameter("image", cc)
-//                                        .build();
-//                                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
-//                               // emailIntent.putExtra(Intent.EXTRA_STREAM, imgUri);
-//                                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" +company_stamp22));
-//                                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-//                                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-
-                            } catch (Exception e) {
-                                //e.toString();
-                                Log.e(TAG, "ERROR: "+e.getMessage());
-                            }
-
-
-                            bottomSheetDialog.dismiss();
-                            mybuilder.dismiss();
-                        }
-                    });
 
 
                     txtPDFfvalue.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+
                             Log.e(TAG, "pdflink:: "+sharelink);
                             try {
+
                                 if (!sharelink.endsWith(".pdf")) {
                                     Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
                                 } else {

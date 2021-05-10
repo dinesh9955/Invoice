@@ -205,7 +205,7 @@ public class ListOfCreditNotes extends Fragment {
                                 invoiceidbypos = list.get(pos).getInvoice_userid();
                                 String ilnvoiceStatus = list.get(pos).getInvocestatus();
                                 String pdflink = list.get(pos).getInvoicepdflink();
-                                String sahrelink = list.get(pos).getInvoice_share_link();
+                                String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
                                 createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
                                 invoicelistAdapterdt.notifyDataSetChanged();
                                 bottomSheetDialog.show();
@@ -892,7 +892,7 @@ public class ListOfCreditNotes extends Fragment {
                             Log.e(TAG, "dataNo:: "+dataNo);
 
                             String subject = dataNo+" from "+customerName;
-                            String txt = "Your Credit note can be view, printed and download from below link." +
+                            String txt = "Your Credit note can be viewed, printed and downloaded from below link." +
                                     "\n\n" +sharelink ;
 
                             try {
