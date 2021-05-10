@@ -368,6 +368,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
         avi = findViewById(R.id.avi);
         invoicenumtxt = findViewById(R.id.invoicenumtxt);
         invoicenum = findViewById(R.id.invoivenum);
+         invoicenum.setEnabled(false);
         duedatetxt = findViewById(R.id.duedatetxt);
         duedate = findViewById(R.id.duedate);
         invoicetotxt = findViewById(R.id.invoicetotxt);

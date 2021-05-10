@@ -551,7 +551,10 @@ public class Utility {
         } else{
             res = sss;
         }
-        return "+"+res;
+        if(!res.equalsIgnoreCase("")){
+            res = "+"+res;
+        }
+        return res;
     }
 
 

@@ -4212,6 +4212,8 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 
         Log.e(TAG, "Utility.getReplaceCurrency(Grossamount_str, cruncycode) "+Utility.getReplaceCurrency(Grossamount_str, cruncycode));
 
+        Log.e(TAG, "companyimagelogopathAA "+companyimagelogopath);
+
         String content = null;
         try {
             content = IOUtils.toString(getActivity().getAssets().open(name))
