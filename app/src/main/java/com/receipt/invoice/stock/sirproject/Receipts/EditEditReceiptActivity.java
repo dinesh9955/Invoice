@@ -4636,6 +4636,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
         }
 
+        companycolor = "#ffffff";
 
         String selectedTemplate = ""+this.selectedTemplate;
 
@@ -4675,15 +4676,15 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                     .replaceAll("crTerms", credit_terms)
                     .replaceAll("refNo", strreferencenovalue)
 
-                    .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
-                    .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
+                    .replaceAll("GrossAm-", ""+Utility.getContainsReplaceCurrency(Grossamount_str, cruncycode))
+                    .replaceAll("Discount-", ""+Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", subTotalValueTxt)
-                    .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
-                    .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
-                    .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
-                    .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
+                    .replaceAll("Txses-", ""+Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
+                    .replaceAll("Shipping-", ""+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
+                    .replaceAll("Total Amount-", ""+Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
+                    .replaceAll("PaidsAmount", ""+Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
-                    .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
+                    .replaceAll("Balance Due-", ""+Utility.getContainsReplaceCurrency(Blanceamountstr, cruncycode))
 
                     .replaceAll("SubTotal", subTotalTxt)
 //                    .replaceAll("Checkto", chektopaidmaount)
@@ -4696,11 +4697,11 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                     .replaceAll("Swift/BICCode", payment_swiftstr)
                     
                     .replaceAll("Client N", ""+stringBuilderBillTo)
-                    .replaceAll("Client A", sltcustomer_address)
-                    .replaceAll("Client C P", sltcustomer_contact)
-                    .replaceAll("Client C N", sltcustomer_phone_number)
-                    .replaceAll("Client Web", sltcustomer_website)
-                    .replaceAll("Client E", sltcustomer_email)
+//                    .replaceAll("Client A", sltcustomer_address)
+//                    .replaceAll("Client C P", sltcustomer_contact)
+//                    .replaceAll("Client C N", sltcustomer_phone_number)
+//                    .replaceAll("Client Web", sltcustomer_website)
+//                    .replaceAll("Client E", sltcustomer_email)
                     .replaceAll("Notes-", strnotes)
                     .replaceAll("#SIGNATURES#", Signatureincoicestr)
                     .replaceAll("#ITEMS#", productitemlist)

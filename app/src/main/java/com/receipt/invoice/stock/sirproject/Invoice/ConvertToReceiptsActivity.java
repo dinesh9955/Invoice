@@ -37,6 +37,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -81,6 +82,7 @@ import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
+import com.receipt.invoice.stock.sirproject.Estimate.ConvertToInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
@@ -148,7 +150,7 @@ import retrofit2.Callback;
 import static com.receipt.invoice.stock.sirproject.Invoice.Fragment_Create_Invoice.verifyStroagePermissions;
 
 public class ConvertToReceiptsActivity extends AppCompatActivity implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
-    private static final String TAG = "editInvoiceActivity";
+    private static final String TAG = "ConvertToReceipts";
     String companycolor = "#ffffff";
     int selectedTemplate = 0;
 //    int defaultClick = 0;
@@ -163,11 +165,6 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
     ApiInterface apiInterface;
     String signature_of_issuerdto = "", signature_of_receiverdto = "", company_stampdto = "";
     String due_datedto = "", datedto = "", credit_termsdto = "";
-
-    StringBuilder stringBuilderBillTo = new StringBuilder();
-    StringBuilder stringBuilderShipTo = new StringBuilder();
-
-
     String sltcustonernamedto = "", sltcustomer_emaildto = "", sltcustomer_contactdto = "", sltcustomer_addressdto = "", sltcustomer_websitedto = "",
             sltcustomer_phone_numberdto = "";
 
@@ -190,8 +187,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
     String currency_codedto;
     //3
 
-    TextView itemstxtTemplate, invoicenumtxt, duedatetxt, duedate, invoicetotxt, invoicerecipnt, itemstxt, subtotaltxt, subtotal, discounttxt, discount, txttax, tax, txtcredit, txtdays, txtreferenceno, edreferenceno, txtduedate,
-            edduedate, txtgrossamount, grosstotal, txtfreight, freight, txtnetamount, netamount, txtpaidamount, paidamount, txtbalance, balance, s_invoice, s_receiver, c_stamp, attachmenttxt;
+    TextView itemstxtTemplate, invoicenumtxt, duedatetxt, duedate, invoicetotxt, invoicerecipnt, itemstxt, subtotaltxt, subtotal, discounttxt, discount, txttax, tax, txtcredit, txtdays, txtreferenceno, edreferenceno, txtduedate, edduedate, txtgrossamount, grosstotal, txtfreight, freight, txtnetamount, netamount, txtpaidamount, paidamount, txtbalance, balance, s_invoice, s_receiver, c_stamp, attachmenttxt;
     Button additem, createinvoice, options, addservice;
     RecyclerView productsRecycler;
     EditText ednotes, invoicenum;
@@ -347,6 +343,11 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
     WebView invoiceweb;
 
+
+    StringBuilder stringBuilderBillTo = new StringBuilder();
+    StringBuilder stringBuilderShipTo = new StringBuilder();
+
+
 //    String templateSelect = "0";
 //    String colorCode = "#ffffff";
 
@@ -356,6 +357,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.fragment_convert_to_receipts);
         Constant.toolbar(ConvertToReceiptsActivity.this, "Convert to Receipt");
+
         invoiceweb = findViewById(R.id.invoiceweb);
 
         apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
@@ -566,9 +568,9 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     for(int i = 0; i < invoice_images.size() ; i++){
                         String signatureofreceiverpath = invoice_image_pathdto + invoice_images.get(i).getImage();
                         new DownloadInvoiceImages().execute(signatureofreceiverpath);
-                        attachmenttxtimg.setVisibility(View.GONE);
+                        attachmenttxtimg.setVisibility(View.VISIBLE);
                     }
-//                    Log.e(TAG, "cccccc "+invoice_images.size());
+                    Log.e(TAG, "cAAccccc "+invoice_images.size());
 //                    Log.e(TAG, "cccccc "+invoice_images.get(0).getImage());
 
                 }
@@ -729,7 +731,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     String signatureofreceiverpath = invoice_image_pathdto + signature_of_issuerdto;
                     Log.e(TAG, "signatureIssuerPathAA "+signatureofreceiverpath);
                     new Downloadsignatureissueweb().execute(signatureofreceiverpath);
-                    imgsigsuccess.setVisibility(View.GONE);
+                    imgsigsuccess.setVisibility(View.VISIBLE);
                 }
 
 //                shippingfirstname = invoiceDtoInvoice.getShippingFirstname();
@@ -926,7 +928,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     }
 
 
-                    else if (title.equals("Freight Cost")) {
+                    else if (code.equals("shipping")) {
                         Shippingamountdto = listobj.getValue();
                         freight.setText(""+Shippingamountdto+currency_codedto);
 //                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
@@ -1237,15 +1239,15 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
     }
 
     private void showUriList(List<Uri> uriList) {
-        attchmentimage.clear();
 
+        attchmentimage.clear();
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
-            attachmenttxtimg.setVisibility(View.GONE);
+            attachmenttxtimg.setVisibility(View.VISIBLE);
         }
         int sizen = attchmentimage.size();
 
-        attachmenttxtimg.setVisibility(View.GONE);
+        attachmenttxtimg.setVisibility(View.VISIBLE);
         String attchedmentimagepath;
         if (attchmentimage != null) {
             for (int i = 0; i < attchmentimage.size(); i++) {
@@ -1284,10 +1286,10 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         if (customer_name.equals("")) {
             Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Customer");
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Valid Receipt No");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Valid Invoice No");
 
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Date");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Invoice Date");
 
         } else if (selectedCompanyId.equals("")) {
             Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select a Company");
@@ -1309,14 +1311,11 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
             Log.e(TAG, "freight_cost"+freight_cost);
 
-//            params.add("invoice_id", invoiceId);
-//            params.add("invoice_no", invoicenumberdto);
-//            params.add("new_invoice_no", invoicenum.getText().toString());
-
             params.add("company_id", selectedCompanyId);
             params.add("receipt_no", invoicenum.getText().toString());
             params.add("receipt_date", invoice_date);
 
+            params.add("company_id", selectedCompanyId);
             params.add("wearhouse_id", selectwarehouseId);
             params.add("invoice_date", invoice_date);
             params.add("due_date", invoice_due_date);
@@ -1370,7 +1369,6 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     e.printStackTrace();
                 }
             }
-            signatureofinvoicemaker = null;
             if (signatureofinvoicemaker != null) {
                 try {
                     params.put("signature_of_maker", signatureofinvoicemaker);
@@ -1442,6 +1440,9 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             }
 
 
+            Log.e(TAG, "selectedUriListAA "+selectedUriList.size());
+
+
 
             if (multiple.length > 0) {
                 for (int k = 0; k < multiple.length; k++) {
@@ -1456,16 +1457,18 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                 }
             }
 
-
-
+//
 //            if (selectedUriList.size() > 0) {
 //                for (int k = 0; k < selectedUriList.size(); k++) {
+//                    Log.e(TAG, "selectedUriListBB "+selectedUriList.get(k));
 //                    try {
 ////                        params.add("invoice_image", "[" + k + "]");
 ////                        params.put("fileName:", "invoice_image" + multiple[k] + ".jpg");
 ////                        params.add("mimeType:", "image/jpeg");
+//
 //                        //params.put("images["+k+"]", multiple[k]);
-//                        params.put("images[]", selectedUriList.get(k).toString().replace("file://", ""));
+//
+//                        params.put("images["+k+"]", selectedUriList.get(k).toString().replace("file://", ""));
 //
 //                    } catch (Exception e) {
 //                        e.printStackTrace();
@@ -1495,7 +1498,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(ConvertToReceiptsActivity.this, "Receipt created successfully");
+                            Constant.SuccessToast(ConvertToReceiptsActivity.this, "Duplicate Invoice created successfully");
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -1982,7 +1985,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         eddate.setError("Required");
                         eddate.requestFocus();
                     } else if (paymentmode.equals("")) {
-//                        Constant.ErrorToast(EditInvoiceActivity.this, "Payment Mode Required");
+//                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Payment Mode Required");
                         Toast.makeText(ConvertToReceiptsActivity.this, "Payment Mode Required", Toast.LENGTH_SHORT).show();
                     } else {
                         if (paidamountstr != null) {
@@ -2091,16 +2094,12 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         intent.putExtra("producprice", producprice);
                         intent.putExtra("totalpriceproduct", totalpriceproduct);
 
-
                         intent.putExtra("signature_of_receiver", signatureofreceiverst);
                         Log.e(TAG, "signatureofreceiverst::: "+signatureofreceiverst);
                         //Log.e(TAG, "signature_of_receiver::: "+signatureofreceiverst);
 
                         Log.e(TAG, "company_stamp::: "+company_stamp);
-                       // company_stamp = "";
                         intent.putExtra("company_stamp", company_stamp);
-
-                        signature_of_issuer = "";
                         intent.putExtra("signature_issuer", signature_of_issuer);
                         intent.putExtra("reference_no", reference_no);
                         // intent.putStringArrayListExtra("products_list",products);
@@ -2111,6 +2110,8 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         intent.putExtra("quantity_list", quantity);
                         intent.putExtra("rate_list", rate);
                         intent.putExtra("attchemnt", attchmentimage);
+
+                        Log.e(TAG , "attchmentimageAAA "+attchmentimage.size());
 
                         // Log.e(TAG)
 
@@ -2279,7 +2280,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                 strdiscountvalue = eddisount.getText().toString();
                 if (strdiscountvalue.matches("")) {
-                    //Toast.makeText(EditInvoiceActivity.this, "You did not enter a username", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ConvertToReceiptsActivity.this, "You did not enter a username", Toast.LENGTH_SHORT).show();
                     mybuilder.dismiss();
                     return;
                 } else {
@@ -2511,14 +2512,14 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     if (addSignatureToGallery(signatureBitmap)) {
                         //  Toast.makeText(getContext(), "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-                        imgsigsuccess.setVisibility(View.GONE);
+                        imgsigsuccess.setVisibility(View.VISIBLE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }
                     if (addSvgSignatureToGallery(signaturePad.getSignatureSvg())) {
                         //  Toast.makeText(getContext(), "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-                        imgsigsuccess.setVisibility(View.GONE);
+                        imgsigsuccess.setVisibility(View.VISIBLE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }
@@ -2575,7 +2576,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             if (s_r.equals("1")) {
                 signatureofinvoicemaker = photo;
                 signature_of_issuer = photo.getAbsolutePath();
-                imgsigsuccess.setVisibility(View.GONE);
+                imgsigsuccess.setVisibility(View.VISIBLE);
 
             }
             if (s_r.equals("2")) {
@@ -3125,8 +3126,6 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         JSONArray customer = data.getJSONArray("customer");
 
                         JSONArray invoice = data.getJSONArray("receipt");
-
-
                         if(invoice.length() == 0){
                             invoicenum.setText("Rec # 1");
                             //invoicenum.setEnabled(true);
@@ -3149,8 +3148,6 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                             }
                         }
-
-
 
 
 //                        for (int i = 0; i < customer.length(); i++) {
@@ -3561,32 +3558,85 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                 }
             }
-//
 
 
+            Log.e(TAG, "freight_costBB "+freight_cost);
 
-            if (freight_cost.equals("")) {
+            Log.e(TAG, "freight_costBBBB "+Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
 
-
-            } else {
-                balanceamount = netamountvalue + Double.parseDouble(freight_cost);
-
-                Double shipingvalue = Double.parseDouble(freight_cost);
-
+            if(freight_cost.isEmpty()){
+                freight.setText("0");
+            }else {
+                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
+                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
                 freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
                 netamount.setText(formatter.format(balanceamount) + cruncycode);
             }
-            if (paidamountstr.isEmpty()) {
+
+            if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
+                freight.setText("0");
+            }else{
+                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                balance.setText(formatter.format(balanceamount) + cruncycode);
+                netamount.setText(formatter.format(balanceamount) + cruncycode);
+            }
+
+
+//            if(!freight_cost.isEmpty()){
+//                if (!freight_cost.equalsIgnoreCase("0")) {
+////                    balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
+////                    Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
+////                    freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+////                    balance.setText(formatter.format(balanceamount) + cruncycode);
+////                    netamount.setText(formatter.format(balanceamount) + cruncycode);
+//                }
+//            } else if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
+//                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+//                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+//                balance.setText(formatter.format(balanceamount) + cruncycode);
+//                netamount.setText(formatter.format(balanceamount) + cruncycode);
+//            }else{
+//                freight.setText("0");
+//            }
+
+
+//            if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
+//
+//            } else if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
+//
+//            }else {
+//
+//                Log.e(TAG, "subtotalvalueAAAA "+subtotalvalue);
+//
+//                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+//
+//                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+//
+//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+//                balance.setText(formatter.format(balanceamount) + cruncycode);
+//                netamount.setText(formatter.format(balanceamount) + cruncycode);
+//            }
+
+
+
+            if (Utility.getReplaceCurrency(paidamount.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
                 //
                 // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
             } else {
-                Log.e(TAG, "balanceAA "+paidamountstr);
-                Double paidindouble = Double.parseDouble(paidamountstr);
+                //Log.e(TAG, "balanceAA "+Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode)));
+
+                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+                Log.e(TAG, "balanceamountAAAA "+balanceamount);
+
+                Double paidindouble = Double.parseDouble(Utility.getReplaceCurrency(paidamount.getText().toString(), cruncycode));
 
                 paidamount.setText(formatter.format(paidindouble) + cruncycode);
-                balanceamount = balanceamount - Double.parseDouble(paidamountstr);
-                Log.e("balance", String.valueOf(balanceamount));
+                balanceamount = balanceamount - Double.parseDouble(Utility.getReplaceCurrency(paidamount.getText().toString(), cruncycode));
+                Log.e("balance", ""+String.valueOf(balanceamount));
 
                 balance.setText(formatter.format(balanceamount) + cruncycode);
             }
@@ -4040,11 +4090,15 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
 
 
-
     private class DownloadInvoiceImages extends AsyncTask<String, Void, Void> {
+
+        ProgressDialog progressDialog = new ProgressDialog(ConvertToReceiptsActivity.this);
+
 
         @Override
         protected Void doInBackground(String... strings) {
+
+
             URL url = null;
             try {
                 url = new URL(strings[0]);
@@ -4081,7 +4135,9 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 //            }
 
             String imagepath = imageFile.getAbsolutePath();
-            Log.e("save image", imagepath);
+            Log.e(TAG , "save_image"+ imagepath);
+
+            attchmentimage.add(imagepath);
 
             FileOutputStream out = null;
             try {
@@ -4109,13 +4165,17 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            avi.smoothToHide();
+//            progressDialog.setMessage("Please wait");
+//            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+
+            Log.e(TAG, "onPreExecute");
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            avi.smoothToShow();
+            //  progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
@@ -4203,7 +4263,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 //
 //        if(defaultClick == 1){
 //                SavePref pref = new SavePref();
-//                pref.SavePref(editInvoiceActivity.this);
+//                pref.SavePref(ConvertToReceiptsActivity.this);
 //
 //                selectedTemplate = pref.getTemplate();
 //                Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
@@ -4396,7 +4456,6 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             }
 
 
-
             if(!sltcustonername.equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustonername+"</br>");
             }
@@ -4415,6 +4474,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             if(!sltcustomer_email.equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_email+"");
             }
+
 
         }
         if (selected.size() < 0) {
@@ -4443,7 +4503,8 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             if(!shippingpostcode.equalsIgnoreCase("")){
                 stringBuilderShipTo.append(shippingpostcode+"");
             }
-           // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+
+            // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
         }
 
@@ -4680,8 +4741,6 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
         }
 
-        company_stamp = "";
-        companyname = "";
         try {
             signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
@@ -4863,7 +4922,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         }
 
 
-
+        companycolor = "#ffffff";
 
         String selectedTemplate = ""+this.selectedTemplate;
 
@@ -4902,15 +4961,15 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     .replaceAll("crTerms", credit_terms)
                     .replaceAll("refNo", strreferencenovalue)
 
-                    .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
-                    .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
+                    .replaceAll("GrossAm-", ""+Utility.getContainsReplaceCurrency(Grossamount_str, cruncycode))
+                    .replaceAll("Discount-", ""+Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", subTotalValueTxt)
-                    .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
-                    .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
-                    .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
-                    .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
+                    .replaceAll("Txses-", ""+Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
+                    .replaceAll("Shipping-", ""+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
+                    .replaceAll("Total Amount-", ""+Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
+                    .replaceAll("PaidsAmount", ""+Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
-                    .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
+                    .replaceAll("Balance Due-", ""+Utility.getContainsReplaceCurrency(Blanceamountstr, cruncycode))
 
                     .replaceAll("SubTotal", subTotalTxt)
 //                    .replaceAll("Checkto", chektopaidmaount)
@@ -4986,69 +5045,71 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
-//        invoiceweb.setWebViewClient(new WebViewClient() {
-//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                return false;
-//            }
+        invoiceweb.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+
+                //if page loaded successfully then show print button
+                //findViewById(R.id.fab).setVisibility(View.VISIBLE);
+                final File savedPDFFile = FileManager.getInstance().createTempFile(ConvertToReceiptsActivity.this, "pdf", false);
+
+                PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
+                    @Override
+                    public void onSuccess(File file) {
+                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+                        if(file.exists()) {
+//                            Uri photoURI = FileProvider.getUriForFile(getActivity(),
+//                                    "com.receipt.invoice.stock.sirproject.provider",
+//                                    file);
+//                            intentShareFile.setType("application/pdf");
+//                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
 //
+//                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+//                                    "Share As Pdf");
+//
+//                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
+
+//                            Log.e(TAG, "FILENAME" +file);
+//
+//                            Log.e(TAG, "selectedUriListQQ" +selectedUriList.size());
+
+
+                            for(int i = 0 ; i < selectedUriList.size() ; i++){
+//                                File file11 = new File(selectedUriList.get(i).getPath());//create path from uri
+//                                final String[] split = file11.getPath().split(":");//split the path.
+//                                //filePath = split[1];//assign it to a string(your choice).
+//
+//                                //File file = new File(new Uri(selectedUriList.get(i)));
+                                Log.e(TAG, "FILENAME11" +selectedUriList.get(i).toString().replace("file://", ""));
+                            }
+
+                            createinvoicewithdetail(file);
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Exception exception) {
+                        exception.printStackTrace();
+                    }
+                });
+
+            }
+        });
+
+        invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
+//
+//        new Handler().postDelayed(new Runnable() {
 //            @Override
-//            public void onPageFinished(WebView view, String url) {
+//            public void run() {
 //
-//                //if page loaded successfully then show print button
-//                //findViewById(R.id.fab).setVisibility(View.VISIBLE);
-//                final File savedPDFFile = FileManager.getInstance().createTempFile(ConvertToReceiptsActivity.this, "pdf", false);
-//
-//                PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
-//                    @Override
-//                    public void onSuccess(File file) {
-//                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-//                        if(file.exists()) {
-////                            Uri photoURI = FileProvider.getUriForFile(getActivity(),
-////                                    "com.receipt.invoice.stock.sirproject.provider",
-////                                    file);
-////                            intentShareFile.setType("application/pdf");
-////                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
-////
-////                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-////                                    "Share As Pdf");
-////
-////                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
-//
-////                            Log.e(TAG, "FILENAME" +file);
-////
-////                            Log.e(TAG, "selectedUriListQQ" +selectedUriList.size());
-//
-//                            Log.e(TAG, "selectedUriListAA "+selectedUriList.size());
-//
-//                            for(int i = 0 ; i < selectedUriList.size() ; i++){
-////                                File file11 = new File(selectedUriList.get(i).getPath());//create path from uri
-////                                final String[] split = file11.getPath().split(":");//split the path.
-////                                //filePath = split[1];//assign it to a string(your choice).
-////
-////                                //File file = new File(new Uri(selectedUriList.get(i)));
-//                                Log.e(TAG, "FILENAME11" +selectedUriList.get(i).toString().replace("file://", ""));
-//                            }
-//
-//                            createinvoicewithdetail(file);
-//                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception exception) {
-//                        exception.printStackTrace();
-//                        Log.e(TAG, "exceptionAA "+exception.getMessage());
-//                    }
-//                });
 //
 //            }
-//        });
-//
-//        invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
-
-
-
-        createinvoicewithdetail(null);
+//        }, 1000);
 
     }
 

@@ -462,6 +462,8 @@ public class Utility {
 
 
 
+
+
     public static String getReplaceCurrency(String text, String cruncycode) {
         String res = "";
         if(text.contains(cruncycode)){
@@ -540,6 +542,25 @@ public class Utility {
         }
         return res;
     }
+
+
+
+    public static String getContainsReplaceCurrency(String text, String cruncycode) {
+        String res = "";
+        if(text.contains(cruncycode)){
+            res = text.replace(cruncycode, "");
+            res = res+cruncycode;
+            if(res.contains("$")){
+                res = res.replace("$", "&#36;");
+            }else{
+                res = res;
+            }
+        }else{
+            res = text;
+        }
+        return res;
+    }
+
 
 
 }

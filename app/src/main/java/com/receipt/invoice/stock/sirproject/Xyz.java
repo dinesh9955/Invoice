@@ -375,10 +375,13 @@ public class Xyz extends AppCompatActivity {
             public void onClick(View v) {
 
 
-
-                String sss = Utility.getRealValueInvoiceWithoutPlus("inv # 12");
-
+                String sss = Utility.getContainsReplaceCurrency("15.00$$" , "$");
                 Log.e(TAG , "sssssssss "+sss);
+
+
+//                String sss = Utility.getRealValueInvoiceWithoutPlus("inv # 12");
+//
+//                Log.e(TAG , "sssssssss "+sss);
 
 //                String myFormat = "yyyy-MM-dd"; //In which you need put here
 //                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);

@@ -4285,23 +4285,23 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     .replaceAll("refNo", strreferencenovalue)
 
 
-                    .replaceAll("GrossAm-", ""+Utility.getReplaceDollor(Grossamount_str))
-                    .replaceAll("Discount-", ""+Utility.getReplaceDollor(discountvalue))
+                    .replaceAll("GrossAm-", ""+Utility.getContainsReplaceCurrency(Grossamount_str, cruncycode))
+                    .replaceAll("Discount-", ""+Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", subTotalValueTxt)
-                    .replaceAll("Txses-", ""+Utility.getReplaceDollor(taxtamountstr))
-                    .replaceAll("Shipping-", ""+Utility.getReplaceDollor(Shipingcosstbyct))
-                    .replaceAll("Total Amount-", ""+Utility.getReplaceDollor(netamountvalue))
-                    .replaceAll("PaidsAmount", ""+Utility.getReplaceDollor(paidamountstrrepvalue))
+                    .replaceAll("Txses-", ""+Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
+                    .replaceAll("Shipping-", ""+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
+                    .replaceAll("Total Amount-", ""+Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
+                    .replaceAll("PaidsAmount", ""+Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
-                    .replaceAll("Balance Due-", ""+Utility.getReplaceDollor(Blanceamountstr))
+                    .replaceAll("Balance Due-", ""+Utility.getContainsReplaceCurrency(Blanceamountstr, cruncycode))
 
 
                     .replaceAll("SubTotal", subTotalTxt)
-                    .replaceAll("Checkto", chektopaidmaount)
+                    .replaceAll("Checkto", "")
                     .replaceAll("BankName", payment_bankstr)
                     .replaceAll("Pemail", pemailpaidstr)
                     .replaceAll("IBAN", payment_ibanstr)
-                    .replaceAll("Currency", payment_currencystr)
+                    .replaceAll("Currency", "")
                     .replaceAll("Swift/BICCode", payment_swiftstr)
 
                     .replaceAll("Client N", ""+stringBuilderBillTo.toString())
@@ -4327,10 +4327,10 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     .replaceAll("#799f6e", companycolor)
 
 
-                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
-                    .replaceAll("By cheque :", bycheckstrtxt)
-                    .replaceAll("Pay Pal :", paypalstrtxt)
-                    .replaceAll("Bank :", bankstrtxt)
+                    .replaceAll(" Payment Details ", "")
+                    .replaceAll("By cheque :", "")
+                    .replaceAll("Pay Pal :", "")
+                    .replaceAll("Bank :", "")
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
 
 
