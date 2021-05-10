@@ -52,6 +52,7 @@ import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
+import com.receipt.invoice.stock.sirproject.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -1033,11 +1034,13 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                             Log.e(TAG, "sharelink:: "+urlPDF);
 
 //                            Log.e(TAG, "pdflink: "+pdflink);
-//                            Log.e(TAG, "sahrelink: "+sahrelink);
+                            Log.e(TAG, "dataNo: "+dataNo);
 
-                            String subject = dataNo+" from "+customerName;
+
+
+                            String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
                             String txt = "Your Invoice can be viewed, printed and downloaded from below link." +
-                                    "\n\n" +sharelink ;
+                                    "\n\n" +urlPDF ;
 
                             try {
 

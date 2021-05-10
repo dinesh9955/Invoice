@@ -1889,7 +1889,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             btnclear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    selectedCompanyId = "";
+                    selectcompany.setText("");
                     duedate.setText("");
                     invoicenum.setText("");
                     invoicerecipnt.setText("");

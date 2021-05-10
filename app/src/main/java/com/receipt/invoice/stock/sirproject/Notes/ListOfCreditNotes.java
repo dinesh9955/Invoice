@@ -58,6 +58,7 @@ import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Receipts.ListOfReceipts;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
+import com.receipt.invoice.stock.sirproject.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -891,7 +892,7 @@ public class ListOfCreditNotes extends Fragment {
                             Log.e(TAG, "customerName:: "+customerName);
                             Log.e(TAG, "dataNo:: "+dataNo);
 
-                            String subject = dataNo+" from "+customerName;
+                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+customerName;
                             String txt = "Your Credit note can be viewed, printed and downloaded from below link." +
                                     "\n\n" +sharelink ;
 

@@ -1903,6 +1903,8 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                 @Override
                 public void onClick(View view) {
 
+                    selectedCompanyId = "";
+                    selectcompany.setText("");
                     duedate.setText("");
                     invoicenum.setText("");
                     invoicerecipnt.setText("");

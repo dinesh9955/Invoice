@@ -39,6 +39,248 @@ public class Utility {
 //
 
 
+
+    public static String getRealValueInvoiceWithoutPlus(String sss) {
+        String valueIs = "";
+        if(sss.toString().length() > 0){
+
+            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
+
+            boolean gg = isNumeric(sss);
+            Log.e(TAG, "gggggg "+gg);
+
+            boolean dd = isChar(sss);
+            Log.e(TAG, "dddddd "+dd);
+
+            if(gg == false && dd == false){
+                Log.e(TAG, "truee ");
+                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+                Log.e(TAG, "cccccc "+flag);
+                if(flag == true){
+                    String str = sss;
+                    String cc = extractInt(str);
+                    if(cc.contains(" ")){
+                        String vv[] = cc.split(" ");
+                        String ii =  vv[vv.length - 1];
+                        Log.e(TAG , "extractInt "+ii);
+                        String vvvvv = sss.substring(0, sss.length() - ii.length());
+
+                        Log.e(TAG , "vvvvv "+vvvvv);
+
+                        int myValue = Integer.parseInt(ii)+1;
+                        valueIs = vvvvv+myValue;
+                    }
+                    if(!cc.contains(" ")){
+                        Log.e(TAG , "extractInt2 "+cc);
+                        int myValue = Integer.parseInt(cc);
+                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
+
+                        Log.e(TAG , "bbbbbb "+myValue);
+                        valueIs = "Invoice # "+myValue;
+                    }
+                }
+            }else{
+                boolean ddd = isChar(sss);
+                if(ddd == false){
+                    int myValue = Integer.parseInt(sss);
+                    valueIs = "Invoice # "+myValue;
+                }
+            }
+        }
+        return valueIs;
+    }
+
+    public static String getRealValueEstimateWithoutPlus(String sss) {
+        String valueIs = "";
+        if(sss.toString().length() > 0){
+
+            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
+
+            boolean gg = isNumeric(sss);
+            Log.e(TAG, "gggggg "+gg);
+
+            boolean dd = isChar(sss);
+            Log.e(TAG, "dddddd "+dd);
+
+            if(gg == false && dd == false){
+                Log.e(TAG, "truee ");
+                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+                Log.e(TAG, "cccccc "+flag);
+                if(flag == true){
+                    String str = sss;
+                    String cc = extractInt(str);
+                    if(cc.contains(" ")){
+                        String vv[] = cc.split(" ");
+                        String ii =  vv[vv.length - 1];
+                        Log.e(TAG , "extractInt "+ii);
+                        String vvvvv = sss.substring(0, sss.length() - ii.length());
+
+                        Log.e(TAG , "vvvvv "+vvvvv);
+
+                        int myValue = Integer.parseInt(ii)+1;
+                        valueIs = vvvvv+myValue;
+                    }
+                    if(!cc.contains(" ")){
+                        Log.e(TAG , "extractInt2 "+cc);
+                        int myValue = Integer.parseInt(cc);
+                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
+
+                        Log.e(TAG , "bbbbbb "+myValue);
+                        valueIs = "Estimate # "+myValue;
+                    }
+                }
+            }else{
+                boolean ddd = isChar(sss);
+                if(ddd == false){
+                    int myValue = Integer.parseInt(sss);
+                    valueIs = "Estimate # "+myValue;
+                }
+            }
+        }
+        return valueIs;
+    }
+
+    public static String getRealValueReceiptWithoutPlus(String sss) {
+        String valueIs = "";
+        if(sss.toString().length() > 0){
+
+            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
+
+            boolean gg = isNumeric(sss);
+            Log.e(TAG, "gggggg "+gg);
+
+            boolean dd = isChar(sss);
+            Log.e(TAG, "dddddd "+dd);
+
+            if(gg == false && dd == false){
+                Log.e(TAG, "truee ");
+                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+                Log.e(TAG, "cccccc "+flag);
+                if(flag == true){
+                    String str = sss;
+                    String cc = extractInt(str);
+                    if(cc.contains(" ")){
+                        String vv[] = cc.split(" ");
+                        String ii =  vv[vv.length - 1];
+                        Log.e(TAG , "extractInt "+ii);
+                        String vvvvv = sss.substring(0, sss.length() - ii.length());
+
+                        Log.e(TAG , "vvvvv "+vvvvv);
+
+                        int myValue = Integer.parseInt(ii)+1;
+                        valueIs = vvvvv+myValue;
+                    }
+                    if(!cc.contains(" ")){
+                        Log.e(TAG , "extractInt2 "+cc);
+                        int myValue = Integer.parseInt(cc);
+                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
+
+                        Log.e(TAG , "bbbbbb "+myValue);
+                        valueIs = "Receipt # "+myValue;
+                    }
+                }
+            }else{
+                boolean ddd = isChar(sss);
+                if(ddd == false){
+                    int myValue = Integer.parseInt(sss);
+                    valueIs = "Receipt # "+myValue;
+                }
+            }
+        }
+        return valueIs;
+    }
+
+    public static String getRealValueCreditNoteWithoutPlus(String sss) {
+        String valueIs = "";
+        if(sss.toString().length() > 0){
+
+            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
+
+            boolean gg = isNumeric(sss);
+            Log.e(TAG, "gggggg "+gg);
+
+            boolean dd = isChar(sss);
+            Log.e(TAG, "dddddd "+dd);
+
+            if(gg == false && dd == false){
+                Log.e(TAG, "truee ");
+                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+                Log.e(TAG, "cccccc "+flag);
+                if(flag == true){
+                    String str = sss;
+                    String cc = extractInt(str);
+                    if(cc.contains(" ")){
+                        String vv[] = cc.split(" ");
+                        String ii =  vv[vv.length - 1];
+                        Log.e(TAG , "extractInt "+ii);
+                        String vvvvv = sss.substring(0, sss.length() - ii.length());
+
+                        Log.e(TAG , "vvvvv "+vvvvv);
+
+                        int myValue = Integer.parseInt(ii)+1;
+                        valueIs = vvvvv+myValue;
+                    }
+                    if(!cc.contains(" ")){
+                        Log.e(TAG , "extractInt2 "+cc);
+                        int myValue = Integer.parseInt(cc);
+                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
+
+                        Log.e(TAG , "bbbbbb "+myValue);
+                        valueIs = "Credit Note # "+myValue;
+                    }
+                }
+            }else{
+                boolean ddd = isChar(sss);
+                if(ddd == false){
+                    int myValue = Integer.parseInt(sss);
+                    valueIs = "Credit Note # "+myValue;
+                }
+            }
+        }
+        return valueIs;
+    }
+
+    static String extractInt(String str)
+    {
+        // Replacing every non-digit number
+        // with a space(" ")
+        str = str.replaceAll("[^\\d]", " ");
+
+        // Remove extra spaces from the beginning
+        // and the ending of the string
+        str = str.trim();
+
+        // Replace all the consecutive white
+        // spaces with a single space
+        str = str.replaceAll(" +", " ");
+
+        if (str.equals(""))
+            return "-1";
+
+        return str;
+    }
+
+
+    public static boolean isNumeric(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
+    }
+
+
+    public static boolean isChar(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (Character.isDigit(c)) return false;
+        }
+        return true;
+    }
+
+
     public static boolean checkAndRequestPermissions(Activity context, int request) {
 //        int camera = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA);
         int writeExternalStorage = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);

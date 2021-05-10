@@ -1926,7 +1926,8 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
             btnclear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    selectedCompanyId = "";
+                    selectcompany.setText("");
                     duedate.setText("");
                     invoicenum.setText("");
                     invoicerecipnt.setText("");

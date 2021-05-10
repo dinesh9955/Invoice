@@ -1940,7 +1940,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             btnclear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    selectedCompanyId = "";
+                    selectcompany.setText("");
                     duedate.setText("");
                     invoicenum.setText("");
                     invoicerecipnt.setText("");
