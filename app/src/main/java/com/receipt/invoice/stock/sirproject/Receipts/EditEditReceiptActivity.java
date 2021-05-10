@@ -850,7 +850,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
                     else if (title.equals("Freight Cost")) {
                         Shippingamountdto = listobj.getValue();
-                        freight.setText(""+Shippingamountdto+currency_codedto);
+                        freight.setText("+"+Shippingamountdto+currency_codedto);
 //                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
 //
 //                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
@@ -4680,7 +4680,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                     .replaceAll("Discount-", ""+Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", subTotalValueTxt)
                     .replaceAll("Txses-", ""+Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
-                    .replaceAll("Shipping-", ""+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
+                    .replaceAll("Shipping-", ""+Utility.getRemoveSinglePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
                     .replaceAll("Total Amount-", ""+Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
                     .replaceAll("PaidsAmount", ""+Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)

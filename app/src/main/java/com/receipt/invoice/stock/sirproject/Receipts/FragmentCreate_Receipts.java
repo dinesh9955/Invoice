@@ -4231,7 +4231,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                     .replaceAll("Discount-", ""+Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", subTotalValueTxt)
                     .replaceAll("Txses-", ""+Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
-                    .replaceAll("Shipping-", ""+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
+                    .replaceAll("Shipping-", ""+Utility.getRemoveSinglePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
                     .replaceAll("Total Amount-", ""+Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
                     .replaceAll("PaidsAmount", ""+Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)

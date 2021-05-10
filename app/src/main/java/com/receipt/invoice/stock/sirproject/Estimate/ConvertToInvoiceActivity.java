@@ -902,7 +902,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
                     else if (title.equals("Freight Cost")) {
                         Shippingamountdto = listobj.getValue();
-                        freight.setText(""+Shippingamountdto+currency_codedto);
+                        freight.setText("+"+Shippingamountdto+currency_codedto);
 //                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
 //
 //                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
@@ -3396,9 +3396,12 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
             netamount.setText(formatter.format(stratingvalue) +cruncycode);
             balance.setText(formatter.format(stratingvalue) +cruncycode);
+            Log.e(TAG, "AAAAAAAA");
             subtotalvalue = total_price;
             netamountvalue = total_price;
             balanceamount = total_price;
+
+            Log.e(TAG , "strdiscountAAAA "+strdiscount);
             if (strdiscount.equalsIgnoreCase("Percentage")) {
                 subtotalvalue = 0.0;
                 netamountvalue = 0.0;
@@ -3419,6 +3422,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
+                Log.e(TAG, "BBBBBBBB");
                 //  Log.e("DissCount value", String.valueOf(Totatlvalue)+ cruncycode);
             } else if (strdiscount.equalsIgnoreCase("Amount")) {
                 subtotalvalue = 0.0;
@@ -3437,11 +3441,10 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
+                Log.e(TAG, "CCCCCCCCC");
             } else {
 
                 Log.e(TAG , "strdiscountvalueBb "+Discountamountstrdto);
-
-
 
                 if(strdiscountvalue.equalsIgnoreCase("")){
                     discount.setText("0");
@@ -3465,7 +3468,11 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
-                balance.setText(formatter.format(subtotalvalue) + cruncycode);
+
+
+                Log.e(TAG, "DDDDDDDD "+netamountvalue);
+                balance.setText(formatter.format(netamountvalue) + cruncycode);
+                Log.e(TAG, "DDDDDDDD");
             }
 
 
@@ -3499,6 +3506,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
                     netamount.setText(formatter.format(netamountvalue) + cruncycode);
                     balance.setText(formatter.format(netamountvalue) + cruncycode);
+                    Log.e(TAG, "EEEEEEEE");
 
                 } else { // include off
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3530,7 +3538,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
                     netamount.setText(formatter.format(netamountvalue) + cruncycode);
                     balance.setText(formatter.format(netamountvalue) + cruncycode);
-
+                    Log.e(TAG, "FFFFFFFF");
                 }
             }
 //
@@ -3548,7 +3556,10 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
                 netamount.setText(formatter.format(balanceamount) + cruncycode);
+                Log.e(TAG, "GGGGGGGGGGG");
             }
+
+
             if (paidamountstr.isEmpty()) {
                 //
                 // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
@@ -3561,7 +3572,17 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 Log.e("balance", String.valueOf(balanceamount));
 
                 balance.setText(formatter.format(balanceamount) + cruncycode);
+                Log.e(TAG, "HHHHHHHHHHH");
             }
+
+
+
+
+//            if (!strdiscount.equalsIgnoreCase("Amount") || !strdiscount.equalsIgnoreCase("Percentage") || !strdiscount.equalsIgnoreCase("")) {
+//                Log.e(TAG, "IIIIIIIIIIIIIIIIIII");
+//
+//                balance.setText("0");
+//            }
 
 
         } else {
@@ -4889,15 +4910,26 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                     .replaceAll("crTerms", credit_terms)
                     .replaceAll("refNo", strreferencenovalue)
 
-                    .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
-                    .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
+//                    .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
+//                    .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
+//                    .replaceAll("SubTotal-", subTotalValueTxt)
+//                    .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
+//                    .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
+//                    .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
+//                    .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
+//                    .replaceAll("Paid Amount", paidamountstrreptxt)
+//                    .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
+
+
+                    .replaceAll("GrossAm-", ""+Utility.getContainsReplaceCurrency(Grossamount_str, cruncycode))
+                    .replaceAll("Discount-", ""+Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", subTotalValueTxt)
-                    .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
-                    .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
-                    .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
-                    .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
+                    .replaceAll("Txses-", ""+Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
+                    .replaceAll("Shipping-", ""+Utility.getRemoveSinglePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
+                    .replaceAll("Total Amount-", ""+Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
+                    .replaceAll("PaidsAmount", ""+Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
-                    .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
+                    .replaceAll("Balance Due-", ""+Utility.getContainsReplaceCurrency(Blanceamountstr, cruncycode))
 
                     .replaceAll("SubTotal", subTotalTxt)
 //                    .replaceAll("Checkto", chektopaidmaount)

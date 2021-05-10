@@ -446,7 +446,9 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/green"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:minWidth="50dp"
+                android:gravity="right"/>
 
             <TextView
                 android:id="@+id/txtnetamount"

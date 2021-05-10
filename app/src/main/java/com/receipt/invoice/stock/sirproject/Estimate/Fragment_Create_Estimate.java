@@ -4202,23 +4202,23 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "invoice.html";
-        String nameName = "file:///android_asset/invoice.html";
+        String name = "estimate.html";
+        String nameName = "file:///android_asset/estimate.html";
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "invoice.html";
-            nameName = "file:///android_asset/invoice.html";
+            name = "estimate.html";
+            nameName = "file:///android_asset/estimate.html";
         }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "invoice1.html";
-            nameName = "file:///android_asset/invoice1.html";
+            name = "estimate1.html";
+            nameName = "file:///android_asset/estimate1.html";
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "invoice2.html";
-            nameName = "file:///android_asset/invoice2.html";
+            name = "estimate2.html";
+            nameName = "file:///android_asset/estimate2.html";
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "invoice3.html";
-            nameName = "file:///android_asset/invoice3.html";
+            name = "estimate3.html";
+            nameName = "file:///android_asset/estimate3.html";
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "invoice4.html";
-            nameName = "file:///android_asset/invoice4.html";
+            name = "estimate4.html";
+            nameName = "file:///android_asset/estimate4.html";
         }
 
         String content = null;
@@ -4236,15 +4236,15 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
                     .replaceAll("DueDate", invoice_due_date)
                     .replaceAll("crTerms", credit_terms)
                     .replaceAll("refNo", strreferencenovalue)
-                    .replaceAll("GrossAm-", ""+Utility.getReplaceCurrency(Grossamount_str, cruncycode))
-                    .replaceAll("Discount-", ""+Utility.getReplaceCurrency(discountvalue, cruncycode))
+                    .replaceAll("GrossAm-", ""+Utility.getContainsReplaceCurrency(Grossamount_str, cruncycode))
+                    .replaceAll("Discount-", ""+Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", subTotalValueTxt)
-                    .replaceAll("Txses-", ""+Utility.getReplaceCurrency(taxtamountstr, cruncycode))
-                    .replaceAll("Shipping-", ""+Utility.getReplaceCurrency(Shipingcosstbyct, cruncycode))
-                    .replaceAll("Total Amount-", ""+Utility.getReplaceCurrency(netamountvalue, cruncycode))
-                    .replaceAll("PaidsAmount", ""+Utility.getReplaceCurrency(paidamountstrrepvalue, cruncycode))
+                    .replaceAll("Txses-", ""+Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
+                    .replaceAll("Shipping-", ""+Utility.getRemoveSinglePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
+                    .replaceAll("Total Amount-", ""+Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
+                    .replaceAll("PaidsAmount", ""+Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
-                    .replaceAll("Balance Due-", ""+Utility.getReplaceCurrency(Blanceamountstr, cruncycode))
+                    .replaceAll("Balance Due-", ""+Utility.getContainsReplaceCurrency(Blanceamountstr, cruncycode))
 
                     .replaceAll("SubTotal", subTotalTxt)
                     .replaceAll("Checkto", chektopaidmaount)

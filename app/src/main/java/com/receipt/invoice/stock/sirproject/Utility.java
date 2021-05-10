@@ -544,6 +544,17 @@ public class Utility {
     }
 
 
+    public static String getRemoveSinglePlus(String sss) {
+        String res = "";
+        if(sss.contains("++")){
+            res = sss.replace("+", "");
+        } else{
+            res = sss;
+        }
+        return "+"+res;
+    }
+
+
 
     public static String getContainsReplaceCurrency(String text, String cruncycode) {
         String res = "";
