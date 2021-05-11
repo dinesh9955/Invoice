@@ -3513,20 +3513,19 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
 
 
 
-            if (freight_cost.equals("")) {
 
+            double cc = 0;
 
-            } else {
-                balanceamount = netamountvalue + Double.parseDouble(freight_cost);
-
-                Double shipingvalue = Double.parseDouble(freight_cost);
-
+            if(freight_cost.isEmpty()){
+                //freight.setText("0");
+            }else {
+                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
+                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
                 freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
-                //netamount.setText(formatter.format(balanceamount) + cruncycode);
+//                    netamount.setText(formatter.format(balanceamount) + cruncycode);
 
-                double cc = subtotalvalue + shipingvalue;
-
+                cc = subtotalvalue + shipingvalue;
                 if (selectedtaxt.size() > 0) {
                     if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
                         netamount.setText(formatter.format(cc) + cruncycode);
@@ -3537,6 +3536,55 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
                     }
                 }
             }
+
+            if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
+                freight.setText("0");
+            }else{
+                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                balance.setText(formatter.format(balanceamount) + cruncycode);
+                // netamount.setText(formatter.format(balanceamount) + cruncycode);
+
+                cc = subtotalvalue + shipingvalue;
+                if (selectedtaxt.size() > 0) {
+                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+                        netamount.setText(formatter.format(cc) + cruncycode);
+                        Log.e(TAG, "QQQQQQ111");
+                    }else{
+                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+                        Log.e(TAG, "QQQQQQ222");
+                    }
+                }
+
+            }
+
+
+
+//            if (freight_cost.equals("")) {
+//
+//
+//            } else {
+//                balanceamount = netamountvalue + Double.parseDouble(freight_cost);
+//
+//                Double shipingvalue = Double.parseDouble(freight_cost);
+//
+//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+//                balance.setText(formatter.format(balanceamount) + cruncycode);
+//                //netamount.setText(formatter.format(balanceamount) + cruncycode);
+//
+//                double cc = subtotalvalue + shipingvalue;
+//
+//                if (selectedtaxt.size() > 0) {
+//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+//                        netamount.setText(formatter.format(cc) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ111");
+//                    }else{
+//                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ222");
+//                    }
+//                }
+//            }
 
 
 
@@ -4862,6 +4910,21 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
             nameName = "file:///android_asset/estimate4.html";
         }
 
+        StringBuilder stringBuilderCompany = new StringBuilder();
+
+        if(!company_address.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_address+"</br>");
+        }
+        if(!company_contact.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_contact+"</br>");
+        }
+        if(!companywebsitestr.equalsIgnoreCase("")){
+            stringBuilderCompany.append(companywebsitestr+"</br>");
+        }
+        if(!company_email.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_email+"");
+        }
+
         String content = null;
         try {
 
@@ -4870,10 +4933,10 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
             content = IOUtils.toString(getAssets().open(name))
 
                     .replaceAll("Company Name", company_name)
-                    .replaceAll("Address", company_address)
-                    .replaceAll("Contact No.", company_contact)
-                    .replaceAll("Website", companywebsitestr)
-                    .replaceAll("Email", company_email)
+                    .replaceAll("Address", stringBuilderCompany.toString())
+//                    .replaceAll("Contact No.", company_contact)
+//                    .replaceAll("Website", companywebsitestr)
+//                    .replaceAll("Email", company_email)
                     .replaceAll("#LOGO_IMAGE#", companyimagelogopath)
                     .replaceAll("INV-564", invoicenum.getText().toString())
                     .replaceAll("invD", invoice_date)

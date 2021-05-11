@@ -729,6 +729,11 @@ public class ViewReceipt_Activity extends AppCompatActivity {
 
         }
 
+
+
+
+
+
         Log.e(TAG, "selectedTemplate "+selectedTemplate);
 
         String name = "receipt1.html";
@@ -752,6 +757,24 @@ public class ViewReceipt_Activity extends AppCompatActivity {
 
        Log.e(TAG, "strreferencenovalueAA "+strreferencenovalue);
 
+
+
+        StringBuilder stringBuilderCompany = new StringBuilder();
+
+        if(!company_address.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_address+"</br>");
+        }
+        if(!company_contact.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_contact+"</br>");
+        }
+        if(!companywebsitestr.equalsIgnoreCase("")){
+            stringBuilderCompany.append(companywebsitestr+"</br>");
+        }
+        if(!company_email.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_email+"");
+        }
+
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
@@ -770,10 +793,10 @@ public class ViewReceipt_Activity extends AppCompatActivity {
 
 
                     .replaceAll("Company Name", company_name)
-                    .replaceAll("Address", company_address)
-                    .replaceAll("Contact No.", company_contact)
-                    .replaceAll("Website", companywebsitestr)
-                    .replaceAll("Email", company_email)
+                    .replaceAll("Address", stringBuilderCompany.toString())
+//                    .replaceAll("Contact No.", company_contact)
+//                    .replaceAll("Website", companywebsitestr)
+//                    .replaceAll("Email", company_email)
                     .replaceAll("#LOGO_IMAGE#", companyimagelogopath)
                     .replaceAll("INV-564", invoicenobystr)
                     .replaceAll("invD", date)

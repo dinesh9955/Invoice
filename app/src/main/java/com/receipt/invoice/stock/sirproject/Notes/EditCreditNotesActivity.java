@@ -4637,15 +4637,32 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
             nameName = "file:///android_asset/invoice4.html";
         }
 
+
+        StringBuilder stringBuilderCompany = new StringBuilder();
+
+        if(!company_address.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_address+"</br>");
+        }
+        if(!company_contact.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_contact+"</br>");
+        }
+        if(!companywebsitestr.equalsIgnoreCase("")){
+            stringBuilderCompany.append(companywebsitestr+"</br>");
+        }
+        if(!company_email.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_email+"");
+        }
+
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
 
                     .replaceAll("Company Name", company_name)
-                    .replaceAll("Address", company_address)
-                    .replaceAll("Contact No.", company_contact)
-                    .replaceAll("Website", companywebsitestr)
-                    .replaceAll("Email", company_email)
+                    .replaceAll("Address", stringBuilderCompany.toString())
+//                    .replaceAll("Contact No.", company_contact)
+//                    .replaceAll("Website", companywebsitestr)
+//                    .replaceAll("Email", company_email)
                     .replaceAll("#LOGO_IMAGE#", companyimagelogopath)
                     .replaceAll("INV-564", invoicenum.getText().toString())
                     .replaceAll("invD", invoice_date)

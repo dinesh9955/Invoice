@@ -48,6 +48,8 @@ import static android.content.Context.MODE_PRIVATE;
 public class Update_Stock extends Fragment implements Select_Warehouse_Adapter.Callback{
 
 
+    private static final String TAG = "Update_Stock";
+
     public Update_Stock() {
         // Required empty public constructor
     }
@@ -81,7 +83,9 @@ public class Update_Stock extends Fragment implements Select_Warehouse_Adapter.C
     ArrayList<String> vnames=new ArrayList<>();
     ArrayList<String> vids=new ArrayList<>();
 
-    ArrayList<String> warehouses=new ArrayList<>();
+//    ArrayList<String> warehouses=new ArrayList<>();
+
+    String warehouses =  "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -254,8 +258,8 @@ public class Update_Stock extends Fragment implements Select_Warehouse_Adapter.C
                             if (status.equals("false")){
 
                                 Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
-                                warehouses.clear();
-
+                                //warehouses.clear();
+                                warehouses = "";
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -494,7 +498,7 @@ public class Update_Stock extends Fragment implements Select_Warehouse_Adapter.C
             Constant.ErrorToast(getActivity(),"Select a Vendor");
 
         }*/
-        else if (warehouses==null || warehouses.size()==0){
+        else if (warehouses.equalsIgnoreCase("")){
             Constant.ErrorToast(getActivity(),"Select Warehouse");
         }
         else{
@@ -505,11 +509,10 @@ public class Update_Stock extends Fragment implements Select_Warehouse_Adapter.C
             params.add("product_id",selectedProductId);
             params.add("quantity",quant);
             params.add("price",pricee);
-
-            params.put("warehouse_id",warehouses);
+            params.add("warehouse_id[0]", ""+warehouses);
             params.add("supplier_id",selectedVendorId);
 
-            Log.e("quant",quant +" "+params.toString());
+            Log.e(TAG, "quantAAA "+quant +" "+params.toString());
 
             String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
@@ -574,20 +577,38 @@ public class Update_Stock extends Fragment implements Select_Warehouse_Adapter.C
     }
 
     @Override
-    public void onWarehouseSelected(int count, ArrayList<String> warehouseList, String wherehousenamstr) {
+    public void onWarehouseSelected(String warehouseList, String wherehousenamstrSelect) {
 
-            mybuilder.dismiss();
-            if (count!=0){
-                selectwarehouse.setText(wherehousenamstr);
-            }
-            else {
-                selectwarehouse.setText("Select Warehouse (s)");
-            }
-            warehouses.clear();
-            warehouses = warehouseList;
+        mybuilder.dismiss();
 
-
+        if(wherehousenamstrSelect.equalsIgnoreCase("")){
+            selectwarehouse.setText("Select Warehouse (s)");
+        }else {
+            selectwarehouse.setText(warehouseList);
         }
+
+        Log.e(TAG, "warehouseList "+wherehousenamstrSelect);
+
+        warehouses = wherehousenamstrSelect;
+
+    }
+
+//
+//        @Override
+//    public void onWarehouseSelected(int count, ArrayList<String> warehouseList, String wherehousenamstr) {
+//
+//            mybuilder.dismiss();
+//            if (count!=0){
+//                selectwarehouse.setText(wherehousenamstr);
+//            }
+//            else {
+//                selectwarehouse.setText("Select Warehouse (s)");
+//            }
+//            warehouses.clear();
+//            warehouses = warehouseList;
+//
+//
+//        }
 
 
 }

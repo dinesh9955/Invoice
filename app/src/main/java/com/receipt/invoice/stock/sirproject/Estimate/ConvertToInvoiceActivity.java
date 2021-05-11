@@ -745,43 +745,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
 
 
-                productsItemDtosdto = new ArrayList<ProductsItemDto>(invoiceDtoInvoice.getProducts());
 
-                Log.e(TAG, "product:::: "+invoice_imageDto.size());
-
-                if (productsItemDtosdto.size() > 0) {
-                    for (int i = 0; i < productsItemDtosdto.size(); i++) {
-                        Product_list product_list = new Product_list();
-                        product_list.setProduct_name(productsItemDtosdto.get(i).getName());
-                        product_list.setProduct_id(productsItemDtosdto.get(i).getProductId());
-                        product_list.setCurrency_code(currency_codedto);
-
-                        product_list.setProduct_description(productsItemDtosdto.get(i).getDescription());
-
-                        product_list.setProduct_measurement_unit(productsItemDtosdto.get(i).getMeasurementUnit());
-
-                        product_list.setProduct_price(productsItemDtosdto.get(i).getTotal());
-                        Log.e("price", productsItemDtosdto.get(i).getPrice());
-                        Log.e("Quentity", productsItemDtosdto.get(i).getQuantity());
-                        producprice.add(productsItemDtosdto.get(i).getPrice());
-                        tempList.add(product_list);
-
-                        tempQuantity.add(productsItemDtosdto.get(i).getQuantity());
-                        total_price = total_price + (Double.parseDouble(productsItemDtosdto.get(i).getPrice()) * Double.parseDouble(productsItemDtosdto.get(i).getQuantity()));
-                        totalpriceproduct.add(String.valueOf(total_price));
-
-                        calculateTotalAmount(total_price);
-
-                        Log.e("total_price", String.valueOf(total_price));
-
-                    }
-
-                }
-                //    products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
-
-                //  products_adapter.update(product_bottom, tempList, tempQuantity, producprice);
-
-                productsRecycler.setAdapter(products_adapter);
 
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
@@ -951,6 +915,46 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                     }
 
                 }
+
+
+
+                productsItemDtosdto = new ArrayList<ProductsItemDto>(invoiceDtoInvoice.getProducts());
+
+                Log.e(TAG, "product:::: "+invoice_imageDto.size());
+
+                if (productsItemDtosdto.size() > 0) {
+                    for (int i = 0; i < productsItemDtosdto.size(); i++) {
+                        Product_list product_list = new Product_list();
+                        product_list.setProduct_name(productsItemDtosdto.get(i).getName());
+                        product_list.setProduct_id(productsItemDtosdto.get(i).getProductId());
+                        product_list.setCurrency_code(currency_codedto);
+
+                        product_list.setProduct_description(productsItemDtosdto.get(i).getDescription());
+
+                        product_list.setProduct_measurement_unit(productsItemDtosdto.get(i).getMeasurementUnit());
+
+                        product_list.setProduct_price(productsItemDtosdto.get(i).getTotal());
+                        Log.e("price", productsItemDtosdto.get(i).getPrice());
+                        Log.e("Quentity", productsItemDtosdto.get(i).getQuantity());
+                        producprice.add(productsItemDtosdto.get(i).getPrice());
+                        tempList.add(product_list);
+
+                        tempQuantity.add(productsItemDtosdto.get(i).getQuantity());
+                        total_price = total_price + (Double.parseDouble(productsItemDtosdto.get(i).getPrice()) * Double.parseDouble(productsItemDtosdto.get(i).getQuantity()));
+                        totalpriceproduct.add(String.valueOf(total_price));
+
+                        calculateTotalAmount(total_price);
+
+                        Log.e("total_price", String.valueOf(total_price));
+
+                    }
+
+                }
+                //    products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
+
+                //  products_adapter.update(product_bottom, tempList, tempQuantity, producprice);
+
+                productsRecycler.setAdapter(products_adapter);
 
 
             }
@@ -3473,6 +3477,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             }
 
 
+
+            Log.e(TAG, "netamountvalueCCC "+netamountvalue);
             Log.e(TAG, "selectedtaxt.size() "+selectedtaxt.size());
 
             Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
@@ -3535,6 +3541,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 }
             }
 
+
+            Log.e(TAG, "netamountvalueCCC22 "+netamountvalue);
 
             Log.e(TAG, "freight_costBB "+freight_cost);
 
@@ -3617,6 +3625,9 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             }
 
 
+            Log.e(TAG, "netamountvalueCCC33 "+cc);
+
+
 //            if(!freight_cost.isEmpty()){
 //                if (!freight_cost.equalsIgnoreCase("0")) {
 ////                    balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
@@ -3663,6 +3674,23 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 Log.e(TAG, "netamountXX "+mainNetAmount);
                 Log.e(TAG, "paidamountXX "+paidamount.getText().toString());
 
+
+               // double ccc = balanceamount - 0;
+               // balance.setText(formatter.format(ccc) + cruncycode);
+
+                //cc = subtotalvalue + shipingvalue;
+
+
+                if (selectedtaxt.size() > 0) {
+                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+                        balance.setText(formatter.format(cc) + cruncycode);
+                        Log.e(TAG, "QQQQQQ111");
+                    }else{
+                        balance.setText(formatter.format(balanceamount) + cruncycode);
+                        Log.e(TAG, "QQQQQQ222");
+                    }
+                }
+
                 //
                 // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
             } else {
@@ -3679,9 +3707,24 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
                 Log.e(TAG, "balanceamountXX "+balanceamount);
                 Log.e(TAG, "cccXX "+cc);
+                Log.e(TAG, "paidindoubleXX "+paidindouble);
 
-                double ccc = balanceamount - paidindouble;
-                balance.setText(formatter.format(ccc) + cruncycode);
+
+               // balance.setText(formatter.format(ccc) + cruncycode);
+
+                if (selectedtaxt.size() > 0) {
+
+                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+                        double ccc = cc - paidindouble;
+                        balance.setText(formatter.format(ccc) + cruncycode);
+                        Log.e(TAG, "QQQQQQ111");
+                    }else{
+                        double ccc = balanceamount - paidindouble;
+                        balance.setText(formatter.format(ccc) + cruncycode);
+                        Log.e(TAG, "QQQQQQ222");
+                    }
+                }
+
             }
 
 
@@ -4997,6 +5040,23 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             nameName = "file:///android_asset/invoice4.html";
         }
 
+
+        StringBuilder stringBuilderCompany = new StringBuilder();
+
+        if(!company_address.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_address+"</br>");
+        }
+        if(!company_contact.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_contact+"</br>");
+        }
+        if(!companywebsitestr.equalsIgnoreCase("")){
+            stringBuilderCompany.append(companywebsitestr+"</br>");
+        }
+        if(!company_email.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_email+"");
+        }
+
+
         String content = null;
         try {
 
@@ -5005,10 +5065,10 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             content = IOUtils.toString(getAssets().open(name))
 
                     .replaceAll("Company Name", company_name)
-                    .replaceAll("Address", company_address)
-                    .replaceAll("Contact No.", company_contact)
-                    .replaceAll("Website", companywebsitestr)
-                    .replaceAll("Email", company_email)
+                    .replaceAll("Address", stringBuilderCompany.toString())
+//                    .replaceAll("Contact No.", company_contact)
+//                    .replaceAll("Website", companywebsitestr)
+//                    .replaceAll("Email", company_email)
                     .replaceAll("#LOGO_IMAGE#", companyimagelogopath)
                     .replaceAll("INV-564", invoicenum.getText().toString())
                     .replaceAll("invD", invoice_date)

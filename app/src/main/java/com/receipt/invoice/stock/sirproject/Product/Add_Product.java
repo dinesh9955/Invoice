@@ -788,18 +788,38 @@ public class Add_Product extends Fragment implements Select_Warehouse_Adapter.Ca
 
 
 
+//    @Override
+//    public void onWarehouseSelected(int count, ArrayList<String> warehouseList, String wherehousenamstr) {
+//        mybuilder.dismiss();
+//        if (count!=0){
+//            selectwarehouse.setText(wherehousenamstr);
+//        }
+//        else {
+//            selectwarehouse.setText("Select Warehouse (s)");
+//        }
+//
+//
+//
+//    }
+
+
     @Override
-    public void onWarehouseSelected(int count, ArrayList<String> warehouseList, String wherehousenamstr) {
+    public void onWarehouseSelected(String warehouseList, String wherehousenamstrSelect) {
+
         mybuilder.dismiss();
-        if (count!=0){
-            selectwarehouse.setText(wherehousenamstr);
-        }
-        else {
+
+        if(wherehousenamstrSelect.equalsIgnoreCase("")){
             selectwarehouse.setText("Select Warehouse (s)");
+        }else {
+            selectwarehouse.setText(warehouseList);
         }
 
+        Log.e(TAG, "warehouseList "+wherehousenamstrSelect);
 
+        //warehouses = wherehousenamstrSelect;
 
     }
+
+
 }
 

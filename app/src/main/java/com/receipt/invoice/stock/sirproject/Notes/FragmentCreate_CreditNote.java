@@ -986,8 +986,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             progressDialog.show();
             RequestParams params = new RequestParams();
             params.add("company_id", selectedCompanyId);
-
-            params.add("warehouse_id", selectwarehouseId);
+            params.add("warehouse", selectwarehouseId);
+            params.add("warehouse_id[0]", selectwarehouseId);
             params.add("credit_note_date", invoice_date);
             params.add("due_date", invoice_due_date);
             params.add("customer_id", Selectedcustomer_id);
@@ -4217,15 +4217,32 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             nameName = "file:///android_asset/invoice4.html";
         }
 
+
+        StringBuilder stringBuilderCompany = new StringBuilder();
+
+        if(!company_address.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_address+"</br>");
+        }
+        if(!company_contact.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_contact+"</br>");
+        }
+        if(!companywebsitestr.equalsIgnoreCase("")){
+            stringBuilderCompany.append(companywebsitestr+"</br>");
+        }
+        if(!company_email.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_email+"");
+        }
+
+
         String content = null;
         try {
             content = IOUtils.toString(getActivity().getAssets().open(name))
 
                     .replaceAll("Company Name", company_name)
-                    .replaceAll("Address", company_address)
-                    .replaceAll("Contact No.", company_contact)
-                    .replaceAll("Website", companywebsitestr)
-                    .replaceAll("Email", company_email)
+                    .replaceAll("Address", stringBuilderCompany.toString())
+//                    .replaceAll("Contact No.", company_contact)
+//                    .replaceAll("Website", companywebsitestr)
+//                    .replaceAll("Email", company_email)
                     .replaceAll("#LOGO_IMAGE#", companyimagelogopath)
                     .replaceAll("INV-564", invoicenum.getText().toString())
                     .replaceAll("invD", invoice_date)

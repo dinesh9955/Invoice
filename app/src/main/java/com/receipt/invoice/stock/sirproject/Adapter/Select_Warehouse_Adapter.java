@@ -24,6 +24,8 @@ import java.util.List;
 
 public class Select_Warehouse_Adapter extends RecyclerView.Adapter<Select_Warehouse_Adapter.ViewHolderForCat> {
 
+    String TAG = "Select_Warehouse_Adapter";
+
     private Context mcontext ;
     List<String> mtxtwarehouse=new ArrayList<>();
     List<String> mwarehouseid=new ArrayList<>();
@@ -31,6 +33,7 @@ public class Select_Warehouse_Adapter extends RecyclerView.Adapter<Select_Wareho
     Callback callback;
     TextView mdone;
     String wherehousenamstr="";
+    String wherehousenamstrSelect="";
     private int selectedPos = -100;
     public Select_Warehouse_Adapter(Context mcontext , ArrayList<String>txtwarehouse,ArrayList<String>warehouseid,TextView done,Callback callback){
         this.mcontext = mcontext;
@@ -79,7 +82,12 @@ public class Select_Warehouse_Adapter extends RecyclerView.Adapter<Select_Wareho
 
 
                 wherehousenamstr = mtxtwarehouse.get(i);
-                selectedlist.add(mwarehouseid.get(i));
+                //selectedlist.add(mwarehouseid.get(i));
+                wherehousenamstrSelect = mwarehouseid.get(i);
+
+
+                Log.e(TAG, "mwarehouseid.get(i) "+wherehousenamstr);
+                Log.e(TAG, "mtxtwarehouse.get(i) "+wherehousenamstrSelect);
 
                 notifyDataSetChanged();
             }
@@ -90,8 +98,7 @@ public class Select_Warehouse_Adapter extends RecyclerView.Adapter<Select_Wareho
             @Override
             public void onClick(View view) {
 
-
-                callback.onWarehouseSelected(selectedlist.size(),selectedlist,wherehousenamstr);
+                callback.onWarehouseSelected(wherehousenamstr, wherehousenamstrSelect);
 
 
             }
@@ -135,6 +142,6 @@ public class Select_Warehouse_Adapter extends RecyclerView.Adapter<Select_Wareho
     }
 
     public interface Callback{
-        void onWarehouseSelected(int count,ArrayList<String> warehouseList,String wherehousenamstr);
+        void onWarehouseSelected(String warehouseList,String wherehousenamstrSelect);
     }
 }

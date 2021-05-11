@@ -820,13 +820,29 @@ public class ReceiptViewActivityWebView extends AppCompatActivity {
             }
 
 
+            StringBuilder stringBuilderCompany = new StringBuilder();
+
+            if(!company_address.equalsIgnoreCase("")){
+                stringBuilderCompany.append(company_address+"</br>");
+            }
+            if(!company_contact.equalsIgnoreCase("")){
+                stringBuilderCompany.append(company_contact+"</br>");
+            }
+            if(!companywebsitestr.equalsIgnoreCase("")){
+                stringBuilderCompany.append(companywebsitestr+"</br>");
+            }
+            if(!company_email.equalsIgnoreCase("")){
+                stringBuilderCompany.append(company_email+"");
+            }
+
+
             try {
                 content = IOUtils.toString(getAssets().open(name))
                         .replaceAll("Company Name", company_name)
-                        .replaceAll("Address", company_address)
-                        .replaceAll("Contact No.", company_contact)
-                        .replaceAll("Website", company_website)
-                        .replaceAll("Email", company_email)
+                        .replaceAll("Address", stringBuilderCompany.toString())
+//                        .replaceAll("Contact No.", company_contact)
+//                        .replaceAll("Website", company_website)
+//                        .replaceAll("Email", company_email)
                         .replaceAll("INV-564", "" + invoicenumber)
                         .replaceAll("invD", date)
                      //   .replaceAll("DueDate", due_date)
