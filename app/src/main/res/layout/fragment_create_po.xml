@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Customer.Customer_Activity">
+    tools:context="com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity">
 
     <WebView
         android:layout_width="match_parent"
@@ -18,37 +16,33 @@
         />
 
 
-    <com.google.android.material.appbar.AppBarLayout
-          android:id="@+id/appbar"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-          android:background="@color/white"/>
-    <include layout="@layout/toolbar" />
-
     <ScrollView
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <RelativeLayout
-            android:id="@+id/relativemain"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content">
 
 
-            <com.isapanah.awesomespinner.AwesomeSpinner
+            <Button
                 android:id="@+id/selectcompany"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:visibility="gone"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/edittextshape"
-                app:spinnerDirection="ltr"
-                app:spinnerHint="Select Company" />
+                android:hint="Select Company"
+                android:spinnerMode="dialog"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                />
 
             <TextView
                 android:id="@+id/invoicenumtxt"
@@ -57,7 +51,7 @@
                 android:layout_below="@+id/selectcompany"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/InvoiceNo" />
+                android:text="@string/poNo" />
 
             <EditText
                 android:id="@+id/invoivenum"
@@ -68,7 +62,7 @@
                 android:layout_below="@+id/invoicenumtxt"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
-                android:hint="Inv #"
+                android:hint="PO #"
                 android:background="@drawable/nobackgroundedittext"
                 android:textColor="@color/lightpurple"
                 android:textSize="14sp"
@@ -93,11 +87,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/duedatetxt"
                 android:layout_alignParentEnd="true"
+
+
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:gravity="end"
                 android:hint="DD-MM-YYYY"
+                android:gravity="end"
                 android:textColor="@color/lightpurple" />
 
             <View
@@ -145,15 +141,13 @@
             <TextView
                 android:id="@+id/txtdays"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtcredit"
                 android:layout_alignParentEnd="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
-                android:gravity="end"
                 android:layout_marginRight="20dp"
-                android:hint="7days"
+                android:hint="0days"
                 android:textColor="@color/lightpurple" />
 
             <View
@@ -207,9 +201,10 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:gravity="end"
                 android:hint="DD-MM-YYYY"
+                android:gravity="end"
                 android:textColor="@color/lightpurple" />
+
 
 
             <TextView
@@ -224,8 +219,8 @@
                 android:text="@string/template"
                 android:textColor="@color/lightpurple"
                 android:textStyle="bold"
-                android:textSize="16sp" />
-
+                android:textSize="16sp"
+                android:visibility="gone"/>
 
 
 
@@ -236,8 +231,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/itemstxtTemplate"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="0dp"
                 android:background="@drawable/edittextshape"
                 app:spinnerDirection="ltr"
                 app:spinnerHint="Select Warehouse" />
@@ -258,27 +253,35 @@
                 android:layout_below="@+id/view2"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
-                android:text="@string/INVOICEITEMS"
+                android:text="@string/ITEMS"
                 android:textColor="@color/lightpurple"
                 android:textSize="16sp" />
 
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/productsRecycler"
+            <RelativeLayout
+                android:id="@+id/productrecyone"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/itemstxt"
-                android:layout_marginTop="10dp"/>
+                android:descendantFocusability="blocksDescendants">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/productsRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="10dp" />
+
+            </RelativeLayout>
 
             <Button
                 android:id="@+id/additem"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/productsRecycler"
+                android:layout_below="@+id/productrecyone"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/light_button_curve"
+                android:padding="10dp"
                 android:text="@string/additem"
                 android:textAllCaps="false"
                 android:textColor="@color/lightpurple" />
@@ -288,11 +291,12 @@
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/productsRecycler"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_below="@+id/productrecyone"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/light_button_curve"
+                android:padding="10dp"
                 android:text="Add items"
                 android:textAllCaps="false"
                 android:textColor="@color/lightpurple" />
@@ -300,9 +304,9 @@
             <View
                 android:id="@+id/view3"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="10dp"
                 android:layout_below="@+id/additem"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/down_shadow"/>
 
             <TextView
@@ -380,10 +384,11 @@
                 android:text="0"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp"
-       />
+                android:minWidth="50dp"
+                android:gravity="right"/>
 
             <TextView
-                android:id="@+id/taxtleft"
+                android:id="@+id/taxvalue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/subtotal"
@@ -395,15 +400,15 @@
 
             <TextView
                 android:id="@+id/txttax"
-                android:layout_toRightOf="@+id/taxtleft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/subtotal"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/taxvalue"
                 android:layout_marginTop="40dp"
                 android:text=""
                 android:textColor="@color/darkgray"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tax"
@@ -411,9 +416,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/subtotal"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:text="0"
                 android:textColor="@color/green"
                 android:textSize="18sp"
@@ -489,7 +494,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/red"
@@ -540,7 +544,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
-                android:text="Signature of invoice maker"
+                android:text="Signature of purchase order maker"
                 android:textColor="@color/lightpurple"
                 android:textSize="16sp" />
 
@@ -611,7 +615,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
-                android:text="Upload Invoice Images"
+                android:text="Upload purchase order Images"
                 android:textColor="@color/lightpurple"
                 android:textSize="16sp" />
 
@@ -669,8 +673,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight=".5"
                     android:background="@drawable/blue_btn_curve"
-                    android:text="@string/createinvoice"
-
+                    android:text="@string/create_purchaseorder"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
 
@@ -680,17 +683,25 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight=".15"
                     android:background="@drawable/light_button_curve"
                     android:drawable="@drawable/ic_options"
-                    android:drawableLeft="@drawable/ic_options"
-                    android:paddingLeft="25dp"
+                    android:drawableStart="@drawable/ic_options"
+                    android:paddingStart="25dp"
                     android:textColor="@color/lightpurple"
                     android:textSize="20sp"
 
                     />
-
+                <WebView
+                    android:id="@+id/webViewpdffile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </LinearLayout>
 
@@ -700,15 +711,15 @@
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/avi"
         style="@style/AVLoadingIndicatorView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="gone"
         app:indicatorName="BallClipRotatePulseIndicator"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-/>
+
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </RelativeLayout>
-
-

@@ -34,6 +34,7 @@ import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.Home.Settings_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity;
 import com.receipt.invoice.stock.sirproject.Notes.CreateNotesActivity;
+import com.receipt.invoice.stock.sirproject.PO.POActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Receipts.ReceiptsActivity;
@@ -361,7 +362,7 @@ public class Constant {
                         }
                         if(position==12)
                         {
-                            Intent intent = new Intent(activity, EstimateActivity.class);
+                            Intent intent = new Intent(activity, POActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             activity.startActivity(intent);
 
@@ -563,18 +564,11 @@ public class Constant {
                 }
 
                 else if(position==3){
-
-                    //Toast.makeText(activity,"Coming soon",Toast.LENGTH_SHORT).show();
-
-                       /* Intent intent = new Intent(activity, MyProfileActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        activity.startActivity(intent);*/
-
                     Intent intent = new Intent(activity, ReceiptsActivity.class);
                     activity.startActivity(intent);
-
-
-
+                }else if(position==4){
+                    Intent intent = new Intent(activity, POActivity.class);
+                    activity.startActivity(intent);
                 }
 
                 return false;

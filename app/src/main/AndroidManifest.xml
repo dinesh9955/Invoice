@@ -68,6 +68,21 @@
 
         </activity>
 
+        <activity
+            android:name=".PO.POActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+        <activity
+            android:name=".PO.ViewPO_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
 
 
         <activity

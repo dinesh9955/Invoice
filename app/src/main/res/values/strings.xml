@@ -42,6 +42,8 @@
     <string name="InvoiceNo">Invoice No.</string>
     <string name="EstiateNo">Estimate No.</string>
 
+    <string name="poNo">PO No.</string>
+
     <string name="DueDate">Due Date</string>
 
     <string name="ReceiptDate">Receipt Date</string>
@@ -60,5 +62,5 @@
     <string name="createreceipt">Create Receipt</string>
     <string name="createcredit">Create Credit Note</string>
     <string name="createestimate">Create Estimate</string>
-
+    <string name="create_purchaseorder">Create purchase order</string>
 </resources>

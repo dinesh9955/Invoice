@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.text.Html;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,7 +25,7 @@ import java.util.Queue;
 
 public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
 
-    public static final int BUTTON_WIDTH = 200;
+    public static final int BUTTON_WIDTH = 320;
     private RecyclerView recyclerView;
     private List<UnderlayButton> buttons;
     private GestureDetector gestureDetector;
@@ -110,7 +111,13 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
             buttons.clear();
 
         buttonsBuffer.clear();
-        swipeThreshold = 0.5f * buttons.size() * BUTTON_WIDTH;
+
+//        if(pos == 0){
+//            swipeThreshold = 0.5f * buttons.size() * 300;
+//        }else{
+            swipeThreshold = 0.5f * buttons.size() * BUTTON_WIDTH;
+//        }
+
         recoverSwipedItem();
     }
 
@@ -152,7 +159,13 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
                     buffer = buttonsBuffer.get(pos);
                 }
 
-                translationX = dX * buffer.size() * BUTTON_WIDTH / itemView.getWidth();
+
+//                if(pos == 0){
+//                    translationX = dX * buffer.size() * 300 / itemView.getWidth();
+//
+//                }else{
+                    translationX = dX * buffer.size() * BUTTON_WIDTH / itemView.getWidth();
+//                }
                 drawButtons(c, itemView, buffer, pos, translationX);
             }
         }
@@ -240,6 +253,15 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
             float x = cWidth / 2f - r.width() / 2f - r.left;
             float y = cHeight / 2f + r.height() / 2f - r.bottom;
             c.drawText(text, rect.left + x, rect.top + y, p);
+
+           // c.drawText(Html.fromHtml("<![CDATA[<font color='#145A14'>text</font>]]>"), rect.left + x, rect.top + y, p);
+
+//            Paint textPaint = new Paint();
+//            textPaint.setARGB(200, 254, 0, 0);
+//            textPaint.setTextAlign(Paint.Align.CENTER);
+//
+//            textPaint.setTextSize(300);
+//            c.drawText("Hello", c.getWidth()/2, c.getHeight()/2  , textPaint);
 
             clickRegion = rect;
             this.pos = pos;

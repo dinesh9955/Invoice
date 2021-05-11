@@ -9,6 +9,7 @@ public class InvoiceData {
     String is_viewed = "";
 
 
+
     public String getIs_viewed() {
         return is_viewed;
     }

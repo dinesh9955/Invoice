@@ -598,7 +598,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
-                android:text="Upload company Seal"
+                android:text="Upload Company Seal"
                 android:textColor="@color/lightpurple"
                 android:textSize="16sp" />
 
