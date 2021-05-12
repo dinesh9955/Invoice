@@ -90,8 +90,10 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
     private static final String TAG = "List_of_PO";
 
     String deliveryStatus = "";
+    String colorDelivery = "#ffffff";
     String voidStatus = "";
     String colorVoid = "#ffffff";
+
     String markAsVoidTxt = "Mark as void";
     // List Of Invoice Dtata
     ApiInterface apiInterface;
@@ -120,7 +122,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
     String invoiceidbypos = "";
     String receipt_count, estimate_count, invoice_useriddt, invoice_count;
     String templatestr = "1";
-    String shareInvoicelink = "http://13.126.22.0/saad/app/index.php/view/invoice/";
+    String shareInvoicelink = "http://13.126.22.0/saad/app/uploads/purchase_order/pdf/";
     //  Shaare invoice lnk
     String BaseurlForShareInvoice = "";
     String invoicelistbyurl = "";
@@ -324,10 +326,12 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                                 String ilnvoiceStatus = list.get(pos).getInvocestatus();
                                 String pdflink = list.get(pos).getInvoicepdflink();
                                 String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
-//                                Log.e(TAG, "pdflink: "+pdflink);
-//                                Log.e(TAG, "sahrelink: "+sahrelink);
+                                Log.e(TAG, "pdflink1: "+pdflink);
+                                Log.e(TAG, "sahrelink1: "+sahrelink);
 
-                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
+                                String link = shareInvoicelink+""+pdflink;
+
+                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, link, link);
                                 invoicelistAdapterdt.notifyDataSetChanged();
                                 bottomSheetDialog.show();
                             }
@@ -398,11 +402,11 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                 Log.e(TAG, "voidStatusAA " + voidStatus);
 
                 if (deliveryStatus.equalsIgnoreCase("1")) {
-                    colorVoid = "#ff4d4d";
+                    colorDelivery = "#ff4d4d";
                     markAsVoidTxt = "Mark as delivery received";
                 }
                 if (deliveryStatus.equalsIgnoreCase("2")) {
-                    colorVoid = "#33cc33";
+                    colorDelivery = "#33cc33";
                     markAsVoidTxt = "Delivery received";
                 }
 
@@ -411,7 +415,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
                         markAsVoidTxt,
                         0,
-                        Color.parseColor(colorVoid),
+                        Color.parseColor(colorDelivery),
                         new SwipeHelper2.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
@@ -1034,7 +1038,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 
 
     private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink) {
-        String urlPDF = Constant.BASE_URL_PDF + pdflink;
+       // String urlPDF = Constant.BASE_URL_PDF + pdflink;
 
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.bottominvoiceview, null);
@@ -1042,22 +1046,29 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
             Log.e("ilnvoiceStatus", ilnvoiceStatus);
             LinearLayout viewinvoicerecipts;
             viewinvoicerecipts = view.findViewById(R.id.viewinvoicerecipts);
-            viewinvoicerecipts.setVisibility(View.GONE);
+//            viewinvoicerecipts.setVisibility(View.GONE);
             recepitsviewtxt = view.findViewById(R.id.recepitsviewtxt);
-            if (ilnvoiceStatus.equals("2")) {
-                viewinvoicerecipts.setVisibility(View.VISIBLE);
-                recepitsviewtxt.setVisibility(View.VISIBLE);
-            }
-            if (ilnvoiceStatus.equals("1")) {
-                recepitsviewtxt.setVisibility(View.INVISIBLE);
-                viewinvoicerecipts.setVisibility(View.INVISIBLE);
-            }
+//            if (ilnvoiceStatus.equals("2")) {
+//                viewinvoicerecipts.setVisibility(View.VISIBLE);
+//                recepitsviewtxt.setVisibility(View.VISIBLE);
+//            }
+//            if (ilnvoiceStatus.equals("1")) {
+//                recepitsviewtxt.setVisibility(View.INVISIBLE);
+//                viewinvoicerecipts.setVisibility(View.INVISIBLE);
+//            }
 
 
             viewinvoicebotom = view.findViewById(R.id.viewinvoicebotom);
             viewinvoicetemplate = view.findViewById(R.id.viewinvoicetemplate);
             duplicateinvoitxt = view.findViewById(R.id.duplicateinvoitxt);
             shareinvoicetxt = view.findViewById(R.id.shareinvoicetxt);
+
+            viewinvoicebotom.setText("View PO");
+            duplicateinvoitxt.setText("Duplicate PO");
+            shareinvoicetxt.setText("Share PO");
+            recepitsviewtxt.setText("Convert to Payment Voucher");
+
+
             viewinvoicebotom.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
             viewinvoicetemplate.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
             duplicateinvoitxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
@@ -1073,7 +1084,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                 public void onClick(View v) {
 //                    Fragment_Create_Invoice.defaultClick = 1;
                     Log.e(TAG, "templateSelectooo "+templateSelect);
-                    Intent intent = new Intent(getContext(), InvoiceViewActivityWebView.class);
+                    Intent intent = new Intent(getContext(), POViewActivityWebView.class);
                     intent.putExtra("invoiceID", invoiceidbypos);
                     intent.putExtra("templatestr", templatestr);
 //                    templateSelect = ""+2;
@@ -1112,7 +1123,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                     pref.SavePref(getActivity());
                     pref.setTemplate(0);
 
-                    Intent intent = new Intent(getContext(), EditInvoiceActivity.class);
+                    Intent intent = new Intent(getContext(), EditPOActivity.class);
                     intent.putExtra("invoiceID", invoiceidbypos);
                     intent.putExtra("invoice_count", invoice_count);
 
@@ -1175,7 +1186,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                         @Override
                         public void onClick(View v) {
 
-                            Log.e(TAG, "sharelink:: "+urlPDF);
+                            Log.e(TAG, "sharelink:: "+sharelink);
 
 //                            Log.e(TAG, "pdflink: "+pdflink);
                             Log.e(TAG, "dataNo: "+dataNo);
@@ -1183,12 +1194,12 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 
 
                             String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
-                            String txt = "Your Invoice can be viewed, printed and downloaded from below link." +
-                                    "\n\n" +urlPDF ;
+                            String txt = "Your Purchase Order can be viewed, printed and downloaded from below link." +
+                                    "\n\n" +sharelink ;
 
                             try {
 
-                                if (!urlPDF.endsWith(".pdf")) {
+                                if (!sharelink.endsWith(".pdf")) {
                                     Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
                                 } else {
                                     BaseurlForShareInvoice = shareInvoicelink + sharelink;
@@ -1243,9 +1254,9 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                     txtPDFfvalue.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Log.e(TAG, "pdflink:: "+urlPDF);
+                            Log.e(TAG, "pdflink:: "+sharelink);
                             try {
-                                if (!urlPDF.endsWith(".pdf")) {
+                                if (!sharelink.endsWith(".pdf")) {
                                     Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
                                 } else {
 //                    /*              String pdfurl = "http://13.126.22.0/saad/app/uploads/invoice/pdf/" + pdflink;
@@ -1268,7 +1279,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                                         //check if app has permission to write to the external storage.
                                         if (checkPermission()) {
                                             //Get the URL entered
-                                            String url = urlPDF;
+                                            String url = sharelink;
                                             new DownloadFile(getActivity()).execute(url);
                                         } else {
 

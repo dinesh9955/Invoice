@@ -17,7 +17,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -33,7 +35,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -45,17 +46,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -84,20 +81,31 @@ import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
 import com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity;
-import com.receipt.invoice.stock.sirproject.Invoice.Fragment_Create_Invoice;
+import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Invoice.ViewInvoice_Activity;
+import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
+import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
+import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDto;
+import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDtoInvoice;
+import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceResponseDto;
+import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
+import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.Model.Moving;
+import com.receipt.invoice.stock.sirproject.Model.Product_Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.SelectedTaxlist;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
+import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
+import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
 import com.receipt.invoice.stock.sirproject.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
@@ -115,6 +123,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -128,41 +138,73 @@ import java.util.Locale;
 import cz.msebera.android.httpclient.Header;
 import gun0912.tedbottompicker.TedRxBottomPicker;
 import io.reactivex.disposables.Disposable;
+import retrofit2.Call;
+import retrofit2.Callback;
 
-public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
+import static com.receipt.invoice.stock.sirproject.Invoice.Fragment_Create_Invoice.verifyStroagePermissions;
 
-    SavePref pref = new SavePref();
-
+public class EditPOActivity extends AppCompatActivity implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
+    private static final String TAG = "EditPOActivity";
+    String companycolor = "#ffffff";
     int selectedTemplate = 0;
+//    int defaultClick = 0;
 
-    //    public static int defaultClick = 0;
-//    int selectComapanyCount = 0;
+
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static final int GALLARY_aCTION_PICK_CODE = 10;
     private static final int CAMERA_ACTION_PICK_CODE = 9;
     private static final String[] PERMISSION_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-    private static final String TAG = "Fragment_Create_Invoice";
-    TextView invoicenumtxt, duedatetxt, duedate, invoicetotxt, invoicerecipnt, itemstxt, subtotaltxt, subtotal, discounttxt, discount, txttax, tax, txtcredit, txtdays, txtreferenceno, edreferenceno, txtduedate, edduedate, txtgrossamount, grosstotal, txtfreight, freight, txtnetamount, netamount, txtpaidamount, paidamount, txtbalance, balance, s_invoice, s_receiver, c_stamp, attachmenttxt, itemstxtTemplate;
+    //Api response data colllection
+    String invoiceId = "";
+    ApiInterface apiInterface;
+    String signature_of_issuerdto = "", signature_of_receiverdto = "", company_stampdto = "";
+    String due_datedto = "", datedto = "", credit_termsdto = "";
+    String sltcustonernamedto = "", sltcustomer_emaildto = "", sltcustomer_contactdto = "", sltcustomer_addressdto = "", sltcustomer_websitedto = "",
+            sltcustomer_phone_numberdto = "";
+
+    String invoicenumberdto = "", ref_nodto = "", paid_amount_payment_methoddto = "", Shippingamountdto = "",
+            strpaid_amountdto = "", Grossamount_strdto = "", Subtotalamountdto = "", netamountvaluedto = "", Blanceamountstrdto = "", Discountamountstrdto ="";
+
+    String  tax_type = "", rate1 = "" , value = "" , rate_type = "";
+
+
+    String paid_amount_date = "";
+
+    String shipping_zonedto;
+    String company_image_pathdto, customer_image_pathdto, invoiceshre_linkdto, invoice_image_pathdto, customerDtoContactName;
+    ArrayList<InvoiceTotalsItemDto> grosamontdto = new ArrayList<>();
+    ArrayList<ProductsItemDto> productsItemDtosdto;
+    ArrayList<Invoice_image> invoice_imageDto;
+    // Edti invoice With Detail Datata
+    InvoiceTotalsItemDto listobj = new InvoiceTotalsItemDto();
+    PODtoPO invoiceDtoInvoice;
+    String currency_codedto;
+    //3
+
+    TextView itemstxtTemplate, invoicenumtxt, duedatetxt, duedate, invoicetotxt, invoicerecipnt, itemstxt, subtotaltxt, subtotal, discounttxt, discount, txttax, tax, txtcredit, txtdays, txtreferenceno, edreferenceno, txtduedate, edduedate, txtgrossamount, grosstotal, txtfreight, freight, txtnetamount, netamount, txtpaidamount, paidamount, txtbalance, balance, s_invoice, s_receiver, c_stamp, attachmenttxt;
     Button additem, createinvoice, options, addservice;
     RecyclerView productsRecycler;
     EditText ednotes, invoicenum;
     ArrayList<Product_list> tempList = new ArrayList<Product_list>();
-    ArrayList<Service_list> Servicetem = new ArrayList<Service_list>();
+
     ArrayList<String> tempQuantity = new ArrayList<String>();
 
 
-    ArrayList<String> totalpriceproduct = new ArrayList<String>();
     ArrayList<String> producprice = new ArrayList<String>();
     // for tax list array listin
     ArrayList<Tax_List> tax_list_array = new ArrayList<Tax_List>();
     ArrayList<SelectedTaxlist> selectedtaxt = new ArrayList<SelectedTaxlist>();
-
     String invoicetaxamount;
+
+
     ImageView imgsigsuccess, imgrecsuccess, imgstampsuccess, attachmenttxtimg;
     BottomSheetDialog bottomSheetDialog, bottomSheetDialog2, bottomSheetDialog3;
-    AwesomeSpinner selectwarehouse;
+    AwesomeSpinner selectcompany, selectwarehouse;
 
     Products_Adapter products_adapter;
+    ArrayList<Product_Service_list> names = new ArrayList<>();
+    ArrayList<String> totalpriceproduct = new ArrayList<String>();
+
     ArrayList<String> quantity = new ArrayList<>();
     //products bottom sheet
     TextView txtproducts;
@@ -170,10 +212,11 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     Product_Bottom_Adapter product_bottom_adapter;
     ArrayList<Product_list> product_bottom = new ArrayList<>();
     RecyclerView recycler_services;
+    Double ProductTotalprice = 0.0;    //servcies bottom sheet
     TextView txtservices;
     EditText search_service;
     Service_bottom_Adapter service_bottom_adapter;
-
+    ArrayList<Taxlistbycompany> taxtlist = new ArrayList<>();
     CustomTaxAdapter customTaxAdapter;
     RecyclerView taxrecycler;
 
@@ -195,11 +238,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
     //three dots bottomsheet
     AwesomeSpinner selectpaymentmode;
-
-
-    Button selectcompany;
-
-
 
 
     //days bottom sheet
@@ -225,11 +263,13 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     ArrayList<String> cids = new ArrayList<>();
     ArrayList<String> wnames = new ArrayList<>();
 
-    //API's For  Werehouse id
+    //API's
     ArrayList<String> wids = new ArrayList<>();
     ArrayList<String> paymode = new ArrayList<>();
     String selectedCompanyId = "";
     String selectwarehouseId = "";
+    int warehousePosition = 0;
+
     String paimentmodespinerstr = "";
     //customer bottom sheet
     TextView txtcustomer, txtname, txtcontactname;
@@ -239,28 +279,19 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     ArrayList<Customer_list> customer_bottom = new ArrayList<>();
     ArrayList<Customer_list> selected = new ArrayList<>();
 
-
+    String invoicecompanyiddto;
     //For Intent
     String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "";
+    String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
     String invoice_no = "", invoice_due_date = "", invoice_date = "", credit_terms = "", reference_no = "";
-    String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "";
+    String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "", taxamount, netamountvalue;
     String s_r = "0";
-    String Grossamount_str = "";
+    String  Grossamount_str;
 
-
-    String Selectedcustomer_id="";
-    String customer_id = "";
-    String customer_name = "";
-
-    String custoner_contact_name = "";
-    String customer_email = "";
-    String customer_contact = "";
-    String customer_address =  "";
-    String customer_website = "";
 
     ArrayList<String> rate = new ArrayList<>();
 
-
+    String paypal_emailstr = "";
     // pick image from galary and
     Context applicationContext = Companies_Activity.getContextOfApplication();
     FileCompressor mCompressor;
@@ -271,147 +302,139 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     ArrayList<String> attchmentimage = new ArrayList<String>();
     Double total_price = 0.0;
     // Image Data
-    File company_stampFileimage, signatureofinvoicemaker, signaturinvoicereceiver;
+    File company_stampFileimage, signatureofinvoicemaker, signaturinvoicereceiver, company_logoFileimage;
     ArrayList<String> multimgpath = new ArrayList<>();
     File[] multiple = new File[5];
     String strnotes, ref_no, freight_cost = "", strpaid_amount = "", Blanceamountstr = "";
-    String Paymentamountdate = "", paymentmode = "", signatureofreceiverst = "", paidamountstr = "", netamountvalue = "";
+    String Paymentamountdate, paymentmode, signatureofreceiverst = "", paidamountstr = "";
     // customer detail
-    String shippingfirstname = "", shippinglastname, shippingaddress1, shippingaddress2, shippingcity, shippingpostcode, shippingcountry, paymentbankname, paymentcurrency, paymentiban, paymentswiftbic;
+    String shippingfirstname, shippinglastname, shippingaddress1, shippingaddress2, shippingcity, shippingpostcode, shippingcountry, paymentbankname, paymentcurrency, paymentiban, paymentswiftbic;
     // Date pikker date Convert To time Millissecund
     long datemillis;
     // Invoice no
     String Invoiceno = "";
-    //    int invoicenovalue;
+    int invoicenovalue;
     // Company logo path
     String companylogopath = "", Subtotalamount = "";
-    String taxtypeclusive = "", taxtype = "", taxtrateamt = "" , taxID = "";
-//    int selectedItemOfMySpinner;
+    String taxtypeclusive = "", taxtype = "", taxtrateamt = "", taxID = "";
+    int selectedItemOfMySpinner;
     // customer information
-
+    String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
     String Selectedcompanyname, taxrname;
-    //
-    String companycolor = "#ffffff";
-    String paypal_emailstr = "";
-    //web View For PDF FILE
-    WebView webViewpdffile;
-    WebView invoiceweb;
+    //    int newinvoice_count;
     private AVLoadingIndicatorView avi;
     private SignaturePad signaturePad;
     private Button btnclear1;
     private Button btnsave;
+    //Radio Group button Seelect
+    private RadioGroup radioGroup;
     // multiple image attachemnt
-    private List<Uri> selectedUriList;
+    private List<Uri> selectedUriList = new ArrayList<>();
     //  ArrayList<String> attchmentimage=new ArrayList<>();
     private Disposable multiImageDisposable;
     private ViewGroup mSelectedImagesContainer;
     private RequestManager requestManager;
 
-    public Fragment_Create_PO() {
-        // Required empty public constructor
-    }
+    WebView invoiceweb;
 
-    private static void hideKeyboard(FragmentActivity activity, View view) {
 
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
+    StringBuilder stringBuilderBillTo = new StringBuilder();
+    StringBuilder stringBuilderShipTo = new StringBuilder();
 
-    public static void verifyStroagePermissions(Activity activity) {
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSION_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
-    }
+//    String templateSelect = "0";
+//    String colorCode = "#ffffff";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        setContentView(R.layout.editpoactivity);
+        Constant.toolbar(EditPOActivity.this, "Edit PO");
+        invoiceweb = findViewById(R.id.invoiceweb);
 
-        pref.SavePref(getActivity());
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        View view = inflater.inflate(R.layout.fragment_create_po, container, false);
-
-        invoiceweb = view.findViewById(R.id.invoiceweb);
+        apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
+        invoiceId = getIntent().getStringExtra("invoiceID");
+        if (invoiceId != null) {
+            Log.e("invoiceId", invoiceId);
+        }
 
 
-        selectcompany = view.findViewById(R.id.selectcompany);
-        avi = view.findViewById(R.id.avi);
-        invoicenumtxt = view.findViewById(R.id.invoicenumtxt);
-        invoicenum = view.findViewById(R.id.invoivenum);
-        duedatetxt = view.findViewById(R.id.duedatetxt);
-        duedate = view.findViewById(R.id.duedate);
-        invoicetotxt = view.findViewById(R.id.invoicetotxt);
-        invoicerecipnt = view.findViewById(R.id.invoicerecipnt);
 
-        itemstxtTemplate = view.findViewById(R.id.itemstxtTemplate);
 
-        itemstxt = view.findViewById(R.id.itemstxt);
-        subtotaltxt = view.findViewById(R.id.subtotaltxt);
-        subtotal = view.findViewById(R.id.subtotal);
-        discounttxt = view.findViewById(R.id.discounttxt);
-        discount = view.findViewById(R.id.discount);
-        txttax = view.findViewById(R.id.txttax);
-        tax = view.findViewById(R.id.tax);
-        additem = view.findViewById(R.id.additem);
-        createinvoice = view.findViewById(R.id.createinvoice);
-        options = view.findViewById(R.id.options);
-        productsRecycler = view.findViewById(R.id.productsRecycler);
-        txtcredit = view.findViewById(R.id.txtcredit);
-        txtdays = view.findViewById(R.id.txtdays);
-        txtreferenceno = view.findViewById(R.id.txtreferenceno);
-        edreferenceno = view.findViewById(R.id.edreferenceno);
-        txtduedate = view.findViewById(R.id.txtduedate);
-        edduedate = view.findViewById(R.id.edduedate);
-        grosstotal = view.findViewById(R.id.grosstotal);
-        txtgrossamount = view.findViewById(R.id.txtgrossamount);
-        txtfreight = view.findViewById(R.id.txtfreight);
-        freight = view.findViewById(R.id.freight);
-        txtnetamount = view.findViewById(R.id.txtnetamount);
-        netamount = view.findViewById(R.id.netamount);
-        txtpaidamount = view.findViewById(R.id.txtpaidamount);
-        paidamount = view.findViewById(R.id.paidamount);
-        txtbalance = view.findViewById(R.id.txtbalance);
-        balance = view.findViewById(R.id.balance);
-        s_invoice = view.findViewById(R.id.s_invoice);
-        s_receiver = view.findViewById(R.id.s_receiver);
-        c_stamp = view.findViewById(R.id.c_stamp);
-        ednotes = view.findViewById(R.id.ednotes);
-//        selectcompany = view.findViewById(R.id.selectcompany);
-        selectwarehouse = view.findViewById(R.id.selectwarehouse);
-        addservice = view.findViewById(R.id.addservice);
-        imgsigsuccess = view.findViewById(R.id.imgsigsuccess);
-        imgrecsuccess = view.findViewById(R.id.imgrecsuccess);
 
-        imgstampsuccess = view.findViewById(R.id.imgstampsuccess);
+//        invoice_count = getIntent().getStringExtra("invoice_count");
+//        if (invoice_count != null) {
+//            Log.e("invoice_count", invoice_count);
+//        }
 
-        attachmenttxtimg = view.findViewById(R.id.attachmenttxtimg);
-        attachmenttxt = view.findViewById(R.id.attachmenttxt);
-        webViewpdffile = view.findViewById(R.id.webViewpdffile);
+//        templateSelect = getIntent().getStringExtra("templateSelect");
+//        colorCode = getIntent().getStringExtra("colorCode");
+
+//        Log.e(TAG, "selectedTemplate "+templateSelect);
+//        Log.e(TAG, "colorCode "+colorCode);
+
+        //newinvoice_count = Integer.parseInt(invoice_count) + 1;
+        avi = findViewById(R.id.avi);
+        invoicenumtxt = findViewById(R.id.invoicenumtxt);
+        invoicenum = findViewById(R.id.invoivenum);
+        duedatetxt = findViewById(R.id.duedatetxt);
+        duedate = findViewById(R.id.duedate);
+        invoicetotxt = findViewById(R.id.invoicetotxt);
+        invoicerecipnt = findViewById(R.id.invoicerecipnt);
+        itemstxt = findViewById(R.id.itemstxt);
+        subtotaltxt = findViewById(R.id.subtotaltxt);
+        subtotal = findViewById(R.id.subtotal);
+        discounttxt = findViewById(R.id.discounttxt);
+        discount = findViewById(R.id.discount);
+        txttax = findViewById(R.id.txttax);
+        tax = findViewById(R.id.tax);
+        additem = findViewById(R.id.additem);
+        createinvoice = findViewById(R.id.createinvoice);
+        options = findViewById(R.id.options);
+        productsRecycler = findViewById(R.id.productsRecycler);
+        txtcredit = findViewById(R.id.txtcredit);
+        txtdays = findViewById(R.id.txtdays);
+        txtreferenceno = findViewById(R.id.txtreferenceno);
+        edreferenceno = findViewById(R.id.edreferenceno);
+        txtduedate = findViewById(R.id.txtduedate);
+        edduedate = findViewById(R.id.edduedate);
+        grosstotal = findViewById(R.id.grosstotal);
+        txtgrossamount = findViewById(R.id.txtgrossamount);
+        txtfreight = findViewById(R.id.txtfreight);
+        freight = findViewById(R.id.freight);
+        txtnetamount = findViewById(R.id.txtnetamount);
+        netamount = findViewById(R.id.netamount);
+        txtpaidamount = findViewById(R.id.txtpaidamount);
+        paidamount = findViewById(R.id.paidamount);
+        txtbalance = findViewById(R.id.txtbalance);
+        balance = findViewById(R.id.balance);
+        s_invoice = findViewById(R.id.s_invoice);
+        s_receiver = findViewById(R.id.s_receiver);
+        c_stamp = findViewById(R.id.c_stamp);
+        ednotes = findViewById(R.id.ednotes);
+        selectcompany = findViewById(R.id.selectcompany);
+        selectwarehouse = findViewById(R.id.selectwarehouse);
+        addservice = findViewById(R.id.addservice);
+        imgsigsuccess = findViewById(R.id.imgsigsuccess);
+        imgrecsuccess = findViewById(R.id.imgrecsuccess);
+
+        imgstampsuccess = findViewById(R.id.imgstampsuccess);
+
+        attachmenttxtimg = findViewById(R.id.attachmenttxtimg);
+        attachmenttxt = findViewById(R.id.attachmenttxt);
+
+        itemstxtTemplate = findViewById(R.id.itemstxtTemplate);
+
+
+
+
         myCalendar = Calendar.getInstance();
 
-        verifyStroagePermissions(getActivity());
+        verifyStroagePermissions(this);
 
-        requestManager = Glide.with(getContext());
-        mCompressor = new FileCompressor(getActivity());
-
-
-        invoicenum.setEnabled(false);
-
-
-
+        requestManager = Glide.with(this);
+        mCompressor = new FileCompressor(this);
 
 
         s_invoice.setOnClickListener(new View.OnClickListener() {
@@ -424,14 +447,15 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             }
         });
 
-        bottomSheetDialog = new BottomSheetDialog(getActivity());
-        bottomSheetDialog2 = new BottomSheetDialog(getActivity());
-        bottomSheetDialog3 = new BottomSheetDialog(getActivity());
+        bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog2 = new BottomSheetDialog(this);
+        bottomSheetDialog3 = new BottomSheetDialog(this);
         setFonts();
         setListeners();
 
-        products_adapter = new Products_Adapter(getActivity(), product_bottom, tempList, this::onClick, tempQuantity, producprice);
-        productsRecycler.setAdapter(products_adapter);
+
+        products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
+//        productsRecycler.setAdapter(products_adapter);
 
         mlistener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -439,6 +463,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 myCalendar.set(Calendar.YEAR, i);
                 myCalendar.set(Calendar.MONTH, i1);
                 myCalendar.set(Calendar.DAY_OF_MONTH, i2);
+
 
                 updateLabel();
                 Log.e("Dateeee", i + " " + i1 + " " + i2);
@@ -460,6 +485,19 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         };
 
 
+        itemstxtTemplate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG, "companycolor: "+companycolor);
+//                defaultClick = 1;
+                Intent intent = new Intent(EditPOActivity.this, ChooseTemplate.class);
+                intent.putExtra("companycolor", companycolor);
+                // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivityForResult(intent, 121);
+            }
+        });
+
+
         duedate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -475,91 +513,522 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             }
         });
 
-
-        itemstxtTemplate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e(TAG, "companycolor: "+companycolor);
-//                defaultClick = 1;
-                Intent intent = new Intent(getActivity(), ChooseTemplate.class);
-                intent.putExtra("companycolor", companycolor);
-                //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                getActivity().startActivityForResult(intent, 120);
-            }
-        });
-
         //for duedate
-        datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener,
+        datePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener,
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
 
         //edduedate
-        datePickerDialog2 = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener2,
+        datePickerDialog2 = new DatePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener2,
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
 
-        //   companyget();
-
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
+//        companyget();
+        getinvoicedata();
 
-        return view;
+
 
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Fragment_Create_PO.hideKeyboard(getActivity(), getView());
+
+    private void getinvoicedata() {
+
+        String token = Constant.GetSharedPreferences(EditPOActivity.this, Constant.ACCESS_TOKEN);
+        Call<POResponseDto> resposresult = apiInterface.getPODetail(token, invoiceId);
+        resposresult.enqueue(new Callback<POResponseDto>() {
+            @Override
+            public void onResponse(Call<POResponseDto> call, retrofit2.Response<POResponseDto> response) {
+
+                company_image_pathdto = response.body().getData().getCompanyImagePath();
+                customer_image_pathdto = response.body().getData().getSupplier_image_path();
+                invoiceshre_linkdto = response.body().getData().getPurchase_order_share_link();
+                invoice_image_pathdto = response.body().getData().getPurchase_order_image_path();
+                // customer data get
+                PODto data = response.body().getData();
+
+
+                List<Invoice_image> invoice_images = data.getPurchase_image();
+
+
+                if(invoice_images != null){
+                    for(int i = 0; i < invoice_images.size() ; i++){
+                        String signatureofreceiverpath = invoice_image_pathdto + invoice_images.get(i).getImage();
+                        new DownloadInvoiceImages().execute(signatureofreceiverpath);
+                        attachmenttxtimg.setVisibility(View.VISIBLE);
+                    }
+                    Log.e(TAG, "cAAccccc "+invoice_images.size());
+//                    Log.e(TAG, "cccccc "+invoice_images.get(0).getImage());
+
+                }
+
+
+                POSupplierDto invoiceCustomerDto = data.getPoDtoPO().getSupplier();
+                Log.e(TAG, "invoiceCustomerDtoXX "+invoiceCustomerDto);
+
+                if(invoiceCustomerDto != null){
+                    sltcustonernamedto = invoiceCustomerDto.getSupplier_name();
+                    Log.e(TAG, "sltcustonernamedto"+sltcustonernamedto);
+                    customer_name = sltcustonernamedto;
+                    invoicerecipnt.setText(sltcustonernamedto);
+                    sltcustomer_addressdto = invoiceCustomerDto.getAddress();
+                    sltcustomer_phone_numberdto = invoiceCustomerDto.getPhone_number();
+                    sltcustomer_websitedto = invoiceCustomerDto.getWebsite();
+                    sltcustomer_emaildto = invoiceCustomerDto.getEmail();
+                    sltcustomer_contactdto = invoiceCustomerDto.getSupplier_name();
+                    customerDtoContactName = invoiceCustomerDto.getContact_name();
+                    customer_name = sltcustomer_contactdto;
+                }
+
+
+
+
+
+//                shippingfirstname = invoiceCustomerDto.getShippingFirstname();
+//                shippinglastname = invoiceCustomerDto.getShippingLastname();
+//                shippingaddress1 = invoiceCustomerDto.getShippingAddress1();
+//                shippingaddress2 = invoiceCustomerDto.getShippingAddress2();
+//                shipping_city = invoiceCustomerDto.getShippingCity();
+//                shippingaddress2 = invoiceCustomerDto.getShippingCity();
+//                shippingcountry = invoiceCustomerDto.getShippingCountry();
+//                shippingpostcode = (String) invoiceCustomerDto.getShippingPostcode();
+//                shipping_zonedto = (String) invoiceCustomerDto.getShippingZone();
+
+
+                // Company Detai
+                InvoiceCompanyDto companyDto = data.getPoDtoPO().getCompany();
+                Selectedcompanyname = companyDto.getName();
+                company_address = companyDto.getAddress();
+                company_contact = companyDto.getPhoneNumber();
+                company_website = companyDto.getWebsite();
+                company_email = companyDto.getPaypalEmail();
+                companylogopath = companyDto.getLogo();
+
+                Log.e(TAG, "companylogopath"+ companylogopath);
+                // new DownloadsImagefromweblogoCom().execute(companylogopathdtodt);
+
+
+                selectedCompanyId = companyDto.getCompanyId();
+                Log.e("selectedCompanyId", selectedCompanyId);
+
+                // all mehodh get information-------
+                warehouse_list(selectedCompanyId);
+                customer_list(selectedCompanyId);
+                CompanyInformation(selectedCompanyId);
+                productget(selectedCompanyId);
+                serviceget(selectedCompanyId);
+
+
+                //invoice Data
+                invoiceDtoInvoice = data.getPoDtoPO();
+
+                Gson gson = new Gson();
+                String json2 = gson.toJson(invoiceDtoInvoice);
+
+                Log.e(TAG, "jsonAA "+json2);
+
+                paid_amount_date = invoiceDtoInvoice.getPaidAmountDate();
+
+                Log.e(TAG, "paid_amount_date "+paid_amount_date);
+
+                invoicenumberdto = invoiceDtoInvoice.getPurchase_order_no();
+                // where House id
+                selectwarehouseId = invoiceDtoInvoice.getWearhouseId();
+
+
+
+                Log.e("Selected_house",selectwarehouseId+"  ");
+
+                datedto = invoiceDtoInvoice.getOrder_date();
+                due_datedto = invoiceDtoInvoice.getDueDate();
+                duedate.setText(datedto);
+                invoice_date = datedto;
+                invoice_due_date = due_datedto;
+                edduedate.setText(due_datedto);
+
+
+
+                //  invoicenum.setText("Inv #" + newinvoice_count);
+
+
+
+                invoicenum.setClickable(false);
+
+//                selectedTemplate = Integer.parseInt(invoiceDtoInvoice.getTemplate_type());
+                if(selectedTemplate != 0){
+                    itemstxtTemplate.setText("Template "+selectedTemplate);
+                }
+                strnotes = invoiceDtoInvoice.getNotes();
+                ednotes.setText(strnotes);
+
+                credit_termsdto = invoiceDtoInvoice.getCreditTerms();
+                credit_terms = credit_termsdto;
+                invoicecompanyiddto = invoiceDtoInvoice.getCompanyId();
+                Log.e("invoicecompanyiddto", invoicecompanyiddto);
+                customer_id = invoiceDtoInvoice.getCustomerId();
+//                Log.e(TAG, "customer_idA"+customer_id);
+                paymentmode = invoiceDtoInvoice.getPaidAmountPaymentMethod();
+
+                txtdays.setText(credit_termsdto);
+                ref_nodto = invoiceDtoInvoice.getRefNo();
+                ref_no = ref_nodto;
+                edreferenceno.setText(ref_nodto);
+
+                payment_swift_bic = invoiceDtoInvoice.getPaymentSwiftBic();
+                payment_currency = invoiceDtoInvoice.getPaymentCurrency();
+                payment_iban = invoiceDtoInvoice.getPaymentIban();
+                paid_amount_payment_methoddto = invoiceDtoInvoice.getPaidAmountPaymentMethod();
+
+                currency_codedto = invoiceDtoInvoice.getCurrencySymbol();
+                Log.e("currency_codhjkkjhkje", currency_codedto);
+                //data set in calculate amount.
+
+
+                company_stampdto = invoiceDtoInvoice.getCompanyStamp();
+                //  Down load image From Web Data
+                String companystempurlpath = invoice_image_pathdto + company_stampdto;
+                Log.e(TAG, "invoice_image_pathdto"+ invoice_image_pathdto);
+                Log.e(TAG, "company_stampdto"+ company_stampdto);
+
+                if (company_stampdto.equals("")) {
+                    Log.e(TAG, "company_stampdto1111"+ company_stampdto);
+                } else {
+                    Log.e(TAG, "company_stampdto2222"+ company_stampdto);
+                    new DownloadCompanystempweb().execute(companystempurlpath);
+                    imgstampsuccess.setVisibility(View.VISIBLE);
+                }
+                signature_of_receiverdto = invoiceDtoInvoice.getSignatureOfReceiver();
+                // down load image from web signature image
+
+
+
+                if (signature_of_receiverdto.equals("")) {
+
+                } else {
+                    s_r = "2";
+                    String signatureofreceiverpath = invoice_image_pathdto + signature_of_receiverdto;
+                    Log.e(TAG, "signatureReceiverPathAA "+signatureofreceiverpath);
+                    new Downloadsignaturereceiverweb().execute(signatureofreceiverpath);
+                    imgrecsuccess.setVisibility(View.VISIBLE);
+                }
+                signature_of_issuerdto = invoiceDtoInvoice.getSignatureOfMaker();
+                // signature of issueceiver from web data
+
+
+                if (signature_of_issuerdto.equals("")) {
+                } else {
+                    s_r = "1";
+                    String signatureofreceiverpath = invoice_image_pathdto + signature_of_issuerdto;
+                    Log.e(TAG, "signatureIssuerPathAA "+signatureofreceiverpath);
+                    new Downloadsignatureissueweb().execute(signatureofreceiverpath);
+                    imgsigsuccess.setVisibility(View.VISIBLE);
+                }
+
+
+
+
+//                shippingfirstname = invoiceDtoInvoice.getShippingFirstname();
+//                shippinglastname = invoiceDtoInvoice.getShippingLastname();
+//                shippingaddress1 = invoiceDtoInvoice.getShippingAddress1();
+//                shippingaddress2 = invoiceDtoInvoice.getShippingAddress2();
+//                shipping_city = invoiceDtoInvoice.getShippingCity();
+//                shippingaddress2 = invoiceDtoInvoice.getShippingCity();
+//                shippingcountry = invoiceDtoInvoice.getShippingCountry();
+//                shippingpostcode = (String) invoiceDtoInvoice.getShippingPostcode();
+//                shipping_zonedto = (String) invoiceDtoInvoice.getShippingZone();
+
+//                Log.e("shippingfirstname", shippingfirstname);
+
+                // Add Custmoer detail
+
+
+                Customer_list selectcsto = new Customer_list();
+                selectcsto.setCustomer_name(sltcustonernamedto);
+                selectcsto.setCustomer_address(sltcustomer_addressdto);
+                selectcsto.setCustomer_contact_person(customerDtoContactName);
+                selectcsto.setCustomer_phone(sltcustomer_phone_numberdto);
+                selectcsto.setCustomer_website(sltcustomer_websitedto);
+                selectcsto.setCustomer_email(sltcustomer_emaildto);
+
+//                selectcsto.setShipping_firstname(shippingfirstname);
+//                selectcsto.setShipping_lastname(shippinglastname);
+//                selectcsto.setShipping_address_1(shippingaddress1);
+//                selectcsto.setShipping_address_2(shippingaddress2);
+////                Log.e("shippingfirstname", shippingfirstname);
+////                Log.e("shippinglastname", shippinglastname);
+//                selectcsto.setShipping_city(shipping_city);
+//                selectcsto.setShipping_country(shippingcountry);
+//                selectcsto.setShipping_postcode(shippingpostcode);
+//                selectcsto.setShipping_zone(shipping_zonedto);
+
+
+                selected.add(selectcsto);
+
+                // calculate amount data
+
+                if(invoiceDtoInvoice.getTotals() != null){
+                    grosamontdto = new ArrayList<InvoiceTotalsItemDto>(invoiceDtoInvoice.getTotals());
+                }
+
+                invoice_imageDto = new ArrayList<Invoice_image>(data.getPurchase_image());
+                Log.e(TAG, "product:::: "+invoice_imageDto.size());
+
+
+                productsItemDtosdto = new ArrayList<ProductsItemDto>(invoiceDtoInvoice.getProducts());
+                if (productsItemDtosdto.size() > 0) {
+                    for (int i = 0; i < productsItemDtosdto.size(); i++) {
+                        Product_list product_list = new Product_list();
+                        product_list.setProduct_name(productsItemDtosdto.get(i).getName());
+                        product_list.setProduct_id(productsItemDtosdto.get(i).getProductId());
+                        product_list.setCurrency_code(currency_codedto);
+
+                        product_list.setProduct_description(productsItemDtosdto.get(i).getDescription());
+
+                        product_list.setProduct_measurement_unit(productsItemDtosdto.get(i).getMeasurementUnit());
+
+                        product_list.setProduct_price(productsItemDtosdto.get(i).getTotal());
+                        Log.e("price", productsItemDtosdto.get(i).getPrice());
+                        Log.e("Quentity", productsItemDtosdto.get(i).getQuantity());
+                        producprice.add(productsItemDtosdto.get(i).getPrice());
+                        tempList.add(product_list);
+
+                        tempQuantity.add(productsItemDtosdto.get(i).getQuantity());
+                        total_price = total_price + (Double.parseDouble(productsItemDtosdto.get(i).getPrice()) * Double.parseDouble(productsItemDtosdto.get(i).getQuantity()));
+                        totalpriceproduct.add(String.valueOf(total_price));
+
+                        calculateTotalAmount(total_price);
+
+                        Log.e("total_price", String.valueOf(total_price));
+
+                    }
+
+                }
+                //    products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
+
+                //  products_adapter.update(product_bottom, tempList, tempQuantity, producprice);
+
+                productsRecycler.setAdapter(products_adapter);
+
+                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
+
+                int numsize = grosamontdto.size();
+                for (int i = 0; i < numsize; i++) {
+                    listobj = grosamontdto.get(i);
+                    String title = listobj.getTitle();
+                    String code = listobj.getCode();
+
+                    if (title.equals("Gross Amount")) {
+                        Grossamount_strdto = listobj.getValue();
+
+                        Double Grossamount_strdtodbl = Double.parseDouble(Grossamount_strdto);
+
+
+                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                            grosstotal.setText(formatter.format(Grossamount_strdtodbl));
+                        } else {
+                            grosstotal.setText(formatter.format(Grossamount_strdtodbl) + currency_codedto);
+                        }
+                    } else if (title.equals("Sub Total")) {
+
+                        Subtotalamountdto = listobj.getValue();
+
+                        Double Subtotalamountdbl = Double.parseDouble(Subtotalamountdto);
+                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                            subtotal.setText(formatter.format(Subtotalamountdbl));
+                        } else {
+                            subtotal.setText(formatter.format(Subtotalamountdbl) + currency_codedto);
+                        }
+
+                    } else if (title.equals("Grand Total")) {
+
+                        netamountvaluedto = listobj.getValue();
+                        Double netamountvaludbl = Double.parseDouble(netamountvaluedto);
+
+
+                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                            netamount.setText(formatter.format(netamountvaludbl));
+                        } else {
+                            netamount.setText(formatter.format(netamountvaludbl) + currency_codedto);
+                        }
+                    } else if (title.equals("Paid Amount")) {
+
+                        strpaid_amountdto = listobj.getValue();
+                        strpaid_amount = strpaid_amountdto;
+
+                        Double strpaid_amountdbl = Double.parseDouble(strpaid_amountdto);
+
+                        Log.e(TAG , "strpaid_amountdbl "+strpaid_amountdbl);
+
+
+                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                            paidamount.setText(formatter.format(strpaid_amountdbl));
+                        } else {
+                            paidamount.setText(formatter.format(strpaid_amountdbl) + currency_codedto);
+                        }
+
+                    } else if (title.equals("Remaining Balance")) {
+
+                        Blanceamountstrdto = listobj.getValue();
+                        Double Blanceamountstdbl = Double.parseDouble(Blanceamountstrdto);
+
+                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                            balance.setText(formatter.format(Blanceamountstdbl));
+                        } else {
+                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
+                        }
+
+
+//                        if(!title.equals("Paid Amount")) {
+//                            //  netamountvaluedto = listobj.getValue();
+//                            Double netamountvaludbl = Double.parseDouble(netamountvaluedto);
+//
+//                            Log.e(TAG , "netamountvaludbl "+netamountvaludbl);
+//
+//                            Blanceamountstrdto = listobj.getValue();
+//                            Double Blanceamountstdbl2 = Double.parseDouble(Blanceamountstrdto);
+//
+//                            Log.e(TAG , "Blanceamountstdbl2 "+Blanceamountstdbl2);
+//
+//
+//                            Double aDoubleBalance = netamountvaludbl - Blanceamountstdbl2;
+//
+//                            Log.e(TAG , "aDoubleBalance "+aDoubleBalance);
+//
+//
+//                            paidamount.setText(formatter.format(aDoubleBalance)+""+currency_codedto);
+//
+//
+//                        }
+
+                    }
+
+                    else if (title.equals("Discount")) {
+
+                        Discountamountstrdto = listobj.getValue();
+
+                        strdiscountvalue = listobj.getValue();
+
+
+                        // discount.setText(Utility.getRemoveDoubleMinus("-"+Discountamountstrdto) + cruncycode);
+
+                        discount.setText(""+Discountamountstrdto+currency_codedto);
+//                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
+//
+//                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+//                            balance.setText(formatter.format(Blanceamountstdbl));
+//                        } else {
+//                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
+//                        }
+
+                    }
+
+
+                    else if (code.equals("shipping")) {
+                        Shippingamountdto = listobj.getValue();
+                        freight.setText("+"+Shippingamountdto+currency_codedto);
+//                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
+//
+//                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+//                            balance.setText(formatter.format(Blanceamountstdbl));
+//                        } else {
+//                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
+//                        }
+
+                    }
+
+
+                    else if (code.equalsIgnoreCase("tax")) {
+//                        Shippingamountdto = listobj.getValue();
+//                        freight.setText(""+Shippingamountdto+currency_codedto);
+
+                        //tax = listobj.getValue();
+
+
+                        tax_type = listobj.getTax_type();
+                        value = listobj.getValue();
+
+                        txttax.setText(""+title);
+                        tax.setText(""+value+currency_codedto);
+
+                        taxrname = listobj.getTitle();
+
+                        taxtypeclusive = listobj.getTax_type();
+                        taxtrateamt = listobj.getRate();
+                        Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+                        Log.e(TAG, "taxtrateamt "+taxtrateamt);
+
+
+
+                        SelectedTaxlist student = new SelectedTaxlist();
+
+                        student.setTaxname(listobj.getTitle());
+                        student.setTaxrate(listobj.getRate());
+                        student.setTaxtype(tax_type);
+                        student.setTaxamount(value);
+
+                        selectedtaxt.add(student);
+
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<POResponseDto> call, Throwable t) {
+
+            }
+        });
+
     }
+
 
     private void setFonts() {
-        invoicenumtxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
-        invoicenum.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        duedatetxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
-        duedate.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        invoicetotxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
-        invoicerecipnt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        itemstxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-        subtotaltxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        subtotal.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        discounttxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        discount.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        txttax.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        tax.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        additem.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/Ubuntu-Regular.ttf"));
-        addservice.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/Ubuntu-Regular.ttf"));
-        createinvoice.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/Ubuntu-Medium.ttf"));
-        txtgrossamount.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        grosstotal.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        txtfreight.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        freight.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        txtnetamount.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        netamount.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        txtpaidamount.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        paidamount.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        txtbalance.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        balance.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        s_invoice.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
-        s_receiver.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
-        c_stamp.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
-        attachmenttxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
-        ednotes.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/Ubuntu-Regular.ttf"));
-
-        txtcredit.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
-        txtdays.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-
-        txtreferenceno.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
-        edreferenceno.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-
-        txtduedate.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
-        edduedate.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
+        invoicenumtxt.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+        invoicenum.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        duedatetxt.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+        duedate.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        invoicetotxt.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+        invoicerecipnt.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        itemstxt.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+        subtotaltxt.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        subtotal.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        discounttxt.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        discount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        txttax.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        tax.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        additem.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/Ubuntu-Regular.ttf"));
+        addservice.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/Ubuntu-Regular.ttf"));
+        createinvoice.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/Ubuntu-Medium.ttf"));
+        txtgrossamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        grosstotal.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        txtfreight.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        freight.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        txtnetamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        netamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        txtpaidamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        paidamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        txtbalance.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        balance.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        s_invoice.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
+        s_receiver.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
+        c_stamp.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
+        attachmenttxt.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
+        ednotes.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/Ubuntu-Regular.ttf"));
+        txtcredit.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+        txtdays.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        txtreferenceno.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+        edreferenceno.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+        txtduedate.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+        edduedate.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
 
 
     }
@@ -570,9 +1039,9 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             @Override
             public void onClick(View view) {
 
-                if (selectwarehouseId.equals("")) {
-                    Constant.ErrorToast(getActivity(), "Select Warehouse");
-
+                if (selectwarehouseId.equals(""))
+                {
+                    Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
                 } else {
                     createbottomsheet_products();
                     bottomSheetDialog.show();
@@ -586,9 +1055,9 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         addservice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 createbottomsheet_services();
                 bottomSheetDialog2.show();
+
             }
         });
 
@@ -607,6 +1076,8 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 bottomSheetDialog2.show();
             }
         });
+
+        options.setEnabled(false);
         options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -623,85 +1094,10 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             }
         });
 
-        //invoicenum.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-
-        invoicenum.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(invoicenum.getText().toString().length() > 0){
-
-                    // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-
-                    boolean gg = isNumeric(invoicenum.getText().toString());
-                    Log.e(TAG, "gggggg "+gg);
-
-                    boolean dd = isChar(invoicenum.getText().toString());
-                    Log.e(TAG, "dddddd "+dd);
-
-                    if(gg == false && dd == false){
-                        Log.e(TAG, "truee ");
-                        Boolean flag = Character.isDigit(invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1));
-                        Log.e(TAG, "cccccc "+flag);
-                        if(flag == true){
-                            String str = invoicenum.getText().toString();
-                            String cc = extractInt(str);
-                            if(cc.contains(" ")){
-                                String vv[] = cc.split(" ");
-                                Log.e(TAG , "extractInt "+vv[vv.length - 1]);
-                            }
-                            if(!cc.contains(" ")){
-                                Log.e(TAG , "extractInt2 "+cc);
-                            }
-                        }
-                    }else{
-                        Log.e(TAG, "falsee ");
-                    }
-                }
-
-
-            }
-        });
-
 
         createinvoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//
-//                invoice_no = invoicenumtxt.getText().toString();
-//                strnotes = ednotes.getText().toString();
-//                ref_no = edreferenceno.getText().toString();
-//
-//                strdiscountvalue = discount.getText().toString();
-//                strpaid_amount = paidamount.getText().toString();
-//
-//                invoice_date = duedate.getText().toString();
-//                invoice_due_date = edduedate.getText().toString();
-//                invoicetaxamount = tax.getText().toString();
-//
-//                if (multimgpath != null) {
-//                    for (int i = 0; i < multimgpath.size(); i++) {
-//                        File imgFile = new File(multimgpath.get(i));
-//                        // company_stampFileimage=imgFile;
-//                        multiple[i] = imgFile;
-//
-//
-//                    }
-//                }
-//
-//                createinvoicewithdetail();
-
-                createinvoice.setEnabled(false);
 
 
                 invoice_no = invoicenumtxt.getText().toString();
@@ -716,16 +1112,16 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 invoicetaxamount = tax.getText().toString();
 
 
-                if (multimgpath != null) {
-                    Log.e(TAG, "multimgpathAA "+multimgpath.size());
+
+                if (multimgpath.size() > 0) {
                     for (int i = 0; i < multimgpath.size(); i++) {
                         File imgFile = new File(multimgpath.get(i));
                         // company_stampFileimage=imgFile;
                         multiple[i] = imgFile;
 
+
                     }
                 }
-
                 viewPDF();
             }
         });
@@ -757,9 +1153,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         c_stamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                requestStoragePermission();
+                requestStoragePermission(false);
 
             }
         });
@@ -774,99 +1168,37 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         });
 
 
-
-        selectcompany.setOnClickListener(new View.OnClickListener() {
+        selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
-            public void onClick(View v) {
-                RecyclerView mRecyclerView;
-                MenuAdapter mAdapter;
+            public void onItemSelected(int position, String itemAtPosition) {
+                selectedCompanyId = cids.get(position);
 
-                final Dialog mybuilder = new Dialog(getActivity());
-                mybuilder.setContentView(R.layout.select_company_dialog);
 
-                TextView txtAddCompany = (TextView) mybuilder.findViewById(R.id.txtheadvalue);
-                txtAddCompany.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(),Companies_Activity.class);
-                        getActivity().startActivityForResult(intent, 200);
-                        mybuilder.dismiss();
-                    }
-                });
+                selectedItemOfMySpinner = selectcompany.getSelectedItemPosition();
 
-                TextView txtcancelvalue = (TextView) mybuilder.findViewById(R.id.txtcancelvalue);
-                txtcancelvalue.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mybuilder.dismiss();
-                    }
-                });
-                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
-//                mRecyclerView.setHasFixedSize(true);
-
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-
-                mAdapter = new MenuAdapter(cnames, cids , mybuilder);
-                mRecyclerView.setAdapter(mAdapter);
-
-                mybuilder.show();
-                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-                Window window = mybuilder.getWindow();
-                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                window.setBackgroundDrawableResource(R.color.transparent);
+                Log.e("selectedCompany", selectedCompanyId);
+                warehouse_list(selectedCompanyId);
+                productget(selectedCompanyId);
+                serviceget(selectedCompanyId);
+                customer_list(selectedCompanyId);
+                CompanyInformation(selectedCompanyId);
 
             }
         });
-
-
-//        selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
-//            @Override
-//            public void onItemSelected(int position, String itemAtPosition) {
-//                selectedCompanyId = cids.get(position);
-//                Log.e(TAG , "selectedCompany" +selectedCompanyId);
-//
-////                defaultClick = 0;
-//
-//                if(selectedCompanyId.equalsIgnoreCase("0")){
-//                    if(selectComapanyCount == 0){
-//                        selectComapanyCount = 1;
-//
-////                        if(defaultClick == 0){
-//                            Intent intent = new Intent(getActivity(),Companies_Activity.class);
-//                           // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                            getActivity().startActivityForResult(intent, 200);
-////                        }
-//
-//                    }else{
-//
-//                    }
-//
-//                }else{
-//                    selectComapanyCount = 0;
-//                  //  selectedItemOfMySpinner = selectcompany.getSelectedItemPosition();
-//
-//                    warehouse_list(selectedCompanyId);
-//
-//                    serviceget(selectedCompanyId);
-//                    customer_list(selectedCompanyId);
-//                    CompanyInformation(selectedCompanyId);
-//
-//                }
-//
-//            }
-//        });
-
-
 
         selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
             public void onItemSelected(int position, String itemAtPosition) {
+
                 selectwarehouseId = wids.get(position);
-                Log.e("selectwarehouseId", selectwarehouseId);
-                productget(selectedCompanyId);
+                Log.e(TAG, "selectwarehouseIdAA "+ selectwarehouseId);
+
+                warehousePosition = position;
 
             }
         });
+
+
 
         invoicerecipnt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -879,7 +1211,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 Moving moving = new Moving();
                 customer_name = moving.getCus_name();
 
-
                 //   Log.e("reccustomer",customer_name);
             }
         });
@@ -890,7 +1221,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     private void multiimagepicker() {
 
 
-        multiImageDisposable = TedRxBottomPicker.with(getActivity())
+        multiImageDisposable = TedRxBottomPicker.with(this)
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
                 .showTitle(false)
@@ -911,14 +1242,14 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
     private void showUriList(List<Uri> uriList) {
 
-        Log.e(TAG, "uriListA "+uriList.size());
-
         attchmentimage.clear();
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
             attachmenttxtimg.setVisibility(View.VISIBLE);
         }
         int sizen = attchmentimage.size();
+
+        attachmenttxtimg.setVisibility(View.VISIBLE);
         String attchedmentimagepath;
         if (attchmentimage != null) {
             for (int i = 0; i < attchmentimage.size(); i++) {
@@ -938,67 +1269,68 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
         }
 
-        Log.e(TAG, "uri Image "+ String.valueOf(attchmentimage));
+        Log.e("uri Image ", String.valueOf(attchmentimage));
 
     }
 
     private void createinvoicewithdetail(File file) {
+
+
+
+        if(strpaid_amount.equalsIgnoreCase("0")){
+            strpaid_amount = "";
+        }else{
+            strpaid_amount = Utility.getReplaceCurrency(strpaid_amount, cruncycode);
+        }
+        Log.e(TAG, "strpaid_amountA "+strpaid_amount);
+
         avi.smoothToShow();
-
-        Log.e(TAG , "invoicenovalue::"+getInvoiceValue(invoicenum.getText().toString()));
-
-        if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
-            Constant.ErrorToast(getActivity(), "Select a Company");
-            createinvoice.setEnabled(true);
+        if (customer_name.equals("")) {
+            Constant.ErrorToast(EditPOActivity.this, "Select A Customer");
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
-            Constant.ErrorToast(getActivity(), "Select Valid PO No");
-            createinvoice.setEnabled(true);
+            Constant.ErrorToast(EditPOActivity.this, "Select Valid Invoice No");
+
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select PO Date");
-            createinvoice.setEnabled(true);
-        } else if (customer_name.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select A Customer");
-            createinvoice.setEnabled(true);
-        } else if (credit_terms.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select Credit Term");
-            createinvoice.setEnabled(true);
-//        } else if (ref_no.equals("")) {
-//            Constant.ErrorToast(getActivity(), "Select Ref number");
+            Constant.ErrorToast(EditPOActivity.this, "Select Invoice Date");
+
+        } else if (selectedCompanyId.equals("")) {
+            Constant.ErrorToast(EditPOActivity.this, "Select a Company");
 
         } else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select Warehouse");
-            createinvoice.setEnabled(true);
-        } else if (producprice.isEmpty()) {
-            Constant.ErrorToast(getActivity(), "Select product First");
-            bottomSheetDialog2.dismiss();
-            createinvoice.setEnabled(true);
-        } else {
+            Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
 
-            Log.e(TAG, "Selectedcustomer_id "+Selectedcustomer_id);
-            final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        } else if (credit_terms.equals("")) {
+            Constant.ErrorToast(EditPOActivity.this, "Select Credit Term");
+
+        }  else {
+
+            final ProgressDialog progressDialog = new ProgressDialog(EditPOActivity.this);
             progressDialog.setMessage("Please wait");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
-            RequestParams params = new RequestParams();
-            params.add("company_id", selectedCompanyId);
 
-            params.add("warehouse_id", selectwarehouseId);
+            RequestParams params = new RequestParams();
+
+            Log.e(TAG, "freight_cost"+freight_cost);
+
+            params.add("purchase_order_id", invoiceId);
+            params.add("purchase_order_no", invoicenumberdto);
+            params.add("new_purchase_order_no", invoicenum.getText().toString());
+
+            params.add("company_id", selectedCompanyId);
+            params.add("wearhouse_id", selectwarehouseId);
             params.add("order_date", invoice_date);
             params.add("due_date", invoice_due_date);
-
+            params.add("customer_id", customer_id);
+            Log.e(TAG, "customer_idBB"+customer_id);
             params.add("supplier_id", "182");
-            params.add("customer_id", Selectedcustomer_id);
-//            params.add("invoice_no", String.valueOf(invoicenovalue));
-            params.add("purchase_order_no", invoicenum.getText().toString());
             params.add("notes", strnotes);
             params.add("ref_no", ref_no);
             params.add("paid_amount_payment_method", paymentmode);
             params.add("credit_terms", credit_terms);
-            params.add("freight_cost", freight_cost);
+            params.add("freight_cost", Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
             params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
-
-            Log.e(TAG, "strpaid_amountAA "+paidamountstr);
-            params.add("paid_amount", paidamountstr);
+            params.add("paid_amount", strpaid_amount);
             params.add("paid_amount_date", Paymentamountdate);
             params.add("shipping_firstname", shippingfirstname);
             params.add("shipping_lastname", shippinglastname);
@@ -1011,7 +1343,8 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             params.add("payment_currency", payment_currency);
             params.add("payment_iban", payment_iban);
             params.add("payment_swift_bic", payment_swift_bic);
-            params.add("logo", "logofile");
+
+
             params.add("template_type", ""+selectedTemplate);
 
             if (file!=null){
@@ -1022,7 +1355,14 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 }
             }
 
-            Log.e(TAG, "posting_params"+params.toString());
+            if (company_logoFileimage != null) {
+                try {
+                    params.put("logo", company_logoFileimage);
+                    //  Log.e("company stamp", company_stamp);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
 
             if (company_stampFileimage != null) {
                 try {
@@ -1032,8 +1372,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     e.printStackTrace();
                 }
             }
-
-
             if (signatureofinvoicemaker != null) {
                 try {
                     params.put("signature_of_maker", signatureofinvoicemaker);
@@ -1051,7 +1389,14 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     e.printStackTrace();
                 }
             }
-
+            if (company_logoFileimage != null) {
+                try {
+                    params.put("logo", company_logoFileimage);
+                    // Log.e("signature_of_issuer", signaturinvoicereceiver.toString());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
 
             for (int i = 0; i < tempList.size(); i++) {
 
@@ -1060,114 +1405,94 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 params.add("product[" + i + "]" + "[price]", producprice.get(i));
                 params.add("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
 
-                Log.e("tempListpid",tempList.get(i).getProduct_id());
-                Log.e("tempListprice", producprice.get(i));
-                Log.e("tempQuantity",tempQuantity.get(i));
-
-
-
-                Log.e("productdetails",params.toString());
-
 
             }
 
 
+
             Log.e(TAG, "selectedtaxtAAA "+selectedtaxt.size());
-
-            //default = "" , off = Exclisive , on = Inclisive,
-            Log.e(TAG, "taxtypeclusiveAAA "+taxtypeclusive);
-
 
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
-                    if(selectedtaxt.get(i).getTaxtype().equalsIgnoreCase("p")){
-                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                        // params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
-                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
-                    }else{
-                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
-                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+
+                    taxtypeclusive = selectedtaxt.get(i).getTaxtype();
+
+                    Log.e(TAG, "selectedtaxtAAA1 "+selectedtaxt.get(i).getTaxtype());
+                    Log.e(TAG, "selectedtaxtAAA2 "+selectedtaxt.get(i).getTaxrate());
+                    Log.e(TAG, "selectedtaxtAAA3 "+selectedtaxt.get(i).getTaxname());
+                    Log.e(TAG, "selectedtaxtAAA4 "+invoicetaxamount);
+                    Log.e(TAG, "selectedtaxtAAA5 "+taxtypeclusive);
+
+
+
+                    params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                    params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                    params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+                    // params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+
+                    if(selectedtaxt.get(i).getTaxname().length() > 0){
+                        if(selectedtaxt.get(i).getTaxname().contains(" ")){
+                            String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                            params.add("tax[" + i + "]" + "[title]", firstTax);
+                        }
                     }
+
                 }
             } else {
 
             }
 
 
+            Log.e(TAG, "selectedUriListAA "+selectedUriList.size());
+
+
 
             if (multiple.length > 0) {
-
-//                try {
-//                    params.put("images[]", multiple[0]);
-//                    params.put("images[]", multiple[1]);
-//                }catch (Exception e) {
-//                        e.printStackTrace();
-//                }
-
-                // params.put("company_stamp", company_stampFileimage);
-
-
-//                ArrayList<File> files = new ArrayList<>();
-//                files.add(new File("/storage/emulated/0/Pictures/AndroidDvlpr/1620578182066.png"));
-//                files.add(new File("/storage/emulated/0/Pictures/AndroidDvlpr/1620578182066.png"));
-//                files.add(new File("/storage/emulated/0/Pictures/AndroidDvlpr/1620578182066.png"));
-//
-////                for (int k = 0; k < 5; k++) {
-//                    try {
-//                        params.put("images[0]", new File("/storage/emulated/0/Pictures/AndroidDvlpr/1620578182066.png"));
-//                        params.put("images[1]", new File("/storage/emulated/0/Pictures/AndroidDvlpr/1620578182066.png"));
-//                    }catch (Exception e){
-//                        Log.e(TAG, "getMessage[k] "+e.getMessage());
-//                    }
-////                }
-
                 for (int k = 0; k < multiple.length; k++) {
                     Log.e(TAG, "multiple[k] "+multiple[k]);
-
-
                     try {
                         if(multiple[k] != null){
                             params.put("images["+k+"]", multiple[k]);
-//                            params.add("images", "[" + k + "]");
-//                            params.add("images", "[" + multiple[k] + "]");
-//                            params.put("fileName:", "" + multiple[k] + "");
-//                            params.add("mimeType:", "image/png");
                         }
-
-                        // params.add("images", "[" + multiple[k] + "]");
-//                        params.put("file", "images" + multiple[k] + ".png");
-//                        params.add("mimeType:", "image/png");
-
-//                        params.add("images", "[" + k + "]");
-                        //params.put("images", "[" + k + "]"+"images" + multiple[k] + ".jpg");
-                        //params.add("mimeType:", "image/jpeg");
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
-
-
-
             }
 
+//
+//            if (selectedUriList.size() > 0) {
+//                for (int k = 0; k < selectedUriList.size(); k++) {
+//                    Log.e(TAG, "selectedUriListBB "+selectedUriList.get(k));
+//                    try {
+////                        params.add("invoice_image", "[" + k + "]");
+////                        params.put("fileName:", "invoice_image" + multiple[k] + ".jpg");
+////                        params.add("mimeType:", "image/jpeg");
+//
+//                        //params.put("images["+k+"]", multiple[k]);
+//
+//                        params.put("images["+k+"]", selectedUriList.get(k).toString().replace("file://", ""));
+//
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            }
 
-            Log.e("postingallparams",params.toString());
 
-            String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
+            Log.e(TAG,  "Params: "+params.toString());
+
+            String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "purchaseorder/add", params, new AsyncHttpResponseHandler() {
+            client.post(Constant.BASE_URL + "purchaseorder/duplicate", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
-                    progressDialog.dismiss();
                     avi.smoothToHide();
+                    progressDialog.dismiss();
                     Log.e("Create Invoicedata", response);
                     try {
                         Log.e("Create Invoicedata", response);
@@ -1176,27 +1501,24 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(getActivity(), "PO created successfully");
+                            Constant.SuccessToast(EditPOActivity.this, "Duplicate PO created successfully");
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-//                                    defaultClick = 1;
-                                    Intent intent = new Intent(getActivity(), POActivity.class);
+                                    Intent intent = new Intent(EditPOActivity.this, POActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
                             }, 500);
 
                             JSONObject data = jsonObject.getJSONObject("data");
-
-
+//
                         }
+
                         if (status.equals("false")) {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
-                            createinvoice.setEnabled(true);
+                            Constant.ErrorToast(EditPOActivity.this, jsonObject.getString("message"));
                         }
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1207,7 +1529,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                     progressDialog.dismiss();
-
                     if (responseBody != null) {
                         String response = new String(responseBody);
                         Log.e("responsecustomersF", response);
@@ -1217,15 +1538,13 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                                Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
-                                createinvoice.setEnabled(true);
+                                Constant.ErrorToast(EditPOActivity.this, jsonObject.getString("message"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
-                        createinvoice.setEnabled(true);
+                        Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
                     }
                 }
             });
@@ -1233,88 +1552,18 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
     }
 
-    private boolean getTrueValue(String toString) {
-        boolean b = false;
-        if(toString.length() > 0){
-            boolean gg = isNumeric(toString.toString());
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(toString.toString());
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(toString.toString().charAt(toString.toString().length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = toString.toString();
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        Log.e(TAG , "extractInt "+vv[vv.length - 1]);
-                        b = true;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        b = true;
-                    }
-                }
-            }else{
-                Log.e(TAG, "falsee ");
-                b = false;
-            }
-        }
-        return b;
-    }
-
-
-
-    private String getInvoiceValue(String toString) {
-        String b = "";
-        if(toString.length() > 0){
-            boolean gg = isNumeric(toString.toString());
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(toString.toString());
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(toString.toString().charAt(toString.toString().length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = toString.toString();
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        Log.e(TAG , "extractInt "+vv[vv.length - 1]);
-
-                        b = ""+(Integer.parseInt(vv[vv.length - 1]));
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        b = ""+(Integer.parseInt(cc));
-                    }
-                }
-            }else{
-                Log.e(TAG, "falsee ");
-            }
-        }
-        return b;
-    }
-
-
-
-    private void requestStoragePermission() {
-        Dexter.withActivity(getActivity()).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+    private void requestStoragePermission(boolean isCamera) {
+        Dexter.withActivity(EditPOActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
-
-                            gallaryIntent();
-
+                            if (isCamera) {
+                                dispatchTakePictureIntent();
+                            } else {
+                                gallaryIntent();
+                            }
                         }
                         // check for permanent denial of any permission
                         if (report.isAnyPermissionPermanentlyDenied()) {
@@ -1334,7 +1583,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
     private void showSettingsDialog() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Need Permissions");
         builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
         builder.setPositiveButton("GOTO SETTINGS", (dialog, which) -> {
@@ -1349,7 +1598,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     private void openSettings() {
 
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
+        Uri uri = Uri.fromParts("package", this.getPackageName(), null);
         intent.setData(uri);
         startActivityForResult(intent, 101);
 
@@ -1357,20 +1606,15 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
     private void gallaryIntent() {
 
-        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         pickPhoto.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        getActivity().startActivityForResult(pickPhoto, GALLARY_aCTION_PICK_CODE);
+        this.startActivityForResult(pickPhoto, GALLARY_aCTION_PICK_CODE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        Log.e(TAG, "onActivityResult requestCode:: "+requestCode);
-
-
-
+        Log.e(TAG, "onActivityResult");
 
 
         if (resultCode == Activity.RESULT_OK) {
@@ -1381,7 +1625,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
 
                     fileimage = mCompressor.compressToFile(fileimage);
-
                     signature_of_receiver = getRealPathFromUri(selectedImageUri);
                     Log.e("Image Path", signature_of_receiver);
                 } catch (Exception e) {
@@ -1391,8 +1634,11 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 Uri selectedImage = data.getData();
                 try {
                     // Get the path from the Uri
-                    company_stamp = getRealPathFromUri(selectedImage);
+
+
                     imgstampsuccess.setVisibility(View.VISIBLE);
+                    company_stamp = getRealPathFromUri(selectedImage);
+
                     try {
                         company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
                         Log.e("company_stamp Path", company_stamp);
@@ -1407,27 +1653,25 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 }
             }
 
+
         }
 
-        Log.e(TAG, "requestCode Path"+requestCode);
-        Log.e(TAG, "resultCode Path"+resultCode);
 
-        if(requestCode == 120){
+        if(requestCode == 121){
 
-//            if(defaultClick == 0){
-//                companyget();
-//            }
+            SavePref pref = new SavePref();
+            pref.SavePref(EditPOActivity.this);
 
             selectedTemplate = pref.getTemplate();
             Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
 
             if(selectedTemplate != 0){
                 itemstxtTemplate.setText("Template "+selectedTemplate);
-            }else{
-                itemstxtTemplate.setText("Choose Template");
             }
-
         }
+
+
+
 
         if(requestCode == 123){
             Log.e(TAG, "requestCode "+requestCode);
@@ -1449,12 +1693,11 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             CompanyInformation(selectedCompanyId);
         }
 
-
     }
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+        if (takePictureIntent.resolveActivity(this.getPackageManager()) != null) {
             // Create the File where the photo should go
             File photoFile = null;
             try {
@@ -1464,7 +1707,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 // Error occurred while creating the File
             }
             if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(getActivity(),
+                Uri photoURI = FileProvider.getUriForFile(this,
                         BuildConfig.APPLICATION_ID + ".provider",
                         photoFile);
 
@@ -1481,7 +1724,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         Cursor cursor = null;
         try {
             String[] proj = {MediaStore.Images.Media.DATA};
-            cursor = getActivity().getContentResolver().query(contentUri, proj, null, null, null);
+            cursor = this.getContentResolver().query(contentUri, proj, null, null, null);
             assert cursor != null;
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
@@ -1497,22 +1740,22 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String mFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File mFile = File.createTempFile(mFileName, ".jpg", storageDir);
         return mFile;
     }
 
     public void createbottomsheet_products() {
         if (bottomSheetDialog != null) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.products_bottom_sheet, null);
+            View view = LayoutInflater.from(this).inflate(R.layout.products_bottom_sheet, null);
             txtproducts = view.findViewById(R.id.txtproduct);
             search = view.findViewById(R.id.search);
             TextView add_product = view.findViewById(R.id.add_product_new);
             add_product.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), Product_Activity.class);
-                    getActivity().startActivityForResult(intent, 124);
+                    Intent intent = new Intent(EditPOActivity.this, Product_Activity.class);
+                    startActivityForResult(intent, 124);
                     bottomSheetDialog.dismiss();
                 }
             });
@@ -1540,33 +1783,31 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             });
 
 
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             recycler_products.setLayoutManager(layoutManager);
             recycler_products.setHasFixedSize(true);
 
-            product_bottom_adapter = new Product_Bottom_Adapter(getActivity(), product_bottom, this, bottomSheetDialog ,"invoice");
+            product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog,"invoice");
             recycler_products.setAdapter(product_bottom_adapter);
             product_bottom_adapter.notifyDataSetChanged();
-
-
-            txtproducts.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-            bottomSheetDialog = new BottomSheetDialog(getActivity());
+            txtproducts.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            bottomSheetDialog = new BottomSheetDialog(this);
             bottomSheetDialog.setContentView(view);
         }
     }
 
     public void createbottomsheet_services() {
         if (bottomSheetDialog2 != null) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.service_bottom_sheet, null);
+            View view = LayoutInflater.from(this).inflate(R.layout.service_bottom_sheet, null);
             txtservices = view.findViewById(R.id.txtservices);
             search_service = view.findViewById(R.id.search_service);
             TextView add_service = view.findViewById(R.id.add_service_new);
             add_service.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), Service_Activity.class);
-                    getActivity().startActivityForResult(intent, 125);
-                    bottomSheetDialog2.dismiss();
+                    Intent intent = new Intent(EditPOActivity.this, Service_Activity.class);
+                    startActivityForResult(intent, 125);
+                    bottomSheetDialog.dismiss();
                 }
             });
             recycler_services = view.findViewById(R.id.recycler_services);
@@ -1593,32 +1834,32 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             });
 
 
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             recycler_services.setLayoutManager(layoutManager);
             recycler_services.setHasFixedSize(true);
 
-            service_bottom_adapter = new Service_bottom_Adapter(getActivity(), service_bottom, this);
+            service_bottom_adapter = new Service_bottom_Adapter(this, service_bottom, this);
             recycler_services.setAdapter(service_bottom_adapter);
             service_bottom_adapter.notifyDataSetChanged();
 
 
-            txtservices.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-            bottomSheetDialog2 = new BottomSheetDialog(getActivity());
+            txtservices.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            bottomSheetDialog2 = new BottomSheetDialog(this);
             bottomSheetDialog2.setContentView(view);
         }
     }
 
     public void createbottomsheet_tax() {
-
         if (bottomSheetDialog3 != null) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.tax_bottom_itemlayout, null);
+
+            View view = LayoutInflater.from(this).inflate(R.layout.tax_bottom_itemlayout, null);
 
             TextView add_service_new = view.findViewById(R.id.add_service_new);
             add_service_new.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), Tax_Activity.class);
-                    getActivity().startActivityForResult(intent, 126);
+                    Intent intent = new Intent(EditPOActivity.this, Tax_Activity.class);
+                    startActivityForResult(intent, 126);
                     bottomSheetDialog3.dismiss();
                 }
             });
@@ -1627,8 +1868,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             taxswitch = view.findViewById(R.id.taxswitch);
             btndone = view.findViewById(R.id.taxbtndone);
 
-            imgincome = view.findViewById(R.id.txttax);
-
             if(taxtypeclusive.equalsIgnoreCase("Inclusive")){
                 taxswitch.setChecked(true);
             }else{
@@ -1636,37 +1875,25 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             }
 
 
-
-        /*    txtincomepercent.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
-            txtincometax.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-
-    */
-            taxswitch.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-            imgincome.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-
-            btndone.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-
-
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            imgincome = view.findViewById(R.id.txttax);
+            taxswitch.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            imgincome.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            btndone.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             taxrecycler.setLayoutManager(layoutManager);
             taxrecycler.setHasFixedSize(true);
 
-            Log.e(TAG,  "tax_list_array "+tax_list_array.size());
-
-            customTaxAdapter = new CustomTaxAdapter(getActivity(), tax_list_array, this);
+            customTaxAdapter = new CustomTaxAdapter(this, tax_list_array, this);
             taxrecycler.setAdapter(customTaxAdapter);
             customTaxAdapter.notifyDataSetChanged();
 
-            //  Log.e(TAG, "taxID" + taxID);
             customTaxAdapter.updateTaxSelect(taxID);
-
 
             btndone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String statusSwitch1;
                     if (taxswitch.isChecked()) {
-
                         statusSwitch1 = taxswitch.getTextOn().toString();
                         taxtypeclusive = "Inclusive";
                     } else {
@@ -1678,7 +1905,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                 }
             });
-            bottomSheetDialog3 = new BottomSheetDialog(getActivity());
+            bottomSheetDialog3 = new BottomSheetDialog(this);
             bottomSheetDialog3.setContentView(view);
         }
     }
@@ -1686,7 +1913,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     public void createbottomsheet_paid() {
         if (bottomSheetDialog2 != null) {
 
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.paidamount_bottom_sheet, null);
+            View view = LayoutInflater.from(this).inflate(R.layout.paidamount_bottom_sheet, null);
             txtpaid = view.findViewById(R.id.txtpaid);
             txtamount = view.findViewById(R.id.txtamount);
             txtdate = view.findViewById(R.id.txtdate);
@@ -1701,7 +1928,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             paymode.add("Credit card");
             paymode.add("Paypal");
             paymode.add("Others");
-            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, paymode);
+            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymode);
             selectpaymentmode.setAdapter(namesadapter);
 
 
@@ -1713,12 +1940,12 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                 }
             });
-            txtpaid.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-            txtamount.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-            txtdate.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-            edamount.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
-            eddate.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
-            btndone2.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
+            txtpaid.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            txtamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            txtdate.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            edamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+            eddate.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Light.otf"));
+            btndone2.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
             eddate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1729,16 +1956,14 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(EditPOActivity.this,
                             new DatePickerDialog.OnDateSetListener() {
 
                                 @Override
                                 public void onDateSet(DatePicker view, int year,
                                                       int monthOfYear, int dayOfMonth) {
 
-
                                     eddate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-
 
                                 }
                             }, mYear, mMonth, mDay);
@@ -1763,29 +1988,27 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         eddate.setError("Required");
                         eddate.requestFocus();
                     } else if (paymentmode.equals("")) {
-                        // Constant.ErrorToast(getActivity(), "Payment Mode Required");
-                        Toast.makeText(getActivity(), "Payment Mode Required", Toast.LENGTH_SHORT).show();
+//                        Constant.ErrorToast(EditPOActivity.this, "Payment Mode Required");
+                        Toast.makeText(EditPOActivity.this, "Payment Mode Required", Toast.LENGTH_SHORT).show();
                     } else {
                         if (paidamountstr != null) {
+                            paidamount.setText(paidamountstr);
                             calculateTotalAmount(total_price);
                             bottomSheetDialog2.dismiss();
                         }
                     }
-
-
                 }
             });
-            bottomSheetDialog2 = new BottomSheetDialog(getActivity());
+            bottomSheetDialog2 = new BottomSheetDialog(EditPOActivity.this);
             bottomSheetDialog2.setContentView(view);
         }
     }
 
     public void createbottomsheet_dots() {
         if (bottomSheetDialog2 != null) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.dots_bottomsheet, null);
+            View view = LayoutInflater.from(this).inflate(R.layout.dots_bottomsheet, null);
             btnviewinvoice = view.findViewById(R.id.btnviewinvoice);
             btnviewinvoice.setText("View Purchase Order");
-
             btnclear = view.findViewById(R.id.btnclear);
             btndotcancel = view.findViewById(R.id.btndotcancel);
 
@@ -1794,10 +2017,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 public void onClick(View view) {
                     avi.smoothToShow();
 
-                    Log.e(TAG, "selectedTemplateAA "+selectedTemplate);
-
-
-
+                    // fright cost
                     String shipingcoast = freight.getText().toString();
                     Subtotalamount = subtotal.getText().toString();
                     Grossamount_str = grosstotal.getText().toString();
@@ -1806,8 +2026,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     reference_no = edreferenceno.getText().toString();
                     netamountvalue = netamount.getText().toString();
                     Blanceamountstr = balance.getText().toString();
-                    invoice_no = invoicenumtxt.getText().toString();
-                    strnotes = ednotes.getText().toString();
+
                     ref_no = edreferenceno.getText().toString();
 
                     strdiscountvalue = discount.getText().toString();
@@ -1817,81 +2036,79 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     invoice_due_date = edduedate.getText().toString();
                     invoicetaxamount = tax.getText().toString();
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select a Company");
+                        Constant.ErrorToast(EditPOActivity.this, "Select a Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Date");
+                        Constant.ErrorToast(EditPOActivity.this, "Select Invoice Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Customer");
+                        Constant.ErrorToast(EditPOActivity.this, "Select A Customer");
                         bottomSheetDialog2.dismiss();
                     } else if (credit_terms.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Credit Term");
+                        Constant.ErrorToast(EditPOActivity.this, "Select Credit Term");
                         bottomSheetDialog2.dismiss();
-                    }  else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Warehouse");
+                    } else if (selectwarehouseId.equals("")) {
+                        Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
                         bottomSheetDialog2.dismiss();
                     } else {
+                       // Customer_list customer_lists = selected.get(0);
+                      //  Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
-
-//                        defaultClick = 1;
-                        Intent intent = new Intent(getContext(), ViewPO_Activity.class);
+                        Intent intent = new Intent(EditPOActivity.this, ViewPO_Activity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("company_id", selectedCompanyId);
                         intent.putExtra("taxText", txttax.getText().toString());
                         intent.putExtra("companycolor", companycolor);
                         intent.putExtra("selectedTemplate", ""+selectedTemplate);
-                        intent.putExtra("company_id", selectedCompanyId);
+
                         intent.putExtra("invoice_date", invoice_date);
                         intent.putExtra("netamount", netamountvalue);
+
                         intent.putExtra("invoicetaxamount", invoicetaxamount);
                         intent.putExtra("blanceamount", Blanceamountstr);
+
                         intent.putExtra("subtotalamt", Subtotalamount);
                         intent.putExtra("due_date", invoice_due_date);
-                        intent.putExtra("customer_id", customer_id);
+                        //intent.putExtra("customer_id", customer_id);
                         intent.putExtra("grossamount", Grossamount_str);
+//                        intent.putExtra("invoice_no", invoicenumberdto);
                         intent.putExtra("invoice_no", invoicenum.getText().toString());
                         intent.putExtra("notes", strnotes);
                         intent.putExtra("ref_no", ref_no);
                         intent.putExtra("paid_amount_payment_method", paymentmode);
                         intent.putExtra("credit_terms", credit_terms);
                         intent.putExtra("freight_cost", shipingcoast);
-                        intent.putExtra("discount", strdiscountvalue);
-                        intent.putExtra("paid_amount", strpaid_amount);
-                        intent.putExtra("paid_amount_date", Paymentamountdate);
-                        intent.putExtra("shipping_firstname", shippingfirstname);
-                        intent.putExtra("shipping_lastname", shippinglastname);
-                        intent.putExtra("shipping_address_1", shippingaddress1);
-                        intent.putExtra("shipping_address_2", shippingaddress2);
-                        intent.putExtra("shipping_city", shippingcity);
-                        intent.putExtra("shipping_postcode", shippingpostcode);
-                        intent.putExtra("shipping_country", shippingcountry);
-                        intent.putExtra("payment_bank_name", payment_bank_name);
-
                         intent.putExtra("paypal_emailstr", paypal_emailstr);
-                        intent.putExtra("payment_currency", payment_currency);
-                        intent.putExtra("payment_iban", payment_iban);
-                        intent.putExtra("payment_swift_bic", payment_swift_bic);
+                        intent.putExtra("company_name", Selectedcompanyname);
 
-                        Log.e(TAG, "companyimagelogopathAA "+companylogopath);
+
+                        Log.e(TAG, "companylogopathCC "+companylogopath);
                         intent.putExtra("company_logo", companylogopath);
                         intent.putExtra("company_name", Selectedcompanyname);
                         intent.putExtra("company_address", company_address);
                         intent.putExtra("company_contact", company_contact);
                         intent.putExtra("company_email", company_email);
                         intent.putExtra("company_website", company_website);
+                        intent.putExtra("discount", strdiscountvalue);
+                        intent.putExtra("paid_amount", strpaid_amount);
+                        intent.putExtra("paid_amount_date", Paymentamountdate);
+                        Log.e(TAG, "Paymentamountdate2 "+Paymentamountdate);
+                        intent.putExtra("payment_bank_name", payment_bank_name);
+                        intent.putExtra("payment_currency", payment_currency);
+                        intent.putExtra("payment_iban", payment_iban);
+                        intent.putExtra("payment_swift_bic", payment_swift_bic);
+                        intent.putExtra("producprice", producprice);
+                        intent.putExtra("totalpriceproduct", totalpriceproduct);
 
-
-                        intent.putExtra("custoner_contact_name", custoner_contact_name);
-                        intent.putExtra("customer_email", customer_email);
-                        intent.putExtra("customer_contact", customer_contact);
-                        intent.putExtra("customer_address", customer_address);
-                        intent.putExtra("customer_website", customer_website);
                         intent.putExtra("signature_of_receiver", signatureofreceiverst);
+                        Log.e(TAG, "signatureofreceiverst::: "+signatureofreceiverst);
+                        //Log.e(TAG, "signature_of_receiver::: "+signatureofreceiverst);
+
+                        Log.e(TAG, "company_stamp::: "+company_stamp);
                         intent.putExtra("company_stamp", company_stamp);
                         intent.putExtra("signature_issuer", signature_of_issuer);
                         intent.putExtra("reference_no", reference_no);
-                        intent.putExtra("producprice", producprice);
-                        intent.putExtra("totalpriceproduct", totalpriceproduct);
+                        // intent.putStringArrayListExtra("products_list",products);
                         intent.putExtra("tempQuantity", tempQuantity);
                         intent.putExtra("tempList", tempList);
                         intent.putExtra("customerselected", selected);
@@ -1900,28 +2117,23 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         intent.putExtra("rate_list", rate);
                         intent.putExtra("attchemnt", attchmentimage);
 
-                        Log.e("invoiceDataCheck",producprice.toString() +"   "+totalpriceproduct.toString());
+                        Log.e(TAG , "attchmentimageAAA "+attchmentimage.size());
+
+                        // Log.e(TAG)
+
 
                         startActivity(intent);
-
-
-
-                        //viewPDF();
-
-
-
                         bottomSheetDialog2.dismiss();
                         avi.hide();
                     }
 
                 }
             });
-
             btnclear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    selectedCompanyId = "";
-                    selectcompany.setText("");
+
+
                     duedate.setText("");
                     invoicenum.setText("");
                     invoicerecipnt.setText("");
@@ -1932,6 +2144,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     quantity.clear();
                     producprice.clear();
                     cnames.clear();
+                    cnames.clear();
                     grosstotal.setText("");
                     discount.setText("");
                     subtotal.setText("");
@@ -1941,17 +2154,13 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     paidamount.setText("");
                     balance.setText("");
                     ednotes.setText("");
-
-
-                    totalpriceproduct.clear();
-
-
-                    products_adapter.notifyDataSetChanged();
-                    Log.e("tempList", ""+String.valueOf(tempList.size()));
                     imgsigsuccess.setVisibility(View.INVISIBLE);
                     imgrecsuccess.setVisibility(View.INVISIBLE);
                     imgstampsuccess.setVisibility(View.INVISIBLE);
                     attachmenttxtimg.setVisibility(View.INVISIBLE);
+
+
+                    products_adapter.notifyDataSetChanged();
 
                     bottomSheetDialog2.dismiss();
                 }
@@ -1962,21 +2171,19 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     bottomSheetDialog2.dismiss();
                 }
             });
-            btnviewinvoice.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-            btnclear.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-            btndotcancel.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-            bottomSheetDialog2 = new BottomSheetDialog(getActivity());
+
+
+            btnviewinvoice.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            btnclear.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            btndotcancel.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+
+            bottomSheetDialog2 = new BottomSheetDialog(EditPOActivity.this);
             bottomSheetDialog2.setContentView(view);
         }
     }
 
-
-
-
-
-
     public void freightdialog() {
-        final Dialog mybuilder = new Dialog(getActivity());
+        final Dialog mybuilder = new Dialog(this);
         mybuilder.setContentView(R.layout.freight_amount_dialog);
 
         TextView txtfreight, txtfreightdes;
@@ -1990,11 +2197,11 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         btncancel = mybuilder.findViewById(R.id.btncancel);
 
 
-        edfreight.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-        btnok.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-        btncancel.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-        txtfreight.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-        txtfreightdes.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
+        edfreight.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+        btnok.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+        btncancel.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+        txtfreight.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+        txtfreightdes.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
 
 
         mybuilder.show();
@@ -2008,7 +2215,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             public void onClick(View view) {
                 String sipingvalue;
                 freight_cost = edfreight.getText().toString();
-                Log.e("freight_cost", freight_cost);
                 calculateTotalAmount(total_price);
                 mybuilder.dismiss();
             }
@@ -2025,7 +2231,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
 
     public void discount_dialog() {
-        final Dialog mybuilder = new Dialog(getActivity());
+        final Dialog mybuilder = new Dialog(this);
         mybuilder.setContentView(R.layout.discount_dialog);
 
         TextView txtdiscount;
@@ -2041,11 +2247,11 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         eddisount = mybuilder.findViewById(R.id.eddisount);
         btndone = mybuilder.findViewById(R.id.btndone);
 
-        txtdiscount.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-        radiopercent.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-        radioamount.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-        eddisount.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
-        btndone.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
+        txtdiscount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+        radiopercent.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+        radioamount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+        eddisount.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+        btndone.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
 
         mybuilder.show();
         mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
@@ -2061,7 +2267,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-
                     if(strdiscount.equalsIgnoreCase("Percentage")){
                         eddisount.setHint("Enter Discount in %");
                     }
@@ -2077,9 +2282,11 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         btndone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 strdiscountvalue = eddisount.getText().toString();
                 if (strdiscountvalue.matches("")) {
-                    //Toast.makeText(getContext(), "You did not enter a username", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(EditPOActivity.this, "You did not enter a username", Toast.LENGTH_SHORT).show();
                     mybuilder.dismiss();
                     return;
                 } else {
@@ -2094,7 +2301,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
     public void createbottomsheet_days() {
         if (bottomSheetDialog != null) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.days_itemlayout, null);
+            View view = LayoutInflater.from(this).inflate(R.layout.days_itemlayout, null);
             txtcredit1 = view.findViewById(R.id.txtcredit);
             radiogroup1 = view.findViewById(R.id.radiogroup1);
             radiogroup2 = view.findViewById(R.id.radiogroup2);
@@ -2123,8 +2330,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                         credit_terms = rb.getText().toString();
 
-                    } else {
-
                     }
 
                 }
@@ -2138,8 +2343,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                         credit_terms = rb.getText().toString();
 
-                    } else {
-
                     }
 
                 }
@@ -2148,13 +2351,10 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             edmanual.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    //edmanual.setClickable(radiogroup1.getCheckedRadioButtonId() != -1 || radiogroup2.getCheckedRadioButtonId() != -1);
+                    edmanual.setClickable(radiogroup1.getCheckedRadioButtonId() != -1 || radiogroup2.getCheckedRadioButtonId() != -1);
+                    credit_terms = "";
                     radiogroup2.clearCheck();
                     radiogroup1.clearCheck();
-                    credit_terms = "";
-
-                    Log.e("Credit_terms",credit_terms);
                 }
             });
 
@@ -2163,12 +2363,9 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 public void onClick(View view) {
                     dayss = edmanual.getText().toString();
 
-                    if (dayss.equals("") && credit_terms.equals(""))
-                    {
-                        Toast.makeText(getActivity(), "Please Select Atleast One", Toast.LENGTH_LONG).show();
-                    }
-                    else if (dayss != null && credit_terms.equals(""))
-                    {
+                    if (dayss.equals("") && credit_terms.equals("")) {
+                        Toast.makeText(EditPOActivity.this, "Please Select Atleast One", Toast.LENGTH_LONG).show();
+                    } else if (dayss != null && credit_terms.equals("")) {
 
                         String dayswith = dayss.trim();
 
@@ -2188,9 +2385,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         txtdays.setText(dayss + " " + "days");
                         bottomSheetDialog.dismiss();
                         edduedate.setClickable(false);
-                    }
-                    else if (credit_terms != null && dayss.equals(""))
-                    {
+                    } else if (credit_terms != null && dayss.equals("")) {
                         if (credit_terms.equals("none")) {
                             txtdays.setText(credit_terms);
                             edduedate.setClickable(true);
@@ -2209,7 +2404,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                             String replaceString = credit_terms.replaceAll("days", "");
                             String dayswith = replaceString.trim();
-                            Log.e(TAG, "dayswith::: "+dayswith);
 
                             try {
                                 Double daysvalue = Double.parseDouble(dayswith);
@@ -2233,15 +2427,13 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                                 edduedate.setText(duedate.getText().toString());
                             }
 
-
                             bottomSheetDialog.dismiss();
                         }
 
 
-                    }
-                    else if (dayss != null && credit_terms != null)
-                    {
-                        Toast.makeText(getActivity(), "Please Select One Value", Toast.LENGTH_LONG).show();
+                    } else if (dayss != null && credit_terms != null) {
+                        Toast.makeText(EditPOActivity.this, "Please Select One Value", Toast.LENGTH_LONG).show();
+
                     }
 
 
@@ -2256,31 +2448,37 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             });
 
 
-            txtcredit1.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
-            txtor.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
-            rnone.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            r3days.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            r14days.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            r30days.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            r60days.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            r120days.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            rimmediately.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            r7days.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            r21days.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            r45days.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            r90days.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            r365days.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            edmanual.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            btndone1.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            bottomSheetDialog = new BottomSheetDialog(getActivity());
+            txtcredit1.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
+            txtor.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Bold.otf"));
+            rnone.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r3days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r14days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r30days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r60days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r120days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            rimmediately.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r7days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r21days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r45days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r90days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            r365days.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            edmanual.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            btndone1.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Regular.otf"));
+            bottomSheetDialog = new BottomSheetDialog(this);
             bottomSheetDialog.setContentView(view);
         }
     }
 
+    private void updateLabe21() {
+
+        String myFormat = "dd-MMM-yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        edduedate.setText(sdf.format(myCalendar.getTime()));
+    }
 
     public void createbottom_signaturepad() {
         if (bottomSheetDialog != null) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.signaturebottom_itemlayout, null);
+            View view = LayoutInflater.from(this).inflate(R.layout.signaturebottom_itemlayout, null);
             signaturePad = view.findViewById(R.id.signaturepad);
             btnclear1 = view.findViewById(R.id.btnclear);
             btnsave = view.findViewById(R.id.btnsave);
@@ -2309,8 +2507,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 @Override
                 public void onClick(View view) {
                     signaturePad.clear();
-                    // bottomSheetDialog.dismiss();
-
+                    bottomSheetDialog.dismiss();
                 }
             });
 
@@ -2321,23 +2518,21 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     if (addSignatureToGallery(signatureBitmap)) {
                         //  Toast.makeText(getContext(), "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-
-
+                        imgsigsuccess.setVisibility(View.VISIBLE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }
                     if (addSvgSignatureToGallery(signaturePad.getSignatureSvg())) {
                         //  Toast.makeText(getContext(), "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-
-                        // imgsigsuccess.setVisibility(View.VISIBLE);
+                        imgsigsuccess.setVisibility(View.VISIBLE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
 
-            bottomSheetDialog = new BottomSheetDialog(getActivity());
+            bottomSheetDialog = new BottomSheetDialog(this);
             bottomSheetDialog.setContentView(view);
         }
     }
@@ -2349,7 +2544,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         switch (requestCode) {
             case REQUEST_EXTERNAL_STORAGE: {
                 if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getContext(), "Cannot write images to external storage", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditPOActivity.this, "Cannot write images to external storage", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -2388,6 +2583,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 signatureofinvoicemaker = photo;
                 signature_of_issuer = photo.getAbsolutePath();
                 imgsigsuccess.setVisibility(View.VISIBLE);
+
             }
             if (s_r.equals("2")) {
                 signaturinvoicereceiver = photo;
@@ -2395,6 +2591,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 imgrecsuccess.setVisibility(View.VISIBLE);
             }
 
+//            Log.e(TAG, "signature_of_issuer"+signatureofreceiverst);
 
             Log.e("Signature Of Issuer", signature_of_issuer);
         } catch (IOException e) {
@@ -2409,7 +2606,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         Uri contenturi = Uri.fromFile(photo);
 
         MediaScanIntent.setData(contenturi);
-        getContext().sendBroadcast(MediaScanIntent);
+        this.sendBroadcast(MediaScanIntent);
     }
 
     public boolean addSvgSignatureToGallery(String signatureSvg) {
@@ -2434,7 +2631,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         duedate.setText(sdf.format(myCalendar.getTime()));
-
         try {
             String myFormat1 = ("yyyy/MM/dd HH:mm:ss"); //In which you need put here
             SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat1, Locale.US);
@@ -2444,66 +2640,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = sdf1.parse(myDate);
             datemillis = date.getTime();
-
-            if (dayss != null && credit_terms.equals(""))
-            {
-                Log.e("getDays",dayss.toString());
-                String dayswith = dayss.trim();
-
-                double daysvalue = Double.parseDouble(dayswith);
-
-                double resultday = daysvalue * 24 * 60 * 60 * 1000;
-                long sum = (long) (resultday + datemillis);
-                // Creating date format
-                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-
-                // Creating date from milliseconds
-                // using Date() constructor
-                Date result = new Date(sum);
-                Log.e("Date Long", simple.format(result));
-                edduedate.setText(simple.format(result));
-                edduedate.setClickable(true);
-                txtdays.setText(dayss + " " + "days");
-                edduedate.setClickable(false);
-            }
-            else if (credit_terms != null && dayss.equals(""))
-            {
-                if (credit_terms.equals("none"))
-                {
-                    txtdays.setText(credit_terms);
-                    edduedate.setClickable(true);
-                } else if (credit_terms.equals("immediately")) {
-                    String myFormat2 = "yyyy-MM-dd"; //In which you need put here
-                    SimpleDateFormat sdf3 = new SimpleDateFormat(myFormat2, Locale.US);
-
-                    edduedate.setText(sdf3.format(myCalendar.getTime()));
-                    edduedate.setClickable(false);
-                    txtdays.setText(credit_terms);
-                } else {
-
-
-                    String replaceString = credit_terms.replaceAll("days", "");
-                    String dayswith = replaceString.trim();
-                    double daysvalue = Double.parseDouble(dayswith);
-
-                    double result = daysvalue * 24 * 60 * 60 * 1000;
-
-                    long sumresult = (long) (result + datemillis);
-                    // Creating date format
-                    DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-                    Date sumresultdate = new Date(sumresult);
-
-                    // Formatting Date according to the
-                    // given format
-
-                    Log.e("Date Long", simple.format(sumresultdate));
-                    edduedate.setText(simple.format(sumresultdate));
-                    edduedate.setClickable(false);
-                    txtdays.setText(credit_terms);
-                }
-
-
-            }
 
         } catch (Exception e) {
 
@@ -2521,8 +2657,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         cnames.clear();
 
         cids.clear();
-
-        String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
@@ -2530,9 +2665,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
                 Log.e("responsecompany", response);
-
-//                cnames.add("Add Company");
-//                cids.add("0");
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -2546,13 +2678,15 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                                 company_id = item.getString("company_id");
                                 company_name = item.getString("name");
 
+                                companycolor = item.getString("color");
+
+                                Log.e(TAG , "companycolor:: "+companycolor);
+
                                 cnames.add(company_name);
                                 cids.add(company_id);
 
-//                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cnames);
-//                                selectcompany.setAdapter(namesadapter);
-
-
+                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditPOActivity.this, android.R.layout.simple_spinner_item, cnames);
+                                selectcompany.setAdapter(namesadapter);
 
                             }
                         }
@@ -2587,10 +2721,10 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
         RequestParams params = new RequestParams();
         if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
-            Constant.ErrorToast(getActivity(), "Select Company");
+            Constant.ErrorToast(EditPOActivity.this, "Select Company");
         } else {
             params.add("company_id", this.selectedCompanyId);
-            String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
+            String token = Constant.GetSharedPreferences(EditPOActivity.this, Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token", token);
             client.post(Constant.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
@@ -2614,11 +2748,19 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                                 wids.add(warehouse_id);
                                 wnames.add(warehouse_name);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                                selectwarehouse.setAdapter(namesadapter);
+                                Log.e("warehouseNames", ""+wnames.toString());
 
 
                             }
+
+                            warehousePosition = wids.indexOf(selectwarehouseId);
+
+                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditPOActivity.this, android.R.layout.simple_spinner_item, wnames);
+                            selectwarehouse.setAdapter(namesadapter);
+
+                            selectwarehouse.setSelection(warehousePosition);
+                            // wearhouse_id
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -2634,7 +2776,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                                Constant.ErrorToast(getActivity(), "No Warehouse Found");
+                                Constant.ErrorToast(EditPOActivity.this, "No Warehouse Found");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -2645,12 +2787,13 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         }
     }
 
+
     public void productget(String selectedCompanyId) {
         product_bottom.clear();
         RequestParams params = new RequestParams();
         params.add("company_id", this.selectedCompanyId);
 
-        String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(EditPOActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
@@ -2683,7 +2826,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                                 String quantity = item.getString("quantity");
 
                                 String measurement_unit = item.getString("measurement_unit");
-                                Log.e(TAG, "measurement_unit: "+measurement_unit);
 
                                 String minimum = item.getString("minimum");
 
@@ -2709,7 +2851,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                             }
                         } else {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(EditPOActivity.this, jsonObject.getString("Product Not Found"));
                         }
                     }
 
@@ -2735,7 +2877,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2758,7 +2900,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         RequestParams params = new RequestParams();
         params.add("company_id", this.selectedCompanyId);
 
-        String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
@@ -2783,15 +2925,17 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                                 String service_price = item.getString("price");
                                 String service_description = item.getString("description");
                                 String service_taxable = item.getString("is_taxable");
-                                String currency_code = item.getString("currency_symbol");
+                                String currency_code = item.getString("currency_code");
                                 String category = item.getString("category");
                                 String measurement_unit = item.getString("measurement_unit");
+                                String service_quantity = item.getString("quantity");
 
                                 //String service_category = item.getString("category");
                                 String service_price_unit = item.getString("currency_symbol");
-                                String service_quantity = "1000";
+
 
                                 Service_list service_list = new Service_list();
+
                                 service_list.setService_id(service_id);
                                 service_list.setCompany_id(company_id);
                                 service_list.setService_name(service_name);
@@ -2809,7 +2953,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                             }
                         } else {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(EditPOActivity.this, jsonObject.getString("Product Not Found"));
                         }
                     }
 
@@ -2838,7 +2982,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -2859,19 +3003,18 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     public void createbottomsheet_customers() {
 
         if (bottomSheetDialog != null) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.customer_bottom_sheet, null);
+            View view = LayoutInflater.from(this).inflate(R.layout.customer_bottom_sheet, null);
             txtcustomer = view.findViewById(R.id.txtcustomer);
             search_customers = view.findViewById(R.id.search_customers);
             TextView add_customer = view.findViewById(R.id.add_customer);
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), Customer_Activity.class);
-                    getActivity().startActivityForResult(intent, 123);
+                    Intent intent = new Intent(EditPOActivity.this, Customer_Activity.class);
+                    startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }
             });
-
             recycler_customers = view.findViewById(R.id.recycler_customers);
             txtname = view.findViewById(R.id.name);
             txtcontactname = view.findViewById(R.id.contactname);
@@ -2896,20 +3039,20 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 }
             });
 
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             recycler_customers.setLayoutManager(layoutManager);
             recycler_customers.setHasFixedSize(true);
 
-            customer_bottom_adapter = new Customer_Bottom_Adapter(getActivity(), customer_bottom, this);
+            customer_bottom_adapter = new Customer_Bottom_Adapter(this, customer_bottom, this);
             recycler_customers.setAdapter(customer_bottom_adapter);
             customer_bottom_adapter.notifyDataSetChanged();
 
 
-            txtcustomer.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Medium.otf"));
+            txtcustomer.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
             // txtname.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Medium.otf"));
             // txtcontactname.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Medium.otf"));
 
-            bottomSheetDialog = new BottomSheetDialog(getActivity());
+            bottomSheetDialog = new BottomSheetDialog(this);
             bottomSheetDialog.setContentView(view);
 
             bottomSheetDialog.show();
@@ -2919,7 +3062,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     }
 
     private void CompanyInformation(String selectedCompanyId) {
-        Log.e(TAG , "selectedCompanyId "+selectedCompanyId);
         tax_list_array.clear();
         RequestParams params = new RequestParams();
         params.add("company_id", this.selectedCompanyId);
@@ -2927,12 +3069,11 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         params.add("service", "1");
         params.add("customer", "1");
         params.add("tax", "1");
-        //   params.add("receipt", "1");
         params.add("purchase_order", "1");
         params.add("warehouse", "1");
 
 
-        String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         Log.e("token", token);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
@@ -2940,7 +3081,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
-                Log.e(TAG, "CompanyInformation"+ response);
+                Log.e("Company Information", response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -2952,14 +3093,14 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         Log.e("imagepath customer", image_path);
                         Invoiceno = data.getString("invoice_count");
 
-                        // invoicenovalue = Integer.parseInt(Invoiceno) + 1;
-//                        if (Invoiceno != null) {
-//
-//                            invoicenum.setText("Inv # " + invoicenovalue);
-//
-//                            Log.e("imagepath customer", String.valueOf(invoicenovalue));
-//
-//                        }
+                        invoicenovalue = Integer.parseInt(Invoiceno) + 1;
+                  /*      if (Invoiceno != null) {
+
+                            invoicenum.setText("Inv # " + invoicenovalue);
+
+                            Log.e("imagepath customer", String.valueOf(invoicenovalue));
+
+                        }*/
                         String company_image_path = data.getString("company_image_path");
                         Log.e("company_image_path", company_image_path);
 
@@ -2978,49 +3119,45 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                             payment_currency = item.getString("payment_currency");
                             payment_iban = item.getString("payment_iban");
                             payment_swift_bic = item.getString("payment_swift_bic");
-
                             paypal_emailstr = item.getString("paypal_email");
-
-
                             companylogopath = company_image_path + logo;
                             Log.e("companylogopath", companylogopath);
 
                             companycolor = item.getString("color");
+
+                            options.setEnabled(true);
 
                         }
 
                         JSONArray customer = data.getJSONArray("customer");
 
                         JSONArray invoice = data.getJSONArray("purchase_order");
+                        for (int i = 0; i < invoice.length(); i++) {
+                            JSONObject item = invoice.getJSONObject(i);
+                            String invoice_nocompany = item.getString("purchase_order_no");
 
-                        if(invoice.length() == 0){
-                            invoicenum.setText("PO # 1");
-                            invoicenum.setEnabled(true);
-                        }else{
-                            for (int i = 0; i < invoice.length(); i++) {
-                                JSONObject item = invoice.getJSONObject(i);
+                            /* invoicenum.setText(invoice_nocompany);*/
+//                            if (invoice_nocompany != null) {
+//                                Log.e("invoice no", invoice_nocompany);
+//                            }
 
-                                String invoice_nocompany = item.getString("purchase_order_no");
+                            if(i == invoice.length() - 1){
+                                Log.e(TAG, "zzzz0 "+invoice_nocompany);
+                                Log.e(TAG, "zzzz1 "+i);
+                                Log.e(TAG, "zzzz2 "+invoice.length());
 
-                                if(i == invoice.length() - 1){
-                                    Log.e(TAG, "zzzz0 "+invoice_nocompany);
-                                    Log.e(TAG, "zzzz1 "+i);
-                                    Log.e(TAG, "zzzz2 "+invoice.length());
+                                String sss = getRealValue(invoice_nocompany);
+                                invoicenum.setText(sss);
 
-                                    String sss = getRealValue(invoice_nocompany);
-                                    invoicenum.setText(sss);
-
-                                    invoicenum.setEnabled(true);
-
-                                }
+                                invoicenum.setEnabled(true);
 
                             }
+
                         }
 
 
-
-                        //  for (int i = 0; i < customer.length(); i++) {
-                        // JSONObject item = customer.getJSONObject(i);
+//                        for (int i = 0; i < customer.length(); i++) {
+//                            JSONObject item = customer.getJSONObject(i);
 
                         tax_list_array.clear();
 
@@ -3028,10 +3165,8 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                         JSONArray tax_list = data.getJSONArray("tax");
 
-                        // Log.e(TAG, "tax_listAA "+tax_list.toString());
-
                         for (int j = 0; j < tax_list.length(); j++) {
-//                                Tax_List student = new Gson().fromJson(tax_list.get(j).toString(), Tax_List.class);
+                            //   Tax_List student = new Gson().fromJson(tax_list.get(j).toString(), Tax_List.class);
                             JSONObject jsonObject1 = tax_list.getJSONObject(j);
 //                                String name = jsonObject1.getString("name");
                             Tax_List student = new Tax_List();
@@ -3046,17 +3181,14 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
 
                         }
-
-                        Gson gson = new Gson();
-                        String json2 = gson.toJson(tax_list_array);
-
-                        Log.e(TAG, "jsonAA "+json2);
-                        // Log.e("Taxt array", tax_list_array.toString());
-                        //  }
-
-
+                        Log.e("Taxt array", tax_list_array.toString());
                     }
 
+
+//                    }
+                    if (status.equals("false")) {
+                        Constant.ErrorToast(EditPOActivity.this, jsonObject.getString("message"));
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -3075,13 +3207,13 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                         String status = jsonObject.getString("status");
                         if (status.equals("false")) {
-                            //Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                            Constant.ErrorToast(EditPOActivity.this, jsonObject.getString("message"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3089,49 +3221,13 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
     }
 
-    private String getLastValue(String invoice_nocompany) {
-        String value = "";
-        if(invoicenum.getText().toString().length() > 0){
-
-            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-
-            boolean gg = isNumeric(invoicenum.getText().toString());
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(invoicenum.getText().toString());
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = invoicenum.getText().toString();
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        Log.e(TAG , "extractInt "+vv[vv.length - 1]);
-                        value = vv[vv.length - 1];
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        value = cc;
-                    }
-                }
-            }else{
-                Log.e(TAG, "falsee ");
-            }
-        }
-
-        return  value;
-    }
-
     public void customer_list(String selectedCompanyId) {
         customer_bottom.clear();
         RequestParams params = new RequestParams();
         params.add("company_id", this.selectedCompanyId);
 
-        String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
+
+        String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
@@ -3139,7 +3235,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
                 Log.e("response customers", response);
-
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -3149,17 +3244,12 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         JSONArray customer = data.getJSONArray("customer");
                         String image_path = data.getString("customer_image_path");
 
-                        String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
-
-                        String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
-
 
                         for (int i = 0; i < customer.length(); i++) {
                             JSONObject item = customer.getJSONObject(i);
 
-                            customer_id = item.getString("customer_id");
-
-                            Log.e("Customer Id", customer_id);
+                            String customer_idBB = item.getString("customer_id");
+                            Log.e(TAG, "customer_idBB "+customer_idBB);
                             customer_name = item.getString("customer_name");
                             custoner_contact_name = item.getString("contact_name");
                             String image = item.getString("image");
@@ -3184,7 +3274,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                             customer_list.setCustomer_website(customer_website);
                             customer_list.setCustomer_phone(customer_contact);
 
-                            customer_list.setCustomer_id(customer_id);
+                            customer_list.setCustomer_id(customer_idBB);
                             customer_list.setCustomer_name(customer_name);
                             customer_list.setCustomer_contact_person(custoner_contact_name);
                             customer_list.setCustomer_image_path(image_path);
@@ -3231,7 +3321,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3254,41 +3344,39 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             bottomSheetDialog.dismiss();
 
             // createbottomsheet_customers();
+
             invoicerecipnt.setText(customer_list.getCustomer_name());
             customer_name = customer_list.getCustomer_name();
-            Selectedcustomer_id=customer_list.getCustomer_id();
-
-
+            customer_id = customer_list.getCustomer_id();
         } else {
             // createbottomsheet_customers();
             invoicerecipnt.setText(customer_list.getCustomer_name());
             customer_name = customer_list.getCustomer_name();
+            customer_id = customer_list.getCustomer_id();
         }
         selected.add(customer_list);
 
-        customer_name = customer_list.getCustomer_name();
-        customer_id = Selectedcustomer_id;
-
-        custoner_contact_name = customer_list.getCustomer_contact_person();
-        customer_email = customer_list.getCustomer_email();
-        customer_contact = customer_list.getCustomer_name();
-        customer_address = customer_list.getCustomer_address();
-        customer_website = customer_list.getCustomer_website();
-
-
-/*
-
-        for (int i = 0; i < customerinfo.size(); i++) {
-            Log.e("getShipping_firstname", customerinfo.get(i).getShipping_firstname());
-            Log.e("getCustomer_email", customerinfo.get(i).getCustomer_email());
-            Log.e("getCustomer_email", customerinfo.get(i).getCustomer_address());
-
-        }*/
     }
 
 
     @Override
     public void onPostExecutecall(Product_list selected_item, String s, String price) {
+//
+//        Double propice = Double.parseDouble(price);
+//        int propriceint = new BigDecimal(propice).setScale(0, RoundingMode.HALF_UP).intValueExact();
+//        producprice.add(String.valueOf(propriceint));
+//        tempList.add(selected_item);
+//        tempQuantity.add(s);
+//        total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
+//
+//
+//        totalpriceproduct.add(String.valueOf(total_price));
+//        calculateTotalAmount(total_price);
+//
+//        products_adapter.notifyDataSetChanged();
+//
+//        bottomSheetDialog.dismiss();
+
 
         bottomSheetDialog.dismiss();
 
@@ -3306,10 +3394,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
         products_adapter.notifyDataSetChanged();
 
-
-
     }
-
 
 
 
@@ -3345,7 +3430,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             subtotalvalue = total_price;
             netamountvalue = total_price;
             balanceamount = total_price;
-            if (strdiscount.equals("Percentage")) {
+            if (strdiscount.equalsIgnoreCase("Percentage")) {
                 subtotalvalue = 0.0;
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
@@ -3366,7 +3451,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
                 //  Log.e("DissCount value", String.valueOf(Totatlvalue)+ cruncycode);
-            } else if (strdiscount.equals("Amount")) {
+            } else if (strdiscount.equalsIgnoreCase("Amount")) {
                 subtotalvalue = 0.0;
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
@@ -3385,7 +3470,30 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
             } else {
 
-                discount.setText("0");
+                Log.e(TAG , "strdiscountvalueBb "+Discountamountstrdto);
+
+
+
+                if(strdiscountvalue.equalsIgnoreCase("")){
+                    discount.setText("0");
+                }else{
+                    double strdiscountval = Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+                    if(strdiscountval == 0){
+                        discount.setText("0");
+                    }else{
+                        discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
+                    }
+
+                    subtotalvalue = total_price - strdiscountval;
+
+                    Log.e(TAG, "total_priceXX "+total_price);
+                    Log.e(TAG, "strdiscountvalXX "+strdiscountval);
+                    Log.e(TAG, "subtotalvalueXX "+subtotalvalue);
+                }
+
+
+
+
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
                 netamount.setText(formatter.format(subtotalvalue) + cruncycode);
                 balance.setText(formatter.format(subtotalvalue) + cruncycode);
@@ -3394,13 +3502,29 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
             Log.e(TAG, "selectedtaxt.size() "+selectedtaxt.size());
 
+            Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+            Log.e(TAG, "taxtrateamt "+taxtrateamt);
+
+
             if (selectedtaxt.size() > 0) {
-                if (taxtypeclusive.equals("Inclusive")) { // exclude on
+                if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
                     //netamountvalue = 0.0;
                     Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-                    String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
-                    txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+
+                    if(taxrname.length() > 0){
+                        if(taxrname.contains(" ")){
+                            String firstTax = taxrname.split(" ")[0].replace("(", "");
+                            String subStrinng = firstTax + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        }else{
+                            String subStrinng = taxrname + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        }
+                    }else{
+                        String subStrinng = taxrname + " " + taxtrateamt + "%";
+                        txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                    }
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
 
@@ -3408,14 +3532,27 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     balance.setText(formatter.format(netamountvalue) + cruncycode);
 
                 } else { // include off
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
 
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
+//
+                    Log.e(TAG, "taxrnameAAA "+taxrname);
+                    Log.e(TAG, "taxtrateamtAAA "+taxtrateamt);
 
-                    String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
-
-                    txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                    if(taxrname.length() > 0){
+                        if(taxrname.contains(" ")){
+                            String firstTax = taxrname.split(" ")[0].replace("(", "");
+                            String subStrinng = firstTax + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        }else{
+                            String subStrinng = taxrname + " " + taxtrateamt + "%";
+                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        }
+                    }else{
+                        String subStrinng = taxrname + " " + taxtrateamt + "%";
+                        txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                    }
 
                     netamountvalue = subtotalvalue + Totatlvalue1;
 
@@ -3426,32 +3563,84 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             }
 
 
+            Log.e(TAG, "freight_costBB "+freight_cost);
+
+            Log.e(TAG, "freight_costBBBB "+Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
 
 
-            if (freight_cost.equals("")) {
+            double cc = 0;
 
-
-            } else {
-                balanceamount = netamountvalue + Double.parseDouble(freight_cost);
-
-                Double shipingvalue = Double.parseDouble(freight_cost);
-
+            if(freight_cost.isEmpty()){
+                //freight.setText("0");
+            }else {
+                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
+                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
                 freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
-                netamount.setText(formatter.format(balanceamount) + cruncycode);
+//                    netamount.setText(formatter.format(balanceamount) + cruncycode);
+
+                cc = subtotalvalue + shipingvalue;
+                if (selectedtaxt.size() > 0) {
+                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+                        netamount.setText(formatter.format(cc) + cruncycode);
+                        Log.e(TAG, "QQQQQQ111");
+                    }else{
+                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+                        Log.e(TAG, "QQQQQQ222");
+                    }
+                }
             }
-            if (paidamountstr.isEmpty()) {
+
+            if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
+                freight.setText("0");
+            }else{
+                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                balance.setText(formatter.format(balanceamount) + cruncycode);
+                // netamount.setText(formatter.format(balanceamount) + cruncycode);
+
+                cc = subtotalvalue + shipingvalue;
+                if (selectedtaxt.size() > 0) {
+                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+                        netamount.setText(formatter.format(cc) + cruncycode);
+                        Log.e(TAG, "QQQQQQ111");
+                    }else{
+                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+                        Log.e(TAG, "QQQQQQ222");
+                    }
+                }
+
+            }
+
+
+            if (Utility.getReplaceCurrency(paidamount.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
                 //
                 // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
             } else {
-                Log.e("balance", paidamountstr);
-                Double paidindouble = Double.parseDouble(paidamountstr);
+                //Log.e(TAG, "balanceAA "+Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode)));
+
+                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+                Log.e(TAG, "balanceamountAAAA "+balanceamount);
+
+                Double paidindouble = Double.parseDouble(Utility.getReplaceCurrency(paidamount.getText().toString(), cruncycode));
 
                 paidamount.setText(formatter.format(paidindouble) + cruncycode);
-                balanceamount = balanceamount - Double.parseDouble(paidamountstr);
-                Log.e("balance", String.valueOf(balanceamount));
+               // balanceamount = balanceamount - Double.parseDouble(Utility.getReplaceCurrency(paidamount.getText().toString(), cruncycode));
+                //Log.e("balance", ""+String.valueOf(balanceamount));
 
-                balance.setText(formatter.format(balanceamount) + cruncycode);
+
+                if (selectedtaxt.size() > 0) {
+                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+                        double ccc = balanceamount - paidindouble;
+                        balance.setText(formatter.format(ccc) + cruncycode);
+                        Log.e(TAG, "QQQQQQ111");
+                    }else{
+                        double ccc = balanceamount - paidindouble;
+                        balance.setText(formatter.format(ccc) + cruncycode);
+                        Log.e(TAG, "QQQQQQ222");
+                    }
+                }
             }
 
 
@@ -3470,101 +3659,216 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     }
 
 
+
+
+
     @Override
     public void onPostExecutecall2(Service_list selected_item, String s, String price) {
-
-//        producprice.add(price);
-//        tempList.add(selected_item);
-//        tempQuantity.add(s);
-//
-//        Log.e(TAG, "tempQuantityAA "+s);
-//        total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
-//
-//        double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
-//
-//        totalpriceproduct.add(String.valueOf(newPrice));
-//        calculateTotalAmount(total_price);
-//
-//        products_adapter.notifyDataSetChanged();
-
-
-
+        //  producprice.add(String.valueOf(price));
 
         Product_list product_list = new Product_list();
         product_list.setProduct_name(selected_item.getService_name());
         product_list.setProduct_id(selected_item.getService_id());
         product_list.setCurrency_code(selected_item.getCuurency_code());
+
         product_list.setProduct_description(selected_item.getService_description());
+
         product_list.setProduct_measurement_unit(selected_item.getMeasurement_unit());
+
         product_list.setProduct_price(selected_item.getService_price());
 
-        producprice.add(price);
+        producprice.add(selected_item.getService_price());
         tempList.add(product_list);
         tempQuantity.add(s);
 
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
-        double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
-        totalpriceproduct.add(String.valueOf(newPrice));
-
-        Log.e(TAG, "tempQuantityBB "+total_price);
 
 
-
+        totalpriceproduct.add(String.valueOf(total_price));
         calculateTotalAmount(total_price);
 
         products_adapter.notifyDataSetChanged();
 
         bottomSheetDialog2.dismiss();
-
-
-
     }
 
-
-    // clear button clear the data
 
     @Override
     public void onClick(int str,String type) {
+        Log.e(TAG, "onClick.size() "+str);
 
-        producprice.remove(str);
-        tempList.remove(str);
-        tempQuantity.remove(str);
-        totalpriceproduct.remove(str);
+        if (type.equalsIgnoreCase("del"))
+        {
 
-        products_adapter.notifyDataSetChanged();
+            producprice.remove(str);
+            tempList.remove(str);
+            tempQuantity.remove(str);
+            totalpriceproduct.remove(str);
 
-        Log.e(TAG, "ccAAA "+tempList.size());
-        Log.e(TAG, "ccBBB "+tempQuantity.size());
+            Log.e(TAG, "producprice.size() "+producprice.size());
+            Log.e(TAG, "tempList.size() "+tempList.size());
+            Log.e(TAG, "tempQuantity.size() "+tempQuantity.size());
+            Log.e(TAG, "totalpriceproduct.size() "+totalpriceproduct.size());
 
+            products_adapter.notifyDataSetChanged();
 
-        double total_price2 = 0;
+            double total_price2 = 0;
 
-        if(tempList.size() > 0){
-            if(tempQuantity.size() > 0){
-                for(int i = 0 ; i < tempList.size() ; i++){
-                    Log.e(TAG, "ccDDD "+producprice.get(i) + " DDDD "+ tempQuantity.get(i));
-                    total_price2 = total_price2 + Double.parseDouble(producprice.get(i)) * Double.parseDouble(tempQuantity.get(i));
+            if(tempList.size() > 0){
+                if(tempQuantity.size() > 0){
+                    for(int i = 0 ; i < tempList.size() ; i++){
+                        Log.e(TAG, "ccDDD "+producprice.get(i) + " DDDD "+ tempQuantity.get(i));
+                        total_price2 = total_price2 + Double.parseDouble(producprice.get(i)) * Double.parseDouble(tempQuantity.get(i));
+                    }
                 }
             }
+
+            Log.e(TAG, "productCal "+total_price2);
+
+            if(tempList.size() == 0) {
+                total_price2 = 0.0;
+            }
+
+            total_price = total_price2;
+
+            calculateTotalAmount(total_price);
         }
+        else
+        {
+            final Dialog mybuilder=new Dialog(this);
+            mybuilder.setContentView(R.layout.product_itemlayout);
 
-        Log.e(TAG, "productCal "+total_price2);
+            TextView txtprice;
+            final EditText edquantity,edprice;
+            Button btnok,btncancel;
 
-        if(tempList.size() == 0) {
-            total_price2 = 0.0;
+            txtprice=mybuilder.findViewById(R.id.txtprice);
+            edquantity=mybuilder.findViewById(R.id.edquantity);
+            edprice=mybuilder.findViewById(R.id.edprice);
+            btnok=mybuilder.findViewById(R.id.btnok);
+            btncancel=mybuilder.findViewById(R.id.btncancel);
+
+            edprice.setText(""+product_bottom.get(str).getProduct_price());
+
+//            show_quantity = edquantity.getText().toString();
+
+            edquantity.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                    if (edquantity.getText().toString().endsWith("."))
+                    {
+                        edquantity.setText(edquantity.getText().toString().replace(".",""));
+                    }
+                }
+            });
+
+
+            edquantity.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
+            btnok.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
+            btncancel.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
+            txtprice.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
+            edprice.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
+
+
+            mybuilder.show();
+            mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            Window window = mybuilder.getWindow();
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawableResource(R.color.transparent);
+
+            btnok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mybuilder.dismiss();
+
+                    int en_quantity = Integer.parseInt(edquantity.getText().toString());
+
+                    int sh_quantity = 0;
+                    double sh_price = 0.0;
+
+                    String quentityproduct= product_bottom.get(str).getQuantity();
+                    if(quentityproduct.equals("null"))
+                    {
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        mybuilder.dismiss();
+                    }
+                    else {
+                        sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
+                    }
+
+                    if (sh_quantity < en_quantity)
+                    {
+                        mybuilder.show();
+                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        mybuilder.dismiss();
+                    }
+                    else
+                    {
+                        sh_price = Double.parseDouble(edprice.getText().toString());
+                        double multiply = en_quantity * sh_price;
+                        String s_multiply = String.valueOf(multiply);
+
+                        product_bottom.get(str).setQuantity(String.valueOf(en_quantity));
+                        product_bottom.get(str).setProduct_price(String.valueOf(sh_price));
+
+                        total_price = (sh_price) * Double.parseDouble(edquantity.getText().toString());
+                        //  Log.e("Total price",String.valueOf(total_price));
+                        producprice.remove(str);
+                        tempQuantity.remove(str);
+
+                        producprice.add(str,String.valueOf(sh_price));
+                        tempList.get(str).setProduct_price(String.valueOf(sh_price));
+                        tempList.get(str).setQuantity(edquantity.getText().toString());
+                        tempQuantity.add(str,edquantity.getText().toString());
+
+                        calculateTotalAmount(total_price);
+                        products_adapter.notifyDataSetChanged();
+                        Log.e("tempList", String.valueOf(tempList.size()));
+
+                        mybuilder.dismiss();
+                    }
+
+                }
+            });
+
+            btncancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mybuilder.dismiss();
+                }
+            });
         }
-
-        total_price = total_price2;
-
-        calculateTotalAmount(total_price);
 
     }
 
-
-
-
     @Override
     public void onPostExecutecall3(String taxID, String taxnamst, String taxnamss, String type) {
+//        selectedtaxt.clear();
+//        Log.e("income rate", taxnamst);
+//        Log.e("taxnamss_rate", taxnamss);
+//        Log.e("type rate", type);
+//        taxtype = type;
+//        taxrname = taxnamst;
+//        taxtrateamt = taxnamss;
+//        SelectedTaxlist student = new SelectedTaxlist();
+//        student.setTaxname(taxnamst);
+//        student.setTaxrate(taxnamss);
+//        student.setTaxtype(type);
+//        student.setTaxamount(taxnamss);
+//        selectedtaxt.add(student);
+
+
         selectedtaxt.clear();
         Log.e(TAG, "income rate" + taxnamst);
         Log.e("taxnamss_rate", taxnamss);
@@ -3584,31 +3888,397 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         student.setTaxamount(taxnamss);
         selectedtaxt.add(student);
 
+    }
 
+    private class DownloadCompanystempweb extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            URL url = null;
+            try {
+                url = new URL(strings[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            Bitmap bm = null;
+            try {
+                bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Create Path to save Image
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr"); //Creates app specific folder
+
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+
+
+            File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
+
+            company_stampFileimage = imageFile;
+            company_stamp = imageFile.getAbsolutePath();
+            String imagepath = imageFile.getAbsolutePath();
+            Log.e("companystemp", imagepath);
+
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(imageFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
+                out.flush();
+                out.close();
+                // Tell the media scanner about the new file so that it is
+                // immediately available to the user.
+                MediaScannerConnection.scanFile(EditPOActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        // Log.i("ExternalStorage", "Scanned " + path + ":");
+                        //    Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
+            } catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private class Downloadsignatureissueweb extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            URL url = null;
+            try {
+                url = new URL(strings[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            Bitmap bm = null;
+            try {
+                bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Create Path to save Image
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr"); //Creates app specific folder
+
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+
+            File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
+
+//            if (s_r.equals("1")) {
+            signatureofinvoicemaker = imageFile;
+            signature_of_issuer = imageFile.getAbsolutePath();
+//            }
+//            if (s_r.equals("2")) {
+//                signaturinvoicereceiver = imageFile;
+//                signatureofreceiverst = imageFile.getAbsolutePath();
+//            }
+
+            String imagepath = imageFile.getAbsolutePath();
+            Log.e("save image", imagepath);
+
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(imageFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
+                out.flush();
+                out.close();
+                // Tell the media scanner about the new file so that it is
+                // immediately available to the user.
+                MediaScannerConnection.scanFile(EditPOActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        // Log.i("ExternalStorage", "Scanned " + path + ":");
+                        //    Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
+            } catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
+        }
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-//        cnames.clear();
-//        cids.clear();
+    private class Downloadsignaturereceiverweb extends AsyncTask<String, Void, Void> {
 
-//        Log.e(TAG, "onResume defaultClick"+defaultClick);
+        @Override
+        protected Void doInBackground(String... strings) {
+            URL url = null;
+            try {
+                url = new URL(strings[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            Bitmap bm = null;
+            try {
+                bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        // selectedCompanyId = "0";
-        // if(defaultClick == 0){
-        companyget();
-        //  }
+            //Create Path to save Image
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr"); //Creates app specific folder
 
-//        selectedTemplate = pref.getTemplate();
-//        Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+
+            File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
+
+//            if (s_r.equals("1")) {
+//                signaturinvoicereceiver = imageFile;
+//                signature_of_issuer = imageFile.getAbsolutePath();
+//            }
+//            if (s_r.equals("2")) {
+            signaturinvoicereceiver = imageFile;
+            signatureofreceiverst = imageFile.getAbsolutePath();
+//            }
+
+            String imagepath = imageFile.getAbsolutePath();
+            Log.e("save image", imagepath);
+
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(imageFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
+                out.flush();
+                out.close();
+                // Tell the media scanner about the new file so that it is
+                // immediately available to the user.
+                MediaScannerConnection.scanFile(EditPOActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        // Log.i("ExternalStorage", "Scanned " + path + ":");
+                        //    Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
+            } catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
+
+    private class DownloadInvoiceImages extends AsyncTask<String, Void, Void> {
+
+        ProgressDialog progressDialog = new ProgressDialog(EditPOActivity.this);
+
+
+        @Override
+        protected Void doInBackground(String... strings) {
+
+
+            URL url = null;
+            try {
+                url = new URL(strings[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            Bitmap bm = null;
+            try {
+                bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Create Path to save Image
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr"); //Creates app specific folder
+
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+
+            File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
+
+//            if (s_r.equals("1")) {
+//                signaturinvoicereceiver = imageFile;
+//                signature_of_issuer = imageFile.getAbsolutePath();
+//            }
+//            if (s_r.equals("2")) {
+//            signaturinvoicereceiver = imageFile;
+//            signatureofreceiverst = imageFile.getAbsolutePath();
+
+
+            selectedUriList.add(Uri.fromFile(imageFile));
+
+//            }
+
+            String imagepath = imageFile.getAbsolutePath();
+            Log.e(TAG , "save_image"+ imagepath);
+
+            attchmentimage.add(imagepath);
+
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(imageFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
+                out.flush();
+                out.close();
+                // Tell the media scanner about the new file so that it is
+                // immediately available to the user.
+                MediaScannerConnection.scanFile(EditPOActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        // Log.i("ExternalStorage", "Scanned " + path + ":");
+                        //    Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
+            } catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            progressDialog.setMessage("Please wait");
+//            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+
+            Log.e(TAG, "onPreExecute");
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //  progressDialog.dismiss();
+            //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
+
+
+    private class DownloadsImagefromweblogoCom extends AsyncTask<String, Void, Void> {
+
+        @SuppressLint("LongLogTag")
+        @Override
+        protected Void doInBackground(String... strings) {
+            URL url = null;
+            try {
+                url = new URL(strings[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            Bitmap bm = null;
+            try {
+                bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Create Path to save Image
+            File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr"); //Creates app specific folder
+
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+
+
+            File imageFile = new File(path, System.currentTimeMillis() + ".png"); // Imagename.png
+
+            company_logoFileimage = imageFile;
+            company_stamp = imageFile.getAbsolutePath();
+            String imagepath = imageFile.getAbsolutePath();
+            Log.e("DownloadsImagefromweblogoCom", "DownloadsImagefromweblogoCom"+imagepath);
+
+            FileOutputStream out = null;
+            try {
+                out = new FileOutputStream(imageFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
+                out.flush();
+                out.close();
+                // Tell the media scanner about the new file so that it is
+                // immediately available to the user.
+                MediaScannerConnection.scanFile(EditPOActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
+                    public void onScanCompleted(String path, Uri uri) {
+                        // Log.i("ExternalStorage", "Scanned " + path + ":");
+                        //    Log.i("ExternalStorage", "-> uri=" + uri);
+                    }
+                });
+            } catch (Exception e) {
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
 //
-//        if(selectedTemplate != 0){
-//            itemstxtTemplate.setText("Template "+selectedTemplate);
-//        }
+//        Log.e(TAG, "onRestart selectedTemplate"+defaultClick);
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        Log.e(TAG, "onResume selectedTemplate"+defaultClick);
+//
+//        if(defaultClick == 1){
+//                SavePref pref = new SavePref();
+//                pref.SavePref(EditPOActivity.this);
+//
+//                selectedTemplate = pref.getTemplate();
+//                Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
+//
+//                if(selectedTemplate != 0){
+//                    itemstxtTemplate.setText("Template "+selectedTemplate);
+//                }
+//            }
+//
+//    }
 
-    }
+
+
 
     static String extractInt(String str)
     {
@@ -3705,14 +4375,51 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
 
 
-    StringBuilder stringBuilderBillTo = new StringBuilder();
-    StringBuilder stringBuilderShipTo = new StringBuilder();
+
+
+    private boolean getTrueValue(String toString) {
+        boolean b = false;
+        if(toString.length() > 0){
+            boolean gg = isNumeric(toString.toString());
+            Log.e(TAG, "gggggg "+gg);
+
+            boolean dd = isChar(toString.toString());
+            Log.e(TAG, "dddddd "+dd);
+
+            if(gg == false && dd == false){
+                Log.e(TAG, "truee ");
+                Boolean flag = Character.isDigit(toString.toString().charAt(toString.toString().length() - 1));
+                Log.e(TAG, "cccccc "+flag);
+                if(flag == true){
+                    String str = toString.toString();
+                    String cc = extractInt(str);
+                    if(cc.contains(" ")){
+                        String vv[] = cc.split(" ");
+                        Log.e(TAG , "extractInt "+vv[vv.length - 1]);
+                        b = true;
+                    }
+                    if(!cc.contains(" ")){
+                        Log.e(TAG , "extractInt2 "+cc);
+                        b = true;
+                    }
+                }
+            }else{
+                Log.e(TAG, "falsee ");
+                b = false;
+            }
+        }
+        return b;
+    }
+
+
+
+
+
 
 
     String  sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
-    //    String  taxamount = "";
+    // String  taxamount = "";
     String shippingzone = "";
-
 
     String cruncycode = "", Shiping_tostr = "", companyimagelogopath = "";
 
@@ -3720,6 +4427,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
     String encodedImage, signature_of_receiverincode, encodesignatureissure, drableimagebase64, attchmentbase64;
     String paid_amount_payment;
+
 
 
     //////////////
@@ -3749,6 +4457,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
             }
 
+
             if(!sltcustonername.equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustonername+"</br>");
             }
@@ -3768,9 +4477,9 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 stringBuilderBillTo.append(sltcustomer_email+"");
             }
 
-        }
 
-        if (shippingfirstname.equalsIgnoreCase("")) {
+        }
+        if (selected.size() < 0) {
             Shiping_tostr = "";
         } else {
             Shiping_tostr = "Ship To:";
@@ -3798,6 +4507,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             }
 
             // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+
         }
 
 
@@ -3808,12 +4518,13 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             }
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         for (int i = 0; i < tempList.size(); i++) {
-            Log.e("product[" + i + "]" + "[price]", tempList.get(i).getProduct_price());
+            Log.e("product[" + i + "]" + "[price]", producprice.get(i));
             Log.e("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
             Log.e("product[" + i + "]" + "[product_id]", tempList.get(i).getProduct_id());
-
         }
+
 
 
         if (paymentmode.equals("")) {
@@ -3884,8 +4595,12 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         }
 
 
+
+
         view_invoice();
     }
+
+
 
 
 
@@ -3931,7 +4646,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 attchedmentimagepath = attchmentimage.get(i);
                 try {
 
-                    multipagepath = IOUtils.toString(getActivity().getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
 
 
                             .replaceAll("#ATTACHMENT_1#", attchmentimage.get(i));
@@ -3952,20 +4667,12 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
         String productitemlist = "";
         try {
-
-
             for (int i = 0; i < tempList.size(); i++) {
                 cruncycode = tempList.get(i).getCurrency_code();
 
-                Log.e(TAG, "NAME "+tempList.get(i).getProduct_name());
-                Log.e(TAG, "DESC "+tempList.get(i).getProduct_description());
-                Log.e(TAG, "UNIT "+tempList.get(i).getProduct_measurement_unit());
-                Log.e(TAG, "QUANTITY "+tempQuantity.get(i));
-                Log.e(TAG, "PRICE "+producprice.get(i));
-                Log.e(TAG, "TOTAL "+totalpriceproduct.get(i));
-                Log.e(TAG, "TOTAL2 "+tempList.get(i).getCurrency_code());
+                productitem = IOUtils.toString(getAssets().open("single_item.html"))
 
-                productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
+
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
@@ -3976,10 +4683,8 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 productitemlist = productitemlist + productitem;
             }
 
-            Log.e(TAG, "cruncycodeAA "+cruncycode);
 
-
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -4039,7 +4744,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         }
 
         try {
-            signatureinvoice = IOUtils.toString(getActivity().getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
@@ -4078,9 +4783,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             discounttxtreplace = " Discount ";
         }
 
-
-
-
         String subTotalTxt = "";
         String subTotalValueTxt = "";
 
@@ -4091,7 +4793,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             subTotalTxt = "SubTotal";
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
-
 
 
         if (company_website != null) {
@@ -4161,8 +4862,9 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         String paypalstrtxt="";
         String bankstrtxt="";
 
+        Log.e(TAG, "strpaid_amount:: "+strpaid_amount);
 
-        if (strpaid_amount.equals("0")) {
+        if (strpaid_amount.equals("0") || strpaid_amount.equals("0.00") || strpaid_amount.equals(".00Rs") || strpaid_amount.equals(".00")) {
             // Do you work here on success
             paidamountstrrepvalue = "";
             paidamountstrreptxt = "";
@@ -4178,18 +4880,15 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             bankstrtxt="";
             hiddenpaidrow="hidden";
 
-
+            paidamountstrrepvalue = "";
 
         } else {
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount;
-            paidamountstrreptxt = "Paid Amount";
-            if(Paymentamountdate.equalsIgnoreCase("")){
-                paidamountstrreptxt = "Paid Amount ";
-            }else{
-                paidamountstrreptxt = "Paid Amount "+"("+Paymentamountdate+")";
-            }
 
+            paidamountstrreptxt = "Paid Amount";
+
+//            paidamountstrreptxt = "Paid Amount "+"("+Paymentamountdate+")";
 
 
             pemailpaidstr = paypal_emailstr;
@@ -4225,32 +4924,29 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
         }
 
-        Log.e(TAG, "selectedTemplate "+selectedTemplate);
+
+
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "po.html";
-        String nameName = "file:///android_asset/po.html";
-//        if(selectedTemplate.equalsIgnoreCase("0")){
-//            name = "invoice.html";
-//            nameName = "file:///android_asset/invoice.html";
-//        }else if(selectedTemplate.equalsIgnoreCase("1")){
-//            name = "invoice1.html";
-//            nameName = "file:///android_asset/invoice1.html";
-//        }else if(selectedTemplate.equalsIgnoreCase("2")){
-//            name = "invoice2.html";
-//            nameName = "file:///android_asset/invoice2.html";
-//        }else if(selectedTemplate.equalsIgnoreCase("3")){
-//            name = "invoice3.html";
-//            nameName = "file:///android_asset/invoice3.html";
-//        }else if(selectedTemplate.equalsIgnoreCase("4")){
-//            name = "invoice4.html";
-//            nameName = "file:///android_asset/invoice4.html";
-//        }
-
-        Log.e(TAG , "Grossamount_str "+Grossamount_str);
-
-        Log.e(TAG, "companyimagelogopathAA "+companyimagelogopath);
+        String name = "invoice.html";
+        String nameName = "file:///android_asset/invoice.html";
+        if(selectedTemplate.equalsIgnoreCase("0")){
+            name = "invoice.html";
+            nameName = "file:///android_asset/invoice.html";
+        }else if(selectedTemplate.equalsIgnoreCase("1")){
+            name = "invoice1.html";
+            nameName = "file:///android_asset/invoice1.html";
+        }else if(selectedTemplate.equalsIgnoreCase("2")){
+            name = "invoice2.html";
+            nameName = "file:///android_asset/invoice2.html";
+        }else if(selectedTemplate.equalsIgnoreCase("3")){
+            name = "invoice3.html";
+            nameName = "file:///android_asset/invoice3.html";
+        }else if(selectedTemplate.equalsIgnoreCase("4")){
+            name = "invoice4.html";
+            nameName = "file:///android_asset/invoice4.html";
+        }
 
         StringBuilder stringBuilderCompany = new StringBuilder();
 
@@ -4266,10 +4962,9 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         if(!company_email.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_email+"");
         }
-
         String content = null;
         try {
-            content = IOUtils.toString(getActivity().getAssets().open(name))
+            content = IOUtils.toString(getAssets().open(name))
 
                     .replaceAll("Company Name", company_name)
                     .replaceAll("Address", stringBuilderCompany.toString())
@@ -4283,23 +4978,23 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     .replaceAll("crTerms", credit_terms)
                     .replaceAll("refNo", strreferencenovalue)
 
-
                     .replaceAll("GrossAm-", ""+Utility.getContainsReplaceCurrency(Grossamount_str, cruncycode))
                     .replaceAll("Discount-", ""+Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", subTotalValueTxt)
                     .replaceAll("Txses-", ""+Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
-                    .replaceAll("Shipping-", ""+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
+                    .replaceAll("Shipping-", "+"+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
                     .replaceAll("Total Amount-", ""+Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
                     .replaceAll("PaidsAmount", ""+Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
                     .replaceAll("Balance Due-", ""+Utility.getContainsReplaceCurrency(Blanceamountstr, cruncycode))
 
-
                     .replaceAll("SubTotal", subTotalTxt)
+//                    .replaceAll("Checkto", chektopaidmaount)
                     .replaceAll("Checkto", "")
                     .replaceAll("BankName", payment_bankstr)
                     .replaceAll("Pemail", pemailpaidstr)
                     .replaceAll("IBAN", payment_ibanstr)
+//                    .replaceAll("Currency", payment_currencystr)
                     .replaceAll("Currency", "")
                     .replaceAll("Swift/BICCode", payment_swiftstr)
 
@@ -4325,11 +5020,17 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                     .replaceAll("#799f6e", companycolor)
 
+//
+//                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
+//                    .replaceAll("By cheque :", bycheckstrtxt)
+//                    .replaceAll("Pay Pal :", paypalstrtxt)
+//                    .replaceAll("Bank :", bankstrtxt)
 
                     .replaceAll(" Payment Details ", "")
                     .replaceAll("By cheque :", "")
                     .replaceAll("Pay Pal :", "")
                     .replaceAll("Bank :", "")
+
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
 
 
@@ -4371,7 +5072,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                 //if page loaded successfully then show print button
                 //findViewById(R.id.fab).setVisibility(View.VISIBLE);
-                final File savedPDFFile = FileManager.getInstance().createTempFile(getActivity(), "pdf", false);
+                final File savedPDFFile = FileManager.getInstance().createTempFile(EditPOActivity.this, "pdf", false);
 
                 PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
                     @Override
@@ -4389,8 +5090,19 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 //
 //                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
 
-                            Log.e(TAG, "FILENAME" +file);
-                            Log.e(TAG, "customer_name" +customer_name);
+//                            Log.e(TAG, "FILENAME" +file);
+//
+//                            Log.e(TAG, "selectedUriListQQ" +selectedUriList.size());
+
+
+                            for(int i = 0 ; i < selectedUriList.size() ; i++){
+//                                File file11 = new File(selectedUriList.get(i).getPath());//create path from uri
+//                                final String[] split = file11.getPath().split(":");//split the path.
+//                                //filePath = split[1];//assign it to a string(your choice).
+//
+//                                //File file = new File(new Uri(selectedUriList.get(i)));
+                                Log.e(TAG, "FILENAME11" +selectedUriList.get(i).toString().replace("file://", ""));
+                            }
 
                             createinvoicewithdetail(file);
                         }
@@ -4420,101 +5132,10 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
 
 
-
-
-    public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
-
-        private static final String TAG = "MenuAdapter";
-
-        ArrayList<String> cnames = new ArrayList<>();
-        ArrayList<String> cids = new ArrayList<>();
-
-        Dialog mybuilder;
-
-        public MenuAdapter(ArrayList<String> cnames, ArrayList<String> cids, Dialog mybuilder) {
-            super();
-            this.cnames = cnames;
-            this.cids = cids;
-            this.mybuilder = mybuilder;
-        }
-
-
-
-        @Override
-        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
-            final View v = LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.menu_item, viewGroup, false);
-//            SellerFeedbackAdapter.ViewHolder viewHolder = new SellerFeedbackAdapter.ViewHolder(v);
-//            return viewHolder;
-
-
-//            val v = LayoutInflater.from(viewGroup.context)
-//                    .inflate(R.layout.mybooking_item, viewGroup, false)
-            return new MenuAdapter.ViewHolder(v);
-        }
-
-
-        @Override
-        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
-
-            viewHolder.textViewName.setText(""+cnames.get(i));
-            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mybuilder.dismiss();
-                    // description.setText(""+alName.get(i).getCompany_name());
-                    // HomeApi(alName.get(i).company_id);
-
-                    selectedCompanyId = cids.get(i);
-
-                    selectcompany.setText(""+cnames.get(i));
-
-                    warehouse_list(selectedCompanyId);
-                    serviceget(selectedCompanyId);
-                    customer_list(selectedCompanyId);
-                    CompanyInformation(selectedCompanyId);
-                }
-            });
-
-        }
-
-
-        @Override
-        public int getItemCount() {
-            return cnames.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder{
-            View view11 = null;
-            TextView textViewName;
-            RelativeLayout realtive1;
-            public ViewHolder(View itemView) {
-                super(itemView);
-                view11 = itemView;
-                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
-                textViewName = (TextView) itemView.findViewById(R.id.txtList);
-            }
-
-        }
-
-
-
-        public void updateData(ArrayList<String> cnames) {
-            // TODO Auto-generated method stub
-            this.cnames = cnames;
-            notifyDataSetChanged();
-        }
-
-
-    }
-
-
-
     @Override
     public void closeDialog() {
         if(bottomSheetDialog != null){
             bottomSheetDialog.dismiss();
         }
     }
-
 }

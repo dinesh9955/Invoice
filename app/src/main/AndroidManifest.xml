@@ -84,6 +84,22 @@
 
         </activity>
 
+        <activity
+            android:name=".PO.POViewActivityWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
+
+        <activity
+            android:name=".PO.EditPOActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
+
+
+
 
         <activity
             android:name=".Receipts.EditReceiptActivity"

@@ -4,6 +4,7 @@ import com.receipt.invoice.stock.sirproject.Estimate.EstimateResponseDto;
 import com.receipt.invoice.stock.sirproject.Invoice.ResponseListOfInvoice.ResponseListInociceDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceResponseDto;
 import com.receipt.invoice.stock.sirproject.Notes.CreditNoteResponseDto;
+import com.receipt.invoice.stock.sirproject.PO.POResponseDto;
 import com.receipt.invoice.stock.sirproject.Receipts.ReceiptResponseDto;
 
 import retrofit2.Call;
@@ -38,6 +39,10 @@ public interface ApiInterface {
     @POST("creditnote/detail/{credit_note_id}")
     Call<CreditNoteResponseDto> getCreditNoteDetail(@Header ("Access-Token") String string, @Field("credit_note_id") String id);
 
+
+    @FormUrlEncoded
+    @POST("purchaseorder/detail/{purchase_order_id}")
+    Call<POResponseDto> getPODetail(@Header ("Access-Token") String string, @Field("purchase_order_id") String id);
 //    @Url String url
 
 }
