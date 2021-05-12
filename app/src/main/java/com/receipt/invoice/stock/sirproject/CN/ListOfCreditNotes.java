@@ -1,4 +1,4 @@
-package com.receipt.invoice.stock.sirproject.Notes;
+package com.receipt.invoice.stock.sirproject.CN;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -35,7 +34,6 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,18 +42,14 @@ import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.receipt.invoice.stock.sirproject.Adapter.InvoicelistAdapterdt;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.CheckForSDCard;
 import com.receipt.invoice.stock.sirproject.Invoice.ConvertToReceiptsActivity;
 //import com.receipt.invoice.stock.sirproject.Invoice.InvoiceViewActivityWebView;
-import com.receipt.invoice.stock.sirproject.Invoice.RecyclerViewSwipeDecorator;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper;
-import com.receipt.invoice.stock.sirproject.Invoice.EditInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.R;
-import com.receipt.invoice.stock.sirproject.Receipts.ListOfReceipts;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Utility;
@@ -103,7 +97,7 @@ public class ListOfCreditNotes extends Fragment {
     RecyclerView recycler_invoices;
     EditText search;
     ArrayList<InvoiceData> list = new ArrayList<>();
-    CreaditLNoteListAdapterdt invoicelistAdapterdt;
+    CreditNoteListAdapterdt invoicelistAdapterdt;
     String invoiceStatus = "";
     int invoice_position = 0;
     String invoice_text = "";
@@ -180,7 +174,7 @@ public class ListOfCreditNotes extends Fragment {
         companyget();
         // COMPANYListingApi();
         setListeners();
-        invoicelistAdapterdt = new CreaditLNoteListAdapterdt(getContext(), list);
+        invoicelistAdapterdt = new CreditNoteListAdapterdt(getContext(), list);
         recycler_invoices.setAdapter(invoicelistAdapterdt);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recycler_invoices.setLayoutManager(layoutManager);

@@ -1,4 +1,4 @@
-package com.receipt.invoice.stock.sirproject.Notes;
+package com.receipt.invoice.stock.sirproject.CN;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,20 +12,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.receipt.invoice.stock.sirproject.Adapter.InvoicelistAdapterdt;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class CreaditLNoteListAdapterdt extends RecyclerView.Adapter<CreaditLNoteListAdapterdt.ViewHolderForCat> {
+public class CreditNoteListAdapterdt extends RecyclerView.Adapter<CreditNoteListAdapterdt.ViewHolderForCat> {
 
     private Context mcontext;
     ArrayList<InvoiceData> mlist = new ArrayList<>();
 
 
-    public CreaditLNoteListAdapterdt(Context mcontext, ArrayList<InvoiceData> list) {
+    public CreditNoteListAdapterdt(Context mcontext, ArrayList<InvoiceData> list) {
         this.mcontext = mcontext;
         mlist = list;
 
@@ -34,15 +33,15 @@ public class CreaditLNoteListAdapterdt extends RecyclerView.Adapter<CreaditLNote
 
     @NonNull
     @Override
-    public CreaditLNoteListAdapterdt.ViewHolderForCat onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public CreditNoteListAdapterdt.ViewHolderForCat onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View myitem = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.invoicedetail, viewGroup, false);
-        CreaditLNoteListAdapterdt.ViewHolderForCat viewHolderForCat = new CreaditLNoteListAdapterdt.ViewHolderForCat(myitem);
+        CreditNoteListAdapterdt.ViewHolderForCat viewHolderForCat = new CreditNoteListAdapterdt.ViewHolderForCat(myitem);
         return viewHolderForCat;
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull final CreaditLNoteListAdapterdt.ViewHolderForCat viewHolderForCat, final int i) {
+    public void onBindViewHolder(@NonNull final CreditNoteListAdapterdt.ViewHolderForCat viewHolderForCat, final int i) {
 
 
         InvoiceData company_list = mlist.get(i);

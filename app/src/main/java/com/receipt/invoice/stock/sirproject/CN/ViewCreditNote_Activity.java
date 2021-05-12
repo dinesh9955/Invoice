@@ -1,4 +1,4 @@
-package com.receipt.invoice.stock.sirproject.Notes;
+package com.receipt.invoice.stock.sirproject.CN;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

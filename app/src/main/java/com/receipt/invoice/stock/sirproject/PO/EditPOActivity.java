@@ -1288,10 +1288,10 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         if (customer_name.equals("")) {
             Constant.ErrorToast(EditPOActivity.this, "Select A Customer");
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
-            Constant.ErrorToast(EditPOActivity.this, "Select Valid Invoice No");
+            Constant.ErrorToast(EditPOActivity.this, "Select Valid PO No");
 
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(EditPOActivity.this, "Select Invoice Date");
+            Constant.ErrorToast(EditPOActivity.this, "Select Date");
 
         } else if (selectedCompanyId.equals("")) {
             Constant.ErrorToast(EditPOActivity.this, "Select a Company");
@@ -1318,7 +1318,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             params.add("new_purchase_order_no", invoicenum.getText().toString());
 
             params.add("company_id", selectedCompanyId);
-            params.add("wearhouse_id", selectwarehouseId);
+            params.add("warehouse_id", selectwarehouseId);
             params.add("order_date", invoice_date);
             params.add("due_date", invoice_due_date);
             params.add("customer_id", customer_id);
@@ -4479,36 +4479,38 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
 
         }
-        if (selected.size() < 0) {
-            Shiping_tostr = "";
-        } else {
-            Shiping_tostr = "Ship To:";
 
-            if(!shippingfirstname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingfirstname+"</br>");
-            }
-            if(!shippinglastname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippinglastname+"</br>");
-            }
-            if(!shippingaddress1.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress1+"</br>");
-            }
-            if(!shippingaddress2.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress2+"</br>");
-            }
-            if(!shippingcity.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcity+"</br>");
-            }
-            if(!shippingcountry.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcountry+"</br>");
-            }
-            if(!shippingpostcode.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingpostcode+"");
-            }
 
-            // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
-
-        }
+//        if (selected.size() < 0) {
+//            Shiping_tostr = "";
+//        } else {
+//            Shiping_tostr = "Ship To:";
+//
+//            if(!shippingfirstname.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingfirstname+"</br>");
+//            }
+//            if(!shippinglastname.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippinglastname+"</br>");
+//            }
+//            if(!shippingaddress1.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingaddress1+"</br>");
+//            }
+//            if(!shippingaddress2.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingaddress2+"</br>");
+//            }
+//            if(!shippingcity.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingcity+"</br>");
+//            }
+//            if(!shippingcountry.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingcountry+"</br>");
+//            }
+//            if(!shippingpostcode.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingpostcode+"");
+//            }
+//
+//            // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+//
+//        }
 
 
 
@@ -4526,8 +4528,9 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         }
 
 
+        Log.e(TAG, "paymentmodeAA "+paymentmode);
 
-        if (paymentmode.equals("")) {
+        if (paymentmode == null) {
             paid_amount_payment = "";
         } else {
             paid_amount_payment = paymentmode;

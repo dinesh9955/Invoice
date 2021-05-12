@@ -1,11 +1,11 @@
-package com.receipt.invoice.stock.sirproject.Notes;
+package com.receipt.invoice.stock.sirproject.DN;
 
 import com.google.gson.annotations.SerializedName;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDto;
+import com.receipt.invoice.stock.sirproject.CN.CreditNoteDto;
 
-public class CreditNoteResponseDto {
+public class DebitNoteResponseDto {
     @SerializedName("data")
-    private CreditNoteDto data;
+    private DebitNoteDto data;
 
     @SerializedName("message")
     private String message;
@@ -13,7 +13,7 @@ public class CreditNoteResponseDto {
     @SerializedName("status")
     private boolean status;
 
-    public CreditNoteDto getData(){
+    public DebitNoteDto getData(){
         return data;
     }
 

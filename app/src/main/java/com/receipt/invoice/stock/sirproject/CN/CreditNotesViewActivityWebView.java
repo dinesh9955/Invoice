@@ -1,4 +1,4 @@
-package com.receipt.invoice.stock.sirproject.Notes;
+package com.receipt.invoice.stock.sirproject.CN;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,13 +20,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
-import com.receipt.invoice.stock.sirproject.Invoice.InvoiceViewActivityWebView;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDto;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDtoInvoice;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceResponseDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.R;

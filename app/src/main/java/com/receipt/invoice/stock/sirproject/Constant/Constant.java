@@ -12,13 +12,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.andrognito.flashbar.Flashbar;
 import com.andrognito.flashbar.anim.FlashAnim;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -29,12 +27,13 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
+import com.receipt.invoice.stock.sirproject.DN.DebitNotesActivity;
 import com.receipt.invoice.stock.sirproject.Estimate.EstimateActivity;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
-import com.receipt.invoice.stock.sirproject.Home.Settings_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity;
-import com.receipt.invoice.stock.sirproject.Notes.CreateNotesActivity;
+import com.receipt.invoice.stock.sirproject.CN.CreditNotesActivity;
 import com.receipt.invoice.stock.sirproject.PO.POActivity;
+import com.receipt.invoice.stock.sirproject.PV.PVActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Receipts.ReceiptsActivity;
@@ -374,10 +373,25 @@ public class Constant {
                             activity.startActivity(intent);
 
                         }
+                        if(position==14)
+                        {
+                            Intent intent = new Intent(activity, PVActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            activity.startActivity(intent);
+
+                        }
 
                         if(position==16)
                         {
-                            Intent intent = new Intent(activity, CreateNotesActivity.class);
+                            Intent intent = new Intent(activity, CreditNotesActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            activity.startActivity(intent);
+
+                        }
+
+                        if(position==17)
+                        {
+                            Intent intent = new Intent(activity, DebitNotesActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             activity.startActivity(intent);
 

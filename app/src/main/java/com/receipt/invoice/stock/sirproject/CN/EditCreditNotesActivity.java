@@ -1,4 +1,4 @@
-package com.receipt.invoice.stock.sirproject.Notes;
+package com.receipt.invoice.stock.sirproject.CN;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -80,16 +80,10 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
-import com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity;
-import com.receipt.invoice.stock.sirproject.Invoice.EditInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
-import com.receipt.invoice.stock.sirproject.Invoice.ViewInvoice_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDto;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDtoInvoice;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceResponseDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
@@ -1351,7 +1345,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Intent intent = new Intent(EditCreditNotesActivity.this, CreateNotesActivity.class);
+                                    Intent intent = new Intent(EditCreditNotesActivity.this, CreditNotesActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }

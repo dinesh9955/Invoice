@@ -1,9 +1,10 @@
 package com.receipt.invoice.stock.sirproject.RetrofitApi;
 
+import com.receipt.invoice.stock.sirproject.DN.DebitNoteResponseDto;
 import com.receipt.invoice.stock.sirproject.Estimate.EstimateResponseDto;
 import com.receipt.invoice.stock.sirproject.Invoice.ResponseListOfInvoice.ResponseListInociceDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceResponseDto;
-import com.receipt.invoice.stock.sirproject.Notes.CreditNoteResponseDto;
+import com.receipt.invoice.stock.sirproject.CN.CreditNoteResponseDto;
 import com.receipt.invoice.stock.sirproject.PO.POResponseDto;
 import com.receipt.invoice.stock.sirproject.Receipts.ReceiptResponseDto;
 
@@ -38,6 +39,11 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("creditnote/detail/{credit_note_id}")
     Call<CreditNoteResponseDto> getCreditNoteDetail(@Header ("Access-Token") String string, @Field("credit_note_id") String id);
+
+
+    @FormUrlEncoded
+    @POST("debitnote/detail/{debit_note_id}")
+    Call<DebitNoteResponseDto> getDebitNoteDetail(@Header ("Access-Token") String string, @Field("debit_note_id") String id);
 
 
     @FormUrlEncoded

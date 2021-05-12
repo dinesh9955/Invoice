@@ -1,14 +1,15 @@
-package com.receipt.invoice.stock.sirproject.Notes;
+package com.receipt.invoice.stock.sirproject.DN;
 
 import com.google.gson.annotations.SerializedName;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
+import com.receipt.invoice.stock.sirproject.PO.POSupplierDto;
 
 import java.util.List;
 
-public class CreditNoteDtoCreditNote {
+public class DebitNoteDtoDebitNote {
 
     @SerializedName("template_type")
     private String template_type;
@@ -46,8 +47,8 @@ public class CreditNoteDtoCreditNote {
     @SerializedName("currency_code")
     private String currencyCode;
 
-    @SerializedName("credit_note_date")
-    private String credit_note_date;
+    @SerializedName("debit_note_date")
+    private String debit_note_date;
 
     @SerializedName("payment_currency")
     private String paymentCurrency;
@@ -70,8 +71,8 @@ public class CreditNoteDtoCreditNote {
     @SerializedName("paid_amount_payment_method")
     private String paidAmountPaymentMethod;
 
-    @SerializedName("credit_note_id")
-    private String credit_note_id;
+    @SerializedName("debit_note_id")
+    private String debit_note_id;
 
     @SerializedName("logo")
     private String logo;
@@ -100,8 +101,8 @@ public class CreditNoteDtoCreditNote {
     @SerializedName("currency_symbol")
     private String currencySymbol;
 
-    @SerializedName("credit_note_no")
-    private String credit_note_no;
+    @SerializedName("debit_note_no")
+    private String debit_note_no;
 
     @SerializedName("signature_of_maker")
     private String signatureOfMaker;
@@ -151,9 +152,29 @@ public class CreditNoteDtoCreditNote {
     @SerializedName("status")
     private String status;
 
-    @SerializedName("customer")
-    private InvoiceCustomerDto customer;
+//    @SerializedName("customer")
+//    private InvoiceCustomerDto customer;
 
+
+    @SerializedName("supplier")
+    private DebitNoteSupplierDto supplier;
+
+
+    public String getDebit_note_date() {
+        return debit_note_date;
+    }
+
+    public void setDebit_note_date(String debit_note_date) {
+        this.debit_note_date = debit_note_date;
+    }
+
+    public String getDebit_note_id() {
+        return debit_note_id;
+    }
+
+    public void setDebit_note_id(String debit_note_id) {
+        this.debit_note_id = debit_note_id;
+    }
 
     public String getTemplate_type() {
         return template_type;
@@ -251,13 +272,7 @@ public class CreditNoteDtoCreditNote {
         this.currencyCode = currencyCode;
     }
 
-    public String getCredit_note_date() {
-        return credit_note_date;
-    }
 
-    public void setCredit_note_date(String credit_note_date) {
-        this.credit_note_date = credit_note_date;
-    }
 
     public String getPaymentCurrency() {
         return paymentCurrency;
@@ -315,13 +330,6 @@ public class CreditNoteDtoCreditNote {
         this.paidAmountPaymentMethod = paidAmountPaymentMethod;
     }
 
-    public String getCredit_note_id() {
-        return credit_note_id;
-    }
-
-    public void setCredit_note_id(String credit_note_id) {
-        this.credit_note_id = credit_note_id;
-    }
 
     public String getLogo() {
         return logo;
@@ -395,12 +403,13 @@ public class CreditNoteDtoCreditNote {
         this.currencySymbol = currencySymbol;
     }
 
-    public String getCredit_note_no() {
-        return credit_note_no;
+
+    public String getDebit_note_no() {
+        return debit_note_no;
     }
 
-    public void setCredit_note_no(String credit_note_no) {
-        this.credit_note_no = credit_note_no;
+    public void setDebit_note_no(String debit_note_no) {
+        this.debit_note_no = debit_note_no;
     }
 
     public String getSignatureOfMaker() {
@@ -531,11 +540,20 @@ public class CreditNoteDtoCreditNote {
         this.status = status;
     }
 
-    public InvoiceCustomerDto getCustomer() {
-        return customer;
+//    public InvoiceCustomerDto getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(InvoiceCustomerDto customer) {
+//        this.customer = customer;
+//    }
+
+
+    public DebitNoteSupplierDto getSupplier() {
+        return supplier;
     }
 
-    public void setCustomer(InvoiceCustomerDto customer) {
-        this.customer = customer;
+    public void setSupplier(DebitNoteSupplierDto supplier) {
+        this.supplier = supplier;
     }
 }

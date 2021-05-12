@@ -54,14 +54,14 @@
 
 
         <activity
-            android:name=".Notes.ViewCreditNote_Activity"
+            android:name=".CN.ViewCreditNote_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
         </activity>
 
         <activity
-            android:name=".Notes.CreateNotesActivity"
+            android:name=".CN.CreditNotesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -98,6 +98,36 @@
             android:windowSoftInputMode="adjustPan|adjustResize" >
         </activity>
 
+
+
+        <activity
+            android:name=".PV.PVActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
+
+        <activity
+            android:name=".DN.DebitNotesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
+
+
+        <activity
+            android:name=".DN.ViewDebitNote_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
+
+        <activity
+            android:name=".DN.DebitNotesViewActivityWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
 
 
 
@@ -203,14 +233,14 @@
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <activity
-            android:name=".Notes.CreditNotesViewActivityWebView"
+            android:name=".CN.CreditNotesViewActivityWebView"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
 
         <activity
-            android:name=".Notes.EditCreditNotesActivity"
+            android:name=".CN.EditCreditNotesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />

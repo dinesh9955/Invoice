@@ -37,6 +37,8 @@
     <string name="PrivacyPolicy">Privacy Policy</string>
     <string name="Support">Support</string>
 
+    <string name="DebitNo">Debit Note No.</string>
+
     <string name="CreditNo">Credit Note No.</string>
     <string name="ReceiptNo">Receipt No.</string>
     <string name="InvoiceNo">Invoice No.</string>
@@ -63,4 +65,7 @@
     <string name="createcredit">Create Credit Note</string>
     <string name="createestimate">Create Estimate</string>
     <string name="create_purchaseorder">Create purchase order</string>
+
+    <string name="createdebit">Create Debit Note</string>
+
 </resources>

@@ -1,8 +1,7 @@
-package com.receipt.invoice.stock.sirproject.Notes;
+package com.receipt.invoice.stock.sirproject.CN;
 
 import com.google.gson.annotations.SerializedName;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDtoInvoice;
 
 import java.util.List;
 
