@@ -6,6 +6,7 @@ import com.receipt.invoice.stock.sirproject.Invoice.ResponseListOfInvoice.Respon
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceResponseDto;
 import com.receipt.invoice.stock.sirproject.CN.CreditNoteResponseDto;
 import com.receipt.invoice.stock.sirproject.PO.POResponseDto;
+import com.receipt.invoice.stock.sirproject.PV.PVResponseDto;
 import com.receipt.invoice.stock.sirproject.Receipts.ReceiptResponseDto;
 
 import retrofit2.Call;
@@ -49,6 +50,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("purchaseorder/detail/{purchase_order_id}")
     Call<POResponseDto> getPODetail(@Header ("Access-Token") String string, @Field("purchase_order_id") String id);
-//    @Url String url
+
+
+    @FormUrlEncoded
+    @POST("paymentvoucher/detail/{payment_voucher_id}")
+    Call<PVResponseDto> getPVDetail(@Header ("Access-Token") String string, @Field("payment_voucher_id") String id);
 
 }

@@ -86,8 +86,8 @@ public class PVActivity extends AppCompatActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new List_of_PO(),"Payment Vouchers");
-        adapter.addFragment(new Fragment_Create_PO(), "Create Payment Vouchers");
+        adapter.addFragment(new List_of_PV(),"Payment Vouchers");
+        adapter.addFragment(new Fragment_Create_PV(), "Create Payment Vouchers");
         pager.setAdapter(adapter);
 
 

@@ -107,6 +107,23 @@
             android:windowSoftInputMode="adjustPan|adjustResize" >
         </activity>
 
+
+        <activity
+            android:name=".PV.ViewPV_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
+
+
+        <activity
+            android:name=".PV.PVViewActivityWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
+
+
         <activity
             android:name=".DN.DebitNotesActivity"
             android:screenOrientation="portrait"
