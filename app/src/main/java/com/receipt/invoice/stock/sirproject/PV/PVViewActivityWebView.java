@@ -206,7 +206,7 @@ public class PVViewActivityWebView extends AppCompatActivity {
                 // customer data get
                 PVDto data = response.body().getData();
 
-                PVSupplierDto invoiceCustomerDto = data.getPoDtoPO().getSupplier();
+                PVSupplierDto invoiceCustomerDto = data.getPvDtoPV().getSupplier();
 
 
 
@@ -248,7 +248,7 @@ public class PVViewActivityWebView extends AppCompatActivity {
 //                shippingzone = (String) invoiceCustomerDto.getShippingZone();
 
                 // Company Detail
-                InvoiceCompanyDto companyDto = data.getPoDtoPO().getCompany();
+                InvoiceCompanyDto companyDto = data.getPvDtoPV().getCompany();
                 company_name = companyDto.getName();
                 company_address = companyDto.getAddress();
                 company_contact = companyDto.getPhoneNumber();
@@ -263,7 +263,7 @@ public class PVViewActivityWebView extends AppCompatActivity {
                 paypal_emailstr=companyDto.getPaypalEmail();
 
                 //invoice Data
-                invoiceDtoInvoice = data.getPoDtoPO();
+                invoiceDtoInvoice = data.getPvDtoPV();
                 invoicenumber = invoiceDtoInvoice.getPayment_voucher_no();
                 date = invoiceDtoInvoice.getPayment_date();
                 due_date = invoiceDtoInvoice.getDueDate();

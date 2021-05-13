@@ -1,4 +1,4 @@
-package com.receipt.invoice.stock.sirproject.PV;
+package com.receipt.invoice.stock.sirproject.PO;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -35,10 +35,10 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class ViewPV_Activity extends AppCompatActivity {
+public class POToPVWebview extends AppCompatActivity {
 
 
-    private static final String TAG = "ViewPV_Activity";
+    private static final String TAG = "POToPVWebview";
     WebView invoiceweb;
 
     String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency, payment_iban, payment_swift_bic;
@@ -71,7 +71,6 @@ public class ViewPV_Activity extends AppCompatActivity {
     StringBuilder stringBuilderBillTo = new StringBuilder();
     StringBuilder stringBuilderShipTo = new StringBuilder();
 
-
     String paypal_emailstr = "", sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
     String strnotes = "",  ref_no ="", paid_amount_payment_method = "", freight_cost = "", strdiscountvalue = "", strpaid_amount = "", companylogopath = "", Grossamount_str = "", Subtotalamount = "", taxamount = "", netamountvalue = "", Blanceamountstr = "";
     String shippingzone = "", Paymentamountdate = "", shippingfirstname = "", shippinglastname = "", shippingaddress1 = "", shippingaddress2 = "", shippingcity = "", shippingpostcode = "", shippingcountry;
@@ -86,7 +85,7 @@ public class ViewPV_Activity extends AppCompatActivity {
 
     String taxText = "";
 
-    @SuppressLint("WrongThread")
+    @SuppressLint({"WrongThread", "LongLogTag"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +111,7 @@ public class ViewPV_Activity extends AppCompatActivity {
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Payment Voucher");
+        titleView.setText("Preview Invoice");
 
         drableimagebase64 = "iVBORw0KGgoAAAANSUhEUgAAAC4AAAAnCAYAAABwtnr/AAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAALqADAAQAAAABAAAAJwAAAAB8SmRPAAAAeklEQVRYCe3SQQrAIBTEUPX+d67iCbIIBSGuw/B57fzOGw++9eDN9+QO//vLJZ44FOhXgVBalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYc2r3IESll5TkQAAAAASUVORK5CYII=";
 
@@ -143,7 +142,6 @@ public class ViewPV_Activity extends AppCompatActivity {
                     shippingzone = customerselected.get(i).getShipping_zone();
 
                 }
-
 
 
                 if(!sltcustonername.equalsIgnoreCase("")){
@@ -193,8 +191,7 @@ public class ViewPV_Activity extends AppCompatActivity {
 //                if(!shippingpostcode.equalsIgnoreCase("")){
 //                    stringBuilderShipTo.append(shippingpostcode+"");
 //                }
-//
-//                //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+//                // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 //
 //            }
 
@@ -408,6 +405,7 @@ public class ViewPV_Activity extends AppCompatActivity {
         return attchmentbase64;
     }
 
+    @SuppressLint("LongLogTag")
     public void view_invoice() {
         invoiceweb = findViewById(R.id.invoiceweb);
 
@@ -646,25 +644,18 @@ public class ViewPV_Activity extends AppCompatActivity {
             shipingvaluetxt = "Shipping";
         }
 
+        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
 
-//        if (!companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
-//            companyimagelogopath = "/android_res/drawable/white_img.png";
-//        } else {
-//            companyimagelogopath = companylogopath;
-//        }
-
-
-        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
-            companyimagelogopath = companylogopath;
-        }else{
             companyimagelogopath = "/android_res/drawable/white_img.png";
+
+
+        } else {
+
+
+            companyimagelogopath = companylogopath;
+
+
         }
-
-
-
-        Log.e(TAG, "companylogopathVV "+companylogopath);
-        Log.e(TAG, "companyimagelogopathVV "+companyimagelogopath);
-
         String paidamountstrrepvalue = "";
         String paidamountstrreptxt = "";
         String paidamountstrreplace = "";
@@ -779,7 +770,6 @@ public class ViewPV_Activity extends AppCompatActivity {
         if(!company_email.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_email+"");
         }
-
 
         String content = null;
         try {

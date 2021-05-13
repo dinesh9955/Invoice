@@ -98,10 +98,25 @@
             android:windowSoftInputMode="adjustPan|adjustResize" >
         </activity>
 
+        <activity
+            android:name=".PO.ConvertToPVActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
 
 
         <activity
             android:name=".PV.PVActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
+
+        <activity
+            android:name=".PO.POToPVWebview"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -118,6 +133,13 @@
 
         <activity
             android:name=".PV.PVViewActivityWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
+
+        <activity
+            android:name=".PV.EditEditPVActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >

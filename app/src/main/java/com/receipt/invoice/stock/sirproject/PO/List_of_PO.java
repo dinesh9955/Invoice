@@ -1324,11 +1324,9 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
             recepitsviewtxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Fragment_Create_Invoice.defaultClick = 1;
-                    Intent intent = new Intent(getContext(), ConvertToReceiptsActivity.class);
+
+                    Intent intent = new Intent(getContext(), ConvertToPVActivity.class);
                     intent.putExtra("invoiceID", invoiceidbypos);
-                    intent.putExtra("companyreceiptno", receipt_count);
-                    intent.putExtra("compnayestimate_count", estimate_count);
 
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getActivity().startActivity(intent);

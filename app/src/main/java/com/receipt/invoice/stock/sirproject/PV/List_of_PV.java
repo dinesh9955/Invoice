@@ -1027,7 +1027,7 @@ public class List_of_PV extends Fragment implements InvoiceCallBack {
                     pref.SavePref(getActivity());
                     pref.setTemplate(0);
 
-                    Intent intent = new Intent(getContext(), EditPOActivity.class);
+                    Intent intent = new Intent(getContext(), EditEditPVActivity.class);
                     intent.putExtra("invoiceID", invoiceidbypos);
                     intent.putExtra("invoice_count", invoice_count);
 

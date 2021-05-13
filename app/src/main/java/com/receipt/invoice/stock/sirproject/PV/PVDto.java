@@ -20,7 +20,7 @@ public class PVDto {
     private String supplier_image_path;
 
     @SerializedName("payment_voucher")
-    private PVDtoPV poDtoPO;
+    private PVDtoPV pvDtoPV;
 
     @SerializedName("company_image_path")
     private String companyImagePath;
@@ -62,12 +62,12 @@ public class PVDto {
     }
 
 
-    public PVDtoPV getPoDtoPO() {
-        return poDtoPO;
+    public PVDtoPV getPvDtoPV() {
+        return pvDtoPV;
     }
 
-    public void setPoDtoPO(PVDtoPV poDtoPO) {
-        this.poDtoPO = poDtoPO;
+    public void setPvDtoPV(PVDtoPV pvDtoPV) {
+        this.pvDtoPV = pvDtoPV;
     }
 
     public String getCompanyImagePath() {
