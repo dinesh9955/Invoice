@@ -62,7 +62,7 @@
                 android:layout_below="@+id/invoicenumtxt"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
-                android:hint="PO #"
+                android:hint="@string/poNo"
                 android:background="@drawable/nobackgroundedittext"
                 android:textColor="@color/lightpurple"
                 android:textSize="14sp"

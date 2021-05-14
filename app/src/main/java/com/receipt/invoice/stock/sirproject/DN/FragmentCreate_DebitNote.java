@@ -977,12 +977,12 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
             RequestParams params = new RequestParams();
             params.add("company_id", selectedCompanyId);
             params.add("warehouse", selectwarehouseId);
-            params.add("warehouse_id[0]", selectwarehouseId);
+            params.add("warehouse_id", selectwarehouseId);
             params.add("debit_note_date", invoice_date);
             params.add("due_date", invoice_due_date);
             params.add("customer_id", Selectedcustomer_id);
 
-            params.add("supplier_id", "182");
+            params.add("supplier_id", Selectedcustomer_id);
 
 //            params.add("invoice_no", String.valueOf(invoicenovalue));
             params.add("debit_note_no", invoicenum.getText().toString());
@@ -1807,12 +1807,14 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                         intent.putExtra("shipping_city", shippingcity);
                         intent.putExtra("shipping_postcode", shippingpostcode);
                         intent.putExtra("shipping_country", shippingcountry);
-                        intent.putExtra("payment_bank_name", payment_bank_name);
 
+                        intent.putExtra("payment_bank_name", payment_bank_name);
                         intent.putExtra("paypal_emailstr", paypal_emailstr);
                         intent.putExtra("payment_currency", payment_currency);
                         intent.putExtra("payment_iban", payment_iban);
                         intent.putExtra("payment_swift_bic", payment_swift_bic);
+
+                        Log.e(TAG, "companylogopathAA "+companylogopath);
                         intent.putExtra("company_logo", companylogopath);
                         intent.putExtra("company_name", Selectedcompanyname);
                         intent.putExtra("company_address", company_address);
@@ -3068,19 +3070,19 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(Constant.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
-                Log.e("response customers", response);
+                Log.e("response customersAA", response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
                     if (status.equals("true")) {
                         JSONObject data = jsonObject.getJSONObject("data");
-                        JSONArray customer = data.getJSONArray("customer");
-                        String image_path = data.getString("customer_image_path");
+                        JSONArray customer = data.getJSONArray("supplier");
+                        String image_path = data.getString("supplier_image_path");
 
 
                         for (int i = 0; i < customer.length(); i++) {
@@ -3090,25 +3092,26 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                             String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
 
 
-                            customer_id = item.getString("customer_id");
+                            customer_id = item.getString("supplier_id");
 
                             Log.e("Customer Id", customer_id);
-                            customer_name = item.getString("customer_name");
+
+                            customer_name = item.getString("supplier_name");
                             custoner_contact_name = item.getString("contact_name");
                             String image = item.getString("image");
                             customer_email = item.getString("email");
                             customer_contact = item.getString("phone_number");
                             customer_address = item.getString("address");
                             customer_website = item.getString("website");
-                            shipping_firstname = item.getString("shipping_firstname");
-                            shipping_lastname = item.getString("shipping_lastname");
-                            shipping_address_1 = item.getString("shipping_address_1");
-
-                            shipping_address_2 = item.getString("shipping_address_2");
-                            shipping_city = item.getString("shipping_city");
-                            shipping_postcode = item.getString("shipping_postcode");
-                            shipping_country = item.getString("shipping_country");
-                            shipping_zone = item.getString("shipping_zone");
+//                            shipping_firstname = item.getString("shipping_firstname");
+//                            shipping_lastname = item.getString("shipping_lastname");
+//                            shipping_address_1 = item.getString("shipping_address_1");
+//
+//                            shipping_address_2 = item.getString("shipping_address_2");
+//                            shipping_city = item.getString("shipping_city");
+//                            shipping_postcode = item.getString("shipping_postcode");
+//                            shipping_country = item.getString("shipping_country");
+//                            shipping_zone = item.getString("shipping_zone");
 
                             Customer_list customer_list = new Customer_list();
 
@@ -3123,14 +3126,14 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                             customer_list.setCustomer_image_path(image_path);
                             customer_list.setCustomer_image(image);
 
-                            customer_list.setShipping_firstname(shipping_firstname);
-                            customer_list.setShipping_lastname(shipping_lastname);
-                            customer_list.setShipping_address_1(shipping_address_1);
-                            customer_list.setShipping_address_2(shipping_address_2);
-                            customer_list.setShipping_city(shipping_city);
-                            customer_list.setShipping_postcode(shipping_postcode);
-                            customer_list.setShipping_country(shipping_country);
-                            customer_list.setShipping_zone(shipping_zone);
+//                            customer_list.setShipping_firstname(shipping_firstname);
+//                            customer_list.setShipping_lastname(shipping_lastname);
+//                            customer_list.setShipping_address_1(shipping_address_1);
+//                            customer_list.setShipping_address_2(shipping_address_2);
+//                            customer_list.setShipping_city(shipping_city);
+//                            customer_list.setShipping_postcode(shipping_postcode);
+//                            customer_list.setShipping_country(shipping_country);
+//                            customer_list.setShipping_zone(shipping_zone);
 
                             customer_bottom.add(customer_list);
 
@@ -3723,34 +3726,34 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
             }
         }
 
-        if (shippingfirstname.equalsIgnoreCase("")) {
-            Shiping_tostr = "";
-        } else {
-            Shiping_tostr = "Ship To:";
-            if(!shippingfirstname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingfirstname+"</br>");
-            }
-            if(!shippinglastname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippinglastname+"</br>");
-            }
-            if(!shippingaddress1.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress1+"</br>");
-            }
-            if(!shippingaddress2.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress2+"</br>");
-            }
-            if(!shippingcity.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcity+"</br>");
-            }
-            if(!shippingcountry.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcountry+"</br>");
-            }
-            if(!shippingpostcode.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingpostcode+"");
-            }
-
-            //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
-        }
+//        if (shippingfirstname.equalsIgnoreCase("")) {
+//            Shiping_tostr = "";
+//        } else {
+//            Shiping_tostr = "Ship To:";
+//            if(!shippingfirstname.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingfirstname+"</br>");
+//            }
+//            if(!shippinglastname.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippinglastname+"</br>");
+//            }
+//            if(!shippingaddress1.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingaddress1+"</br>");
+//            }
+//            if(!shippingaddress2.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingaddress2+"</br>");
+//            }
+//            if(!shippingcity.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingcity+"</br>");
+//            }
+//            if(!shippingcountry.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingcountry+"</br>");
+//            }
+//            if(!shippingpostcode.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingpostcode+"");
+//            }
+//
+//            //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+//        }
 
 
 

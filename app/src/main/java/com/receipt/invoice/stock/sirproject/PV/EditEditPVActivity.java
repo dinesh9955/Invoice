@@ -279,9 +279,12 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
     ArrayList<Customer_list> selected = new ArrayList<>();
 
     String invoicecompanyiddto;
+
+    String customer_name = "", customer_id = "";
+
+
     //For Intent
     String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "";
-    String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
     String invoice_no = "", invoice_due_date = "", invoice_date = "", credit_terms = "", reference_no = "";
     String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "", taxamount, netamountvalue;
     String s_r = "0";
@@ -573,6 +576,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
 
                 if(invoiceCustomerDto != null){
                     sltcustonernamedto = invoiceCustomerDto.getSupplier_name();
+                    customer_id = invoiceCustomerDto.getSupplier_id();
                     Log.e(TAG, "sltcustonernamedto"+sltcustonernamedto);
                     customer_name = sltcustonernamedto;
                     invoicerecipnt.setText(sltcustonernamedto);
@@ -670,7 +674,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                 credit_terms = credit_termsdto;
                 invoicecompanyiddto = invoiceDtoInvoice.getCompanyId();
                 Log.e("invoicecompanyiddto", invoicecompanyiddto);
-                customer_id = invoiceDtoInvoice.getCustomerId();
+                //customer_id = invoiceDtoInvoice.getCustomerId();
 //                Log.e(TAG, "customer_idA"+customer_id);
                 paymentmode = invoiceDtoInvoice.getPaidAmountPaymentMethod();
 
@@ -1322,7 +1326,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
             params.add("due_date", invoice_due_date);
             params.add("customer_id", customer_id);
             Log.e(TAG, "customer_idBB"+customer_id);
-            params.add("supplier_id", "182");
+            params.add("supplier_id", customer_id);
             params.add("notes", strnotes);
             params.add("ref_no", ref_no);
             params.add("paid_amount_payment_method", paymentmode);
@@ -3240,7 +3244,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(Constant.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3251,31 +3255,34 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                     String status = jsonObject.getString("status");
                     if (status.equals("true")) {
                         JSONObject data = jsonObject.getJSONObject("data");
-                        JSONArray customer = data.getJSONArray("customer");
-                        String image_path = data.getString("customer_image_path");
+                        JSONArray customer = data.getJSONArray("supplier");
+                        String image_path = data.getString("supplier_image_path");
 
+                        String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
 
                         for (int i = 0; i < customer.length(); i++) {
                             JSONObject item = customer.getJSONObject(i);
 
-                            String customer_idBB = item.getString("customer_id");
+                            String customer_idBB = item.getString("supplier_id");
                             Log.e(TAG, "customer_idBB "+customer_idBB);
-                            customer_name = item.getString("customer_name");
+                            customer_name = item.getString("supplier_name");
                             custoner_contact_name = item.getString("contact_name");
                             String image = item.getString("image");
                             customer_email = item.getString("email");
                             customer_contact = item.getString("phone_number");
                             customer_address = item.getString("address");
                             customer_website = item.getString("website");
-                            shipping_firstname = item.getString("shipping_firstname");
-                            shipping_lastname = item.getString("shipping_lastname");
-                            shipping_address_1 = item.getString("shipping_address_1");
 
-                            shipping_address_2 = item.getString("shipping_address_2");
-                            shipping_city = item.getString("shipping_city");
-                            shipping_postcode = item.getString("shipping_postcode");
-                            shipping_country = item.getString("shipping_country");
-                            shipping_zone = item.getString("shipping_zone");
+
+//                            shipping_firstname = item.getString("shipping_firstname");
+//                            shipping_lastname = item.getString("shipping_lastname");
+//                            shipping_address_1 = item.getString("shipping_address_1");
+//
+//                            shipping_address_2 = item.getString("shipping_address_2");
+//                            shipping_city = item.getString("shipping_city");
+//                            shipping_postcode = item.getString("shipping_postcode");
+//                            shipping_country = item.getString("shipping_country");
+//                            shipping_zone = item.getString("shipping_zone");
 
                             Customer_list customer_list = new Customer_list();
 
@@ -3290,14 +3297,14 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                             customer_list.setCustomer_image_path(image_path);
                             customer_list.setCustomer_image(image);
 
-                            customer_list.setShipping_firstname(shipping_firstname);
-                            customer_list.setShipping_lastname(shipping_lastname);
-                            customer_list.setShipping_address_1(shipping_address_1);
-                            customer_list.setShipping_address_2(shipping_address_2);
-                            customer_list.setShipping_city(shipping_city);
-                            customer_list.setShipping_postcode(shipping_postcode);
-                            customer_list.setShipping_country(shipping_country);
-                            customer_list.setShipping_zone(shipping_zone);
+//                            customer_list.setShipping_firstname(shipping_firstname);
+//                            customer_list.setShipping_lastname(shipping_lastname);
+//                            customer_list.setShipping_address_1(shipping_address_1);
+//                            customer_list.setShipping_address_2(shipping_address_2);
+//                            customer_list.setShipping_city(shipping_city);
+//                            customer_list.setShipping_postcode(shipping_postcode);
+//                            customer_list.setShipping_country(shipping_country);
+//                            customer_list.setShipping_zone(shipping_zone);
 
                             customer_bottom.add(customer_list);
 

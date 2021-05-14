@@ -746,13 +746,14 @@ public class DebitNotesViewActivityWebView extends AppCompatActivity {
 
         String companylogopathdto="";
 
-        if(companylogopath.equals(""))
-        {
-            companylogopathdto= "/android_res/drawable/white_img.png";
-        }
-        else {
+
+        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
             companylogopathdto= company_image_path + companylogopath;
+        }else{
+            companylogopathdto = "/android_res/drawable/white_img.png";
         }
+
+
 
         String name = "debit.html";
         String nameName = "file:///android_asset/debit.html";

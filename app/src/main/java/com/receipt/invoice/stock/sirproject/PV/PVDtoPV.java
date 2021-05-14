@@ -139,8 +139,8 @@ public class PVDtoPV {
     @SerializedName("shipping_zone")
     private Object shippingZone;
 
-    @SerializedName("customer_id")
-    private String customerId;
+//    @SerializedName("customer_id")
+//    private String customerId;
 
     @SerializedName("shipping_country")
     private String shippingCountry;
@@ -509,13 +509,13 @@ public class PVDtoPV {
         this.shippingZone = shippingZone;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
+//    public String getCustomerId() {
+//        return customerId;
+//    }
+//
+//    public void setCustomerId(String customerId) {
+//        this.customerId = customerId;
+//    }
 
     public String getShippingCountry() {
         return shippingCountry;

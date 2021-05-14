@@ -986,7 +986,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             params.add("order_date", invoice_date);
             params.add("due_date", invoice_due_date);
 
-            params.add("supplier_id", "182");
+            params.add("supplier_id", Selectedcustomer_id);
             params.add("customer_id", Selectedcustomer_id);
 //            params.add("invoice_no", String.valueOf(invoicenovalue));
             params.add("purchase_order_no", invoicenum.getText().toString());
@@ -3134,7 +3134,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(Constant.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3146,8 +3146,8 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     String status = jsonObject.getString("status");
                     if (status.equals("true")) {
                         JSONObject data = jsonObject.getJSONObject("data");
-                        JSONArray customer = data.getJSONArray("customer");
-                        String image_path = data.getString("customer_image_path");
+                        JSONArray customer = data.getJSONArray("supplier");
+                        String image_path = data.getString("supplier_image_path");
 
                         String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
 
@@ -3157,25 +3157,27 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         for (int i = 0; i < customer.length(); i++) {
                             JSONObject item = customer.getJSONObject(i);
 
-                            customer_id = item.getString("customer_id");
+                            String customer_idBB = item.getString("supplier_id");
 
-                            Log.e("Customer Id", customer_id);
-                            customer_name = item.getString("customer_name");
+                            Log.e("Customer Id", customer_idBB);
+                            customer_name = item.getString("supplier_name");
                             custoner_contact_name = item.getString("contact_name");
                             String image = item.getString("image");
                             customer_email = item.getString("email");
                             customer_contact = item.getString("phone_number");
                             customer_address = item.getString("address");
                             customer_website = item.getString("website");
-                            shipping_firstname = item.getString("shipping_firstname");
-                            shipping_lastname = item.getString("shipping_lastname");
-                            shipping_address_1 = item.getString("shipping_address_1");
 
-                            shipping_address_2 = item.getString("shipping_address_2");
-                            shipping_city = item.getString("shipping_city");
-                            shipping_postcode = item.getString("shipping_postcode");
-                            shipping_country = item.getString("shipping_country");
-                            shipping_zone = item.getString("shipping_zone");
+
+//                            shipping_firstname = item.getString("shipping_firstname");
+//                            shipping_lastname = item.getString("shipping_lastname");
+//                            shipping_address_1 = item.getString("shipping_address_1");
+//
+//                            shipping_address_2 = item.getString("shipping_address_2");
+//                            shipping_city = item.getString("shipping_city");
+//                            shipping_postcode = item.getString("shipping_postcode");
+//                            shipping_country = item.getString("shipping_country");
+//                            shipping_zone = item.getString("shipping_zone");
 
                             Customer_list customer_list = new Customer_list();
 
@@ -3184,20 +3186,20 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                             customer_list.setCustomer_website(customer_website);
                             customer_list.setCustomer_phone(customer_contact);
 
-                            customer_list.setCustomer_id(customer_id);
+                            customer_list.setCustomer_id(customer_idBB);
                             customer_list.setCustomer_name(customer_name);
                             customer_list.setCustomer_contact_person(custoner_contact_name);
                             customer_list.setCustomer_image_path(image_path);
                             customer_list.setCustomer_image(image);
 
-                            customer_list.setShipping_firstname(shipping_firstname);
-                            customer_list.setShipping_lastname(shipping_lastname);
-                            customer_list.setShipping_address_1(shipping_address_1);
-                            customer_list.setShipping_address_2(shipping_address_2);
-                            customer_list.setShipping_city(shipping_city);
-                            customer_list.setShipping_postcode(shipping_postcode);
-                            customer_list.setShipping_country(shipping_country);
-                            customer_list.setShipping_zone(shipping_zone);
+//                            customer_list.setShipping_firstname(shipping_firstname);
+//                            customer_list.setShipping_lastname(shipping_lastname);
+//                            customer_list.setShipping_address_1(shipping_address_1);
+//                            customer_list.setShipping_address_2(shipping_address_2);
+//                            customer_list.setShipping_city(shipping_city);
+//                            customer_list.setShipping_postcode(shipping_postcode);
+//                            customer_list.setShipping_country(shipping_country);
+//                            customer_list.setShipping_zone(shipping_zone);
 
                             customer_bottom.add(customer_list);
 
@@ -3770,35 +3772,35 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
         }
 
-        if (shippingfirstname.equalsIgnoreCase("")) {
-            Shiping_tostr = "";
-        } else {
-            Shiping_tostr = "Ship To:";
-
-            if(!shippingfirstname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingfirstname+"</br>");
-            }
-            if(!shippinglastname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippinglastname+"</br>");
-            }
-            if(!shippingaddress1.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress1+"</br>");
-            }
-            if(!shippingaddress2.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress2+"</br>");
-            }
-            if(!shippingcity.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcity+"</br>");
-            }
-            if(!shippingcountry.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcountry+"</br>");
-            }
-            if(!shippingpostcode.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingpostcode+"");
-            }
-
-            // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
-        }
+//        if (shippingfirstname.equalsIgnoreCase("")) {
+//            Shiping_tostr = "";
+//        } else {
+//            Shiping_tostr = "Ship To:";
+//
+//            if(!shippingfirstname.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingfirstname+"</br>");
+//            }
+//            if(!shippinglastname.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippinglastname+"</br>");
+//            }
+//            if(!shippingaddress1.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingaddress1+"</br>");
+//            }
+//            if(!shippingaddress2.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingaddress2+"</br>");
+//            }
+//            if(!shippingcity.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingcity+"</br>");
+//            }
+//            if(!shippingcountry.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingcountry+"</br>");
+//            }
+//            if(!shippingpostcode.equalsIgnoreCase("")){
+//                stringBuilderShipTo.append(shippingpostcode+"");
+//            }
+//
+//            // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+//        }
 
 
 

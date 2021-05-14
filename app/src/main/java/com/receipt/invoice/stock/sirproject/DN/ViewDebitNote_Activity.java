@@ -174,36 +174,36 @@ public class ViewDebitNote_Activity extends AppCompatActivity {
 
             }
 
-            Log.e(TAG, "customerselectedAA "+customerselected.size());
-
-            if (shippingfirstname.equalsIgnoreCase("")) {
-                Shiping_tostr = "";
-            } else {
-                Shiping_tostr = "Ship To:";
-
-                if(!shippingfirstname.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingfirstname+"</br>");
-                }
-                if(!shippinglastname.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippinglastname+"</br>");
-                }
-                if(!shippingaddress1.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingaddress1+"</br>");
-                }
-                if(!shippingaddress2.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingaddress2+"</br>");
-                }
-                if(!shippingcity.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingcity+"</br>");
-                }
-                if(!shippingcountry.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingcountry+"</br>");
-                }
-                if(!shippingpostcode.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingpostcode+"");
-                }
-                //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
-            }
+//            Log.e(TAG, "customerselectedAA "+customerselected.size());
+//
+//            if (shippingfirstname.equalsIgnoreCase("")) {
+//                Shiping_tostr = "";
+//            } else {
+//                Shiping_tostr = "Ship To:";
+//
+//                if(!shippingfirstname.equalsIgnoreCase("")){
+//                    stringBuilderShipTo.append(shippingfirstname+"</br>");
+//                }
+//                if(!shippinglastname.equalsIgnoreCase("")){
+//                    stringBuilderShipTo.append(shippinglastname+"</br>");
+//                }
+//                if(!shippingaddress1.equalsIgnoreCase("")){
+//                    stringBuilderShipTo.append(shippingaddress1+"</br>");
+//                }
+//                if(!shippingaddress2.equalsIgnoreCase("")){
+//                    stringBuilderShipTo.append(shippingaddress2+"</br>");
+//                }
+//                if(!shippingcity.equalsIgnoreCase("")){
+//                    stringBuilderShipTo.append(shippingcity+"</br>");
+//                }
+//                if(!shippingcountry.equalsIgnoreCase("")){
+//                    stringBuilderShipTo.append(shippingcountry+"</br>");
+//                }
+//                if(!shippingpostcode.equalsIgnoreCase("")){
+//                    stringBuilderShipTo.append(shippingpostcode+"");
+//                }
+//                //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+//            }
 
             tempQuantity = (ArrayList<String>) getIntent().getSerializableExtra("tempQuantity");
 
@@ -657,18 +657,13 @@ public class ViewDebitNote_Activity extends AppCompatActivity {
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
-
-            companyimagelogopath = "/android_res/drawable/white_img.png";
-
-
-        } else {
-
-
+        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
             companyimagelogopath = companylogopath;
-
-
+        }else{
+            companyimagelogopath = "/android_res/drawable/white_img.png";
         }
+
+
         String paidamountstrrepvalue = "";
         String paidamountstrreptxt = "";
         String paidamountstrreplace = "";

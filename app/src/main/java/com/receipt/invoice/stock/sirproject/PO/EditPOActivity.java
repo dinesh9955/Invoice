@@ -671,7 +671,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                 credit_terms = credit_termsdto;
                 invoicecompanyiddto = invoiceDtoInvoice.getCompanyId();
                 Log.e("invoicecompanyiddto", invoicecompanyiddto);
-                customer_id = invoiceDtoInvoice.getCustomerId();
+                customer_id = invoiceDtoInvoice.getSupplier().getSupplier_id();
 //                Log.e(TAG, "customer_idA"+customer_id);
                 paymentmode = invoiceDtoInvoice.getPaidAmountPaymentMethod();
 
@@ -1323,7 +1323,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             params.add("due_date", invoice_due_date);
             params.add("customer_id", customer_id);
             Log.e(TAG, "customer_idBB"+customer_id);
-            params.add("supplier_id", "182");
+            params.add("supplier_id", customer_id);
             params.add("notes", strnotes);
             params.add("ref_no", ref_no);
             params.add("paid_amount_payment_method", paymentmode);
@@ -3230,7 +3230,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(Constant.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3241,31 +3241,33 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                     String status = jsonObject.getString("status");
                     if (status.equals("true")) {
                         JSONObject data = jsonObject.getJSONObject("data");
-                        JSONArray customer = data.getJSONArray("customer");
-                        String image_path = data.getString("customer_image_path");
+                        JSONArray customer = data.getJSONArray("supplier");
+                        String image_path = data.getString("supplier_image_path");
 
 
                         for (int i = 0; i < customer.length(); i++) {
                             JSONObject item = customer.getJSONObject(i);
 
-                            String customer_idBB = item.getString("customer_id");
-                            Log.e(TAG, "customer_idBB "+customer_idBB);
-                            customer_name = item.getString("customer_name");
+                            String customer_idBB = item.getString("supplier_id");
+
+                            Log.e("Customer Id", customer_idBB);
+                            customer_name = item.getString("supplier_name");
                             custoner_contact_name = item.getString("contact_name");
                             String image = item.getString("image");
                             customer_email = item.getString("email");
                             customer_contact = item.getString("phone_number");
                             customer_address = item.getString("address");
                             customer_website = item.getString("website");
-                            shipping_firstname = item.getString("shipping_firstname");
-                            shipping_lastname = item.getString("shipping_lastname");
-                            shipping_address_1 = item.getString("shipping_address_1");
 
-                            shipping_address_2 = item.getString("shipping_address_2");
-                            shipping_city = item.getString("shipping_city");
-                            shipping_postcode = item.getString("shipping_postcode");
-                            shipping_country = item.getString("shipping_country");
-                            shipping_zone = item.getString("shipping_zone");
+//                            shipping_firstname = item.getString("shipping_firstname");
+//                            shipping_lastname = item.getString("shipping_lastname");
+//                            shipping_address_1 = item.getString("shipping_address_1");
+//
+//                            shipping_address_2 = item.getString("shipping_address_2");
+//                            shipping_city = item.getString("shipping_city");
+//                            shipping_postcode = item.getString("shipping_postcode");
+//                            shipping_country = item.getString("shipping_country");
+//                            shipping_zone = item.getString("shipping_zone");
 
                             Customer_list customer_list = new Customer_list();
 
@@ -3280,14 +3282,14 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                             customer_list.setCustomer_image_path(image_path);
                             customer_list.setCustomer_image(image);
 
-                            customer_list.setShipping_firstname(shipping_firstname);
-                            customer_list.setShipping_lastname(shipping_lastname);
-                            customer_list.setShipping_address_1(shipping_address_1);
-                            customer_list.setShipping_address_2(shipping_address_2);
-                            customer_list.setShipping_city(shipping_city);
-                            customer_list.setShipping_postcode(shipping_postcode);
-                            customer_list.setShipping_country(shipping_country);
-                            customer_list.setShipping_zone(shipping_zone);
+//                            customer_list.setShipping_firstname(shipping_firstname);
+//                            customer_list.setShipping_lastname(shipping_lastname);
+//                            customer_list.setShipping_address_1(shipping_address_1);
+//                            customer_list.setShipping_address_2(shipping_address_2);
+//                            customer_list.setShipping_city(shipping_city);
+//                            customer_list.setShipping_postcode(shipping_postcode);
+//                            customer_list.setShipping_country(shipping_country);
+//                            customer_list.setShipping_zone(shipping_zone);
 
                             customer_bottom.add(customer_list);
 
