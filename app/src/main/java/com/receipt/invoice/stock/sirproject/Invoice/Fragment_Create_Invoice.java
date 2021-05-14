@@ -1009,10 +1009,12 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             params.add("shipping_city", shippingcity);
             params.add("shipping_postcode", shippingpostcode);
             params.add("shipping_country", shippingcountry);
+
             params.add("payment_bank_name", payment_bank_name);
             params.add("payment_currency", payment_currency);
             params.add("payment_iban", payment_iban);
             params.add("payment_swift_bic", payment_swift_bic);
+
             params.add("logo", "logofile");
             params.add("template_type", ""+selectedTemplate);
 

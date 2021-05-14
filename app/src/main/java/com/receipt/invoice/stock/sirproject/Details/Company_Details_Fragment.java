@@ -109,6 +109,7 @@ public class Company_Details_Fragment extends Fragment {
     private static final int CAMERA_ACTION_PICK_CODE=9;
     Context applicationContext = Company_Details_Activity.getContextOfApplication();
     FileCompressor mCompressor;
+    @SuppressLint("LongLogTag")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -135,12 +136,14 @@ public class Company_Details_Fragment extends Fragment {
         colorCode = pref.getString("color","#ffffff");
 
 
-        StrPaypalemail = pref.getString(Constant.Payment_bank_name,"");
-        StrPaymentbankname = pref.getString(Constant.Paypal_email,"");
+        StrPaypalemail = pref.getString(Constant.Paypal_email,"");
+        StrPaymentbankname = pref.getString(Constant.Payment_bank_name,"");
         StrPaymentswiftbic = pref.getString(Constant.Payment_swift_bic,"");
         Strchequepayableto = pref.getString(Constant.Cheque_payable_to,"");
         StrIbnnumber = pref.getString(Constant.Ibn_number,"");
 
+        Log.e(TAG, "StrPaymentbanknameBB "+StrPaymentbankname);
+        Log.e(TAG, "StrPaypalemailBB "+StrPaypalemail);
 
         Paymentbanknameid.setText(StrPaymentbankname);
         txtPaypalemailid.setText(StrPaypalemail);
@@ -567,6 +570,7 @@ public class Company_Details_Fragment extends Fragment {
     }
 
 
+    @SuppressLint("LongLogTag")
     private void EditCompany(){
 
         String edname = name.getText().toString();
@@ -653,6 +657,8 @@ public class Company_Details_Fragment extends Fragment {
             params.add("address",edCompanyAddress);
             params.add("color",colorCode);
 
+            Log.e(TAG, "endPaymentbanknameid "+endPaymentbanknameid);
+            Log.e(TAG, "endtxtPaypalemailid "+endtxtPaypalemailid);
 
             params.add("payment_iban",endIbnnumbertxtid);
             params.add("payment_bank_name",endPaymentbanknameid);
@@ -670,7 +676,12 @@ public class Company_Details_Fragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-            String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
+
+        Log.e(TAG, "paramsBB "+params.toString());
+
+
+
+        String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token",token);
             client.post(Constant.BASE_URL + "company/update", params, new AsyncHttpResponseHandler() {

@@ -631,6 +631,8 @@ public class Add_Company extends Fragment {
                 return;
             }
 
+
+
             avi.smoothToShow();
             avibackground.setVisibility(View.VISIBLE);
             RequestParams params = new RequestParams();
@@ -654,6 +656,9 @@ public class Add_Company extends Fragment {
                     e.printStackTrace();
                 }
             }
+
+
+            Log.e(TAG, "paramsAA "+params.toString());
 
             String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
