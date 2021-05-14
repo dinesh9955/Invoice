@@ -23,6 +23,8 @@ import com.wang.avi.AVLoadingIndicatorView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 import cz.msebera.android.httpclient.Header;
 
 public class Product_Detail_Activity extends AppCompatActivity {
@@ -128,7 +130,9 @@ public class Product_Detail_Activity extends AppCompatActivity {
 
                             price.setText("");
                         } else {
-                            price.setText(p_price +" "+currency_code+" / Per Unit");
+                            double vc = Double.parseDouble(p_price);
+                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                            price.setText(formatter.format(vc) +" "+currency_code+" / Per Unit");
                         }
 
                         if (p_category.equals("") || p_category.equals("null")) {

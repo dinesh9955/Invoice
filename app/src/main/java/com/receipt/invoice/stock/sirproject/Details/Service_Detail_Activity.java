@@ -11,6 +11,8 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import java.text.DecimalFormat;
+
 public class Service_Detail_Activity extends AppCompatActivity {
 
 
@@ -87,7 +89,9 @@ public class Service_Detail_Activity extends AppCompatActivity {
             }
             else
             {
-                serviceprice.setText(service_price+" "+currencycode);
+                double vc = Double.parseDouble(service_price);
+                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                serviceprice.setText(formatter.format(vc)+" "+currencycode);
             }
 
             if (service_description.equals("") || service_description.equals("null"))
