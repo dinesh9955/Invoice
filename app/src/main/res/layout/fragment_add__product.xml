@@ -107,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/productprice"
-                    android:hint="Re Order Level"
+                    android:hint="Reorder Level"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:textSize="12dp"

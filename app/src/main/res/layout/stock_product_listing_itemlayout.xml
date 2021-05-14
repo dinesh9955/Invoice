@@ -61,7 +61,7 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Re Order Level: "
+        android:text="Reorder Level: "
         android:id="@+id/status"
         android:layout_toRightOf="@+id/image"
         android:layout_marginLeft="20dp"

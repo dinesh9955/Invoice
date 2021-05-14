@@ -118,7 +118,7 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
         if (quantity.equals("") || quantity.equals("null"))
         {
             viewHolderForCat.productquantity.setText("Quantity: ");
-            viewHolderForCat.statusvalue.setText("Re Order");
+            viewHolderForCat.statusvalue.setText("Reorder");
             viewHolderForCat.statusvalue.setTextColor(mcontext.getResources().getColor(R.color.green));
 
         }
@@ -133,7 +133,7 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
             else{
 
 
-                viewHolderForCat.statusvalue.setText("Re Order");
+                viewHolderForCat.statusvalue.setText("Reorder");
                 viewHolderForCat.statusvalue.setTextColor(mcontext.getResources().getColor(R.color.red));
 
 

@@ -635,7 +635,7 @@ public class Add_Product extends Fragment implements Select_Warehouse_Adapter.Ca
             productprice.setError("Required");
             productprice.requestFocus();
         }  else if (selectedMeasuremetnId.equals("")) {
-            Constant.ErrorToast(getActivity(), "Measurement unit is required");
+            Constant.ErrorToast(getActivity(), "Measurement and unit is required");
         } else if (selectedCompanyId.equals("")) {
             Constant.ErrorToast(getActivity(), "Company is required");
 //        } else if (selectedTaxable.equals("")) {
@@ -734,7 +734,6 @@ public class Add_Product extends Fragment implements Select_Warehouse_Adapter.Ca
                             }
 
                             if (status.equals("false")) {
-
                                 if(jsonObject.has("error")){
                                     Constant.ErrorToast(getActivity(), jsonObject.getString("error"));
                                 }
@@ -742,9 +741,7 @@ public class Add_Product extends Fragment implements Select_Warehouse_Adapter.Ca
                                 if(jsonObject.has("message")){
                                     Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                                 }
-
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -31,7 +31,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class Signup_Activity extends AppCompatActivity {
 
-
+    String TAG = "Signup_Activity";
     TextView txtsignup,txtsignupdes,txtregistered,txtsigninhere;
     EditText edfullname,edemail,edpassword;
     Button btnregister;
@@ -175,51 +175,11 @@ public class Signup_Activity extends AppCompatActivity {
                              Signin();
 
 
-//                             new Handler().postDelayed(new Runnable() {
-//                                 @Override
-//                                 public void run() {
-//                                     Intent intent = new Intent(Signup_Activity.this, Signin_Activity.class);
-//                                   //  intent.putExtra("login","login");
-//                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                     startActivity(intent);
-//                                     finish();
-//                                 }
-//                             },1500);
-
-
-
                          }
 
                          if (status.equals("false")){
                              Constant.ErrorToast(Signup_Activity.this,jsonObject.getString("message"));
                          }
-
-//                     if (status.equals("true"))
-//                     {
-//                         JSONObject data = jsonObject.getJSONObject("data");
-//                         JSONObject user = data.getJSONObject("user");
-//
-//                          mail = user.getString("email");
-//                          final String verification_code = user.getString("verification_code");
-//
-//                         Constant.SuccessToast(Signup_Activity.this,jsonObject.getString("message"));
-//                         new Handler().postDelayed(new Runnable() {
-//                             @Override
-//                             public void run() {
-//                                 Intent intent = new Intent(Signup_Activity.this,Verification_Code_Activity.class);
-//                                 intent.putExtra("mail",mail);
-//                                 intent.putExtra("pwd",password);
-//                                 intent.putExtra("verification_code",verification_code);
-//                                 startActivity(intent);
-//                             }
-//                         },1500);
-//
-//
-//
-//                     }
-
-
-
 
 
                  } catch (JSONException e) {
@@ -235,24 +195,25 @@ public class Signup_Activity extends AppCompatActivity {
              public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                  if(responseBody!=null){
                      String response = new String(responseBody);
-                     Log.e("signupresponseF",response);
+                     Log.e("signupresponseFBB",response);
 
                      try {
                          JSONObject jsonObject = new JSONObject(response);
+                         Log.e(TAG, "jsonObjectBB"+jsonObject);
 
                          String status = jsonObject.getString("status");
                          if (status.equals("false"))
                          {
+                             Log.e(TAG, "statusBB"+status);
 
                              JSONObject message = jsonObject.getJSONObject("message");
 
+                             Log.e(TAG, "messageBB"+message);
+
                              String email = message.getString("email");
-                             String fullname = message.getString("fullname");
+                             //String fullname = message.getString("fullname");
                              //Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
-                             Constant.ErrorToast(Signup_Activity.this,jsonObject.getString(email));
-
-
-
+                             Constant.ErrorToast(Signup_Activity.this,email);
                          }
                      } catch (JSONException e) {
                          e.printStackTrace();
@@ -383,8 +344,18 @@ public class Signup_Activity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 }
-                            },1500);
+                            },500);
 
+                        }
+
+                        if (status.equals("false"))
+                        {
+                            JSONObject message = jsonObject.getJSONObject("message");
+                            String messageMsg = message.getString("email");
+                            Log.e("signinresponseF",response);
+
+                            //Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                            Constant.ErrorToast(Signup_Activity.this, messageMsg);
 
 
                         }
@@ -401,21 +372,24 @@ public class Signup_Activity extends AppCompatActivity {
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                     if(responseBody!=null){
                         String response = new String(responseBody);
-                        Log.e("signinresponseF",response);
+                        Log.e("signinresponseFAA ",response);
 
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
 
                             String status = jsonObject.getString("status");
+
+                            Log.e(TAG, "signinresponseF"+status);
+
                             if (status.equals("false"))
                             {
-                                //JSONObject message = jsonObject.getJSONObject("message");
-                                String message = jsonObject.getString("message");
+                                JSONObject message = jsonObject.getJSONObject("message");
+                                String err = jsonObject.getString("message");
                                 Log.e("signinresponseF",response);
 
                                 //Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
-                                Constant.ErrorToast(Signup_Activity.this, message);
+                            //    Constant.ErrorToast(Signup_Activity.this, message);
 
 
                             }

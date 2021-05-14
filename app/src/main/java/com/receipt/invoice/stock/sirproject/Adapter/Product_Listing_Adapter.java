@@ -17,6 +17,7 @@ import com.receipt.invoice.stock.sirproject.Details.Product_Detail_Activity;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -114,7 +115,9 @@ public class Product_Listing_Adapter extends RecyclerView.Adapter<Product_Listin
         }
         else
         {
-            viewHolderForCat.productcurrency.setText(product_price.replace(".00",""));
+            double vc = Double.parseDouble(product_price);
+            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            viewHolderForCat.productcurrency.setText(formatter.format(vc));
 
         }
 

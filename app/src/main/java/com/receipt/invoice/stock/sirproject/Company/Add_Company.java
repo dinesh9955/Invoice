@@ -582,11 +582,20 @@ public class Add_Company extends Fragment {
         if (TextUtils.isEmpty(name.getText())) {
             name.setError("Field is required");
             name.requestFocus();
-        }
-        else if (selected_currency.equals(""))
+        } else if (selected_currency.equals(""))
         {
             Constant.ErrorToast(getActivity(),"Please select currency");
         }
+
+        else if(isEnter() == true){
+            Constant.ErrorToast(getActivity(),"Please select currencyAAAA ");
+        }
+
+     //   boolean isEnter = isEnter();
+
+
+
+
 //        else if (edemail.isEmpty()){
 //            email.setError("Field is required");
 //            email.requestFocus();
@@ -609,6 +618,8 @@ public class Add_Company extends Fragment {
 //            CompanyAddress.requestFocus();
 //        }
         else {
+
+
             avi.smoothToShow();
             avibackground.setVisibility(View.VISIBLE);
             RequestParams params = new RequestParams();
@@ -636,7 +647,7 @@ public class Add_Company extends Fragment {
             String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token",token);
-            client.post(Constant.BASE_URL + "company/add", params, new AsyncHttpResponseHandler() {
+            client.post(Constant.BASE_URL + "company/addd", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -712,6 +723,38 @@ public class Add_Company extends Fragment {
                 }
             });
         }
+    }
+
+    private boolean isEnter() {
+
+        boolean isEntered = false;
+        String iban = ediban.getText().toString();
+        String bank = edbank.getText().toString();
+        String swift = edswift.getText().toString();
+
+//        if (iban.equals("")){
+//
+//        }
+
+        if (iban.equals("")){
+            Constant.ErrorToast(getActivity(),"Please select iban");
+        }else if(bank.equals("")){
+            Constant.ErrorToast(getActivity(),"Please select bank");
+        }
+
+
+//        if (iban.equals("") && bank.equals("") && swift.equals(""))
+//        {
+//           // Constant.ErrorToast(getActivity(),"Please select bank");
+//            isEntered = true;
+//        }
+//
+//        if (!iban.equals("") && !bank.equals("") && !swift.equals("") )
+//        {
+//           // Constant.ErrorToast(getActivity(),"Please select currency");
+//            isEntered = true;
+//        }
+        return  isEntered;
     }
 
 

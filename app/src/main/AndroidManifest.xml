@@ -46,10 +46,7 @@
             android:name=".Splash_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
 
@@ -335,7 +332,12 @@
             android:name=".Company.Companies_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Details.Company_Details_Activity"
             android:screenOrientation="portrait"

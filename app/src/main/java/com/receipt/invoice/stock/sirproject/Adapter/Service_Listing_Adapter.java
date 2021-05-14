@@ -14,6 +14,7 @@ import com.receipt.invoice.stock.sirproject.Details.Service_Detail_Activity;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -77,7 +78,9 @@ public class Service_Listing_Adapter extends RecyclerView.Adapter<Service_Listin
         }
         else
         {
-            viewHolderForCat.servicecurrency.setText(service_price.replace(".00",""));
+            double vc = Double.parseDouble(service_price);
+            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            viewHolderForCat.servicecurrency.setText(formatter.format(vc));
 
         }
         if (service_category.equals("") || service_category.equals("null"))

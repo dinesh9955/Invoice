@@ -615,6 +615,42 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
             else if (selectedCompanyId.equals("")){
                 Constant.ErrorToast(getActivity(),"Select Company");
             }
+
+
+
+
+            else if (f_name.isEmpty()){
+                edfirstname.setError("Required");
+                edfirstname.requestFocus();
+            }
+            else if (l_name.equals("")){
+                edlastname.setError("Required");
+                edlastname.requestFocus();
+            }
+            else if (address1.isEmpty()){
+                edaddress1.setError("Required");
+                edaddress1.requestFocus();
+            }
+            else if (address2.equals("")){
+                edaddress2.setError("Required");
+                edaddress2.requestFocus();
+            }
+            else if (city.isEmpty()){
+                edcity.setError("Required");
+                edcity.requestFocus();
+            }
+            else if (postcode.equals("")){
+                edpostcode.setError("Required");
+                edpostcode.requestFocus();
+            }
+            else if (country.equals("")){
+                edcountry.setError("Required");
+                edcountry.requestFocus();
+            }
+
+
+
+
             else{
                 avi.smoothToShow();
                 avibackground.setVisibility(View.VISIBLE);
