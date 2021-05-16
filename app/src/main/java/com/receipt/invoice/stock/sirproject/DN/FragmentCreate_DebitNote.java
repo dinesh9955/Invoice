@@ -2795,7 +2795,9 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.customer_bottom_sheet, null);
             txtcustomer = view.findViewById(R.id.txtcustomer);
+            txtcustomer.setText("Select Supplier");
             search_customers = view.findViewById(R.id.search_customers);
+            search_customers.setHint("Search Supplier");
             TextView add_customer = view.findViewById(R.id.add_customer);
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2937,7 +2939,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                         Log.e(TAG, "invoiceAAA "+invoice.length());
 
                         if(invoice.length() == 0){
-                            invoicenum.setText("DBN # 1");
+                            invoicenum.setText("DN # 1");
                             //  invoicenum.setEnabled(true);
                         }else{
                             for (int i = 0; i < invoice.length(); i++) {
@@ -3654,7 +3656,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                 boolean ddd = isChar(sss);
                 if(ddd == false){
                     int myValue = Integer.parseInt(sss)+1;
-                    valueIs = "DBN # "+myValue;
+                    valueIs = "DN # "+myValue;
                 }
             }
         }

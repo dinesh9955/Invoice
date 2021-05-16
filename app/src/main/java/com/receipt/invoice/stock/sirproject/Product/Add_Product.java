@@ -635,7 +635,7 @@ public class Add_Product extends Fragment implements Select_Warehouse_Adapter.Ca
             productprice.setError("Required");
             productprice.requestFocus();
         }  else if (selectedMeasuremetnId.equals("")) {
-            Constant.ErrorToast(getActivity(), "Measurement and unit is required");
+            Constant.ErrorToast(getActivity(), "Measurement unit is required");
         } else if (selectedCompanyId.equals("")) {
             Constant.ErrorToast(getActivity(), "Company is required");
 //        } else if (selectedTaxable.equals("")) {

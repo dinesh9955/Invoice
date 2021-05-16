@@ -34,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
@@ -56,8 +57,8 @@ import com.receipt.invoice.stock.sirproject.Invoice.InvoiceViewActivityWebView;
 import com.receipt.invoice.stock.sirproject.Invoice.List_of_Invoices;
 import com.receipt.invoice.stock.sirproject.Invoice.RecyclerViewSwipeDecorator;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
-import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper;
 import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper2;
+import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper3;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
@@ -204,7 +205,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 
 
         enableSwipe();
-
+//        enableSwipe2();
 
 
 
@@ -297,10 +298,150 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 //        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
 //        itemTouchHelper.attachToRecyclerView(recycler_invoices);
 
+//
+//        ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+//            @Override
+//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+//                return false;
+//            }
+//
+//            @Override
+//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+//                // Take action for the swiped item
+//            }
+//
+//            public void onChildDraw (Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,float dX, float dY,int actionState, boolean isCurrentlyActive){
+////
+////                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+////                        .addBackgroundColor(ContextCompat.getColor(getActivity(), R.color.accent))
+////                        .addActionIcon(R.drawable.accessories)
+////                        .create()
+////                        .decorate();
+//
+//                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+//                        .
+//                        .addSwipeRightBackgroundColor(invoice_color)
+//                        .addSwipeRightLabel(invoice_text)
+//                        .setSwipeRightLabelColor(Color.WHITE)
+//                        .create()
+//                        .decorate();
+//                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+//
+//                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+//            }
+//        };
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+//        itemTouchHelper.attachToRecyclerView(recycler_invoices);
+
+
+
+
+
+
+//        SwipeHelper3 swipeHelper = new SwipeHelper3(getContext(), recycler_invoices) {
+//            @Override
+//            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<SwipeHelper3.UnderlayButton> underlayButtons) {
+//
+//                underlayButtons.add(new SwipeHelper3.UnderlayButton(
+//                        "More",
+//                        0,
+//                        Color.parseColor("#669933"),
+//                        new SwipeHelper3.UnderlayButtonClickListener() {
+//                            @Override
+//                            public void onClick(final int pos) {
+////                                customerName = list.get(pos).getInvoicustomer_name();
+////                                dataNo = list.get(pos).getInvoice_nobdt();
+////                                templateSelect = list.get(pos).getTemplate_type();
+////                                Log.e(TAG, "templateSelect: "+templateSelect);
+////                                invoiceidbypos = list.get(pos).getInvoice_userid();
+////                                String ilnvoiceStatus = list.get(pos).getInvocestatus();
+////                                String pdflink = list.get(pos).getInvoicepdflink();
+////                                String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
+////                                Log.e(TAG, "pdflink1: "+pdflink);
+////                                Log.e(TAG, "sahrelink1: "+sahrelink);
+////
+////                                String link = shareInvoicelink+""+pdflink;
+////
+////                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, link, link);
+////                                invoicelistAdapterdt.notifyDataSetChanged();
+////                                bottomSheetDialog.show();
+//                            }
+//                        }
+//                ));
+//
+//            }
+//
+//        };
+
+//         Paint p = new Paint();
+//
+//        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+//
+//            @Override
+//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+//                return false;
+//            }
+//
+//            @Override
+//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+//                int position = viewHolder.getAdapterPosition();
+////
+////                if (direction == ItemTouchHelper.LEFT){
+////                    adapter.removeItem(position);
+////                } else {
+////                    removeView();
+////                    edit_position = position;
+////                    alertDialog.setTitle("Edit Country");
+////                    et_country.setText(countries.get(position));
+////                    alertDialog.show();
+////                }
+//            }
+//
+//            @Override
+//            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+//
+//                Bitmap icon;
+//                if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
+//
+//                    View itemView = viewHolder.itemView;
+//                    float height = (float) itemView.getBottom() - (float) itemView.getTop();
+//                    float width = height / 3;
+//
+//                    if(dX > 0){
+//                        p.setColor(Color.parseColor("#388E3C"));
+//                        RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), dX,(float) itemView.getBottom());
+//                        c.drawRect(background,p);
+//                        icon = BitmapFactory.decodeResource(getResources(), R.drawable.thanksimg);
+//                        RectF icon_dest = new RectF((float)  10 ,10, 2*10, 10);
+//                        c.drawBitmap(icon,null,icon_dest,p);
+//                    } else {
+////                        p.setColor(Color.parseColor("#D32F2F"));
+////                        RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(),(float) itemView.getRight(), (float) itemView.getBottom());
+////                        c.drawRect(background,p);
+////                        icon = BitmapFactory.decodeResource(getResources(), R.drawable.a);
+////                        RectF icon_dest = new RectF((float) itemView.getRight() - 2*width ,(float) itemView.getTop() + width,(float) itemView.getRight() - width,(float)itemView.getBottom() - width);
+////                        c.drawBitmap(icon,null,icon_dest,p);
+//                    }
+//                }
+//                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+//            }
+//        };
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+//        itemTouchHelper.attachToRecyclerView(recycler_invoices);
+//
+
+
         return view;
 
 
     }
+
+
+
+
+
+
+
 
 
     private void enableSwipe(){
@@ -461,6 +602,317 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
         //  swipeHelper.attachToRecyclerView(recycler_invoices);
 
     }
+
+
+
+
+//    private void enableSwipe(){
+//
+//        SwipeHelper swipeHelper = new SwipeHelper(getContext(), recycler_invoices) {
+//            @Override
+//            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
+//
+//
+//
+//                underlayButtons.add(new SwipeHelper.UnderlayButton(
+//                        "aaa",
+//                        0,
+//                        Color.parseColor("#ff0000"),
+//
+//                        new UnderlayButtonClickListener() {
+//                            @Override
+//                            public void onClick(final int pos) {
+//                                Log.e(TAG, "onClick11111: "+invoiceidbypos);
+//                            }
+//                        },
+//                        "bbb",
+//                        1,
+//                        Color.parseColor("#ffff00"),
+//
+//                        new UnderlayButtonClickListener2() {
+//                            @Override
+//                            public void onClick(final int pos) {
+//                                Log.e(TAG, "onClick22222: "+invoiceidbypos);
+//                            }
+//                        }
+//                ));
+//
+//
+//                underlayButtons.add(new SwipeHelper.UnderlayButton(
+//                        "ccc",
+//                        2,
+//                        Color.parseColor("#00cc99"),
+//                        new UnderlayButtonClickListener() {
+//                            @Override
+//                            public void onClick(final int pos) {
+//                                Log.e(TAG, "onClick11111: "+invoiceidbypos);
+//                            }
+//                        }
+//
+////                        ,
+//
+////                        null,
+//
+//                        ,
+//
+//                        "SSSS",
+//                        3,
+//                        Color.parseColor("#6600ff"),
+//
+//                        new UnderlayButtonClickListener2() {
+//                            @Override
+//                            public void onClick(final int pos) {
+//                                Log.e(TAG, "onClick22222: "+invoiceidbypos);
+//                            }
+//                        }
+//                ));
+//
+//
+////                underlayButtons.add(new SwipeHelper.UnderlayButton(
+////                        "",
+////                        0,
+////                        Color.parseColor("#6600ff"),
+////                        new UnderlayButtonClickListener() {
+////                            @Override
+////                            public void onClick(final int pos) {
+////                                Log.e(TAG, "onClick22222: "+invoiceidbypos);
+////                            }
+////                        }
+////                ));
+//
+//            }
+//        };
+//
+//
+////        com.receipt.invoice.stock.sirproject.SwipeHelper swipeHelper = new com.receipt.invoice.stock.sirproject.SwipeHelper(getContext()) {
+////            @Override
+////            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<com.receipt.invoice.stock.sirproject.SwipeHelper.UnderlayButton> underlayButtons) {
+////                if (list.size() > 0) {
+////                    deliveryStatus = list.get(viewHolder.getPosition()).getInvocestatus();
+////                }
+////
+////                Log.e(TAG, "voidStatusAA " + voidStatus);
+////
+////                if (deliveryStatus.equalsIgnoreCase("1")) {
+////                    colorDelivery = "#ff4d4d";
+////                    markAsVoidTxt = "Mark as delivery received";
+////                }
+////                if (deliveryStatus.equalsIgnoreCase("2")) {
+////                    colorDelivery = "#33cc33";
+////                    markAsVoidTxt = "Delivery received";
+////                }
+////
+////                // invoicelistAdapterdt.notifyDataSetChanged();
+////                underlayButtons.add(new com.receipt.invoice.stock.sirproject.SwipeHelper.UnderlayButton(
+////                        markAsVoidTxt,
+////                        0,
+////                        Color.parseColor(colorDelivery),
+////
+////                        new com.receipt.invoice.stock.sirproject.SwipeHelper.UnderlayButtonClickListener2() {
+////                            @Override
+////                            public void onClick(final int pos) {
+////                                invoicelistAdapterdt.notifyDataSetChanged();
+////                                String  invoiceidbypos = list.get(pos).getInvoice_userid();
+////                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+////
+////                                String invoiceVoidStatus = list.get(pos).getInvocestatus();
+////
+////                                String voidPassValue = "1";
+////
+////                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
+////                                    voidPassValue = "2";
+////                                    // colorVoid = "#ff9900";
+////                                }
+////
+////                                if(invoiceVoidStatus.equalsIgnoreCase("2")){
+////                                    voidPassValue = "1";
+////                                    //colorVoid = "#99cc00";
+////                                }
+////
+////                                Log.e(TAG, "instantiateUnderlayButton");
+////
+////                                invoicelistAdapterdt.notifyDataSetChanged();
+////                                deliveryStatus(invoiceidbypos, voidPassValue);
+////                            }
+////                        }
+////                ));
+////            }
+////        };
+////
+////        swipeHelper.attachToRecyclerView(recycler_invoices);
+////
+//
+//
+//    }
+//
+//
+
+
+    private void enableSwipe2(){
+
+
+        SwipeHelper2 swipeHelper2 = new SwipeHelper2(getContext(), recycler_invoices) {
+            @Override
+            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
+
+                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                        "More",
+                        0,
+                        Color.parseColor("#669933"),
+
+                        new SwipeHelper2.UnderlayButtonClickListener() {
+                            @Override
+                            public void onClick(final int pos) {
+                                customerName = list.get(pos).getInvoicustomer_name();
+                                dataNo = list.get(pos).getInvoice_nobdt();
+                                templateSelect = list.get(pos).getTemplate_type();
+                                Log.e(TAG, "templateSelect: "+templateSelect);
+                                invoiceidbypos = list.get(pos).getInvoice_userid();
+                                String ilnvoiceStatus = list.get(pos).getInvocestatus();
+                                String pdflink = list.get(pos).getInvoicepdflink();
+                                String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
+                                Log.e(TAG, "pdflink1: "+pdflink);
+                                Log.e(TAG, "sahrelink1: "+sahrelink);
+
+                                String link = shareInvoicelink+""+pdflink;
+
+                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, link, link);
+                                invoicelistAdapterdt.notifyDataSetChanged();
+                                bottomSheetDialog.show();
+                            }
+                        }
+                ));
+
+
+                if (list.size() > 0) {
+                    voidStatus = list.get(viewHolder.getPosition()).getVoid_status();
+                }
+
+                Log.e(TAG, "voidStatusAA " + voidStatus);
+
+                if (voidStatus.equalsIgnoreCase("0")) {
+                    colorVoid = "#ff9900";
+                    markAsVoidTxt = "Mark as void";
+                }
+                if (voidStatus.equalsIgnoreCase("1")) {
+                    colorVoid = "#99cc00";
+                    markAsVoidTxt = "Mark as unvoid";
+                }
+
+
+
+                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                        markAsVoidTxt,
+                        0,
+                        Color.parseColor(colorVoid),
+                        new SwipeHelper2.UnderlayButtonClickListener() {
+                            @Override
+                            public void onClick(final int pos) {
+
+                                String invoiceidbypos = list.get(pos).getInvoice_userid();
+
+                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+
+                                String invoiceVoidStatus = list.get(pos).getVoid_status();
+
+                                String voidPassValue = "0";
+
+                                if(invoiceVoidStatus.equalsIgnoreCase("0")){
+                                    voidPassValue = "1";
+                                    // colorVoid = "#ff9900";
+                                }
+
+                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
+                                    voidPassValue = "0";
+                                    //colorVoid = "#99cc00";
+                                }
+
+                                Log.e(TAG, "instantiateUnderlayButton");
+
+                                invoicelistAdapterdt.notifyDataSetChanged();
+                                markVoidInvoice(invoiceidbypos, voidPassValue);
+
+                            }
+                        }
+                ));
+
+
+
+            }
+        };
+
+
+
+
+
+
+//        SwipeHelper swipeHelper = new SwipeHelper(getContext(), recycler_invoices) {
+//            @Override
+//            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
+//
+//                if (list.size() > 0) {
+//                    deliveryStatus = list.get(viewHolder.getPosition()).getInvocestatus();
+//                }
+//
+//                Log.e(TAG, "voidStatusAA " + voidStatus);
+//
+//                if (deliveryStatus.equalsIgnoreCase("1")) {
+//                    colorDelivery = "#ff4d4d";
+//                    markAsVoidTxt = "Mark as delivery received";
+//                }
+//                if (deliveryStatus.equalsIgnoreCase("2")) {
+//                    colorDelivery = "#33cc33";
+//                    markAsVoidTxt = "Delivery received";
+//                }
+//
+//                underlayButtons.add(new SwipeHelper.UnderlayButton(
+//                        "More",
+//                        0,
+//                        Color.parseColor("#ff00ff"),
+//                        new SwipeHelper.UnderlayButtonClickListener() {
+//
+//                            @Override
+//                            public void onClick(int pos) {
+//
+//                            }
+//                        },
+//                        markAsVoidTxt,
+//                        0,
+//                        Color.parseColor(colorDelivery),
+//                        new SwipeHelper.UnderlayButtonClickListener2() {
+//                            @Override
+//                            public void onClick(int pos) {
+//                                String invoiceidbypos = list.get(pos).getInvoice_userid();
+//
+//                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+//
+//                                String invoiceVoidStatus = list.get(pos).getInvocestatus();
+//
+//                                String voidPassValue = "1";
+//
+//                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
+//                                    voidPassValue = "2";
+//                                    // colorVoid = "#ff9900";
+//                                }
+//
+//                                if(invoiceVoidStatus.equalsIgnoreCase("2")){
+//                                    voidPassValue = "1";
+//                                    //colorVoid = "#99cc00";
+//                                }
+//
+//                                Log.e(TAG, "instantiateUnderlayButton");
+//
+//                                invoicelistAdapterdt.notifyDataSetChanged();
+//                                deliveryStatus(invoiceidbypos, voidPassValue);
+//                            }
+//                        }
+//                ));
+//
+//            }
+//        };
+
+    }
+
 
 
     void filter(String text) {

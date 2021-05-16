@@ -401,7 +401,7 @@ public class Add_Services extends Fragment {
 //            servicedescription.requestFocus();
 //        }
         else if (selectedMeasurementunit.equals("")){
-            Constant.ErrorToast(getActivity(),"Measurement and Unit is required");
+            Constant.ErrorToast(getActivity(),"Measurement Unit is required");
         }
         else if (selectedCompanyId.equals("")){
             Constant.ErrorToast(getActivity(),"Company is required");

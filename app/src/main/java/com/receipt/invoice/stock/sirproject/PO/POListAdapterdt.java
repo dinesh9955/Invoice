@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.receipt.invoice.stock.sirproject.Adapter.InvoicelistAdapterdt;
 import com.receipt.invoice.stock.sirproject.Invoice.InvoiceCallBack;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
@@ -52,67 +53,69 @@ public class POListAdapterdt extends RecyclerView.Adapter<POListAdapterdt.ViewHo
     public void onBindViewHolder(@NonNull final POListAdapterdt.ViewHolderForCat viewHolderForCat, final int i) {
 
 
-        InvoiceData company_list = mlist.get(i);
-
-        final String customer_name = company_list.getInvoicustomer_name();
-        final String invoice_no = company_list.getInvoice_nobdt();
-        final String invoicedue_date = company_list.getInvoicedue_date();
-        final String invoicetotlaprice = company_list.getInvoicetotlaprice();
-        final String strstatus = company_list.getInvocestatus();
-        final String is_viewed = company_list.getIs_viewed();
 
 
-
-        if (customer_name.equals("") && customer_name.equals("null")) {
-            viewHolderForCat.customernamtxt.setText("");
-        } else {
-            viewHolderForCat.customernamtxt.setText(customer_name);
-        }
-        if (invoice_no.equals("") && invoice_no.equals("null")) {
-            viewHolderForCat.invoicenbtxt.setText("");
-        } else {
-            viewHolderForCat.invoicenbtxt.setText(""+invoice_no);
-        }
-
-        if (invoicedue_date.equals("") && invoicedue_date.equals("null")) {
-            viewHolderForCat.invoiceduetxt.setText("");
-        } else {
-            viewHolderForCat.invoiceduetxt.setText(invoicedue_date);
-        }
-
-        if (invoicetotlaprice.equals("") && invoicetotlaprice.equals("null")) {
-            viewHolderForCat.invoicepricetxt.setText("");
-        } else {
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-            double stratingvalue = Double.parseDouble(invoicetotlaprice);
-            viewHolderForCat.invoicepricetxt.setText(formatter.format(stratingvalue)+" "+company_list.getPayment_currency());
-        }
-
-        if (strstatus.equals("") && strstatus.equals("null")) {
-            viewHolderForCat.statustxt.setText("");
-        } else {
-            if (strstatus.equals("2")) {
-                viewHolderForCat.statustxt.setText("Paid");
-                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
-
-            }else {
-                viewHolderForCat.statustxt.setText("Unpaid");
-                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
-            }
-        }
-
-        if (is_viewed.equalsIgnoreCase("0")) {
-            viewHolderForCat.invoicesttsuspend.setText("Pending");
-            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#FF0000"));
-        }else{
-            viewHolderForCat.invoicesttsuspend.setText("Seen");
-            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#008000"));
-        }
-
-        viewHolderForCat.invoicestatus.setVisibility(View.GONE);
-        viewHolderForCat.invoicesttsuspend.setVisibility(View.GONE);
-
-        viewHolderForCat.statustxt.setVisibility(View.GONE);
+//        InvoiceData company_list = mlist.get(i);
+//
+//        final String customer_name = company_list.getInvoicustomer_name();
+//        final String invoice_no = company_list.getInvoice_nobdt();
+//        final String invoicedue_date = company_list.getInvoicedue_date();
+//        final String invoicetotlaprice = company_list.getInvoicetotlaprice();
+//        final String strstatus = company_list.getInvocestatus();
+//        final String is_viewed = company_list.getIs_viewed();
+//
+//
+//
+//        if (customer_name.equals("") && customer_name.equals("null")) {
+//            viewHolderForCat.customernamtxt.setText("");
+//        } else {
+//            viewHolderForCat.customernamtxt.setText(customer_name);
+//        }
+//        if (invoice_no.equals("") && invoice_no.equals("null")) {
+//            viewHolderForCat.invoicenbtxt.setText("");
+//        } else {
+//            viewHolderForCat.invoicenbtxt.setText(""+invoice_no);
+//        }
+//
+//        if (invoicedue_date.equals("") && invoicedue_date.equals("null")) {
+//            viewHolderForCat.invoiceduetxt.setText("");
+//        } else {
+//            viewHolderForCat.invoiceduetxt.setText(invoicedue_date);
+//        }
+//
+//        if (invoicetotlaprice.equals("") && invoicetotlaprice.equals("null")) {
+//            viewHolderForCat.invoicepricetxt.setText("");
+//        } else {
+//            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+//            double stratingvalue = Double.parseDouble(invoicetotlaprice);
+//            viewHolderForCat.invoicepricetxt.setText(formatter.format(stratingvalue)+" "+company_list.getPayment_currency());
+//        }
+//
+//        if (strstatus.equals("") && strstatus.equals("null")) {
+//            viewHolderForCat.statustxt.setText("");
+//        } else {
+//            if (strstatus.equals("2")) {
+//                viewHolderForCat.statustxt.setText("Paid");
+//                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
+//
+//            }else {
+//                viewHolderForCat.statustxt.setText("Unpaid");
+//                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
+//            }
+//        }
+//
+//        if (is_viewed.equalsIgnoreCase("0")) {
+//            viewHolderForCat.invoicesttsuspend.setText("Pending");
+//            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#FF0000"));
+//        }else{
+//            viewHolderForCat.invoicesttsuspend.setText("Seen");
+//            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#008000"));
+//        }
+//
+//        viewHolderForCat.invoicestatus.setVisibility(View.GONE);
+//        viewHolderForCat.invoicesttsuspend.setVisibility(View.GONE);
+//
+//        viewHolderForCat.statustxt.setVisibility(View.GONE);
 
 
 //
@@ -156,6 +159,10 @@ public class POListAdapterdt extends RecyclerView.Adapter<POListAdapterdt.ViewHo
 //            }
 //        });
 
+
+
+
+
     }
 
 
@@ -183,32 +190,32 @@ public class POListAdapterdt extends RecyclerView.Adapter<POListAdapterdt.ViewHo
         TextView customernamtxt,invoicenbtxt,invoiceduetxt,invoicepricetxt,statustxt,invoicestatus,invoicesttsuspend;
 
         TextView textViewLeftPaidUnPaid;
-
+        SwipeLayout swipeLayout;
 
         public ViewHolderForCat(@NonNull View itemView) {
             super(itemView);
 
-//            SwipeLayout swipeLayout = (SwipeLayout)itemView.findViewById(R.id.swipe);
-//            swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
-//            swipeLayout.addDrag(SwipeLayout.DragEdge.Left, swipeLayout.findViewById(R.id.left_view));
-//            swipeLayout.addDrag(SwipeLayout.DragEdge.Right, swipeLayout.findViewById(R.id.right_view));
+//            swipeLayout = (SwipeLayout)itemView.findViewById(R.id.swipe);
+////            swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
+//            viewHolderForCat.swipeLayout.addDrag(SwipeLayout.DragEdge.Left, viewHolderForCat.swipeLayout.findViewById(R.id.left_view));
+//            viewHolderForCat.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, viewHolderForCat.swipeLayout.findViewById(R.id.right_view));
+
+         //   textViewLeftPaidUnPaid = itemView.findViewById(R.id.textdelete1);
+
+//            customernamtxt = itemView.findViewById(R.id.customernamtxt);
+//            invoicenbtxt = itemView.findViewById(R.id.invoicenbtxt);
+//            invoiceduetxt = itemView.findViewById(R.id.invoiceduetxt);
+//            invoicepricetxt = itemView.findViewById(R.id.invoicepricetxt);
+//            statustxt = itemView.findViewById(R.id.statustxt);
+//            invoicestatus = itemView.findViewById(R.id.invoicestatus);
+//            invoicesttsuspend = itemView.findViewById(R.id.invoicesttsuspend);
 //
-//            textViewLeftPaidUnPaid = itemView.findViewById(R.id.textdelete1);
-
-            customernamtxt = itemView.findViewById(R.id.customernamtxt);
-            invoicenbtxt = itemView.findViewById(R.id.invoicenbtxt);
-            invoiceduetxt = itemView.findViewById(R.id.invoiceduetxt);
-            invoicepricetxt = itemView.findViewById(R.id.invoicepricetxt);
-            statustxt = itemView.findViewById(R.id.statustxt);
-            invoicestatus = itemView.findViewById(R.id.invoicestatus);
-            invoicesttsuspend = itemView.findViewById(R.id.invoicesttsuspend);
-
-            invoicestatus.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
-            invoicesttsuspend.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
-            invoicenbtxt.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
-            invoiceduetxt.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Light.otf"));
-            invoicepricetxt.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Bold.otf"));
-            statustxt.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Bold.otf"));
+//            invoicestatus.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
+//            invoicesttsuspend.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
+//            invoicenbtxt.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
+//            invoiceduetxt.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Light.otf"));
+//            invoicepricetxt.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Bold.otf"));
+//            statustxt.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Bold.otf"));
 
         }
 

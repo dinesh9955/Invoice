@@ -3014,7 +3014,9 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(this).inflate(R.layout.customer_bottom_sheet, null);
             txtcustomer = view.findViewById(R.id.txtcustomer);
+            txtcustomer.setText("Select Supplier");
             search_customers = view.findViewById(R.id.search_customers);
+            search_customers.setHint("Search Supplier");
             TextView add_customer = view.findViewById(R.id.add_customer);
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
