@@ -312,6 +312,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
     private ViewGroup mSelectedImagesContainer;
     private RequestManager requestManager;
 
+    TextView textViewNoItems;
+
     public Fragment_Create_Invoice() {
         // Required empty public constructor
     }
@@ -351,6 +353,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
         invoiceweb = view.findViewById(R.id.invoiceweb);
 
+        textViewNoItems = view.findViewById(R.id.txtnoitems);
 
         selectcompany = view.findViewById(R.id.selectcompany);
         avi = view.findViewById(R.id.avi);
@@ -437,6 +440,13 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
         products_adapter = new Products_Adapter(getActivity(), product_bottom, tempList, this::onClick, tempQuantity, producprice);
         productsRecycler.setAdapter(products_adapter);
+
+        if(tempList.size() == 0){
+            textViewNoItems.setVisibility(View.VISIBLE);
+        }else{
+            textViewNoItems.setVisibility(View.GONE);
+        }
+
 
         mlistener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -1970,6 +1980,11 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
                     totalpriceproduct.clear();
 
+                    if(tempList.size() == 0){
+                        textViewNoItems.setVisibility(View.VISIBLE);
+                    }else{
+                        textViewNoItems.setVisibility(View.GONE);
+                    }
 
                     products_adapter.notifyDataSetChanged();
                     Log.e("tempList", ""+String.valueOf(tempList.size()));
@@ -3340,6 +3355,13 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_price: "+total_price);
+
+        if(tempList.size() == 0){
+            textViewNoItems.setVisibility(View.VISIBLE);
+        }else{
+            textViewNoItems.setVisibility(View.GONE);
+        }
+
 
         double balanceamount = 0.0;
         Double netamountvalue = 0.0;

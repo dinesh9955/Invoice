@@ -332,6 +332,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
     WebView invoiceweb;
 
+    TextView textViewNoItems;
+
     String  tax_type = "", rate1 = "" , value = "" , rate_type = "";
 
 
@@ -348,6 +350,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
         setContentView(R.layout.editinvoiceactivity);
         Constant.toolbar(ConvertToInvoiceActivity.this, "Convert to Invoice");
         invoiceweb = findViewById(R.id.invoiceweb);
+
+        textViewNoItems = findViewById(R.id.txtnoitems);
 
         apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
         invoiceId = getIntent().getStringExtra("invoiceID");
@@ -446,6 +450,13 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
         products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
 //        productsRecycler.setAdapter(products_adapter);
+
+        if(tempList.size() == 0){
+            textViewNoItems.setVisibility(View.VISIBLE);
+        }else{
+            textViewNoItems.setVisibility(View.GONE);
+        }
+
 
         mlistener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -953,6 +964,13 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 //    products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
 
                 //  products_adapter.update(product_bottom, tempList, tempQuantity, producprice);
+
+                if(tempList.size() == 0){
+                    textViewNoItems.setVisibility(View.VISIBLE);
+                }else{
+                    textViewNoItems.setVisibility(View.GONE);
+                }
+
 
                 productsRecycler.setAdapter(products_adapter);
 
@@ -2110,6 +2128,11 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                     imgstampsuccess.setVisibility(View.INVISIBLE);
                     attachmenttxtimg.setVisibility(View.INVISIBLE);
 
+                    if(tempList.size() == 0){
+                        textViewNoItems.setVisibility(View.VISIBLE);
+                    }else{
+                        textViewNoItems.setVisibility(View.GONE);
+                    }
 
                     products_adapter.notifyDataSetChanged();
 
@@ -3376,6 +3399,12 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_price: "+total_price);
+
+        if(tempList.size() == 0){
+            textViewNoItems.setVisibility(View.VISIBLE);
+        }else{
+            textViewNoItems.setVisibility(View.GONE);
+        }
 
         double balanceamount = 0.0;
         Double netamountvalue = 0.0;

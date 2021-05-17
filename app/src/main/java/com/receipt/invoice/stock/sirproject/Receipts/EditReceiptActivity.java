@@ -339,6 +339,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 //    String templateSelect = "0";
 //    String colorCode = "#ffffff";
 
+    TextView textViewNoItems;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -347,6 +349,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
         setContentView(R.layout.editreceiptactivity);
         Constant.toolbar(EditReceiptActivity.this, "Edit Receipt");
         invoiceweb = findViewById(R.id.invoiceweb);
+
+        textViewNoItems = findViewById(R.id.txtnoitems);
 
         apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
         invoiceId = getIntent().getStringExtra("invoiceID");
@@ -446,6 +450,12 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
         products_adapter = new Products_Adapter(this, product_bottom, tempList, this::onClick, tempQuantity, producprice);
 //        productsRecycler.setAdapter(products_adapter);
+
+        if(tempList.size() == 0){
+            textViewNoItems.setVisibility(View.VISIBLE);
+        }else{
+            textViewNoItems.setVisibility(View.GONE);
+        }
 
         mlistener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -765,6 +775,12 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                 //  products_adapter.update(product_bottom, tempList, tempQuantity, producprice);
 
                 productsRecycler.setAdapter(products_adapter);
+
+                if(tempList.size() == 0){
+                    textViewNoItems.setVisibility(View.VISIBLE);
+                }else{
+                    textViewNoItems.setVisibility(View.GONE);
+                }
 
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
@@ -2031,6 +2047,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     attachmenttxtimg.setVisibility(View.INVISIBLE);
 
 
+
                     products_adapter.notifyDataSetChanged();
 
                     bottomSheetDialog2.dismiss();
@@ -3253,6 +3270,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
         totalpriceproduct.add(String.valueOf(newPrice));
         calculateTotalAmount(total_price);
 
+
+
         products_adapter.notifyDataSetChanged();
 
 
@@ -3266,6 +3285,12 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_price: "+total_price);
+
+        if(tempList.size() == 0){
+            textViewNoItems.setVisibility(View.VISIBLE);
+        }else{
+            textViewNoItems.setVisibility(View.GONE);
+        }
 
         double balanceamount = 0.0;
         Double netamountvalue = 0.0;
@@ -3567,6 +3592,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
         totalpriceproduct.add(String.valueOf(total_price));
         calculateTotalAmount(total_price);
 
+
+
         products_adapter.notifyDataSetChanged();
 
         bottomSheetDialog2.dismiss();
@@ -3586,6 +3613,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
             Log.e(TAG, "tempList.size() "+tempList.size());
             Log.e(TAG, "tempQuantity.size() "+tempQuantity.size());
             Log.e(TAG, "totalpriceproduct.size() "+totalpriceproduct.size());
+
+
 
             products_adapter.notifyDataSetChanged();
 

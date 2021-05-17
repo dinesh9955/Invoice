@@ -312,6 +312,8 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
     private ViewGroup mSelectedImagesContainer;
     private RequestManager requestManager;
 
+    TextView textViewNoItems;
+
     public FragmentCreate_Receipts() {
         // Required empty public constructor
     }
@@ -350,6 +352,10 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         View view = inflater.inflate(R.layout.fragment_create__receipts, container, false);
 
         invoiceweb = view.findViewById(R.id.invoiceweb);
+
+        textViewNoItems = view.findViewById(R.id.txtnoitems);
+
+
 
 
         selectcompany = view.findViewById(R.id.selectcompany);
@@ -440,6 +446,12 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 
         products_adapter = new Products_Adapter(getActivity(), product_bottom, tempList, this::onClick, tempQuantity, producprice);
         productsRecycler.setAdapter(products_adapter);
+
+        if(tempList.size() == 0){
+            textViewNoItems.setVisibility(View.VISIBLE);
+        }else{
+            textViewNoItems.setVisibility(View.GONE);
+        }
 
         mlistener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -1929,6 +1941,14 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                     totalpriceproduct.clear();
 
 
+
+                            if(tempList.size() == 0){
+                                textViewNoItems.setVisibility(View.VISIBLE);
+                            }else{
+                                textViewNoItems.setVisibility(View.GONE);
+                            }
+
+
                     products_adapter.notifyDataSetChanged();
                     Log.e("tempList", String.valueOf(tempList.size()));
                     imgsigsuccess.setVisibility(View.INVISIBLE);
@@ -3277,6 +3297,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         totalpriceproduct.add(String.valueOf(newPrice));
         calculateTotalAmount(total_price);
 
+
         products_adapter.notifyDataSetChanged();
 
 
@@ -3288,6 +3309,12 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_price: "+total_price);
+
+        if(tempList.size() == 0){
+            textViewNoItems.setVisibility(View.VISIBLE);
+        }else{
+            textViewNoItems.setVisibility(View.GONE);
+        }
 
         double balanceamount = 0.0;
         Double netamountvalue = 0.0;
@@ -3489,6 +3516,8 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 
         calculateTotalAmount(total_price);
 
+
+
         products_adapter.notifyDataSetChanged();
 
         bottomSheetDialog2.dismiss();
@@ -3508,6 +3537,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         tempList.remove(str);
         tempQuantity.remove(str);
         totalpriceproduct.remove(str);
+
 
         products_adapter.notifyDataSetChanged();
 
