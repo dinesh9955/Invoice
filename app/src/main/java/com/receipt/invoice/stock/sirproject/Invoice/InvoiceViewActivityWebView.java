@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.print.PDFPrint;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
+import android.print.PrintJob;
 import android.print.PrintManager;
 import android.util.Log;
 import android.view.View;
@@ -430,14 +431,17 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
         //create object of print manager in your device
         PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
 
+
+
         //create object of print adapter
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
 
         //provide name to your newly generated pdf file
         String jobName = getString(R.string.app_name) + " Print Test";
 
-        //open print dialog
-        printManager.print(jobName, printAdapter, new PrintAttributes.Builder().build());
+        PrintAttributes.Builder builder = new PrintAttributes.Builder();
+        builder.setMediaSize( PrintAttributes.MediaSize.ISO_A3);
+        printManager.print(jobName, printAdapter, builder.build());
     }
 
 
@@ -776,7 +780,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxvalue + currency_code;
-            taxtamountstrvalue = " Tax "+taxTitle;
+            taxtamountstrvalue = ""+taxTitle.replace("(", "").replace(")", "").toUpperCase();
         }
 
         String discountvalue = "";

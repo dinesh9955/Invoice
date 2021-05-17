@@ -629,12 +629,12 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                 warehouse_list(selectedCompanyId);
                 customer_list(selectedCompanyId);
                 CompanyInformation(selectedCompanyId);
-                productget(selectedCompanyId);
                 serviceget(selectedCompanyId);
 
 
                 //invoice Data
                 invoiceDtoInvoice = data.getPoDtoPO();
+               // Log.e(TAG, "selectwarehouseIdAACC "+invoiceDtoInvoice.getWarehouse_id());
 
                 Gson gson = new Gson();
                 String json2 = gson.toJson(invoiceDtoInvoice);
@@ -643,12 +643,14 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
                 paid_amount_date = invoiceDtoInvoice.getPaidAmountDate();
 
-                Log.e(TAG, "paid_amount_date "+paid_amount_date);
 
                 invoicenumberdto = invoiceDtoInvoice.getPurchase_order_no();
                 // where House id
-                selectwarehouseId = invoiceDtoInvoice.getWearhouseId();
+                selectwarehouseId = invoiceDtoInvoice.getWarehouse_id();
 
+                Log.e(TAG, "selectwarehouseIdAA "+selectwarehouseId);
+
+                productget(selectwarehouseId);
 
 
                 Log.e("Selected_house",selectwarehouseId+"  ");
@@ -974,7 +976,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
 
-                        txttax.setText(""+title);
+                        txttax.setText(""+title.replace("(","").replace(")",""));
                         tax.setText(""+value+currency_codedto);
 
                         taxrname = listobj.getTitle();
@@ -1198,7 +1200,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
                 Log.e("selectedCompany", selectedCompanyId);
                 warehouse_list(selectedCompanyId);
-                productget(selectedCompanyId);
+                //productget(selectedCompanyId);
                 serviceget(selectedCompanyId);
                 customer_list(selectedCompanyId);
                 CompanyInformation(selectedCompanyId);
@@ -1212,7 +1214,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
                 selectwarehouseId = wids.get(position);
                 Log.e(TAG, "selectwarehouseIdAA "+ selectwarehouseId);
-
+                productget(selectwarehouseId);
                 warehousePosition = position;
 
             }
@@ -1435,8 +1437,8 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
 
-                    taxtypeclusive = selectedtaxt.get(i).getTaxtype();
-
+                    //taxtypeclusive = selectedtaxt.get(i).getTaxtype();
+                    Log.e(TAG, "selectedtaxtAAA0 "+selectedtaxt.get(i).getRateType());
                     Log.e(TAG, "selectedtaxtAAA1 "+selectedtaxt.get(i).getTaxtype());
                     Log.e(TAG, "selectedtaxtAAA2 "+selectedtaxt.get(i).getTaxrate());
                     Log.e(TAG, "selectedtaxtAAA3 "+selectedtaxt.get(i).getTaxname());
@@ -1445,17 +1447,55 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
 
 
-                    params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                    params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
-                    params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-                    // params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                    if(selectedtaxt.get(i).getRateType().equalsIgnoreCase("p")){
+                        Log.e(TAG, "QQQQQQQQQQQ");
+                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                        // params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", "zz");
 
-                    if(selectedtaxt.get(i).getTaxname().length() > 0){
-                        if(selectedtaxt.get(i).getTaxname().contains(" ")){
-                            String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
-                            params.add("tax[" + i + "]" + "[title]", firstTax);
+                        if(selectedtaxt.get(i).getTaxname().length() > 0){
+                            if(selectedtaxt.get(i).getTaxname().contains(" ")){
+                                String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                                Log.e(TAG, "firstTaxAAA5 "+firstTax);
+                                params.add("tax[" + i + "]" + "[title]", firstTax);
+                            }else{
+                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                            }
+                        }
+
+
+                    }else{
+                        Log.e(TAG, "WWWWWWWWWWWWW");
+                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", "xx");
+
+                        if(selectedtaxt.get(i).getTaxname().length() > 0){
+                            if(selectedtaxt.get(i).getTaxname().contains(" ")){
+                                String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                                Log.e(TAG, "firstTaxAAA6 "+firstTax);
+                                params.add("tax[" + i + "]" + "[title]", firstTax);
+                            }else{
+                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                            }
                         }
                     }
+
+
+//
+//                    params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+//                    params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+//                    params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                    // params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+//
+//                    if(selectedtaxt.get(i).getTaxname().length() > 0){
+//                        if(selectedtaxt.get(i).getTaxname().contains(" ")){
+//                            String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+//                            params.add("tax[" + i + "]" + "[title]", firstTax);
+//                        }
+//                    }
 
                 }
             } else {
@@ -2816,17 +2856,17 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
     public void productget(String selectedCompanyId) {
         product_bottom.clear();
         RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
+        params.add("warehouse_id", selectedCompanyId);
 
         String token = Constant.GetSharedPreferences(EditPOActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(Constant.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 String response = new String(responseBody);
-                Log.e("response product", response);
+                Log.e(TAG, "response_product"+ response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -2871,8 +2911,13 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                                 product_list.setQuantity(quantity);
                                 product_list.setMinimum(minimum);
 
-                                product_bottom.add(product_list);
+                                boolean isCompare = Utility.isCompare(product_bottom , product_id);
 
+                                Log.e(TAG , "isCompareA "+isCompare);
+
+                                if(isCompare != true){
+                                    product_bottom.add(product_list);
+                                }
 
                             }
                         } else {
@@ -2909,6 +2954,8 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             }
         });
     }
+
+
 
     void filter(String text) {
         ArrayList<Product_list> temp = new ArrayList();
@@ -3551,14 +3598,14 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                         if(taxrname.contains(" ")){
                             String firstTax = taxrname.split(" ")[0].replace("(", "");
                             String subStrinng = firstTax + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                         }else{
                             String subStrinng = taxrname + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                         }
                     }else{
                         String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                     }
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
@@ -3579,14 +3626,14 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                         if(taxrname.contains(" ")){
                             String firstTax = taxrname.split(" ")[0].replace("(", "");
                             String subStrinng = firstTax + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                            txttax.setText(subStrinng); //Dont do any change
                         }else{
                             String subStrinng = taxrname + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                            txttax.setText(subStrinng); //Dont do any change
                         }
                     }else{
                         String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        txttax.setText(subStrinng); //Dont do any change
                     }
 
                     netamountvalue = subtotalvalue + Totatlvalue1;

@@ -3370,7 +3370,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
                     String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
 
-                    txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                    txttax.setText(  subStrinng + " Incl" ); //Dont do any change
 
                    // netamountvalue = subtotalvalue + Totatlvalue1;
 
@@ -3385,7 +3385,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
                     String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
 
-                    txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                    txttax.setText(subStrinng); //Dont do any change
 
                     netamountvalue = subtotalvalue + Totatlvalue1;
 

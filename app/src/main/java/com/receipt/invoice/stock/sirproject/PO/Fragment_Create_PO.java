@@ -873,7 +873,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             public void onItemSelected(int position, String itemAtPosition) {
                 selectwarehouseId = wids.get(position);
                 Log.e("selectwarehouseId", selectwarehouseId);
-                productget(selectedCompanyId);
+                productget(selectwarehouseId);
 
             }
         });
@@ -2664,12 +2664,12 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     public void productget(String selectedCompanyId) {
         product_bottom.clear();
         RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
+        params.add("warehouse_id", selectedCompanyId);
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(Constant.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -3428,7 +3428,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
                     String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
-                    txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                    txttax.setText(  subStrinng + " Incl" ); //Dont do any change
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
 
@@ -3443,7 +3443,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                     String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
 
-                    txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                    txttax.setText(subStrinng); //Dont do any change
 
                     netamountvalue = subtotalvalue + Totatlvalue1;
 

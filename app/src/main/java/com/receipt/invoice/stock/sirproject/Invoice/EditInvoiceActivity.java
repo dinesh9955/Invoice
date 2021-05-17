@@ -628,12 +628,14 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 warehouse_list(selectedCompanyId);
                 customer_list(selectedCompanyId);
                 CompanyInformation(selectedCompanyId);
-                productget(selectedCompanyId);
+
                 serviceget(selectedCompanyId);
 
 
                 //invoice Data
                 invoiceDtoInvoice = data.getInvoice();
+
+
 
                 Gson gson = new Gson();
                 String json2 = gson.toJson(invoiceDtoInvoice);
@@ -648,7 +650,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 // where House id
                 selectwarehouseId = invoiceDtoInvoice.getWearhouseId();
 
-
+                productget(selectwarehouseId);
 
                 Log.e("Selected_house",selectwarehouseId+"  ");
 
@@ -962,7 +964,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
 
-                        txttax.setText(""+title);
+                        txttax.setText(""+title.replace("(","").replace(")",""));
                         tax.setText(""+value+currency_codedto);
 
                         taxrname = listobj.getTitle();
@@ -1201,6 +1203,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 selectwarehouseId = wids.get(position);
                 Log.e(TAG, "selectwarehouseIdAA "+ selectwarehouseId);
 
+                productget(selectwarehouseId);
+
                 warehousePosition = position;
 
             }
@@ -1422,7 +1426,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
 
-                    taxtypeclusive = selectedtaxt.get(i).getTaxtype();
+                   // taxtypeclusive = selectedtaxt.get(i).getTaxtype();
 
                     Log.e(TAG, "selectedtaxtAAA1 "+selectedtaxt.get(i).getTaxtype());
                     Log.e(TAG, "selectedtaxtAAA2 "+selectedtaxt.get(i).getTaxrate());
@@ -1437,10 +1441,39 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                     params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
                    // params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
 
-                    if(selectedtaxt.get(i).getTaxname().length() > 0){
-                        if(selectedtaxt.get(i).getTaxname().contains(" ")){
-                        String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
-                            params.add("tax[" + i + "]" + "[title]", firstTax);
+                    if(selectedtaxt.get(i).getRateType().equalsIgnoreCase("p")){
+                        Log.e(TAG, "QQQQQQQQQQQ");
+                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                        // params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", "zz");
+
+                        if(selectedtaxt.get(i).getTaxname().length() > 0){
+                            if(selectedtaxt.get(i).getTaxname().contains(" ")){
+                                String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                                Log.e(TAG, "firstTaxAAA5 "+firstTax);
+                                params.add("tax[" + i + "]" + "[title]", firstTax);
+                            }else{
+                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                            }
+                        }
+
+
+                    }else{
+                        Log.e(TAG, "WWWWWWWWWWWWW");
+                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
+                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", "xx");
+
+                        if(selectedtaxt.get(i).getTaxname().length() > 0){
+                            if(selectedtaxt.get(i).getTaxname().contains(" ")){
+                                String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                                Log.e(TAG, "firstTaxAAA6 "+firstTax);
+                                params.add("tax[" + i + "]" + "[title]", firstTax);
+                            }else{
+                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                            }
                         }
                     }
 
@@ -2800,12 +2833,12 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
     public void productget(String selectedCompanyId) {
         product_bottom.clear();
         RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
+        params.add("warehouse_id", selectedCompanyId);
 
         String token = Constant.GetSharedPreferences(EditInvoiceActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(Constant.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -2855,7 +2888,13 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                                 product_list.setQuantity(quantity);
                                 product_list.setMinimum(minimum);
 
-                                product_bottom.add(product_list);
+                                boolean isCompare = Utility.isCompare(product_bottom , product_id);
+
+                                Log.e(TAG , "isCompareA "+isCompare);
+
+                                if(isCompare != true){
+                                    product_bottom.add(product_list);
+                                }
 
 
                             }
@@ -3532,14 +3571,14 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         if(taxrname.contains(" ")){
                             String firstTax = taxrname.split(" ")[0].replace("(", "");
                             String subStrinng = firstTax + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                         }else{
                             String subStrinng = taxrname + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                         }
                     }else{
                         String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                     }
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
@@ -3560,14 +3599,14 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         if(taxrname.contains(" ")){
                             String firstTax = taxrname.split(" ")[0].replace("(", "");
                             String subStrinng = firstTax + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                            txttax.setText(subStrinng); //Dont do any change
                         }else{
                             String subStrinng = taxrname + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                            txttax.setText(subStrinng); //Dont do any change
                         }
                     }else{
                         String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        txttax.setText(subStrinng); //Dont do any change
                     }
 
                     netamountvalue = subtotalvalue + Totatlvalue1;

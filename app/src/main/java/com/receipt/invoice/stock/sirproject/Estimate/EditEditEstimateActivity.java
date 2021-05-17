@@ -943,7 +943,7 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
 
-                        txttax.setText(""+title);
+                        txttax.setText(""+title.replace("(","").replace(")",""));
                         tax.setText(""+value+currency_codedto);
 
                         taxrname = listobj.getTitle();
@@ -1379,7 +1379,7 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
 
-                    taxtypeclusive = selectedtaxt.get(i).getTaxtype();
+                  //  taxtypeclusive = selectedtaxt.get(i).getTaxtype();
 
                     Log.e(TAG, "selectedtaxtAAA1 "+selectedtaxt.get(i).getTaxtype());
                     Log.e(TAG, "selectedtaxtAAA2 "+selectedtaxt.get(i).getTaxrate());
@@ -1388,28 +1388,41 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
                     Log.e(TAG, "selectedtaxtAAA5 "+taxtypeclusive);
 
                     if(selectedtaxt.get(i).getRateType().equalsIgnoreCase("p")){
+                        Log.e(TAG, "QQQQQQQQQQQ");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
                         // params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", "zz");
+
                         if(selectedtaxt.get(i).getTaxname().length() > 0){
                             if(selectedtaxt.get(i).getTaxname().contains(" ")){
                                 String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                                Log.e(TAG, "firstTaxAAA5 "+firstTax);
                                 params.add("tax[" + i + "]" + "[title]", firstTax);
+                            }else{
+                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
                             }
                         }
 
 
                     }else{
+                        Log.e(TAG, "WWWWWWWWWWWWW");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
                         params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", "xx");
+
                         if(selectedtaxt.get(i).getTaxname().length() > 0){
                             if(selectedtaxt.get(i).getTaxname().contains(" ")){
                                 String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                                Log.e(TAG, "firstTaxAAA6 "+firstTax);
                                 params.add("tax[" + i + "]" + "[title]", firstTax);
+                            }else{
+                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
                             }
                         }
                     }
+
 
 
 
@@ -3491,14 +3504,14 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
                         if(taxrname.contains(" ")){
                             String firstTax = taxrname.split(" ")[0].replace("(", "");
                             String subStrinng = firstTax + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                         }else{
                             String subStrinng = taxrname + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                         }
                     }else{
                         String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                     }
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
@@ -3519,14 +3532,14 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
                         if(taxrname.contains(" ")){
                             String firstTax = taxrname.split(" ")[0].replace("(", "");
                             String subStrinng = firstTax + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                            txttax.setText(subStrinng); //Dont do any change
                         }else{
                             String subStrinng = taxrname + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                            txttax.setText(subStrinng); //Dont do any change
                         }
                     }else{
                         String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        txttax.setText(subStrinng); //Dont do any change
                     }
 
 

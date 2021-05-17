@@ -880,7 +880,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
 
-                        txttax.setText(""+title);
+                        txttax.setText(""+title.replace("(","").replace(")",""));
                         tax.setText(""+value+currency_codedto);
 
                         taxrname = listobj.getTitle();
@@ -3403,14 +3403,14 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         if(taxrname.contains(" ")){
                             String firstTax = taxrname.split(" ")[0].replace("(", "");
                             String subStrinng = firstTax + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                         }else{
                             String subStrinng = taxrname + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                         }
                     }else{
                         String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                     }
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
@@ -3431,14 +3431,14 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         if(taxrname.contains(" ")){
                             String firstTax = taxrname.split(" ")[0].replace("(", "");
                             String subStrinng = firstTax + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                            txttax.setText(subStrinng); //Dont do any change
                         }else{
                             String subStrinng = taxrname + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                            txttax.setText(subStrinng); //Dont do any change
                         }
                     }else{
                         String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        txttax.setText(subStrinng); //Dont do any change
                     }
 
 

@@ -607,7 +607,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 warehouse_list(selectedCompanyId);
                 customer_list(selectedCompanyId);
                 CompanyInformation(selectedCompanyId);
-                productget(selectedCompanyId);
+
                 serviceget(selectedCompanyId);
 
 
@@ -616,6 +616,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 invoicenumberdto = invoiceDtoInvoice.getEstimate_no();
                 // where House id
                 selectwarehouseId = invoiceDtoInvoice.getWearhouseId();
+
+                productget(selectwarehouseId);
 
                 Log.e("Selected_house",selectwarehouseId+"  "+wnames.toString());
 
@@ -901,7 +903,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
 
-                        txttax.setText(""+title);
+                        txttax.setText(""+title.replace("(","").replace(")",""));
                         tax.setText(""+value+currency_codedto);
 
                         taxrname = listobj.getTitle();
@@ -1181,7 +1183,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             public void onItemSelected(int position, String itemAtPosition) {
                 selectwarehouseId = wids.get(position);
                 Log.e("selectwarehouseId", selectwarehouseId);
-
+                productget(selectwarehouseId);
                 warehousePosition = position;
 
             }
@@ -1388,7 +1390,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
 
-                    taxtypeclusive = selectedtaxt.get(i).getTaxtype();
+                   // taxtypeclusive = selectedtaxt.get(i).getTaxtype();
 
                     Log.e(TAG, "selectedtaxtAAA1 "+selectedtaxt.get(i).getTaxtype());
                     Log.e(TAG, "selectedtaxtAAA2 "+selectedtaxt.get(i).getTaxrate());
@@ -1397,28 +1399,41 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                     Log.e(TAG, "selectedtaxtAAA5 "+taxtypeclusive);
 
                     if(selectedtaxt.get(i).getRateType().equalsIgnoreCase("p")){
+                        Log.e(TAG, "QQQQQQQQQQQ");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
                         // params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", "zz");
+
                         if(selectedtaxt.get(i).getTaxname().length() > 0){
                             if(selectedtaxt.get(i).getTaxname().contains(" ")){
                                 String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                                Log.e(TAG, "firstTaxAAA5 "+firstTax);
                                 params.add("tax[" + i + "]" + "[title]", firstTax);
+                            }else{
+                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
                             }
                         }
 
 
                     }else{
+                        Log.e(TAG, "WWWWWWWWWWWWW");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
                         params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
+//                        params.add("tax[" + i + "]" + "[title]", "xx");
+
                         if(selectedtaxt.get(i).getTaxname().length() > 0){
                             if(selectedtaxt.get(i).getTaxname().contains(" ")){
                                 String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
+                                Log.e(TAG, "firstTaxAAA6 "+firstTax);
                                 params.add("tax[" + i + "]" + "[title]", firstTax);
+                            }else{
+                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
                             }
                         }
                     }
+
 
 
 
@@ -2786,12 +2801,12 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
     public void productget(String selectedCompanyId) {
         product_bottom.clear();
         RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
+        params.add("warehouse_id", selectedCompanyId);
 
         String token = Constant.GetSharedPreferences(ConvertToInvoiceActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(Constant.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -2841,7 +2856,13 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                                 product_list.setQuantity(quantity);
                                 product_list.setMinimum(minimum);
 
-                                product_bottom.add(product_list);
+                                boolean isCompare = Utility.isCompare(product_bottom , product_id);
+
+                                Log.e(TAG , "isCompareA "+isCompare);
+
+                                if(isCompare != true){
+                                    product_bottom.add(product_list);
+                                }
 
 
                             }
@@ -3524,14 +3545,14 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         if(taxrname.contains(" ")){
                             String firstTax = taxrname.split(" ")[0].replace("(", "");
                             String subStrinng = firstTax + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                         }else{
                             String subStrinng = taxrname + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                         }
                     }else{
                         String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText("(" + subStrinng + " Incl" + ")"); //Dont do any change
+                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
                     }
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
@@ -3552,14 +3573,14 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         if(taxrname.contains(" ")){
                             String firstTax = taxrname.split(" ")[0].replace("(", "");
                             String subStrinng = firstTax + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                            txttax.setText(subStrinng); //Dont do any change
                         }else{
                             String subStrinng = taxrname + " " + taxtrateamt + "%";
-                            txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                            txttax.setText(subStrinng); //Dont do any change
                         }
                     }else{
                         String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText("(" + subStrinng + "" + ")"); //Dont do any change
+                        txttax.setText(subStrinng); //Dont do any change
                     }
 
                     netamountvalue = subtotalvalue + Totatlvalue1;

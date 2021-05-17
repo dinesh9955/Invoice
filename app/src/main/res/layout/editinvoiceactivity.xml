@@ -403,6 +403,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
                 android:text="Tax"
+                android:visibility="gone"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp" />
 
@@ -412,9 +413,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/subtotal"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
-                android:text=""
+                android:text="Tax"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp" />
 

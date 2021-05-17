@@ -23,6 +23,8 @@ import android.widget.TextView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.receipt.invoice.stock.sirproject.Model.Product_list;
+
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -471,7 +473,7 @@ public class Utility {
         }else{
             res = text;
         }
-        return getRemoveMinus(res);
+        return getRemoveMinus(res).replace(",","").replace(" ","");
     }
 
 
@@ -578,5 +580,15 @@ public class Utility {
     }
 
 
-
+    public static boolean isCompare(ArrayList<Product_list> product_bottom, String product_id) {
+        boolean b = false;
+        if(product_bottom.size() > 0){
+            for(int i = 0; i < product_bottom.size() ; i++){
+                if(product_bottom.get(i).getProduct_id().equalsIgnoreCase(product_id)){
+                    b = true;
+                }
+            }
+        }
+        return  b;
+    }
 }

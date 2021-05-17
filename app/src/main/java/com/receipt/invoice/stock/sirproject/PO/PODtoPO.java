@@ -40,8 +40,8 @@ public class PODtoPO {
     @SerializedName("shipping_address_2")
     private String shippingAddress2;
 
-    @SerializedName("wearhouse_id")
-    private String wearhouseId;
+    @SerializedName("warehouse_id")
+    private String warehouse_id;
 
     @SerializedName("currency_code")
     private String currencyCode;
@@ -239,12 +239,13 @@ public class PODtoPO {
         this.shippingAddress2 = shippingAddress2;
     }
 
-    public String getWearhouseId() {
-        return wearhouseId;
+
+    public String getWarehouse_id() {
+        return warehouse_id;
     }
 
-    public void setWearhouseId(String wearhouseId) {
-        this.wearhouseId = wearhouseId;
+    public void setWarehouse_id(String warehouse_id) {
+        this.warehouse_id = warehouse_id;
     }
 
     public String getCurrencyCode() {

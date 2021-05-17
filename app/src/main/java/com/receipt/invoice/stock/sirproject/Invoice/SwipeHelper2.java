@@ -53,19 +53,24 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
             Point point = new Point((int) e.getRawX(), (int) e.getRawY());
 
             RecyclerView.ViewHolder swipedViewHolder = recyclerView.findViewHolderForAdapterPosition(swipedPos);
-            View swipedItem = swipedViewHolder.itemView;
-            Rect rect = new Rect();
-            swipedItem.getGlobalVisibleRect(rect);
 
-            if (e.getAction() == MotionEvent.ACTION_DOWN || e.getAction() == MotionEvent.ACTION_UP ||e.getAction() == MotionEvent.ACTION_MOVE) {
-                if (rect.top < point.y && rect.bottom > point.y)
-                    gestureDetector.onTouchEvent(e);
-                else {
-                    recoverQueue.add(swipedPos);
-                    swipedPos = -1;
-                    recoverSwipedItem();
+            if(swipedViewHolder != null){
+                if(swipedViewHolder.itemView != null){
+                    View swipedItem = swipedViewHolder.itemView;
+                    Rect rect = new Rect();
+                    swipedItem.getGlobalVisibleRect(rect);
+                    if (e.getAction() == MotionEvent.ACTION_DOWN || e.getAction() == MotionEvent.ACTION_UP ||e.getAction() == MotionEvent.ACTION_MOVE) {
+                        if (rect.top < point.y && rect.bottom > point.y)
+                            gestureDetector.onTouchEvent(e);
+                        else {
+                            recoverQueue.add(swipedPos);
+                            swipedPos = -1;
+                            recoverSwipedItem();
+                        }
+                    }
                 }
             }
+
             return false;
         }
     };
@@ -177,7 +182,8 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
         while (!recoverQueue.isEmpty()){
             int pos = recoverQueue.poll();
             if (pos > -1) {
-                recyclerView.getAdapter().notifyItemChanged(pos);
+                recyclerView.getAdapter().notifyDataSetChanged();
+               // recyclerView.getAdapter().notifyItemChanged(pos);
             }
         }
     }

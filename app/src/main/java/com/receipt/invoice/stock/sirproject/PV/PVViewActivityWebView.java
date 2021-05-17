@@ -430,8 +430,9 @@ public class PVViewActivityWebView extends AppCompatActivity {
         //provide name to your newly generated pdf file
         String jobName = getString(R.string.app_name) + " Print Test";
 
-        //open print dialog
-        printManager.print(jobName, printAdapter, new PrintAttributes.Builder().build());
+        PrintAttributes.Builder builder = new PrintAttributes.Builder();
+        builder.setMediaSize( PrintAttributes.MediaSize.ISO_A3);
+        printManager.print(jobName, printAdapter, builder.build());
     }
 
 
@@ -770,7 +771,7 @@ public class PVViewActivityWebView extends AppCompatActivity {
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxvalue + currency_code;
-            taxtamountstrvalue = " Tax "+taxTitle;
+            taxtamountstrvalue = ""+taxTitle.replace("(", "").replace(")", "").toUpperCase();
         }
 
         String discountvalue = "";
