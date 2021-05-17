@@ -49,7 +49,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
@@ -60,7 +63,7 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
     String TAG = "Home_Activity";
 
     RecyclerView businessactivitiesRV, invoiceoverdueRV, recycleCustomers,recyclerVinder;
-//    Invoice_OverDue_Adapter invoice_overDue_adapter;
+   // Invoice_OverDue_Adapter invoice_overDue_adapter;
 //    HomeCustomerAdapter homeCustomerAdapter;
 //    HomeSupplierAdapter homeSupplierAdapter;
 //    HomeInvoiceAdapter homeInvoiceAdapter;
@@ -75,13 +78,15 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
 
     SavePref savePref;
     TextView no_customer;
-    TextView txtNo;
+    TextView txtNo, no_overduetxt;
     TextView txtinvoice;
     String compantId;
 
     public ArrayList<CompanyModel> companyModelArrayList = new ArrayList<>();
 
     public ArrayList<InvoiceModel> invoiceModelArrayList = new ArrayList<>();
+    public ArrayList<InvoiceModel> invoiceDueDateModelArrayList = new ArrayList<>();
+
     public ArrayList<CustomerModel> customerModelArrayList = new ArrayList<>();
     public ArrayList<SupplierModel> supplierModelArrayList = new ArrayList<>();
 
@@ -180,6 +185,8 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
         recyclerVinder = findViewById(R.id.recyclerVinder);
         no_customer = findViewById(R.id.no_customer);
         txtNo = findViewById(R.id.txtNo);
+        no_overduetxt = findViewById(R.id.no_overduetxt);
+
         avi = findViewById(R.id.avi);
         avibackground = findViewById(R.id.avibackground);
 
@@ -192,7 +199,6 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
         vendorsseeall = findViewById(R.id.vendorsseeall);
         txtinvoice = findViewById(R.id.txtinvoice);
 
-        invoiceoverdueRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
 
         COMPANYListingApi();
 
@@ -306,6 +312,50 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
                         }
 
 
+
+                        invoiceDueDateModelArrayList.clear();
+                        for (int i=0; i<invoice_array.length(); i++){
+                            JSONObject obj_invoice = invoice_array.getJSONObject(i);
+                            InvoiceModel invoiceModel=new InvoiceModel();
+                            invoiceModel.setInvoice_id(obj_invoice.getString("invoice_id"));
+                            invoiceModel.setInvoice_no(obj_invoice.getString("invoice_no"));
+                            invoiceModel.setTotal(obj_invoice.getString("total"));
+                            invoiceModel.setPayment_currency(obj_invoice.getString("currency_symbol"));
+                            String customer_name = obj_invoice.getString("customer_name");
+                            invoiceModel.setCustomer_name(customer_name);
+
+
+                            String due_date = obj_invoice.getString("due_date");
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            try {
+                                Date date = sdf.parse(due_date);
+                                long millis = date.getTime();
+                                Log.e(TAG, "millisAAA "+millis);
+
+
+                                String todayCurrent = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                                Date dateCurrent = sdf.parse(todayCurrent);
+                                long millisCurrent = dateCurrent.getTime();
+                                Log.e(TAG, "dateCurrentAAA "+millisCurrent);
+
+                                if(millisCurrent > millis){
+                                    String order_status_id = obj_invoice.getString("order_status_id");
+                                    if(order_status_id.equalsIgnoreCase("1")){
+                                        invoiceDueDateModelArrayList.add(invoiceModel);
+                                    }
+                                }
+
+                            }catch (Exception e){
+
+                            }
+
+
+                        }
+
+
+
+
+
                         JSONArray customer_array = object_data.getJSONArray("customer");
                         //Log.e("detail Image", "result " + customer_array);
 
@@ -350,7 +400,7 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
 
                         }
 
-                        businessactivitiesRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, true));
+                        businessactivitiesRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
                         HomeInvoiceAdapter homeInvoiceAdapter = new HomeInvoiceAdapter(Home_Activity.this);
                         businessactivitiesRV.setAdapter(homeInvoiceAdapter);
 
@@ -361,6 +411,22 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
                         }
 
                         homeInvoiceAdapter.setData(invoiceModelArrayList);
+
+
+
+                        invoiceoverdueRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                        Invoice_OverDue_Adapter invoice_overDue_adapter = new Invoice_OverDue_Adapter(Home_Activity.this);
+                        invoiceoverdueRV.setAdapter(invoice_overDue_adapter);
+
+                        if (invoiceDueDateModelArrayList.size()>0) {
+                            no_overduetxt.setVisibility(View.GONE);
+                        } else {
+                            no_overduetxt.setVisibility(View.VISIBLE);
+                        }
+
+                        invoice_overDue_adapter.setData(invoiceDueDateModelArrayList);
+
+
 
 
                         int numberOfColumns = 3;
@@ -507,6 +573,12 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
                     txtinvoice.setVisibility(View.VISIBLE);
                 }
 
+                if (invoiceDueDateModelArrayList.size()>0) {
+                    no_overduetxt.setVisibility(View.GONE);
+                } else {
+                    no_overduetxt.setVisibility(View.VISIBLE);
+                }
+
                 if (customerModelArrayList.size()>0) {
                     txtNo.setVisibility(View.GONE);
                 } else {
@@ -518,6 +590,7 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
                 } else {
                     no_customer.setVisibility(View.VISIBLE);
                 }
+
 
 
             }

@@ -116,16 +116,16 @@
             </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
-
-                android:layout_marginTop="100dp"
+                android:id="@+id/no_overduetxt"
+                android:layout_marginTop="70dp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No OverDue Invoices"
+                android:text="No Overdue Invoices"
                 android:textSize="14dp"
                 android:textColor="@color/darkgray"
                 android:layout_below="@+id/bluerelative"
-
+                android:visibility="gone"
                 />
 
             <RelativeLayout

@@ -8,10 +8,29 @@ public class InvoiceModel {
     public String invoice_id="";
     public String invoice_no="";
 
+    public String customer_name="";
+
     public String currency_id="";
     public String customer_mobile="";
     public String total="";
     public String payment_currency="";
+    public String due_date ="";
+
+    public String getDue_date() {
+        return due_date;
+    }
+
+    public void setDue_date(String due_date) {
+        this.due_date = due_date;
+    }
+
+    public String getCustomer_name() {
+        return customer_name;
+    }
+
+    public void setCustomer_name(String customer_name) {
+        this.customer_name = customer_name;
+    }
 
     public String getPayment_currency() {
         return payment_currency;

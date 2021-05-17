@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.receipt.invoice.stock.sirproject.Home.Model.InvoiceModel;
 import com.receipt.invoice.stock.sirproject.R;
 
 import java.util.ArrayList;
@@ -24,16 +26,19 @@ import java.util.List;
 public class Invoice_OverDue_Adapter extends RecyclerView.Adapter<Invoice_OverDue_Adapter.ViewHolderForCat> {
 
     private Context mcontext ;
-    List<String> mnames=new ArrayList<>();
-    List<String> mquantity=new ArrayList<>();
-    List<String> mprice=new ArrayList<>();
 
-    public Invoice_OverDue_Adapter(Context mcontext , ArrayList<String> names,ArrayList<String> quantity){
+    public ArrayList<InvoiceModel> invoiceModelArrayList = new ArrayList<>() ;
+
+
+    public Invoice_OverDue_Adapter(Context mcontext){
         this.mcontext = mcontext;
-        mnames=names;
-        mquantity=quantity;
     }
 
+    public void setData(ArrayList<InvoiceModel> newList) {
+        this.invoiceModelArrayList.clear();
+        this.invoiceModelArrayList.addAll(newList);
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -45,22 +50,22 @@ public class Invoice_OverDue_Adapter extends RecyclerView.Adapter<Invoice_OverDu
 
     @Override
     public void onBindViewHolder(@NonNull final Invoice_OverDue_Adapter.ViewHolderForCat viewHolderForCat, final int i) {
+        Glide.with(mcontext).load("").placeholder(R.drawable.app_icon).into(viewHolderForCat.image);
+        viewHolderForCat.name.setText(invoiceModelArrayList.get(i).getInvoice_no());
+        viewHolderForCat.companyname.setText(invoiceModelArrayList.get(i).getCustomer_name());
 
-        viewHolderForCat.name.setText(mnames.get(i));
-        viewHolderForCat.companyname.setText(mquantity.get(i));
-
-        viewHolderForCat.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mcontext,"Coming Soon",Toast.LENGTH_SHORT).show();
-            }
-        });
+//        viewHolderForCat.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(mcontext,"Coming Soon",Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 
     @Override
     public int getItemCount() {
-        return mnames.size();
+        return invoiceModelArrayList.size();
         //return 2;
     }
 

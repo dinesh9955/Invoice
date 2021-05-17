@@ -218,7 +218,9 @@
         android:id="@+id/edmanual"
         android:background="@drawable/edittextshape"
         android:elevation="2dp"
-        tools:ignore="RtlSymmetry" />
+        tools:ignore="RtlSymmetry"
+        android:imeOptions="actionDone"
+        />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

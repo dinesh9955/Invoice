@@ -33,7 +33,6 @@ public class HomeInvoiceAdapter extends RecyclerView.Adapter<HomeInvoiceAdapter.
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.businessactivities_itemlayout, parent, false);
         return new MyViewHolder(itemView);
-
     }
 
     @Override
