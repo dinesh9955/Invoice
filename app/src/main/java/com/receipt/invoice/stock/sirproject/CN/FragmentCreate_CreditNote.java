@@ -872,7 +872,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             public void onItemSelected(int position, String itemAtPosition) {
                 selectwarehouseId = wids.get(position);
                 Log.e("selectwarehouseId", selectwarehouseId);
-                productget(selectedCompanyId);
+                productget(selectwarehouseId);
 
             }
         });
@@ -1086,34 +1086,6 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                     params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                     params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
                     params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
-
-
-
-//                    //off exclusive
-//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
-//                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive);
-//                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
-//                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
-//                    }else if (taxtypeclusive.equalsIgnoreCase("Exclusive")) {
-//                        params.add("tax[" + i + "]" + "[type]", taxtypeclusive);
-//                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
-//                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
-//                    }
-
-
-//                    if (selectedtaxt.get(i).getTaxtype().equals("p")) {
-//                        params.add("tax[" + i + "]" + "[type]", selectedtaxt.get(i).getTaxtype());
-//                        params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
-//
-//                    } else {
-//                        params.add("tax[" + i + "]" + "[type]", selectedtaxt.get(i).getTaxtype());
-////                        params.add("tax[" + i + "]" + "[amount]", selectedtaxt.get(i).getTaxamount());
-//                        params.add("tax[" + i + "]" + "[amount]", invoicetaxamount);
-//                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
-//                    }
                 }
             } else {
 
@@ -2625,17 +2597,17 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
     public void productget(String selectedCompanyId) {
         product_bottom.clear();
         RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
+        params.add("warehouse_id", selectedCompanyId);
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(Constant.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 String response = new String(responseBody);
-                Log.e("response product", response);
+                Log.e(TAG, "response_productAAA "+response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -3496,7 +3468,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
         Product_list product_list = new Product_list();
         product_list.setProduct_name(selected_item.getService_name());
         product_list.setProduct_id(selected_item.getService_id());
-        product_list.setCurrency_code(selected_item.getCuurency_code());
+        product_list.setCurrency_code(selected_item.getService_price_unit());
         product_list.setProduct_description(selected_item.getService_description());
         product_list.setProduct_measurement_unit(selected_item.getMeasurement_unit());
         product_list.setProduct_price(selected_item.getService_price());
@@ -4055,7 +4027,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxamount;
-            taxtamountstrvalue = "Tax "+txttax.getText().toString();
+            taxtamountstrvalue = ""+txttax.getText().toString();
         }
 
         String discountvalue = "";

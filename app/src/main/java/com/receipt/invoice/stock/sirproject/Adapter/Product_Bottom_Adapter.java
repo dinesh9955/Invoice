@@ -49,7 +49,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
 
     GlobalVariabal myAppClass = (GlobalVariabal)getApplicationContext();
 
-    String show_price="",show_quantity="",show_name="";
+    String show_price="",show_name="";
     Callback callback;
     int sh_quantity;
     double sh_price;
@@ -230,28 +230,27 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
 
         edprice.setText(show_price);
 
-        show_quantity = edquantity.getText().toString();
 
-        edquantity.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                if (edquantity.getText().toString().endsWith("."))
-                {
-                    edquantity.setText(edquantity.getText().toString().replace(".",""));
-                }
-            }
-        });
+//        edquantity.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//                if (edquantity.getText().toString().endsWith("."))
+//                {
+//                    edquantity.setText(edquantity.getText().toString().replace(".",""));
+//                }
+//            }
+//        });
 
 
         edquantity.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
@@ -278,7 +277,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                 }
 
                 try {
-                    int en_quantity = Integer.parseInt(edquantity.getText().toString());
+                    double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
                     if(receipt.equalsIgnoreCase("invoice")){
                         Log.e(TAG, "invoice");

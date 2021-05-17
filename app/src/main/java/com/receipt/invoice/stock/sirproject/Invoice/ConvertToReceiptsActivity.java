@@ -577,7 +577,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     for(int i = 0; i < invoice_images.size() ; i++){
                         String signatureofreceiverpath = invoice_image_pathdto + invoice_images.get(i).getImage();
                         new DownloadInvoiceImages().execute(signatureofreceiverpath);
-                        attachmenttxtimg.setVisibility(View.VISIBLE);
+                        attachmenttxtimg.setVisibility(View.GONE);
                     }
                     Log.e(TAG, "cAAccccc "+invoice_images.size());
 //                    Log.e(TAG, "cccccc "+invoice_images.get(0).getImage());
@@ -740,7 +740,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     String signatureofreceiverpath = invoice_image_pathdto + signature_of_issuerdto;
                     Log.e(TAG, "signatureIssuerPathAA "+signatureofreceiverpath);
                     new Downloadsignatureissueweb().execute(signatureofreceiverpath);
-                    imgsigsuccess.setVisibility(View.VISIBLE);
+                    imgsigsuccess.setVisibility(View.GONE);
                 }
 
 //                shippingfirstname = invoiceDtoInvoice.getShippingFirstname();
@@ -1258,11 +1258,11 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         attchmentimage.clear();
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
-            attachmenttxtimg.setVisibility(View.VISIBLE);
+            attachmenttxtimg.setVisibility(View.GONE);
         }
         int sizen = attchmentimage.size();
 
-        attachmenttxtimg.setVisibility(View.VISIBLE);
+        attachmenttxtimg.setVisibility(View.GONE);
         String attchedmentimagepath;
         if (attchmentimage != null) {
             for (int i = 0; i < attchmentimage.size(); i++) {
@@ -2532,14 +2532,14 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     if (addSignatureToGallery(signatureBitmap)) {
                         //  Toast.makeText(getContext(), "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-                        imgsigsuccess.setVisibility(View.VISIBLE);
+                        imgsigsuccess.setVisibility(View.GONE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }
                     if (addSvgSignatureToGallery(signaturePad.getSignatureSvg())) {
                         //  Toast.makeText(getContext(), "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-                        imgsigsuccess.setVisibility(View.VISIBLE);
+                        imgsigsuccess.setVisibility(View.GONE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }
@@ -2596,7 +2596,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             if (s_r.equals("1")) {
                 signatureofinvoicemaker = photo;
                 signature_of_issuer = photo.getAbsolutePath();
-                imgsigsuccess.setVisibility(View.VISIBLE);
+                imgsigsuccess.setVisibility(View.GONE);
 
             }
             if (s_r.equals("2")) {
@@ -3422,7 +3422,6 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             textViewNoItems.setVisibility(View.GONE);
         }
 
-
         double balanceamount = 0.0;
         Double netamountvalue = 0.0;
         Double Totatlvalue = 0.0;
@@ -3694,7 +3693,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         Product_list product_list = new Product_list();
         product_list.setProduct_name(selected_item.getService_name());
         product_list.setProduct_id(selected_item.getService_id());
-        product_list.setCurrency_code(selected_item.getCuurency_code());
+        product_list.setCurrency_code(selected_item.getService_price_unit());
 
         product_list.setProduct_description(selected_item.getService_description());
 

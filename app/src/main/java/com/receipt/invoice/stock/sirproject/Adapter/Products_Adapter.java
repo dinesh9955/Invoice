@@ -72,9 +72,9 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.View
         String product_price = product_service_list.getProduct_price();
        String cruncycode=product_service_list.getCurrency_code();
        String pricsestr=product_service_list.getEditproductproce();
-        int value = 0;
+        double value = 0;
         try{
-           value = (int) Double.parseDouble(tempQuantity.get(i));
+           value = Double.parseDouble(tempQuantity.get(i));
        }catch (Exception e){
 
        }

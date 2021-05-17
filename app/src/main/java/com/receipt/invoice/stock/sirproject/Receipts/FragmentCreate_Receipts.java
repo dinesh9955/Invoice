@@ -3497,7 +3497,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         Product_list product_list = new Product_list();
         product_list.setProduct_name(selected_item.getService_name());
         product_list.setProduct_id(selected_item.getService_id());
-        product_list.setCurrency_code(selected_item.getCuurency_code());
+        product_list.setCurrency_code(selected_item.getService_price_unit());
         product_list.setProduct_description(selected_item.getService_description());
         product_list.setProduct_measurement_unit(selected_item.getMeasurement_unit());
         product_list.setProduct_price(selected_item.getService_price());

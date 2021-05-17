@@ -1732,7 +1732,8 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            new DownloadFile(getActivity()).execute(url);
+                                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+customerName;
+                                            new DownloadFile(getActivity(), subject).execute(url);
                                         } else {
 
                                         }
@@ -2116,9 +2117,13 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
         private boolean isDownloaded;
         Context context;
 
-        DownloadFile(Context c) {
+        String subject;
+
+        DownloadFile(Context c, String sub) {
             context = c;
+            subject = sub;
         }
+
 
         /**
          * Before starting background thread
@@ -2239,8 +2244,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                 intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
 
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-                        "Sharing File...");
-                intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+                        subject);
 
                 context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
             }

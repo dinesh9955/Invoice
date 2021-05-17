@@ -49,6 +49,7 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.CheckForSDCard;
 import com.receipt.invoice.stock.sirproject.Invoice.ConvertToReceiptsActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.InvoiceViewActivityWebView;
+import com.receipt.invoice.stock.sirproject.Invoice.List_of_Invoices;
 import com.receipt.invoice.stock.sirproject.Invoice.RecyclerViewSwipeDecorator;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper;
@@ -989,7 +990,8 @@ public class List_of_Estimate extends Fragment {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            new DownloadFile(getActivity()).execute(url);
+                                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+customerName;
+                                            new DownloadFile(getActivity(), subject).execute(url);
                                         } else {
 
                                         }
@@ -1378,9 +1380,13 @@ public class List_of_Estimate extends Fragment {
         private boolean isDownloaded;
         Context context;
 
-        DownloadFile(Context c) {
+        String subject;
+
+        DownloadFile(Context c, String sub) {
             context = c;
+            subject = sub;
         }
+
 
         /**
          * Before starting background thread
@@ -1501,8 +1507,7 @@ public class List_of_Estimate extends Fragment {
                 intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
 
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-                        "Sharing File...");
-                intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+                        subject);
 
                 context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
             }

@@ -46,6 +46,7 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.CheckForSDCard;
 import com.receipt.invoice.stock.sirproject.Invoice.ConvertToReceiptsActivity;
 //import com.receipt.invoice.stock.sirproject.Invoice.InvoiceViewActivityWebView;
+import com.receipt.invoice.stock.sirproject.Invoice.List_of_Invoices;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
@@ -983,7 +984,8 @@ public class ListOfCreditNotes extends Fragment {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            new DownloadFile(getActivity()).execute(url);
+                                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+customerName;
+                                            new DownloadFile(getActivity(), subject).execute(url);
                                         } else {
 
                                         }
@@ -1370,9 +1372,11 @@ public class ListOfCreditNotes extends Fragment {
         private String folder;
         private boolean isDownloaded;
         Context context;
+        String subject;
 
-        DownloadFile(Context c) {
+        DownloadFile(Context c, String sub) {
             context = c;
+            subject = sub;
         }
 
         /**
@@ -1494,8 +1498,7 @@ public class ListOfCreditNotes extends Fragment {
                 intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
 
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-                        "Sharing File...");
-                intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+                        subject);
 
                 context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
             }

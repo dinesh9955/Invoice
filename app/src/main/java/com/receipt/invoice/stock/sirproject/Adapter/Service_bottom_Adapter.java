@@ -6,6 +6,8 @@ import android.content.Context;
 import android.graphics.Typeface;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,16 +32,17 @@ import java.util.ArrayList;
 
 public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_Adapter.ViewHolderForCat> {
 
+    private static final String TAG = "Service_bottom_Adapter";
     private Context mcontext ;
     ArrayList<Service_list> mlist=new ArrayList<>();
 
     Callback callback;
 
     String show_name,show_price,show_quantity;
-    int sh_quantity;
+//    double sh_quantity;
 
     double sh_price;
-    int shquentityedt;
+//    int shquentityedt;
 
     public Service_bottom_Adapter(Context mcontext , ArrayList<Service_list>list,Callback callback){
         this.mcontext = mcontext;
@@ -139,7 +142,7 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
                 show_name = service_list.getService_name();
                 show_quantity = service_list.getService_quantity();
 
-                sh_quantity = Integer.parseInt(service_list.getService_quantity());
+//                sh_quantity = Double.parseDouble(service_list.getService_quantity());
 
                 servicedialog(i);
             }
@@ -205,7 +208,6 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
 
         edprice.setText(show_price);
 
-        String enter_quantity = edquantity.getText().toString();
 
         edquantity.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
         btnok.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
@@ -222,11 +224,15 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
         btnok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
-                    sh_price = Double.parseDouble(edprice.getText().toString());
-                    shquentityedt= Integer.parseInt(edquantity.getText().toString());
 
-                    callback.onPostExecutecall2(mlist.get(i), String.valueOf(shquentityedt),String.valueOf(sh_price));
+                try{
+                    double en_quantity = Double.parseDouble(edquantity.getText().toString());
+                    sh_price = Double.parseDouble(edprice.getText().toString());
+                    //shquentityedt= Integer.parseInt(edquantity.getText().toString());
+
+                    Log.e(TAG, "mlist.get(i) "+mlist.get(i).getCuurency_code());
+
+                    callback.onPostExecutecall2(mlist.get(i), String.valueOf(en_quantity),String.valueOf(sh_price));
                     mybuilder.dismiss();
                 }catch (Exception e){
 
