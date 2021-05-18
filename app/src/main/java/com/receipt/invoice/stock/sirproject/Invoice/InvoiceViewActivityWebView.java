@@ -73,6 +73,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
 
     String invoicenumber = "", strnotes = "", ref_no = "", paid_amount_payment_method = "", freight_cost = "0", strdiscountvalue = "0", strpaid_amount = "", companylogopath = "", Grossamount_str = "", Subtotalamount = "", netamountvalue = "", Blanceamountstr = "";
 
+    String paid_amount_date = "";
 //    String Grossamount_str_real = "0";
     String Shipingdetail = "", shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_country, shipping_zone;
 
@@ -285,7 +286,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
 
                 payment_iban = invoiceDtoInvoice.getPaymentIban();
                 paid_amount_payment_method = invoiceDtoInvoice.getPaidAmountPaymentMethod();
-                paid_amount_payment_method = invoiceDtoInvoice.getPaidAmountPaymentMethod();
+                paid_amount_date = invoiceDtoInvoice.getPaidAmountDate();
                 currency_code = invoiceDtoInvoice.getCurrencySymbol();
                 Log.e("currency_code",currency_code);
                 company_stamp = invoiceDtoInvoice.getCompanyStamp();
@@ -726,7 +727,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
 
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount+currency_code;
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrreptxt = "Paid Amount"+" ("+paid_amount_date+")";
 
 
             pemailpaidstr = paypal_emailstr;

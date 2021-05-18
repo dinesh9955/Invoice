@@ -149,7 +149,7 @@ public class List_of_Estimate extends Fragment {
         avibackground = view.findViewById(R.id.avibackground);
         recycler_invoices = view.findViewById(R.id.recycler_invoices);
         search = view.findViewById(R.id.search);
-        search.setHint("Search  By Estimate Number");
+        search.setHint("Search  By Customer Name");
         selectcompany = view.findViewById(R.id.selectcompany);
         imageViewmenu = view.findViewById(R.id.imageViewmenu);
 
@@ -298,7 +298,7 @@ public class List_of_Estimate extends Fragment {
         for (InvoiceData d : list) {
             //or use .equal(text) with you want equal match
             //use .toLowerCase() for better matches
-            if (d.getInvoice_nobdt().toLowerCase().contains(text.toLowerCase())) {
+            if (d.getInvoicustomer_name().toLowerCase().contains(text.toLowerCase())) {
                 temp.add(d);
             }
         }

@@ -4524,18 +4524,13 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
-
-            companyimagelogopath = "/android_res/drawable/white_img.png";
-
-
-        } else {
-
-
+        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
             companyimagelogopath = companylogopath;
-
-
+        }else{
+            companyimagelogopath = "/android_res/drawable/white_img.png";
         }
+
+
         String paidamountstrrepvalue = "";
         String paidamountstrreptxt = "";
         String paidamountstrreplace = "";

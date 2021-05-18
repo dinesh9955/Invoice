@@ -1315,7 +1315,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             params.add("credit_terms", credit_terms);
             params.add("freight_cost", Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
             params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
-            params.add("paid_amount", strpaid_amount);
+            params.add("paid_amount", Utility.getReplaceCurrency(strpaid_amount, cruncycode));
             params.add("paid_amount_date", Paymentamountdate);
             params.add("shipping_firstname", shippingfirstname);
             params.add("shipping_lastname", shippinglastname);
@@ -1454,15 +1454,24 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
             }
 
-
-
+//            File file1 = new File("/storage/emulated/0/Pictures/AndroidDvlpr/1621343613248.png");
+//
+//            try {
+//                params.put("images["+0+"]", file1);
+//            } catch (Exception e) {
+//               e.printStackTrace();
+//            }
 
             if (multiple.length > 0) {
                 for (int k = 0; k < multiple.length; k++) {
                     Log.e(TAG, "multiple[k] "+multiple[k]);
                     try {
                         if(multiple[k] != null){
-                            params.put("images["+k+"]", multiple[k]);
+                            File file1 = new File(multiple[k].toString().replace("file:",""));
+
+                            Log.e(TAG, "multiple[k]AAA "+file1);
+                            params.put("images["+k+"]", file1);
+                           // params.put("images[]", multiple[k]);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -1470,7 +1479,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 }
             }
 
-            params.put("estimate_id", ""+invoiceId);
+           // params.put("estimate_id", ""+invoiceId);
             params.put("estimate_to_invoice", "3");
 
 
@@ -4930,46 +4939,34 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             notestringvalue = "Notes:";
         }
 
-        String signatureinvoice = null;
+
         String companyname = "";
-        if (company_stamp.equals("")) {
+        if (company_stamp.toLowerCase().endsWith(".jpg") || company_stamp.toLowerCase().endsWith(".jpeg") || company_stamp.toLowerCase().endsWith(".png")){
+            companyname = "Company Seal";
+        }else{
             company_stamp = "/android_res/drawable/white_img.png";
             companyname = "";
-
-        } else {
-
-
-            companyname = "Company Seal";
-
-
         }
 
+
         String signature_of_receivername = "";
-        if (signatureofreceiverst.equals("")) {
+        if (signatureofreceiverst.toLowerCase().endsWith(".jpg") || signatureofreceiverst.toLowerCase().endsWith(".jpeg") || signatureofreceiverst.toLowerCase().endsWith(".png")){
+            signature_of_receivername = "Signature of Receiver";
+        }else{
             signatureofreceiverst = "/android_res/drawable/white_img.png";
             signature_of_receivername = "";
-
-        } else {
-
-
-            signature_of_receivername = "Signature of Receiver";
-
-
         }
 
 
         String signature_of_issuername = "";
-        if (signature_of_issuer.equals("")) {
+        if (signature_of_issuer.toLowerCase().endsWith(".jpg") || signature_of_issuer.toLowerCase().endsWith(".jpeg") || signature_of_issuer.toLowerCase().endsWith(".png")){
+            signature_of_issuername = "Signature of Issuer";
+        }else{
             signature_of_issuer = "/android_res/drawable/white_img.png";
             signature_of_issuername = "";
-
-        } else {
-
-            signature_of_issuername = "Signature of Issuer";
-
-
         }
 
+        String signatureinvoice = null;
         try {
             signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
@@ -5065,18 +5062,15 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
 
-            companyimagelogopath = "/android_res/drawable/white_img.png";
-
-
-        } else {
-
-
+        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
             companyimagelogopath = companylogopath;
-
-
+        }else{
+            companyimagelogopath = "/android_res/drawable/white_img.png";
         }
+
+
+
         String paidamountstrrepvalue = "";
         String paidamountstrreptxt = "";
         String paidamountstrreplace = "";
