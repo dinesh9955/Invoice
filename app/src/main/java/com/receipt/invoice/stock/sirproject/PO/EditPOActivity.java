@@ -1140,10 +1140,17 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                         File imgFile = new File(multimgpath.get(i));
                         // company_stampFileimage=imgFile;
                         multiple[i] = imgFile;
-
-
                     }
                 }
+
+                if (attchmentimage != null) {
+                    for (int i = 0; i < attchmentimage.size(); i++) {
+                        File imgFile = new File(attchmentimage.get(i));
+                        // company_stampFileimage=imgFile;
+                        multiple[i] = imgFile;
+                    }
+                }
+
                 viewPDF();
             }
         });
@@ -2280,6 +2287,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             public void onClick(View view) {
                 String sipingvalue;
                 freight_cost = edfreight.getText().toString();
+                Shippingamountdto = freight_cost;
                 calculateTotalAmount(total_price);
                 mybuilder.dismiss();
             }
@@ -3615,7 +3623,12 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
                 } else { // include off
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
+                    Double Totatlvalue1 = 0.0;
+                    try{
+                        Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
+                    }catch (Exception e){
+
+                    }
 
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 //
@@ -3650,18 +3663,23 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             Log.e(TAG, "freight_costBBBB "+Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
 
 
-            double cc = 0;
 
-            if(freight_cost.isEmpty()){
+
+            Log.e(TAG, "freight_cost00 "+Shippingamountdto);
+//            Log.e(TAG, "freight_costAA "+freight_cost);
+//            Log.e(TAG, "freight_costBB "+Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0"));
+            double cc = 0;
+            if(Shippingamountdto.isEmpty()){
                 //freight.setText("0");
             }else {
-                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
-                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
+                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
+                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
                 freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
 //                    netamount.setText(formatter.format(balanceamount) + cruncycode);
 
                 cc = subtotalvalue + shipingvalue;
+                Log.e(TAG, "cc00 "+cc);
                 if (selectedtaxt.size() > 0) {
                     if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
                         netamount.setText(formatter.format(cc) + cruncycode);
@@ -3670,30 +3688,56 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                         netamount.setText(formatter.format(balanceamount) + cruncycode);
                         Log.e(TAG, "QQQQQQ222");
                     }
+                }else{
+                    netamount.setText(formatter.format(cc) + cruncycode);
                 }
             }
 
-            if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
-                freight.setText("0");
-            }else{
-                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
-                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
-                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
-                balance.setText(formatter.format(balanceamount) + cruncycode);
-                // netamount.setText(formatter.format(balanceamount) + cruncycode);
 
-                cc = subtotalvalue + shipingvalue;
-                if (selectedtaxt.size() > 0) {
-                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
-                        netamount.setText(formatter.format(cc) + cruncycode);
-                        Log.e(TAG, "QQQQQQ111");
-                    }else{
-                        netamount.setText(formatter.format(balanceamount) + cruncycode);
-                        Log.e(TAG, "QQQQQQ222");
-                    }
-                }
-
-            }
+//            double cc = 0;
+//
+//            if(freight_cost.isEmpty()){
+//                //freight.setText("0");
+//            }else {
+//                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
+//                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
+//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+//                balance.setText(formatter.format(balanceamount) + cruncycode);
+////                    netamount.setText(formatter.format(balanceamount) + cruncycode);
+//
+//                cc = subtotalvalue + shipingvalue;
+//                if (selectedtaxt.size() > 0) {
+//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+//                        netamount.setText(formatter.format(cc) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ111");
+//                    }else{
+//                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ222");
+//                    }
+//                }
+//            }
+//
+//            if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
+//                freight.setText("0");
+//            }else{
+//                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+//                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+//                balance.setText(formatter.format(balanceamount) + cruncycode);
+//                // netamount.setText(formatter.format(balanceamount) + cruncycode);
+//
+//                cc = subtotalvalue + shipingvalue;
+//                if (selectedtaxt.size() > 0) {
+//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+//                        netamount.setText(formatter.format(cc) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ111");
+//                    }else{
+//                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ222");
+//                    }
+//                }
+//
+//            }
 
 
             if (Utility.getReplaceCurrency(paidamount.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
@@ -4546,9 +4590,9 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             if(!sltcustomer_address.equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_address+"</br>");
             }
-            if(!sltcustomer_contact.equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_contact+"</br>");
-            }
+//            if(!sltcustomer_contact.equalsIgnoreCase("")){
+//                stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+//            }
             if(!sltcustomer_phone_number.equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
             }

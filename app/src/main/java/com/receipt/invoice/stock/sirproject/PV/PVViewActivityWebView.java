@@ -208,34 +208,36 @@ public class PVViewActivityWebView extends AppCompatActivity {
 
                 PVSupplierDto invoiceCustomerDto = data.getPvDtoPV().getSupplier();
 
+                if(invoiceCustomerDto != null){
+                    sltcustonername = invoiceCustomerDto.getSupplier_name();
+                    sltcustomer_address = invoiceCustomerDto.getAddress();
+                    sltcustomer_phone_number = invoiceCustomerDto.getPhone_number();
+                    sltcustomer_website = invoiceCustomerDto.getWebsite();
+                    sltcustomer_email = invoiceCustomerDto.getEmail();
+                    sltcustomer_contact = invoiceCustomerDto.getContact_name();
 
 
-                sltcustonername = invoiceCustomerDto.getSupplier_name();
-                sltcustomer_address = invoiceCustomerDto.getAddress();
-                sltcustomer_phone_number = invoiceCustomerDto.getPhone_number();
-                sltcustomer_website = invoiceCustomerDto.getWebsite();
-                sltcustomer_email = invoiceCustomerDto.getEmail();
-                sltcustomer_contact = invoiceCustomerDto.getContact_name();
+                    if(!sltcustonername.equalsIgnoreCase("")){
+                        stringBuilderBillTo.append(sltcustonername+"</br>");
+                    }
+                    if(!sltcustomer_address.equalsIgnoreCase("")){
+                        stringBuilderBillTo.append(sltcustomer_address+"</br>");
+                    }
+                    if(!sltcustomer_contact.equalsIgnoreCase("")){
+                        stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+                    }
+                    if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+                        stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
+                    }
+                    if(!sltcustomer_website.equalsIgnoreCase("")){
+                        stringBuilderBillTo.append(sltcustomer_website+"</br>");
+                    }
+                    if(!sltcustomer_email.equalsIgnoreCase("")){
+                        stringBuilderBillTo.append(sltcustomer_email+"");
+                    }
+                }
 
 
-                if(!sltcustonername.equalsIgnoreCase("")){
-                    stringBuilderBillTo.append(sltcustonername+"</br>");
-                }
-                if(!sltcustomer_address.equalsIgnoreCase("")){
-                    stringBuilderBillTo.append(sltcustomer_address+"</br>");
-                }
-                if(!sltcustomer_contact.equalsIgnoreCase("")){
-                    stringBuilderBillTo.append(sltcustomer_contact+"</br>");
-                }
-                if(!sltcustomer_phone_number.equalsIgnoreCase("")){
-                    stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
-                }
-                if(!sltcustomer_website.equalsIgnoreCase("")){
-                    stringBuilderBillTo.append(sltcustomer_website+"</br>");
-                }
-                if(!sltcustomer_email.equalsIgnoreCase("")){
-                    stringBuilderBillTo.append(sltcustomer_email+"");
-                }
 
 
 //                shippingfirstname = invoiceCustomerDto.getShippingFirstname();

@@ -171,7 +171,11 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
 //
 //                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
 //                        }
-//
+//        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
+//            companylogopathdto= company_image_path + companylogopath;
+//        }else{
+//            companylogopathdto = "/android_res/drawable/white_img.png";
+//        }
 ////                        Intent intentPdfViewer = new Intent(Abc.this, PDFViewerActivity.class);
 ////                        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri);
 ////
@@ -815,12 +819,10 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
 
         String companylogopathdto="";
 
-        if(companylogopath.equals(""))
-        {
-            companylogopathdto= "/android_res/drawable/white_img.png";
-        }
-        else {
+        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
             companylogopathdto= company_image_path + companylogopath;
+        }else{
+            companylogopathdto = "/android_res/drawable/white_img.png";
         }
 
         String name = "invoice.html";

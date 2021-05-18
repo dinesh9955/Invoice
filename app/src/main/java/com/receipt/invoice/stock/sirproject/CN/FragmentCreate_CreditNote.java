@@ -3966,6 +3966,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
         String signatureinvoice = null;
         String companyname = "";
+
         if (company_stamp.equals("")) {
             company_stamp = "/android_res/drawable/white_img.png";
             companyname = "";

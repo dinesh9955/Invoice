@@ -645,18 +645,19 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
 
-            companyimagelogopath = "/android_res/drawable/white_img.png";
-
-
-        } else {
-
-
-            companyimagelogopath = companylogopath;
-
-
+        String companylogopathdto="";
+        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
+            companylogopathdto= companyimagelogopath + companylogopath;
+        }else{
+            companylogopathdto = "/android_res/drawable/white_img.png";
         }
+
+        Log.e(TAG, "companylogopathdtoAA "+companylogopathdto);
+
+
+
+
         String paidamountstrrepvalue = "";
         String paidamountstrreptxt = "";
         String paidamountstrreplace = "";
@@ -781,7 +782,7 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
 //                    .replaceAll("Contact No.", company_contact)
 //                    .replaceAll("Website", companywebsitestr)
 //                    .replaceAll("Email", company_email)
-                    .replaceAll("#LOGO_IMAGE#", companyimagelogopath)
+                    .replaceAll("#LOGO_IMAGE#", companylogopathdto)
                     .replaceAll("INV-564", invoicenobystr)
                     .replaceAll("invD", date)
                     .replaceAll("DueDate", due_date)

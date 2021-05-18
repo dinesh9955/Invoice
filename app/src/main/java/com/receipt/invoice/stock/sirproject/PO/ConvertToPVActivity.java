@@ -1126,6 +1126,15 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                         multiple[i] = imgFile;
                     }
                 }
+
+                if (attchmentimage != null) {
+                    for (int i = 0; i < attchmentimage.size(); i++) {
+                        File imgFile = new File(attchmentimage.get(i));
+                        // company_stampFileimage=imgFile;
+                        multiple[i] = imgFile;
+                    }
+                }
+
                 viewPDF();
             }
         });
@@ -2217,6 +2226,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
             public void onClick(View view) {
                 String sipingvalue;
                 freight_cost = edfreight.getText().toString();
+                Shippingamountdto = freight_cost;
                 calculateTotalAmount(total_price);
                 mybuilder.dismiss();
             }
@@ -3642,16 +3652,21 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 
 
 
-            if(freight_cost.isEmpty()){
+
+            Log.e(TAG, "freight_cost00 "+Shippingamountdto);
+//            Log.e(TAG, "freight_costAA "+freight_cost);
+//            Log.e(TAG, "freight_costBB "+Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0"));
+            if(Shippingamountdto.isEmpty()){
                 //freight.setText("0");
             }else {
-                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
-                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
+                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
+                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
                 freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
-
+                balance.setText(formatter.format(balanceamount) + cruncycode);
 //                    netamount.setText(formatter.format(balanceamount) + cruncycode);
 
                 cc = subtotalvalue + shipingvalue;
+                Log.e(TAG, "cc00 "+cc);
                 if (selectedtaxt.size() > 0) {
                     if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
                         netamount.setText(formatter.format(cc) + cruncycode);
@@ -3660,37 +3675,62 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                         netamount.setText(formatter.format(balanceamount) + cruncycode);
                         Log.e(TAG, "QQQQQQ222");
                     }
+                }else{
+                    netamount.setText(formatter.format(cc) + cruncycode);
                 }
-
-                balance.setText(formatter.format(cc) + cruncycode);
-            }
-
-            if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
-                freight.setText("0");
-            }else{
-                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
-                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
-                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
-
-                // netamount.setText(formatter.format(balanceamount) + cruncycode);
-
-                cc = subtotalvalue + shipingvalue;
-                if (selectedtaxt.size() > 0) {
-                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
-                        netamount.setText(formatter.format(cc) + cruncycode);
-                        Log.e(TAG, "QQQQQQ111");
-                    }else{
-                        netamount.setText(formatter.format(balanceamount) + cruncycode);
-                        Log.e(TAG, "QQQQQQ222");
-                    }
-                }
-
-                balance.setText(formatter.format(cc) + cruncycode);
-
             }
 
 
-            Log.e(TAG, "netamountvalueCCC33 "+cc);
+
+//            if(freight_cost.isEmpty()){
+//                //freight.setText("0");
+//            }else {
+//                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
+//                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
+//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+//
+////                    netamount.setText(formatter.format(balanceamount) + cruncycode);
+//
+//                cc = subtotalvalue + shipingvalue;
+//                if (selectedtaxt.size() > 0) {
+//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+//                        netamount.setText(formatter.format(cc) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ111");
+//                    }else{
+//                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ222");
+//                    }
+//                }
+//
+//                balance.setText(formatter.format(cc) + cruncycode);
+//            }
+//
+//            if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
+//                freight.setText("0");
+//            }else{
+//                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+//                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+//
+//                // netamount.setText(formatter.format(balanceamount) + cruncycode);
+//
+//                cc = subtotalvalue + shipingvalue;
+//                if (selectedtaxt.size() > 0) {
+//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
+//                        netamount.setText(formatter.format(cc) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ111");
+//                    }else{
+//                        netamount.setText(formatter.format(balanceamount) + cruncycode);
+//                        Log.e(TAG, "QQQQQQ222");
+//                    }
+//                }
+//
+//                balance.setText(formatter.format(cc) + cruncycode);
+//
+//            }
+//
+//
+//            Log.e(TAG, "netamountvalueCCC33 "+cc);
 
 
 //            if(!freight_cost.isEmpty()){

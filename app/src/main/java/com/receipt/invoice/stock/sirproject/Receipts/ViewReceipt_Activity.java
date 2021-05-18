@@ -644,18 +644,14 @@ public class ViewReceipt_Activity extends AppCompatActivity {
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.equals("") || !companylogopath.toLowerCase().endsWith(".png") || !companylogopath.toLowerCase().endsWith(".jpg") || !companylogopath.toLowerCase().endsWith(".jpeg")) {
-
-            companyimagelogopath = "/android_res/drawable/white_img.png";
-
-
-        } else {
-
-
+        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
             companyimagelogopath = companylogopath;
-
-
+        }else{
+            companyimagelogopath = "/android_res/drawable/white_img.png";
         }
+
+        Log.e(TAG, "companyimagelogopathXX "+companyimagelogopath);
+
         String paidamountstrrepvalue = "";
         String paidamountstrreptxt = "";
         String paidamountstrreplace = "";
