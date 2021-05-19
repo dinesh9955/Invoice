@@ -3583,8 +3583,24 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 //                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
 //                        }
 //                    }else{
-                        String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
+//                        String subStrinng = taxrname + " " + taxtrateamt + "%";
+//                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
+
+
+                    String isTaxRate = taxtrateamt;
+                    String isPecent = "%";
+
+                    String subStrinng = taxrname.replace("(", "").replace(")", "");
+
+                    if(!subStrinng.contains(isTaxRate+isPecent)){
+                        subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+                    }else{
+
+                    }
+
+                    txttax.setText(subStrinng+ " Incl"); //Dont do any change
+
+
 //                    }
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
@@ -3611,8 +3627,27 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 //                            txttax.setText(subStrinng); //Dont do any change
 //                        }
 //                    }else{
-                        String subStrinng = taxrname + " " + taxtrateamt + "%";
-                        txttax.setText(subStrinng); //Dont do any change
+
+
+
+
+
+
+                    String isTaxRate = taxtrateamt;
+                    String isPecent = "%";
+
+                     String subStrinng = taxrname.replace("(", "").replace(")", "");
+
+                     if(!subStrinng.contains(isTaxRate+isPecent)){
+                         subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+                     }else{
+
+                     }
+
+                    txttax.setText(subStrinng); //Dont do any change
+
+                    Log.e(TAG, "taxrname"+taxrname);
+                    Log.e(TAG, "taxtrateamt"+taxtrateamt);
 //                    }
 
 

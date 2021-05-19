@@ -3574,7 +3574,16 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                     Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
-                    String subStrinng = taxrname + " " + taxtrateamt + "%";
+                    String isTaxRate = taxtrateamt;
+                    String isPecent = "%";
+
+                    String subStrinng = taxrname.replace("(", "").replace(")", "");
+
+                    if(!subStrinng.contains(isTaxRate+isPecent)){
+                        subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+                    }else{
+
+                    }
                     txttax.setText( subStrinng + " Incl" ); //Dont do any change
 
 //                    if(taxrname.length() > 0){
@@ -3606,7 +3615,16 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                         Log.e(TAG, "taxrnameAAA "+taxrname);
                         Log.e(TAG, "taxtrateamtAAA "+taxtrateamt);
 
-                        String subStrinng = taxrname + " " + taxtrateamt + "%";
+                        String isTaxRate = taxtrateamt;
+                        String isPecent = "%";
+
+                        String subStrinng = taxrname.replace("(", "").replace(")", "");
+
+                        if(!subStrinng.contains(isTaxRate+isPecent)){
+                            subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+                        }else{
+
+                        }
                         txttax.setText(subStrinng); //Dont do any change
 
 //                        if(taxrname.length() > 0){
