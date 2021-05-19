@@ -12,6 +12,8 @@ import android.print.PDFPrint;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
+import android.text.Html;
+import android.text.SpannableString;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -151,6 +153,8 @@ public class ViewInvoice_Activity extends AppCompatActivity {
                     shippingpostcode = customerselected.get(i).getShipping_postcode();
                     shippingzone = customerselected.get(i).getShipping_zone();
 
+
+
                 }
 
 
@@ -240,6 +244,11 @@ public class ViewInvoice_Activity extends AppCompatActivity {
 //            invoice_no = String.valueOf(invoicenovalue);
 
             strnotes = getIntent().getStringExtra("notes");
+           // SpannableString contentText = (SpannableString) contentView.getText();
+            //strnotes = Html.toHtml(new SpannableString(getIntent().getStringExtra("notes")));
+
+              Log.e(TAG, "strnotesA"+strnotes);
+
             ref_no = getIntent().getStringExtra("ref_no");
             Subtotalamount = getIntent().getStringExtra("subtotalamt");
             paid_amount_payment_method = getIntent().getStringExtra("paid_amount_payment_method");
@@ -705,7 +714,7 @@ public class ViewInvoice_Activity extends AppCompatActivity {
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
                 paidamountstrreptxt = "Paid Amount ";
             }else{
-                paidamountstrreptxt = "Paid Amount "+"("+Paymentamountdate+")";
+                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
             }
 
 

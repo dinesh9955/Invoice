@@ -706,7 +706,7 @@ public class POToPVWebview extends AppCompatActivity {
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
                 paidamountstrreptxt = "Paid Amount ";
             }else{
-                paidamountstrreptxt = "Paid Amount "+"("+Paymentamountdate+")";
+                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
             }
 
 

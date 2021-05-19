@@ -571,7 +571,7 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
         } else {
             // null response or Exception occur
             taxtamountstr = taxamount;
-            taxtamountstrvalue = ""+taxText.replace("(", "").replace(")", "").toUpperCase();
+            taxtamountstrvalue = ""+taxText.replace("(", "").replace(")", "");
         }
 
         String discountvalue = "";
@@ -699,7 +699,7 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
                 paidamountstrreptxt = "Paid Amount ";
             }else{
-                paidamountstrreptxt = "Paid Amount "+"("+Paymentamountdate+")";
+                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
             }
 
 

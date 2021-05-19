@@ -25,6 +25,8 @@ import android.print.PDFPrint;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
@@ -715,7 +717,10 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
 
                 invoice_no = invoicenumtxt.getText().toString();
-                strnotes = ednotes.getText().toString();
+                //strnotes = ednotes.getText().toString();
+                SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+                strnotes = Html.toHtml(textNotes);
+
                 ref_no = edreferenceno.getText().toString();
 
                 strdiscountvalue = discount.getText().toString();
@@ -1770,7 +1775,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        eddate.setError("Required");
+                        Toast.makeText(getActivity(), "Date Required", Toast.LENGTH_SHORT).show();
                         eddate.requestFocus();
                     } else if (paymentmode.equals("")) {
                         // Constant.ErrorToast(getActivity(), "Payment Mode Required");
@@ -1807,7 +1812,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     Log.e(TAG, "selectedTemplateAA "+selectedTemplate);
 
 
-
                     String shipingcoast = freight.getText().toString();
                     Subtotalamount = subtotal.getText().toString();
                     Grossamount_str = grosstotal.getText().toString();
@@ -1817,7 +1821,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     netamountvalue = netamount.getText().toString();
                     Blanceamountstr = balance.getText().toString();
                     invoice_no = invoicenumtxt.getText().toString();
-                    strnotes = ednotes.getText().toString();
+                    //strnotes = ednotes.getText().toString();
                     ref_no = edreferenceno.getText().toString();
 
                     strdiscountvalue = discount.getText().toString();
@@ -1826,6 +1830,12 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     invoice_date = duedate.getText().toString();
                     invoice_due_date = edduedate.getText().toString();
                     invoicetaxamount = tax.getText().toString();
+
+//                    strnotes = ednotes.getText().toString();
+
+                    SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+                    strnotes = Html.toHtml(textNotes);
+
                     if (selectedCompanyId.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select a Company");
                         bottomSheetDialog2.dismiss();
@@ -2174,95 +2184,105 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 }
             });
 
+
+
             btndone1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dayss = edmanual.getText().toString();
 
-                    if (dayss.equals("") && credit_terms.equals(""))
-                    {
-                        Toast.makeText(getActivity(), "Please Select Atleast One", Toast.LENGTH_LONG).show();
-                    }
-                    else if (dayss != null && credit_terms.equals(""))
-                    {
+                    Log.e(TAG, "dayss"+dayss);
+                    Log.e(TAG, "credit_terms"+credit_terms);
+                    DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
 
-                        String dayswith = dayss.trim();
+                    String xxDate = duedate.getText().toString();
 
-                        Double daysvalue = Double.parseDouble(dayswith);
-
-                        Double resultday = toMilliSeconds(daysvalue);
-                        long sum = (long) (resultday + datemillis);
-                        // Creating date format
-                        DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-
-                        // Creating date from milliseconds
-                        // using Date() constructor
-                        Date result = new Date(sum);
-                        Log.e("Date Long", simple.format(result));
-                        edduedate.setText(simple.format(result));
-                        edduedate.setClickable(true);
-                        txtdays.setText(dayss + " " + "days");
-                        bottomSheetDialog.dismiss();
-                        edduedate.setClickable(false);
-                    }
-                    else if (credit_terms != null && dayss.equals(""))
-                    {
-                        if (credit_terms.equals("none")) {
-                            txtdays.setText(credit_terms);
-                            edduedate.setClickable(true);
-                            bottomSheetDialog.dismiss();
-                        } else if (credit_terms.equals("immediately")) {
-                            String myFormat = "yyyy-MM-dd"; //In which you need put here
-                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-                            edduedate.setText(sdf.format(myCalendar.getTime()));
-                            edduedate.setClickable(false);
-                            txtdays.setText(credit_terms);
-
-                            bottomSheetDialog.dismiss();
-                        } else {
-
-
-                            String replaceString = credit_terms.replaceAll("days", "");
+                    if(xxDate.equalsIgnoreCase("")){
+                        Toast.makeText(getActivity(), "Please Select Date", Toast.LENGTH_LONG).show();
+                    }else{
+                        if(!dayss.equals("")){
+                            String replaceString = dayss.replaceAll("days", "");
                             String dayswith = replaceString.trim();
-                            Log.e(TAG, "dayswith::: "+dayswith);
 
                             try {
                                 Double daysvalue = Double.parseDouble(dayswith);
 
                                 Double result = toMilliSeconds(daysvalue);
 
+                                Date date = simple.parse(xxDate);
+                                datemillis = date.getTime();
+
+                                Log.e(TAG, "datemillisAAA "+datemillis);
+
                                 long sumresult = (long) (result + datemillis);
                                 // Creating date format
-                                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+
                                 Date sumresultdate = new Date(sumresult);
 
-                                // Formatting Date according to the
-                                // given format
-
-                                Log.e("Date Long", simple.format(sumresultdate));
+                                Log.e("Date Long22", simple.format(sumresultdate));
                                 edduedate.setText(simple.format(sumresultdate));
                                 edduedate.setClickable(false);
-                                txtdays.setText(credit_terms);
+                                txtdays.setText(dayss+" days");
                             }catch (Exception e){
                                 txtdays.setText(dayswith);
                                 edduedate.setText(duedate.getText().toString());
                             }
-
-
                             bottomSheetDialog.dismiss();
+                        }else if (!credit_terms.equals("")) {
+
+                            if (credit_terms.equals("none")) {
+                                txtdays.setText(credit_terms);
+                                edduedate.setClickable(true);
+                                bottomSheetDialog.dismiss();
+                            } else if (credit_terms.equals("immediately")) {
+                                String myFormat = "yyyy-MM-dd"; //In which you need put here
+                                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                                edduedate.setText(sdf.format(myCalendar.getTime()));
+                                edduedate.setClickable(false);
+                                txtdays.setText(credit_terms);
+
+                                bottomSheetDialog.dismiss();
+                            } else {
+
+
+                                String replaceString = credit_terms.replaceAll("days", "");
+                                String dayswith = replaceString.trim();
+
+
+                                try {
+                                    Double daysvalue = Double.parseDouble(dayswith);
+
+                                    Double result = toMilliSeconds(daysvalue);
+
+
+                                    Date date = simple.parse(xxDate);
+                                    datemillis = date.getTime();
+
+                                    Log.e(TAG, "datemillisAAA " + datemillis);
+
+                                    long sumresult = (long) (result + datemillis);
+                                    // Creating date format
+
+                                    Date sumresultdate = new Date(sumresult);
+
+                                    Log.e("Date Long22", simple.format(sumresultdate));
+                                    edduedate.setText(simple.format(sumresultdate));
+                                    edduedate.setClickable(false);
+                                    txtdays.setText(credit_terms);
+                                } catch (Exception e) {
+                                    txtdays.setText(dayswith);
+                                    edduedate.setText(duedate.getText().toString());
+                                }
+
+                                bottomSheetDialog.dismiss();
+
+                            }
+
+                        }else{
+                            Toast.makeText(getActivity(), "Please Select One Value", Toast.LENGTH_LONG).show();
                         }
-
-
                     }
-                    else if (dayss != null && credit_terms != null)
-                    {
-                        Toast.makeText(getActivity(), "Please Select One Value", Toast.LENGTH_LONG).show();
-                    }
-
-
-                    // myCalendar.set(Calendar.DAY_OF_MONTH, a);
-                    // updateLabe21();
 
                 }
 
@@ -2270,6 +2290,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     return days * 24 * 60 * 60 * 1000;
                 }
             });
+
 
 
             txtcredit1.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
@@ -3427,7 +3448,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     //netamountvalue = 0.0;
                     Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-                    String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
+                    String subStrinng = taxrname + " " + taxtrateamt + "%";
                     txttax.setText(  subStrinng + " Incl" ); //Dont do any change
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
@@ -3441,7 +3462,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
-                    String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
+                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 
                     txttax.setText(subStrinng); //Dont do any change
 
@@ -3939,7 +3960,10 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         netamountvalue = netamount.getText().toString();
         Blanceamountstr = balance.getText().toString();
         invoice_no = invoicenumtxt.getText().toString();
-        strnotes = ednotes.getText().toString();
+        //strnotes = ednotes.getText().toString();
+        SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+        strnotes = Html.toHtml(textNotes);
+
         ref_no = edreferenceno.getText().toString();
 
         strdiscountvalue = discount.getText().toString();
@@ -4199,7 +4223,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             if(Paymentamountdate.equalsIgnoreCase("")){
                 paidamountstrreptxt = "Paid Amount ";
             }else{
-                paidamountstrreptxt = "Paid Amount "+"("+Paymentamountdate+")";
+                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
             }
 
 

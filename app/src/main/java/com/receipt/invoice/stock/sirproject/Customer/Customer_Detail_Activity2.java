@@ -101,6 +101,9 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
 
     String customer_id,customer_name,customer_contact_person,customer_image,customer_email,customer_phone,customer_mobile,customer_website,customer_address;
 
+    String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country;
+
+
     TextView save,cancel;
     ImageView editbtn;
 
@@ -133,6 +136,16 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
         customer_website = getIntent().getStringExtra("customer_website");
         customer_address = getIntent().getStringExtra("customer_address");
 
+        shipping_firstname = getIntent().getStringExtra("shipping_firstname");
+        shipping_lastname = getIntent().getStringExtra("shipping_lastname");
+        shipping_address_1 = getIntent().getStringExtra("shipping_address_1");
+        shipping_address_2 = getIntent().getStringExtra("shipping_address_2");
+        shipping_city = getIntent().getStringExtra("shipping_city");
+        shipping_postcode = getIntent().getStringExtra("shipping_postcode");
+        shipping_country = getIntent().getStringExtra("shipping_country");
+
+
+
         Log.e(TAG, "selectedCompanyId "+selectedCompanyId);
         Log.e(TAG, "customer_id "+customer_id);
         Log.e(TAG, "customer_image "+customer_image);
@@ -157,9 +170,16 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
         mobile.setText(customer_mobile);
         website.setText(customer_website);
         CompanyAddress.setText(customer_address);
-
-
         imagedescription.setVisibility(View.GONE);
+
+
+        edfirstname.setText(shipping_firstname);
+        edlastname.setText(shipping_lastname);
+        edaddress1.setText(shipping_address_1);
+        edaddress2.setText(shipping_address_2);
+        edcity.setText(shipping_city);
+        edpostcode.setText(shipping_postcode);
+        edcountry.setText(shipping_country);
 
 
     }

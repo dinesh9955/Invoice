@@ -584,15 +584,22 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
 
                             String customer_name = "";
-                            String cc = item.getString("customer");
-                            if(!cc.equalsIgnoreCase("null")){
-                              JSONObject customerobj = item.getJSONObject("customer");
-                                Log.e(TAG , "customerobj "+cc);
-                                if(customerobj != null){
-                                    customer_name = customerobj.getString("customer_name");
+
+                            if(item.has("customer_name")){
+                                customer_name = item.getString("customer_name");
+                            }else{
+                                 String cc = item.getString("customer");
+                                 if(!cc.equalsIgnoreCase("null")){
+                                     JSONObject customerobj = item.getJSONObject("customer");
+                                        Log.e(TAG , "customerobj "+cc);
+                                    if(customerobj != null){
+                                        customer_name = customerobj.getString("customer_name");
+                                    }
+                                    Log.e("customer_name_id", customer_name);
                                 }
-                                Log.e("customer_name_id", customer_name);
                             }
+
+
 
 
 

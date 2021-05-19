@@ -74,6 +74,8 @@ public class Customer_Listing_Adapter extends RecyclerView.Adapter<Customer_List
         final String customer_mobile = customer_list.getCustomer_mobile();
         final String customer_website = customer_list.getCustomer_website();
 
+
+
         if (customer_name.equals("") || customer_name.equals("null"))
         {
             viewHolderForCat.companyname.setText("");
@@ -130,6 +132,15 @@ public class Customer_Listing_Adapter extends RecyclerView.Adapter<Customer_List
                 intent.putExtra("customer_mobile",customer_mobile);
                 intent.putExtra("customer_website",customer_website);
                 intent.putExtra("customer_address",customer_address);
+
+                intent.putExtra("shipping_firstname",customer_list.getShipping_firstname());
+                intent.putExtra("shipping_lastname",customer_list.getShipping_lastname());
+                intent.putExtra("shipping_address_1",customer_list.getShipping_address_1());
+                intent.putExtra("shipping_address_2",customer_list.getShipping_address_2());
+                intent.putExtra("shipping_city",customer_list.getShipping_city());
+                intent.putExtra("shipping_postcode",customer_list.getShipping_postcode());
+                intent.putExtra("shipping_country",customer_list.getShipping_country());
+
                 mcontext.startActivity(intent);
             }
         });

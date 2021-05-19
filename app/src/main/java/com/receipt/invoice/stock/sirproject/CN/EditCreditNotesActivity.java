@@ -27,6 +27,8 @@ import android.print.PDFPrint;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
@@ -641,7 +643,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                     itemstxtTemplate.setText("Template "+selectedTemplate);
                 }
                 strnotes = invoiceDtoInvoice.getNotes();
-                ednotes.setText(strnotes);
+                ednotes.setText(Html.fromHtml(strnotes));
 
                 credit_termsdto = invoiceDtoInvoice.getCreditTerms();
                 credit_terms = credit_termsdto;
@@ -1020,7 +1022,9 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
 
 
                 invoice_no = invoicenumtxt.getText().toString();
-                strnotes = ednotes.getText().toString();
+//                strnotes = ednotes.getText().toString();
+                SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+                strnotes = Html.toHtml(textNotes);
                 ref_no = edreferenceno.getText().toString();
 
                 strdiscountvalue = discount.getText().toString();
@@ -1817,7 +1821,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        eddate.setError("Required");
+                        Toast.makeText(EditCreditNotesActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
                         eddate.requestFocus();
                     } else if (paymentmode.equals("")) {
 //                        Constant.ErrorToast(EditInvoiceActivity.this, "Payment Mode Required");
@@ -1869,6 +1873,11 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                     invoice_date = duedate.getText().toString();
                     invoice_due_date = edduedate.getText().toString();
                     invoicetaxamount = tax.getText().toString();
+
+//                    strnotes = ednotes.getText().toString();
+                    SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+                    strnotes = Html.toHtml(textNotes);
+
                     if (selectedCompanyId.equals("")) {
                         Constant.ErrorToast(EditCreditNotesActivity.this, "Select a Company");
                         bottomSheetDialog2.dismiss();
@@ -4327,7 +4336,9 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
         netamountvalue = netamount.getText().toString();
         Blanceamountstr = balance.getText().toString();
         invoice_no = invoicenumtxt.getText().toString();
-        strnotes = ednotes.getText().toString();
+//        strnotes = ednotes.getText().toString();
+        SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+        strnotes = Html.toHtml(textNotes);
         ref_no = edreferenceno.getText().toString();
 
         strdiscountvalue = discount.getText().toString();

@@ -102,7 +102,7 @@ public class Customer_list implements Serializable {
     String customer_website;
     String customer_image_path;
 
-    String shipping_firstname;
+
 
 
     public String getCompany_id() {
@@ -177,6 +177,7 @@ public class Customer_list implements Serializable {
         this.shipping_zone = shipping_zone;
     }
 
+    String shipping_firstname;
     String shipping_lastname;
     String shipping_address_1;
     String shipping_address_2;

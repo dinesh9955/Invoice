@@ -67,7 +67,7 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
         final String invoicetotlaprice = company_list.getInvoicetotlaprice();
         final String strstatus = company_list.getInvocestatus();
         final String is_viewed = company_list.getIs_viewed();
-
+        final String voidStatus = company_list.getVoid_status();
 
 
         if (customer_name.equals("") && customer_name.equals("null")) {
@@ -98,14 +98,20 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
         if (strstatus.equals("") && strstatus.equals("null")) {
             viewHolderForCat.statustxt.setText("");
         } else {
-            if (strstatus.equals("2")) {
-                viewHolderForCat.statustxt.setText("Paid");
-                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
-
-            }else {
-                viewHolderForCat.statustxt.setText("Unpaid");
+            if(voidStatus.equalsIgnoreCase("1")){
+                viewHolderForCat.statustxt.setText("Void");
                 viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
+            }else{
+                if (strstatus.equals("2")) {
+                    viewHolderForCat.statustxt.setText("Paid");
+                    viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
+
+                }else {
+                    viewHolderForCat.statustxt.setText("Unpaid");
+                    viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
+                }
             }
+
         }
 
         if (is_viewed.equalsIgnoreCase("0")) {

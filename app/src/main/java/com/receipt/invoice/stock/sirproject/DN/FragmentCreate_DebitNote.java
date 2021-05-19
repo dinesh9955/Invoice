@@ -25,6 +25,8 @@ import android.print.PDFPrint;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
@@ -717,7 +719,9 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                 createinvoice.setEnabled(false);
 
                 invoice_no = invoicenumtxt.getText().toString();
-                strnotes = ednotes.getText().toString();
+//                strnotes = ednotes.getText().toString();
+                SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+                strnotes = Html.toHtml(textNotes);
                 ref_no = edreferenceno.getText().toString();
 
                 strdiscountvalue = discount.getText().toString();
@@ -1712,7 +1716,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        eddate.setError("Required");
+                        Toast.makeText(getActivity(), "Date Required", Toast.LENGTH_SHORT).show();
                         eddate.requestFocus();
                     } else if (paimentmodespinerstr.equals("")) {
                         Constant.ErrorToast(getActivity(), "Payment Mode Required");
@@ -1759,7 +1763,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                     netamountvalue = netamount.getText().toString();
                     Blanceamountstr = balance.getText().toString();
                     invoice_no = invoicenumtxt.getText().toString();
-                    strnotes = ednotes.getText().toString();
+//                    strnotes = ednotes.getText().toString();
                     ref_no = edreferenceno.getText().toString();
 
                     strdiscountvalue = discount.getText().toString();
@@ -1768,6 +1772,11 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                     invoice_date = duedate.getText().toString();
                     invoice_due_date = edduedate.getText().toString();
                     invoicetaxamount = tax.getText().toString();
+
+//                    strnotes = ednotes.getText().toString();
+                    SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+                    strnotes = Html.toHtml(textNotes);
+
                     if (selectedCompanyId.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select a Company");
                         bottomSheetDialog2.dismiss();
@@ -3372,7 +3381,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                     //netamountvalue = 0.0;
                     Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-                    String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
+                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 
                     txttax.setText(  subStrinng + " Incl" ); //Dont do any change
 
@@ -3387,7 +3396,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
 
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
-                    String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
+                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 
                     txttax.setText(subStrinng); //Dont do any change
 
@@ -3891,7 +3900,10 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
         netamountvalue = netamount.getText().toString();
         Blanceamountstr = balance.getText().toString();
         invoice_no = invoicenumtxt.getText().toString();
-        strnotes = ednotes.getText().toString();
+//        strnotes = ednotes.getText().toString();
+        SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+        strnotes = Html.toHtml(textNotes);
+
         ref_no = edreferenceno.getText().toString();
 
         strdiscountvalue = discount.getText().toString();

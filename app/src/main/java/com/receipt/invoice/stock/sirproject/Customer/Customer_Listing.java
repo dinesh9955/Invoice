@@ -245,6 +245,21 @@ public class Customer_Listing extends Fragment {
                                 customer_list.setCustomer_mobile(customer_mobile);
                                 customer_list.setCustomer_image_path(customer_image_path);
 
+                                String fname = item.getString("shipping_firstname");
+                                String lname = item.getString("shipping_lastname");
+                                String ship1 = item.getString("shipping_address_1");
+                                String ship2 = item.getString("shipping_address_2");
+                                String city = item.getString("shipping_city");
+                                String post = item.getString("shipping_postcode");
+                                String country = item.getString("shipping_country");
+
+                                customer_list.setShipping_firstname(fname);
+                                customer_list.setShipping_lastname(lname);
+                                customer_list.setShipping_address_1(ship1);
+                                customer_list.setShipping_address_2(ship2);
+                                customer_list.setShipping_city(city);
+                                customer_list.setShipping_postcode(post);
+                                customer_list.setShipping_country(country);
 
                                 list.add(customer_list);
                                 customer_listing_adapter.notifyDataSetChanged();

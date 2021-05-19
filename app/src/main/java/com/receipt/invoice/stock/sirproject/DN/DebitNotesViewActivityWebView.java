@@ -711,7 +711,7 @@ public class DebitNotesViewActivityWebView extends AppCompatActivity {
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxvalue + currency_code;
-            taxtamountstrvalue = ""+taxTitle.replace("(", "").replace(")", "").toUpperCase();
+            taxtamountstrvalue = ""+taxTitle.replace("(", "").replace(")", "");
         }
 
         String discountvalue = "";

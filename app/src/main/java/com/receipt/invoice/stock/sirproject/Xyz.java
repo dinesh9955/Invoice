@@ -53,7 +53,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import project.aamir.sheikh.circletextview.CircleTextView;
-
+import org.apache.commons.lang3.text.WordUtils;
 public class Xyz extends AppCompatActivity {
 
 
@@ -359,6 +359,31 @@ public class Xyz extends AppCompatActivity {
         return true;
     }
 
+
+    public String capitalizeFirstLetter(String original) {
+        if (original == null || original.length() == 0) {
+            return original;
+        }
+        return original.substring(0, 1).toUpperCase() + original.substring(1);
+    }
+
+    private String capitalize(final String line) {
+        return Character.toUpperCase(line.charAt(0)) + line.substring(1);
+    }
+
+
+    public static String toTitleCase(String givenString) {
+        String[] arr = givenString.split(" ");
+        StringBuffer sb = new StringBuffer();
+
+        for (int i = 0; i < arr.length; i++) {
+            sb.append(Character.toUpperCase(arr[i].charAt(0)))
+                    .append(arr[i].substring(1)).append(" ");
+        }
+        return sb.toString().trim();
+    }
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -366,6 +391,23 @@ public class Xyz extends AppCompatActivity {
         setContentView(R.layout.abc);
 
         Button button = (Button) findViewById(R.id.button2);
+
+        TextView textView3 = (TextView) findViewById(R.id.textView3);
+
+
+
+        final String str2 = "hello wO";
+
+        //String output = str2.substring(0, 1).toUpperCase() + str2.substring(1);
+
+       // String output = capitalizeFirstLetter(str2);
+       // System.out.println(capitalizeFirstLetter(str2));
+
+        String ggg = WordUtils.capitalize(str2);
+
+        Log.e(TAG , "gggGG "+ggg);
+
+      //  textView3.setText(""+WordUtils.capitalizeFirstLetter(str2));
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());

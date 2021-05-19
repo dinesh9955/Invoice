@@ -25,6 +25,8 @@ import android.print.PDFPrint;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
+import android.text.Html;
+import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
@@ -714,7 +716,9 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
 
 
                 invoice_no = invoicenumtxt.getText().toString();
-                strnotes = ednotes.getText().toString();
+//                strnotes = ednotes.getText().toString();
+                SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+                strnotes = Html.toHtml(textNotes);
                 ref_no = edreferenceno.getText().toString();
 
                 strdiscountvalue = discount.getText().toString();
@@ -1769,7 +1773,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        eddate.setError("Required");
+                        Toast.makeText(getActivity(), "Date Required", Toast.LENGTH_SHORT).show();
                         eddate.requestFocus();
                     } else if (paymentmode.equals("")) {
                         // Constant.ErrorToast(getActivity(), "Payment Mode Required");
@@ -1805,8 +1809,6 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
 
                     Log.e(TAG, "selectedTemplateAA "+selectedTemplate);
 
-
-
                     String shipingcoast = freight.getText().toString();
                     Subtotalamount = subtotal.getText().toString();
                     Grossamount_str = grosstotal.getText().toString();
@@ -1816,7 +1818,9 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
                     netamountvalue = netamount.getText().toString();
                     Blanceamountstr = balance.getText().toString();
                     invoice_no = invoicenumtxt.getText().toString();
-                    strnotes = ednotes.getText().toString();
+//                    strnotes = ednotes.getText().toString();
+                    SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+                    strnotes = Html.toHtml(textNotes);
                     ref_no = edreferenceno.getText().toString();
 
                     strdiscountvalue = discount.getText().toString();
@@ -1825,6 +1829,8 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
                     invoice_date = duedate.getText().toString();
                     invoice_due_date = edduedate.getText().toString();
                     invoicetaxamount = tax.getText().toString();
+
+
                     if (selectedCompanyId.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select a Company");
                         bottomSheetDialog2.dismiss();
@@ -3423,7 +3429,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
                     //netamountvalue = 0.0;
                     Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-                    String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
+                    String subStrinng = taxrname + " " + taxtrateamt + "%";
                     txttax.setText(  subStrinng + " Incl" ); //Dont do any change
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
@@ -3437,7 +3443,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
 
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
-                    String subStrinng = taxrname.toUpperCase() + " " + taxtrateamt + "%";
+                    String subStrinng = taxrname+ " " + taxtrateamt + "%";
 
                     txttax.setText(subStrinng); //Dont do any change
 
@@ -3935,7 +3941,10 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
         netamountvalue = netamount.getText().toString();
         Blanceamountstr = balance.getText().toString();
         invoice_no = invoicenumtxt.getText().toString();
-        strnotes = ednotes.getText().toString();
+//        strnotes = ednotes.getText().toString();
+        SpannableStringBuilder textNotes = (SpannableStringBuilder) ednotes.getText();
+        strnotes = Html.toHtml(textNotes);
+
         ref_no = edreferenceno.getText().toString();
 
         strdiscountvalue = discount.getText().toString();

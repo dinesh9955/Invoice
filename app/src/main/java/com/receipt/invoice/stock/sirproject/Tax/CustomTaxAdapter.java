@@ -69,7 +69,7 @@ public class CustomTaxAdapter  extends RecyclerView.Adapter<CustomTaxAdapter.Vie
 
         if (taxname != null)
         {
-            viewHolderForCat.txtincome.setText(taxname.toUpperCase());
+            viewHolderForCat.txtincome.setText(taxname);
         }
 
         if (typestr.equals("P"))
