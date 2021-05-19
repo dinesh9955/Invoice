@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,13 +16,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Picture;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.print.PDFPrint;
+import android.print.PrintAttributes;
+import android.print.pdf.PrintedPdfDocument;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
@@ -29,6 +35,7 @@ import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +73,10 @@ import com.bumptech.glide.RequestManager;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.isapanah.awesomespinner.AwesomeSpinner;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfPrinterGraphics2D;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -97,9 +108,11 @@ import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Utility;
+import com.tejpratapsingh.pdfcreator.activity.PDFViewerActivity;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 import com.wang.avi.AVLoadingIndicatorView;
+import com.webviewtopdf.PdfView;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -734,8 +747,6 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                         File imgFile = new File(multimgpath.get(i));
                         // company_stampFileimage=imgFile;
                         multiple[i] = imgFile;
-
-
                     }
                 }
 
@@ -3944,8 +3955,6 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                 cruncycode = tempList.get(i).getCurrency_code();
 
                 productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
-
-
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
@@ -4319,6 +4328,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
+        String finalContent = content;
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
@@ -4329,7 +4339,124 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
                 //if page loaded successfully then show print button
                 //findViewById(R.id.fab).setVisibility(View.VISIBLE);
+
+
+
                 final File savedPDFFile = FileManager.getInstance().createTempFile(getActivity(), "pdf", false);
+
+
+
+//                final PrintAttributes attrs = new PrintAttributes.Builder()
+//                        .setColorMode(PrintAttributes.COLOR_MODE_COLOR)
+//                        .setMediaSize(PrintAttributes.MediaSize.ISO_A1)
+//                        .setMinMargins(PrintAttributes.Margins.NO_MARGINS)
+//                        .setResolution(new PrintAttributes.Resolution("1", "label", 1500, 800))
+//                        .build();
+//
+//                final PrintedPdfDocument document = new PrintedPdfDocument(getActivity(), attrs);
+//                final PdfDocument.Page page = document.startPage(1);
+//
+//                view.draw(page.getCanvas());
+//
+//                document.finishPage(page);
+//
+//                try{
+//                    final FileOutputStream outputStream = new FileOutputStream(new File(Environment.getExternalStorageDirectory(), "test.pdf"));
+//                    document.writeTo(outputStream);
+//                    outputStream.close();
+//                    document.close();
+//                }catch (Exception e){
+//
+//                }
+
+
+//                Log.e(TAG, "savedPDFFile"+savedPDFFile);
+//                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/");
+//                PdfView.createWebPrintJob(getActivity(), view, path, "savedPDFFile.pdf", new PdfView.Callback() {
+//
+//                    @Override
+//                    public void success(String path) {
+//                       // progressDialog.dismiss();
+//                        //PdfView.openPdfFile(getActivity(),getString(R.string.app_name),"Do you want to open the pdf file?"+fileName,path);
+//                    }
+//
+//                    @Override
+//                    public void failure() {
+//                        //progressDialog.dismiss();
+//
+//                    }
+//                });
+
+//                String jobName = getActivity().getString(R.string.app_name) + " Document";
+//                PrintAttributes attributes = new PrintAttributes.Builder()
+//                        .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
+//                        .setResolution(new PrintAttributes.Resolution("pdf", "pdf", 600, 600))
+//                        .setMinMargins(PrintAttributes.Margins.NO_MARGINS).build();
+//                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/");
+//                PdfView pdfPrint = new PdfView(attributes);
+//                pdfPrint.print(wv.createPrintDocumentAdapter(jobName), path, "output_" + System.currentTimeMillis() + ".pdf");
+
+//                Bitmap bitmap = loadBitmapFromView(view, view.getWidth(), view.getHeight());
+//
+//                createPdf(bitmap);
+
+//                Picture picture = view.capturePicture();
+//                Bitmap b = Bitmap.createBitmap(
+//                        picture.getWidth(), picture.getHeight(), Bitmap.Config.ARGB_8888);
+//                Canvas c = new Canvas(b);
+//                picture.draw(c);
+//
+//                FileOutputStream fos = null;
+//                try {
+//                    fos = new FileOutputStream( "/sdcard/"  + "page.jpg" );
+//                    if ( fos != null ) {
+//                        b.compress(Bitmap.CompressFormat.JPEG, 80, fos );
+//                        fos.close();
+//                    }
+//                }
+//                catch( Exception e ) {
+//                    System.out.println("-----error--"+e);
+//                }
+//
+//
+//
+//                try {
+//                    Document document = new Document();
+//                    String dirpath = Environment.getExternalStorageDirectory().toString();
+//                    PdfWriter.getInstance(document, new FileOutputStream(dirpath + "/NewPDF.pdf")); //  Change pdf's name.
+//                    document.open();
+//                    Image img = Image.getInstance(Environment.getExternalStorageDirectory() + File.separator + "page.jpg");
+//                    float scaler = ((document.getPageSize().getWidth() - document.leftMargin()
+//                            - document.rightMargin() - 0) / img.getWidth()) * 100;
+//                    img.scalePercent(scaler);
+//                    img.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
+//                    document.add(img);
+//                    document.close();
+//                } catch (Exception e) {
+//
+//                }
+
+
+
+//                PDFUtil.generatePDFFromHTML(getActivity(), savedPDFFile, finalContent, new PDFPrint.OnPDFPrintListener() {
+//                    @Override
+//                    public void onSuccess(File file) {
+//                        // Open Pdf Viewer
+//                        Uri pdfUri = Uri.fromFile(savedPDFFile);
+//
+//                        Intent intentPdfViewer = new Intent(getActivity(), PDFViewerActivity.class);
+//                        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri);
+//
+//                        startActivity(intentPdfViewer);
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception exception) {
+//                        exception.printStackTrace();
+//                    }
+//                });
+//
+
 
                 PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
                     @Override
@@ -4363,6 +4490,11 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
         });
 
         invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
+
+
+
+
+
 //
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
@@ -4375,6 +4507,86 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
     }
 
 
+
+
+    public static Bitmap loadBitmapFromView(View v, int width, int height) {
+        Bitmap b = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(b);
+        v.draw(c);
+
+        return b;
+    }
+
+
+
+
+    private void createPdf(Bitmap bitmap){
+        WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+        //  Display display = wm.getDefaultDisplay();
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        float hight = displaymetrics.heightPixels ;
+        float width = displaymetrics.widthPixels ;
+
+        int convertHighet = (int) hight, convertWidth = (int) width;
+
+//        Resources mResources = getResources();
+//        Bitmap bitmap = BitmapFactory.decodeResource(mResources, R.drawable.screenshot);
+
+        PdfDocument document = new PdfDocument();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(convertWidth, convertHighet, 1).create();
+        PdfDocument.Page page = document.startPage(pageInfo);
+
+        Canvas canvas = page.getCanvas();
+
+        Paint paint = new Paint();
+        canvas.drawPaint(paint);
+
+        bitmap = Bitmap.createScaledBitmap(bitmap, convertWidth, convertHighet, true);
+
+        paint.setColor(Color.BLUE);
+        canvas.drawBitmap(bitmap, 0, 0 , null);
+        document.finishPage(page);
+
+        // write the document content
+        String targetPdf = "/sdcard/pdffromlayout.pdf";
+        File filePath;
+        filePath = new File(targetPdf);
+        try {
+            document.writeTo(new FileOutputStream(filePath));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+           // Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+        // close the document
+        document.close();
+        //Toast.makeText(this, "PDF is created!!!", Toast.LENGTH_SHORT).show();
+
+        openGeneratedPDF();
+
+    }
+
+    private void openGeneratedPDF(){
+        File file = new File("/sdcard/pdffromlayout.pdf");
+        if (file.exists())
+        {
+            Intent intent=new Intent(Intent.ACTION_VIEW);
+            Uri uri = Uri.fromFile(file);
+            intent.setDataAndType(uri, "application/pdf");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            try
+            {
+                startActivity(intent);
+            }
+            catch(ActivityNotFoundException e)
+            {
+                Toast.makeText(getActivity(), "No Application available to view pdf", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
 
 

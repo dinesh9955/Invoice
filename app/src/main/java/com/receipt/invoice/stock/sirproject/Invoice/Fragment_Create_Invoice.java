@@ -3807,7 +3807,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
         drableimagebase64 = "iVBORw0KGgoAAAANSUhEUgAAAC4AAAAnCAYAAABwtnr/AAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAALqADAAQAAAABAAAAJwAAAAB8SmRPAAAAeklEQVRYCe3SQQrAIBTEUPX+d67iCbIIBSGuw/B57fzOGw++9eDN9+QO//vLJZ44FOhXgVBalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYc2r3IESll5TkQAAAAASUVORK5CYII=";
 
 
-        selectedShip();
+        selectedShip2();
 
 
 
@@ -3902,6 +3902,9 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
     private void selectedShip() {
 
+        stringBuilderBillTo.delete(0,stringBuilderBillTo.length());
+        stringBuilderShipTo.delete(0,stringBuilderShipTo.length());
+
         if (selected.size() > 0) {
             for (int i = 0; i < selected.size(); i++) {
                 sltcustonername = selected.get(i).getCustomer_name();
@@ -3978,6 +3981,91 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
 
     }
+
+
+
+    private void selectedShip2() {
+
+        stringBuilderBillTo.delete(0,stringBuilderBillTo.length());
+        stringBuilderShipTo.delete(0,stringBuilderShipTo.length());
+
+        if (selected.size() > 0) {
+            for (int i = 0; i < selected.size(); i++) {
+                sltcustonername = selected.get(i).getCustomer_name();
+                sltcustomer_address = selected.get(i).getCustomer_address();
+                sltcustomer_email = selected.get(i).getCustomer_email();
+                sltcustomer_website = selected.get(i).getCustomer_website();
+                sltcustomer_phone_number = selected.get(i).getCustomer_phone();
+                sltcustomer_contact = selected.get(i).getCustomer_contact_person();
+
+
+                shippingfirstname = selected.get(i).getShipping_firstname();
+                shippinglastname = selected.get(i).getShipping_lastname();
+                shippingaddress1 = selected.get(i).getShipping_address_1();
+                shippingaddress2 = selected.get(i).getShipping_address_2();
+                shippingcity = selected.get(i).getShipping_city();
+                shippingcountry = selected.get(i).getShipping_country();
+                shippingpostcode = selected.get(i).getShipping_postcode();
+                shippingzone = selected.get(i).getShipping_zone();
+
+            }
+
+            if(!sltcustonername.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustonername+"</br>");
+            }
+            if(!sltcustomer_address.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_address+"</br>");
+            }
+            if(!sltcustomer_contact.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+            }
+            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
+            }
+            if(!sltcustomer_website.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_website+"</br>");
+            }
+            if(!sltcustomer_email.equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_email+"");
+            }
+
+            Log.e(TAG, "stringBuilderBillTo "+stringBuilderBillTo.toString());
+
+        }
+
+        if (shippingfirstname.equalsIgnoreCase("")) {
+            Shiping_tostr = "";
+        } else {
+            Shiping_tostr = "Ship To:";
+
+            if(!shippingfirstname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingfirstname+"</br>");
+            }
+            if(!shippinglastname.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippinglastname+"</br>");
+            }
+            if(!shippingaddress1.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress1+"</br>");
+            }
+            if(!shippingaddress2.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress2+"</br>");
+            }
+            if(!shippingcity.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcity+"</br>");
+            }
+            if(!shippingcountry.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcountry+"</br>");
+            }
+            if(!shippingpostcode.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingpostcode+"");
+            }
+
+            // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
+        }
+
+
+    }
+
 
 
     String attchedmentimagepath;

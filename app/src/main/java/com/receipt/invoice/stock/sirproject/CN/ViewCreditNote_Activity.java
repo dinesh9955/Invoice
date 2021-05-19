@@ -402,6 +402,15 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
         PrintAttributes.Builder builder = new PrintAttributes.Builder();
         builder.setMediaSize( PrintAttributes.MediaSize.ISO_A3);
         printManager.print(jobName, printAdapter, builder.build());
+
+//        attributes = PrintAttributes.Builder()
+//
+//                .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
+//                .setResolution(PrintAttributes.Resolution("pdf","pdf", 600, 600))
+//                .setMinMargins(PrintAttributes.Margins.NO_MARGINS).build()
+
+
+
     }
 
     private String AttchmentimageConvert(String attchedmentimagepath) {
