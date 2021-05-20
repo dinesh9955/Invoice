@@ -1101,7 +1101,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 for (int i = 0; i < selectedtaxt.size(); i++) {
                     if(selectedtaxt.get(i).getTaxtype().equalsIgnoreCase("p")){
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                        // params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
                         params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
                     }else{
@@ -3502,7 +3501,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
                 Double shipingvalue = Double.parseDouble(freight_cost);
 
-                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                freight.setText("" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
                 netamount.setText(formatter.format(balanceamount) + cruncycode);
             }
@@ -4186,7 +4185,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             }
             else
             {
-                Shipingcosstbyct = "+" + shipingcoast + cruncycode;
+                Shipingcosstbyct = "" + shipingcoast + cruncycode;
             }
 
 
@@ -4319,6 +4318,8 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         if(!company_email.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_email+"");
         }
+
+
 
         String content = null;
         try {

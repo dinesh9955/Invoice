@@ -671,7 +671,7 @@ public class PVViewActivityWebView extends AppCompatActivity {
         }else{
             // null response or Exception occur
 
-            Shipingcosstbyct="+"+freight_cost+currency_code;
+            Shipingcosstbyct=""+freight_cost+currency_code;
             shipingvaluetxt="Shipping";
         }
 

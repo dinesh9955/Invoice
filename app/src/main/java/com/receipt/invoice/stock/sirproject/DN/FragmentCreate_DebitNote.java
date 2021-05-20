@@ -3438,7 +3438,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
 
                 Double shipingvalue = Double.parseDouble(freight_cost);
 
-                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                freight.setText("" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
                 netamount.setText(formatter.format(balanceamount) + cruncycode);
             }

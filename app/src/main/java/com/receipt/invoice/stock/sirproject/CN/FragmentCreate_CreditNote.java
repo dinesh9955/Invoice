@@ -3445,7 +3445,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
                 Double shipingvalue = Double.parseDouble(freight_cost);
 
-                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                freight.setText("" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
                 netamount.setText(formatter.format(balanceamount) + cruncycode);
             }

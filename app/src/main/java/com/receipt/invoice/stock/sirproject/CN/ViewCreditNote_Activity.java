@@ -804,7 +804,7 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
                     .replaceAll("Discount-", Utility.getReplaceDollor(discountvalue))
                     .replaceAll("SubTotal-", subTotalValueTxt)
                     .replaceAll("Txses-", Utility.getReplaceDollor(taxtamountstr))
-                    .replaceAll("Shipping-", Utility.getReplaceDollor(Shipingcosstbyct.replace("++", "+").replace("RsRs", "Rs")))
+                    .replaceAll("Shipping-", Utility.getReplaceDollor(Shipingcosstbyct))
                     .replaceAll("Total Amount-", Utility.getReplaceDollor(netamountvalue))
                     .replaceAll("PaidsAmount", Utility.getReplaceDollor(paidamountstrrepvalue))
                     .replaceAll("Paid Amount", paidamountstrreptxt)

@@ -375,11 +375,13 @@ public class POViewActivityWebView extends AppCompatActivity {
                         //Blanceamountstr = listobj.getValue();
                     }else if (code.equals("tax")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
-                            String dd = listobj.getValue();
-                            double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            invoicetaxvalue = formatter.format(vc);
                             taxTitle = title;
+                            if(!taxTitle.equalsIgnoreCase("")){
+                                String dd = listobj.getValue();
+                                double vc = Double.parseDouble(dd);
+                                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                                invoicetaxvalue = formatter.format(vc);
+                            }
                         }
                         //invoicetaxvalue = listobj.getValue();
                     }
@@ -670,7 +672,7 @@ public class POViewActivityWebView extends AppCompatActivity {
         }else{
             // null response or Exception occur
 
-            Shipingcosstbyct="+"+freight_cost+currency_code;
+            Shipingcosstbyct=""+freight_cost+currency_code;
             shipingvaluetxt="Shipping";
         }
 

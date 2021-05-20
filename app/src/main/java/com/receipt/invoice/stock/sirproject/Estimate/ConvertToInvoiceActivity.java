@@ -890,7 +890,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
                     else if (title.equals("Freight Cost")) {
                         Shippingamountdto = listobj.getValue();
-                        freight.setText("+"+Shippingamountdto+currency_codedto);
+                        freight.setText(""+Shippingamountdto+currency_codedto);
 //                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
 //
 //                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
@@ -3712,7 +3712,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             }else {
                 balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
                 Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
-                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                freight.setText("" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
 //                    netamount.setText(formatter.format(balanceamount) + cruncycode);
 
@@ -5111,7 +5111,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             }
             else
             {
-                Shipingcosstbyct = "+" + shipingcoast + cruncycode;
+                Shipingcosstbyct = "" + shipingcoast + cruncycode;
             }
 
 

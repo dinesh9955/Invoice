@@ -3532,7 +3532,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
                 Double shipingvalue = Double.parseDouble(freight_cost);
 
-                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                freight.setText("" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
                 netamount.setText(formatter.format(balanceamount) + cruncycode);
             }
@@ -4315,7 +4315,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             }
             else
             {
-                Shipingcosstbyct = "+" + shipingcoast + cruncycode;
+                Shipingcosstbyct = "" + shipingcoast + cruncycode;
             }
 
 

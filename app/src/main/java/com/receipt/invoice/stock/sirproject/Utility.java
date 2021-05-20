@@ -536,28 +536,28 @@ public class Utility {
 
     public static String getRemovePlus(String sss) {
         String res = "";
-        if(sss.contains("++")){
+        if(sss.contains("+")){
             res = sss.replace("+", "");
         } else{
             res = sss;
         }
-        if(!res.equalsIgnoreCase("")){
-            res = "+"+res;
-        }
+//        if(!res.equalsIgnoreCase("")){
+//            res = "+"+res;
+//        }
         return res;
     }
 
 
     public static String getRemoveSinglePlus(String sss) {
         String res = "";
-        if(sss.contains("++")){
+        if(sss.contains("+")){
             res = sss.replace("+", "");
         } else{
             res = sss;
         }
-        if(!res.equalsIgnoreCase("")){
-            res = "+"+res;
-        }
+//        if(!res.equalsIgnoreCase("")){
+//            res = "+"+res;
+//        }
         return res;
     }
 

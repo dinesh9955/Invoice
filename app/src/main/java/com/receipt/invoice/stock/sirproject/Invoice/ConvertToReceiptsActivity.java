@@ -3690,7 +3690,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             }else {
                 balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
                 Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
-                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                freight.setText("" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
 //                    netamount.setText(formatter.format(balanceamount) + cruncycode);
 
@@ -4967,7 +4967,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             }
             else
             {
-                Shipingcosstbyct = "+" + shipingcoast + cruncycode;
+                Shipingcosstbyct = "" + shipingcoast + cruncycode;
             }
 
 

@@ -4264,7 +4264,8 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
             }
             else
             {
-                Shipingcosstbyct = "+" + shipingcoast + cruncycode;
+                Shipingcosstbyct = "" + shipingcoast + cruncycode;
+
             }
 
 

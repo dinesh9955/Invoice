@@ -832,14 +832,16 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 
                         Double strpaid_amountdbl = Double.parseDouble(strpaid_amountdto);
 
+                        if(strpaid_amountdbl != 0){
+                            if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                                paidamount.setText(formatter.format(strpaid_amountdbl));
+                            } else {
+                                paidamount.setText(formatter.format(strpaid_amountdbl) + currency_codedto);
+                            }
+                        }
+
                         Log.e(TAG , "strpaid_amountdbl "+strpaid_amountdbl);
 
-
-                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            paidamount.setText(formatter.format(strpaid_amountdbl));
-                        } else {
-                            paidamount.setText(formatter.format(strpaid_amountdbl) + currency_codedto);
-                        }
 
                     } else if (title.equals("Remaining Balance")) {
 
@@ -900,7 +902,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 
                     else if (title.equals("Freight Cost")) {
                         Shippingamountdto = listobj.getValue();
-                        freight.setText("+"+Shippingamountdto+currency_codedto);
+                        freight.setText(""+Shippingamountdto+currency_codedto);
 //                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
 //
 //                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
@@ -922,28 +924,34 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
 
-                        taxvalueText.setText("Tax "+title);
-                        txttax.setText(""+title.replace("(","").replace(")",""));
-                        tax.setText(""+value+currency_codedto);
-
                         taxrname = listobj.getTitle();
 
-                        taxtypeclusive = listobj.getTax_type();
-                        taxtrateamt = listobj.getRate();
-                        Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
-                        Log.e(TAG, "taxtrateamt "+taxtrateamt);
+                        if(!taxrname.equalsIgnoreCase("")){
+                            taxvalueText.setText("Tax "+title);
+                            txttax.setText(""+title.replace("(","").replace(")",""));
+                            tax.setText(""+value+currency_codedto);
 
 
 
-                        SelectedTaxlist student = new SelectedTaxlist();
+                            taxtypeclusive = listobj.getTax_type();
+                            taxtrateamt = listobj.getRate();
+                            Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+                            Log.e(TAG, "taxtrateamt "+taxtrateamt);
 
-                        student.setTaxname(listobj.getTitle());
-                        student.setTaxrate(listobj.getRate());
-                        student.setTaxtype(tax_type);
-                        student.setTaxamount(value);
-                        // student.setRateType(value);
 
-                        selectedtaxt.add(student);
+
+                            SelectedTaxlist student = new SelectedTaxlist();
+
+                            student.setTaxname(listobj.getTitle());
+                            student.setTaxrate(listobj.getRate());
+                            student.setTaxtype(tax_type);
+                            student.setTaxamount(value);
+                            // student.setRateType(value);
+
+                            selectedtaxt.add(student);
+                        }
+
+
 
                     }
 
@@ -3716,7 +3724,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
             }else {
                 balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
                 Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
-                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                freight.setText("" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
 //                    netamount.setText(formatter.format(balanceamount) + cruncycode);
 
@@ -5077,7 +5085,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
             }
             else
             {
-                Shipingcosstbyct = "+" + shipingcoast + cruncycode;
+                Shipingcosstbyct = "" + shipingcoast + cruncycode;
             }
 
 

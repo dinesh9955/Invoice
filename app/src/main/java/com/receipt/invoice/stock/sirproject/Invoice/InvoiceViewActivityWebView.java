@@ -683,7 +683,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
         }else{
             // null response or Exception occur
 
-            Shipingcosstbyct="+"+freight_cost+currency_code;
+            Shipingcosstbyct=""+freight_cost+currency_code;
             shipingvaluetxt="Shipping";
         }
 
@@ -881,7 +881,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
                         .replaceAll("Discount-", ""+Utility.getReplaceDollor(discountvalue))
                         .replaceAll("SubTotal-", subTotalValueTxt)
                         .replaceAll("Txses-", Utility.getReplaceDollor(taxtamountstr))
-                        .replaceAll("Shipping-", Utility.getReplaceDollor(Shipingcosstbyct.replace("++", "+").replace("RsRs", "Rs")))
+                        .replaceAll("Shipping-", Utility.getReplaceDollor(Shipingcosstbyct))
                         .replaceAll("Total Amount-", netamountvalue + Utility.getReplaceDollor(currency_code))
                         .replaceAll("PaidsAmount",  Utility.getReplaceDollor(paidamountstrrepvalue))
                         .replaceAll("Paid Amount", paidamountstrreptxt)

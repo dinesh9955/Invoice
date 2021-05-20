@@ -894,14 +894,17 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
                         Double strpaid_amountdbl = Double.parseDouble(strpaid_amountdto);
 
+                        if(strpaid_amountdbl != 0){
+                            if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                                paidamount.setText(formatter.format(strpaid_amountdbl));
+                            } else {
+                                paidamount.setText(formatter.format(strpaid_amountdbl) + currency_codedto);
+                            }
+                        }
+
                         Log.e(TAG , "strpaid_amountdbl "+strpaid_amountdbl);
 
 
-                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            paidamount.setText(formatter.format(strpaid_amountdbl));
-                        } else {
-                            paidamount.setText(formatter.format(strpaid_amountdbl) + currency_codedto);
-                        }
 
                     } else if (title.equals("Remaining Balance")) {
 
@@ -962,7 +965,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
                     else if (code.equals("shipping")) {
                         Shippingamountdto = listobj.getValue();
-                        freight.setText("+"+Shippingamountdto+currency_codedto);
+                        freight.setText(""+Shippingamountdto+currency_codedto);
 //                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
 //
 //                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
@@ -975,36 +978,39 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
 
                     else if (code.equalsIgnoreCase("tax")) {
-//                        Shippingamountdto = listobj.getValue();
-//                        freight.setText(""+Shippingamountdto+currency_codedto);
-
-                        //tax = listobj.getValue();
 
 
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
 
-                        taxvalueText.setText("Tax "+title);
-                        txttax.setText(""+title.replace("(","").replace(")",""));
-                        tax.setText(""+value+currency_codedto);
+
 
                         taxrname = listobj.getTitle();
 
-                        taxtypeclusive = listobj.getTax_type();
-                        taxtrateamt = listobj.getRate();
-                        Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
-                        Log.e(TAG, "taxtrateamt "+taxtrateamt);
+                        if(!taxrname.equalsIgnoreCase("")){
+
+                            taxvalueText.setText("Tax "+title);
+                            txttax.setText(""+title.replace("(","").replace(")",""));
+                            tax.setText(""+value+currency_codedto);
+
+                            taxtypeclusive = listobj.getTax_type();
+                            taxtrateamt = listobj.getRate();
+                            Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+                            Log.e(TAG, "taxtrateamt "+taxtrateamt);
 
 
 
-                        SelectedTaxlist student = new SelectedTaxlist();
+                            SelectedTaxlist student = new SelectedTaxlist();
 
-                        student.setTaxname(listobj.getTitle());
-                        student.setTaxrate(listobj.getRate());
-                        student.setTaxtype(tax_type);
-                        student.setTaxamount(value);
+                            student.setTaxname(listobj.getTitle());
+                            student.setTaxrate(listobj.getRate());
+                            student.setTaxtype(tax_type);
+                            student.setTaxamount(value);
 
-                        selectedtaxt.add(student);
+                            selectedtaxt.add(student);
+                        }
+
+
 
                     }
 
@@ -2149,6 +2155,8 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                     } else {
                        // Customer_list customer_lists = selected.get(0);
                       //  Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
+
+
 
                         Intent intent = new Intent(EditPOActivity.this, ViewPO_Activity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -3750,7 +3758,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             }else {
                 balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
                 Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(Shippingamountdto, cruncycode));
-                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+                freight.setText("" + formatter.format(shipingvalue) + cruncycode);
                 balance.setText(formatter.format(balanceamount) + cruncycode);
 //                    netamount.setText(formatter.format(balanceamount) + cruncycode);
 
@@ -5025,7 +5033,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             }
             else
             {
-                Shipingcosstbyct = "+" + shipingcoast + cruncycode;
+                Shipingcosstbyct = "" + shipingcoast + cruncycode;
             }
 
 
@@ -5173,7 +5181,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                     .replaceAll("Discount-", ""+Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", subTotalValueTxt)
                     .replaceAll("Txses-", ""+Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
-                    .replaceAll("Shipping-", "+"+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
+                    .replaceAll("Shipping-", ""+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
                     .replaceAll("Total Amount-", ""+Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
                     .replaceAll("PaidsAmount", ""+Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
