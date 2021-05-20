@@ -1,18 +1,28 @@
 package com.receipt.invoice.stock.sirproject;
 
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -35,22 +45,28 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.receipt.invoice.stock.sirproject.CN.ListOfCreditNotes;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
 import com.receipt.invoice.stock.sirproject.Invoice.Fragment_Create_Invoice;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Stack;
 
 import project.aamir.sheikh.circletextview.CircleTextView;
 import org.apache.commons.lang3.text.WordUtils;
@@ -384,6 +400,155 @@ public class Xyz extends AppCompatActivity {
     }
 
 
+
+
+    private static class DownloadFile extends AsyncTask<String, String, String> {
+
+        private ProgressDialog progressDialog;
+        private String fileName;
+        private String folder;
+        private boolean isDownloaded;
+        Context context;
+        String subject;
+
+        DownloadFile(Context c, String sub) {
+            context = c;
+            subject = sub;
+        }
+
+        /**
+         * Before starting background thread
+         * Show Progress Bar Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            this.progressDialog = new ProgressDialog(context);
+            this.progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            this.progressDialog.setCancelable(false);
+            this.progressDialog.show();
+        }
+
+        /**
+         * Downloading file in background thread
+         */
+        @Override
+        protected String doInBackground(String... f_url) {
+            int count;
+            try {
+                URL url = new URL(f_url[0]);
+                URLConnection connection = url.openConnection();
+                connection.connect();
+                // getting file length
+                int lengthOfFile = connection.getContentLength();
+
+
+                // input stream to read file - with 8k buffer
+                InputStream input = new BufferedInputStream(url.openStream(), 8192);
+
+                String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+
+                //Extract file name from URL
+                fileName = f_url[0].substring(f_url[0].lastIndexOf('/') + 1);
+
+                //Append timestamp to file name
+                fileName = timestamp + "_" + fileName;
+
+                //External directory path to save file
+                folder = Environment.getExternalStorageDirectory() + File.separator + "SAAR/";
+
+                //Create androiddeft folder if it does not exist
+                File directory = new File(folder);
+
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+
+                String newFileName = "Receipt.pdf";
+                // Output stream to write file
+                OutputStream output = new FileOutputStream(folder + newFileName);
+
+                byte data[] = new byte[1024];
+
+                long total = 0;
+
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    // publishing the progress....
+                    // After this onProgressUpdate will be called
+                    publishProgress("" + (int) ((total * 100) / lengthOfFile));
+                    Log.d(TAG, "Progress: " + (int) ((total * 100) / lengthOfFile));
+
+                    // writing data to file
+                    output.write(data, 0, count);
+                }
+
+                // flushing output
+                output.flush();
+
+                // closing streams
+                output.close();
+                input.close();
+                return "" + folder + newFileName;
+
+            } catch (Exception e) {
+                Log.e("Error: ", e.getMessage());
+            }
+
+            return "Something went wrong";
+        }
+
+        /**
+         * Updating progress bar
+         */
+        protected void onProgressUpdate(String... progress) {
+            // setting progress percentage
+            progressDialog.setProgress(Integer.parseInt(progress[0]));
+        }
+
+
+        @Override
+        protected void onPostExecute(String message) {
+            // dismiss the dialog after the file was downloaded
+            this.progressDialog.dismiss();
+
+            // Display File path after downloading
+            //  Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+
+
+//                                    Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
+//                                    shareIntent.setType("text/plain");
+//                                    shareIntent.putExtra(Intent.EXTRA_SUBJECT,"Insert Subject here");
+//                                    //String app_url = "file:///home/apptunix/Desktop/invoice.html";
+//                                    shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
+//                                    context.startActivity(Intent.createChooser(shareIntent, "Share via"));
+
+
+            Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+            File fileWithinMyDir = new File(message);
+            Uri photoURI = FileProvider.getUriForFile(context,
+                    "com.receipt.invoice.stock.sirproject.provider",
+                    fileWithinMyDir);
+
+            if(fileWithinMyDir.exists()) {
+                intentShareFile.setType("application/pdf");
+                Uri outputFileUri = Uri.fromFile(fileWithinMyDir);
+                intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
+
+                intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                        subject);
+
+                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+            }
+
+        }
+    }
+
+
+
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -412,431 +577,315 @@ public class Xyz extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
+        Bitmap icon = BitmapFactory.decodeResource(getResources(),
+                R.drawable.thanksimg);
+//                Intent share = new Intent(Intent.ACTION_SEND);
+//                share.setType("image/jpeg");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "share.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                String sss = Utility.getContainsReplaceCurrency("15.00$$" , "$");
-                Log.e(TAG , "sssssssss "+sss);
 
-
-//                String sss = Utility.getRealValueInvoiceWithoutPlus("inv # 12");
+//                share.putExtra(Intent.EXTRA_SUBJECT, "subject");
+//                share.putExtra(Intent.EXTRA_TEXT, "txt");
 //
-//                Log.e(TAG , "sssssssss "+sss);
-
-//                String myFormat = "yyyy-MM-dd"; //In which you need put here
-//                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-//               // duedate.setText(sdf.format(myCalendar.getTime()));
-//                try {
-//                    String myFormat1 = ("yyyy/MM/dd HH:mm:ss"); //In which you need put here
-//                    SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat1, Locale.US);
-//
-//                    String myDate = sdf2.format(myCalendar.getTime());
-//                    Log.e("Date Long", myDate);
-//                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//                    Date date = sdf1.parse(myDate);
-//                    datemillis = date.getTime();
-//
-//                } catch (Exception e) {
-//
-//                }
-
-//                String givenDateString = "2021-05-07";
-//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                try {
-//                    Date mDate = sdf.parse(givenDateString);
-//                    long timeInMilliseconds = mDate.getTime();
-//                    System.out.println("Date in milli :: " + timeInMilliseconds);
-//
-//                    Double daysvalue = Double.parseDouble("7");
-//
-//                    Double result = toMilliSeconds(daysvalue);
-//
-//                    long sumresult = (long) (result + timeInMilliseconds);
-//                    // Creating date format
-//                    DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-//                    Date sumresultdate = new Date(sumresult);
-//
-//                    // Formatting Date according to the
-//                    // given format
-//
-//                    Log.e(TAG, "DateLong: "+simple.format(sumresultdate));
-//
-//
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-
-
-//                Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
-
-//                Uri uri = FileProvider.getUriForFile(this, "com.example.provider", new File(photoPath));
-//                Intent share = ShareCompat.IntentBuilder.from(Xyz.this)
-//                        .setStream(uri) // uri from FileProvider
-//                        .setType("text/html")
-//                        .getIntent()
-//                        .setAction(Intent.ACTION_SEND) //Change if needed
-//                        .setDataAndType(uri, "image/*")
-//                        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//
-//                startActivity(Intent.createChooser(share, getString(R.string.share_image)));
-//
-//                String text = "Look at my awesome picture";
-//                Uri pictureUri = Uri.parse("file://my_picture");
-//                Intent shareIntent = new Intent();
-//                shareIntent.setAction(Intent.ACTION_SEND);
-//                shareIntent.putExtra(Intent.EXTRA_TEXT, text);
-//                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-//                shareIntent.setType("image/*");
-//                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                startActivity(Intent.createChooser(shareIntent, "Share images..."));
-
-//                final Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//                shareIntent.setType("image/jpg");
-//                final File photoFile = new File("temporary_file.jpg");
-//                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(photoFile));
-//                startActivity(Intent.createChooser(shareIntent, "Share image using"));
-
-
-//                Intent shareIntent;
-//                Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
-//                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+"/Share.png";
-//                OutputStream out = null;
-//                File file=new File(path);
-//                try {
-//                    out = new FileOutputStream(file);
-//                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-//                    out.flush();
-//                    out.close();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                path=file.getPath();
-//                Uri bmpUri = Uri.parse("file://"+path);
-//                shareIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-//                shareIntent.putExtra(Intent.EXTRA_TEXT,"Hey please check this application " + "https://play.google.com/store/apps/details?id=" +getPackageName());
-//                shareIntent.setType("image/png");
-//                startActivity(Intent.createChooser(shareIntent,"Share with"));
-
-
-//                Uri imageUri = Uri.parse("android.resource://" + getPackageName()
-//                        + "/drawable/" + "thanksimg");
-//                Intent shareIntent = new Intent();
-//                shareIntent.setAction(Intent.ACTION_SEND);
-//                shareIntent.putExtra(Intent.EXTRA_TEXT, "Hello");
-//                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-//                shareIntent.setType("image/jpeg");
-//                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                startActivity(Intent.createChooser(shareIntent, "send"));
-
-
-//                Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ "/drawable/" + "thanksimg");
-//                Intent intent = new Intent();
-//                intent.setAction(Intent.ACTION_SEND);
-//                intent.putExtra(Intent.EXTRA_TEXT, "Hello");
-//                intent.putExtra(Intent.EXTRA_STREAM, imageUri);
-//                intent.setType("*/*");
-//                startActivity(intent);
-
-
-////                String[] TO = {email@server.com};
-////               // Uri imageUri = Uri.parse("android.resource://com.examle.tarea/" + R.drawable.thanksimg);
-//                Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ R.drawable.thanksimg);
-//
-//
-//
-//                String[] TO = {"email@server.com"};
-//                Uri uri = Uri.parse("mailto:email@server.com")
-//                        .buildUpon()
-//                        .appendQueryParameter("subject", "subject")
-//                        .appendQueryParameter("body", "txt")
-//                        .appendQueryParameter("file", "file:///sdcard/temporary_file.jpg")
-//
-//                        .build();
-//                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
-//                // emailIntent.putExtra(Intent.EXTRA_STREAM, imgUri);
-//              //  emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" +company_stamp22));
-//                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-
-
-
-
-
-
-
-
-//                Intent intent = new Intent();
-//                intent.setAction(Intent.ACTION_SEND);
-//                //intent.setType("image/jpeg");
-//                intent.putExtra(Intent.EXTRA_STREAM, imageUri);
-//                intent.putExtra(Intent.EXTRA_EMAIL, TO);
-//                intent.putExtra(Intent.EXTRA_SUBJECT, "imageUri3");
-//                intent.putExtra(Intent.EXTRA_TEXT, "imageUrddfdsfi3");
-//                startActivity(Intent.createChooser(intent, getString(R.string.facebook_app_id)));
-
-
-//                String text = "Look at my awesome picture";
-//               // Uri pictureUri = Uri.parse("file://my_picture");
-//                Intent shareIntent = new Intent();
-//                shareIntent.setAction(Intent.ACTION_SEND);
-//                shareIntent.putExtra(Intent.EXTRA_TEXT, text);
-//                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-//                shareIntent.setType("image/*");
-//                shareIntent.putExtra(Intent.EXTRA_EMAIL, "email@server.com");
-////                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//              //  startActivity(Intent.createChooser(shareIntent, "Share images..."));
-//
-//
-
-//               // Intent shareIntent;
-//                Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.thanksimg);
-//
-//
-//                Uri bmpUri = Uri.parse("file://"+bitmap);
-//                shareIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-//                shareIntent.putExtra(Intent.EXTRA_TEXT,"Hey please check this application " + "https://play.google.com/store/apps/details?id=" +getPackageName());
-//                shareIntent.setType("image/png");
-//               // startActivity(Intent.createChooser(shareIntent,"Share with"));
-//
-//                shareImage();
-
-//                try {
-//
-//                    String cc = "android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.a;
-//
-//                    Uri imgUri=Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.a);
-//
-//                    String company_stamp = "android.resource://com.receipt.invoice.stock.sirproject/"+R.drawable.thanksimg;
-//                    //String imageUri = "drawable://" + R.drawable.thanksimg;
-//
-//                   // String company_stamp22 = "/sdcard/thanksimg.png";
-//
-//                    String imageUrl = getURLForResource(R.drawable.thanksimg);
-//
-//                    String company_stamp22 = getURLForResource(R.drawable.thanksimg);
-//
-//
-//
-//                    Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ "/drawable/" + "ic_launcher");
-//
-//
-//
-//                    String[] TO = {"email@server.com"};
-//                    Uri uri = Uri.parse("mailto:email@server.com")
-//                            .buildUpon()
-//                            .appendQueryParameter("subject", "subject")
-//                            .appendQueryParameter("body", "txt")
-//                            .build();
-//
-//                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
-//                    emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-//
-//                    Bitmap b = BitmapFactory.decodeResource(getResources(),R.drawable.thanksimg);
-//
-//                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//                    b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-//                    String path = MediaStore.Images.Media.insertImage(getContentResolver(), b, "Title", null);
-//                    Uri imageUri3 =  Uri.parse(path);
-//
-////                    File image = new File(Uri.parse("android.resource://" + getPackageName() + "/drawable/" + R.drawable.thanksimg).toString());
-////                    emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(image));
-//
-//                    emailIntent.putExtra(Intent.EXTRA_STREAM, imageUri3);
-//
-//                    startActivity(Intent.createChooser(emailIntent, "Share image using"));
-//
-//                    // Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
-//
-//
-//                   // emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//
-//                   // startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-//
-//
-////                    Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-////                    Uri screenshotUri = Uri.parse("android.resource://"+getPackageName()+"/*");
-////
-////                    sharingIntent.setType("mailto:email@server.com");
-////                    sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-//                    //startActivity(Intent.createChooser(sharingIntent, "Share image using"));
-//
-//
-////                    Bitmap b =BitmapFactory.decodeResource(getResources(),R.drawable.accessories);
-////
-////                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-////                    b.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-////                    String path = MediaStore.Images.Media.insertImage(getContentResolver(), b, "Title", null);
-////                    Uri imageUri3 =  Uri.parse(path);
-//
-////                    Intent share = new Intent(Intent.ACTION_SEND, uri);
-////                    share.setType("image/jpeg");
-////                    share.putExtra(Intent.EXTRA_STREAM, imageUri3);
-////                    share.putExtra(Intent.EXTRA_SUBJECT, "imageUri3");
-////                    share.putExtra(Intent.EXTRA_TEXT, "imageUrddfdsfi3");
-////                    startActivity(Intent.createChooser(share, "Select"));
-//
-//                } catch (Exception e) {
-//                    //e.toString();
-//                }
-
-
-
-               // createShortDialog();
-
-//                Intent intent = new Intent(Xyz.this, ChooseTemplate.class);
-//                intent.putExtra("companycolor", "#ffffff");
-//               // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivityForResult(intent, 121);
-
-//                        int mYear, mMonth, mDay;
-//                        final Calendar c = Calendar.getInstance();
-//                        mYear = c.get(Calendar.YEAR);
-//                        mMonth = c.get(Calendar.MONTH);
-//                        mDay = c.get(Calendar.DAY_OF_MONTH);
-//
-//
-//                        DatePickerDialog datePickerDialog = new DatePickerDialog(Xyz.this,
-//                                new DatePickerDialog.OnDateSetListener() {
-//
-//                                    @Override
-//                                    public void onDateSet(DatePicker view, int year,
-//                                                          int monthOfYear, int dayOfMonth) {
-//
-//
-//                                        button.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-//
-//
-//                                    }
-//                                }, mYear, mMonth, mDay);
-//                   //     datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-//                        datePickerDialog.show();
-
-              //  Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ "/drawable/" + "ic_launcher");
-               // Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.accessories);
-
-                //Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
-
-               // Uri uri = FileProvider.getUriForFile(this, "com.example.provider", new File(photoPath));
-
-//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                emailIntent.setType("image/jpeg");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {""});
-//                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "EMAIL_SUBJECT");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "EMAIL_BODY");
-//       //         emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+uri));
-//                startActivity(Intent.createChooser(emailIntent, "Sharing Options"));
-
-
-
-//                Intent shareIntent;
-//                Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
-//                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+"/Share.png";
-//                OutputStream out = null;
-//                File file=new File(path);
-//                try {
-//                    out = new FileOutputStream(file);
-//                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-//                    out.flush();
-//                    out.close();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                path=file.getPath();
-//                Uri bmpUri = Uri.parse("file://"+path);
-//                shareIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-//                shareIntent.putExtra(Intent.EXTRA_TEXT,"Hey please check this application " + "https://play.google.com/store/apps/details?id=" +getPackageName());
-//                shareIntent.setType("image/png");
-//                startActivity(Intent.createChooser(shareIntent,"Share with"));
-
-//                Uri imageUri = Uri.parse("android.resource://" + getPackageName()+ R.drawable.thanksimg);
-//                String text = "Look at my awesome picture";
-//                //Uri pictureUri = Uri.parse("file://my_picture");
-//                Intent shareIntent = new Intent();
-//                shareIntent.setAction(Intent.ACTION_SEND);
-//                shareIntent.putExtra(Intent.EXTRA_TEXT, text);
-//                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-//                shareIntent.setType("image/*");
-//                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                startActivity(Intent.createChooser(shareIntent, "Share images..."));
-
-                //share2();
-              //  share3();
-
-//                Bitmap icon = BitmapFactory.decodeResource(getResources(),
-//                        R.drawable.thanksimg);
-//                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//                icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-//                File f = new File(Environment.getExternalStorageDirectory()
-//                        + File.separator + "share.jpg");
-//                try {
-//                    f.createNewFile();
-//                    FileOutputStream fo = new FileOutputStream(f);
-//                    fo.write(bytes.toByteArray());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-
-
-//                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                emailIntent.setType("plain/text");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] { "android@abcxyz.com" });
-//                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Emergency");
-//                emailIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file://sdcard/share.jpg"));
-//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Please Find Attachments");
-//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-
-
-//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                emailIntent.setType("application/image");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "Text text");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"This is email subject");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is extra text");
-//                emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///android_asset/note.html"));
-//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-
-
-//                String to = "test@gmail.com";
-//                String subject= "Hi I am subject";
-//                String body="Hi I am test body";
-//                String mailTo = "mailto:" + to +
-//                        "?&subject=" + Uri.encode(subject) +
-//                        "&body=" + Uri.encode(body);
-//                Intent emailIntent = new Intent(Intent.ACTION_VIEW);
-//                emailIntent.setData(Uri.parse(mailTo));
-//                emailIntent.putExtra(Intent.EXTRA_STREAM,
+//                share.putExtra(Intent.EXTRA_STREAM,
 //                        Uri.parse("file:///sdcard/share.jpg"));
+//                startActivity(Intent.createChooser(share, "Share..."));
+
+
+
+//                Intent email = new Intent(Intent.ACTION_SEND);
+////                email.putExtra(Intent.EXTRA_EMAIL, new String[]{ "dinu@gmail.com"});
+//                email.setData(Uri.parse("mailto:" + "recipient@example.com"));
+//                email.putExtra(Intent.EXTRA_SUBJECT, "subject");
+//                email.putExtra(Intent.EXTRA_TEXT, "message");
 //
-//             //   emailIntent.setType("image/jpeg");
+////need this to prompts email client only
+//                email.setType("message/rfc822");
 //
+//                startActivity(Intent.createChooser(email, "Choose an Email client :"));
+
+
+
+//                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+//                emailIntent.setData(Uri.parse("mailto:" + "recipient@example.com"));
+//                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "My email's subject");
+//                emailIntent.putExtra(Intent.EXTRA_TEXT, "My email's body");
 //
-////                emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-////                emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                try {
+//                    startActivity(Intent.createChooser(emailIntent, "Send email using..."));
+//                } catch (android.content.ActivityNotFoundException ex) {
+//                    Toast.makeText(Xyz.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
+//                }
+//                share.putExtra(Intent.EXTRA_STREAM,
+//                        Uri.parse("file:///sdcard/share.jpg"));
+
+//                Intent intent = new Intent(Intent.ACTION_SENDTO)
+//                        .setData(new Uri.Builder().scheme("mailto").build())
+//                        .putExtra(Intent.EXTRA_EMAIL, new String[]{ "John Smith <johnsmith@yourdomain.com>" })
+//                        .putExtra(Intent.EXTRA_SUBJECT, "Email subject")
+//                        .putExtra(Intent.EXTRA_TEXT, "Email body")
+//                        .putExtra(Intent.EXTRA_STREAM,
+//                                Uri.parse("file:///sdcard/share.jpg"))
+//                        ;
+//                //intent.setType("image/png");
+//                intent.setType("message/rfc822");
 //
-//                startActivity(Intent.createChooser(emailIntent, "Share Image"));
+//                ComponentName emailApp = intent.resolveActivity(getPackageManager());
+//                ComponentName unsupportedAction = ComponentName.unflattenFromString("com.android.fallback/.Fallback");
+//                if (emailApp != null && !emailApp.equals(unsupportedAction))
+//                    try {
+//                        // Needed to customise the chooser dialog title since it might default to "Share with"
+//                        // Note that the chooser will still be skipped if only one app is matched
+//                        Intent chooser = Intent.createChooser(intent, "Send email with");
+//                        startActivity(chooser);
+//                        return;
+//                    }
+//                    catch (ActivityNotFoundException ignored) {
+//                    }
+
+
+//                Intent i = new Intent(Intent.ACTION_SEND);
+//                i.setType("message/rfc822");
+//                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"skapis1@outlook.com"});
+//                i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+//                i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+//               // i.setType("image/jpeg");
+//                i.putExtra(Intent.EXTRA_STREAM,
+//                                Uri.parse("file:///sdcard/share.jpg"));
+//                try {
+//                    startActivity(Intent.createChooser(i, "Send mail..."));
+//                } catch (android.content.ActivityNotFoundException ex) {
+//                    Toast.makeText(Xyz.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+//                }
+
+//                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+//                        "mailto","gg@gmail.com", null));
+//                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Report message");
+//                emailIntent.putExtra(Intent.EXTRA_TEXT, "edt_msg.getText().toString()");
+//                emailIntent.putExtra(Intent.EXTRA_STREAM,
+//                                Uri.parse("file:///sdcard/share.jpg"));
+//                emailIntent.setType("message/rfc822");
+//                startActivity(Intent.createChooser(emailIntent, "Send email..."));
+
+
+
+//                String subject = "Lap times";
+//                ArrayList<Uri> attachments = new ArrayList<Uri>();
+//                attachments.add(Uri.parse("file:///sdcard/share.jpg"));
+//                Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+//                intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+//                intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, attachments);
+//                intent.setClassName("com.android.email", "com.android.mail.compose.ComposeActivity");
+//
+//                try {
+//                    startActivity(intent);
+//                } catch (ActivityNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+
+
+
+//                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+//                emailIntent.setType("text/plain");
+//                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"email@example.com"});
+//                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "subject here");
+//                emailIntent.putExtra(Intent.EXTRA_TEXT, "body text");
+//                File root = Environment.getExternalStorageDirectory();
+////                String pathToMyAttachedFile = "temp/attachement.xml";
+////                File file = new File(root, pathToMyAttachedFile);
+////                if (!file.exists() || !file.canRead()) {
+////                    return;
+////                }
+//                Uri uri = Uri.fromFile(f);
+//                emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+//                emailIntent.setClassName("com.android.email", "com.android.mail.compose.ComposeActivity");
+//                startActivity(Intent.createChooser(emailIntent, "Pick an Email provider"));
+
+//                Intent email = new Intent(android.content.Intent.ACTION_SEND);
+//                email.setType("application/octet-stream");
+
+
+//                Uri path = Uri.fromFile(f);
+//                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+//// set the type to 'email'
+//                emailIntent .setType("vnd.android.cursor.dir/email");
+//                String to[] = {"asd@gmail.com"};
+//                emailIntent .putExtra(Intent.EXTRA_EMAIL, to);
+//// the attachment
+//                emailIntent .putExtra(Intent.EXTRA_STREAM, path);
+//// the mail subject
+//                emailIntent .putExtra(Intent.EXTRA_SUBJECT, "Subject");
+//                startActivity(Intent.createChooser(emailIntent , "Send email..."));
+
+
+
+                try {
+                    String to = "";
+                    String subject= "Hi I am subject";
+                    String body="Hi I am test body";
+                    String mailTo = "mailto:" + to +
+                            "?&subject=" + Uri.encode(subject) +
+                            "&body=" + Uri.encode(body);
+
+                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                    //intent.setType("*/*");
+//                    intent.setType("application/pdf");
+                   // intent.setType("text/plain");
+                    String message="File to be shared is " + "file_name" + ".";
+//                    intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+
+
+
+
+                    Uri ccc = Uri.fromFile(f);
+                    Log.e(TAG , "XXXXXXXXXX "+f.toString());
+                    Log.e(TAG , "XXXXXXXXXX22 "+ccc.toString());
+
+                    File fileWithinMyDir = new File("/storage/emulated/0/CreditNote.pdf");
+                    Uri ddd = Uri.fromFile(fileWithinMyDir);
+                    Log.e(TAG , "YYYYYYYYYYY "+fileWithinMyDir.toString());
+                    Log.e(TAG , "YYYYYYYYYYY22 "+ddd.toString());
+
+                   // Uri uri = FileProvider.getUriForFile(Xyz.this, "com.redacted.redacted.fileprovider", fileWithinMyDir);
+
+
+                    Uri photoURI = FileProvider.getUriForFile(Xyz.this,
+                            "com.receipt.invoice.stock.sirproject.provider",
+                            fileWithinMyDir);
+
+                    File file = new File(Environment.getExternalStorageDirectory(),
+                            "CreditNote.pdf");
+
+                    intent.putExtra(Intent.EXTRA_STREAM, photoURI);
+//                    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+//                    intent.setDataAndType(photoURI,"application/pdf");
+
+//                    intent.putExtra(Intent.EXTRA_TEXT, message);
+                    //intent.setData(Uri.parse("mailto:xyz@gmail.com"));
+                    intent.setData(Uri.parse(mailTo));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                  //  intent.setType("*/*");
+//                    intent.setType("application/octet-stream");
+//                    intent.setType("text/html");
+//                    intent.setType("application/pdf");
+//
+//                    intent.setType("message/rfc822");
+
+
+                    //startActivity(intent);
+                } catch(Exception e)  {
+                    System.out.println("is exception raises during sending mail"+e);
+                }
+
+                    String to = "abc@gmail.com";
+//                    String subject= "Hi I am subject";
+//                    String body="Hi I am test body";
+                    String mailTo = "mailto:" + to;
+//
+//                Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//                File fileWithinMyDir = new File("/storage/emulated/0/SAAR/CreditNote.pdf");
+//                Uri photoURI = FileProvider.getUriForFile(Xyz.this,
+//                        "com.receipt.invoice.stock.sirproject.provider",
+//                        fileWithinMyDir);
+//               // intentShareFile.setType("text/plain");
+//                if(fileWithinMyDir.exists()) {
+//                   // intentShareFile.setType("application/pdf");
+//                    Uri outputFileUri = Uri.fromFile(fileWithinMyDir);
+//                    intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
+//                    intentShareFile.setData(Uri.parse(mailTo));
+//                    intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+//                            "subject");
+//
+//                    startActivity(Intent.createChooser(intentShareFile, "Share File"));
+//                }
 
 //                String[] mimeTypes =
-//                        {"application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .doc & .docx
-//                                "application/vnd.ms-powerpoint","application/vnd.openxmlformats-officedocument.presentationml.presentation", // .ppt & .pptx
-//                                "application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xls & .xlsx
-//                                "text/plain",
-//                                "application/pdf",
-//                                "application/zip"};
-//                String mimeTypesStr = "";
-//                for (String mimeType : mimeTypes) {
-//                    mimeTypesStr += mimeType + "|";
+//                        {"application/msword", "text/plain", "application/pdf", "application/zip"};
+//
+//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                    intent.setType(mimeTypes.length == 1 ? mimeTypes[0] : "*/*");
+//                    if (mimeTypes.length > 0) {
+//                        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+//                    }
+//                } else {
+//                    String mimeTypesStr = "";
+//                    for (String mimeType : mimeTypes) {
+//                        mimeTypesStr += mimeType + "|";
+//                    }
+//                    intent.setType(mimeTypesStr.substring(0, mimeTypesStr.length() - 1));
 //                }
-//                emailIntent.setType(mimeTypesStr.substring(0,mimeTypesStr.length() - 1));
+//                startActivityForResult(Intent.createChooser(intent, "ChooseFile"), 100);
+
+//                Intent intent = new Intent();
+//                intent.setAction(Intent.ACTION_SENDTO);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//               // intent.putExtra(Intent.EXTRA_EMAIL, "mailID");
+//                intent.setData(Uri.parse(mailTo));
+//                // Need to grant this permission
+//                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                // Attachment
+//               // intent.setType("vnd.android.cursor.dir/email");
+//
+//
+                File fileWithinMyDir = new File("/storage/emulated/0/CreditNote.pdf");
+//                Uri photoURI = FileProvider.getUriForFile(Xyz.this,
+//                        "com.receipt.invoice.stock.sirproject.provider",
+//                        fileWithinMyDir);
+//
+//                    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(fileWithinMyDir));
+//
+//                    intent.putExtra(Intent.EXTRA_STREAM, photoURI);
+//
+//
+//                    intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+//
+//
+////                if (isNetworkAvailable(context)) {
+////                    if (isAppAvailable(context, "com.google.android.gm"))
+//                        intent.setPackage("com.google.android.gm");
+//                    startActivityForResult(intent, 101);
+////                }
 
 
-               // startActivity(emailIntent);
+
+                Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+                //File fileWithinMyDir = new File(message);
+                Uri photoURI = FileProvider.getUriForFile(Xyz.this,
+                        "com.receipt.invoice.stock.sirproject.provider",
+                        fileWithinMyDir);
+
+                if(fileWithinMyDir.exists()) {
+                    intentShareFile.setType("application/pdf");
+                    Uri outputFileUri = Uri.fromFile(fileWithinMyDir);
+                    intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
+
+                    intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                            "subject");
+                    if (isAppAvailable(Xyz.this, "com.google.android.gm")){
+                        intentShareFile.setPackage("com.google.android.gm");
+                    }
+                    startActivityForResult(intentShareFile, 101);
+                   // startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                }
 
             }
         });
@@ -846,6 +895,44 @@ public class Xyz extends AppCompatActivity {
 
 }
 
+    public static Boolean isAppAvailable(Context context, String appName) {
+        PackageManager pm = context.getPackageManager();
+        boolean isInstalled;
+        try {
+            pm.getPackageInfo(appName, PackageManager.GET_ACTIVITIES);
+            isInstalled = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            isInstalled = false;
+        }
+        return isInstalled;
+    }
+
+
+    public Intent createEmailOnlyChooserIntent(Intent source,
+                                               CharSequence chooserTitle) {
+        Stack<Intent> intents = new Stack<Intent>();
+        Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",
+                "info@domain.com", null));
+        List<ResolveInfo> activities = getPackageManager()
+                .queryIntentActivities(i, 0);
+
+        for(ResolveInfo ri : activities) {
+            Intent target = new Intent(source);
+            target.setPackage(ri.activityInfo.packageName);
+            intents.add(target);
+        }
+
+        if(!intents.isEmpty()) {
+            Intent chooserIntent = Intent.createChooser(intents.remove(0),
+                    chooserTitle);
+            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS,
+                    intents.toArray(new Parcelable[intents.size()]));
+
+            return chooserIntent;
+        } else {
+            return Intent.createChooser(source, chooserTitle);
+        }
+    }
 
     void share3() {
         Bitmap icon = BitmapFactory.decodeResource(getResources(),

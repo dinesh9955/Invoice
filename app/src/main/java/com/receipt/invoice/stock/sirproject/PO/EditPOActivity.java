@@ -5128,24 +5128,24 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "invoice.html";
-        String nameName = "file:///android_asset/invoice.html";
-        if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "invoice.html";
-            nameName = "file:///android_asset/invoice.html";
-        }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "invoice1.html";
-            nameName = "file:///android_asset/invoice1.html";
-        }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "invoice2.html";
-            nameName = "file:///android_asset/invoice2.html";
-        }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "invoice3.html";
-            nameName = "file:///android_asset/invoice3.html";
-        }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "invoice4.html";
-            nameName = "file:///android_asset/invoice4.html";
-        }
+        String name = "po.html";
+        String nameName = "file:///android_asset/po.html";
+//        if(selectedTemplate.equalsIgnoreCase("0")){
+//            name = "invoice.html";
+//            nameName = "file:///android_asset/invoice.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("1")){
+//            name = "invoice1.html";
+//            nameName = "file:///android_asset/invoice1.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("2")){
+//            name = "invoice2.html";
+//            nameName = "file:///android_asset/invoice2.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("3")){
+//            name = "invoice3.html";
+//            nameName = "file:///android_asset/invoice3.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("4")){
+//            name = "invoice4.html";
+//            nameName = "file:///android_asset/invoice4.html";
+//        }
 
         StringBuilder stringBuilderCompany = new StringBuilder();
 

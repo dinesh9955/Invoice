@@ -127,6 +127,7 @@ public class ListOfCreditNotes extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        File logoPath = Utility.getFileLogo(getActivity());
     }
 
     @Override
@@ -746,7 +747,6 @@ public class ListOfCreditNotes extends Fragment {
 
     private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink) {
 
-
         if (bottomSheetDialog != null) {
 
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.bottominvoiceview, null);
@@ -888,7 +888,7 @@ public class ListOfCreditNotes extends Fragment {
                             Log.e(TAG, "dataNo:: "+dataNo);
 
                             String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+customerName;
-                            String txt = "Your Credit note can be viewed, printed and downloaded from below link." +
+                            String txt = "Your Credit Note can be viewed, printed and downloaded from below link." +
                                     "\n\n" +sharelink ;
 
                             try {
@@ -898,27 +898,45 @@ public class ListOfCreditNotes extends Fragment {
                                     BaseurlForShareInvoice = shareInvoicelink + sharelink;
                                 }
 
-                                Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                                        R.drawable.thanksimg);
+
+
+
+
+
                                 Intent share = new Intent(Intent.ACTION_SEND);
                                 share.setType("image/jpeg");
-                                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                                icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                                File f = new File(Environment.getExternalStorageDirectory()
-                                        + File.separator + "share.jpg");
-                                try {
-                                    f.createNewFile();
-                                    FileOutputStream fo = new FileOutputStream(f);
-                                    fo.write(bytes.toByteArray());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
                                 share.putExtra(Intent.EXTRA_SUBJECT, subject);
                                 share.putExtra(Intent.EXTRA_TEXT, txt);
 
                                 share.putExtra(Intent.EXTRA_STREAM,
                                         Uri.parse("file:///sdcard/share.jpg"));
-                                startActivity(Intent.createChooser(share, "Share..."));
+
+                                if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")){
+                                    share.setPackage("com.google.android.gm");
+                                }
+                                startActivity(share);
+
+
+//                                String to = "";
+//                              //  String subject= "Hi I am subject";
+//                              //  String body="Hi I am test body";
+//                                String mailTo = "mailto:" + to +
+//                                        "?&subject=" + Uri.encode(subject) +
+//                                        "&body=" + Uri.encode(txt);
+//
+//                                Intent intent = new Intent(Intent.ACTION_SENDTO);
+//                                // intent.setType("text/plain");
+//                                String message="File to be shared is " + "file_name" + ".";
+////                                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+//                                intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
+////                                intent.putExtra(Intent.EXTRA_TEXT, message);
+//                                //intent.setData(Uri.parse("mailto:xyz@gmail.com"));
+//                                intent.setData(Uri.parse(mailTo));
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                startActivity(intent);
+
+
+
 
 //                                String finalurl = BaseurlForShareInvoice;
 //
@@ -1427,8 +1445,9 @@ public class ListOfCreditNotes extends Fragment {
                     directory.mkdirs();
                 }
 
+                String newFileName = "CreditNote.pdf";
                 // Output stream to write file
-                OutputStream output = new FileOutputStream(folder + fileName);
+                OutputStream output = new FileOutputStream(folder + newFileName);
 
                 byte data[] = new byte[1024];
 
@@ -1451,7 +1470,7 @@ public class ListOfCreditNotes extends Fragment {
                 // closing streams
                 output.close();
                 input.close();
-                return "" + folder + fileName;
+                return "" + folder + newFileName;
 
             } catch (Exception e) {
                 Log.e("Error: ", e.getMessage());
@@ -1474,6 +1493,9 @@ public class ListOfCreditNotes extends Fragment {
             // dismiss the dialog after the file was downloaded
             this.progressDialog.dismiss();
 
+
+            Log.e(TAG, "onPostExecuteFile "+message);
+
             // Display File path after downloading
             //  Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
@@ -1484,7 +1506,7 @@ public class ListOfCreditNotes extends Fragment {
 //                                    //String app_url = "file:///home/apptunix/Desktop/invoice.html";
 //                                    shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
 //                                    context.startActivity(Intent.createChooser(shareIntent, "Share via"));
-
+///storage/emulated/0/SAAR/CreditNote.pdf
 
             Intent intentShareFile = new Intent(Intent.ACTION_SEND);
             File fileWithinMyDir = new File(message);
@@ -1500,12 +1522,26 @@ public class ListOfCreditNotes extends Fragment {
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
                         subject);
 
-                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                if (isAppAvailable(context, "com.google.android.gm")){
+                    intentShareFile.setPackage("com.google.android.gm");
+                }
+                context.startActivity(intentShareFile);
             }
 
         }
     }
 
 
+    public static Boolean isAppAvailable(Context context, String appName) {
+        PackageManager pm = context.getPackageManager();
+        boolean isInstalled;
+        try {
+            pm.getPackageInfo(appName, PackageManager.GET_ACTIVITIES);
+            isInstalled = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            isInstalled = false;
+        }
+        return isInstalled;
+    }
 
 }

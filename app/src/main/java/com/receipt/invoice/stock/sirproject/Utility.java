@@ -14,6 +14,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+import android.os.Environment;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -22,9 +23,14 @@ import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,6 +46,18 @@ public class Utility {
 
 //
 
+
+    public static Boolean isAppAvailable(Context context, String appName) {
+        PackageManager pm = context.getPackageManager();
+        boolean isInstalled;
+        try {
+            pm.getPackageInfo(appName, PackageManager.GET_ACTIVITIES);
+            isInstalled = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            isInstalled = false;
+        }
+        return isInstalled;
+    }
 
 
     public static String getRealValueInvoiceWithoutPlus(String sss) {
@@ -236,6 +254,156 @@ public class Utility {
                 if(ddd == false){
                     int myValue = Integer.parseInt(sss);
                     valueIs = "Credit Note # "+myValue;
+                }
+            }
+        }
+        return valueIs;
+    }
+
+    public static String getRealValueDebitNoteWithoutPlus(String sss) {
+        String valueIs = "";
+        if(sss.toString().length() > 0){
+
+            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
+
+            boolean gg = isNumeric(sss);
+            Log.e(TAG, "gggggg "+gg);
+
+            boolean dd = isChar(sss);
+            Log.e(TAG, "dddddd "+dd);
+
+            if(gg == false && dd == false){
+                Log.e(TAG, "truee ");
+                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+                Log.e(TAG, "cccccc "+flag);
+                if(flag == true){
+                    String str = sss;
+                    String cc = extractInt(str);
+                    if(cc.contains(" ")){
+                        String vv[] = cc.split(" ");
+                        String ii =  vv[vv.length - 1];
+                        Log.e(TAG , "extractInt "+ii);
+                        String vvvvv = sss.substring(0, sss.length() - ii.length());
+
+                        Log.e(TAG , "vvvvv "+vvvvv);
+
+                        int myValue = Integer.parseInt(ii)+1;
+                        valueIs = vvvvv+myValue;
+                    }
+                    if(!cc.contains(" ")){
+                        Log.e(TAG , "extractInt2 "+cc);
+                        int myValue = Integer.parseInt(cc);
+                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
+
+                        Log.e(TAG , "bbbbbb "+myValue);
+                        valueIs = "Debit Note # "+myValue;
+                    }
+                }
+            }else{
+                boolean ddd = isChar(sss);
+                if(ddd == false){
+                    int myValue = Integer.parseInt(sss);
+                    valueIs = "Debit Note # "+myValue;
+                }
+            }
+        }
+        return valueIs;
+    }
+
+    public static String getRealValuePOWithoutPlus(String sss) {
+        String valueIs = "";
+        if(sss.toString().length() > 0){
+
+            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
+
+            boolean gg = isNumeric(sss);
+            Log.e(TAG, "gggggg "+gg);
+
+            boolean dd = isChar(sss);
+            Log.e(TAG, "dddddd "+dd);
+
+            if(gg == false && dd == false){
+                Log.e(TAG, "truee ");
+                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+                Log.e(TAG, "cccccc "+flag);
+                if(flag == true){
+                    String str = sss;
+                    String cc = extractInt(str);
+                    if(cc.contains(" ")){
+                        String vv[] = cc.split(" ");
+                        String ii =  vv[vv.length - 1];
+                        Log.e(TAG , "extractInt "+ii);
+                        String vvvvv = sss.substring(0, sss.length() - ii.length());
+
+                        Log.e(TAG , "vvvvv "+vvvvv);
+
+                        int myValue = Integer.parseInt(ii)+1;
+                        valueIs = vvvvv+myValue;
+                    }
+                    if(!cc.contains(" ")){
+                        Log.e(TAG , "extractInt2 "+cc);
+                        int myValue = Integer.parseInt(cc);
+                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
+
+                        Log.e(TAG , "bbbbbb "+myValue);
+                        valueIs = "Purchase Order # "+myValue;
+                    }
+                }
+            }else{
+                boolean ddd = isChar(sss);
+                if(ddd == false){
+                    int myValue = Integer.parseInt(sss);
+                    valueIs = "Purchase Order # "+myValue;
+                }
+            }
+        }
+        return valueIs;
+    }
+
+    public static String getRealValuePVWithoutPlus(String sss) {
+        String valueIs = "";
+        if(sss.toString().length() > 0){
+
+            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
+
+            boolean gg = isNumeric(sss);
+            Log.e(TAG, "gggggg "+gg);
+
+            boolean dd = isChar(sss);
+            Log.e(TAG, "dddddd "+dd);
+
+            if(gg == false && dd == false){
+                Log.e(TAG, "truee ");
+                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+                Log.e(TAG, "cccccc "+flag);
+                if(flag == true){
+                    String str = sss;
+                    String cc = extractInt(str);
+                    if(cc.contains(" ")){
+                        String vv[] = cc.split(" ");
+                        String ii =  vv[vv.length - 1];
+                        Log.e(TAG , "extractInt "+ii);
+                        String vvvvv = sss.substring(0, sss.length() - ii.length());
+
+                        Log.e(TAG , "vvvvv "+vvvvv);
+
+                        int myValue = Integer.parseInt(ii)+1;
+                        valueIs = vvvvv+myValue;
+                    }
+                    if(!cc.contains(" ")){
+                        Log.e(TAG , "extractInt2 "+cc);
+                        int myValue = Integer.parseInt(cc);
+                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
+
+                        Log.e(TAG , "bbbbbb "+myValue);
+                        valueIs = "Payment Voucher # "+myValue;
+                    }
+                }
+            }else{
+                boolean ddd = isChar(sss);
+                if(ddd == false){
+                    int myValue = Integer.parseInt(sss);
+                    valueIs = "Payment Voucher # "+myValue;
                 }
             }
         }
@@ -590,5 +758,23 @@ public class Utility {
             }
         }
         return  b;
+    }
+
+    public static File getFileLogo(Activity activity) {
+        Bitmap icon = BitmapFactory.decodeResource(activity.getResources(),
+                R.drawable.thanksimg);
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "share.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return f;
     }
 }

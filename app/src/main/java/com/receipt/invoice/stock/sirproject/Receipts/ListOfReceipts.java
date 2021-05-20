@@ -1015,7 +1015,7 @@ public class ListOfReceipts extends Fragment {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+customerName;
+                                            String subject = Utility.getRealValueReceiptWithoutPlus(dataNo)+" from "+customerName;
                                             new DownloadFile(getActivity(), subject).execute(url);
                                         } else {
 
@@ -1454,8 +1454,9 @@ public class ListOfReceipts extends Fragment {
                     directory.mkdirs();
                 }
 
+                String newFileName = "Receipt.pdf";
                 // Output stream to write file
-                OutputStream output = new FileOutputStream(folder + fileName);
+                OutputStream output = new FileOutputStream(folder + newFileName);
 
                 byte data[] = new byte[1024];
 
@@ -1478,7 +1479,7 @@ public class ListOfReceipts extends Fragment {
                 // closing streams
                 output.close();
                 input.close();
-                return "" + folder + fileName;
+                return "" + folder + newFileName;
 
             } catch (Exception e) {
                 Log.e("Error: ", e.getMessage());
@@ -1527,7 +1528,10 @@ public class ListOfReceipts extends Fragment {
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
                         subject);
 
-                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                if (Utility.isAppAvailable(context, "com.google.android.gm")){
+                    intentShareFile.setPackage("com.google.android.gm");
+                }
+                context.startActivity(intentShareFile);
             }
 
         }

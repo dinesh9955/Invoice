@@ -194,6 +194,14 @@
         </activity>
 
 
+<!--        <activity-->
+<!--            android:name="com.google.android.gm/ComposeActivityGmail"-->
+<!--            android:screenOrientation="locked"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.VIEW"/>-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
 
         <activity
             android:name=".OnBoardings.OnBoarding_Activity"

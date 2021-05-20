@@ -138,6 +138,7 @@ public class List_of_PV extends Fragment implements InvoiceCallBack {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        File logoPath = Utility.getFileLogo(getActivity());
     }
 
     @Override
@@ -1098,8 +1099,8 @@ public class List_of_PV extends Fragment implements InvoiceCallBack {
 
 
 
-                            String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
-                            String txt = "Your Purchase Order can be viewed, printed and downloaded from below link." +
+                            String subject = Utility.getRealValuePVWithoutPlus(dataNo)+" from "+customerName;
+                            String txt = "Your Payment Voucher can be viewed, printed and downloaded from below link." +
                                     "\n\n" +sharelink ;
 
                             try {
@@ -1122,27 +1123,39 @@ public class List_of_PV extends Fragment implements InvoiceCallBack {
 //                                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 
 
-                                    Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                                            R.drawable.thanksimg);
+
+
+
+//                                    String to = "";
+//                                    //  String subject= "Hi I am subject";
+//                                    //  String body="Hi I am test body";
+//                                    String mailTo = "mailto:" + to +
+//                                            "?&subject=" + Uri.encode(subject) +
+//                                            "&body=" + Uri.encode(txt);
+//
+//                                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+//                                    // intent.setType("text/plain");
+//                                    String message="File to be shared is " + "file_name" + ".";
+////                                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+//                                    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
+////                                intent.putExtra(Intent.EXTRA_TEXT, message);
+//                                    //intent.setData(Uri.parse("mailto:xyz@gmail.com"));
+//                                    intent.setData(Uri.parse(mailTo));
+//                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                    startActivity(intent);
+
                                     Intent share = new Intent(Intent.ACTION_SEND);
                                     share.setType("image/jpeg");
-                                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                                    icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                                    File f = new File(Environment.getExternalStorageDirectory()
-                                            + File.separator + "share.jpg");
-                                    try {
-                                        f.createNewFile();
-                                        FileOutputStream fo = new FileOutputStream(f);
-                                        fo.write(bytes.toByteArray());
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
                                     share.putExtra(Intent.EXTRA_SUBJECT, subject);
                                     share.putExtra(Intent.EXTRA_TEXT, txt);
 
                                     share.putExtra(Intent.EXTRA_STREAM,
                                             Uri.parse("file:///sdcard/share.jpg"));
-                                    startActivity(Intent.createChooser(share, "Share..."));
+
+                                    if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")){
+                                        share.setPackage("com.google.android.gm");
+                                    }
+                                    startActivity(share);
                                 }
 
 
@@ -1185,7 +1198,7 @@ public class List_of_PV extends Fragment implements InvoiceCallBack {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+customerName;
+                                            String subject = Utility.getRealValuePVWithoutPlus(dataNo)+" from "+customerName;
                                             new DownloadFile(getActivity(), subject).execute(url);
                                         } else {
 
@@ -1628,8 +1641,10 @@ public class List_of_PV extends Fragment implements InvoiceCallBack {
                     directory.mkdirs();
                 }
 
+
+                String newFileName = "PaymentVoucher.pdf";
                 // Output stream to write file
-                OutputStream output = new FileOutputStream(folder + fileName);
+                OutputStream output = new FileOutputStream(folder + newFileName);
 
                 byte data[] = new byte[1024];
 
@@ -1652,7 +1667,7 @@ public class List_of_PV extends Fragment implements InvoiceCallBack {
                 // closing streams
                 output.close();
                 input.close();
-                return "" + folder + fileName;
+                return "" + folder + newFileName;
 
             } catch (Exception e) {
                 Log.e("Error: ", e.getMessage());
@@ -1701,8 +1716,10 @@ public class List_of_PV extends Fragment implements InvoiceCallBack {
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
                         subject);
 
-                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
-            }
+                if (Utility.isAppAvailable(context, "com.google.android.gm")){
+                    intentShareFile.setPackage("com.google.android.gm");
+                }
+                context.startActivity(intentShareFile);            }
 
         }
     }
