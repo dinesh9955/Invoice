@@ -4231,7 +4231,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxamount;
-            taxtamountstrvalue = "Tax "+txttax.getText().toString();
+            taxtamountstrvalue = ""+txttax.getText().toString();
         }
 
         String discountvalue = "";

@@ -4102,7 +4102,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxamount;
-            taxtamountstrvalue = "Tax "+txttax.getText().toString();
+            taxtamountstrvalue = ""+txttax.getText().toString();
         }
 
         String discountvalue = "";

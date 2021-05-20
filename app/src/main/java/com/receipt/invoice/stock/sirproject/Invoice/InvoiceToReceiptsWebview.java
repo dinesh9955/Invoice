@@ -574,7 +574,7 @@ public class InvoiceToReceiptsWebview extends AppCompatActivity {
         } else {
             // null response or Exception occur
             taxtamountstr = taxamount;
-            taxtamountstrvalue = "Tax "+taxText;
+            taxtamountstrvalue = ""+taxText;
         }
 
         String discountvalue = "";

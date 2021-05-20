@@ -4916,7 +4916,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxamount;
-            taxtamountstrvalue = "Tax "+txttax.getText().toString();
+            taxtamountstrvalue = ""+txttax.getText().toString();
         }
 
         String discountvalue = "";

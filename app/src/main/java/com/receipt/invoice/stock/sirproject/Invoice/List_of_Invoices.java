@@ -340,9 +340,9 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
                                 Log.e(TAG, "instantiateUnderlayButton");
 
-                                invoicelistAdapterdt.notifyDataSetChanged();
+                                invoicelistAdapterdt.updateList(list);
 
-                                //invoicelistAdapterdt.notifyItemChanged(pos);
+//                                invoicelistAdapterdt.notifyItemChanged(pos);
                                 markVoidInvoice(invoiceidbypos, voidPassValue);
 
 

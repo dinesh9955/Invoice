@@ -570,6 +570,9 @@ public class Company_Details_Fragment extends Fragment {
     }
 
 
+
+
+
     @SuppressLint("LongLogTag")
     private void EditCompany(){
 
@@ -587,62 +590,24 @@ public class Company_Details_Fragment extends Fragment {
         String endtxtPaymentswiftbicid = txtPaymentswiftbicid.getText().toString();
         String endchequepayabletoid = chequepayabletoid.getText().toString();
         String endIbnnumbertxtid = Ibnnumbertxtid.getText().toString();
-//
-//        if (TextUtils.isEmpty(Ibnnumbertxtid.getText())) {
-//            Ibnnumbertxtid.setError("Field is required");
-//            Ibnnumbertxtid.requestFocus();
-//        }
-//        if (TextUtils.isEmpty(chequepayabletoid.getText())) {
-//            chequepayabletoid.setError("Field is required");
-//            chequepayabletoid.requestFocus();
-//        }
-//        if (TextUtils.isEmpty(txtPaymentswiftbicid.getText())) {
-//            txtPaymentswiftbicid.setError("Field is required");
-//            txtPaymentswiftbicid.requestFocus();
-//        }
-//        if (TextUtils.isEmpty(txtPaypalemailid.getText())) {
-//            txtPaypalemailid.setError("Field is required");
-//            txtPaypalemailid.requestFocus();
-//        }
-//
-//        if (TextUtils.isEmpty(Paymentbanknameid.getText())) {
-//            Paymentbanknameid.setError("Field is required");
-//            Paymentbanknameid.requestFocus();
-//        }
-//
-//        if (TextUtils.isEmpty(name.getText())) {
-//            name.setError("Field is required");
-//            name.requestFocus();
-//        }
 
 
-
-
-       /* else if (selected_currency.equals(""))
+        if (TextUtils.isEmpty(name.getText())) {
+            name.setError("Field is required");
+            name.requestFocus();
+        } else if (currencyid.equals(""))
         {
-            Constant.ErrorToast(Company_Edit.this,"Please select currency");
-        }*/
-//        else if (edemail.isEmpty()){
-//            email.setError("Field is required");
-//            email.requestFocus();
-//        }
-//        else if (!Patterns.EMAIL_ADDRESS.matcher(edemail).matches()){
-//            email.setError("Invalid email");
-//            email.requestFocus();
-//        }
-//        else if (edphone.isEmpty()){
-//            phone.setError("Field is required");
-//            phone.requestFocus();
-//        }
-//        else if (edwebsite.isEmpty()){
-//            website.setError("Field is required");
-//            website.requestFocus();
-//        }
-//        else if (edCompanyAddress.isEmpty()){
-//            address.setError("Field is required");
-//            address.requestFocus();
-//        }
-//        else {
+            Constant.ErrorToast(getActivity(),"Please select currency");
+        }else{
+
+            boolean isEnter = isEnter();
+
+            Log.e(TAG, "isEnterAA "+isEnter);
+
+            if(isEnter == false){
+                return;
+            }
+
 
             avi.smoothToShow();
             avibackground.setVisibility(View.VISIBLE);
@@ -677,11 +642,11 @@ public class Company_Details_Fragment extends Fragment {
                 }
             }
 
-        Log.e(TAG, "paramsBB "+params.toString());
+            Log.e(TAG, "paramsBB "+params.toString());
 
 
 
-        String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
+            String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token",token);
             client.post(Constant.BASE_URL + "company/update", params, new AsyncHttpResponseHandler() {
@@ -695,7 +660,7 @@ public class Company_Details_Fragment extends Fragment {
                     avi.smoothToHide();
                     avibackground.setVisibility(View.GONE);
 
-                        try {
+                    try {
                         JSONObject jsonObject = new JSONObject(response);
 
                         String status = jsonObject.getString("status");
@@ -712,10 +677,10 @@ public class Company_Details_Fragment extends Fragment {
                             },1500);
                         }
 
-                            if (status.equals("false"))
-                            {
-                                Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
-                            }
+                        if (status.equals("false"))
+                        {
+                            Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
+                        }
 
 
                     } catch (JSONException e) {
@@ -759,7 +724,47 @@ public class Company_Details_Fragment extends Fragment {
 
         }
 
-//    }
+
+
+
+
+
+     }
+
+
+
+
+    @SuppressLint("LongLogTag")
+    private boolean isEnter() {
+
+        boolean isEntered = false;
+
+
+        String iban = Ibnnumbertxtid.getText().toString();
+        String bank = Paymentbanknameid.getText().toString();
+        String swift = txtPaymentswiftbicid.getText().toString();
+
+        if (iban.equals("") && bank.equals("") && swift.equals("")) {
+            isEntered = true;
+            Log.e(TAG, "AAAAAAAAAAA");
+        }else{
+            if (iban.equals("")){
+                Constant.ErrorToast(getActivity(),"Please select iban");
+                isEntered = false;
+            }else if(bank.equals("")){
+                Constant.ErrorToast(getActivity(),"Please select bank");
+                isEntered = false;
+            }else if(swift.equals("")){
+                Constant.ErrorToast(getActivity(),"Please select swift");
+                isEntered = false;
+            }else{
+                isEntered = true;
+            }
+        }
+        return isEntered;
+    }
+
+
 
 
 

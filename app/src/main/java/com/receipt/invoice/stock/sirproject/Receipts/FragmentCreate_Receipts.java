@@ -1169,7 +1169,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "receipt/add", params, new AsyncHttpResponseHandler() {
+            client.post(Constant.BASE_URL + "receipt/asdd", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -3318,164 +3318,287 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_price: "+total_price);
 
+        double grandAmount = 0.0;
+        double discountAmount = 0.0;
+        double subtotalAmount = 0.0;
+        double taxAmount = 0.0;
+        double afterTaxAmount = 0.0;
+        double shippingAmount = 0.0;
+        double netAmount = 0.0;
+
+        if (tempList.size() > 0) {
+            String cruncycode = tempList.get(0).getCurrency_code();
+
+            grandAmount = total_price;
+
+            if (strdiscount.equals("Percentage")) {
+                double value = grandAmount * Double.parseDouble(strdiscountvalue) / 100;
+                discountAmount = value;
+            } else if (strdiscount.equals("Amount")) {
+                double value = Double.parseDouble(strdiscountvalue);
+                discountAmount = value;
+            }else{
+                double value = 0.0;
+                discountAmount = value;
+            }
+
+            subtotalAmount = grandAmount - discountAmount;
+
+            afterTaxAmount = subtotalAmount;
+
+            Log.e(TAG, "taxtrateamt "+taxtrateamt);
+            if (selectedtaxt.size() > 0) {
+                if (taxtypeclusive.equals("Inclusive")) { // exclude on
+                    taxAmount = Double.parseDouble(taxtrateamt) * subtotalAmount / (100+ Double.parseDouble(taxtrateamt));
+                    afterTaxAmount = subtotalAmount;
+                    String subStrinng = taxrname + " " + taxtrateamt + "%";
+                    txttax.setText(  subStrinng + " Incl" );
+                } else { // include off
+                    taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
+                    afterTaxAmount = subtotalAmount + taxAmount;
+                    String subStrinng = taxrname + " " + taxtrateamt + "%";
+                    txttax.setText(  subStrinng + "" );
+                }
+            }
+
+
+            Log.e(TAG, "freight_cost "+freight_cost);
+            if (freight_cost.equals("")) {
+                double value = 0.0;
+                shippingAmount = value;
+            } else {
+                double value = Double.parseDouble(freight_cost);
+                shippingAmount = value;
+            }
+
+            netAmount  = afterTaxAmount + shippingAmount;
+
+            Log.e(TAG, "grandAmount "+grandAmount);
+            Log.e(TAG, "discountAmount "+discountAmount);
+            Log.e(TAG, "subtotalAmount "+subtotalAmount);
+            Log.e(TAG, "taxAmount "+taxAmount);
+            Log.e(TAG, "shippingAmount "+shippingAmount);
+            Log.e(TAG, "netAmount "+netAmount);
+
+
+            if(grandAmount == 0){
+                grosstotal.setText("0");
+            }else{
+                grosstotal.setText(grandAmount+""+cruncycode);
+            }
+
+            if(discountAmount == 0){
+                discount.setText("0");
+            }else{
+                discount.setText(discountAmount+""+cruncycode);
+            }
+
+            if(subtotalAmount == 0){
+                subtotal.setText("0");
+            }else{
+                subtotal.setText(subtotalAmount+""+cruncycode);
+            }
+
+            if(taxAmount == 0){
+                tax.setText("0");
+            }else{
+                tax.setText(taxAmount+""+cruncycode);
+            }
+
+            if(shippingAmount == 0){
+                freight.setText("0");
+            }else{
+                freight.setText(shippingAmount+""+cruncycode);
+            }
+
+            if(netAmount == 0){
+                netamount.setText("0");
+            }else{
+                netamount.setText(netAmount+""+cruncycode);
+            }
+
+        }else{
+            grandAmount = 0.0;
+            discountAmount = 0.0;
+            subtotalAmount = 0.0;
+            taxAmount = 0.0;
+            afterTaxAmount = 0.0;
+            shippingAmount = 0.0;
+            netAmount = 0.0;
+
+
+            grosstotal.setText("0");
+            discount.setText("0");
+            subtotal.setText("0");
+            tax.setText("0");
+            freight.setText("0");
+            netamount.setText("0");
+
+        }
+
+
         if(tempList.size() == 0){
             textViewNoItems.setVisibility(View.VISIBLE);
         }else{
             textViewNoItems.setVisibility(View.GONE);
         }
 
-        double balanceamount = 0.0;
-        Double netamountvalue = 0.0;
-        Double Totatlvalue = 0.0;
-        Double subtotalvalue = 0.0;
 
 
 
-
-        if (tempList.size() > 0) {
-
-            String cruncycode = tempList.get(0).getCurrency_code();
-            Log.e("cruncycode", cruncycode);
-            Log.e("total_price", String.valueOf(this.total_price));
-
-            Double stratingvalue = this.total_price;
-
-
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-
-
-
-            grosstotal.setText(formatter.format(stratingvalue) +cruncycode);
-
-            netamount.setText(formatter.format(stratingvalue) +cruncycode);
-            balance.setText(formatter.format(stratingvalue) +cruncycode);
-            subtotalvalue = total_price;
-            netamountvalue = total_price;
-            balanceamount = total_price;
-            if (strdiscount.equals("Percentage")) {
-                subtotalvalue = 0.0;
-                netamountvalue = 0.0;
-                balanceamount = 0.0;
-
-                Log.e(TAG , "total_priceAA "+total_price);
-                Log.e(TAG , "strdiscountvalueAA "+strdiscountvalue);
-
-                Totatlvalue = total_price * Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode)) / 100;
-
-
-                discount.setText("-"+formatter.format(Totatlvalue) + cruncycode);
-                subtotalvalue = total_price - Totatlvalue;
-
-
-                netamountvalue = subtotalvalue;
-
-                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
-
-
-                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
-                balance.setText(formatter.format(subtotalvalue) + cruncycode);
-                //  Log.e("DissCount value", String.valueOf(Totatlvalue)+ cruncycode);
-            } else if (strdiscount.equals("Amount")) {
-                subtotalvalue = 0.0;
-                netamountvalue = 0.0;
-                balanceamount = 0.0;
-                try {
-                    subtotalvalue = total_price - Double.parseDouble(strdiscountvalue.replace("Rs", ""));
-                }catch (Exception e){
-
-                }
-
-                netamountvalue = subtotalvalue;
-                double  strdiscountval=Double.parseDouble(strdiscountvalue);
-
-                discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
-                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
-                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
-                balance.setText(formatter.format(subtotalvalue) + cruncycode);
-            } else {
-
-                discount.setText("0");
-                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
-                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
-                balance.setText(formatter.format(subtotalvalue) + cruncycode);
-            }
-
-
-            Log.e(TAG, "selectedtaxt.size() "+selectedtaxt.size());
-
-            if (selectedtaxt.size() > 0) {
-                if (taxtypeclusive.equals("Inclusive")) { // exclude on
-                    //netamountvalue = 0.0;
-                    Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
-                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-                    String subStrinng = taxrname + " " + taxtrateamt + "%";
-
-                    txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-
-                    //netamountvalue = subtotalvalue + Totatlvalue1;
-
-                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
-                    balance.setText(formatter.format(netamountvalue) + cruncycode);
-
-                } else { // include off
-
-                    Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
-
-                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-
-                    String subStrinng = taxrname + " " + taxtrateamt + "%";
-
-                    txttax.setText(subStrinng); //Dont do any change
-
-                    netamountvalue = subtotalvalue + Totatlvalue1;
-
-                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
-                    balance.setText(formatter.format(netamountvalue) + cruncycode);
-
-                }
-            }
-
-
-
-
-            if (freight_cost.equals("")) {
-
-
-            } else {
-                balanceamount = netamountvalue + Double.parseDouble(freight_cost);
-
-                Double shipingvalue = Double.parseDouble(freight_cost);
-
-                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
-                balance.setText(formatter.format(balanceamount) + cruncycode);
-                netamount.setText(formatter.format(balanceamount) + cruncycode);
-            }
-            if (paidamountstr.isEmpty()) {
-                //
-                // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
-            } else {
-                Log.e("balance", paidamountstr);
-                Double paidindouble = Double.parseDouble(paidamountstr);
-
-                paidamount.setText(formatter.format(paidindouble) + cruncycode);
-                balanceamount = balanceamount - Double.parseDouble(paidamountstr);
-                Log.e("balance", String.valueOf(balanceamount));
-
-                balance.setText(formatter.format(balanceamount) + cruncycode);
-            }
-
-
-        } else {
-            grosstotal.setText("0");
-            subtotal.setText("0");
-            discount.setText("0");
-            freight.setText("0");
-            paidamount.setText("0");
-            netamount.setText("0");
-            tax.setText("0");
-            balance.setText("0");
-
-        }
+//
+//
+//        double balanceamount = 0.0;
+//        Double netamountvalue = 0.0;
+//        Double Totatlvalue = 0.0;
+//        Double subtotalvalue = 0.0;
+//
+//
+//
+//
+//        if (tempList.size() > 0) {
+//
+//            String cruncycode = tempList.get(0).getCurrency_code();
+//            Log.e("cruncycode", cruncycode);
+//            Log.e("total_price", String.valueOf(this.total_price));
+//
+//            Double stratingvalue = this.total_price;
+//
+//
+//            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+//
+//
+//
+//            grosstotal.setText(formatter.format(stratingvalue) +cruncycode);
+//
+//            netamount.setText(formatter.format(stratingvalue) +cruncycode);
+//            balance.setText(formatter.format(stratingvalue) +cruncycode);
+//            subtotalvalue = total_price;
+//            netamountvalue = total_price;
+//            balanceamount = total_price;
+//            if (strdiscount.equals("Percentage")) {
+//                subtotalvalue = 0.0;
+//                netamountvalue = 0.0;
+//                balanceamount = 0.0;
+//
+//                Log.e(TAG , "total_priceAA "+total_price);
+//                Log.e(TAG , "strdiscountvalueAA "+strdiscountvalue);
+//
+//                Totatlvalue = total_price * Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode)) / 100;
+//
+//
+//                discount.setText("-"+formatter.format(Totatlvalue) + cruncycode);
+//                subtotalvalue = total_price - Totatlvalue;
+//
+//
+//                netamountvalue = subtotalvalue;
+//
+//                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+//
+//
+//                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
+//                balance.setText(formatter.format(subtotalvalue) + cruncycode);
+//                //  Log.e("DissCount value", String.valueOf(Totatlvalue)+ cruncycode);
+//            } else if (strdiscount.equals("Amount")) {
+//                subtotalvalue = 0.0;
+//                netamountvalue = 0.0;
+//                balanceamount = 0.0;
+//                try {
+//                    subtotalvalue = total_price - Double.parseDouble(strdiscountvalue.replace("Rs", ""));
+//                }catch (Exception e){
+//
+//                }
+//
+//                netamountvalue = subtotalvalue;
+//                double  strdiscountval=Double.parseDouble(strdiscountvalue);
+//
+//                discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
+//                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+//                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
+//                balance.setText(formatter.format(subtotalvalue) + cruncycode);
+//            } else {
+//
+//                discount.setText("0");
+//                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
+//                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
+//                balance.setText(formatter.format(subtotalvalue) + cruncycode);
+//            }
+//
+//
+//            Log.e(TAG, "selectedtaxt.size() "+selectedtaxt.size());
+//
+//            if (selectedtaxt.size() > 0) {
+//                if (taxtypeclusive.equals("Inclusive")) { // exclude on
+//                    //netamountvalue = 0.0;
+//                    Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
+//                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
+//                    String subStrinng = taxrname + " " + taxtrateamt + "%";
+//                    txttax.setText(  subStrinng + " Incl" ); //Dont do any change
+//
+//                    //netamountvalue = subtotalvalue + Totatlvalue1;
+//
+//                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
+//                    balance.setText(formatter.format(netamountvalue) + cruncycode);
+//
+//                } else { // include off
+//
+//                    Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
+//
+//                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
+//
+//                    String subStrinng = taxrname + " " + taxtrateamt + "%";
+//
+//                    txttax.setText(subStrinng); //Dont do any change
+//
+//                    netamountvalue = subtotalvalue + Totatlvalue1;
+//
+//                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
+//                    balance.setText(formatter.format(netamountvalue) + cruncycode);
+//
+//                }
+//            }
+//
+//
+//
+//
+//            if (freight_cost.equals("")) {
+//
+//
+//            } else {
+//                balanceamount = netamountvalue + Double.parseDouble(freight_cost);
+//
+//                Double shipingvalue = Double.parseDouble(freight_cost);
+//
+//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
+//                balance.setText(formatter.format(balanceamount) + cruncycode);
+//                netamount.setText(formatter.format(balanceamount) + cruncycode);
+//            }
+//            if (paidamountstr.isEmpty()) {
+//                //
+//                // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
+//            } else {
+//                Log.e("balance", paidamountstr);
+//                Double paidindouble = Double.parseDouble(paidamountstr);
+//
+//                paidamount.setText(formatter.format(paidindouble) + cruncycode);
+//                balanceamount = balanceamount - Double.parseDouble(paidamountstr);
+//                Log.e("balance", String.valueOf(balanceamount));
+//
+//                balance.setText(formatter.format(balanceamount) + cruncycode);
+//            }
+//
+//
+//        } else {
+//            grosstotal.setText("0");
+//            subtotal.setText("0");
+//            discount.setText("0");
+//            freight.setText("0");
+//            paidamount.setText("0");
+//            netamount.setText("0");
+//            tax.setText("0");
+//            balance.setText("0");
+//
+//        }
 
     }
 
@@ -4060,7 +4183,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxamount;
-            taxtamountstrvalue = "Tax "+txttax.getText().toString();
+            taxtamountstrvalue = ""+txttax.getText().toString();
         }
 
         String discountvalue = "";
@@ -4304,7 +4427,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                     .replaceAll("Notes:", notestringvalue)
                   //  .replaceAll("Ship To:", Shiping_tostr)
                     .replaceAll(" Shipping ", shipingvaluetxt)
-                    .replaceAll(" Tax ", taxtamountstrvalue)
+                    .replaceAll("Tax", taxtamountstrvalue)
                     .replaceAll(" Discount ", discounttxtreplace)
                     .replaceAll("Reference No:", strreferencenotxtvalue)
                     .replaceAll("hide", hiddenpaidrow)

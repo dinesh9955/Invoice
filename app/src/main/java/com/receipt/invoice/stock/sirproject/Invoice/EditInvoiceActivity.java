@@ -5003,7 +5003,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxamount;
-            taxtamountstrvalue = "Tax "+txttax.getText().toString();
+            taxtamountstrvalue = ""+txttax.getText().toString();
         }
 
         String discountvalue = "";

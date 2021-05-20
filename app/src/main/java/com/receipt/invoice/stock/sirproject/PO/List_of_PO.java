@@ -441,9 +441,6 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 
 
 
-
-
-
     private void enableSwipe(){
 
         SwipeHelper2 swipeHelper = new SwipeHelper2(getContext(), recycler_invoices) {
@@ -467,12 +464,10 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                                 String ilnvoiceStatus = list.get(pos).getInvocestatus();
                                 String pdflink = list.get(pos).getInvoicepdflink();
                                 String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
-                                Log.e(TAG, "pdflink1: "+pdflink);
-                                Log.e(TAG, "sahrelink1: "+sahrelink);
+//                                Log.e(TAG, "pdflink: "+pdflink);
+//                                Log.e(TAG, "sahrelink: "+sahrelink);
 
-                                String link = shareInvoicelink+""+pdflink;
-
-                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, link, link);
+                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
                                 invoicelistAdapterdt.notifyDataSetChanged();
                                 bottomSheetDialog.show();
                             }
@@ -480,12 +475,15 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                 ));
 
 
+
+
                 if (list.size() > 0) {
                     voidStatus = list.get(viewHolder.getPosition()).getVoid_status();
                 }
 
                 Log.e(TAG, "voidStatusAA " + voidStatus);
-
+//
+//
                 if (voidStatus.equalsIgnoreCase("0")) {
                     colorVoid = "#ff9900";
                     markAsVoidTxt = "Mark as void";
@@ -494,7 +492,6 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                     colorVoid = "#99cc00";
                     markAsVoidTxt = "Mark as unvoid";
                 }
-
 
 
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
@@ -525,8 +522,11 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 
                                 Log.e(TAG, "instantiateUnderlayButton");
 
-                                invoicelistAdapterdt.notifyDataSetChanged();
+                                invoicelistAdapterdt.updateList(list);
+
+//                                invoicelistAdapterdt.notifyItemChanged(pos);
                                 markVoidInvoice(invoiceidbypos, voidPassValue);
+
 
                             }
                         }
@@ -550,7 +550,6 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                     colorDelivery = "#33cc33";
                     markAsVoidTxt = "Delivery received";
                 }
-
 
 
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
@@ -581,7 +580,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 
                                 Log.e(TAG, "instantiateUnderlayButton");
 
-                                invoicelistAdapterdt.notifyDataSetChanged();
+                                invoicelistAdapterdt.updateList(list);
                                 deliveryStatus(invoiceidbypos, voidPassValue);
 
                             }
@@ -590,18 +589,205 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 
 
 
+
+
             }
 
 
         };
 
-//        swipeHelper.clearView(recycler_invoices , null);
 
-//        swipeHelper.attachToRecyclerView();
-
-        //  swipeHelper.attachToRecyclerView(recycler_invoices);
 
     }
+
+
+
+
+
+
+//
+//    private void enableSwipe(){
+//
+//
+//
+//
+//
+//
+//
+//
+//
+////        SwipeHelper2 swipeHelper = new SwipeHelper2(getContext(), recycler_invoices) {
+////
+////            @Override
+////            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
+////
+////                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+////                        "More",
+////                        0,
+////                        Color.parseColor("#669933"),
+////
+////                        new SwipeHelper2.UnderlayButtonClickListener() {
+////                            @Override
+////                            public void onClick(final int pos) {
+////                                customerName = list.get(pos).getInvoicustomer_name();
+////                                dataNo = list.get(pos).getInvoice_nobdt();
+////                                templateSelect = list.get(pos).getTemplate_type();
+////                                Log.e(TAG, "templateSelect: "+templateSelect);
+////                                invoiceidbypos = list.get(pos).getInvoice_userid();
+////                                String ilnvoiceStatus = list.get(pos).getInvocestatus();
+////                                String pdflink = list.get(pos).getInvoicepdflink();
+////                                String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
+////                                Log.e(TAG, "pdflink1: "+pdflink);
+////                                Log.e(TAG, "sahrelink1: "+sahrelink);
+////
+////                                String link = shareInvoicelink+""+pdflink;
+////
+////                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, link, link);
+////                                invoicelistAdapterdt.notifyDataSetChanged();
+////                                bottomSheetDialog.show();
+////                            }
+////                        }
+////                ));
+////
+////
+////                if (list.size() > 0) {
+////                    voidStatus = list.get(viewHolder.getPosition()).getVoid_status();
+////                }
+////
+////                Log.e(TAG, "voidStatusAA " + voidStatus);
+////
+////                if (voidStatus.equalsIgnoreCase("0")) {
+////                    colorVoid = "#ff9900";
+////                    markAsVoidTxt = "Mark as void";
+////                }
+////                if (voidStatus.equalsIgnoreCase("1")) {
+////                    colorVoid = "#99cc00";
+////                    markAsVoidTxt = "Mark as unvoid";
+////                }
+////
+////
+////
+////                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+////                        markAsVoidTxt,
+////                        0,
+////                        Color.parseColor(colorVoid),
+////                        new SwipeHelper2.UnderlayButtonClickListener() {
+////                            @Override
+////                            public void onClick(final int pos) {
+////
+////                                String invoiceidbypos = list.get(pos).getInvoice_userid();
+////
+////                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+////
+////                                String invoiceVoidStatus = list.get(pos).getVoid_status();
+////
+////                                String voidPassValue = "0";
+////
+////                                if(invoiceVoidStatus.equalsIgnoreCase("0")){
+////                                    voidPassValue = "1";
+////                                    // colorVoid = "#ff9900";
+////                                }
+////
+////                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
+////                                    voidPassValue = "0";
+////                                    //colorVoid = "#99cc00";
+////                                }
+////
+////                                Log.e(TAG, "instantiateUnderlayButton");
+////
+////                                invoicelistAdapterdt.updateList(list);
+////
+////                                markVoidInvoice(invoiceidbypos, voidPassValue);
+////
+////                            }
+////                        }
+////                ));
+////
+////
+////
+////
+//////
+//////                if (list.size() > 0) {
+//////                    deliveryStatus = list.get(viewHolder.getPosition()).getInvocestatus();
+//////                }
+//////
+//////                Log.e(TAG, "voidStatusAA " + voidStatus);
+//////
+//////                if (deliveryStatus.equalsIgnoreCase("1")) {
+//////                    colorDelivery = "#ff4d4d";
+//////                    markAsVoidTxt = "Mark as delivery received";
+//////                }
+//////                if (deliveryStatus.equalsIgnoreCase("2")) {
+//////                    colorDelivery = "#33cc33";
+//////                    markAsVoidTxt = "Delivery received";
+//////                }
+//////
+//////
+//////
+//////                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+//////                        markAsVoidTxt,
+//////                        0,
+//////                        Color.parseColor(colorDelivery),
+//////                        new SwipeHelper2.UnderlayButtonClickListener() {
+//////                            @Override
+//////                            public void onClick(final int pos) {
+//////
+//////                                String invoiceidbypos = list.get(pos).getInvoice_userid();
+//////
+//////                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+//////
+//////                                String invoiceVoidStatus = list.get(pos).getInvocestatus();
+//////
+//////                                String voidPassValue = "1";
+//////
+//////                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
+//////                                    voidPassValue = "2";
+//////                                    // colorVoid = "#ff9900";
+//////                                }
+//////
+//////                                if(invoiceVoidStatus.equalsIgnoreCase("2")){
+//////                                    voidPassValue = "1";
+//////                                    //colorVoid = "#99cc00";
+//////                                }
+//////
+//////                                Log.e(TAG, "instantiateUnderlayButton");
+//////
+//////                                invoicelistAdapterdt.notifyDataSetChanged();
+//////                                deliveryStatus(invoiceidbypos, voidPassValue);
+//////
+//////                            }
+//////                        }
+//////                ));
+////
+////
+////
+////            }
+////
+////
+////        };
+////
+////
+////
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+////        swipeHelper.clearView(recycler_invoices , null);
+//
+////        swipeHelper.attachToRecyclerView();
+//
+//        //  swipeHelper.attachToRecyclerView(recycler_invoices);
+//
+//    }
 
 
 

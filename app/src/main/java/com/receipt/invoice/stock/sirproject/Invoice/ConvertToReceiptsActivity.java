@@ -4886,7 +4886,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxamount;
-            taxtamountstrvalue = "Tax "+txttax.getText().toString();
+            taxtamountstrvalue = ""+txttax.getText().toString();
         }
 
         String discountvalue = "";

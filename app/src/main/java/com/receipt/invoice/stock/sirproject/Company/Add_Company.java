@@ -588,39 +588,6 @@ public class Add_Company extends Fragment {
         }
 
 
-
-//        else if(isEnter() == false){
-//            Constant.ErrorToast(getActivity(),"Please select currencyAAAA ");
-//        }
-
-       // Constant.ErrorToast(getActivity(),"Please select currencyCCC");
-
-     //   boolean isEnter = isEnter();
-
-
-
-
-//        else if (edemail.isEmpty()){
-//            email.setError("Field is required");
-//            email.requestFocus();
-//        }
-//        else if (!Patterns.EMAIL_ADDRESS.matcher(edemail).matches()){
-//            email.setError("Invalid email");
-//            email.requestFocus();
-//        }
-//
-//        else if (edphone.isEmpty()){
-//            phone.setError("Field is required");
-//            phone.requestFocus();
-//        }
-//        else if (edwebsite.isEmpty()){
-//            website.setError("Field is required");
-//            website.requestFocus();
-//        }
-//        else if (edCompanyAddress.isEmpty()){
-//            CompanyAddress.setError("Field is required");
-//            CompanyAddress.requestFocus();
-//        }
         else {
 
             boolean isEnter = isEnter();

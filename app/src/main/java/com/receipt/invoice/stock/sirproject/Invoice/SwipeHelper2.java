@@ -9,6 +9,10 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.text.Html;
+import android.text.Layout;
+import android.text.SpannedString;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,7 +29,7 @@ import java.util.Queue;
 
 public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
 
-    public static final int BUTTON_WIDTH = 260;
+    public static final int BUTTON_WIDTH = 220;
     private RecyclerView recyclerView;
     private List<UnderlayButton> buttons;
     private GestureDetector gestureDetector;
@@ -249,16 +253,50 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
 
             // Draw Text
             p.setColor(Color.WHITE);
-            p.setTextSize(Resources.getSystem().getDisplayMetrics().density * 12);
+            p.setTextSize(Resources.getSystem().getDisplayMetrics().density * 11);
 
             Rect r = new Rect();
             float cHeight = rect.height();
             float cWidth = rect.width();
-            p.setTextAlign(Paint.Align.LEFT);
-            p.getTextBounds(text, 0, text.length(), r);
+            p.setTextAlign(Paint.Align.CENTER);
+            p.getTextBounds(text, 0, 0, r);
             float x = cWidth / 2f - r.width() / 2f - r.left;
             float y = cHeight / 2f + r.height() / 2f - r.bottom;
-            c.drawText(text, rect.left + x, rect.top + y, p);
+
+
+            String t1 = "Mark as delivery";
+            String t2 = "received";
+
+            if(text.equalsIgnoreCase("Mark as delivery received")){
+                c.drawText(t1, rect.left + x, rect.top + y, p);
+                c.drawText(t2, rect.left + x, rect.top + y + 30, p);
+            }else{
+                c.drawText(text, rect.left + x, rect.top + y+10, p);
+            }
+
+//            c.drawText(t1, rect.left + x, rect.top + y, p);
+//            c.drawText(t2, rect.left + x, rect.top + y + 50, p);
+
+//            if(text.contains(" ")){
+//                for (String line: text.split(" ")) {
+//                    c.drawText(line, rect.left + x, rect.top + y, p);
+//
+////                    y += p.getTextSize();
+//                   // y += p.descent() - p.ascent();
+//                   // x += p.descent() - p.ascent();
+//                    y += p.descent() - p.ascent();
+//                }
+//            }else{
+                //c.drawText(text, rect.left + x, rect.top + y+10, p);
+//            }
+
+            //CharSequence m = ViewUtil.noTrailingwhiteLines(Html.fromHtml(text));
+
+
+//
+//            c.drawText(text, rect.left + x, rect.top + y, p);
+
+           // c.drawText(SpannedString"\"<b>Hello bold Text</b>\"", rect.left + x, rect.top + y, p);
 
            // c.drawText(Html.fromHtml("<![CDATA[<font color='#145A14'>text</font>]]>"), rect.left + x, rect.top + y, p);
 

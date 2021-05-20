@@ -4942,7 +4942,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxamount;
-            taxtamountstrvalue = "Tax "+txttax.getText().toString();
+            taxtamountstrvalue = ""+txttax.getText().toString();
         }
 
         String discountvalue = "";

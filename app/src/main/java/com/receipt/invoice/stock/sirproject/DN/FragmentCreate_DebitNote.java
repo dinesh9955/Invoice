@@ -4034,7 +4034,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxamount;
-            taxtamountstrvalue = "Tax "+txttax.getText().toString();
+            taxtamountstrvalue = ""+txttax.getText().toString();
         }
 
         String discountvalue = "";
