@@ -146,6 +146,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
     int selectedTemplate = 0;
 
+    TextView taxvalueText;
+
     //    public static int defaultClick = 0;
 //    int selectComapanyCount = 0;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -358,6 +360,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         View view = inflater.inflate(R.layout.fragment_create__credit_notes, container, false);
 
+        taxvalueText = view.findViewById(R.id.taxvalue);
         invoiceweb = view.findViewById(R.id.invoiceweb);
 
         textViewNoItems = view.findViewById(R.id.txtnoitems);
@@ -1706,8 +1709,20 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                                                       int monthOfYear, int dayOfMonth) {
 
 
-                                    eddate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                    int month = monthOfYear + 1;
+                                    String realMonth = ""+month;
+                                    if(realMonth.length() == 1){
+                                        realMonth = "0"+month;
+                                    }
 
+
+                                    int day = dayOfMonth;
+                                    String realDay = ""+day;
+                                    if(realDay.length() == 1){
+                                        realDay = "0"+day;
+                                    }
+
+                                    eddate.setText(year + "-" + realMonth + "-" + realDay);
 
                                 }
                             }, mYear, mMonth, mDay);
@@ -3392,6 +3407,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
                     txttax.setText(  subStrinng + " Incl" ); //Dont do any change
 
+                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
+
                    // netamountvalue = subtotalvalue + Totatlvalue1;
 
                     netamount.setText(formatter.format(netamountvalue) + cruncycode);
@@ -3406,6 +3423,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
 
                     txttax.setText(subStrinng); //Dont do any change
+
+                    taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
 
                     netamountvalue = subtotalvalue + Totatlvalue1;
 

@@ -317,6 +317,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
     TextView textViewNoItems;
 
+    TextView taxvalueText;
+
     public Fragment_Create_Invoice() {
         // Required empty public constructor
     }
@@ -353,6 +355,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         View view = inflater.inflate(R.layout.fragment_fragment__create__invoice, container, false);
+
+        taxvalueText = view.findViewById(R.id.taxvalue);
 
         invoiceweb = view.findViewById(R.id.invoiceweb);
 
@@ -1781,8 +1785,20 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                                 public void onDateSet(DatePicker view, int year,
                                                       int monthOfYear, int dayOfMonth) {
 
+                                    int month = monthOfYear + 1;
+                                    String realMonth = ""+month;
+                                    if(realMonth.length() == 1){
+                                        realMonth = "0"+month;
+                                    }
 
-                                    eddate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+                                    int day = dayOfMonth;
+                                    String realDay = ""+day;
+                                    if(realDay.length() == 1){
+                                        realDay = "0"+day;
+                                    }
+
+                                    eddate.setText(year + "-" + realMonth + "-" + realDay);
 
 
                                 }
@@ -3480,7 +3496,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
                     txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-
+                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
                    // netamountvalue = subtotalvalue + Totatlvalue1;
 
                     netamount.setText(formatter.format(netamountvalue) + cruncycode);
@@ -3495,6 +3511,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
 
                     txttax.setText(subStrinng); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
 
                     netamountvalue = subtotalvalue + Totatlvalue1;
 

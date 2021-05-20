@@ -347,6 +347,8 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
     TextView textViewNoItems;
 
+    TextView taxvalueText;
+
     StringBuilder stringBuilderBillTo = new StringBuilder();
     StringBuilder stringBuilderShipTo = new StringBuilder();
 
@@ -360,6 +362,8 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.fragment_convert_to_receipts);
         Constant.toolbar(ConvertToReceiptsActivity.this, "Convert to Receipt");
+
+        taxvalueText = findViewById(R.id.taxvalue);
 
         invoiceweb = findViewById(R.id.invoiceweb);
 
@@ -969,6 +973,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
 
+                        taxvalueText.setText("Tax "+title);
                         txttax.setText(""+title.replace("(","").replace(")","").toUpperCase());
                         tax.setText(""+value+currency_codedto);
 
@@ -2010,8 +2015,20 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                                 public void onDateSet(DatePicker view, int year,
                                                       int monthOfYear, int dayOfMonth) {
 
-                                    eddate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                    int month = monthOfYear + 1;
+                                    String realMonth = ""+month;
+                                    if(realMonth.length() == 1){
+                                        realMonth = "0"+month;
+                                    }
 
+
+                                    int day = dayOfMonth;
+                                    String realDay = ""+day;
+                                    if(realDay.length() == 1){
+                                        realDay = "0"+day;
+                                    }
+
+                                    eddate.setText(year + "-" + realMonth + "-" + realDay);
                                 }
                             }, mYear, mMonth, mDay);
                     // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -3599,7 +3616,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     }
 
                     txttax.setText(subStrinng+ " Incl"); //Dont do any change
-
+                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
 
 //                    }
 
@@ -3645,6 +3662,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                      }
 
                     txttax.setText(subStrinng); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
 
                     Log.e(TAG, "taxrname"+taxrname);
                     Log.e(TAG, "taxtrateamt"+taxtrateamt);

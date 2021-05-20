@@ -1798,7 +1798,20 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                                                       int monthOfYear, int dayOfMonth) {
 
 
-                                    eddate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                    int month = monthOfYear + 1;
+                                    String realMonth = ""+month;
+                                    if(realMonth.length() == 1){
+                                        realMonth = "0"+month;
+                                    }
+
+
+                                    int day = dayOfMonth;
+                                    String realDay = ""+day;
+                                    if(realDay.length() == 1){
+                                        realDay = "0"+day;
+                                    }
+
+                                    eddate.setText(year + "-" + realMonth + "-" + realDay);
 
 
                                 }

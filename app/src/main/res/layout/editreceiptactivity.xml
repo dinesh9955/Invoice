@@ -400,7 +400,20 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/taxtleft"
+                android:id="@+id/taxvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/subtotal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:text="Tax"
+                android:textColor="@color/darkgray"
+                android:textSize="18sp"
+                android:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/txttax"
+                android:layout_toRightOf="@+id/taxvalue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/subtotal"
@@ -410,18 +423,6 @@
                 android:textColor="@color/darkgray"
                 android:textSize="18sp"
                 android:visibility="gone"/>
-
-            <TextView
-                android:id="@+id/txttax"
-                android:layout_toRightOf="@+id/taxtleft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/subtotal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp"
-                android:text="Tax"
-                android:textColor="@color/darkgray"
-                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tax"

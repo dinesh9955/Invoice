@@ -342,6 +342,8 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
     TextView textViewNoItems;
 
+    TextView taxvalueText;
+
     StringBuilder stringBuilderBillTo = new StringBuilder();
     StringBuilder stringBuilderShipTo = new StringBuilder();
 
@@ -355,6 +357,9 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.editpoactivity);
         Constant.toolbar(EditPOActivity.this, "Edit PO");
+
+        taxvalueText = findViewById(R.id.taxvalue);
+
         invoiceweb = findViewById(R.id.invoiceweb);
 
         textViewNoItems = findViewById(R.id.txtnoitems);
@@ -979,6 +984,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
 
+                        taxvalueText.setText("Tax "+title);
                         txttax.setText(""+title.replace("(","").replace(")",""));
                         tax.setText(""+value+currency_codedto);
 
@@ -2036,8 +2042,20 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                                 public void onDateSet(DatePicker view, int year,
                                                       int monthOfYear, int dayOfMonth) {
 
-                                    eddate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                    int month = monthOfYear + 1;
+                                    String realMonth = ""+month;
+                                    if(realMonth.length() == 1){
+                                        realMonth = "0"+month;
+                                    }
 
+
+                                    int day = dayOfMonth;
+                                    String realDay = ""+day;
+                                    if(realDay.length() == 1){
+                                        realDay = "0"+day;
+                                    }
+
+                                    eddate.setText(year + "-" + realMonth + "-" + realDay);
                                 }
                             }, mYear, mMonth, mDay);
                     // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -3644,6 +3662,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
                     }
                     txttax.setText(  subStrinng + " Incl" ); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
 
 //                    if(taxrname.length() > 0){
 //                        if(taxrname.contains(" ")){
@@ -3690,6 +3709,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
                     }
                     txttax.setText(subStrinng); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
 
 //                    if(taxrname.length() > 0){
 //                        if(taxrname.contains(" ")){

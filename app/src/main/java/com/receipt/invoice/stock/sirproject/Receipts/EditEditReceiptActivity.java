@@ -339,12 +339,17 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 //    String colorCode = "#ffffff";
     TextView textViewNoItems;
 
+    TextView taxvalueText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.editreceiptactivity);
         Constant.toolbar(EditEditReceiptActivity.this, "Edit Receipt");
+
+        taxvalueText = findViewById(R.id.taxvalue);
+
         invoiceweb = findViewById(R.id.invoiceweb);
 
         textViewNoItems = findViewById(R.id.txtnoitems);
@@ -882,6 +887,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
 
+                        taxvalueText.setText("Tax "+title);
                         txttax.setText(""+title.replace("(","").replace(")",""));
                         tax.setText(""+value+currency_codedto);
 
@@ -1890,8 +1896,20 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                                                       int monthOfYear, int dayOfMonth) {
 
 
-                                    eddate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                    int month = monthOfYear + 1;
+                                    String realMonth = ""+month;
+                                    if(realMonth.length() == 1){
+                                        realMonth = "0"+month;
+                                    }
 
+
+                                    int day = dayOfMonth;
+                                    String realDay = ""+day;
+                                    if(realDay.length() == 1){
+                                        realDay = "0"+day;
+                                    }
+
+                                    eddate.setText(year + "-" + realMonth + "-" + realDay);
 
                                 }
                             }, mYear, mMonth, mDay);
@@ -3464,6 +3482,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
                         }
                         txttax.setText(  subStrinng + " Incl" ); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
 //                    }
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
@@ -3501,6 +3520,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
                         }
                         txttax.setText(subStrinng); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
 //                    }
 
 

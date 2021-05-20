@@ -316,6 +316,9 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 
     TextView textViewNoItems;
 
+    TextView taxvalueText;
+
+
     public FragmentCreate_Receipts() {
         // Required empty public constructor
     }
@@ -353,12 +356,11 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         View view = inflater.inflate(R.layout.fragment_create__receipts, container, false);
 
+        taxvalueText = view.findViewById(R.id.taxvalue);
+
         invoiceweb = view.findViewById(R.id.invoiceweb);
 
         textViewNoItems = view.findViewById(R.id.txtnoitems);
-
-
-
 
         selectcompany = view.findViewById(R.id.selectcompany);
         avi = view.findViewById(R.id.avi);
@@ -1169,7 +1171,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "receipt/asdd", params, new AsyncHttpResponseHandler() {
+            client.post(Constant.BASE_URL + "receipt/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -1739,7 +1741,20 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                                 public void onDateSet(DatePicker view, int year,
                                                       int monthOfYear, int dayOfMonth) {
 
-                                    eddate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                    int month = monthOfYear + 1;
+                                    String realMonth = ""+month;
+                                    if(realMonth.length() == 1){
+                                        realMonth = "0"+month;
+                                    }
+
+
+                                    int day = dayOfMonth;
+                                    String realDay = ""+day;
+                                    if(realDay.length() == 1){
+                                        realDay = "0"+day;
+                                    }
+
+                                    eddate.setText(year + "-" + realMonth + "-" + realDay);
 
                                 }
                             }, mYear, mMonth, mDay);
@@ -3353,11 +3368,13 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                     afterTaxAmount = subtotalAmount;
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
                     txttax.setText(  subStrinng + " Incl" );
+                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
                 } else { // include off
                     taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
                     afterTaxAmount = subtotalAmount + taxAmount;
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
                     txttax.setText(  subStrinng + "" );
+                    taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
                 }
             }
 
