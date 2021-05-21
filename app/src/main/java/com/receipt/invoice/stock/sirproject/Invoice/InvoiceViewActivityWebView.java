@@ -73,7 +73,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
 
     String invoicenumber = "", strnotes = "", ref_no = "", paid_amount_payment_method = "", freight_cost = "0", strdiscountvalue = "0", strpaid_amount = "", companylogopath = "", Grossamount_str = "", Subtotalamount = "", netamountvalue = "", Blanceamountstr = "";
 
-    String paid_amount_date = "";
+//    String paid_amount_date = "";
 //    String Grossamount_str_real = "0";
     String Shipingdetail = "", shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_country, shipping_zone;
 
@@ -286,7 +286,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
 
                 payment_iban = invoiceDtoInvoice.getPaymentIban();
                 paid_amount_payment_method = invoiceDtoInvoice.getPaidAmountPaymentMethod();
-                paid_amount_date = invoiceDtoInvoice.getPaidAmountDate();
+                Paymentamountdate = invoiceDtoInvoice.getPaidAmountDate();
                 currency_code = invoiceDtoInvoice.getCurrencySymbol();
                 Log.e("currency_code",currency_code);
                 company_stamp = invoiceDtoInvoice.getCompanyStamp();
@@ -566,15 +566,15 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
             for (int i = 0; i < productsItemDtos.size(); i++) {
 
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                double productQuantity= Double.parseDouble(productsItemDtos.get(i).getQuantity());
                 double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
                 double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
-
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
                         .replaceAll("#NAME#", ""+productsItemDtos.get(i).getName())
                         .replaceAll("#DESC#", ""+productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", ""+productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
-                        .replaceAll("#QUANTITY#", ""+productsItemDtos.get(i).getQuantity())
+                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
                         .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) +"" +Utility.getReplaceDollor(currency_code))
                         .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) +"" + Utility.getReplaceDollor(currency_code));
 

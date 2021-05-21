@@ -494,6 +494,7 @@ public class ViewInvoice_Activity extends AppCompatActivity {
                 cruncycode = myList.get(i).getCurrency_code();
 
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                double productQuantity = Double.parseDouble(tempQuantity.get(i));
                 double producpriceRate = Double.parseDouble(producprice.get(i));
                 double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
 
@@ -501,9 +502,9 @@ public class ViewInvoice_Activity extends AppCompatActivity {
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", myList.get(i).getProduct_measurement_unit())
-                        .replaceAll("#QUANTITY#", tempQuantity.get(i))
-                        .replaceAll("#PRICE#", formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#TOTAL#", formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
+                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
                 productitemlist = productitemlist + productitem;
             }
 

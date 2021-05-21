@@ -4728,14 +4728,20 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
             for (int i = 0; i < tempList.size(); i++) {
                 cruncycode = tempList.get(i).getCurrency_code();
 
+                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
+                Double quantityAmount = Double.parseDouble(tempQuantity.get(i));
+                double producpriceRate = Double.parseDouble(producprice.get(i));
+                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
 
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
-                        .replaceAll("#QUANTITY#", tempQuantity.get(i))
-                        .replaceAll("#PRICE#", producprice.get(i) + "" + tempList.get(i).getCurrency_code())
-                        .replaceAll("#TOTAL#", totalpriceproduct.get(i) + "" + tempList.get(i).getCurrency_code());
+                        .replaceAll("#QUANTITY#", ""+formatter.format(quantityAmount))
+                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) + "" + tempList.get(i).getCurrency_code())
+                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) + "" + tempList.get(i).getCurrency_code());
 
                 productitemlist = productitemlist + productitem;
             }

@@ -487,6 +487,8 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
         try {
             for (int i = 0; i < productsItemDtos.size(); i++) {
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
+                Double quantityAmount = Double.parseDouble(productsItemDtos.get(i).getQuantity());
                 double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
                 double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
 
@@ -495,9 +497,10 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         .replaceAll("#NAME#", productsItemDtos.get(i).getName())
                         .replaceAll("#DESC#", productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
-                        .replaceAll("#QUANTITY#", productsItemDtos.get(i).getQuantity())
+                        .replaceAll("#QUANTITY#", ""+formatter.format(quantityAmount))
                         .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) +"" +Utility.getReplaceDollor(currency_code))
                         .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) +"" + Utility.getReplaceDollor(currency_code));
+
 
                 productitemlist = productitemlist + productitem;
             }

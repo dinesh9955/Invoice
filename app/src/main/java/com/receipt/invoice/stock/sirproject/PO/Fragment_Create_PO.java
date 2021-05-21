@@ -4033,13 +4033,18 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 Log.e(TAG, "TOTAL "+totalpriceproduct.get(i));
                 Log.e(TAG, "TOTAL2 "+tempList.get(i).getCurrency_code());
 
+                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                double productQuantity = Double.parseDouble(tempQuantity.get(i));
+                double producpriceRate = Double.parseDouble(producprice.get(i));
+                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+
                 productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
-                        .replaceAll("#QUANTITY#", tempQuantity.get(i))
-                        .replaceAll("#PRICE#", producprice.get(i) + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#TOTAL#", totalpriceproduct.get(i) + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
+                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
 
                 productitemlist = productitemlist + productitem;
             }

@@ -547,6 +547,8 @@ public class ReceiptViewActivityWebView extends AppCompatActivity {
         try {
             for (int i = 0; i < productsItemDtos.size(); i++) {
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
+                double productQuantity = Double.parseDouble(productsItemDtos.get(i).getQuantity());
                 double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
                 double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
 
@@ -554,7 +556,7 @@ public class ReceiptViewActivityWebView extends AppCompatActivity {
                         .replaceAll("#NAME#", productsItemDtos.get(i).getName())
                         .replaceAll("#DESC#", productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", productsItemDtos.get(i).getMeasurementUnit())
-                        .replaceAll("#QUANTITY#", productsItemDtos.get(i).getQuantity())
+                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
                         .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) +"" +Utility.getReplaceDollor(currency_code))
                         .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) +"" + Utility.getReplaceDollor(currency_code));
 
