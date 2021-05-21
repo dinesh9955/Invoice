@@ -929,21 +929,37 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
-
                         taxrname = listobj.getTitle();
+                        taxtypeclusive = listobj.getTax_type();
+                        taxtrateamt = listobj.getRate();
 
                         if(!taxrname.equalsIgnoreCase("")){
-                            taxvalueText.setText("Tax "+title);
                             txttax.setText(""+title.replace("(","").replace(")",""));
-                            tax.setText(""+value+currency_codedto);
+
+                            Double taxVAL = Double.parseDouble(value);
+                            if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                                tax.setText(formatter.format(taxVAL));
+                            } else {
+                                tax.setText(formatter.format(taxVAL) + currency_codedto);
+                            }
 
 
 
-                            taxtypeclusive = listobj.getTax_type();
-                            taxtrateamt = listobj.getRate();
-                            Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
-                            Log.e(TAG, "taxtrateamt "+taxtrateamt);
+                            String isTaxRate = taxtrateamt;
+                            String isPecent = "%";
 
+                            String subStrinng = taxrname.replace("(", "").replace(")", "");
+
+                            if(!subStrinng.contains(isTaxRate+isPecent)){
+                                subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+                            }else{
+
+                            }
+
+
+                            Log.e(TAG, "subStrinngAA "+subStrinng);
+
+                            taxvalueText.setText("Tax (" + subStrinng + "" + ")");
 
 
                             SelectedTaxlist student = new SelectedTaxlist();
@@ -1457,7 +1473,19 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 //                                Log.e(TAG, "firstTaxAAA5 "+firstTax);
 //                                params.add("tax[" + i + "]" + "[title]", firstTax);
 //                            }else{
-                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                                String isTaxRate = selectedtaxt.get(i).getTaxrate();
+                                String isPecent = "%";
+
+                                String subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
+
+                                if(!subStrinng.contains(isTaxRate+isPecent)){
+                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
+                                }else if(subStrinng.contains(isTaxRate+isPecent)){
+                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
+                                }
+
+                                subStrinng = subStrinng.replace("incl." , "");
+                                params.add("tax[" + i + "]" + "[title]", subStrinng);
 //                            }
 //                        }
 
@@ -1475,7 +1503,19 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 //                                Log.e(TAG, "firstTaxAAA6 "+firstTax);
 //                                params.add("tax[" + i + "]" + "[title]", firstTax);
 //                            }else{
-                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                                String isTaxRate = selectedtaxt.get(i).getTaxrate();
+                                String isPecent = "%";
+
+                                String subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
+
+                                if(!subStrinng.contains(isTaxRate+isPecent)){
+                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
+                                }else if(subStrinng.contains(isTaxRate+isPecent)){
+                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
+                                }
+
+                                subStrinng = subStrinng.replace("incl." , "");
+                                params.add("tax[" + i + "]" + "[title]", subStrinng);
 //                            }
 //                        }
 
@@ -3616,8 +3656,14 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                     }else{
 
                     }
-                    txttax.setText( subStrinng + " Incl" ); //Dont do any change
-                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
+
+                    if(subStrinng.toLowerCase().contains("Incl".toLowerCase())){
+                        taxvalueText.setText("Tax (" + subStrinng + ")"); //Dont do any change
+                        txttax.setText(  subStrinng + "" ); //Dont do any change
+                    }else{
+                        taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
+                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
+                    }
 
 //                    if(taxrname.length() > 0){
 //                        if(taxrname.contains(" ")){
@@ -3658,7 +3704,12 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                         }else{
 
                         }
+
+
+                        subStrinng = subStrinng.replace("incl.", "");
+
                         txttax.setText(subStrinng); //Dont do any change
+
                         taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
 
 //                        if(taxrname.length() > 0){

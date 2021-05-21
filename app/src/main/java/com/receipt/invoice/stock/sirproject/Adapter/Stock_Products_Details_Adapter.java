@@ -15,6 +15,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Model.Stock_Products;
 import com.receipt.invoice.stock.sirproject.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Stock_Products_Details_Adapter extends RecyclerView.Adapter<Stock_Products_Details_Adapter.ViewHolderForCat> {
@@ -52,8 +53,9 @@ public class Stock_Products_Details_Adapter extends RecyclerView.Adapter<Stock_P
 
         }
         else {
-            viewHolderForCat.stock.setText("Quantity: "+stock_products.getTotal_quantity());
-
+            DecimalFormat formatter = new DecimalFormat("##,##,##,##0");
+            double vz = Double.parseDouble(stock_products.getTotal_quantity());
+            viewHolderForCat.stock.setText("Quantity: "+formatter.format(vz));
         }
 
         RequestOptions options = new RequestOptions();

@@ -720,13 +720,13 @@ public class Add_Company extends Fragment {
             Log.e(TAG, "AAAAAAAAAAA");
         }else{
             if (iban.equals("")){
-                Constant.ErrorToast(getActivity(),"Please select iban");
+                Constant.ErrorToast(getActivity(),"Please Enter IBAN");
                 isEntered = false;
             }else if(bank.equals("")){
-                Constant.ErrorToast(getActivity(),"Please select bank");
+                Constant.ErrorToast(getActivity(),"Please Enter Bank Name");
                 isEntered = false;
             }else if(swift.equals("")){
-                Constant.ErrorToast(getActivity(),"Please select swift");
+                Constant.ErrorToast(getActivity(),"Please Enter Swift BIC");
                 isEntered = false;
             }else{
                 isEntered = true;

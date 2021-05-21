@@ -986,38 +986,37 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         taxtrateamt = listobj.getRate();
 
                         //taxvalueText.setText("Tax "+taxrname);
-                        txttax.setText(""+title.replace("(","").replace(")",""));
+                        if(!taxrname.equalsIgnoreCase("")){
+                            txttax.setText(""+title.replace("(","").replace(")",""));
 
-                        Double taxVAL = Double.parseDouble(value);
-                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            tax.setText(formatter.format(taxVAL));
-                        } else {
-                            tax.setText(formatter.format(taxVAL) + currency_codedto);
-                        }
+                            Double taxVAL = Double.parseDouble(value);
+                            if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                                tax.setText(formatter.format(taxVAL));
+                            } else {
+                                tax.setText(formatter.format(taxVAL) + currency_codedto);
+                            }
 
-                       // tax.setText(""+value+currency_codedto);
+                            // tax.setText(""+value+currency_codedto);
 
+                            Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
+                            Log.e(TAG, "taxtrateamt "+taxtrateamt);
+                            Log.e(TAG, "taxrname "+taxrname);
 
+                            String isTaxRate = taxtrateamt;
+                            String isPecent = "%";
 
-                        Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
-                        Log.e(TAG, "taxtrateamt "+taxtrateamt);
-                        Log.e(TAG, "taxrname "+taxrname);
+                            String subStrinng = taxrname.replace("(", "").replace(")", "");
 
-                        String isTaxRate = taxtrateamt;
-                        String isPecent = "%";
+                            if(!subStrinng.contains(isTaxRate+isPecent)){
+                                subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+                            }else{
 
-                        String subStrinng = taxrname.replace("(", "").replace(")", "");
-
-                        if(!subStrinng.contains(isTaxRate+isPecent)){
-                            subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
-                        }else{
-
-                        }
+                            }
 
 
-                        Log.e(TAG, "subStrinngAA "+subStrinng);
+                            Log.e(TAG, "subStrinngAA "+subStrinng);
 
-                        taxvalueText.setText("Tax (" + subStrinng + "" + ")");
+                            taxvalueText.setText("Tax (" + subStrinng + "" + ")");
 
 //                        if (taxtypeclusive.toLowerCase().equalsIgnoreCase("Inclusive")) {
 //                            taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
@@ -1026,14 +1025,17 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 //                        }
 
 
-                        SelectedTaxlist student = new SelectedTaxlist();
+                            SelectedTaxlist student = new SelectedTaxlist();
 
-                        student.setTaxname(listobj.getTitle());
-                        student.setTaxrate(listobj.getRate());
-                        student.setTaxtype(tax_type);
-                        student.setTaxamount(value);
+                            student.setTaxname(listobj.getTitle());
+                            student.setTaxrate(listobj.getRate());
+                            student.setTaxtype(tax_type);
+                            student.setTaxamount(value);
 
-                        selectedtaxt.add(student);
+                            selectedtaxt.add(student);
+                        }
+
+
 
                     }
 
