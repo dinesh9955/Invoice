@@ -59,7 +59,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
     String colorCode = "#ffffff";
 
     ApiInterface apiInterface;
-    String company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "";
+    String company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "", cheque_payable_to ="";
 
     String credit_terms = "";
     String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "";
@@ -272,7 +272,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
                     companylogopath = companyDto.getLogo();
                 }
 
-                paypal_emailstr=companyDto.getPaypalEmail();
+
 
                 //invoice Data
                 invoiceDtoInvoice = data.getInvoice();
@@ -281,10 +281,16 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
                 due_date = invoiceDtoInvoice.getDueDate();
                 credit_terms = invoiceDtoInvoice.getCreditTerms();
                 ref_no = invoiceDtoInvoice.getRefNo();
+
                 payment_swift_bic = invoiceDtoInvoice.getPaymentSwiftBic();
                 payment_currency = invoiceDtoInvoice.getPaymentCurrency();
-
                 payment_iban = invoiceDtoInvoice.getPaymentIban();
+                paypal_emailstr = companyDto.getPaypalEmail();
+                payment_bank_name = companyDto.getPaymentBankName();
+                cheque_payable_to = companyDto.getChequePayableTo();
+
+                Log.e(TAG, "paypal_emailstrLL "+paypal_emailstr);
+
                 paid_amount_payment_method = invoiceDtoInvoice.getPaidAmountPaymentMethod();
                 Paymentamountdate = invoiceDtoInvoice.getPaidAmountDate();
                 currency_code = invoiceDtoInvoice.getCurrencySymbol();
@@ -691,6 +697,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
         String bycheckstrtxt="";
         String paypalstrtxt="";
         String bankstrtxt="";
+        String cheque_payableTo = "";
 
         Log.e(TAG, "strpaid_amount:: "+strpaid_amount);
 
@@ -709,6 +716,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
             bycheckstrtxt="";
             paypalstrtxt="";
             bankstrtxt="";
+            cheque_payableTo = "";
             hiddenpaidrow="hidden";
 
 
@@ -721,21 +729,68 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
             paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
 
 
+
             pemailpaidstr = paypal_emailstr;
             chektopaidmaount = strpaid_amount;
             payment_bankstr = payment_bank_name;
             payment_ibanstr = payment_iban;
             payment_currencystr = payment_currency;
             payment_swiftstr = payment_swift_bic;
+            cheque_payableTo = cheque_payable_to;
 
-            paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
+            if (cheque_payableTo.equalsIgnoreCase("") ||
+                    pemailpaidstr.equalsIgnoreCase("") ||
+                    payment_bankstr.equalsIgnoreCase("") ||
+                    payment_ibanstr.equalsIgnoreCase("") ||
+                    payment_swiftstr.equalsIgnoreCase("") ){
+                pemailpaidstr = "";
+                chektopaidmaount = "";
+                payment_bankstr = "";
+                payment_ibanstr = "";
+                payment_currencystr = "";
+                payment_swiftstr = "";
+                cheque_payableTo = "";
+
+                paimnetdetailstrtxt="";
+                bycheckstrtxt="";
+                paypalstrtxt="";
+                bankstrtxt="";
+
+            }else{
+                pemailpaidstr = paypal_emailstr;
+                chektopaidmaount = strpaid_amount;
+                payment_bankstr = payment_bank_name;
+                payment_ibanstr = payment_iban;
+                payment_currencystr = payment_currency;
+                payment_swiftstr = payment_swift_bic;
+                cheque_payableTo = cheque_payable_to;
+
+                paimnetdetailstrtxt=" Payment Details ";
+                bycheckstrtxt="By cheque :";
+                paypalstrtxt="Pay Pal :";
+                bankstrtxt="Bank :";
+            }
 
 
             hiddenpaidrow="";
         }
+
+
+        Log.e(TAG,"paimnetdetailstrtxtCCC "+paimnetdetailstrtxt);
+        Log.e(TAG,"bycheckstrtxtCCC "+bycheckstrtxt);
+        Log.e(TAG,"paypalstrtxtCCC "+paypalstrtxt);
+        Log.e(TAG,"bankstrtxtCCC "+bankstrtxt);
+
+        Log.e(TAG,"cheque_payableToCCC "+cheque_payableTo);
+        Log.e(TAG,"payment_bankstrCCC "+payment_bankstr);
+        Log.e(TAG,"payment_ibanstrCCC "+payment_ibanstr);
+        Log.e(TAG,"payment_currencystrCCC "+payment_currencystr);
+        Log.e(TAG,"payment_swiftstrCCC "+payment_swiftstr);
+        Log.e(TAG,"pemailpaidstrCCC "+pemailpaidstr);
+
+
+
+
         String strreferencenovalue="";
         String strreferencenotxtvalue="";
 
@@ -854,7 +909,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
             }
 
 
-            pemailpaidstr = "";
+
 
             try {
                 content = IOUtils.toString(getAssets().open(name))
@@ -879,16 +934,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
                         .replaceAll("Balance Due-", Blanceamountstr + Utility.getReplaceDollor(currency_code))
 
                         .replaceAll("SubTotal", subTotalTxt)
-//                        .replaceAll("Checkto", chektopaidmaount)
-                        .replaceAll("Checkto", "")
 
-                        .replaceAll("BankName", payment_bankstr)
-
-                        .replaceAll("Pemail", pemailpaidstr)
-                        .replaceAll("IBAN", payment_ibanstr)
-//                        .replaceAll("Currency", payment_currencystr)
-                        .replaceAll("Currency", "")
-                        .replaceAll("Swift/BICCode", payment_swiftstr)
 
                         .replaceAll("Client N", ""+stringBuilderBillTo.toString())
 //                        .replaceAll("Client A", sltcustomer_address)
@@ -910,16 +956,25 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
                         .replaceAll(" Discount ", discounttxtreplace)
                         .replaceAll("Reference No:", strreferencenotxtvalue)
                         .replaceAll("hide", hiddenpaidrow)
-//                        .replaceAll(" Payment Details ", paimnetdetailstrtxt)
-//                        .replaceAll("By cheque :", bycheckstrtxt)
-//                        .replaceAll("Pay Pal :", paypalstrtxt)
-//                        .replaceAll("Bank :", bankstrtxt)
-                        .replaceAll(" Payment Details ", "")
-                        .replaceAll("By cheque :", "")
-                        .replaceAll("Pay Pal :", "")
-                        .replaceAll("Bank :", "")
+
+
+                        .replaceAll("Checkto", cheque_payableTo)
+                        .replaceAll("BankName", payment_bankstr)
+                        .replaceAll("Pemail", pemailpaidstr)
+                        .replaceAll("IBAN", payment_ibanstr)
+                        .replaceAll("Currency", payment_currencystr)
+                        .replaceAll("Swift/BICCode", payment_swiftstr)
+
+                        .replaceAll(" Payment Details ", paimnetdetailstrtxt)
+                        .replaceAll("By cheque :", bycheckstrtxt)
+                        .replaceAll("Pay Pal :", paypalstrtxt)
+                        .replaceAll("Bank :", bankstrtxt)
+
+
                         .replaceAll("#799f6e", colorCode)
                         .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
+
+                Log.e(TAG, "pemailpaidstrVV "+pemailpaidstr);
 
             } catch (IOException e) {
                 e.printStackTrace();
