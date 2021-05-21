@@ -972,8 +972,11 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                         tax_type = listobj.getTax_type();
                         value = listobj.getValue();
+                        taxtypeclusive = listobj.getTax_type();
+                        taxtrateamt = listobj.getRate();
+                        taxrname = listobj.getTitle();
 
-                        taxvalueText.setText("Tax "+title);
+                        //taxvalueText.setText("Tax "+taxrname);
                         txttax.setText(""+title.replace("(","").replace(")",""));
 
                         Double taxVAL = Double.parseDouble(value);
@@ -982,13 +985,33 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         } else {
                             tax.setText(formatter.format(taxVAL) + currency_codedto);
                         }
-                        taxrname = listobj.getTitle();
 
-                        taxtypeclusive = listobj.getTax_type();
-                        taxtrateamt = listobj.getRate();
+
                         Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
                         Log.e(TAG, "taxtrateamt "+taxtrateamt);
 
+
+                        String isTaxRate = taxtrateamt;
+                        String isPecent = "%";
+
+                        String subStrinng = taxrname.replace("(", "").replace(")", "");
+
+                        if(!subStrinng.contains(isTaxRate+isPecent)){
+                            subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+                        }else{
+
+                        }
+
+
+                        Log.e(TAG, "subStrinngAA "+subStrinng);
+
+                        taxvalueText.setText("Tax (" + subStrinng);
+
+//                        if (taxtypeclusive.toLowerCase().equalsIgnoreCase("Inclusive")) {
+//                            taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
+//                        }else{
+//                            taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
+//                        }
 
 
                         SelectedTaxlist student = new SelectedTaxlist();
@@ -1471,7 +1494,24 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 //                                Log.e(TAG, "firstTaxAAA5 "+firstTax);
 //                                params.add("tax[" + i + "]" + "[title]", firstTax);
 //                            }else{
-                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                                String isTaxRate = selectedtaxt.get(i).getTaxrate();
+                                String isPecent = "%";
+
+                                String subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
+
+                                if(!subStrinng.contains(isTaxRate+isPecent)){
+                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
+                                }else if(subStrinng.contains(isTaxRate+isPecent)){
+                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
+                                }
+
+                                Log.e(TAG, "subStrinngAA "+subStrinng);
+        //                                txttax.setText(subStrinng+ " Incl"); //Dont do any change
+        //                                taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
+
+                                subStrinng = subStrinng.replace("incl." , "");
+
+                                params.add("tax[" + i + "]" + "[title]", subStrinng);
 //                            }
 //                        }
 
@@ -1489,7 +1529,24 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 //                                Log.e(TAG, "firstTaxAAA6 "+firstTax);
 //                                params.add("tax[" + i + "]" + "[title]", firstTax);
 //                            }else{
-                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                                String isTaxRate = selectedtaxt.get(i).getTaxrate();
+                                String isPecent = "%";
+
+                                String subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
+
+                                if(!subStrinng.contains(isTaxRate+isPecent)){
+                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
+                                }else if(subStrinng.contains(isTaxRate+isPecent)){
+                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
+                                }
+
+                                Log.e(TAG, "subStrinngAA "+subStrinng);
+        //                                txttax.setText(subStrinng+ " Incl"); //Dont do any change
+        //                                taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
+
+                                subStrinng = subStrinng.replace("incl." , "");
+
+                                params.add("tax[" + i + "]" + "[title]", subStrinng);
 //                            }
 //                        }
                     }
@@ -3667,7 +3724,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                      }
 
                     txttax.setText(subStrinng); //Dont do any change
-                    taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng); //Dont do any change
 
                     Log.e(TAG, "taxrname"+taxrname);
                     Log.e(TAG, "taxtrateamt"+taxtrateamt);
@@ -4632,7 +4689,9 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
 
         }
-        if (selected.size() < 0) {
+
+
+        if (shippingfirstname.equalsIgnoreCase("")) {
             Shiping_tostr = "";
         } else {
             Shiping_tostr = "Ship To:";

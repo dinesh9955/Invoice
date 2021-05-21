@@ -892,7 +892,13 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
 
                     else if (title.equals("Freight Cost")) {
                         Shippingamountdto = listobj.getValue();
-                        freight.setText(""+Shippingamountdto+currency_codedto);
+                        Double Discountamountstdbl = Double.parseDouble(Shippingamountdto);
+
+                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                            freight.setText(formatter.format(Discountamountstdbl));
+                        } else {
+                            freight.setText(formatter.format(Discountamountstdbl) + currency_codedto);
+                        }
 //                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
 //
 //                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {

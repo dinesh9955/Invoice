@@ -67,7 +67,7 @@ public class InvoiceToReceiptsWebview extends AppCompatActivity {
     ArrayList<String> producprice = new ArrayList<String>();
 
     String selectedTemplate = "";
-    String companycolor = "";
+    String companycolor = "#ffffff";
 
     StringBuilder stringBuilderBillTo = new StringBuilder();
     StringBuilder stringBuilderShipTo = new StringBuilder();
@@ -248,7 +248,7 @@ public class InvoiceToReceiptsWebview extends AppCompatActivity {
 
             taxText = getIntent().getStringExtra("taxText");
 
-            companycolor = getIntent().getStringExtra("companycolor");
+            //companycolor = getIntent().getStringExtra("companycolor");
             selectedTemplate = getIntent().getStringExtra("selectedTemplate");
 
             paypal_emailstr = getIntent().getStringExtra("paypal_emailstr");

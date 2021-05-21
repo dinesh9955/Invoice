@@ -721,8 +721,8 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
         if(templatestr.equals("1")) {
 
             if(templateSelect.equalsIgnoreCase("0")){
-                name = "estimate1.html";
-                nameName = "file:///android_asset/estimate1.html";
+                name = "estimate.html";
+                nameName = "file:///android_asset/estimate.html";
             }else if(templateSelect.equalsIgnoreCase("1")){
                 name = "estimate1.html";
                 nameName = "file:///android_asset/estimate1.html";
