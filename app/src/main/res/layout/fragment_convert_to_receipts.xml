@@ -602,7 +602,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_toRightOf="@id/s_receiver"
                 android:src="@drawable/code_success"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/c_stamp"
@@ -625,7 +625,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_toRightOf="@id/c_stamp"
                 android:src="@drawable/code_success"
-                android:visibility="visible"
+                android:visibility="gone"
 
                 />
 

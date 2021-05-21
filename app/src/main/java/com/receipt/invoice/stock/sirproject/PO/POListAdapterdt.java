@@ -63,7 +63,7 @@ public class POListAdapterdt extends RecyclerView.Adapter<POListAdapterdt.ViewHo
         final String invoicetotlaprice = company_list.getInvoicetotlaprice();
         final String strstatus = company_list.getInvocestatus();
         final String is_viewed = company_list.getIs_viewed();
-
+        final String voidStatus = company_list.getVoid_status();
 
 
         if (customer_name.equals("") && customer_name.equals("null")) {
@@ -80,7 +80,7 @@ public class POListAdapterdt extends RecyclerView.Adapter<POListAdapterdt.ViewHo
         if (invoicedue_date.equals("") && invoicedue_date.equals("null")) {
             viewHolderForCat.invoiceduetxt.setText("");
         } else {
-            viewHolderForCat.invoiceduetxt.setText(invoicedue_date);
+            viewHolderForCat.invoiceduetxt.setText("| Date: "+invoicedue_date);
         }
 
         if (invoicetotlaprice.equals("") && invoicetotlaprice.equals("null")) {
@@ -91,18 +91,48 @@ public class POListAdapterdt extends RecyclerView.Adapter<POListAdapterdt.ViewHo
             viewHolderForCat.invoicepricetxt.setText(formatter.format(stratingvalue)+" "+company_list.getPayment_currency());
         }
 
-        if (strstatus.equals("") && strstatus.equals("null")) {
-            viewHolderForCat.statustxt.setText("");
-        } else {
-            if (strstatus.equals("2")) {
-                viewHolderForCat.statustxt.setText("Paid");
-                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
+//        if (strstatus.equals("") && strstatus.equals("null")) {
+//            viewHolderForCat.statustxt.setText("");
+//        } else {
+//            if (strstatus.equals("2")) {
+//                viewHolderForCat.statustxt.setText("Paid");
+//                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
+//
+//            }else {
+//                viewHolderForCat.statustxt.setText("Unpaid");
+//                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
+//            }
+//        }
 
-            }else {
-                viewHolderForCat.statustxt.setText("Unpaid");
-                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
-            }
+
+        if(voidStatus.equalsIgnoreCase("1")){
+            viewHolderForCat.statustxt.setText("Void");
+            viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
+            viewHolderForCat.statustxt.setVisibility(View.VISIBLE);
+        }else{
+            viewHolderForCat.statustxt.setVisibility(View.GONE);
         }
+
+
+//        if (strstatus.equals("") && strstatus.equals("null")) {
+//            viewHolderForCat.statustxt.setText("");
+//        } else {
+//            if(voidStatus.equalsIgnoreCase("1")){
+//                viewHolderForCat.statustxt.setText("Void");
+//                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
+//            }else{
+//                if (strstatus.equals("2")) {
+//                    viewHolderForCat.statustxt.setText("Paid");
+//                    viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
+//
+//                }else {
+//                    viewHolderForCat.statustxt.setText("Unpaid");
+//                    viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//            }
+//
+//        }
+
 
         if (is_viewed.equalsIgnoreCase("0")) {
             viewHolderForCat.invoicesttsuspend.setText("Pending");
@@ -115,7 +145,7 @@ public class POListAdapterdt extends RecyclerView.Adapter<POListAdapterdt.ViewHo
         viewHolderForCat.invoicestatus.setVisibility(View.GONE);
         viewHolderForCat.invoicesttsuspend.setVisibility(View.GONE);
 
-        viewHolderForCat.statustxt.setVisibility(View.GONE);
+      //  viewHolderForCat.statustxt.setVisibility(View.GONE);
 
 
 //

@@ -68,7 +68,7 @@ public class ReceiptlistAdapterdt extends RecyclerView.Adapter<ReceiptlistAdapte
         if (invoicedue_date.equals("") && invoicedue_date.equals("null")) {
             viewHolderForCat.invoiceduetxt.setText("");
         } else {
-            viewHolderForCat.invoiceduetxt.setText(invoicedue_date);
+            viewHolderForCat.invoiceduetxt.setText("| Date: "+invoicedue_date);
         }
 
         if (invoicetotlaprice.equals("") && invoicetotlaprice.equals("null")) {

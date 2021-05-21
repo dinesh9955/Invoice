@@ -1323,10 +1323,15 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
         } else if (selectedCompanyId.equals("")) {
             Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select a Company");
 
-        } else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
-
-        } else if (credit_terms.equals("")) {
+        }
+//        else if (selectwarehouseId.equals("")) {
+//            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
+//
+//        }
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Product First");
+        }
+        else if (credit_terms.equals("")) {
             Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Credit Term");
 
         }  else {
@@ -2143,10 +2148,16 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                     } else if (credit_terms.equals("")) {
                         Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Credit Term");
                         bottomSheetDialog2.dismiss();
-                    } else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
+                    }
+//                    else if (selectwarehouseId.equals("")) {
+//                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Product First");
                         bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+                    else {
                         Customer_list customer_lists = selected.get(0);
                         Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
@@ -2553,6 +2564,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                             Toast.makeText(ConvertToInvoiceActivity.this, "Please Select One Value", Toast.LENGTH_LONG).show();
                         }
                     }
+
+                    credit_terms = txtdays.getText().toString();
 
                 }
 

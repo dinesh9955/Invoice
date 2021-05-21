@@ -971,6 +971,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
         avi.smoothToShow();
 
         Log.e(TAG , "invoicenovalue::"+getInvoiceValue(invoicenum.getText().toString()));
+        Log.e(TAG , "credit_terms::"+credit_terms);
+
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
             Constant.ErrorToast(getActivity(), "Select a Company");
@@ -990,11 +992,20 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 //        } else if (ref_no.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Ref number");
 
-        } else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select Warehouse");
+        }
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(getActivity(), "Select Product First");
             createinvoice.setEnabled(true);
-        } else if (producprice.isEmpty()) {
-            Constant.ErrorToast(getActivity(), "Select product First");
+        }
+
+//        else if (service_bottom.size() == 0) {
+//            if (selectwarehouseId.equals("")) {
+//                Constant.ErrorToast(getActivity(), "Select Warehouse");
+//                createinvoice.setEnabled(true);
+//            }
+//        }
+        else if (producprice.isEmpty()) {
+            Constant.ErrorToast(getActivity(), "Select Product First");
             bottomSheetDialog2.dismiss();
             createinvoice.setEnabled(true);
         } else {
@@ -1289,6 +1300,20 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
         }
 
     }
+
+//    private boolean isTrue() {
+//
+//        if
+//
+//         if (service_bottom.size() == 0) {
+//            if (selectwarehouseId.equals("")) {
+//                Constant.ErrorToast(getActivity(), "Select Warehouse");
+//                createinvoice.setEnabled(true);
+//            }
+//        }else{
+//
+//         }
+//    }
 
     private boolean getTrueValue(String toString) {
         boolean b = false;
@@ -1901,10 +1926,17 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     } else if (credit_terms.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select Credit Term");
                         bottomSheetDialog2.dismiss();
-                    }  else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Warehouse");
+                    }
+//                    else if (selectwarehouseId.equals("")) {
+//                        Constant.ErrorToast(getActivity(), "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
+
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(getActivity(), "Select Product First");
                         bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+                    else {
 
 
 //                        defaultClick = 1;
@@ -2333,6 +2365,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                                     edduedate.setText(duedate.getText().toString());
                                 }
 
+
+
                                 bottomSheetDialog.dismiss();
 
                             }
@@ -2341,6 +2375,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                             Toast.makeText(getActivity(), "Please Select One Value", Toast.LENGTH_LONG).show();
                         }
                     }
+
+                    credit_terms = txtdays.getText().toString();
 
                 }
 

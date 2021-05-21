@@ -1265,7 +1265,13 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 //        } else if (credit_terms.equals("")) {
 //            Constant.ErrorToast(EditReceiptActivity.this, "Select Credit Tearm");
 
-        }  else {
+        }
+
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(EditReceiptActivity.this, "Select Product First");
+        }
+
+        else {
 
             final ProgressDialog progressDialog = new ProgressDialog(EditReceiptActivity.this);
             progressDialog.setMessage("Please wait");
@@ -2072,7 +2078,14 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 //                    } else if (selectwarehouseId.equals("")) {
 //                        Constant.ErrorToast(EditReceiptActivity.this, "Select A Where House");
 //                        bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(EditReceiptActivity.this, "Select Product First");
+                        bottomSheetDialog2.dismiss();
+                    }
+
+                    else {
                         Customer_list customer_lists = selected.get(0);
                         Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
@@ -2446,10 +2459,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
                     }
 
-
-                    // myCalendar.set(Calendar.DAY_OF_MONTH, a);
-                    // updateLabe21();
-
+                    credit_terms = txtdays.getText().toString();
                 }
 
                 private Double toMilliSeconds(Double days) {
@@ -3590,7 +3600,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     }
 
                     txttax.setText(subStrinng); //Dont do any change
-                    taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
 //                    }
 
 

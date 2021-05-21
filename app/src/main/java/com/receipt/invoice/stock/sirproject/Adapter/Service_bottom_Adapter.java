@@ -113,7 +113,9 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
         }
         else
         {
-            viewHolderForCat.servicedescription.setText("Quantity Available:"+" "+service_quantity);
+            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            String producttotatlps=formatter.format(Double.parseDouble(service_quantity));
+            viewHolderForCat.servicedescription.setText("Quantity Available:"+" "+producttotatlps);
         }
 
 

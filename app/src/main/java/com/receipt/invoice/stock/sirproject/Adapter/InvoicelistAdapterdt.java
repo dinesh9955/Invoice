@@ -84,7 +84,7 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
         if (invoicedue_date.equals("") && invoicedue_date.equals("null")) {
             viewHolderForCat.invoiceduetxt.setText("");
         } else {
-            viewHolderForCat.invoiceduetxt.setText(invoicedue_date);
+            viewHolderForCat.invoiceduetxt.setText("| Due: "+invoicedue_date);
         }
 
         if (invoicetotlaprice.equals("") && invoicetotlaprice.equals("null")) {
@@ -121,48 +121,6 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
             viewHolderForCat.invoicesttsuspend.setText("Seen");
             viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#008000"));
         }
-
-
-//
-//                String invoiceStatus = "0";
-//                String invoice_useriddt = "";
-//
-//                String invoice_text = "0";
-//                int invoice_color = 0;
-//
-//                try {
-//                    invoiceStatus = mlist.get(i).getInvocestatus();
-//                    invoice_useriddt = mlist.get(i).getInvoice_userid();
-//                    Log.e("UinvoiceStatus", invoiceStatus);
-//
-//                    if (invoiceStatus.equals("1")) {
-//                        invoice_text = "Mark as unpaid";
-//                        invoice_color = R.color.red;
-//                        invoiceStatus = "2";
-//
-//
-//                    } else {
-//                        invoice_text = "Mark as Paid";
-//                        invoice_color = R.color.green;
-//                        invoiceStatus = "1";
-//
-//                    }
-//
-//                    //UpdateInvoiceStatusmethodh(invoiceStatus);
-//                } catch (Exception e) {
-//                    Log.e("MainActivity", e.getMessage());
-//                }
-//
-//
-//        String finalInvoiceStatus = invoiceStatus;
-//        viewHolderForCat.textViewLeftPaidUnPaid.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                notifyDataSetChanged();
-//                invoiceCallBack.callBack(finalInvoiceStatus);
-//
-//            }
-//        });
 
     }
 

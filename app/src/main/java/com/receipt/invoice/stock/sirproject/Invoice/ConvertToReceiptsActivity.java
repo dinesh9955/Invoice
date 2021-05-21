@@ -1005,7 +1005,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                         Log.e(TAG, "subStrinngAA "+subStrinng);
 
-                        taxvalueText.setText("Tax (" + subStrinng);
+                        taxvalueText.setText("Tax (" + subStrinng+")");
 
 //                        if (taxtypeclusive.toLowerCase().equalsIgnoreCase("Inclusive")) {
 //                            taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
@@ -1353,13 +1353,18 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         } else if (selectedCompanyId.equals("")) {
             Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select a Company");
 
-        } else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Warehouse");
-
-        } else if (credit_terms.equals("")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Credit Term");
-
-        }  else {
+        }
+//        else if (selectwarehouseId.equals("")) {
+//            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Warehouse");
+//        }
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Product First");
+        }
+//        else if (credit_terms.equals("")) {
+//            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Credit Term");
+//
+//        }
+        else {
 
             final ProgressDialog progressDialog = new ProgressDialog(ConvertToReceiptsActivity.this);
             progressDialog.setMessage("Please wait");
@@ -2175,13 +2180,20 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     } else if (customer_name.equals("")) {
                         Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Customer");
                         bottomSheetDialog2.dismiss();
-                    } else if (credit_terms.equals("")) {
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Credit Term");
+                    }
+//                    else if (credit_terms.equals("")) {
+//                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Credit Term");
+//                        bottomSheetDialog2.dismiss();
+//                    }
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Product First");
                         bottomSheetDialog2.dismiss();
-                    } else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Warehouse");
-                        bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+//                    else if (selectwarehouseId.equals("")) {
+//                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
+                    else {
                         Customer_list customer_lists = selected.get(0);
                         Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
@@ -2573,7 +2585,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                     // myCalendar.set(Calendar.DAY_OF_MONTH, a);
                     // updateLabe21();
-
+                    credit_terms = txtdays.getText().toString();
                 }
 
                 private Double toMilliSeconds(Double days) {
@@ -3724,7 +3736,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                      }
 
                     txttax.setText(subStrinng); //Dont do any change
-                    taxvalueText.setText("Tax (" + subStrinng); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng+")"); //Dont do any change
 
                     Log.e(TAG, "taxrname"+taxrname);
                     Log.e(TAG, "taxtrateamt"+taxtrateamt);

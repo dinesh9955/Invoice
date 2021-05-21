@@ -108,6 +108,7 @@ import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
 import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -1374,7 +1375,14 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
 //        } else if (credit_terms.equals("")) {
 //            Constant.ErrorToast(EditEditPVActivity.this, "Select Credit Term");
 
-        }  else {
+        }
+
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(EditEditPVActivity.this, "Select Product First");
+            bottomSheetDialog2.dismiss();
+        }
+
+        else {
 
             final ProgressDialog progressDialog = new ProgressDialog(EditEditPVActivity.this);
             progressDialog.setMessage("Please wait");
@@ -2158,7 +2166,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
         if (bottomSheetDialog2 != null) {
             View view = LayoutInflater.from(this).inflate(R.layout.dots_bottomsheet, null);
             btnviewinvoice = view.findViewById(R.id.btnviewinvoice);
-            btnviewinvoice.setText("View Purchase Order");
+            btnviewinvoice.setText("View Payment Voucher");
             btnclear = view.findViewById(R.id.btnclear);
             btndotcancel = view.findViewById(R.id.btndotcancel);
 
@@ -2207,7 +2215,14 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
 //                    } else if (selectwarehouseId.equals("")) {
 //                        Constant.ErrorToast(EditEditPVActivity.this, "Select Warehouse");
 //                        bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(EditEditPVActivity.this, "Select Product First");
+                        bottomSheetDialog2.dismiss();
+                    }
+
+                    else {
                         // Customer_list customer_lists = selected.get(0);
                         //  Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
@@ -2603,10 +2618,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
 
                     }
 
-
-                    // myCalendar.set(Calendar.DAY_OF_MONTH, a);
-                    // updateLabe21();
-
+                    credit_terms = txtdays.getText().toString();
                 }
 
                 private Double toMilliSeconds(Double days) {
@@ -3179,7 +3191,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(EditEditPVActivity.this, Customer_Activity.class);
+                    Intent intent = new Intent(EditEditPVActivity.this, Vendor_Activity.class);
                     startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

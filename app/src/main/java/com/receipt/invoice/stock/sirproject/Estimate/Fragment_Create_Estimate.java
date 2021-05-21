@@ -996,11 +996,11 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select A Where House");
 
-        } else if (producprice.isEmpty()) {
-            Constant.ErrorToast(getActivity(), "Select product First");
-            bottomSheetDialog2.dismiss();
+        } else if (tempList.size() == 0) {
+            Constant.ErrorToast(getActivity(), "Select Product First");
             createinvoice.setEnabled(true);
-        } else {
+        }
+        else {
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Please wait");
@@ -1866,7 +1866,14 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
 //                    }  else if (selectwarehouseId.equals("")) {
 //                        Constant.ErrorToast(getActivity(), "Select A Where House");
 //                        bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+
+                     else if (tempList.size() == 0) {
+                        Constant.ErrorToast(getActivity(), "Select Product First");
+                        bottomSheetDialog2.dismiss();
+                    }
+
+                    else {
 
 //                        defaultClick = 1;
 
@@ -2289,7 +2296,7 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
 
                     // myCalendar.set(Calendar.DAY_OF_MONTH, a);
                     // updateLabe21();
-
+                    credit_terms = txtdays.getText().toString();
                 }
 
                 private Double toMilliSeconds(Double days) {

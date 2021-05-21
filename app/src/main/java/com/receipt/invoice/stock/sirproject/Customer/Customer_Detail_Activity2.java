@@ -612,6 +612,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
 
 
 
+    @SuppressLint("LongLogTag")
     private void AddCustomer(){
 
         String companyname = name.getText().toString();
@@ -644,6 +645,14 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
 //                Constant.ErrorToast(activity,"Select Company");
 //            }
             else{
+                boolean isEnter = isEnter();
+
+                Log.e(TAG, "isEnterAA "+isEnter);
+
+                if(isEnter == false){
+                    return;
+                }
+
                 Utility.hideKeypad(activity);
                 avi.smoothToShow();
                 avibackground.setVisibility(View.VISIBLE);
@@ -852,6 +861,55 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
     }
 
 
+
+
+
+
+    @SuppressLint("LongLogTag")
+    private boolean isEnter() {
+
+        boolean isEntered = false;
+
+        String f_name = edfirstname.getText().toString();
+        String l_name = edlastname.getText().toString();
+        String address1 = edaddress1.getText().toString();
+        String address2 = edaddress2.getText().toString();
+        String city = edcity.getText().toString();
+        String postcode= edpostcode.getText().toString();
+        String country = edcountry.getText().toString();
+
+
+        if (f_name.equals("") && l_name.equals("") && address1.equals("") && address2.equals("") && city.equals("") && postcode.equals("") && country.equals("")) {
+            isEntered = true;
+            Log.e(TAG, "AAAAAAAAAAA");
+        }else{
+            if (f_name.equals("")){
+                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter First Name");
+                isEntered = false;
+            }else if(l_name.equals("")){
+                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter Last Name");
+                isEntered = false;
+            }else if(address1.equals("")){
+                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter Shipping Address 1");
+                isEntered = false;
+            }else if(address2.equals("")){
+                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter Shipping Address 2");
+                isEntered = false;
+            }else if(city.equals("")){
+                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter City");
+                isEntered = false;
+            }else if(postcode.equals("")){
+                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter Postcode");
+                isEntered = false;
+            }else if(country.equals("")){
+                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter Country");
+                isEntered = false;
+            }else{
+                isEntered = true;
+            }
+        }
+        return isEntered;
+    }
 
 
 

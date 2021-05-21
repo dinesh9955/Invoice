@@ -2289,7 +2289,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
 
                     }
 
-
+                    credit_terms = txtdays.getText().toString();
                     // myCalendar.set(Calendar.DAY_OF_MONTH, a);
                     // updateLabe21();
 

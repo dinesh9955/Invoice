@@ -113,6 +113,7 @@ import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
 import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -1340,7 +1341,12 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 //        } else if (credit_terms.equals("")) {
 //            Constant.ErrorToast(ConvertToPVActivity.this, "Select Credit Term");
 
-        }  else {
+        }
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(ConvertToPVActivity.this, "Select Product First");
+        }
+
+        else {
 
 //{"status":false,"message":{"credit_terms":"The Credit Terms field is required.","due_date":"The Due Date field is required."}}
 
@@ -2147,7 +2153,14 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 //                    } else if (selectwarehouseId.equals("")) {
 //                        Constant.ErrorToast(ConvertToPVActivity.this, "Select Warehouse");
 //                        bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(ConvertToPVActivity.this, "Select Product First");
+                        bottomSheetDialog2.dismiss();
+                    }
+
+                    else {
                         Customer_list customer_lists = selected.get(0);
                         Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
@@ -2548,9 +2561,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 
                     }
 
-
-                    // myCalendar.set(Calendar.DAY_OF_MONTH, a);
-                    // updateLabe21();
+                    credit_terms = txtdays.getText().toString();
 
                 }
 
@@ -3128,7 +3139,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(ConvertToPVActivity.this, Customer_Activity.class);
+                    Intent intent = new Intent(ConvertToPVActivity.this, Vendor_Activity.class);
                     startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

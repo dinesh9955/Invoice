@@ -79,6 +79,8 @@ import static android.content.Context.MODE_PRIVATE;
 public class Add_Customer extends Fragment {
 
 
+    private static final String TAG = "Add_Customer";
+
     public Add_Customer() {
     }
 // file for pic image
@@ -471,6 +473,7 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
         String cmobile= mobile.getText().toString();
         String cwebsite = website.getText().toString();
         String caddress = CompanyAddress.getText().toString();
+
         String f_name = edfirstname.getText().toString();
         String l_name = edlastname.getText().toString();
         String address1 = edaddress1.getText().toString();
@@ -493,6 +496,15 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                 Constant.ErrorToast(getActivity(),"Select Company");
             }
             else{
+
+                boolean isEnter = isEnter();
+
+                Log.e(TAG, "isEnterAA "+isEnter);
+
+                if(isEnter == false){
+                    return;
+                }
+
                 Utility.hideKeypad(getActivity());
                 avi.smoothToShow();
                 avibackground.setVisibility(View.VISIBLE);
@@ -734,6 +746,54 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
         }
 
     }
+
+
+
+    private boolean isEnter() {
+
+        boolean isEntered = false;
+
+        String f_name = edfirstname.getText().toString();
+        String l_name = edlastname.getText().toString();
+        String address1 = edaddress1.getText().toString();
+        String address2 = edaddress2.getText().toString();
+        String city = edcity.getText().toString();
+        String postcode= edpostcode.getText().toString();
+        String country = edcountry.getText().toString();
+
+
+        if (f_name.equals("") && l_name.equals("") && address1.equals("") && address2.equals("") && city.equals("") && postcode.equals("") && country.equals("")) {
+            isEntered = true;
+            Log.e(TAG, "AAAAAAAAAAA");
+        }else{
+            if (f_name.equals("")){
+                Constant.ErrorToast(getActivity(),"Please Enter First Name");
+                isEntered = false;
+            }else if(l_name.equals("")){
+                Constant.ErrorToast(getActivity(),"Please Enter Last Name");
+                isEntered = false;
+            }else if(address1.equals("")){
+                Constant.ErrorToast(getActivity(),"Please Enter Shipping Address 1");
+                isEntered = false;
+            }else if(address2.equals("")){
+                Constant.ErrorToast(getActivity(),"Please Enter Shipping Address 2");
+                isEntered = false;
+            }else if(city.equals("")){
+                Constant.ErrorToast(getActivity(),"Please Enter City");
+                isEntered = false;
+            }else if(postcode.equals("")){
+                Constant.ErrorToast(getActivity(),"Please Enter Postcode");
+                isEntered = false;
+            }else if(country.equals("")){
+                Constant.ErrorToast(getActivity(),"Please Enter Country");
+                isEntered = false;
+            }else{
+                isEntered = true;
+            }
+        }
+        return isEntered;
+    }
+
 
     public void companyget()
     {

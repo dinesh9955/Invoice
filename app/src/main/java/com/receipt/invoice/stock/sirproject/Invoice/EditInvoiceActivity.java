@@ -1370,10 +1370,16 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         } else if (selectedCompanyId.equals("")) {
             Constant.ErrorToast(EditInvoiceActivity.this, "Select a Company");
 
-        } else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
-
-        } else if (credit_terms.equals("")) {
+        }
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(EditInvoiceActivity.this, "Select Product First");
+            createinvoice.setEnabled(true);
+        }
+//        else if (selectwarehouseId.equals("")) {
+//            Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
+//
+//        }
+        else if (credit_terms.equals("")) {
             Constant.ErrorToast(EditInvoiceActivity.this, "Select Credit Term");
 
         }  else {
@@ -2230,10 +2236,16 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                     } else if (credit_terms.equals("")) {
                         Constant.ErrorToast(EditInvoiceActivity.this, "Select Credit Term");
                         bottomSheetDialog2.dismiss();
-                    } else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
+                    }
+//                    else if (selectwarehouseId.equals("")) {
+//                        Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(EditInvoiceActivity.this, "Select Product First");
                         bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+                    else {
                         Customer_list customer_lists = selected.get(0);
                         Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
@@ -2647,6 +2659,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         }
                     }
 
+                    credit_terms = txtdays.getText().toString();
                 }
 
                 private Double toMilliSeconds(Double days) {

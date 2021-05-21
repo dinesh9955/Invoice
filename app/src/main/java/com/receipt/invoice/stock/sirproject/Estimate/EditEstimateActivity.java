@@ -1326,7 +1326,13 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 //        } else if (credit_terms.equals("")) {
 //            Constant.ErrorToast(EditEstimateActivity.this, "Select Credit Tearm");
 
-        }  else {
+        }
+
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(EditEstimateActivity.this, "Select Product First");
+        }
+
+        else {
 
             final ProgressDialog progressDialog = new ProgressDialog(EditEstimateActivity.this);
             progressDialog.setMessage("Please wait");
@@ -2140,7 +2146,14 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 //                    } else if (selectwarehouseId.equals("")) {
 //                        Constant.ErrorToast(EditEstimateActivity.this, "Select A Where House");
 //                        bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(EditEstimateActivity.this, "Select Product First");
+                        bottomSheetDialog2.dismiss();
+                    }
+
+                    else {
                         Customer_list customer_lists = selected.get(0);
                         Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
@@ -2522,7 +2535,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
                     // myCalendar.set(Calendar.DAY_OF_MONTH, a);
                     // updateLabe21();
-
+                    credit_terms = txtdays.getText().toString();
                 }
 
                 private Double toMilliSeconds(Double days) {

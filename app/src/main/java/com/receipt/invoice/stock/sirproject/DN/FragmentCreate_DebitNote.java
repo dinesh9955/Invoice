@@ -100,6 +100,7 @@ import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -979,13 +980,18 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Where House");
 
+        }   else if (tempList.size() == 0) {
+                Constant.ErrorToast(getActivity(), "Select Product First");
+                bottomSheetDialog2.dismiss();
+        }
 
+//        } else if (producprice.isEmpty()) {
+//            Constant.ErrorToast(getActivity(), "Select product First");
+//            bottomSheetDialog2.dismiss();
+//            createinvoice.setEnabled(true);
+//        }
 
-        } else if (producprice.isEmpty()) {
-            Constant.ErrorToast(getActivity(), "Select product First");
-            bottomSheetDialog2.dismiss();
-            createinvoice.setEnabled(true);
-        } else {
+        else {
 
             Log.e(TAG, "selectwarehouseIdAA "+selectwarehouseId);
 
@@ -1810,7 +1816,14 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
 //                    }  else if (selectwarehouseId.equals("")) {
 //                        Constant.ErrorToast(getActivity(), "Select A Where House");
 //                        bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(getActivity(), "Select Product First");
+                        bottomSheetDialog2.dismiss();
+                    }
+
+                    else {
 
 //                        defaultClick = 1;
                         Intent intent = new Intent(getContext(), ViewDebitNote_Activity.class);
@@ -2221,7 +2234,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                         Toast.makeText(getActivity(), "Please Select One Value", Toast.LENGTH_LONG).show();
                     }
 
-
+                    credit_terms = txtdays.getText().toString();
                     // myCalendar.set(Calendar.DAY_OF_MONTH, a);
                     // updateLabe21();
 
@@ -2844,7 +2857,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), Customer_Activity.class);
+                    Intent intent = new Intent(getActivity(), Vendor_Activity.class);
                     getActivity().startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

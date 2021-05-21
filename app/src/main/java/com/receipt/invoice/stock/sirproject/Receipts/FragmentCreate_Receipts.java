@@ -994,11 +994,18 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select A Where House");
 
-        } else if (producprice.isEmpty()) {
-            Constant.ErrorToast(getActivity(), "Select product First");
+//        } else if (producprice.isEmpty()) {
+//            Constant.ErrorToast(getActivity(), "Select product First");
+//            bottomSheetDialog2.dismiss();
+//            createinvoice.setEnabled(true);
+        }
+
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(getActivity(), "Select Product First");
             bottomSheetDialog2.dismiss();
-            createinvoice.setEnabled(true);
-        } else {
+        }
+
+        else {
 
             Log.e(TAG , "strdiscountvalue " +Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
 
@@ -1838,7 +1845,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                         Constant.ErrorToast(getActivity(), "Select a Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Invoice Date");
+                        Constant.ErrorToast(getActivity(), "Select Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select A Customer");
@@ -1849,7 +1856,14 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 //                    }  else if (selectwarehouseId.equals("")) {
 //                        Constant.ErrorToast(getActivity(), "Select A Where House");
 //                        bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(getActivity(), "Select Product First");
+                        bottomSheetDialog2.dismiss();
+                    }
+
+                    else {
 
 //                        defaultClick = 1;
 
@@ -2262,10 +2276,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                         Toast.makeText(getActivity(), "Please Select One Value", Toast.LENGTH_LONG).show();
                     }
 
-
-                    // myCalendar.set(Calendar.DAY_OF_MONTH, a);
-                    // updateLabe21();
-
+                    credit_terms = txtdays.getText().toString();
                 }
 
                 private Double toMilliSeconds(Double days) {

@@ -110,6 +110,7 @@ import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
 import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -1357,10 +1358,15 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         } else if (selectedCompanyId.equals("")) {
             Constant.ErrorToast(EditPOActivity.this, "Select a Company");
 
-        } else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
-
-        } else if (credit_terms.equals("")) {
+        }
+//        else if (selectwarehouseId.equals("")) {
+//            Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
+//
+//        }
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(EditPOActivity.this, "Select Product First");
+        }
+        else if (credit_terms.equals("")) {
             Constant.ErrorToast(EditPOActivity.this, "Select Credit Term");
 
         }  else {
@@ -2187,10 +2193,18 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                     } else if (credit_terms.equals("")) {
                         Constant.ErrorToast(EditPOActivity.this, "Select Credit Term");
                         bottomSheetDialog2.dismiss();
-                    } else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
+                    }
+//                    else if (selectwarehouseId.equals("")) {
+//                        Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
+
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(EditPOActivity.this, "Select Product First");
                         bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+
+                    else {
                        // Customer_list customer_lists = selected.get(0);
                       //  Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
@@ -2607,6 +2621,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                         }
                     }
 
+                    credit_terms = txtdays.getText().toString();
                 }
 
                 private Double toMilliSeconds(Double days) {
@@ -3187,7 +3202,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(EditPOActivity.this, Customer_Activity.class);
+                    Intent intent = new Intent(EditPOActivity.this, Vendor_Activity.class);
                     startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

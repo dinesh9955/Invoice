@@ -993,14 +993,13 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Where House");
-
-
-
-        } else if (producprice.isEmpty()) {
-            Constant.ErrorToast(getActivity(), "Select product First");
+        }
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(getActivity(), "Select Product First");
             bottomSheetDialog2.dismiss();
             createinvoice.setEnabled(true);
-        } else {
+        }
+        else {
 
             Log.e(TAG, "selectwarehouseIdAA "+selectwarehouseId);
 
@@ -1820,7 +1819,14 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 //                    }  else if (selectwarehouseId.equals("")) {
 //                        Constant.ErrorToast(getActivity(), "Select A Where House");
 //                        bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(getActivity(), "Select Product First");
+                        bottomSheetDialog2.dismiss();
+                    }
+
+                    else {
 
 //                        defaultClick = 1;
                         Intent intent = new Intent(getContext(), ViewCreditNote_Activity.class);
@@ -2228,7 +2234,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                         Toast.makeText(getActivity(), "Please Select One Value", Toast.LENGTH_LONG).show();
                     }
 
-
+                    credit_terms = txtdays.getText().toString();
                     // myCalendar.set(Calendar.DAY_OF_MONTH, a);
                     // updateLabe21();
 

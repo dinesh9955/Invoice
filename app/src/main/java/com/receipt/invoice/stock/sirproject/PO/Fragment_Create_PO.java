@@ -101,6 +101,7 @@ import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -984,14 +985,19 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 //        } else if (ref_no.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Ref number");
 
-        } else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select Warehouse");
-            createinvoice.setEnabled(true);
-        } else if (producprice.isEmpty()) {
-            Constant.ErrorToast(getActivity(), "Select product First");
+        }
+//        else if (selectwarehouseId.equals("")) {
+//            Constant.ErrorToast(getActivity(), "Select Warehouse");
+//            createinvoice.setEnabled(true);
+//        }
+
+
+        else if (tempList.size() == 0) {
+            Constant.ErrorToast(getActivity(), "Select Product First");
             bottomSheetDialog2.dismiss();
-            createinvoice.setEnabled(true);
-        } else {
+        }
+
+        else {
 
             Log.e(TAG, "Selectedcustomer_id "+Selectedcustomer_id);
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
@@ -1863,10 +1869,18 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     } else if (credit_terms.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select Credit Term");
                         bottomSheetDialog2.dismiss();
-                    }  else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Warehouse");
+                    }
+//                    else if (selectwarehouseId.equals("")) {
+//                        Constant.ErrorToast(getActivity(), "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
+
+                    else if (tempList.size() == 0) {
+                        Constant.ErrorToast(getActivity(), "Select Product First");
                         bottomSheetDialog2.dismiss();
-                    } else {
+                    }
+
+                    else {
 
 
 //                        defaultClick = 1;
@@ -2299,6 +2313,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         }
                     }
 
+                    credit_terms = txtdays.getText().toString();
                 }
 
                 private Double toMilliSeconds(Double days) {
@@ -2921,7 +2936,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), Customer_Activity.class);
+                    Intent intent = new Intent(getActivity(), Vendor_Activity.class);
                     getActivity().startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

@@ -111,7 +111,10 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
         }
         else
         {
-            viewHolderForCat.productquantity.setText("Quantity Available: "+quantity);
+            Log.e(TAG, "quantityCCC "+quantity);
+            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            String producttotatlps=formatter.format(Double.parseDouble(quantity));
+            viewHolderForCat.productquantity.setText("Quantity Available: "+producttotatlps);
         }
         if (product_price.equals("") || product_price.equals("null"))
         {
