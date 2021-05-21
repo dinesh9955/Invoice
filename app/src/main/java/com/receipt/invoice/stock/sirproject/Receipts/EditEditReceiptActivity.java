@@ -1249,7 +1249,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
         if (customer_name.equals("")) {
             Constant.ErrorToast(EditEditReceiptActivity.this, "Select A Customer");
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
-            Constant.ErrorToast(EditEditReceiptActivity.this, "Select Valid Receipt No");
+            Constant.ErrorToast(EditEditReceiptActivity.this, "Receipt No. should be letters followed by Digits");
 
         }else if (invoice_date.equals("")) {
             Constant.ErrorToast(EditEditReceiptActivity.this, "Select Receipt Date");
@@ -4706,7 +4706,11 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
         String companyname = "";
         if (company_stamp.toLowerCase().endsWith(".jpg") || company_stamp.toLowerCase().endsWith(".jpeg") || company_stamp.toLowerCase().endsWith(".png")){
-            companyname = "Company Seal";
+            if(company_stamp.toLowerCase().endsWith("white_img.png")){
+                companyname = "";
+            }else{
+                companyname = "Company Seal";
+            }
         }else{
             company_stamp = "/android_res/drawable/white_img.png";
             companyname = "";
@@ -4715,7 +4719,11 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
         String signature_of_receivername = "";
         if (signatureofreceiverst.toLowerCase().endsWith(".jpg") || signatureofreceiverst.toLowerCase().endsWith(".jpeg") || signatureofreceiverst.toLowerCase().endsWith(".png")){
-            signature_of_receivername = "Signature of Receiver";
+            if(signatureofreceiverst.toLowerCase().endsWith("white_img.png")){
+                signature_of_receivername = "";
+            }else{
+                signature_of_receivername = "Signature of Receiver";
+            }
         }else{
             signatureofreceiverst = "/android_res/drawable/white_img.png";
             signature_of_receivername = "";
@@ -4724,11 +4732,16 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
         String signature_of_issuername = "";
         if (signature_of_issuer.toLowerCase().endsWith(".jpg") || signature_of_issuer.toLowerCase().endsWith(".jpeg") || signature_of_issuer.toLowerCase().endsWith(".png")){
-            signature_of_issuername = "Signature of Issuer";
+            if(signature_of_issuer.toLowerCase().endsWith("white_img.png")){
+                signature_of_issuername = "";
+            }else{
+                signature_of_issuername = "Signature of Issuer";
+            }
         }else{
             signature_of_issuer = "/android_res/drawable/white_img.png";
             signature_of_issuername = "";
         }
+
 
         String signatureinvoice = null;
          try {

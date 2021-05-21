@@ -522,44 +522,32 @@ public class ViewDebitNote_Activity extends AppCompatActivity {
             notestringvalue = "Notes:";
         }
 
+
+
         String signatureinvoice = null;
         String companyname = "";
-        if (company_stamp.equals("")) {
+        if (company_stamp.equals("") || company_stamp.endsWith("white_img.png")) {
             company_stamp = "/android_res/drawable/white_img.png";
             companyname = "";
-
         } else {
-
-
             companyname = "Company Seal";
-
-
         }
 
         String signature_of_receivername = "";
-        if (signature_of_receiver.equals("")) {
+        if (signature_of_receiver.equals("") || signature_of_receiver.endsWith("white_img.png")) {
             signature_of_receiver = "/android_res/drawable/white_img.png";
             signature_of_receivername = "";
-
         } else {
-
-
             signature_of_receivername = "Signature of Receiver";
-
-
         }
 
 
         String signature_of_issuername = "";
-        if (signature_of_issuer.equals("")) {
+        if (signature_of_issuer.equals("") || signature_of_issuer.endsWith("white_img.png")) {
             signature_of_issuer = "/android_res/drawable/white_img.png";
             signature_of_issuername = "";
-
         } else {
-
             signature_of_issuername = "Signature of Issuer";
-
-
         }
 
         try {

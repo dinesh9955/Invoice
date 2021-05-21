@@ -593,51 +593,40 @@ public class PVViewActivityWebView extends AppCompatActivity {
             notestringvalue="Notes:";
         }
 
+
         String signatureinvoice = null;
 
         String companyname="";
-
-        if(company_stamp.equals(""))
+        if(company_stamp.equals("") || company_stamp.endsWith("white_img.png"))
         {
             invoice_image_pathcompanystemp="/android_res/drawable/white_img.png";
-
             companyname="";
-
         }else {
-
             invoice_image_pathcompanystemp=invoice_image_path + company_stamp;
             companyname="Company Seal";
-
         }
 
         String signature_of_receivername="";
-        if(signature_of_receiver.equals(""))
+        if(signature_of_receiver.equals("") || signature_of_receiver.endsWith("white_img.png"))
         {
             invoice_image_pathreceiverpath="/android_res/drawable/white_img.png";
             signature_of_receivername="";
-
         }else {
-
             invoice_image_pathreceiverpath=invoice_image_path + signature_of_receiver;
             signature_of_receivername="SignatureofReceiver";
-
-
         }
 
 
         String signature_of_issuername="";
-        if(signature_of_issuer.equals(""))
+        if(signature_of_issuer.equals("") || signature_of_issuer.endsWith("white_img.png"))
         {
             invoice_image_pathissuverpath="/android_res/drawable/white_img.png";
             signature_of_issuername="";
-
         }else {
-
             invoice_image_pathissuverpath=invoice_image_path + signature_of_issuer;
             signature_of_issuername="Signature of Issuer";
-
-
         }
+
 
         try {
             signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))

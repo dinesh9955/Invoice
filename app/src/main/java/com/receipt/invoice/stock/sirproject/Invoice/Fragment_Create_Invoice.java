@@ -978,7 +978,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             Constant.ErrorToast(getActivity(), "Select a Company");
             createinvoice.setEnabled(true);
         } else if (getTrueValue(invoicenum.getText().toString()) == false) {
-            Constant.ErrorToast(getActivity(), "Select Valid Invoice No");
+            Constant.ErrorToast(getActivity(), "Invoice No. should be letters followed by Digits");
             createinvoice.setEnabled(true);
         }else if (invoice_date.equals("")) {
             Constant.ErrorToast(getActivity(), "Select Invoice Date");
@@ -2014,8 +2014,9 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
                         startActivity(intent);
 
-
-
+                        Log.e(TAG, "signature_of_issuerZZ "+signature_of_issuer);
+                        Log.e(TAG, "signatureofreceiverstZZ "+signatureofreceiverst);
+                        Log.e(TAG, "company_stampZZ "+company_stamp);
                         //viewPDF();
 
 
@@ -4249,7 +4250,11 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
         String companyname = "";
         if (company_stamp.toLowerCase().endsWith(".jpg") || company_stamp.toLowerCase().endsWith(".jpeg") || company_stamp.toLowerCase().endsWith(".png")){
-            companyname = "Company Seal";
+            if(company_stamp.toLowerCase().endsWith("white_img.png")){
+                companyname = "";
+            }else{
+                companyname = "Company Seal";
+            }
         }else{
             company_stamp = "/android_res/drawable/white_img.png";
             companyname = "";
@@ -4258,7 +4263,11 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
         String signature_of_receivername = "";
         if (signatureofreceiverst.toLowerCase().endsWith(".jpg") || signatureofreceiverst.toLowerCase().endsWith(".jpeg") || signatureofreceiverst.toLowerCase().endsWith(".png")){
-            signature_of_receivername = "Signature of Receiver";
+            if(signatureofreceiverst.toLowerCase().endsWith("white_img.png")){
+                signature_of_receivername = "";
+            }else{
+                signature_of_receivername = "Signature of Receiver";
+            }
         }else{
             signatureofreceiverst = "/android_res/drawable/white_img.png";
             signature_of_receivername = "";
@@ -4267,7 +4276,11 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
         String signature_of_issuername = "";
         if (signature_of_issuer.toLowerCase().endsWith(".jpg") || signature_of_issuer.toLowerCase().endsWith(".jpeg") || signature_of_issuer.toLowerCase().endsWith(".png")){
-            signature_of_issuername = "Signature of Issuer";
+            if(signature_of_issuer.toLowerCase().endsWith("white_img.png")){
+                signature_of_issuername = "";
+            }else{
+                signature_of_issuername = "Signature of Issuer";
+            }
         }else{
             signature_of_issuer = "/android_res/drawable/white_img.png";
             signature_of_issuername = "";
