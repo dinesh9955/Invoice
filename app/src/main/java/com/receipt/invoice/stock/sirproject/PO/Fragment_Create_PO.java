@@ -965,6 +965,10 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
     }
 
+
+
+
+
     private void createinvoicewithdetail(File file) {
         avi.smoothToShow();
 
@@ -1042,6 +1046,14 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             params.add("payment_swift_bic", payment_swift_bic);
             params.add("cheque_payable_to", cheque_payable_to);
             params.add("paypal_email", paypal_emailstr);
+
+            Log.e(TAG,"payment_bank_name "+payment_bank_name);
+            Log.e(TAG,"payment_currency "+payment_currency);
+            Log.e(TAG,"payment_iban "+payment_iban);
+            Log.e(TAG,"payment_swift_bic "+payment_swift_bic);
+            Log.e(TAG,"cheque_payable_to "+cheque_payable_to);
+            Log.e(TAG,"paypal_emailstr "+paypal_emailstr);
+
 
             params.add("logo", "logofile");
             params.add("template_type", ""+selectedTemplate);
@@ -4284,7 +4296,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             }
 
             pemailpaidstr = paypal_emailstr;
-            chektopaidmaount = paid_amount_payment;
             payment_bankstr = payment_bank_name;
             payment_ibanstr = payment_iban;
             payment_currencystr = payment_currency;
@@ -4292,39 +4303,47 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             cheque_payableTo = cheque_payable_to;
 
 
-            if (cheque_payableTo.equalsIgnoreCase("") ||
-                    pemailpaidstr.equalsIgnoreCase("") ||
-                    payment_bankstr.equalsIgnoreCase("") ||
-                    payment_ibanstr.equalsIgnoreCase("") ||
-                    payment_swiftstr.equalsIgnoreCase("") ){
-                pemailpaidstr = "";
-                chektopaidmaount = "";
-                payment_bankstr = "";
-                payment_ibanstr = "";
-                payment_currencystr = "";
-                payment_swiftstr = "";
+            if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
-
-                paimnetdetailstrtxt="";
-                bycheckstrtxt="";
-                paypalstrtxt="";
-                bankstrtxt="";
-
             }else{
-                pemailpaidstr = paypal_emailstr;
-                chektopaidmaount = paid_amount_payment;
-                payment_bankstr = payment_bank_name;
-                payment_ibanstr = payment_iban;
-                payment_currencystr = payment_currency;
-                payment_swiftstr = payment_swift_bic;
                 cheque_payableTo = cheque_payable_to;
-
-                paimnetdetailstrtxt=" Payment Details ";
-                bycheckstrtxt="By cheque :";
-                paypalstrtxt="Pay Pal :";
-                bankstrtxt="Bank :";
             }
 
+            if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
+                pemailpaidstr = "";
+            }else{
+                pemailpaidstr = paypal_emailstr;
+            }
+
+            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+                payment_bankstr = "";
+            }else{
+                payment_bankstr = payment_bank_name;
+            }
+
+            if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
+                payment_ibanstr = "";
+            }else{
+                payment_ibanstr = payment_iban;
+            }
+
+            if ( Utility.isEmptyNull(payment_swiftstr).equalsIgnoreCase("")){
+                payment_swiftstr = "";
+            }else{
+                payment_swiftstr = payment_swift_bic;
+            }
+
+            if ( Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                payment_currencystr = "";
+            }else{
+                payment_currencystr = payment_currency;
+            }
+
+
+            paimnetdetailstrtxt=" Payment Details ";
+            bycheckstrtxt="By cheque :";
+            paypalstrtxt="Pay Pal :";
+            bankstrtxt="Bank :";
 
             hiddenpaidrow="";
         }

@@ -742,7 +742,6 @@ public class ViewInvoice_Activity extends AppCompatActivity {
 
 
             pemailpaidstr = paypal_emailstr;
-            chektopaidmaount = paid_amount_payment;
             payment_bankstr = payment_bank_name;
             payment_ibanstr = payment_iban;
             payment_currencystr = payment_currency;
@@ -750,45 +749,51 @@ public class ViewInvoice_Activity extends AppCompatActivity {
             cheque_payableTo = cheque_payable_to;
 
 
-
-
-
-            if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("") ||
-                    Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("") ||
-                    Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("") ||
-                    Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("") ||
-                    Utility.isEmptyNull(payment_swiftstr).equalsIgnoreCase("") ){
-                pemailpaidstr = "";
-                chektopaidmaount = "";
-                payment_bankstr = "";
-                payment_ibanstr = "";
-                payment_currencystr = "";
-                payment_swiftstr = "";
+            if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
+            }else{
+                cheque_payableTo = cheque_payable_to;
+            }
 
-                paimnetdetailstrtxt="";
-                bycheckstrtxt="";
-                paypalstrtxt="";
-                bankstrtxt="";
-
+            if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
+                pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
-                chektopaidmaount = paid_amount_payment;
-                payment_bankstr = payment_bank_name;
-                payment_ibanstr = payment_iban;
-                payment_currencystr = payment_currency;
-                payment_swiftstr = payment_swift_bic;
-                cheque_payableTo = cheque_payable_to;
+            }
 
-                paimnetdetailstrtxt=" Payment Details ";
-                bycheckstrtxt="By cheque :";
-                paypalstrtxt="Pay Pal :";
-                bankstrtxt="Bank :";
+            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+                payment_bankstr = "";
+            }else{
+                payment_bankstr = payment_bank_name;
+            }
+
+            if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
+                payment_ibanstr = "";
+            }else{
+                payment_ibanstr = payment_iban;
+            }
+
+            if ( Utility.isEmptyNull(payment_swiftstr).equalsIgnoreCase("")){
+                payment_swiftstr = "";
+            }else{
+                payment_swiftstr = payment_swift_bic;
+            }
+
+            if ( Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                payment_currencystr = "";
+            }else{
+                payment_currencystr = payment_currency;
             }
 
 
+            paimnetdetailstrtxt=" Payment Details ";
+            bycheckstrtxt="By cheque :";
+            paypalstrtxt="Pay Pal :";
+            bankstrtxt="Bank :";
+
             hiddenpaidrow="";
         }
+
 
 
         Log.e(TAG,"paimnetdetailstrtxtCCC "+paimnetdetailstrtxt);

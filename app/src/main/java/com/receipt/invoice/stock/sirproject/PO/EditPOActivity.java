@@ -285,7 +285,10 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
     String invoicecompanyiddto;
     //For Intent
-    String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "";
+    String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "";
+
+    String payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "", cheque_payable_to = ""  , paypal_emailstr = "";;
+
     String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
     String invoice_no = "", invoice_due_date = "", invoice_date = "", credit_terms = "", reference_no = "";
     String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "", taxamount, netamountvalue;
@@ -295,7 +298,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
     ArrayList<String> rate = new ArrayList<>();
 
-    String paypal_emailstr = "";
+
     // pick image from galary and
     Context applicationContext = Companies_Activity.getContextOfApplication();
     FileCompressor mCompressor;
@@ -651,7 +654,8 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                 Log.e(TAG, "jsonAA "+json2);
 
                 paid_amount_date = invoiceDtoInvoice.getPaidAmountDate();
-
+                Paymentamountdate = paid_amount_date;
+                Log.e(TAG, "paid_amount_date "+paid_amount_date);
 
                 invoicenumberdto = invoiceDtoInvoice.getPurchase_order_no();
                 // where House id
@@ -1388,17 +1392,24 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             params.add("warehouse_id", selectwarehouseId);
             params.add("order_date", invoice_date);
             params.add("due_date", invoice_due_date);
+
             params.add("customer_id", customer_id);
             Log.e(TAG, "customer_idBB"+customer_id);
             params.add("supplier_id", customer_id);
+
             params.add("notes", strnotes);
             params.add("ref_no", ref_no);
+            Log.e(TAG, "paymentmodeXXX "+paymentmode);
             params.add("paid_amount_payment_method", paymentmode);
             params.add("credit_terms", credit_terms);
             params.add("freight_cost", Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
             params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+
             params.add("paid_amount", strpaid_amount);
+            Log.e(TAG, "strpaid_amountXXX "+strpaid_amount);
+            Log.e(TAG, "PaymentamountdateXXX "+Paymentamountdate);
             params.add("paid_amount_date", Paymentamountdate);
+
             params.add("shipping_firstname", shippingfirstname);
             params.add("shipping_lastname", shippinglastname);
             params.add("shipping_address_1", shippingaddress1);
@@ -1406,11 +1417,13 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             params.add("shipping_city", shippingcity);
             params.add("shipping_postcode", shippingpostcode);
             params.add("shipping_country", shippingcountry);
+
             params.add("payment_bank_name", payment_bank_name);
             params.add("payment_currency", payment_currency);
             params.add("payment_iban", payment_iban);
             params.add("payment_swift_bic", payment_swift_bic);
-
+            params.add("cheque_payable_to", cheque_payable_to);
+            params.add("paypal_email", paypal_emailstr);
 
             params.add("template_type", ""+selectedTemplate);
 
@@ -2249,10 +2262,21 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                         intent.putExtra("paid_amount", strpaid_amount);
                         intent.putExtra("paid_amount_date", Paymentamountdate);
                         Log.e(TAG, "Paymentamountdate2 "+Paymentamountdate);
+
+
+                        Log.e(TAG,"cheque_payableToCCC "+payment_bank_name);
+                        Log.e(TAG,"payment_bankstrCCC "+paypal_emailstr);
+                        Log.e(TAG,"payment_ibanstrCCC "+payment_currency);
+                        Log.e(TAG,"payment_currencystrCCC "+payment_iban);
+                        Log.e(TAG,"payment_swiftstrCCC "+payment_swift_bic);
+
                         intent.putExtra("payment_bank_name", payment_bank_name);
+                        intent.putExtra("paypal_emailstr", paypal_emailstr);
                         intent.putExtra("payment_currency", payment_currency);
                         intent.putExtra("payment_iban", payment_iban);
                         intent.putExtra("payment_swift_bic", payment_swift_bic);
+                        intent.putExtra("cheque_payable_to", cheque_payable_to);
+
                         intent.putExtra("producprice", producprice);
                         intent.putExtra("totalpriceproduct", totalpriceproduct);
 
@@ -3307,11 +3331,14 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                             company_contact = item.getString("phone_number");
                             company_email = item.getString("email");
                             company_website = item.getString("website");
+
                             payment_bank_name = item.getString("payment_bank_name");
                             payment_currency = item.getString("payment_currency");
                             payment_iban = item.getString("payment_iban");
                             payment_swift_bic = item.getString("payment_swift_bic");
                             paypal_emailstr = item.getString("paypal_email");
+                            cheque_payable_to = item.getString("cheque_payable_to");
+
                             companylogopath = company_image_path + logo;
                             Log.e("companylogopath", companylogopath);
 
@@ -5127,6 +5154,8 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         }
 
 
+
+
         String paidamountstrrepvalue = "";
         String paidamountstrreptxt = "";
         String paidamountstrreplace = "";
@@ -5140,6 +5169,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         String bycheckstrtxt="";
         String paypalstrtxt="";
         String bankstrtxt="";
+        String cheque_payableTo = "";
 
         Log.e(TAG, "strpaid_amount:: "+strpaid_amount);
 
@@ -5157,6 +5187,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             bycheckstrtxt="";
             paypalstrtxt="";
             bankstrtxt="";
+            cheque_payableTo = "";
             hiddenpaidrow="hidden";
 
             paidamountstrrepvalue = "";
@@ -5165,26 +5196,72 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount;
 
-            paidamountstrreptxt = "Paid Amount";
+            if(Paymentamountdate.equalsIgnoreCase("")){
+                paidamountstrreptxt = "Paid Amount ";
+            }else{
+                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+            }
+
 
 //            paidamountstrreptxt = "Paid Amount "+"("+Paymentamountdate+")";
 
 
             pemailpaidstr = paypal_emailstr;
-            chektopaidmaount = paid_amount_payment;
             payment_bankstr = payment_bank_name;
             payment_ibanstr = payment_iban;
             payment_currencystr = payment_currency;
             payment_swiftstr = payment_swift_bic;
+            cheque_payableTo = cheque_payable_to;
+
+
+            if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
+                cheque_payableTo = "";
+            }else{
+                cheque_payableTo = cheque_payable_to;
+            }
+
+            if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
+                pemailpaidstr = "";
+            }else{
+                pemailpaidstr = paypal_emailstr;
+            }
+
+            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+                payment_bankstr = "";
+            }else{
+                payment_bankstr = payment_bank_name;
+            }
+
+            if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
+                payment_ibanstr = "";
+            }else{
+                payment_ibanstr = payment_iban;
+            }
+
+            if ( Utility.isEmptyNull(payment_swiftstr).equalsIgnoreCase("")){
+                payment_swiftstr = "";
+            }else{
+                payment_swiftstr = payment_swift_bic;
+            }
+
+            if ( Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                payment_currencystr = "";
+            }else{
+                payment_currencystr = payment_currency;
+            }
+
 
             paimnetdetailstrtxt=" Payment Details ";
             bycheckstrtxt="By cheque :";
             paypalstrtxt="Pay Pal :";
             bankstrtxt="Bank :";
 
-
             hiddenpaidrow="";
         }
+
+
+
+
         String strreferencenovalue="";
         String strreferencenotxtvalue="";
 
@@ -5268,14 +5345,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                     .replaceAll("Balance Due-", ""+Utility.getContainsReplaceCurrency(Blanceamountstr, cruncycode))
 
                     .replaceAll("SubTotal", subTotalTxt)
-//                    .replaceAll("Checkto", chektopaidmaount)
-                    .replaceAll("Checkto", "")
-                    .replaceAll("BankName", payment_bankstr)
-                    .replaceAll("Pemail", pemailpaidstr)
-                    .replaceAll("IBAN", payment_ibanstr)
-//                    .replaceAll("Currency", payment_currencystr)
-                    .replaceAll("Currency", "")
-                    .replaceAll("Swift/BICCode", payment_swiftstr)
+
 
                     .replaceAll("Client N", ""+stringBuilderBillTo.toString())
 //                    .replaceAll("Client A", sltcustomer_address)
@@ -5299,16 +5369,17 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
                     .replaceAll("#799f6e", companycolor)
 
-//
-//                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
-//                    .replaceAll("By cheque :", bycheckstrtxt)
-//                    .replaceAll("Pay Pal :", paypalstrtxt)
-//                    .replaceAll("Bank :", bankstrtxt)
+                    .replaceAll("Checkto", cheque_payableTo)
+                    .replaceAll("BankName", payment_bankstr)
+                    .replaceAll("Pemail", pemailpaidstr)
+                    .replaceAll("IBAN", payment_ibanstr)
+                    .replaceAll("Currency", payment_currencystr)
+                    .replaceAll("Swift/BICCode", payment_swiftstr)
 
-                    .replaceAll(" Payment Details ", "")
-                    .replaceAll("By cheque :", "")
-                    .replaceAll("Pay Pal :", "")
-                    .replaceAll("Bank :", "")
+                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
+                    .replaceAll("By cheque :", bycheckstrtxt)
+                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("Bank :", bankstrtxt)
 
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
 
