@@ -632,7 +632,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
 
                 // new DownloadsImagefromweblogoCom().execute(companylogopathdtodt);
 
-
+                company_name = Selectedcompanyname;
                 selectedCompanyId = companyDto.getCompanyId();
                 Log.e("selectedCompanyId", selectedCompanyId);
 

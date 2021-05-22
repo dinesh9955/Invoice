@@ -3121,6 +3121,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                             company_contact = item.getString("phone_number");
                             company_email = item.getString("email");
                             company_website = item.getString("website");
+
                             payment_bank_name = item.getString("payment_bank_name");
                             payment_currency = item.getString("payment_currency");
                             payment_iban = item.getString("payment_iban");
@@ -4492,10 +4493,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             }
 
 
-
             hiddenpaidrow="";
         }
-
 
 
 

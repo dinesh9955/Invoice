@@ -4972,6 +4972,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
         try {
 
             Log.e(TAG , "ShipingdetailAAA "+Shipingdetail);
+            Log.e(TAG , "company_nameAAA "+company_name);
 
             content = IOUtils.toString(getAssets().open(name))
                     .replaceAll("Company Name", company_name)

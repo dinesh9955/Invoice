@@ -41,7 +41,8 @@ public class ViewPO_Activity extends AppCompatActivity {
     private static final String TAG = "ViewInvoice_Activity";
     WebView invoiceweb;
 
-    String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency, payment_iban, payment_swift_bic;
+    String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "";
+    String payment_bank_name = "", paypal_emailstr= "", payment_currency = "", payment_iban = "", payment_swift_bic = "", cheque_payable_to = "";
     String customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "";
     String  credit_terms = "";
     String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "";
@@ -72,7 +73,7 @@ public class ViewPO_Activity extends AppCompatActivity {
     StringBuilder stringBuilderShipTo = new StringBuilder();
 
 
-    String paypal_emailstr = "", sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
+    String sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
     String strnotes = "",  ref_no ="", paid_amount_payment_method = "", freight_cost = "", strdiscountvalue = "", strpaid_amount = "", companylogopath = "", Grossamount_str = "", Subtotalamount = "", taxamount = "", netamountvalue = "", Blanceamountstr = "";
     String shippingzone = "", Paymentamountdate = "", shippingfirstname = "", shippinglastname = "", shippingaddress1 = "", shippingaddress2 = "", shippingcity = "", shippingpostcode = "", shippingcountry;
     ArrayList<Customer_list> customerinfo;
@@ -266,11 +267,13 @@ public class ViewPO_Activity extends AppCompatActivity {
             shippingcity = getIntent().getStringExtra("shipping_city");
             shippingpostcode = getIntent().getStringExtra("shipping_postcode");
             shippingcountry = getIntent().getStringExtra("shipping_country");
-            payment_bank_name = getIntent().getStringExtra("payment_bank_name");
 
+            payment_bank_name = getIntent().getStringExtra("payment_bank_name");
+            paypal_emailstr = getIntent().getStringExtra("paypal_emailstr");
+            payment_currency = getIntent().getStringExtra("payment_currency");
             payment_iban = getIntent().getStringExtra("payment_iban");
             payment_swift_bic = getIntent().getStringExtra("payment_swift_bic");
-            payment_currency = getIntent().getStringExtra("payment_currency");
+            cheque_payable_to = getIntent().getStringExtra("cheque_payable_to");
 
             company_name = getIntent().getStringExtra("company_name");
             company_address = getIntent().getStringExtra("company_address");
@@ -654,7 +657,9 @@ public class ViewPO_Activity extends AppCompatActivity {
         Log.e(TAG, "companylogopathVV "+companylogopath);
         Log.e(TAG, "companyimagelogopathVV "+companyimagelogopath);
 
-        String paidamountstrrepvalue = "";
+
+
+          String paidamountstrrepvalue = "";
         String paidamountstrreptxt = "";
         String paidamountstrreplace = "";
         String chektopaidmaount = "";
@@ -667,6 +672,7 @@ public class ViewPO_Activity extends AppCompatActivity {
         String bycheckstrtxt="";
         String paypalstrtxt="";
         String bankstrtxt="";
+        String cheque_payableTo = "";
 
         Log.e(TAG, "strpaid_amount:: "+strpaid_amount);
 
@@ -684,13 +690,14 @@ public class ViewPO_Activity extends AppCompatActivity {
             bycheckstrtxt="";
             paypalstrtxt="";
             bankstrtxt="";
+            cheque_payableTo = "";
             hiddenpaidrow="hidden";
 
 
 
         } else {
             // null response or Exception occur
-            paidamountstrrepvalue =strpaid_amount;
+            paidamountstrrepvalue = strpaid_amount;
 
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
                 paidamountstrreptxt = "Paid Amount ";
@@ -699,22 +706,71 @@ public class ViewPO_Activity extends AppCompatActivity {
             }
 
 
+            pemailpaidstr = paypal_emailstr;
+            chektopaidmaount = paid_amount_payment;
+            payment_bankstr = payment_bank_name;
+            payment_ibanstr = payment_iban;
+            payment_currencystr = payment_currency;
+            payment_swiftstr = payment_swift_bic;
+            cheque_payableTo = cheque_payable_to;
 
-//            pemailpaidstr = paypal_emailstr;
-//            chektopaidmaount = paid_amount_payment;
-//            payment_bankstr = payment_bank_name;
-//            payment_ibanstr = payment_iban;
-//            payment_currencystr = payment_currency;
-//            payment_swiftstr = payment_swift_bic;
 
-            paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
+
+
+
+            if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("") ||
+                    Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("") ||
+                    Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("") ||
+                    Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("") ||
+                    Utility.isEmptyNull(payment_swiftstr).equalsIgnoreCase("") ){
+                pemailpaidstr = "";
+                chektopaidmaount = "";
+                payment_bankstr = "";
+                payment_ibanstr = "";
+                payment_currencystr = "";
+                payment_swiftstr = "";
+                cheque_payableTo = "";
+
+                paimnetdetailstrtxt="";
+                bycheckstrtxt="";
+                paypalstrtxt="";
+                bankstrtxt="";
+
+            }else{
+                pemailpaidstr = paypal_emailstr;
+                chektopaidmaount = paid_amount_payment;
+                payment_bankstr = payment_bank_name;
+                payment_ibanstr = payment_iban;
+                payment_currencystr = payment_currency;
+                payment_swiftstr = payment_swift_bic;
+                cheque_payableTo = cheque_payable_to;
+
+                paimnetdetailstrtxt=" Payment Details ";
+                bycheckstrtxt="By cheque :";
+                paypalstrtxt="Pay Pal :";
+                bankstrtxt="Bank :";
+            }
 
 
             hiddenpaidrow="";
         }
+
+
+        Log.e(TAG,"paimnetdetailstrtxtCCC "+paimnetdetailstrtxt);
+        Log.e(TAG,"bycheckstrtxtCCC "+bycheckstrtxt);
+        Log.e(TAG,"paypalstrtxtCCC "+paypalstrtxt);
+        Log.e(TAG,"bankstrtxtCCC "+bankstrtxt);
+
+        Log.e(TAG,"cheque_payableToCCC "+cheque_payableTo);
+        Log.e(TAG,"payment_bankstrCCC "+payment_bankstr);
+        Log.e(TAG,"payment_ibanstrCCC "+payment_ibanstr);
+        Log.e(TAG,"payment_currencystrCCC "+payment_currencystr);
+        Log.e(TAG,"payment_swiftstrCCC "+payment_swiftstr);
+
+
+
+
+
         String strreferencenovalue="";
         String strreferencenotxtvalue="";
 
@@ -762,8 +818,8 @@ public class ViewPO_Activity extends AppCompatActivity {
         if(!company_contact.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_contact+"</br>");
         }
-        if(!companywebsitestr.equalsIgnoreCase("")){
-            stringBuilderCompany.append(companywebsitestr+"</br>");
+        if(!company_website.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_website+"</br>");
         }
         if(!company_email.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_email+"");
@@ -796,14 +852,6 @@ public class ViewPO_Activity extends AppCompatActivity {
                     .replaceAll("Balance Due-", Utility.getReplaceDollor(Blanceamountstr))
 
                     .replaceAll("SubTotal", subTotalTxt)
-//                    .replaceAll("Checkto", chektopaidmaount)
-                    .replaceAll("Checkto", "")
-                    .replaceAll("BankName", payment_bankstr)
-                    .replaceAll("Pemail", pemailpaidstr)
-                    .replaceAll("IBAN", payment_ibanstr)
-//                    .replaceAll("Currency", payment_currencystr)
-                    .replaceAll("Currency", "")
-                    .replaceAll("Swift/BICCode", payment_swiftstr)
 
                     .replaceAll("Client N", ""+stringBuilderBillTo.toString())
 //                    .replaceAll("Client A", sltcustomer_address)
@@ -828,15 +876,17 @@ public class ViewPO_Activity extends AppCompatActivity {
                     .replaceAll("#799f6e", companycolor)
 
 
-//                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
-//                    .replaceAll("By cheque :", bycheckstrtxt)
-//                    .replaceAll("Pay Pal :", paypalstrtxt)
-//                    .replaceAll("Bank :", bankstrtxt)
+                    .replaceAll("Checkto", cheque_payableTo)
+                    .replaceAll("BankName", payment_bankstr)
+                    .replaceAll("Pemail", pemailpaidstr)
+                    .replaceAll("IBAN", payment_ibanstr)
+                    .replaceAll("Currency", payment_currencystr)
+                    .replaceAll("Swift/BICCode", payment_swiftstr)
 
-                    .replaceAll(" Payment Details ", "")
-                    .replaceAll("By cheque :", "")
-                    .replaceAll("Pay Pal :", "")
-                    .replaceAll("Bank :", "")
+                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
+                    .replaceAll("By cheque :", bycheckstrtxt)
+                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("Bank :", bankstrtxt)
 
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
 

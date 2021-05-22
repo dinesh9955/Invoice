@@ -244,7 +244,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
 
     //For Intent
-    String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "";
+    String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "";
     String invoice_no = "", invoice_due_date = "", invoice_date = "", credit_terms = "", reference_no = "";
     String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "";
     String s_r = "0";
@@ -295,7 +295,10 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
     String Selectedcompanyname, taxrname;
     //
     String companycolor = "#ffffff";
-    String paypal_emailstr = "";
+
+
+    String paypal_emailstr = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "", cheque_payable_to = "";
+
     //web View For PDF FILE
     WebView webViewpdffile;
     WebView invoiceweb;
@@ -1032,10 +1035,14 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             params.add("shipping_city", shippingcity);
             params.add("shipping_postcode", shippingpostcode);
             params.add("shipping_country", shippingcountry);
+
             params.add("payment_bank_name", payment_bank_name);
             params.add("payment_currency", payment_currency);
             params.add("payment_iban", payment_iban);
             params.add("payment_swift_bic", payment_swift_bic);
+            params.add("cheque_payable_to", cheque_payable_to);
+            params.add("paypal_email", paypal_emailstr);
+
             params.add("logo", "logofile");
             params.add("template_type", ""+selectedTemplate);
 
@@ -1914,12 +1921,13 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         intent.putExtra("shipping_city", shippingcity);
                         intent.putExtra("shipping_postcode", shippingpostcode);
                         intent.putExtra("shipping_country", shippingcountry);
-                        intent.putExtra("payment_bank_name", payment_bank_name);
 
+                        intent.putExtra("payment_bank_name", payment_bank_name);
                         intent.putExtra("paypal_emailstr", paypal_emailstr);
                         intent.putExtra("payment_currency", payment_currency);
                         intent.putExtra("payment_iban", payment_iban);
                         intent.putExtra("payment_swift_bic", payment_swift_bic);
+                        intent.putExtra("cheque_payable_to", cheque_payable_to);
 
                         Log.e(TAG, "companyimagelogopathAA "+companylogopath);
                         intent.putExtra("company_logo", companylogopath);
@@ -3044,13 +3052,13 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                             company_contact = item.getString("phone_number");
                             company_email = item.getString("email");
                             company_website = item.getString("website");
+
                             payment_bank_name = item.getString("payment_bank_name");
                             payment_currency = item.getString("payment_currency");
                             payment_iban = item.getString("payment_iban");
                             payment_swift_bic = item.getString("payment_swift_bic");
-
                             paypal_emailstr = item.getString("paypal_email");
-
+                            cheque_payable_to = item.getString("cheque_payable_to");
 
                             companylogopath = company_image_path + logo;
                             Log.e("companylogopath", companylogopath);
@@ -4244,7 +4252,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
         String bycheckstrtxt="";
         String paypalstrtxt="";
         String bankstrtxt="";
-
+        String cheque_payableTo = "";
 
         if (strpaid_amount.equals("0")) {
             // Do you work here on success
@@ -4260,6 +4268,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             bycheckstrtxt="";
             paypalstrtxt="";
             bankstrtxt="";
+            cheque_payableTo = "";
             hiddenpaidrow="hidden";
 
 
@@ -4274,23 +4283,68 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
             }
 
-
-
             pemailpaidstr = paypal_emailstr;
             chektopaidmaount = paid_amount_payment;
             payment_bankstr = payment_bank_name;
             payment_ibanstr = payment_iban;
             payment_currencystr = payment_currency;
             payment_swiftstr = payment_swift_bic;
+            cheque_payableTo = cheque_payable_to;
 
-            paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
+
+            if (cheque_payableTo.equalsIgnoreCase("") ||
+                    pemailpaidstr.equalsIgnoreCase("") ||
+                    payment_bankstr.equalsIgnoreCase("") ||
+                    payment_ibanstr.equalsIgnoreCase("") ||
+                    payment_swiftstr.equalsIgnoreCase("") ){
+                pemailpaidstr = "";
+                chektopaidmaount = "";
+                payment_bankstr = "";
+                payment_ibanstr = "";
+                payment_currencystr = "";
+                payment_swiftstr = "";
+                cheque_payableTo = "";
+
+                paimnetdetailstrtxt="";
+                bycheckstrtxt="";
+                paypalstrtxt="";
+                bankstrtxt="";
+
+            }else{
+                pemailpaidstr = paypal_emailstr;
+                chektopaidmaount = paid_amount_payment;
+                payment_bankstr = payment_bank_name;
+                payment_ibanstr = payment_iban;
+                payment_currencystr = payment_currency;
+                payment_swiftstr = payment_swift_bic;
+                cheque_payableTo = cheque_payable_to;
+
+                paimnetdetailstrtxt=" Payment Details ";
+                bycheckstrtxt="By cheque :";
+                paypalstrtxt="Pay Pal :";
+                bankstrtxt="Bank :";
+            }
 
 
             hiddenpaidrow="";
         }
+
+
+
+        Log.e(TAG,"paimnetdetailstrtxtCCC "+paimnetdetailstrtxt);
+        Log.e(TAG,"bycheckstrtxtCCC "+bycheckstrtxt);
+        Log.e(TAG,"paypalstrtxtCCC "+paypalstrtxt);
+        Log.e(TAG,"bankstrtxtCCC "+bankstrtxt);
+
+        Log.e(TAG,"cheque_payableToCCC "+cheque_payableTo);
+        Log.e(TAG,"payment_bankstrCCC "+payment_bankstr);
+        Log.e(TAG,"payment_ibanstrCCC "+payment_ibanstr);
+        Log.e(TAG,"payment_currencystrCCC "+payment_currencystr);
+        Log.e(TAG,"payment_swiftstrCCC "+payment_swiftstr);
+
+
+
+
         String strreferencenovalue="";
         String strreferencenotxtvalue="";
 
@@ -4382,12 +4436,8 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
 
                     .replaceAll("SubTotal", subTotalTxt)
-                    .replaceAll("Checkto", "")
-                    .replaceAll("BankName", payment_bankstr)
-                    .replaceAll("Pemail", pemailpaidstr)
-                    .replaceAll("IBAN", payment_ibanstr)
-                    .replaceAll("Currency", "")
-                    .replaceAll("Swift/BICCode", payment_swiftstr)
+
+
 
                     .replaceAll("Client N", ""+stringBuilderBillTo.toString())
 //                    .replaceAll("Client A", sltcustomer_address)
@@ -4412,10 +4462,19 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                     .replaceAll("#799f6e", companycolor)
 
 
-                    .replaceAll(" Payment Details ", "")
-                    .replaceAll("By cheque :", "")
-                    .replaceAll("Pay Pal :", "")
-                    .replaceAll("Bank :", "")
+                    .replaceAll("Checkto", cheque_payableTo)
+                    .replaceAll("BankName", payment_bankstr)
+                    .replaceAll("Pemail", pemailpaidstr)
+                    .replaceAll("IBAN", payment_ibanstr)
+                    .replaceAll("Currency", payment_currencystr)
+                    .replaceAll("Swift/BICCode", payment_swiftstr)
+
+                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
+                    .replaceAll("By cheque :", bycheckstrtxt)
+                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("Bank :", bankstrtxt)
+
+
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
 
 

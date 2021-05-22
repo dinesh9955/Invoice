@@ -263,6 +263,10 @@ public class ReceiptViewActivityWebView extends AppCompatActivity {
                 company_website = companyDto.getWebsite();
                 company_email = companyDto.getEmail();
 
+                Log.e(TAG, "websiteL "+company_website);
+
+
+
                 if (companyDto.getLogo() != null)
                 {
                     companylogopath = companyDto.getLogo();
@@ -817,8 +821,8 @@ public class ReceiptViewActivityWebView extends AppCompatActivity {
             if(!company_contact.equalsIgnoreCase("")){
                 stringBuilderCompany.append(company_contact+"</br>");
             }
-            if(!companywebsitestr.equalsIgnoreCase("")){
-                stringBuilderCompany.append(companywebsitestr+"</br>");
+            if(!company_website.equalsIgnoreCase("")){
+                stringBuilderCompany.append(company_website+"</br>");
             }
             if(!company_email.equalsIgnoreCase("")){
                 stringBuilderCompany.append(company_email+"");

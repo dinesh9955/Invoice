@@ -549,7 +549,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
-//        companyget();
+        //companyget();
         getinvoicedata();
 
 
@@ -629,7 +629,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                 // new DownloadsImagefromweblogoCom().execute(companylogopathdtodt);
 
-
+                company_name = Selectedcompanyname;
                 selectedCompanyId = companyDto.getCompanyId();
                 Log.e("selectedCompanyId", selectedCompanyId);
 
@@ -2902,7 +2902,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
-                Log.e("responsecompany", response);
+                Log.e(TAG, "responsecompanyAA "+ response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -5384,6 +5384,9 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         if(!company_email.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_email+"");
         }
+
+        Log.e(TAG, "company_nameAAA "+company_name);
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
