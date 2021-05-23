@@ -375,6 +375,8 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
 
                             String hasPhone =c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
 
+                            Log.e(TAG, "hasPhone "+hasPhone);
+
                             if (hasPhone.equalsIgnoreCase("1")) {
                                 Cursor phones = getActivity().getContentResolver().query(
                                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,
@@ -382,20 +384,19 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                                         null, null);
                                 phones.moveToFirst();
                                 contactnumber = phones.getString(phones.getColumnIndex("data1"));
+
+                                Log.e(TAG, "contactnumber "+contactnumber);
                             }
                             contactname = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
                             name.setText(contactname);
                             contactperson.setText(contactname);
                             mobile.setText(contactnumber);
-
+                            phone.setText(contactnumber);
                         }
                     }
 
             }
-
-
-
 
     }
 

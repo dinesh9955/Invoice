@@ -1236,7 +1236,12 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             }
 
 
-            Log.e("postingallparams",params.toString());
+            Log.e(TAG, "postingallparams"+params.toString());
+
+            Gson gson = new Gson();
+            String json = gson.toJson(params.toString());
+
+            Log.e(TAG, "jsonDD "+json);
 
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             Log.e("token", token);

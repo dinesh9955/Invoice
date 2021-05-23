@@ -556,7 +556,7 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
-                Log.e("responsecustomers", response);
+                Log.e(TAG, "responsecustomers"+ response);
                 avi.smoothToHide();
 
                 try {

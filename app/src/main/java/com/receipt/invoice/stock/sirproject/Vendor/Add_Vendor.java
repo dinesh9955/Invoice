@@ -366,7 +366,7 @@ public class Add_Vendor extends Fragment {
                     name.setText(contactname);
                     contactperson.setText(contactname);
                     mobile.setText(contactnumber);
-
+                    phone.setText(contactnumber);
                 }
             }
 
