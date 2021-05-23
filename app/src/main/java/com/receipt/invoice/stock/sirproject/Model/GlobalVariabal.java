@@ -2,15 +2,18 @@ package com.receipt.invoice.stock.sirproject.Model;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.multidex.MultiDex;
-
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class GlobalVariabal  extends Application {
 
+
+    private static final String TAG = "GlobalVariabal";
 
     public static String getCurencycode() {
         return Curencycode;
@@ -81,6 +84,22 @@ public class GlobalVariabal  extends Application {
 
     private  String  templatevariable;
 
+
+
+
+    FirebaseCrashlytics crashlytics;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        try {
+            crashlytics = FirebaseCrashlytics.getInstance();
+            crashlytics.log("Start logging!");
+            crashlytics.setCustomKey("DeviceName", "Android" );
+            crashlytics.setCustomKey("Email", "dinesh.kumar@apptunix.com");
+        }catch (Exception e) {
+            Log.e(TAG , "getMessage3 "+e.getMessage());
+        }
+    }
 
     @Override
     protected void attachBaseContext(Context base) {
