@@ -1373,17 +1373,20 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             Constant.ErrorToast(EditInvoiceActivity.this, "Select a Company");
 
         }
+
+         else if (selectwarehouseId.equals("")) {
+            Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
+            createinvoice.setEnabled(true);
+        }
+
         else if (tempList.size() == 0) {
             Constant.ErrorToast(EditInvoiceActivity.this, "Select Product First");
             createinvoice.setEnabled(true);
         }
-//        else if (selectwarehouseId.equals("")) {
-//            Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
-//
-//        }
+
         else if (credit_terms.equals("")) {
             Constant.ErrorToast(EditInvoiceActivity.this, "Select Credit Term");
-
+            createinvoice.setEnabled(true);
         }  else {
 
             final ProgressDialog progressDialog = new ProgressDialog(EditInvoiceActivity.this);
@@ -2242,10 +2245,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         Constant.ErrorToast(EditInvoiceActivity.this, "Select Credit Term");
                         bottomSheetDialog2.dismiss();
                     }
-//                    else if (selectwarehouseId.equals("")) {
-//                        Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
-//                        bottomSheetDialog2.dismiss();
-//                    }
+                    else if (selectwarehouseId.equals("")) {
+                        Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
+                        bottomSheetDialog2.dismiss();
+                    }
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(EditInvoiceActivity.this, "Select Product First");
                         bottomSheetDialog2.dismiss();

@@ -1363,10 +1363,10 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             Constant.ErrorToast(EditPOActivity.this, "Select a Company");
 
         }
-//        else if (selectwarehouseId.equals("")) {
-//            Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
-//
-//        }
+        else if (selectwarehouseId.equals("")) {
+            Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
+
+        }
         else if (tempList.size() == 0) {
             Constant.ErrorToast(EditPOActivity.this, "Select Product First");
         }
@@ -2207,10 +2207,10 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                         Constant.ErrorToast(EditPOActivity.this, "Select Credit Term");
                         bottomSheetDialog2.dismiss();
                     }
-//                    else if (selectwarehouseId.equals("")) {
-//                        Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
-//                        bottomSheetDialog2.dismiss();
-//                    }
+                    else if (selectwarehouseId.equals("")) {
+                        Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
+                        bottomSheetDialog2.dismiss();
+                    }
 
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(EditPOActivity.this, "Select Product First");

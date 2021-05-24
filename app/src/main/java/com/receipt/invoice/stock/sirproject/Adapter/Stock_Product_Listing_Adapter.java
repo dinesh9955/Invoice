@@ -99,7 +99,7 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
         }
         else
         {
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0");
+            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
             double vz = Double.parseDouble(value);
 
@@ -151,7 +151,7 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
         }
         else
         {
-            viewHolderForCat.productcurrency.setText(product_price.replace(".00",""));
+            viewHolderForCat.productcurrency.setText(product_price);
 
         }
 

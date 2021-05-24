@@ -991,8 +991,9 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 //        } else if (ref_no.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Ref number");
 
-//        } else if (selectwarehouseId.equals("")) {
-//            Constant.ErrorToast(getActivity(), "Select Where House");
+        } else if (selectwarehouseId.equals("")) {
+            Constant.ErrorToast(getActivity(), "Select Warehouse");
+            createinvoice.setEnabled(true);
         }
         else if (tempList.size() == 0) {
             Constant.ErrorToast(getActivity(), "Select Product First");
@@ -1819,6 +1820,11 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 //                    }  else if (selectwarehouseId.equals("")) {
 //                        Constant.ErrorToast(getActivity(), "Select A Where House");
 //                        bottomSheetDialog2.dismiss();
+
+
+                    } else if (selectwarehouseId.equals("")) {
+                        Constant.ErrorToast(getActivity(), "Select Warehouse");
+                        bottomSheetDialog2.dismiss();
                     }
 
                     else if (tempList.size() == 0) {

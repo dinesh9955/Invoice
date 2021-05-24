@@ -993,10 +993,11 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 //            Constant.ErrorToast(getActivity(), "Select Ref number");
 
         }
-//        else if (selectwarehouseId.equals("")) {
-//            Constant.ErrorToast(getActivity(), "Select Warehouse");
-//            createinvoice.setEnabled(true);
-//        }
+
+        else if (selectwarehouseId.equals("")) {
+            Constant.ErrorToast(getActivity(), "Select Warehouse");
+            createinvoice.setEnabled(true);
+        }
 
 
         else if (tempList.size() == 0) {
@@ -1889,10 +1890,10 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         Constant.ErrorToast(getActivity(), "Select Credit Term");
                         bottomSheetDialog2.dismiss();
                     }
-//                    else if (selectwarehouseId.equals("")) {
-//                        Constant.ErrorToast(getActivity(), "Select Warehouse");
-//                        bottomSheetDialog2.dismiss();
-//                    }
+                    else if (selectwarehouseId.equals("")) {
+                        Constant.ErrorToast(getActivity(), "Select Warehouse");
+                        bottomSheetDialog2.dismiss();
+                    }
 
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(getActivity(), "Select Product First");

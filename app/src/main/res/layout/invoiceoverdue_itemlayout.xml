@@ -15,15 +15,15 @@
         android:background="@drawable/invoiceoverdue_curve"
         >
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/user_03"
-            app:riv_corner_radius="100dp"
+            android:src="@drawable/app_icon"
             android:id="@+id/image"
+            android:scaleType="centerCrop"
            />
 
 

@@ -1324,10 +1324,11 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select a Company");
 
         }
-//        else if (selectwarehouseId.equals("")) {
-//            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
-//
-//        }
+        else if (selectwarehouseId.equals("")) {
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
+
+        }
+
         else if (tempList.size() == 0) {
             Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Product First");
         }
@@ -2149,10 +2150,10 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Credit Term");
                         bottomSheetDialog2.dismiss();
                     }
-//                    else if (selectwarehouseId.equals("")) {
-//                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
-//                        bottomSheetDialog2.dismiss();
-//                    }
+                    else if (selectwarehouseId.equals("")) {
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
+                        bottomSheetDialog2.dismiss();
+                    }
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Product First");
                         bottomSheetDialog2.dismiss();

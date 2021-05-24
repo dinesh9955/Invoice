@@ -980,9 +980,13 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Where House");
 
+        } else if (selectwarehouseId.equals("")) {
+            Constant.ErrorToast(getActivity(), "Select Warehouse");
+            createinvoice.setEnabled(true);
         }   else if (tempList.size() == 0) {
                 Constant.ErrorToast(getActivity(), "Select Product First");
                 bottomSheetDialog2.dismiss();
+            createinvoice.setEnabled(true);
         }
 
 //        } else if (producprice.isEmpty()) {

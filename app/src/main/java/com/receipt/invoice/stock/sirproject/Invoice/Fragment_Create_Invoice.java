@@ -993,22 +993,21 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 //            Constant.ErrorToast(getActivity(), "Select Ref number");
 
         }
+
+        else if (selectwarehouseId.equals("")) {
+                Constant.ErrorToast(getActivity(), "Select Warehouse");
+                createinvoice.setEnabled(true);
+        }
+
         else if (tempList.size() == 0) {
             Constant.ErrorToast(getActivity(), "Select Product First");
             createinvoice.setEnabled(true);
         }
 
-//        else if (service_bottom.size() == 0) {
-//            if (selectwarehouseId.equals("")) {
-//                Constant.ErrorToast(getActivity(), "Select Warehouse");
-//                createinvoice.setEnabled(true);
-//            }
-//        }
-        else if (producprice.isEmpty()) {
-            Constant.ErrorToast(getActivity(), "Select Product First");
-            bottomSheetDialog2.dismiss();
-            createinvoice.setEnabled(true);
-        } else {
+
+
+
+       else {
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Please wait");
@@ -1944,10 +1943,10 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                         Constant.ErrorToast(getActivity(), "Select Credit Term");
                         bottomSheetDialog2.dismiss();
                     }
-//                    else if (selectwarehouseId.equals("")) {
-//                        Constant.ErrorToast(getActivity(), "Select Warehouse");
-//                        bottomSheetDialog2.dismiss();
-//                    }
+                    else if (selectwarehouseId.equals("")) {
+                        Constant.ErrorToast(getActivity(), "Select Warehouse");
+                        bottomSheetDialog2.dismiss();
+                    }
 
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(getActivity(), "Select Product First");

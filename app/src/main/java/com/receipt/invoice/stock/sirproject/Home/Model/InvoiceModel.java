@@ -7,7 +7,7 @@ public class InvoiceModel {
     public String paid_amount_date="";
     public String invoice_id="";
     public String invoice_no="";
-
+    public String customer_logo ="";
     public String customer_name="";
 
     public String currency_id="";
@@ -15,6 +15,15 @@ public class InvoiceModel {
     public String total="";
     public String payment_currency="";
     public String due_date ="";
+
+
+    public String getCustomer_logo() {
+        return customer_logo;
+    }
+
+    public void setCustomer_logo(String customer_logo) {
+        this.customer_logo = customer_logo;
+    }
 
     public String getDue_date() {
         return due_date;

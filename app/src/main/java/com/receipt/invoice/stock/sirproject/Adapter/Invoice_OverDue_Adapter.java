@@ -18,6 +18,8 @@ import com.receipt.invoice.stock.sirproject.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by Fawad on 4/1/2020.
  */
@@ -50,7 +52,7 @@ public class Invoice_OverDue_Adapter extends RecyclerView.Adapter<Invoice_OverDu
 
     @Override
     public void onBindViewHolder(@NonNull final Invoice_OverDue_Adapter.ViewHolderForCat viewHolderForCat, final int i) {
-        Glide.with(mcontext).load("").placeholder(R.drawable.app_icon).into(viewHolderForCat.image);
+        Glide.with(mcontext).load(invoiceModelArrayList.get(i).customer_logo).placeholder(R.drawable.app_icon).into(viewHolderForCat.image);
         viewHolderForCat.name.setText(invoiceModelArrayList.get(i).getInvoice_no());
         viewHolderForCat.companyname.setText(invoiceModelArrayList.get(i).getCustomer_name());
 
@@ -73,7 +75,7 @@ public class Invoice_OverDue_Adapter extends RecyclerView.Adapter<Invoice_OverDu
     public class ViewHolderForCat extends RecyclerView.ViewHolder {
 
 
-        RoundedImageView image;
+        CircleImageView image;
         TextView invoiceoverduetxt,name,companyname;
 
 

@@ -988,7 +988,6 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
 //            createinvoice.setEnabled(true);
         }    else if (tempList.size() == 0) {
             Constant.ErrorToast(getActivity(), "Select Product First");
-            bottomSheetDialog2.dismiss();
             createinvoice.setEnabled(true);
         } else {
 

@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.andrognito.flashbar.Flashbar;
 import com.andrognito.flashbar.anim.FlashAnim;
+import com.bumptech.glide.Glide;
 import com.receipt.invoice.stock.sirproject.Home.Model.CompanyModel;
 import com.receipt.invoice.stock.sirproject.Home.Model.InvoiceModel;
 import com.receipt.invoice.stock.sirproject.Adapter.Invoice_OverDue_Adapter;
@@ -291,8 +292,32 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
                         JSONObject object_data = jsonObject.getJSONObject("data");
                      String supplier_image_path=object_data.getString("supplier_image_path");
                         String customer_image_path=object_data.getString("customer_image_path");
-                       //Log.e("customer_image_path",customer_image_path);
-                       // Log.e("supplier_image_path",supplier_image_path);
+                       Log.e("customer_image_path",customer_image_path);
+                        Log.e("supplier_image_path",supplier_image_path);
+
+
+
+                        JSONArray customer_array = object_data.getJSONArray("customer");
+                        //Log.e("detail Image", "result " + customer_array);
+
+                        customerModelArrayList.clear();
+                        for (int j = 0; j <customer_array.length(); j++) {
+
+                            JSONObject obj_customer = customer_array.getJSONObject(j);
+
+                            CustomerModel customerModel = new CustomerModel();
+
+                            customerModel.setCustomerId(obj_customer.getString("customer_id"));
+                            customerModel.setCustomerName(obj_customer.getString("customer_name"));
+                            customerModel.setImage(obj_customer.getString("image"));
+                            customerModel.setCustomer_image_path(customer_image_path);
+                            String strresult=obj_customer.getString("customer_name");
+
+
+                            //Log.e("CompanyList Image", "result " + strresult);
+                            customerModelArrayList.add(customerModel);
+                        }
+
 
                         JSONArray invoice_array = object_data.getJSONArray("invoice");
 
@@ -324,19 +349,24 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
                             String customer_name = obj_invoice.getString("customer_name");
                             invoiceModel.setCustomer_name(customer_name);
 
+                          //  invoiceModel.setCustomer_name(customer_name);
+                            String customer_id = obj_invoice.getString("customer_id");
+                            String imageSS = getCustomerImageById(customerModelArrayList, customer_id);
+                            Log.e(TAG, "imageSS "+imageSS);
+                            invoiceModel.setCustomer_logo(customer_image_path+imageSS);
 
                             String due_date = obj_invoice.getString("due_date");
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                             try {
                                 Date date = sdf.parse(due_date);
                                 long millis = date.getTime();
-                                Log.e(TAG, "millisAAA "+millis);
+                              //  Log.e(TAG, "millisAAA "+millis);
 
 
                                 String todayCurrent = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                                 Date dateCurrent = sdf.parse(todayCurrent);
                                 long millisCurrent = dateCurrent.getTime();
-                                Log.e(TAG, "dateCurrentAAA "+millisCurrent);
+                             //   Log.e(TAG, "dateCurrentAAA "+millisCurrent);
 
                                 if(millisCurrent > millis){
                                     String order_status_id = obj_invoice.getString("order_status_id");
@@ -356,27 +386,7 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
 
 
 
-                        JSONArray customer_array = object_data.getJSONArray("customer");
-                        //Log.e("detail Image", "result " + customer_array);
 
-                        customerModelArrayList.clear();
-                        for (int j = 0; j <customer_array.length(); j++) {
-
-                            JSONObject obj_customer = customer_array.getJSONObject(j);
-
-                            CustomerModel customerModel = new CustomerModel();
-
-                            customerModel.setCustomerId(obj_customer.getString("customer_id"));
-                            customerModel.setCustomerName(obj_customer.getString("customer_name"));
-                            customerModel.setImage(obj_customer.getString("image"));
-                             customerModel.setCustomer_image_path(customer_image_path);
-                               String strresult=obj_customer.getString("customer_name");
-
-
-                            //Log.e("CompanyList Image", "result " + strresult);
-                            customerModelArrayList.add(customerModel);
-
-                        }
 
                         JSONArray supplier_array = object_data.getJSONArray("supplier");
 
@@ -485,6 +495,18 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
 
         mAsync.execute();
 
+    }
+
+    private String getCustomerImageById(ArrayList<CustomerModel> customerModelArrayList, String customer_id) {
+        String path = "";
+        if(customerModelArrayList.size() > 0){
+            for (int k=0; k<customerModelArrayList.size(); k++){
+                if(customerModelArrayList.get(k).getCustomerId().equalsIgnoreCase(customer_id)){
+                    path = customerModelArrayList.get(k).getImage().toString();
+                }
+            }
+        }
+        return path;
     }
 
     private void COMPANYListingApi() {

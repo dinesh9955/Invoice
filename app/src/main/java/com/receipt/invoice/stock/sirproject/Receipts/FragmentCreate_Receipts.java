@@ -1002,7 +1002,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 
         else if (tempList.size() == 0) {
             Constant.ErrorToast(getActivity(), "Select Product First");
-            bottomSheetDialog2.dismiss();
+            createinvoice.setEnabled(true);
         }
 
         else {
