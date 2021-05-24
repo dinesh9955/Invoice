@@ -65,7 +65,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
-
         </activity>
 
         <activity
@@ -491,6 +490,26 @@
             android:windowSoftInputMode="adjustPan|adjustResize" >
 
         </activity>
+
+
+        <activity
+            android:name=".Report.ReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
+        <activity
+            android:name=".Report.ReportViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
 
 
         <provider

@@ -63,64 +63,58 @@ public class Customer_Bottom_Adapter extends RecyclerView.Adapter<Customer_Botto
 
        final Customer_list customer_list = mlist.get(i);
 
-        final String customer_id = customer_list.getCustomer_id();
-        final String customer_name = customer_list.getCustomer_name();
-        final String customer_contact_person = customer_list.getCustomer_contact_person();
-        final String customer_address = customer_list.getCustomer_address();
-        final String customer_image = customer_list.getCustomer_image_path()+customer_list.getCustomer_image();
-        final String customer_email = customer_list.getCustomer_email();
-        final String customer_phone = customer_list.getCustomer_phone();
-        final String customer_mobile = customer_list.getCustomer_mobile();
-        final String customer_website = customer_list.getCustomer_website();
 
 
-        if (customer_name.equals("") || customer_name.equals("null"))
-        {
-            viewHolderForCat.name.setText("");
-        }
-        else
-        {
-            viewHolderForCat.name.setText(customer_name);
-        }
+           final String customer_id = customer_list.getCustomer_id();
+           final String customer_name = customer_list.getCustomer_name();
+           final String customer_contact_person = customer_list.getCustomer_contact_person();
+           final String customer_address = customer_list.getCustomer_address();
+           final String customer_image = customer_list.getCustomer_image_path()+customer_list.getCustomer_image();
+           final String customer_email = customer_list.getCustomer_email();
+           final String customer_phone = customer_list.getCustomer_phone();
+           final String customer_mobile = customer_list.getCustomer_mobile();
+           final String customer_website = customer_list.getCustomer_website();
 
-        if (customer_contact_person.equals("") || customer_contact_person.equals("null"))
-        {
-            viewHolderForCat.contactname.setText("");
-        }
-        else
-        {
-            viewHolderForCat.contactname.setText(customer_contact_person);
-        }
 
-        RequestOptions options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.drawable.app_icon);
-        Glide.with(mcontext)
-                .load(customer_image)
-                .apply(options)
-                .into(viewHolderForCat.image);
+           if (customer_name.equals("") || customer_name.equals("null"))
+           {
+               viewHolderForCat.name.setText("");
+           }
+           else
+           {
+               viewHolderForCat.name.setText(customer_name);
+           }
+
+           if (customer_contact_person.equals("") || customer_contact_person.equals("null"))
+           {
+               viewHolderForCat.contactname.setText("");
+           }
+           else
+           {
+               viewHolderForCat.contactname.setText(customer_contact_person);
+           }
+
+
+           RequestOptions options = new RequestOptions();
+           options.centerCrop();
+           options.placeholder(R.drawable.app_icon);
+           Glide.with(mcontext)
+                   .load(customer_image)
+                   .apply(options)
+                   .into(viewHolderForCat.image);
+
+
+
+
+
+
+
 
 
         viewHolderForCat.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*final SharedPreferences pref = mcontext.getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
-                String name = customer_list.getCustomer_name();
-                Moving moving = new Moving();
-                moving.setCus_name(name);
-                pref.edit().putString(Constant.CUSTOMER_NAME,name).commit();
-                Log.e("logcustomername",name);*/
-                 customer_namee = customer_list.getCustomer_name();
-               address = customer_list.getCustomer_address();
-               website = customer_list.getCustomer_website();
-               email = customer_list.getCustomer_email();
-              phone = customer_list.getCustomer_phone();
-               clientcp = customer_list.getCustomer_contact_person();
-
                  callback.onPostExecute(mlist.get(i));
-                Log.e("loggcus",customer_list.getCustomer_name());
-
-
             }
         });
 

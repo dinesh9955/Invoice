@@ -103,7 +103,34 @@ public class Customer_list implements Serializable {
     String customer_image_path;
 
 
+    String price;
+    String currency_symbol;
 
+    String type = "";
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getCurrency_symbol() {
+        return currency_symbol;
+    }
+
+    public void setCurrency_symbol(String currency_symbol) {
+        this.currency_symbol = currency_symbol;
+    }
 
     public String getCompany_id() {
         return company_id;

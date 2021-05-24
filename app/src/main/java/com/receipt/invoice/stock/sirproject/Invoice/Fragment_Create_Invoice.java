@@ -1954,7 +1954,6 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     }
                     else {
 
-
 //                        defaultClick = 1;
                         Intent intent = new Intent(getContext(), ViewInvoice_Activity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -3009,7 +3008,6 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
     }
 
     public void createbottomsheet_customers() {
-
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.customer_bottom_sheet, null);
             txtcustomer = view.findViewById(R.id.txtcustomer);
@@ -3397,6 +3395,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
         }
         customer_bottom_adapter.updateList(temp);
     }
+
+
 
     @Override
     public void onPostExecute(Customer_list customer_list) {

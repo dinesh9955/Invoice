@@ -129,7 +129,6 @@
                 />
 
             <RelativeLayout
-
                 android:elevation="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"

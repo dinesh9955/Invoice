@@ -342,7 +342,7 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
         String jobName = getString(R.string.app_name) + " Print Test";
 
         PrintAttributes.Builder builder = new PrintAttributes.Builder();
-        builder.setMediaSize( PrintAttributes.MediaSize.ISO_A3);
+        builder.setMediaSize( PrintAttributes.MediaSize.ISO_A4);
         printManager.print(jobName, printAdapter, builder.build());
     }
 

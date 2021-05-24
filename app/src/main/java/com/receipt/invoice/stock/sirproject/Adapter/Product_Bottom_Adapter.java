@@ -154,23 +154,31 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
         viewHolderForCat.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                show_price = product_list.getProduct_price();
-                show_name= product_list.getProduct_name();
-                product_ida= product_list.getProduct_id();
-                Log.e("product_id",product_ida);
-                String quentityproduct=product_list.getQuantity();
-                if(quentityproduct.equals("null"))
-                {
+
+                if(receipt.equalsIgnoreCase("report")){
+                   // sh_price = Double.parseDouble(edprice.getText().toString().trim());
+                    callback.onPostExecutecall(mlist.get(i),"0","0");
+                }else{
+                    show_price = product_list.getProduct_price();
+                    show_name= product_list.getProduct_name();
+                    product_ida= product_list.getProduct_id();
+                    Log.e("product_id",product_ida);
+                    String quentityproduct=product_list.getQuantity();
+                    if(quentityproduct.equals("null"))
+                    {
                         Constant.ErrorToast((Activity) mcontext,"Insufficient Quantity Available");
 
-                    if(bottomSheetDialog != null){
-                        bottomSheetDialog.dismiss();
+                        if(bottomSheetDialog != null){
+                            bottomSheetDialog.dismiss();
+                        }
                     }
+                    else {
+                        sh_quantity = Integer.parseInt(product_list.getQuantity());
+                    }
+                    productdialog(i);
                 }
-                else {
-                    sh_quantity = Integer.parseInt(product_list.getQuantity());
-                }
-                productdialog(i);
+
+
             }
         });
 
@@ -308,6 +316,11 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                     }
 
                     else if(receipt.equalsIgnoreCase("creditnotes")){
+                        Log.e(TAG, "creditnotes");
+                        sh_price = Double.parseDouble(edprice.getText().toString().trim());
+                        callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
+                    }
+                    else if(receipt.equalsIgnoreCase("report")){
                         Log.e(TAG, "creditnotes");
                         sh_price = Double.parseDouble(edprice.getText().toString().trim());
                         callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));

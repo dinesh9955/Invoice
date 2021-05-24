@@ -1231,7 +1231,7 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
             for (int i = 0; i <2; i++) {
 
 
-                productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getActivity().getAssets().open("customer_single_item.html"))
 
 
                         .replaceAll("#NAME#", "Dev")

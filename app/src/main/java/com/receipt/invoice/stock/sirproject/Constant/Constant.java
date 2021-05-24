@@ -37,6 +37,7 @@ import com.receipt.invoice.stock.sirproject.PV.PVActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Receipts.ReceiptsActivity;
+import com.receipt.invoice.stock.sirproject.Report.ReportActivity;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.SignupSignin.Signin_Activity;
 import com.receipt.invoice.stock.sirproject.Stock.Stock_Activity;
@@ -378,9 +379,13 @@ public class Constant {
                             Intent intent = new Intent(activity, PVActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             activity.startActivity(intent);
-
                         }
-
+                        if(position==15)
+                        {
+                            Intent intent = new Intent(activity, ReportActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            activity.startActivity(intent);
+                        }
                         if(position==16)
                         {
                             Intent intent = new Intent(activity, CreditNotesActivity.class);
