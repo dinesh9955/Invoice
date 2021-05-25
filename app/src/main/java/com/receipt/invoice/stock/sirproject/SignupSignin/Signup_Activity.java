@@ -112,9 +112,9 @@ public class Signup_Activity extends AppCompatActivity {
  public void userregistration()
  {
      if (TextUtils.isEmpty(edfullname.getText())) {
-     edfullname.setError("Field is required");
-     edfullname.requestFocus();
-    }
+         edfullname.setError("Field is required");
+         edfullname.requestFocus();
+     }
      else if (TextUtils.isEmpty(edemail.getText())) {
          edemail.setError("Field is required");
          edemail.requestFocus();
@@ -134,33 +134,44 @@ public class Signup_Activity extends AppCompatActivity {
      }
      else {
 
-         avi.smoothToShow();
-         avibackground.setVisibility(View.VISIBLE);
+         int value = -1;
+         try{
+             value = Integer.parseInt(edfullname.getText().toString().replaceAll("[^0-9]", ""));
+         }catch (Exception e){
+
+         }
 
 
-         String fullname = edfullname.getText().toString();
-         String email = edemail.getText().toString();
-         final String password = edpassword.getText().toString();
-         RequestParams requestParams = new RequestParams();
-         requestParams.add("email",email);
-         requestParams.add("password",password);
-         requestParams.add("fullname",fullname);
+         Log.e(TAG, "value "+value);
 
-         requestParams.add("device_type", "Andorid");
+         if(value == -1){
+             avi.smoothToShow();
+             avibackground.setVisibility(View.VISIBLE);
 
-         AsyncHttpClient client = new AsyncHttpClient();
-         client.post(Constant.BASE_URL+"user/registration", requestParams, new AsyncHttpResponseHandler() {
-             @Override
-             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                 String response = new String(responseBody);
-                 Log.e("signupresponse",response);
+             String fullname = edfullname.getText().toString();
+             String email = edemail.getText().toString();
+             final String password = edpassword.getText().toString();
+             RequestParams requestParams = new RequestParams();
+             requestParams.add("email",email);
+             requestParams.add("password",password);
+             requestParams.add("fullname",fullname);
 
-                 avi.smoothToHide();
-                 avibackground.setVisibility(View.GONE);
-                 try {
+             requestParams.add("device_type", "Andorid");
 
-                     final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
+             AsyncHttpClient client = new AsyncHttpClient();
+             client.post(Constant.BASE_URL+"user/registration", requestParams, new AsyncHttpResponseHandler() {
+                 @Override
+                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                     String response = new String(responseBody);
+                     Log.e("signupresponse",response);
+
+                     avi.smoothToHide();
+                     avibackground.setVisibility(View.GONE);
+                     try {
+
+                         final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
                          JSONObject jsonObject = new JSONObject(response);
 
                          String status = jsonObject.getString("status");
@@ -182,48 +193,54 @@ public class Signup_Activity extends AppCompatActivity {
                          }
 
 
-                 } catch (JSONException e) {
-                     e.printStackTrace();
-                 }
-
-
-                 // messagebar();
-
-             }
-
-             @Override
-             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                 if(responseBody!=null){
-                     String response = new String(responseBody);
-                     Log.e("signupresponseFBB",response);
-
-                     try {
-                         JSONObject jsonObject = new JSONObject(response);
-                         Log.e(TAG, "jsonObjectBB"+jsonObject);
-
-                         String status = jsonObject.getString("status");
-                         if (status.equals("false"))
-                         {
-                             Log.e(TAG, "statusBB"+status);
-
-                             JSONObject message = jsonObject.getJSONObject("message");
-
-                             Log.e(TAG, "messageBB"+message);
-
-                             String email = message.getString("email");
-                             //String fullname = message.getString("fullname");
-                             //Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
-                             Constant.ErrorToast(Signup_Activity.this,email);
-                         }
                      } catch (JSONException e) {
                          e.printStackTrace();
                      }
 
+
+                     // messagebar();
+
                  }
-                 avi.smoothToHide();
-                 avibackground.setVisibility(View.GONE);
-             }
-         });
+
+                 @Override
+                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                     if(responseBody!=null){
+                         String response = new String(responseBody);
+                         Log.e("signupresponseFBB",response);
+
+                         try {
+                             JSONObject jsonObject = new JSONObject(response);
+                             Log.e(TAG, "jsonObjectBB"+jsonObject);
+
+                             String status = jsonObject.getString("status");
+                             if (status.equals("false"))
+                             {
+                                 Log.e(TAG, "statusBB"+status);
+
+                                 JSONObject message = jsonObject.getJSONObject("message");
+
+                                 Log.e(TAG, "messageBB"+message);
+
+                                 String email = message.getString("email");
+                                 //String fullname = message.getString("fullname");
+                                 //Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                                 Constant.ErrorToast(Signup_Activity.this,email);
+                             }
+                         } catch (JSONException e) {
+                             e.printStackTrace();
+                         }
+
+                     }
+                     avi.smoothToHide();
+                     avibackground.setVisibility(View.GONE);
+                 }
+             });
+         }else{
+             edfullname.setError("Digit is not required");
+             edfullname.requestFocus();
+         }
+
+
  }
 
  }

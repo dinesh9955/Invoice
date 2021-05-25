@@ -510,6 +510,15 @@
         </activity>
 
 
+        <activity
+            android:name=".Settings.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
 
 
         <provider
@@ -533,13 +542,13 @@
 
 
 
-        <service android:name=".fcm.MyFirebaseMessagingService">
+        <service android:name=".FCM.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <service android:name=".fcm.MyFirebaseInstanceIDService">
+        <service android:name=".FCM.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

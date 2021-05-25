@@ -39,6 +39,7 @@ import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Receipts.ReceiptsActivity;
 import com.receipt.invoice.stock.sirproject.Report.ReportActivity;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
+import com.receipt.invoice.stock.sirproject.Settings.SettingsActivity;
 import com.receipt.invoice.stock.sirproject.SignupSignin.Signin_Activity;
 import com.receipt.invoice.stock.sirproject.Stock.Stock_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
@@ -391,7 +392,6 @@ public class Constant {
                             Intent intent = new Intent(activity, CreditNotesActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             activity.startActivity(intent);
-
                         }
 
                         if(position==17)
@@ -399,8 +399,29 @@ public class Constant {
                             Intent intent = new Intent(activity, DebitNotesActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             activity.startActivity(intent);
-
                         }
+
+                        if(position==18)
+                        {
+                            Intent intent = new Intent(activity, DebitNotesActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            activity.startActivity(intent);
+                        }
+
+                        if(position==19)
+                        {
+                            Intent intent = new Intent(activity, DebitNotesActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            activity.startActivity(intent);
+                        }
+
+                        if(position==21)
+                        {
+                            Intent intent = new Intent(activity, SettingsActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            activity.startActivity(intent);
+                        }
+
 
                         if(position==22)
                         {

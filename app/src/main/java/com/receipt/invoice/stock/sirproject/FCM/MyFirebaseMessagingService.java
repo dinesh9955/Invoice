@@ -1,4 +1,4 @@
-package com.receipt.invoice.stock.sirproject.fcm;
+package com.receipt.invoice.stock.sirproject.FCM;
 
 import android.util.Log;
 

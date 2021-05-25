@@ -66,6 +66,13 @@ public class ForgotPassword_Activity extends AppCompatActivity {
         edv4 = findViewById(R.id.edv4);
         btnverify = findViewById(R.id.btnverify);
 
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         btnverify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -116,9 +116,7 @@ public class Signin_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 Signin();
-
 
 //                if (CheckForSDCard.isSDCardPresent()) {
 //

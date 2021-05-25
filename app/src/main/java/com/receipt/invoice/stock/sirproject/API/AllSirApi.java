@@ -1,4 +1,4 @@
-package com.receipt.invoice.stock.sirproject.api;
+package com.receipt.invoice.stock.sirproject.API;
 
 public class AllSirApi {
 

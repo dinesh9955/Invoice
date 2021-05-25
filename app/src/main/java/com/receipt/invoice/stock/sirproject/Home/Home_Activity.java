@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 
 import com.andrognito.flashbar.Flashbar;
 import com.andrognito.flashbar.anim.FlashAnim;
-import com.bumptech.glide.Glide;
 import com.receipt.invoice.stock.sirproject.Home.Model.CompanyModel;
 import com.receipt.invoice.stock.sirproject.Home.Model.InvoiceModel;
 import com.receipt.invoice.stock.sirproject.Adapter.Invoice_OverDue_Adapter;
@@ -39,18 +37,16 @@ import com.receipt.invoice.stock.sirproject.Home.adapter.HomeInvoiceAdapter;
 import com.receipt.invoice.stock.sirproject.Home.adapter.HomeSupplierAdapter;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
-import com.receipt.invoice.stock.sirproject.api.AllSirApi;
-import com.receipt.invoice.stock.sirproject.api.GetAsyncPost;
-import com.receipt.invoice.stock.sirproject.api.Parameters;
-import com.receipt.invoice.stock.sirproject.api.SavePref;
-import com.receipt.invoice.stock.sirproject.api.util;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.API.GetAsyncPost;
+import com.receipt.invoice.stock.sirproject.API.Parameters;
+import com.receipt.invoice.stock.sirproject.API.SavePref;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

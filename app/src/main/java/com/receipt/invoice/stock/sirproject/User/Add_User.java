@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,13 +46,10 @@ import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import com.receipt.invoice.stock.sirproject.BuildConfig;
-import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
-import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.R;
-import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
-import com.receipt.invoice.stock.sirproject.api.SavePref;
+import com.receipt.invoice.stock.sirproject.API.SavePref;
 import com.wang.avi.AVLoadingIndicatorView;
 
 
