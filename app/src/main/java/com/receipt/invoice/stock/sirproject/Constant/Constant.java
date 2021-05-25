@@ -32,6 +32,7 @@ import com.receipt.invoice.stock.sirproject.Estimate.EstimateActivity;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity;
 import com.receipt.invoice.stock.sirproject.CN.CreditNotesActivity;
+import com.receipt.invoice.stock.sirproject.InvoiceReminder.InvoiceReminderActivity;
 import com.receipt.invoice.stock.sirproject.PO.POActivity;
 import com.receipt.invoice.stock.sirproject.PV.PVActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
@@ -43,6 +44,7 @@ import com.receipt.invoice.stock.sirproject.Settings.SettingsActivity;
 import com.receipt.invoice.stock.sirproject.SignupSignin.Signin_Activity;
 import com.receipt.invoice.stock.sirproject.Stock.Stock_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
+import com.receipt.invoice.stock.sirproject.ThankYouNote.ThankYouNoteActivity;
 import com.receipt.invoice.stock.sirproject.User.User_Activity;
 import com.receipt.invoice.stock.sirproject.Utility;
 import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
@@ -403,14 +405,14 @@ public class Constant {
 
                         if(position==18)
                         {
-                            Intent intent = new Intent(activity, DebitNotesActivity.class);
+                            Intent intent = new Intent(activity, ThankYouNoteActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             activity.startActivity(intent);
                         }
 
                         if(position==19)
                         {
-                            Intent intent = new Intent(activity, DebitNotesActivity.class);
+                            Intent intent = new Intent(activity, InvoiceReminderActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             activity.startActivity(intent);
                         }
