@@ -63,6 +63,7 @@ public class ReportViewActivity extends AppCompatActivity {
         TextView titleView = toolbar.findViewById(R.id.title1);
         ImageView backbtn = toolbar.findViewById(R.id.backbtn);
         ImageView printimg = toolbar.findViewById(R.id.imageViewptint);
+        printimg.setVisibility(View.GONE);
 
         invoiceweb = findViewById(R.id.invoiceweb);
 
@@ -342,6 +343,7 @@ public class ReportViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -355,7 +357,7 @@ public class ReportViewActivity extends AppCompatActivity {
                             .replaceAll("Customer Name", customerItem.getCustomer_name())
                             .replaceAll("#LOGO_IMAGE#", customerItem.getCompany_logo())
                             .replaceAll("#ITEMS#", productitemlist)
-                            .replaceAll("Total Amount-", totalAmount+ Utility.getReplaceDollor(cruncycode))
+                            .replaceAll("Total Amount-", formatter.format(totalAmount) + Utility.getReplaceDollor(cruncycode))
                            ;
 
 //                    .replaceAll("Company Name", company_name)
@@ -435,7 +437,6 @@ public class ReportViewActivity extends AppCompatActivity {
         invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
 
     }
-
 
 
 
@@ -620,6 +621,7 @@ public class ReportViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -633,7 +635,7 @@ public class ReportViewActivity extends AppCompatActivity {
                     .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getCompany_logo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", totalAmount+ Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", formatter.format(totalAmount)+ Utility.getReplaceDollor(cruncycode))
             ;
 
         } catch (IOException e) {
@@ -646,7 +648,6 @@ public class ReportViewActivity extends AppCompatActivity {
         invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
 
     }
-
 
 
 
@@ -752,6 +753,7 @@ public class ReportViewActivity extends AppCompatActivity {
         });
     }
 
+
     private void totalSalesReportWeb(CompanyItem customerItem, ArrayList<TotalSalesReportItem> customerReportItemArrayList) {
 
         double totalAmount = 0.0;
@@ -813,6 +815,8 @@ public class ReportViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
 
         String content = null;
         try {
@@ -826,7 +830,7 @@ public class ReportViewActivity extends AppCompatActivity {
                    // .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", totalAmount+ Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", formatter.format(totalAmount)+ Utility.getReplaceDollor(cruncycode))
             ;
 
 
@@ -1007,6 +1011,7 @@ public class ReportViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -1020,7 +1025,7 @@ public class ReportViewActivity extends AppCompatActivity {
                     // .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", totalAmount+ Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", formatter.format(totalAmount)+ Utility.getReplaceDollor(cruncycode))
             ;
 
 
@@ -1241,6 +1246,7 @@ public class ReportViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -1254,7 +1260,7 @@ public class ReportViewActivity extends AppCompatActivity {
                     // .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", totalAmount+ Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", formatter.format(totalAmount)+ Utility.getReplaceDollor(cruncycode))
             ;
 
 
@@ -1462,6 +1468,7 @@ public class ReportViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -1475,7 +1482,7 @@ public class ReportViewActivity extends AppCompatActivity {
                     // .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", totalAmount+ Utility.getReplaceDollor(cruncycode) + "%")
+                    .replaceAll("Total Amount-", formatter.format(totalAmount)+ Utility.getReplaceDollor(cruncycode) + "%")
             ;
 
 
@@ -1681,6 +1688,7 @@ public class ReportViewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -1694,7 +1702,7 @@ public class ReportViewActivity extends AppCompatActivity {
                     // .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", totalAmount + Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", formatter.format(totalAmount) + Utility.getReplaceDollor(cruncycode))
             ;
 
 
@@ -1876,6 +1884,8 @@ public class ReportViewActivity extends AppCompatActivity {
         double quantity = Double.parseDouble(customerItem.getProductQuantity());
         double price = Double.parseDouble(customerItem.getProductPrice());
 
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
@@ -1890,7 +1900,7 @@ public class ReportViewActivity extends AppCompatActivity {
                     .replaceAll("#ITEMS#", productitemlist)
                     .replaceAll("Amount1-", ""+quantity)
                     .replaceAll("Amount2-", price+""+Utility.getReplaceDollor(cruncycode))
-                    .replaceAll("Total Amount-", totalAmount + Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", formatter.format(totalAmount) + Utility.getReplaceDollor(cruncycode))
             ;
 
 

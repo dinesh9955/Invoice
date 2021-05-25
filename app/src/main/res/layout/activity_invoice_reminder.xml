@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Customer.Customer_Activity"
+    android:background="@color/white">
+
+    <!--<include layout="@layout/toolbar">
+    </include>-->
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <include layout="@layout/toolbar" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.isapanah.awesomespinner.AwesomeSpinner
+        android:id="@+id/selectcompany"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/edittextshape"
+        android:layout_below="@+id/appbar"
+        app:spinnerHint="Select Company" />
+
+
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/edittextshape"
+        android:drawableRight="@drawable/search_icon"
+        android:layout_below="@+id/selectcompany"
+        android:elevation="3dp"
+        android:hint="Search by Invoice number"
+        android:maxLines="1"
+        android:padding="10dp"
+      />
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_invoices"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/search">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+
+</RelativeLayout>

@@ -2,6 +2,7 @@ package com.receipt.invoice.stock.sirproject.Settings;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Report.ReportActivity;
 import com.receipt.invoice.stock.sirproject.Report.ReportAdapter;
+import com.receipt.invoice.stock.sirproject.Report.ReportViewActivity;
 
 import java.util.ArrayList;
 
@@ -58,7 +60,18 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
         viewHolderForCat.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // ((ReportActivity)mcontext).onClickAdapter(i);
+                Intent intent = new Intent(mcontext, WebShowActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                if(i == 8){
+                    intent.putExtra("positionNext", i);
+                    mcontext.startActivity(intent);
+                } else if(i == 10){
+                    intent.putExtra("positionNext", i);
+                    mcontext.startActivity(intent);
+                }else if(i == 11){
+                    intent.putExtra("positionNext", i);
+                    mcontext.startActivity(intent);
+                }
             }
         });
 

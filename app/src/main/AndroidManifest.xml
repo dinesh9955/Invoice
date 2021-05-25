@@ -52,6 +52,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".Settings.WebShowActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
 
         <activity
             android:name=".CN.ViewCreditNote_Activity"
@@ -518,6 +526,42 @@
 
         </activity>
 
+
+
+        <activity
+            android:name=".InvoiceReminder.InvoiceReminderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+        <activity
+            android:name=".InvoiceReminder.ViewInvoiceReminderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
+
+
+        <activity
+            android:name=".ThankYouNote.ThankYouNoteActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+        <activity
+            android:name=".ThankYouNote.ViewThankYouNoteActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
 
 
 

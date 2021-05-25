@@ -258,8 +258,6 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
     private void enableSwipe(){
 
-
-
         SwipeHelper2 swipeHelper = new SwipeHelper2(getContext(), recycler_invoices) {
 
             @Override
@@ -679,6 +677,9 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
             }
         });
     }
+
+
+
 
     private void UpdateInvoiceStatusmethodh(String s) {
 
@@ -1203,6 +1204,9 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
             });
         }
     }
+
+
+
 
     private void ViewTamlatemethodh() {
 
