@@ -688,7 +688,7 @@ public class ViewInvoice_Activity extends AppCompatActivity {
         }
 
 
-        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
+        if (companylogopath.toLowerCase().endsWith(".gif") || companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
             companyimagelogopath = companylogopath;
         }else{
             companyimagelogopath = "/android_res/drawable/white_img.png";

@@ -101,6 +101,7 @@ import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.SelectedTaxlist;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
+import com.receipt.invoice.stock.sirproject.PV.EditEditPVActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
@@ -1014,6 +1015,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
 
                             Log.e(TAG, "subStrinngAA "+subStrinng);
+                            subStrinng = subStrinng.replaceAll("( )+", " ");
 
                             taxvalueText.setText("Tax (" + subStrinng + "" + ")");
 
@@ -4100,7 +4102,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditPOActivity.this,"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else {
@@ -4110,7 +4112,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                     if (sh_quantity < en_quantity)
                     {
                         mybuilder.show();
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditPOActivity.this,"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else

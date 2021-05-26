@@ -80,6 +80,7 @@ import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
+import com.receipt.invoice.stock.sirproject.Estimate.ConvertToInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
@@ -3560,7 +3561,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditCreditNotesActivity.this,"Insufficient Quantity Available");
                     }
                     else {
                         sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
@@ -3569,7 +3570,7 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                     if (sh_quantity < en_quantity)
                     {
                         mybuilder.show();
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditCreditNotesActivity.this,"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else

@@ -101,6 +101,7 @@ import com.receipt.invoice.stock.sirproject.PO.POResponseDto;
 import com.receipt.invoice.stock.sirproject.PO.POSupplierDto;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Receipts.EditReceiptActivity;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
@@ -1015,6 +1016,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
 
 
                             Log.e(TAG, "subStrinngAA "+subStrinng);
+                            subStrinng = subStrinng.replaceAll("( )+", " ");
 
                             taxvalueText.setText("Tax (" + subStrinng + "" + ")");
                             SelectedTaxlist student = new SelectedTaxlist();
@@ -3727,6 +3729,8 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                         }else{
 
                         }
+
+
                         txttax.setText(  subStrinng + " incl." ); //Dont do any change
                     taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
 //                    }
@@ -4046,7 +4050,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditEditPVActivity.this,"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else {
@@ -4056,7 +4060,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                     if (sh_quantity < en_quantity)
                     {
                         mybuilder.show();
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditEditPVActivity.this,"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else

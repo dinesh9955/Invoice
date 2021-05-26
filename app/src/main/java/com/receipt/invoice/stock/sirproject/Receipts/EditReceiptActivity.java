@@ -861,14 +861,14 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                         Discountamountstrdto = listobj.getValue();
                         strdiscountvalue = listobj.getValue();
 
-                        discount.setText(Utility.getReplaceMinus("-"+Discountamountstrdto+currency_codedto));
-//                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
-//
-//                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-//                            balance.setText(formatter.format(Blanceamountstdbl));
-//                        } else {
-//                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
-//                        }
+                        //discount.setText(Utility.getReplaceMinus("-"+Discountamountstrdto+currency_codedto));
+                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
+
+                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                            balance.setText(formatter.format(Discountamountstdbl));
+                        } else {
+                            balance.setText(formatter.format(Discountamountstdbl) + currency_codedto);
+                        }
 
                     }
 
@@ -882,13 +882,6 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                         } else {
                             freight.setText(formatter.format(Discountamountstdbl) + currency_codedto);
                         }
-//                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
-//
-//                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-//                            balance.setText(formatter.format(Blanceamountstdbl));
-//                        } else {
-//                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
-//                        }
 
                     }
 
@@ -927,7 +920,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
 
                         Log.e(TAG, "subStrinngAA "+subStrinng);
-
+                        subStrinng = subStrinng.replaceAll("( )+", " ");
 //                        if (taxtypeclusive.toLowerCase().equalsIgnoreCase("Inclusive")) {
 //                            taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
 //                        }else{
@@ -943,6 +936,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                         student.setTaxamount(value);
 
                         selectedtaxt.add(student);
+
+
                     }
 
                 }
@@ -3421,7 +3416,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
 
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_price: "+total_price);
@@ -3431,6 +3426,12 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
         }else{
             textViewNoItems.setVisibility(View.GONE);
         }
+
+
+
+
+
+
 
         double balanceamount = 0.0;
         Double netamountvalue = 0.0;
@@ -3541,16 +3542,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
-//                    if(taxrname.length() > 0){
-//                        if(taxrname.contains(" ")){
-//                            String firstTax = taxrname.split(" ")[0].replace("(", "");
-//                            String subStrinng = firstTax + " " + taxtrateamt + "%";
-//                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-//                        }else{
-//                            String subStrinng = taxrname + " " + taxtrateamt + "%";
-//                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-//                        }
-//                    }else{
+
                         String isTaxRate = taxtrateamt;
                         String isPecent = "%";
 
@@ -3562,8 +3554,13 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
                         }
 
+                    subStrinng = subStrinng.replace("incl.","").replaceAll("( )+", " ");
                         txttax.setText(  subStrinng + " incl." ); //Dont do any change
                     taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
+
+
+                    Log.e(TAG, "IIIIIIIIIIIIIIII"+subStrinng);
+
 //                    }
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
@@ -3580,16 +3577,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     Log.e(TAG, "taxrnameAAA "+taxrname);
                     Log.e(TAG, "taxtrateamtAAA "+taxtrateamt);
 
-//                    if(taxrname.length() > 0){
-//                        if(taxrname.contains(" ")){
-//                            String firstTax = taxrname.split(" ")[0].replace("(", "");
-//                            String subStrinng = firstTax + " " + taxtrateamt + "%";
-//                            txttax.setText(subStrinng); //Dont do any change
-//                        }else{
-//                            String subStrinng = taxrname + " " + taxtrateamt + "%";
-//                            txttax.setText(subStrinng); //Dont do any change
-//                        }
-//                    }else{
+
                     String isTaxRate = taxtrateamt;
                     String isPecent = "%";
 
@@ -3598,14 +3586,16 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     if(!subStrinng.contains(isTaxRate+isPecent)){
                         subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
                     }else{
-                        subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+                        subStrinng = taxrname.replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "") + " " + taxtrateamt + "%";
                     }
 
+                    subStrinng = subStrinng.replace("incl.","").replaceAll("( )+", " ");
                     txttax.setText(subStrinng); //Dont do any change
                     taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
 //                    }
 
 
+                    Log.e(TAG, "EEEEEEEEEEEEEE"+subStrinng);
 
 
                     netamountvalue = subtotalvalue + Totatlvalue1;
@@ -3647,82 +3637,6 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                 }
             }
 
-
-//            double cc = 0;
-//
-//            if(freight_cost.isEmpty()){
-//                //freight.setText("0");
-//            }else {
-//                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
-//                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight_cost, cruncycode));
-//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
-//                balance.setText(formatter.format(balanceamount) + cruncycode);
-////                    netamount.setText(formatter.format(balanceamount) + cruncycode);
-//
-//                cc = subtotalvalue + shipingvalue;
-//                if (selectedtaxt.size() > 0) {
-//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
-//                        netamount.setText(formatter.format(cc) + cruncycode);
-//                        Log.e(TAG, "QQQQQQ111");
-//                    }else{
-//                        netamount.setText(formatter.format(balanceamount) + cruncycode);
-//                        Log.e(TAG, "QQQQQQ222");
-//                    }
-//                }
-//            }
-//
-//            if (Utility.getReplaceCurrency(freight.getText().toString(), cruncycode).equalsIgnoreCase("0")) {
-//                freight.setText("0");
-//            }else{
-//                balanceamount = netamountvalue + Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
-//                Double shipingvalue = Double.parseDouble(Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
-//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
-//                balance.setText(formatter.format(balanceamount) + cruncycode);
-//                // netamount.setText(formatter.format(balanceamount) + cruncycode);
-//
-//                cc = subtotalvalue + shipingvalue;
-//                if (selectedtaxt.size() > 0) {
-//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
-//                        netamount.setText(formatter.format(cc) + cruncycode);
-//                        Log.e(TAG, "QQQQQQ111");
-//                    }else{
-//                        netamount.setText(formatter.format(balanceamount) + cruncycode);
-//                        Log.e(TAG, "QQQQQQ222");
-//                    }
-//                }
-//
-//            }
-
-
-
-//            if (freight_cost.equals("")) {
-//
-//
-//            } else {
-//                balanceamount = netamountvalue + Double.parseDouble(freight_cost);
-//
-//                Double shipingvalue = Double.parseDouble(freight_cost);
-//
-//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
-//                balance.setText(formatter.format(balanceamount) + cruncycode);
-//
-//                //if()
-//                Log.e(TAG, "subtotalvalueAA "+subtotalvalue);
-//                Log.e(TAG, "netamountvalueAA "+netamountvalue);
-//                Log.e(TAG, "balanceamountAA "+balanceamount);
-//
-//                double cc = subtotalvalue + shipingvalue;
-//
-//                if (selectedtaxt.size() > 0) {
-//                    if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
-//                         netamount.setText(formatter.format(cc) + cruncycode);
-//                         Log.e(TAG, "QQQQQQ111");
-//                    }else{
-//                         netamount.setText(formatter.format(balanceamount) + cruncycode);
-//                         Log.e(TAG, "QQQQQQ222");
-//                    }
-//                }
-//            }
 
 
             if (paidamountstr.isEmpty()) {
@@ -3898,7 +3812,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditReceiptActivity.this,"Insufficient Quantity Available");
                     }
                     else {
                         sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
@@ -3907,7 +3821,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     if (sh_quantity < en_quantity)
                     {
                         mybuilder.show();
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditReceiptActivity.this,"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else
@@ -3916,8 +3830,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                         double multiply = en_quantity * sh_price;
                         String s_multiply = String.valueOf(multiply);
 
-                        product_bottom.get(str).setQuantity(String.valueOf(en_quantity));
-                        product_bottom.get(str).setProduct_price(String.valueOf(sh_price));
+//                        product_bottom.get(str).setQuantity(String.valueOf(en_quantity));
+//                        product_bottom.get(str).setProduct_price(String.valueOf(sh_price));
 
                         total_price = (sh_price) * Double.parseDouble(edquantity.getText().toString());
                         //  Log.e("Total price",String.valueOf(total_price));

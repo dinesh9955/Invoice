@@ -926,6 +926,8 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
                         Log.e(TAG, "subStrinngAA "+subStrinng);
 
+                        subStrinng = subStrinng.replaceAll("( )+", " ");
+
 //                        if (taxtypeclusive.toLowerCase().equalsIgnoreCase("Inclusive")) {
 //                            taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
 //                        }else{
@@ -3534,26 +3536,19 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                     Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
-//                    if(taxrname.length() > 0){
-//                        if(taxrname.contains(" ")){
-//                            String firstTax = taxrname.split(" ")[0].replace("(", "");
-//                            String subStrinng = firstTax + " " + taxtrateamt + "%";
-//                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-//                        }else{
-//                            String subStrinng = taxrname + " " + taxtrateamt + "%";
-//                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-//                        }
-//                    }else{
+
                         String isTaxRate = taxtrateamt;
                         String isPecent = "%";
 
-                        String subStrinng = taxrname.replace("(", "").replace(")", "");
+                    String subStrinng = taxrname.replace("(", "").replace(")", "");
 
-                        if(!subStrinng.contains(isTaxRate+isPecent)){
-                            subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
-                        }else{
+                    if(!subStrinng.contains(isTaxRate+isPecent)){
+                        subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+                    }else{
 
-                        }
+                    }
+
+                    subStrinng = subStrinng.replace("incl.","").replaceAll("( )+", " ");
                         txttax.setText(  subStrinng + " incl." ); //Dont do any change
                     taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
 //                    }
@@ -3572,26 +3567,20 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                     Log.e(TAG, "taxrnameAAA "+taxrname);
                     Log.e(TAG, "taxtrateamtAAA "+taxtrateamt);
 
-//                    if(taxrname.length() > 0){
-//                        if(taxrname.contains(" ")){
-//                            String firstTax = taxrname.split(" ")[0].replace("(", "");
-//                            String subStrinng = firstTax + " " + taxtrateamt + "%";
-//                            txttax.setText(subStrinng); //Dont do any change
-//                        }else{
-//                            String subStrinng = taxrname + " " + taxtrateamt + "%";
-//                            txttax.setText(subStrinng); //Dont do any change
-//                        }
-//                    }else{
+
                         String isTaxRate = taxtrateamt;
                         String isPecent = "%";
 
                         String subStrinng = taxrname.replace("(", "").replace(")", "");
 
-                        if(!subStrinng.contains(isTaxRate+isPecent)){
-                            subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
-                        }else{
+                    if(!subStrinng.contains(isTaxRate+isPecent)){
+                        subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+                    }else{
+                        subStrinng = taxrname.replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "") + " " + taxtrateamt + "%";
+                    }
 
-                        }
+                    subStrinng = subStrinng.replace("incl.","").replaceAll("( )+", " ");
+
                         txttax.setText(subStrinng); //Dont do any change
                     taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
 //                    }
@@ -3885,7 +3874,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditEditReceiptActivity.this,"Insufficient Quantity Available");
                     }
                     else {
                         sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
@@ -3894,7 +3883,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                     if (sh_quantity < en_quantity)
                     {
                         mybuilder.show();
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditEditReceiptActivity.this,"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else
@@ -3903,8 +3892,8 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                         double multiply = en_quantity * sh_price;
                         String s_multiply = String.valueOf(multiply);
 
-                        product_bottom.get(str).setQuantity(String.valueOf(en_quantity));
-                        product_bottom.get(str).setProduct_price(String.valueOf(sh_price));
+//                        product_bottom.get(str).setQuantity(String.valueOf(en_quantity));
+//                        product_bottom.get(str).setProduct_price(String.valueOf(sh_price));
 
                         total_price = (sh_price) * Double.parseDouble(edquantity.getText().toString());
                         //  Log.e("Total price",String.valueOf(total_price));

@@ -83,6 +83,7 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
+import com.receipt.invoice.stock.sirproject.Invoice.ConvertToReceiptsActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.EditInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
@@ -991,6 +992,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                             }
 
                             Log.e(TAG, "subStrinngAA "+subStrinng);
+                            subStrinng = subStrinng.replaceAll("( )+", " ");
 
                             taxvalueText.setText("Tax (" + subStrinng + "" + ")");
 
@@ -3965,7 +3967,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditEstimateActivity.this,"Insufficient Quantity Available");
                     }
                     else {
                         sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
@@ -3974,7 +3976,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                     if (sh_quantity < en_quantity)
                     {
                         mybuilder.show();
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(EditEstimateActivity.this,"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else

@@ -875,7 +875,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
 
         String companylogopathdto="";
 
-        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
+        if (companylogopath.toLowerCase().endsWith(".gif") || companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
             companylogopathdto= company_image_path + companylogopath;
         }else{
             companylogopathdto = "/android_res/drawable/white_img.png";

@@ -4267,7 +4267,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
 
         String companyname = "";
-        if (company_stamp.toLowerCase().endsWith(".jpg") || company_stamp.toLowerCase().endsWith(".jpeg") || company_stamp.toLowerCase().endsWith(".png")){
+        if (company_stamp.toLowerCase().endsWith(".gif") || company_stamp.toLowerCase().endsWith(".jpg") || company_stamp.toLowerCase().endsWith(".jpeg") || company_stamp.toLowerCase().endsWith(".png")){
             if(company_stamp.toLowerCase().endsWith("white_img.png")){
                 companyname = "";
             }else{
@@ -4280,7 +4280,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
 
         String signature_of_receivername = "";
-        if (signatureofreceiverst.toLowerCase().endsWith(".jpg") || signatureofreceiverst.toLowerCase().endsWith(".jpeg") || signatureofreceiverst.toLowerCase().endsWith(".png")){
+        if (signatureofreceiverst.toLowerCase().endsWith(".gif") || signatureofreceiverst.toLowerCase().endsWith(".jpg") || signatureofreceiverst.toLowerCase().endsWith(".jpeg") || signatureofreceiverst.toLowerCase().endsWith(".png")){
             if(signatureofreceiverst.toLowerCase().endsWith("white_img.png")){
                 signature_of_receivername = "";
             }else{
@@ -4293,7 +4293,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
 
         String signature_of_issuername = "";
-        if (signature_of_issuer.toLowerCase().endsWith(".jpg") || signature_of_issuer.toLowerCase().endsWith(".jpeg") || signature_of_issuer.toLowerCase().endsWith(".png")){
+        if (signature_of_issuer.toLowerCase().endsWith(".gif") || signature_of_issuer.toLowerCase().endsWith(".jpg") || signature_of_issuer.toLowerCase().endsWith(".jpeg") || signature_of_issuer.toLowerCase().endsWith(".png")){
             if(signature_of_issuer.toLowerCase().endsWith("white_img.png")){
                 signature_of_issuername = "";
             }else{
@@ -4403,7 +4403,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             shipingvaluetxt = "Shipping";
         }
 
-        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
+        if (companylogopath.toLowerCase().endsWith(".gif") || companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
             companyimagelogopath = companylogopath;
         }else{
             companyimagelogopath = "/android_res/drawable/white_img.png";

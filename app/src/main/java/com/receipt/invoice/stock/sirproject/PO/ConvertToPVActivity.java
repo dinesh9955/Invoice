@@ -959,6 +959,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 
 
                             Log.e(TAG, "subStrinngAA "+subStrinng);
+                            subStrinng = subStrinng.replaceAll("( )+", " ");
 
                             taxvalueText.setText("Tax (" + subStrinng + "" + ")");
 
@@ -4124,7 +4125,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(ConvertToPVActivity.this,"Insufficient Quantity Available");
                     }
                     else {
                         sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
@@ -4133,7 +4134,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                     if (sh_quantity < en_quantity)
                     {
                         mybuilder.show();
-                        Constant.ErrorToast((Activity) getApplicationContext(),"Insufficient Quantity Available");
+                        Constant.ErrorToast(ConvertToPVActivity.this,"Insufficient Quantity Available");
                         mybuilder.dismiss();
                     }
                     else
