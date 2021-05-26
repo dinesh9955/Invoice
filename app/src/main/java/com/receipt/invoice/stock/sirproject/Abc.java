@@ -41,6 +41,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -73,9 +76,66 @@ public class Abc extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
-                File savedPDFFile = FileManager.getInstance().createTempFile(Abc.this, "pdf", false);
+//                double val = 12345678.00;
+//                String patternFormat = Utility.getPatternFormat("3");
+//
+////                DecimalFormat formatter = new DecimalFormat("%,.2f");
+////
+////                String sss = formatter.format(val);
+//
+//                //Log.e(TAG, "savedPDFFile "+sss);
+//
+////                String sssX =  String.format("%..2f", val);
+//              //  Log.e(TAG, "savedPDFFile "+sssX);
+//
+//                String result = String.format("%,,2f", val).replace(".", " ");
+//
+//                Log.e(TAG, "savedPDFFile "+result);
 
-                Log.e(TAG, "savedPDFFile "+savedPDFFile.toString());
+
+                double n = 12345678.00;
+
+                NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
+                nf.setMinimumFractionDigits(2);
+                String val1 = nf.format(n);
+
+                System.out.println(val1);
+                Log.e(TAG, "savedPDFFile "+val1);
+
+                NumberFormat nf2 = NumberFormat.getInstance(new Locale("sk", "SK"));
+                nf2.setMinimumFractionDigits(2);
+                String val2 = nf2.format(n);
+
+                System.out.println(val2);
+                Log.e(TAG, "savedPDFFile "+val2);
+
+                NumberFormat nf3 = NumberFormat.getInstance(new Locale("da", "DK"));
+                nf3.setMinimumFractionDigits(2);
+                String val3 = nf3.format(n);
+
+                System.out.println(val3);
+                Log.e(TAG, "savedPDFFile "+val3);
+
+
+                NumberFormat nf4 = NumberFormat.getInstance(new Locale("en", "IN"));
+                nf4.setMinimumFractionDigits(2);
+                String val4 = nf4.format(n);
+                Log.e(TAG, "savedPDFFile "+val4);
+
+//                try {
+//                    Number num = nf.parse("150000,456");
+//                    Log.e(TAG, "savedPDFFile "+num);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+
+
+                //System.out.println(result);
+
+
+//                File savedPDFFile = FileManager.getInstance().createTempFile(Abc.this, "pdf", false);
+//
+//                Log.e(TAG, "savedPDFFile "+savedPDFFile.toString());
 
 //                MyAsyncTask asyncTask = new MyAsyncTask();
 //                asyncTask.execute();

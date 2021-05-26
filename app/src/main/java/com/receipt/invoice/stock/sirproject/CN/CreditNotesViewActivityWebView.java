@@ -422,6 +422,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
+        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -735,13 +736,13 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
         }
 
 
-        String name = "note.html";
-        String nameName = "file:///android_asset/note.html";
+        String name = "credit.html";
+        String nameName = "file:///android_asset/credit.html";
         if(templatestr.equals("1")) {
 
             if(templateSelect.equalsIgnoreCase("0")){
-                name = "note.html";
-                nameName = "file:///android_asset/note.html";
+                name = "credit.html";
+                nameName = "file:///android_asset/credit.html";
             }else if(templateSelect.equalsIgnoreCase("1")){
                 name = "invoice1.html";
                 nameName = "file:///android_asset/invoice1.html";

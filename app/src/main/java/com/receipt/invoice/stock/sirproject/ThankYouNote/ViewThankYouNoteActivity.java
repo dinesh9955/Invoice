@@ -632,7 +632,7 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
             signature_of_receivername="";
         }else {
             invoice_image_pathreceiverpath=invoice_image_path + signature_of_receiver;
-            signature_of_receivername="SignatureofReceiver";
+            signature_of_receivername="Signature of Receiver";
         }
 
 
@@ -955,7 +955,13 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
 //                        .replaceAll("Client Web", sltcustomer_website)
 //                        .replaceAll("Client E", sltcustomer_email)
                         .replaceAll("Notes-", strnotes)
-                        .replaceAll("#SIGNATURES#", signatureinvoice)
+                       // .replaceAll("#SIGNATURES#", signatureinvoice)
+                        .replaceAll("dataimageCompany_Stamp", invoice_image_pathcompanystemp)
+                        .replaceAll("dataimageRecieverImage", invoice_image_pathreceiverpath)
+
+                        .replaceAll("Company Seal", companyname)
+                        .replaceAll("Authorized Signatory", signature_of_receivername)
+
                         .replaceAll("#ITEMS#", productitemlist)
                         .replaceAll("#LOGO_IMAGE#",companylogopathdto)
                         .replaceAll("#Shipp", ""+stringBuilderShipTo.toString())

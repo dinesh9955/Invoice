@@ -505,6 +505,7 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
+        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -612,7 +613,7 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
 
 
 
-        String signatureinvoice = null;
+//        String signatureinvoice = null;
         String companyname="";
 
         if(company_stamp.equals("") || company_stamp.endsWith("white_img.png"))
@@ -645,17 +646,20 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
             signature_of_issuername="Signature of Issuer";
         }
 
-        try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
-                    .replaceAll("CompanyStamp", companyname)
-                    .replaceAll("SignatureofReceiver", signature_of_receivername)
-                    .replaceAll("SignatureofIssuer", signature_of_issuername)
-                    .replaceAll("dataimageCompany_Stamp",invoice_image_pathcompanystemp)
-                    .replaceAll("dataimageRecieverImage", invoice_image_pathreceiverpath)
-                    .replaceAll("data:imageSige_path", invoice_image_pathissuverpath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Log.e(TAG, "invoice_image_pathcompanystemp "+invoice_image_pathcompanystemp);
+        Log.e(TAG, "invoice_image_pathreceiverpath "+invoice_image_pathreceiverpath);
+
+//        try {
+//            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+//                    .replaceAll("CompanyStamp", companyname)
+//                    .replaceAll("SignatureofReceiver", signature_of_receivername)
+//                    .replaceAll("SignatureofIssuer", signature_of_issuername)
+//                    .replaceAll("dataimageCompany_Stamp",invoice_image_pathcompanystemp)
+//                    .replaceAll("dataimageRecieverImage", invoice_image_pathreceiverpath)
+//                    .replaceAll("data:imageSige_path", invoice_image_pathissuverpath);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
         String content = null;
@@ -952,7 +956,16 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
 //                        .replaceAll("Client Web", sltcustomer_website)
 //                        .replaceAll("Client E", sltcustomer_email)
                         .replaceAll("Notes-", strnotes)
-                        .replaceAll("#SIGNATURES#", signatureinvoice)
+                       // .replaceAll("#SIGNATURES#", signatureinvoice)
+//                Log.e(TAG, "invoice_image_pathcompanystemp "+invoice_image_pathcompanystemp);
+//                Log.e(TAG, "invoice_image_pathreceiverpath "+invoice_image_pathreceiverpath);
+
+                        .replaceAll("dataimageCompany_Stamp", invoice_image_pathcompanystemp)
+                        .replaceAll("dataimageRecieverImage", invoice_image_pathreceiverpath)
+
+                        .replaceAll("Company Seal", companyname)
+                        .replaceAll("Authorized Signatory", signature_of_receivername)
+
                         .replaceAll("#ITEMS#", productitemlist)
                         .replaceAll("#LOGO_IMAGE#",companylogopathdto)
                         .replaceAll("#Shipp", ""+stringBuilderShipTo.toString())

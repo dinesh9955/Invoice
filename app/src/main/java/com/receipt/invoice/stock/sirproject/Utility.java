@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -777,4 +778,37 @@ public class Utility {
 
         return f;
     }
+
+
+    public static String getPatternFormat(String s, double value) {
+        String defaultPattern = "0.0";
+
+        if(s.equalsIgnoreCase("1")){
+            NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
+            nf.setMinimumFractionDigits(2);
+            defaultPattern = nf.format(value);
+//            defaultPattern = "###,###,###,##0.00";
+        }else if(s.equalsIgnoreCase("2")){
+            NumberFormat nf = NumberFormat.getInstance(new Locale("en", "IN"));
+            nf.setMinimumFractionDigits(2);
+            defaultPattern = nf.format(value);
+//            defaultPattern = "##,##,##,##0.00";
+        }else if(s.equalsIgnoreCase("3")){
+            NumberFormat nf = NumberFormat.getInstance(new Locale("da", "DK"));
+            nf.setMinimumFractionDigits(2);
+            defaultPattern = nf.format(value);
+//            defaultPattern = "###.###.###.##0,00";
+        }else if(s.equalsIgnoreCase("4")){
+            NumberFormat nf = NumberFormat.getInstance(new Locale("sk", "SK"));
+            nf.setMinimumFractionDigits(2);
+            defaultPattern = nf.format(value);
+//            defaultPattern = "### ### ### ###,00";
+        }
+
+        return defaultPattern;
+    }
 }
+//    t E/Abc: savedPDFFile 12,345,678.00
+//        2021-05-26 21:47:37.199 28287-28287/com.receipt.invoice.stock.sirproject E/Abc: savedPDFFile 12 345 678,00
+//        2021-05-26 21:47:37.215 28287-28287/com.receipt.invoice.stock.sirproject E/Abc: savedPDFFile 12.345.678,00
+//        2021-05-26 21:47:37.228 28287-28287/com.receipt.invoice.stock.sirproject E/Abc: savedPDFFile 1,23,45,678.00

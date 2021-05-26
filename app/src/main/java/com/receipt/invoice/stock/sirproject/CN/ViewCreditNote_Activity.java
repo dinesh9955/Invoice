@@ -443,6 +443,7 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
+        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -492,7 +493,9 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
                 cruncycode = myList.get(i).getCurrency_code();
 
                 //Log.e(TAG, " producprice.get(i)"+ producprice.get(i))
-
+//
+//                String patternFormat = Utility.getPatternFormat("3");
+//
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                 double producQuantity = Double.parseDouble(tempQuantity.get(i));
                 double producpriceRate = Double.parseDouble(producprice.get(i));
@@ -503,6 +506,9 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", myList.get(i).getProduct_measurement_unit())
+//                        .replaceAll("#QUANTITY#", ""+Utility.getPatternFormat("3", producQuantity))
+//                        .replaceAll("#PRICE#", ""+Utility.getPatternFormat("3", producpriceRate) + Utility.getReplaceDollor(cruncycode))
+//                        .replaceAll("#TOTAL#", ""+Utility.getPatternFormat("3", producpriceAmount) + Utility.getReplaceDollor(cruncycode));
                         .replaceAll("#QUANTITY#", ""+formatter.format(producQuantity))
                         .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
                         .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
@@ -739,11 +745,11 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
 
         Log.e(TAG, "selectedTemplate "+selectedTemplate);
 
-        String name = "note.html";
-        String nameName = "file:///android_asset/note.html";
+        String name = "credit.html";
+        String nameName = "file:///android_asset/credit.html";
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "note.html";
-            nameName = "file:///android_asset/note.html";
+            name = "credit.html";
+            nameName = "file:///android_asset/credit.html";
         }
 
 //        else if(selectedTemplate.equalsIgnoreCase("1")){

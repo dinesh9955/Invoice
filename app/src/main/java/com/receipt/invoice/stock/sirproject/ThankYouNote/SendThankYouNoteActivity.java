@@ -958,7 +958,13 @@ public class SendThankYouNoteActivity extends AppCompatActivity {
 //                        .replaceAll("Client Web", sltcustomer_website)
 //                        .replaceAll("Client E", sltcustomer_email)
                         .replaceAll("Notes-", strnotes)
-                        .replaceAll("#SIGNATURES#", signatureinvoice)
+                    //    .replaceAll("#SIGNATURES#", signatureinvoice)
+                        .replaceAll("dataimageCompany_Stamp", invoice_image_pathcompanystemp)
+                        .replaceAll("dataimageRecieverImage", invoice_image_pathreceiverpath)
+
+                        .replaceAll("Company Seal", companyname)
+                        .replaceAll("Authorized Signatory", signature_of_receivername)
+
                         .replaceAll("#ITEMS#", productitemlist)
                         .replaceAll("#LOGO_IMAGE#",companylogopathdto)
                         .replaceAll("#Shipp", ""+stringBuilderShipTo.toString())

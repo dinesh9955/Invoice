@@ -17,7 +17,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Picture;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.pdf.PdfDocument;
@@ -26,8 +25,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.print.PDFPrint;
-import android.print.PrintAttributes;
-import android.print.pdf.PrintedPdfDocument;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
@@ -73,10 +70,6 @@ import com.bumptech.glide.RequestManager;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.isapanah.awesomespinner.AwesomeSpinner;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.PdfPrinterGraphics2D;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -108,11 +101,9 @@ import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Utility;
-import com.tejpratapsingh.pdfcreator.activity.PDFViewerActivity;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 import com.wang.avi.AVLoadingIndicatorView;
-import com.webviewtopdf.PdfView;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -4243,11 +4234,11 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "note.html";
-        String nameName = "file:///android_asset/note.html";
+        String name = "credit.html";
+        String nameName = "file:///android_asset/credit.html";
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "note.html";
-            nameName = "file:///android_asset/note.html";
+            name = "credit.html";
+            nameName = "file:///android_asset/credit.html";
         }else if(selectedTemplate.equalsIgnoreCase("1")){
             name = "invoice1.html";
             nameName = "file:///android_asset/invoice1.html";
@@ -4376,6 +4367,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
+        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
 
         String finalContent = content;
         invoiceweb.setWebViewClient(new WebViewClient() {

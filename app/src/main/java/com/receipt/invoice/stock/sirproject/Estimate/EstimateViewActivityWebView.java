@@ -399,6 +399,7 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
+        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
