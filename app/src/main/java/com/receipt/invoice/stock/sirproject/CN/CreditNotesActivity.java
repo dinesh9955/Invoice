@@ -19,11 +19,12 @@ import com.google.android.material.tabs.TabLayout;
 import com.receipt.invoice.stock.sirproject.Adapter.CustomViewPagerAdapter;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
 public class CreditNotesActivity extends AppCompatActivity {
 
 
-    CrystalViewPager viewPager;
+    LockableViewPager viewPager;
     TabLayout tabs;
     public static Context contextOfApplication;
     @Override
@@ -65,14 +66,7 @@ public class CreditNotesActivity extends AppCompatActivity {
         }
 
 
-        viewPager.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                return true;
-            }
-        });
+        viewPager.setSwipeable(false);
     }
 
     public static Context getContextOfApplication()

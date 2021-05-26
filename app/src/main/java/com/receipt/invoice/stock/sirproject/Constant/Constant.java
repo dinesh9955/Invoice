@@ -46,7 +46,7 @@ import com.receipt.invoice.stock.sirproject.Stock.Stock_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.ThankYouNote.ThankYouNoteActivity;
 import com.receipt.invoice.stock.sirproject.User.User_Activity;
-import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 
 import static android.content.Context.MODE_PRIVATE;

@@ -25,15 +25,10 @@ import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
-import com.receipt.invoice.stock.sirproject.PO.PODto;
-import com.receipt.invoice.stock.sirproject.PO.PODtoPO;
-import com.receipt.invoice.stock.sirproject.PO.POResponseDto;
-import com.receipt.invoice.stock.sirproject.PO.POSupplierDto;
-import com.receipt.invoice.stock.sirproject.PO.POViewActivityWebView;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
-import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import org.apache.commons.io.IOUtils;
 

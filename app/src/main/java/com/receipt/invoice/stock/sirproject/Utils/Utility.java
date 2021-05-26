@@ -1,4 +1,4 @@
-package com.receipt.invoice.stock.sirproject;
+package com.receipt.invoice.stock.sirproject.Utils;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -26,6 +26,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
+import com.receipt.invoice.stock.sirproject.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

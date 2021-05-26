@@ -20,11 +20,12 @@ import com.receipt.invoice.stock.sirproject.Adapter.CustomViewPagerAdapter;
 import com.receipt.invoice.stock.sirproject.CN.FragmentCreate_CreditNote;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
 public class DebitNotesActivity extends AppCompatActivity {
 
 
-    CrystalViewPager viewPager;
+    LockableViewPager viewPager;
     TabLayout tabs;
     public static Context contextOfApplication;
     @Override
@@ -66,14 +67,7 @@ public class DebitNotesActivity extends AppCompatActivity {
         }
 
 
-        viewPager.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                return true;
-            }
-        });
+        viewPager.setSwipeable(false);
     }
 
     public static Context getContextOfApplication()

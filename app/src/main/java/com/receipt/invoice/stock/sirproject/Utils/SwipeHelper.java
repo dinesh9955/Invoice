@@ -1,4 +1,4 @@
-package com.receipt.invoice.stock.sirproject;
+package com.receipt.invoice.stock.sirproject.Utils;
 
 import android.content.Context;
 import android.content.res.Resources;

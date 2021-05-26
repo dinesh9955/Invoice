@@ -33,7 +33,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.crystalviewpager.widgets.CrystalViewPager
+    <com.receipt.invoice.stock.sirproject.Utils.LockableViewPager
         android:layout_below="@id/appbar"
         android:id="@+id/viewPagerLayout"
         android:layout_width="match_parent"

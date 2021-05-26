@@ -25,7 +25,6 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,20 +50,18 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.libRG.CustomTextView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mikhaellopez.circleview.CircleView;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
-import com.receipt.invoice.stock.sirproject.Company.Add_Company;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.R;
 
-import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
@@ -79,8 +76,6 @@ import java.util.Date;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
-import petrov.kristiyan.colorpicker.ColorPicker;
-import project.aamir.sheikh.circletextview.CircleTextView;
 
 public class Company_Details_Fragment extends Fragment {
 

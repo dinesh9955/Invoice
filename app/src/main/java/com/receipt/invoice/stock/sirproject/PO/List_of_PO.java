@@ -6,12 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -34,11 +29,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,23 +40,16 @@ import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.receipt.invoice.stock.sirproject.Adapter.InvoicelistAdapterdt;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.CheckForSDCard;
-import com.receipt.invoice.stock.sirproject.Invoice.ConvertToReceiptsActivity;
-import com.receipt.invoice.stock.sirproject.Invoice.EditInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.InvoiceCallBack;
-import com.receipt.invoice.stock.sirproject.Invoice.InvoiceViewActivityWebView;
-import com.receipt.invoice.stock.sirproject.Invoice.List_of_Invoices;
-import com.receipt.invoice.stock.sirproject.Invoice.RecyclerViewSwipeDecorator;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper2;
-import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper3;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
-import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -71,10 +57,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -944,9 +928,9 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 //        };
 //
 //
-////        com.receipt.invoice.stock.sirproject.SwipeHelper swipeHelper = new com.receipt.invoice.stock.sirproject.SwipeHelper(getContext()) {
+////        com.receipt.invoice.stock.sirproject.Utils.SwipeHelper swipeHelper = new com.receipt.invoice.stock.sirproject.Utils.SwipeHelper(getContext()) {
 ////            @Override
-////            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<com.receipt.invoice.stock.sirproject.SwipeHelper.UnderlayButton> underlayButtons) {
+////            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<com.receipt.invoice.stock.sirproject.Utils.SwipeHelper.UnderlayButton> underlayButtons) {
 ////                if (list.size() > 0) {
 ////                    deliveryStatus = list.get(viewHolder.getPosition()).getInvocestatus();
 ////                }
@@ -963,12 +947,12 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 ////                }
 ////
 ////                // invoicelistAdapterdt.notifyDataSetChanged();
-////                underlayButtons.add(new com.receipt.invoice.stock.sirproject.SwipeHelper.UnderlayButton(
+////                underlayButtons.add(new com.receipt.invoice.stock.sirproject.Utils.SwipeHelper.UnderlayButton(
 ////                        markAsVoidTxt,
 ////                        0,
 ////                        Color.parseColor(colorDelivery),
 ////
-////                        new com.receipt.invoice.stock.sirproject.SwipeHelper.UnderlayButtonClickListener2() {
+////                        new com.receipt.invoice.stock.sirproject.Utils.SwipeHelper.UnderlayButtonClickListener2() {
 ////                            @Override
 ////                            public void onClick(final int pos) {
 ////                                invoicelistAdapterdt.notifyDataSetChanged();

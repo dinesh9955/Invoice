@@ -19,21 +19,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.receipt.invoice.stock.sirproject.CN.CreditNoteDto;
-import com.receipt.invoice.stock.sirproject.CN.CreditNoteDtoCreditNote;
-import com.receipt.invoice.stock.sirproject.CN.CreditNoteResponseDto;
-import com.receipt.invoice.stock.sirproject.CN.CreditNotesViewActivityWebView;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
-import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import org.apache.commons.io.IOUtils;
 

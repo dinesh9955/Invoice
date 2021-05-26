@@ -2,18 +2,12 @@ package com.receipt.invoice.stock.sirproject.Invoice;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.print.PDFPrint;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
-import android.text.Html;
-import android.text.SpannableString;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -26,22 +20,17 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.RequestManager;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.View_invoice;
 import com.receipt.invoice.stock.sirproject.R;
-import com.receipt.invoice.stock.sirproject.Utility;
-import com.tejpratapsingh.pdfcreator.activity.PDFViewerActivity;
-import com.tejpratapsingh.pdfcreator.utils.FileManager;
-import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import org.apache.commons.io.IOUtils;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;

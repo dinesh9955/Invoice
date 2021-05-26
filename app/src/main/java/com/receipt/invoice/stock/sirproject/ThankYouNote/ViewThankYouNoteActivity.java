@@ -2,13 +2,10 @@ package com.receipt.invoice.stock.sirproject.ThankYouNote;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -21,10 +18,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.bumptech.glide.RequestManager;
 import com.google.gson.Gson;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
-import com.receipt.invoice.stock.sirproject.Invoice.InvoiceViewActivityWebView;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
@@ -33,17 +28,13 @@ import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDtoInvoice;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceResponseDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
-import com.receipt.invoice.stock.sirproject.Model.Customer_list;
-import com.receipt.invoice.stock.sirproject.Model.Product_list;
-import com.receipt.invoice.stock.sirproject.Model.View_invoice;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
-import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import org.apache.commons.io.IOUtils;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;

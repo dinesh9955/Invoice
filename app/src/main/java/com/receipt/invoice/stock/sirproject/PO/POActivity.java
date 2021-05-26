@@ -22,12 +22,13 @@ import com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.Fragment_Create_Invoice;
 import com.receipt.invoice.stock.sirproject.Invoice.List_of_Invoices;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
 public class POActivity extends AppCompatActivity {
 
 
     private static final String TAG = "POActivity";
-    CrystalViewPager viewPager;
+    LockableViewPager viewPager;
     TabLayout tabs;
     public static Context contextOfApplication;
     @Override
@@ -69,14 +70,7 @@ public class POActivity extends AppCompatActivity {
             viewPager.setOffscreenPageLimit(1);
         }
 
-        viewPager.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                return true;
-            }
-        });
+        viewPager.setSwipeable(false);
     }
 
     public static Context getContextOfApplication()

@@ -79,19 +79,11 @@ import com.receipt.invoice.stock.sirproject.Adapter.Service_bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
-import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
-import com.receipt.invoice.stock.sirproject.Estimate.EstimateDto;
-import com.receipt.invoice.stock.sirproject.Estimate.EstimateDtoEstimate;
-import com.receipt.invoice.stock.sirproject.Estimate.EstimateResponseDto;
-import com.receipt.invoice.stock.sirproject.Estimate.EstimateToInvoiceWebview;
 import com.receipt.invoice.stock.sirproject.Estimate.Estimate_image;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
-import com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity;
-import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
-import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
@@ -102,8 +94,6 @@ import com.receipt.invoice.stock.sirproject.Model.SelectedTaxlist;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
 import com.receipt.invoice.stock.sirproject.PV.PVActivity;
-import com.receipt.invoice.stock.sirproject.PV.PVViewActivityWebView;
-import com.receipt.invoice.stock.sirproject.PV.ViewPV_Activity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
@@ -112,7 +102,7 @@ import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
-import com.receipt.invoice.stock.sirproject.Utility;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
@@ -1587,6 +1577,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
+                                    finish();
                                     Intent intent = new Intent(ConvertToPVActivity.this, PVActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
