@@ -3610,8 +3610,8 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
                     }else{
 
                     }
-                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
+                        txttax.setText(  subStrinng + " incl." ); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
 //                    }
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;

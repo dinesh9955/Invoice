@@ -3378,8 +3378,8 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                     taxAmount = Double.parseDouble(taxtrateamt) * subtotalAmount / (100+ Double.parseDouble(taxtrateamt));
                     afterTaxAmount = subtotalAmount;
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
-                    txttax.setText(  subStrinng + " Incl" );
-                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
+                    txttax.setText(  subStrinng + " incl." );
+                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                 } else { // include off
                     taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
                     afterTaxAmount = subtotalAmount + taxAmount;

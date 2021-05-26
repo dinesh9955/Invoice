@@ -3449,8 +3449,8 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
                     Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
-                    txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
+                    txttax.setText(  subStrinng + " incl." ); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;
 

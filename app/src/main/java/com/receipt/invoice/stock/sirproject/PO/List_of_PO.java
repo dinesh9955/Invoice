@@ -115,6 +115,8 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
     RecyclerView recycler_invoices;
     EditText search;
     ArrayList<InvoiceData> list = new ArrayList<>();
+    ArrayList<InvoiceData> temp = new ArrayList();
+
     POListAdapterdt invoicelistAdapterdt;
     String invoiceStatus = "";
     int invoice_position = 0;
@@ -457,18 +459,28 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                         new SwipeHelper2.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
-                                customerName = list.get(pos).getInvoicustomer_name();
-                                dataNo = list.get(pos).getInvoice_nobdt();
-                                templateSelect = list.get(pos).getTemplate_type();
-                                Log.e(TAG, "templateSelect: "+templateSelect);
-                                invoiceidbypos = list.get(pos).getInvoice_userid();
-                                String ilnvoiceStatus = list.get(pos).getInvocestatus();
-                                String pdflink = list.get(pos).getInvoicepdflink();
-                                String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
-//                                Log.e(TAG, "pdflink: "+pdflink);
-//                                Log.e(TAG, "sahrelink: "+sahrelink);
+                                if(temp.size() > 0){
+                                    customerName = temp.get(pos).getInvoicustomer_name();
+                                    dataNo = temp.get(pos).getInvoice_nobdt();
+                                    templateSelect = temp.get(pos).getTemplate_type();
+                                    Log.e(TAG, "templateSelect: "+templateSelect);
+                                    invoiceidbypos = temp.get(pos).getInvoice_userid();
+                                    String ilnvoiceStatus = temp.get(pos).getInvocestatus();
+                                    String pdflink = temp.get(pos).getInvoicepdflink();
+                                    String sahrelink = temp.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
+                                }else{
+                                    customerName = list.get(pos).getInvoicustomer_name();
+                                    dataNo = list.get(pos).getInvoice_nobdt();
+                                    templateSelect = list.get(pos).getTemplate_type();
+                                    Log.e(TAG, "templateSelect: "+templateSelect);
+                                    invoiceidbypos = list.get(pos).getInvoice_userid();
+                                    String ilnvoiceStatus = list.get(pos).getInvocestatus();
+                                    String pdflink = list.get(pos).getInvoicepdflink();
+                                    String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
+                                }
 
-                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
                                 invoicelistAdapterdt.notifyDataSetChanged();
                                 bottomSheetDialog.show();
                             }
@@ -479,7 +491,12 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 
 
                 if (list.size() > 0) {
-                    voidStatus = list.get(viewHolder.getPosition()).getVoid_status();
+                    if(temp.size() > 0){
+                        voidStatus = temp.get(viewHolder.getPosition()).getVoid_status();
+                    }else{
+                        voidStatus = list.get(viewHolder.getPosition()).getVoid_status();
+                    }
+
                 }
 
                 Log.e(TAG, "voidStatusAA " + voidStatus);
@@ -502,31 +519,54 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                         new SwipeHelper2.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
+                                if(temp.size() > 0){
+                                    String invoiceidbypos = temp.get(pos).getInvoice_userid();
 
-                                String invoiceidbypos = list.get(pos).getInvoice_userid();
+                                    Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
 
-                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+                                    String invoiceVoidStatus = temp.get(pos).getVoid_status();
 
-                                String invoiceVoidStatus = list.get(pos).getVoid_status();
+                                    String voidPassValue = "0";
 
-                                String voidPassValue = "0";
+                                    if(invoiceVoidStatus.equalsIgnoreCase("0")){
+                                        voidPassValue = "1";
+                                        // colorVoid = "#ff9900";
+                                    }
 
-                                if(invoiceVoidStatus.equalsIgnoreCase("0")){
-                                    voidPassValue = "1";
-                                    // colorVoid = "#ff9900";
+                                    if(invoiceVoidStatus.equalsIgnoreCase("1")){
+                                        voidPassValue = "0";
+                                        //colorVoid = "#99cc00";
+                                    }
+
+                                    Log.e(TAG, "instantiateUnderlayButton");
+
+                                    invoicelistAdapterdt.updateList(list);
+                                    markVoidInvoice(invoiceidbypos, voidPassValue);
+                                }else{
+                                    String invoiceidbypos = list.get(pos).getInvoice_userid();
+
+                                    Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+
+                                    String invoiceVoidStatus = list.get(pos).getVoid_status();
+
+                                    String voidPassValue = "0";
+
+                                    if(invoiceVoidStatus.equalsIgnoreCase("0")){
+                                        voidPassValue = "1";
+                                        // colorVoid = "#ff9900";
+                                    }
+
+                                    if(invoiceVoidStatus.equalsIgnoreCase("1")){
+                                        voidPassValue = "0";
+                                        //colorVoid = "#99cc00";
+                                    }
+
+                                    Log.e(TAG, "instantiateUnderlayButton");
+
+                                    invoicelistAdapterdt.updateList(list);
+                                    markVoidInvoice(invoiceidbypos, voidPassValue);
                                 }
 
-                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
-                                    voidPassValue = "0";
-                                    //colorVoid = "#99cc00";
-                                }
-
-                                Log.e(TAG, "instantiateUnderlayButton");
-
-                                invoicelistAdapterdt.updateList(list);
-
-//                                invoicelistAdapterdt.notifyItemChanged(pos);
-                                markVoidInvoice(invoiceidbypos, voidPassValue);
 
 
                             }
@@ -538,7 +578,12 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 
 
                 if (list.size() > 0) {
-                    deliveryStatus = list.get(viewHolder.getPosition()).getInvocestatus();
+                    if(temp.size() > 0){
+                        deliveryStatus = temp.get(viewHolder.getPosition()).getInvocestatus();
+                    }else{
+                        deliveryStatus = list.get(viewHolder.getPosition()).getInvocestatus();
+                    }
+
                 }
 
                 Log.e(TAG, "voidStatusAA " + voidStatus);
@@ -561,28 +606,56 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                             @Override
                             public void onClick(final int pos) {
 
-                                String invoiceidbypos = list.get(pos).getInvoice_userid();
+                                if(temp.size() > 0){
+                                    String invoiceidbypos = temp.get(pos).getInvoice_userid();
 
-                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+                                    Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
 
-                                String invoiceVoidStatus = list.get(pos).getInvocestatus();
+                                    String invoiceVoidStatus = temp.get(pos).getInvocestatus();
 
-                                String voidPassValue = "1";
+                                    String voidPassValue = "1";
 
-                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
-                                    voidPassValue = "2";
-                                    // colorVoid = "#ff9900";
+                                    if(invoiceVoidStatus.equalsIgnoreCase("1")){
+                                        voidPassValue = "2";
+                                        // colorVoid = "#ff9900";
+                                    }
+
+                                    if(invoiceVoidStatus.equalsIgnoreCase("2")){
+                                        voidPassValue = "1";
+                                        //colorVoid = "#99cc00";
+                                    }
+
+                                    Log.e(TAG, "instantiateUnderlayButton");
+
+                                    invoicelistAdapterdt.updateList(list);
+                                    deliveryStatus(invoiceidbypos, voidPassValue);
+
+                                }else{
+                                    String invoiceidbypos = list.get(pos).getInvoice_userid();
+
+                                    Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+
+                                    String invoiceVoidStatus = list.get(pos).getInvocestatus();
+
+                                    String voidPassValue = "1";
+
+                                    if(invoiceVoidStatus.equalsIgnoreCase("1")){
+                                        voidPassValue = "2";
+                                        // colorVoid = "#ff9900";
+                                    }
+
+                                    if(invoiceVoidStatus.equalsIgnoreCase("2")){
+                                        voidPassValue = "1";
+                                        //colorVoid = "#99cc00";
+                                    }
+
+                                    Log.e(TAG, "instantiateUnderlayButton");
+
+                                    invoicelistAdapterdt.updateList(list);
+                                    deliveryStatus(invoiceidbypos, voidPassValue);
+
                                 }
 
-                                if(invoiceVoidStatus.equalsIgnoreCase("2")){
-                                    voidPassValue = "1";
-                                    //colorVoid = "#99cc00";
-                                }
-
-                                Log.e(TAG, "instantiateUnderlayButton");
-
-                                invoicelistAdapterdt.updateList(list);
-                                deliveryStatus(invoiceidbypos, voidPassValue);
 
                             }
                         }
@@ -1103,7 +1176,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 
 
     void filter(String text) {
-        ArrayList<InvoiceData> temp = new ArrayList();
+        temp.clear();
         for (InvoiceData d : list) {
             //or use .equal(text) with you want equal match
             //use .toLowerCase() for better matches
@@ -2449,10 +2522,12 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
                         subject);
 
-                if (Utility.isAppAvailable(context, "com.google.android.gm")){
-                    intentShareFile.setPackage("com.google.android.gm");
-                }
-                context.startActivity(intentShareFile);            }
+//                if (Utility.isAppAvailable(context, "com.google.android.gm")){
+//                    intentShareFile.setPackage("com.google.android.gm");
+//                }
+//                context.startActivity(intentShareFile);
+                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+            }
 
         }
     }

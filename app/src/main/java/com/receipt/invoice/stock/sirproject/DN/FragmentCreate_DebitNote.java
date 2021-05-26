@@ -723,7 +723,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
 //
 //                createinvoicewithdetail();
 
-                createinvoice.setEnabled(false);
+              //  createinvoice.setEnabled(false);
 
                 invoice_no = invoicenumtxt.getText().toString();
 //                strnotes = ednotes.getText().toString();
@@ -1056,6 +1056,8 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                 }
             }
 
+            Log.e(TAG, "company_stampFileimage "+company_stampFileimage);
+
 
             if (signatureofinvoicemaker != null) {
                 try {
@@ -1066,6 +1068,8 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                 }
             }
 
+            Log.e(TAG, "signatureofinvoicemaker "+signatureofinvoicemaker);
+
             if (signaturinvoicereceiver != null) {
                 try {
                     params.put("signature_of_receiver", signaturinvoicereceiver);
@@ -1075,6 +1079,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                 }
             }
 
+            Log.e(TAG, "signaturinvoicereceiver "+signaturinvoicereceiver);
 
             for (int i = 0; i < tempList.size(); i++) {
 
@@ -1360,7 +1365,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                     imgstampsuccess.setVisibility(View.VISIBLE);
                     try {
                         company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
-                        Log.e("company_stamp Path", company_stamp);
+                        Log.e("company_stamp_Path", company_stampFileimage.toString());
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -1987,7 +1992,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
-        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Credit note?");
+        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Debit note?");
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 
@@ -3418,8 +3423,8 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
 
-                    txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
+                    txttax.setText(  subStrinng + " incl." ); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                     // netamountvalue = subtotalvalue + Totatlvalue1;
 
                     netamount.setText(formatter.format(netamountvalue) + cruncycode);

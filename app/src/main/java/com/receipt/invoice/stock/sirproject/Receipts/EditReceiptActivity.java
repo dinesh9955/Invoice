@@ -3560,8 +3560,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
                         }
 
-                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-                    taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
+                        txttax.setText(  subStrinng + " incl." ); //Dont do any change
+                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
 //                    }
 
                     // netamountvalue = subtotalvalue + Totatlvalue1;

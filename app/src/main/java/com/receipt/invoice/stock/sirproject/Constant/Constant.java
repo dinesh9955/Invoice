@@ -158,7 +158,7 @@ public class Constant {
         PrimaryDrawerItem item18 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.reports_2).withName("Reports").withTextColor(Color.WHITE);
         PrimaryDrawerItem item19 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.credit_notes_2).withName("Credit Notes").withTextColor(Color.WHITE);
         PrimaryDrawerItem item20 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.debit_note_2).withName("Debit Notes").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item21 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.thanku_note_2).withName("Thank you Note").withTextColor(Color.WHITE);
+        PrimaryDrawerItem item21 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.thanku_note_2).withName("Thank You Note").withTextColor(Color.WHITE);
         PrimaryDrawerItem item22 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.invoice_reminder_2).withName("Invoice Reminders").withTextColor(Color.WHITE);
 
         PrimaryDrawerItem item11 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);

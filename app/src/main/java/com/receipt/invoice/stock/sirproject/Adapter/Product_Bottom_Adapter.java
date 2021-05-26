@@ -295,7 +295,6 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                         if (sh_quantity < en_quantity) {
                             Log.e(TAG, "invoice1");
                             Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity Available");
-
                         } else{
                             Log.e(TAG, "invoice2");
                             sh_price = Double.parseDouble(edprice.getText().toString().trim());
@@ -305,23 +304,48 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                     }
                     else if(receipt.equalsIgnoreCase("receipt")){
                         Log.e(TAG, "receipt");
-                        sh_price = Double.parseDouble(edprice.getText().toString().trim());
-                        callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
+                        if (sh_quantity < en_quantity) {
+                            Log.e(TAG, "invoice1");
+                            Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity Available");
+                        } else{
+                            sh_price = Double.parseDouble(edprice.getText().toString().trim());
+                            callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
+                        }
+
 
                     }
                     else if(receipt.equalsIgnoreCase("estimate")){
                         Log.e(TAG, "estimate");
-                        sh_price = Double.parseDouble(edprice.getText().toString().trim());
-                        callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
+                        if (sh_quantity < en_quantity) {
+                            Log.e(TAG, "invoice1");
+                            Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity Available");
+                        } else{
+                            sh_price = Double.parseDouble(edprice.getText().toString().trim());
+                            callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
+                        }
+
                     }
 
                     else if(receipt.equalsIgnoreCase("creditnotes")){
                         Log.e(TAG, "creditnotes");
-                        sh_price = Double.parseDouble(edprice.getText().toString().trim());
-                        callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
+                        if (sh_quantity < en_quantity) {
+                            Log.e(TAG, "invoice1");
+                            Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity Available");
+                        } else{
+                            sh_price = Double.parseDouble(edprice.getText().toString().trim());
+                            callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
+                        }
+
                     }
                     else if(receipt.equalsIgnoreCase("report")){
                         Log.e(TAG, "creditnotes");
+//                        if (sh_quantity < en_quantity) {
+//                            Log.e(TAG, "invoice1");
+//                            Constant.ErrorToastTop((Activity) mcontext,"Insufficient Quantity Available");
+//
+//                        } else{
+//
+//                        }
                         sh_price = Double.parseDouble(edprice.getText().toString().trim());
                         callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));
                     }

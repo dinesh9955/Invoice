@@ -99,8 +99,12 @@ public class ListOfDebitNotes extends Fragment {
     BottomSheetDialog bottomSheetDialog;
     // Custom Invoice Detail
     RecyclerView recycler_invoices;
+
     EditText search;
     ArrayList<InvoiceData> list = new ArrayList<>();
+    ArrayList<InvoiceData> temp = new ArrayList();
+
+
     DebitNoteListAdapterdt invoicelistAdapterdt;
     String invoiceStatus = "";
     int invoice_position = 0;
@@ -197,15 +201,29 @@ public class ListOfDebitNotes extends Fragment {
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
-                                customerName = list.get(pos).getInvoicustomer_name();
-                                dataNo = list.get(pos).getInvoice_nobdt();
-                                templateSelect = list.get(pos).getTemplate_type();
-                                Log.e(TAG, "templateSelect: "+templateSelect);
-                                invoiceidbypos = list.get(pos).getInvoice_userid();
-                                String ilnvoiceStatus = list.get(pos).getInvocestatus();
-                                String pdflink = list.get(pos).getInvoicepdflink();
-                                String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
-                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
+
+                                if(temp.size() > 0){
+                                    customerName = temp.get(pos).getInvoicustomer_name();
+                                    dataNo = temp.get(pos).getInvoice_nobdt();
+                                    templateSelect = temp.get(pos).getTemplate_type();
+                                    Log.e(TAG, "templateSelect: "+templateSelect);
+                                    invoiceidbypos = temp.get(pos).getInvoice_userid();
+                                    String ilnvoiceStatus = temp.get(pos).getInvocestatus();
+                                    String pdflink = temp.get(pos).getInvoicepdflink();
+                                    String sahrelink = temp.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
+                                }else{
+                                    customerName = list.get(pos).getInvoicustomer_name();
+                                    dataNo = list.get(pos).getInvoice_nobdt();
+                                    templateSelect = list.get(pos).getTemplate_type();
+                                    Log.e(TAG, "templateSelect: "+templateSelect);
+                                    invoiceidbypos = list.get(pos).getInvoice_userid();
+                                    String ilnvoiceStatus = list.get(pos).getInvocestatus();
+                                    String pdflink = list.get(pos).getInvoicepdflink();
+                                    String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
+                                }
+
                                 invoicelistAdapterdt.notifyDataSetChanged();
                                 bottomSheetDialog.show();
                             }
@@ -290,7 +308,8 @@ public class ListOfDebitNotes extends Fragment {
     }
 
     void filter(String text) {
-        ArrayList<InvoiceData> temp = new ArrayList();
+        temp.clear();
+
         for (InvoiceData d : list) {
             //or use .equal(text) with you want equal match
             //use .toLowerCase() for better matches
@@ -749,6 +768,8 @@ public class ListOfDebitNotes extends Fragment {
 //                    Fragment_Create_Invoice.defaultClick = 1;
                     Log.e(TAG, "templateSelectooo "+templateSelect);
                     Intent intent = new Intent(getContext(), DebitNotesViewActivityWebView.class);
+
+
                     intent.putExtra("invoiceID", invoiceidbypos);
                     intent.putExtra("templatestr", templatestr);
                     intent.putExtra("templateSelect", ""+templateSelect);
@@ -1476,13 +1497,13 @@ public class ListOfDebitNotes extends Fragment {
 
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
                         subject);
-                if (Utility.isAppAvailable(context, "com.google.android.gm")){
-                    intentShareFile.setPackage("com.google.android.gm");
-                }
-                context.startActivity(intentShareFile);
+//                if (Utility.isAppAvailable(context, "com.google.android.gm")){
+//                    intentShareFile.setPackage("com.google.android.gm");
+//                }
+                //context.startActivity(intentShareFile);
 
                 //startActivityForResult(intentShareFile, 101);
-//                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
 
             }
 

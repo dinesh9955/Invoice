@@ -221,6 +221,9 @@ public class DebitNotesViewActivityWebView extends AppCompatActivity {
                 signature_of_receiver = invoiceDtoInvoice.getSignatureOfReceiver();
                 signature_of_issuer = invoiceDtoInvoice.getSignatureOfMaker();
 
+                Log.e(TAG, "company_stamp"+company_stamp);
+                Log.e(TAG, "signature_of_receiver"+signature_of_receiver);
+                Log.e(TAG, "signature_of_issuer"+signature_of_issuer);
 
 //                shipping_firstname = invoiceDtoInvoice.getShippingFirstname();
 //                shipping_lastname = invoiceDtoInvoice.getShippingLastname();

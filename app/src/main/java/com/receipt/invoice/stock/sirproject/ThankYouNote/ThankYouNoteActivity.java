@@ -49,6 +49,7 @@ public class ThankYouNoteActivity extends AppCompatActivity{
 
     private static final String TAG = "ThankYouNoteActivity";
     ArrayList<InvoiceData> list = new ArrayList<>();
+    ArrayList<InvoiceData> temp = new ArrayList();
 
     ApiInterface apiInterface;
     private AVLoadingIndicatorView avi;
@@ -144,7 +145,7 @@ public class ThankYouNoteActivity extends AppCompatActivity{
 
 
     void filter(String text) {
-        ArrayList<InvoiceData> temp = new ArrayList();
+        temp.clear();
         for (InvoiceData d : list) {
             //or use .equal(text) with you want equal match
             //use .toLowerCase() for better matches
@@ -413,18 +414,25 @@ public class ThankYouNoteActivity extends AppCompatActivity{
                         new SwipeHelper2.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
-//                                customerName = list.get(pos).getInvoicustomer_name();
+                                // customerName = list.get(pos).getInvoicustomer_name();
 //                                dataNo = list.get(pos).getInvoice_nobdt();
-                                templateSelect = list.get(pos).getTemplate_type();
-                                // Log.e(TAG, "templateSelect: "+templateSelect);
-                                String invoiceidbypos = list.get(pos).getInvoice_userid();
-                                String ilnvoiceStatus = list.get(pos).getInvocestatus();
-                                String pdflink = list.get(pos).getInvoicepdflink();
-                                String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
-//                                Log.e(TAG, "pdflink: "+pdflink);
-//                                Log.e(TAG, "sahrelink: "+sahrelink);
 
-                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
+                                if(temp.size() > 0){
+                                    templateSelect = temp.get(pos).getTemplate_type();
+                                    String invoiceidbypos = temp.get(pos).getInvoice_userid();
+                                    String ilnvoiceStatus = temp.get(pos).getInvocestatus();
+                                    String pdflink = temp.get(pos).getInvoicepdflink();
+                                    String sahrelink = temp.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
+                                }else{
+                                    templateSelect = list.get(pos).getTemplate_type();
+                                    String invoiceidbypos = list.get(pos).getInvoice_userid();
+                                    String ilnvoiceStatus = list.get(pos).getInvocestatus();
+                                    String pdflink = list.get(pos).getInvoicepdflink();
+                                    String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
+                                }
+
                                 invoicelistAdapterdt.notifyDataSetChanged();
                                 bottomSheetDialog.show();
                             }

@@ -3750,12 +3750,12 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
                     }
 
-                    if(subStrinng.toLowerCase().contains("Incl".toLowerCase())){
+                    if(subStrinng.toLowerCase().contains("incl".toLowerCase())){
                         taxvalueText.setText("Tax (" + subStrinng + ")"); //Dont do any change
                         txttax.setText(  subStrinng + "" ); //Dont do any change
                     }else{
-                        taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
-                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
+                        taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
+                        txttax.setText(  subStrinng + " incl." ); //Dont do any change
                     }
 
 //                    if(taxrname.length() > 0){
