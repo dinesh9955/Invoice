@@ -1,8 +1,7 @@
-package com.receipt.invoice.stock.sirproject.CN;
+package com.receipt.invoice.stock.sirproject.InvoiceReminder;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -19,11 +18,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.gson.Gson;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDto;
+import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDtoInvoice;
+import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceResponseDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.R;
@@ -40,15 +42,15 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class CreditNotesViewActivityWebView extends AppCompatActivity {
-    private final String TAG = "CreditNotesViewActivityWebView";
+public class ViewInvoiceActivity extends AppCompatActivity {
+    private final String TAG = "ViewThankYouNoteActivity";
     WebView invoiceweb;
     String invoiceId = "";
     String templateSelect = "";
     String colorCode = "#ffffff";
 
     ApiInterface apiInterface;
-    String company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "";
+    String company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "", cheque_payable_to ="";
 
     String credit_terms = "";
     String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "";
@@ -57,23 +59,23 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
     StringBuilder stringBuilderBillTo = new StringBuilder();
     StringBuilder stringBuilderShipTo = new StringBuilder();
 
-
     String sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
     String shippingzone = "", Paymentamountdate = "", shippingfirstname = "", shippinglastname = "", shippingaddress1 = "", shippingaddress2 = "", shippingcity = "", shippingpostcode = "", shippingcountry;
 
-    String invoicenumber = "", strnotes = "", ref_no = "", paid_amount_payment_method = "", freight_cost = "0", strdiscountvalue = "0", strpaid_amount = "",
-            companylogopath = "", Grossamount_str = "", Subtotalamount = "", netamountvalue = "", Blanceamountstr = "";
+    String invoicenumber = "", strnotes = "", ref_no = "", paid_amount_payment_method = "", freight_cost = "0", strdiscountvalue = "0", strpaid_amount = "", companylogopath = "", Grossamount_str = "", Subtotalamount = "", netamountvalue = "", Blanceamountstr = "";
 
+    //    String paid_amount_date = "";
+//    String Grossamount_str_real = "0";
     String Shipingdetail = "", shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_country, shipping_zone;
 
     String shipping_postalcode, company_image_path, customer_image_path, invoiceshre_link, invoice_image_path;
     ArrayList<InvoiceTotalsItemDto> grosamont = new ArrayList<>();
 
     ArrayList<ProductsItemDto> productsItemDtos = new ArrayList<>();
-    ArrayList<Invoice_image> invoice_imageDto = new ArrayList<>();
+    ArrayList<Invoice_image> invoice_imageDto;
 
     InvoiceTotalsItemDto listobj = new InvoiceTotalsItemDto();
-    CreditNoteDtoCreditNote invoiceDtoInvoice;
+    InvoiceDtoInvoice invoiceDtoInvoice;
 
     InvoiceDto invoiceDto;
     String currency_code,templatestr,paypal_emailstr="";
@@ -97,7 +99,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
         invoiceId = getIntent().getStringExtra("invoiceID");
         templatestr = getIntent().getStringExtra("templatestr");
         templateSelect = getIntent().getStringExtra("templateSelect");
-     //   colorCode = getIntent().getStringExtra("colorCode");
+        colorCode = getIntent().getStringExtra("colorCode");
 
         if (invoiceId != null) {
             Log.e("invoiceId", invoiceId);
@@ -112,11 +114,77 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+//                final File savedPDFFile = FileManager.getInstance().createTempFile(getApplicationContext(), "pdf", false);
+//
+//                String content  = " <!DOCTYPE html>\n" +
+//                        "<html>\n" +
+//                        "<body>\n" +
+//                        "\n" +
+//                        "<h1>My First Heading</h1>\n" +
+//                        "<p>My first paragraph.</p>\n" +
+//                        " <a href='https://www.example.com'>This is a link</a>" +
+//                        "\n" +
+//                        "</body>\n" +
+//                        "</html> ";
+//
+//
+//                PDFUtil.generatePDFFromHTML(getApplicationContext(), savedPDFFile, contentAll , new PDFPrint.OnPDFPrintListener() {
+//                    @SuppressLint("LongLogTag")
+//                    @Override
+//                    public void onSuccess(File file) {
+//
+//                        Log.e(TAG, "file!!! "+file);
+//
+//                        // Open Pdf Viewer
+//                        // Uri pdfUri = Uri.fromFile(file);
+//
+//
+//                        //File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/example.pdf");
+////                        Intent intent = new Intent(Intent.ACTION_VIEW);
+////                        intent.setDataAndType(Uri.fromFile(file), "application/pdf");
+////                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+////                        startActivity(intent);
+//
+//
+//
+//                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//                        //File fileWithinMyDir = new File(pdfUri);
+//
+//                        if(file.exists()) {
+//                            Uri photoURI = FileProvider.getUriForFile(InvoiceViewActivityWebView.this,
+//                                    "com.receipt.invoice.stock.sirproject.provider",
+//                                    file);
+//                            intentShareFile.setType("application/pdf");
+//                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
+//
+//                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+//                                    "Share As Pdf");
+//                            //  intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+//
+//                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
+//                        }
+//        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
+//            companylogopathdto= company_image_path + companylogopath;
+//        }else{
+//            companylogopathdto = "/android_res/drawable/white_img.png";
+//        }
+////                        Intent intentPdfViewer = new Intent(Abc.this, PDFViewerActivity.class);
+////                        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri);
+////
+////                        startActivity(intentPdfViewer);
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception exception) {
+//                        exception.printStackTrace();
+//                    }
+//                });
+
                 createWebPrintJob(invoiceweb);
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Credit Notes");
+        titleView.setText("Preview Invoice");
 
 
         getinvoicedata();
@@ -125,29 +193,33 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
 
     private void getinvoicedata() {
 
-        String token = Constant.GetSharedPreferences(CreditNotesViewActivityWebView.this, Constant.ACCESS_TOKEN);
-        Call<CreditNoteResponseDto> resposresult = apiInterface.getCreditNoteDetail(token, invoiceId);
-        resposresult.enqueue(new Callback<CreditNoteResponseDto>() {
+        String token = Constant.GetSharedPreferences(ViewInvoiceActivity.this, Constant.ACCESS_TOKEN);
+        Call<InvoiceResponseDto> resposresult = apiInterface.getInvoiceDetail(token, invoiceId);
+        resposresult.enqueue(new Callback<InvoiceResponseDto>() {
             @SuppressLint("LongLogTag")
             @Override
-            public void onResponse(Call<CreditNoteResponseDto> call, retrofit2.Response<CreditNoteResponseDto> response) {
+            public void onResponse(Call<InvoiceResponseDto> call, retrofit2.Response<InvoiceResponseDto> response) {
 
                 Log.e("resss ", ""+response.body().toString());
                 // image path of all
                 company_image_path = response.body().getData().getCompanyImagePath();
                 customer_image_path = response.body().getData().getCustomerImagePath();
-                invoiceshre_link = response.body().getData().getCredit_note_share_link();
-                invoice_image_path = response.body().getData().getCredit_note_image_path();
+                invoiceshre_link = response.body().getData().getInvoiceShareLink();
+                invoice_image_path = response.body().getData().getInvoiceImagePath();
                 // customer data get
-                CreditNoteDto data = response.body().getData();
+                InvoiceDto data = response.body().getData();
 
-                InvoiceCustomerDto invoiceCustomerDto = data.getCredit_note().getCustomer();
+                InvoiceCustomerDto invoiceCustomerDto = data.getInvoice().getCustomer();
+
+
+
                 sltcustonername = invoiceCustomerDto.getCustomerName();
                 sltcustomer_address = invoiceCustomerDto.getAddress();
                 sltcustomer_phone_number = invoiceCustomerDto.getPhoneNumber();
                 sltcustomer_website = invoiceCustomerDto.getWebsite();
                 sltcustomer_email = invoiceCustomerDto.getEmail();
                 sltcustomer_contact = invoiceCustomerDto.getContactName();
+
 
                 if(!sltcustonername.equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustonername+"</br>");
@@ -179,7 +251,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                 shippingzone = (String) invoiceCustomerDto.getShippingZone();
 
                 // Company Detail
-                InvoiceCompanyDto companyDto = data.getCredit_note().getCompany();
+                InvoiceCompanyDto companyDto = data.getInvoice().getCompany();
                 company_name = companyDto.getName();
                 company_address = companyDto.getAddress();
                 company_contact = companyDto.getPhoneNumber();
@@ -191,27 +263,32 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                     companylogopath = companyDto.getLogo();
                 }
 
-                paypal_emailstr=companyDto.getPaypalEmail();
+
 
                 //invoice Data
-                invoiceDtoInvoice = data.getCredit_note();
-                invoicenumber = invoiceDtoInvoice.getCredit_note_no();
-                date = invoiceDtoInvoice.getCredit_note_date();
+                invoiceDtoInvoice = data.getInvoice();
+                invoicenumber = invoiceDtoInvoice.getInvoiceNo();
+                date = invoiceDtoInvoice.getInvoiceDate();
                 due_date = invoiceDtoInvoice.getDueDate();
                 credit_terms = invoiceDtoInvoice.getCreditTerms();
                 ref_no = invoiceDtoInvoice.getRefNo();
+
                 payment_swift_bic = invoiceDtoInvoice.getPaymentSwiftBic();
                 payment_currency = invoiceDtoInvoice.getPaymentCurrency();
-
                 payment_iban = invoiceDtoInvoice.getPaymentIban();
+                paypal_emailstr = companyDto.getPaypalEmail();
+                payment_bank_name = companyDto.getPaymentBankName();
+                cheque_payable_to = companyDto.getChequePayableTo();
+
+                Log.e(TAG, "paypal_emailstrLL "+paypal_emailstr);
+
                 paid_amount_payment_method = invoiceDtoInvoice.getPaidAmountPaymentMethod();
-                paid_amount_payment_method = invoiceDtoInvoice.getPaidAmountPaymentMethod();
+                Paymentamountdate = invoiceDtoInvoice.getPaidAmountDate();
                 currency_code = invoiceDtoInvoice.getCurrencySymbol();
                 Log.e("currency_code",currency_code);
                 company_stamp = invoiceDtoInvoice.getCompanyStamp();
                 signature_of_receiver = invoiceDtoInvoice.getSignatureOfReceiver();
                 signature_of_issuer = invoiceDtoInvoice.getSignatureOfMaker();
-
 
 //                shipping_firstname = invoiceDtoInvoice.getShippingFirstname();
 //                shipping_lastname = invoiceDtoInvoice.getShippingLastname();
@@ -237,12 +314,22 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                     grosamont = new ArrayList<InvoiceTotalsItemDto>(invoiceDtoInvoice.getTotals());
                 }
 
+
+                Gson gson = new Gson();
+                String json2 = gson.toJson(invoiceDtoInvoice);
+
+                Log.e(TAG, "jsonAA "+json2);
+
+
+
                 productsItemDtos = new ArrayList<ProductsItemDto>(invoiceDtoInvoice.getProducts());
-//                invoice_imageDto = new ArrayList<Invoice_image>(data.getInvoiceImage());
+                invoice_imageDto = new ArrayList<Invoice_image>(data.getInvoiceImage());
 
                 Log.e(TAG, "invoice_imageDto"+invoice_imageDto.size());
 
                 Log.e("product", productsItemDtos.toString());
+
+
 
                 int numsize = grosamont.size();
                 for (int i = 0; i < numsize; i++) {
@@ -250,14 +337,18 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                     String title = listobj.getTitle();
                     String code = listobj.getCode();
 
-                    if (title.equals("Gross Amount")) {
+                    if (code.equals("gross_amount")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
+
                             double vc = Double.parseDouble(dd);
                             DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                             Grossamount_str = formatter.format(vc);
+                            //Grossamount_str_real = dd;
                         }
-                        //Grossamount_str = listobj.getValue();
+
+
+                        // Grossamount_str = listobj.getValue();
                     } else if (title.equals("Sub Total")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
@@ -265,24 +356,15 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                             DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                             Subtotalamount = formatter.format(vc);
                         }
-                       // Subtotalamount = listobj.getValue();
+                        // Subtotalamount = listobj.getValue();
                     } else if (title.equals("Grand Total")) {
-//                        netamountvalue = listobj.getValue();
-//                        Blanceamountstr = listobj.getValue();
-
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
                             DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                             netamountvalue = formatter.format(vc);
                         }
-
-                        if(!listobj.getValue().equalsIgnoreCase("")){
-                            String dd = listobj.getValue();
-                            double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            Blanceamountstr = formatter.format(vc);
-                        }
+                        //netamountvalue = listobj.getValue();
                     } else if (title.equals("Paid Amount")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
@@ -299,10 +381,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                             Blanceamountstr = formatter.format(vc);
                         }
                         //Blanceamountstr = listobj.getValue();
-                    }
-
-
-                    else if (code.equals("tax")) {
+                    }else if (code.equals("tax")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
@@ -310,8 +389,8 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                             invoicetaxvalue = formatter.format(vc);
                             taxTitle = title;
                         }
+                        //invoicetaxvalue = listobj.getValue();
                     }
-
                     else if (title.equals("Discount")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
@@ -319,7 +398,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                             DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                             strdiscountvalue = formatter.format(vc);
                         }
-                       // strdiscountvalue = listobj.getValue();
+                        // strdiscountvalue = listobj.getValue();
                     }
                     else if (title.equals("Freight Cost")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
@@ -328,14 +407,9 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                             DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                             freight_cost = formatter.format(vc);
                         }
-                        //freight_cost = listobj.getValue();
+                        // freight_cost = listobj.getValue();
                     }
 
-//                    else if (!title.equals("Remaining Balance")) {
-//                        if (title.equals("Grand Total")) {
-//                            Blanceamountstr = listobj.getValue();
-//                        }
-//                    }
 
 
                 }
@@ -346,7 +420,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<CreditNoteResponseDto> call, Throwable t) {
+            public void onFailure(Call<InvoiceResponseDto> call, Throwable t) {
 
             }
         });
@@ -358,6 +432,8 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
 
         //create object of print manager in your device
         PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
+
+
 
         //create object of print adapter
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
@@ -375,6 +451,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
     public void view_invoice() {
 
         invoiceweb = findViewById(R.id.invoiceweb);
+
 
         if(shippingfirstname.equals(""))
         {
@@ -405,10 +482,8 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                 stringBuilderShipTo.append(shippingpostcode+"");
             }
 
-
             //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
         }
-
 
         WebSettings webSettings = invoiceweb.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -436,10 +511,10 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
             }
         });
 
-        Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
+        // Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
 
-        String path = uri.toString();
-        Log.e("path", path);
+        // String path = uri.toString();
+        //  Log.e("path", path);
 
 
         String multipleimage = "";
@@ -486,27 +561,28 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
         String productitemlist ="";
         try {
             for (int i = 0; i < productsItemDtos.size(); i++) {
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
-                Double quantityAmount = Double.parseDouble(productsItemDtos.get(i).getQuantity());
+                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                double productQuantity= Double.parseDouble(productsItemDtos.get(i).getQuantity());
                 double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
                 double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
-
-                        .replaceAll("#NAME#", productsItemDtos.get(i).getName())
-                        .replaceAll("#DESC#", productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
-                        .replaceAll("#UNIT#", productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
-                        .replaceAll("#QUANTITY#", ""+formatter.format(quantityAmount))
-                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) +"" +Utility.getReplaceDollor(currency_code))
+                        .replaceAll("#NAME#", ""+productsItemDtos.get(i).getName())
+                        .replaceAll("#DESC#", ""+productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
+                        .replaceAll("#UNIT#", ""+productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
+                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
+                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) +"" + Utility.getReplaceDollor(currency_code))
                         .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) +"" + Utility.getReplaceDollor(currency_code));
 
-
                 productitemlist = productitemlist + productitem;
+
+
+                //Log.e(TAG, "PRICEAA "+productsItemDtos.get(i).getPrice() + currency_code);
             }
 
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -525,8 +601,12 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
         }
 
 
+
+
+
         String signatureinvoice = null;
         String companyname="";
+
         if(company_stamp.equals("") || company_stamp.endsWith("white_img.png"))
         {
             invoice_image_pathcompanystemp="/android_res/drawable/white_img.png";
@@ -543,7 +623,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
             signature_of_receivername="";
         }else {
             invoice_image_pathreceiverpath=invoice_image_path + signature_of_receiver;
-            signature_of_receivername="Signature of Receiver";
+            signature_of_receivername="SignatureofReceiver";
         }
 
 
@@ -556,7 +636,6 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
             invoice_image_pathissuverpath=invoice_image_path + signature_of_issuer;
             signature_of_issuername="Signature of Issuer";
         }
-
 
         try {
             signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
@@ -575,6 +654,13 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
 
 
 
+
+
+
+
+
+
+
         String shipingvaluetxt="";
         if(freight_cost.equals("0") ){
             // Do you work here on success
@@ -589,6 +675,8 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
             shipingvaluetxt="Shipping";
         }
 
+
+
         String paidamountstrrepvalue = "";
         String paidamountstrreptxt = "";
         String paidamountstrreplace = "";
@@ -602,6 +690,7 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
         String bycheckstrtxt="";
         String paypalstrtxt="";
         String bankstrtxt="";
+        String cheque_payableTo = "";
 
         Log.e(TAG, "strpaid_amount:: "+strpaid_amount);
 
@@ -620,8 +709,8 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
             bycheckstrtxt="";
             paypalstrtxt="";
             bankstrtxt="";
+            cheque_payableTo = "";
             hiddenpaidrow="hidden";
-
 
 
         } else {
@@ -629,24 +718,78 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
 
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount+currency_code;
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
 
 
             pemailpaidstr = paypal_emailstr;
-            chektopaidmaount = strpaid_amount;
             payment_bankstr = payment_bank_name;
             payment_ibanstr = payment_iban;
             payment_currencystr = payment_currency;
             payment_swiftstr = payment_swift_bic;
+            cheque_payableTo = cheque_payable_to;
+
+
+            if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
+                cheque_payableTo = "";
+            }else{
+                cheque_payableTo = cheque_payable_to;
+            }
+
+            if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
+                pemailpaidstr = "";
+            }else{
+                pemailpaidstr = paypal_emailstr;
+            }
+
+            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+                payment_bankstr = "";
+            }else{
+                payment_bankstr = payment_bank_name;
+            }
+
+            if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
+                payment_ibanstr = "";
+            }else{
+                payment_ibanstr = payment_iban;
+            }
+
+            if ( Utility.isEmptyNull(payment_swiftstr).equalsIgnoreCase("")){
+                payment_swiftstr = "";
+            }else{
+                payment_swiftstr = payment_swift_bic;
+            }
+
+            if ( Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                payment_currencystr = "";
+            }else{
+                payment_currencystr = payment_currency;
+            }
+
 
             paimnetdetailstrtxt=" Payment Details ";
             bycheckstrtxt="By cheque :";
             paypalstrtxt="Pay Pal :";
             bankstrtxt="Bank :";
 
-
             hiddenpaidrow="";
         }
+
+
+        Log.e(TAG,"paimnetdetailstrtxtCCC "+paimnetdetailstrtxt);
+        Log.e(TAG,"bycheckstrtxtCCC "+bycheckstrtxt);
+        Log.e(TAG,"paypalstrtxtCCC "+paypalstrtxt);
+        Log.e(TAG,"bankstrtxtCCC "+bankstrtxt);
+
+        Log.e(TAG,"cheque_payableToCCC "+cheque_payableTo);
+        Log.e(TAG,"payment_bankstrCCC "+payment_bankstr);
+        Log.e(TAG,"payment_ibanstrCCC "+payment_ibanstr);
+        Log.e(TAG,"payment_currencystrCCC "+payment_currencystr);
+        Log.e(TAG,"payment_swiftstrCCC "+payment_swiftstr);
+        Log.e(TAG,"pemailpaidstrCCC "+pemailpaidstr);
+
+
+
+
         String strreferencenovalue="";
         String strreferencenotxtvalue="";
 
@@ -664,11 +807,6 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
 
 
         }
-
-
-
-
-
 
 
 
@@ -725,7 +863,6 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
 
 
 
-
         String companylogopathdto="";
 
         if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
@@ -734,14 +871,13 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
             companylogopathdto = "/android_res/drawable/white_img.png";
         }
 
-
-        String name = "note.html";
-        String nameName = "file:///android_asset/note.html";
+        String name = "invoice.html";
+        String nameName = "file:///android_asset/invoice.html";
         if(templatestr.equals("1")) {
 
             if(templateSelect.equalsIgnoreCase("0")){
-                name = "note.html";
-                nameName = "file:///android_asset/note.html";
+                name = "invoice.html";
+                nameName = "file:///android_asset/invoice.html";
             }else if(templateSelect.equalsIgnoreCase("1")){
                 name = "invoice1.html";
                 nameName = "file:///android_asset/invoice1.html";
@@ -755,7 +891,6 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                 name = "invoice4.html";
                 nameName = "file:///android_asset/invoice4.html";
             }
-
 
             StringBuilder stringBuilderCompany = new StringBuilder();
 
@@ -773,6 +908,8 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
             }
 
 
+
+
             try {
                 content = IOUtils.toString(getAssets().open(name))
                         .replaceAll("Company Name", company_name)
@@ -785,27 +922,18 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         .replaceAll("DueDate", due_date)
                         .replaceAll("crTerms", invoiceDtoInvoice.getCreditTerms())
                         .replaceAll("refNo", strreferencenovalue)
-                        .replaceAll("GrossAm-", Grossamount_str + ""+ Utility.getReplaceDollor(currency_code))
-                        .replaceAll("Discount-", ""+ Utility.getReplaceDollor(discountvalue))
+                        .replaceAll("GrossAm-", ""+Grossamount_str + ""+ Utility.getReplaceDollor(currency_code))
+                        .replaceAll("Discount-", ""+Utility.getReplaceDollor(discountvalue))
                         .replaceAll("SubTotal-", subTotalValueTxt)
                         .replaceAll("Txses-", Utility.getReplaceDollor(taxtamountstr))
                         .replaceAll("Shipping-", Utility.getReplaceDollor(Shipingcosstbyct))
                         .replaceAll("Total Amount-", netamountvalue + Utility.getReplaceDollor(currency_code))
-                        .replaceAll("PaidsAmount", Utility.getReplaceDollor(paidamountstrrepvalue))
+                        .replaceAll("PaidsAmount",  Utility.getReplaceDollor(paidamountstrrepvalue))
                         .replaceAll("Paid Amount", paidamountstrreptxt)
-//                        .replaceAll("Balance Due-", Blanceamountstr + currency_code)
                         .replaceAll("Balance Due-", Blanceamountstr + Utility.getReplaceDollor(currency_code))
 
                         .replaceAll("SubTotal", subTotalTxt)
-//                        .replaceAll("Checkto", chektopaidmaount)
-                        .replaceAll("Checkto", "")
 
-                        .replaceAll("BankName", payment_bankstr)
-                        .replaceAll("Pemail", pemailpaidstr)
-                        .replaceAll("IBAN", payment_ibanstr)
-//                        .replaceAll("Currency", payment_currencystr)
-                        .replaceAll("Currency", "")
-                        .replaceAll("Swift/BICCode", payment_swiftstr)
 
                         .replaceAll("Client N", ""+stringBuilderBillTo.toString())
 //                        .replaceAll("Client A", sltcustomer_address)
@@ -813,7 +941,6 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
 //                        .replaceAll("Client C N", sltcustomer_phone_number)
 //                        .replaceAll("Client Web", sltcustomer_website)
 //                        .replaceAll("Client E", sltcustomer_email)
-
                         .replaceAll("Notes-", strnotes)
                         .replaceAll("#SIGNATURES#", signatureinvoice)
                         .replaceAll("#ITEMS#", productitemlist)
@@ -828,16 +955,25 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         .replaceAll(" Discount ", discounttxtreplace)
                         .replaceAll("Reference No:", strreferencenotxtvalue)
                         .replaceAll("hide", hiddenpaidrow)
-//                        .replaceAll(" Payment Details ", paimnetdetailstrtxt)
-//                        .replaceAll("By cheque :", bycheckstrtxt)
-//                        .replaceAll("Pay Pal :", paypalstrtxt)
-//                        .replaceAll("Bank :", bankstrtxt)
-                        .replaceAll(" Payment Details ", "")
-                        .replaceAll("By cheque :", "")
-                        .replaceAll("Pay Pal :", "")
-                        .replaceAll("Bank :", "")
+
+
+                        .replaceAll("Checkto", cheque_payableTo)
+                        .replaceAll("BankName", payment_bankstr)
+                        .replaceAll("Pemail", pemailpaidstr)
+                        .replaceAll("IBAN", payment_ibanstr)
+                        .replaceAll("Currency", payment_currencystr)
+                        .replaceAll("Swift/BICCode", payment_swiftstr)
+
+                        .replaceAll(" Payment Details ", paimnetdetailstrtxt)
+                        .replaceAll("By cheque :", bycheckstrtxt)
+                        .replaceAll("Pay Pal :", paypalstrtxt)
+                        .replaceAll("Bank :", bankstrtxt)
+
+
                         .replaceAll("#799f6e", colorCode)
                         .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
+
+                Log.e(TAG, "pemailpaidstrVV "+pemailpaidstr);
 
             } catch (IOException e) {
                 e.printStackTrace();

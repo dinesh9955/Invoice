@@ -48,6 +48,9 @@ import java.util.Locale;
 //import io.github.lucasfsc.html2pdf.Html2Pdf;
 
 import com.lowagie.text.Font;
+import com.receipt.invoice.stock.sirproject.InvoiceReminder.SendInvoiceReminderActivity;
+import com.tejpratapsingh.pdfcreator.utils.FileManager;
+//import com.tejpratapsingh.pdfcreator.utils.FileManager;
 
 import cz.msebera.android.httpclient.util.ByteArrayBuffer;
 
@@ -70,9 +73,12 @@ public class Abc extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
+                File savedPDFFile = FileManager.getInstance().createTempFile(Abc.this, "pdf", false);
 
-                MyAsyncTask asyncTask = new MyAsyncTask();
-                asyncTask.execute();
+                Log.e(TAG, "savedPDFFile "+savedPDFFile.toString());
+
+//                MyAsyncTask asyncTask = new MyAsyncTask();
+//                asyncTask.execute();
 
 
 //                pd = new ProgressDialog(Abc.this);

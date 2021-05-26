@@ -1058,6 +1058,11 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 
             Log.e("posting params",params.toString());
 
+            Log.e(TAG, "company_stampAAAAAA "+company_stamp);
+            Log.e(TAG, "company_stampBBBBBB "+company_stampFileimage);
+
+            //company_stampFileimage = new File("/storage/emulated/0/Download/images(1).jpeg");
+
             if (company_stampFileimage != null) {
                 try {
                     params.put("company_stamp", company_stampFileimage);
@@ -1409,10 +1414,13 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
                     company_stamp = getRealPathFromUri(selectedImage);
                     imgstampsuccess.setVisibility(View.VISIBLE);
                     try {
+                        //company_stampFileimage = new File(company_stamp);
                         company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
-                        Log.e("company_stamp Path", company_stamp);
+                        Log.e(TAG, "company_stampFileimageXX "+company_stampFileimage);
 
-                    } catch (IOException e) {
+//                        Log.e("company_stamp Path", company_stamp);
+
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -1512,7 +1520,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
             assert cursor != null;
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
-            return cursor.getString(column_index);
+            return cursor.getString(column_index).replace(" ", "");
         } finally {
             if (cursor != null) {
                 cursor.close();
@@ -3344,6 +3352,8 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_price: "+total_price);
 
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
         double grandAmount = 0.0;
         double discountAmount = 0.0;
         double subtotalAmount = 0.0;
@@ -3412,37 +3422,37 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
             if(grandAmount == 0){
                 grosstotal.setText("0");
             }else{
-                grosstotal.setText(grandAmount+""+cruncycode);
+                grosstotal.setText(formatter.format(grandAmount)+""+cruncycode);
             }
 
             if(discountAmount == 0){
                 discount.setText("0");
             }else{
-                discount.setText(discountAmount+""+cruncycode);
+                discount.setText(formatter.format(discountAmount)+""+cruncycode);
             }
 
             if(subtotalAmount == 0){
                 subtotal.setText("0");
             }else{
-                subtotal.setText(subtotalAmount+""+cruncycode);
+                subtotal.setText(formatter.format(subtotalAmount)+""+cruncycode);
             }
 
             if(taxAmount == 0){
                 tax.setText("0");
             }else{
-                tax.setText(taxAmount+""+cruncycode);
+                tax.setText(formatter.format(taxAmount)+""+cruncycode);
             }
 
             if(shippingAmount == 0){
                 freight.setText("0");
             }else{
-                freight.setText(shippingAmount+""+cruncycode);
+                freight.setText(formatter.format(shippingAmount)+""+cruncycode);
             }
 
             if(netAmount == 0){
                 netamount.setText("0");
             }else{
-                netamount.setText(netAmount+""+cruncycode);
+                netamount.setText(formatter.format(netAmount)+""+cruncycode);
             }
 
         }else{
@@ -4177,6 +4187,8 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
             company_stamp = "/android_res/drawable/white_img.png";
             companyname = "";
         }
+
+
 
 
         String signature_of_receivername = "";

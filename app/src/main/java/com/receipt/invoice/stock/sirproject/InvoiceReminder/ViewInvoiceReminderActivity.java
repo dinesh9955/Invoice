@@ -2,7 +2,10 @@ package com.receipt.invoice.stock.sirproject.InvoiceReminder;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.print.PDFPrint;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 
 import com.google.gson.Gson;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
@@ -33,9 +37,12 @@ import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.ThankYouNote.ViewThankYouNoteActivity;
 import com.receipt.invoice.stock.sirproject.Utility;
+import com.tejpratapsingh.pdfcreator.utils.FileManager;
+import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 
 import org.apache.commons.io.IOUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -872,26 +879,26 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
             companylogopathdto = "/android_res/drawable/white_img.png";
         }
 
-        String name = "invoice.html";
-        String nameName = "file:///android_asset/invoice.html";
+        String name = "notes/duedatereminder.html";
+        String nameName = "file:///android_asset/notes/duedatereminder.html";
         if(templatestr.equals("1")) {
 
-            if(templateSelect.equalsIgnoreCase("0")){
-                name = "invoice.html";
-                nameName = "file:///android_asset/invoice.html";
-            }else if(templateSelect.equalsIgnoreCase("1")){
-                name = "invoice1.html";
-                nameName = "file:///android_asset/invoice1.html";
-            }else if(templateSelect.equalsIgnoreCase("2")){
-                name = "invoice2.html";
-                nameName = "file:///android_asset/invoice2.html";
-            }else if(templateSelect.equalsIgnoreCase("3")){
-                name = "invoice3.html";
-                nameName = "file:///android_asset/invoice3.html";
-            }else if(templateSelect.equalsIgnoreCase("4")){
-                name = "invoice4.html";
-                nameName = "file:///android_asset/invoice4.html";
-            }
+//            if(templateSelect.equalsIgnoreCase("0")){
+//                name = "invoice.html";
+//                nameName = "file:///android_asset/invoice.html";
+//            }else if(templateSelect.equalsIgnoreCase("1")){
+//                name = "invoice1.html";
+//                nameName = "file:///android_asset/invoice1.html";
+//            }else if(templateSelect.equalsIgnoreCase("2")){
+//                name = "invoice2.html";
+//                nameName = "file:///android_asset/invoice2.html";
+//            }else if(templateSelect.equalsIgnoreCase("3")){
+//                name = "invoice3.html";
+//                nameName = "file:///android_asset/invoice3.html";
+//            }else if(templateSelect.equalsIgnoreCase("4")){
+//                name = "invoice4.html";
+//                nameName = "file:///android_asset/invoice4.html";
+//            }
 
             StringBuilder stringBuilderCompany = new StringBuilder();
 
@@ -918,6 +925,8 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
 //                        .replaceAll("Contact No.", company_contact)
 //                        .replaceAll("Website", company_website)
 //                        .replaceAll("Email", company_email)
+                        .replaceAll("Name!", company_name)
+                        .replaceAll("CusName", date)
                         .replaceAll("INV-564", "" + invoicenumber)
                         .replaceAll("invD", date)
                         .replaceAll("DueDate", due_date)
@@ -987,6 +996,73 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
         contentAll = content;
 
         invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
+
+
+
+//        invoiceweb.setWebViewClient(new WebViewClient() {
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                return false;
+//            }
+//
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//
+//                //if page loaded successfully then show print button
+//                //findViewById(R.id.fab).setVisibility(View.VISIBLE);
+//                final File savedPDFFile = FileManager.getInstance().createTempFile(ViewInvoiceReminderActivity.this, "pdf", false);
+//
+//                PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
+//                    @Override
+//                    public void onSuccess(File file) {
+//                       // Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//                        if(file.exists()) {
+//
+//                            Log.e(TAG, "FILENAME" +file);
+//                          //  Log.e(TAG, "customer_name" +customer_name);
+//
+//                           // createinvoicewithdetail(file);
+//
+//
+//
+//                            Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//                           // File fileWithinMyDir = new File(message);
+//                            Uri photoURI = FileProvider.getUriForFile(ViewInvoiceReminderActivity.this,
+//                                    "com.receipt.invoice.stock.sirproject.provider",
+//                                    file);
+//
+//                            if(file.exists()) {
+//                                intentShareFile.setType("application/pdf");
+//                                Uri outputFileUri = Uri.fromFile(file);
+//                                intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
+//
+//                                intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+//                                        "Invoice Due Date Reminder");
+//                                intentShareFile.putExtra(Intent.EXTRA_TEXT,
+//                                        "Your invoice is due for payment. Kindly find below reminder note");
+//
+//                                if (Utility.isAppAvailable(ViewInvoiceReminderActivity.this, "com.google.android.gm")){
+//                                    intentShareFile.setPackage("com.google.android.gm");
+//                                }
+//                                startActivity(intentShareFile);
+//
+//                            }
+//
+//
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception exception) {
+//                        exception.printStackTrace();
+//                    }
+//                });
+//
+//            }
+//        });
+//
+//
+
     }
 
 

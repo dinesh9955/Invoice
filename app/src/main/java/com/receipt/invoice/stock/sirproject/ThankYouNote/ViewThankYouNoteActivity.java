@@ -880,26 +880,26 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
             companylogopathdto = "/android_res/drawable/white_img.png";
         }
 
-        String name = "invoice.html";
-        String nameName = "file:///android_asset/invoice.html";
+        String name = "notes/thankyounote.html";
+        String nameName = "file:///android_asset/notes/thankyounote.html";
         if(templatestr.equals("1")) {
 
-            if(templateSelect.equalsIgnoreCase("0")){
-                name = "invoice.html";
-                nameName = "file:///android_asset/invoice.html";
-            }else if(templateSelect.equalsIgnoreCase("1")){
-                name = "invoice1.html";
-                nameName = "file:///android_asset/invoice1.html";
-            }else if(templateSelect.equalsIgnoreCase("2")){
-                name = "invoice2.html";
-                nameName = "file:///android_asset/invoice2.html";
-            }else if(templateSelect.equalsIgnoreCase("3")){
-                name = "invoice3.html";
-                nameName = "file:///android_asset/invoice3.html";
-            }else if(templateSelect.equalsIgnoreCase("4")){
-                name = "invoice4.html";
-                nameName = "file:///android_asset/invoice4.html";
-            }
+//            if(templateSelect.equalsIgnoreCase("0")){
+//                name = "invoice.html";
+//                nameName = "file:///android_asset/invoice.html";
+//            }else if(templateSelect.equalsIgnoreCase("1")){
+//                name = "invoice1.html";
+//                nameName = "file:///android_asset/invoice1.html";
+//            }else if(templateSelect.equalsIgnoreCase("2")){
+//                name = "invoice2.html";
+//                nameName = "file:///android_asset/invoice2.html";
+//            }else if(templateSelect.equalsIgnoreCase("3")){
+//                name = "invoice3.html";
+//                nameName = "file:///android_asset/invoice3.html";
+//            }else if(templateSelect.equalsIgnoreCase("4")){
+//                name = "invoice4.html";
+//                nameName = "file:///android_asset/invoice4.html";
+//            }
 
             StringBuilder stringBuilderCompany = new StringBuilder();
 
@@ -926,6 +926,10 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
 //                        .replaceAll("Contact No.", company_contact)
 //                        .replaceAll("Website", company_website)
 //                        .replaceAll("Email", company_email)
+
+
+                        .replaceAll("Name!", company_name)
+                        .replaceAll("TNdate", date)
                         .replaceAll("INV-564", "" + invoicenumber)
                         .replaceAll("invD", date)
                         .replaceAll("DueDate", due_date)

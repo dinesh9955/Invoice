@@ -239,6 +239,7 @@ public class ForgotPassword_Activity extends AppCompatActivity {
         }
         else
         {
+
             avi.smoothToShow();
             avibackground.setVisibility(View.VISIBLE);
 

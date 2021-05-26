@@ -512,7 +512,7 @@ public class InvoiceReminderActivity extends AppCompatActivity{
                 public void onClick(View v) {
 //                    Fragment_Create_Invoice.defaultClick = 1;
                     Log.e(TAG, "templateSelectooo "+templateSelect);
-                    Intent intent = new Intent(InvoiceReminderActivity.this, ViewInvoiceReminderActivity.class);
+                    Intent intent = new Intent(InvoiceReminderActivity.this, ViewInvoiceActivity.class);
                     intent.putExtra("invoiceID", invoiceidbypos);
                     intent.putExtra("templatestr", templatestr);
 //                    templateSelect = ""+2;
@@ -542,35 +542,45 @@ public class InvoiceReminderActivity extends AppCompatActivity{
 //                    }
 //                }
 //            });
-//
-//            duplicateinvoitxt.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-////                    Fragment_Create_Invoice.defaultClick = 1;
-//                    SavePref pref = new SavePref();
-//                    pref.SavePref(getActivity());
-//                    pref.setTemplate(0);
-//
-//                    Intent intent = new Intent(getContext(), EditInvoiceActivity.class);
-//                    intent.putExtra("invoiceID", invoiceidbypos);
-//                    intent.putExtra("invoice_count", invoice_count);
-//
-////                    intent.putExtra("templatestr", templatestr);
-//
-////                    intent.putExtra("templateSelect", ""+templateSelect);
-////                    intent.putExtra("colorCode", ""+colorCode);
-//
-////                    templateSelect = ""+2;
-////                    colorCode = "#ff0000";
-////                    intent.putExtra("templateSelect", ""+templateSelect);
-////                    intent.putExtra("colorCode", ""+colorCode);
-//
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    startActivity(intent);
-//                    bottomSheetDialog.dismiss();
-//                }
-//            });
-//
+
+            duplicateinvoitxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(InvoiceReminderActivity.this, ViewInvoiceReminderActivity.class);
+                    intent.putExtra("invoiceID", invoiceidbypos);
+                    intent.putExtra("templatestr", templatestr);
+                    intent.putExtra("templateSelect", ""+templateSelect);
+                    intent.putExtra("colorCode", ""+colorCode);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+
+            viewinvoicetemplate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(InvoiceReminderActivity.this, SendInvoiceReminderActivity.class);
+                    intent.putExtra("invoiceID", invoiceidbypos);
+                    intent.putExtra("templatestr", templatestr);
+                    intent.putExtra("templateSelect", ""+templateSelect);
+                    intent.putExtra("colorCode", ""+colorCode);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+
+            shareinvoicetxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+
 //
 //
 //

@@ -1411,8 +1411,10 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                         String subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
 
                         if(!subStrinng.contains(isTaxRate+isPecent)){
-                            subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
+                            //subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
+                            subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
                         }else if(subStrinng.contains(isTaxRate+isPecent)){
+                           // subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
                             subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
                         }
 
@@ -3596,7 +3598,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     if(!subStrinng.contains(isTaxRate+isPecent)){
                         subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
                     }else{
-
+                        subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
                     }
 
                     txttax.setText(subStrinng); //Dont do any change

@@ -46,19 +46,9 @@
             android:name=".Splash_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".Settings.WebShowActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
 
         </activity>
+
 
 
         <activity
@@ -533,7 +523,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -543,6 +536,23 @@
             android:windowSoftInputMode="adjustPan|adjustResize" >
 
         </activity>
+
+        <activity
+            android:name=".InvoiceReminder.ViewInvoiceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+        <activity
+            android:name=".InvoiceReminder.SendInvoiceReminderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
 
 
 
@@ -557,6 +567,36 @@
 
         <activity
             android:name=".ThankYouNote.ViewThankYouNoteActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
+        <activity
+            android:name=".ThankYouNote.ViewInvoiceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
+        <activity
+            android:name=".ThankYouNote.SendThankYouNoteActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
+
+
+
+        <activity
+            android:name=".Settings.WebShowActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >

@@ -30,6 +30,7 @@ import com.receipt.invoice.stock.sirproject.Invoice.InvoiceViewActivityWebView;
 import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper2;
 import com.receipt.invoice.stock.sirproject.InvoiceReminder.InvoiceReminderActivity;
 import com.receipt.invoice.stock.sirproject.InvoiceReminder.InvoiceReminderAdapter;
+import com.receipt.invoice.stock.sirproject.InvoiceReminder.SendInvoiceReminderActivity;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
@@ -500,7 +501,7 @@ public class ThankYouNoteActivity extends AppCompatActivity{
                   //  Log.e(TAG, "templateSelectooo "+templateSelect);
 
 
-                    Intent intent = new Intent(ThankYouNoteActivity.this, InvoiceViewActivityWebView.class);
+                    Intent intent = new Intent(ThankYouNoteActivity.this, ViewInvoiceActivity.class);
                     intent.putExtra("invoiceID", invoiceidbypos);
                     intent.putExtra("templatestr", templatestr);
 //                    templateSelect = ""+2;
@@ -531,33 +532,49 @@ public class ThankYouNoteActivity extends AppCompatActivity{
 //                }
 //            });
 //
-//            duplicateinvoitxt.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-////                    Fragment_Create_Invoice.defaultClick = 1;
+            duplicateinvoitxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Fragment_Create_Invoice.defaultClick = 1;
 //                    SavePref pref = new SavePref();
 //                    pref.SavePref(getActivity());
 //                    pref.setTemplate(0);
-//
-//                    Intent intent = new Intent(getContext(), EditInvoiceActivity.class);
-//                    intent.putExtra("invoiceID", invoiceidbypos);
-//                    intent.putExtra("invoice_count", invoice_count);
-//
-////                    intent.putExtra("templatestr", templatestr);
-//
-////                    intent.putExtra("templateSelect", ""+templateSelect);
-////                    intent.putExtra("colorCode", ""+colorCode);
-//
-////                    templateSelect = ""+2;
-////                    colorCode = "#ff0000";
-////                    intent.putExtra("templateSelect", ""+templateSelect);
-////                    intent.putExtra("colorCode", ""+colorCode);
-//
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    startActivity(intent);
-//                    bottomSheetDialog.dismiss();
-//                }
-//            });
+
+                    Intent intent = new Intent(ThankYouNoteActivity.this, ViewThankYouNoteActivity.class);
+                    intent.putExtra("invoiceID", invoiceidbypos);
+                    intent.putExtra("templatestr", templatestr);
+                    intent.putExtra("templateSelect", ""+templateSelect);
+                    intent.putExtra("colorCode", ""+colorCode);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+
+
+            viewinvoicetemplate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ThankYouNoteActivity.this, SendThankYouNoteActivity.class);
+                    intent.putExtra("invoiceID", invoiceidbypos);
+                    intent.putExtra("templatestr", templatestr);
+                    intent.putExtra("templateSelect", ""+templateSelect);
+                    intent.putExtra("colorCode", ""+colorCode);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+
+            shareinvoicetxt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
 //
 //
 //

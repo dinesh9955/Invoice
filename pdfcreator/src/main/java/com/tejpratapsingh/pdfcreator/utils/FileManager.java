@@ -30,6 +30,8 @@ import java.util.Locale;
  */
 public class FileManager {
 
+    private static final String TAG = "FileManager";
+
     public enum FILE_TYPE implements Serializable {
         IMAGE, AUDIO, VIDEO, PDF, TEXT, DOC, PPT, XLS, UNKNOWN
     }
@@ -398,15 +400,25 @@ public class FileManager {
      */
     public File createTempFile(Context context, String withExtension, boolean withDuplicate) {
         // Actual temp file
-        String tempFileName = Long.toString(new Date().getTime());
-        if (withExtension != null && withExtension.isEmpty() == false) {
+       String tempFileName = Long.toString(new Date().getTime());
+
+        if (withDuplicate == false) {
             tempFileName = tempFileName + "." + withExtension;
+            Log.e(TAG , "withExtension false");
         }
+
+        if (withDuplicate == true) {
+            tempFileName = withExtension;
+            Log.e(TAG , "withExtension true");
+        }
+
         File tempFile = new File(getTempFolder(context), tempFileName);
         if (withDuplicate) {
             // Duplicate of temp file
             File tempDuplicateFile = new File(getTempFolder(context), tempFileName + tempDuplicateFileNameSuffix);
         }
+
+        Log.e(TAG , "tempFile_tempFile "+tempFile);
 
         return tempFile;
     }
