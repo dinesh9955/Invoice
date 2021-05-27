@@ -4404,6 +4404,8 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
 
         drableimagebase64 = "iVBORw0KGgoAAAANSUhEUgAAAC4AAAAnCAYAAABwtnr/AAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAALqADAAQAAAABAAAAJwAAAAB8SmRPAAAAeklEQVRYCe3SQQrAIBTEUPX+d67iCbIIBSGuw/B57fzOGw++9eDN9+QO//vLJZ44FOhXgVBalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYc2r3IESll5TkQAAAAASUVORK5CYII=";
 
+        stringBuilderBillTo.delete(0,stringBuilderBillTo.length());
+        stringBuilderShipTo.delete(0,stringBuilderShipTo.length());
 
         if (selected.size() > 0) {
             for (int i = 0; i < selected.size(); i++) {
@@ -4453,25 +4455,16 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
             Shiping_tostr = "Ship To:";
 
             if(!shippingfirstname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingfirstname+"</br>");
-            }
-            if(!shippinglastname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippinglastname+"</br>");
-            }
-            if(!shippingaddress1.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress1+"</br>");
-            }
-            if(!shippingaddress2.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress2+"</br>");
-            }
-            if(!shippingcity.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcity+"</br>");
-            }
-            if(!shippingcountry.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcountry+"</br>");
+                stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
             }
             if(!shippingpostcode.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingpostcode+"");
+                stringBuilderShipTo.append(shippingpostcode+"</br>");
+            }
+            if(!shippingcity.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcity+", "+shippingcountry+"</br>");
+            }
+            if(!shippingaddress1.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress1+", "+shippingaddress2+"</br>");
             }
             //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
