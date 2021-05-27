@@ -248,7 +248,7 @@
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".Invoice.Create_Invoice_Activity"
+            android:name=".Invoice.InvoiceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >

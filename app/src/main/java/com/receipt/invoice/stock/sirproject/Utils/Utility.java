@@ -412,45 +412,7 @@ public class Utility {
         return valueIs;
     }
 
-    static String extractInt(String str)
-    {
-        // Replacing every non-digit number
-        // with a space(" ")
-        str = str.replaceAll("[^\\d]", " ");
 
-        // Remove extra spaces from the beginning
-        // and the ending of the string
-        str = str.trim();
-
-        // Replace all the consecutive white
-        // spaces with a single space
-        str = str.replaceAll(" +", " ");
-
-        if (str.equals(""))
-            return "-1";
-
-        return str;
-    }
-
-
-    public static boolean isNumeric(String str)
-    {
-        for (char c : str.toCharArray())
-        {
-            if (!Character.isDigit(c)) return false;
-        }
-        return true;
-    }
-
-
-    public static boolean isChar(String str)
-    {
-        for (char c : str.toCharArray())
-        {
-            if (Character.isDigit(c)) return false;
-        }
-        return true;
-    }
 
 
     public static boolean checkAndRequestPermissions(Activity context, int request) {
@@ -808,8 +770,135 @@ public class Utility {
 
         return defaultPattern;
     }
-}
-//    t E/Abc: savedPDFFile 12,345,678.00
+    //    t E/Abc: savedPDFFile 12,345,678.00
 //        2021-05-26 21:47:37.199 28287-28287/com.receipt.invoice.stock.sirproject E/Abc: savedPDFFile 12 345 678,00
 //        2021-05-26 21:47:37.215 28287-28287/com.receipt.invoice.stock.sirproject E/Abc: savedPDFFile 12.345.678,00
 //        2021-05-26 21:47:37.228 28287-28287/com.receipt.invoice.stock.sirproject E/Abc: savedPDFFile 1,23,45,678.00
+
+
+
+
+
+
+
+
+
+    public static String getRealValue(String sss, String withPlus) {
+        String valueIs = "";
+        if(sss.toString().length() > 0){
+
+            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
+
+            boolean gg = isNumeric(sss);
+            Log.e(TAG, "gggggg "+gg);
+
+            boolean dd = isChar(sss);
+            Log.e(TAG, "dddddd "+dd);
+
+            if(gg == false && dd == false){
+                Log.e(TAG, "truee ");
+                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+                Log.e(TAG, "cccccc "+flag);
+                if(flag == true){
+
+                    String str = sss;
+
+
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = str.length() - 1; i >= 0; i --) {
+                        char c = str.charAt(i);
+                        if (Character.isDigit(c)) {
+                            sb.insert(0, c);
+                        } else {
+                            break;
+                        }
+                    }
+                    String result = sb.toString();
+
+                    Log.e(TAG, "ccccccresult "+result);
+
+                    String vvvvv = sss.substring(0, sss.length() - result.length());
+                    Log.e(TAG, "ccccccvvvvv "+vvvvv);
+
+                    int secondLength = result.length();
+                    Log.e(TAG, "secondLength "+secondLength);
+
+                    int wrappedValue = Integer.parseInt(result);
+                    Log.e(TAG, "wrappedValue "+wrappedValue);
+
+                    int XXXXX = String.valueOf(wrappedValue).length();
+                    int XXXXXPlus = wrappedValue+1;
+//                   int first =  String.valueOf(secondLength).length();
+//                    int second = String.valueOf(wrappedValue).length();
+//                    Log.e(TAG, "first "+first);
+                    Log.e(TAG, "XXXXX "+XXXXX);
+
+                    String vvvvvSS = sss.substring(0, sss.length() - XXXXX);
+                    Log.e(TAG, "vvvvvSS "+vvvvvSS+XXXXXPlus);
+                    valueIs = vvvvvSS+XXXXXPlus;
+                }
+            }else{
+                boolean ddd = isChar(sss);
+                if(ddd == false){
+                    int myValue = Integer.parseInt(sss)+1;
+                    valueIs = withPlus+" "+myValue;
+                }
+            }
+        }
+        return valueIs;
+    }
+
+
+
+
+    static String extractInt(String str)
+    {
+        // Replacing every non-digit number
+        // with a space(" ")
+        str = str.replaceAll("[^\\d]", " ");
+
+        // Remove extra spaces from the beginning
+        // and the ending of the string
+        str = str.trim();
+
+        // Replace all the consecutive white
+        // spaces with a single space
+        str = str.replaceAll(" +", " ");
+
+        if (str.equals(""))
+            return "-1";
+
+        return str;
+    }
+
+
+    public static boolean isNumeric(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
+    }
+
+
+    public static boolean isChar(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (Character.isDigit(c)) return false;
+        }
+        return true;
+    }
+
+
+
+
+    public static String DEFAULT_INVOICE = "Inv # 1";
+    public static String DEFAULT_RECEIPT = "Rec # 1";
+    public static String DEFAULT_ESTIMATE = "Est # 1";
+    public static String DEFAULT_CN = "CRN # 1";
+    public static String DEFAULT_DN = "DN # 1";
+    public static String DEFAULT_PO = "PO # 1";
+    public static String DEFAULT_PV = "PV # 1";
+}

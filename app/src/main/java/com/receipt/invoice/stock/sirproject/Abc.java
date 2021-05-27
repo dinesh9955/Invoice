@@ -76,206 +76,48 @@ public class Abc extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
-//                double val = 12345678.00;
-//                String patternFormat = Utility.getPatternFormat("3");
+
+
+//                double n = 12345678.00;
 //
-////                DecimalFormat formatter = new DecimalFormat("%,.2f");
-////
-////                String sss = formatter.format(val);
+//                NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
+//                nf.setMinimumFractionDigits(2);
+//                String val1 = nf.format(n);
 //
-//                //Log.e(TAG, "savedPDFFile "+sss);
+//                System.out.println(val1);
+//                Log.e(TAG, "savedPDFFile "+val1);
 //
-////                String sssX =  String.format("%..2f", val);
-//              //  Log.e(TAG, "savedPDFFile "+sssX);
+//                NumberFormat nf2 = NumberFormat.getInstance(new Locale("sk", "SK"));
+//                nf2.setMinimumFractionDigits(2);
+//                String val2 = nf2.format(n);
 //
-//                String result = String.format("%,,2f", val).replace(".", " ");
+//                System.out.println(val2);
+//                Log.e(TAG, "savedPDFFile "+val2);
 //
-//                Log.e(TAG, "savedPDFFile "+result);
-
-
-                double n = 12345678.00;
-
-                NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
-                nf.setMinimumFractionDigits(2);
-                String val1 = nf.format(n);
-
-                System.out.println(val1);
-                Log.e(TAG, "savedPDFFile "+val1);
-
-                NumberFormat nf2 = NumberFormat.getInstance(new Locale("sk", "SK"));
-                nf2.setMinimumFractionDigits(2);
-                String val2 = nf2.format(n);
-
-                System.out.println(val2);
-                Log.e(TAG, "savedPDFFile "+val2);
-
-                NumberFormat nf3 = NumberFormat.getInstance(new Locale("da", "DK"));
-                nf3.setMinimumFractionDigits(2);
-                String val3 = nf3.format(n);
-
-                System.out.println(val3);
-                Log.e(TAG, "savedPDFFile "+val3);
-
-
-                NumberFormat nf4 = NumberFormat.getInstance(new Locale("en", "IN"));
-                nf4.setMinimumFractionDigits(2);
-                String val4 = nf4.format(n);
-                Log.e(TAG, "savedPDFFile "+val4);
-
-//                try {
-//                    Number num = nf.parse("150000,456");
-//                    Log.e(TAG, "savedPDFFile "+num);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-
-
-                //System.out.println(result);
-
-
-//                File savedPDFFile = FileManager.getInstance().createTempFile(Abc.this, "pdf", false);
+//                NumberFormat nf3 = NumberFormat.getInstance(new Locale("da", "DK"));
+//                nf3.setMinimumFractionDigits(2);
+//                String val3 = nf3.format(n);
 //
-//                Log.e(TAG, "savedPDFFile "+savedPDFFile.toString());
-
-//                MyAsyncTask asyncTask = new MyAsyncTask();
-//                asyncTask.execute();
-
-
-//                pd = new ProgressDialog(Abc.this);
-//                pd.setMessage("Downloading image, please wait ...");
-//                pd.setIndeterminate(true);
-//                pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-//                pd.setCancelable(false);
-//                pd.setProgressNumberFormat("%1d KB/%2d KB");
+//                System.out.println(val3);
+//                Log.e(TAG, "savedPDFFile "+val3);
 //
-//                DownloadImage di = new DownloadImage(Abc.this);
-//                di.execute("http://13.126.22.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
 //
-//                pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
-//                    @Override
-//                    public void onCancel(DialogInterface dialog) {
-//                        di.cancel(true);
-//                    }
-//                });
-                //downloadImage("http://13.126.22.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
-//                DownloadFromUrl("http://13.126.22.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf", "601e40db1f4ed.pdf" );
-
-               // DownloadFile("http://13.126.22.0/saad/app/uploads/invoice/pdf/", "DCIM" , "601e40db1f4ed.pdf" );
-
-//                MyAsyncTasks asyncTasks = new MyAsyncTasks();
-//                asyncTasks.execute("http://13.126.22.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
+//                NumberFormat nf4 = NumberFormat.getInstance(new Locale("en", "IN"));
+//                nf4.setMinimumFractionDigits(2);
+//                String val4 = nf4.format(n);
+//                Log.e(TAG, "savedPDFFile "+val4);
 
 
+                String dd = "wew19";
 
+                String sss = getRealValue(dd);
 
-//                try {
-//                    URL url = new URL("http://13.126.22.0/saad/app/uploads/invoice/pdf/601e40db1f4ed.pdf");
-//                    HttpURLConnection c = (HttpURLConnection) url.openConnection();
-//                    c.setRequestMethod("GET");
-//                    c.setDoOutput(true);
-//                    c.connect();
-//
-//                    String PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/down";
-//                    File file = new File(PATH);
-//                    if(!file.exists()) {
-//                        file.mkdirs();
-//                    }
-//                    String name=String.valueOf("601e40db1f4ed")+".pdf";
-//                    File outputFile = new File(file,name);
-//                    FileOutputStream fos =
-//                            new FileOutputStream(outputFile);//this line
-//
-//                    InputStream is = c.getInputStream();
-//                    int fileLength = 0;
-//
-//                    byte[] buffer = new byte[4096];
-//                    int len1 = 0;
-//                    long total = 0;
-//                    while ((len1 = is.read(buffer)) != -1) {
-//                        total += len1;
-//                        if (fileLength > 0)
-//                            //publishProgress((int) (total));
-//                        fos.write(buffer, 0, len1);
-//                    }
-//                    fos.close();
-//                    is.close();
-//
-//                } catch (Exception e) {
-//                    Log.e("Error: ", e.getMessage());
-//                }
+                Log.e(TAG, "savedPDFFile "+sss);
+
             }
         });
 
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Log.e(TAG , "Abc ");
-//
-////                final File savedPDFFile = FileManager.getInstance().createTempFile(getApplicationContext(), "pdf", false);
-////                PDFUtil.generatePDFFromHTML(getApplicationContext(), savedPDFFile, " <!DOCTYPE html>\n" +
-////                        "<html>\n" +
-////                        "<body>\n" +
-////                        "\n" +
-////                        "<h1>My First Heading</h1>\n" +
-////                        "<p>My first paragraph.</p>\n" +
-////                        " <a href='https://www.example.com'>This is a link</a>" +
-////                        "\n" +
-////                        "</body>\n" +
-////                        "</html> ", new PDFPrint.OnPDFPrintListener() {
-////                    @Override
-////                    public void onSuccess(File file) {
-////
-////                        Log.e(TAG, "file!!! "+file);
-////
-////                        // Open Pdf Viewer
-////                       // Uri pdfUri = Uri.fromFile(file);
-////
-////
-////                        //File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/example.pdf");
-//////                        Intent intent = new Intent(Intent.ACTION_VIEW);
-//////                        intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-//////                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-//////                        startActivity(intent);
-////
-////
-////
-////                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-////                        //File fileWithinMyDir = new File(pdfUri);
-////
-////                        if(file.exists()) {
-////                            Uri photoURI = FileProvider.getUriForFile(Abc.this,
-////                                    "com.receipt.invoice.stock.sirproject.provider",
-////                                    file);
-////                            intentShareFile.setType("application/pdf");
-////                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
-////
-////                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-////                                    "Share As Pdf");
-////                          //  intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
-////
-////                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
-////                        }
-////
-//////                        Intent intentPdfViewer = new Intent(Abc.this, PDFViewerActivity.class);
-//////                        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri);
-//////
-//////                        startActivity(intentPdfViewer);
-////                    }
-////
-////                    @Override
-////                    public void onError(Exception exception) {
-////                        exception.printStackTrace();
-////                    }
-////                });
-//
-//                Intent intent = new Intent(Abc.this, ChooseTemplate.class);
-//                intent.putExtra("companycolor", "#ffffff");
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivityForResult(intent, 121);
-//
-//            }
-//        });
+
     }
 
 
@@ -485,7 +327,6 @@ public class Abc extends AppCompatActivity{
     }
 
 
-
     private String getRealValue(String sss) {
         String valueIs = "";
         if(sss.toString().length() > 0){
@@ -503,37 +344,98 @@ public class Abc extends AppCompatActivity{
                 Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
                 Log.e(TAG, "cccccc "+flag);
                 if(flag == true){
+
                     String str = sss;
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        String ii =  vv[vv.length - 1];
-                        Log.e(TAG , "extractInt "+ii);
-                        String vvvvv = sss.substring(0, sss.length() - ii.length());
 
-                        Log.e(TAG , "vvvvv "+vvvvv);
 
-                        int myValue = Integer.parseInt(ii)+1;
-                        valueIs = vvvvv+myValue;
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = str.length() - 1; i >= 0; i --) {
+                        char c = str.charAt(i);
+                        if (Character.isDigit(c)) {
+                            sb.insert(0, c);
+                        } else {
+                            break;
+                        }
                     }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        int myValue = Integer.parseInt(cc)+1;
-                        String vvvvv = sss.substring(0, sss.length() - cc.length());
+                    String result = sb.toString();
 
-                        Log.e(TAG , "bbbbbb "+vvvvv);
-                        valueIs = vvvvv+myValue;
-                    }
+                    Log.e(TAG, "ccccccresult "+result);
+
+                    String vvvvv = sss.substring(0, sss.length() - result.length());
+                    Log.e(TAG, "ccccccvvvvv "+vvvvv);
+
+                    int secondLength = result.length();
+                    Log.e(TAG, "secondLength "+secondLength);
+
+                    int wrappedValue = Integer.parseInt(result);
+                    Log.e(TAG, "wrappedValue "+wrappedValue);
+
+                    int XXXXX = String.valueOf(wrappedValue).length();
+                    int XXXXXPlus = wrappedValue+1;
+//                   int first =  String.valueOf(secondLength).length();
+//                    int second = String.valueOf(wrappedValue).length();
+//                    Log.e(TAG, "first "+first);
+                    Log.e(TAG, "XXXXX "+XXXXX);
+
+                    String vvvvvSS = sss.substring(0, sss.length() - XXXXX);
+                    Log.e(TAG, "vvvvvSS "+vvvvvSS+XXXXXPlus);
+
+//                    if(secondLength == XXXXX){
+//                        int wrappedValuePlus1 = Integer.parseInt(result) + 1;
+//                        Log.e(TAG, "wrappedValuePlus1 "+wrappedValuePlus1);
+//                    }else{
+//                        int wrappedValuePlus2 = Integer.parseInt(result) + 1;
+//                        Log.e(TAG, "wrappedValuePlus2 "+wrappedValuePlus2);
+//                    }
+
+
+
+
+//                    String str = sss;
+//                    String cc = extractInt(str);
+//                    if(cc.contains(" ")){
+//                        String vv[] = cc.split(" ");
+//                        String ii =  vv[vv.length - 1];
+//                        Log.e(TAG , "extractInt "+ii);
+//                        String vvvvv = sss.substring(0, sss.length() - ii.length());
+//
+//                        Log.e(TAG , "vvvvv "+vvvvv);
+//
+//                        int myValue = Integer.parseInt(ii)+1;
+//                        valueIs = vvvvv+myValue;
+//                    }
+//                    if(!cc.contains(" ")){
+//                        Log.e(TAG , "extractInt2 "+cc);
+//
+//                        int myValue = Integer.parseInt(cc);
+//                        Log.e(TAG , "aaaaaa "+myValue);
+//
+//                        int length = String.valueOf(myValue).length();
+//
+//                        String vvvvvSS = sss.substring(0, sss.length() - length);
+//
+//                        int myValuePlus = myValue+1;
+//                        Log.e(TAG , "myValuePlus "+myValuePlus);
+//
+//                        Log.e(TAG , "myValuePlusvvv "+vvvvvSS);
+//
+//
+//                        valueIs = vvvvvSS+myValuePlus;
+//
+//                        Log.e(TAG , "bbbbbb "+valueIs);
+//
+//                    }
                 }
             }else{
-                valueIs = "Inv # 1";
-                Log.e(TAG, "falsee ");
+                boolean ddd = isChar(sss);
+                if(ddd == false){
+                    int myValue = Integer.parseInt(sss)+1;
+                    valueIs = "Inv # "+myValue;
+                }
             }
         }
         return valueIs;
     }
-
-
     static String extractInt(String str)
     {
         // Replacing every non-digit number

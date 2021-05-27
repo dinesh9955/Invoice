@@ -2991,7 +2991,8 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
                                 Log.e(TAG, "zzzz1 "+i);
                                 Log.e(TAG, "zzzz2 "+invoice.length());
 
-                                String sss = getRealValue(invoice_nocompany);
+                                String sss = Utility.getRealValue(invoice_nocompany, Utility.DEFAULT_CN);
+
                                 invoicenum.setText(sss);
 
                                 invoicenum.setEnabled(true);
@@ -4215,26 +4216,18 @@ public class EditCreditNotesActivity extends AppCompatActivity implements Custom
             Shiping_tostr = "Ship To:";
 
             if(!shippingfirstname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingfirstname+"</br>");
-            }
-            if(!shippinglastname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippinglastname+"</br>");
-            }
-            if(!shippingaddress1.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress1+"</br>");
-            }
-            if(!shippingaddress2.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress2+"</br>");
-            }
-            if(!shippingcity.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcity+"</br>");
-            }
-            if(!shippingcountry.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcountry+"</br>");
+                stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
             }
             if(!shippingpostcode.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingpostcode+"");
+                stringBuilderShipTo.append(shippingpostcode+"</br>");
             }
+            if(!shippingcity.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcity+", "+shippingcountry+"</br>");
+            }
+            if(!shippingaddress1.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress1+", "+shippingaddress2+"</br>");
+            }
+
 
             //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 

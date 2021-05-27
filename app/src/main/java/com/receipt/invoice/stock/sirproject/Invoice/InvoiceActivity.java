@@ -9,20 +9,16 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.crystalviewpager.widgets.CrystalViewPager;
 import com.receipt.invoice.stock.sirproject.Adapter.CustomViewPagerAdapter;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
-public class  Create_Invoice_Activity extends AppCompatActivity {
+public class InvoiceActivity extends AppCompatActivity {
 
 
     private static final String TAG = "Create_Invoice_Activity";
@@ -38,7 +34,7 @@ public class  Create_Invoice_Activity extends AppCompatActivity {
         overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(Create_Invoice_Activity.this,"Create Invoice");
+        Constant.toolbar(InvoiceActivity.this,"Create Invoice");
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);

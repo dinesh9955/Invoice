@@ -1346,7 +1346,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         avi.smoothToShow();
         if (customer_name.equals("")) {
             Constant.ErrorToast(EditPOActivity.this, "Select A Customer");
-        } else if (getTrueValue(invoicenum.getText().toString()) == false) {
+        } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_PO).equalsIgnoreCase("")) {
             Constant.ErrorToast(EditPOActivity.this, "Purchase Order No. should be letters followed by Digits");
 
         }else if (invoice_date.equals("")) {
@@ -3357,8 +3357,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                                 Log.e(TAG, "zzzz0 "+invoice_nocompany);
                                 Log.e(TAG, "zzzz1 "+i);
                                 Log.e(TAG, "zzzz2 "+invoice.length());
-
-                                String sss = getRealValue(invoice_nocompany);
+                                String sss = Utility.getRealValue(invoice_nocompany, Utility.DEFAULT_PO);
                                 invoicenum.setText(sss);
 
                                 invoicenum.setEnabled(true);
@@ -4572,139 +4571,139 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
 
 
-
-    static String extractInt(String str)
-    {
-        // Replacing every non-digit number
-        // with a space(" ")
-        str = str.replaceAll("[^\\d]", " ");
-
-        // Remove extra spaces from the beginning
-        // and the ending of the string
-        str = str.trim();
-
-        // Replace all the consecutive white
-        // spaces with a single space
-        str = str.replaceAll(" +", " ");
-
-        if (str.equals(""))
-            return "-1";
-
-        return str;
-    }
-
-
-    public static boolean isNumeric(String str)
-    {
-        for (char c : str.toCharArray())
-        {
-            if (!Character.isDigit(c)) return false;
-        }
-        return true;
-    }
-
-
-    public static boolean isChar(String str)
-    {
-        for (char c : str.toCharArray())
-        {
-            if (Character.isDigit(c)) return false;
-        }
-        return true;
-    }
-
-
-
-
-    private String getRealValue(String sss) {
-        String valueIs = "";
-        if(sss.toString().length() > 0){
-
-            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-
-            boolean gg = isNumeric(sss);
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(sss);
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = sss;
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        String ii =  vv[vv.length - 1];
-                        Log.e(TAG , "extractInt "+ii);
-                        String vvvvv = sss.substring(0, sss.length() - ii.length());
-
-                        Log.e(TAG , "vvvvv "+vvvvv);
-
-                        int myValue = Integer.parseInt(ii)+1;
-                        valueIs = vvvvv+myValue;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        int myValue = Integer.parseInt(cc)+1;
-                        String vvvvv = sss.substring(0, sss.length() - cc.length());
-
-                        Log.e(TAG , "bbbbbb "+vvvvv);
-                        valueIs = vvvvv+myValue;
-                    }
-                }
-            }else{
-                boolean ddd = isChar(sss);
-                if(ddd == false){
-                    int myValue = Integer.parseInt(sss)+1;
-                    valueIs = "PO # "+myValue;
-                }
-            }
-        }
-        return valueIs;
-    }
-
-
-
-
-
-    private boolean getTrueValue(String toString) {
-        boolean b = false;
-        if(toString.length() > 0){
-            boolean gg = isNumeric(toString.toString());
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(toString.toString());
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(toString.toString().charAt(toString.toString().length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = toString.toString();
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        Log.e(TAG , "extractInt "+vv[vv.length - 1]);
-                        b = true;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        b = true;
-                    }
-                }
-            }else{
-                Log.e(TAG, "falsee ");
-                b = false;
-            }
-        }
-        return b;
-    }
-
-
+//
+//    static String extractInt(String str)
+//    {
+//        // Replacing every non-digit number
+//        // with a space(" ")
+//        str = str.replaceAll("[^\\d]", " ");
+//
+//        // Remove extra spaces from the beginning
+//        // and the ending of the string
+//        str = str.trim();
+//
+//        // Replace all the consecutive white
+//        // spaces with a single space
+//        str = str.replaceAll(" +", " ");
+//
+//        if (str.equals(""))
+//            return "-1";
+//
+//        return str;
+//    }
+//
+//
+//    public static boolean isNumeric(String str)
+//    {
+//        for (char c : str.toCharArray())
+//        {
+//            if (!Character.isDigit(c)) return false;
+//        }
+//        return true;
+//    }
+//
+//
+//    public static boolean isChar(String str)
+//    {
+//        for (char c : str.toCharArray())
+//        {
+//            if (Character.isDigit(c)) return false;
+//        }
+//        return true;
+//    }
+//
+//
+//
+//
+//    private String getRealValue(String sss) {
+//        String valueIs = "";
+//        if(sss.toString().length() > 0){
+//
+//            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
+//
+//            boolean gg = isNumeric(sss);
+//            Log.e(TAG, "gggggg "+gg);
+//
+//            boolean dd = isChar(sss);
+//            Log.e(TAG, "dddddd "+dd);
+//
+//            if(gg == false && dd == false){
+//                Log.e(TAG, "truee ");
+//                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+//                Log.e(TAG, "cccccc "+flag);
+//                if(flag == true){
+//                    String str = sss;
+//                    String cc = extractInt(str);
+//                    if(cc.contains(" ")){
+//                        String vv[] = cc.split(" ");
+//                        String ii =  vv[vv.length - 1];
+//                        Log.e(TAG , "extractInt "+ii);
+//                        String vvvvv = sss.substring(0, sss.length() - ii.length());
+//
+//                        Log.e(TAG , "vvvvv "+vvvvv);
+//
+//                        int myValue = Integer.parseInt(ii)+1;
+//                        valueIs = vvvvv+myValue;
+//                    }
+//                    if(!cc.contains(" ")){
+//                        Log.e(TAG , "extractInt2 "+cc);
+//                        int myValue = Integer.parseInt(cc)+1;
+//                        String vvvvv = sss.substring(0, sss.length() - cc.length());
+//
+//                        Log.e(TAG , "bbbbbb "+vvvvv);
+//                        valueIs = vvvvv+myValue;
+//                    }
+//                }
+//            }else{
+//                boolean ddd = isChar(sss);
+//                if(ddd == false){
+//                    int myValue = Integer.parseInt(sss)+1;
+//                    valueIs = "PO # "+myValue;
+//                }
+//            }
+//        }
+//        return valueIs;
+//    }
+//
+//
+//
+//
+//
+//    private boolean getTrueValue(String toString) {
+//        boolean b = false;
+//        if(toString.length() > 0){
+//            boolean gg = isNumeric(toString.toString());
+//            Log.e(TAG, "gggggg "+gg);
+//
+//            boolean dd = isChar(toString.toString());
+//            Log.e(TAG, "dddddd "+dd);
+//
+//            if(gg == false && dd == false){
+//                Log.e(TAG, "truee ");
+//                Boolean flag = Character.isDigit(toString.toString().charAt(toString.toString().length() - 1));
+//                Log.e(TAG, "cccccc "+flag);
+//                if(flag == true){
+//                    String str = toString.toString();
+//                    String cc = extractInt(str);
+//                    if(cc.contains(" ")){
+//                        String vv[] = cc.split(" ");
+//                        Log.e(TAG , "extractInt "+vv[vv.length - 1]);
+//                        b = true;
+//                    }
+//                    if(!cc.contains(" ")){
+//                        Log.e(TAG , "extractInt2 "+cc);
+//                        b = true;
+//                    }
+//                }
+//            }else{
+//                Log.e(TAG, "falsee ");
+//                b = false;
+//            }
+//        }
+//        return b;
+//    }
+//
+//
 
 
 

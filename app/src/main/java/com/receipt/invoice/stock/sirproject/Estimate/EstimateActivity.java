@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -14,15 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.crystalviewpager.widgets.CrystalViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.receipt.invoice.stock.sirproject.Adapter.CustomViewPagerAdapter;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
-import com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity;
-import com.receipt.invoice.stock.sirproject.Invoice.Fragment_Create_Invoice;
-import com.receipt.invoice.stock.sirproject.Invoice.List_of_Invoices;
 import com.receipt.invoice.stock.sirproject.R;
-import com.receipt.invoice.stock.sirproject.Receipts.ReceiptsActivity;
 import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
 public class EstimateActivity extends AppCompatActivity {

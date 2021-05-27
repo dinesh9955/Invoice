@@ -30,7 +30,7 @@ import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
 import com.receipt.invoice.stock.sirproject.DN.DebitNotesActivity;
 import com.receipt.invoice.stock.sirproject.Estimate.EstimateActivity;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
-import com.receipt.invoice.stock.sirproject.Invoice.Create_Invoice_Activity;
+import com.receipt.invoice.stock.sirproject.Invoice.InvoiceActivity;
 import com.receipt.invoice.stock.sirproject.CN.CreditNotesActivity;
 import com.receipt.invoice.stock.sirproject.InvoiceReminder.InvoiceReminderActivity;
 import com.receipt.invoice.stock.sirproject.PO.POActivity;
@@ -343,7 +343,7 @@ public class Constant {
                             Log.e("invoice",invoice);
                             if (invoice.equals("1"))
                             {
-                                Intent intent = new Intent(activity, Create_Invoice_Activity.class);
+                                Intent intent = new Intent(activity, InvoiceActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }
@@ -599,7 +599,7 @@ public class Constant {
                 }
                 else if(position==2){
 
-                    Intent intent = new Intent(activity, Create_Invoice_Activity.class);
+                    Intent intent = new Intent(activity, InvoiceActivity.class);
                     activity.startActivity(intent);
 
 

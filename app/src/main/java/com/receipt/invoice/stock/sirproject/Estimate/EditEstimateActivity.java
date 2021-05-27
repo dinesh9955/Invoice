@@ -1302,7 +1302,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
         avi.smoothToShow();
         if (customer_name.equals("")) {
             Constant.ErrorToast(EditEstimateActivity.this, "Select A Customer");
-        } else if (getTrueValue(invoicenum.getText().toString()) == false) {
+        } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_ESTIMATE).equalsIgnoreCase("")) {
             Constant.ErrorToast(EditEstimateActivity.this, "Estimate No. should be letters followed by Digits");
 
         }else if (invoice_date.equals("")) {
@@ -3219,28 +3219,36 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         JSONArray customer = data.getJSONArray("customer");
 
                         JSONArray invoice = data.getJSONArray("estimate");
-                        for (int i = 0; i < invoice.length(); i++) {
-                            JSONObject item = invoice.getJSONObject(i);
-                            String invoice_nocompany = item.getString("estimate_no");
 
-                            /* invoicenum.setText(invoice_nocompany);*/
+                        if(invoice.length() == 0){
+                            invoicenum.setText(Utility.DEFAULT_ESTIMATE);
+                            //invoicenum.setEnabled(true);
+                        }else{
+                            for (int i = 0; i < invoice.length(); i++) {
+                                JSONObject item = invoice.getJSONObject(i);
+                                String invoice_nocompany = item.getString("estimate_no");
+
+                                /* invoicenum.setText(invoice_nocompany);*/
 //                            if (invoice_nocompany != null) {
 //                                Log.e("invoice no", invoice_nocompany);
 //                            }
 
-                            if(i == invoice.length() - 1){
-                                Log.e(TAG, "zzzz0 "+invoice_nocompany);
-                                Log.e(TAG, "zzzz1 "+i);
-                                Log.e(TAG, "zzzz2 "+invoice.length());
+                                if(i == invoice.length() - 1){
+                                    Log.e(TAG, "zzzz0 "+invoice_nocompany);
+                                    Log.e(TAG, "zzzz1 "+i);
+                                    Log.e(TAG, "zzzz2 "+invoice.length());
 
-                                String sss = getRealValue(invoice_nocompany);
-                                invoicenum.setText(sss);
+                                    String sss = Utility.getRealValue(invoice_nocompany, Utility.DEFAULT_ESTIMATE);
+                                    invoicenum.setText(sss);
 
-                                invoicenum.setEnabled(true);
+                                    invoicenum.setEnabled(true);
+
+                                }
 
                             }
-
                         }
+
+
 
 
 //                        for (int i = 0; i < customer.length(); i++) {
@@ -4442,139 +4450,139 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
 
 
 
-
-    static String extractInt(String str)
-    {
-        // Replacing every non-digit number
-        // with a space(" ")
-        str = str.replaceAll("[^\\d]", " ");
-
-        // Remove extra spaces from the beginning
-        // and the ending of the string
-        str = str.trim();
-
-        // Replace all the consecutive white
-        // spaces with a single space
-        str = str.replaceAll(" +", " ");
-
-        if (str.equals(""))
-            return "-1";
-
-        return str;
-    }
-
-
-    public static boolean isNumeric(String str)
-    {
-        for (char c : str.toCharArray())
-        {
-            if (!Character.isDigit(c)) return false;
-        }
-        return true;
-    }
-
-
-    public static boolean isChar(String str)
-    {
-        for (char c : str.toCharArray())
-        {
-            if (Character.isDigit(c)) return false;
-        }
-        return true;
-    }
-
-
-
-
-    private String getRealValue(String sss) {
-        String valueIs = "";
-        if(sss.toString().length() > 0){
-
-            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-
-            boolean gg = isNumeric(sss);
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(sss);
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = sss;
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        String ii =  vv[vv.length - 1];
-                        Log.e(TAG , "extractInt "+ii);
-                        String vvvvv = sss.substring(0, sss.length() - ii.length());
-
-                        Log.e(TAG , "vvvvv "+vvvvv);
-
-                        int myValue = Integer.parseInt(ii)+1;
-                        valueIs = vvvvv+myValue;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        int myValue = Integer.parseInt(cc)+1;
-                        String vvvvv = sss.substring(0, sss.length() - cc.length());
-
-                        Log.e(TAG , "bbbbbb "+vvvvv);
-                        valueIs = vvvvv+myValue;
-                    }
-                }
-            }else{
-                boolean ddd = isChar(sss);
-                if(ddd == false){
-                    int myValue = Integer.parseInt(sss)+1;
-                    valueIs = "Est # "+myValue;
-                }
-            }
-        }
-        return valueIs;
-    }
-
-
-
-
-
-    private boolean getTrueValue(String toString) {
-        boolean b = false;
-        if(toString.length() > 0){
-            boolean gg = isNumeric(toString.toString());
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(toString.toString());
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(toString.toString().charAt(toString.toString().length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = toString.toString();
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        Log.e(TAG , "extractInt "+vv[vv.length - 1]);
-                        b = true;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        b = true;
-                    }
-                }
-            }else{
-                Log.e(TAG, "falsee ");
-                b = false;
-            }
-        }
-        return b;
-    }
-
-
+//
+//    static String extractInt(String str)
+//    {
+//        // Replacing every non-digit number
+//        // with a space(" ")
+//        str = str.replaceAll("[^\\d]", " ");
+//
+//        // Remove extra spaces from the beginning
+//        // and the ending of the string
+//        str = str.trim();
+//
+//        // Replace all the consecutive white
+//        // spaces with a single space
+//        str = str.replaceAll(" +", " ");
+//
+//        if (str.equals(""))
+//            return "-1";
+//
+//        return str;
+//    }
+//
+//
+//    public static boolean isNumeric(String str)
+//    {
+//        for (char c : str.toCharArray())
+//        {
+//            if (!Character.isDigit(c)) return false;
+//        }
+//        return true;
+//    }
+//
+//
+//    public static boolean isChar(String str)
+//    {
+//        for (char c : str.toCharArray())
+//        {
+//            if (Character.isDigit(c)) return false;
+//        }
+//        return true;
+//    }
+//
+//
+//
+//
+//    private String getRealValue(String sss) {
+//        String valueIs = "";
+//        if(sss.toString().length() > 0){
+//
+//            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
+//
+//            boolean gg = isNumeric(sss);
+//            Log.e(TAG, "gggggg "+gg);
+//
+//            boolean dd = isChar(sss);
+//            Log.e(TAG, "dddddd "+dd);
+//
+//            if(gg == false && dd == false){
+//                Log.e(TAG, "truee ");
+//                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+//                Log.e(TAG, "cccccc "+flag);
+//                if(flag == true){
+//                    String str = sss;
+//                    String cc = extractInt(str);
+//                    if(cc.contains(" ")){
+//                        String vv[] = cc.split(" ");
+//                        String ii =  vv[vv.length - 1];
+//                        Log.e(TAG , "extractInt "+ii);
+//                        String vvvvv = sss.substring(0, sss.length() - ii.length());
+//
+//                        Log.e(TAG , "vvvvv "+vvvvv);
+//
+//                        int myValue = Integer.parseInt(ii)+1;
+//                        valueIs = vvvvv+myValue;
+//                    }
+//                    if(!cc.contains(" ")){
+//                        Log.e(TAG , "extractInt2 "+cc);
+//                        int myValue = Integer.parseInt(cc)+1;
+//                        String vvvvv = sss.substring(0, sss.length() - cc.length());
+//
+//                        Log.e(TAG , "bbbbbb "+vvvvv);
+//                        valueIs = vvvvv+myValue;
+//                    }
+//                }
+//            }else{
+//                boolean ddd = isChar(sss);
+//                if(ddd == false){
+//                    int myValue = Integer.parseInt(sss)+1;
+//                    valueIs = "Est # "+myValue;
+//                }
+//            }
+//        }
+//        return valueIs;
+//    }
+//
+//
+//
+//
+//
+//    private boolean getTrueValue(String toString) {
+//        boolean b = false;
+//        if(toString.length() > 0){
+//            boolean gg = isNumeric(toString.toString());
+//            Log.e(TAG, "gggggg "+gg);
+//
+//            boolean dd = isChar(toString.toString());
+//            Log.e(TAG, "dddddd "+dd);
+//
+//            if(gg == false && dd == false){
+//                Log.e(TAG, "truee ");
+//                Boolean flag = Character.isDigit(toString.toString().charAt(toString.toString().length() - 1));
+//                Log.e(TAG, "cccccc "+flag);
+//                if(flag == true){
+//                    String str = toString.toString();
+//                    String cc = extractInt(str);
+//                    if(cc.contains(" ")){
+//                        String vv[] = cc.split(" ");
+//                        Log.e(TAG , "extractInt "+vv[vv.length - 1]);
+//                        b = true;
+//                    }
+//                    if(!cc.contains(" ")){
+//                        Log.e(TAG , "extractInt2 "+cc);
+//                        b = true;
+//                    }
+//                }
+//            }else{
+//                Log.e(TAG, "falsee ");
+//                b = false;
+//            }
+//        }
+//        return b;
+//    }
+//
+//
 
 
 
@@ -4647,26 +4655,18 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             Shiping_tostr = "Ship To:";
 
             if(!shippingfirstname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingfirstname+"</br>");
-            }
-            if(!shippinglastname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippinglastname+"</br>");
-            }
-            if(!shippingaddress1.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress1+"</br>");
-            }
-            if(!shippingaddress2.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress2+"</br>");
-            }
-            if(!shippingcity.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcity+"</br>");
-            }
-            if(!shippingcountry.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcountry+"</br>");
+                stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
             }
             if(!shippingpostcode.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingpostcode+"");
+                stringBuilderShipTo.append(shippingpostcode+"</br>");
             }
+            if(!shippingcity.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcity+", "+shippingcountry+"</br>");
+            }
+            if(!shippingaddress1.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress1+", "+shippingaddress2+"</br>");
+            }
+
             //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
         }
