@@ -47,7 +47,6 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.View
         this.tempQuantity=tempQuantity;
         this.editpriceval=editpriceval;
 
-
     }
 
 
@@ -72,14 +71,27 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.View
         String product_price = product_service_list.getProduct_price();
        String cruncycode=product_service_list.getCurrency_code();
        String pricsestr=product_service_list.getEditproductproce();
-        double value = 0;
+        double valueQuantity = 0;
         try{
-           value = Double.parseDouble(tempQuantity.get(i));
+            valueQuantity = Double.parseDouble(tempQuantity.get(i));
        }catch (Exception e){
 
        }
 
-        viewHolderForCat.quantity.setText(""+editpriceval.get(i) + " "+cruncycode+" x "+value);
+        double valuePrice = 0;
+        try{
+            valuePrice = Double.parseDouble(editpriceval.get(i));
+        }catch (Exception e){
+
+        }
+
+//        viewHolderForCat.quantity.setText(""+editpriceval.get(i) + " "+cruncycode+" x "+valueQuantity);
+
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+        String pQuantity = formatter.format(valueQuantity);
+        String pPrice = formatter.format(valuePrice);
+
+        viewHolderForCat.quantity.setText(pPrice + " "+cruncycode+" x "+pQuantity);
 
         String productid=product_service_list.getProduct_id();
         String productprice=product_service_list.getProduct_price();
@@ -88,7 +100,7 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.View
         Double productresul= Double.parseDouble(tempQuantity.get(i))*Double.parseDouble(editpriceval.get(i));
 //        Log.e("productid detailed" ,productid);
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+       // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
         String producttotatlps=formatter.format(productresul);
         String product_name = product_service_list.getProduct_name();
         if (product_name.equals("") || product_name.equals("null"))

@@ -75,6 +75,11 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
     private static final String TAG = "List_of_Invoices";
 
+    String paidStatus = "";
+    String colorPaid = "#ffffff";
+    String markAsPaidTxt = "Mark as unpaid";
+
+
     String voidStatus = "";
     String colorVoid = "#ffffff";
     String markAsVoidTxt = "Mark as void";
@@ -198,54 +203,54 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
 
 
-        ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                try {
-                    invoice_position = viewHolder.getAdapterPosition();
-                    invoiceStatus = list.get(invoice_position).getInvocestatus();
-                    invoice_useriddt = list.get(invoice_position).getInvoice_userid();
-                    Log.e("UinvoiceStatus", invoiceStatus);
-
-                    if (invoiceStatus.equals("1")) {
-                        invoice_text = "Mark as unpaid";
-                        invoice_color = R.color.red;
-                        invoiceStatus = "2";
-
-
-                    } else {
-                        invoice_text = "Mark as Paid";
-                        invoice_color = R.color.green;
-                        invoiceStatus = "1";
-
-                    }
-                    UpdateInvoiceStatusmethodh(invoiceStatus);
-
-
-                } catch (Exception e) {
-                    Log.e("MainActivity", e.getMessage());
-                }
-            }
-
-            // You must use @RecyclerViewSwipeDecorator inside the onChildDraw method
-            @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                        .addSwipeRightBackgroundColor(invoice_color)
-                        .addSwipeRightLabel(invoice_text)
-                        .setSwipeRightLabelColor(Color.WHITE)
-                        .create()
-                        .decorate();
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-            }
-        };
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
-        itemTouchHelper.attachToRecyclerView(recycler_invoices);
+//        ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+//            @Override
+//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+//                return false;
+//            }
+//
+//            @Override
+//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+//                try {
+//                    invoice_position = viewHolder.getAdapterPosition();
+//                    invoiceStatus = list.get(invoice_position).getInvocestatus();
+//                    invoice_useriddt = list.get(invoice_position).getInvoice_userid();
+//                    Log.e("UinvoiceStatus", invoiceStatus);
+//
+//                    if (invoiceStatus.equals("1")) {
+//                        invoice_text = "Mark as unpaid";
+//                        invoice_color = R.color.red;
+//                        invoiceStatus = "2";
+//
+//
+//                    } else {
+//                        invoice_text = "Mark as Paid";
+//                        invoice_color = R.color.green;
+//                        invoiceStatus = "1";
+//
+//                    }
+//                    UpdateInvoiceStatusmethodh(invoiceStatus);
+//
+//
+//                } catch (Exception e) {
+//                    Log.e("MainActivity", e.getMessage());
+//                }
+//            }
+//
+//            // You must use @RecyclerViewSwipeDecorator inside the onChildDraw method
+//            @Override
+//            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+//                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+//                        .addSwipeRightBackgroundColor(invoice_color)
+//                        .addSwipeRightLabel(invoice_text)
+//                        .setSwipeRightLabelColor(Color.WHITE)
+//                        .create()
+//                        .decorate();
+//                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+//            }
+//        };
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+//        itemTouchHelper.attachToRecyclerView(recycler_invoices);
 
         return view;
 
@@ -321,9 +326,6 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                     markAsVoidTxt = "Mark as unvoid";
                 }
 
-
-
-
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
                         markAsVoidTxt,
                         0,
@@ -382,26 +384,120 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                                 }
 
 
-
+                                invoicelistAdapterdt.notifyDataSetChanged();
                             }
                         }
                 ));
 
 //
-//                underlayButtons.add(new SwipeHelper2.UnderlayButton(
-//                        "Delete",
-//                        0,
-//                        Color.parseColor("#ff0000"),
+
+
+
+
+
+
+
+//                if (list.size() > 0) {
+//                    if(temp.size() > 0){
+//                        paidStatus = temp.get(viewHolder.getPosition()).getInvocestatus();
+//                    }else{
+//                        paidStatus = list.get(viewHolder.getPosition()).getInvocestatus();
+//                    }
+//                }
 //
+//                Log.e(TAG, "voidStatusAA " + paidStatus);
+////
+////
+//                if (paidStatus.equalsIgnoreCase("2")) {
+//                    colorPaid = "#FF0000";
+//                    markAsPaidTxt = "Mark as Unpaid";
+//                }
+//                if (paidStatus.equalsIgnoreCase("1")) {
+//                    colorPaid = "#80c904";
+//                    markAsPaidTxt = "Mark as Paid";
+//                }
+//
+//                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+//                        markAsPaidTxt,
+//                        0,
+//                        Color.parseColor(colorPaid),
 //                        new SwipeHelper2.UnderlayButtonClickListener() {
 //                            @Override
 //                            public void onClick(final int pos) {
-//                                String  invoiceidbypos = list.get(pos).getInvoice_userid();
-//                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
-//                                deleteInvoice(invoiceidbypos);
+//                                if(temp.size() > 0){
+//                                    String invoiceidbypos = temp.get(pos).getInvoice_userid();
+//
+//                                    Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+//
+//                                    String invoiceVoidStatus = temp.get(pos).getInvocestatus();
+//
+//                                    String voidPassValue = "0";
+//
+//                                    if(invoiceVoidStatus.equalsIgnoreCase("2")){
+//                                        voidPassValue = "1";
+//                                        // colorVoid = "#ff9900";
+//                                    }
+//
+//                                    if(invoiceVoidStatus.equalsIgnoreCase("1")){
+//                                        voidPassValue = "2";
+//                                        //colorVoid = "#99cc00";
+//                                    }
+//
+//                                    Log.e(TAG, "instantiateUnderlayButton");
+//
+//                                    invoicelistAdapterdt.updateList(list);
+//                                    UpdateInvoiceStatusmethodh(invoiceidbypos, voidPassValue);
+//                                   // markVoidInvoice(invoiceidbypos, voidPassValue);
+//                                }else{
+//                                    String invoiceidbypos = list.get(pos).getInvoice_userid();
+//
+//                                    Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+//
+//                                    String invoiceVoidStatus = list.get(pos).getInvocestatus();
+//
+//                                    String voidPassValue = "0";
+//
+//                                    if(invoiceVoidStatus.equalsIgnoreCase("2")){
+//                                        voidPassValue = "1";
+//                                        // colorVoid = "#ff9900";
+//                                    }
+//
+//                                    if(invoiceVoidStatus.equalsIgnoreCase("1")){
+//                                        voidPassValue = "2";
+//                                        //colorVoid = "#99cc00";
+//                                    }
+//
+//                                    Log.e(TAG, "instantiateUnderlayButton");
+//
+//                                    invoicelistAdapterdt.updateList(list);
+//                                    UpdateInvoiceStatusmethodh(invoiceidbypos, voidPassValue);
+//                                    //markVoidInvoice(invoiceidbypos, voidPassValue);
+//                                }
+//
+//
+//                                invoicelistAdapterdt.notifyDataSetChanged();
 //                            }
+//
 //                        }
 //                ));
+
+
+
+
+                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                        "Delete",
+                        0,
+                        Color.parseColor("#ff0000"),
+
+                        new SwipeHelper2.UnderlayButtonClickListener() {
+                            @Override
+                            public void onClick(final int pos) {
+                                String  invoiceidbypos = list.get(pos).getInvoice_userid();
+                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+                                deleteInvoice(invoiceidbypos);
+                            }
+                        }
+                ));
 
 
             }
@@ -719,19 +815,19 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
 
 
-    private void UpdateInvoiceStatusmethodh(String s) {
+    private void UpdateInvoiceStatusmethodh(String id , String s) {
 
         list.clear();
         avi.smoothToShow();
         RequestParams params = new RequestParams();
-        if (invoice_idstr.equals("") || invoice_idstr.equals("null")) {
+        if (id.equals("") || id.equals("null")) {
             Constant.ErrorToast(getActivity(), "Invoice not found");
         } else {
 
-            params.add("invoice_id", invoice_useriddt);
+            params.add("invoice_id", id);
             params.add("order_status_id", s);
 
-            Log.e("invoice_idupdate", invoice_idstr);
+            Log.e("invoice_idupdate", id);
             Log.e("s order status", s);
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();

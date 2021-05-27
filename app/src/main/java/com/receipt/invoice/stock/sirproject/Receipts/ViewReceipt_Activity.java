@@ -174,25 +174,16 @@ public class ViewReceipt_Activity extends AppCompatActivity {
                 Log.e(TAG, "shippingfirstnameAA "+shippingfirstname);
 
                 if(!shippingfirstname.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingfirstname+"</br>");
-                }
-                if(!shippinglastname.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippinglastname+"</br>");
-                }
-                if(!shippingaddress1.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingaddress1+"</br>");
-                }
-                if(!shippingaddress2.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingaddress2+"</br>");
-                }
-                if(!shippingcity.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingcity+"</br>");
-                }
-                if(!shippingcountry.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingcountry+"</br>");
+                    stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
                 }
                 if(!shippingpostcode.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingpostcode+"");
+                    stringBuilderShipTo.append(shippingpostcode+"</br>");
+                }
+                if(!shippingcity.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingcity+", "+shippingcountry+"</br>");
+                }
+                if(!shippingaddress1.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingaddress1+", "+shippingaddress2+"</br>");
                 }
 
                 //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
@@ -477,7 +468,7 @@ public class ViewReceipt_Activity extends AppCompatActivity {
 
                 double productQuantity = Double.parseDouble(tempQuantity.get(i));
                 double producpriceRate = Double.parseDouble(producprice.get(i));
-                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+                double producpriceAmount = producpriceRate * productQuantity;
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
 

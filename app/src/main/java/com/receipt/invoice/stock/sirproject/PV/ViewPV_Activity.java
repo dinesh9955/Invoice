@@ -480,7 +480,8 @@ public class ViewPV_Activity extends AppCompatActivity {
 
                 double productQuantity = Double.parseDouble(tempQuantity.get(i));
                 double producpriceRate = Double.parseDouble(producprice.get(i));
-                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+                double producpriceAmount = producpriceRate * productQuantity;
+
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())

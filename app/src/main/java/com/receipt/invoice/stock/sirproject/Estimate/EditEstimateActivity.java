@@ -3982,8 +3982,8 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                         double multiply = en_quantity * sh_price;
                         String s_multiply = String.valueOf(multiply);
 
-                        product_bottom.get(str).setQuantity(String.valueOf(en_quantity));
-                        product_bottom.get(str).setProduct_price(String.valueOf(sh_price));
+//                        product_bottom.get(str).setQuantity(String.valueOf(en_quantity));
+//                        product_bottom.get(str).setProduct_price(String.valueOf(sh_price));
 
                         total_price = (sh_price) * Double.parseDouble(edquantity.getText().toString());
                         //  Log.e("Total price",String.valueOf(total_price));

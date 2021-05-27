@@ -2122,6 +2122,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                         intent.putExtra("producprice", producprice);
                         intent.putExtra("totalpriceproduct", totalpriceproduct);
 
+                        Log.e(TAG, "totalpriceproduct::: "+totalpriceproduct);
+
                         intent.putExtra("signature_of_receiver", signatureofreceiverst);
                         Log.e(TAG, "signatureofreceiverst::: "+signatureofreceiverst);
                         //Log.e(TAG, "signature_of_receiver::: "+signatureofreceiverst);
@@ -3839,7 +3841,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
                         calculateTotalAmount(total_price);
                         products_adapter.notifyDataSetChanged();
-                        Log.e("tempList", String.valueOf(tempList.size()));
+                        Log.e("tempList", ""+String.valueOf(tempList.size()));
 
                         mybuilder.dismiss();
                     }

@@ -40,7 +40,6 @@ import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.receipt.invoice.stock.sirproject.CN.EditCreditNotesActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.CheckForSDCard;
 import com.receipt.invoice.stock.sirproject.Invoice.ConvertToReceiptsActivity;
@@ -794,17 +793,17 @@ public class ListOfDebitNotes extends Fragment {
                 @Override
                 public void onClick(View v) {
 //                    Fragment_Create_Invoice.defaultClick = 1;
-                    SavePref pref = new SavePref();
-                    pref.SavePref(getActivity());
-                    pref.setTemplate(0);
-
-                    Intent intent = new Intent(getContext(), EditCreditNotesActivity.class);
-                    intent.putExtra("invoiceID", invoiceidbypos);
-                    intent.putExtra("invoice_count", invoice_count);
-
-
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+//                    SavePref pref = new SavePref();
+//                    pref.SavePref(getActivity());
+//                    pref.setTemplate(0);
+//
+//                    Intent intent = new Intent(getContext(), EditCreditNotesActivity.class);
+//                    intent.putExtra("invoiceID", invoiceidbypos);
+//                    intent.putExtra("invoice_count", invoice_count);
+//
+//
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(intent);
                     bottomSheetDialog.dismiss();
                 }
             });

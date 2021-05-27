@@ -489,9 +489,9 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
 //                String patternFormat = Utility.getPatternFormat("3");
 //
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                double producQuantity = Double.parseDouble(tempQuantity.get(i));
+                double productQuantity = Double.parseDouble(tempQuantity.get(i));
                 double producpriceRate = Double.parseDouble(producprice.get(i));
-                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+                double producpriceAmount = producpriceRate * productQuantity;
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
 
@@ -501,7 +501,7 @@ public class ViewCreditNote_Activity extends AppCompatActivity {
 //                        .replaceAll("#QUANTITY#", ""+Utility.getPatternFormat("3", producQuantity))
 //                        .replaceAll("#PRICE#", ""+Utility.getPatternFormat("3", producpriceRate) + Utility.getReplaceDollor(cruncycode))
 //                        .replaceAll("#TOTAL#", ""+Utility.getPatternFormat("3", producpriceAmount) + Utility.getReplaceDollor(cruncycode));
-                        .replaceAll("#QUANTITY#", ""+formatter.format(producQuantity))
+                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
                         .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
                         .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
 

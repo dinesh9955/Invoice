@@ -487,16 +487,17 @@ public class ViewDebitNote_Activity extends AppCompatActivity {
 
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
-                Double quantityAmount = Double.parseDouble(tempQuantity.get(i));
+                Double productQuantity = Double.parseDouble(tempQuantity.get(i));
                 double producpriceRate = Double.parseDouble(producprice.get(i));
-                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+                double producpriceAmount = producpriceRate * productQuantity;
+
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
 
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", myList.get(i).getProduct_measurement_unit())
-                        .replaceAll("#QUANTITY#", ""+formatter.format(quantityAmount))
+                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
                         .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
                         .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
 

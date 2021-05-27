@@ -835,18 +835,18 @@ public class ListOfCreditNotes extends Fragment {
             duplicateinvoitxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Fragment_Create_Invoice.defaultClick = 1;
-                    SavePref pref = new SavePref();
-                    pref.SavePref(getActivity());
-                    pref.setTemplate(0);
-
-                    Intent intent = new Intent(getContext(), EditCreditNotesActivity.class);
-                    intent.putExtra("invoiceID", invoiceidbypos);
-                    intent.putExtra("invoice_count", invoice_count);
-
-
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+////                    Fragment_Create_Invoice.defaultClick = 1;
+//                    SavePref pref = new SavePref();
+//                    pref.SavePref(getActivity());
+//                    pref.setTemplate(0);
+//
+//                    Intent intent = new Intent(getContext(), EditCreditNotesActivity.class);
+//                    intent.putExtra("invoiceID", invoiceidbypos);
+//                    intent.putExtra("invoice_count", invoice_count);
+//
+//
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(intent);
                     bottomSheetDialog.dismiss();
                 }
             });
