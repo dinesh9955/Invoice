@@ -994,35 +994,34 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                                 tax.setText(formatter.format(taxVAL) + currency_codedto);
                             }
 
-                            // tax.setText(""+value+currency_codedto);
 
                             Log.e(TAG, "taxtypeclusive "+taxtypeclusive);
                             Log.e(TAG, "taxtrateamt "+taxtrateamt);
-                            Log.e(TAG, "taxrname "+taxrname);
+
 
                             String isTaxRate = taxtrateamt;
                             String isPecent = "%";
 
                             String subStrinng = taxrname.replace("(", "").replace(")", "");
 
-                            if(!subStrinng.contains(isTaxRate+isPecent)){
-                                subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
-                            }else{
+//                            if(!subStrinng.contains(isTaxRate+isPecent)){
+//                                Log.e(TAG, "contains111");
+//                                subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+//                            }else if(subStrinng.contains(isTaxRate+isPecent)){
+//                                Log.e(TAG, "contains222");
+//                                subStrinng = taxrname.replace("(", "").replace(")", "").replace(isTaxRate+isPecent, taxtrateamt+"%");
+//                                Log.e(TAG, "subStrinngAAQQ "+subStrinng);
+//                              //  subStrinng = subStrinng+" "+taxtrateamt + "%";
+//                            }
+//                            subStrinng = subStrinng.replace(isTaxRate, "");
+//                            subStrinng = subStrinng.replace(isPecent, "");
+//                            subStrinng = subStrinng+" "+taxtrateamt + "%";
 
-                            }
 
-
-                            Log.e(TAG, "subStrinngAA "+subStrinng);
                             subStrinng = subStrinng.replaceAll("( )+", " ");
 
                             taxvalueText.setText("Tax (" + subStrinng + "" + ")");
-
-//                        if (taxtypeclusive.toLowerCase().equalsIgnoreCase("Inclusive")) {
-//                            taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
-//                        }else{
-//                            taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
-//                        }
-
+                            Log.e(TAG, "subStrinngAA "+subStrinng);
 
                             SelectedTaxlist student = new SelectedTaxlist();
 
@@ -1517,80 +1516,43 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                     if(selectedtaxt.get(i).getRateType().equalsIgnoreCase("p")){
                         Log.e(TAG, "QQQQQQQQQQQ");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                        // params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-//                        params.add("tax[" + i + "]" + "[title]", "zz");
 
-//                        if(selectedtaxt.get(i).getTaxname().length() > 0){
-//                            if(selectedtaxt.get(i).getTaxname().contains(" ")){
-//                                String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
-//                                Log.e(TAG, "firstTaxAAA5 "+firstTax);
-//                                params.add("tax[" + i + "]" + "[title]", firstTax);
-//                            }else{
-                                String isTaxRate = selectedtaxt.get(i).getTaxrate();
-                                String isPecent = "%";
-
-                                String subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
-
-                                if(!subStrinng.contains(isTaxRate+isPecent)){
-                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
-                                }else if(subStrinng.contains(isTaxRate+isPecent)){
-                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
-                                }
-
-                                subStrinng = subStrinng.replace("incl." , "");
-                                Log.e(TAG, "subStrinngAA "+subStrinng);
-//                                txttax.setText(subStrinng+ " Incl"); //Dont do any change
-//                                taxvalueText.setText("Tax (" + subStrinng + " Incl" + ")"); //Dont do any change
-
-//                            if (taxtypeclusive.toLowerCase().equalsIgnoreCase("Inclusive")) {
-//                                params.add("tax[" + i + "]" + "[title]", subStrinng+ "");
-//                            }else{
-                                params.add("tax[" + i + "]" + "[title]", subStrinng);
-//                            }
-
-                        //subStrinngAA road tax  incl.
-
-//                            }
-//                        }
-
-
+//                                String isTaxRate = selectedtaxt.get(i).getTaxrate();
+//                                String isPecent = "%";
+//
+//                                String subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
+//
+//                                if(!subStrinng.contains(isTaxRate+isPecent)){
+//                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
+//                                }else if(subStrinng.contains(isTaxRate+isPecent)){
+//                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
+//                                }
+//
+//                                subStrinng = subStrinng.replace("incl." , "");
+//                                Log.e(TAG, "subStrinngAAC "+subStrinng);
+                                params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
                     }else{
                         Log.e(TAG, "WWWWWWWWWWWWW");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
                         params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-//                        params.add("tax[" + i + "]" + "[title]", "xx");
 
-//                        if(selectedtaxt.get(i).getTaxname().length() > 0){
-//                            if(selectedtaxt.get(i).getTaxname().contains(" ")){
-//                                String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
-//                                Log.e(TAG, "firstTaxAAA6 "+firstTax);
-//                                params.add("tax[" + i + "]" + "[title]", firstTax);
-//                            }else{
-                                String isTaxRate = selectedtaxt.get(i).getTaxrate();
-                                String isPecent = "%";
+//                                String isTaxRate = selectedtaxt.get(i).getTaxrate();
+//                                String isPecent = "%";
+//
+//                                String subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
+//
+//                                if(!subStrinng.contains(isTaxRate+isPecent)){
+//                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
+//                                }else if(subStrinng.contains(isTaxRate+isPecent)){
+//                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
+//                                }
+//
+//                                subStrinng = subStrinng.replace("incl." , "");
 
-                                String subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
-
-                                if(!subStrinng.contains(isTaxRate+isPecent)){
-                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
-                                }else if(subStrinng.contains(isTaxRate+isPecent)){
-                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
-                                }
-
-                                subStrinng = subStrinng.replace("incl." , "");
-
-                                params.add("tax[" + i + "]" + "[title]", subStrinng);
-
-//                            if (taxtypeclusive.toLowerCase().equalsIgnoreCase("Inclusive")) {
-//                                params.add("tax[" + i + "]" + "[title]", subStrinng+ " Incl");
-//                            }else{
-//                                params.add("tax[" + i + "]" + "[title]", subStrinng);
-//                            }
-//                            }
-//                        }
-
+                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                       // Log.e(TAG, "subStrinngBBC "+subStrinng);
                     }
 
                 }
@@ -3769,19 +3731,6 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                     Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
-//                    if(taxrname.length() > 0){
-//                        if(taxrname.contains(" ")){
-//                            String firstTax = taxrname.split(" ")[0].replace("(", "");
-//                            String subStrinng = firstTax + " " + taxtrateamt + "%";
-//                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-//                        }else{
-//                            String subStrinng = taxrname + " " + taxtrateamt + "%";
-//                            txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-//                        }
-//                    }else{
-//                        String subStrinng = taxrname + " " + taxtrateamt + "%";
-//                        txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-
                     String isTaxRate = taxtrateamt;
                     String isPecent = "%";
 
@@ -3793,36 +3742,24 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                     }
 
-                    txttax.setText(subStrinng+ " incl."); //Dont do any change
-                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
-//                    }
+                    subStrinng = subStrinng.replace("incl.","").replaceAll("( )+", " ");
+                    txttax.setText( subStrinng + " incl." );
+                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")");
 
-                    // netamountvalue = subtotalvalue + Totatlvalue1;
+                    Log.e(TAG, "IIIIIIIIIIIIIIII"+subStrinng);
 
                     netamount.setText(formatter.format(netamountvalue) + cruncycode);
                     balance.setText(formatter.format(netamountvalue) + cruncycode);
+
 
                 } else { // include off
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
 
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-//
+
                     Log.e(TAG, "taxrnameAAA "+taxrname);
                     Log.e(TAG, "taxtrateamtAAA "+taxtrateamt);
-
-//                    if(taxrname.length() > 0){
-//                        if(taxrname.contains(" ")){
-//                            String firstTax = taxrname.split(" ")[0].replace("(", "");
-//                            String subStrinng = firstTax + " " + taxtrateamt + "%";
-//                            txttax.setText(subStrinng); //Dont do any change
-//                        }else{
-//                            String subStrinng = taxrname + " " + taxtrateamt + "%";
-//                            txttax.setText(subStrinng); //Dont do any change
-//                        }
-//                    }else{
-//                        String subStrinng = taxrname + " " + taxtrateamt + "%";
-//                        txttax.setText(subStrinng); //Dont do any change
 
                     String isTaxRate = taxtrateamt;
                     String isPecent = "%";
@@ -3832,12 +3769,14 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                     if(!subStrinng.contains(isTaxRate+isPecent)){
                         subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
                     }else{
-
+                        subStrinng = taxrname.replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "") + " " + taxtrateamt + "%";
                     }
 
-                    txttax.setText(subStrinng); //Dont do any change
-                    taxvalueText.setText("Tax (" + subStrinng + "" + ")"); //Dont do any change
-//                    }
+                    subStrinng = subStrinng.replace("incl.","").replaceAll("( )+", " ");
+                    txttax.setText(subStrinng);
+                    taxvalueText.setText("Tax (" + subStrinng + "" + ")");
+
+                    Log.e(TAG, "EEEEEEEEEEEEEE"+subStrinng);
 
                     netamountvalue = subtotalvalue + Totatlvalue1;
 

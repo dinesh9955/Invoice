@@ -173,25 +173,16 @@ public class InvoiceToReceiptsWebview extends AppCompatActivity {
                 Log.e(TAG, "shippingfirstnameAA "+shippingfirstname);
 
                 if(!shippingfirstname.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingfirstname+"</br>");
-                }
-                if(!shippinglastname.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippinglastname+"</br>");
-                }
-                if(!shippingaddress1.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingaddress1+"</br>");
-                }
-                if(!shippingaddress2.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingaddress2+"</br>");
-                }
-                if(!shippingcity.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingcity+"</br>");
-                }
-                if(!shippingcountry.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingcountry+"</br>");
+                    stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
                 }
                 if(!shippingpostcode.equalsIgnoreCase("")){
-                    stringBuilderShipTo.append(shippingpostcode+"");
+                    stringBuilderShipTo.append(shippingpostcode+"</br>");
+                }
+                if(!shippingcity.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingcity+", "+shippingcountry+"</br>");
+                }
+                if(!shippingaddress1.equalsIgnoreCase("")){
+                    stringBuilderShipTo.append(shippingaddress1+", "+shippingaddress2+"</br>");
                 }
 
                 //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
@@ -295,9 +286,9 @@ public class InvoiceToReceiptsWebview extends AppCompatActivity {
             rate = getIntent().getStringArrayListExtra("rate_list");
             totalpriceproduct = getIntent().getStringArrayListExtra("totalpriceproduct");
 
-            atchemntimg = getIntent().getStringArrayListExtra("attchemnt");
+           // atchemntimg = getIntent().getStringArrayListExtra("attchemnt");
 
-            signature_of_issuer = getIntent().getStringExtra("signature_issuer");
+           // signature_of_issuer = getIntent().getStringExtra("signature_issuer");
 
             signature_of_receiver = getIntent().getStringExtra("signature_of_receiver");
             company_stamp = getIntent().getStringExtra("company_stamp");
