@@ -108,9 +108,9 @@ public class Abc extends AppCompatActivity{
 //                Log.e(TAG, "savedPDFFile "+val4);
 
 
-                String dd = "wew19";
+                String dd = "wew009";
 
-                String sss = getRealValue(dd);
+                String sss = getRealValue2(dd);
 
                 Log.e(TAG, "savedPDFFile "+sss);
 
@@ -436,6 +436,37 @@ public class Abc extends AppCompatActivity{
         }
         return valueIs;
     }
+
+
+    private String getRealValue2(String sss) {
+        String valueIs = "";
+        if(sss.toString().length() > 0){
+                Log.e(TAG, "truee ");
+                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+                Log.e(TAG, "cccccc "+flag);
+                if(flag == true){
+                    String str = sss;
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = str.length() - 1; i >= 0; i --) {
+                        char c = str.charAt(i);
+                        if (Character.isDigit(c)) {
+                            sb.insert(0, c);
+                        } else {
+                            break;
+                        }
+                    }
+                    String result = sb.toString();
+
+                    Log.e(TAG, "ccccccresult "+result);
+                    valueIs = "Inv # "+result;
+                }
+        }
+        return valueIs;
+    }
+
+
+
+
     static String extractInt(String str)
     {
         // Replacing every non-digit number

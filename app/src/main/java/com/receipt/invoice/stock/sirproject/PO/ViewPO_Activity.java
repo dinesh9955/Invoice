@@ -153,9 +153,9 @@ public class ViewPO_Activity extends AppCompatActivity {
                 if(!sltcustomer_address.equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_address+"</br>");
                 }
-                if(!sltcustomer_contact.equalsIgnoreCase("")){
-                    stringBuilderBillTo.append(sltcustomer_contact+"</br>");
-                }
+//                if(!sltcustomer_contact.equalsIgnoreCase("")){
+//                    stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+//                }
                 if(!sltcustomer_phone_number.equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
                 }

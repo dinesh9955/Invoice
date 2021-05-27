@@ -203,54 +203,54 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
 
 
-//        ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-//            @Override
-//            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-//                try {
-//                    invoice_position = viewHolder.getAdapterPosition();
-//                    invoiceStatus = list.get(invoice_position).getInvocestatus();
-//                    invoice_useriddt = list.get(invoice_position).getInvoice_userid();
-//                    Log.e("UinvoiceStatus", invoiceStatus);
-//
-//                    if (invoiceStatus.equals("1")) {
-//                        invoice_text = "Mark as unpaid";
-//                        invoice_color = R.color.red;
-//                        invoiceStatus = "2";
-//
-//
-//                    } else {
-//                        invoice_text = "Mark as Paid";
-//                        invoice_color = R.color.green;
-//                        invoiceStatus = "1";
-//
-//                    }
-//                    UpdateInvoiceStatusmethodh(invoiceStatus);
-//
-//
-//                } catch (Exception e) {
-//                    Log.e("MainActivity", e.getMessage());
-//                }
-//            }
-//
-//            // You must use @RecyclerViewSwipeDecorator inside the onChildDraw method
-//            @Override
-//            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-//                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-//                        .addSwipeRightBackgroundColor(invoice_color)
-//                        .addSwipeRightLabel(invoice_text)
-//                        .setSwipeRightLabelColor(Color.WHITE)
-//                        .create()
-//                        .decorate();
-//                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-//            }
-//        };
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
-//        itemTouchHelper.attachToRecyclerView(recycler_invoices);
+        ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                try {
+                    invoice_position = viewHolder.getAdapterPosition();
+                    invoiceStatus = list.get(invoice_position).getInvocestatus();
+                    invoice_useriddt = list.get(invoice_position).getInvoice_userid();
+                    Log.e("UinvoiceStatus", invoiceStatus);
+
+                    if (invoiceStatus.equals("1")) {
+                        invoice_text = "Mark as unpaid";
+                        invoice_color = R.color.red;
+                        invoiceStatus = "2";
+
+
+                    } else {
+                        invoice_text = "Mark as Paid";
+                        invoice_color = R.color.green;
+                        invoiceStatus = "1";
+
+                    }
+                    UpdateInvoiceStatusmethodh(invoice_useriddt, invoiceStatus);
+
+
+                } catch (Exception e) {
+                    Log.e("MainActivity", e.getMessage());
+                }
+            }
+
+            // You must use @RecyclerViewSwipeDecorator inside the onChildDraw method
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                        .addSwipeRightBackgroundColor(invoice_color)
+                        .addSwipeRightLabel(invoice_text)
+                        .setSwipeRightLabelColor(Color.WHITE)
+                        .create()
+                        .decorate();
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+        itemTouchHelper.attachToRecyclerView(recycler_invoices);
 
         return view;
 
@@ -484,20 +484,20 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
 
 
-                underlayButtons.add(new SwipeHelper2.UnderlayButton(
-                        "Delete",
-                        0,
-                        Color.parseColor("#ff0000"),
-
-                        new SwipeHelper2.UnderlayButtonClickListener() {
-                            @Override
-                            public void onClick(final int pos) {
-                                String  invoiceidbypos = list.get(pos).getInvoice_userid();
-                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
-                                deleteInvoice(invoiceidbypos);
-                            }
-                        }
-                ));
+//                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+//                        "Delete",
+//                        0,
+//                        Color.parseColor("#ff0000"),
+//
+//                        new SwipeHelper2.UnderlayButtonClickListener() {
+//                            @Override
+//                            public void onClick(final int pos) {
+//                                String  invoiceidbypos = list.get(pos).getInvoice_userid();
+//                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+//                                deleteInvoice(invoiceidbypos);
+//                            }
+//                        }
+//                ));
 
 
             }
@@ -1226,18 +1226,22 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 //                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                                    startActivity(intent);
 
-                                    Intent share = new Intent(Intent.ACTION_SEND);
-                                    share.setType("image/jpeg");
-                                    share.putExtra(Intent.EXTRA_SUBJECT, subject);
-                                    share.putExtra(Intent.EXTRA_TEXT, txt);
+//                                    Intent share = new Intent(Intent.ACTION_SEND);
+//                                    share.setType("image/jpeg");
+//                                    share.putExtra(Intent.EXTRA_SUBJECT, subject);
+//                                    share.putExtra(Intent.EXTRA_TEXT, txt);
+//
+//                                    share.putExtra(Intent.EXTRA_STREAM,
+//                                            Uri.parse("file:///sdcard/share.jpg"));
+//
+//                                    if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")){
+//                                        share.setPackage("com.google.android.gm");
+//                                    }
+//                                    startActivity(share);
 
-                                    share.putExtra(Intent.EXTRA_STREAM,
-                                            Uri.parse("file:///sdcard/share.jpg"));
-
-                                    if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")){
-                                        share.setPackage("com.google.android.gm");
-                                    }
-                                    startActivity(share);
+                                    String url = urlPDF;
+                                    //String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
+                                    new DownloadFileAttach(getActivity(), subject, txt).execute(url);
                                 }
 
 
@@ -1662,6 +1666,9 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
     }
 
 
+
+
+
     private static class DownloadFile extends AsyncTask<String, String, String> {
 
         private ProgressDialog progressDialog;
@@ -1809,6 +1816,216 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
         }
     }
+
+
+
+    private static class DownloadFileAttach extends AsyncTask<String, String, String> {
+
+        private ProgressDialog progressDialog;
+        private String fileName;
+        private String folder;
+        private boolean isDownloaded;
+        Context context;
+
+        String subject;
+        String text;
+
+        DownloadFileAttach(Context c, String sub, String txt) {
+            context = c;
+            subject = sub;
+            text = txt;
+        }
+
+
+        /**
+         * Before starting background thread
+         * Show Progress Bar Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            this.progressDialog = new ProgressDialog(context);
+            this.progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            this.progressDialog.setCancelable(false);
+            this.progressDialog.show();
+        }
+
+        /**
+         * Downloading file in background thread
+         */
+        @Override
+        protected String doInBackground(String... f_url) {
+            int count;
+            try {
+                URL url = new URL(f_url[0]);
+                URLConnection connection = url.openConnection();
+                connection.connect();
+                // getting file length
+                int lengthOfFile = connection.getContentLength();
+
+
+                // input stream to read file - with 8k buffer
+                InputStream input = new BufferedInputStream(url.openStream(), 8192);
+
+                String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+
+                //Extract file name from URL
+                fileName = f_url[0].substring(f_url[0].lastIndexOf('/') + 1);
+
+                //Append timestamp to file name
+                fileName = timestamp + "_" + fileName;
+
+                //External directory path to save file
+                folder = Environment.getExternalStorageDirectory() + File.separator + "SAAR/";
+
+                //Create androiddeft folder if it does not exist
+                File directory = new File(folder);
+
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+
+
+                String newFileName = "Invoice.pdf";
+                // Output stream to write file
+                OutputStream output = new FileOutputStream(folder + newFileName);
+
+                byte data[] = new byte[1024];
+
+                long total = 0;
+
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    // publishing the progress....
+                    // After this onProgressUpdate will be called
+                    publishProgress("" + (int) ((total * 100) / lengthOfFile));
+                    Log.d(TAG, "Progress: " + (int) ((total * 100) / lengthOfFile));
+
+                    // writing data to file
+                    output.write(data, 0, count);
+                }
+
+                // flushing output
+                output.flush();
+
+                // closing streams
+                output.close();
+                input.close();
+                return "" + folder + newFileName;
+
+            } catch (Exception e) {
+                Log.e("Error: ", e.getMessage());
+            }
+
+            return "Something went wrong";
+        }
+
+        /**
+         * Updating progress bar
+         */
+        protected void onProgressUpdate(String... progress) {
+            // setting progress percentage
+            progressDialog.setProgress(Integer.parseInt(progress[0]));
+        }
+
+
+        @Override
+        protected void onPostExecute(String message) {
+            // dismiss the dialog after the file was downloaded
+            this.progressDialog.dismiss();
+
+//            Intent share = new Intent(Intent.ACTION_SEND);
+//            share.setType("image/jpeg");
+//            share.putExtra(Intent.EXTRA_SUBJECT, subject);
+//            share.putExtra(Intent.EXTRA_TEXT, text);
+//
+//            File fileWithinMyDir = new File(message);
+//            Uri photoURI = FileProvider.getUriForFile(context,
+//                    "com.receipt.invoice.stock.sirproject.provider",
+//                    fileWithinMyDir);
+//
+//            share.putExtra(Intent.EXTRA_STREAM, photoURI);
+//
+////            share.putExtra(Intent.EXTRA_STREAM,
+////                    Uri.parse("file:///sdcard/share.jpg"));
+//
+//            if (Utility.isAppAvailable(context, "com.google.android.gm")){
+//                share.setPackage("com.google.android.gm");
+//            }
+//            context.startActivity(share);
+            //context.startActivity(Intent.createChooser(share, "Share File"));
+
+
+
+            Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+            File fileWithinMyDir = new File(message);
+            Uri photoURI = FileProvider.getUriForFile(context,
+                    "com.receipt.invoice.stock.sirproject.provider",
+                    fileWithinMyDir);
+
+            if(fileWithinMyDir.exists()) {
+                intentShareFile.setType("application/pdf");
+//                intentShareFile.setType("image/jpeg");
+                intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
+
+                //  intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/share.jpg"));
+
+
+                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+                intentShareFile.putExtra(Intent.EXTRA_TEXT, text);
+
+                if (Utility.isAppAvailable(context, "com.google.android.gm")) {
+                    intentShareFile.setPackage("com.google.android.gm");
+                }
+                context.startActivity(intentShareFile);
+                //context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+            }
+
+
+//            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+//            File fileWithinMyDir = new File(message);
+//            Uri photoURI = FileProvider.getUriForFile(context,
+//                    "com.receipt.invoice.stock.sirproject.provider",
+//                    fileWithinMyDir);
+//
+////            if(fileWithinMyDir.exists()) {
+////                intentShareFile.setType("application/pdf");
+//                intentShareFile.setType("image/jpeg");
+//                //intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
+//
+//                  intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/share.jpg"));
+//
+//
+//                intentShareFile.putExtra(Intent.EXTRA_SUBJECT,  subject);
+//                intentShareFile.putExtra(Intent.EXTRA_TEXT, text);
+//
+//
+//                ArrayList<Uri> uris = new ArrayList<Uri>();
+//                uris.add(Uri.parse("file:///sdcard/share.jpg"));
+//                uris.add(Uri.parse("file:///sdcard/share.jpg"));
+//
+////                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+//
+//
+//
+//                if (Utility.isAppAvailable(context, "com.google.android.gm")){
+//                    intentShareFile.setPackage("com.google.android.gm");
+//                }
+//
+//                context.startActivity(intentShareFile);
+
+
+
+
+
+
+
+
+//            }
+
+        }
+    }
+
 
 
 

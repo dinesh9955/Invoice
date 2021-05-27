@@ -1988,7 +1988,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
-        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Debit note?");
+        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Debit Note?");
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 

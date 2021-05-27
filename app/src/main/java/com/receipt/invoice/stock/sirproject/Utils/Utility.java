@@ -64,351 +64,202 @@ public class Utility {
 
     public static String getRealValueInvoiceWithoutPlus(String sss) {
         String valueIs = "";
+
         if(sss.toString().length() > 0){
-
-            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-
-            boolean gg = isNumeric(sss);
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(sss);
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = sss;
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        String ii =  vv[vv.length - 1];
-                        Log.e(TAG , "extractInt "+ii);
-                        String vvvvv = sss.substring(0, sss.length() - ii.length());
-
-                        Log.e(TAG , "vvvvv "+vvvvv);
-
-                        int myValue = Integer.parseInt(ii)+1;
-                        valueIs = vvvvv+myValue;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        int myValue = Integer.parseInt(cc);
-                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
-
-                        Log.e(TAG , "bbbbbb "+myValue);
-                        valueIs = "Invoice # "+myValue;
+            Log.e(TAG, "truee ");
+            Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+            Log.e(TAG, "cccccc "+flag);
+            if(flag == true){
+                String str = sss;
+                StringBuilder sb = new StringBuilder();
+                for (int i = str.length() - 1; i >= 0; i --) {
+                    char c = str.charAt(i);
+                    if (Character.isDigit(c)) {
+                        sb.insert(0, c);
+                    } else {
+                        break;
                     }
                 }
-            }else{
-                boolean ddd = isChar(sss);
-                if(ddd == false){
-                    int myValue = Integer.parseInt(sss);
-                    valueIs = "Invoice # "+myValue;
-                }
+                String result = sb.toString();
+
+                Log.e(TAG, "ccccccresult "+result);
+                valueIs = "Invoice # "+result;
             }
         }
+
         return valueIs;
     }
 
     public static String getRealValueEstimateWithoutPlus(String sss) {
         String valueIs = "";
+
         if(sss.toString().length() > 0){
-
-            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-
-            boolean gg = isNumeric(sss);
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(sss);
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = sss;
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        String ii =  vv[vv.length - 1];
-                        Log.e(TAG , "extractInt "+ii);
-                        String vvvvv = sss.substring(0, sss.length() - ii.length());
-
-                        Log.e(TAG , "vvvvv "+vvvvv);
-
-                        int myValue = Integer.parseInt(ii)+1;
-                        valueIs = vvvvv+myValue;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        int myValue = Integer.parseInt(cc);
-                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
-
-                        Log.e(TAG , "bbbbbb "+myValue);
-                        valueIs = "Estimate # "+myValue;
+            Log.e(TAG, "truee ");
+            Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+            Log.e(TAG, "cccccc "+flag);
+            if(flag == true){
+                String str = sss;
+                StringBuilder sb = new StringBuilder();
+                for (int i = str.length() - 1; i >= 0; i --) {
+                    char c = str.charAt(i);
+                    if (Character.isDigit(c)) {
+                        sb.insert(0, c);
+                    } else {
+                        break;
                     }
                 }
-            }else{
-                boolean ddd = isChar(sss);
-                if(ddd == false){
-                    int myValue = Integer.parseInt(sss);
-                    valueIs = "Estimate # "+myValue;
-                }
+                String result = sb.toString();
+
+                Log.e(TAG, "ccccccresult "+result);
+                valueIs = "Estimate # "+result;
             }
         }
+
         return valueIs;
     }
+
 
     public static String getRealValueReceiptWithoutPlus(String sss) {
         String valueIs = "";
+
         if(sss.toString().length() > 0){
-
-            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-
-            boolean gg = isNumeric(sss);
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(sss);
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = sss;
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        String ii =  vv[vv.length - 1];
-                        Log.e(TAG , "extractInt "+ii);
-                        String vvvvv = sss.substring(0, sss.length() - ii.length());
-
-                        Log.e(TAG , "vvvvv "+vvvvv);
-
-                        int myValue = Integer.parseInt(ii)+1;
-                        valueIs = vvvvv+myValue;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        int myValue = Integer.parseInt(cc);
-                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
-
-                        Log.e(TAG , "bbbbbb "+myValue);
-                        valueIs = "Receipt # "+myValue;
+            Log.e(TAG, "truee ");
+            Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+            Log.e(TAG, "cccccc "+flag);
+            if(flag == true){
+                String str = sss;
+                StringBuilder sb = new StringBuilder();
+                for (int i = str.length() - 1; i >= 0; i --) {
+                    char c = str.charAt(i);
+                    if (Character.isDigit(c)) {
+                        sb.insert(0, c);
+                    } else {
+                        break;
                     }
                 }
-            }else{
-                boolean ddd = isChar(sss);
-                if(ddd == false){
-                    int myValue = Integer.parseInt(sss);
-                    valueIs = "Receipt # "+myValue;
-                }
+                String result = sb.toString();
+
+                Log.e(TAG, "ccccccresult "+result);
+                valueIs = "Receipt # "+result;
             }
         }
+
         return valueIs;
     }
+
 
     public static String getRealValueCreditNoteWithoutPlus(String sss) {
         String valueIs = "";
+
         if(sss.toString().length() > 0){
-
-            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-
-            boolean gg = isNumeric(sss);
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(sss);
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = sss;
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        String ii =  vv[vv.length - 1];
-                        Log.e(TAG , "extractInt "+ii);
-                        String vvvvv = sss.substring(0, sss.length() - ii.length());
-
-                        Log.e(TAG , "vvvvv "+vvvvv);
-
-                        int myValue = Integer.parseInt(ii)+1;
-                        valueIs = vvvvv+myValue;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        int myValue = Integer.parseInt(cc);
-                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
-
-                        Log.e(TAG , "bbbbbb "+myValue);
-                        valueIs = "Credit Note # "+myValue;
+            Log.e(TAG, "truee ");
+            Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+            Log.e(TAG, "cccccc "+flag);
+            if(flag == true){
+                String str = sss;
+                StringBuilder sb = new StringBuilder();
+                for (int i = str.length() - 1; i >= 0; i --) {
+                    char c = str.charAt(i);
+                    if (Character.isDigit(c)) {
+                        sb.insert(0, c);
+                    } else {
+                        break;
                     }
                 }
-            }else{
-                boolean ddd = isChar(sss);
-                if(ddd == false){
-                    int myValue = Integer.parseInt(sss);
-                    valueIs = "Credit Note # "+myValue;
-                }
+                String result = sb.toString();
+
+                Log.e(TAG, "ccccccresult "+result);
+                valueIs = "Credit Note # "+result;
             }
         }
+
         return valueIs;
     }
+
 
     public static String getRealValueDebitNoteWithoutPlus(String sss) {
         String valueIs = "";
+
         if(sss.toString().length() > 0){
-
-            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-
-            boolean gg = isNumeric(sss);
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(sss);
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = sss;
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        String ii =  vv[vv.length - 1];
-                        Log.e(TAG , "extractInt "+ii);
-                        String vvvvv = sss.substring(0, sss.length() - ii.length());
-
-                        Log.e(TAG , "vvvvv "+vvvvv);
-
-                        int myValue = Integer.parseInt(ii)+1;
-                        valueIs = vvvvv+myValue;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        int myValue = Integer.parseInt(cc);
-                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
-
-                        Log.e(TAG , "bbbbbb "+myValue);
-                        valueIs = "Debit Note # "+myValue;
+            Log.e(TAG, "truee ");
+            Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+            Log.e(TAG, "cccccc "+flag);
+            if(flag == true){
+                String str = sss;
+                StringBuilder sb = new StringBuilder();
+                for (int i = str.length() - 1; i >= 0; i --) {
+                    char c = str.charAt(i);
+                    if (Character.isDigit(c)) {
+                        sb.insert(0, c);
+                    } else {
+                        break;
                     }
                 }
-            }else{
-                boolean ddd = isChar(sss);
-                if(ddd == false){
-                    int myValue = Integer.parseInt(sss);
-                    valueIs = "Debit Note # "+myValue;
-                }
+                String result = sb.toString();
+
+                Log.e(TAG, "ccccccresult "+result);
+                valueIs = "Debit Note # "+result;
             }
         }
+
         return valueIs;
     }
+
 
     public static String getRealValuePOWithoutPlus(String sss) {
         String valueIs = "";
+
         if(sss.toString().length() > 0){
-
-            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-
-            boolean gg = isNumeric(sss);
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(sss);
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = sss;
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        String ii =  vv[vv.length - 1];
-                        Log.e(TAG , "extractInt "+ii);
-                        String vvvvv = sss.substring(0, sss.length() - ii.length());
-
-                        Log.e(TAG , "vvvvv "+vvvvv);
-
-                        int myValue = Integer.parseInt(ii)+1;
-                        valueIs = vvvvv+myValue;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        int myValue = Integer.parseInt(cc);
-                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
-
-                        Log.e(TAG , "bbbbbb "+myValue);
-                        valueIs = "Purchase Order # "+myValue;
+            Log.e(TAG, "truee ");
+            Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+            Log.e(TAG, "cccccc "+flag);
+            if(flag == true){
+                String str = sss;
+                StringBuilder sb = new StringBuilder();
+                for (int i = str.length() - 1; i >= 0; i --) {
+                    char c = str.charAt(i);
+                    if (Character.isDigit(c)) {
+                        sb.insert(0, c);
+                    } else {
+                        break;
                     }
                 }
-            }else{
-                boolean ddd = isChar(sss);
-                if(ddd == false){
-                    int myValue = Integer.parseInt(sss);
-                    valueIs = "Purchase Order # "+myValue;
-                }
+                String result = sb.toString();
+
+                Log.e(TAG, "ccccccresult "+result);
+                valueIs = "Purchase Order # "+result;
             }
         }
+
         return valueIs;
     }
 
+
     public static String getRealValuePVWithoutPlus(String sss) {
         String valueIs = "";
+
         if(sss.toString().length() > 0){
-
-            // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-
-            boolean gg = isNumeric(sss);
-            Log.e(TAG, "gggggg "+gg);
-
-            boolean dd = isChar(sss);
-            Log.e(TAG, "dddddd "+dd);
-
-            if(gg == false && dd == false){
-                Log.e(TAG, "truee ");
-                Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
-                Log.e(TAG, "cccccc "+flag);
-                if(flag == true){
-                    String str = sss;
-                    String cc = extractInt(str);
-                    if(cc.contains(" ")){
-                        String vv[] = cc.split(" ");
-                        String ii =  vv[vv.length - 1];
-                        Log.e(TAG , "extractInt "+ii);
-                        String vvvvv = sss.substring(0, sss.length() - ii.length());
-
-                        Log.e(TAG , "vvvvv "+vvvvv);
-
-                        int myValue = Integer.parseInt(ii)+1;
-                        valueIs = vvvvv+myValue;
-                    }
-                    if(!cc.contains(" ")){
-                        Log.e(TAG , "extractInt2 "+cc);
-                        int myValue = Integer.parseInt(cc);
-                        // String vvvvv = sss.substring(0, sss.length() - cc.length());
-
-                        Log.e(TAG , "bbbbbb "+myValue);
-                        valueIs = "Payment Voucher # "+myValue;
+            Log.e(TAG, "truee ");
+            Boolean flag = Character.isDigit(sss.charAt(sss.length() - 1));
+            Log.e(TAG, "cccccc "+flag);
+            if(flag == true){
+                String str = sss;
+                StringBuilder sb = new StringBuilder();
+                for (int i = str.length() - 1; i >= 0; i --) {
+                    char c = str.charAt(i);
+                    if (Character.isDigit(c)) {
+                        sb.insert(0, c);
+                    } else {
+                        break;
                     }
                 }
-            }else{
-                boolean ddd = isChar(sss);
-                if(ddd == false){
-                    int myValue = Integer.parseInt(sss);
-                    valueIs = "Payment Voucher # "+myValue;
-                }
+                String result = sb.toString();
+
+                Log.e(TAG, "ccccccresult "+result);
+                valueIs = "Payment Voucher # "+result;
             }
         }
+
         return valueIs;
     }
 

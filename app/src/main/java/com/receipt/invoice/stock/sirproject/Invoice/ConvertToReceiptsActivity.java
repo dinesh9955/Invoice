@@ -2328,9 +2328,10 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
         Button btnok, btncancel;
 
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
-        txtfreight.setText("Do you want to add Shipping amount for\nthis receipt?");
+
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
+        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Receipt?");
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 

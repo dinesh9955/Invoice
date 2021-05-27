@@ -2371,6 +2371,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
+        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Purchase Order?");
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 

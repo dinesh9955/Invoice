@@ -2291,7 +2291,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
-        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Estimate?");
+        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Payment Voucher?");
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 

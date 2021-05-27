@@ -34,7 +34,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Do you want to add Shipping amount for\nthis invoice?"
+            android:text="Do you want to add Shipping amount for\nthis Invoice?"
             android:layout_below="@id/txtfreight"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
