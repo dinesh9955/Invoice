@@ -1014,6 +1014,7 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
             params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
             params.add("paid_amount", strpaid_amount);
             params.add("paid_amount_date", Paymentamountdate);
+
             params.add("shipping_firstname", shippingfirstname);
             params.add("shipping_lastname", shippinglastname);
             params.add("shipping_address_1", shippingaddress1);
@@ -1021,6 +1022,7 @@ public class Fragment_Create_Estimate extends Fragment implements Customer_Botto
             params.add("shipping_city", shippingcity);
             params.add("shipping_postcode", shippingpostcode);
             params.add("shipping_country", shippingcountry);
+
             params.add("payment_bank_name", payment_bank_name);
             params.add("payment_currency", payment_currency);
             params.add("payment_iban", payment_iban);

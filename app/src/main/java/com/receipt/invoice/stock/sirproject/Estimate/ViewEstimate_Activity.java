@@ -139,6 +139,8 @@ public class ViewEstimate_Activity extends AppCompatActivity {
                     shippingpostcode = customerselected.get(i).getShipping_postcode();
                     shippingzone = customerselected.get(i).getShipping_zone();
 
+                    Log.e(TAG, "shippingaddress2XXX "+shippingaddress2);
+
                 }
 
 
@@ -183,6 +185,7 @@ public class ViewEstimate_Activity extends AppCompatActivity {
                     stringBuilderShipTo.append(shippingaddress1+", "+shippingaddress2+"</br>");
                 }
 
+                Log.e(TAG, "stringBuilderShipTo:: "+stringBuilderShipTo.toString());
 
                 //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
 
@@ -247,12 +250,17 @@ public class ViewEstimate_Activity extends AppCompatActivity {
             strdiscountvalue = getIntent().getStringExtra("discount");
             strpaid_amount = getIntent().getStringExtra("paid_amount");
             Paymentamountdate = getIntent().getStringExtra("paid_amount_date");
+
             shippingfirstname = getIntent().getStringExtra("shipping_firstname");
             shippinglastname = getIntent().getStringExtra("shipping_lastname");
             shippingaddress1 = getIntent().getStringExtra("shipping_address_1");
             shippingaddress2 = getIntent().getStringExtra("shipping_address_2");
             shippingcity = getIntent().getStringExtra("shipping_city");
             shippingpostcode = getIntent().getStringExtra("shipping_postcode");
+
+            Log.e(TAG, "shippingaddress1AA "+shippingaddress1);
+            Log.e(TAG, "shippingaddress2AA "+shippingaddress2);
+
             shippingcountry = getIntent().getStringExtra("shipping_country");
             payment_bank_name = getIntent().getStringExtra("payment_bank_name");
 

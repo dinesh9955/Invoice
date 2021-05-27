@@ -575,7 +575,6 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                 shippingaddress1 = invoiceCustomerDto.getShippingAddress1();
                 shippingaddress2 = invoiceCustomerDto.getShippingAddress2();
                 shipping_city = invoiceCustomerDto.getShippingCity();
-                shippingaddress2 = invoiceCustomerDto.getShippingCity();
                 shippingcountry = invoiceCustomerDto.getShippingCountry();
                 shippingpostcode = (String) invoiceCustomerDto.getShippingPostcode();
                 shipping_zonedto = (String) invoiceCustomerDto.getShippingZone();
