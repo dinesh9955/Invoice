@@ -1590,6 +1590,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
+                                    POActivity.activity.finish();
                                     finish();
                                     Intent intent = new Intent(ConvertToPVActivity.this, PVActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

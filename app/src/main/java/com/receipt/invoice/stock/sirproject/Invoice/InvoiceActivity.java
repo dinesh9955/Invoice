@@ -1,5 +1,6 @@
 package com.receipt.invoice.stock.sirproject.Invoice;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -20,6 +21,8 @@ import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
 public class InvoiceActivity extends AppCompatActivity {
 
+    public static Activity activity;
+
 
     private static final String TAG = "Create_Invoice_Activity";
     LockableViewPager viewPager;
@@ -35,6 +38,8 @@ public class InvoiceActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         Constant.toolbar(InvoiceActivity.this,"Create Invoice");
+
+        activity = this;
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);

@@ -1,5 +1,6 @@
 package com.receipt.invoice.stock.sirproject.PO;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -20,6 +21,7 @@ import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
 public class POActivity extends AppCompatActivity {
 
+    public static Activity activity;
 
     private static final String TAG = "POActivity";
     LockableViewPager viewPager;
@@ -36,6 +38,7 @@ public class POActivity extends AppCompatActivity {
 
         Constant.toolbar(POActivity.this,"Purchase Orders");
 
+        activity = this;
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
         viewPager = findViewById(R.id.viewPagerLayout);

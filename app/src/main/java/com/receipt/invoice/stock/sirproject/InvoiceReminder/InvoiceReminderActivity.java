@@ -482,6 +482,7 @@ public class InvoiceReminderActivity extends AppCompatActivity{
             viewinvoicetemplate.setText("Send Reminder Note");
             duplicateinvoitxt.setText("View Reminder Note");
             shareinvoicetxt.setText("Cancel");
+            shareinvoicetxt.setVisibility(View.GONE);
 
             viewinvoicebotom.setTypeface(Typeface.createFromAsset(getAssets(), "Fonts/AzoSans-Bold.otf"));
             viewinvoicetemplate.setTypeface(Typeface.createFromAsset(getAssets(), "Fonts/AzoSans-Bold.otf"));

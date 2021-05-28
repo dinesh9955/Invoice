@@ -75,8 +75,8 @@ public class ReportViewActivity extends AppCompatActivity {
         invoiceweb.setWebChromeClient(new WebChromeClient());
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSupportZoom(true);
-//        webSettings.setBuiltInZoomControls(true);
-//        webSettings.setDisplayZoomControls(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(true);
         invoiceweb.getSettings().setLoadsImagesAutomatically(true);
         invoiceweb.getSettings().setJavaScriptEnabled(true);
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);

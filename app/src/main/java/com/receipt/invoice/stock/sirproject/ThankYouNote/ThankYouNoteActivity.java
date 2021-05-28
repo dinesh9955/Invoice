@@ -483,6 +483,7 @@ public class ThankYouNoteActivity extends AppCompatActivity{
             viewinvoicetemplate.setText("Send Thank You Note");
             duplicateinvoitxt.setText("View Thank You Note");
             shareinvoicetxt.setText("Cancel");
+            shareinvoicetxt.setVisibility(View.GONE);
 
             viewinvoicebotom.setTypeface(Typeface.createFromAsset(getAssets(), "Fonts/AzoSans-Bold.otf"));
             viewinvoicetemplate.setTypeface(Typeface.createFromAsset(getAssets(), "Fonts/AzoSans-Bold.otf"));

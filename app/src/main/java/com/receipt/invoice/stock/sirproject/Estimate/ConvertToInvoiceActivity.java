@@ -95,6 +95,7 @@ import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.SelectedTaxlist;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
+import com.receipt.invoice.stock.sirproject.PO.POActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
@@ -1587,6 +1588,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
+                                    EstimateActivity.activity.finish();
                                     finish();
                                     Intent intent = new Intent(ConvertToInvoiceActivity.this, InvoiceActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -1,5 +1,6 @@
 package com.receipt.invoice.stock.sirproject.Estimate;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -20,6 +21,7 @@ import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
 public class EstimateActivity extends AppCompatActivity {
 
+    public static Activity activity;
 
     LockableViewPager viewPager;
         TabLayout tabs;
@@ -34,7 +36,7 @@ public class EstimateActivity extends AppCompatActivity {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
             Constant.toolbar(EstimateActivity.this,"Create Estimate");
-
+            activity = this;
 
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
             viewPager = findViewById(R.id.viewPagerLayout);

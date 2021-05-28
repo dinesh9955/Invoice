@@ -622,6 +622,8 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                 company_email = companyDto.getPaypalEmail();
                 companylogopath = companyDto.getLogo();
 
+                Log.e(TAG, "SelectedcompanynameAA "+ Selectedcompanyname);
+
                 Log.e(TAG, "companylogopath"+ companylogopath);
                 // new DownloadsImagefromweblogoCom().execute(companylogopathdtodt);
 
@@ -2892,11 +2894,12 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                                 cnames.add(company_name);
                                 cids.add(company_id);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditPOActivity.this, android.R.layout.simple_spinner_item, cnames);
-                                selectcompany.setAdapter(namesadapter);
-
                             }
+
                         }
+
+                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditPOActivity.this, android.R.layout.simple_spinner_item, cnames);
+                        selectcompany.setAdapter(namesadapter);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -5282,11 +5285,15 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         if(!company_email.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_email+"");
         }
+
+
+        Log.e(TAG, "company_nameZZZZ "+Selectedcompanyname);
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
 
-                    .replaceAll("Company Name", company_name)
+                    .replaceAll("Company Name", Selectedcompanyname)
                     .replaceAll("Address", stringBuilderCompany.toString())
 //                    .replaceAll("Contact No.", company_contact)
 //                    .replaceAll("Website", companywebsitestr)
