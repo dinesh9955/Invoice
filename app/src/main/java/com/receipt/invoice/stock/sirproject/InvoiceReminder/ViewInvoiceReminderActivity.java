@@ -624,7 +624,7 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
             signature_of_receivername="";
         }else {
             invoice_image_pathreceiverpath=invoice_image_path + signature_of_receiver;
-            signature_of_receivername="SignatureofReceiver";
+            signature_of_receivername="Signature of Receiver";
         }
 
 

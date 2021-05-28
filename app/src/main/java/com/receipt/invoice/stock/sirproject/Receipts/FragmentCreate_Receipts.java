@@ -965,7 +965,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
        // Log.e(TAG , "invoicenovalue::"+getInvoiceValue(invoicenum.getText().toString()));
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
-            Constant.ErrorToast(getActivity(), "Select a Company");
+            Constant.ErrorToast(getActivity(), "Select A Company");
             createinvoice.setEnabled(true);
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_RECEIPT).equalsIgnoreCase("")) {
             Constant.ErrorToast(getActivity(), "Receipt No. should be letters followed by Digits");
@@ -1841,7 +1841,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select a Company");
+                        Constant.ErrorToast(getActivity(), "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select Date");

@@ -678,7 +678,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 if (company_stampdto.equals("")) {
                     Log.e(TAG, "company_stampdto1111"+ company_stampdto);
                 } else {
-                    Log.e(TAG, "company_stampdto2222"+ company_stampdto);
+                    Log.e(TAG, "company_stampdto2222"+ companystempurlpath);
                     new DownloadCompanystempweb().execute(companystempurlpath);
                     imgstampsuccess.setVisibility(View.VISIBLE);
                 }
@@ -690,6 +690,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 } else {
                     s_r = "2";
                     String signatureofreceiverpath = invoice_image_pathdto + signature_of_receiverdto;
+
+
                     new Downloadsignaturereceiverweb().execute(signatureofreceiverpath);
                     imgrecsuccess.setVisibility(View.VISIBLE);
                 }
@@ -1320,7 +1322,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Invoice Date");
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select a Company");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select A Company");
 
         }
         else if (selectwarehouseId.equals("")) {
@@ -2138,7 +2140,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select a Company");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Date");

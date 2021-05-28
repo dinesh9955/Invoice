@@ -965,7 +965,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
-            Constant.ErrorToast(getActivity(), "Select a Company");
+            Constant.ErrorToast(getActivity(), "Select A Company");
             createinvoice.setEnabled(true);
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_INVOICE).equalsIgnoreCase("")) {
             Constant.ErrorToast(getActivity(), "Invoice No. should be letters followed by Digits");
@@ -1923,7 +1923,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select a Company");
+                        Constant.ErrorToast(getActivity(), "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select Invoice Date");

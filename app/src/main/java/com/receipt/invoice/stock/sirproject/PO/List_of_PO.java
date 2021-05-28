@@ -1627,6 +1627,10 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                     String status = jsonObject.getString("status");
                     if (status.equals("true")) {
 
+                        if(voidPassValue.equalsIgnoreCase("2")){
+                            Constant.SuccessToast(getActivity(), "Delivery received successfully!");
+                        }
+
                         parmsvalue = "All";
                         InvoicelistData(parmsvalue);
                     }

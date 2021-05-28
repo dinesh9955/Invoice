@@ -379,7 +379,7 @@ public class Stock_Movement extends Fragment {
             quantity.requestFocus();
         }
         else if (selectedProductId.equals("")){
-            Constant.ErrorToast(getActivity(),"Select a Product");
+            Constant.ErrorToast(getActivity(),"Select A Product");
         }
         else if (selectedfromId.equals("")){
             Constant.ErrorToast(getActivity(),"Select Sender Warehouse");

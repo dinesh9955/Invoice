@@ -1242,7 +1242,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
             Constant.ErrorToast(EditReceiptActivity.this, "Select Receipt Date");
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(EditReceiptActivity.this, "Select a Company");
+            Constant.ErrorToast(EditReceiptActivity.this, "Select A Company");
 
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(EditReceiptActivity.this, "Select A Where House");
@@ -2021,7 +2021,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(EditReceiptActivity.this, "Select a Company");
+                        Constant.ErrorToast(EditReceiptActivity.this, "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(EditReceiptActivity.this, "Select Receipt Date");
@@ -2497,14 +2497,14 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     if (addSignatureToGallery(signatureBitmap)) {
                         //  Toast.makeText(getContext(), "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-                        imgsigsuccess.setVisibility(View.VISIBLE);
+                        imgrecsuccess.setVisibility(View.VISIBLE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }
                     if (addSvgSignatureToGallery(signaturePad.getSignatureSvg())) {
                         //  Toast.makeText(getContext(), "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
-                        imgsigsuccess.setVisibility(View.VISIBLE);
+                        imgrecsuccess.setVisibility(View.VISIBLE);
                     } else {
                         //Toast.makeText(getContext(), "Unable to store the signature", Toast.LENGTH_SHORT).show();
                     }

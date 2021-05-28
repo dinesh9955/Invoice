@@ -295,11 +295,12 @@ public class POToPVWebview extends AppCompatActivity {
             atchemntimg = getIntent().getStringArrayListExtra("attchemnt");
 
             signature_of_issuer = getIntent().getStringExtra("signature_issuer");
-
             signature_of_receiver = getIntent().getStringExtra("signature_of_receiver");
             company_stamp = getIntent().getStringExtra("company_stamp");
 
-
+            Log.e(TAG, "signature_of_issuer "+signature_of_issuer);
+            Log.e(TAG, "signature_of_receiver "+signature_of_receiver);
+            Log.e(TAG, "company_stamp "+company_stamp);
 
 
             if (signature_of_issuer != null) {

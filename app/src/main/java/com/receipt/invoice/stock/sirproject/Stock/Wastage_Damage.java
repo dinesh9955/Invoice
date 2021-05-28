@@ -379,11 +379,11 @@ public class Wastage_Damage extends Fragment {
             reason.requestFocus();
         }
         else if (selectedCompanyId.equals("")){
-            Constant.ErrorToast(getActivity(),"Select a Company");
+            Constant.ErrorToast(getActivity(),"Select A Company");
         }
 
         else if (selectedProductId.equals("")){
-            Constant.ErrorToast(getActivity(),"Select a Product");
+            Constant.ErrorToast(getActivity(),"Select A Product");
         }
         else if (selectedfromId.equals("")){
             Constant.ErrorToast(getActivity(),"Select Sender Warehouse");

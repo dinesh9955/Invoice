@@ -1365,7 +1365,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             Constant.ErrorToast(EditInvoiceActivity.this, "Select Invoice Date");
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(EditInvoiceActivity.this, "Select a Company");
+            Constant.ErrorToast(EditInvoiceActivity.this, "Select A Company");
 
         }
 
@@ -2191,7 +2191,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(EditInvoiceActivity.this, "Select a Company");
+                        Constant.ErrorToast(EditInvoiceActivity.this, "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(EditInvoiceActivity.this, "Select Invoice Date");

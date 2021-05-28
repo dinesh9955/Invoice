@@ -956,7 +956,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
       //  Log.e(TAG , "invoicenovalue::"+getInvoiceValue(invoicenum.getText().toString()));
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
-            Constant.ErrorToast(getActivity(), "Select a Company");
+            Constant.ErrorToast(getActivity(), "Select A Company");
             createinvoice.setEnabled(true);
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_DN).equalsIgnoreCase("")) {
             Constant.ErrorToast(getActivity(), "Dedit Note No. should be letters followed by Digits");
@@ -965,7 +965,7 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
             Constant.ErrorToast(getActivity(), "Select Date");
             createinvoice.setEnabled(true);
         } else if (customer_name.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select A Customer");
+            Constant.ErrorToast(getActivity(), "Select A Supplier");
             createinvoice.setEnabled(true);
 //        } else if (credit_terms.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Credit Tearm");
@@ -1807,13 +1807,13 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select a Company");
+                        Constant.ErrorToast(getActivity(), "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Customer");
+                        Constant.ErrorToast(getActivity(), "Select A Supplier");
                         bottomSheetDialog2.dismiss();
 //                    } else if (credit_terms.equals("")) {
 //                        Constant.ErrorToast(getActivity(), "Select Credit Tearm");

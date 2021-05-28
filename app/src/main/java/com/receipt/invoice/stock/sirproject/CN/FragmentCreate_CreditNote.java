@@ -965,7 +965,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
      //   Log.e(TAG , "invoicenovalue::"+getInvoiceValue(invoicenum.getText().toString()));
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
-            Constant.ErrorToast(getActivity(), "Select a Company");
+            Constant.ErrorToast(getActivity(), "Select A Company");
             createinvoice.setEnabled(true);
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_CN).equalsIgnoreCase("")) {
             Constant.ErrorToast(getActivity(), "Credit Note No. should be letters followed by Digits");
@@ -1797,7 +1797,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                    // strnotes = ednotes.getText().toString();
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select a Company");
+                        Constant.ErrorToast(getActivity(), "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select Date");

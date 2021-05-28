@@ -1360,7 +1360,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
 
         avi.smoothToShow();
         if (customer_name.equals("")) {
-            Constant.ErrorToast(EditEditPVActivity.this, "Select A Customer");
+            Constant.ErrorToast(EditEditPVActivity.this, "Select A Supplier");
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_PV).equalsIgnoreCase("")) {
             Constant.ErrorToast(EditEditPVActivity.this, "Payment Voucher No. should be letters followed by Digits");
 
@@ -1368,7 +1368,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
             Constant.ErrorToast(EditEditPVActivity.this, "Select Date");
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(EditEditPVActivity.this, "Select a Company");
+            Constant.ErrorToast(EditEditPVActivity.this, "Select A Company");
 
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(EditEditPVActivity.this, "Select Warehouse");
@@ -2202,13 +2202,13 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(EditEditPVActivity.this, "Select a Company");
+                        Constant.ErrorToast(EditEditPVActivity.this, "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(EditEditPVActivity.this, "Select Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(EditEditPVActivity.this, "Select A Customer");
+                        Constant.ErrorToast(EditEditPVActivity.this, "Select A Supplier");
                         bottomSheetDialog2.dismiss();
 //                    } else if (credit_terms.equals("")) {
 //                        Constant.ErrorToast(EditEditPVActivity.this, "Select Credit Term");
@@ -4694,9 +4694,9 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
             if(!sltcustomer_address.equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_address+"</br>");
             }
-            if(!sltcustomer_contact.equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_contact+"</br>");
-            }
+//            if(!sltcustomer_contact.equalsIgnoreCase("")){
+//                stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+//            }
             if(!sltcustomer_phone_number.equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
             }

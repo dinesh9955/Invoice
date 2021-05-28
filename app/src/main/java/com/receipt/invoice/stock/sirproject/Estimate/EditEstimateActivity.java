@@ -1310,7 +1310,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
             Constant.ErrorToast(EditEstimateActivity.this, "Select Estimate Date");
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(EditEstimateActivity.this, "Select a Company");
+            Constant.ErrorToast(EditEstimateActivity.this, "Select A Company");
 
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(EditEstimateActivity.this, "Select A Where House");
@@ -1537,7 +1537,8 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                     Log.e(TAG, "multiple[k] "+multiple[k]);
                     try {
                         if(multiple[k] != null){
-                            params.put("estimate_image["+k+"]", multiple[k]);
+                            String dd = multiple[k].toString().replace("file:", "");
+                            params.put("estimate_image["+k+"]", new File(dd));
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -2125,7 +2126,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                     //strnotes = ednotes.getText().toString();
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(EditEstimateActivity.this, "Select a Company");
+                        Constant.ErrorToast(EditEstimateActivity.this, "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(EditEstimateActivity.this, "Select Date");

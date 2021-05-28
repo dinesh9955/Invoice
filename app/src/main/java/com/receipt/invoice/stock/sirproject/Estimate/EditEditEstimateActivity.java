@@ -1328,7 +1328,7 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
             Constant.ErrorToast(EditEditEstimateActivity.this, "Select Estimate Date");
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(EditEditEstimateActivity.this, "Select a Company");
+            Constant.ErrorToast(EditEditEstimateActivity.this, "Select A Company");
 
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(EditEstimateActivity.this, "Select A Where House");
@@ -1550,7 +1550,9 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
                     Log.e(TAG, "multiple[k] "+multiple[k]);
                     try {
                         if(multiple[k] != null){
-                            params.put("estimate_image["+k+"]", multiple[k]);
+                            //params.put("estimate_image[0]", new File("/storage/emulated/0/DCIM/Screenshots/Screenshot_20210522-105329_Facebook.jpg"));
+                            String dd = multiple[k].toString().replace("file:", "");
+                            params.put("estimate_image["+k+"]", new File(dd));
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -2137,7 +2139,7 @@ public class EditEditEstimateActivity extends AppCompatActivity implements Custo
 
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(EditEditEstimateActivity.this, "Select a Company");
+                        Constant.ErrorToast(EditEditEstimateActivity.this, "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(EditEditEstimateActivity.this, "Select Date");

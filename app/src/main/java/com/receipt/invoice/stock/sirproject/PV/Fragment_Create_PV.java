@@ -902,8 +902,6 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
     }
 
     private void multiimagepicker() {
-
-
         multiImageDisposable = TedRxBottomPicker.with(getActivity())
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
@@ -962,7 +960,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
     //    Log.e(TAG , "invoicenovalue::"+getInvoiceValue(invoicenum.getText().toString()));
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
-            Constant.ErrorToast(getActivity(), "Select a Company");
+            Constant.ErrorToast(getActivity(), "Select A Company");
             createinvoice.setEnabled(true);
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_PV).equalsIgnoreCase("")) {
             Constant.ErrorToast(getActivity(), "Payment Voucher No. should be letters followed by Digits");
@@ -971,7 +969,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
             Constant.ErrorToast(getActivity(), "Select Date");
             createinvoice.setEnabled(true);
         } else if (customer_name.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select A Customer");
+            Constant.ErrorToast(getActivity(), "Select A Supplier");
             createinvoice.setEnabled(true);
 //        } else if (credit_terms.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Credit Term");
@@ -1843,13 +1841,13 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
 
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select a Company");
+                        Constant.ErrorToast(getActivity(), "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(getActivity(), "Select Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Customer");
+                        Constant.ErrorToast(getActivity(), "Select A Supplier");
                         bottomSheetDialog2.dismiss();
 //                    } else if (credit_terms.equals("")) {
 //                        Constant.ErrorToast(getActivity(), "Select Credit Term");

@@ -1350,7 +1350,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
 
         avi.smoothToShow();
         if (customer_name.equals("")) {
-            Constant.ErrorToast(EditPOActivity.this, "Select A Customer");
+            Constant.ErrorToast(EditPOActivity.this, "Select A Supplier");
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_PO).equalsIgnoreCase("")) {
             Constant.ErrorToast(EditPOActivity.this, "Purchase Order No. should be letters followed by Digits");
 
@@ -1358,7 +1358,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             Constant.ErrorToast(EditPOActivity.this, "Select Date");
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(EditPOActivity.this, "Select a Company");
+            Constant.ErrorToast(EditPOActivity.this, "Select A Company");
 
         }
         else if (selectwarehouseId.equals("")) {
@@ -2194,13 +2194,13 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(EditPOActivity.this, "Select a Company");
+                        Constant.ErrorToast(EditPOActivity.this, "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(EditPOActivity.this, "Select Invoice Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(EditPOActivity.this, "Select A Customer");
+                        Constant.ErrorToast(EditPOActivity.this, "Select A Supplier");
                         bottomSheetDialog2.dismiss();
                     } else if (credit_terms.equals("")) {
                         Constant.ErrorToast(EditPOActivity.this, "Select Credit Term");

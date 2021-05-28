@@ -1334,7 +1334,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
             Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Invoice Date");
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select a Company");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Company");
 
         }
 //        else if (selectwarehouseId.equals("")) {
@@ -1603,7 +1603,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(ConvertToReceiptsActivity.this, "Duplicate Invoice created successfully");
+                            Constant.SuccessToast(ConvertToReceiptsActivity.this, "Receipt created successfully");
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -2156,7 +2156,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select a Company");
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Invoice Date");

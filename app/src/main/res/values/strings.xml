@@ -65,9 +65,9 @@
     <string name="createreceipt">Create Receipt</string>
     <string name="createcredit">Create Credit Note</string>
     <string name="createestimate">Create Estimate</string>
-    <string name="create_purchaseorder">Create purchase order</string>
+    <string name="create_purchaseorder">Create Purchase Order</string>
 +
-    <string name="create_paymentvoucher">Create payment voucher</string>
+    <string name="create_paymentvoucher">Create Payment Voucher</string>
 
 
 

@@ -491,7 +491,7 @@ public class Update_Stock extends Fragment implements Select_Warehouse_Adapter.C
             price.requestFocus();
         }
         else if (selectedProductId.equals("")){
-            Constant.ErrorToast(getActivity(),"Select a Product");
+            Constant.ErrorToast(getActivity(),"Select A Product");
 
         }
        /* else if (selectedVendorId.equals("")){

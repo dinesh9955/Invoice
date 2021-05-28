@@ -678,7 +678,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 
                 company_stampdto = invoiceDtoInvoice.getCompanyStamp();
                 //  Down load image From Web Data
-                String companystempurlpath = invoice_image_pathdto + company_stampdto;
+                String companystempurlpath = customer_image_pathdto + company_stampdto;
                 Log.e(TAG, "invoice_image_pathdto"+ invoice_image_pathdto);
                 Log.e(TAG, "company_stampdto"+ company_stampdto);
 
@@ -696,7 +696,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 
                 } else {
                     s_r = "2";
-                    String signatureofreceiverpath = invoice_image_pathdto + signature_of_receiverdto;
+                    String signatureofreceiverpath = customer_image_pathdto + signature_of_receiverdto;
                     new Downloadsignaturereceiverweb().execute(signatureofreceiverpath);
                     imgrecsuccess.setVisibility(View.VISIBLE);
                 }
@@ -709,7 +709,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 
                 } else {
                     s_r = "1";
-                    String signatureofreceiverpath = invoice_image_pathdto + signature_of_issuerdto;
+                    String signatureofreceiverpath = customer_image_pathdto + signature_of_issuerdto;
                     new Downloadsignatureissueweb().execute(signatureofreceiverpath);
                     imgsigsuccess.setVisibility(View.VISIBLE);
                 }
@@ -755,16 +755,16 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                 }
 
 
-                //invoice_imageDto = new ArrayList<Estimate_image>(data.getPurchase_image());
-                if(invoice_imageDto != null){
-                    for(int i = 0; i < invoice_imageDto.size() ; i++){
-                        String signatureofreceiverpath = invoice_image_pathdto + invoice_imageDto.get(i).getImage();
-                        new DownloadInvoiceImages().execute(signatureofreceiverpath);
-                        attachmenttxtimg.setVisibility(View.VISIBLE);
-                    }
-                    Log.e(TAG, "cAAccccc "+invoice_imageDto.size());
-//                    Log.e(TAG, "cccccc "+invoice_images.get(0).getImage());
-                }
+//                //invoice_imageDto = new ArrayList<Estimate_image>(data.getPurchase_image());
+//                if(invoice_imageDto != null){
+//                    for(int i = 0; i < invoice_imageDto.size() ; i++){
+//                        String signatureofreceiverpath = invoice_image_pathdto + invoice_imageDto.get(i).getImage();
+//                        new DownloadInvoiceImages().execute(signatureofreceiverpath);
+//                        attachmenttxtimg.setVisibility(View.VISIBLE);
+//                    }
+//                    Log.e(TAG, "cAAccccc "+invoice_imageDto.size());
+////                    Log.e(TAG, "cccccc "+invoice_images.get(0).getImage());
+//                }
 
 
 
@@ -1317,9 +1317,11 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
     }
 
     private void createinvoicewithdetail(File file) {
+
+        Log.e(TAG, "customer_nameZZZ "+customer_id);
         avi.smoothToShow();
-        if (customer_name.equals("")) {
-            Constant.ErrorToast(ConvertToPVActivity.this, "Select A Customer");
+        if (customer_id.equals("")) {
+            Constant.ErrorToast(ConvertToPVActivity.this, "Select A Supplier");
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_PV).equalsIgnoreCase("")) {
             Constant.ErrorToast(ConvertToPVActivity.this, "Payment Voucher No. should be letters followed by Digits");
 
@@ -1327,7 +1329,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
             Constant.ErrorToast(ConvertToPVActivity.this, "Select Date");
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(ConvertToPVActivity.this, "Select a Company");
+            Constant.ErrorToast(ConvertToPVActivity.this, "Select A Company");
 
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(ConvertToPVActivity.this, "Select Warehouse");
@@ -2134,13 +2136,13 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(ConvertToPVActivity.this, "Select a Company");
+                        Constant.ErrorToast(ConvertToPVActivity.this, "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
                         Constant.ErrorToast(ConvertToPVActivity.this, "Select Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(ConvertToPVActivity.this, "Select A Customer");
+                        Constant.ErrorToast(ConvertToPVActivity.this, "Select A Supplier");
                         bottomSheetDialog2.dismiss();
 //                    } else if (credit_terms.equals("")) {
 //                        Constant.ErrorToast(ConvertToPVActivity.this, "Select Credit Term");

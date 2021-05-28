@@ -428,7 +428,7 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
                 try {
 
                     multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
-                            .replaceAll("#ATTACHMENT_1#", "http://13.126.22.0/saad/app/uploads/estimate/"+invoice_imageDto.get(i).getImage());
+                            .replaceAll("#ATTACHMENT_1#", invoice_image_path+invoice_imageDto.get(i).getImage());
                            // .replaceAll("#ATTACHMENT_1#", invoice_imageDto.get(i));
 
 
@@ -505,7 +505,7 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
             signature_of_receivername="";
         }else {
             invoice_image_pathreceiverpath=invoice_image_path + signature_of_receiver;
-            signature_of_receivername="SignatureofReceiver";
+            signature_of_receivername="Signature of Receiver";
         }
 
 

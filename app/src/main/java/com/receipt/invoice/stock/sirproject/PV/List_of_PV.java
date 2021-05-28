@@ -148,7 +148,7 @@ public class List_of_PV extends Fragment implements InvoiceCallBack {
         search = view.findViewById(R.id.search);
         selectcompany = view.findViewById(R.id.selectcompany);
         imageViewmenu = view.findViewById(R.id.imageViewmenu);
-
+        imageViewmenu.setVisibility(View.GONE);
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1104,7 +1104,7 @@ public class List_of_PV extends Fragment implements InvoiceCallBack {
 
 
 
-
+                    txtSHAREvalue.setVisibility(View.GONE);
                     txtSHAREvalue.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
