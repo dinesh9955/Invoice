@@ -80,7 +80,7 @@ public class POListAdapterdt extends RecyclerView.Adapter<POListAdapterdt.ViewHo
         if (invoicedue_date.equals("") && invoicedue_date.equals("null")) {
             viewHolderForCat.invoiceduetxt.setText("");
         } else {
-            viewHolderForCat.invoiceduetxt.setText("| Date: "+invoicedue_date);
+            viewHolderForCat.invoiceduetxt.setText("| Due: "+invoicedue_date);
         }
 
         if (invoicetotlaprice.equals("") && invoicetotlaprice.equals("null")) {

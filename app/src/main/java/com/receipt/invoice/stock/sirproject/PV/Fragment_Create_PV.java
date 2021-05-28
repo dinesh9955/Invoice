@@ -134,6 +134,8 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
 
     int selectedTemplate = 0;
 
+    ArrayList<String> arrayListAllPVNo = new ArrayList<>();
+
     //    public static int defaultClick = 0;
 //    int selectComapanyCount = 0;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -713,7 +715,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
 //
 //                createinvoicewithdetail();
 
-                createinvoice.setEnabled(false);
+                //createinvoice.setEnabled(false);
 
 
                 invoice_no = invoicenumtxt.getText().toString();
@@ -957,12 +959,26 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
     private void createinvoicewithdetail(File file) {
         avi.smoothToShow();
 
+
+        Gson gson = new Gson();
+        String json = gson.toJson(arrayListAllPVNo);
+//        Log.e(TAG, "yyyyyyyyyyyyyyy"+json);
+//        Log.e(TAG, "yyyyyyyyyyyyyyy"+invoicenum.getText().toString());
+//
+//        if (json.contains(invoicenum.getText().toString())){
+//            Log.e(TAG, "yyyyyyyyyyyyyyy");
+//        }else{
+//            Log.e(TAG, "nnnnnnnnnnnnnnn");
+//        }
     //    Log.e(TAG , "invoicenovalue::"+getInvoiceValue(invoicenum.getText().toString()));
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
             Constant.ErrorToast(getActivity(), "Select A Company");
             createinvoice.setEnabled(true);
-        } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_PV).equalsIgnoreCase("")) {
+        } else if (json.contains(invoicenum.getText().toString())){
+            Constant.ErrorToast(getActivity(), "Payment Voucher No. already exists");
+            createinvoice.setEnabled(true);
+        }else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_PV).equalsIgnoreCase("")) {
             Constant.ErrorToast(getActivity(), "Payment Voucher No. should be letters followed by Digits");
             createinvoice.setEnabled(true);
         }else if (invoice_date.equals("")) {
@@ -1172,7 +1188,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "paymentvoucher/add", params, new AsyncHttpResponseHandler() {
+            client.post(Constant.BASE_URL + "paymentvoucher/adda", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -3029,6 +3045,8 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
 
                         JSONArray invoice = data.getJSONArray("payment_voucher");
 
+                        arrayListAllPVNo.clear();;
+
                         if(invoice.length() == 0){
                             invoicenum.setText(Utility.DEFAULT_PO);
                             invoicenum.setEnabled(true);
@@ -3037,6 +3055,8 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
                                 JSONObject item = invoice.getJSONObject(i);
 
                                 String invoice_nocompany = item.getString("payment_voucher_no");
+
+                                arrayListAllPVNo.add(invoice_nocompany);
 
                                 if(i == invoice.length() - 1){
                                     Log.e(TAG, "zzzz0 "+invoice_nocompany);

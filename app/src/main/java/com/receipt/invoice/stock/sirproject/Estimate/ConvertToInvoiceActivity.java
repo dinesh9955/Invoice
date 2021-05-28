@@ -1325,7 +1325,9 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select A Company");
 
         }
-        else if (selectwarehouseId.equals("")) {
+
+
+        else if (Utility.isEmptyNull(selectwarehouseId).equalsIgnoreCase("")) {
             Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
 
         }
@@ -2824,7 +2826,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ConvertToInvoiceActivity.this, android.R.layout.simple_spinner_item, cnames);
                         selectcompany.setAdapter(namesadapter);
 
-                        selectwarehouse.setSelection(warehousePosition);
+//                        selectwarehouse.setSelection(warehousePosition);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

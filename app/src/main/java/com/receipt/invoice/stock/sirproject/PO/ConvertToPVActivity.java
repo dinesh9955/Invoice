@@ -146,6 +146,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
     String companycolor = "#ffffff";
     int selectedTemplate = 0;
 //    int defaultClick = 0;
+    ArrayList<String> arrayListAllPVNo = new ArrayList<>();
 
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -1319,10 +1320,17 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
     private void createinvoicewithdetail(File file) {
 
         Log.e(TAG, "customer_nameZZZ "+customer_id);
+
         avi.smoothToShow();
+
+        Gson gson = new Gson();
+        String json = gson.toJson(arrayListAllPVNo);
+
         if (customer_id.equals("")) {
             Constant.ErrorToast(ConvertToPVActivity.this, "Select A Supplier");
-        } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_PV).equalsIgnoreCase("")) {
+        } else if (json.contains(invoicenum.getText().toString())){
+            Constant.ErrorToast(ConvertToPVActivity.this, "Payment Voucher No. already exists");
+        }else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_PV).equalsIgnoreCase("")) {
             Constant.ErrorToast(ConvertToPVActivity.this, "Payment Voucher No. should be letters followed by Digits");
 
         }else if (invoice_date.equals("")) {
@@ -1495,7 +1503,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                     }else{
                         Log.e(TAG, "WWWWWWWWWWWWW");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "j]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
 ////                        params.add("tax[" + i + "]" + "[title]", "xx");
 //
@@ -3258,6 +3266,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                         JSONArray customer = data.getJSONArray("customer");
 
                         JSONArray invoice = data.getJSONArray("payment_voucher");
+                        arrayListAllPVNo.clear();;
 
                         if(invoice.length() == 0){
                             invoicenum.setText(Utility.DEFAULT_PV);
@@ -3266,6 +3275,8 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                             for (int i = 0; i < invoice.length(); i++) {
                                 JSONObject item = invoice.getJSONObject(i);
                                 String invoice_nocompany = item.getString("payment_voucher_no");
+
+                                arrayListAllPVNo.add(invoice_nocompany);
 
                                 if(i == invoice.length() - 1){
                                     Log.e(TAG, "zzzz0 "+invoice_nocompany);

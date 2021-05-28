@@ -147,7 +147,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
         search = view.findViewById(R.id.search);
         selectcompany = view.findViewById(R.id.selectcompany);
         imageViewmenu = view.findViewById(R.id.imageViewmenu);
-
+        imageViewmenu.setVisibility(View.GONE);
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
         search.addTextChangedListener(new TextWatcher() {
             @Override
