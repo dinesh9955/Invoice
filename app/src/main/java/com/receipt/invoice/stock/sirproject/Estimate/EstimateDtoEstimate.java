@@ -10,6 +10,10 @@ import java.util.List;
 
 public class EstimateDtoEstimate {
 
+
+    @SerializedName("cheque_payable_to")
+    private String cheque_payable_to;
+
     @SerializedName("template_type")
     private String template_type;
 
@@ -537,5 +541,13 @@ public class EstimateDtoEstimate {
 
     public void setCustomer(InvoiceCustomerDto customer) {
         this.customer = customer;
+    }
+
+    public String getCheque_payable_to() {
+        return cheque_payable_to;
+    }
+
+    public void setCheque_payable_to(String cheque_payable_to) {
+        this.cheque_payable_to = cheque_payable_to;
     }
 }

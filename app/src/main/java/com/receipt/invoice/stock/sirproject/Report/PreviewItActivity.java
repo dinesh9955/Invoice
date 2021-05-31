@@ -1,20 +1,14 @@
 package com.receipt.invoice.stock.sirproject.Report;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.print.PDFPrint;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -24,47 +18,32 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
-import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
-import com.receipt.invoice.stock.sirproject.Home.Model.CompanyModel;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
-import com.tejpratapsingh.pdfcreator.utils.FileManager;
-import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ReportViewActivity extends AppCompatActivity {
+public class PreviewItActivity extends AppCompatActivity {
 
-    private static final String TAG = "ViewInvoice_Activity";
-
-    File fileWithinMyDir = null;
-
+    private static final String TAG = "PreviewItActivity";
     WebView invoiceweb;
 
     int positionNext = -1;
     String company_image_path = "";
-
-    String fileName = "";
 
 //    String companyName = "";
 //    String companyAddress = "";
@@ -73,154 +52,22 @@ public class ReportViewActivity extends AppCompatActivity {
 //    String companyEmail = "";
 //    String companyLogo = "";
 
-public ArrayList<String> arrayListFilter = new ArrayList<>();
-
-    String customer_id = "";
-    String supplier_id = "";
-    String company_id = "";
-    String product_id = "";
 
     @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report_view);
+        setContentView(R.layout.activity_view_invoice_);
 
         Toolbar toolbar = findViewById(R.id.toolbarprint);
         TextView titleView = toolbar.findViewById(R.id.title1);
         ImageView backbtn = toolbar.findViewById(R.id.backbtn);
         ImageView printimg = toolbar.findViewById(R.id.imageViewptint);
-        printimg.setImageResource(R.drawable.ic_options);
-        printimg.setVisibility(View.VISIBLE);
-
-
+        printimg.setVisibility(View.GONE);
 
         invoiceweb = findViewById(R.id.invoiceweb);
 
         titleView.setText("Preview Report");
-
-
-
-
-//        invoiceweb.setWebViewClient(new WebViewClient() {
-//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onPageFinished(WebView view, String url) {
-//
-//                //if page loaded successfully then show print button
-//                //findViewById(R.id.fab).setVisibility(View.VISIBLE);
-//            }
-//        });
-
-
-//        printimg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                createWebPrintJob(invoiceweb);
-//            }
-//        });
-
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                onBackPressed();
-            }
-        });
-
-        Bundle bundle = getIntent().getExtras();
-
-
-        positionNext = bundle.getInt("positionNext");
-        company_image_path = bundle.getString("company_image_path");
-        if(positionNext == 0){
-            fileName = "CustomerStatementReport";
-            customer_id = bundle.getString("customer_id");
-            customerReport(customer_id, "");
-        } else if(positionNext == 1){
-            fileName = "SupplierStatementReport";
-            supplier_id = bundle.getString("supplier_id");
-            supplierReport(supplier_id, "");
-        } else if(positionNext == 2){
-            fileName = "TotalSalesReport";
-            company_id = bundle.getString("company_id");
-            totalSalesReport(company_id, "");
-        } else if(positionNext == 3){
-            fileName = "TotalPurchaseReport";
-            company_id = bundle.getString("company_id");
-            totalPurchaseReport(company_id, "");
-        } else if(positionNext == 4){
-            fileName = "CustomerAgeingReport";
-            company_id = bundle.getString("company_id");
-            customerAgeingReport(company_id,"");
-        } else if(positionNext == 5){
-            fileName = "TaxCollecteReport";
-            company_id = bundle.getString("company_id");
-            taxCollectedReport(company_id, "");
-        } else if(positionNext == 6){
-            fileName = "StockReport";
-            company_id = bundle.getString("company_id");
-            stockReport(company_id, "");
-        } else if(positionNext == 7){
-            fileName = "ProductMovementReport";
-            product_id = bundle.getString("product_id");
-//            companyName = bundle.getString("companyName");
-//            companyAddress = bundle.getString("companyAddress");
-//            companyContactNo = bundle.getString("companyContactNo");
-//            companyWebsite = bundle.getString("companyWebsite");
-//            companyEmail = bundle.getString("companyEmail");
-//            companyLogo = bundle.getString("companyLogo");
-            productMovementReport(product_id);
-        } else{
-//            String company_id = bundle.getString("company_id");
-//            customerReport(company_id);
-        }
-
-
-
-        Log.e(TAG, "company_image_pathWW "+company_image_path);
-
-        addFilterData(positionNext);
-
-        printimg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RecyclerView mRecyclerView;
-                MenuAdapter mAdapter;
-
-                final Dialog mybuilder = new Dialog(ReportViewActivity.this);
-                mybuilder.setContentView(R.layout.report_dialog_list);
-
-                TextView txtcancelvalue = (TextView) mybuilder.findViewById(R.id.txtcancelvalue);
-                txtcancelvalue.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mybuilder.dismiss();
-                    }
-                });
-                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
-//                mRecyclerView.setHasFixedSize(true);
-
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(ReportViewActivity.this, LinearLayoutManager.VERTICAL, false));
-
-                mAdapter = new MenuAdapter(arrayListFilter, mybuilder);
-                mRecyclerView.setAdapter(mAdapter);
-
-                mybuilder.show();
-                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-                Window window = mybuilder.getWindow();
-                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                window.setBackgroundDrawableResource(R.color.transparent);
-            }
-        });
-
-
-
-
-
 
         WebSettings webSettings = invoiceweb.getSettings();
 
@@ -238,86 +85,89 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         invoiceweb.getSettings().setUseWideViewPort(true);
         invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
 
-
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
+
             @Override
             public void onPageFinished(WebView view, String url) {
-                final File savedPDFFile = FileManager.getInstance().createTempFile(ReportViewActivity.this, fileName+".pdf", true);
-                PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
-                    @Override
-                    public void onSuccess(File file) {
-                        Log.e(TAG, "fileWithinMyDir "+fileWithinMyDir);
-                        fileWithinMyDir = file;
-                        //Intent intentShareFile = new Intent(Intent.ACTION_SEND);
 
-                    }
-                    @Override
-                    public void onError(Exception exception) {
-                        exception.printStackTrace();
-                        Log.e(TAG, "exception::: "+exception.getMessage());
-                    }
-                });
-
+                //if page loaded successfully then show print button
+                //findViewById(R.id.fab).setVisibility(View.VISIBLE);
             }
         });
 
 
-    }
+        printimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createWebPrintJob(invoiceweb);
+            }
+        });
 
-    private void addFilterData(int positionNext) {
-        arrayListFilter.add("Preview it");
-        arrayListFilter.add("Print");
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                onBackPressed();
+            }
+        });
+
+        Bundle bundle = getIntent().getExtras();
+
+
+        positionNext = bundle.getInt("positionNext");
+        company_image_path = bundle.getString("company_image_path");
         if(positionNext == 0){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("Filter By Date");
-            arrayListFilter.add("Remove Filter");
+            String customer_id = bundle.getString("customer_id");
+            customerReport(customer_id);
         } else if(positionNext == 1){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("Filter By Date");
-            arrayListFilter.add("Remove Filter");
+            String supplier_id = bundle.getString("supplier_id");
+            supplierReport(supplier_id);
         } else if(positionNext == 2){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("Filter By Date");
-            arrayListFilter.add("By Customer Name");
-            arrayListFilter.add("Paid");
-            arrayListFilter.add("UnPaid");
-            arrayListFilter.add("Remove Filter");
+            String company_id = bundle.getString("company_id");
+            totalSalesReport(company_id);
         } else if(positionNext == 3){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("Filter By Date");
-            arrayListFilter.add("By Supplier");
-            arrayListFilter.add("Remove Filter");
+            String company_id = bundle.getString("company_id");
+            totalPurchaseReport(company_id);
         } else if(positionNext == 4){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("By Customer Name");
-            arrayListFilter.add("Remove Filter");
+            String company_id = bundle.getString("company_id");
+            customerAgeingReport(company_id);
         } else if(positionNext == 5){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("Filter By Date");
-            arrayListFilter.add("By Tax Name");
-            arrayListFilter.add("Remove Filter");
+            String company_id = bundle.getString("company_id");
+            taxCollectedReport(company_id);
         } else if(positionNext == 6){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("In Stock");
-            arrayListFilter.add("Reorder");
-            arrayListFilter.add("Filter By Product Name");
-            arrayListFilter.add("Remove Filter");
+            String company_id = bundle.getString("company_id");
+            stockReport(company_id);
         } else if(positionNext == 7){
-            arrayListFilter.add("Export/Share");
+            String product_id = bundle.getString("product_id");
+//            companyName = bundle.getString("companyName");
+//            companyAddress = bundle.getString("companyAddress");
+//            companyContactNo = bundle.getString("companyContactNo");
+//            companyWebsite = bundle.getString("companyWebsite");
+//            companyEmail = bundle.getString("companyEmail");
+//            companyLogo = bundle.getString("companyLogo");
+            productMovementReport(product_id);
         } else{
-
+//            String company_id = bundle.getString("company_id");
+//            customerReport(company_id);
         }
+
+
+
+        Log.e(TAG, "company_image_pathWW "+company_image_path);
+
+
+
     }
 
 
-    private void customerReport(String customer_id, String filterID) {
+    private void customerReport(String customer_id) {
         RequestParams params = new RequestParams();
         params.add("customer_id", customer_id);
 
-        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(PreviewItActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "report/customerStatement", params, new AsyncHttpResponseHandler() {
@@ -326,7 +176,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 String response = new String(responseBody);
                 Log.e(TAG, "responsecompanyCSS"+ response);
 
-              //  avi.smoothToHide();
+                //  avi.smoothToHide();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
@@ -399,16 +249,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                             }
                         }
 
-
-                        if(filterID.equalsIgnoreCase("date")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
-                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
-                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
-                                }
-                            });
-                        }
-
-
                         customerReportWeb(customerItem, customerReportItemArrayList);
 
                     }
@@ -476,7 +316,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                if(getDebit == 0){
 //                    stringBalance = "";
 //                }else{
-                    stringBalance = customerReportItemArrayList.get(i).getBalance() + Utility.getReplaceDollor(cruncycode);
+                stringBalance = customerReportItemArrayList.get(i).getBalance() + Utility.getReplaceDollor(cruncycode);
 //                }
 
 
@@ -510,16 +350,16 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         try {
             content = IOUtils.toString(getAssets().open(name))
 
-                            .replaceAll("Company Name", customerItem.getCompany_name())
-                            .replaceAll("Address", customerItem.getCompany_address())
-                            .replaceAll("Contact No.", customerItem.getCompany_phone())
-                            .replaceAll("Website", customerItem.getCompany_website())
-                            .replaceAll("Email", customerItem.getCompany_email())
-                            .replaceAll("Customer Name", customerItem.getCustomer_name())
-                            .replaceAll("#LOGO_IMAGE#", customerItem.getCompany_logo())
-                            .replaceAll("#ITEMS#", productitemlist)
-                            .replaceAll("Total Amount-", formatter.format(totalAmount) + Utility.getReplaceDollor(cruncycode))
-                           ;
+                    .replaceAll("Company Name", customerItem.getCompany_name())
+                    .replaceAll("Address", customerItem.getCompany_address())
+                    .replaceAll("Contact No.", customerItem.getCompany_phone())
+                    .replaceAll("Website", customerItem.getCompany_website())
+                    .replaceAll("Email", customerItem.getCompany_email())
+                    .replaceAll("Customer Name", customerItem.getCustomer_name())
+                    .replaceAll("#LOGO_IMAGE#", customerItem.getCompany_logo())
+                    .replaceAll("#ITEMS#", productitemlist)
+                    .replaceAll("Total Amount-", formatter.format(totalAmount) + Utility.getReplaceDollor(cruncycode))
+            ;
 
 //                    .replaceAll("Company Name", company_name)
 //                    .replaceAll("Address", stringBuilderCompany.toString())
@@ -586,7 +426,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //
 //
 
-         //   );
+            //   );
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -601,11 +441,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void supplierReport(String customer_id, String filterID) {
+    private void supplierReport(String customer_id) {
         RequestParams params = new RequestParams();
         params.add("supplier_id", customer_id);
 
-        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(PreviewItActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "report/supplierStatement", params, new AsyncHttpResponseHandler() {
@@ -671,7 +511,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                                String customer_id = item.getString("customer_id");
                                 String balance = item.getString("balance");
 
-                               // Log.e(TAG, "CompanyId "+invoice_id);
+                                // Log.e(TAG, "CompanyId "+invoice_id);
 
                                 CustomerReportItem customerReportItem = new CustomerReportItem();
                                 customerReportItem.setCreated_date(created_date);
@@ -685,14 +525,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                                 customerReportItemArrayList.add(customerReportItem);
                             }
-                        }
-
-                        if(filterID.equalsIgnoreCase("date")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
-                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
-                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
-                                }
-                            });
                         }
 
                         supplierReportWeb(customerItem, customerReportItemArrayList);
@@ -820,11 +652,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void totalSalesReport(String customer_id, String filterID) {
+    private void totalSalesReport(String customer_id) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
-        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(PreviewItActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "report/totalSales", params, new AsyncHttpResponseHandler() {
@@ -840,7 +672,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     if (status.equals("true")) {
 
                         JSONObject data = jsonObject.getJSONObject("data");
-                       // String company_image_path = data.getString("company_image_path");
+                        // String company_image_path = data.getString("company_image_path");
 
                         JSONObject company = data.getJSONObject("company");
 
@@ -892,28 +724,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                                 customerReportItemArrayList.add(customerReportItem);
                             }
-                        }
-
-                        if(filterID.equalsIgnoreCase("date")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TotalSalesReportItem>() {
-                                public int compare(TotalSalesReportItem o1, TotalSalesReportItem o2) {
-                                    return o1.getInvoice_date().compareTo(o2.getInvoice_date());
-                                }
-                            });
-                        } else if(filterID.equalsIgnoreCase("customer")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TotalSalesReportItem>() {
-                                public int compare(TotalSalesReportItem o1, TotalSalesReportItem o2) {
-                                    return o1.getCustomer_name().compareTo(o2.getCustomer_name());
-                                }
-                            });
-                        } else if(filterID.equalsIgnoreCase("paid")){
-//                            Collections.sort(customerReportItemArrayList, new Comparator<TotalSalesReportItem>() {
-//                                public int compare(TotalSalesReportItem o1, TotalSalesReportItem o2) {
-//                                    return o1.getCustomer_name().compareTo(o2.getCustomer_name());
-//                                }
-//                            });
-                        } else if(filterID.equalsIgnoreCase("unpaid")){
-
                         }
 
                         totalSalesReportWeb(customerItem, customerReportItemArrayList);
@@ -1018,7 +828,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     .replaceAll("Contact No.", customerItem.getPhone_number())
                     .replaceAll("Website", customerItem.getWebsite())
                     .replaceAll("Email", customerItem.getEmail())
-                   // .replaceAll("Customer Name", customerItem.getSupplier_name())
+                    // .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
                     .replaceAll("Total Amount-", formatter.format(totalAmount)+ Utility.getReplaceDollor(cruncycode))
@@ -1038,11 +848,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void totalPurchaseReport(String customer_id, String filterID) {
+    private void totalPurchaseReport(String customer_id) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
-        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(PreviewItActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "report/totalPurchases", params, new AsyncHttpResponseHandler() {
@@ -1111,21 +921,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 customerReportItemArrayList.add(customerReportItem);
                             }
                         }
-
-                        if(filterID.equalsIgnoreCase("date")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TotalPurchaseReportItem>() {
-                                public int compare(TotalPurchaseReportItem o1, TotalPurchaseReportItem o2) {
-                                    return o1.getOrder_date().compareTo(o2.getOrder_date());
-                                }
-                            });
-                        } else if(filterID.equalsIgnoreCase("supplier")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TotalPurchaseReportItem>() {
-                                public int compare(TotalPurchaseReportItem o1, TotalPurchaseReportItem o2) {
-                                    return o1.getSupplier_name().compareTo(o2.getSupplier_name());
-                                }
-                            });
-                        }
-
 
                         totalPurchaseReportWeb(customerItem, customerReportItemArrayList);
 
@@ -1248,11 +1043,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void customerAgeingReport(String customer_id, String filterID) {
+    private void customerAgeingReport(String customer_id) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
-        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(PreviewItActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "report/customerAgeing", params, new AsyncHttpResponseHandler() {
@@ -1334,14 +1129,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                                 customerReportItemArrayList.add(customerReportItem);
                             }
-                        }
-
-                        if(filterID.equalsIgnoreCase("customer")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerAgeingReportItem>() {
-                                public int compare(CustomerAgeingReportItem o1, CustomerAgeingReportItem o2) {
-                                    return o1.getCustomer_name().compareTo(o2.getCustomer_name());
-                                }
-                            });
                         }
 
                         customerAgeingReportWeb(customerItem, customerReportItemArrayList);
@@ -1491,11 +1278,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void taxCollectedReport(String customer_id, String filterID) {
+    private void taxCollectedReport(String customer_id) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
-        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(PreviewItActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "report/taxation", params, new AsyncHttpResponseHandler() {
@@ -1567,20 +1354,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                             }
                         }
 
-                        if(filterID.equalsIgnoreCase("date")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TaxCollectedReportItem>() {
-                                public int compare(TaxCollectedReportItem o1, TaxCollectedReportItem o2) {
-                                    return o1.getDate_added().compareTo(o2.getDate_added());
-                                }
-                            });
-                        }else if(filterID.equalsIgnoreCase("tax")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TaxCollectedReportItem>() {
-                                public int compare(TaxCollectedReportItem o1, TaxCollectedReportItem o2) {
-                                    return o1.getTax_name().compareTo(o2.getTax_name());
-                                }
-                            });
-                        }
-
                         taxCollectedReportWeb(customerItem, customerReportItemArrayList);
 
                     }
@@ -1637,7 +1410,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                String slab3Txt = "";
 //                String slab4Txt = "";
 //
-             //   String stringBalance = "";
+                //   String stringBalance = "";
 //
 //                if(slab1 == 0){
 //                    slab1Txt = "";
@@ -1727,11 +1500,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void stockReport(String customer_id, String filterID) {
+    private void stockReport(String customer_id) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
-        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(PreviewItActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "report/stock", params, new AsyncHttpResponseHandler() {
@@ -1799,26 +1572,10 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 customerReportItem.setValue(value);
                                 customerReportItem.setDate_added(date_added);
 
-                                if(quantity_status.equalsIgnoreCase("In Stock")){
-                                    customerReportItemArrayList.add(customerReportItem);
-                                }
 
 
+                                customerReportItemArrayList.add(customerReportItem);
                             }
-                        }
-
-                        if(filterID.equalsIgnoreCase("reorder")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<StockReportItem>() {
-                                public int compare(StockReportItem o1, StockReportItem o2) {
-                                    return o1.getMinimum().compareTo(o2.getMinimum());
-                                }
-                            });
-                        }else if(filterID.equalsIgnoreCase("product")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<StockReportItem>() {
-                                public int compare(StockReportItem o1, StockReportItem o2) {
-                                    return o1.getName().compareTo(o2.getName());
-                                }
-                            });
                         }
 
                         stockReportWeb(customerItem, customerReportItemArrayList);
@@ -1967,7 +1724,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         RequestParams params = new RequestParams();
         params.add("product_id", customer_id);
 
-        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        String token = Constant.GetSharedPreferences(PreviewItActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
         client.post(Constant.BASE_URL + "report/productMovement", params, new AsyncHttpResponseHandler() {
@@ -1983,7 +1740,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     if (status.equals("true")) {
 
                         JSONObject data = jsonObject.getJSONObject("data");
-                         String company_image_path = data.getString("company_image_path");
+                        String company_image_path = data.getString("company_image_path");
 
                         JSONObject product = data.getJSONObject("product");
                         String productName = product.getString("name");
@@ -2139,7 +1896,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     .replaceAll("Contact No.", customerItem.getPhone_number())
                     .replaceAll("Website", customerItem.getWebsite())
                     .replaceAll("Email", customerItem.getEmail())
-                     .replaceAll("Product Name", customerItem.getProductName())
+                    .replaceAll("Product Name", customerItem.getProductName())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
                     .replaceAll("Amount1-", ""+quantity)
@@ -2175,237 +1932,5 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         builder.setMediaSize( PrintAttributes.MediaSize.ISO_A4);
         printManager.print(jobName, printAdapter, builder.build());
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
-
-        private static final String TAG = "MenuAdapter";
-
-        ArrayList<String> alName = new ArrayList<>();
-        Dialog mybuilder;
-
-        public MenuAdapter(ArrayList<String> arrayList, Dialog mybuilder) {
-            super();
-            this.alName = arrayList;
-            this.mybuilder = mybuilder;
-        }
-
-        @Override
-        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
-            final View v = LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.menu_item, viewGroup, false);
-//            SellerFeedbackAdapter.ViewHolder viewHolder = new SellerFeedbackAdapter.ViewHolder(v);
-//            return viewHolder;
-
-
-//            val v = LayoutInflater.from(viewGroup.context)
-//                    .inflate(R.layout.mybooking_item, viewGroup, false)
-            return new MenuAdapter.ViewHolder(v);
-        }
-
-
-        @Override
-        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
-
-            viewHolder.textViewName.setText(""+alName.get(i));
-            viewHolder.textViewName.setTextColor(getColor(R.color.light_blue));
-
-            viewHolder.textViewName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mybuilder.dismiss();
-                    menuClickByPosition(positionNext, i);
-                }
-            });
-
-        }
-
-
-        @Override
-        public int getItemCount() {
-            return alName.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder{
-            View view11 = null;
-            TextView textViewName;
-            public ViewHolder(View itemView) {
-                super(itemView);
-                view11 = itemView;
-                //  imageViewImage = (ImageView) itemView.findViewById(R.id.profile_image);
-                textViewName = (TextView) itemView.findViewById(R.id.txtList);
-
-            }
-
-
-       }
-
-
-
-        public void updateData(ArrayList<String> arrayList2) {
-            // TODO Auto-generated method stub
-            alName = arrayList2;
-            notifyDataSetChanged();
-        }
-    }
-
-
-    private void menuClickByPosition(int positionNext, int i) {
-        Intent intent = new Intent(ReportViewActivity.this, PreviewItActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("positionNext", positionNext);
-        intent.putExtra("company_image_path", company_image_path);
-        if(positionNext == 0){
-            if(i == 0){
-                intent.putExtra("customer_id", customer_id);
-                startActivity(intent);
-            }else if(i == 1){
-                createWebPrintJob(invoiceweb);
-            }else if(i == 2){
-                shareWeb("Customer Statement Report");
-            }else if(i == 3){
-                customerReport(customer_id, "date");
-            }else if(i == 4){
-                customerReport(customer_id, "");
-            }
-        } else if(positionNext == 1){
-            if(i == 0){
-                intent.putExtra("supplier_id", supplier_id);
-                startActivity(intent);
-            }else if(i == 1){
-                createWebPrintJob(invoiceweb);
-            }else if(i == 2){
-                shareWeb("Supplier Statement Report");
-            }else if(i == 3){
-                supplierReport(supplier_id, "date");
-            }else if(i == 4){
-                supplierReport(supplier_id, "");
-            }
-        } else if(positionNext == 2){
-            if(i == 0){
-                intent.putExtra("company_id", company_id);
-                startActivity(intent);
-            }else if(i == 1){
-                createWebPrintJob(invoiceweb);
-            }else if(i == 2){
-                shareWeb("Total Sales Report");
-            }else if(i == 3){
-                totalSalesReport(company_id, "date");
-            }else if(i == 4){
-                totalSalesReport(company_id, "customer");
-            }else if(i == 5){
-                totalSalesReport(company_id, "paid");
-            }else if(i == 6){
-                totalSalesReport(company_id, "unpaid");
-            }else if(i == 7){
-                totalSalesReport(company_id, "");
-            }
-        } else if(positionNext == 3){
-            if(i == 0){
-                intent.putExtra("company_id", company_id);
-                startActivity(intent);
-            }else if(i == 1){
-                createWebPrintJob(invoiceweb);
-            }else if(i == 2){
-                shareWeb("Total Purchase Report");
-            }else if(i == 3){
-                totalPurchaseReport(company_id, "date");
-            }else if(i == 4){
-                totalPurchaseReport(company_id, "supplier");
-            }else if(i == 5){
-                totalPurchaseReport(company_id, "");
-            }
-        } else if(positionNext == 4){
-            if(i == 0){
-                intent.putExtra("company_id", company_id);
-                startActivity(intent);
-            }else if(i == 1){
-                createWebPrintJob(invoiceweb);
-            }else if(i == 2){
-                shareWeb("Customer Ageing Report");
-            }else if(i == 3){
-                customerAgeingReport(company_id, "customer");
-            }else if(i == 4){
-                customerAgeingReport(company_id, "");
-            }
-        } else if(positionNext == 5){
-            if(i == 0){
-                intent.putExtra("company_id", company_id);
-                startActivity(intent);
-            }else if(i == 1){
-                createWebPrintJob(invoiceweb);
-            }else if(i == 2){
-                shareWeb("Tax Collected Report");
-            }else if(i == 3){
-                taxCollectedReport(company_id, "date");
-            }else if(i == 4){
-                taxCollectedReport(company_id, "tax");
-            }else if(i == 5){
-                taxCollectedReport(company_id, "");
-            }
-        } else if(positionNext == 6){
-            if(i == 0){
-                intent.putExtra("company_id", company_id);
-                startActivity(intent); startActivity(intent);
-            }else if(i == 1){
-                createWebPrintJob(invoiceweb);
-            }else if(i == 2){
-                shareWeb("Stock Report");
-            }else if(i == 3){
-                stockReport(company_id, "instock");
-            }else if(i == 4){
-                stockReport(company_id, "reorder");
-            }else if(i == 5){
-                stockReport(company_id, "product");
-            }else if(i == 6){
-                stockReport(company_id, "");
-            }
-        } else if(positionNext == 7){
-            if(i == 0){
-                intent.putExtra("product_id", customer_id);
-                startActivity(intent);
-            }else if(i == 1){
-                createWebPrintJob(invoiceweb);
-            }else if(i == 2){
-                shareWeb("Product Movement Report");
-            }
-        } else{
-
-        }
-
-
-    }
-
-
-
-    private void shareWeb(String title) {
-        Log.e(TAG, "title "+title);
-
-        if(fileWithinMyDir.exists()) {
-            Log.e(TAG, "FILENAME" +fileWithinMyDir);
-             Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-                            // File fileWithinMyDir = new File(message);
-             Uri photoURI = FileProvider.getUriForFile(ReportViewActivity.this, "com.receipt.invoice.stock.sirproject.provider", fileWithinMyDir);
-                 if(fileWithinMyDir.exists()) {
-                     intentShareFile.setType("application/pdf");
-                                //Uri outputFileUri = Uri.fromFile(fileWithinMyDir);
-                     intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
-                     intentShareFile.putExtra(Intent.EXTRA_SUBJECT, title);
-                     startActivity(Intent.createChooser(intentShareFile, "Share File"));
-            }
-        }
-
-    }
-
 
 }

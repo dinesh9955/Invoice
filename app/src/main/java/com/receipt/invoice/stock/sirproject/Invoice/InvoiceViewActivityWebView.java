@@ -279,7 +279,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
                 paypal_emailstr = companyDto.getPaypalEmail();
                 payment_bank_name = companyDto.getPaymentBankName();
                 cheque_payable_to = companyDto.getChequePayableTo();
-
+                Log.e(TAG, "cheque_payable_toLL "+cheque_payable_to);
                 Log.e(TAG, "paypal_emailstrLL "+paypal_emailstr);
 
                 paid_amount_payment_method = invoiceDtoInvoice.getPaidAmountPaymentMethod();
@@ -669,7 +669,7 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
 
 
 
-                String paidamountstrrepvalue = "";
+        String paidamountstrrepvalue = "";
         String paidamountstrreptxt = "";
         String paidamountstrreplace = "";
         String chektopaidmaount = "";
@@ -720,23 +720,31 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
             payment_swiftstr = payment_swift_bic;
             cheque_payableTo = cheque_payable_to;
 
+            paimnetdetailstrtxt=" Payment Details ";
+
 
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
+                bycheckstrtxt="By cheque :";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
+                paypalstrtxt="Pay Pal :";
             }
 
             if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
             }else{
                 payment_bankstr = payment_bank_name;
+                if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                    payment_currencystr = payment_currency;
+                }
+                bankstrtxt="Bank :";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -750,18 +758,6 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
             }else{
                 payment_swiftstr = payment_swift_bic;
             }
-
-            if ( Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
-                payment_currencystr = "";
-            }else{
-                payment_currencystr = payment_currency;
-            }
-
-
-            paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
 
             hiddenpaidrow="";
         }
@@ -866,7 +862,6 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
         String name = "invoice.html";
         String nameName = "file:///android_asset/invoice.html";
         if(templatestr.equals("1")) {
-
             if(templateSelect.equalsIgnoreCase("0")){
                 name = "invoice.html";
                 nameName = "file:///android_asset/invoice.html";
@@ -883,6 +878,8 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
                 name = "invoice4.html";
                 nameName = "file:///android_asset/invoice4.html";
             }
+
+            Log.e(TAG, "templateSelectZZZ "+templateSelect);
 
             StringBuilder stringBuilderCompany = new StringBuilder();
 
@@ -961,6 +958,8 @@ public class InvoiceViewActivityWebView extends AppCompatActivity {
                         .replaceAll("Pay Pal :", paypalstrtxt)
                         .replaceAll("Bank :", bankstrtxt)
 
+
+                      //  .replaceAll("display:none", "none")
 
                         .replaceAll("#799f6e", colorCode)
                         .replaceAll("#TEMP3#", String.valueOf(R.color.blue));

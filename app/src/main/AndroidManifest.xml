@@ -503,6 +503,14 @@
 
         </activity>
 
+        <activity
+            android:name=".Report.PreviewItActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
 
         <activity
             android:name=".Settings.SettingsActivity"

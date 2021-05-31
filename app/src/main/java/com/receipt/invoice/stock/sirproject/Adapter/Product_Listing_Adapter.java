@@ -90,7 +90,14 @@ public class Product_Listing_Adapter extends RecyclerView.Adapter<Product_Listin
 
         viewHolderForCat.productcurrencyunit.setText(product_list.getCurrency_code());
 
-        viewHolderForCat.productstock.setText(mninimum);
+        double doubleMinimum = 0.0;
+        try{
+            doubleMinimum = Double.parseDouble(mninimum);
+        }catch (Exception e){
+
+        }
+        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+        viewHolderForCat.productstock.setText(""+formatter.format(doubleMinimum));
 
 
         //reorder
@@ -116,7 +123,6 @@ public class Product_Listing_Adapter extends RecyclerView.Adapter<Product_Listin
         else
         {
             double vc = Double.parseDouble(product_price);
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
             viewHolderForCat.productcurrency.setText(formatter.format(vc));
 
         }

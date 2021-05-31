@@ -343,6 +343,7 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
     StringBuilder stringBuilderBillTo = new StringBuilder();
     StringBuilder stringBuilderShipTo = new StringBuilder();
 
+    Button selectButton;
 
 //    String templateSelect = "0";
 //    String colorCode = "#ffffff";
@@ -353,6 +354,8 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.editpoactivity);
         Constant.toolbar(EditPOActivity.this, "Edit PO");
+
+        selectButton = findViewById(R.id.selectButton);
 
         taxvalueText = findViewById(R.id.taxvalue);
 
@@ -1252,6 +1255,19 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             }
         });
 
+
+        selectButton.setVisibility(View.GONE);
+        selectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG, "setOnClickListener");
+                int ddd = wids.size();
+                if(ddd == 0){
+                    Constant.ErrorToast(EditPOActivity.this, "No warehouse found!");
+                }
+            }
+        });
+
         selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
             public void onItemSelected(int position, String itemAtPosition) {
@@ -1363,10 +1379,10 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             Constant.ErrorToast(EditPOActivity.this, "Select A Company");
 
         }
-        else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
-
-        }
+//        else if (selectwarehouseId.equals("")) {
+//            Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
+//
+//        }
         else if (tempList.size() == 0) {
             Constant.ErrorToast(EditPOActivity.this, "Select Product First");
         }
@@ -2208,10 +2224,10 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                         Constant.ErrorToast(EditPOActivity.this, "Select Credit Term");
                         bottomSheetDialog2.dismiss();
                     }
-                    else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
-                        bottomSheetDialog2.dismiss();
-                    }
+//                    else if (selectwarehouseId.equals("")) {
+//                        Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
 
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(EditPOActivity.this, "Select Product First");
@@ -2961,6 +2977,12 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
                                 Log.e("warehouseNames", ""+wnames.toString());
 
 
+                            }
+
+                            if(wids.size() == 0){
+                                selectButton.setVisibility(View.VISIBLE);
+                            }else{
+                                selectButton.setVisibility(View.GONE);
                             }
 
                             warehousePosition = wids.indexOf(selectwarehouseId);
@@ -5181,22 +5203,31 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             cheque_payableTo = cheque_payable_to;
 
 
+            paimnetdetailstrtxt=" Payment Details ";
+
+
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
+                bycheckstrtxt="By cheque :";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
+                paypalstrtxt="Pay Pal :";
             }
 
             if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
             }else{
                 payment_bankstr = payment_bank_name;
+                if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                    payment_currencystr = payment_currency;
+                }
+                bankstrtxt="Bank :";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -5210,18 +5241,6 @@ public class EditPOActivity extends AppCompatActivity implements Customer_Bottom
             }else{
                 payment_swiftstr = payment_swift_bic;
             }
-
-            if ( Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
-                payment_currencystr = "";
-            }else{
-                payment_currencystr = payment_currency;
-            }
-
-
-            paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
 
             hiddenpaidrow="";
         }

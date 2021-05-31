@@ -83,6 +83,7 @@ import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
+import com.receipt.invoice.stock.sirproject.Invoice.EditInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.Model.Moving;
@@ -311,6 +312,8 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
     StringBuilder stringBuilderBillTo = new StringBuilder();
     StringBuilder stringBuilderShipTo = new StringBuilder();
 
+    Button selectButton;
+
     public FragmentCreate_DebitNote() {
         // Required empty public constructor
     }
@@ -347,6 +350,8 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         View view = inflater.inflate(R.layout.fragment_create_debit_notes, container, false);
+
+        selectButton = view.findViewById(R.id.selectButton);
 
         taxvalueText = view.findViewById(R.id.taxvalue);
 
@@ -875,6 +880,17 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
 //        });
 
 
+        selectButton.setVisibility(View.GONE);
+        selectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG, "setOnClickListener");
+                int ddd = wids.size();
+                if(ddd == 0){
+                    Constant.ErrorToast(getActivity(), "No warehouse found!");
+                }
+            }
+        });
 
         selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
@@ -976,10 +992,12 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Where House");
 
-        } else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select Warehouse");
-            createinvoice.setEnabled(true);
-        }   else if (tempList.size() == 0) {
+        }
+//        else if (selectwarehouseId.equals("")) {
+//            Constant.ErrorToast(getActivity(), "Select Warehouse");
+//            createinvoice.setEnabled(true);
+//        }
+        else if (tempList.size() == 0) {
                 Constant.ErrorToast(getActivity(), "Select Product First");
                 bottomSheetDialog2.dismiss();
             createinvoice.setEnabled(true);
@@ -2609,11 +2627,19 @@ public class FragmentCreate_DebitNote extends Fragment implements Customer_Botto
                                 wids.add(warehouse_id);
                                 wnames.add(warehouse_name);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                                selectwarehouse.setAdapter(namesadapter);
+
 
 
                             }
+
+                            if(wids.size() == 0){
+                                selectButton.setVisibility(View.VISIBLE);
+                            }else{
+                                selectButton.setVisibility(View.GONE);
+                            }
+
+                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+                            selectwarehouse.setAdapter(namesadapter);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

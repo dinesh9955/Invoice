@@ -2161,7 +2161,7 @@ public class ConvertToReceiptsActivity extends AppCompatActivity implements Cust
                         Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Company");
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Invoice Date");
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Date");
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
                         Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Customer");

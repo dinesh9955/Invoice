@@ -88,6 +88,7 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
+import com.receipt.invoice.stock.sirproject.Invoice.EditInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.Model.Moving;
@@ -314,6 +315,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
     StringBuilder stringBuilderBillTo = new StringBuilder();
     StringBuilder stringBuilderShipTo = new StringBuilder();
 
+    Button selectButton;
+
     public FragmentCreate_CreditNote() {
         // Required empty public constructor
     }
@@ -350,6 +353,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         View view = inflater.inflate(R.layout.fragment_create__credit_notes, container, false);
+
+        selectButton = view.findViewById(R.id.selectButton);
 
         taxvalueText = view.findViewById(R.id.taxvalue);
         invoiceweb = view.findViewById(R.id.invoiceweb);
@@ -875,6 +880,17 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 //        });
 
 
+        selectButton.setVisibility(View.GONE);
+        selectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG, "setOnClickListener");
+                int ddd = wids.size();
+                if(ddd == 0){
+                    Constant.ErrorToast(getActivity(), "No warehouse found!");
+                }
+            }
+        });
 
         selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
@@ -982,10 +998,11 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 //        } else if (ref_no.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Ref number");
 
-        } else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select Warehouse");
-            createinvoice.setEnabled(true);
         }
+//        else if (selectwarehouseId.equals("")) {
+//            Constant.ErrorToast(getActivity(), "Select Warehouse");
+//            createinvoice.setEnabled(true);
+//        }
         else if (tempList.size() == 0) {
             Constant.ErrorToast(getActivity(), "Select Product First");
             bottomSheetDialog2.dismiss();
@@ -1813,10 +1830,11 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 //                        bottomSheetDialog2.dismiss();
 
 
-                    } else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Warehouse");
-                        bottomSheetDialog2.dismiss();
                     }
+//                    else if (selectwarehouseId.equals("")) {
+//                        Constant.ErrorToast(getActivity(), "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
 
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(getActivity(), "Select Product First");
@@ -2601,11 +2619,16 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                                 wids.add(warehouse_id);
                                 wnames.add(warehouse_name);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                                selectwarehouse.setAdapter(namesadapter);
-
-
                             }
+
+                            if(wids.size() == 0){
+                                selectButton.setVisibility(View.VISIBLE);
+                            }else{
+                                selectButton.setVisibility(View.GONE);
+                            }
+
+                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+                            selectwarehouse.setAdapter(namesadapter);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

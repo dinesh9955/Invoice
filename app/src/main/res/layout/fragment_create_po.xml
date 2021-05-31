@@ -238,6 +238,19 @@
                 app:spinnerHint="Select Warehouse" />
 
 
+
+            <Button
+                android:id="@+id/selectButton"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@id/itemstxtTemplate"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="0dp"
+                android:background="@android:color/transparent"
+                android:visibility="gone"
+                />
+
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"

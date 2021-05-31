@@ -82,6 +82,7 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
+import com.receipt.invoice.stock.sirproject.Invoice.EditInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.InvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
@@ -275,8 +276,11 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
     ArrayList<Customer_list> selected = new ArrayList<>();
 
     String invoicecompanyiddto;
+
+
     //For Intent
-    String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "";
+    String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "";
+            String payment_bank_name = "", payment_currency = "",cheque_payable_to = ""  , payment_iban = "", payment_swift_bic = "",paypal_emailstr = "" ;
     String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
     String invoice_no = "", invoice_due_date = "", invoice_date = "", credit_terms = "", reference_no = "";
     String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "", taxamount, netamountvalue;
@@ -286,7 +290,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
     ArrayList<String> rate = new ArrayList<>();
 
-    String paypal_emailstr = "";
+
     // pick image from galary and
     Context applicationContext = Companies_Activity.getContextOfApplication();
     FileCompressor mCompressor;
@@ -343,6 +347,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
     StringBuilder stringBuilderBillTo = new StringBuilder();
     StringBuilder stringBuilderShipTo = new StringBuilder();
 
+    Button selectButton;
 //    String templateSelect = "0";
 //    String colorCode = "#ffffff";
 
@@ -376,6 +381,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 //        Log.e(TAG, "colorCode "+colorCode);
 
         //newinvoice_count = Integer.parseInt(invoice_count) + 1;
+        selectButton = findViewById(R.id.selectButton);
+
         avi = findViewById(R.id.avi);
         invoicenumtxt = findViewById(R.id.invoicenumtxt);
         invoicenum = findViewById(R.id.invoivenum);
@@ -603,6 +610,18 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 company_email = companyDto.getPaypalEmail();
                 companylogopath = companyDto.getLogo();
 
+
+
+
+
+                cheque_payable_to = companyDto.getChequePayableTo();
+                Log.e("cheque_payable_toAA", ""+cheque_payable_to);
+                paypal_emailstr = companyDto.getPaypalEmail();
+                payment_bank_name = companyDto.getPaymentBankName();
+                payment_swift_bic = companyDto.getPaymentSwiftBic();
+                payment_currency = companyDto.getPaymentCurrency();
+                payment_iban = companyDto.getPaymentIban();
+
                 // new DownloadsImagefromweblogoCom().execute(companylogopathdtodt);
 
                 selectedCompanyId = companyDto.getCompanyId();
@@ -618,6 +637,9 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
                 //invoice Data
                 invoiceDtoInvoice = data.getEstimate();
+
+                String cccDD = gson.toJson(invoiceDtoInvoice);
+                Log.e("cccDD",""+cccDD);
                 invoicenumberdto = invoiceDtoInvoice.getEstimate_no();
                 // where House id
                 selectwarehouseId = invoiceDtoInvoice.getWearhouseId();
@@ -660,9 +682,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                 ref_no = ref_nodto;
                 edreferenceno.setText(ref_nodto);
 
-                payment_swift_bic = invoiceDtoInvoice.getPaymentSwiftBic();
-                payment_currency = invoiceDtoInvoice.getPaymentCurrency();
-                payment_iban = invoiceDtoInvoice.getPaymentIban();
+
                 paid_amount_payment_methoddto = invoiceDtoInvoice.getPaidAmountPaymentMethod();
 
                 currency_codedto = invoiceDtoInvoice.getCurrencySymbol();
@@ -1230,6 +1250,20 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             }
         });
 
+
+        selectButton.setVisibility(View.GONE);
+        selectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG, "setOnClickListener");
+                int ddd = wids.size();
+                if(ddd == 0){
+                    Constant.ErrorToast(ConvertToInvoiceActivity.this, "No warehouse found!");
+                }
+            }
+        });
+
+
         selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
             public void onItemSelected(int position, String itemAtPosition) {
@@ -1328,10 +1362,10 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
         }
 
 
-        else if (Utility.isEmptyNull(selectwarehouseId).equalsIgnoreCase("")) {
-            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
-
-        }
+//        else if (Utility.isEmptyNull(selectwarehouseId).equalsIgnoreCase("")) {
+//            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
+//
+//        }
 
         else if (tempList.size() == 0) {
             Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Product First");
@@ -1374,11 +1408,13 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             params.add("shipping_city", shippingcity);
             params.add("shipping_postcode", shippingpostcode);
             params.add("shipping_country", shippingcountry);
+
             params.add("payment_bank_name", payment_bank_name);
             params.add("payment_currency", payment_currency);
             params.add("payment_iban", payment_iban);
             params.add("payment_swift_bic", payment_swift_bic);
-
+            params.add("cheque_payable_to", cheque_payable_to);
+            params.add("paypal_email", paypal_emailstr);
 
             params.add("template_type", ""+selectedTemplate);
 
@@ -2156,10 +2192,10 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Credit Term");
                         bottomSheetDialog2.dismiss();
                     }
-                    else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
-                        bottomSheetDialog2.dismiss();
-                    }
+//                    else if (Utility.isEmptyNull(selectwarehouseId).equalsIgnoreCase("")) {
+//                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Product First");
                         bottomSheetDialog2.dismiss();
@@ -2192,7 +2228,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         intent.putExtra("paid_amount_payment_method", paymentmode);
                         intent.putExtra("credit_terms", credit_terms);
                         intent.putExtra("freight_cost", shipingcoast);
-                        intent.putExtra("paypal_emailstr", paypal_emailstr);
+
                         intent.putExtra("company_name", Selectedcompanyname);
                         intent.putExtra("company_logo", companylogopath);
                         intent.putExtra("company_name", Selectedcompanyname);
@@ -2203,10 +2239,15 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         intent.putExtra("discount", strdiscountvalue);
                         intent.putExtra("paid_amount", strpaid_amount);
                         intent.putExtra("paid_amount_date", Paymentamountdate);
+
                         intent.putExtra("payment_bank_name", payment_bank_name);
                         intent.putExtra("payment_currency", payment_currency);
                         intent.putExtra("payment_iban", payment_iban);
                         intent.putExtra("payment_swift_bic", payment_swift_bic);
+                        intent.putExtra("cheque_payable_to", cheque_payable_to);
+                        intent.putExtra("paypal_emailstr", paypal_emailstr);
+                        Log.e(TAG, "cheque_payable_toAAA "+cheque_payable_to);
+
                         intent.putExtra("producprice", producprice);
                         intent.putExtra("totalpriceproduct", totalpriceproduct);
 
@@ -2823,6 +2864,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                             }
                         }
 
+
+
                         warehousePosition = wids.indexOf(selectwarehouseId);
 
                         ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ConvertToInvoiceActivity.this, android.R.layout.simple_spinner_item, cnames);
@@ -2892,6 +2935,12 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
 
 
+                            }
+
+                            if(wids.size() == 0){
+                                selectButton.setVisibility(View.VISIBLE);
+                            }else{
+                                selectButton.setVisibility(View.GONE);
                             }
 
 
@@ -5194,6 +5243,8 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
 
 
+
+
         String paidamountstrrepvalue = "";
         String paidamountstrreptxt = "";
         String paidamountstrreplace = "";
@@ -5207,6 +5258,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
         String bycheckstrtxt="";
         String paypalstrtxt="";
         String bankstrtxt="";
+        String cheque_payableTo = "";
 
         Log.e(TAG, "strpaid_amount:: "+strpaid_amount);
 
@@ -5224,31 +5276,80 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
             bycheckstrtxt="";
             paypalstrtxt="";
             bankstrtxt="";
+            cheque_payableTo = "";
             hiddenpaidrow="hidden";
 
 
 
         } else {
             // null response or Exception occur
-            paidamountstrrepvalue =strpaid_amount;
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrrepvalue = strpaid_amount;
+
+            if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
+                paidamountstrreptxt = "Paid Amount ";
+            }else{
+                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+            }
 
 
             pemailpaidstr = paypal_emailstr;
-            chektopaidmaount = paid_amount_payment;
             payment_bankstr = payment_bank_name;
             payment_ibanstr = payment_iban;
             payment_currencystr = payment_currency;
             payment_swiftstr = payment_swift_bic;
+            cheque_payableTo = cheque_payable_to;
+
 
             paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
 
+
+            if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
+                cheque_payableTo = "";
+            }else{
+                cheque_payableTo = cheque_payable_to;
+                bycheckstrtxt="By cheque :";
+            }
+
+            if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
+                pemailpaidstr = "";
+            }else{
+                pemailpaidstr = paypal_emailstr;
+                paypalstrtxt="Pay Pal :";
+            }
+
+            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+                payment_bankstr = "";
+            }else{
+                payment_bankstr = payment_bank_name;
+                if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                    payment_currencystr = payment_currency;
+                }
+                bankstrtxt="Bank :";
+            }
+
+            if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
+                payment_ibanstr = "";
+            }else{
+                payment_ibanstr = payment_iban;
+            }
+
+            if ( Utility.isEmptyNull(payment_swiftstr).equalsIgnoreCase("")){
+                payment_swiftstr = "";
+            }else{
+                payment_swiftstr = payment_swift_bic;
+            }
 
             hiddenpaidrow="";
+
         }
+
+
+
+
+
+
+
+
         String strreferencenovalue="";
         String strreferencenotxtvalue="";
 

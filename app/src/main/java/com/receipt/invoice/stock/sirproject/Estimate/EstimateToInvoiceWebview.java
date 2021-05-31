@@ -41,7 +41,11 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
     private static final String TAG = "EstimateToInvoiceWebview";
     WebView invoiceweb;
 
-    String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency, payment_iban, payment_swift_bic;
+    String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "";
+
+    String  payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "", cheque_payable_to ="";
+
+
     String customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "";
     String  credit_terms = "";
     String signature_of_issuer = "", signature_of_receiver = "", company_stamp = "";
@@ -255,21 +259,24 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
             shippingcity = getIntent().getStringExtra("shipping_city");
             shippingpostcode = getIntent().getStringExtra("shipping_postcode");
             shippingcountry = getIntent().getStringExtra("shipping_country");
-            payment_bank_name = getIntent().getStringExtra("payment_bank_name");
 
             payment_iban = getIntent().getStringExtra("payment_iban");
             payment_swift_bic = getIntent().getStringExtra("payment_swift_bic");
             payment_currency = getIntent().getStringExtra("payment_currency");
+            payment_bank_name = getIntent().getStringExtra("payment_bank_name");
+            payment_currency = getIntent().getStringExtra("payment_currency");
+            payment_iban = getIntent().getStringExtra("payment_iban");
+            payment_swift_bic = getIntent().getStringExtra("payment_swift_bic");
+            cheque_payable_to = getIntent().getStringExtra("cheque_payable_to");
 
             company_name = getIntent().getStringExtra("company_name");
             company_address = getIntent().getStringExtra("company_address");
             company_contact = getIntent().getStringExtra("company_contact");
             company_email = getIntent().getStringExtra("company_email");
             company_website = getIntent().getStringExtra("company_website");
-            payment_bank_name = getIntent().getStringExtra("payment_bank_name");
-            payment_currency = getIntent().getStringExtra("payment_currency");
-            payment_iban = getIntent().getStringExtra("payment_iban");
-            payment_swift_bic = getIntent().getStringExtra("payment_swift_bic");
+
+
+
             Grossamount_str = getIntent().getStringExtra("grossamount");
             custoner_contact_name = getIntent().getStringExtra("custoner_contact_name");
             customer_email = getIntent().getStringExtra("customer_email");
@@ -653,10 +660,12 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
         String bycheckstrtxt="";
         String paypalstrtxt="";
         String bankstrtxt="";
+        String cheque_payableTo = "";
 
         Log.e(TAG, "strpaid_amount:: "+strpaid_amount);
 
-        if (strpaid_amount.equals("0") || strpaid_amount.equals("0.00") || strpaid_amount.equals(".00Rs") || strpaid_amount.equals(".00")) {
+        if (strpaid_amount.equals("") || strpaid_amount.equals("0") || strpaid_amount.equals("0.00") || strpaid_amount.equals(".00Rs") || strpaid_amount.equals(".00")) {
+            Log.e(TAG, "strpaid_amount1:: "+strpaid_amount);
             // Do you work here on success
             paidamountstrrepvalue = "";
             paidamountstrreptxt = "";
@@ -670,37 +679,72 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
             bycheckstrtxt="";
             paypalstrtxt="";
             bankstrtxt="";
+            cheque_payableTo = "";
             hiddenpaidrow="hidden";
 
 
-
         } else {
+            Log.e(TAG, "strpaid_amount2:: "+strpaid_amount);
+
             // null response or Exception occur
-            paidamountstrrepvalue =strpaid_amount;
-
-            if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
-                paidamountstrreptxt = "Paid Amount ";
-            }else{
-                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
-            }
+            paidamountstrrepvalue =strpaid_amount+cruncycode;
+            paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
 
 
-
-//            pemailpaidstr = paypal_emailstr;
-//            chektopaidmaount = paid_amount_payment;
-//            payment_bankstr = payment_bank_name;
-//            payment_ibanstr = payment_iban;
-//            payment_currencystr = payment_currency;
-//            payment_swiftstr = payment_swift_bic;
+            pemailpaidstr = paypal_emailstr;
+            payment_bankstr = payment_bank_name;
+            payment_ibanstr = payment_iban;
+            payment_currencystr = payment_currency;
+            payment_swiftstr = payment_swift_bic;
+            cheque_payableTo = cheque_payable_to;
 
             paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
 
+
+            if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
+                cheque_payableTo = "";
+            }else{
+                cheque_payableTo = cheque_payable_to;
+                bycheckstrtxt="By cheque :";
+            }
+
+            if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
+                pemailpaidstr = "";
+            }else{
+                pemailpaidstr = paypal_emailstr;
+                paypalstrtxt="Pay Pal :";
+            }
+
+            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+                payment_bankstr = "";
+            }else{
+                payment_bankstr = payment_bank_name;
+                if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                    payment_currencystr = payment_currency;
+                }
+                bankstrtxt="Bank :";
+            }
+
+            if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
+                payment_ibanstr = "";
+            }else{
+                payment_ibanstr = payment_iban;
+            }
+
+            if ( Utility.isEmptyNull(payment_swiftstr).equalsIgnoreCase("")){
+                payment_swiftstr = "";
+            }else{
+                payment_swiftstr = payment_swift_bic;
+            }
 
             hiddenpaidrow="";
         }
+
+
+
+
+
+
         String strreferencenovalue="";
         String strreferencenotxtvalue="";
 
@@ -781,14 +825,6 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
                     .replaceAll("Balance Due-", Utility.getReplaceDollor(Blanceamountstr))
 
                     .replaceAll("SubTotal", subTotalTxt)
-//                    .replaceAll("Checkto", chektopaidmaount)
-                    .replaceAll("Checkto", "")
-                    .replaceAll("BankName", payment_bankstr)
-                    .replaceAll("Pemail", pemailpaidstr)
-                    .replaceAll("IBAN", payment_ibanstr)
-//                    .replaceAll("Currency", payment_currencystr)
-                    .replaceAll("Currency", "")
-                    .replaceAll("Swift/BICCode", payment_swiftstr)
 
                     .replaceAll("Client N", ""+stringBuilderBillTo.toString())
 //                    .replaceAll("Client A", sltcustomer_address)
@@ -813,15 +849,17 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
                     .replaceAll("#799f6e", companycolor)
 
 
-//                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
-//                    .replaceAll("By cheque :", bycheckstrtxt)
-//                    .replaceAll("Pay Pal :", paypalstrtxt)
-//                    .replaceAll("Bank :", bankstrtxt)
+                    .replaceAll("Checkto", cheque_payableTo)
+                    .replaceAll("BankName", payment_bankstr)
+                    .replaceAll("Pemail", pemailpaidstr)
+                    .replaceAll("IBAN", payment_ibanstr)
+                    .replaceAll("Currency", payment_currencystr)
+                    .replaceAll("Swift/BICCode", payment_swiftstr)
 
-                    .replaceAll(" Payment Details ", "")
-                    .replaceAll("By cheque :", "")
-                    .replaceAll("Pay Pal :", "")
-                    .replaceAll("Bank :", "")
+                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
+                    .replaceAll("By cheque :", bycheckstrtxt)
+                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("Bank :", bankstrtxt)
 
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
 

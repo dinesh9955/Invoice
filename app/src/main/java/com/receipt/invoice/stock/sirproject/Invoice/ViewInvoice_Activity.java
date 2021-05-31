@@ -730,22 +730,31 @@ public class ViewInvoice_Activity extends AppCompatActivity {
             cheque_payableTo = cheque_payable_to;
 
 
+            paimnetdetailstrtxt=" Payment Details ";
+
+
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
+                bycheckstrtxt="By cheque :";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
+                paypalstrtxt="Pay Pal :";
             }
 
             if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
             }else{
                 payment_bankstr = payment_bank_name;
+                if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                    payment_currencystr = payment_currency;
+                }
+                bankstrtxt="Bank :";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -760,19 +769,8 @@ public class ViewInvoice_Activity extends AppCompatActivity {
                 payment_swiftstr = payment_swift_bic;
             }
 
-            if ( Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
-                payment_currencystr = "";
-            }else{
-                payment_currencystr = payment_currency;
-            }
-
-
-            paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
-
             hiddenpaidrow="";
+
         }
 
 

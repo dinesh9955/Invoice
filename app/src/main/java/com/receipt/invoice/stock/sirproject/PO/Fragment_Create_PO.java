@@ -84,6 +84,7 @@ import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
+import com.receipt.invoice.stock.sirproject.Invoice.EditInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.Model.Moving;
@@ -313,6 +314,8 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
     TextView taxvalueText;
 
+    Button selectButton;
+
     public Fragment_Create_PO() {
         // Required empty public constructor
     }
@@ -349,6 +352,8 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         View view = inflater.inflate(R.layout.fragment_create_po, container, false);
+
+        selectButton = view.findViewById(R.id.selectButton);
 
         taxvalueText = view.findViewById(R.id.taxvalue);
 
@@ -876,6 +881,17 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 //        });
 
 
+        selectButton.setVisibility(View.GONE);
+        selectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG, "setOnClickListener");
+                int ddd = wids.size();
+                if(ddd == 0){
+                    Constant.ErrorToast(getActivity(), "No warehouse found!");
+                }
+            }
+        });
 
         selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
@@ -990,10 +1006,10 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
         }
 
-        else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select Warehouse");
-            createinvoice.setEnabled(true);
-        }
+//        else if (selectwarehouseId.equals("")) {
+//            Constant.ErrorToast(getActivity(), "Select Warehouse");
+//            createinvoice.setEnabled(true);
+//        }
 
 
         else if (tempList.size() == 0) {
@@ -1886,10 +1902,10 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                         Constant.ErrorToast(getActivity(), "Select Credit Term");
                         bottomSheetDialog2.dismiss();
                     }
-                    else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Warehouse");
-                        bottomSheetDialog2.dismiss();
-                    }
+//                    else if (selectwarehouseId.equals("")) {
+//                        Constant.ErrorToast(getActivity(), "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
 
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(getActivity(), "Select Product First");
@@ -2699,11 +2715,16 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                                 wids.add(warehouse_id);
                                 wnames.add(warehouse_name);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                                selectwarehouse.setAdapter(namesadapter);
-
-
                             }
+
+                            if(wids.size() == 0){
+                                selectButton.setVisibility(View.VISIBLE);
+                            }else{
+                                selectButton.setVisibility(View.GONE);
+                            }
+
+                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+                            selectwarehouse.setAdapter(namesadapter);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -4309,22 +4330,31 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             cheque_payableTo = cheque_payable_to;
 
 
+            paimnetdetailstrtxt=" Payment Details ";
+
+
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
+                bycheckstrtxt="By cheque :";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
+                paypalstrtxt="Pay Pal :";
             }
 
             if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
             }else{
                 payment_bankstr = payment_bank_name;
+                if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                    payment_currencystr = payment_currency;
+                }
+                bankstrtxt="Bank :";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -4338,18 +4368,6 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             }else{
                 payment_swiftstr = payment_swift_bic;
             }
-
-            if ( Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
-                payment_currencystr = "";
-            }else{
-                payment_currencystr = payment_currency;
-            }
-
-
-            paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
 
             hiddenpaidrow="";
         }

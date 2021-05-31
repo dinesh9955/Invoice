@@ -30,7 +30,9 @@ import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -309,6 +311,9 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
     TextView taxvalueText;
 
+
+    Button selectButton;
+
     public Fragment_Create_Invoice() {
         // Required empty public constructor
     }
@@ -346,6 +351,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         View view = inflater.inflate(R.layout.fragment_fragment__create__invoice, container, false);
 
+        selectButton = view.findViewById(R.id.selectButton);
         taxvalueText = view.findViewById(R.id.taxvalue);
 
         invoiceweb = view.findViewById(R.id.invoiceweb);
@@ -873,6 +879,46 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
 
 
+//        selectwarehouse.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                int ddd = wids.size();
+//                Log.e(TAG, "setOnKeyListener");
+//                return true;
+//            }
+//        });
+//
+//        selectwarehouse.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                Log.e(TAG, "setOnTouchListener");
+//                return true;
+//            }
+//        });
+
+        //selectwarehouse.performClick();
+
+
+//        selectwarehouse.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int ddd = wids.size();
+//                Log.e("selectwarehouseIdAAA", ""+ddd);
+//            }
+//        });
+
+        selectButton.setVisibility(View.GONE);
+        selectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG, "setOnClickListener");
+                int ddd = wids.size();
+                if(ddd == 0){
+                    Constant.ErrorToast(getActivity(), "No warehouse found!");
+                }
+            }
+        });
+
         selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
             public void onItemSelected(int position, String itemAtPosition) {
@@ -984,10 +1030,10 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
         }
 
-        else if (selectwarehouseId.equals("")) {
-                Constant.ErrorToast(getActivity(), "Select Warehouse");
-                createinvoice.setEnabled(true);
-        }
+//        else if (selectwarehouseId.equals("")) {
+//                Constant.ErrorToast(getActivity(), "Select Warehouse");
+//                createinvoice.setEnabled(true);
+//        }
 
         else if (tempList.size() == 0) {
             Constant.ErrorToast(getActivity(), "Select Product First");
@@ -1935,10 +1981,10 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                         Constant.ErrorToast(getActivity(), "Select Credit Term");
                         bottomSheetDialog2.dismiss();
                     }
-                    else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Warehouse");
-                        bottomSheetDialog2.dismiss();
-                    }
+//                    else if (selectwarehouseId.equals("")) {
+//                        Constant.ErrorToast(getActivity(), "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
 
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(getActivity(), "Select Product First");
@@ -2756,12 +2802,17 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
                                 wids.add(warehouse_id);
                                 wnames.add(warehouse_name);
-
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                                selectwarehouse.setAdapter(namesadapter);
-
-
                             }
+
+                            if(wids.size() == 0){
+                                selectButton.setVisibility(View.VISIBLE);
+                            }else{
+                                selectButton.setVisibility(View.GONE);
+                            }
+
+                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+                            selectwarehouse.setAdapter(namesadapter);
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -4440,22 +4491,31 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             cheque_payableTo = cheque_payable_to;
 
 
+            paimnetdetailstrtxt=" Payment Details ";
+
+
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
+                bycheckstrtxt="By cheque :";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
+                paypalstrtxt="Pay Pal :";
             }
 
             if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
             }else{
                 payment_bankstr = payment_bank_name;
+                if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                    payment_currencystr = payment_currency;
+                }
+                bankstrtxt="Bank :";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -4469,18 +4529,6 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             }else{
                 payment_swiftstr = payment_swift_bic;
             }
-
-            if ( Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
-                payment_currencystr = "";
-            }else{
-                payment_currencystr = payment_currency;
-            }
-
-
-            paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
 
             hiddenpaidrow="";
         }

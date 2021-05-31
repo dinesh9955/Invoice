@@ -3048,7 +3048,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
                         arrayListAllPVNo.clear();;
 
                         if(invoice.length() == 0){
-                            invoicenum.setText(Utility.DEFAULT_PO);
+                            invoicenum.setText(Utility.DEFAULT_PV);
                             invoicenum.setEnabled(true);
                         }else{
                             for (int i = 0; i < invoice.length(); i++) {
@@ -3062,7 +3062,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
                                     Log.e(TAG, "zzzz0 "+invoice_nocompany);
                                     Log.e(TAG, "zzzz1 "+i);
                                     Log.e(TAG, "zzzz2 "+invoice.length());
-                                    String sss = Utility.getRealValue(invoice_nocompany, Utility.DEFAULT_PO);
+                                    String sss = Utility.getRealValue(invoice_nocompany, Utility.DEFAULT_PV);
                                     invoicenum.setText(sss);
 
                                     invoicenum.setEnabled(true);

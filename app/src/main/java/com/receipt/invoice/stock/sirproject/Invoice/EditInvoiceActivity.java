@@ -345,6 +345,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
     StringBuilder stringBuilderShipTo = new StringBuilder();
 
 
+    Button selectButton;
+
 //    String templateSelect = "0";
 //    String colorCode = "#ffffff";
 
@@ -383,6 +385,8 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 //        Log.e(TAG, "colorCode "+colorCode);
 
         //newinvoice_count = Integer.parseInt(invoice_count) + 1;
+
+        selectButton = findViewById(R.id.selectButton);
         avi = findViewById(R.id.avi);
         invoicenumtxt = findViewById(R.id.invoicenumtxt);
         invoicenum = findViewById(R.id.invoivenum);
@@ -1237,6 +1241,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         });
 
 
+
+
+
+
         selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
             public void onItemSelected(int position, String itemAtPosition) {
@@ -1252,6 +1260,19 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                 customer_list(selectedCompanyId);
                 CompanyInformation(selectedCompanyId);
 
+            }
+        });
+
+
+        selectButton.setVisibility(View.GONE);
+        selectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG, "setOnClickListener");
+                int ddd = wids.size();
+                if(ddd == 0){
+                    Constant.ErrorToast(EditInvoiceActivity.this, "No warehouse found!");
+                }
             }
         });
 
@@ -1369,10 +1390,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
         }
 
-         else if (selectwarehouseId.equals("")) {
-            Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
-            createinvoice.setEnabled(true);
-        }
+//         else if (selectwarehouseId.equals("")) {
+//            Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
+//            createinvoice.setEnabled(true);
+//        }
 
         else if (tempList.size() == 0) {
             Constant.ErrorToast(EditInvoiceActivity.this, "Select Product First");
@@ -2203,10 +2224,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         Constant.ErrorToast(EditInvoiceActivity.this, "Select Credit Term");
                         bottomSheetDialog2.dismiss();
                     }
-                    else if (selectwarehouseId.equals("")) {
-                        Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
-                        bottomSheetDialog2.dismiss();
-                    }
+//                    else if (selectwarehouseId.equals("")) {
+//                        Constant.ErrorToast(EditInvoiceActivity.this, "Select Warehouse");
+//                        bottomSheetDialog2.dismiss();
+//                    }
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(EditInvoiceActivity.this, "Select Product First");
                         bottomSheetDialog2.dismiss();
@@ -2886,10 +2907,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                                 cnames.add(company_name);
                                 cids.add(company_id);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditInvoiceActivity.this, android.R.layout.simple_spinner_item, cnames);
-                                selectcompany.setAdapter(namesadapter);
-
                             }
+
+                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditInvoiceActivity.this, android.R.layout.simple_spinner_item, cnames);
+                            selectcompany.setAdapter(namesadapter);
                         }
                     }
                 } catch (JSONException e) {
@@ -2954,13 +2975,19 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                             }
 
+                            if(wids.size() == 0){
+                                selectButton.setVisibility(View.VISIBLE);
+                            }else{
+                                selectButton.setVisibility(View.GONE);
+                            }
+
                             warehousePosition = wids.indexOf(selectwarehouseId);
 
                             ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(EditInvoiceActivity.this, android.R.layout.simple_spinner_item, wnames);
                             selectwarehouse.setAdapter(namesadapter);
 
                             selectwarehouse.setSelection(warehousePosition);
-                           // wearhouse_id
+
 
                         }
                     } catch (JSONException e) {
@@ -5229,22 +5256,31 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             cheque_payableTo = cheque_payable_to;
 
 
+            paimnetdetailstrtxt=" Payment Details ";
+
+
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
+                bycheckstrtxt="By cheque :";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
+                paypalstrtxt="Pay Pal :";
             }
 
             if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
             }else{
                 payment_bankstr = payment_bank_name;
+                if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                    payment_currencystr = payment_currency;
+                }
+                bankstrtxt="Bank :";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -5258,18 +5294,6 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             }else{
                 payment_swiftstr = payment_swift_bic;
             }
-
-            if ( Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
-                payment_currencystr = "";
-            }else{
-                payment_currencystr = payment_currency;
-            }
-
-
-            paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
 
             hiddenpaidrow="";
         }

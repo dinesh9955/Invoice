@@ -751,5 +751,5 @@ public class Utility {
     public static String DEFAULT_CN = "CRN # 1";
     public static String DEFAULT_DN = "DN # 1";
     public static String DEFAULT_PO = "PO # 1";
-    public static String DEFAULT_PV = "PV # 1";
+    public static String DEFAULT_PV = "PVN # 1";
 }
