@@ -520,6 +520,36 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
         duedate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                int mYear, mMonth, mDay;
+//                final Calendar c = Calendar.getInstance();
+//                mYear = c.get(Calendar.YEAR);
+//                mMonth = c.get(Calendar.MONTH);
+//                mDay = c.get(Calendar.DAY_OF_MONTH);
+//
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(EditInvoiceActivity.this,
+//                        new DatePickerDialog.OnDateSetListener() {
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year,
+//                                                  int monthOfYear, int dayOfMonth) {
+//
+//                                int month = monthOfYear + 1;
+//                                String realMonth = ""+month;
+//                                if(realMonth.length() == 1){
+//                                    realMonth = "0"+month;
+//                                }
+//
+//
+//                                int day = dayOfMonth;
+//                                String realDay = ""+day;
+//                                if(realDay.length() == 1){
+//                                    realDay = "0"+day;
+//                                }
+//
+//                                eddate.setText(year + "-" + realMonth + "-" + realDay);
+//                            }
+//                        }, mYear, mMonth, mDay);
+//                // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
                 datePickerDialog.show();
             }
         });
@@ -532,11 +562,14 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             }
         });
 
+
         //for duedate
         datePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener,
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+
 
 
         //edduedate
