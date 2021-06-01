@@ -5153,8 +5153,8 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
         if(!company_contact.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_contact+"</br>");
         }
-        if(!companywebsitestr.equalsIgnoreCase("")){
-            stringBuilderCompany.append(companywebsitestr+"</br>");
+        if(!company_website.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_website+"</br>");
         }
         if(!company_email.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_email+"");

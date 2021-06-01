@@ -402,10 +402,10 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
             }
         });
 
-        Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
-
-        String path = uri.toString();
-        Log.e("path", path);
+//        Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
+//
+//        String path = uri.toString();
+//        Log.e("path", path);
 
 
         String multipleimage = "";
@@ -639,7 +639,6 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
 
         }
         String taxtamountstr = "";
-        String companywebsitestr = "";
         String taxtamountstrvalue = "";
         if (invoicetaxvalue.equals("")) {
             // Do you work here on success
@@ -721,8 +720,8 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
             if(!company_contact.equalsIgnoreCase("")){
                 stringBuilderCompany.append(company_contact+"</br>");
             }
-            if(!companywebsitestr.equalsIgnoreCase("")){
-                stringBuilderCompany.append(companywebsitestr+"</br>");
+            if(!company_website.equalsIgnoreCase("")){
+                stringBuilderCompany.append(company_website+"</br>");
             }
             if(!company_email.equalsIgnoreCase("")){
                 stringBuilderCompany.append(company_email+"");

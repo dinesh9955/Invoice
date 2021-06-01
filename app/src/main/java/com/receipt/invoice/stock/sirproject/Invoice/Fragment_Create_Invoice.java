@@ -4607,8 +4607,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
         if(!company_contact.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_contact+"</br>");
         }
-        if(!companywebsitestr.equalsIgnoreCase("")){
-            stringBuilderCompany.append(companywebsitestr+"</br>");
+        if(!company_website.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_website+"</br>");
         }
         if(!company_email.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_email+"");

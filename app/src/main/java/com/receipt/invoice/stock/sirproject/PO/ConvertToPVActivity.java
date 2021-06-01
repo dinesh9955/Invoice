@@ -5310,8 +5310,8 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
         if(!company_contact.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_contact+"</br>");
         }
-        if(!companywebsitestr.equalsIgnoreCase("")){
-            stringBuilderCompany.append(companywebsitestr+"</br>");
+        if(!company_website.equalsIgnoreCase("")){
+            stringBuilderCompany.append(company_website+"</br>");
         }
         if(!company_email.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_email+"");
