@@ -2826,7 +2826,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                                Constant.ErrorToast(getActivity(), "No Warehouse Found");
+                               // Constant.ErrorToast(getActivity(), "No Warehouse Found");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -3043,7 +3043,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                                Constant.ErrorToast(EditInvoiceActivity.this, "No Warehouse Found");
+                                //Constant.ErrorToast(EditInvoiceActivity.this, "No Warehouse Found");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

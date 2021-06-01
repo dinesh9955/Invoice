@@ -2803,7 +2803,7 @@ public class EditEditReceiptActivity extends AppCompatActivity implements Custom
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                                Constant.ErrorToast(EditEditReceiptActivity.this, "No Warehouse Found");
+                               //Constant.ErrorToast(EditEditReceiptActivity.this, "No Warehouse Found");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

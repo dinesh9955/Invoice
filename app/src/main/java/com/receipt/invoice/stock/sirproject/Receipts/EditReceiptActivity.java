@@ -172,7 +172,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
     ReceiptDtoReceipt invoiceDtoInvoice;
     String currency_codedto;
     //3
-   // String companylogopathdtodt = "";
+    // String companylogopathdtodt = "";
     TextView itemstxtTemplate, invoicenumtxt, duedatetxt, duedate, invoicetotxt, invoicerecipnt, itemstxt, subtotaltxt, subtotal, discounttxt, discount, txttax, tax, txtcredit, txtdays, txtreferenceno, edreferenceno, txtduedate, edduedate, txtgrossamount, grosstotal, txtfreight, freight, txtnetamount, netamount, txtpaidamount, paidamount, txtbalance, balance, s_invoice, s_receiver, c_stamp, attachmenttxt;
     Button additem, createinvoice, options, addservice;
     RecyclerView productsRecycler;
@@ -373,7 +373,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
         avi = findViewById(R.id.avi);
         invoicenumtxt = findViewById(R.id.invoicenumtxt);
         invoicenum = findViewById(R.id.invoivenum);
-         invoicenum.setEnabled(false);
+        invoicenum.setEnabled(false);
         duedatetxt = findViewById(R.id.duedatetxt);
         duedate = findViewById(R.id.duedate);
         invoicetotxt = findViewById(R.id.invoicetotxt);
@@ -591,7 +591,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                 company_website = companyDto.getWebsite();
                 company_email = companyDto.getPaypalEmail();
                 companylogopath = companyDto.getLogo();
-               // companylogopathdto = companyDto.getLogo();
+                // companylogopathdto = companyDto.getLogo();
 //                companylogopathdtodt = company_image_pathdto + companylogopathdto;
 //
 //                Log.e(TAG, "companylogopathdtodtAA "+companylogopathdtodt);
@@ -633,19 +633,19 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
                 invoicenum.setClickable(false);
 
-               // selectedTemplate = Integer.parseInt(invoiceDtoInvoice.getTemplate_type());
+                // selectedTemplate = Integer.parseInt(invoiceDtoInvoice.getTemplate_type());
                 if(selectedTemplate != 0){
                     itemstxtTemplate.setText("Template "+selectedTemplate);
                 }
                 strnotes = invoiceDtoInvoice.getNotes();
                 ednotes.setText(Html.fromHtml(strnotes));
-              //  credit_termsdto = invoiceDtoInvoice.getCreditTerms();
-               // credit_terms = credit_termsdto;
+                //  credit_termsdto = invoiceDtoInvoice.getCreditTerms();
+                // credit_terms = credit_termsdto;
                 invoicecompanyiddto = invoiceDtoInvoice.getCompanyId();
                 Log.e("invoicecompanyiddto", invoicecompanyiddto);
                 customer_id = invoiceDtoInvoice.getCustomerId();
 
-              //  paymentmode = invoiceDtoInvoice.getPaidAmountPaymentMethod();
+                //  paymentmode = invoiceDtoInvoice.getPaidAmountPaymentMethod();
 
                 txtdays.setText(credit_termsdto);
                 ref_nodto = invoiceDtoInvoice.getRefNo();
@@ -655,7 +655,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                 payment_swift_bic = invoiceDtoInvoice.getPaymentSwiftBic();
                 payment_currency = invoiceDtoInvoice.getPaymentCurrency();
                 payment_iban = invoiceDtoInvoice.getPaymentIban();
-               // paid_amount_payment_methoddto = invoiceDtoInvoice.getPaidAmountPaymentMethod();
+                // paid_amount_payment_methoddto = invoiceDtoInvoice.getPaidAmountPaymentMethod();
 
                 currency_codedto = invoiceDtoInvoice.getCurrencySymbol();
                 Log.e("currency_codhjkkjhkje", currency_codedto);
@@ -995,9 +995,9 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 //                {
 //                    Constant.ErrorToast(EditReceiptActivity.this, "Select A Where House");
 //                } else {
-                    createbottomsheet_products();
-                    bottomSheetDialog.show();
-                    bottomSheetDialog2.dismiss();
+                createbottomsheet_products();
+                bottomSheetDialog.show();
+                bottomSheetDialog2.dismiss();
 //
 //                }
 
@@ -2285,7 +2285,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
                 strdiscountvalue = eddisount.getText().toString();
                 if (strdiscountvalue.matches("")) {
-                   // Toast.makeText(EditReceiptActivity.this, "You did not enter a username", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(EditReceiptActivity.this, "You did not enter a username", Toast.LENGTH_SHORT).show();
                     mybuilder.dismiss();
                     return;
                 } else {
@@ -2765,7 +2765,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                                Constant.ErrorToast(EditReceiptActivity.this, "No Warehouse Found");
+                                //Constant.ErrorToast(EditReceiptActivity.this, "No Warehouse Found");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -3084,11 +3084,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
                         invoicenovalue = Integer.parseInt(Invoiceno) + 1;
                   /*      if (Invoiceno != null) {
-
                             invoicenum.setText("Inv # " + invoicenovalue);
-
                             Log.e("imagepath customer", String.valueOf(invoicenovalue));
-
                         }*/
                         String company_image_path = data.getString("company_image_path");
                         Log.e("company_image_path", company_image_path);
@@ -3138,7 +3135,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                                 String sss = Utility.getRealValue(invoice_nocompany, Utility.DEFAULT_RECEIPT);
                                 invoicenum.setText(sss);
 
-                               // invoicenum.setEnabled(true);
+                                // invoicenum.setEnabled(true);
 
                             }
 
@@ -3148,29 +3145,29 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 //                        for (int i = 0; i < customer.length(); i++) {
 //                            JSONObject item = customer.getJSONObject(i);
 
-                            tax_list_array.clear();
+                        tax_list_array.clear();
 
-                            tax_list_array = new ArrayList<Tax_List>();
+                        tax_list_array = new ArrayList<Tax_List>();
 
-                            JSONArray tax_list = data.getJSONArray("tax");
+                        JSONArray tax_list = data.getJSONArray("tax");
 
-                            for (int j = 0; j < tax_list.length(); j++) {
-                                JSONObject jsonObject1 = tax_list.getJSONObject(j);
+                        for (int j = 0; j < tax_list.length(); j++) {
+                            JSONObject jsonObject1 = tax_list.getJSONObject(j);
 //                                String name = jsonObject1.getString("name");
-                                Tax_List student = new Tax_List();
-                                student.setTax_id(jsonObject1.getString("tax_id"));
-                                student.setTax_name(jsonObject1.getString("name"));
-                                student.setCompany_name(jsonObject1.getString("company_name"));
-                                student.setTax_rate(jsonObject1.getString("rate"));
-                                student.setCompanyid(jsonObject1.getString("company_id"));
-                                student.setType(jsonObject1.getString("type"));
-                                student.setTax_name(jsonObject1.getString("name"));
-                                tax_list_array.add(student);
+                            Tax_List student = new Tax_List();
+                            student.setTax_id(jsonObject1.getString("tax_id"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            student.setCompany_name(jsonObject1.getString("company_name"));
+                            student.setTax_rate(jsonObject1.getString("rate"));
+                            student.setCompanyid(jsonObject1.getString("company_id"));
+                            student.setType(jsonObject1.getString("type"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            tax_list_array.add(student);
 
 
-                            }
-                            Log.e("Taxt array", tax_list_array.toString());
                         }
+                        Log.e("Taxt array", tax_list_array.toString());
+                    }
 
 
 //                    }
@@ -3389,7 +3386,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
 
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_price: "+total_price);
@@ -3513,19 +3510,19 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                     tax.setText(formatter.format(Totatlvalue1) + cruncycode);
 
 
-                        String isTaxRate = taxtrateamt;
-                        String isPecent = "%";
+                    String isTaxRate = taxtrateamt;
+                    String isPecent = "%";
 
-                        String subStrinng = taxrname.replace("(", "").replace(")", "");
+                    String subStrinng = taxrname.replace("(", "").replace(")", "");
 
-                        if(!subStrinng.contains(isTaxRate+isPecent)){
-                            subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
-                        }else{
+                    if(!subStrinng.contains(isTaxRate+isPecent)){
+                        subStrinng = taxrname.replace("(", "").replace(")", "") + " " + taxtrateamt + "%";
+                    }else{
 
-                        }
+                    }
 
                     subStrinng = subStrinng.replace("incl.","").replaceAll("( )+", " ");
-                        txttax.setText(  subStrinng + " incl." );
+                    txttax.setText(  subStrinng + " incl." );
                     taxvalueText.setText("Tax (" + subStrinng + " incl." + ")");
 
 

@@ -352,7 +352,7 @@ public class POViewActivityWebView extends AppCompatActivity {
 
 
                         // Grossamount_str = listobj.getValue();
-                    } else if (title.equals("Sub Total")) {
+                    } else if (code.equals("sub_total")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
@@ -360,7 +360,7 @@ public class POViewActivityWebView extends AppCompatActivity {
                             Subtotalamount = formatter.format(vc);
                         }
                         // Subtotalamount = listobj.getValue();
-                    } else if (title.equals("Grand Total")) {
+                    } else if (code.equals("total")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
@@ -368,7 +368,7 @@ public class POViewActivityWebView extends AppCompatActivity {
                             netamountvalue = formatter.format(vc);
                         }
                         //netamountvalue = listobj.getValue();
-                    } else if (title.equals("Paid Amount")) {
+                    } else if (code.equals("paid_amount")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
@@ -376,7 +376,7 @@ public class POViewActivityWebView extends AppCompatActivity {
                             strpaid_amount = formatter.format(vc);
                         }
                         //strpaid_amount = listobj.getValue();
-                    } else if (title.equals("Remaining Balance")) {
+                    } else if (code.equals("remaining_balance")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
@@ -396,7 +396,7 @@ public class POViewActivityWebView extends AppCompatActivity {
                         }
                         //invoicetaxvalue = listobj.getValue();
                     }
-                    else if (title.equals("Discount")) {
+                    else if (code.equals("discount")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
@@ -405,7 +405,7 @@ public class POViewActivityWebView extends AppCompatActivity {
                         }
                         // strdiscountvalue = listobj.getValue();
                     }
-                    else if (title.equals("Freight Cost")) {
+                    else if (code.equals("shipping")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);

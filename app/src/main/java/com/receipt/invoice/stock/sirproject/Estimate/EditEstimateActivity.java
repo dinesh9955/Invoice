@@ -2874,7 +2874,7 @@ public class EditEstimateActivity extends AppCompatActivity implements Customer_
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                                Constant.ErrorToast(EditEstimateActivity.this, "No Warehouse Found");
+                                //Constant.ErrorToast(EditEstimateActivity.this, "No Warehouse Found");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
