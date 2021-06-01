@@ -517,7 +517,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
         datePickerDialog2 = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener2,
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+       // datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
 
      //   companyget();
@@ -966,8 +966,6 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                     selectedUriList = uris;
                     showUriList(uris);
                 }, Throwable::printStackTrace);
-
-
     }
 
     private void showUriList(List<Uri> uriList) {
@@ -3575,13 +3573,21 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
                 try {
-                    subtotalvalue = total_price - Double.parseDouble(strdiscountvalue.replace("Rs", ""));
+                    subtotalvalue = total_price - Double.parseDouble(strdiscountvalue);
                 }catch (Exception e){
 
                 }
 
                 netamountvalue = subtotalvalue;
-                double  strdiscountval=Double.parseDouble(strdiscountvalue);
+
+                double  strdiscountval = 0.0;
+
+                try {
+                     strdiscountval=Double.parseDouble(strdiscountvalue);
+                }catch (Exception e){
+
+                }
+
 
                 discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);

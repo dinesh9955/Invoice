@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -45,6 +46,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -52,6 +54,8 @@ import java.util.Locale;
 
 import com.lowagie.text.Font;
 import com.receipt.invoice.stock.sirproject.InvoiceReminder.SendInvoiceReminderActivity;
+import com.receipt.invoice.stock.sirproject.ThankYouNote.SendThankYouNoteActivity;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 //import com.tejpratapsingh.pdfcreator.utils.FileManager;
 
@@ -108,11 +112,48 @@ public class Abc extends AppCompatActivity{
 //                Log.e(TAG, "savedPDFFile "+val4);
 
 
-                String dd = "wew009";
+//                String dd = "wew009";
+//
+//                String sss = getRealValue2(dd);
+//
+//                Log.e(TAG, "savedPDFFile "+sss);
 
-                String sss = getRealValue2(dd);
 
-                Log.e(TAG, "savedPDFFile "+sss);
+
+                String pdf = "/sdcard/CreditNote.pdf";
+                String png = "/sdcard/logo_new.png";
+
+                File mFile1 = new File(pdf);
+                File mFile2 = new File(png);
+
+                Uri imageUri1 = FileProvider.getUriForFile(
+                        Abc.this,
+                        "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
+                        mFile1);
+
+                Uri imageUri2 = FileProvider.getUriForFile(
+                        Abc.this,
+                        "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
+                        mFile2);
+
+                ArrayList<Uri> uriArrayList = new ArrayList<>();
+                uriArrayList.add(imageUri1);
+                uriArrayList.add(imageUri2);
+
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                sharingIntent.setType("application/pdf/*|image/*");
+                sharingIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+              //  startActivity(Intent.createChooser(sharingIntent, "Share using"));
+
+                sharingIntent.putExtra(Intent.EXTRA_SUBJECT,
+                        "Thank you note");
+                sharingIntent.putExtra(Intent.EXTRA_TEXT,
+                        "We appreciate your Business. Kindly find below Thank you note.");
+
+                if (Utility.isAppAvailable(Abc.this, "com.google.android.gm")){
+                    sharingIntent.setPackage("com.google.android.gm");
+                }
+                startActivity(sharingIntent);
 
             }
         });

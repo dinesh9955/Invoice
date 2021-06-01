@@ -513,7 +513,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
         datePickerDialog2 = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener2,
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        //datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
 
         //   companyget();

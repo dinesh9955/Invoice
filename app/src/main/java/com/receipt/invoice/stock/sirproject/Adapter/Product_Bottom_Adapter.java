@@ -51,7 +51,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
 
     String show_price="",show_name="";
     Callback callback;
-    int sh_quantity;
+    double sh_quantity;
     double sh_price;
     String product_ida;
     String receipt = "";
@@ -173,7 +173,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                         }
                     }
                     else {
-                        sh_quantity = Integer.parseInt(product_list.getQuantity());
+                        sh_quantity = Double.parseDouble(product_list.getQuantity());
                     }
                     productdialog(i);
                 }

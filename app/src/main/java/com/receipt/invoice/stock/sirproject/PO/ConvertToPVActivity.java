@@ -82,6 +82,7 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Estimate.Estimate_image;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
+import com.receipt.invoice.stock.sirproject.Invoice.ConvertToReceiptsActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
@@ -526,14 +527,14 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
         datePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener,
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
 
         //edduedate
         datePickerDialog2 = new DatePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener2,
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        //datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -1498,7 +1499,13 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 //                                params.add("tax[" + i + "]" + "[title]", subStrinng);
 ////                            }
 ////                        }
-                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                        String isTaxRate = selectedtaxt.get(i).getTaxrate();
+                        String isPecent = "%";
+                        String taxT1 = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
+                        taxT1 = taxT1.replace(isTaxRate, "");
+                        taxT1 = taxT1.replace(isPecent, "");
+                        taxT1 = taxT1.replace("incl." , "");
+                        params.add("tax[" + i + "]" + "[title]", taxT1);
 
                     }else{
                         Log.e(TAG, "WWWWWWWWWWWWW");
@@ -1528,7 +1535,13 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 //                                params.add("tax[" + i + "]" + "[title]", subStrinng);
 ////                            }
 ////                        }
-                        params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
+                        String isTaxRate = selectedtaxt.get(i).getTaxrate();
+                        String isPecent = "%";
+                        String taxT1 = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
+                        taxT1 = taxT1.replace(isTaxRate, "");
+                        taxT1 = taxT1.replace(isPecent, "");
+                        taxT1 = taxT1.replace("incl." , "");
+                        params.add("tax[" + i + "]" + "[title]", taxT1);
                     }
 
 
@@ -2070,7 +2083,7 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 
                                 }
                             }, mYear, mMonth, mDay);
-                    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                    //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                     datePickerDialog.show();
                 }
             });
@@ -3975,14 +3988,30 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 
         product_list.setProduct_price(selected_item.getService_price());
 
-        producprice.add(selected_item.getService_price());
+//        producprice.add(selected_item.getService_price());
+//        tempList.add(product_list);
+//        tempQuantity.add(s);
+//
+//        total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
+//
+//
+//        totalpriceproduct.add(String.valueOf(total_price));
+//        calculateTotalAmount(total_price);
+//
+//        products_adapter.notifyDataSetChanged();
+//
+//        bottomSheetDialog2.dismiss();
+
+        producprice.add(price);
         tempList.add(product_list);
         tempQuantity.add(s);
 
+        Log.e(TAG, "tempQuantityAA "+s);
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
 
+        double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
 
-        totalpriceproduct.add(String.valueOf(total_price));
+        totalpriceproduct.add(String.valueOf(newPrice));
         calculateTotalAmount(total_price);
 
         products_adapter.notifyDataSetChanged();
@@ -4045,30 +4074,33 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
             btnok=mybuilder.findViewById(R.id.btnok);
             btncancel=mybuilder.findViewById(R.id.btncancel);
 
-            edprice.setText(product_bottom.get(str).getProduct_price());
+            edprice.setText(producprice.get(str));
+            edquantity.setText(tempQuantity.get(str));
 
-//            show_quantity = edquantity.getText().toString();
-
-            edquantity.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                    if (edquantity.getText().toString().endsWith("."))
-                    {
-                        edquantity.setText(edquantity.getText().toString().replace(".",""));
-                    }
-                }
-            });
+//            edprice.setText(product_bottom.get(str).getProduct_price());
+//
+////            show_quantity = edquantity.getText().toString();
+//
+//            edquantity.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                }
+//
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//
+//                    if (edquantity.getText().toString().endsWith("."))
+//                    {
+//                        edquantity.setText(edquantity.getText().toString().replace(".",""));
+//                    }
+//                }
+//            });
 
 
             edquantity.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
@@ -4089,9 +4121,9 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
                 public void onClick(View view) {
                     mybuilder.dismiss();
 
-                    int en_quantity = Integer.parseInt(edquantity.getText().toString());
+                    double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
-                    int sh_quantity = 0;
+                    double sh_quantity = 0;
                     double sh_price = 0.0;
 
                     String quentityproduct= product_bottom.get(str).getQuantity();
@@ -4118,25 +4150,45 @@ public class ConvertToPVActivity extends AppCompatActivity implements Customer_B
 //                        product_bottom.get(str).setQuantity(String.valueOf(en_quantity));
 //                        product_bottom.get(str).setProduct_price(String.valueOf(sh_price));
 
-                        total_price = (sh_price) * Double.parseDouble(edquantity.getText().toString());
+                        //total_price = (sh_price) * Double.parseDouble(edquantity.getText().toString());
                         //  Log.e("Total price",String.valueOf(total_price));
+//                        producprice.remove(str);
+//                        tempQuantity.remove(str);
+//
+//                        producprice.add(str,String.valueOf(sh_price));
+//                        tempList.get(str).setProduct_price(String.valueOf(sh_price));
+//                        tempList.get(str).setQuantity(edquantity.getText().toString());
+//                        tempQuantity.add(str,edquantity.getText().toString());
+
                         producprice.remove(str);
+                        totalpriceproduct.remove(str);
                         tempQuantity.remove(str);
 
-                        producprice.add(str,String.valueOf(sh_price));
-                        tempList.get(str).setProduct_price(String.valueOf(sh_price));
-                        tempList.get(str).setQuantity(edquantity.getText().toString());
-                        tempQuantity.add(str,edquantity.getText().toString());
+                        producprice.add(str, String.valueOf(sh_price));
+                        totalpriceproduct.add(str, String.valueOf(sh_price));
+                        tempQuantity.add(str, edquantity.getText().toString());
+
+                        double dd = 0.0;
+                        for (int i = 0; i < producprice.size(); i++){
+                            double aa = Double.parseDouble(producprice.get(i));
+                            double bb = Double.parseDouble(tempQuantity.get(i));
+
+                            double cc = aa * bb;
+                            dd = dd + cc;
+                        }
+                        total_price = dd;
+//                        edprice.setText(totalpriceproduct.get(str));
+//                        edquantity.setText(tempQuantity.get(str));
 
                         calculateTotalAmount(total_price);
                         products_adapter.notifyDataSetChanged();
-                        Log.e("tempList", String.valueOf(tempList.size()));
 
                         mybuilder.dismiss();
                     }
 
                 }
             });
+
 
             btncancel.setOnClickListener(new View.OnClickListener() {
                 @Override

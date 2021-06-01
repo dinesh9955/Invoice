@@ -504,7 +504,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         });
 
         //for duedate
-        datePickerDialog = new DatePickerDialog(getContext(), AlertDialog.THEME_HOLO_DARK, mlistener,
+        datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener,
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 //        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -514,7 +514,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         datePickerDialog2 = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener2,
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        //datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
 
         //   companyget();
@@ -1764,7 +1764,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
 
                                 }
                             }, mYear, mMonth, mDay);
-                    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                    //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                     datePickerDialog.show();
                 }
             });
