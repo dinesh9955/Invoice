@@ -847,7 +847,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                     String title = listobj.getTitle();
                     String code = listobj.getCode();
 
-                    if (title.equals("Gross Amount")) {
+                    if (code.equals("gross_amount")) {
                         Grossamount_strdto = listobj.getValue();
 
                         Double Grossamount_strdtodbl = Double.parseDouble(Grossamount_strdto);
@@ -858,7 +858,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                         } else {
                             grosstotal.setText(formatter.format(Grossamount_strdtodbl) + currency_codedto);
                         }
-                    } else if (title.equals("Sub Total")) {
+                    } else if (code.equals("sub_total")) {
 
                         Subtotalamountdto = listobj.getValue();
 
@@ -869,7 +869,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                             subtotal.setText(formatter.format(Subtotalamountdbl) + currency_codedto);
                         }
 
-                    } else if (title.equals("Grand Total")) {
+                    } else if (code.equals("total")) {
 
                         netamountvaluedto = listobj.getValue();
                         Double netamountvaludbl = Double.parseDouble(netamountvaluedto);
@@ -880,7 +880,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                         } else {
                             netamount.setText(formatter.format(netamountvaludbl) + currency_codedto);
                         }
-                    } else if (title.equals("Paid Amount")) {
+                    } else if (code.equals("paid_amount")) {
 
                         strpaid_amountdto = listobj.getValue();
                         strpaid_amount = strpaid_amountdto;
@@ -896,7 +896,7 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
                             paidamount.setText(formatter.format(strpaid_amountdbl) + currency_codedto);
                         }
 
-                    } else if (title.equals("Remaining Balance")) {
+                    } else if (code.equals("remaining_balance")) {
 
                         Blanceamountstrdto = listobj.getValue();
                         Double Blanceamountstdbl = Double.parseDouble(Blanceamountstrdto);
@@ -932,24 +932,18 @@ public class EditEditPVActivity extends AppCompatActivity implements Customer_Bo
 
                     }
 
-                    else if (title.equals("Discount")) {
-
+                    else if (code.equals("discount")) {
                         Discountamountstrdto = listobj.getValue();
-
                         strdiscountvalue = listobj.getValue();
 
+                        //discount.setText(Utility.getReplaceMinus("-"+Discountamountstrdto+currency_codedto));
+                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
 
-                        // discount.setText(Utility.getRemoveDoubleMinus("-"+Discountamountstrdto) + cruncycode);
-
-                        discount.setText(""+Discountamountstrdto+currency_codedto);
-//                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
-//
-//                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-//                            balance.setText(formatter.format(Blanceamountstdbl));
-//                        } else {
-//                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
-//                        }
-
+                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                            balance.setText(formatter.format(Discountamountstdbl));
+                        } else {
+                            balance.setText(formatter.format(Discountamountstdbl) + currency_codedto);
+                        }
                     }
 
 

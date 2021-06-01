@@ -798,7 +798,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                     String title = listobj.getTitle();
                     String code = listobj.getCode();
 
-                    if (title.equals("Gross Amount")) {
+                    if (code.equals("gross_amount")) {
                         Grossamount_strdto = listobj.getValue();
 
                         Double Grossamount_strdtodbl = Double.parseDouble(Grossamount_strdto);
@@ -809,7 +809,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         } else {
                             grosstotal.setText(formatter.format(Grossamount_strdtodbl) + currency_codedto);
                         }
-                    } else if (title.equals("Sub Total")) {
+                    } else if (code.equals("sub_total")) {
 
                         Subtotalamountdto = listobj.getValue();
 
@@ -820,7 +820,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                             subtotal.setText(formatter.format(Subtotalamountdbl) + currency_codedto);
                         }
 
-                    } else if (title.equals("Grand Total")) {
+                    } else if (code.equals("total")) {
 
                         mainNetAmount = listobj.getValue();
 
@@ -833,7 +833,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                         } else {
                             netamount.setText(formatter.format(netamountvaludbl) + currency_codedto);
                         }
-                    } else if (title.equals("Paid Amount")) {
+                    } else if (code.equals("paid_amount")) {
 
                         strpaid_amountdto = listobj.getValue();
                         strpaid_amount = strpaid_amountdto;
@@ -849,7 +849,7 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
                             paidamount.setText(formatter.format(strpaid_amountdbl) + currency_codedto);
                         }
 
-                    } else if (title.equals("Remaining Balance")) {
+                    } else if (code.equals("remaining_balance")) {
 
                         Blanceamountstrdto = listobj.getValue();
                         Double Blanceamountstdbl = Double.parseDouble(Blanceamountstrdto);
@@ -885,28 +885,23 @@ public class ConvertToInvoiceActivity extends AppCompatActivity implements Custo
 
                     }
 
-                    else if (title.equals("Discount")) {
-
+                    else if (code.equals("discount")) {
                         Discountamountstrdto = listobj.getValue();
-
                         strdiscountvalue = listobj.getValue();
 
+                        //discount.setText(Utility.getReplaceMinus("-"+Discountamountstrdto+currency_codedto));
+                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
 
-                        // discount.setText(Utility.getRemoveDoubleMinus("-"+Discountamountstrdto) + cruncycode);
-
-                        discount.setText(""+Discountamountstrdto+currency_codedto);
-//                        Double Discountamountstdbl = Double.parseDouble(Discountamountstrdto);
-//
-//                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-//                            balance.setText(formatter.format(Blanceamountstdbl));
-//                        } else {
-//                            balance.setText(formatter.format(Blanceamountstdbl) + currency_codedto);
-//                        }
+                        if (currency_codedto.equals("null") || currency_codedto.equals("")) {
+                            balance.setText(formatter.format(Discountamountstdbl));
+                        } else {
+                            balance.setText(formatter.format(Discountamountstdbl) + currency_codedto);
+                        }
 
                     }
 
 
-                    else if (title.equals("Freight Cost")) {
+                    else if (code.equals("shipping")) {
                         Shippingamountdto = listobj.getValue();
                         Double Discountamountstdbl = Double.parseDouble(Shippingamountdto);
 
