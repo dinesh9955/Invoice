@@ -316,6 +316,8 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
 
     Button selectButton;
 
+    double discountAmountDD = 0.0;
+
     public Fragment_Create_PO() {
         // Required empty public constructor
     }
@@ -2167,6 +2169,11 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
             @Override
             public void onClick(View view) {
                 strdiscountvalue = eddisount.getText().toString();
+                try {
+                    discountAmountDD = Double.parseDouble(eddisount.getText().toString());
+                }catch (Exception e){
+
+                }
                 if (strdiscountvalue.matches("")) {
                     //Toast.makeText(getContext(), "You did not enter a username", Toast.LENGTH_SHORT).show();
                     mybuilder.dismiss();
@@ -3473,7 +3480,7 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 Log.e(TAG , "total_priceAA "+total_price);
                 Log.e(TAG , "strdiscountvalueAA "+strdiscountvalue);
 
-                Totatlvalue = total_price * Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode)) / 100;
+                Totatlvalue = total_price * discountAmountDD / 100;
 
 
                 discount.setText("-"+formatter.format(Totatlvalue) + cruncycode);
@@ -3491,13 +3498,13 @@ public class Fragment_Create_PO extends Fragment implements Customer_Bottom_Adap
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
                 try {
-                    subtotalvalue = total_price - Double.parseDouble(strdiscountvalue.replace("Rs", ""));
+                    subtotalvalue = total_price - discountAmountDD;
                 }catch (Exception e){
 
                 }
 
                 netamountvalue = subtotalvalue;
-                double  strdiscountval=Double.parseDouble(strdiscountvalue);
+                double  strdiscountval = discountAmountDD;
 
                 discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
                 subtotal.setText(formatter.format(subtotalvalue) + cruncycode);

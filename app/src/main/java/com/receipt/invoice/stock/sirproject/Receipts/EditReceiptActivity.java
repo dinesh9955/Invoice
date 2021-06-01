@@ -2765,7 +2765,7 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                                //Constant.ErrorToast(EditReceiptActivity.this, "No Warehouse Found");
+                                Constant.ErrorToast(EditReceiptActivity.this, "No Warehouse Found");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -4885,8 +4885,8 @@ public class EditReceiptActivity extends AppCompatActivity implements Customer_B
         if(!company_contact.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_contact+"</br>");
         }
-        if(!company_website.equalsIgnoreCase("")){
-            stringBuilderCompany.append(company_website+"</br>");
+        if(!companywebsitestr.equalsIgnoreCase("")){
+            stringBuilderCompany.append(companywebsitestr+"</br>");
         }
         if(!company_email.equalsIgnoreCase("")){
             stringBuilderCompany.append(company_email+"");

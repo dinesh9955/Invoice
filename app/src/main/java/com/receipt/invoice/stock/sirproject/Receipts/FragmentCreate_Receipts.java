@@ -310,6 +310,10 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
     TextView taxvalueText;
 
 
+
+    double discountAmountDD = 0.0;
+
+
     public FragmentCreate_Receipts() {
         // Required empty public constructor
     }
@@ -2115,9 +2119,13 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         btndone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 strdiscountvalue = eddisount.getText().toString();
+                try {
+                    discountAmountDD = Double.parseDouble(eddisount.getText().toString());
+                }catch (Exception e){
+
+                }
+
                 if (strdiscountvalue.matches("")) {
                     //Toast.makeText(getContext(), "You did not enter a username", Toast.LENGTH_SHORT).show();
                     mybuilder.dismiss();
@@ -3359,10 +3367,10 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
             grandAmount = total_price;
 
             if (strdiscount.equals("Percentage")) {
-                double value = grandAmount * Double.parseDouble(strdiscountvalue) / 100;
+                double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
             } else if (strdiscount.equals("Amount")) {
-                double value = Double.parseDouble(strdiscountvalue);
+                double value = discountAmountDD;
                 discountAmount = value;
             }else{
                 double value = 0.0;
@@ -3419,7 +3427,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
             if(discountAmount == 0){
                 discount.setText("0");
             }else{
-                discount.setText(formatter.format(discountAmount)+""+cruncycode);
+                discount.setText("-"+formatter.format(discountAmount)+""+cruncycode);
             }
 
             if(subtotalAmount == 0){

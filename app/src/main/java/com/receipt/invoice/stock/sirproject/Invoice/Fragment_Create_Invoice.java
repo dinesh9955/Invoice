@@ -314,6 +314,8 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
 
     Button selectButton;
 
+    double discountAmountDD = 0.0;
+
     public Fragment_Create_Invoice() {
         // Required empty public constructor
     }
@@ -2247,6 +2249,11 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
             @Override
             public void onClick(View view) {
                 strdiscountvalue = eddisount.getText().toString();
+                try {
+                    discountAmountDD = Double.parseDouble(eddisount.getText().toString());
+                }catch (Exception e){
+
+                }
                 if (strdiscountvalue.matches("")) {
                     //Toast.makeText(getContext(), "You did not enter a username", Toast.LENGTH_SHORT).show();
                     mybuilder.dismiss();
@@ -3555,7 +3562,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                 Log.e(TAG , "total_priceAA "+total_price);
                 Log.e(TAG , "strdiscountvalueAA "+strdiscountvalue);
 
-                Totatlvalue = total_price * Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode)) / 100;
+                Totatlvalue = total_price * discountAmountDD / 100;
 
 
                 discount.setText("-"+formatter.format(Totatlvalue) + cruncycode);
@@ -3573,7 +3580,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                 netamountvalue = 0.0;
                 balanceamount = 0.0;
                 try {
-                    subtotalvalue = total_price - Double.parseDouble(strdiscountvalue);
+                    subtotalvalue = total_price - discountAmountDD;
                 }catch (Exception e){
 
                 }
@@ -3583,7 +3590,7 @@ public class Fragment_Create_Invoice extends Fragment implements Customer_Bottom
                 double  strdiscountval = 0.0;
 
                 try {
-                     strdiscountval=Double.parseDouble(strdiscountvalue);
+                     strdiscountval = discountAmountDD;
                 }catch (Exception e){
 
                 }
