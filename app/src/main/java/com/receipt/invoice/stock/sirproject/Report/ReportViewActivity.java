@@ -34,6 +34,8 @@ import com.loopj.android.http.RequestParams;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.Home.Model.CompanyModel;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
+import com.receipt.invoice.stock.sirproject.InvoiceReminder.ViewInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
@@ -56,6 +58,8 @@ import cz.msebera.android.httpclient.Header;
 public class ReportViewActivity extends AppCompatActivity {
 
     private static final String TAG = "ViewInvoice_Activity";
+
+    int numberPostion = 0;
 
     File fileWithinMyDir = null;
 
@@ -99,7 +103,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         titleView.setText("Preview Report");
 
-
+        SavePref pref = new SavePref();
+        pref.SavePref(ReportViewActivity.this);
+        numberPostion = pref.getNumberFormatPosition();
 
 
 //        invoiceweb.setWebViewClient(new WebViewClient() {
@@ -439,6 +445,8 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
     private void customerReportWeb(CustomerItem customerItem, ArrayList<CustomerReportItem> customerReportItemArrayList) {
 
+
+
         double totalAmount = 0.0;
 
         String name = "report/CustomerReport.html";
@@ -464,20 +472,24 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 if(getDebit == 0){
                     stringDebit = "";
                 }else{
-                    stringDebit = customerReportItemArrayList.get(i).getDebit() + Utility.getReplaceDollor(cruncycode);
+                    String stringDebit1 = customerReportItemArrayList.get(i).getDebit();
+                    stringDebit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringDebit1)) + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(getCredit == 0){
                     stringCredit = "";
                 }else{
-                    stringCredit = customerReportItemArrayList.get(i).getCredit() + Utility.getReplaceDollor(cruncycode);
+                    String stringCredit1 = customerReportItemArrayList.get(i).getCredit();
+                    stringCredit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringCredit1)) + Utility.getReplaceDollor(cruncycode);
                 }
 
 //                if(getDebit == 0){
 //                    stringBalance = "";
 //                }else{
-                    stringBalance = customerReportItemArrayList.get(i).getBalance() + Utility.getReplaceDollor(cruncycode);
+                String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
+                stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
 //                }
+
 
 
                 productitem = IOUtils.toString(getAssets().open("report/customer_single_item.html"))
@@ -504,12 +516,15 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             e.printStackTrace();
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+      //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
+        //double vc = Double.parseDouble(totalAmount);
+        //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+//        Grossamount_str= Utility.getPatternFormat(""+numberPostion, totalAmount);
 
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
-
                             .replaceAll("Company Name", customerItem.getCompany_name())
                             .replaceAll("Address", customerItem.getCompany_address())
                             .replaceAll("Contact No.", customerItem.getCompany_phone())
@@ -518,75 +533,8 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                             .replaceAll("Customer Name", customerItem.getCustomer_name())
                             .replaceAll("#LOGO_IMAGE#", customerItem.getCompany_logo())
                             .replaceAll("#ITEMS#", productitemlist)
-                            .replaceAll("Total Amount-", formatter.format(totalAmount) + Utility.getReplaceDollor(cruncycode))
+                            .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount) + Utility.getReplaceDollor(cruncycode))
                            ;
-
-//                    .replaceAll("Company Name", company_name)
-//                    .replaceAll("Address", stringBuilderCompany.toString())
-////                    .replaceAll("Contact No.", company_contact)
-////                    .replaceAll("Website", companywebsitestr)
-////                    .replaceAll("Email", company_email)
-//                    .replaceAll("#LOGO_IMAGE#", companyimagelogopath)
-//                    .replaceAll("INV-564", invoicenobystr)
-//                    .replaceAll("invD", date)
-//                    .replaceAll("DueDate", due_date)
-//                    .replaceAll("crTerms", credit_terms)
-//                    .replaceAll("refNo", strreferencenovalue)
-//                    .replaceAll("GrossAm-", Utility.getReplaceDollor(Grossamount_str))
-//                    .replaceAll("Discount-", Utility.getReplaceDollor(discountvalue))
-//                    .replaceAll("SubTotal-", subTotalValueTxt)
-//                    .replaceAll("Txses-", Utility.getReplaceDollor(taxtamountstr))
-//                    .replaceAll("Shipping-", Utility.getReplaceDollor(Shipingcosstbyct))
-//                    .replaceAll("Total Amount-", Utility.getReplaceDollor(netamountvalue))
-//                    .replaceAll("PaidsAmount", Utility.getReplaceDollor(paidamountstrrepvalue))
-//                    .replaceAll("Paid Amount", paidamountstrreptxt)
-//                    .replaceAll("Balance Due-", Utility.getReplaceDollor(Blanceamountstr))
-//
-//                    .replaceAll("SubTotal", subTotalTxt)
-//
-//
-//
-//                    .replaceAll("Client N", ""+stringBuilderBillTo.toString())
-////                    .replaceAll("Client A", sltcustomer_address)
-////                    .replaceAll("Client C P", sltcustomer_contact)
-////                    .replaceAll("Client C N", sltcustomer_phone_number)
-////                    .replaceAll("Client Web", sltcustomer_website)
-////                    .replaceAll("Client E", sltcustomer_email)
-//                    .replaceAll("Notes-", strnotes)
-//                    .replaceAll("#SIGNATURES#", Signatureincoicestr)
-//                    .replaceAll("#ITEMS#", productitemlist)
-//                    .replaceAll("#Shipp", ""+stringBuilderShipTo.toString())
-//                    .replaceAll("#ATTACHMENTS#", multipleimage)
-//                    .replaceAll("Attachments", attachmentimage)
-//                    .replaceAll("Notes:", notestringvalue)
-//                    .replaceAll("Ship To:", Shiping_tostr)
-//                    .replaceAll(" Shipping ", shipingvaluetxt)
-//                    .replaceAll(" Tax ", taxtamountstrvalue)
-//                    .replaceAll(" Discount ", discounttxtreplace)
-//                    .replaceAll("Reference No:", strreferencenotxtvalue)
-//                    .replaceAll("hide", hiddenpaidrow)
-//
-//                    .replaceAll("#799f6e", companycolor)
-//
-//
-//
-//                    .replaceAll("Checkto", cheque_payableTo)
-//                    .replaceAll("BankName", payment_bankstr)
-//                    .replaceAll("Pemail", pemailpaidstr)
-//                    .replaceAll("IBAN", payment_ibanstr)
-//                    .replaceAll("Currency", payment_currencystr)
-//                    .replaceAll("Swift/BICCode", payment_swiftstr)
-//
-//                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
-//                    .replaceAll("By cheque :", bycheckstrtxt)
-//                    .replaceAll("Pay Pal :", paypalstrtxt)
-//                    .replaceAll("Bank :", bankstrtxt)
-//
-//                    .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
-//
-//
-
-         //   );
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -750,19 +698,22 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 if(getDebit == 0){
                     stringDebit = "";
                 }else{
-                    stringDebit = customerReportItemArrayList.get(i).getDebit() + Utility.getReplaceDollor(cruncycode);
+                    String stringDebit1 = customerReportItemArrayList.get(i).getDebit();
+                    stringDebit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringDebit1)) + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(getCredit == 0){
                     stringCredit = "";
                 }else{
-                    stringCredit = customerReportItemArrayList.get(i).getCredit() + Utility.getReplaceDollor(cruncycode);
+                    String stringCredit1 = customerReportItemArrayList.get(i).getDebit();
+                    stringCredit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringCredit1)) + Utility.getReplaceDollor(cruncycode);
                 }
 
 //                if(getDebit == 0){
 //                    stringBalance = "";
 //                }else{
-                stringBalance = customerReportItemArrayList.get(i).getBalance() + Utility.getReplaceDollor(cruncycode);
+                String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
+                stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
 //                }
 
 
@@ -790,7 +741,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             e.printStackTrace();
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+    //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -804,7 +755,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getCompany_logo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", formatter.format(totalAmount)+ Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount) + Utility.getReplaceDollor(cruncycode))
             ;
 
         } catch (IOException e) {
@@ -979,7 +930,8 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                if(getDebit == 0){
 //                    stringBalance = "";
 //                }else{
-                stringBalance = customerReportItemArrayList.get(i).getTotal() + Utility.getReplaceDollor(cruncycode);
+                String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
+                stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
 //                }
 
 
@@ -1006,7 +958,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             e.printStackTrace();
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+    //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
 
         String content = null;
@@ -1021,7 +973,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                    // .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", formatter.format(totalAmount)+ Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount)+ Utility.getReplaceDollor(cruncycode))
             ;
 
 
@@ -1190,7 +1142,8 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                if(getDebit == 0){
 //                    stringBalance = "";
 //                }else{
-                stringBalance = customerReportItemArrayList.get(i).getTotal() + Utility.getReplaceDollor(cruncycode);
+                String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
+                stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
 //                }
 
 
@@ -1217,7 +1170,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             e.printStackTrace();
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+    //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -1231,7 +1184,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     // .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", formatter.format(totalAmount)+ Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount)+ Utility.getReplaceDollor(cruncycode))
             ;
 
 
@@ -1395,6 +1348,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 double slab3 = Double.parseDouble(customerReportItemArrayList.get(i).getSlab3());
                 double slab4 = Double.parseDouble(customerReportItemArrayList.get(i).getSlab4());
 
+                String slab1Txt11 = Utility.getPatternFormat(""+numberPostion, slab1);
+                String slab1Txt22 = Utility.getPatternFormat(""+numberPostion, slab2);
+                String slab1Txt33 = Utility.getPatternFormat(""+numberPostion, slab3);
+                String slab1Txt44 = Utility.getPatternFormat(""+numberPostion, slab4);
+
                 String slab1Txt = "";
                 String slab2Txt = "";
                 String slab3Txt = "";
@@ -1405,38 +1363,42 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 if(slab1 == 0){
                     slab1Txt = "";
                 }else{
-                    slab1Txt = slab1 + Utility.getReplaceDollor(cruncycode);
+                    slab1Txt = slab1Txt11 + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(slab2 == 0){
                     slab2Txt = "";
                 }else{
-                    slab2Txt = slab2 + Utility.getReplaceDollor(cruncycode);
+                    slab2Txt = slab1Txt22 + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(slab3 == 0){
                     slab3Txt = "";
                 }else{
-                    slab3Txt = slab3 + Utility.getReplaceDollor(cruncycode);
+                    slab3Txt = slab1Txt33 + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(slab4 == 0){
                     slab4Txt = "";
                 }else{
-                    slab4Txt = slab4 + Utility.getReplaceDollor(cruncycode);
+                    slab4Txt = slab1Txt44 + Utility.getReplaceDollor(cruncycode);
                 }
 
 
 //                if(getDebit == 0){
 //                    stringBalance = "";
 //                }else{
-                stringBalance = customerReportItemArrayList.get(i).getTotal() + Utility.getReplaceDollor(cruncycode);
+                String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
+                stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
 //                }
+
+                String stringNotDue1 = customerReportItemArrayList.get(i).getNot_due();
+                String stringNotDue11 = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringNotDue1)) + Utility.getReplaceDollor(cruncycode);
 
 
                 productitem = IOUtils.toString(getAssets().open("report/customer_ageing_single_item.html"))
                         .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getContact_name())
-                        .replaceAll("#Currentdue#", customerReportItemArrayList.get(i).getNot_due())
+                        .replaceAll("#Currentdue#", stringNotDue11)
                         .replaceAll("#Slab1#", slab1Txt)
                         .replaceAll("#Slab2#", slab2Txt)
                         .replaceAll("#Slab3#", slab3Txt)
@@ -1460,7 +1422,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             e.printStackTrace();
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+    //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -1474,7 +1436,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     // .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", formatter.format(totalAmount)+ Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount)+ Utility.getReplaceDollor(cruncycode))
             ;
 
 
@@ -1625,59 +1587,19 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             for (int i = 0; i < customerReportItemArrayList.size(); i++) {
                 cruncycode = customerItem.getCurrency_symbol();
 
-////                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                String stringTAX1 = customerReportItemArrayList.get(i).getTax_rate();
+                String stringTAX = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringTAX1));
 
-//                double slab1 = Double.parseDouble(customerReportItemArrayList.get(i).getSlab1());
-//                double slab2 = Double.parseDouble(customerReportItemArrayList.get(i).getSlab2());
-//                double slab3 = Double.parseDouble(customerReportItemArrayList.get(i).getSlab3());
-//                double slab4 = Double.parseDouble(customerReportItemArrayList.get(i).getSlab4());
-//
-//                String slab1Txt = "";
-//                String slab2Txt = "";
-//                String slab3Txt = "";
-//                String slab4Txt = "";
-//
-             //   String stringBalance = "";
-//
-//                if(slab1 == 0){
-//                    slab1Txt = "";
-//                }else{
-//                    slab1Txt = slab1 + Utility.getReplaceDollor(cruncycode);
-//                }
-//
-//                if(slab2 == 0){
-//                    slab2Txt = "";
-//                }else{
-//                    slab2Txt = slab2 + Utility.getReplaceDollor(cruncycode);
-//                }
-//
-//                if(slab3 == 0){
-//                    slab3Txt = "";
-//                }else{
-//                    slab3Txt = slab3 + Utility.getReplaceDollor(cruncycode);
-//                }
-//
-//                if(slab4 == 0){
-//                    slab4Txt = "";
-//                }else{
-//                    slab4Txt = slab4 + Utility.getReplaceDollor(cruncycode);
-//                }
-
-
-//                if(getDebit == 0){
-//                    stringBalance = "";
-//                }else{
-                //stringBalance = customerReportItemArrayList.get(i).getTax_amount() + Utility.getReplaceDollor(cruncycode);
-//                }
-
+                String stringAmount1 = customerReportItemArrayList.get(i).getTax_amount();
+                String stringAmount = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringAmount1));
 
                 productitem = IOUtils.toString(getAssets().open("report/tax_collection_single_item.html"))
                         .replaceAll("#DATE#", customerReportItemArrayList.get(i).getDate_added())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getParticulars())
                         .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getCustomer_name())
                         .replaceAll("#TaxName#", customerReportItemArrayList.get(i).getTax_name())
-                        .replaceAll("#TaxRate#", customerReportItemArrayList.get(i).getTax_rate() +"%")
-                        .replaceAll("#Amount#", customerReportItemArrayList.get(i).getTax_amount() +"%");
+                        .replaceAll("#TaxRate#", stringTAX +"%")
+                        .replaceAll("#Amount#", stringAmount +"%");
                 productitemlist = productitemlist + productitem;
 
                 double allAmount = 0.0;
@@ -1696,7 +1618,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             e.printStackTrace();
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+      //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -1710,7 +1632,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     // .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", formatter.format(totalAmount)+ Utility.getReplaceDollor(cruncycode) + "%")
+                    .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount) + Utility.getReplaceDollor(cruncycode) + "%")
             ;
 
 
@@ -1872,6 +1794,10 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                double slab3 = Double.parseDouble(customerReportItemArrayList.get(i).getSlab3());
 //                double slab4 = Double.parseDouble(customerReportItemArrayList.get(i).getSlab4());
 
+                String minimumSS = Utility.getPatternFormat(""+numberPostion, minimum);
+                String quantitySS = Utility.getPatternFormat(""+numberPostion, quantity);
+
+
                 String minimumTxt = "";
 
                 String stringBalance = "";
@@ -1879,7 +1805,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 if(minimum == 0){
                     minimumTxt = "";
                 }else{
-                    minimumTxt = minimum + Utility.getReplaceDollor(cruncycode);
+                    minimumTxt = minimumSS + Utility.getReplaceDollor(cruncycode);
                 }
 
 
@@ -1903,17 +1829,19 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 //stringBalance = customerReportItemArrayList.get(i).getTax_amount() + Utility.getReplaceDollor(cruncycode);
 //                }
 
+                String priceS = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getPrice()));
+                String valueS = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getValue()));
 
 
                 productitem = IOUtils.toString(getAssets().open("report/stock_single_item.html"))
                         .replaceAll("#SNo#", ""+(i+1))
                         .replaceAll("#Product#", customerReportItemArrayList.get(i).getName())
                         .replaceAll("#ReorderLevel#", minimumTxt)
-                        .replaceAll("#QuantityAvaliable#", ""+quantity)
+                        .replaceAll("#QuantityAvaliable#", ""+quantitySS)
                         .replaceAll("#Status#", customerReportItemArrayList.get(i).getQuantity_status())
                         .replaceAll("white1", colorCode)
-                        .replaceAll("#PerUnitPrice#", customerReportItemArrayList.get(i).getPrice() + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#InventoryValue#", customerReportItemArrayList.get(i).getValue() + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#PerUnitPrice#", priceS + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#InventoryValue#", valueS + Utility.getReplaceDollor(cruncycode));
                 productitemlist = productitemlist + productitem;
 
                 double allAmount = 0.0;
@@ -1932,7 +1860,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             e.printStackTrace();
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+        //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -1946,7 +1874,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     // .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", formatter.format(totalAmount) + Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount) + Utility.getReplaceDollor(cruncycode))
             ;
 
 
@@ -2093,14 +2021,17 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             for (int i = 0; i < customerReportItemArrayList.size(); i++) {
                 cruncycode = customerItem.getCurrency_symbol();
 
+                String getQuantity = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getQuantity()));
+                String getTotal_quantity = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getTotal_quantity()));
+
                 productitem = IOUtils.toString(getAssets().open("report/product_movement_single_item.html"))
                         .replaceAll("#DATE#", customerReportItemArrayList.get(i).getDate())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getParticulars())
-                        .replaceAll("#OpeningStock#", customerReportItemArrayList.get(i).getQuantity())
+                        .replaceAll("#OpeningStock#", getQuantity)
                         .replaceAll("#Purchases#", "")
                         .replaceAll("#Sales#", "")
                         .replaceAll("#Wastage#", "")
-                        .replaceAll("#NetQuantity#", customerReportItemArrayList.get(i).getTotal_quantity());
+                        .replaceAll("#NetQuantity#", getTotal_quantity);
                 productitemlist = productitemlist + productitem;
 
                 double allAmount = 0.0;
@@ -2128,7 +2059,10 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         double quantity = Double.parseDouble(customerItem.getProductQuantity());
         double price = Double.parseDouble(customerItem.getProductPrice());
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+        String quantityAA = Utility.getPatternFormat(""+numberPostion, quantity);
+        String priceAA = Utility.getPatternFormat(""+numberPostion, price);
+
+       // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         String content = null;
         try {
@@ -2142,9 +2076,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                      .replaceAll("Product Name", customerItem.getProductName())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Amount1-", ""+quantity)
-                    .replaceAll("Amount2-", price+""+Utility.getReplaceDollor(cruncycode))
-                    .replaceAll("Total Amount-", formatter.format(totalAmount) + Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Amount1-", ""+quantityAA)
+                    .replaceAll("Amount2-", priceAA+""+Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount) + Utility.getReplaceDollor(cruncycode))
             ;
 
 

@@ -479,9 +479,7 @@ public class ViewInvoiceActivity extends AppCompatActivity {
 
                     multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
 
-
                             .replaceAll("#ATTACHMENT_1#", "http://13.126.22.0/saad/app/uploads/invoice/"+invoice_imageDto.get(i).getImage());
-
 
                     multipleimage = multipleimage + multipagepath;
                 } catch (Exception e) {

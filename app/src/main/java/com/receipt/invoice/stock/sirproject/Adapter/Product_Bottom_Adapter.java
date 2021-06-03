@@ -23,10 +23,13 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
+import com.receipt.invoice.stock.sirproject.InvoiceReminder.ViewInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Model.GlobalVariabal;
 import com.receipt.invoice.stock.sirproject.Model.Itemproductselect;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -76,6 +79,9 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
     @Override
     public void onBindViewHolder(@NonNull final Product_Bottom_Adapter.ViewHolderForCat viewHolderForCat, final int i) {
 
+        SavePref pref = new SavePref();
+        pref.SavePref(mcontext);
+        int numberPostion = pref.getNumberFormatPosition();
 
 
         final Product_list product_list = mlist.get(i);
@@ -112,9 +118,11 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
         else
         {
             Log.e(TAG, "quantityCCC "+quantity);
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-            String producttotatlps=formatter.format(Double.parseDouble(quantity));
-            viewHolderForCat.productquantity.setText("Quantity Available: "+producttotatlps);
+            //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+           // String producttotatlps=formatter.format(Double.parseDouble(quantity));
+            double vc = Double.parseDouble(quantity);
+            String patternFormat= Utility.getPatternFormat(""+numberPostion, vc);
+            viewHolderForCat.productquantity.setText("Quantity Available: "+patternFormat);
         }
         if (product_price.equals("") || product_price.equals("null"))
         {
@@ -122,9 +130,11 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
         }
         else
         {
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-            String price = formatter.format(Double.parseDouble(product_price));
-            viewHolderForCat.productcurrency.setText(price);
+         //   DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            double vc = Double.parseDouble(product_price);
+            String patternFormat= Utility.getPatternFormat(""+numberPostion, vc);
+//            String price = formatter.format(Double.parseDouble(product_price));
+            viewHolderForCat.productcurrency.setText(patternFormat);
 //            viewHolderForCat.productcurrency.setText(product_price.replace(".00",""));
 
         }

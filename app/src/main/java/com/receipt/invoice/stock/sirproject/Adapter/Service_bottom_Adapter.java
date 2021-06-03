@@ -18,9 +18,11 @@ import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -63,6 +65,9 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
     @Override
     public void onBindViewHolder(@NonNull final Service_bottom_Adapter.ViewHolderForCat viewHolderForCat, final int i) {
 
+        SavePref pref = new SavePref();
+        pref.SavePref(mcontext);
+        int numberPostion = pref.getNumberFormatPosition();
 
         final Service_list service_list = mlist.get(i);
         String company_id = service_list.getCompany_id();
@@ -92,9 +97,11 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
         }
         else
         {
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-            String price = formatter.format(Double.parseDouble(service_price));
-            viewHolderForCat.servicecurrency.setText(price);
+          //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            double vc = Double.parseDouble(service_price);
+            String patternFormat= Utility.getPatternFormat(""+numberPostion, vc);
+         //   String price = formatter.format(Double.parseDouble(service_price));
+            viewHolderForCat.servicecurrency.setText(patternFormat);
 
 //            viewHolderForCat.servicecurrency.setText(service_price.replace(".00",""));
         }
@@ -113,9 +120,11 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
         }
         else
         {
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-            String producttotatlps=formatter.format(Double.parseDouble(service_quantity));
-            viewHolderForCat.servicedescription.setText("Quantity Available:"+" "+producttotatlps);
+         //   DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+           // String producttotatlps=formatter.format(Double.parseDouble(service_quantity));
+            double vc = Double.parseDouble(service_quantity);
+            String patternFormat= Utility.getPatternFormat(""+numberPostion, vc);
+            viewHolderForCat.servicedescription.setText("Quantity Available:"+" "+patternFormat);
         }
 
 

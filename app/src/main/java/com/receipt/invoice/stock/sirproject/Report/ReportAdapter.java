@@ -51,78 +51,12 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
 
         viewHolderForCat.textViewName.setText(""+mlist.get(i));
 
-
         viewHolderForCat.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((ReportActivity)mcontext).onClickAdapter(i);
             }
         });
-
-
-//        InvoiceData company_list = mlist.get(i);
-//
-//        final String customer_name = company_list.getInvoicustomer_name();
-//        final String invoice_no = company_list.getInvoice_nobdt();
-//        final String invoicedue_date = company_list.getInvoicedue_date();
-//        final String invoicetotlaprice = company_list.getInvoicetotlaprice();
-//        final String strstatus = company_list.getInvocestatus();
-//        final String is_viewed = company_list.getIs_viewed();
-//
-//
-//
-//        if (customer_name.equals("") && customer_name.equals("null")) {
-//            viewHolderForCat.customernamtxt.setText("");
-//        } else {
-//            viewHolderForCat.customernamtxt.setText(customer_name);
-//        }
-//        if (invoice_no.equals("") && invoice_no.equals("null")) {
-//            viewHolderForCat.invoicenbtxt.setText("");
-//        } else {
-//            viewHolderForCat.invoicenbtxt.setText(""+invoice_no);
-//        }
-//
-//        if (invoicedue_date.equals("") && invoicedue_date.equals("null")) {
-//            viewHolderForCat.invoiceduetxt.setText("");
-//        } else {
-//            viewHolderForCat.invoiceduetxt.setText("| Date: "+invoicedue_date);
-//        }
-//
-//        if (invoicetotlaprice.equals("") && invoicetotlaprice.equals("null")) {
-//            viewHolderForCat.invoicepricetxt.setText("");
-//        } else {
-//            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-//            double stratingvalue = Double.parseDouble(invoicetotlaprice);
-//            viewHolderForCat.invoicepricetxt.setText(formatter.format(stratingvalue)+" "+company_list.getPayment_currency());
-//        }
-//
-//        if (strstatus.equals("") && strstatus.equals("null")) {
-//            viewHolderForCat.statustxt.setText("");
-//        } else {
-//            if (strstatus.equals("2")) {
-//                viewHolderForCat.statustxt.setText("Paid");
-//                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
-//
-//            }else {
-//                viewHolderForCat.statustxt.setText("Unpaid");
-//                viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
-//            }
-//        }
-//
-//        if (is_viewed.equalsIgnoreCase("0")) {
-//            viewHolderForCat.invoicesttsuspend.setText("Pending");
-//            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#FF0000"));
-//        }else{
-//            viewHolderForCat.invoicesttsuspend.setText("Seen");
-//            viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#008000"));
-//        }
-//
-//        viewHolderForCat.invoicestatus.setVisibility(View.GONE);
-//        viewHolderForCat.invoicesttsuspend.setVisibility(View.GONE);
-//
-//        viewHolderForCat.statustxt.setVisibility(View.GONE);
-
-
 
     }
 
