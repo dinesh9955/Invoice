@@ -12,8 +12,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Stock_Products;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -53,9 +55,14 @@ public class Stock_Products_Details_Adapter extends RecyclerView.Adapter<Stock_P
 
         }
         else {
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0");
+          //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0");
             double vz = Double.parseDouble(stock_products.getTotal_quantity());
-            viewHolderForCat.stock.setText("Quantity: "+formatter.format(vz));
+            SavePref pref = new SavePref();
+            pref.SavePref(mcontext);
+            int numberPostion = pref.getNumberFormatPosition();
+
+            String stringFormat = Utility.getPatternFormat(""+numberPostion, vz);
+            viewHolderForCat.stock.setText("Quantity: "+stringFormat);
         }
 
         RequestOptions options = new RequestOptions();

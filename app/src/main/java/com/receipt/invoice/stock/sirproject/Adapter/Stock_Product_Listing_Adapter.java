@@ -14,8 +14,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Details.Stock_Products_Detail;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -84,12 +86,18 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
         }
         else
         {
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0");
+            //DecimalFormat formatter = new DecimalFormat("##,##,##,##0");
 
             double vz = Double.parseDouble(quantity);
 
+            SavePref pref = new SavePref();
+            pref.SavePref(mcontext);
+            int numberPostion = pref.getNumberFormatPosition();
+
+            String stringFormat = Utility.getPatternFormat(""+numberPostion, vz);
+
            // grosstotal.setText(formatter.format(stratingvalue) +cruncycode);
-            viewHolderForCat.productquantity.setText("Quantity: "+formatter.format(vz));
+            viewHolderForCat.productquantity.setText("Quantity: "+stringFormat);
         }
 
         //value
@@ -99,15 +107,21 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
         }
         else
         {
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+           // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
             double vz = Double.parseDouble(value);
 
+            SavePref pref = new SavePref();
+            pref.SavePref(mcontext);
+            int numberPostion = pref.getNumberFormatPosition();
+
+            String stringFormat = Utility.getPatternFormat(""+numberPostion, vz);
+
             if (currency_symbol.equals("") || currency_symbol.equals("null")){
-                viewHolderForCat.productvalue.setText("Value: "+formatter.format(vz)+" "+product_list.getCurrency_code());
+                viewHolderForCat.productvalue.setText("Value: "+stringFormat+" "+product_list.getCurrency_code());
             }
             else {
-                viewHolderForCat.productvalue.setText("Value: "+formatter.format(vz)+" "+currency_symbol);
+                viewHolderForCat.productvalue.setText("Value: "+stringFormat+" "+currency_symbol);
             }
         }
 
@@ -151,9 +165,14 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
         }
         else
         {
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+           // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
             double vz = Double.parseDouble(product_price);
-            viewHolderForCat.productcurrency.setText(""+formatter.format(vz));
+            SavePref pref = new SavePref();
+            pref.SavePref(mcontext);
+            int numberPostion = pref.getNumberFormatPosition();
+
+            String stringFormat = Utility.getPatternFormat(""+numberPostion, vz);
+            viewHolderForCat.productcurrency.setText(""+stringFormat);
 
         }
 

@@ -59,10 +59,11 @@ dependencies {
 
     //bottom navigation
     implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
-    implementation 'com.google.android.material:material:1.0.0'
-
+   // implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.2.0'
     //spinner
     implementation 'com.github.sadra:AwesomeSpinner:1.5.2'
+    implementation 'com.github.psinetron:slycalendarview:0.0.9'
 
     //camera and gallery dialog
     //implementation 'com.github.jrvansuita:PickImage:+'

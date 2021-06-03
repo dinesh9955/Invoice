@@ -3351,6 +3351,12 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_price: "+total_price);
 
+        if(tempList.size() == 0){
+            textViewNoItems.setVisibility(View.VISIBLE);
+        }else{
+            textViewNoItems.setVisibility(View.GONE);
+        }
+
         DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         double grandAmount = 0.0;
@@ -3474,11 +3480,7 @@ public class FragmentCreate_Receipts extends Fragment implements Customer_Bottom
         }
 
 
-        if(tempList.size() == 0){
-            textViewNoItems.setVisibility(View.VISIBLE);
-        }else{
-            textViewNoItems.setVisibility(View.GONE);
-        }
+
 
 
 

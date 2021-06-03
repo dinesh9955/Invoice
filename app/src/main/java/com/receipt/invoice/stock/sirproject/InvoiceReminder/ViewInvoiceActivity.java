@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.gson.Gson;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceDto;
@@ -113,73 +114,6 @@ public class ViewInvoiceActivity extends AppCompatActivity {
         printimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                final File savedPDFFile = FileManager.getInstance().createTempFile(getApplicationContext(), "pdf", false);
-//
-//                String content  = " <!DOCTYPE html>\n" +
-//                        "<html>\n" +
-//                        "<body>\n" +
-//                        "\n" +
-//                        "<h1>My First Heading</h1>\n" +
-//                        "<p>My first paragraph.</p>\n" +
-//                        " <a href='https://www.example.com'>This is a link</a>" +
-//                        "\n" +
-//                        "</body>\n" +
-//                        "</html> ";
-//
-//
-//                PDFUtil.generatePDFFromHTML(getApplicationContext(), savedPDFFile, contentAll , new PDFPrint.OnPDFPrintListener() {
-//                    @SuppressLint("LongLogTag")
-//                    @Override
-//                    public void onSuccess(File file) {
-//
-//                        Log.e(TAG, "file!!! "+file);
-//
-//                        // Open Pdf Viewer
-//                        // Uri pdfUri = Uri.fromFile(file);
-//
-//
-//                        //File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/example.pdf");
-////                        Intent intent = new Intent(Intent.ACTION_VIEW);
-////                        intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-////                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-////                        startActivity(intent);
-//
-//
-//
-//                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-//                        //File fileWithinMyDir = new File(pdfUri);
-//
-//                        if(file.exists()) {
-//                            Uri photoURI = FileProvider.getUriForFile(InvoiceViewActivityWebView.this,
-//                                    "com.receipt.invoice.stock.sirproject.provider",
-//                                    file);
-//                            intentShareFile.setType("application/pdf");
-//                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
-//
-//                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-//                                    "Share As Pdf");
-//                            //  intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
-//
-//                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
-//                        }
-//        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
-//            companylogopathdto= company_image_path + companylogopath;
-//        }else{
-//            companylogopathdto = "/android_res/drawable/white_img.png";
-//        }
-////                        Intent intentPdfViewer = new Intent(Abc.this, PDFViewerActivity.class);
-////                        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri);
-////
-////                        startActivity(intentPdfViewer);
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception exception) {
-//                        exception.printStackTrace();
-//                    }
-//                });
-
                 createWebPrintJob(invoiceweb);
             }
         });
@@ -329,6 +263,10 @@ public class ViewInvoiceActivity extends AppCompatActivity {
 
                 Log.e("product", productsItemDtos.toString());
 
+                SavePref pref = new SavePref();
+                pref.SavePref(ViewInvoiceActivity.this);
+                int numberPostion = pref.getNumberFormatPosition();
+
 
 
                 int numsize = grosamont.size();
@@ -342,70 +280,79 @@ public class ViewInvoiceActivity extends AppCompatActivity {
                             String dd = listobj.getValue();
 
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            Grossamount_str = formatter.format(vc);
+                            //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                            Grossamount_str= Utility.getPatternFormat(""+numberPostion, vc);
+                            //Grossamount_str = formatter.format(vc);
                             //Grossamount_str_real = dd;
                         }
 
 
                         // Grossamount_str = listobj.getValue();
-                    } else if (title.equals("Sub Total")) {
+                    } else if (code.equals("sub_total")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            Subtotalamount = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+//                            Subtotalamount = formatter.format(vc);
+                            Subtotalamount= Utility.getPatternFormat(""+numberPostion, vc);
                         }
                         // Subtotalamount = listobj.getValue();
-                    } else if (title.equals("Grand Total")) {
+                    } else if (code.equals("total")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            netamountvalue = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+//                            netamountvalue = formatter.format(vc);
+                            netamountvalue= Utility.getPatternFormat(""+numberPostion, vc);
                         }
                         //netamountvalue = listobj.getValue();
-                    } else if (title.equals("Paid Amount")) {
+                    } else if (code.equals("paid_amount")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            strpaid_amount = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+//                            strpaid_amount = formatter.format(vc);
+                            strpaid_amount= Utility.getPatternFormat(""+numberPostion, vc);
                         }
                         //strpaid_amount = listobj.getValue();
-                    } else if (title.equals("Remaining Balance")) {
+                    } else if (code.equals("remaining_balance")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            Blanceamountstr = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+//                            Blanceamountstr = formatter.format(vc);
+                            Blanceamountstr= Utility.getPatternFormat(""+numberPostion, vc);
                         }
                         //Blanceamountstr = listobj.getValue();
                     }else if (code.equals("tax")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            invoicetaxvalue = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+//                            invoicetaxvalue = formatter.format(vc);
+                            invoicetaxvalue= Utility.getPatternFormat(""+numberPostion, vc);
                             taxTitle = title;
                         }
                         //invoicetaxvalue = listobj.getValue();
                     }
-                    else if (title.equals("Discount")) {
+                    else if (code.equals("discount")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            strdiscountvalue = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+//                            strdiscountvalue = formatter.format(vc);
+                            strdiscountvalue= Utility.getPatternFormat(""+numberPostion, vc);
                         }
                         // strdiscountvalue = listobj.getValue();
                     }
-                    else if (title.equals("Freight Cost")) {
+                    else if (code.equals("shipping")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            freight_cost = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+//                            freight_cost = formatter.format(vc);
+                            freight_cost= Utility.getPatternFormat(""+numberPostion, vc);
+
                         }
                         // freight_cost = listobj.getValue();
                     }
@@ -461,25 +408,16 @@ public class ViewInvoiceActivity extends AppCompatActivity {
             Shiping_tostr="Ship To:";
 
             if(!shippingfirstname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingfirstname+"</br>");
-            }
-            if(!shippinglastname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippinglastname+"</br>");
-            }
-            if(!shippingaddress1.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress1+"</br>");
-            }
-            if(!shippingaddress2.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress2+"</br>");
-            }
-            if(!shippingcity.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcity+"</br>");
-            }
-            if(!shippingcountry.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcountry+"</br>");
+                stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
             }
             if(!shippingpostcode.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingpostcode+"");
+                stringBuilderShipTo.append(shippingpostcode+"</br>");
+            }
+            if(!shippingcity.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingcity+", "+shippingcountry+"</br>");
+            }
+            if(!shippingaddress1.equalsIgnoreCase("")){
+                stringBuilderShipTo.append(shippingaddress1+", "+shippingaddress2+"</br>");
             }
 
             //Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
@@ -562,18 +500,27 @@ public class ViewInvoiceActivity extends AppCompatActivity {
         try {
             for (int i = 0; i < productsItemDtos.size(); i++) {
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+              //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                 double productQuantity= Double.parseDouble(productsItemDtos.get(i).getQuantity());
                 double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
                 double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
+
+                SavePref pref = new SavePref();
+                pref.SavePref(ViewInvoiceActivity.this);
+                int numberPostion = pref.getNumberFormatPosition();
+
+                String stringFormatQuantity = Utility.getPatternFormat(""+numberPostion, productQuantity);
+                String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
+                String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, producpriceAmount);
+
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
                         .replaceAll("#NAME#", ""+productsItemDtos.get(i).getName())
                         .replaceAll("#DESC#", ""+productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", ""+productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
-                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
-                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) +"" + Utility.getReplaceDollor(currency_code))
-                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) +"" + Utility.getReplaceDollor(currency_code));
+                        .replaceAll("#QUANTITY#", ""+stringFormatQuantity)
+                        .replaceAll("#PRICE#", ""+stringFormatRate +"" + Utility.getReplaceDollor(currency_code))
+                        .replaceAll("#TOTAL#", ""+stringFormatAmount +"" + Utility.getReplaceDollor(currency_code));
 
                 productitemlist = productitemlist + productitem;
 
@@ -773,6 +720,11 @@ public class ViewInvoiceActivity extends AppCompatActivity {
 
             hiddenpaidrow="";
         }
+
+        SavePref pref = new SavePref();
+        pref.SavePref(ViewInvoiceActivity.this);
+        int numberPostion = pref.getNumberFormatPosition();
+
 
 
         Log.e(TAG,"paimnetdetailstrtxtCCC "+paimnetdetailstrtxt);

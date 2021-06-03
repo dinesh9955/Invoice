@@ -2,18 +2,25 @@ package com.receipt.invoice.stock.sirproject.Home.adapter;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.receipt.invoice.stock.sirproject.Home.Model.InvoiceModel;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class HomeInvoiceAdapter extends RecyclerView.Adapter<HomeInvoiceAdapter.MyViewHolder> {
+
+    private static final String TAG = "HomeInvoiceAdapter";
+
 
     public Context context;
     public ArrayList<InvoiceModel> invoiceModelArrayList = new ArrayList<>() ;
@@ -40,19 +47,23 @@ public class HomeInvoiceAdapter extends RecyclerView.Adapter<HomeInvoiceAdapter.
 
         holder.invoicestxt.setText(invoiceModelArrayList.get(position).getInvoice_no());
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+      //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
+        SavePref pref = new SavePref();
+        pref.SavePref(context);
+
         double stratingvalue = Double.parseDouble(invoiceModelArrayList.get(position).getTotal());
-        holder.amount.setText(formatter.format(stratingvalue) + " "+invoiceModelArrayList.get(position).getPayment_currency());
+        int numberPostion = pref.getNumberFormatPosition();
+        Log.e(TAG, "numberPostionAA "+numberPostion);
+        String stringFormat = Utility.getPatternFormat(""+numberPostion, stratingvalue);
 
-
+        holder.amount.setText(stringFormat + " "+invoiceModelArrayList.get(position).getPayment_currency());
 
     }
 
     @Override
     public int getItemCount() {
-
         return invoiceModelArrayList.size();
-
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

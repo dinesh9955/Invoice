@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +16,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Details.Product_Detail_Activity;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -96,8 +100,17 @@ public class Product_Listing_Adapter extends RecyclerView.Adapter<Product_Listin
         }catch (Exception e){
 
         }
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-        viewHolderForCat.productstock.setText(""+formatter.format(doubleMinimum));
+        //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
+        SavePref pref = new SavePref();
+        pref.SavePref(mcontext);
+
+        //double stratingvalue = Double.parseDouble(invoiceModelArrayList.get(position).getTotal());
+        int numberPostion = pref.getNumberFormatPosition();
+       // Log.e(TAG, "numberPostionAA "+numberPostion);
+        String stringFormat = Utility.getPatternFormat(""+numberPostion, doubleMinimum);
+
+        viewHolderForCat.productstock.setText(""+stringFormat);
 
 
         //reorder
@@ -123,7 +136,8 @@ public class Product_Listing_Adapter extends RecyclerView.Adapter<Product_Listin
         else
         {
             double vc = Double.parseDouble(product_price);
-            viewHolderForCat.productcurrency.setText(formatter.format(vc));
+            String stringFormatproductcurrency = Utility.getPatternFormat(""+numberPostion, vc);
+            viewHolderForCat.productcurrency.setText(stringFormatproductcurrency);
 
         }
 

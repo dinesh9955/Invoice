@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.receipt.invoice.stock.sirproject.Details.Service_Detail_Activity;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -79,8 +81,13 @@ public class Service_Listing_Adapter extends RecyclerView.Adapter<Service_Listin
         else
         {
             double vc = Double.parseDouble(service_price);
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-            viewHolderForCat.servicecurrency.setText(formatter.format(vc));
+            //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            SavePref pref = new SavePref();
+            pref.SavePref(mcontext);
+            int numberPostion = pref.getNumberFormatPosition();
+            String stringFormat = Utility.getPatternFormat(""+numberPostion, vc);
+
+            viewHolderForCat.servicecurrency.setText(stringFormat);
 
         }
         if (service_category.equals("") || service_category.equals("null"))

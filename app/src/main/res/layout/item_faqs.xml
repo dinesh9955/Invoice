@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+>
+
+    <RelativeLayout
+        android:id="@+id/relaive11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_blue2"
+        android:padding="22dp"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apache 2.0"
+            android:id="@+id/text_setting"
+            android:textColor="@color/fragmentfont"
+            android:layout_alignParentLeft="true"
+            android:textSize="17sp"
+            android:layout_centerVertical="true"
+            android:textStyle="normal"
+            android:layout_toLeftOf="@+id/imageView"
+            />
+
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/directional25"
+            android:tint="@color/black"/>
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relaive11"
+        android:visibility="gone"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:letterSpacing="0.1"
+                android:lineSpacingExtra="10dp"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:textStyle="normal"
+                android:id="@+id/name"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

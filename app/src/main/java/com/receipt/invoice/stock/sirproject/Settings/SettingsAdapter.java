@@ -1,21 +1,34 @@
 package com.receipt.invoice.stock.sirproject.Settings;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.receipt.invoice.stock.sirproject.Adapter.Product_Bottom_Adapter;
+import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
+import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Report.ReportActivity;
 import com.receipt.invoice.stock.sirproject.Report.ReportAdapter;
 import com.receipt.invoice.stock.sirproject.Report.ReportViewActivity;
+import com.receipt.invoice.stock.sirproject.SignupSignin.Signin_Activity;
 
 import java.util.ArrayList;
 
@@ -23,16 +36,24 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
 
     //InvoiceCallBack invoiceCallBack;
 
-    private Context mcontext;
+    private Activity mcontext;
 
     ArrayList<Integer> arrayListIcons = new ArrayList<>();
     ArrayList<String> arrayListNames = new ArrayList<>();
 
+    SavePref pref = new SavePref();
+    private SettingsAdapter settingsAdapter;
 
-    public SettingsAdapter(Context mcontext, ArrayList<Integer> arrayListIcons2, ArrayList<String> list) {
+    int languagePostion = -1;
+
+    public SettingsAdapter(Activity mcontext, ArrayList<Integer> arrayListIcons2, ArrayList<String> list) {
         this.mcontext = mcontext;
         arrayListNames = list;
         arrayListIcons = arrayListIcons2;
+
+        pref.SavePref(mcontext);
+
+        settingsAdapter = this;
     }
 
 
@@ -60,16 +81,31 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
         viewHolderForCat.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mcontext, WebShowActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                if(i == 8){
+                if(i == 0){
+                    numberFormatDialog();
+                } else if(i == 6){
+                    Intent intent = new Intent(mcontext, FAQsActivity.class);
+                    mcontext.startActivity(intent);
+                } else if(i == 7){
+                    Intent intent = new Intent(mcontext, LanguageActivity.class);
+                    mcontext.startActivity(intent);
+                } else if(i == 8){
+                    Intent intent = new Intent(mcontext, WebShowActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("positionNext", i);
                     mcontext.startActivity(intent);
                 } else if(i == 10){
+                    Intent intent = new Intent(mcontext, WebShowActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("positionNext", i);
                     mcontext.startActivity(intent);
                 }else if(i == 11){
+                    Intent intent = new Intent(mcontext, WebShowActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("positionNext", i);
+                    mcontext.startActivity(intent);
+                }else if(i == 12){
+                    Intent intent = new Intent(mcontext, SupportActivity.class);
                     mcontext.startActivity(intent);
                 }
             }
@@ -142,4 +178,69 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
         arrayListNames = list;
         notifyDataSetChanged();
     }
+
+
+
+
+    public void numberFormatDialog() {
+
+
+        final Dialog mybuilder = new Dialog(mcontext);
+        mybuilder.setContentView(R.layout.number_format_dialog_list);
+
+        TextView txtBack = (TextView) mybuilder.findViewById(R.id.txtBack);
+        txtBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mybuilder.dismiss();
+            }
+        });
+
+        TextView txtSave = (TextView) mybuilder.findViewById(R.id.txtSave);
+        txtSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pref.setNumberFormatPosition(languagePostion);
+                mybuilder.dismiss();
+                Intent intent = new Intent(mcontext, Home_Activity.class);
+                mcontext.startActivity(intent);
+               // mcontext.finishAffinity();
+                mcontext.finish();
+            }
+        });
+
+        RecyclerView recycler_invoices = mybuilder.findViewById(R.id.recycler_list);
+
+        ArrayList<String> arrayListNames = new ArrayList<>();
+        arrayListNames.add("1,000,000.00");
+        arrayListNames.add("1,00,00,000.00");
+        arrayListNames.add("1.000.000,00");
+        arrayListNames.add("1 000 000,00");
+
+
+        languagePostion = pref.getNumberFormatPosition();
+
+        NumberFormatAdapter invoicelistAdapterdt = new NumberFormatAdapter(mcontext, arrayListNames, settingsAdapter);
+        recycler_invoices.setAdapter(invoicelistAdapterdt);
+        invoicelistAdapterdt.updateLanguagePosition(languagePostion);
+        recycler_invoices.setLayoutManager(new LinearLayoutManager(mcontext, LinearLayoutManager.VERTICAL, false));
+        recycler_invoices.setHasFixedSize(true);
+        invoicelistAdapterdt.notifyDataSetChanged();
+
+
+
+        mybuilder.show();
+        mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        Window window = mybuilder.getWindow();
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawableResource(R.color.transparent);
+
+    }
+
+
+    public void numberFormatPosition(int position){
+        languagePostion = position;
+    }
+
+
 }

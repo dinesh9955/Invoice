@@ -193,11 +193,11 @@ public class ViewEstimate_Activity extends AppCompatActivity {
 
 
             tempQuantity = (ArrayList<String>) getIntent().getSerializableExtra("tempQuantity");
-
             producprice = (ArrayList<String>) getIntent().getSerializableExtra("producprice");
+
             if (tempQuantity.size() > 0) {
                 for (int i = 0; i < tempQuantity.size(); i++) {
-                    Log.e("value", tempQuantity.get(i));
+                    Log.e("valueAAA ", tempQuantity.get(i));
                 }
             }
             myList = (ArrayList<Product_list>) getIntent().getSerializableExtra("tempList");
@@ -470,14 +470,19 @@ public class ViewEstimate_Activity extends AppCompatActivity {
                 cruncycode = myList.get(i).getCurrency_code();
 
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+//                Log.e("product[" + i + "]" + "[price]", myList.get(i).getProduct_price());
+//                Log.e("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
+//                Log.e("product[" + i + "]" + "[product_id]", myList.get(i).getProduct_id());
+
 
                 double productQuantity = Double.parseDouble(tempQuantity.get(i));
                 double producpriceRate = Double.parseDouble(producprice.get(i));
-                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+             //   double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+
+                double producpriceAmount = producpriceRate * productQuantity;
 
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
-
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", myList.get(i).getProduct_measurement_unit())

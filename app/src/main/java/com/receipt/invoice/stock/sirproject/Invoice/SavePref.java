@@ -1343,4 +1343,36 @@ public class SavePref {
 		return name;
 	}
 
+
+	public void setLanguagePosition(int string) {
+		// TODO Auto-generated method stub
+		editor.putInt("setLanguagePosition",string);
+		editor.commit();
+		Log.d(TAG, "setLanguagePosition received");
+	}
+
+
+	public int getLanguagePosition() {
+		// TODO Auto-generated method stub
+		int name = preferences.getInt("setLanguagePosition",0);
+		Log.d(TAG, "setLanguagePosition received "+name);
+		return name;
+	}
+
+
+	public void setNumberFormatPosition(int string) {
+		// TODO Auto-generated method stub
+		editor.putInt("getNumberFormatPosition",string);
+		editor.commit();
+		Log.d(TAG, "getNumberFormatPosition received");
+	}
+
+
+	public int getNumberFormatPosition() {
+		// TODO Auto-generated method stub
+		int name = preferences.getInt("getNumberFormatPosition",0);
+		Log.d(TAG, "getNumberFormatPosition received "+name);
+		return name;
+	}
+
 }

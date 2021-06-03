@@ -451,12 +451,14 @@ public class EstimateViewActivityWebView extends AppCompatActivity {
 
                 DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
+                Log.e(TAG, "productsItemDtos.get(i).getPrice() "+productsItemDtos.get(i).getPrice());
+                Log.e(TAG, "productsItemDtos.get(i).getTotal() "+productsItemDtos.get(i).getTotal());
+
                 double productQuantity = Double.parseDouble(productsItemDtos.get(i).getQuantity());
                 double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
                 double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
-
                         .replaceAll("#NAME#", productsItemDtos.get(i).getName())
                         .replaceAll("#DESC#", productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())

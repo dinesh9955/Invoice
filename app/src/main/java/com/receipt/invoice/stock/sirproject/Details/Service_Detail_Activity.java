@@ -8,7 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.text.DecimalFormat;
@@ -90,8 +92,13 @@ public class Service_Detail_Activity extends AppCompatActivity {
             else
             {
                 double vc = Double.parseDouble(service_price);
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                serviceprice.setText(formatter.format(vc)+" "+currencycode);
+              //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                SavePref pref = new SavePref();
+                pref.SavePref(Service_Detail_Activity.this);
+                int numberPostion = pref.getNumberFormatPosition();
+                String stringFormat = Utility.getPatternFormat(""+numberPostion, vc);
+
+                serviceprice.setText(stringFormat+" "+currencycode);
             }
 
             if (service_description.equals("") || service_description.equals("null"))

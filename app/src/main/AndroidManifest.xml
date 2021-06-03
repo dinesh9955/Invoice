@@ -512,13 +512,7 @@
         </activity>
 
 
-        <activity
-            android:name=".Settings.SettingsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
 
-        </activity>
 
 
 
@@ -594,10 +588,51 @@
 
 
 
+        <activity
+            android:name=".Settings.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+x
+        </activity>
 
 
         <activity
             android:name=".Settings.WebShowActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+        <activity
+            android:name=".Settings.SupportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
+        <activity
+            android:name=".Settings.LanguageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+
+        <activity
+            android:name=".Settings.FAQsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
+        <activity
+            android:name=".Settings.FAQsDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >

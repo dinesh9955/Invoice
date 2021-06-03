@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="save"
+                android:text="Save"
                 android:padding="3dp"
                 android:textColor="@color/lightpurple"
                 android:textSize="15sp"

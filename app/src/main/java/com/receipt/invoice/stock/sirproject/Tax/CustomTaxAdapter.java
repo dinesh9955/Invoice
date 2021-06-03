@@ -12,8 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.util.ArrayList;
 
@@ -72,13 +74,24 @@ public class CustomTaxAdapter  extends RecyclerView.Adapter<CustomTaxAdapter.Vie
             viewHolderForCat.txtincome.setText(taxname);
         }
 
+        SavePref pref = new SavePref();
+        pref.SavePref(mcontext);
+        int numberPostion = pref.getNumberFormatPosition();
+        double vc = 0.0;
+        try {
+            vc = Double.parseDouble(taxvalue);
+        }catch (Exception e){
+
+        }
+        String stringFormat = Utility.getPatternFormat(""+numberPostion, vc);
+
         if (typestr.equals("P"))
         {
-                viewHolderForCat.txtincomepercent.setText(taxvalue + " %");
+                viewHolderForCat.txtincomepercent.setText(stringFormat + " %");
         }
         else
             {
-                viewHolderForCat.txtincomepercent.setText(taxvalue );
+                viewHolderForCat.txtincomepercent.setText(stringFormat );
             }
 
         if(i == selectedPos)

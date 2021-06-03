@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/r"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/lightgray"
+       >
+
+
+        <TextView
+
+            android:id="@+id/txtheadvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+         android:layout_centerVertical="true"
+            android:text="Select Number Format"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            />
+
+
+        <TextView
+
+            android:id="@+id/txtBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="Back"
+            android:textColor="@color/light_blue"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_toLeftOf="@+id/txtSave"
+            />
+
+
+
+        <TextView
+
+            android:id="@+id/txtSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Save"
+            android:textColor="@color/light_blue"
+            android:layout_alignParentRight="true"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            />
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler_list"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/r">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

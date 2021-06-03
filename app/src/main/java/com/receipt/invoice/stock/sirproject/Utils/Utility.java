@@ -597,22 +597,22 @@ public class Utility {
     public static String getPatternFormat(String s, double value) {
         String defaultPattern = "0.0";
 
-        if(s.equalsIgnoreCase("1")){
+        if(s.equalsIgnoreCase("0")){
             NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
             nf.setMinimumFractionDigits(2);
             defaultPattern = nf.format(value);
 //            defaultPattern = "###,###,###,##0.00";
-        }else if(s.equalsIgnoreCase("2")){
+        }else if(s.equalsIgnoreCase("1")){
             NumberFormat nf = NumberFormat.getInstance(new Locale("en", "IN"));
             nf.setMinimumFractionDigits(2);
             defaultPattern = nf.format(value);
 //            defaultPattern = "##,##,##,##0.00";
-        }else if(s.equalsIgnoreCase("3")){
+        }else if(s.equalsIgnoreCase("2")){
             NumberFormat nf = NumberFormat.getInstance(new Locale("da", "DK"));
             nf.setMinimumFractionDigits(2);
             defaultPattern = nf.format(value);
 //            defaultPattern = "###.###.###.##0,00";
-        }else if(s.equalsIgnoreCase("4")){
+        }else if(s.equalsIgnoreCase("3")){
             NumberFormat nf = NumberFormat.getInstance(new Locale("sk", "SK"));
             nf.setMinimumFractionDigits(2);
             defaultPattern = nf.format(value);

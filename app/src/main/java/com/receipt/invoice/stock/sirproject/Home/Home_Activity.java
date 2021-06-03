@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.andrognito.flashbar.Flashbar;
 import com.andrognito.flashbar.anim.FlashAnim;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
+import com.receipt.invoice.stock.sirproject.Base.LicenseListAdapter;
 import com.receipt.invoice.stock.sirproject.Home.Model.CompanyModel;
 import com.receipt.invoice.stock.sirproject.Home.Model.InvoiceModel;
 import com.receipt.invoice.stock.sirproject.Adapter.Invoice_OverDue_Adapter;
@@ -55,7 +57,7 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Home_Activity extends AppCompatActivity implements MenuDelegate{
+public class Home_Activity extends BaseActivity implements MenuDelegate{
 
     String TAG = "Home_Activity";
 
@@ -410,6 +412,8 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
                         HomeInvoiceAdapter homeInvoiceAdapter = new HomeInvoiceAdapter(Home_Activity.this);
                         businessactivitiesRV.setAdapter(homeInvoiceAdapter);
 
+//                        LicenseListAdapter licenseListAdapter = new LicenseListAdapter(Home_Activity.this);
+//                        businessactivitiesRV.setAdapter(licenseListAdapter);
                         if (invoiceModelArrayList.size()>0) {
                             txtinvoice.setVisibility(View.GONE);
                         } else {
@@ -424,7 +428,7 @@ public class Home_Activity extends AppCompatActivity implements MenuDelegate{
                         Invoice_OverDue_Adapter invoice_overDue_adapter = new Invoice_OverDue_Adapter(Home_Activity.this);
                         invoiceoverdueRV.setAdapter(invoice_overDue_adapter);
 
-                        if (invoiceDueDateModelArrayList.size()>0) {
+                        if (invoiceDueDateModelArrayList.size() > 0) {
                             no_overduetxt.setVisibility(View.GONE);
                         } else {
                             no_overduetxt.setVisibility(View.VISIBLE);

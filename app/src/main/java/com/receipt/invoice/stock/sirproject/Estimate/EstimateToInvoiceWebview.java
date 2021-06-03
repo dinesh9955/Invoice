@@ -687,7 +687,7 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
             Log.e(TAG, "strpaid_amount2:: "+strpaid_amount);
 
             // null response or Exception occur
-            paidamountstrrepvalue =strpaid_amount+cruncycode;
+            paidamountstrrepvalue =strpaid_amount;
             paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
 
 

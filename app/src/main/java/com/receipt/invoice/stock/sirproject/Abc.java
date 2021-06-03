@@ -1,5 +1,6 @@
 package com.receipt.invoice.stock.sirproject;
 
+import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -26,7 +27,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.core.util.Pair;
 
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
@@ -47,6 +53,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -60,6 +67,7 @@ import com.tejpratapsingh.pdfcreator.utils.FileManager;
 //import com.tejpratapsingh.pdfcreator.utils.FileManager;
 
 import cz.msebera.android.httpclient.util.ByteArrayBuffer;
+import ru.slybeaver.slycalendarview.SlyCalendarDialog;
 
 public class Abc extends AppCompatActivity{
 
@@ -75,10 +83,71 @@ public class Abc extends AppCompatActivity{
         Button button = (Button) findViewById(R.id.button2);
 
 
+        MaterialDatePicker.Builder<Pair<Long, Long>> materialDateBuilder = MaterialDatePicker.Builder.dateRangePicker();
+       // materialDateBuilder.setTitleText("SELECT A DATE");
+        materialDateBuilder.setTheme(R.style.AppTheme2);
+        final MaterialDatePicker materialDatePicker = materialDateBuilder.build();
+
+//        materialDatePicker.
+
+        materialDatePicker.addOnPositiveButtonClickListener(
+                new MaterialPickerOnPositiveButtonClickListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onPositiveButtonClick(Object selection) {
+
+                        // if the user clicks on the positive
+                        // button that is ok button update the
+                        // selected date
+                        button.setText("Selected Date is : " + materialDatePicker.getHeaderText());
+                        // in the above statement, getHeaderText
+                        // will return selected date preview from the
+                        // dialog
+                    }
+                });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+              //  materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
+
+                MaterialDatePicker.Builder startDateBuilder;
+                MaterialDatePicker startDatePicker;
+
+                startDateBuilder = MaterialDatePicker.Builder.datePicker();
+                startDateBuilder.setTitleText("Starting date");
+
+                long today = MaterialDatePicker.todayInUtcMilliseconds();
+
+
+                CalendarConstraints.Builder con = new CalendarConstraints.Builder();
+
+                CalendarConstraints.DateValidator dateValidator = DateValidatorPointForward.now();
+
+                con.setValidator(dateValidator); // Previous dates hide
+
+                con.setStart(today); // Calender start from set day of the month
+
+                startDateBuilder.setSelection(today);
+
+                startDateBuilder.setCalendarConstraints(con.build());
+                startDateBuilder.setTheme(R.style.AppTheme2); // Custom Theme
+
+                startDatePicker = startDateBuilder.build();
+
+                startDatePicker.show(getSupportFragmentManager(), startDatePicker.toString());
+
+
+//                new SlyCalendarDialog()
+//                        .setSingle(false)
+//                        .setCallback(listener)
+//                        .
+////                        .setBackgroundColor(Color.parseColor("#ff0000"))
+////                        .setSelectedTextColor(Color.parseColor("#ffff00"))
+////                        .setSelectedColor(Color.parseColor("#0000ff"))
+//                        .show(getSupportFragmentManager(), "TAG_SLYCALENDAR");
+
+
 
 
 
@@ -120,40 +189,40 @@ public class Abc extends AppCompatActivity{
 
 
 
-                String pdf = "/sdcard/CreditNote.pdf";
-                String png = "/sdcard/logo_new.png";
-
-                File mFile1 = new File(pdf);
-                File mFile2 = new File(png);
-
-                Uri imageUri1 = FileProvider.getUriForFile(
-                        Abc.this,
-                        "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
-                        mFile1);
-
-                Uri imageUri2 = FileProvider.getUriForFile(
-                        Abc.this,
-                        "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
-                        mFile2);
-
-                ArrayList<Uri> uriArrayList = new ArrayList<>();
-                uriArrayList.add(imageUri1);
-                uriArrayList.add(imageUri2);
-
-                Intent sharingIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-                sharingIntent.setType("application/pdf/*|image/*");
-                sharingIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-              //  startActivity(Intent.createChooser(sharingIntent, "Share using"));
-
-                sharingIntent.putExtra(Intent.EXTRA_SUBJECT,
-                        "Thank you note");
-                sharingIntent.putExtra(Intent.EXTRA_TEXT,
-                        "We appreciate your Business. Kindly find below Thank you note.");
-
-                if (Utility.isAppAvailable(Abc.this, "com.google.android.gm")){
-                    sharingIntent.setPackage("com.google.android.gm");
-                }
-                startActivity(sharingIntent);
+//                String pdf = "/sdcard/CreditNote.pdf";
+//                String png = "/sdcard/logo_new.png";
+//
+//                File mFile1 = new File(pdf);
+//                File mFile2 = new File(png);
+//
+//                Uri imageUri1 = FileProvider.getUriForFile(
+//                        Abc.this,
+//                        "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
+//                        mFile1);
+//
+//                Uri imageUri2 = FileProvider.getUriForFile(
+//                        Abc.this,
+//                        "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
+//                        mFile2);
+//
+//                ArrayList<Uri> uriArrayList = new ArrayList<>();
+//                uriArrayList.add(imageUri1);
+//                uriArrayList.add(imageUri2);
+//
+//                Intent sharingIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+//                sharingIntent.setType("application/pdf/*|image/*");
+//                sharingIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+//              //  startActivity(Intent.createChooser(sharingIntent, "Share using"));
+//
+//                sharingIntent.putExtra(Intent.EXTRA_SUBJECT,
+//                        "Thank you note");
+//                sharingIntent.putExtra(Intent.EXTRA_TEXT,
+//                        "We appreciate your Business. Kindly find below Thank you note.");
+//
+//                if (Utility.isAppAvailable(Abc.this, "com.google.android.gm")){
+//                    sharingIntent.setPackage("com.google.android.gm");
+//                }
+//                startActivity(sharingIntent);
 
             }
         });
@@ -161,6 +230,18 @@ public class Abc extends AppCompatActivity{
 
     }
 
+
+    SlyCalendarDialog.Callback listener = new SlyCalendarDialog.Callback() {
+        @Override
+        public void onCancelled() {
+
+        }
+
+        @Override
+        public void onDataSelected(Calendar firstDate, Calendar secondDate, int hours, int minutes) {
+
+        }
+    };
 
 
     public void DownloadFile(String strUrl, String folderName, String fileName) {
