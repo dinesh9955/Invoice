@@ -28,7 +28,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.core.util.Pair;
+import androidx.fragment.app.DialogFragment;
 
+import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
+import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
+import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -48,6 +52,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -62,6 +67,7 @@ import java.util.Locale;
 import com.lowagie.text.Font;
 import com.receipt.invoice.stock.sirproject.InvoiceReminder.SendInvoiceReminderActivity;
 import com.receipt.invoice.stock.sirproject.ThankYouNote.SendThankYouNoteActivity;
+import com.receipt.invoice.stock.sirproject.Utils.SublimePickerFragment;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 //import com.tejpratapsingh.pdfcreator.utils.FileManager;
@@ -111,31 +117,54 @@ public class Abc extends AppCompatActivity{
             public void onClick(View v) {
               //  materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
 
-                MaterialDatePicker.Builder startDateBuilder;
-                MaterialDatePicker startDatePicker;
 
-                startDateBuilder = MaterialDatePicker.Builder.datePicker();
-                startDateBuilder.setTitleText("Starting date");
-
-                long today = MaterialDatePicker.todayInUtcMilliseconds();
+                SublimePickerFragment pickerFrag = new SublimePickerFragment();
+                pickerFrag.setCallback(mFragmentCallback);
 
 
-                CalendarConstraints.Builder con = new CalendarConstraints.Builder();
+                android.util.Pair<Boolean, SublimeOptions> optionsPair = getOptions();
 
-                CalendarConstraints.DateValidator dateValidator = DateValidatorPointForward.now();
+//                if (!optionsPair.first) { // If options are not valid
+//                    Toast.makeText(Abc.this, "No pickers activated",
+//                            Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
 
-                con.setValidator(dateValidator); // Previous dates hide
+                // Valid options
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("SUBLIME_OPTIONS", optionsPair.second);
+                pickerFrag.setArguments(bundle);
 
-                con.setStart(today); // Calender start from set day of the month
+                pickerFrag.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+                pickerFrag.show(getSupportFragmentManager(), "SUBLIME_PICKER");
 
-                startDateBuilder.setSelection(today);
 
-                startDateBuilder.setCalendarConstraints(con.build());
-                startDateBuilder.setTheme(R.style.AppTheme2); // Custom Theme
-
-                startDatePicker = startDateBuilder.build();
-
-                startDatePicker.show(getSupportFragmentManager(), startDatePicker.toString());
+//
+//                MaterialDatePicker.Builder startDateBuilder;
+//                MaterialDatePicker startDatePicker;
+//
+//                startDateBuilder = MaterialDatePicker.Builder.datePicker();
+//                startDateBuilder.setTitleText("Starting date");
+//
+//                long today = MaterialDatePicker.todayInUtcMilliseconds();
+//
+//
+//                CalendarConstraints.Builder con = new CalendarConstraints.Builder();
+//
+//                CalendarConstraints.DateValidator dateValidator = DateValidatorPointForward.now();
+//
+//                con.setValidator(dateValidator); // Previous dates hide
+//
+//                con.setStart(today); // Calender start from set day of the month
+//
+//                startDateBuilder.setSelection(today);
+//
+//                startDateBuilder.setCalendarConstraints(con.build());
+//                startDateBuilder.setTheme(R.style.AppTheme2); // Custom Theme
+//
+//                startDatePicker = startDateBuilder.build();
+//
+//                startDatePicker.show(getSupportFragmentManager(), startDatePicker.toString());
 
 
 //                new SlyCalendarDialog()
@@ -229,6 +258,86 @@ public class Abc extends AppCompatActivity{
 
 
     }
+
+    android.util.Pair<Boolean, SublimeOptions> getOptions() {
+        SublimeOptions options = new SublimeOptions();
+        int displayOptions = 0;
+
+//        if (cbDatePicker.isChecked()) {
+            displayOptions |= SublimeOptions.ACTIVATE_DATE_PICKER;
+//        }
+//
+//        if (cbTimePicker.isChecked()) {
+//            displayOptions |= SublimeOptions.ACTIVATE_TIME_PICKER;
+//        }
+//
+//        if (cbRecurrencePicker.isChecked()) {
+//            displayOptions |= SublimeOptions.ACTIVATE_RECURRENCE_PICKER;
+//        }
+
+//        if (rbDatePicker.getVisibility() == View.VISIBLE && rbDatePicker.isChecked()) {
+            options.setPickerToShow(SublimeOptions.Picker.DATE_PICKER);
+//        } else if (rbTimePicker.getVisibility() == View.VISIBLE && rbTimePicker.isChecked()) {
+//            options.setPickerToShow(SublimeOptions.Picker.TIME_PICKER);
+//        } else if (rbRecurrencePicker.getVisibility() == View.VISIBLE && rbRecurrencePicker.isChecked()) {
+//            options.setPickerToShow(SublimeOptions.Picker.REPEAT_OPTION_PICKER);
+//        }
+
+        options.setDisplayOptions(displayOptions);
+
+        // Enable/disable the date range selection feature
+        options.setCanPickDateRange(true);
+
+        // Example for setting date range:
+        // Note that you can pass a date range as the initial date params
+        // even if you have date-range selection disabled. In this case,
+        // the user WILL be able to change date-range using the header
+        // TextViews, but not using long-press.
+
+        /*Calendar startCal = Calendar.getInstance();
+        startCal.set(2016, 2, 4);
+        Calendar endCal = Calendar.getInstance();
+        endCal.set(2016, 2, 17);
+
+        options.setDateParams(startCal, endCal);*/
+
+        // If 'displayOptions' is zero, the chosen options are not valid
+        return new android.util.Pair<>(displayOptions != 0 ? Boolean.TRUE : Boolean.FALSE, options);
+    }
+
+
+
+    SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
+        @Override
+        public void onCancelled() {
+           // rlDateTimeRecurrenceInfo.setVisibility(View.GONE);
+        }
+
+        @Override
+        public void onDateTimeRecurrenceSet(SelectedDate selectedDate,
+                                            int hourOfDay, int minute,
+                                            SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
+                                            String recurrenceRule) {
+            if (selectedDate != null) {
+                if (selectedDate.getType() == SelectedDate.Type.SINGLE) {
+//                tvYear.setText(applyBoldStyle("YEAR: ")
+//                        .append(String.valueOf(mSelectedDate.getStartDate().get(Calendar.YEAR))));
+//                tvMonth.setText(applyBoldStyle("MONTH: ")
+//                        .append(String.valueOf(mSelectedDate.getStartDate().get(Calendar.MONTH))));
+//                tvDay.setText(applyBoldStyle("DAY: ")
+//                        .append(String.valueOf(mSelectedDate.getStartDate().get(Calendar.DAY_OF_MONTH))));
+                } else if (selectedDate.getType() == SelectedDate.Type.RANGE) {
+//                llDateHolder.setVisibility(View.GONE);
+//                llDateRangeHolder.setVisibility(View.VISIBLE);
+//
+//                tvStartDate.setText(applyBoldStyle("START: ")
+//                        .append(DateFormat.getDateInstance().format(mSelectedDate.getStartDate().getTime())));
+//                tvEndDate.setText(applyBoldStyle("END: ")
+//                        .append(DateFormat.getDateInstance().format(mSelectedDate.getEndDate().getTime())));
+                }
+            }
+        }
+    };
 
 
     SlyCalendarDialog.Callback listener = new SlyCalendarDialog.Callback() {

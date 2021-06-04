@@ -169,6 +169,8 @@ dependencies {
 
     def billing_version = "3.0.0"
     implementation "com.android.billingclient:billing:$billing_version"
+
+    compile 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.2'
 }
 
 
