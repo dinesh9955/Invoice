@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
@@ -20,7 +21,7 @@ import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import static com.facebook.FacebookSdk.setAutoLogAppEventsEnabled;
 
-public class Splash_Activity extends AppCompatActivity {
+public class Splash_Activity extends BaseActivity {
     private static final String TAG = "Splash_Activity";
     boolean LOGGED_IN = false;
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1999;
@@ -37,8 +38,8 @@ public class Splash_Activity extends AppCompatActivity {
        /* FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 */
-        SavePref pref  = new SavePref();
-        pref.SavePref(Splash_Activity.this);
+//        SavePref pref  = new SavePref();
+//        pref.SavePref(Splash_Activity.this);
         pref.setTemplate(0);
 
         FacebookSdk.setAdvertiserIDCollectionEnabled(true);

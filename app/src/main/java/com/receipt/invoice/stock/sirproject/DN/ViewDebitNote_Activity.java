@@ -23,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.RequestManager;
 import com.google.gson.Gson;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.View_invoice;
@@ -36,7 +37,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class ViewDebitNote_Activity extends AppCompatActivity {
+public class ViewDebitNote_Activity extends BaseActivity {
 
 
     private static final String TAG = "ViewDebitNote_Activity";
@@ -485,21 +486,24 @@ public class ViewDebitNote_Activity extends AppCompatActivity {
 
                 //Log.e(TAG, " producprice.get(i)"+ producprice.get(i))
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
                 Double productQuantity = Double.parseDouble(tempQuantity.get(i));
                 double producpriceRate = Double.parseDouble(producprice.get(i));
                 double producpriceAmount = producpriceRate * productQuantity;
 
+                String stringFormatQuantity = Utility.getPatternFormat(""+numberPostion, productQuantity);
+                String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
+                String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, producpriceAmount);
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
 
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", myList.get(i).getProduct_measurement_unit())
-                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
-                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#QUANTITY#", ""+stringFormatQuantity)
+                        .replaceAll("#PRICE#", ""+stringFormatRate +"" + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", ""+stringFormatAmount +"" + Utility.getReplaceDollor(cruncycode));
 
                 productitemlist = productitemlist + productitem;
             }

@@ -25,6 +25,7 @@ import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.InvoiceViewActivityWebView;
 import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper2;
@@ -46,7 +47,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ThankYouNoteActivity extends AppCompatActivity{
+public class ThankYouNoteActivity extends BaseActivity {
 
     private static final String TAG = "ThankYouNoteActivity";
     ArrayList<InvoiceData> list = new ArrayList<>();
@@ -97,7 +98,6 @@ public class ThankYouNoteActivity extends AppCompatActivity{
         recycler_invoices = findViewById(R.id.recycler_invoices);
         selectcompany = findViewById(R.id.selectcompany);
         search = findViewById(R.id.search);
-
 
 
         invoicelistAdapterdt = new ThankYouNoteAdapter(ThankYouNoteActivity.this, list);
@@ -209,11 +209,13 @@ public class ThankYouNoteActivity extends AppCompatActivity{
 //                                cEmail.add(company_email);
 //                                cLogo.add(logo);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ThankYouNoteActivity.this, android.R.layout.simple_spinner_item, cnames);
-                                selectcompany.setAdapter(namesadapter);
+
 
                             }
                         }
+
+                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ThankYouNoteActivity.this, android.R.layout.simple_spinner_item, cnames);
+                        selectcompany.setAdapter(namesadapter);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

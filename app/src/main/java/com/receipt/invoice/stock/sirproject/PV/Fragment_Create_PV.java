@@ -79,6 +79,7 @@ import com.receipt.invoice.stock.sirproject.Adapter.Customer_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Product_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Products_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Service_bottom_Adapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
@@ -128,9 +129,9 @@ import cz.msebera.android.httpclient.Header;
 import gun0912.tedbottompicker.TedRxBottomPicker;
 import io.reactivex.disposables.Disposable;
 
-public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
+public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
 
-    SavePref pref = new SavePref();
+  //  SavePref pref = new SavePref();
 
     int selectedTemplate = 0;
 
@@ -314,6 +315,14 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
 
     double discountAmountDD = 0.0;
 
+    double grandAmountZZ = 0.0;
+    double discountAmountZZ = 0.0;
+    double subtotalAmountZZ = 0.0;
+    double taxAmountZZ = 0.0;
+    double afterTaxAmountZZ = 0.0;
+    double shippingAmountZZ = 0.0;
+    double netAmountZZ = 0.0;
+
     public Fragment_Create_PV() {
         // Required empty public constructor
     }
@@ -340,7 +349,6 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        pref.SavePref(getActivity());
     }
 
     @Override
@@ -1023,9 +1031,10 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
             params.add("ref_no", ref_no);
             params.add("paid_amount_payment_method", paymentmode);
             params.add("credit_terms", credit_terms);
-            params.add("freight_cost", freight_cost);
-            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
-
+//            params.add("freight_cost", freight_cost);
+//            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+            params.add("freight_cost", ""+shippingAmountZZ);
+            params.add("discount", ""+discountAmountZZ);
             Log.e(TAG, "strpaid_amountAA "+paidamountstr);
             params.add("paid_amount", paidamountstr);
             params.add("paid_amount_date", Paymentamountdate);
@@ -1115,7 +1124,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
                         params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
                     }else{
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "]" + "[amount]", ""+taxAmountZZ);
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
                         params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
                     }
@@ -3394,7 +3403,7 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
             textViewNoItems.setVisibility(View.GONE);
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+       // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         double grandAmount = 0.0;
         double discountAmount = 0.0;
@@ -3464,38 +3473,46 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
             if(grandAmount == 0){
                 grosstotal.setText("0");
             }else{
-                grosstotal.setText(formatter.format(grandAmount)+""+cruncycode);
+                grosstotal.setText(Utility.getPatternFormat(""+numberPostion, grandAmount)+""+cruncycode);
             }
 
             if(discountAmount == 0){
                 discount.setText("0");
             }else{
-                discount.setText("-"+formatter.format(discountAmount)+""+cruncycode);
+                discount.setText("-"+Utility.getPatternFormat(""+numberPostion, discountAmount)+""+cruncycode);
             }
 
             if(subtotalAmount == 0){
                 subtotal.setText("0");
             }else{
-                subtotal.setText(formatter.format(subtotalAmount)+""+cruncycode);
+                subtotal.setText(Utility.getPatternFormat(""+numberPostion, subtotalAmount)+""+cruncycode);
             }
 
             if(taxAmount == 0){
                 tax.setText("0");
             }else{
-                tax.setText(formatter.format(taxAmount)+""+cruncycode);
+                tax.setText(Utility.getPatternFormat(""+numberPostion, taxAmount)+""+cruncycode);
             }
 
             if(shippingAmount == 0){
                 freight.setText("0");
             }else{
-                freight.setText(formatter.format(shippingAmount)+""+cruncycode);
+                freight.setText(Utility.getPatternFormat(""+numberPostion, shippingAmount)+""+cruncycode);
             }
 
             if(netAmount == 0){
                 netamount.setText("0");
             }else{
-                netamount.setText(formatter.format(netAmount)+""+cruncycode);
+                netamount.setText(Utility.getPatternFormat(""+numberPostion, netAmount)+""+cruncycode);
             }
+
+            grandAmountZZ = grandAmount;
+            discountAmountZZ = discountAmount;
+            subtotalAmountZZ = subtotalAmount;
+            taxAmountZZ = taxAmount;
+            afterTaxAmountZZ = afterTaxAmount;
+            shippingAmountZZ = shippingAmount;
+            netAmountZZ = netAmount;
 
         }else{
             grandAmount = 0.0;
@@ -3506,6 +3523,13 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
             shippingAmount = 0.0;
             netAmount = 0.0;
 
+            grandAmountZZ = 0.0;
+            discountAmountZZ = 0.0;
+            subtotalAmountZZ = 0.0;
+            taxAmountZZ = 0.0;
+            afterTaxAmountZZ = 0.0;
+            shippingAmountZZ = 0.0;
+            netAmountZZ = 0.0;
 
             grosstotal.setText("0");
             discount.setText("0");
@@ -4184,19 +4208,25 @@ public class Fragment_Create_PV extends Fragment implements Customer_Bottom_Adap
                 Log.e(TAG, "TOTAL "+totalpriceproduct.get(i));
                 Log.e(TAG, "TOTAL2 "+tempList.get(i).getCurrency_code());
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
                 double productQuantity = Double.parseDouble(tempQuantity.get(i));
                 double producpriceRate = Double.parseDouble(producprice.get(i));
-                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+               // double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+
+                double totalAmount = producpriceRate * productQuantity;
+
+                String stringFormatQuantity = Utility.getPatternFormat(""+numberPostion, productQuantity);
+                String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
+                String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
                 productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
-                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
-                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#QUANTITY#", ""+stringFormatQuantity)
+                        .replaceAll("#PRICE#", ""+stringFormatRate +"" + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", ""+stringFormatAmount +"" + Utility.getReplaceDollor(cruncycode));
 
                 productitemlist = productitemlist + productitem;
             }

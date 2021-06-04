@@ -12,8 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.ThankYouNote.ViewInvoiceActivity;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -73,9 +76,12 @@ public class CreditNoteListAdapterdt extends RecyclerView.Adapter<CreditNoteList
         if (invoicetotlaprice.equals("") && invoicetotlaprice.equals("null")) {
             viewHolderForCat.invoicepricetxt.setText("");
         } else {
-            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
             double stratingvalue = Double.parseDouble(invoicetotlaprice);
-            viewHolderForCat.invoicepricetxt.setText(formatter.format(stratingvalue)+" "+company_list.getPayment_currency());
+            SavePref pref = new SavePref();
+            pref.SavePref(mcontext);
+            int numberPostion = pref.getNumberFormatPosition();
+            viewHolderForCat.invoicepricetxt.setText(Utility.getPatternFormat(""+numberPostion, stratingvalue)+" "+company_list.getPayment_currency());
         }
 
         if (strstatus.equals("") && strstatus.equals("null")) {

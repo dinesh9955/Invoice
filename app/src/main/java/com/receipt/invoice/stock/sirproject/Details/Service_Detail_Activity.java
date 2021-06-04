@@ -7,15 +7,16 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
-import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
+//import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.text.DecimalFormat;
 
-public class Service_Detail_Activity extends AppCompatActivity {
+public class Service_Detail_Activity extends BaseActivity {
 
 
     TextView service_id,servicename,serviceprice,servicedepart,servicedescription,servicetaxable,measurement;
@@ -93,9 +94,7 @@ public class Service_Detail_Activity extends AppCompatActivity {
             {
                 double vc = Double.parseDouble(service_price);
               //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                SavePref pref = new SavePref();
-                pref.SavePref(Service_Detail_Activity.this);
-                int numberPostion = pref.getNumberFormatPosition();
+
                 String stringFormat = Utility.getPatternFormat(""+numberPostion, vc);
 
                 serviceprice.setText(stringFormat+" "+currencycode);

@@ -75,7 +75,6 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
     ProgressDialog dialog;
 
-    SavePref savePref;
     TextView no_customer;
     TextView txtNo, no_overduetxt;
     TextView txtinvoice;
@@ -95,7 +94,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         setContentView(R.layout.activity_home_);
         overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
 
-        savePref = new SavePref(Home_Activity.this);
+
 
         if (getIntent().hasExtra("login")) {
             messagebar();

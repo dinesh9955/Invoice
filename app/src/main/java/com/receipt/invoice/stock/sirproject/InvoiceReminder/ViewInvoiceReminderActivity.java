@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
@@ -43,7 +44,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class ViewInvoiceReminderActivity extends AppCompatActivity {
+public class ViewInvoiceReminderActivity extends BaseActivity {
     private final String TAG = "ViewThankYouNoteActivity";
     WebView invoiceweb;
     String invoiceId = "";
@@ -259,12 +260,18 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
                 company_website = companyDto.getWebsite();
                 company_email = companyDto.getEmail();
 
+
                 if (companyDto.getLogo() != null)
                 {
                     companylogopath = companyDto.getLogo();
                 }
 
-
+                payment_swift_bic = companyDto.getPaymentSwiftBic();
+                payment_currency = companyDto.getPaymentCurrency();
+                payment_iban = companyDto.getPaymentIban();
+                paypal_emailstr = companyDto.getPaypalEmail();
+                payment_bank_name = companyDto.getPaymentBankName();
+                cheque_payable_to = companyDto.getChequePayableTo();
 
                 //invoice Data
                 invoiceDtoInvoice = data.getInvoice();
@@ -274,12 +281,12 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
                 credit_terms = invoiceDtoInvoice.getCreditTerms();
                 ref_no = invoiceDtoInvoice.getRefNo();
 
-                payment_swift_bic = invoiceDtoInvoice.getPaymentSwiftBic();
-                payment_currency = invoiceDtoInvoice.getPaymentCurrency();
-                payment_iban = invoiceDtoInvoice.getPaymentIban();
-                paypal_emailstr = companyDto.getPaypalEmail();
-                payment_bank_name = companyDto.getPaymentBankName();
-                cheque_payable_to = companyDto.getChequePayableTo();
+//                payment_swift_bic = invoiceDtoInvoice.getPaymentSwiftBic();
+//                payment_currency = invoiceDtoInvoice.getPaymentCurrency();
+//                payment_iban = invoiceDtoInvoice.getPaymentIban();
+//                paypal_emailstr = companyDto.getPaypalEmail();
+//                payment_bank_name = companyDto.getPaymentBankName();
+//                cheque_payable_to = companyDto.getChequePayableTo();
 
                 Log.e(TAG, "paypal_emailstrLL "+paypal_emailstr);
 
@@ -330,9 +337,6 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
 
                 Log.e("product", productsItemDtos.toString());
 
-                SavePref pref = new SavePref();
-                pref.SavePref(ViewInvoiceReminderActivity.this);
-                int numberPostion = pref.getNumberFormatPosition();
 
                 int numsize = grosamont.size();
                 for (int i = 0; i < numsize; i++) {
@@ -569,9 +573,6 @@ public class ViewInvoiceReminderActivity extends AppCompatActivity {
                 double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
                 double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
 
-                SavePref pref = new SavePref();
-                pref.SavePref(ViewInvoiceReminderActivity.this);
-                int numberPostion = pref.getNumberFormatPosition();
 
                 String stringFormatQuantity = Utility.getPatternFormat(""+numberPostion, productQuantity);
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);

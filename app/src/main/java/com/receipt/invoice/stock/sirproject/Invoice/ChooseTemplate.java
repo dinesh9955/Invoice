@@ -19,12 +19,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.adapter.ChooseTemplateAdapter;
 import com.receipt.invoice.stock.sirproject.R;
 
 import java.util.ArrayList;
 
-public class ChooseTemplate extends AppCompatActivity {
+public class ChooseTemplate extends BaseActivity {
 
     private static final String TAG = "ChooseTemplate";
     int selectedTemplate = 0;
@@ -34,7 +35,7 @@ public class ChooseTemplate extends AppCompatActivity {
     ChooseTemplateAdapter mAdapter;
 
     ArrayList<String> arrayList = new ArrayList<>();
-    SavePref pref = new SavePref();
+    //SavePref pref = new SavePref();
      String colorCode = "#ffffff";
 
     @Override
@@ -43,7 +44,7 @@ public class ChooseTemplate extends AppCompatActivity {
 
         setContentView(R.layout.choose_template);
 
-        pref.SavePref(ChooseTemplate.this);
+//        pref.SavePref(ChooseTemplate.this);
 
         Toolbar toolbar = findViewById(R.id.toolbarprint);
         TextView titleView = toolbar.findViewById(R.id.title1);

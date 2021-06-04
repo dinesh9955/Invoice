@@ -25,6 +25,7 @@ import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper2;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
@@ -42,7 +43,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class InvoiceReminderActivity extends AppCompatActivity{
+public class InvoiceReminderActivity extends BaseActivity {
 
     private static final String TAG = "InvoiceReminderActivity";
     ArrayList<InvoiceData> list = new ArrayList<>();

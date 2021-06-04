@@ -83,6 +83,9 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
             public void onClick(View v) {
                 if(i == 0){
                     numberFormatDialog();
+                } else if(i == 1){
+                    Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
+                    mcontext.startActivity(intent);
                 } else if(i == 6){
                     Intent intent = new Intent(mcontext, FAQsActivity.class);
                     mcontext.startActivity(intent);

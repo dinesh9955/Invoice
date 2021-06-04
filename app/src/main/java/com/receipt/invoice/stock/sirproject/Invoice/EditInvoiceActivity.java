@@ -77,6 +77,7 @@ import com.receipt.invoice.stock.sirproject.Adapter.Customer_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Product_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Products_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Service_bottom_Adapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
@@ -141,7 +142,7 @@ import retrofit2.Callback;
 
 import static com.receipt.invoice.stock.sirproject.Invoice.Fragment_Create_Invoice.verifyStroagePermissions;
 
-public class EditInvoiceActivity extends AppCompatActivity implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
+public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
     private static final String TAG = "editInvoiceActivity";
     String companycolor = "#ffffff";
     int selectedTemplate = 0;
@@ -353,6 +354,17 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
     double discountAmountDD = 0.0;
     boolean boolTax = false;
+
+    double grandAmountZZ = 0.0;
+    double discountAmountZZ = 0.0;
+    double subtotalAmountZZ = 0.0;
+    double taxAmountZZ = 0.0;
+    double afterTaxAmountZZ = 0.0;
+    double shippingAmountZZ = 0.0;
+    double netAmountZZ = 0.0;
+    double paidAmountZZ = 0.0;
+    double balanceAmountZZ = 0.0;
+
 
 //    String templateSelect = "0";
 //    String colorCode = "#ffffff";
@@ -850,7 +862,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                 productsRecycler.setAdapter(products_adapter);
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
 
 
@@ -870,11 +882,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                         // Log.e(TAG,"Grossamount_strdtoDDD "+Grossamount_strdto);
 
-
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            grosstotal.setText(formatter.format(Grossamount_strdto));
+                            grosstotal.setText(Utility.getPatternFormat(""+numberPostion, Grossamount_strdto));
                         } else {
-                            grosstotal.setText(formatter.format(Grossamount_strdto) + currency_codedto);
+                            grosstotal.setText(Utility.getPatternFormat(""+numberPostion, Grossamount_strdto) + currency_codedto);
                         }
                     } else if (code.equals("sub_total")) {
 
@@ -884,11 +895,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                         }
 
-
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            subtotal.setText(formatter.format(Subtotalamountdto));
+                            subtotal.setText(Utility.getPatternFormat(""+numberPostion, Subtotalamountdto));
                         } else {
-                            subtotal.setText(formatter.format(Subtotalamountdto) + currency_codedto);
+                            subtotal.setText(Utility.getPatternFormat(""+numberPostion, Subtotalamountdto) + currency_codedto);
                         }
 
                     } else if (code.equals("total")) {
@@ -899,11 +909,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                         }
 
-
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            netamount.setText(formatter.format(Netamountvaluedto));
+                            netamount.setText(Utility.getPatternFormat(""+numberPostion, Netamountvaluedto));
                         } else {
-                            netamount.setText(formatter.format(Netamountvaluedto) + currency_codedto);
+                            netamount.setText(Utility.getPatternFormat(""+numberPostion, Netamountvaluedto) + currency_codedto);
                         }
                     } else if (code.equals("paid_amount")) {
 
@@ -913,11 +922,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                         }
 
-
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            paidamount.setText(formatter.format(Paidamountstrdto));
+                            paidamount.setText(Utility.getPatternFormat(""+numberPostion, Paidamountstrdto));
                         } else {
-                            paidamount.setText(formatter.format(Paidamountstrdto) + currency_codedto);
+                            paidamount.setText(Utility.getPatternFormat(""+numberPostion, Paidamountstrdto) + currency_codedto);
                         }
 
                     } else if (code.equals("remaining_balance")) {
@@ -928,11 +936,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                         }
 
-
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            balance.setText(formatter.format(Blanceamountstrdto));
+                            balance.setText(Utility.getPatternFormat(""+numberPostion, Blanceamountstrdto));
                         } else {
-                            balance.setText(formatter.format(Blanceamountstrdto) + currency_codedto);
+                            balance.setText(Utility.getPatternFormat(""+numberPostion, Blanceamountstrdto) + currency_codedto);
                         }
 
                     }
@@ -945,15 +952,13 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                         }
 
-
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            balance.setText("-"+formatter.format(Discountamountstrdto));
+                            discount.setText("-"+Utility.getPatternFormat(""+numberPostion, Discountamountstrdto));
                         } else {
-                            balance.setText("-"+formatter.format(Discountamountstrdto) + currency_codedto);
+                            discount.setText("-"+Utility.getPatternFormat(""+numberPostion, Discountamountstrdto) + currency_codedto);
                         }
 
                     }
-
 
                     else if (code.equals("shipping")) {
 
@@ -963,12 +968,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
                         }
 
-
-
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            freight.setText(formatter.format(Shippingamountdto));
+                            freight.setText(Utility.getPatternFormat(""+numberPostion, Shippingamountdto));
                         } else {
-                            freight.setText(formatter.format(Shippingamountdto) + currency_codedto);
+                            freight.setText(Utility.getPatternFormat(""+numberPostion, Shippingamountdto) + currency_codedto);
                         }
 
                     }
@@ -991,9 +994,9 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         // Double taxVAL = Double.parseDouble(Tax_amountdto);
 
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            tax.setText(formatter.format(Tax_amountdto));
+                            tax.setText(Utility.getPatternFormat(""+numberPostion, Tax_amountdto));
                         } else {
-                            tax.setText(formatter.format(Tax_amountdto) + currency_codedto);
+                            tax.setText(Utility.getPatternFormat(""+numberPostion, Tax_amountdto) + currency_codedto);
                         }
 
 
@@ -1043,9 +1046,9 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         }
 
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            paidamount.setText(formatter.format(Paidamountstrdto));
+                            paidamount.setText(Utility.getPatternFormat(""+numberPostion, Paidamountstrdto));
                         } else {
-                            paidamount.setText(formatter.format(Paidamountstrdto) + currency_codedto);
+                            paidamount.setText(Utility.getPatternFormat(""+numberPostion, Paidamountstrdto) + currency_codedto);
                         }
 
                     } else if (code.equals("remaining_balance")) {
@@ -1056,9 +1059,9 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                         }
 
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            balance.setText(formatter.format(Blanceamountstrdto));
+                            balance.setText(Utility.getPatternFormat(""+numberPostion, Blanceamountstrdto));
                         } else {
-                            balance.setText(formatter.format(Blanceamountstrdto) + currency_codedto);
+                            balance.setText(Utility.getPatternFormat(""+numberPostion, Blanceamountstrdto) + currency_codedto);
                         }
 
                     }
@@ -1487,8 +1490,10 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             Log.e(TAG, "paymentmodeXXX "+paymentmode);
             params.add("paid_amount_payment_method", paymentmode);
             params.add("credit_terms", credit_terms);
-            params.add("freight_cost", Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
-            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+//            params.add("freight_cost", Utility.getReplaceCurrency(freight.getText().toString(), cruncycode));
+//            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+            params.add("freight_cost", ""+shippingAmountZZ);
+            params.add("discount", ""+discountAmountZZ);
             params.add("paid_amount", strpaid_amount);
             params.add("paid_amount_date", Paymentamountdate);
             params.add("shipping_firstname", shippingfirstname);
@@ -1619,7 +1624,7 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
                     }else{
                         Log.e(TAG, "WWWWWWWWWWWWW");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                        params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                        params.add("tax[" + i + "]" + "[amount]", ""+taxAmountZZ);
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
 
 //                                String isTaxRate = selectedtaxt.get(i).getTaxrate();
@@ -1886,9 +1891,6 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
 
 
         if(requestCode == 121){
-
-            SavePref pref = new SavePref();
-            pref.SavePref(EditInvoiceActivity.this);
 
             selectedTemplate = pref.getTemplate();
             Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
@@ -3893,53 +3895,60 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             if(grandAmount == 0){
                 grosstotal.setText("0");
             }else{
-                grosstotal.setText(formatter.format(grandAmount)+""+cruncycode);
+                grosstotal.setText(Utility.getPatternFormat(""+numberPostion, grandAmount)+""+cruncycode);
             }
 
             if(discountAmount == 0){
                 discount.setText("0");
             }else{
-                discount.setText("-"+formatter.format(discountAmount)+""+cruncycode);
+                discount.setText("-"+Utility.getPatternFormat(""+numberPostion, discountAmount)+""+cruncycode);
             }
 
             if(subtotalAmount == 0){
                 subtotal.setText("0");
             }else{
-                subtotal.setText(formatter.format(subtotalAmount)+""+cruncycode);
+                subtotal.setText(Utility.getPatternFormat(""+numberPostion, subtotalAmount)+""+cruncycode);
             }
 
             if(taxAmount == 0){
                 tax.setText("0");
             }else{
-                tax.setText(formatter.format(taxAmount)+""+cruncycode);
+                tax.setText(Utility.getPatternFormat(""+numberPostion, taxAmount)+""+cruncycode);
             }
 
             if(shippingAmount == 0){
                 freight.setText("0");
             }else{
-                freight.setText(formatter.format(shippingAmount)+""+cruncycode);
+                freight.setText(Utility.getPatternFormat(""+numberPostion, shippingAmount)+""+cruncycode);
             }
 
             if(netAmount == 0){
                 netamount.setText("0");
             }else{
-                netamount.setText(formatter.format(netAmount)+""+cruncycode);
+                netamount.setText(Utility.getPatternFormat(""+numberPostion, netAmount)+""+cruncycode);
             }
 
             if(paidAmount == 0){
                 paidamount.setText("0");
             }else{
-                paidamount.setText(formatter.format(paidAmount)+""+cruncycode);
+                paidamount.setText(Utility.getPatternFormat(""+numberPostion, paidAmount)+""+cruncycode);
             }
 
             if(balanceAmount == 0){
                 balance.setText("0");
             }else{
-                balance.setText(formatter.format(balanceAmount)+""+cruncycode);
+                balance.setText(Utility.getPatternFormat(""+numberPostion, balanceAmount)+""+cruncycode);
             }
 
-
-
+            grandAmountZZ = grandAmount;
+            discountAmountZZ = discountAmount;
+            subtotalAmountZZ = subtotalAmount;
+            taxAmountZZ = taxAmount;
+            afterTaxAmountZZ = afterTaxAmount;
+            shippingAmountZZ = shippingAmount;
+            netAmountZZ = netAmount;
+            paidAmountZZ = paidAmount;
+            balanceAmountZZ = balanceAmount;
         } else {
 
             grandAmount = 0.0;
@@ -3951,6 +3960,16 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             netAmount = 0.0;
             paidAmount= 0.0;
             balanceAmount = 0.0;
+
+            grandAmountZZ = 0.0;
+            discountAmountZZ = 0.0;
+            subtotalAmountZZ = 0.0;
+            taxAmountZZ = 0.0;
+            afterTaxAmountZZ = 0.0;
+            shippingAmountZZ = 0.0;
+            netAmountZZ = 0.0;
+            paidAmountZZ = 0.0;
+            balanceAmountZZ = 0.0;
 
             grosstotal.setText("0");
             subtotal.setText("0");
@@ -5019,20 +5038,27 @@ public class EditInvoiceActivity extends AppCompatActivity implements Customer_B
             for (int i = 0; i < tempList.size(); i++) {
                 cruncycode = tempList.get(i).getCurrency_code();
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+               // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
                 double productQuantity = Double.parseDouble(tempQuantity.get(i));
                 double producpriceRate = Double.parseDouble(producprice.get(i));
-                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+//                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+
+                double totalAmount = producpriceRate * productQuantity;
+
+
+                String stringFormatQuantity = Utility.getPatternFormat(""+numberPostion, productQuantity);
+                String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
+                String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
 
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
-                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
-                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#QUANTITY#", ""+stringFormatQuantity)
+                        .replaceAll("#PRICE#", ""+stringFormatRate + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", ""+stringFormatAmount + Utility.getReplaceDollor(cruncycode));
 
                 productitemlist = productitemlist + productitem;
             }

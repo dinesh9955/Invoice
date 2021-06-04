@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.RequestManager;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.View_invoice;
@@ -35,7 +36,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class EstimateToInvoiceWebview extends AppCompatActivity {
+public class EstimateToInvoiceWebview extends BaseActivity {
 
 
     private static final String TAG = "EstimateToInvoiceWebview";
@@ -473,19 +474,25 @@ public class EstimateToInvoiceWebview extends AppCompatActivity {
             for (int i = 0; i < myList.size(); i++) {
                 cruncycode = myList.get(i).getCurrency_code();
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
                 double productQuantity = Double.parseDouble(tempQuantity.get(i));
                 double producpriceRate = Double.parseDouble(producprice.get(i));
-                double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+                //double producpriceAmount = Double.parseDouble(totalpriceproduct.get(i));
+
+                double totalAmount = producpriceRate * productQuantity;
+
+                String stringFormatQuantity = Utility.getPatternFormat(""+numberPostion, productQuantity);
+                String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
+                String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", myList.get(i).getProduct_measurement_unit())
-                        .replaceAll("#QUANTITY#", ""+formatter.format(productQuantity))
-                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#QUANTITY#", ""+stringFormatQuantity)
+                        .replaceAll("#PRICE#", ""+stringFormatRate +"" + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", ""+stringFormatAmount +"" + Utility.getReplaceDollor(cruncycode));
                 productitemlist = productitemlist + productitem;
             }
 

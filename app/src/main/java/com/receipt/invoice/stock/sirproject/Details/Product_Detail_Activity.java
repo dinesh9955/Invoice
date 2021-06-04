@@ -16,8 +16,9 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
-import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
+//import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -29,7 +30,7 @@ import java.text.DecimalFormat;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Product_Detail_Activity extends AppCompatActivity {
+public class Product_Detail_Activity extends BaseActivity {
 
     TextView name,price,category,measurement,description,taxable;
     RoundedImageView image;
@@ -134,8 +135,6 @@ public class Product_Detail_Activity extends AppCompatActivity {
                         } else {
                             double vc = Double.parseDouble(p_price);
                            // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            SavePref pref = new SavePref();
-                            pref.SavePref(Product_Detail_Activity.this);
 
                             //double stratingvalue = Double.parseDouble(invoiceModelArrayList.get(position).getTotal());
                             int numberPostion = pref.getNumberFormatPosition();

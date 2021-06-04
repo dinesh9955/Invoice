@@ -14,13 +14,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.R;
 
 import java.util.ArrayList;
 
-public class LanguageActivity extends AppCompatActivity implements LanguageCallback{
+public class LanguageActivity extends BaseActivity implements LanguageCallback{
 
     private static final String TAG = "LanguageActivity";
     RecyclerView recycler_invoices;
@@ -31,7 +32,7 @@ public class LanguageActivity extends AppCompatActivity implements LanguageCallb
 
     int languagePostion = 0;
 
-    SavePref pref = new SavePref();
+    //SavePref pref = new SavePref();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class LanguageActivity extends AppCompatActivity implements LanguageCallb
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
        // Constant.toolbar(LanguageActivity.this, "Select Language");
-        pref.SavePref(LanguageActivity.this);
+      //  pref.SavePref(LanguageActivity.this);
 
         Toolbar toolbar = findViewById(R.id.toolbarprint);
         TextView titleView = toolbar.findViewById(R.id.title1);

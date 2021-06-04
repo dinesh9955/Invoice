@@ -3,19 +3,19 @@ package com.receipt.invoice.stock.sirproject.Base;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseFragment extends Fragment {
     public int numberPostion = 0;
     public int languagePosition = 0;
 
     public SavePref pref = new SavePref();
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pref.SavePref(this);
+        pref.SavePref(getActivity());
         numberPostion = pref.getNumberFormatPosition();
         languagePosition = pref.getLanguagePosition();
     }

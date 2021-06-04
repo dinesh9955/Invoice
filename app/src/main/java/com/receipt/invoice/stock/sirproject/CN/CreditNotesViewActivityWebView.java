@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class CreditNotesViewActivityWebView extends AppCompatActivity {
+public class CreditNotesViewActivityWebView extends BaseActivity {
     private final String TAG = "CreditNotesViewActivityWebView";
     WebView invoiceweb;
     String invoiceId = "";
@@ -254,16 +255,16 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            Grossamount_str = formatter.format(vc);
+                            //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                            Grossamount_str= Utility.getPatternFormat(""+numberPostion, vc);
                         }
                         //Grossamount_str = listobj.getValue();
                     } else if (code.equals("sub_total")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            Subtotalamount = formatter.format(vc);
+                           // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                            Subtotalamount = Utility.getPatternFormat(""+numberPostion, vc);
                         }
                        // Subtotalamount = listobj.getValue();
                     } else if (code.equals("total")) {
@@ -273,30 +274,30 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            netamountvalue = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                            netamountvalue = Utility.getPatternFormat(""+numberPostion, vc);
                         }
 
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            Blanceamountstr = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                            Blanceamountstr = Utility.getPatternFormat(""+numberPostion, vc);
                         }
                     } else if (code.equals("paid_amount")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            strpaid_amount = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                            strpaid_amount = Utility.getPatternFormat(""+numberPostion, vc);
                         }
                         //strpaid_amount = listobj.getValue();
                     } else if (code.equals("remaining_balance")) {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            Blanceamountstr = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                            Blanceamountstr = Utility.getPatternFormat(""+numberPostion, vc);
                         }
                         //Blanceamountstr = listobj.getValue();
                     }
@@ -306,8 +307,8 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            invoicetaxvalue = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                            invoicetaxvalue = Utility.getPatternFormat(""+numberPostion, vc);
                             taxTitle = title;
                         }
                     }
@@ -316,8 +317,8 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            strdiscountvalue = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                            strdiscountvalue = Utility.getPatternFormat(""+numberPostion, vc);
                         }
                        // strdiscountvalue = listobj.getValue();
                     }
@@ -325,8 +326,8 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
                         if(!listobj.getValue().equalsIgnoreCase("")){
                             String dd = listobj.getValue();
                             double vc = Double.parseDouble(dd);
-                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-                            freight_cost = formatter.format(vc);
+//                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                            freight_cost = Utility.getPatternFormat(""+numberPostion, vc);
                         }
                         //freight_cost = listobj.getValue();
                     }
@@ -479,20 +480,26 @@ public class CreditNotesViewActivityWebView extends AppCompatActivity {
         String productitemlist ="";
         try {
             for (int i = 0; i < productsItemDtos.size(); i++) {
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
-                Double quantityAmount = Double.parseDouble(productsItemDtos.get(i).getQuantity());
+                Double productQuantity = Double.parseDouble(productsItemDtos.get(i).getQuantity());
                 double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
-                double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
+                //double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
+
+                double totalAmount = producpriceRate * productQuantity;
+
+                String stringFormatQuantity = Utility.getPatternFormat(""+numberPostion, productQuantity);
+                String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
+                String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
 
                         .replaceAll("#NAME#", productsItemDtos.get(i).getName())
                         .replaceAll("#DESC#", productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
-                        .replaceAll("#QUANTITY#", ""+formatter.format(quantityAmount))
-                        .replaceAll("#PRICE#", ""+formatter.format(producpriceRate) +"" +Utility.getReplaceDollor(currency_code))
-                        .replaceAll("#TOTAL#", ""+formatter.format(producpriceAmount) +"" + Utility.getReplaceDollor(currency_code));
+                        .replaceAll("#QUANTITY#", ""+stringFormatQuantity)
+                        .replaceAll("#PRICE#", ""+stringFormatRate +"" + Utility.getReplaceDollor(currency_code))
+                        .replaceAll("#TOTAL#", ""+stringFormatAmount +"" + Utility.getReplaceDollor(currency_code));
 
 
                 productitemlist = productitemlist + productitem;

@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
@@ -44,7 +45,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class ViewThankYouNoteActivity extends AppCompatActivity {
+public class ViewThankYouNoteActivity extends BaseActivity {
     private final String TAG = "ViewThankYouNoteActivity";
     WebView invoiceweb;
     String invoiceId = "";
@@ -89,6 +90,7 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
 
     String taxTitle = "";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +104,7 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
         templatestr = getIntent().getStringExtra("templatestr");
         templateSelect = getIntent().getStringExtra("templateSelect");
         colorCode = getIntent().getStringExtra("colorCode");
+
 
         if (invoiceId != null) {
             Log.e("invoiceId", invoiceId);
@@ -265,7 +268,12 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
                     companylogopath = companyDto.getLogo();
                 }
 
-
+                payment_swift_bic = companyDto.getPaymentSwiftBic();
+                payment_currency = companyDto.getPaymentCurrency();
+                payment_iban = companyDto.getPaymentIban();
+                paypal_emailstr = companyDto.getPaypalEmail();
+                payment_bank_name = companyDto.getPaymentBankName();
+                cheque_payable_to = companyDto.getChequePayableTo();
 
                 //invoice Data
                 invoiceDtoInvoice = data.getInvoice();
@@ -275,12 +283,12 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
                 credit_terms = invoiceDtoInvoice.getCreditTerms();
                 ref_no = invoiceDtoInvoice.getRefNo();
 
-                payment_swift_bic = invoiceDtoInvoice.getPaymentSwiftBic();
-                payment_currency = invoiceDtoInvoice.getPaymentCurrency();
-                payment_iban = invoiceDtoInvoice.getPaymentIban();
-                paypal_emailstr = companyDto.getPaypalEmail();
-                payment_bank_name = companyDto.getPaymentBankName();
-                cheque_payable_to = companyDto.getChequePayableTo();
+//                payment_swift_bic = invoiceDtoInvoice.getPaymentSwiftBic();
+//                payment_currency = invoiceDtoInvoice.getPaymentCurrency();
+//                payment_iban = invoiceDtoInvoice.getPaymentIban();
+//                paypal_emailstr = companyDto.getPaypalEmail();
+//                payment_bank_name = companyDto.getPaymentBankName();
+//                cheque_payable_to = companyDto.getChequePayableTo();
 
                 Log.e(TAG, "paypal_emailstrLL "+paypal_emailstr);
 
@@ -330,12 +338,6 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
                 Log.e(TAG, "invoice_imageDto"+invoice_imageDto.size());
 
                 Log.e("product", productsItemDtos.toString());
-
-
-
-                SavePref pref = new SavePref();
-                pref.SavePref(ViewThankYouNoteActivity.this);
-                int numberPostion = pref.getNumberFormatPosition();
 
 
 
@@ -574,9 +576,7 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
                 double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
                 double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
 
-                SavePref pref = new SavePref();
-                pref.SavePref(ViewThankYouNoteActivity.this);
-                int numberPostion = pref.getNumberFormatPosition();
+
 
                 String stringFormatQuantity = Utility.getPatternFormat(""+numberPostion, productQuantity);
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
@@ -709,8 +709,7 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
 
         Log.e(TAG, "strpaid_amount:: "+strpaid_amount);
 
-        if (strpaid_amount.equals("") || strpaid_amount.equals("0") || strpaid_amount.equals("0.00") || strpaid_amount.equals(".00Rs") || strpaid_amount.equals(".00")) {
-            Log.e(TAG, "strpaid_amount1:: "+strpaid_amount);
+        if (strpaid_amount.equals("0") || strpaid_amount.equals("0.00") || strpaid_amount.equals(".00Rs") || strpaid_amount.equals(".00")) {
             // Do you work here on success
             paidamountstrrepvalue = "";
             paidamountstrreptxt = "";
@@ -728,12 +727,16 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
             hiddenpaidrow="hidden";
 
 
-        } else {
-            Log.e(TAG, "strpaid_amount2:: "+strpaid_amount);
 
+        } else {
             // null response or Exception occur
-            paidamountstrrepvalue =strpaid_amount+currency_code;
-            paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+            paidamountstrrepvalue = strpaid_amount;
+
+            if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
+                paidamountstrreptxt = "Paid Amount ";
+            }else{
+                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+            }
 
 
             pemailpaidstr = paypal_emailstr;
@@ -744,22 +747,31 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
             cheque_payableTo = cheque_payable_to;
 
 
+            paimnetdetailstrtxt=" Payment Details ";
+
+
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
+                bycheckstrtxt="By cheque :";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
+                paypalstrtxt="Pay Pal :";
             }
 
             if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
             }else{
                 payment_bankstr = payment_bank_name;
+                if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                    payment_currencystr = payment_currency;
+                }
+                bankstrtxt="Bank :";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -774,19 +786,8 @@ public class ViewThankYouNoteActivity extends AppCompatActivity {
                 payment_swiftstr = payment_swift_bic;
             }
 
-            if ( Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
-                payment_currencystr = "";
-            }else{
-                payment_currencystr = payment_currency;
-            }
-
-
-            paimnetdetailstrtxt=" Payment Details ";
-            bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
-            bankstrtxt="Bank :";
-
             hiddenpaidrow="";
+
         }
 
 

@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.Home.Model.CompanyModel;
@@ -55,11 +56,11 @@ import java.util.Comparator;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ReportViewActivity extends AppCompatActivity {
+public class ReportViewActivity extends BaseActivity {
 
     private static final String TAG = "ViewInvoice_Activity";
 
-    int numberPostion = 0;
+
 
     File fileWithinMyDir = null;
 
@@ -103,9 +104,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         titleView.setText("Preview Report");
 
-        SavePref pref = new SavePref();
-        pref.SavePref(ReportViewActivity.this);
-        numberPostion = pref.getNumberFormatPosition();
 
 
 //        invoiceweb.setWebViewClient(new WebViewClient() {
@@ -443,6 +441,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         });
     }
 
+
     private void customerReportWeb(CustomerItem customerItem, ArrayList<CustomerReportItem> customerReportItemArrayList) {
 
 
@@ -670,6 +669,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }
         });
     }
+
 
     private void supplierReportWeb(SupplierItem customerItem, ArrayList<CustomerReportItem> customerReportItemArrayList) {
 

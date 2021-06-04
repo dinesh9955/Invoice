@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 //import com.receipt.invoice.stock.sirproject.Model.Product_List;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -39,6 +41,8 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.View
     onItemClickListner onItemClickListner;
     String quentity;
 
+    public int numberPostion = 0;
+
     public Products_Adapter(Context mcontext, ArrayList<Product_list> names,ArrayList<Product_list> tempList, onItemClickListner buttonListener, ArrayList<String> tempQuantity,ArrayList<String> editpriceval){
         this.mcontext = mcontext;
         mnames=tempList;
@@ -46,7 +50,9 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.View
         this.onItemClickListner = buttonListener;
         this.tempQuantity=tempQuantity;
         this.editpriceval=editpriceval;
-
+        SavePref pref = new SavePref();
+        pref.SavePref(mcontext);
+        numberPostion = pref.getNumberFormatPosition();
     }
 
 
@@ -87,11 +93,13 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.View
 
 //        viewHolderForCat.quantity.setText(""+editpriceval.get(i) + " "+cruncycode+" x "+valueQuantity);
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-        String pQuantity = formatter.format(valueQuantity);
-        String pPrice = formatter.format(valuePrice);
+        //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
-        viewHolderForCat.quantity.setText(pPrice + " "+cruncycode+" x "+pQuantity);
+
+//        String pQuantity = formatter.format(valueQuantity);
+//        String pPrice = formatter.format(valuePrice);
+
+        viewHolderForCat.quantity.setText(Utility.getPatternFormat(""+numberPostion, valuePrice) + " "+cruncycode+" x "+Utility.getPatternFormat(""+numberPostion, valueQuantity));
 
         String productid=product_service_list.getProduct_id();
         String productprice=product_service_list.getProduct_price();
@@ -101,7 +109,8 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.View
 //        Log.e("productid detailed" ,productid);
 
        // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-        String producttotatlps=formatter.format(productresul);
+
+        //String producttotatlps=formatter.format(productresul);
         String product_name = product_service_list.getProduct_name();
         if (product_name.equals("") || product_name.equals("null"))
         {
@@ -119,7 +128,7 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.View
         }
         else
         {
-            viewHolderForCat.price.setText(String.valueOf(producttotatlps)+cruncycode);
+            viewHolderForCat.price.setText(Utility.getPatternFormat(""+numberPostion, productresul)+cruncycode);
         }
 
 

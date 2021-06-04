@@ -82,6 +82,7 @@ import com.receipt.invoice.stock.sirproject.Adapter.Customer_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Product_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Products_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Service_bottom_Adapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
@@ -132,9 +133,8 @@ import cz.msebera.android.httpclient.Header;
 import gun0912.tedbottompicker.TedRxBottomPicker;
 import io.reactivex.disposables.Disposable;
 
-public class FragmentCreate_CreditNote extends Fragment implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
+public class FragmentCreate_CreditNote extends BaseFragment implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
 
-    SavePref pref = new SavePref();
 
     int selectedTemplate = 0;
 
@@ -319,6 +319,16 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
     double discountAmountDD = 0.0;
 
+
+
+    double grandAmountZZ = 0.0;
+    double discountAmountZZ = 0.0;
+    double subtotalAmountZZ = 0.0;
+    double taxAmountZZ = 0.0;
+    double afterTaxAmountZZ = 0.0;
+    double shippingAmountZZ = 0.0;
+    double netAmountZZ = 0.0;
+
     public FragmentCreate_CreditNote() {
         // Required empty public constructor
     }
@@ -345,7 +355,6 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        pref.SavePref(getActivity());
     }
 
     @Override
@@ -424,7 +433,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
         mCompressor = new FileCompressor(getActivity());
 
 
-        invoicenum.setEnabled(false);
+    //    invoicenum.setEnabled(false);
 
 
 
@@ -728,7 +737,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 //
 //                createinvoicewithdetail();
 
-                createinvoice.setEnabled(false);
+               // createinvoice.setEnabled(false);
 
                 invoice_no = invoicenumtxt.getText().toString();
 //                strnotes = ednotes.getText().toString();
@@ -1012,7 +1021,22 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
         }
         else {
 
-            Log.e(TAG, "selectwarehouseIdAA "+selectwarehouseId);
+//            Log.e(TAG, "selectwarehouseIdAA "+selectwarehouseId);
+//
+//            grandAmountZZ = grandAmount;
+//            discountAmountZZ = discountAmount;
+//            subtotalAmountZZ = subtotalAmount;
+//            taxAmountZZ = taxAmount;
+//            afterTaxAmountZZ = afterTaxAmount;
+//            shippingAmountZZ = shippingAmount;
+//            netAmountZZ = netAmount;
+
+            Log.e(TAG, "strdiscountvalue "+discountAmountZZ);
+            //Log.e(TAG, "Utility.getReplaceCurrency(strdiscountvalue, cruncycode) "+Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+//            Log.e(TAG, "strpaid_amount "+strpaid_amount);
+//            Log.e(TAG, "freight_cost "+freight_cost);
+//            Log.e(TAG, "freight_cost "+freight_cost);
+//            Log.e(TAG, "freight_cost "+freight_cost);
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Please wait");
@@ -1032,7 +1056,8 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             params.add("paid_amount_payment_method", paymentmode);
             params.add("credit_terms", credit_terms);
             params.add("freight_cost", freight_cost);
-            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+//            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
+            params.add("discount", ""+discountAmountZZ);
             params.add("paid_amount", strpaid_amount);
             params.add("paid_amount_date", Paymentamountdate);
             params.add("shipping_firstname", shippingfirstname);
@@ -1099,9 +1124,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                 Log.e("tempListprice",tempList.get(i).getProduct_price());
                 Log.e("tempQuantity",tempQuantity.get(i));
 
-
-
-                Log.e("productdetails",params.toString());
+                Log.e(TAG, "productdetails "+params.toString());
 
 
             }
@@ -1111,13 +1134,14 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                 for (int i = 0; i < selectedtaxt.size(); i++) {
 
                     params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                    params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
+                    params.add("tax[" + i + "]" + "[amount]", ""+taxAmountZZ);
                     params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
                     params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
                 }
             } else {
 
             }
+
             if (multiple.length > 0) {
                 for (int k = 0; k < multiple.length; k++) {
                     try {
@@ -3337,7 +3361,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             textViewNoItems.setVisibility(View.GONE);
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+      //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         double grandAmount = 0.0;
         double discountAmount = 0.0;
@@ -3407,38 +3431,47 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             if(grandAmount == 0){
                 grosstotal.setText("0");
             }else{
-                grosstotal.setText(formatter.format(grandAmount)+""+cruncycode);
+                grosstotal.setText(Utility.getPatternFormat(""+numberPostion, grandAmount)+""+cruncycode);
             }
 
             if(discountAmount == 0){
                 discount.setText("0");
             }else{
-                discount.setText("-"+formatter.format(discountAmount)+""+cruncycode);
+                discount.setText("-"+Utility.getPatternFormat(""+numberPostion, discountAmount)+""+cruncycode);
             }
 
             if(subtotalAmount == 0){
                 subtotal.setText("0");
             }else{
-                subtotal.setText(formatter.format(subtotalAmount)+""+cruncycode);
+                subtotal.setText(Utility.getPatternFormat(""+numberPostion, subtotalAmount)+""+cruncycode);
             }
 
             if(taxAmount == 0){
                 tax.setText("0");
             }else{
-                tax.setText(formatter.format(taxAmount)+""+cruncycode);
+                tax.setText(Utility.getPatternFormat(""+numberPostion, taxAmount)+""+cruncycode);
             }
 
             if(shippingAmount == 0){
                 freight.setText("0");
             }else{
-                freight.setText(formatter.format(shippingAmount)+""+cruncycode);
+                freight.setText(Utility.getPatternFormat(""+numberPostion, shippingAmount)+""+cruncycode);
             }
 
             if(netAmount == 0){
                 netamount.setText("0");
             }else{
-                netamount.setText(formatter.format(netAmount)+""+cruncycode);
+                netamount.setText(Utility.getPatternFormat(""+numberPostion, netAmount)+""+cruncycode);
             }
+
+            grandAmountZZ = grandAmount;
+            discountAmountZZ = discountAmount;
+            subtotalAmountZZ = subtotalAmount;
+            taxAmountZZ = taxAmount;
+            afterTaxAmountZZ = afterTaxAmount;
+            shippingAmountZZ = shippingAmount;
+            netAmountZZ = netAmount;
+
 
         }else{
             grandAmount = 0.0;
@@ -3448,6 +3481,14 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             afterTaxAmount = 0.0;
             shippingAmount = 0.0;
             netAmount = 0.0;
+
+            grandAmountZZ = 0.0;
+            discountAmountZZ = 0.0;
+            subtotalAmountZZ = 0.0;
+            taxAmountZZ = 0.0;
+            afterTaxAmountZZ = 0.0;
+            shippingAmountZZ = 0.0;
+            netAmountZZ = 0.0;
 
 
             grosstotal.setText("0");
@@ -4087,11 +4128,7 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
                 try {
 
                     multipagepath = IOUtils.toString(getActivity().getAssets().open("attchment.html"))
-
-
                             .replaceAll("#ATTACHMENT_1#", attchmentimage.get(i));
-
-
                     multipleimage = multipleimage + multipagepath;
                 } catch (Exception e) {
 
@@ -4110,19 +4147,25 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
             for (int i = 0; i < tempList.size(); i++) {
                 cruncycode = tempList.get(i).getCurrency_code();
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+              //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
-                Double quantityAmount = Double.parseDouble(tempQuantity.get(i));
-                Double priceAmount = Double.parseDouble(producprice.get(i));
-                Double totalAmount = Double.parseDouble(totalpriceproduct.get(i));
+                double productQuantity = Double.parseDouble(tempQuantity.get(i));
+                double producpriceRate = Double.parseDouble(producprice.get(i));
+//                Double totalAmount = Double.parseDouble(totalpriceproduct.get(i));
+
+                double totalAmount = producpriceRate * productQuantity;
+
+                String stringFormatQuantity = Utility.getPatternFormat(""+numberPostion, productQuantity);
+                String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
+                String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
                 productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
-                        .replaceAll("#QUANTITY#", ""+formatter.format(quantityAmount))
-                        .replaceAll("#PRICE#", ""+formatter.format(priceAmount) + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#TOTAL#", ""+formatter.format(totalAmount) + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#QUANTITY#", ""+stringFormatQuantity)
+                        .replaceAll("#PRICE#", ""+stringFormatRate + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", ""+stringFormatAmount + Utility.getReplaceDollor(cruncycode));
 
                 productitemlist = productitemlist + productitem;
             }
@@ -4518,119 +4561,6 @@ public class FragmentCreate_CreditNote extends Fragment implements Customer_Bott
 
 
                 final File savedPDFFile = FileManager.getInstance().createTempFile(getActivity(), "pdf", false);
-
-
-
-//                final PrintAttributes attrs = new PrintAttributes.Builder()
-//                        .setColorMode(PrintAttributes.COLOR_MODE_COLOR)
-//                        .setMediaSize(PrintAttributes.MediaSize.ISO_A1)
-//                        .setMinMargins(PrintAttributes.Margins.NO_MARGINS)
-//                        .setResolution(new PrintAttributes.Resolution("1", "label", 1500, 800))
-//                        .build();
-//
-//                final PrintedPdfDocument document = new PrintedPdfDocument(getActivity(), attrs);
-//                final PdfDocument.Page page = document.startPage(1);
-//
-//                view.draw(page.getCanvas());
-//
-//                document.finishPage(page);
-//
-//                try{
-//                    final FileOutputStream outputStream = new FileOutputStream(new File(Environment.getExternalStorageDirectory(), "test.pdf"));
-//                    document.writeTo(outputStream);
-//                    outputStream.close();
-//                    document.close();
-//                }catch (Exception e){
-//
-//                }
-
-
-//                Log.e(TAG, "savedPDFFile"+savedPDFFile);
-//                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/");
-//                PdfView.createWebPrintJob(getActivity(), view, path, "savedPDFFile.pdf", new PdfView.Callback() {
-//
-//                    @Override
-//                    public void success(String path) {
-//                       // progressDialog.dismiss();
-//                        //PdfView.openPdfFile(getActivity(),getString(R.string.app_name),"Do you want to open the pdf file?"+fileName,path);
-//                    }
-//
-//                    @Override
-//                    public void failure() {
-//                        //progressDialog.dismiss();
-//
-//                    }
-//                });
-
-//                String jobName = getActivity().getString(R.string.app_name) + " Document";
-//                PrintAttributes attributes = new PrintAttributes.Builder()
-//                        .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
-//                        .setResolution(new PrintAttributes.Resolution("pdf", "pdf", 600, 600))
-//                        .setMinMargins(PrintAttributes.Margins.NO_MARGINS).build();
-//                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/");
-//                PdfView pdfPrint = new PdfView(attributes);
-//                pdfPrint.print(wv.createPrintDocumentAdapter(jobName), path, "output_" + System.currentTimeMillis() + ".pdf");
-
-//                Bitmap bitmap = loadBitmapFromView(view, view.getWidth(), view.getHeight());
-//
-//                createPdf(bitmap);
-
-//                Picture picture = view.capturePicture();
-//                Bitmap b = Bitmap.createBitmap(
-//                        picture.getWidth(), picture.getHeight(), Bitmap.Config.ARGB_8888);
-//                Canvas c = new Canvas(b);
-//                picture.draw(c);
-//
-//                FileOutputStream fos = null;
-//                try {
-//                    fos = new FileOutputStream( "/sdcard/"  + "page.jpg" );
-//                    if ( fos != null ) {
-//                        b.compress(Bitmap.CompressFormat.JPEG, 80, fos );
-//                        fos.close();
-//                    }
-//                }
-//                catch( Exception e ) {
-//                    System.out.println("-----error--"+e);
-//                }
-//
-//
-//
-//                try {
-//                    Document document = new Document();
-//                    String dirpath = Environment.getExternalStorageDirectory().toString();
-//                    PdfWriter.getInstance(document, new FileOutputStream(dirpath + "/NewPDF.pdf")); //  Change pdf's name.
-//                    document.open();
-//                    Image img = Image.getInstance(Environment.getExternalStorageDirectory() + File.separator + "page.jpg");
-//                    float scaler = ((document.getPageSize().getWidth() - document.leftMargin()
-//                            - document.rightMargin() - 0) / img.getWidth()) * 100;
-//                    img.scalePercent(scaler);
-//                    img.setAlignment(Image.ALIGN_CENTER | Image.ALIGN_TOP);
-//                    document.add(img);
-//                    document.close();
-//                } catch (Exception e) {
-//
-//                }
-
-
-
-//                PDFUtil.generatePDFFromHTML(getActivity(), savedPDFFile, finalContent, new PDFPrint.OnPDFPrintListener() {
-//                    @Override
-//                    public void onSuccess(File file) {
-//                        // Open Pdf Viewer
-//                        Uri pdfUri = Uri.fromFile(savedPDFFile);
-//
-//                        Intent intentPdfViewer = new Intent(getActivity(), PDFViewerActivity.class);
-//                        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri);
-//
-//                        startActivity(intentPdfViewer);
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception exception) {
-//                        exception.printStackTrace();
-//                    }
-//                });
-//
 
 
                 PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
