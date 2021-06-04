@@ -647,6 +647,14 @@ x
 
         </activity>
 
+        <activity
+            android:name=".Settings.SubscribeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+
+        </activity>
+
 
 
         <provider

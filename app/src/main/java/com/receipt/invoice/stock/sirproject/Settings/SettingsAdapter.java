@@ -3,9 +3,11 @@ package com.receipt.invoice.stock.sirproject.Settings;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.receipt.invoice.stock.sirproject.Adapter.Product_Bottom_Adapter;
+import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
@@ -86,6 +89,27 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
                 } else if(i == 1){
                     Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
                     mcontext.startActivity(intent);
+                } else if(i == 2){
+//                    Intent intent = new Intent(mcontext, SubscribeActivity.class);
+//                    mcontext.startActivity(intent);
+                } else if(i == 3){
+//                    Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
+//                    mcontext.startActivity(intent);
+                } else if(i == 4){
+//                    Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
+//                    mcontext.startActivity(intent);
+                } else if(i == 5){
+                    try {
+                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.setType("text/plain");
+                        shareIntent.putExtra(Intent.EXTRA_SUBJECT, mcontext.getString(R.string.app_name));
+                        String shareMessage= mcontext.getString(R.string.app_name)+"\n\n";
+                        shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID+"\n\n";
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                        mcontext.startActivity(Intent.createChooser(shareIntent, "Choose One"));
+                    } catch(Exception e) {
+                        //e.toString();
+                    }
                 } else if(i == 6){
                     Intent intent = new Intent(mcontext, FAQsActivity.class);
                     mcontext.startActivity(intent);
@@ -97,6 +121,18 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("positionNext", i);
                     mcontext.startActivity(intent);
+                } else if(i == 9){
+                    Uri uri = Uri.parse("market://details?id=" + mcontext.getPackageName());
+                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                    goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                            Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                    try {
+                        mcontext.startActivity(goToMarket);
+                    } catch (ActivityNotFoundException e) {
+                        mcontext.startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse("http://play.google.com/store/apps/details?id=" + mcontext.getPackageName())));
+                    }
                 } else if(i == 10){
                     Intent intent = new Intent(mcontext, WebShowActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

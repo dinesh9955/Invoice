@@ -69,7 +69,7 @@ public class SettingsActivity extends AppCompatActivity {
         arrayListNames.add("Online Payment Gateway");
         arrayListNames.add("Subscribe");
         arrayListNames.add("Upgrade");
-        arrayListNames.add("Restore Puchases");
+        arrayListNames.add("Restore Purchases");
         arrayListNames.add("Invite Friends");
         arrayListNames.add("FAQs");
         arrayListNames.add("Language");
