@@ -98,6 +98,7 @@ import com.receipt.invoice.stock.sirproject.Model.Tax_List;
 import com.receipt.invoice.stock.sirproject.PV.PVActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Receipts.EditReceiptActivity;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
@@ -3939,70 +3940,69 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                 public void onClick(View view) {
                     mybuilder.dismiss();
 
-                    double en_quantity = Double.parseDouble(edquantity.getText().toString());
+                    if(edprice.getText().toString().length() == 0){
+                        Constant.ErrorToast(ConvertToPVActivity.this,"Please enter amount!");
+                    }else if(edquantity.getText().toString().length() == 0){
+                        Constant.ErrorToast(ConvertToPVActivity.this,"Please enter quantity!");
+                    }else{
+                        if(product_bottom.size() > 0){
+                            double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
-                    double sh_quantity = 0;
-                    double sh_price = 0.0;
+                            double sh_quantity = 0;
+                            double sh_price = 0.0;
 
-                    String quentityproduct= product_bottom.get(str).getQuantity();
-                    if(quentityproduct.equals("null"))
-                    {
-                        Constant.ErrorToast(ConvertToPVActivity.this,"Insufficient Quantity Available");
-                    }
-                    else {
-                        sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
-                    }
+                            String quentityproduct= product_bottom.get(str).getQuantity();
+                            if(quentityproduct.equals("null"))
+                            {
+                                Constant.ErrorToast(ConvertToPVActivity.this,"Insufficient Quantity Available");
+                            }
+                            else {
+                                sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
+                            }
 
-                    if (sh_quantity < en_quantity)
-                    {
-                        mybuilder.show();
-                        Constant.ErrorToast(ConvertToPVActivity.this,"Insufficient Quantity Available");
-                        mybuilder.dismiss();
-                    }
-                    else
-                    {
-                        sh_price = Double.parseDouble(edprice.getText().toString());
-                        double multiply = en_quantity * sh_price;
-                        String s_multiply = String.valueOf(multiply);
+                            if (sh_quantity < en_quantity)
+                            {
+                                mybuilder.show();
+                                Constant.ErrorToast(ConvertToPVActivity.this,"Insufficient Quantity Available");
+                                mybuilder.dismiss();
+                            }
+                            else
+                            {
+                                sh_price = Double.parseDouble(edprice.getText().toString());
+                                double multiply = en_quantity * sh_price;
+                                String s_multiply = String.valueOf(multiply);
 
-//                        product_bottom.get(str).setQuantity(String.valueOf(en_quantity));
-//                        product_bottom.get(str).setProduct_price(String.valueOf(sh_price));
 
-                        //total_price = (sh_price) * Double.parseDouble(edquantity.getText().toString());
-                        //  Log.e("Total price",String.valueOf(total_price));
-//                        producprice.remove(str);
-//                        tempQuantity.remove(str);
-//
-//                        producprice.add(str,String.valueOf(sh_price));
-//                        tempList.get(str).setProduct_price(String.valueOf(sh_price));
-//                        tempList.get(str).setQuantity(edquantity.getText().toString());
-//                        tempQuantity.add(str,edquantity.getText().toString());
 
-                        producprice.remove(str);
-                        totalpriceproduct.remove(str);
-                        tempQuantity.remove(str);
+                                producprice.remove(str);
+                                totalpriceproduct.remove(str);
+                                tempQuantity.remove(str);
 
-                        producprice.add(str, String.valueOf(sh_price));
-                        totalpriceproduct.add(str, String.valueOf(sh_price));
-                        tempQuantity.add(str, edquantity.getText().toString());
+                                producprice.add(str, String.valueOf(sh_price));
+                                totalpriceproduct.add(str, String.valueOf(sh_price));
+                                tempQuantity.add(str, edquantity.getText().toString());
 
-                        double dd = 0.0;
-                        for (int i = 0; i < producprice.size(); i++){
-                            double aa = Double.parseDouble(producprice.get(i));
-                            double bb = Double.parseDouble(tempQuantity.get(i));
+                                double dd = 0.0;
+                                for (int i = 0; i < producprice.size(); i++){
+                                    double aa = Double.parseDouble(producprice.get(i));
+                                    double bb = Double.parseDouble(tempQuantity.get(i));
 
-                            double cc = aa * bb;
-                            dd = dd + cc;
-                        }
-                        total_price = dd;
+                                    double cc = aa * bb;
+                                    dd = dd + cc;
+                                }
+                                total_price = dd;
 //                        edprice.setText(totalpriceproduct.get(str));
 //                        edquantity.setText(tempQuantity.get(str));
 
-                        calculateTotalAmount(total_price);
-                        products_adapter.notifyDataSetChanged();
+                                calculateTotalAmount(total_price);
+                                products_adapter.notifyDataSetChanged();
 
-                        mybuilder.dismiss();
+                                mybuilder.dismiss();
+                            }
+                        }
                     }
+
+
 
                 }
             });
