@@ -35,6 +35,8 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
@@ -66,7 +68,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -720,6 +724,10 @@ public class Add_Product extends Fragment implements Select_Warehouse_Adapter.Ca
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("true")) {
+
+                                Map<String, Object> eventValue = new HashMap<String, Object>();
+                                eventValue.put(AFInAppEventParameterName.PARAM_1, "product_addnew");
+                                AppsFlyerLib.getInstance().trackEvent(getActivity(), "product_addnew", eventValue);
 
                                 Constant.SuccessToast(getActivity(), "Product Added");
                                 new Handler().postDelayed(new Runnable() {

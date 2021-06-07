@@ -5,6 +5,10 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.multidex.MultiDex;
+
+import com.appsflyer.AppsFlyer2dXConversionCallback;
+import com.appsflyer.AppsFlyerConversionListener;
+import com.appsflyer.AppsFlyerLib;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,7 +90,7 @@ public class GlobalVariabal  extends Application {
 
 
 
-
+    private static final String AF_DEV_KEY = "yLJo3QQZNawuqif7hLtW3Q";
     FirebaseCrashlytics crashlytics;
     @Override
     public void onCreate() {
@@ -99,6 +103,94 @@ public class GlobalVariabal  extends Application {
         }catch (Exception e) {
             Log.e(TAG , "getMessage3 "+e.getMessage());
         }
+
+
+
+
+
+//        AppsFlyerConversionListener conversionListener = new AppsFlyerConversionListener() {
+//            @Override
+//            public void onConversionDataSuccess(Map<String, Object> conversionData) {
+//
+//                for (String attrName : conversionData.keySet()) {
+//                    Log.d("LOG_TAG", "attribute: " + attrName + " = " + conversionData.get(attrName));
+//                }
+//            }
+//
+//            @Override
+//            public void onConversionDataFail(String errorMessage) {
+//                Log.d("LOG_TAG", "error getting conversion data: " + errorMessage);
+//            }
+//
+//            @Override
+//            public void onAppOpenAttribution(Map<String, String> attributionData) {
+//                for (String attrName : attributionData.keySet()) {
+//                    Log.d("LOG_TAG", "attribute: " + attrName + " = " + attributionData.get(attrName));
+//                }
+//            }
+//
+//            @Override
+//            public void onAttributionFailure(String errorMessage) {
+//                Log.d("LOG_TAG", "error onAttributionFailure : " + errorMessage);
+//            }
+//        };
+//
+//        AppsFlyerLib.getInstance().init(AF_DEV_KEY, conversionListener, this);
+//        AppsFlyerLib.getInstance().setDebugLog(true);
+//        AppsFlyerLib.getInstance().start(this);
+//        AppsFlyerConversionListener conversionDataListener =
+//                new AppsFlyerConversionListener() {
+//
+//                    @Override
+//                    public void onInstallConversionDataLoaded(Map<String, String> conversionData) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onInstallConversionFailure(String errorMessage) {
+//                        Log.d(AppsFlyerLib.LOG_TAG, "error getting conversion data: " + errorMessage);
+//                    }
+//
+//                    @Override
+//                    public void onAppOpenAttribution(Map<String, String> attributionData) {
+//                        Log.d(AppsFlyerLib.LOG_TAG, "DEEP LINK WORKING");
+//                    }
+//
+//                    @Override
+//                    public void onAttributionFailure(String errorMessage) {
+//                        Log.d(AppsFlyerLib.LOG_TAG, "error onAttributionFailure : " + errorMessage);
+//                    }
+//                };
+
+
+        AppsFlyerConversionListener appsFlyerConversionListener = new AppsFlyerConversionListener(){
+
+            @Override
+            public void onConversionDataSuccess(Map<String, Object> map) {
+                Log.e(TAG, "onConversionDataSuccess " +  map.toString());
+            }
+
+            @Override
+            public void onConversionDataFail(String s) {
+                Log.e(TAG, "onConversionDataFail " + s);
+            }
+
+            @Override
+            public void onAppOpenAttribution(Map<String, String> map) {
+                Log.e(TAG, "onAppOpenAttribution " + map.toString());
+
+            }
+
+            @Override
+            public void onAttributionFailure(String s) {
+                Log.e(TAG, "onAttributionFailure " + s);
+
+            }
+        };
+
+        AppsFlyerLib.getInstance().init(AF_DEV_KEY, appsFlyerConversionListener, this);
+        AppsFlyerLib.getInstance().startTracking(this);
+
     }
 
     @Override

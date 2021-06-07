@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.andrognito.flashbar.Flashbar;
 import com.andrognito.flashbar.anim.FlashAnim;
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Base.LicenseListAdapter;
 import com.receipt.invoice.stock.sirproject.Home.Model.CompanyModel;
@@ -38,6 +40,7 @@ import com.receipt.invoice.stock.sirproject.Home.adapter.HomeCustomerAdapter;
 import com.receipt.invoice.stock.sirproject.Home.adapter.HomeInvoiceAdapter;
 import com.receipt.invoice.stock.sirproject.Home.adapter.HomeSupplierAdapter;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.SignupSignin.Signup_Activity;
 import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.API.GetAsyncPost;
@@ -52,6 +55,8 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
@@ -155,6 +160,12 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             hello.setText("Hello " + username);
 
         }
+
+
+        Map<String, Object> eventValue = new HashMap<String, Object>();
+        eventValue.put(AFInAppEventParameterName.PARAM_1, "dashboard_view");
+        AppsFlyerLib.getInstance().trackEvent(Home_Activity.this, "dashboard_view", eventValue);
+
     }
 
 

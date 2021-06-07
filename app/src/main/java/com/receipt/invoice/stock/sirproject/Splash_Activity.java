@@ -9,15 +9,21 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.gson.Gson;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.SignupSignin.Signin_Activity;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.facebook.FacebookSdk.setAutoLogAppEventsEnabled;
 
@@ -34,6 +40,18 @@ public class Splash_Activity extends BaseActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_);
+
+
+//        Map<String, Object> eventValue = new HashMap<String, Object>();
+//        eventValue.put("App_open", "App Open");
+//
+//        Gson gson = new Gson();
+//        String stringConvert = gson.toJson(eventValue);
+//
+//        AppsFlyerLib.getInstance().start(getApplicationContext(), ""+"stringConvert");
+
+
+
 
        /* FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
@@ -55,6 +73,10 @@ public class Splash_Activity extends BaseActivity {
         setAutoLogAppEventsEnabled(true);
         FacebookSdk.getAutoLogAppEventsEnabled();
         FacebookSdk.fullyInitialize();
+
+        Map<String, Object> eventValue = new HashMap<String, Object>();
+        eventValue.put(AFInAppEventParameterName.PARAM_1, "App_Open");
+        AppsFlyerLib.getInstance().trackEvent(Splash_Activity.this, "app_open", eventValue);
 
         new Handler().postDelayed(new Runnable() {
             @Override

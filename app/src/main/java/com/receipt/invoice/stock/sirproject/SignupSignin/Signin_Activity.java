@@ -26,10 +26,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.karan.churi.PermissionManager.PermissionManager;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.Abc;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ForgotResetPassword.ForgotPassword_Activity;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
@@ -51,6 +54,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -268,6 +273,10 @@ public class Signin_Activity extends AppCompatActivity {
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
+                                        Map<String, Object> eventValue = new HashMap<String, Object>();
+                                        eventValue.put(AFInAppEventParameterName.PARAM_1, "signin_click");
+                                        AppsFlyerLib.getInstance().trackEvent(Signin_Activity.this, "signin_click", eventValue);
+
                                         Intent intent = new Intent(Signin_Activity.this, Home_Activity.class);
                                         intent.putExtra("login","login");
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

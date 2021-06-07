@@ -39,6 +39,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.isapanah.awesomespinner.AwesomeSpinner;
@@ -71,7 +73,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -637,6 +641,10 @@ public class Add_Company extends Fragment {
                             JSONObject company = data.getJSONObject("company");
                             company_id = company.getString("company_id");
                             savePref.setCompanyId(company_id);
+
+                            Map<String, Object> eventValue = new HashMap<String, Object>();
+                            eventValue.put(AFInAppEventParameterName.PARAM_1, "companies_addnew");
+                            AppsFlyerLib.getInstance().trackEvent(getActivity(), "companies_addnew", eventValue);
 
                             Constant.SuccessToast(getActivity(),"Company created successfully");
 

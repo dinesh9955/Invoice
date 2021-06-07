@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -33,10 +34,15 @@ import androidx.fragment.app.DialogFragment;
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AFInAppEventType;
+import com.appsflyer.AppsFlyerConversionListener;
+import com.appsflyer.AppsFlyerLib;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.gson.Gson;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
@@ -60,7 +66,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 //import io.github.lucasfsc.html2pdf.Html2Pdf;
 
@@ -117,6 +125,11 @@ public class Abc extends AppCompatActivity{
             public void onClick(View v) {
               //  materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
 
+                Map<String, Object> eventValue = new HashMap<String, Object>();
+                eventValue.put(AFInAppEventParameterName.PARAM_1, "App_Open");
+                AppsFlyerLib.getInstance().trackEvent(Abc.this, "app_open", eventValue);
+
+
 
                 int a = 2;
                 int b = 10;
@@ -147,7 +160,7 @@ public class Abc extends AppCompatActivity{
                 pickerFrag.setArguments(bundle);
 
                 pickerFrag.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-                pickerFrag.show(getSupportFragmentManager(), "SUBLIME_PICKER");
+            //    pickerFrag.show(getSupportFragmentManager(), "SUBLIME_PICKER");
 
 
 //

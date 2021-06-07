@@ -61,6 +61,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.github.gcacace.signaturepad.views.SignaturePad;
@@ -122,8 +124,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 import gun0912.tedbottompicker.TedRxBottomPicker;
@@ -1172,6 +1176,10 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                         JSONObject jsonObject = new JSONObject(response);
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
+
+                            Map<String, Object> eventValue = new HashMap<String, Object>();
+                            eventValue.put(AFInAppEventParameterName.PARAM_1, "debitnotes_crreate");
+                            AppsFlyerLib.getInstance().trackEvent(getActivity(), "debitnotes_crreate", eventValue);
 
                             Constant.SuccessToast(getActivity(), "Debit Note created successfully");
 

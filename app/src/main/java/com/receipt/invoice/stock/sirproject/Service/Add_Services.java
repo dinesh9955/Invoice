@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.google.gson.Gson;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
@@ -35,6 +37,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -478,6 +482,10 @@ public class Add_Services extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("true")){
+
+                                Map<String, Object> eventValue = new HashMap<String, Object>();
+                                eventValue.put(AFInAppEventParameterName.PARAM_1, "service_addnew");
+                                AppsFlyerLib.getInstance().trackEvent(getActivity(), "service_addnew", eventValue);
 
                                 Constant.SuccessToast(getActivity(),"Item Added");
                                 new Handler().postDelayed(new Runnable() {

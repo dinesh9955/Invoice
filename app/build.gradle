@@ -170,7 +170,17 @@ dependencies {
     def billing_version = "3.0.0"
     implementation "com.android.billingclient:billing:$billing_version"
 
-    compile 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.2'
+    implementation 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.2'
+
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.14.2'
+
+//    implementation 'com.appsflyer:af-android-sdk:6.2.3'
+//    implementation 'com.android.installreferrer:installreferrer:2.2'
+
+    implementation 'com.appsflyer:af-android-sdk:5.0.0@aar'
+    implementation 'com.android.installreferrer:installreferrer:1.0'
+
+
 }
 
 

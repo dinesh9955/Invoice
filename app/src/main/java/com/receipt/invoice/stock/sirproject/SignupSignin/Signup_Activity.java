@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -26,6 +28,9 @@ import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -179,6 +184,9 @@ public class Signup_Activity extends AppCompatActivity {
                          {
                              //JSONObject data = jsonObject.getJSONObject("data");
 
+                             Map<String, Object> eventValue = new HashMap<String, Object>();
+                             eventValue.put(AFInAppEventParameterName.PARAM_1, "Signup_complete");
+                             AppsFlyerLib.getInstance().trackEvent(Signup_Activity.this, "Signup_complete", eventValue);
 
                              Constant.SuccessToast(Signup_Activity.this,jsonObject.getString("message"));
 

@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -32,6 +34,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -413,6 +417,11 @@ public class Stock_Movement extends Fragment {
                         String status = jsonObject.getString("status");
                         if (status.equals("true"))
                         {
+
+                            Map<String, Object> eventValue = new HashMap<String, Object>();
+                            eventValue.put(AFInAppEventParameterName.PARAM_1, "stocks_move");
+                            AppsFlyerLib.getInstance().trackEvent(getActivity(), "stocks_move", eventValue);
+
                             Constant.SuccessToast(getActivity(),"Stock Moved");
                             new Handler().postDelayed(new Runnable() {
                                 @Override

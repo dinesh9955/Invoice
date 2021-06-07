@@ -40,6 +40,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.isapanah.awesomespinner.AwesomeSpinner;
@@ -69,7 +71,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -697,6 +701,11 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("true")){
+
+                                Map<String, Object> eventValue = new HashMap<String, Object>();
+                                eventValue.put(AFInAppEventParameterName.PARAM_1, "customer_addnew");
+                                AppsFlyerLib.getInstance().trackEvent(getActivity(), "customer_addnew", eventValue);
+
                                 Constant.SuccessToast(getActivity(),"Customer Added");
                                 new Handler().postDelayed(new Runnable() {
                                     @Override

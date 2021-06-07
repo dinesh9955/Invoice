@@ -32,6 +32,8 @@ import android.widget.Toast;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.isapanah.awesomespinner.AwesomeSpinner;
@@ -45,6 +47,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import com.receipt.invoice.stock.sirproject.Abc;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
@@ -63,7 +66,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -729,6 +734,10 @@ public class Add_User extends Fragment {
                         String status = jsonObject.getString("status");
 
                         if (status.equals("true")) {
+                            Map<String, Object> eventValue = new HashMap<String, Object>();
+                            eventValue.put(AFInAppEventParameterName.PARAM_1, "user_addnew");
+                            AppsFlyerLib.getInstance().trackEvent(getActivity(), "user_addnew", eventValue);
+
                             Constant.SuccessToast(getActivity(), "User Added Successfully");
                             Intent intent = new Intent(getContext(), User_Activity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

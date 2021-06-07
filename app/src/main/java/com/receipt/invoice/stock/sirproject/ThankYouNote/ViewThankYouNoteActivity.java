@@ -18,6 +18,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AppsFlyerLib;
 import com.google.gson.Gson;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
@@ -43,7 +45,9 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -128,8 +132,13 @@ public class ViewThankYouNoteActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         titleView.setText("Preview Invoice");
 
+        Map<String, Object> eventValue = new HashMap<String, Object>();
+        eventValue.put(AFInAppEventParameterName.PARAM_1, "thankyounotes_view");
+        AppsFlyerLib.getInstance().trackEvent(ViewThankYouNoteActivity.this, "thankyounotes_view", eventValue);
+
 
         getinvoicedata();
+
 
     }
 
