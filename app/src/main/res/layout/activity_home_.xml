@@ -99,8 +99,6 @@
                     android:textColor="@color/darkgray"
                     android:id="@+id/txtinvoice"
                     android:visibility="gone"
-
-
                     />
 
             </RelativeLayout>

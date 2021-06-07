@@ -3900,10 +3900,17 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                 public void onClick(View view) {
                     mybuilder.dismiss();
 
-                    double en_quantity = Double.parseDouble(edquantity.getText().toString());
+                 double en_quantity = 0.0;
+                    try{
+                        en_quantity = Double.parseDouble(edquantity.getText().toString());
+                    }catch (Exception e){
+
+                    }
 
                     double sh_quantity = 0;
                     double sh_price = 0.0;
+
+
 
                     String quentityproduct= product_bottom.get(str).getQuantity();
                     if(quentityproduct.equals("null"))

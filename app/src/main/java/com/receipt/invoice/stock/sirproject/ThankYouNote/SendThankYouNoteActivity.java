@@ -1095,10 +1095,11 @@ public class SendThankYouNoteActivity extends BaseActivity {
                                 sharingIntent.putExtra(Intent.EXTRA_TEXT,
                                         "We appreciate your Business. Kindly find below Thank you note.");
 
-                                if (Utility.isAppAvailable(SendThankYouNoteActivity.this, "com.google.android.gm")){
-                                    sharingIntent.setPackage("com.google.android.gm");
-                                }
-                                startActivity(sharingIntent);
+//                                if (Utility.isAppAvailable(SendThankYouNoteActivity.this, "com.google.android.gm")){
+//                                    sharingIntent.setPackage("com.google.android.gm");
+//                                }
+//                                startActivity(sharingIntent);
+                                startActivity(Intent.createChooser(sharingIntent, "Share File"));
                                 finish();
 
 

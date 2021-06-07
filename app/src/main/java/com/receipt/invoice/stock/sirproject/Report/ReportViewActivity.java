@@ -25,9 +25,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
+import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
+import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -38,6 +42,7 @@ import com.receipt.invoice.stock.sirproject.Home.Model.CompanyModel;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.InvoiceReminder.ViewInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.SublimePickerFragment;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
@@ -49,10 +54,15 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -143,19 +153,19 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         if(positionNext == 0){
             fileName = "CustomerStatementReport";
             customer_id = bundle.getString("customer_id");
-            customerReport(customer_id, "");
+            customerReport(customer_id, "", null);
         } else if(positionNext == 1){
             fileName = "SupplierStatementReport";
             supplier_id = bundle.getString("supplier_id");
-            supplierReport(supplier_id, "");
+            supplierReport(supplier_id, "", null);
         } else if(positionNext == 2){
             fileName = "TotalSalesReport";
             company_id = bundle.getString("company_id");
-            totalSalesReport(company_id, "");
+            totalSalesReport(company_id, "", null);
         } else if(positionNext == 3){
             fileName = "TotalPurchaseReport";
             company_id = bundle.getString("company_id");
-            totalPurchaseReport(company_id, "");
+            totalPurchaseReport(company_id, "", null);
         } else if(positionNext == 4){
             fileName = "CustomerAgeingReport";
             company_id = bundle.getString("company_id");
@@ -163,7 +173,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         } else if(positionNext == 5){
             fileName = "TaxCollecteReport";
             company_id = bundle.getString("company_id");
-            taxCollectedReport(company_id, "");
+            taxCollectedReport(company_id, "", null);
         } else if(positionNext == 6){
             fileName = "StockReport";
             company_id = bundle.getString("company_id");
@@ -317,7 +327,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     }
 
 
-    private void customerReport(String customer_id, String filterID) {
+    private void customerReport(String customer_id, String filterID, SelectedDate selectedDate) {
         RequestParams params = new RequestParams();
         params.add("customer_id", customer_id);
 
@@ -399,9 +409,43 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 customerReportItem.setCustomer_id(customer_id);
                                 customerReportItem.setBalance(balance);
 
-                                customerReportItemArrayList.add(customerReportItem);
+//                                customerReportItemArrayList.add(customerReportItem);
+
+                                if(filterID.equalsIgnoreCase("date")){
+                                    if(selectedDate != null){
+
+                                        try{
+                                            Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
+                                            Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
+
+                                            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+
+                                            Date date = simple.parse(created_date);
+
+//                                            if(date.getTime() == resultSS.getTime()){
+//                                                customerReportItemArrayList.add(customerReportItem);
+//                                            }
+
+                                            if(date.getTime() >= resultSS.getTime() && resultEE.getTime() >= date.getTime()){
+                                                Log.e(TAG, "datemillis1 "+simple.format(resultSS));
+                                                Log.e(TAG, "datemillis2 "+simple.format(resultEE));
+                                                Log.e(TAG, "datemillis3 "+simple.format(date));
+                                                customerReportItemArrayList.add(customerReportItem);
+                                            }
+
+                                        }catch (Exception e){
+
+                                        }
+                                    }
+                                }else{
+                                    customerReportItemArrayList.add(customerReportItem);
+                                }
+
+
+
                             }
                         }
+
 
 
                         if(filterID.equalsIgnoreCase("date")){
@@ -411,6 +455,8 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 }
                             });
                         }
+
+                        //Collections.reverse(customerReportItemArrayList);
 
 
                         customerReportWeb(customerItem, customerReportItemArrayList);
@@ -548,7 +594,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void supplierReport(String customer_id, String filterID) {
+    private void supplierReport(String customer_id, String filterID, SelectedDate selectedDate) {
         RequestParams params = new RequestParams();
         params.add("supplier_id", customer_id);
 
@@ -630,7 +676,25 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                                customerReportItem.setCustomer_id(customer_id);
                                 customerReportItem.setBalance(balance);
 
-                                customerReportItemArrayList.add(customerReportItem);
+                                if(filterID.equalsIgnoreCase("date")){
+                                    if(selectedDate != null){
+                                        try{
+                                            Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
+                                            Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
+                                            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+                                            Date date = simple.parse(created_date);
+                                            if(date.getTime() >= resultSS.getTime() && resultEE.getTime() >= date.getTime()){
+                                                Log.e(TAG, "datemillis1 "+simple.format(resultSS));
+                                                Log.e(TAG, "datemillis2 "+simple.format(resultEE));
+                                                Log.e(TAG, "datemillis3 "+simple.format(date));
+                                                customerReportItemArrayList.add(customerReportItem);
+                                            }
+                                        }catch (Exception e){
+                                        }
+                                    }
+                                }else{
+                                    customerReportItemArrayList.add(customerReportItem);
+                                }
                             }
                         }
 
@@ -771,7 +835,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void totalSalesReport(String customer_id, String filterID) {
+    private void totalSalesReport(String customer_id, String filterID, SelectedDate selectedDate) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
@@ -841,7 +905,25 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 customerReportItem.setCustomer_name(customer_name);
                                 customerReportItem.setTotal(total);
 
-                                customerReportItemArrayList.add(customerReportItem);
+                                if(filterID.equalsIgnoreCase("date")){
+                                    if(selectedDate != null){
+                                        try{
+                                            Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
+                                            Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
+                                            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+                                            Date date = simple.parse(invoice_date);
+                                            if(date.getTime() >= resultSS.getTime() && resultEE.getTime() >= date.getTime()){
+                                                Log.e(TAG, "datemillis1 "+simple.format(resultSS));
+                                                Log.e(TAG, "datemillis2 "+simple.format(resultEE));
+                                                Log.e(TAG, "datemillis3 "+simple.format(date));
+                                                customerReportItemArrayList.add(customerReportItem);
+                                            }
+                                        }catch (Exception e){
+                                        }
+                                    }
+                                }else{
+                                    customerReportItemArrayList.add(customerReportItem);
+                                }
                             }
                         }
 
@@ -990,7 +1072,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void totalPurchaseReport(String customer_id, String filterID) {
+    private void totalPurchaseReport(String customer_id, String filterID, SelectedDate selectedDate) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
@@ -1060,8 +1142,25 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 customerReportItem.setSupplier_name(supplier_name);
                                 customerReportItem.setTotal(total);
 
-                                customerReportItemArrayList.add(customerReportItem);
-                            }
+                                if(filterID.equalsIgnoreCase("date")){
+                                    if(selectedDate != null){
+                                        try{
+                                            Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
+                                            Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
+                                            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+                                            Date date = simple.parse(order_date);
+                                            if(date.getTime() >= resultSS.getTime() && resultEE.getTime() >= date.getTime()){
+                                                Log.e(TAG, "datemillis1 "+simple.format(resultSS));
+                                                Log.e(TAG, "datemillis2 "+simple.format(resultEE));
+                                                Log.e(TAG, "datemillis3 "+simple.format(date));
+                                                customerReportItemArrayList.add(customerReportItem);
+                                            }
+                                        }catch (Exception e){
+                                        }
+                                    }
+                                }else{
+                                    customerReportItemArrayList.add(customerReportItem);
+                                }                            }
                         }
 
                         if(filterID.equalsIgnoreCase("date")){
@@ -1358,7 +1457,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 String slab3Txt = "";
                 String slab4Txt = "";
 
-                String stringBalance = "";
 
                 if(slab1 == 0){
                     slab1Txt = "";
@@ -1385,12 +1483,14 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 }
 
 
-//                if(getDebit == 0){
-//                    stringBalance = "";
-//                }else{
+                double doubleBalance = Double.parseDouble(customerReportItemArrayList.get(i).getTotal());
+                String stringBalance = "";
+                if(doubleBalance == 0){
+                    stringBalance = "";
+                }else{
                 String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
-                stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
-//                }
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
+                }
 
                 String stringNotDue1 = customerReportItemArrayList.get(i).getNot_due();
                 String stringNotDue11 = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringNotDue1)) + Utility.getReplaceDollor(cruncycode);
@@ -1453,7 +1553,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void taxCollectedReport(String customer_id, String filterID) {
+    private void taxCollectedReport(String customer_id, String filterID, SelectedDate selectedDate) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
@@ -1525,8 +1625,25 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 customerReportItem.setTax_rate(tax_rate);
 
 
-                                customerReportItemArrayList.add(customerReportItem);
-                            }
+                                if(filterID.equalsIgnoreCase("date")){
+                                    if(selectedDate != null){
+                                        try{
+                                            Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
+                                            Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
+                                            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+                                            Date date = simple.parse(date_added);
+                                            if(date.getTime() >= resultSS.getTime() && resultEE.getTime() >= date.getTime()){
+                                                Log.e(TAG, "datemillis1 "+simple.format(resultSS));
+                                                Log.e(TAG, "datemillis2 "+simple.format(resultEE));
+                                                Log.e(TAG, "datemillis3 "+simple.format(date));
+                                                customerReportItemArrayList.add(customerReportItem);
+                                            }
+                                        }catch (Exception e){
+                                        }
+                                    }
+                                }else{
+                                    customerReportItemArrayList.add(customerReportItem);
+                                }                            }
                         }
 
                         if(filterID.equalsIgnoreCase("date")){
@@ -1599,7 +1716,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                         .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getCustomer_name())
                         .replaceAll("#TaxName#", customerReportItemArrayList.get(i).getTax_name())
                         .replaceAll("#TaxRate#", stringTAX +"%")
-                        .replaceAll("#Amount#", stringAmount +"%");
+                        .replaceAll("#Amount#", stringAmount +"");
                 productitemlist = productitemlist + productitem;
 
                 double allAmount = 0.0;
@@ -2208,9 +2325,10 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 2){
                 shareWeb("Customer Statement Report");
             }else if(i == 3){
-                customerReport(customer_id, "date");
+                //customerReport(customer_id, "date");
+                customerFilterDate(customer_id, positionNext);
             }else if(i == 4){
-                customerReport(customer_id, "");
+                customerReport(customer_id, "", null);
             }
         } else if(positionNext == 1){
             if(i == 0){
@@ -2221,9 +2339,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 2){
                 shareWeb("Supplier Statement Report");
             }else if(i == 3){
-                supplierReport(supplier_id, "date");
+                customerFilterDate(supplier_id, positionNext);
             }else if(i == 4){
-                supplierReport(supplier_id, "");
+                supplierReport(supplier_id, "", null);
             }
         } else if(positionNext == 2){
             if(i == 0){
@@ -2234,15 +2352,15 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 2){
                 shareWeb("Total Sales Report");
             }else if(i == 3){
-                totalSalesReport(company_id, "date");
+                customerFilterDate(company_id, positionNext);
             }else if(i == 4){
-                totalSalesReport(company_id, "customer");
+                totalSalesReport(company_id, "customer", null);
             }else if(i == 5){
-                totalSalesReport(company_id, "paid");
+                totalSalesReport(company_id, "paid", null);
             }else if(i == 6){
-                totalSalesReport(company_id, "unpaid");
+                totalSalesReport(company_id, "unpaid", null);
             }else if(i == 7){
-                totalSalesReport(company_id, "");
+                totalSalesReport(company_id, "", null);
             }
         } else if(positionNext == 3){
             if(i == 0){
@@ -2253,11 +2371,12 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 2){
                 shareWeb("Total Purchase Report");
             }else if(i == 3){
-                totalPurchaseReport(company_id, "date");
+//                totalPurchaseReport(company_id, "date");
+                customerFilterDate(company_id, positionNext);
             }else if(i == 4){
-                totalPurchaseReport(company_id, "supplier");
+                totalPurchaseReport(company_id, "supplier", null);
             }else if(i == 5){
-                totalPurchaseReport(company_id, "");
+                totalPurchaseReport(company_id, "", null);
             }
         } else if(positionNext == 4){
             if(i == 0){
@@ -2281,11 +2400,12 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 2){
                 shareWeb("Tax Collected Report");
             }else if(i == 3){
-                taxCollectedReport(company_id, "date");
+                //taxCollectedReport(company_id, "date");
+                customerFilterDate(company_id, positionNext);
             }else if(i == 4){
-                taxCollectedReport(company_id, "tax");
+                taxCollectedReport(company_id, "tax", null);
             }else if(i == 5){
-                taxCollectedReport(company_id, "");
+                taxCollectedReport(company_id, "", null);
             }
         } else if(positionNext == 6){
             if(i == 0){
@@ -2321,25 +2441,144 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     }
 
 
-
     private void shareWeb(String title) {
         Log.e(TAG, "title "+title);
 
         if(fileWithinMyDir.exists()) {
             Log.e(TAG, "FILENAME" +fileWithinMyDir);
-             Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-                            // File fileWithinMyDir = new File(message);
-             Uri photoURI = FileProvider.getUriForFile(ReportViewActivity.this, "com.receipt.invoice.stock.sirproject.provider", fileWithinMyDir);
-                 if(fileWithinMyDir.exists()) {
-                     intentShareFile.setType("application/pdf");
-                                //Uri outputFileUri = Uri.fromFile(fileWithinMyDir);
-                     intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
-                     intentShareFile.putExtra(Intent.EXTRA_SUBJECT, title);
-                     startActivity(Intent.createChooser(intentShareFile, "Share File"));
+            Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+            // File fileWithinMyDir = new File(message);
+            Uri photoURI = FileProvider.getUriForFile(ReportViewActivity.this, "com.receipt.invoice.stock.sirproject.provider", fileWithinMyDir);
+            if(fileWithinMyDir.exists()) {
+                intentShareFile.setType("application/pdf");
+                //Uri outputFileUri = Uri.fromFile(fileWithinMyDir);
+                intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
+                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, title);
+                startActivity(Intent.createChooser(intentShareFile, "Share File"));
             }
         }
 
     }
+
+
+
+    private void customerFilterDate(String customer_id, int position) {
+        SublimePickerFragment pickerFrag = new SublimePickerFragment();
+        pickerFrag.setCallback(new SublimePickerFragment.Callback() {
+            @Override
+            public void onCancelled() {
+
+            }
+
+            @Override
+            public void onDateTimeRecurrenceSet(SelectedDate selectedDate, int hourOfDay, int minute, SublimeRecurrencePicker.RecurrenceOption recurrenceOption, String recurrenceRule) {
+                if (selectedDate != null) {
+                    if (selectedDate.getType() == SelectedDate.Type.SINGLE) {
+    //                    Log.e(TAG, "YEARSS "+String.valueOf(selectedDate.getStartDate().get(Calendar.YEAR)));
+    //                    Log.e(TAG, "MONTHSS "+String.valueOf(selectedDate.getStartDate().get(Calendar.MONTH)));
+    //                    Log.e(TAG, "DAYSS "+String.valueOf(selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH)));
+    //                    String ddd = selectedDate.getStartDate().get(Calendar.YEAR) + "-" + (selectedDate.getStartDate().get(Calendar.MONTH)+1) + "-" + selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH);
+
+                    } else if (selectedDate.getType() == SelectedDate.Type.RANGE) {
+
+//                        DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+//
+//    //                    String fff = DateFormat.getDateInstance().format(selectedDate.getStartDate().getTime());
+//    //                    Log.e(TAG, "fff "+fff);
+//                        Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
+//                        Log.e(TAG, "datemillis22 "+simple.format(resultSS));
+//
+//    //                    String eee = DateFormat.getDateInstance().format(selectedDate.getEndDate().getTime());
+//    //                    Log.e(TAG, "eee "+eee);
+//                        Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
+//                        Log.e(TAG, "datemillis22 "+simple.format(resultEE));
+
+
+
+                    }
+
+                    Log.e(TAG, "positionCCCCC "+position);
+
+                    if(position == 0){
+                        customerReport(customer_id, "date", selectedDate);
+                    } else if(position == 1){
+                        supplierReport(customer_id, "date", selectedDate);
+                    } else if(position == 2){
+                        totalSalesReport(customer_id, "date", selectedDate);
+                    }else if(position == 3){
+                        totalPurchaseReport(customer_id, "date", selectedDate);
+                    }else if(position == 4){
+                        //customerReport(customer_id, "date", selectedDate);
+                    }else if(position == 5){
+                        taxCollectedReport(customer_id, "date", selectedDate);
+                    }else if(position == 6){
+                        //customerReport(customer_id, "date", selectedDate);
+                    }else if(position == 7){
+                        //customerReport(customer_id, "date", selectedDate);
+                    }
+                }
+            }
+        });
+        android.util.Pair<Boolean, SublimeOptions> optionsPair = getOptions();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("SUBLIME_OPTIONS", optionsPair.second);
+        pickerFrag.setArguments(bundle);
+
+        pickerFrag.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+        pickerFrag.show(getSupportFragmentManager(), "SUBLIME_PICKER");
+    }
+
+    android.util.Pair<Boolean, SublimeOptions> getOptions() {
+        SublimeOptions options = new SublimeOptions();
+        int displayOptions = 0;
+
+        displayOptions |= SublimeOptions.ACTIVATE_DATE_PICKER;
+
+        options.setPickerToShow(SublimeOptions.Picker.DATE_PICKER);
+
+        options.setDisplayOptions(displayOptions);
+
+        options.setCanPickDateRange(true);
+
+        return new android.util.Pair<>(displayOptions != 0 ? Boolean.TRUE : Boolean.FALSE, options);
+    }
+
+
+
+//
+//    SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
+//        @Override
+//        public void onCancelled() {
+//            // rlDateTimeRecurrenceInfo.setVisibility(View.GONE);
+//        }
+//
+//        @Override
+//        public void onDateTimeRecurrenceSet(SelectedDate selectedDate,
+//                                            int hourOfDay, int minute,
+//                                            SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
+//                                            String recurrenceRule) {
+//            if (selectedDate != null) {
+//                if (selectedDate.getType() == SelectedDate.Type.SINGLE) {
+////                tvYear.setText(applyBoldStyle("YEAR: ")
+////                        .append(String.valueOf(mSelectedDate.getStartDate().get(Calendar.YEAR))));
+////                tvMonth.setText(applyBoldStyle("MONTH: ")
+////                        .append(String.valueOf(mSelectedDate.getStartDate().get(Calendar.MONTH))));
+////                tvDay.setText(applyBoldStyle("DAY: ")
+////                        .append(String.valueOf(mSelectedDate.getStartDate().get(Calendar.DAY_OF_MONTH))));
+//                } else if (selectedDate.getType() == SelectedDate.Type.RANGE) {
+////                llDateHolder.setVisibility(View.GONE);
+////                llDateRangeHolder.setVisibility(View.VISIBLE);
+////
+////                tvStartDate.setText(applyBoldStyle("START: ")
+////                        .append(DateFormat.getDateInstance().format(mSelectedDate.getStartDate().getTime())));
+////                tvEndDate.setText(applyBoldStyle("END: ")
+////                        .append(DateFormat.getDateInstance().format(mSelectedDate.getEndDate().getTime())));
+//                }
+//            }
+//        }
+//    };
+//
+
 
 
 }

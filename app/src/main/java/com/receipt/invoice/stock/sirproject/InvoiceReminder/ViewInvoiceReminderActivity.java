@@ -39,7 +39,10 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -922,7 +925,10 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
                 stringBuilderCompany.append(company_email+"");
             }
 
-
+            Calendar myCalendar = Calendar.getInstance();
+            String myFormat = "yyyy-MM-dd";
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            String dateCurrent = sdf.format(myCalendar.getTime());
 
 
             try {
@@ -933,7 +939,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
 //                        .replaceAll("Website", company_website)
 //                        .replaceAll("Email", company_email)
                         .replaceAll("Name!", company_name)
-                        .replaceAll("CusName", date)
+                        .replaceAll("CusName", dateCurrent)
                         .replaceAll("INV-564", "" + invoicenumber)
                         .replaceAll("invD", date)
                         .replaceAll("DueDate", due_date)

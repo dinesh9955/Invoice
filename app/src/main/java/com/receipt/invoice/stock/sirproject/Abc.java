@@ -118,6 +118,17 @@ public class Abc extends AppCompatActivity{
               //  materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
 
 
+                int a = 2;
+                int b = 10;
+                int x = 10;
+
+                if(x >= a && b >= x){
+                    Log.e(TAG , "yyyyyyyyyyy");
+                }else{
+                    Log.e(TAG , "nnnnnnnnnnn");
+                }
+
+
                 SublimePickerFragment pickerFrag = new SublimePickerFragment();
                 pickerFrag.setCallback(mFragmentCallback);
 
@@ -318,6 +329,49 @@ public class Abc extends AppCompatActivity{
                                             int hourOfDay, int minute,
                                             SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
                                             String recurrenceRule) {
+
+
+
+
+//
+//            Log.e(TAG, "YEARSS "+String.valueOf(selectedDate.getStartDate().get(Calendar.YEAR)));
+//            Log.e(TAG, "MONTHSS "+String.valueOf(selectedDate.getStartDate().get(Calendar.MONTH)));
+//            Log.e(TAG, "DAYSS "+String.valueOf(selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH)));
+//
+//            String ddd = selectedDate.getStartDate().get(Calendar.YEAR) + "-" + (selectedDate.getStartDate().get(Calendar.MONTH)+1) + "-" + selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH);
+//
+//            try{
+//                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+//                Date date = simple.parse(ddd);
+//                long datemillis = date.getTime();
+//
+//                Log.e(TAG, "datemillis "+datemillis);
+//
+//
+//               // long miliSec = 3010;
+//
+//                // Creating date format
+//               // DateFormat simple = new SimpleDateFormat("dd MMM yyyy HH:mm:ss:SSS Z");
+//
+//                // Creating date from milliseconds
+//                // using Date() constructor
+//                Date result = new Date(datemillis);
+//
+//                // Formatting Date according to the
+//                // given format
+//
+//                Log.e(TAG, "datemillis22 "+simple.format(result));
+//
+//
+//                System.out.println(simple.format(result));
+//
+//
+//            }catch (Exception e){
+//
+//            }
+
+            Log.e(TAG, "");
+
             if (selectedDate != null) {
                 if (selectedDate.getType() == SelectedDate.Type.SINGLE) {
 //                tvYear.setText(applyBoldStyle("YEAR: ")
@@ -334,6 +388,14 @@ public class Abc extends AppCompatActivity{
 //                        .append(DateFormat.getDateInstance().format(mSelectedDate.getStartDate().getTime())));
 //                tvEndDate.setText(applyBoldStyle("END: ")
 //                        .append(DateFormat.getDateInstance().format(mSelectedDate.getEndDate().getTime())));
+
+                   // String dddS = selectedDate.getStartDate().get(Calendar.YEAR) + "-" + (selectedDate.getStartDate().get(Calendar.MONTH)+1) + "-" + selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH);
+
+                    String fff = DateFormat.getDateInstance().format(selectedDate.getStartDate().getTime());
+                    Log.e(TAG, "fff "+fff);
+                    DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+                    Date result = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
+                    Log.e(TAG, "datemillis22 "+simple.format(result));
                 }
             }
         }

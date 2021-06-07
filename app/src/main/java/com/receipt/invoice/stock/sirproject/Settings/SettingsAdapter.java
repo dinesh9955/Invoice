@@ -90,8 +90,8 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
                     Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
                     mcontext.startActivity(intent);
                 } else if(i == 2){
-//                    Intent intent = new Intent(mcontext, SubscribeActivity.class);
-//                    mcontext.startActivity(intent);
+                    Intent intent = new Intent(mcontext, SubscribeActivity.class);
+                    mcontext.startActivity(intent);
                 } else if(i == 3){
 //                    Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
 //                    mcontext.startActivity(intent);
@@ -222,7 +222,6 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
 
 
     public void numberFormatDialog() {
-
 
         final Dialog mybuilder = new Dialog(mcontext);
         mybuilder.setContentView(R.layout.number_format_dialog_list);

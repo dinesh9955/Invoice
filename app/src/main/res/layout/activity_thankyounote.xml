@@ -62,14 +62,18 @@
     </androidx.recyclerview.widget.RecyclerView>
 
 
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/avi"
-        style="@style/AVLoadingIndicatorView"
+    <TextView
+        android:layout_marginTop="100dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="No Paid invoices"
+        android:textSize="14dp"
+        android:textColor="@color/darkgray"
+        android:id="@+id/txtinvoice"
         android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        />
 
 
 </RelativeLayout>

@@ -50,7 +50,7 @@ public class InvoiceReminderActivity extends BaseActivity {
     ArrayList<InvoiceData> temp = new ArrayList();
 
     ApiInterface apiInterface;
-    private AVLoadingIndicatorView avi;
+//    private AVLoadingIndicatorView avi;
 
     AwesomeSpinner selectcompany;
 
@@ -72,6 +72,8 @@ public class InvoiceReminderActivity extends BaseActivity {
 
     String templatestr = "1";
 
+    TextView textViewMessage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,10 +93,12 @@ public class InvoiceReminderActivity extends BaseActivity {
         StrictMode.setVmPolicy(builder.build());
 
         apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
-        avi = findViewById(R.id.avi);
+//        avi = findViewById(R.id.avi);
         recycler_invoices = findViewById(R.id.recycler_invoices);
         selectcompany = findViewById(R.id.selectcompany);
         search = findViewById(R.id.search);
+        textViewMessage = findViewById(R.id.txtinvoice);
+        textViewMessage.setVisibility(View.VISIBLE);
 
 
 
@@ -135,6 +139,7 @@ public class InvoiceReminderActivity extends BaseActivity {
             }
         });
 
+
         bottomSheetDialog = new BottomSheetDialog(InvoiceReminderActivity.this);
         enableSwipe();
 
@@ -152,6 +157,13 @@ public class InvoiceReminderActivity extends BaseActivity {
                 temp.add(d);
             }
         }
+
+        if(temp.size() > 0){
+            textViewMessage.setVisibility(View.GONE);
+        }else{
+            textViewMessage.setVisibility(View.VISIBLE);
+        }
+
         invoicelistAdapterdt.updateList(temp);
     }
 
@@ -161,7 +173,7 @@ public class InvoiceReminderActivity extends BaseActivity {
 
         cnames.clear();
         cids.clear();
-        avi.smoothToShow();
+//        avi.smoothToShow();
         String token = Constant.GetSharedPreferences(InvoiceReminderActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Access-Token", token);
@@ -170,7 +182,7 @@ public class InvoiceReminderActivity extends BaseActivity {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
                 Log.e("responsecompany", response);
-                avi.smoothToHide();
+//                avi.smoothToHide();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
@@ -207,11 +219,13 @@ public class InvoiceReminderActivity extends BaseActivity {
 //                                cEmail.add(company_email);
 //                                cLogo.add(logo);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(InvoiceReminderActivity.this, android.R.layout.simple_spinner_item, cnames);
-                                selectcompany.setAdapter(namesadapter);
+
 
                             }
                         }
+
+                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(InvoiceReminderActivity.this, android.R.layout.simple_spinner_item, cnames);
+                        selectcompany.setAdapter(namesadapter);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -222,7 +236,7 @@ public class InvoiceReminderActivity extends BaseActivity {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 if (responseBody != null) {
                     String response = new String(responseBody);
-                    avi.smoothToHide();
+//                    avi.smoothToHide();
                     Log.e("responsecompanyF", response);
                     try {
                         JSONObject jsonObject = new JSONObject(response);
@@ -244,7 +258,7 @@ public class InvoiceReminderActivity extends BaseActivity {
     private void InvoicelistData(String paramsvalue) {
 
         list.clear();
-        avi.smoothToShow();
+//        avi.smoothToShow();
         RequestParams params = new RequestParams();
 
         if (paramsvalue.equals("All")) {
@@ -278,7 +292,7 @@ public class InvoiceReminderActivity extends BaseActivity {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
                 Log.e(TAG, "responsecustomers"+ response);
-                avi.smoothToHide();
+//                avi.smoothToHide();
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -362,6 +376,12 @@ public class InvoiceReminderActivity extends BaseActivity {
                         invoicelistAdapterdt.updateList(list);
                         invoicelistAdapterdt.notifyDataSetChanged();
 
+                        if(list.size() > 0){
+                            textViewMessage.setVisibility(View.GONE);
+                        }else{
+                            textViewMessage.setVisibility(View.VISIBLE);
+                        }
+
                         //  enableSwipe();
 
                     }
@@ -383,7 +403,7 @@ public class InvoiceReminderActivity extends BaseActivity {
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecustomersF", response);
-                    avi.smoothToHide();
+//                    avi.smoothToHide();
                     try {
                         JSONObject jsonObject = new JSONObject(response);
 

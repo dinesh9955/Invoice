@@ -1052,7 +1052,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
 
                             if(file.exists()) {
                                 intentShareFile.setType("application/pdf");
-                                Uri outputFileUri = Uri.fromFile(file);
+                                //Uri outputFileUri = Uri.fromFile(file);
                                 intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
 
                                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
@@ -1060,10 +1060,11 @@ public class SendInvoiceReminderActivity extends BaseActivity {
                                 intentShareFile.putExtra(Intent.EXTRA_TEXT,
                                         "Your invoice is due for payment. Kindly find below reminder note.");
 
-                                if (Utility.isAppAvailable(SendInvoiceReminderActivity.this, "com.google.android.gm")){
-                                    intentShareFile.setPackage("com.google.android.gm");
-                                }
-                                startActivity(intentShareFile);
+//                                if (Utility.isAppAvailable(SendInvoiceReminderActivity.this, "com.google.android.gm")){
+////                                    intentShareFile.setPackage("com.google.android.gm");
+////                                }
+////                                startActivity(intentShareFile);
+                                startActivity(Intent.createChooser(intentShareFile, "Share File"));
                                 finish();
                             }
 

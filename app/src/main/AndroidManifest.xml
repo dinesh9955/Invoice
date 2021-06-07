@@ -593,7 +593,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
-x
+
         </activity>
 
 

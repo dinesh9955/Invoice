@@ -32,6 +32,7 @@ import com.receipt.invoice.stock.sirproject.Estimate.EstimateActivity;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.Invoice.InvoiceActivity;
 import com.receipt.invoice.stock.sirproject.CN.CreditNotesActivity;
+import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.InvoiceReminder.InvoiceReminderActivity;
 import com.receipt.invoice.stock.sirproject.PO.POActivity;
 import com.receipt.invoice.stock.sirproject.PV.PVActivity;
@@ -447,6 +448,11 @@ public class Constant {
                             preferences.edit().remove(Constant.ACCESS_TOKEN).commit();
                             preferences.edit().remove(Constant.FULLNAME).commit();
                             preferences.edit().remove(Constant.EMAIL).commit();
+                            SavePref pref = new SavePref();
+                            pref.SavePref(activity);
+
+                            pref.setNumberFormatPosition(0);
+                            pref.setLanguagePosition(0);
 
 
                             Intent intent = new Intent(activity, Signin_Activity.class);

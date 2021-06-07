@@ -1385,7 +1385,7 @@ public class PreviewItActivity extends BaseActivity {
                         .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getCustomer_name())
                         .replaceAll("#TaxName#", customerReportItemArrayList.get(i).getTax_name())
                         .replaceAll("#TaxRate#", stringTAX +"%")
-                        .replaceAll("#Amount#", stringAmount +"%");
+                        .replaceAll("#Amount#", stringAmount +"");
                 productitemlist = productitemlist + productitem;
 
                 double allAmount = 0.0;

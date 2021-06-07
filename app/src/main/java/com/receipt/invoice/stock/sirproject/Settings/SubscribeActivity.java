@@ -34,7 +34,7 @@ public class SubscribeActivity extends BaseActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_language);
+        setContentView(R.layout.activity_subscribe);
         //Constant.bottomNav(Create_Invoice_Activity.this,1);
 
         overridePendingTransition(R.anim.flip_out, R.anim.flip_in);

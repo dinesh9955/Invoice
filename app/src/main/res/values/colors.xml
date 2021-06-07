@@ -35,6 +35,8 @@
     <color name="golden">#D9BE09</color>
     <color name="bottom">#777777</color>
 
+    <color name="full_transparent">#00000000</color>
+
     <color name="one">#2dc795</color>
     <color name="two">#09BB9F</color>
     <color name="three">#15607A</color>
