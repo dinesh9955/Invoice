@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rel_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@color/lightgray">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PAYMENT GATEWAY"
+            android:textAllCaps="true"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:textSize="@dimen/_13sdp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_paypal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_below="@+id/rel_header">
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PayPal"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:padding="@dimen/_5sdp"/>
+    </RelativeLayout>
+
+
+
+
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_paypal"
+        android:weightSum="1"
+        android:id="@+id/radioGroup"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:visibility="gone"
+       >
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Standard"
+            android:id="@+id/radioButton"
+            android:checked="false"
+            android:textSize="@dimen/_13sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            />
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Business"
+            android:id="@+id/radioButton2"
+            android:checked="false"
+            android:textSize="@dimen/_13sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"/>
+    </RadioGroup>
+
+
+    <RelativeLayout
+        android:id="@+id/relative_stripe"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_below="@+id/radioGroup">
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stripe"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:padding="@dimen/_5sdp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

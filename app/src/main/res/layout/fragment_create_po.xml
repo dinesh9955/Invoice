@@ -561,12 +561,22 @@
                 android:layout_marginRight="20dp"
                 android:background="@color/gray"/>
 
+            <include layout="@layout/payment_design"
+                android:layout_below="@+id/view4"
+                android:id="@+id/payment_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp">
+
+            </include>
+
+
 
             <TextView
                 android:id="@+id/s_invoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/view4"
+                android:layout_below="@+id/payment_id"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"

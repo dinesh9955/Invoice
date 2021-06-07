@@ -181,6 +181,7 @@ dependencies {
     implementation 'com.android.installreferrer:installreferrer:1.0'
 
 
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
 }
 
 

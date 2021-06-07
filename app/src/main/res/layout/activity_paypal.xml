@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Customer.Customer_Activity"
+    android:background="@color/white">
+
+    <!--<include layout="@layout/toolbar">
+    </include>-->
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <include layout="@layout/toolbar_language" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        android:fillViewport="true"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <EditText
+                android:id="@+id/login_email"
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/fade_green_border_corner_round"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="40dp"
+                android:textColorHint="@color/d_grey"
+                android:textColor="@color/black"
+                android:text=""
+                android:textSize="15dp"
+                android:singleLine="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+
+                />
+
+
+            <EditText
+                android:id="@+id/login_email_confirm"
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/fade_green_border_corner_round"
+                android:hint="Confirm Email"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="20dp"
+                android:textColorHint="@color/d_grey"
+                android:textColor="@color/black"
+                android:text=""
+                android:textSize="15dp"
+                android:layout_below="@+id/login_email"
+                android:singleLine="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Options"
+                android:id="@+id/customerstxt"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+
+
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:textStyle="bold"
+                android:layout_below="@+id/login_email_confirm"
+                />
+
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/customerstxt"
+                android:weightSum="1"
+                android:id="@+id/radioGroup_1"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:visibility="visible"
+
+                >
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Standard"
+                    android:id="@+id/radioButton_1"
+                    android:checked="false"
+                    android:textSize="@dimen/_13sdp"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:background="@drawable/fade_green_border_corner_round"
+                    android:layoutDirection="rtl"
+                    android:textAlignment="textStart"
+                    android:layout_gravity="start"
+                    android:theme="@style/AppTheme"
+                    />
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Business"
+                    android:id="@+id/radioButton_2"
+                    android:checked="false"
+                    android:textSize="@dimen/_13sdp"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:background="@drawable/fade_green_border_corner_round"
+                    android:layoutDirection="rtl"
+                    android:textAlignment="textStart"
+                    android:layout_gravity="start"
+                    android:theme="@style/AppTheme"
+                    android:layout_marginTop="@dimen/_15sdp"/>
+            </RadioGroup>
+
+
+
+            <Button
+                android:id="@+id/createinvoice"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/blue_btn_curve"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_gravity="center_vertical"
+                android:layout_below="@+id/radioGroup_1"
+                />
+
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>
