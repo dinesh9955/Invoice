@@ -51,6 +51,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Adapter.Select_Warehouse_Adapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
@@ -76,7 +77,7 @@ import cz.msebera.android.httpclient.Header;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Add_Product extends Fragment implements Select_Warehouse_Adapter.Callback {
+public class Add_Product extends BaseFragment implements Select_Warehouse_Adapter.Callback {
 
 
     private static final int GALLARY_aCTION_PICK_CODE = 10;
@@ -728,6 +729,10 @@ public class Add_Product extends Fragment implements Select_Warehouse_Adapter.Ca
                                 Map<String, Object> eventValue = new HashMap<String, Object>();
                                 eventValue.put(AFInAppEventParameterName.PARAM_1, "product_addnew");
                                 AppsFlyerLib.getInstance().trackEvent(getActivity(), "product_addnew", eventValue);
+
+                                Bundle params2 = new Bundle();
+                                params2.putString("event_name", "My Products");
+                                firebaseAnalytics.logEvent("product_addnew", params2);
 
                                 Constant.SuccessToast(getActivity(), "Product Added");
                                 new Handler().postDelayed(new Runnable() {

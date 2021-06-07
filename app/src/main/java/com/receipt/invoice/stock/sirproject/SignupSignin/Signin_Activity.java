@@ -33,6 +33,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.receipt.invoice.stock.sirproject.Abc;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ForgotResetPassword.ForgotPassword_Activity;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
@@ -59,7 +60,7 @@ import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Signin_Activity extends AppCompatActivity {
+public class Signin_Activity extends BaseActivity {
 
 
     private static final String TAG = "Signin_Activity";
@@ -268,14 +269,18 @@ public class Signin_Activity extends AppCompatActivity {
                                 pref.edit().putString(Constant.SERVICE,service).commit();
                                 pref.edit().putString(Constant.CREDIT_NOTE,credit_note).commit();
 
+                                Map<String, Object> eventValue = new HashMap<String, Object>();
+                                eventValue.put(AFInAppEventParameterName.PARAM_1, "signin_click");
+                                AppsFlyerLib.getInstance().trackEvent(Signin_Activity.this, "signin_click", eventValue);
+
+                                Bundle params2 = new Bundle();
+                                params2.putString("event_name", "signin_click");
+                                firebaseAnalytics.logEvent("signin_click", params2);
 
                                 Constant.SuccessToast(Signin_Activity.this,jsonObject.getString("message"));
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Map<String, Object> eventValue = new HashMap<String, Object>();
-                                        eventValue.put(AFInAppEventParameterName.PARAM_1, "signin_click");
-                                        AppsFlyerLib.getInstance().trackEvent(Signin_Activity.this, "signin_click", eventValue);
 
                                         Intent intent = new Intent(Signin_Activity.this, Home_Activity.class);
                                         intent.putExtra("login","login");

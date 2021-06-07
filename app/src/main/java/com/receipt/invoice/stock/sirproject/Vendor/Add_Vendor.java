@@ -55,6 +55,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
@@ -84,7 +85,7 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Add_Vendor extends Fragment {
+public class Add_Vendor extends BaseFragment {
 
 
     private static final String TAG = "Add_Vendor";
@@ -611,6 +612,10 @@ public class Add_Vendor extends Fragment {
                                 Map<String, Object> eventValue = new HashMap<String, Object>();
                                 eventValue.put(AFInAppEventParameterName.PARAM_1, "supplier_addnew");
                                 AppsFlyerLib.getInstance().trackEvent(getActivity(), "supplier_addnew", eventValue);
+
+                                Bundle params2 = new Bundle();
+                                params2.putString("event_name", "Suppliers");
+                                firebaseAnalytics.logEvent("supplier_addnew", params2);
 
                                 Constant.SuccessToast(getActivity(),"Supplier Added");
                                 new Handler().postDelayed(new Runnable() {

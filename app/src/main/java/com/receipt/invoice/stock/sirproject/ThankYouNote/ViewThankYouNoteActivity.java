@@ -136,6 +136,10 @@ public class ViewThankYouNoteActivity extends BaseActivity {
         eventValue.put(AFInAppEventParameterName.PARAM_1, "thankyounotes_view");
         AppsFlyerLib.getInstance().trackEvent(ViewThankYouNoteActivity.this, "thankyounotes_view", eventValue);
 
+        Bundle params2 = new Bundle();
+        params2.putString("event_name", "Thank you notes");
+        firebaseAnalytics.logEvent("thankyounotes_view", params2);
+
 
         getinvoicedata();
 

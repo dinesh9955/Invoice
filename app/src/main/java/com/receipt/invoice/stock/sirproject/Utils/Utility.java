@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.receipt.invoice.stock.sirproject.Model.ItemQuantity;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
 
@@ -742,6 +743,45 @@ public class Utility {
         return true;
     }
 
+
+
+    public static ItemQuantity getQuantityByProductId(ArrayList<Product_list> product_bottom, String product_id) {
+        ItemQuantity itemQuantity = new ItemQuantity();
+        double en_quantity = 0.0;
+        String category = "";
+        if(product_bottom.size() > 0){
+            for(int i = 0; i < product_bottom.size() ; i ++){
+                Log.e(TAG, product_bottom.get(i).getProduct_id()+" ::: "+product_id+ " :::: "+product_bottom.get(i).getProduct_type());
+
+                if(product_bottom.get(i).getProduct_type().equalsIgnoreCase("PRODUCT")){
+                    if(product_bottom.get(i).getProduct_id().equalsIgnoreCase(product_id)){
+                        Log.e(TAG, product_bottom.get(i).getProduct_id()+" ::: "+product_id);
+                        try{
+                            en_quantity = Double.parseDouble(product_bottom.get(i).getQuantity());
+                            category = product_bottom.get(i).getProduct_type();
+
+                            Log.e(TAG, "categoryQQQ "+category);
+
+                            itemQuantity.setProduct_type(category);
+                            itemQuantity.setEn_quantity(en_quantity);
+                        }catch (Exception e){
+
+                        }
+                        break;
+                    }else{
+
+                    }
+                }else {
+
+                }
+
+            }
+        }
+
+
+
+        return itemQuantity;
+    }
 
 
 

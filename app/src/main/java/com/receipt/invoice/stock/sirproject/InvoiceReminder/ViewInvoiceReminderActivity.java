@@ -200,6 +200,11 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
         eventValue.put(AFInAppEventParameterName.PARAM_1, "invoiceRemainder_view");
         AppsFlyerLib.getInstance().trackEvent(ViewInvoiceReminderActivity.this, "invoiceRemainder_view", eventValue);
 
+        Bundle params2 = new Bundle();
+        params2.putString("event_name", "Invoice remainder");
+        firebaseAnalytics.logEvent("invoiceRemainder_view", params2);
+
+
         getinvoicedata();
 
     }

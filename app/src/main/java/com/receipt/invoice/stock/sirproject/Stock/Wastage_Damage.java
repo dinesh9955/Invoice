@@ -24,6 +24,7 @@ import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.R;
@@ -44,7 +45,7 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Wastage_Damage extends Fragment {
+public class Wastage_Damage extends BaseFragment {
 
 
     public Wastage_Damage() {
@@ -423,6 +424,10 @@ public class Wastage_Damage extends Fragment {
                             Map<String, Object> eventValue = new HashMap<String, Object>();
                             eventValue.put(AFInAppEventParameterName.PARAM_1, "stocks_remove");
                             AppsFlyerLib.getInstance().trackEvent(getActivity(), "stocks_remove", eventValue);
+
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name", "Stocks Remove");
+                            firebaseAnalytics.logEvent("stocks_remove", params2);
 
                             Constant.SuccessToast(getActivity(),"Stock Removed");
                             new Handler().postDelayed(new Runnable() {

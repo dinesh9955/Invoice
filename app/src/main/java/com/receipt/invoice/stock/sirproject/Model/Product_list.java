@@ -117,6 +117,15 @@ public class Product_list implements Serializable {
     String product_taxable;
     String product_description = "";
     String usedQuantity;
+    String product_type;
+
+    public String getProduct_type() {
+        return product_type;
+    }
+
+    public void setProduct_type(String product_type) {
+        this.product_type = product_type;
+    }
 
     public String getProducttotatlprice() {
         return producttotatlprice;

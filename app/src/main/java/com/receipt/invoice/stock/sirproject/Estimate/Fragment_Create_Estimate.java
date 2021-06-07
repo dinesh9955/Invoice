@@ -1204,6 +1204,10 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                             eventValue.put(AFInAppEventParameterName.PARAM_1, "estimate_create");
                             AppsFlyerLib.getInstance().trackEvent(getActivity(), "estimate_create", eventValue);
 
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name", "Estimates");
+                            firebaseAnalytics.logEvent("estimate_create", params2);
+
                             Constant.SuccessToast(getActivity(), "Estimate created successfully");
 
                             new Handler().postDelayed(new Runnable() {

@@ -78,6 +78,11 @@ public class Splash_Activity extends BaseActivity {
         eventValue.put(AFInAppEventParameterName.PARAM_1, "App_Open");
         AppsFlyerLib.getInstance().trackEvent(Splash_Activity.this, "app_open", eventValue);
 
+
+        Bundle params2 = new Bundle();
+        params2.putString("event_name", "App Open");
+        firebaseAnalytics.logEvent("app_open", params2);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

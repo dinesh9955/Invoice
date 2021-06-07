@@ -89,12 +89,14 @@ import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
+import com.receipt.invoice.stock.sirproject.Model.ItemQuantity;
 import com.receipt.invoice.stock.sirproject.Model.Moving;
 import com.receipt.invoice.stock.sirproject.Model.Product_Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.SelectedTaxlist;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
+import com.receipt.invoice.stock.sirproject.PV.EditEditPVActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
@@ -2919,6 +2921,8 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                                 product_list.setCurrency_code(currency_code);
                                 product_list.setQuantity(quantity);
                                 product_list.setMinimum(minimum);
+                                String product_type = item.getString("product_type");
+                                product_list.setProduct_type(product_type);
 
                                 product_bottom.add(product_list);
 
@@ -3836,6 +3840,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                 public void onClick(View view) {
                     mybuilder.dismiss();
 
+
                     if(edprice.getText().toString().length() == 0){
                         Constant.ErrorToast(EditEditReceiptActivity.this,"Please enter amount!");
                     }else if(edquantity.getText().toString().length() == 0){
@@ -3846,27 +3851,22 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                         double sh_quantity = 0;
                         double sh_price = 0.0;
 
-                        if(product_bottom.size() > 0){
-                            String quentityproduct= product_bottom.get(str).getQuantity();
-                            if(quentityproduct.equals("null"))
-                            {
-                                Constant.ErrorToast(EditEditReceiptActivity.this,"Insufficient Quantity Available");
-                            }
-                            else {
-                                sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
-                            }
 
-                            if (sh_quantity < en_quantity)
-                            {
+
+                        ItemQuantity itemQuantity = Utility.getQuantityByProductId(product_bottom, tempList.get(str).getProduct_id());
+                        Log.e(TAG, "itemQuantityAA "+itemQuantity.getEn_quantity());
+                        Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
+
+                        if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
+                            if (itemQuantity.getEn_quantity() <= en_quantity) {
                                 mybuilder.show();
-                                Constant.ErrorToast(EditEditReceiptActivity.this,"Insufficient Quantity Available");
+                                Constant.ErrorToast(EditEditReceiptActivity.this, "Insufficient Quantity Available");
                                 mybuilder.dismiss();
-                            }
-                            else
-                            {
+                            } else {
                                 sh_price = Double.parseDouble(edprice.getText().toString());
                                 double multiply = en_quantity * sh_price;
                                 String s_multiply = String.valueOf(multiply);
+
 
 
                                 producprice.remove(str);
@@ -3876,6 +3876,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                                 producprice.add(str, String.valueOf(sh_price));
                                 totalpriceproduct.add(str, String.valueOf(sh_price));
                                 tempQuantity.add(str, edquantity.getText().toString());
+
 
                                 double dd = 0.0;
                                 for (int i = 0; i < producprice.size(); i++){
@@ -3887,8 +3888,6 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                                 }
                                 total_price = dd;
 
-//                        edprice.setText(totalpriceproduct.get(str));
-//                        edquantity.setText(tempQuantity.get(str));
 
                                 calculateTotalAmount(total_price);
                                 products_adapter.notifyDataSetChanged();
@@ -3897,10 +3896,41 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                             }
                         }
 
+                        else
+                        {
+                            sh_price = Double.parseDouble(edprice.getText().toString());
+                            double multiply = en_quantity * sh_price;
+                            String s_multiply = String.valueOf(multiply);
 
+
+
+                            producprice.remove(str);
+                            totalpriceproduct.remove(str);
+                            tempQuantity.remove(str);
+
+                            producprice.add(str, String.valueOf(sh_price));
+                            totalpriceproduct.add(str, String.valueOf(sh_price));
+                            tempQuantity.add(str, edquantity.getText().toString());
+
+
+                            double dd = 0.0;
+                            for (int i = 0; i < producprice.size(); i++){
+                                double aa = Double.parseDouble(producprice.get(i));
+                                double bb = Double.parseDouble(tempQuantity.get(i));
+
+                                double cc = aa * bb;
+                                dd = dd + cc;
+                            }
+                            total_price = dd;
+
+
+                            calculateTotalAmount(total_price);
+                            products_adapter.notifyDataSetChanged();
+
+                            mybuilder.dismiss();
+                        }
 
                     }
-
 
                 }
             });

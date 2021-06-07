@@ -24,6 +24,7 @@ import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.R;
@@ -44,7 +45,7 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Stock_Movement extends Fragment {
+public class Stock_Movement extends BaseFragment {
 
 
     public Stock_Movement() {
@@ -421,6 +422,10 @@ public class Stock_Movement extends Fragment {
                             Map<String, Object> eventValue = new HashMap<String, Object>();
                             eventValue.put(AFInAppEventParameterName.PARAM_1, "stocks_move");
                             AppsFlyerLib.getInstance().trackEvent(getActivity(), "stocks_move", eventValue);
+
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name", "Stocks Move");
+                            firebaseAnalytics.logEvent("stocks_move", params2);
 
                             Constant.SuccessToast(getActivity(),"Stock Moved");
                             new Handler().postDelayed(new Runnable() {

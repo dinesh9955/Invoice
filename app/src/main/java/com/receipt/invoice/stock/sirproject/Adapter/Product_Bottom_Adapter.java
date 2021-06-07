@@ -7,8 +7,6 @@ import android.graphics.Typeface;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +22,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
-import com.receipt.invoice.stock.sirproject.InvoiceReminder.ViewInvoiceActivity;
-import com.receipt.invoice.stock.sirproject.Model.GlobalVariabal;
-import com.receipt.invoice.stock.sirproject.Model.Itemproductselect;
+import com.receipt.invoice.stock.sirproject.SAADApplication;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -50,7 +45,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
 
     BottomSheetDialog bottomSheetDialog;
 
-    GlobalVariabal myAppClass = (GlobalVariabal)getApplicationContext();
+    SAADApplication myAppClass = (SAADApplication)getApplicationContext();
 
     String show_price="",show_name="";
     Callback callback;
@@ -101,7 +96,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
         String currency_code = product_list.getCurrency_code();
 
         Log.e("currency_code",currency_code);
-        GlobalVariabal.setCurencycode(currency_code);
+        SAADApplication.setCurencycode(currency_code);
 
         if (product_name.equals("") || product_name.equals("null"))
         {

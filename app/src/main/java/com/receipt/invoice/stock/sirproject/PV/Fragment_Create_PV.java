@@ -1221,6 +1221,11 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
                             eventValue.put(AFInAppEventParameterName.PARAM_1, "paymentVoucher_create");
                             AppsFlyerLib.getInstance().trackEvent(getActivity(), "paymentVoucher_create", eventValue);
 
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name", "Payment Vouchers");
+                            firebaseAnalytics.logEvent("paymentVoucher_create", params2);
+
+
                             Constant.SuccessToast(getActivity(), "PV created successfully");
 
                             new Handler().postDelayed(new Runnable() {

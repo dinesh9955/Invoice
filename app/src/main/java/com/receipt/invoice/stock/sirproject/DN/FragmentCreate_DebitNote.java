@@ -1181,6 +1181,10 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                             eventValue.put(AFInAppEventParameterName.PARAM_1, "debitnotes_crreate");
                             AppsFlyerLib.getInstance().trackEvent(getActivity(), "debitnotes_crreate", eventValue);
 
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name", "Debit Notes");
+                            firebaseAnalytics.logEvent("debitnotes_crreate", params2);
+
                             Constant.SuccessToast(getActivity(), "Debit Note created successfully");
 
                             new Handler().postDelayed(new Runnable() {

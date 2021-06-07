@@ -1255,6 +1255,10 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                             eventValue.put(AFInAppEventParameterName.PARAM_1, "purchaseorder_create");
                             AppsFlyerLib.getInstance().trackEvent(getActivity(), "purchaseorder_create", eventValue);
 
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name", "Purchase Orders");
+                            firebaseAnalytics.logEvent("purchaseorder_create", params2);
+
                             Constant.SuccessToast(getActivity(), "PO created successfully");
 
                             new Handler().postDelayed(new Runnable() {

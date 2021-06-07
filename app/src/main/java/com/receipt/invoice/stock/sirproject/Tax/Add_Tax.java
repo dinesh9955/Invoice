@@ -26,6 +26,7 @@ import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -42,7 +43,7 @@ import cz.msebera.android.httpclient.Header;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Add_Tax extends Fragment {
+public class Add_Tax extends BaseFragment {
 
 
     public Add_Tax() {
@@ -239,6 +240,10 @@ public class Add_Tax extends Fragment {
                             Map<String, Object> eventValue = new HashMap<String, Object>();
                             eventValue.put(AFInAppEventParameterName.PARAM_1, "taxes_addnew");
                             AppsFlyerLib.getInstance().trackEvent(getActivity(), "taxes_addnew", eventValue);
+
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name", "Add Taxes");
+                            firebaseAnalytics.logEvent("taxes_addnew", params2);
 
                             Constant.SuccessToast(getActivity(),"Tax Added");
                             new Handler().postDelayed(new Runnable() {

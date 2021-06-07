@@ -42,6 +42,8 @@ import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -85,7 +87,7 @@ import ru.slybeaver.slycalendarview.SlyCalendarDialog;
 
 public class Abc extends AppCompatActivity{
 
-
+    FirebaseAnalytics firebaseAnalytics;
     private static final String TAG = "Abc";
     private ProgressDialog pd;
     @Override
@@ -95,7 +97,7 @@ public class Abc extends AppCompatActivity{
         setContentView(R.layout.abc);
 
         Button button = (Button) findViewById(R.id.button2);
-
+        firebaseAnalytics = FirebaseAnalytics.getInstance(Abc.this);
 
         MaterialDatePicker.Builder<Pair<Long, Long>> materialDateBuilder = MaterialDatePicker.Builder.dateRangePicker();
        // materialDateBuilder.setTitleText("SELECT A DATE");
@@ -125,11 +127,37 @@ public class Abc extends AppCompatActivity{
             public void onClick(View v) {
               //  materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
 
-                Map<String, Object> eventValue = new HashMap<String, Object>();
-                eventValue.put(AFInAppEventParameterName.PARAM_1, "App_Open");
-                AppsFlyerLib.getInstance().trackEvent(Abc.this, "app_open", eventValue);
+//                Map<String, Object> eventValue = new HashMap<String, Object>();
+//                eventValue.put(AFInAppEventParameterName.PARAM_1, "App_Open");
+//                AppsFlyerLib.getInstance().trackEvent(Abc.this, "app_open", eventValue);
 
+//
+//                Bundle parameters = new Bundle();
+//                parameters.putString("level_name", "Caverns01");
+//               // parameters.putInt("level_difficulty", 4);
+//              //  firebaseAnalytics.setDefaultEventParameters(parameters);
+//
+////                Bundle bundle = new Bundle();
+////                bundle.putString(EventTrackingKeys.EventTypes.CATEGORY, categoryName);
+////                bundle.putString(EventTrackingKeys.EventTypes.ACTION, actionName);
+////                bundle.putLong(EventTrackingKeys.EventTypes.VALUE, value);
+//                firebaseAnalytics.setUserProperty("level_name", "Caverns01");
+////                mFirebaseAnalytics.setUserProperty(EventTrackingKeys.EventTypes.ACTION, actionName);
+////                mFirebaseAnalytics.setUserProperty(EventTrackingKeys.EventTypes.VALUE, value);
+//                firebaseAnalytics.logEvent("feature_selected_event", parameters);
 
+//                Bundle params = new Bundle();
+//                params.putString("invalid_url", "urlPart");
+//            //    firebaseAnalytics.logEvent("event_a", params);
+//
+////                Bundle bundle = new Bundle();
+////                bundle.putString(FirebaseAnalytics.Param.CONTENT_ID, contentId);
+////                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, contentType);
+//                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, params);
+
+                Bundle params2 = new Bundle();
+                params2.putString("event_name", "App Open");
+                firebaseAnalytics.logEvent("app_open", params2);
 
                 int a = 2;
                 int b = 10;

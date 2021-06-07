@@ -1185,6 +1185,10 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                             eventValue.put(AFInAppEventParameterName.PARAM_1, "creditnotes_create");
                             AppsFlyerLib.getInstance().trackEvent(getActivity(), "creditnotes_create", eventValue);
 
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name", "Credit Notes");
+                            firebaseAnalytics.logEvent("creditnotes_create", params2);
+
                             Constant.SuccessToast(getActivity(), "Credit Note created successfully");
 
                             new Handler().postDelayed(new Runnable() {

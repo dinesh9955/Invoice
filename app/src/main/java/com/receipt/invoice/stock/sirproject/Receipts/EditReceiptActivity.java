@@ -88,6 +88,7 @@ import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
+import com.receipt.invoice.stock.sirproject.Model.ItemQuantity;
 import com.receipt.invoice.stock.sirproject.Model.Moving;
 import com.receipt.invoice.stock.sirproject.Model.Product_Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
@@ -2896,6 +2897,8 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
                                 product_list.setCurrency_code(currency_code);
                                 product_list.setQuantity(quantity);
                                 product_list.setMinimum(minimum);
+                                String product_type = item.getString("product_type");
+                                product_list.setProduct_type(product_type);
 
                                 product_bottom.add(product_list);
 
@@ -3856,85 +3859,93 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
                     }else if(edquantity.getText().toString().length() == 0){
                         Constant.ErrorToast(EditReceiptActivity.this,"Please enter quantity!");
                     }else{
-                        double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
-                        double sh_quantity = 0;
-                        double sh_price = 0.0;
+                         double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
-                        if(product_bottom.size() > 0){
-                            String quentityproduct= product_bottom.get(str).getQuantity();
-                            if(quentityproduct.equals("null"))
-                            {
-                                Constant.ErrorToast(EditReceiptActivity.this,"Insufficient Quantity Available");
-                            }
-                            else {
-                                sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
-                            }
-
-                            if (sh_quantity < en_quantity)
-                            {
-                                mybuilder.show();
-                                Constant.ErrorToast(EditReceiptActivity.this,"Insufficient Quantity Available");
-                                mybuilder.dismiss();
-                            }
-                            else
-                            {
-                                sh_price = Double.parseDouble(edprice.getText().toString());
-                                double multiply = en_quantity * sh_price;
-                                //String s_multiply = String.valueOf(multiply);
-
-//                        product_bottom.get(str).setQuantity(String.valueOf(en_quantity));
-//                        product_bottom.get(str).setProduct_price(String.valueOf(sh_price));
+                            double sh_quantity = 0;
+                            double sh_price = 0.0;
 
 
-                                //  Log.e("Total price",String.valueOf(total_price));
-//                        producprice.remove(str);
-//                        tempQuantity.remove(str);
-//
-//                        producprice.add(str,String.valueOf(sh_price));
-//                        tempList.get(str).setProduct_price(String.valueOf(sh_price));
-//                        tempList.get(str).setQuantity(edquantity.getText().toString());
-//                        tempQuantity.add(str,edquantity.getText().toString());
 
-                                producprice.remove(str);
-                                totalpriceproduct.remove(str);
-                                tempQuantity.remove(str);
+                            ItemQuantity itemQuantity = Utility.getQuantityByProductId(product_bottom, tempList.get(str).getProduct_id());
+                            Log.e(TAG, "itemQuantityAA "+itemQuantity.getEn_quantity());
+                            Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
 
-                                producprice.add(str, String.valueOf(sh_price));
-                                totalpriceproduct.add(str, String.valueOf(sh_price));
-                                tempQuantity.add(str, edquantity.getText().toString());
+                                    if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
+                                        if (itemQuantity.getEn_quantity() <= en_quantity) {
+                                            mybuilder.show();
+                                            Constant.ErrorToast(EditReceiptActivity.this, "Insufficient Quantity Available");
+                                            mybuilder.dismiss();
+                                        } else {
+                                            sh_price = Double.parseDouble(edprice.getText().toString());
+                                            double multiply = en_quantity * sh_price;
+                                            String s_multiply = String.valueOf(multiply);
 
-                                Log.e(TAG, "total_priceAAAAAAA "+total_price);
 
-                                double dd = 0.0;
-                                for (int i = 0; i < producprice.size(); i++){
-                                    double aa = Double.parseDouble(producprice.get(i));
-                                    double bb = Double.parseDouble(tempQuantity.get(i));
 
-                                    double cc = aa * bb;
-                                    dd = dd + cc;
+                                            producprice.remove(str);
+                                            totalpriceproduct.remove(str);
+                                            tempQuantity.remove(str);
+
+                                            producprice.add(str, String.valueOf(sh_price));
+                                            totalpriceproduct.add(str, String.valueOf(sh_price));
+                                            tempQuantity.add(str, edquantity.getText().toString());
+
+
+                                            double dd = 0.0;
+                                            for (int i = 0; i < producprice.size(); i++){
+                                                double aa = Double.parseDouble(producprice.get(i));
+                                                double bb = Double.parseDouble(tempQuantity.get(i));
+
+                                                double cc = aa * bb;
+                                                dd = dd + cc;
+                                            }
+                                            total_price = dd;
+
+
+                                            calculateTotalAmount(total_price);
+                                            products_adapter.notifyDataSetChanged();
+
+                                            mybuilder.dismiss();
+                                        }
+                                    }
+
+                                    else
+                                    {
+                                        sh_price = Double.parseDouble(edprice.getText().toString());
+                                        double multiply = en_quantity * sh_price;
+                                        String s_multiply = String.valueOf(multiply);
+
+
+
+                                        producprice.remove(str);
+                                        totalpriceproduct.remove(str);
+                                        tempQuantity.remove(str);
+
+                                        producprice.add(str, String.valueOf(sh_price));
+                                        totalpriceproduct.add(str, String.valueOf(sh_price));
+                                        tempQuantity.add(str, edquantity.getText().toString());
+
+
+                                        double dd = 0.0;
+                                        for (int i = 0; i < producprice.size(); i++){
+                                            double aa = Double.parseDouble(producprice.get(i));
+                                            double bb = Double.parseDouble(tempQuantity.get(i));
+
+                                            double cc = aa * bb;
+                                            dd = dd + cc;
+                                        }
+                                        total_price = dd;
+
+
+                                        calculateTotalAmount(total_price);
+                                        products_adapter.notifyDataSetChanged();
+
+                                        mybuilder.dismiss();
+                                    }
                                 }
-                                total_price = dd;
-
-//                        Log.e(TAG, "total_pricedddddd "+dd);
-//
-//                       // total_price = (sh_price) * Double.parseDouble(edquantity.getText().toString());
-//
-//                        Log.e(TAG, "total_priceBBBBBBB "+total_price);
-
-//                        edprice.setText(totalpriceproduct.get(str));
-//                        edquantity.setText(tempQuantity.get(str));
-
-                                calculateTotalAmount(total_price);
-                                products_adapter.notifyDataSetChanged();
-
-                                mybuilder.dismiss();
-                            }
-                        }
 
 
-
-                    }
 
 
                 }

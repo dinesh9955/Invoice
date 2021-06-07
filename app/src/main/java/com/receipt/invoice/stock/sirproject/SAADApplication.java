@@ -1,4 +1,4 @@
-package com.receipt.invoice.stock.sirproject.Model;
+package com.receipt.invoice.stock.sirproject;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,15 +6,15 @@ import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
-import com.appsflyer.AppsFlyer2dXConversionCallback;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.receipt.invoice.stock.sirproject.Model.Itemproductselect;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
-public class GlobalVariabal  extends Application {
+public class SAADApplication extends Application {
 
 
     private static final String TAG = "GlobalVariabal";
@@ -34,7 +34,7 @@ public class GlobalVariabal  extends Application {
     }
 
     public static void setPercnetagetax(String percnetagetax) {
-        GlobalVariabal.percnetagetax = percnetagetax;
+        SAADApplication.percnetagetax = percnetagetax;
     }
 
     public static String getAponttaxt() {
@@ -42,7 +42,7 @@ public class GlobalVariabal  extends Application {
     }
 
     public static void setAponttaxt(String aponttaxt) {
-        GlobalVariabal.aponttaxt = aponttaxt;
+        SAADApplication.aponttaxt = aponttaxt;
     }
 
     public static String getTaxtedittxt() {
@@ -50,7 +50,7 @@ public class GlobalVariabal  extends Application {
     }
 
     public static void setTaxtedittxt(String taxtedittxt) {
-        GlobalVariabal.taxtedittxt = taxtedittxt;
+        SAADApplication.taxtedittxt = taxtedittxt;
     }
 
     private  static String percnetagetax=null;

@@ -1,6 +1,7 @@
 package com.receipt.invoice.stock.sirproject.Report;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -153,19 +155,19 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         if(positionNext == 0){
             fileName = "CustomerStatementReport";
             customer_id = bundle.getString("customer_id");
-            customerReport(customer_id, "", null);
+            customerReport(customer_id, "", "", "");
         } else if(positionNext == 1){
             fileName = "SupplierStatementReport";
             supplier_id = bundle.getString("supplier_id");
-            supplierReport(supplier_id, "", null);
+            supplierReport(supplier_id, "", "", "");
         } else if(positionNext == 2){
             fileName = "TotalSalesReport";
             company_id = bundle.getString("company_id");
-            totalSalesReport(company_id, "", null);
+            totalSalesReport(company_id, "", "", "");
         } else if(positionNext == 3){
             fileName = "TotalPurchaseReport";
             company_id = bundle.getString("company_id");
-            totalPurchaseReport(company_id, "", null);
+            totalPurchaseReport(company_id, "", "", "");
         } else if(positionNext == 4){
             fileName = "CustomerAgeingReport";
             company_id = bundle.getString("company_id");
@@ -173,7 +175,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         } else if(positionNext == 5){
             fileName = "TaxCollecteReport";
             company_id = bundle.getString("company_id");
-            taxCollectedReport(company_id, "", null);
+            taxCollectedReport(company_id, "", "", "");
         } else if(positionNext == 6){
             fileName = "StockReport";
             company_id = bundle.getString("company_id");
@@ -327,7 +329,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     }
 
 
-    private void customerReport(String customer_id, String filterID, SelectedDate selectedDate) {
+    private void customerReport(String customer_id, String filterID, String fDate, String sDate) {
         RequestParams params = new RequestParams();
         params.add("customer_id", customer_id);
 
@@ -412,31 +414,28 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                                customerReportItemArrayList.add(customerReportItem);
 
                                 if(filterID.equalsIgnoreCase("date")){
-                                    if(selectedDate != null){
-
+                                    if(!fDate.equalsIgnoreCase("") && !sDate.equalsIgnoreCase("")){
                                         try{
-                                            Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
-                                            Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
-
                                             DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-
                                             Date date = simple.parse(created_date);
 
-//                                            if(date.getTime() == resultSS.getTime()){
-//                                                customerReportItemArrayList.add(customerReportItem);
-//                                            }
+                                            Date fDateC = simple.parse(fDate);
+                                            Date sDateC = simple.parse(sDate);
 
-                                            if(date.getTime() >= resultSS.getTime() && resultEE.getTime() >= date.getTime()){
-                                                Log.e(TAG, "datemillis1 "+simple.format(resultSS));
-                                                Log.e(TAG, "datemillis2 "+simple.format(resultEE));
+                                            if(date.getTime() >= fDateC.getTime() && sDateC.getTime() >= date.getTime()){
+                                                Log.e(TAG, "datemillis1 "+simple.format(fDateC));
+                                                Log.e(TAG, "datemillis2 "+simple.format(sDateC));
                                                 Log.e(TAG, "datemillis3 "+simple.format(date));
                                                 customerReportItemArrayList.add(customerReportItem);
                                             }
-
                                         }catch (Exception e){
 
                                         }
+
+                                    }else{
+
                                     }
+
                                 }else{
                                     customerReportItemArrayList.add(customerReportItem);
                                 }
@@ -594,7 +593,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void supplierReport(String customer_id, String filterID, SelectedDate selectedDate) {
+    private void supplierReport(String customer_id, String filterID, String fDate, String sDate) {
         RequestParams params = new RequestParams();
         params.add("supplier_id", customer_id);
 
@@ -676,25 +675,34 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                                customerReportItem.setCustomer_id(customer_id);
                                 customerReportItem.setBalance(balance);
 
+
                                 if(filterID.equalsIgnoreCase("date")){
-                                    if(selectedDate != null){
+                                    if(!fDate.equalsIgnoreCase("") && !sDate.equalsIgnoreCase("")){
                                         try{
-                                            Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
-                                            Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
                                             DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
                                             Date date = simple.parse(created_date);
-                                            if(date.getTime() >= resultSS.getTime() && resultEE.getTime() >= date.getTime()){
-                                                Log.e(TAG, "datemillis1 "+simple.format(resultSS));
-                                                Log.e(TAG, "datemillis2 "+simple.format(resultEE));
+
+                                            Date fDateC = simple.parse(fDate);
+                                            Date sDateC = simple.parse(sDate);
+
+                                            if(date.getTime() >= fDateC.getTime() && sDateC.getTime() >= date.getTime()){
+                                                Log.e(TAG, "datemillis1 "+simple.format(fDateC));
+                                                Log.e(TAG, "datemillis2 "+simple.format(sDateC));
                                                 Log.e(TAG, "datemillis3 "+simple.format(date));
                                                 customerReportItemArrayList.add(customerReportItem);
                                             }
                                         }catch (Exception e){
+
                                         }
+
+                                    }else{
+
                                     }
+
                                 }else{
                                     customerReportItemArrayList.add(customerReportItem);
                                 }
+
                             }
                         }
 
@@ -835,7 +843,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void totalSalesReport(String customer_id, String filterID, SelectedDate selectedDate) {
+    private void totalSalesReport(String customer_id, String filterID, String fDate, String sDate) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
@@ -906,21 +914,28 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 customerReportItem.setTotal(total);
 
                                 if(filterID.equalsIgnoreCase("date")){
-                                    if(selectedDate != null){
+                                    if(!fDate.equalsIgnoreCase("") && !sDate.equalsIgnoreCase("")){
                                         try{
-                                            Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
-                                            Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
                                             DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
                                             Date date = simple.parse(invoice_date);
-                                            if(date.getTime() >= resultSS.getTime() && resultEE.getTime() >= date.getTime()){
-                                                Log.e(TAG, "datemillis1 "+simple.format(resultSS));
-                                                Log.e(TAG, "datemillis2 "+simple.format(resultEE));
+
+                                            Date fDateC = simple.parse(fDate);
+                                            Date sDateC = simple.parse(sDate);
+
+                                            if(date.getTime() >= fDateC.getTime() && sDateC.getTime() >= date.getTime()){
+                                                Log.e(TAG, "datemillis1 "+simple.format(fDateC));
+                                                Log.e(TAG, "datemillis2 "+simple.format(sDateC));
                                                 Log.e(TAG, "datemillis3 "+simple.format(date));
                                                 customerReportItemArrayList.add(customerReportItem);
                                             }
                                         }catch (Exception e){
+
                                         }
+
+                                    }else{
+
                                     }
+
                                 }else{
                                     customerReportItemArrayList.add(customerReportItem);
                                 }
@@ -1072,7 +1087,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void totalPurchaseReport(String customer_id, String filterID, SelectedDate selectedDate) {
+    private void totalPurchaseReport(String customer_id, String filterID, String fDate, String sDate) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
@@ -1143,24 +1158,32 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 customerReportItem.setTotal(total);
 
                                 if(filterID.equalsIgnoreCase("date")){
-                                    if(selectedDate != null){
+                                    if(!fDate.equalsIgnoreCase("") && !sDate.equalsIgnoreCase("")){
                                         try{
-                                            Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
-                                            Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
                                             DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
                                             Date date = simple.parse(order_date);
-                                            if(date.getTime() >= resultSS.getTime() && resultEE.getTime() >= date.getTime()){
-                                                Log.e(TAG, "datemillis1 "+simple.format(resultSS));
-                                                Log.e(TAG, "datemillis2 "+simple.format(resultEE));
+
+                                            Date fDateC = simple.parse(fDate);
+                                            Date sDateC = simple.parse(sDate);
+
+                                            if(date.getTime() >= fDateC.getTime() && sDateC.getTime() >= date.getTime()){
+                                                Log.e(TAG, "datemillis1 "+simple.format(fDateC));
+                                                Log.e(TAG, "datemillis2 "+simple.format(sDateC));
                                                 Log.e(TAG, "datemillis3 "+simple.format(date));
                                                 customerReportItemArrayList.add(customerReportItem);
                                             }
                                         }catch (Exception e){
+
                                         }
+
+                                    }else{
+
                                     }
+
                                 }else{
                                     customerReportItemArrayList.add(customerReportItem);
-                                }                            }
+                                }
+                            }
                         }
 
                         if(filterID.equalsIgnoreCase("date")){
@@ -1553,7 +1576,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void taxCollectedReport(String customer_id, String filterID, SelectedDate selectedDate) {
+    private void taxCollectedReport(String customer_id, String filterID, String fDate, String sDate) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
@@ -1626,24 +1649,32 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
                                 if(filterID.equalsIgnoreCase("date")){
-                                    if(selectedDate != null){
+                                    if(!fDate.equalsIgnoreCase("") && !sDate.equalsIgnoreCase("")){
                                         try{
-                                            Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
-                                            Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
                                             DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
                                             Date date = simple.parse(date_added);
-                                            if(date.getTime() >= resultSS.getTime() && resultEE.getTime() >= date.getTime()){
-                                                Log.e(TAG, "datemillis1 "+simple.format(resultSS));
-                                                Log.e(TAG, "datemillis2 "+simple.format(resultEE));
+
+                                            Date fDateC = simple.parse(fDate);
+                                            Date sDateC = simple.parse(sDate);
+
+                                            if(date.getTime() >= fDateC.getTime() && sDateC.getTime() >= date.getTime()){
+                                                Log.e(TAG, "datemillis1 "+simple.format(fDateC));
+                                                Log.e(TAG, "datemillis2 "+simple.format(sDateC));
                                                 Log.e(TAG, "datemillis3 "+simple.format(date));
                                                 customerReportItemArrayList.add(customerReportItem);
                                             }
                                         }catch (Exception e){
+
                                         }
+
+                                    }else{
+
                                     }
+
                                 }else{
                                     customerReportItemArrayList.add(customerReportItem);
-                                }                            }
+                                }
+                            }
                         }
 
                         if(filterID.equalsIgnoreCase("date")){
@@ -2326,9 +2357,12 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 shareWeb("Customer Statement Report");
             }else if(i == 3){
                 //customerReport(customer_id, "date");
-                customerFilterDate(customer_id, positionNext);
+//                customerFilterDate(customer_id, positionNext);
+
+                filterDate(customer_id, positionNext);
+
             }else if(i == 4){
-                customerReport(customer_id, "", null);
+                customerReport(customer_id, "", "", "");
             }
         } else if(positionNext == 1){
             if(i == 0){
@@ -2339,9 +2373,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 2){
                 shareWeb("Supplier Statement Report");
             }else if(i == 3){
-                customerFilterDate(supplier_id, positionNext);
+                filterDate(supplier_id, positionNext);
             }else if(i == 4){
-                supplierReport(supplier_id, "", null);
+                supplierReport(supplier_id, "", "", "");
             }
         } else if(positionNext == 2){
             if(i == 0){
@@ -2352,15 +2386,15 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 2){
                 shareWeb("Total Sales Report");
             }else if(i == 3){
-                customerFilterDate(company_id, positionNext);
+                filterDate(company_id, positionNext);
             }else if(i == 4){
-                totalSalesReport(company_id, "customer", null);
+                totalSalesReport(company_id, "customer", "", "");
             }else if(i == 5){
-                totalSalesReport(company_id, "paid", null);
+                totalSalesReport(company_id, "paid", "", "");
             }else if(i == 6){
-                totalSalesReport(company_id, "unpaid", null);
+                totalSalesReport(company_id, "unpaid", "", "");
             }else if(i == 7){
-                totalSalesReport(company_id, "", null);
+                totalSalesReport(company_id, "", "", "");
             }
         } else if(positionNext == 3){
             if(i == 0){
@@ -2372,11 +2406,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 shareWeb("Total Purchase Report");
             }else if(i == 3){
 //                totalPurchaseReport(company_id, "date");
-                customerFilterDate(company_id, positionNext);
+                filterDate(company_id, positionNext);
             }else if(i == 4){
-                totalPurchaseReport(company_id, "supplier", null);
+                totalPurchaseReport(company_id, "supplier", "", "");
             }else if(i == 5){
-                totalPurchaseReport(company_id, "", null);
+                totalPurchaseReport(company_id, "", "", "");
             }
         } else if(positionNext == 4){
             if(i == 0){
@@ -2401,11 +2435,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 shareWeb("Tax Collected Report");
             }else if(i == 3){
                 //taxCollectedReport(company_id, "date");
-                customerFilterDate(company_id, positionNext);
+                filterDate(company_id, positionNext);
             }else if(i == 4){
-                taxCollectedReport(company_id, "tax", null);
+                taxCollectedReport(company_id, "tax", "", "");
             }else if(i == 5){
-                taxCollectedReport(company_id, "", null);
+                taxCollectedReport(company_id, "", "", "");
             }
         } else if(positionNext == 6){
             if(i == 0){
@@ -2441,6 +2475,100 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     }
 
 
+
+    private void filterDate(String customer_id, int positionNext) {
+        int mYear, mMonth, mDay;
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(ReportViewActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        int month = monthOfYear + 1;
+                        String realMonth = ""+month;
+                        if(realMonth.length() == 1){
+                            realMonth = "0"+month;
+                        }
+
+
+                        int day = dayOfMonth;
+                        String realDay = ""+day;
+                        if(realDay.length() == 1){
+                            realDay = "0"+day;
+                        }
+
+                        //eddate.setText(year + "-" + realMonth + "-" + realDay);
+                        String fDate = year + "-" + realMonth + "-" + realDay;
+                        filterDate2(customer_id, positionNext, fDate);
+
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.setMessage("Select Date (From)");
+        datePickerDialog.show();
+    }
+
+
+    private void filterDate2(String customer_id, int position, String fDate) {
+        int mYear, mMonth, mDay;
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(ReportViewActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        int month = monthOfYear + 1;
+                        String realMonth = ""+month;
+                        if(realMonth.length() == 1){
+                            realMonth = "0"+month;
+                        }
+
+
+                        int day = dayOfMonth;
+                        String realDay = ""+day;
+                        if(realDay.length() == 1){
+                            realDay = "0"+day;
+                        }
+
+                        String sDate = year + "-" + realMonth + "-" + realDay;
+
+//                        customerFilterDate();
+                        //eddate.setText(year + "-" + realMonth + "-" + realDay);
+
+                        if(position == 0){
+                            customerReport(customer_id, "date", fDate, sDate);
+                        } else if(position == 1){
+                            supplierReport(customer_id, "date", fDate, sDate);
+                        } else if(position == 2){
+                            totalSalesReport(customer_id, "date", fDate, sDate);
+                        }else if(position == 3){
+                            totalPurchaseReport(customer_id, "date", fDate, sDate);
+                        }else if(position == 4){
+                        }else if(position == 5){
+                            taxCollectedReport(customer_id, "date", fDate, sDate);
+                        }else if(position == 6){
+                        }else if(position == 7){
+                        }
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.setMessage("Select Date (To)");
+        datePickerDialog.show();
+    }
+
+
     private void shareWeb(String title) {
         Log.e(TAG, "title "+title);
 
@@ -2462,122 +2590,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void customerFilterDate(String customer_id, int position) {
-        SublimePickerFragment pickerFrag = new SublimePickerFragment();
-        pickerFrag.setCallback(new SublimePickerFragment.Callback() {
-            @Override
-            public void onCancelled() {
 
-            }
-
-            @Override
-            public void onDateTimeRecurrenceSet(SelectedDate selectedDate, int hourOfDay, int minute, SublimeRecurrencePicker.RecurrenceOption recurrenceOption, String recurrenceRule) {
-                if (selectedDate != null) {
-                    if (selectedDate.getType() == SelectedDate.Type.SINGLE) {
-    //                    Log.e(TAG, "YEARSS "+String.valueOf(selectedDate.getStartDate().get(Calendar.YEAR)));
-    //                    Log.e(TAG, "MONTHSS "+String.valueOf(selectedDate.getStartDate().get(Calendar.MONTH)));
-    //                    Log.e(TAG, "DAYSS "+String.valueOf(selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH)));
-    //                    String ddd = selectedDate.getStartDate().get(Calendar.YEAR) + "-" + (selectedDate.getStartDate().get(Calendar.MONTH)+1) + "-" + selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH);
-
-                    } else if (selectedDate.getType() == SelectedDate.Type.RANGE) {
-
-//                        DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-//
-//    //                    String fff = DateFormat.getDateInstance().format(selectedDate.getStartDate().getTime());
-//    //                    Log.e(TAG, "fff "+fff);
-//                        Date resultSS = new Date(DateFormat.getDateInstance().format(selectedDate.getStartDate().getTimeInMillis()));
-//                        Log.e(TAG, "datemillis22 "+simple.format(resultSS));
-//
-//    //                    String eee = DateFormat.getDateInstance().format(selectedDate.getEndDate().getTime());
-//    //                    Log.e(TAG, "eee "+eee);
-//                        Date resultEE = new Date(DateFormat.getDateInstance().format(selectedDate.getEndDate().getTimeInMillis()));
-//                        Log.e(TAG, "datemillis22 "+simple.format(resultEE));
-
-
-
-                    }
-
-                    Log.e(TAG, "positionCCCCC "+position);
-
-                    if(position == 0){
-                        customerReport(customer_id, "date", selectedDate);
-                    } else if(position == 1){
-                        supplierReport(customer_id, "date", selectedDate);
-                    } else if(position == 2){
-                        totalSalesReport(customer_id, "date", selectedDate);
-                    }else if(position == 3){
-                        totalPurchaseReport(customer_id, "date", selectedDate);
-                    }else if(position == 4){
-                        //customerReport(customer_id, "date", selectedDate);
-                    }else if(position == 5){
-                        taxCollectedReport(customer_id, "date", selectedDate);
-                    }else if(position == 6){
-                        //customerReport(customer_id, "date", selectedDate);
-                    }else if(position == 7){
-                        //customerReport(customer_id, "date", selectedDate);
-                    }
-                }
-            }
-        });
-        android.util.Pair<Boolean, SublimeOptions> optionsPair = getOptions();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("SUBLIME_OPTIONS", optionsPair.second);
-        pickerFrag.setArguments(bundle);
-
-        pickerFrag.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-        pickerFrag.show(getSupportFragmentManager(), "SUBLIME_PICKER");
-    }
-
-    android.util.Pair<Boolean, SublimeOptions> getOptions() {
-        SublimeOptions options = new SublimeOptions();
-        int displayOptions = 0;
-
-        displayOptions |= SublimeOptions.ACTIVATE_DATE_PICKER;
-
-        options.setPickerToShow(SublimeOptions.Picker.DATE_PICKER);
-
-        options.setDisplayOptions(displayOptions);
-
-        options.setCanPickDateRange(true);
-
-        return new android.util.Pair<>(displayOptions != 0 ? Boolean.TRUE : Boolean.FALSE, options);
-    }
-
-
-
-//
-//    SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
-//        @Override
-//        public void onCancelled() {
-//            // rlDateTimeRecurrenceInfo.setVisibility(View.GONE);
-//        }
-//
-//        @Override
-//        public void onDateTimeRecurrenceSet(SelectedDate selectedDate,
-//                                            int hourOfDay, int minute,
-//                                            SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
-//                                            String recurrenceRule) {
-//            if (selectedDate != null) {
-//                if (selectedDate.getType() == SelectedDate.Type.SINGLE) {
-////                tvYear.setText(applyBoldStyle("YEAR: ")
-////                        .append(String.valueOf(mSelectedDate.getStartDate().get(Calendar.YEAR))));
-////                tvMonth.setText(applyBoldStyle("MONTH: ")
-////                        .append(String.valueOf(mSelectedDate.getStartDate().get(Calendar.MONTH))));
-////                tvDay.setText(applyBoldStyle("DAY: ")
-////                        .append(String.valueOf(mSelectedDate.getStartDate().get(Calendar.DAY_OF_MONTH))));
-//                } else if (selectedDate.getType() == SelectedDate.Type.RANGE) {
-////                llDateHolder.setVisibility(View.GONE);
-////                llDateRangeHolder.setVisibility(View.VISIBLE);
-////
-////                tvStartDate.setText(applyBoldStyle("START: ")
-////                        .append(DateFormat.getDateInstance().format(mSelectedDate.getStartDate().getTime())));
-////                tvEndDate.setText(applyBoldStyle("END: ")
-////                        .append(DateFormat.getDateInstance().format(mSelectedDate.getEndDate().getTime())));
-//                }
-//            }
-//        }
-//    };
-//
 
 
 

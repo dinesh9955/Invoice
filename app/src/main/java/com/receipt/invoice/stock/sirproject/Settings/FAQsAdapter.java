@@ -55,18 +55,15 @@ public class FAQsAdapter extends RecyclerView.Adapter<FAQsAdapter.ViewHolderForC
         viewHolderForCat.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(mcontext, FAQsDetailActivity.class);
-//                intent.putExtra("keyPosition", i);
-//                mcontext.startActivity(intent);
-
                 if (viewHolderForCat.nestedScrollView.getVisibility() == View.GONE) {
                     viewHolderForCat.nestedScrollView.setVisibility(View.VISIBLE);
+                    viewHolderForCat.imageViewCheck.setImageResource(R.drawable.directional26);
                 }else{
                     viewHolderForCat.nestedScrollView.setVisibility(View.GONE);
-                    notifyDataSetChanged();
+                    viewHolderForCat.imageViewCheck.setImageResource(R.drawable.directional25);
                 }
 
-
+                notifyDataSetChanged();
                 setFoterData(i, viewHolderForCat.textViewName);
 
             }

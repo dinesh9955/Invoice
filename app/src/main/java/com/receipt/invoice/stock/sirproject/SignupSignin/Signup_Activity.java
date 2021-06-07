@@ -21,6 +21,7 @@ import com.appsflyer.AppsFlyerLib;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.R;
@@ -34,7 +35,7 @@ import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Signup_Activity extends AppCompatActivity {
+public class Signup_Activity extends BaseActivity {
 
     String TAG = "Signup_Activity";
     TextView txtsignup,txtsignupdes,txtregistered,txtsigninhere;
@@ -187,6 +188,10 @@ public class Signup_Activity extends AppCompatActivity {
                              Map<String, Object> eventValue = new HashMap<String, Object>();
                              eventValue.put(AFInAppEventParameterName.PARAM_1, "Signup_complete");
                              AppsFlyerLib.getInstance().trackEvent(Signup_Activity.this, "Signup_complete", eventValue);
+
+                             Bundle params2 = new Bundle();
+                             params2.putString("event_name", "Complete Sign-up");
+                             firebaseAnalytics.logEvent("signup_complete", params2);
 
                              Constant.SuccessToast(Signup_Activity.this,jsonObject.getString("message"));
 

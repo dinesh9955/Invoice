@@ -48,6 +48,7 @@ import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import com.receipt.invoice.stock.sirproject.Abc;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
@@ -72,7 +73,7 @@ import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Add_User extends Fragment {
+public class Add_User extends BaseFragment {
 
 
     public Add_User() {
@@ -737,6 +738,10 @@ public class Add_User extends Fragment {
                             Map<String, Object> eventValue = new HashMap<String, Object>();
                             eventValue.put(AFInAppEventParameterName.PARAM_1, "user_addnew");
                             AppsFlyerLib.getInstance().trackEvent(getActivity(), "user_addnew", eventValue);
+
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name", "Add new User");
+                            firebaseAnalytics.logEvent("user_addnew", params2);
 
                             Constant.SuccessToast(getActivity(), "User Added Successfully");
                             Intent intent = new Intent(getContext(), User_Activity.class);

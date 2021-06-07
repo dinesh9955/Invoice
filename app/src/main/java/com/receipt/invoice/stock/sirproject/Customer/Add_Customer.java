@@ -54,6 +54,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
@@ -79,7 +80,7 @@ import cz.msebera.android.httpclient.Header;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class Add_Customer extends Fragment {
+public class Add_Customer extends BaseFragment {
 
 
     private static final String TAG = "Add_Customer";
@@ -705,6 +706,10 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                                 Map<String, Object> eventValue = new HashMap<String, Object>();
                                 eventValue.put(AFInAppEventParameterName.PARAM_1, "customer_addnew");
                                 AppsFlyerLib.getInstance().trackEvent(getActivity(), "customer_addnew", eventValue);
+
+                                Bundle params2 = new Bundle();
+                                params2.putString("event_name", "Customers");
+                                firebaseAnalytics.logEvent("customer_addnew", params2);
 
                                 Constant.SuccessToast(getActivity(),"Customer Added");
                                 new Handler().postDelayed(new Runnable() {

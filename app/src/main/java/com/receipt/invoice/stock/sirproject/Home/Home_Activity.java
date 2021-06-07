@@ -166,6 +166,10 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         eventValue.put(AFInAppEventParameterName.PARAM_1, "dashboard_view");
         AppsFlyerLib.getInstance().trackEvent(Home_Activity.this, "dashboard_view", eventValue);
 
+        Bundle params2 = new Bundle();
+        params2.putString("event_name", "Home");
+        firebaseAnalytics.logEvent("dashboard_view", params2);
+
     }
 
 

@@ -83,12 +83,14 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
 import com.receipt.invoice.stock.sirproject.Invoice.ConvertToReceiptsActivity;
+import com.receipt.invoice.stock.sirproject.Invoice.EditInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
+import com.receipt.invoice.stock.sirproject.Model.ItemQuantity;
 import com.receipt.invoice.stock.sirproject.Model.Moving;
 import com.receipt.invoice.stock.sirproject.Model.Product_Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
@@ -3148,6 +3150,8 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                                 product_list.setCurrency_code(currency_code);
                                 product_list.setQuantity(quantity);
                                 product_list.setMinimum(minimum);
+                                String product_type = item.getString("product_type");
+                                product_list.setProduct_type(product_type);
 
                                 boolean isCompare = Utility.isCompare(product_bottom , product_id);
 
@@ -4086,30 +4090,6 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             edprice.setText(producprice.get(str));
             edquantity.setText(tempQuantity.get(str));
 
-//            edprice.setText(""+product_bottom.get(str).getProduct_price());
-//
-////            show_quantity = edquantity.getText().toString();
-//
-//            edquantity.addTextChangedListener(new TextWatcher() {
-//                @Override
-//                public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//                }
-//
-//                @Override
-//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//                }
-//
-//                @Override
-//                public void afterTextChanged(Editable s) {
-//
-//                    if (edquantity.getText().toString().endsWith("."))
-//                    {
-//                        edquantity.setText(edquantity.getText().toString().replace(".",""));
-//                    }
-//                }
-//            });
 
 
             edquantity.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
@@ -4135,62 +4115,91 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                     }else if(edquantity.getText().toString().length() == 0){
                         Constant.ErrorToast(EditPOActivity.this,"Please enter quantity!");
                     }else{
-                        if(product_bottom.size() > 0){
-                            double en_quantity = Double.parseDouble(edquantity.getText().toString());
+            double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
                             double sh_quantity = 0;
                             double sh_price = 0.0;
 
-                            String quentityproduct= product_bottom.get(str).getQuantity();
-                            if(quentityproduct.equals("null"))
-                            {
-                                Constant.ErrorToast(EditPOActivity.this,"Insufficient Quantity Available");
-                            }
-                            else {
-                                sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
-                            }
 
-                            if (sh_quantity < en_quantity)
-                            {
-                                mybuilder.show();
-                                Constant.ErrorToast(EditPOActivity.this,"Insufficient Quantity Available");
-                                mybuilder.dismiss();
-                            }
-                            else
-                            {
-                                sh_price = Double.parseDouble(edprice.getText().toString());
-                                double multiply = en_quantity * sh_price;
-                                String s_multiply = String.valueOf(multiply);
+
+                            ItemQuantity itemQuantity = Utility.getQuantityByProductId(product_bottom, tempList.get(str).getProduct_id());
+                            Log.e(TAG, "itemQuantityAA "+itemQuantity.getEn_quantity());
+                            Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
+
+                                    if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
+                                        if (itemQuantity.getEn_quantity() <= en_quantity) {
+                                            mybuilder.show();
+                                            Constant.ErrorToast(EditPOActivity.this, "Insufficient Quantity Available");
+                                            mybuilder.dismiss();
+                                        } else {
+                                            sh_price = Double.parseDouble(edprice.getText().toString());
+                                            double multiply = en_quantity * sh_price;
+                                            String s_multiply = String.valueOf(multiply);
 
 
 
-                                producprice.remove(str);
-                                totalpriceproduct.remove(str);
-                                tempQuantity.remove(str);
+                                            producprice.remove(str);
+                                            totalpriceproduct.remove(str);
+                                            tempQuantity.remove(str);
 
-                                producprice.add(str, String.valueOf(sh_price));
-                                totalpriceproduct.add(str, String.valueOf(sh_price));
-                                tempQuantity.add(str, edquantity.getText().toString());
+                                            producprice.add(str, String.valueOf(sh_price));
+                                            totalpriceproduct.add(str, String.valueOf(sh_price));
+                                            tempQuantity.add(str, edquantity.getText().toString());
 
-                                double dd = 0.0;
-                                for (int i = 0; i < producprice.size(); i++){
-                                    double aa = Double.parseDouble(producprice.get(i));
-                                    double bb = Double.parseDouble(tempQuantity.get(i));
 
-                                    double cc = aa * bb;
-                                    dd = dd + cc;
+                                            double dd = 0.0;
+                                            for (int i = 0; i < producprice.size(); i++){
+                                                double aa = Double.parseDouble(producprice.get(i));
+                                                double bb = Double.parseDouble(tempQuantity.get(i));
+
+                                                double cc = aa * bb;
+                                                dd = dd + cc;
+                                            }
+                                            total_price = dd;
+
+
+                                            calculateTotalAmount(total_price);
+                                            products_adapter.notifyDataSetChanged();
+
+                                            mybuilder.dismiss();
+                                        }
+                                    }
+
+                                    else
+                                    {
+                                        sh_price = Double.parseDouble(edprice.getText().toString());
+                                        double multiply = en_quantity * sh_price;
+                                        String s_multiply = String.valueOf(multiply);
+
+
+
+                                        producprice.remove(str);
+                                        totalpriceproduct.remove(str);
+                                        tempQuantity.remove(str);
+
+                                        producprice.add(str, String.valueOf(sh_price));
+                                        totalpriceproduct.add(str, String.valueOf(sh_price));
+                                        tempQuantity.add(str, edquantity.getText().toString());
+
+
+                                        double dd = 0.0;
+                                        for (int i = 0; i < producprice.size(); i++){
+                                            double aa = Double.parseDouble(producprice.get(i));
+                                            double bb = Double.parseDouble(tempQuantity.get(i));
+
+                                            double cc = aa * bb;
+                                            dd = dd + cc;
+                                        }
+                                        total_price = dd;
+
+
+                                        calculateTotalAmount(total_price);
+                                        products_adapter.notifyDataSetChanged();
+
+                                        mybuilder.dismiss();
+                                    }
                                 }
-                                total_price = dd;
-//                        edprice.setText(totalpriceproduct.get(str));
-//                        edquantity.setText(tempQuantity.get(str));
 
-                                calculateTotalAmount(total_price);
-                                products_adapter.notifyDataSetChanged();
-
-                                mybuilder.dismiss();
-                            }
-                        }
-                    }
 
 
 

@@ -1316,6 +1316,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             eventValue.put(AFInAppEventParameterName.PARAM_1, "invoice_create");
                             AppsFlyerLib.getInstance().trackEvent(getActivity(), "invoice_create", eventValue);
 
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name", "Invoice");
+                            firebaseAnalytics.logEvent("invoice_create", params2);
+
                             Constant.SuccessToast(getActivity(), "Invoice created successfully");
 
                             new Handler().postDelayed(new Runnable() {

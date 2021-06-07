@@ -55,6 +55,7 @@ import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import com.mikhaellopez.circleview.CircleView;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
@@ -82,7 +83,7 @@ import cz.msebera.android.httpclient.Header;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Add_Company extends Fragment {
+public class Add_Company extends BaseFragment {
 
 
     private static final String TAG = "Add_Company";
@@ -645,6 +646,10 @@ public class Add_Company extends Fragment {
                             Map<String, Object> eventValue = new HashMap<String, Object>();
                             eventValue.put(AFInAppEventParameterName.PARAM_1, "companies_addnew");
                             AppsFlyerLib.getInstance().trackEvent(getActivity(), "companies_addnew", eventValue);
+
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name", "My Companies");
+                            firebaseAnalytics.logEvent("companies_addnew", params2);
 
                             Constant.SuccessToast(getActivity(),"Company created successfully");
 

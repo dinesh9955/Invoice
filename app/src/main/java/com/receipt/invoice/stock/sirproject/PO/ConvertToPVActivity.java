@@ -89,12 +89,14 @@ import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
+import com.receipt.invoice.stock.sirproject.Model.ItemQuantity;
 import com.receipt.invoice.stock.sirproject.Model.Moving;
 import com.receipt.invoice.stock.sirproject.Model.Product_Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.SelectedTaxlist;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
+import com.receipt.invoice.stock.sirproject.PV.EditEditPVActivity;
 import com.receipt.invoice.stock.sirproject.PV.PVActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
@@ -2983,6 +2985,8 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                                 product_list.setCurrency_code(currency_code);
                                 product_list.setQuantity(quantity);
                                 product_list.setMinimum(minimum);
+                                String product_type = item.getString("product_type");
+                                product_list.setProduct_type(product_type);
 
                                 product_bottom.add(product_list);
 
@@ -3896,31 +3900,6 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
             edprice.setText(producprice.get(str));
             edquantity.setText(tempQuantity.get(str));
 
-//            edprice.setText(product_bottom.get(str).getProduct_price());
-//
-////            show_quantity = edquantity.getText().toString();
-//
-//            edquantity.addTextChangedListener(new TextWatcher() {
-//                @Override
-//                public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//                }
-//
-//                @Override
-//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//                }
-//
-//                @Override
-//                public void afterTextChanged(Editable s) {
-//
-//                    if (edquantity.getText().toString().endsWith("."))
-//                    {
-//                        edquantity.setText(edquantity.getText().toString().replace(".",""));
-//                    }
-//                }
-//            });
-
 
             edquantity.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
             btnok.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Medium.otf"));
@@ -3940,34 +3919,29 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                 public void onClick(View view) {
                     mybuilder.dismiss();
 
+
                     if(edprice.getText().toString().length() == 0){
                         Constant.ErrorToast(ConvertToPVActivity.this,"Please enter amount!");
                     }else if(edquantity.getText().toString().length() == 0){
                         Constant.ErrorToast(ConvertToPVActivity.this,"Please enter quantity!");
                     }else{
-                        if(product_bottom.size() > 0){
-                            double en_quantity = Double.parseDouble(edquantity.getText().toString());
+                        double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
-                            double sh_quantity = 0;
-                            double sh_price = 0.0;
+                        double sh_quantity = 0;
+                        double sh_price = 0.0;
 
-                            String quentityproduct= product_bottom.get(str).getQuantity();
-                            if(quentityproduct.equals("null"))
-                            {
-                                Constant.ErrorToast(ConvertToPVActivity.this,"Insufficient Quantity Available");
-                            }
-                            else {
-                                sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
-                            }
 
-                            if (sh_quantity < en_quantity)
-                            {
+
+                        ItemQuantity itemQuantity = Utility.getQuantityByProductId(product_bottom, tempList.get(str).getProduct_id());
+                        Log.e(TAG, "itemQuantityAA "+itemQuantity.getEn_quantity());
+                        Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
+
+                        if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
+                            if (itemQuantity.getEn_quantity() <= en_quantity) {
                                 mybuilder.show();
-                                Constant.ErrorToast(ConvertToPVActivity.this,"Insufficient Quantity Available");
+                                Constant.ErrorToast(ConvertToPVActivity.this, "Insufficient Quantity Available");
                                 mybuilder.dismiss();
-                            }
-                            else
-                            {
+                            } else {
                                 sh_price = Double.parseDouble(edprice.getText().toString());
                                 double multiply = en_quantity * sh_price;
                                 String s_multiply = String.valueOf(multiply);
@@ -3982,6 +3956,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                                 totalpriceproduct.add(str, String.valueOf(sh_price));
                                 tempQuantity.add(str, edquantity.getText().toString());
 
+
                                 double dd = 0.0;
                                 for (int i = 0; i < producprice.size(); i++){
                                     double aa = Double.parseDouble(producprice.get(i));
@@ -3991,8 +3966,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                                     dd = dd + cc;
                                 }
                                 total_price = dd;
-//                        edprice.setText(totalpriceproduct.get(str));
-//                        edquantity.setText(tempQuantity.get(str));
+
 
                                 calculateTotalAmount(total_price);
                                 products_adapter.notifyDataSetChanged();
@@ -4000,8 +3974,42 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                                 mybuilder.dismiss();
                             }
                         }
-                    }
 
+                        else
+                        {
+                            sh_price = Double.parseDouble(edprice.getText().toString());
+                            double multiply = en_quantity * sh_price;
+                            String s_multiply = String.valueOf(multiply);
+
+
+
+                            producprice.remove(str);
+                            totalpriceproduct.remove(str);
+                            tempQuantity.remove(str);
+
+                            producprice.add(str, String.valueOf(sh_price));
+                            totalpriceproduct.add(str, String.valueOf(sh_price));
+                            tempQuantity.add(str, edquantity.getText().toString());
+
+
+                            double dd = 0.0;
+                            for (int i = 0; i < producprice.size(); i++){
+                                double aa = Double.parseDouble(producprice.get(i));
+                                double bb = Double.parseDouble(tempQuantity.get(i));
+
+                                double cc = aa * bb;
+                                dd = dd + cc;
+                            }
+                            total_price = dd;
+
+
+                            calculateTotalAmount(total_price);
+                            products_adapter.notifyDataSetChanged();
+
+                            mybuilder.dismiss();
+                        }
+
+                    }
 
 
                 }

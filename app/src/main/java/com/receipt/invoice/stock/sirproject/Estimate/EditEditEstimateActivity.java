@@ -90,6 +90,7 @@ import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
+import com.receipt.invoice.stock.sirproject.Model.ItemQuantity;
 import com.receipt.invoice.stock.sirproject.Model.Moving;
 import com.receipt.invoice.stock.sirproject.Model.Product_Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
@@ -2939,6 +2940,8 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
                                 String minimum = item.getString("minimum");
 
+
+
                                 Product_list product_list = new Product_list();
 
                                 product_list.setProduct_measurement_unit(measurement_unit);
@@ -2955,6 +2958,8 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                                 product_list.setCurrency_code(currency_code);
                                 product_list.setQuantity(quantity);
                                 product_list.setMinimum(minimum);
+                                String product_type = item.getString("product_type");
+                                product_list.setProduct_type(product_type);
 
                                 product_bottom.add(product_list);
 
@@ -3888,27 +3893,26 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
                         }
 
-                        double sh_quantity = 0;
+                     //   double sh_quantity = 0;
                         double sh_price = 0.0;
 
-                        if(product_bottom.size() > 0){
-                            String quentityproduct= product_bottom.get(str).getQuantity();
-                            if(quentityproduct.equals("null"))
-                            {
-                                Constant.ErrorToast(EditEditEstimateActivity.this,"Insufficient Quantity Available");
-                            }
-                            else {
-                                sh_quantity = Integer.parseInt(product_bottom.get(str).getQuantity());
-                            }
 
-                            if (sh_quantity < en_quantity)
-                            {
+                        Log.e(TAG, "product_bottomAA "+tempQuantity.size());
+                        Log.e(TAG, "product_bottomBB "+str);
+                        Log.e(TAG, "product_bottomCC "+tempList.get(str).getProduct_id());
+
+
+
+                        ItemQuantity itemQuantity = Utility.getQuantityByProductId(product_bottom, tempList.get(str).getProduct_id());
+                        Log.e(TAG, "itemQuantityAA "+itemQuantity.getEn_quantity());
+                        Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
+
+                        if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")){
+                            if (itemQuantity.getEn_quantity() <= en_quantity){
                                 mybuilder.show();
                                 Constant.ErrorToast(EditEditEstimateActivity.this,"Insufficient Quantity Available");
                                 mybuilder.dismiss();
-                            }
-                            else
-                            {
+                            }else{
                                 sh_price = Double.parseDouble(edprice.getText().toString());
                                 double multiply = en_quantity * sh_price;
                                 String s_multiply = String.valueOf(multiply);
@@ -3932,16 +3936,113 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                                 }
                                 total_price = dd;
 
-//                        edprice.setText(totalpriceproduct.get(str));
-//                        edquantity.setText(tempQuantity.get(str));
 
                                 calculateTotalAmount(total_price);
                                 products_adapter.notifyDataSetChanged();
 
                                 mybuilder.dismiss();
+
                             }
+                        }else{
+                                sh_price = Double.parseDouble(edprice.getText().toString());
+                                double multiply = en_quantity * sh_price;
+                                String s_multiply = String.valueOf(multiply);
+
+
+                                producprice.remove(str);
+                                totalpriceproduct.remove(str);
+                                tempQuantity.remove(str);
+
+                                producprice.add(str, String.valueOf(sh_price));
+                                totalpriceproduct.add(str, String.valueOf(sh_price));
+                                tempQuantity.add(str, edquantity.getText().toString());
+
+                                double dd = 0.0;
+                                for (int i = 0; i < producprice.size(); i++){
+                                    double aa = Double.parseDouble(producprice.get(i));
+                                    double bb = Double.parseDouble(tempQuantity.get(i));
+
+                                    double cc = aa * bb;
+                                    dd = dd + cc;
+                                }
+                                total_price = dd;
+
+
+                                calculateTotalAmount(total_price);
+                                products_adapter.notifyDataSetChanged();
+
+                                mybuilder.dismiss();
+
 
                         }
+
+
+
+
+
+
+
+//                        }
+
+//                        if(tempList.size() > 0){
+//                            Log.e(TAG, "product_bottomAA "+tempList.size());
+//                            Log.e(TAG, "product_bottomBB "+str);
+//
+//                            String quentityproduct = tempQuantity.get(str);
+////                            if(quentityproduct.equals("null"))
+////                            {
+////                                Constant.ErrorToast(EditEditEstimateActivity.this,"Insufficient Quantity Available");
+////                            }
+////                            else {
+////                                sh_quantity = Double.parseDouble(tempQuantity.get(str));
+////                            }
+////
+////                            if (sh_quantity < en_quantity)
+////                            {
+////                                mybuilder.show();
+////                                Constant.ErrorToast(EditEditEstimateActivity.this,"Insufficient Quantity Available");
+////                                mybuilder.dismiss();
+////                            }
+//
+////
+////                            if (sh_quantity < en_quantity){
+////
+////                            }
+////                            else
+////                            {
+////                                sh_price = Double.parseDouble(edprice.getText().toString());
+////                                double multiply = en_quantity * sh_price;
+////                                String s_multiply = String.valueOf(multiply);
+////
+////
+////                                producprice.remove(str);
+////                                totalpriceproduct.remove(str);
+////                                tempQuantity.remove(str);
+////
+////                                producprice.add(str, String.valueOf(sh_price));
+////                                totalpriceproduct.add(str, String.valueOf(sh_price));
+////                                tempQuantity.add(str, edquantity.getText().toString());
+////
+////                                double dd = 0.0;
+////                                for (int i = 0; i < producprice.size(); i++){
+////                                    double aa = Double.parseDouble(producprice.get(i));
+////                                    double bb = Double.parseDouble(tempQuantity.get(i));
+////
+////                                    double cc = aa * bb;
+////                                    dd = dd + cc;
+////                                }
+////                                total_price = dd;
+////
+//////                        edprice.setText(totalpriceproduct.get(str));
+//////                        edquantity.setText(tempQuantity.get(str));
+////
+////                                calculateTotalAmount(total_price);
+////                                products_adapter.notifyDataSetChanged();
+////
+////                                mybuilder.dismiss();
+////                            }
+//
+//                        }
 
 
                     }
@@ -3961,6 +4062,10 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
         }
 
     }
+
+
+
+
 
 
 
