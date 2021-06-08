@@ -777,9 +777,6 @@ public class Utility {
 
             }
         }
-
-
-
         return itemQuantity;
     }
 

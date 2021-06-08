@@ -42,6 +42,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -334,6 +335,21 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
     double paidAmountZZ = 0.0;
     double balanceAmountZZ = 0.0;
 
+    String stringPaypal = "";
+    String stringPaypalEmail_2 = "";
+    String stringPaypalEmail_2_Type = "";
+
+    String stringStripe = "";
+    String stringToken = "";
+
+
+    View viewPayment;
+    Switch switchPaypal, switchStripe;
+    RadioGroup radioGroupPaypal;
+    RadioButton radioButton1, radioButton2;
+
+    boolean booleanSwitchPaypal = false, booleanSwitchStripe = false;
+    String stringPaypalSendType = "";
 
     public Fragment_Create_PO() {
         // Required empty public constructor
@@ -370,6 +386,14 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         View view = inflater.inflate(R.layout.fragment_create_po, container, false);
+
+        viewPayment = view.findViewById(R.id.payment_id);
+        viewPayment.setVisibility(View.GONE);
+        switchPaypal = view.findViewById(R.id.switch1);
+        switchStripe = view.findViewById(R.id.switch2);
+        radioGroupPaypal = view.findViewById(R.id.radioGroup);
+        radioButton1 = view.findViewById(R.id.radioButton);
+        radioButton2 = view.findViewById(R.id.radioButton2);
 
         selectButton = view.findViewById(R.id.selectButton);
 
@@ -1229,6 +1253,21 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
 
             }
+
+            if(booleanSwitchPaypal == true){
+                if(!stringPaypalSendType.equalsIgnoreCase("")){
+                    params.put("paypal", "1");
+                    params.put("paypal_type", ""+stringPaypalSendType);
+                    params.put("payment_type", ""+stringPaypalSendType);
+                }
+            }
+
+
+            if(booleanSwitchStripe == true){
+                params.put("stripe", "1");
+            }
+
+
 
 
             Log.e("postingallparams",params.toString());
@@ -3128,12 +3167,107 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                             paypal_emailstr = item.getString("paypal_email");
                             cheque_payable_to = item.getString("cheque_payable_to");
 
+                            stringPaypal = item.getString("paypal");
+                            stringPaypalEmail_2 = item.getString("paypal_email_2");
+                            stringPaypalEmail_2_Type = item.getString("paypal_email_2_type");
+
+                            stringStripe = item.getString("stripe");
+                            stringToken = item.getString("stripe_token");
+
+
                             companylogopath = company_image_path + logo;
                             Log.e("companylogopath", companylogopath);
 
                             companycolor = item.getString("color");
 
                         }
+
+
+                        if(stringPaypal.equalsIgnoreCase("0") && stringStripe.equalsIgnoreCase("0")){
+                            viewPayment.setVisibility(View.GONE);
+                        }else{
+                            Log.e(TAG , "stringPaypalAA "+stringPaypal);
+
+                            radioGroupPaypal.setVisibility(View.GONE);
+                            if(stringPaypal.equalsIgnoreCase("1")){
+                                viewPayment.setVisibility(View.VISIBLE);
+                                switchPaypal.setVisibility(View.VISIBLE);
+                                //switchPaypal.setChecked(true);
+//                                booleanSwitchPaypal = true;
+//                                if(stringPaypalEmail_2_Type.equalsIgnoreCase("STANDARD")){
+//                                    radioGroupPaypal.setVisibility(View.VISIBLE);
+//                                    radioButton1.setChecked(true);
+//                                    radioButton2.setChecked(false);
+//                                }
+//                                if(stringPaypalEmail_2_Type.equalsIgnoreCase("BUSINESS")){
+//                                    radioGroupPaypal.setVisibility(View.VISIBLE);
+//                                    radioButton1.setChecked(false);
+//                                    radioButton2.setChecked(true);
+//                                }
+                                switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                    @Override
+                                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                        if(isChecked == true){
+                                            radioGroupPaypal.setVisibility(View.VISIBLE);
+                                            booleanSwitchPaypal = true;
+                                        }else{
+                                            radioGroupPaypal.setVisibility(View.GONE);
+                                            booleanSwitchPaypal = false;
+                                        }
+                                    }
+                                });
+
+                                radioButton1.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        radioButton1.setChecked(true);
+                                        radioButton2.setChecked(false);
+                                        stringPaypalSendType = "STANDARD";
+                                    }
+                                });
+
+                                radioButton2.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        radioButton1.setChecked(false);
+                                        radioButton2.setChecked(true);
+                                        stringPaypalSendType = "BUSINESS";
+                                    }
+                                });
+
+                            }else{
+                                // switchPaypal.setChecked(false);
+                                switchPaypal.setVisibility(View.GONE);
+                                radioGroupPaypal.setVisibility(View.GONE);
+                                booleanSwitchPaypal = false;
+                            }
+
+                            Log.e(TAG , "stringStripeAA "+stringStripe);
+                            if(stringStripe.equalsIgnoreCase("1")){
+                                viewPayment.setVisibility(View.VISIBLE);
+                                switchStripe.setVisibility(View.VISIBLE);
+                                switchStripe.setChecked(true);
+                                // booleanSwitchStripe = true;
+                                switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                    @Override
+                                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                        if(isChecked == true){
+                                            booleanSwitchStripe = true;
+                                        }else{
+                                            booleanSwitchStripe = false;
+                                        }
+                                    }
+                                });
+
+                            }else{
+                                switchStripe.setVisibility(View.GONE);
+                                switchStripe.setChecked(false);
+                                booleanSwitchStripe = false;
+                            }
+                        }
+
+
+
 
                         JSONArray customer = data.getJSONArray("customer");
 
