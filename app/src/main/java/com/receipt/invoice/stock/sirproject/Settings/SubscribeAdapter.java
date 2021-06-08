@@ -1,6 +1,7 @@
 package com.receipt.invoice.stock.sirproject.Settings;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -23,14 +24,14 @@ public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.View
 
     //InvoiceCallBack invoiceCallBack;
 
-    private Context mcontext;
+    private Activity mcontext;
 
     ArrayList<ItemSubscribe> arrayListNames = new ArrayList<>();
 
-    private int selectedPos = 0;
+    private int selectedPos = -1;
 
 
-    public SubscribeAdapter(Context mcontext, ArrayList<ItemSubscribe> list) {
+    public SubscribeAdapter(Activity mcontext, ArrayList<ItemSubscribe> list) {
         this.mcontext = mcontext;
         arrayListNames = list;
 
@@ -83,7 +84,7 @@ public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.View
 
                 Log.e(TAG, "viewHolderForCat.getAdapterPosition() "+viewHolderForCat.getAdapterPosition());
 
-                //activity.onLanguageClickBack(selectedPos);
+                ((SubscribeActivity)mcontext).onClickBack(arrayListNames.get(i));
 
                 notifyDataSetChanged();
             }

@@ -15,6 +15,8 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+
 
     <application
         android:name=".SAADApplication"
@@ -87,6 +89,12 @@
 
         <activity
             android:name=".PO.POViewActivityWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" >
+        </activity>
+        <activity
+            android:name=".PO.POViewActivityWebViewPayment"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -412,6 +420,11 @@
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name=".Invoice.InvoiceViewActivityWebView"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".Invoice.InvoiceViewActivityWebViewPayment"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />

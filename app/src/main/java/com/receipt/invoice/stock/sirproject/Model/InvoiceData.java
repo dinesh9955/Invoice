@@ -6,9 +6,36 @@ package com.receipt.invoice.stock.sirproject.Model;
 
 public class InvoiceData {
 
+
     String is_viewed = "";
 
+    String paypal = "";
+    String stripe = "";
+    String paypal_type = "";
 
+    public String getPaypal() {
+        return paypal;
+    }
+
+    public void setPaypal(String paypal) {
+        this.paypal = paypal;
+    }
+
+    public String getStripe() {
+        return stripe;
+    }
+
+    public void setStripe(String stripe) {
+        this.stripe = stripe;
+    }
+
+    public String getPaypal_type() {
+        return paypal_type;
+    }
+
+    public void setPaypal_type(String paypal_type) {
+        this.paypal_type = paypal_type;
+    }
 
     public String getIs_viewed() {
         return is_viewed;

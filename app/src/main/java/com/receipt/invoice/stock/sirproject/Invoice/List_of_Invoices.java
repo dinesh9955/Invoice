@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -33,7 +32,6 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -124,6 +122,10 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
     String customerName = "";
     String dataNo = "";
+
+    String stringPaypal = "";
+    String stringStripe = "";
+    String stringPaypalType = "";
 
     public List_of_Invoices() {
         // Required empty public constructor
@@ -278,6 +280,11 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                                     dataNo = temp.get(pos).getInvoice_nobdt();
                                     templateSelect = temp.get(pos).getTemplate_type();
                                     Log.e(TAG, "templateSelect: "+templateSelect);
+
+                                    stringPaypal = temp.get(pos).getPaypal();
+                                    stringStripe = temp.get(pos).getStripe();
+                                    stringPaypalType = temp.get(pos).getPaypal_type();
+
                                     invoiceidbypos = temp.get(pos).getInvoice_userid();
                                     String ilnvoiceStatus = temp.get(pos).getInvocestatus();
                                     String pdflink = temp.get(pos).getInvoicepdflink();
@@ -288,6 +295,11 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                                     dataNo = list.get(pos).getInvoice_nobdt();
                                     templateSelect = list.get(pos).getTemplate_type();
                                     Log.e(TAG, "templateSelect: "+templateSelect);
+
+                                    stringPaypal = list.get(pos).getPaypal();
+                                    stringStripe = list.get(pos).getStripe();
+                                    stringPaypalType = list.get(pos).getPaypal_type();
+
                                     invoiceidbypos = list.get(pos).getInvoice_userid();
                                     String ilnvoiceStatus = list.get(pos).getInvocestatus();
                                     String pdflink = list.get(pos).getInvoicepdflink();
@@ -759,6 +771,9 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                             company_list.setVoid_status(void_status);
                             String is_viewed = item.getString("is_viewed");
                             company_list.setIs_viewed(is_viewed);
+                            company_list.setPaypal(item.getString("paypal"));
+                            company_list.setStripe(item.getString("stripe"));
+                            company_list.setPaypal_type(item.getString("paypal_type"));
                             list.add(company_list);
 
 
@@ -1049,7 +1064,7 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
             }
             if (ilnvoiceStatus.equals("1")) {
                 recepitsviewtxt.setVisibility(View.INVISIBLE);
-                viewinvoicerecipts.setVisibility(View.INVISIBLE);
+                viewinvoicerecipts.setVisibility(View.GONE);
             }
 
 
@@ -1064,8 +1079,19 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
             recepitsviewtxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
 
             LinearLayout linearLayoutChangeTemp= view.findViewById(R.id.viewicetemplate);
-            linearLayoutChangeTemp.setVisibility(View.GONE);
+            linearLayoutChangeTemp.setVisibility(View.VISIBLE);
+            viewinvoicetemplate.setText("Charge Customer");
 
+//            stringPaypal = temp.get(pos).getPaypal();
+//            stringStripe = temp.get(pos).getStripe();
+//            stringPaypalType = temp.get(pos).getPaypal_type();
+
+            if (stringPaypal.equals("") || stringPaypal.equals("0") && stringStripe.equals("") || stringStripe.equals("0")) {
+                linearLayoutChangeTemp.setVisibility(View.GONE);
+            }
+            if (stringPaypal.equals("1") || stringStripe.equals("1")) {
+                linearLayoutChangeTemp.setVisibility(View.VISIBLE);
+            }
 
             viewinvoicebotom.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1090,16 +1116,17 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
             viewinvoicetemplate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), InvoiceViewActivityWebViewPayment.class);
+                    intent.putExtra("invoiceID", invoiceidbypos);
+                    intent.putExtra("templatestr", templatestr);
+//                    templateSelect = ""+2;
+//                    colorCode = "#ff0000";
+                    intent.putExtra("templateSelect", ""+templateSelect);
+                    intent.putExtra("colorCode", ""+colorCode);
 
-
-                    if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Company");
-                        bottomSheetDialog.show();
-                    } else {
-
-                        ViewTamlatemethodh();
-                        bottomSheetDialog.show();
-                    }
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    bottomSheetDialog.dismiss();
                 }
             });
 
