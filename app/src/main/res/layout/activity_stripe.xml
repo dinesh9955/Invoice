@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Customer.Customer_Activity"
+    android:background="@color/white">
+
+    <!--<include layout="@layout/toolbar">
+    </include>-->
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <include layout="@layout/toolbar_language" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_20sdp"
+            >
+
+
+
+        <RelativeLayout
+            android:id="@+id/relative11"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/image"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sir_app_logo2"
+                android:layout_centerVertical="true"
+                app:riv_corner_radius="100dp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SK TECH SYSTEMS LLC"
+                android:id="@+id/customerstxt1"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:textStyle="normal"
+                android:textAllCaps="true"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/image"
+                />
+
+
+        </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Started with Stirpe"
+                android:id="@+id/customerstxt2"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="normal"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/relative11"
+                android:layout_marginTop="@dimen/_20sdp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please have the owner of this business or someone with significant management responsibility complete this form."
+                android:id="@+id/customerstxt3"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="normal"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/customerstxt2"
+                android:layout_marginTop="@dimen/_15sdp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:id="@+id/customerstxt4"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="normal"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/customerstxt3"
+                android:layout_marginTop="@dimen/_30sdp"
+                />
+
+
+
+            <EditText
+                android:id="@+id/login_email"
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/fade_green_border_corner_round"
+                android:hint="Email Address"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColorHint="@color/d_grey"
+                android:textColor="@color/black"
+                android:text=""
+                android:textSize="15dp"
+                android:singleLine="true"
+                android:layout_below="@+id/customerstxt4"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Have a Stripe account? You can use the same email."
+                android:id="@+id/customerstxt5"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="normal"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/login_email"
+                android:layout_marginTop="@dimen/_10sdp"
+                />
+
+
+            <Button
+                android:id="@+id/createinvoice"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/blue_btn_curve"
+                android:textSize="@dimen/_13sdp"
+                android:text="Next ->"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_below="@+id/customerstxt5"
+
+                />
+
+
+
+
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:src="@drawable/stripe"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/createinvoice"
+                android:layout_marginTop="@dimen/_50sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SK TECH SYSTEMS LLC partners with Stripe for secure payments."
+                android:id="@+id/customerstxt6"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="normal"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/imageView2"
+                android:layout_marginTop="@dimen/_7sdp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terms Privacy English (IN)"
+                android:id="@+id/customerstxt7"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:layout_below="@+id/customerstxt6"
+                android:layout_marginTop="@dimen/_7sdp"
+                />
+
+
+
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blue_btn_curve"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/fbLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:drawableRight="@drawable/directional25"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:text="Next"
+                    android:tint="@color/white"
+                    android:textColor="@android:color/white" />
+            </FrameLayout>
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

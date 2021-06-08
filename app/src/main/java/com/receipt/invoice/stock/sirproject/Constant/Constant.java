@@ -61,6 +61,11 @@ public class Constant {
     public static String BASE_URL = "http://13.126.22.0/saad/app/index.php/api/";
     public static String BASE_URL_PDF = "http://13.126.22.0/saad/app/uploads/invoice/pdf/";
     public static String BASE_URL_SUPPORT = "http://13.126.22.0/saad/wp-content/api/";
+    public static String BASE_URL_PAYMENT = "http://prod.webdevelopmentsolution.net/saad/app/index.php/api/";
+
+
+
+
    // public static String BASE_URL = "https://infinitmobility.com/sir/index.php/api/";
    public static final String ACCESS_TOKEN = "mndnkdcnn";
     public static final String FULLNAME = "fn";

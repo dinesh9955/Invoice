@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp"
+    android:padding="@dimen/_25sdp"
     android:id="@+id/relative_root"
     android:layout_marginTop="5dp"
    >
@@ -14,14 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:layout_toLeftOf="@+id/imageView">
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_marginRight="@dimen/_5sdp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Customizeyourexperience"
             android:id="@+id/text_setting"
             android:textColor="@color/fragmentfont"
-            android:textSize="16sp"
+            android:textSize="@dimen/_14sdp"
             android:textStyle="normal"
             />
 
@@ -32,7 +33,7 @@
             android:id="@+id/text_setting2"
             android:layout_below="@+id/text_setting"
             android:textColor="@color/fragmentfont"
-            android:textSize="16sp"
+            android:textSize="@dimen/_14sdp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:textStyle="bold"
@@ -45,8 +46,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/checked_green"

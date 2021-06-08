@@ -25,7 +25,7 @@ public class SubscribeActivity extends BaseActivity{
 
     SubscribeAdapter invoicelistAdapterdt;
 
-    ArrayList<String> arrayListNames = new ArrayList<>();
+    ArrayList<ItemSubscribe> arrayListNames = new ArrayList<>();
 
     int languagePostion = 0;
 
@@ -76,14 +76,10 @@ public class SubscribeActivity extends BaseActivity{
 
         recycler_invoices = findViewById(R.id.recycler_invoices);
 
-        arrayListNames.add("English");
-        arrayListNames.add("Arabic");
-        arrayListNames.add("German");
-        arrayListNames.add("Dutch");
-        arrayListNames.add("French");
-        arrayListNames.add("Italian");
-        arrayListNames.add("Spanish");
-        arrayListNames.add("Portuguese");
+
+        arrayListNames = getPlans();
+
+
 
 
 
@@ -95,6 +91,41 @@ public class SubscribeActivity extends BaseActivity{
         recycler_invoices.setHasFixedSize(true);
         invoicelistAdapterdt.notifyDataSetChanged();
 
+    }
+
+    private ArrayList<ItemSubscribe> getPlans() {
+
+        ArrayList<ItemSubscribe> itemSubscribeArrayList = new ArrayList<>();
+
+        ItemSubscribe itemSubscribe1 = new ItemSubscribe();
+        itemSubscribe1.setId("1");
+        itemSubscribe1.setPlan("35.99");
+        itemSubscribe1.setPlanName("Annual Plan");
+        itemSubscribe1.setDescription("Subscribe to Annual Package and get upto 25% off. USD 35.99 only annually with unlimited access to all features except Stock Tracking.");
+        itemSubscribeArrayList.add(itemSubscribe1);
+
+        ItemSubscribe itemSubscribe2 = new ItemSubscribe();
+        itemSubscribe2.setId("2");
+        itemSubscribe2.setPlan("3.99");
+        itemSubscribe2.setPlanName("Value Plan");
+        itemSubscribe2.setDescription("Monthly package starts at USD 3.99 only with unlimited access to all features except Stock Tracking.");
+        itemSubscribeArrayList.add(itemSubscribe2);
+
+        ItemSubscribe itemSubscribe3 = new ItemSubscribe();
+        itemSubscribe3.setId("3");
+        itemSubscribe3.setPlan("3.99");
+        itemSubscribe3.setPlanName("Extra Users");
+        itemSubscribe3.setDescription("Assign additional users with limited or unlimited access for one time payment of USD 3.99 only per user.");
+        itemSubscribeArrayList.add(itemSubscribe3);
+
+        ItemSubscribe itemSubscribe4 = new ItemSubscribe();
+        itemSubscribe4.setId("4");
+        itemSubscribe4.setPlan("11.99");
+        itemSubscribe4.setPlanName("Extra Companies");
+        itemSubscribe4.setDescription("Create additional companies under the same credentials for one time payment of USD 11.99 only per additional company.");
+        itemSubscribeArrayList.add(itemSubscribe4);
+
+        return itemSubscribeArrayList;
     }
 
 //    @Override

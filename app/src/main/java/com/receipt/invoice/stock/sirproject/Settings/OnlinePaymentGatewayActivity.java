@@ -1,6 +1,9 @@
 package com.receipt.invoice.stock.sirproject.Settings;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.ThankYouNote.ThankYouNoteActivity;
@@ -31,9 +36,9 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class OnlinePaymentGatewayActivity extends AppCompatActivity {
+public class OnlinePaymentGatewayActivity extends BaseActivity {
 
-    private static final String TAG = "OnlinePaymentGatewayy";
+    private static final String TAG = "OnlinePaymentGateway";
 
     ImageView imageViewStripeUp, imageViewPaypalUp;
 
@@ -45,8 +50,12 @@ public class OnlinePaymentGatewayActivity extends AppCompatActivity {
 
     ArrayList<String> cids = new ArrayList<>();
     ArrayList<String> cnames = new ArrayList<>();
+    ArrayList<String> cidsLogo = new ArrayList<>();
+
 
     String selectedCompanyId = "";
+    String selectedCompanyName = "";
+    String selectedCompanyImage = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -131,8 +140,39 @@ public class OnlinePaymentGatewayActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(int position, String itemAtPosition) {
                 selectedCompanyId = cids.get(position);
+                selectedCompanyName = cnames.get(position);
+                selectedCompanyImage = cidsLogo.get(position);
             }
         });
+
+
+
+        buttonPaypal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!selectedCompanyId.equalsIgnoreCase("")){
+                    Intent intent = new Intent(OnlinePaymentGatewayActivity.this, PayPalActivity.class);
+                    intent.putExtra("companyID", selectedCompanyId);
+                    startActivity(intent);
+                }
+            }
+        });
+
+
+        buttonStripe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!selectedCompanyId.equalsIgnoreCase("")){
+                    Intent intent = new Intent(OnlinePaymentGatewayActivity.this, StripeWebActivity.class);
+//                    intent.putExtra("companyID", selectedCompanyId);
+//                    intent.putExtra("companyName", selectedCompanyName);
+//                    intent.putExtra("companyImage", selectedCompanyImage);
+                    startActivityForResult(intent, 123);
+                }
+            }
+        });
+
+
 
 
         companyget();
@@ -159,6 +199,8 @@ public class OnlinePaymentGatewayActivity extends AppCompatActivity {
                     if (status.equals("true")) {
                         JSONObject data = jsonObject.getJSONObject("data");
                         JSONArray company = data.getJSONArray("company");
+                        String company_image_path = data.getString("company_image_path");
+
                         String company_id= "", company_name= "", company_address= "", company_contact= "", company_email= "",
                                 company_website= "", payment_bank_name= "", payment_currency= "", payment_iban= "", payment_swift_bic= "", logo = "";
                         if (company.length() > 0) {
@@ -181,7 +223,7 @@ public class OnlinePaymentGatewayActivity extends AppCompatActivity {
 
                                 cnames.add(company_name);
                                 cids.add(company_id);
-
+                                cidsLogo.add(company_image_path+logo);
 
 
                             }
@@ -215,6 +257,96 @@ public class OnlinePaymentGatewayActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 123){
+            if(resultCode == RESULT_OK){
+                String responseCode = data.getStringExtra("responseCode");
+                Log.e(TAG, "responseCode:: "+responseCode);
+                callMethod(responseCode);
+
+            }
+        }
+    }
+
+
+
+
+    private void callMethod(String responseCode) {
+        final ProgressDialog progressDialog = new ProgressDialog(OnlinePaymentGatewayActivity.this);
+        progressDialog.setMessage("Please wait");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        RequestParams params = new RequestParams();
+        params.add("key", "STRIPE");
+        params.add("company_id", selectedCompanyId);
+        params.add("token", responseCode);
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        String token = Constant.GetSharedPreferences(OnlinePaymentGatewayActivity.this, Constant.ACCESS_TOKEN);
+        client.addHeader("Access-Token", token);
+
+        client.post(Constant.BASE_URL_PAYMENT+ "settings/add", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                progressDialog.dismiss();
+
+                Log.e(TAG, "CreateInvoicedata "+ response);
+                try {
+                    Log.e("Create Invoicedata", response);
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    String message = jsonObject.getString("message");
+                    if (status.equalsIgnoreCase("true")) {
+                        Constant.SuccessToast(OnlinePaymentGatewayActivity.this, message);
+
+//                        new Handler().postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                finish();
+//                            }
+//                        }, 500);
+
+                    }else{
+                        Constant.ErrorToast(OnlinePaymentGatewayActivity.this, message);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                progressDialog.dismiss();
+
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String status = jsonObject.getString("status");
+                        String message = jsonObject.getString("message");
+                        if (status.equals("1")) {
+                            Constant.ErrorToast(OnlinePaymentGatewayActivity.this, message);
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    //Constant.ErrorToast(PayPalActivity.this, "Something went wrong, try again!");
+                }
+            }
+        });
+    }
 
 
 }

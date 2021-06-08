@@ -47,18 +47,12 @@
             android:name=".Splash_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Splash">
-
-        </activity>
-
-        <activity
-            android:name=".Settings.PayPalActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
 
         <activity
@@ -655,12 +649,43 @@
         </activity>
 
         <activity
+            android:name=".Settings.PayPalActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize">
+
+        </activity>
+
+        <activity
+            android:name=".Settings.StripeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize">
+
+        </activity>
+
+        <activity
+            android:name=".Settings.StripeWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Settings"
+            android:windowSoftInputMode="adjustPan|adjustResize">
+
+        </activity>
+
+
+
+        <activity
             android:name=".Settings.SubscribeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
 
         </activity>
+
+
+
+
+
 
 
 

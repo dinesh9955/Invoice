@@ -25,12 +25,12 @@ public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.View
 
     private Context mcontext;
 
-    ArrayList<String> arrayListNames = new ArrayList<>();
+    ArrayList<ItemSubscribe> arrayListNames = new ArrayList<>();
 
     private int selectedPos = 0;
 
 
-    public SubscribeAdapter(Context mcontext, ArrayList<String> list) {
+    public SubscribeAdapter(Context mcontext, ArrayList<ItemSubscribe> list) {
         this.mcontext = mcontext;
         arrayListNames = list;
 
@@ -51,7 +51,8 @@ public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.View
     @Override
     public void onBindViewHolder(@NonNull final SubscribeAdapter.ViewHolderForCat viewHolderForCat, final int i) {
 
-        viewHolderForCat.textViewName.setText(""+arrayListNames.get(i));
+        viewHolderForCat.textViewName.setText(""+arrayListNames.get(i).getPlanName());
+        viewHolderForCat.textViewDesc.setText(""+arrayListNames.get(i).getDescription());
 
         if(i == selectedPos)
         {
@@ -138,7 +139,7 @@ public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.View
         }
 
     }
-    public void updateList(ArrayList<String> list){
+    public void updateList(ArrayList<ItemSubscribe> list){
         arrayListNames = list;
         notifyDataSetChanged();
     }
