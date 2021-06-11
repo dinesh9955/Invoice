@@ -27,7 +27,9 @@ import com.appsflyer.AppsFlyerLib;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.Select_Warehouse_Adapter;
 import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
@@ -210,8 +212,9 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
             params.add("company_id",id);
             String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
-            client.post(Constant.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -293,8 +296,9 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         final SharedPreferences preferences = getActivity().getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
         String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -353,8 +357,9 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         avibackground.setVisibility(View.VISIBLE);
         String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL+"supplier/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+"supplier/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -420,8 +425,9 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         params.add("company_id",companyid);
         String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL+"product/getOnlyProductsListingByCompany",params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+"product/getOnlyProductsListingByCompany",params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -521,8 +527,9 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
 
             String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
-            client.post(Constant.BASE_URL + "product/addQuantity", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "product/addQuantity", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);

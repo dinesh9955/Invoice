@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 
 import java.util.ArrayList;
 
@@ -137,7 +138,7 @@ public class Product_Selection_Adapter extends RecyclerView.Adapter<Product_Sele
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.app_icon);
-        Glide.with(mcontext)
+        GlideApp.with(mcontext)
                 .load(product_list.getProduct_image_path()+product_list.getProduct_image())
                 .apply(options)
                 .into(viewHolderForCat.image);

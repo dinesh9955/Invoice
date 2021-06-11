@@ -113,7 +113,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Estimate");
+        titleView.setText(getString(R.string.preview));
 
 
         getinvoicedata();

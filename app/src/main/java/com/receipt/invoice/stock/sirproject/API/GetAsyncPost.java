@@ -11,6 +11,7 @@ import android.util.Log;
 import androidx.appcompat.app.AlertDialog;
 
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
+import com.receipt.invoice.stock.sirproject.Utils.UnsafeOkHttpClient;
 
 import java.lang.ref.WeakReference;
 import java.net.ConnectException;
@@ -63,10 +64,11 @@ public abstract class GetAsyncPost extends AsyncTask<Response, Void, Response> {
         Response jsonData = null;
         try {
             try {
-                OkHttpClient client = new OkHttpClient.Builder().connectTimeout(50, TimeUnit.SECONDS).writeTimeout(50, TimeUnit.SECONDS)
-                        .readTimeout(50, TimeUnit.SECONDS)
-                        .retryOnConnectionFailure(true)
-                        .build();
+                OkHttpClient okHttpClient= UnsafeOkHttpClient.getUnsafeOkHttpClient();
+//                OkHttpClient client = new OkHttpClient.Builder().connectTimeout(50, TimeUnit.SECONDS).writeTimeout(50, TimeUnit.SECONDS)
+//                        .readTimeout(50, TimeUnit.SECONDS)
+//                        .retryOnConnectionFailure(true)
+//                        .build();
                 String token = Constant.GetSharedPreferences(context, Constant.ACCESS_TOKEN);
 
                 Log.e(TAG, "tokentoken "+token);
@@ -78,7 +80,7 @@ public abstract class GetAsyncPost extends AsyncTask<Response, Void, Response> {
                         .build();
                 try {
 
-                    Response responses = client.newCall(request).execute();
+                    Response responses = okHttpClient.newCall(request).execute();
                     jsonData = responses;
 //                    jsonData = responses.body().string();
                 } catch (SocketTimeoutException ex) {
@@ -114,11 +116,11 @@ public abstract class GetAsyncPost extends AsyncTask<Response, Void, Response> {
 
         Log.e(TAG, "onPostExecute:: "+result);
 
-        if (result != null) {
+//        if (result != null) {
             getValueParse(result);
-        } else {
-
-        }
+//        } else {
+//
+//        }
     }
 
     public abstract void getValueParse(Response listValue);

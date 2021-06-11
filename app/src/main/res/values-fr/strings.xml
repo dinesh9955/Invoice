@@ -1,0 +1,129 @@
+<resources>
+    <string name="app_name">SIR Invoices</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="facebook_app_id">1296888023851596</string>
+    <string name="fb_login_protocol_scheme">fb1296888023851596</string>
+
+
+
+    <string name="preview">Aperçu</string>
+
+    <string name="header_receipts">Reçus</string>
+    <string name="header_invoices">Factures</string>
+    <string name="header_debit_notes">Notes de débit</string>
+    <string name="header_credit_notes">Notes de crédit</string>
+    <string name="header_estimates">Estimations</string>
+    <string name="header_purchase_orders">Acheter en ligne</string>
+    <string name="header_payment_vouchers">Bons de paiement</string>
+
+
+
+
+    <string name="home_hello">Bonjour</string>
+    <string name="home_quick_look">Un aperçu rapide de vos principales activités commerciales</string>
+    <string name="home_customers">Les clients</string>
+    <string name="home_suppliers">Fournisseuses</string>
+    <string name="home_no_unpaid_invoices">Pas de factures impayées</string>
+    <string name="home_no_overdue_invoices">Aucune facture en retard</string>
+    <string name="home_no_customers">Aucun client</string>
+    <string name="home_no_suppliers">Aucun fournisseur</string>
+
+    <string name="home">Domicile</string>
+    <string name="estimate">Estimations</string>
+    <string name="invoices">Factures</string>
+    <string name="receipts">Reçus</string>
+    <string name="po">PO</string>
+
+    <string name="add_new_user">Ajouter un nouvel utilisateur</string>
+    <string name="my_companies">Mes entreprises</string>
+    <string name="my_products">Mes produits (suivi)</string>
+    <string name="my_items">Mes articles</string>
+    <string name="add_taxes">Ajouter des taxes</string>
+
+    <string name="suppliers">Fournisseuses</string>
+    <string name="stocks">Actions</string>
+    <string name="settings">Paramètres</string>
+    <string name="logout">Se déconnecter</string>
+    <string name="purchase_orders">Acheter en ligne</string>
+    <string name="payment_vouchers">Bons de paiement</string>
+    <string name="reports">Rapports</string>
+    <string name="credit_notes">Notes de crédit</string>
+    <string name="debit_notes">Notes de débit</string>
+    <string name="thank_you_note">Remerciements</string>
+    <string name="invoice_reminders">Rappels de factures</string>
+
+    <string name="select_company">Sélectionnez l\'entreprise</string>
+    <string name="cancel">Annuler</string>
+
+
+
+    <string name="internet_error">Check your Internet Connection</string>
+    <string name="condiotn">Terms &amp; Conditions</string>
+    <string name="connection_not_found">You must have a connection to the internet</string>
+    <string name="GOPREMIUM">GO PREMIUM</string>
+    <string name="AnnualPlan">Annual Plan *</string>
+    <string name="dollaryear">$ 35.99/year</string>
+    <string name="ValuePlan">Value Plan *</string>
+    <string name="dollarmonth">$ 3.99/month</string>
+    <string name="Restore">Restore</string>
+    <string name="Purchases">Purchases</string>
+    <string name="Termsconditionsapply">*Terms &amp; conditions apply:</string>
+    <string name="USD1199">USD 11.99</string>
+    <string name="oneimepaymentforcreatinganewcompany">\u0020 one-time payment for creating a new company within the same credentials</string>
+    <string name="USD399">USD 3.99</string>
+    <string name="onetimepaymentperadditionaluser">\u0020 one-time payment per additional user (for assigning additional users)</string>
+    <string name="Skipsubscription">Skip subscription</string>
+    <string name="trytheappforaperiodof14days">Try the app for a period of 14-days</string>
+    <string name="startfreetrial">Start free trial</string>
+
+    <string name="Customizeyourexperience">Customize your experience</string>
+    <string name="InviteFriends">Invite Friends</string>
+    <string name="Customize">Customize</string>
+    <string name="FAQs">FAQs</string>
+    <string name="Language">Language</string>
+    <string name="Abouttheapp">About the app</string>
+    <string name="Ratetheapp">Rate the app</string>
+    <string name="TermsofUse">Terms of Use</string>
+    <string name="PrivacyPolicy">Privacy Policy</string>
+    <string name="Support">Support</string>
+
+    <string name="DebitNo">Debit Note No.</string>
+
+    <string name="CreditNo">Credit Note No.</string>
+    <string name="ReceiptNo">Receipt No.</string>
+    <string name="InvoiceNo">Invoice No.</string>
+    <string name="EstiateNo">Estimate No.</string>
+
+    <string name="poNo">PO No.</string>
+    <string name="pvNo">PV No.</string>
+
+    <string name="DueDate">Due Date</string>
+
+    <string name="ReceiptDate">Receipt Date</string>
+    <string name="Date">Date</string>
+    <string name="InvoiceTo">Recipient</string>
+    <string name="ITEMS">ITEMS</string>
+    <string name="INVOICEITEMS">INVOICE ITEMS</string>
+    <string name="template">Choose Template</string>
+    <string name="choose_color">Choose Color</string>
+
+    <string name="additem">Add products</string>
+    <string name="SubTotal">Sub Total</string>
+    <string name="Discount">Discount</string>
+    <string name="Tax">Tax</string>
+    <string name="createinvoice">Create Invoice</string>
+    <string name="createreceipt">Create Receipt</string>
+    <string name="createcredit">Create Credit Note</string>
+    <string name="createestimate">Create Estimate</string>
+    <string name="create_purchaseorder">Create Purchase Order</string>
++
+    <string name="create_paymentvoucher">Create Payment Voucher</string>
+
+
+
+    <string name="createdebit">Create Debit Note</string>
+
+</resources>

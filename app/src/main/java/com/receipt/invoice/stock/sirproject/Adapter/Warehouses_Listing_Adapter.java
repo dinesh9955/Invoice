@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Model.Warehouse_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +72,7 @@ public class Warehouses_Listing_Adapter extends RecyclerView.Adapter<Warehouses_
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.app_icon);
-        Glide.with(mcontext)
+        GlideApp.with(mcontext)
                 .load(warehouse_image)
                 .apply(options)
                 .into(viewHolderForCat.image);

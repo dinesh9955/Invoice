@@ -562,7 +562,8 @@
                 android:id="@+id/payment_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp">
+                android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="gone">
 
             </include>
 
@@ -584,7 +585,7 @@
                 android:id="@+id/imgsigsuccess"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_below="@id/view4"
+                android:layout_below="@id/payment_id"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="20dp"
                 android:layout_toRightOf="@id/s_invoice"

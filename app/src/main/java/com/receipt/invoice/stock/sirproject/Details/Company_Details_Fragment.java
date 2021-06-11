@@ -52,15 +52,19 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.mikhaellopez.circleview.CircleView;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.R;
 
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -77,7 +81,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Company_Details_Fragment extends Fragment {
+public class Company_Details_Fragment extends BaseFragment {
 
 
     private static final String TAG = "Company_Details_Fragment";
@@ -155,7 +159,7 @@ public class Company_Details_Fragment extends Fragment {
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.app_icon);
-        Glide.with(getActivity())
+        GlideApp.with(getActivity())
                 .load(company_logo)
                 .apply(options)
                 .into(image);
@@ -339,7 +343,7 @@ public class Company_Details_Fragment extends Fragment {
                 RequestOptions options = new RequestOptions();
                 options.centerCrop();
                 options.placeholder(R.drawable.app_icon);
-                Glide.with(getActivity())
+                GlideApp.with(getActivity())
                         .load(company_logo)
                         .apply(options)
                         .into(image);
@@ -480,7 +484,7 @@ public class Company_Details_Fragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Glide.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
+                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
 
               /*  Uri selectedImageUri = data.getData();
@@ -494,7 +498,7 @@ public class Company_Details_Fragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                Glide.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
+                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
 
             }
 
@@ -643,8 +647,9 @@ public class Company_Details_Fragment extends Fragment {
 
             String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
-            client.post(Constant.BASE_URL + "company/update", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "company/update", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 

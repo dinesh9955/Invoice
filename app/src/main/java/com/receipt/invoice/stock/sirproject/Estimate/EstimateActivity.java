@@ -35,7 +35,7 @@ public class EstimateActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-            Constant.toolbar(EstimateActivity.this,"Create Estimate");
+            Constant.toolbar(EstimateActivity.this,getString(R.string.header_estimates));
             activity = this;
 
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
@@ -51,8 +51,8 @@ public class EstimateActivity extends AppCompatActivity {
 
             customers.setTextColor(getResources().getColor(R.color.lightpurple));
             addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-            customers.setText("CREATE ESTIMATES");
-            addcustomer.setText("LIST OF ESTIMATES");
+            addcustomer.setText(getString(R.string.header_estimates_list));
+            customers.setText(getString(R.string.header_estimates_create));
 
             customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
             addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -75,8 +75,8 @@ public class EstimateActivity extends AppCompatActivity {
         private void setUpViewPager(ViewPager pager) {
 
             CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-            adapter.addFragment(new List_of_Estimate(),"LIST OF ESTIMATES");
-            adapter.addFragment(new Fragment_Create_Estimate(), "CREATE ESTIMATES");
+            adapter.addFragment(new List_of_Estimate(), getString(R.string.header_estimates_list));
+            adapter.addFragment(new Fragment_Create_Estimate(), getString(R.string.header_estimates_create));
             pager.setAdapter(adapter);
 
         }

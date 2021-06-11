@@ -268,19 +268,19 @@ public class Utility {
 
 
     public static boolean checkAndRequestPermissions(Activity context, int request) {
-//        int camera = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA);
+        int camera = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA);
         int writeExternalStorage = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int readExternalStorage = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);
 //        int coarseLocartion = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION);
 //        int fineLocartion = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
-//        int callPhone = ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
-//        int readContacts = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS);
+        int callPhone = ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
+        int readContacts = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS);
 
         List<String> listPermissionsNeeded = new ArrayList<>();
 
-//        if (camera != PackageManager.PERMISSION_GRANTED) {
-//            listPermissionsNeeded.add(Manifest.permission.CAMERA);
-//        }
+        if (camera != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CAMERA);
+        }
         if (writeExternalStorage != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
@@ -293,12 +293,12 @@ public class Utility {
 //        if (fineLocartion != PackageManager.PERMISSION_GRANTED) {
 //            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
 //        }
-//        if (callPhone != PackageManager.PERMISSION_GRANTED) {
-//            listPermissionsNeeded.add(Manifest.permission.CALL_PHONE);
-//        }
-//        if (readContacts != PackageManager.PERMISSION_GRANTED) {
-//            listPermissionsNeeded.add(Manifest.permission.READ_CONTACTS);
-//        }
+        if (callPhone != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CALL_PHONE);
+        }
+        if (readContacts != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_CONTACTS);
+        }
 
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(context, listPermissionsNeeded.toArray
@@ -329,8 +329,8 @@ public class Utility {
         Map<String, Integer> perms = new HashMap<>();
 
         perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
-        perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
-        perms.put(Manifest.permission.ACCESS_COARSE_LOCATION, PackageManager.PERMISSION_GRANTED);
+//        perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
+//        perms.put(Manifest.permission.ACCESS_COARSE_LOCATION, PackageManager.PERMISSION_GRANTED);
         perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
         perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
         perms.put(Manifest.permission.CALL_PHONE, PackageManager.PERMISSION_GRANTED);
@@ -341,8 +341,8 @@ public class Utility {
                 perms.put(permissions[i], grantResults[i]);
             // Check for both permissions
             if (perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
-                    perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                    perms.get(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+//                    perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+//                    perms.get(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED &&
@@ -357,8 +357,8 @@ public class Utility {
             } else {
                 //  Log.d(TAG, "Please allow access to all asked permissions. Due to the nature of the friendlywagon app, access to these areas on your mobile devices are necessary  for the app to function properly.");
                 if (ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.CAMERA) ||
-                        ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.ACCESS_FINE_LOCATION) ||
-                        ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.ACCESS_COARSE_LOCATION) ||
+//                        ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.ACCESS_FINE_LOCATION) ||
+//                        ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.ACCESS_COARSE_LOCATION) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.READ_EXTERNAL_STORAGE) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.CALL_PHONE) ||
@@ -397,7 +397,7 @@ public class Utility {
         new AlertDialog.Builder(splashScreen)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", okListener)
+                .setNegativeButton("CANCEL", okListener)
                 .create()
                 .show();
     }

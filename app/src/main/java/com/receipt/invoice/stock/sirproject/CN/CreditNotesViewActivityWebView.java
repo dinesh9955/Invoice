@@ -117,7 +117,7 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Credit Notes");
+        titleView.setText(getString(R.string.preview));
 
 
         getinvoicedata();

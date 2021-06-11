@@ -24,7 +24,9 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.SignupSignin.Signup_Activity;
@@ -338,7 +340,8 @@ public class Go_Premium_Activity extends Activity implements BillingProcessor.IB
             params.add("password",pwd);
 
             AsyncHttpClient client = new AsyncHttpClient();
-            client.post(Constant.BASE_URL+"user/login",params, new AsyncHttpResponseHandler() {
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+            client.post(AllSirApi.BASE_URL+"user/login",params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 

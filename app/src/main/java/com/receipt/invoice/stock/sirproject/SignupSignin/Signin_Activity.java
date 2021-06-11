@@ -28,10 +28,14 @@ import android.widget.Toast;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.karan.churi.PermissionManager.PermissionManager;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
+import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Abc;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
@@ -41,6 +45,7 @@ import com.receipt.invoice.stock.sirproject.Invoice.CheckForSDCard;
 import com.receipt.invoice.stock.sirproject.Invoice.List_of_Invoices;
 import com.receipt.invoice.stock.sirproject.OnBoardings.OnBoarding_Activity;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.MyCustomSSLFactory;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
@@ -75,11 +80,16 @@ public class Signin_Activity extends BaseActivity {
 
     PermissionManager permissionManager;
     DownloadManager downloadManager;
+    String refreshedToken = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+        refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+        Log.e(TAG, "refreshedToken "+refreshedToken);
 
 //
 //        permissionManager = new PermissionManager() {
@@ -201,9 +211,21 @@ public class Signin_Activity extends BaseActivity {
 
                 params.add("email",email);
                 params.add("password",password);
-
+                params.add("device_token", refreshedToken);
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.post(Constant.BASE_URL+"user/login",params, new AsyncHttpResponseHandler() {
+
+//                AsyncHttpClient client = new AsyncHttpClient(true, 80, 443);
+////                PersistentCookieStore myCookieStore = new PersistentCookieStore(
+////                        Signin_Activity.this);
+////                // List<Cookie> cookies = myCookieStore.getCookies();
+////                myCookieStore.clear();
+////                // cookies = myCookieStore.getCookies();
+////                client.setCookieStore(myCookieStore);
+////                client.setSSLSocketFactory(new MyCustomSSLFactory());
+//
+                client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+//                https://sir-app.com/app/api/user/login
+                client.post(AllSirApi.BASE_URL+"user/login",params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 

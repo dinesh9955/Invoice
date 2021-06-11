@@ -2,6 +2,7 @@ package com.receipt.invoice.stock.sirproject;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.util.Log;
 
 import androidx.multidex.MultiDex;
@@ -10,8 +11,10 @@ import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.receipt.invoice.stock.sirproject.Model.Itemproductselect;
+import com.receipt.invoice.stock.sirproject.Utils.ContextUtils;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Map;
 
 public class SAADApplication extends Application {

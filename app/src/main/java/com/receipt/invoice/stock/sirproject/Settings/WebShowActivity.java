@@ -19,6 +19,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Report.ReportActivity;
@@ -29,7 +32,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class WebShowActivity extends AppCompatActivity {
+public class WebShowActivity extends BaseActivity {
 
     private static final String TAG = "ViewInvoice_Activity";
     WebView webView;
@@ -78,11 +81,11 @@ public class WebShowActivity extends AppCompatActivity {
 
         String url = "";
         if(key == 8){
-            url = "http://13.126.22.0/saad/wp-content/api/about-app.php";
+            url = AllSirApi.BASE_LEVEL+"wp-content/api/about-app.php";
         } else if(key == 10){
-            url = "http://13.126.22.0/saad/wp-content/api/term-of-use.php";
+            url = AllSirApi.BASE_LEVEL+"wp-content/api/term-of-use.php";
         }else if(key == 11){
-            url = "http://13.126.22.0/saad/wp-content/api/privacy-policy.php";
+            url = AllSirApi.BASE_LEVEL+"wp-content/api/privacy-policy.php";
         }
 
         companyget(url);
@@ -98,6 +101,7 @@ public class WebShowActivity extends AppCompatActivity {
 
         String token = Constant.GetSharedPreferences(WebShowActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
         client.post(url, new AsyncHttpResponseHandler() {
             @Override

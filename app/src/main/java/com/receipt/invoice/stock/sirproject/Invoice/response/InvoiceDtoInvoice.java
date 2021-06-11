@@ -5,6 +5,39 @@ import com.google.gson.annotations.SerializedName;
 
 public class InvoiceDtoInvoice {
 
+	@SerializedName("paypal")
+	private String paypal;
+
+	@SerializedName("stripe")
+	private String stripe;
+
+	@SerializedName("paypal_type")
+	private String paypal_type;
+
+
+	public String getPaypal() {
+		return paypal;
+	}
+
+	public void setPaypal(String paypal) {
+		this.paypal = paypal;
+	}
+
+	public String getStripe() {
+		return stripe;
+	}
+
+	public void setStripe(String stripe) {
+		this.stripe = stripe;
+	}
+
+	public String getPaypal_type() {
+		return paypal_type;
+	}
+
+	public void setPaypal_type(String paypal_type) {
+		this.paypal_type = paypal_type;
+	}
 
 	@SerializedName("template_type")
 	private String template_type;

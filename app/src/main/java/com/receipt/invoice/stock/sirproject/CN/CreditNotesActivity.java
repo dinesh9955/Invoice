@@ -17,11 +17,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.crystalviewpager.widgets.CrystalViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.receipt.invoice.stock.sirproject.Adapter.CustomViewPagerAdapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
-public class CreditNotesActivity extends AppCompatActivity {
+public class CreditNotesActivity extends BaseActivity {
 
 
     LockableViewPager viewPager;
@@ -36,7 +37,7 @@ public class CreditNotesActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(CreditNotesActivity.this,"Credit Notes");
+        Constant.toolbar(CreditNotesActivity.this, getString(R.string.header_credit_notes));
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
@@ -52,8 +53,8 @@ public class CreditNotesActivity extends AppCompatActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("CREATE CREDIT NOTES");
-        addcustomer.setText("LIST OF CREDIT NOTES");
+        addcustomer.setText(getString(R.string.header_credit_notes_list));
+        customers.setText(getString(R.string.header_credit_notes_create));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -76,8 +77,8 @@ public class CreditNotesActivity extends AppCompatActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ListOfCreditNotes(),"LIST OF CREDIT NOTES");
-        adapter.addFragment(new FragmentCreate_CreditNote(), "CREATE CREDIT NOTES");
+        adapter.addFragment(new ListOfCreditNotes(), getString(R.string.header_credit_notes_list));
+        adapter.addFragment(new FragmentCreate_CreditNote(), getString(R.string.header_credit_notes_create));
         pager.setAdapter(adapter);
 
     }

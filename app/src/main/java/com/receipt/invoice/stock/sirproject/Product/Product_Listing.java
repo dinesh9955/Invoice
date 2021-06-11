@@ -20,8 +20,11 @@ import android.widget.ImageView;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.Product_Listing_Adapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
@@ -35,7 +38,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Product_Listing extends Fragment {
+public class Product_Listing extends BaseFragment {
 
     public Product_Listing() {
         // Required empty public constructor
@@ -128,8 +131,9 @@ public class Product_Listing extends Fragment {
         params.add("company_id",c_id);
         String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL+"product/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+"product/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -232,8 +236,9 @@ public class Product_Listing extends Fragment {
         cids.clear();
         String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

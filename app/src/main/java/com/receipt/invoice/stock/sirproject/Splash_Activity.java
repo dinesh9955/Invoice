@@ -41,7 +41,7 @@ public class Splash_Activity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_);
 
-
+        pref.setCustomerName("");
 //        Map<String, Object> eventValue = new HashMap<String, Object>();
 //        eventValue.put("App_open", "App Open");
 //

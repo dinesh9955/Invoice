@@ -17,7 +17,10 @@ import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.SignupSignin.Signin_Activity;
@@ -28,7 +31,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ResetPassword_Activity extends AppCompatActivity {
+public class ResetPassword_Activity extends BaseActivity {
 
 
 
@@ -154,7 +157,8 @@ public class ResetPassword_Activity extends AppCompatActivity {
             params.add("password",password2);
 
             AsyncHttpClient client = new AsyncHttpClient();
-            client.post(Constant.BASE_URL + "user/resetPassword", params, new AsyncHttpResponseHandler() {
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+            client.post(AllSirApi.BASE_URL + "user/resetPassword", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 

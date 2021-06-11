@@ -15,11 +15,12 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.receipt.invoice.stock.sirproject.Adapter.CustomViewPagerAdapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
-public class InvoiceActivity extends AppCompatActivity {
+public class InvoiceActivity extends BaseActivity {
 
     public static Activity activity;
 
@@ -37,9 +38,10 @@ public class InvoiceActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(InvoiceActivity.this,"Create Invoice");
+        Constant.toolbar(InvoiceActivity.this,getString(R.string.header_invoices));
 
         activity = this;
+        pref.setCustomerName("");
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
@@ -55,8 +57,8 @@ public class InvoiceActivity extends AppCompatActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("CREATE INVOICE");
-        addcustomer.setText("LIST OF INVOICES");
+        addcustomer.setText(getString(R.string.header_invoices_list));
+        customers.setText(getString(R.string.header_invoices_create));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -79,8 +81,8 @@ public class InvoiceActivity extends AppCompatActivity {
    private void setUpViewPager(ViewPager pager) {
 
        CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-       adapter.addFragment(new  List_of_Invoices(),"LIST OF INVOICES");
-       adapter.addFragment(new Fragment_Create_Invoice(), "CREATE INVOICE");
+       adapter.addFragment(new  List_of_Invoices(), getString(R.string.header_invoices_list));
+       adapter.addFragment(new Fragment_Create_Invoice(), getString(R.string.header_invoices_create));
        pager.setAdapter(adapter);
 
 

@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,15 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Details.Company_Details_Activity;
 import com.receipt.invoice.stock.sirproject.Model.Company_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
+import com.receipt.invoice.stock.sirproject.Utils.MyAppGlideModule;
+//import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class Company_Listing_Adapter extends RecyclerView.Adapter<Company_Listing_Adapter.ViewHolderForCat> {
 
+    private static final String TAG = "Company_Listing_Adapter";
     private Context mcontext;
     ArrayList<Company_list> mlist = new ArrayList<>();
 
@@ -100,15 +105,37 @@ public class Company_Listing_Adapter extends RecyclerView.Adapter<Company_Listin
        /* if (logo == null || logo.equals("") || logo.equals("null")) {
             viewHolderForCat.image.setImageResource(R.drawable.placeholder_big);
         } else {
-            Glide.with(mcontext).load(image_path).into(viewHolderForCat.image);
+            GlideApp.with(mcontext).load(image_path).into(viewHolderForCat.image);
         }*/
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.app_icon);
-        Glide.with(mcontext)
+
+        Log.e(TAG, "image_path "+image_path);
+
+//        Picasso.get()
+//                .load("http://sir-app.com/app/uploads/company/60c08c6627181.jpg")
+//                .resize(50, 50)
+//                .centerCrop()
+//                .into(viewHolderForCat.image);
+
+
+        GlideApp.with(mcontext)
                 .load(image_path)
                 .apply(options)
                 .into(viewHolderForCat.image);
+
+//        GlideApp.with(mcontext)
+//                .load(image_path)
+//                .apply(options)
+//                .into(viewHolderForCat.image);
+
+//        GlideApp.with(context)
+//                .load("http://via.placeholder.com/300.png")
+//                .centerCrop()
+//                .into(ivImg);
+//        MyAppGlideModule.with(context).load(url).apply(RequestOptions.circleCropTransform()).into(viewHolderForCat.image);
+
 
         /*viewHolderForCat.details.setOnClickListener(new View.OnClickListener() {
             @Override

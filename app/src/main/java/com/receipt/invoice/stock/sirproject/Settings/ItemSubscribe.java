@@ -1,17 +1,26 @@
 package com.receipt.invoice.stock.sirproject.Settings;
 
 public class ItemSubscribe {
-    String id = "";
+    String subscription_type = "";
+    String productId = "";
     String plan = "";
     String planName = "";
     String description = "";
 
-    public String getId() {
-        return id;
+    public String getSubscription_type() {
+        return subscription_type;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSubscription_type(String subscription_type) {
+        this.subscription_type = subscription_type;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getPlan() {

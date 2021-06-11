@@ -117,7 +117,7 @@ public class ViewInvoice_Activity extends BaseActivity {
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Invoice");
+        titleView.setText(getString(R.string.preview));
 
         drableimagebase64 = "iVBORw0KGgoAAAANSUhEUgAAAC4AAAAnCAYAAABwtnr/AAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAALqADAAQAAAABAAAAJwAAAAB8SmRPAAAAeklEQVRYCe3SQQrAIBTEUPX+d67iCbIIBSGuw/B57fzOGw++9eDN9+QO//vLJZ44FOhXgVBalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYc2r3IESll5TkQAAAAASUVORK5CYII=";
 
@@ -735,7 +735,6 @@ public class ViewInvoice_Activity extends BaseActivity {
             cheque_payableTo = cheque_payable_to;
 
 
-            paimnetdetailstrtxt=" Payment Details ";
 
 
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
@@ -743,6 +742,7 @@ public class ViewInvoice_Activity extends BaseActivity {
             }else{
                 cheque_payableTo = cheque_payable_to;
                 bycheckstrtxt="By cheque :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
@@ -750,16 +750,21 @@ public class ViewInvoice_Activity extends BaseActivity {
             }else{
                 pemailpaidstr = paypal_emailstr;
                 paypalstrtxt="Pay Pal :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
-            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+            if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
+                payment_currencystr = "";
             }else{
                 payment_bankstr = payment_bank_name;
                 if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
                     payment_currencystr = payment_currency;
+                }else{
+                    payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){

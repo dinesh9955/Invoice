@@ -79,7 +79,9 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.Customer_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Product_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Products_Adapter;
@@ -99,8 +101,10 @@ import com.receipt.invoice.stock.sirproject.Model.Tax_List;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
+import com.receipt.invoice.stock.sirproject.Settings.OnlinePaymentGatewayActivity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
@@ -347,8 +351,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
 
-
     View viewPayment;
+    RelativeLayout relativeLayoutPaymentButtons, relativeLayoutPaymentSetup;
+    TextView textViewSetUp;
     Switch switchPaypal, switchStripe;
     RadioGroup radioGroupPaypal;
     RadioButton radioButton1, radioButton2;
@@ -395,6 +400,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         viewPayment = view.findViewById(R.id.payment_id);
         viewPayment.setVisibility(View.GONE);
+        relativeLayoutPaymentButtons = view.findViewById(R.id.rel_footer);
+        relativeLayoutPaymentSetup = view.findViewById(R.id.rel_footer2);
+        textViewSetUp  = view.findViewById(R.id.textView3_4);
         switchPaypal = view.findViewById(R.id.switch1);
         switchStripe = view.findViewById(R.id.switch2);
         radioGroupPaypal = view.findViewById(R.id.radioGroup);
@@ -402,19 +410,19 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         radioButton2 = view.findViewById(R.id.radioButton2);
 
 
-        switchPaypal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        switchStripe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        switchPaypal.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        switchStripe.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
 
 
@@ -482,7 +490,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         verifyStroagePermissions(getActivity());
 
-        requestManager = Glide.with(getContext());
+        requestManager = GlideApp.with(getContext());
         mCompressor = new FileCompressor(getActivity());
 
 
@@ -1357,8 +1365,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "invoice/add", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "invoice/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -1591,8 +1600,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
 
-
-
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_ACTION_PICK_CODE) {
                 try {
@@ -1668,6 +1675,15 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             Log.e(TAG, "requestCode "+requestCode);
             CompanyInformation(selectedCompanyId);
         }
+
+
+//        if(requestCode == 128){
+//            Log.e(TAG, "requestCode "+requestCode);
+//            cnames.clear();
+//            cids.clear();
+//
+//            companyget();
+//        }
 
 
     }
@@ -2475,6 +2491,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 txtdays.setText(credit_terms);
                                 edduedate.setClickable(true);
                                 bottomSheetDialog.dismiss();
+
+                                edduedate.setText(duedate.getText().toString());
+
                             } else if (credit_terms.equals("immediately")) {
                                 String myFormat = "yyyy-MM-dd"; //In which you need put here
                                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -2808,8 +2827,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -2876,8 +2896,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -2929,6 +2950,12 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             e.printStackTrace();
                         }
                     }
+
+                    if(wids.size() == 0){
+                        selectButton.setVisibility(View.VISIBLE);
+                    }else{
+                        selectButton.setVisibility(View.GONE);
+                    }
                 }
             });
         }
@@ -2941,8 +2968,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -3049,8 +3077,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -3222,8 +3251,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         Log.e("token", token);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3289,28 +3319,30 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                         }
 
-
+//                        stringPaypal = "0";
+//                        stringStripe = "0";
                         if(stringPaypal.equalsIgnoreCase("0") && stringStripe.equalsIgnoreCase("0")){
-                            viewPayment.setVisibility(View.GONE);
+                            viewPayment.setVisibility(View.VISIBLE);
+                            relativeLayoutPaymentButtons.setVisibility(View.GONE);
+                            relativeLayoutPaymentSetup.setVisibility(View.VISIBLE);
+
+                            textViewSetUp.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(getActivity() , OnlinePaymentGatewayActivity.class);
+                                    startActivityForResult(intent , 128);
+                                }
+                            });
+
                         }else{
                             Log.e(TAG , "stringPaypalAA "+stringPaypal);
-
+                            relativeLayoutPaymentButtons.setVisibility(View.VISIBLE);
+                            relativeLayoutPaymentSetup.setVisibility(View.GONE);
                             radioGroupPaypal.setVisibility(View.GONE);
                             if(stringPaypal.equalsIgnoreCase("1")){
                                 viewPayment.setVisibility(View.VISIBLE);
                                 switchPaypal.setVisibility(View.VISIBLE);
-                                //switchPaypal.setChecked(true);
-//                                booleanSwitchPaypal = true;
-//                                if(stringPaypalEmail_2_Type.equalsIgnoreCase("STANDARD")){
-//                                    radioGroupPaypal.setVisibility(View.VISIBLE);
-//                                    radioButton1.setChecked(true);
-//                                    radioButton2.setChecked(false);
-//                                }
-//                                if(stringPaypalEmail_2_Type.equalsIgnoreCase("BUSINESS")){
-//                                    radioGroupPaypal.setVisibility(View.VISIBLE);
-//                                    radioButton1.setChecked(false);
-//                                    radioButton2.setChecked(true);
-//                                }
+
                                 switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -3372,6 +3404,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 booleanSwitchStripe = false;
                             }
                         }
+
+
+
 
 
 
@@ -3522,8 +3557,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -4881,14 +4917,12 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             cheque_payableTo = cheque_payable_to;
 
 
-            paimnetdetailstrtxt=" Payment Details ";
-
-
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
                 bycheckstrtxt="By cheque :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
@@ -4896,16 +4930,21 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             }else{
                 pemailpaidstr = paypal_emailstr;
                 paypalstrtxt="Pay Pal :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
-            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+            if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
+                payment_currencystr = "";
             }else{
                 payment_bankstr = payment_bank_name;
                 if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
                     payment_currencystr = payment_currency;
+                }else{
+                    payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){

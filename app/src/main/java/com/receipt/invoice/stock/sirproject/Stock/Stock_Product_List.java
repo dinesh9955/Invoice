@@ -19,8 +19,11 @@ import android.widget.ImageView;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.Stock_Product_Listing_Adapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
@@ -37,7 +40,7 @@ import cz.msebera.android.httpclient.Header;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Stock_Product_List extends Fragment {
+public class Stock_Product_List extends BaseFragment {
 
 
     public Stock_Product_List() {
@@ -122,8 +125,9 @@ public class Stock_Product_List extends Fragment {
         cids.clear();
         String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -185,8 +189,9 @@ public class Stock_Product_List extends Fragment {
         params.add("company_id",selectedCompanyId);
         String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL+"product/getListingByCompany",params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+"product/getListingByCompany",params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

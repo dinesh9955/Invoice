@@ -17,6 +17,7 @@ import com.receipt.invoice.stock.sirproject.Details.Stock_Products_Detail;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.text.DecimalFormat;
@@ -179,7 +180,7 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.app_icon);
-        Glide.with(mcontext)
+        GlideApp.with(mcontext)
                 .load(product_list.getProduct_image_path()+product_list.getProduct_image())
                 .apply(options)
                 .into(viewHolderForCat.image);

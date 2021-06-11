@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.receipt.invoice.stock.sirproject.Home.Model.CustomerModel;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class HomeCustomerAdapter extends RecyclerView.Adapter<HomeCustomerAdapte
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
 
-        Glide.with(context).load(customerModelArrayList.get(position).getCustomer_image_path()+customerModelArrayList.get(position).getImage()).placeholder(R.drawable.app_icon).into(holder.img_customer);
+        GlideApp.with(context).load(customerModelArrayList.get(position).getCustomer_image_path()+customerModelArrayList.get(position).getImage()).placeholder(R.drawable.app_icon).into(holder.img_customer);
 
        // Log.e("image eepath",imageurldd);
         holder.txtCustomerName.setText(customerModelArrayList.get(position).getCustomerName());

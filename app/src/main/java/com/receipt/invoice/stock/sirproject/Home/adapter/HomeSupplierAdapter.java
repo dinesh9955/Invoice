@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.receipt.invoice.stock.sirproject.Home.Model.SupplierModel;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,7 @@ public class HomeSupplierAdapter extends RecyclerView.Adapter<HomeSupplierAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        Glide.with(context).load(supplierModelArrayList.get(position).getSupplier_image_path()+supplierModelArrayList.get(position).getImage()).placeholder(R.drawable.app_icon).into(holder.img_supplier);
+        GlideApp.with(context).load(supplierModelArrayList.get(position).getSupplier_image_path()+supplierModelArrayList.get(position).getImage()).placeholder(R.drawable.app_icon).into(holder.img_supplier);
         holder.txtCustomerName.setText(supplierModelArrayList.get(position).getSupplierName());
 
     }

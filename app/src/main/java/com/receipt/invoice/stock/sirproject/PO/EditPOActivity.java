@@ -72,7 +72,9 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.Customer_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Product_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Products_Adapter;
@@ -106,6 +108,7 @@ import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
@@ -377,13 +380,6 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 //    String templateSelect = "0";
 //    String colorCode = "#ffffff";
 
-    View viewPayment;
-    Switch switchPaypal, switchStripe;
-    RadioGroup radioGroupPaypal;
-    RadioButton radioButton1, radioButton2;
-
-    boolean booleanSwitchPaypal = false, booleanSwitchStripe = false;
-    String stringPaypalSendType = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -392,13 +388,6 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         setContentView(R.layout.editpoactivity);
         Constant.toolbar(EditPOActivity.this, "Edit PO");
 
-        viewPayment = findViewById(R.id.payment_id);
-        viewPayment.setVisibility(View.GONE);
-        switchPaypal = findViewById(R.id.switch1);
-        switchStripe = findViewById(R.id.switch2);
-        radioGroupPaypal = findViewById(R.id.radioGroup);
-        radioButton1 = findViewById(R.id.radioButton);
-        radioButton2 = findViewById(R.id.radioButton2);
 
         selectButton = findViewById(R.id.selectButton);
 
@@ -488,7 +477,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
         verifyStroagePermissions(this);
 
-        requestManager = Glide.with(this);
+        requestManager = GlideApp.with(this);
         mCompressor = new FileCompressor(this);
 
 
@@ -1474,6 +1463,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             RequestParams params = new RequestParams();
 
             Log.e(TAG, "freight_cost"+freight_cost);
+            Log.e(TAG, "invoiceIdAAA "+invoiceId);
+            Log.e(TAG, "invoicenumberdtoAAA "+invoicenumberdto);
+            Log.e(TAG, "invoicenumAAA "+invoicenum.getText().toString());
 
             params.add("purchase_order_id", invoiceId);
             params.add("purchase_order_no", invoicenumberdto);
@@ -1481,11 +1473,15 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
             params.add("company_id", selectedCompanyId);
             params.add("warehouse_id", selectwarehouseId);
+
+            Log.e(TAG, "selectedCompanyIdAAA "+selectedCompanyId);
+            Log.e(TAG, "selectwarehouseIdAAA "+selectwarehouseId);
+
             params.add("order_date", invoice_date);
             params.add("due_date", invoice_due_date);
 
-            params.add("customer_id", customer_id);
-            Log.e(TAG, "customer_idBB"+customer_id);
+//            params.add("customer_id", customer_id);
+//            Log.e(TAG, "customer_idBB"+customer_id);
             params.add("supplier_id", customer_id);
 
             params.add("notes", strnotes);
@@ -1497,10 +1493,13 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 //            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
             params.add("freight_cost", ""+shippingAmountZZ);
             params.add("discount", ""+discountAmountZZ);
-            params.add("paid_amount", strpaid_amount);
+
+
             Log.e(TAG, "strpaid_amountXXX "+strpaid_amount);
             Log.e(TAG, "PaymentamountdateXXX "+Paymentamountdate);
-            params.add("paid_amount_date", Paymentamountdate);
+
+            params.add("paid_amount", ""+strpaid_amount);
+            params.add("paid_amount_date", ""+Paymentamountdate);
 
             params.add("shipping_firstname", shippingfirstname);
             params.add("shipping_lastname", shippinglastname);
@@ -1728,18 +1727,6 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 //            }
 
 
-            if(booleanSwitchPaypal == true){
-                if(!stringPaypalSendType.equalsIgnoreCase("")){
-                    params.put("paypal", "1");
-                    params.put("paypal_type", ""+stringPaypalSendType);
-                    params.put("payment_type", ""+stringPaypalSendType);
-                }
-            }
-
-
-            if(booleanSwitchStripe == true){
-                params.put("stripe", "1");
-            }
 
 
             Log.e(TAG,  "Params: "+params.toString());
@@ -1747,8 +1734,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "purchaseorder/duplicate", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "purchaseorder/duplicate", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -2045,7 +2033,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             recycler_products.setLayoutManager(layoutManager);
             recycler_products.setHasFixedSize(true);
 
-            product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog,"invoice");
+            product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog,"po");
             recycler_products.setAdapter(product_bottom_adapter);
             product_bottom_adapter.notifyDataSetChanged();
             txtproducts.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
@@ -2725,6 +2713,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                                 txtdays.setText(credit_terms);
                                 edduedate.setClickable(true);
                                 bottomSheetDialog.dismiss();
+
+                                edduedate.setText(duedate.getText().toString());
+
                             } else if (credit_terms.equals("immediately")) {
                                 String myFormat = "yyyy-MM-dd"; //In which you need put here
                                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -2996,8 +2987,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         cids.clear();
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3064,8 +3056,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(EditPOActivity.this, Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -3125,6 +3118,12 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        if(wids.size() == 0){
+                            selectButton.setVisibility(View.VISIBLE);
+                        }else{
+                            selectButton.setVisibility(View.GONE);
+                        }
                     }
                 }
             });
@@ -3139,8 +3138,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
         String token = Constant.GetSharedPreferences(EditPOActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -3255,8 +3255,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -3431,8 +3432,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         Log.e("token", token);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3479,14 +3481,6 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                             cheque_payable_to = item.getString("cheque_payable_to");
 
 
-                            stringPaypal = item.getString("paypal");
-                            stringPaypalEmail_2 = item.getString("paypal_email_2");
-                            stringPaypalEmail_2_Type = item.getString("paypal_email_2_type");
-
-                            stringStripe = item.getString("stripe");
-                            stringToken = item.getString("stripe_token");
-
-
                             companylogopath = company_image_path + logo;
                             Log.e("companylogopath", companylogopath);
 
@@ -3497,88 +3491,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                         }
 
 
-                        if(stringPaypal.equalsIgnoreCase("0") && stringStripe.equalsIgnoreCase("0")){
-                            viewPayment.setVisibility(View.GONE);
-                        }else{
-                            Log.e(TAG , "stringPaypalAA "+stringPaypal);
 
-                            radioGroupPaypal.setVisibility(View.GONE);
-                            if(stringPaypal.equalsIgnoreCase("1")){
-                                viewPayment.setVisibility(View.VISIBLE);
-                                switchPaypal.setVisibility(View.VISIBLE);
-                                //switchPaypal.setChecked(true);
-//                                booleanSwitchPaypal = true;
-//                                if(stringPaypalEmail_2_Type.equalsIgnoreCase("STANDARD")){
-//                                    radioGroupPaypal.setVisibility(View.VISIBLE);
-//                                    radioButton1.setChecked(true);
-//                                    radioButton2.setChecked(false);
-//                                }
-//                                if(stringPaypalEmail_2_Type.equalsIgnoreCase("BUSINESS")){
-//                                    radioGroupPaypal.setVisibility(View.VISIBLE);
-//                                    radioButton1.setChecked(false);
-//                                    radioButton2.setChecked(true);
-//                                }
-                                switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                    @Override
-                                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                        if(isChecked == true){
-                                            radioGroupPaypal.setVisibility(View.VISIBLE);
-                                            booleanSwitchPaypal = true;
-                                        }else{
-                                            radioGroupPaypal.setVisibility(View.GONE);
-                                            booleanSwitchPaypal = false;
-                                        }
-                                    }
-                                });
-
-                                radioButton1.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        radioButton1.setChecked(true);
-                                        radioButton2.setChecked(false);
-                                        stringPaypalSendType = "STANDARD";
-                                    }
-                                });
-
-                                radioButton2.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        radioButton1.setChecked(false);
-                                        radioButton2.setChecked(true);
-                                        stringPaypalSendType = "BUSINESS";
-                                    }
-                                });
-
-                            }else{
-                                // switchPaypal.setChecked(false);
-                                switchPaypal.setVisibility(View.GONE);
-                                radioGroupPaypal.setVisibility(View.GONE);
-                                booleanSwitchPaypal = false;
-                            }
-
-                            Log.e(TAG , "stringStripeAA "+stringStripe);
-                            if(stringStripe.equalsIgnoreCase("1")){
-                                viewPayment.setVisibility(View.VISIBLE);
-                                switchStripe.setVisibility(View.VISIBLE);
-                                switchStripe.setChecked(true);
-                                // booleanSwitchStripe = true;
-                                switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                    @Override
-                                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                        if(isChecked == true){
-                                            booleanSwitchStripe = true;
-                                        }else{
-                                            booleanSwitchStripe = false;
-                                        }
-                                    }
-                                });
-
-                            }else{
-                                switchStripe.setVisibility(View.GONE);
-                                switchStripe.setChecked(false);
-                                booleanSwitchStripe = false;
-                            }
-                        }
 
 
 
@@ -3683,8 +3596,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3941,14 +3855,16 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                 if (selectedtaxt.size() > 0) {
                     // taxAmount = Tax_amountdto;
                     if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
-                        taxAmount = Tax_amountdto * subtotalAmount / (100+ Tax_amountdto);
-                        afterTaxAmount = subtotalAmount;
+//                        taxAmount = Tax_amountdto * subtotalAmount / (100+ Tax_amountdto);
+//                        afterTaxAmount = subtotalAmount;
+                        taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + " incl." );
 //                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                     } else { // include off
-                        taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
-                        afterTaxAmount = subtotalAmount + taxAmount;
+//                        taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
+//                        afterTaxAmount = subtotalAmount + taxAmount;
+                        taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + "" );
 //                    taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
@@ -5424,14 +5340,12 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             cheque_payableTo = cheque_payable_to;
 
 
-            paimnetdetailstrtxt=" Payment Details ";
-
-
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
                 bycheckstrtxt="By cheque :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
@@ -5439,16 +5353,21 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             }else{
                 pemailpaidstr = paypal_emailstr;
                 paypalstrtxt="Pay Pal :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
-            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+            if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
+                payment_currencystr = "";
             }else{
                 payment_bankstr = payment_bank_name;
                 if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
                     payment_currencystr = payment_currency;
+                }else{
+                    payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){

@@ -17,8 +17,11 @@ import android.widget.ImageView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.Stock_Products_Details_Adapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Model.Stock_Products;
 import com.receipt.invoice.stock.sirproject.R;
@@ -32,7 +35,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Stock_Products_Detail extends AppCompatActivity {
+public class Stock_Products_Detail extends BaseActivity {
 
     private static final String TAG = "Stock_Products_Detail";
     String product_id;
@@ -100,8 +103,9 @@ public class Stock_Products_Detail extends AppCompatActivity {
         params.add("product_id",pid);
         String token = Constant.GetSharedPreferences(Stock_Products_Detail.this,Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL + "product/detail", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "product/detail", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 

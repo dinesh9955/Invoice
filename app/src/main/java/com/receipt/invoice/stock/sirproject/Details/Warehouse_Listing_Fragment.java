@@ -20,8 +20,11 @@ import android.widget.ImageView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.Warehouses_Listing_Adapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Model.Warehouse_list;
 import com.receipt.invoice.stock.sirproject.R;
@@ -39,7 +42,7 @@ import cz.msebera.android.httpclient.Header;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Warehouse_Listing_Fragment extends Fragment {
+public class Warehouse_Listing_Fragment extends BaseFragment {
 
 
     public Warehouse_Listing_Fragment() {
@@ -129,8 +132,9 @@ public class Warehouse_Listing_Fragment extends Fragment {
 
         String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL+"warehouse/listing",params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+"warehouse/listing",params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 

@@ -18,9 +18,12 @@ import android.widget.TextView;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
@@ -47,7 +50,7 @@ public class Signup_Activity extends BaseActivity {
     private AVLoadingIndicatorView avi;
     ImageView avibackground;
     ImageView imgback;
-
+    String refreshedToken = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +68,10 @@ public class Signup_Activity extends BaseActivity {
         edpassword = findViewById(R.id.edpassword);
         btnregister = findViewById(R.id.btnregister);
         imgback = findViewById(R.id.imgback);
+
+        refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+        Log.e(TAG, "refreshedToken "+refreshedToken);
 
         fonts();
 
@@ -163,10 +170,13 @@ public class Signup_Activity extends BaseActivity {
              requestParams.add("password",password);
              requestParams.add("fullname",fullname);
 
-             requestParams.add("device_type", "Andorid");
+             requestParams.add("device_type", "Android");
+             requestParams.add("device_token", refreshedToken);
+
 
              AsyncHttpClient client = new AsyncHttpClient();
-             client.post(Constant.BASE_URL+"user/registration", requestParams, new AsyncHttpResponseHandler() {
+             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+             client.post(AllSirApi.BASE_URL+"user/registration", requestParams, new AsyncHttpResponseHandler() {
                  @Override
                  public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -297,9 +307,10 @@ public class Signup_Activity extends BaseActivity {
 
             params.add("email",email);
             params.add("password",password);
-
+            params.add("device_token", refreshedToken);
             AsyncHttpClient client = new AsyncHttpClient();
-            client.post(Constant.BASE_URL+"user/login",params, new AsyncHttpResponseHandler() {
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+            client.post(AllSirApi.BASE_URL+"user/login",params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 

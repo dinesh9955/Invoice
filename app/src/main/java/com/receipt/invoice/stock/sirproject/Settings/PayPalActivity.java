@@ -1,6 +1,7 @@
 package com.receipt.invoice.stock.sirproject.Settings;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -19,7 +20,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
@@ -152,10 +155,11 @@ public class PayPalActivity extends BaseActivity {
         params.add("email_type", optionType);
 
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         String token = Constant.GetSharedPreferences(PayPalActivity.this, Constant.ACCESS_TOKEN);
         client.addHeader("Access-Token", token);
 
-        client.post(Constant.BASE_URL_PAYMENT + "settings/add", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "settings/add", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -174,6 +178,8 @@ public class PayPalActivity extends BaseActivity {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK , intent);
                                 finish();
                             }
                         }, 500);

@@ -39,7 +39,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.CheckForSDCard;
 import com.receipt.invoice.stock.sirproject.Invoice.InvoiceCallBack;
@@ -71,7 +74,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class List_of_PO extends Fragment implements InvoiceCallBack {
+public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 
     private static final String TAG = "List_of_PO";
 
@@ -110,7 +113,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
     String invoiceidbypos = "";
     String receipt_count, estimate_count, invoice_useriddt, invoice_count;
     String templatestr = "1";
-    String shareInvoicelink = "http://13.126.22.0/saad/app/uploads/purchase_order/pdf/";
+    String shareInvoicelink = AllSirApi.BASE+"uploads/purchase_order/pdf/";
     //  Shaare invoice lnk
     String BaseurlForShareInvoice = "";
     String invoicelistbyurl = "";
@@ -617,17 +620,20 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                                     if(invoiceVoidStatus.equalsIgnoreCase("1")){
                                         voidPassValue = "2";
                                         // colorVoid = "#ff9900";
+
+                                        deliveryStatus(invoiceidbypos, voidPassValue);
                                     }
 
-                                    if(invoiceVoidStatus.equalsIgnoreCase("2")){
-                                        voidPassValue = "1";
-                                        //colorVoid = "#99cc00";
-                                    }
+//                                    if(invoiceVoidStatus.equalsIgnoreCase("2")){
+//                                        voidPassValue = "1";
+//                                        //colorVoid = "#99cc00";
+//                                    }
 
                                     Log.e(TAG, "instantiateUnderlayButton");
 
-                                    invoicelistAdapterdt.updateList(list);
-                                    deliveryStatus(invoiceidbypos, voidPassValue);
+                                    invoicelistAdapterdt.updateList(temp);
+
+
 
                                 }else{
                                     String invoiceidbypos = list.get(pos).getInvoice_userid();
@@ -641,22 +647,26 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                                     if(invoiceVoidStatus.equalsIgnoreCase("1")){
                                         voidPassValue = "2";
                                         // colorVoid = "#ff9900";
+
+                                        deliveryStatus(invoiceidbypos, voidPassValue);
                                     }
 
-                                    if(invoiceVoidStatus.equalsIgnoreCase("2")){
-                                        voidPassValue = "1";
-                                        //colorVoid = "#99cc00";
-                                    }
+//                                    if(invoiceVoidStatus.equalsIgnoreCase("2")){
+//                                        voidPassValue = "1";
+//                                        //colorVoid = "#99cc00";
+//                                    }
 
                                     Log.e(TAG, "instantiateUnderlayButton");
 
                                     invoicelistAdapterdt.updateList(list);
-                                    deliveryStatus(invoiceidbypos, voidPassValue);
 
                                 }
 
 
                             }
+
+
+
                         }
                 ));
 
@@ -1250,8 +1260,9 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         Log.e("token", token);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1342,9 +1353,9 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
 
         AsyncHttpClient client = new AsyncHttpClient();
-
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1412,9 +1423,9 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                             company_list.setVoid_status(void_status);
                             String is_viewed = item.getString("is_viewed");
                             company_list.setIs_viewed(is_viewed);
-                            company_list.setPaypal(item.getString("paypal"));
-                            company_list.setStripe(item.getString("stripe"));
-                            company_list.setPaypal_type(item.getString("paypal_type"));
+//                            company_list.setPaypal(item.getString("paypal"));
+//                            company_list.setStripe(item.getString("stripe"));
+//                            company_list.setPaypal_type(item.getString("paypal_type"));
                             list.add(company_list);
 
 
@@ -1482,8 +1493,9 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
             Log.e("s order status", s);
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "invoice/updateStatus", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "invoice/updateStatus", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -1562,8 +1574,9 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 //            Log.e("s order status", s);
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "invoice/delete", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "invoice/delete", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1632,8 +1645,9 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 //            Log.e("s order status", s);
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "purchaseorder/updateStatus", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "purchaseorder/updateStatus", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1704,8 +1718,9 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
 //            Log.e("s order status", s);
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "purchaseorder/updateVoidStatus", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "purchaseorder/updateVoidStatus", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -2021,7 +2036,7 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
                                             //Get the URL entered
                                             String url = sharelink;
                                             String subject = Utility.getRealValuePOWithoutPlus(dataNo)+" from "+customerName;
-                                            new DownloadFile(getActivity(), subject).execute(url);
+                                            new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
                                         }
@@ -2319,8 +2334,9 @@ public class List_of_PO extends Fragment implements InvoiceCallBack {
         avi.smoothToShow();
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

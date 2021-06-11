@@ -36,7 +36,9 @@ import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
@@ -335,8 +337,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "report/customerStatement", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "report/customerStatement", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -490,7 +493,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     private void customerReportWeb(CustomerItem customerItem, ArrayList<CustomerReportItem> customerReportItemArrayList) {
 
 
-
         double totalAmount = 0.0;
 
         String name = "report/CustomerReport.html";
@@ -527,12 +529,12 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     stringCredit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringCredit1)) + Utility.getReplaceDollor(cruncycode);
                 }
 
-//                if(getDebit == 0){
-//                    stringBalance = "";
-//                }else{
-                String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
-                stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
-//                }
+                if(getBalance == 0){
+                    stringBalance = "";
+                }else{
+                    String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
+                }
 
 
 
@@ -544,13 +546,17 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                         .replaceAll("#Balance#", stringBalance);
                 productitemlist = productitemlist + productitem;
 
+
                 double allAmount = 0.0;
+                if(i == customerReportItemArrayList.size() - 1){
+                    try{
+                        allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
+                    }catch (Exception e){
 
-                try{
-                    allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
-                }catch (Exception e){
-
+                    }
                 }
+
+
 
                 totalAmount =   totalAmount + allAmount;
             }
@@ -566,14 +572,25 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 //        Grossamount_str= Utility.getPatternFormat(""+numberPostion, totalAmount);
 
+        StringBuilder stringBuilderBillTo = new StringBuilder();
+        if(!customerItem.getCompany_address().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getCompany_address()+"</br>");
+        }
+        if(!customerItem.getCompany_phone().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getCompany_phone()+"</br>");
+        }
+        if(!customerItem.getCompany_website().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getCompany_website()+"</br>");
+        }
+        if(!customerItem.getCompany_email().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getCompany_email()+"");
+        }
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
-                            .replaceAll("Company Name", customerItem.getCompany_name())
-                            .replaceAll("Address", customerItem.getCompany_address())
-                            .replaceAll("Contact No.", customerItem.getCompany_phone())
-                            .replaceAll("Website", customerItem.getCompany_website())
-                            .replaceAll("Email", customerItem.getCompany_email())
+                    .replaceAll("Company Name", customerItem.getCompany_name())
+                    .replaceAll("Address", ""+stringBuilderBillTo.toString())
                             .replaceAll("Customer Name", customerItem.getCustomer_name())
                             .replaceAll("#LOGO_IMAGE#", customerItem.getCompany_logo())
                             .replaceAll("#ITEMS#", productitemlist)
@@ -599,8 +616,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "report/supplierStatement", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "report/supplierStatement", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -777,16 +795,16 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 if(getCredit == 0){
                     stringCredit = "";
                 }else{
-                    String stringCredit1 = customerReportItemArrayList.get(i).getDebit();
+                    String stringCredit1 = customerReportItemArrayList.get(i).getCredit();
                     stringCredit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringCredit1)) + Utility.getReplaceDollor(cruncycode);
                 }
 
-//                if(getDebit == 0){
-//                    stringBalance = "";
-//                }else{
-                String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
-                stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
-//                }
+                if(getBalance == 0){
+                    stringBalance = "";
+                }else{
+                    String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
+                }
 
 
                 productitem = IOUtils.toString(getAssets().open("report/customer_single_item.html"))
@@ -797,12 +815,14 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                         .replaceAll("#Balance#", stringBalance);
                 productitemlist = productitemlist + productitem;
 
+
                 double allAmount = 0.0;
+                if(i == customerReportItemArrayList.size() - 1){
+                    try{
+                        allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
+                    }catch (Exception e){
 
-                try{
-                    allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
-                }catch (Exception e){
-
+                    }
                 }
 
                 totalAmount =   totalAmount + allAmount;
@@ -815,15 +835,26 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
     //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
+
+        StringBuilder stringBuilderBillTo = new StringBuilder();
+        if(!customerItem.getCompany_address().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getCompany_address()+"</br>");
+        }
+        if(!customerItem.getCompany_phone().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getCompany_phone()+"</br>");
+        }
+        if(!customerItem.getCompany_website().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getCompany_website()+"</br>");
+        }
+        if(!customerItem.getCompany_email().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getCompany_email()+"");
+        }
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
-
                     .replaceAll("Company Name", customerItem.getCompany_name())
-                    .replaceAll("Address", customerItem.getCompany_address())
-                    .replaceAll("Contact No.", customerItem.getCompany_phone())
-                    .replaceAll("Website", customerItem.getCompany_website())
-                    .replaceAll("Email", customerItem.getCompany_email())
+                    .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("Customer Name", customerItem.getSupplier_name())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getCompany_logo())
                     .replaceAll("#ITEMS#", productitemlist)
@@ -849,8 +880,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "report/totalSales", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "report/totalSales", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1009,7 +1041,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 cruncycode = customerItem.getCurrency_symbol();
 
 ////                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-//                double getDebit = Double.parseDouble(customerReportItemArrayList.get(i).getDebit());
+                double getTotal = Double.parseDouble(customerReportItemArrayList.get(i).getTotal());
 //                double getCredit = Double.parseDouble(customerReportItemArrayList.get(i).getCredit());
 //                double getBalance = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
 //
@@ -1024,12 +1056,12 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                }
 
 
-//                if(getDebit == 0){
-//                    stringBalance = "";
-//                }else{
-                String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
-                stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
-//                }
+                if(getTotal == 0){
+                    stringBalance = "";
+                }else{
+                    String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
+                }
 
 
                 productitem = IOUtils.toString(getAssets().open("report/total_sales_single_item.html"))
@@ -1058,16 +1090,25 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
 
+        StringBuilder stringBuilderBillTo = new StringBuilder();
+        if(!customerItem.getAddress().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getAddress()+"</br>");
+        }
+        if(!customerItem.getPhone_number().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getPhone_number()+"</br>");
+        }
+        if(!customerItem.getWebsite().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getWebsite()+"</br>");
+        }
+        if(!customerItem.getEmail().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getEmail()+"");
+        }
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
-
                     .replaceAll("Company Name", customerItem.getName())
-                    .replaceAll("Address", customerItem.getAddress())
-                    .replaceAll("Contact No.", customerItem.getPhone_number())
-                    .replaceAll("Website", customerItem.getWebsite())
-                    .replaceAll("Email", customerItem.getEmail())
-                   // .replaceAll("Customer Name", customerItem.getSupplier_name())
+                    .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
                     .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount)+ Utility.getReplaceDollor(cruncycode))
@@ -1093,8 +1134,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "report/totalPurchases", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "report/totalPurchases", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1246,7 +1288,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 cruncycode = customerItem.getCurrency_symbol();
 
 ////                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-//                double getDebit = Double.parseDouble(customerReportItemArrayList.get(i).getDebit());
+                double getTotal = Double.parseDouble(customerReportItemArrayList.get(i).getTotal());
 //                double getCredit = Double.parseDouble(customerReportItemArrayList.get(i).getCredit());
 //                double getBalance = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
 //
@@ -1261,12 +1303,12 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                }
 
 
-//                if(getDebit == 0){
-//                    stringBalance = "";
-//                }else{
-                String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
-                stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
-//                }
+                if(getTotal == 0){
+                    stringBalance = "";
+                }else{
+                    String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
+                }
 
 
                 productitem = IOUtils.toString(getAssets().open("report/total_sales_single_item.html"))
@@ -1294,16 +1336,25 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
     //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
+        StringBuilder stringBuilderBillTo = new StringBuilder();
+        if(!customerItem.getAddress().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getAddress()+"</br>");
+        }
+        if(!customerItem.getPhone_number().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getPhone_number()+"</br>");
+        }
+        if(!customerItem.getWebsite().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getWebsite()+"</br>");
+        }
+        if(!customerItem.getEmail().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getEmail()+"");
+        }
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
-
                     .replaceAll("Company Name", customerItem.getName())
-                    .replaceAll("Address", customerItem.getAddress())
-                    .replaceAll("Contact No.", customerItem.getPhone_number())
-                    .replaceAll("Website", customerItem.getWebsite())
-                    .replaceAll("Email", customerItem.getEmail())
-                    // .replaceAll("Customer Name", customerItem.getSupplier_name())
+                    .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
                     .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount)+ Utility.getReplaceDollor(cruncycode))
@@ -1329,8 +1380,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "report/customerAgeing", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "report/customerAgeing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1509,19 +1561,25 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 double doubleBalance = Double.parseDouble(customerReportItemArrayList.get(i).getTotal());
                 String stringBalance = "";
                 if(doubleBalance == 0){
-                    stringBalance = "";
+                    String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
                 }else{
-                String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
+                    String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
                     stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
                 }
 
-                String stringNotDue1 = customerReportItemArrayList.get(i).getNot_due();
-                String stringNotDue11 = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringNotDue1)) + Utility.getReplaceDollor(cruncycode);
-
+                double doubleNotDue = Double.parseDouble(customerReportItemArrayList.get(i).getNot_due());
+                String stringNotDue = "";
+                if(doubleNotDue == 0){
+                    stringNotDue = "";
+                }else{
+                    String stringNotDue1 = customerReportItemArrayList.get(i).getNot_due();
+                    stringNotDue = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringNotDue1)) + Utility.getReplaceDollor(cruncycode);
+                }
 
                 productitem = IOUtils.toString(getAssets().open("report/customer_ageing_single_item.html"))
                         .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getContact_name())
-                        .replaceAll("#Currentdue#", stringNotDue11)
+                        .replaceAll("#Currentdue#", stringNotDue)
                         .replaceAll("#Slab1#", slab1Txt)
                         .replaceAll("#Slab2#", slab2Txt)
                         .replaceAll("#Slab3#", slab3Txt)
@@ -1547,16 +1605,26 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
     //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
+
+        StringBuilder stringBuilderBillTo = new StringBuilder();
+        if(!customerItem.getAddress().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getAddress()+"</br>");
+        }
+        if(!customerItem.getPhone_number().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getPhone_number()+"</br>");
+        }
+        if(!customerItem.getWebsite().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getWebsite()+"</br>");
+        }
+        if(!customerItem.getEmail().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getEmail()+"");
+        }
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
-
                     .replaceAll("Company Name", customerItem.getName())
-                    .replaceAll("Address", customerItem.getAddress())
-                    .replaceAll("Contact No.", customerItem.getPhone_number())
-                    .replaceAll("Website", customerItem.getWebsite())
-                    .replaceAll("Email", customerItem.getEmail())
-                    // .replaceAll("Customer Name", customerItem.getSupplier_name())
+                    .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
                     .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount)+ Utility.getReplaceDollor(cruncycode))
@@ -1582,8 +1650,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "report/taxation", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "report/taxation", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1735,18 +1804,32 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             for (int i = 0; i < customerReportItemArrayList.size(); i++) {
                 cruncycode = customerItem.getCurrency_symbol();
 
-                String stringTAX1 = customerReportItemArrayList.get(i).getTax_rate();
-                String stringTAX = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringTAX1));
+                double doubleTaxRate = Double.parseDouble(customerReportItemArrayList.get(i).getTax_rate());
+                String stringTaxRate = "";
+                if(doubleTaxRate == 0){
+                    stringTaxRate = "";
+                }else{
+                    stringTaxRate = Utility.getPatternFormat(""+numberPostion, doubleTaxRate) + "%";
+                }
 
-                String stringAmount1 = customerReportItemArrayList.get(i).getTax_amount();
-                String stringAmount = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringAmount1));
+
+                double doubleAmount = Double.parseDouble(customerReportItemArrayList.get(i).getTax_amount());
+                String stringAmount = "";
+                if(doubleAmount == 0){
+                    stringAmount = "";
+                }else{
+                    String stringAmount1 = customerReportItemArrayList.get(i).getTax_amount();
+                    stringAmount = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringAmount1)) + Utility.getReplaceDollor(cruncycode);
+                }
+
+
 
                 productitem = IOUtils.toString(getAssets().open("report/tax_collection_single_item.html"))
                         .replaceAll("#DATE#", customerReportItemArrayList.get(i).getDate_added())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getParticulars())
                         .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getCustomer_name())
                         .replaceAll("#TaxName#", customerReportItemArrayList.get(i).getTax_name())
-                        .replaceAll("#TaxRate#", stringTAX +"%")
+                        .replaceAll("#TaxRate#", stringTaxRate)
                         .replaceAll("#Amount#", stringAmount +"");
                 productitemlist = productitemlist + productitem;
 
@@ -1766,21 +1849,41 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             e.printStackTrace();
         }
 
-      //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
+
+
+        String stringAmount = "";
+        if(totalAmount == 0){
+            stringAmount = "";
+        }else{
+            stringAmount = Utility.getPatternFormat(""+numberPostion, totalAmount) + Utility.getReplaceDollor(cruncycode);
+        }
+
+
+
+
+        StringBuilder stringBuilderBillTo = new StringBuilder();
+        if(!customerItem.getAddress().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getAddress()+"</br>");
+        }
+        if(!customerItem.getPhone_number().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getPhone_number()+"</br>");
+        }
+        if(!customerItem.getWebsite().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getWebsite()+"</br>");
+        }
+        if(!customerItem.getEmail().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getEmail()+"");
+        }
 
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
-
                     .replaceAll("Company Name", customerItem.getName())
-                    .replaceAll("Address", customerItem.getAddress())
-                    .replaceAll("Contact No.", customerItem.getPhone_number())
-                    .replaceAll("Website", customerItem.getWebsite())
-                    .replaceAll("Email", customerItem.getEmail())
-                    // .replaceAll("Customer Name", customerItem.getSupplier_name())
+                    .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount) + Utility.getReplaceDollor(cruncycode) + "%")
+                    .replaceAll("Total Amount-", stringAmount)
             ;
 
 
@@ -1803,8 +1906,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "report/stock", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "report/stock", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1939,21 +2043,26 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                 double minimum = Double.parseDouble(customerReportItemArrayList.get(i).getMinimum());
                 double quantity = Double.parseDouble(customerReportItemArrayList.get(i).getQuantity());
-//                double slab3 = Double.parseDouble(customerReportItemArrayList.get(i).getSlab3());
-//                double slab4 = Double.parseDouble(customerReportItemArrayList.get(i).getSlab4());
+                double pricePerUnit = Double.parseDouble(customerReportItemArrayList.get(i).getPrice());
+//                double value = Double.parseDouble(customerReportItemArrayList.get(i).getValue());
 
-                String minimumSS = Utility.getPatternFormat(""+numberPostion, minimum);
-                String quantitySS = Utility.getPatternFormat(""+numberPostion, quantity);
+
 
 
                 String minimumTxt = "";
-
-                String stringBalance = "";
-
                 if(minimum == 0){
                     minimumTxt = "";
                 }else{
-                    minimumTxt = minimumSS + Utility.getReplaceDollor(cruncycode);
+                    String minimumSS = Utility.getPatternFormat(""+numberPostion, minimum);
+                    minimumTxt = minimumSS;
+                }
+
+                String quantityTxt = "";
+                if(quantity == 0){
+                    quantityTxt = "";
+                }else{
+                    String quantitySS = Utility.getPatternFormat(""+numberPostion, quantity);
+                    quantityTxt = quantitySS;
                 }
 
 
@@ -1963,39 +2072,50 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 }else{
                     colorCode = "#ff0000";
                 }
+
+
+
+                String pricePerUnitTxt = "";
+                if(pricePerUnit == 0){
+                    pricePerUnitTxt = "";
+                }else{
+                    String pricePerUnitSS = Utility.getPatternFormat(""+numberPostion, pricePerUnit) + Utility.getReplaceDollor(cruncycode);
+                    pricePerUnitTxt = pricePerUnitSS;
+                }
+
+
+                double quantityPricePerUnit = quantity * pricePerUnit;
+                String valueTxt = "";
+                if(quantityPricePerUnit == 0){
+                    valueTxt = "";
+                }else{
+                    String valueSS = Utility.getPatternFormat(""+numberPostion, quantityPricePerUnit) + Utility.getReplaceDollor(cruncycode);
+                    valueTxt = valueSS;
+                }
+
 //
-//                if(slab4 == 0){
-//                    slab4Txt = "";
-//                }else{
-//                    slab4Txt = slab4 + Utility.getReplaceDollor(cruncycode);
-//                }
+//                totalAmount = totalAmount + pricePerUnitValue;
 
 
-//                if(getDebit == 0){
-//                    stringBalance = "";
-//                }else{
-                //stringBalance = customerReportItemArrayList.get(i).getTax_amount() + Utility.getReplaceDollor(cruncycode);
-//                }
-
-                String priceS = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getPrice()));
-                String valueS = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getValue()));
+//                String priceS = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getPrice()));
+//                String valueS = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getValue()));
 
 
                 productitem = IOUtils.toString(getAssets().open("report/stock_single_item.html"))
                         .replaceAll("#SNo#", ""+(i+1))
                         .replaceAll("#Product#", customerReportItemArrayList.get(i).getName())
                         .replaceAll("#ReorderLevel#", minimumTxt)
-                        .replaceAll("#QuantityAvaliable#", ""+quantitySS)
+                        .replaceAll("#QuantityAvaliable#", ""+quantityTxt)
                         .replaceAll("#Status#", customerReportItemArrayList.get(i).getQuantity_status())
                         .replaceAll("white1", colorCode)
-                        .replaceAll("#PerUnitPrice#", priceS + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#InventoryValue#", valueS + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#PerUnitPrice#", pricePerUnitTxt)
+                        .replaceAll("#InventoryValue#", valueTxt);
                 productitemlist = productitemlist + productitem;
 
                 double allAmount = 0.0;
 
                 try{
-                    allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getValue());
+                    allAmount = quantityPricePerUnit;
                 }catch (Exception e){
 
                 }
@@ -2010,16 +2130,25 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
+        StringBuilder stringBuilderBillTo = new StringBuilder();
+        if(!customerItem.getAddress().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getAddress()+"</br>");
+        }
+        if(!customerItem.getPhone_number().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getPhone_number()+"</br>");
+        }
+        if(!customerItem.getWebsite().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getWebsite()+"</br>");
+        }
+        if(!customerItem.getEmail().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getEmail()+"");
+        }
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
-
                     .replaceAll("Company Name", customerItem.getName())
-                    .replaceAll("Address", customerItem.getAddress())
-                    .replaceAll("Contact No.", customerItem.getPhone_number())
-                    .replaceAll("Website", customerItem.getWebsite())
-                    .replaceAll("Email", customerItem.getEmail())
-                    // .replaceAll("Customer Name", customerItem.getSupplier_name())
+                    .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
                     .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount) + Utility.getReplaceDollor(cruncycode))
@@ -2045,8 +2174,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "report/productMovement", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "report/productMovement", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -2158,6 +2288,8 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         double totalAmount = 0.0;
 
+        double lastQuantity = 0.0;
+
         String name = "report/ProductMovementReport.html";
         String nameName = "file:///android_asset/report/ProductMovementReport.html";
 
@@ -2169,28 +2301,85 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             for (int i = 0; i < customerReportItemArrayList.size(); i++) {
                 cruncycode = customerItem.getCurrency_symbol();
 
-                String getQuantity = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getQuantity()));
-                String getTotal_quantity = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getTotal_quantity()));
+                //String getQuantity = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getQuantity()));
+               // String getTotal_quantity = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getTotal_quantity()));
+
+
+                double getQuantity = Double.parseDouble(customerReportItemArrayList.get(i).getQuantity());
+                String openingStockTxt = "";
+                String purchasesTxt = "";
+                String salesTxt = "";
+                String wastageTxt = "";
+                if(getQuantity == 0){
+                    openingStockTxt = "";
+                    purchasesTxt = "";
+                    salesTxt = "";
+                    wastageTxt = "";
+                }else{
+                    String valueSS = Utility.getPatternFormat(""+numberPostion, getQuantity);
+
+                    if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("product_quantity")){
+                        openingStockTxt = valueSS;
+                    } else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("purchase_order")){
+                        purchasesTxt = valueSS;
+                    } else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("invoice")){
+                        salesTxt = valueSS;
+                    } else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("credit")){
+                        salesTxt = valueSS;
+                    } else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("debit")){
+                        salesTxt = valueSS;
+                    }else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("wastage")){
+                        wastageTxt = valueSS;
+                    }
+
+
+
+                }
+
+
+                double getTotal_quantity = Double.parseDouble(customerReportItemArrayList.get(i).getTotal_quantity());
+                String totalQuantityTxt = "";
+                if(getTotal_quantity == 0){
+//                    String valueSS = Utility.getPatternFormat(""+numberPostion, getTotal_quantity);
+                    totalQuantityTxt = "";
+                }else{
+                    String valueSS = Utility.getPatternFormat(""+numberPostion, getTotal_quantity);
+                    totalQuantityTxt = valueSS;
+                }
+
 
                 productitem = IOUtils.toString(getAssets().open("report/product_movement_single_item.html"))
                         .replaceAll("#DATE#", customerReportItemArrayList.get(i).getDate())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getParticulars())
-                        .replaceAll("#OpeningStock#", getQuantity)
-                        .replaceAll("#Purchases#", "")
-                        .replaceAll("#Sales#", "")
-                        .replaceAll("#Wastage#", "")
-                        .replaceAll("#NetQuantity#", getTotal_quantity);
+                        .replaceAll("#OpeningStock#", ""+openingStockTxt)
+                        .replaceAll("#Purchases#", ""+purchasesTxt)
+                        .replaceAll("#Sales#", ""+salesTxt)
+                        .replaceAll("#Wastage#", ""+wastageTxt)
+                        .replaceAll("#NetQuantity#", totalQuantityTxt);
                 productitemlist = productitemlist + productitem;
 
-                double allAmount = 0.0;
+//                double allAmount = 0.0;
+//
+//                try{
+//                    allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getTotal_quantity());
+//                }catch (Exception e){
+//
+//                }
+//
+//                totalAmount =   totalAmount + allAmount;
 
-                try{
-                    allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getTotal_quantity());
-                }catch (Exception e){
-
+              //  String lastQuantityTxt = "";
+                if(i == customerReportItemArrayList.size() - 1){
+                    lastQuantity = Double.parseDouble(customerReportItemArrayList.get(i).getTotal_quantity());
+//                    if(getLastQuantity == 0){
+//                        lastQuantityTxt = "";
+//                    }else{
+//                        String valueSS = Utility.getPatternFormat(""+numberPostion, getLastQuantity);
+//                        lastQuantityTxt = valueSS;
+//                    }
                 }
 
-                totalAmount =   totalAmount + allAmount;
+
             }
 
 
@@ -2204,29 +2393,65 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         Log.e(TAG, "customerItem.getLogo()"+customerItem.getLogo());
 
 
-        double quantity = Double.parseDouble(customerItem.getProductQuantity());
+       // double quantity = Double.parseDouble(customerItem.getProductQuantity());
         double price = Double.parseDouble(customerItem.getProductPrice());
 
-        String quantityAA = Utility.getPatternFormat(""+numberPostion, quantity);
+     //   String quantityAA = Utility.getPatternFormat(""+numberPostion, quantity);
         String priceAA = Utility.getPatternFormat(""+numberPostion, price);
 
-       // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
+        String lastQuantityTxt ="";
+        if(lastQuantity == 0){
+            lastQuantityTxt = "";
+         }else{
+             String valueSS = Utility.getPatternFormat(""+numberPostion, lastQuantity);
+             lastQuantityTxt = valueSS;
+         }
+
+        String priceTxt ="";
+        if(price == 0){
+            priceTxt = "";
+        }else{
+            String valueSS = Utility.getPatternFormat(""+numberPostion, price)+Utility.getReplaceDollor(cruncycode);
+            priceTxt = valueSS;
+        }
+
+        double totalPrice = lastQuantity * price;
+
+        String totalPriceTxt ="";
+        if(totalPrice == 0){
+            totalPriceTxt = "";
+        }else{
+            String valueSS = Utility.getPatternFormat(""+numberPostion, totalPrice)+Utility.getReplaceDollor(cruncycode);
+            totalPriceTxt = valueSS;
+        }
+
+
+        StringBuilder stringBuilderBillTo = new StringBuilder();
+        if(!customerItem.getAddress().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getAddress()+"</br>");
+        }
+        if(!customerItem.getPhone_number().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getPhone_number()+"</br>");
+        }
+        if(!customerItem.getWebsite().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getWebsite()+"</br>");
+        }
+        if(!customerItem.getEmail().equalsIgnoreCase("")){
+            stringBuilderBillTo.append(customerItem.getEmail()+"");
+        }
 
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
-
                     .replaceAll("Company Name", customerItem.getName())
-                    .replaceAll("Address", customerItem.getAddress())
-                    .replaceAll("Contact No.", customerItem.getPhone_number())
-                    .replaceAll("Website", customerItem.getWebsite())
-                    .replaceAll("Email", customerItem.getEmail())
+                    .replaceAll("Address", ""+stringBuilderBillTo.toString())
                      .replaceAll("Product Name", customerItem.getProductName())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("Amount1-", ""+quantityAA)
-                    .replaceAll("Amount2-", priceAA+""+Utility.getReplaceDollor(cruncycode))
-                    .replaceAll("Total Amount-", Utility.getPatternFormat(""+numberPostion, totalAmount) + Utility.getReplaceDollor(cruncycode))
+                    .replaceAll("Amount1-", ""+lastQuantityTxt)
+                    .replaceAll("Amount2-", ""+priceTxt)
+                    .replaceAll("Total Amount-", ""+totalPriceTxt)
             ;
 
 
@@ -2460,7 +2685,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }
         } else if(positionNext == 7){
             if(i == 0){
-                intent.putExtra("product_id", customer_id);
+                intent.putExtra("product_id", product_id);
                 startActivity(intent);
             }else if(i == 1){
                 createWebPrintJob(invoiceweb);

@@ -45,12 +45,16 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -66,7 +70,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Customer_Detail_Activity2 extends AppCompatActivity {
+public class Customer_Detail_Activity2 extends BaseActivity {
 
     private static final String TAG = "Customer_Detail_Activity2";
     Customer_Detail_Activity2 activity;
@@ -155,7 +159,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
         options.centerCrop();
         options.circleCrop();
         options.placeholder(R.drawable.app_icon);
-        Glide.with(activity)
+        GlideApp.with(activity)
                 .load(customer_image)
                 .apply(options)
                 .into(uploadimage);
@@ -333,7 +337,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
                 options.centerCrop();
                 options.circleCrop();
                 options.placeholder(R.drawable.app_icon);
-                Glide.with(activity)
+                GlideApp.with(activity)
                         .load(R.drawable.upload_company_logo)
                         //.apply(options)
                         .into(uploadimage);
@@ -390,7 +394,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
                 options.centerCrop();
                 options.circleCrop();
                 options.placeholder(R.drawable.app_icon);
-                Glide.with(activity)
+                GlideApp.with(activity)
                         .load(customer_image)
                         .apply(options)
                         .into(uploadimage);
@@ -506,7 +510,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Glide.with(activity).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                GlideApp.with(activity).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
@@ -515,7 +519,7 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Glide.with(activity).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                GlideApp.with(activity).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
 
             }else if(requestCode== PICK_CONTACT)
             {
@@ -683,8 +687,9 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
 
                 String token = Constant.GetSharedPreferences(activity,Constant.ACCESS_TOKEN);
                 AsyncHttpClient client = new AsyncHttpClient();
+                client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
                 client.addHeader("Access-Token",token);
-                client.post(Constant.BASE_URL + "customer/update", params, new AsyncHttpResponseHandler() {
+                client.post(AllSirApi.BASE_URL + "customer/update", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         avi.smoothToHide();
@@ -796,8 +801,9 @@ public class Customer_Detail_Activity2 extends AppCompatActivity {
 
                 String token = Constant.GetSharedPreferences(activity,Constant.ACCESS_TOKEN);
                 AsyncHttpClient client = new AsyncHttpClient();
+                client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
                 client.addHeader("Access-Token",token);
-                client.post(Constant.BASE_URL + "customer/add", params, new AsyncHttpResponseHandler() {
+                client.post(AllSirApi.BASE_URL + "customer/add", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         avi.smoothToHide();

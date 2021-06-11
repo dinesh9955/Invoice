@@ -23,9 +23,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.Customer_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Product_Bottom_Adapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
@@ -45,7 +48,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ReportActivity extends AppCompatActivity implements Customer_Bottom_Adapter.Callback, Product_Bottom_Adapter.Callback{
+public class ReportActivity extends BaseActivity implements Customer_Bottom_Adapter.Callback, Product_Bottom_Adapter.Callback{
     private static final String TAG = "ReportActivity" ;
     ApiInterface apiInterface;
     private AVLoadingIndicatorView avi;
@@ -175,8 +178,9 @@ public class ReportActivity extends AppCompatActivity implements Customer_Bottom
         avi.smoothToShow();
         String token = Constant.GetSharedPreferences(ReportActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -256,8 +260,9 @@ public class ReportActivity extends AppCompatActivity implements Customer_Bottom
 
         String token = Constant.GetSharedPreferences(ReportActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -368,8 +373,9 @@ public class ReportActivity extends AppCompatActivity implements Customer_Bottom
 
         String token = Constant.GetSharedPreferences(ReportActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -482,8 +488,9 @@ public class ReportActivity extends AppCompatActivity implements Customer_Bottom
 
         String token = Constant.GetSharedPreferences(ReportActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

@@ -22,7 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
@@ -52,10 +54,17 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
     ArrayList<String> cnames = new ArrayList<>();
     ArrayList<String> cidsLogo = new ArrayList<>();
 
+    ArrayList<String> stringPaypal = new ArrayList<>();
+    ArrayList<String> stringStripe = new ArrayList<>();
+
+
 
     String selectedCompanyId = "";
     String selectedCompanyName = "";
     String selectedCompanyImage = "";
+
+    String selectedStringPaypal = "";
+    String selectedStringStripe = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -142,6 +151,22 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                 selectedCompanyId = cids.get(position);
                 selectedCompanyName = cnames.get(position);
                 selectedCompanyImage = cidsLogo.get(position);
+
+                selectedStringPaypal = stringPaypal.get(position);
+                selectedStringStripe = stringStripe.get(position);
+
+                if(selectedStringPaypal.equalsIgnoreCase("1")){
+                    buttonPaypal.setText("Edit");
+                }else{
+                    buttonPaypal.setText("Setup");
+                }
+
+                if(selectedStringStripe.equalsIgnoreCase("1")){
+                    buttonStripe.setText("Edit");
+                }else{
+                    buttonStripe.setText("Setup");
+                }
+
             }
         });
 
@@ -153,7 +178,7 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                 if(!selectedCompanyId.equalsIgnoreCase("")){
                     Intent intent = new Intent(OnlinePaymentGatewayActivity.this, PayPalActivity.class);
                     intent.putExtra("companyID", selectedCompanyId);
-                    startActivity(intent);
+                    startActivityForResult(intent, 122);
                 }
             }
         });
@@ -174,7 +199,6 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
 
 
 
-
         companyget();
 
     }
@@ -187,8 +211,9 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         cids.clear();
         String token = Constant.GetSharedPreferences(OnlinePaymentGatewayActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -221,6 +246,11 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                                 String colorCode = item.getString("color");
                                 Log.e("CompanyId",company_id);
 
+                                String paypal = item.getString("paypal");
+                                String stripe = item.getString("stripe");
+
+                                stringPaypal.add(paypal);
+                                stringStripe.add(stripe);
                                 cnames.add(company_name);
                                 cids.add(company_id);
                                 cidsLogo.add(company_image_path+logo);
@@ -262,6 +292,12 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if(requestCode == 122){
+            if(resultCode == RESULT_OK){
+                companyget();
+            }
+        }
+
         if(requestCode == 123){
             if(resultCode == RESULT_OK){
                 String responseCode = data.getStringExtra("responseCode");
@@ -287,10 +323,11 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         params.add("token", responseCode);
 
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         String token = Constant.GetSharedPreferences(OnlinePaymentGatewayActivity.this, Constant.ACCESS_TOKEN);
         client.addHeader("Access-Token", token);
 
-        client.post(Constant.BASE_URL_PAYMENT+ "settings/add", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL_PAYMENT+ "settings/add", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -305,6 +342,8 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                     String message = jsonObject.getString("message");
                     if (status.equalsIgnoreCase("true")) {
                         Constant.SuccessToast(OnlinePaymentGatewayActivity.this, message);
+
+                        companyget();
 
 //                        new Handler().postDelayed(new Runnable() {
 //                            @Override
@@ -349,4 +388,9 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+       // companyget();
+    }
 }

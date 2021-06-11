@@ -2,12 +2,15 @@ package com.receipt.invoice.stock.sirproject.Invoice;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
 import android.util.Log;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
@@ -61,6 +65,12 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
     String shippingzone = "", Paymentamountdate = "", shippingfirstname = "", shippinglastname = "", shippingaddress1 = "", shippingaddress2 = "", shippingcity = "", shippingpostcode = "", shippingcountry;
 
     String invoicenumber = "", strnotes = "", ref_no = "", paid_amount_payment_method = "", freight_cost = "0", strdiscountvalue = "0", strpaid_amount = "", companylogopath = "", Grossamount_str = "", Subtotalamount = "", netamountvalue = "", Blanceamountstr = "";
+
+    String stringPaypal = "";
+    String stringStripe = "";
+    String stringPaypal_type = "";
+    String stringLink = "";
+
 
     //    String paid_amount_date = "";
 //    String Grossamount_str_real = "0";
@@ -112,77 +122,11 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
             @Override
             public void onClick(View view) {
 
-//                final File savedPDFFile = FileManager.getInstance().createTempFile(getApplicationContext(), "pdf", false);
-//
-//                String content  = " <!DOCTYPE html>\n" +
-//                        "<html>\n" +
-//                        "<body>\n" +
-//                        "\n" +
-//                        "<h1>My First Heading</h1>\n" +
-//                        "<p>My first paragraph.</p>\n" +
-//                        " <a href='https://www.example.com'>This is a link</a>" +
-//                        "\n" +
-//                        "</body>\n" +
-//                        "</html> ";
-//
-//
-//                PDFUtil.generatePDFFromHTML(getApplicationContext(), savedPDFFile, contentAll , new PDFPrint.OnPDFPrintListener() {
-//                    @SuppressLint("LongLogTag")
-//                    @Override
-//                    public void onSuccess(File file) {
-//
-//                        Log.e(TAG, "file!!! "+file);
-//
-//                        // Open Pdf Viewer
-//                        // Uri pdfUri = Uri.fromFile(file);
-//
-//
-//                        //File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/example.pdf");
-////                        Intent intent = new Intent(Intent.ACTION_VIEW);
-////                        intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-////                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-////                        startActivity(intent);
-//
-//
-//
-//                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-//                        //File fileWithinMyDir = new File(pdfUri);
-//
-//                        if(file.exists()) {
-//                            Uri photoURI = FileProvider.getUriForFile(InvoiceViewActivityWebView.this,
-//                                    "com.receipt.invoice.stock.sirproject.provider",
-//                                    file);
-//                            intentShareFile.setType("application/pdf");
-//                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
-//
-//                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-//                                    "Share As Pdf");
-//                            //  intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
-//
-//                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
-//                        }
-//        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
-//            companylogopathdto= company_image_path + companylogopath;
-//        }else{
-//            companylogopathdto = "/android_res/drawable/white_img.png";
-//        }
-////                        Intent intentPdfViewer = new Intent(Abc.this, PDFViewerActivity.class);
-////                        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri);
-////
-////                        startActivity(intentPdfViewer);
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception exception) {
-//                        exception.printStackTrace();
-//                    }
-//                });
-
                 createWebPrintJob(invoiceweb);
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Invoice");
+        titleView.setText(getString(R.string.preview));
 
 
         getinvoicedata();
@@ -300,6 +244,15 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
 
                 strnotes = invoiceDtoInvoice.getNotes();
 
+                stringLink = invoiceDtoInvoice.getLink();
+
+                stringPaypal = invoiceDtoInvoice.getPaypal();
+                stringStripe = invoiceDtoInvoice.getStripe();
+                stringPaypal_type = invoiceDtoInvoice.getPaypal_type();
+
+                Log.e(TAG, "stringPaypal "+stringPaypal);
+                Log.e(TAG, "stringStripe "+stringStripe);
+                Log.e(TAG, "stringPaypal_type "+stringPaypal_type);
 
                 //tax
 
@@ -500,6 +453,36 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
                 //findViewById(R.id.fab).setVisibility(View.VISIBLE);
             }
         });
+
+
+
+        invoiceweb.addJavascriptInterface(new Object()
+        {
+            @JavascriptInterface           // For API 17+
+            public void performClickStripe()
+            {
+                Log.e(TAG, "performClickStripe");
+                String url = AllSirApi.BASE+"view/stripe/"+stringLink;
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+
+            }
+        }, "stripe");
+
+
+        invoiceweb.addJavascriptInterface(new Object()
+        {
+            @JavascriptInterface           // For API 17+
+            public void performClickPaypal()
+            {
+                Log.e(TAG, "performClickPaypal");
+                String url = AllSirApi.BASE+"view/paypal/"+stringLink;
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        }, "paypal");
 
         // Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
 
@@ -724,7 +707,7 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
             payment_swiftstr = payment_swift_bic;
             cheque_payableTo = cheque_payable_to;
 
-            paimnetdetailstrtxt=" Payment Details ";
+
 
 
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
@@ -732,6 +715,7 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
             }else{
                 cheque_payableTo = cheque_payable_to;
                 bycheckstrtxt="By cheque :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
@@ -739,16 +723,21 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
             }else{
                 pemailpaidstr = paypal_emailstr;
                 paypalstrtxt="Pay Pal :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
-            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+            if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
+                payment_currencystr = "";
             }else{
                 payment_bankstr = payment_bank_name;
                 if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
                     payment_currencystr = payment_currency;
+                }else{
+                    payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -863,24 +852,24 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
             companylogopathdto = "/android_res/drawable/white_img.png";
         }
 
-        String name = "invoice.html";
-        String nameName = "file:///android_asset/invoice.html";
+        String name = "invoicePay.html";
+        String nameName = "file:///android_asset/invoicePay.html";
         if(templatestr.equals("1")) {
             if(templateSelect.equalsIgnoreCase("0")){
-                name = "invoice.html";
-                nameName = "file:///android_asset/invoice.html";
+                name = "invoicePay.html";
+                nameName = "file:///android_asset/invoicePay.html";
             }else if(templateSelect.equalsIgnoreCase("1")){
-                name = "invoice1.html";
-                nameName = "file:///android_asset/invoice1.html";
+                name = "invoicePay1.html";
+                nameName = "file:///android_asset/invoicePay1.html";
             }else if(templateSelect.equalsIgnoreCase("2")){
-                name = "invoice2.html";
-                nameName = "file:///android_asset/invoice2.html";
+                name = "invoicePay2.html";
+                nameName = "file:///android_asset/invoicePay2.html";
             }else if(templateSelect.equalsIgnoreCase("3")){
-                name = "invoice3.html";
-                nameName = "file:///android_asset/invoice3.html";
+                name = "invoicePay3.html";
+                nameName = "file:///android_asset/invoicePay3.html";
             }else if(templateSelect.equalsIgnoreCase("4")){
-                name = "invoice4.html";
-                nameName = "file:///android_asset/invoice4.html";
+                name = "invoicePay4.html";
+                nameName = "file:///android_asset/invoicePay4.html";
             }
 
             Log.e(TAG, "templateSelectZZZ "+templateSelect);
@@ -901,10 +890,36 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
             }
 
 
+            String hide1 = "" , hide2 = "", hide3 = "";
+            if(stringPaypal.equalsIgnoreCase("0") && stringStripe.equalsIgnoreCase("0") ){
+                hide1 = "hidden";
+                hide2 = "hidden";
+                hide3 = "hidden";
+            }else{
+                if(stringPaypal.equalsIgnoreCase("1")){
+                    //hide1 = "hidden";
+                }else{
+                    hide2 = "hidden";
+                }
+
+                if(stringStripe.equalsIgnoreCase("1")){
+                   // hide1 = "hidden";
+                }else{
+                    hide3 = "hidden";
+                }
+            }
+
 
 
             try {
                 content = IOUtils.toString(getAssets().open(name))
+
+                        .replaceAll("hide1", hide1)
+                        .replaceAll("hide2", hide2)
+                        .replaceAll("hide3", hide3)
+                        .replaceAll("#LOGO_IMAGE1#", "/android_res/drawable/stripe.png")
+                        .replaceAll("#LOGO_IMAGE2#", "/android_res/drawable/paypal.png")
+
                         .replaceAll("Company Name", company_name)
                         .replaceAll("Address", stringBuilderCompany.toString())
 //                        .replaceAll("Contact No.", company_contact)

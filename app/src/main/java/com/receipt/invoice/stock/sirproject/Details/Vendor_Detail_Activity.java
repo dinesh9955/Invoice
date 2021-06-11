@@ -10,11 +10,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.wang.avi.AVLoadingIndicatorView;
 
-public class Vendor_Detail_Activity extends AppCompatActivity {
+public class Vendor_Detail_Activity extends BaseActivity {
     TextView name,contactperson,email,phone,website,mobile,address;
     RoundedImageView image;
     private AVLoadingIndicatorView avi;
@@ -54,7 +56,7 @@ public class Vendor_Detail_Activity extends AppCompatActivity {
             RequestOptions options = new RequestOptions();
             options.centerCrop();
             options.placeholder(R.drawable.app_icon);
-            Glide.with(Vendor_Detail_Activity.this)
+            GlideApp.with(Vendor_Detail_Activity.this)
                     .load(vendor_image)
                     .apply(options)
                     .into(image);

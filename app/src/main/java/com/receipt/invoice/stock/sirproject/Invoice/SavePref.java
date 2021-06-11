@@ -1375,4 +1375,22 @@ public class SavePref {
 		return name;
 	}
 
+
+	public void setCustomerName(String string) {
+		// TODO Auto-generated method stub
+		editor.putString("setCustomerName",string);
+		editor.commit();
+		Log.d(TAG, "setCustomerName received");
+	}
+
+
+	public String getCustomerName() {
+		// TODO Auto-generated method stub
+		String name = preferences.getString("setCustomerName","");
+		Log.d(TAG, "setCustomerName received "+name);
+		return name;
+	}
+
+
+
 }

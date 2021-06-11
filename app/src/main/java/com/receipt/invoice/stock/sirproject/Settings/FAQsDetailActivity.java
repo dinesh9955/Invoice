@@ -11,9 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.R;
 
-public class FAQsDetailActivity extends AppCompatActivity {
+public class FAQsDetailActivity extends BaseActivity {
 
     private static final String TAG = "FAQsDetailActivity";
 

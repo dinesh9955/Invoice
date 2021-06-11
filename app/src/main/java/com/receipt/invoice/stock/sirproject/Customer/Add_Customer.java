@@ -52,13 +52,16 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -356,7 +359,7 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Glide.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
@@ -365,7 +368,7 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                     e.printStackTrace();
                 }
 
-                Glide.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
 
             }else if(requestCode== PICK_CONTACT)
                  {
@@ -541,8 +544,9 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
 
                 String token = Constant.GetSharedPreferences(getContext(),Constant.ACCESS_TOKEN);
                 AsyncHttpClient client = new AsyncHttpClient();
+                client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
                 client.addHeader("Access-Token",token);
-                client.post(Constant.BASE_URL + "customer/add", params, new AsyncHttpResponseHandler() {
+                client.post(AllSirApi.BASE_URL + "customer/add", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         avi.smoothToHide();
@@ -690,8 +694,9 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
 
                 String token = Constant.GetSharedPreferences(getContext(),Constant.ACCESS_TOKEN);
                 AsyncHttpClient client = new AsyncHttpClient();
+                client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
                 client.addHeader("Access-Token",token);
-                client.post(Constant.BASE_URL + "customer/add", params, new AsyncHttpResponseHandler() {
+                client.post(AllSirApi.BASE_URL + "customer/add", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         avi.smoothToHide();
@@ -815,8 +820,9 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
         final SharedPreferences preferences = getActivity().getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
         String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

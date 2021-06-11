@@ -20,7 +20,10 @@ import android.widget.TextView;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
@@ -34,7 +37,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Tax_Edit extends AppCompatActivity {
+public class Tax_Edit extends BaseActivity {
     EditText taxname, taxpercent;
     TextView taxcalculation;
     RadioButton rinclusive, rexclusive;
@@ -110,8 +113,9 @@ public class Tax_Edit extends AppCompatActivity {
         final SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
         String token = Constant.GetSharedPreferences(Tax_Edit.this,Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -212,8 +216,9 @@ public class Tax_Edit extends AppCompatActivity {
 
             String token = Constant.GetSharedPreferences(Tax_Edit.this,Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
-            client.post(Constant.BASE_URL + "tax/update", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "tax/update", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     avi.smoothToHide();

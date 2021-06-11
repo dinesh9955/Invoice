@@ -11,10 +11,11 @@ import android.widget.TextView;
 
 import com.crystalviewpager.widgets.CrystalViewPager;
 import com.receipt.invoice.stock.sirproject.Adapter.CustomViewPagerAdapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 
-public class Stock_Activity extends AppCompatActivity {
+public class Stock_Activity extends BaseActivity {
     CrystalViewPager viewPager;
     TabLayout tabs;
     @Override

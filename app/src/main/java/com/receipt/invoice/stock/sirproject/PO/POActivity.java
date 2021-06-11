@@ -15,11 +15,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.receipt.invoice.stock.sirproject.Adapter.CustomViewPagerAdapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
-public class POActivity extends AppCompatActivity {
+public class POActivity extends BaseActivity {
 
     public static Activity activity;
 
@@ -36,7 +37,7 @@ public class POActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(POActivity.this,"Purchase Orders");
+        Constant.toolbar(POActivity.this,getString(R.string.header_purchase_orders));
 
         activity = this;
 
@@ -53,8 +54,8 @@ public class POActivity extends AppCompatActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        addcustomer.setText("Purchase Orders");
-        customers.setText("Create Purchase Orders");
+        addcustomer.setText(getString(R.string.header_purchase_orders_list));
+        customers.setText(getString(R.string.header_purchase_orders_create));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -77,8 +78,8 @@ public class POActivity extends AppCompatActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new List_of_PO(),"Purchase Orders");
-        adapter.addFragment(new Fragment_Create_PO(), "Create Purchase Orders");
+        adapter.addFragment(new List_of_PO(), getString(R.string.header_purchase_orders_list));
+        adapter.addFragment(new Fragment_Create_PO(), getString(R.string.header_purchase_orders_create));
         pager.setAdapter(adapter);
 
 

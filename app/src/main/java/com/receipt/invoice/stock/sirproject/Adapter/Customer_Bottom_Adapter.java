@@ -16,6 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 
 import java.util.ArrayList;
 
@@ -98,7 +99,7 @@ public class Customer_Bottom_Adapter extends RecyclerView.Adapter<Customer_Botto
            RequestOptions options = new RequestOptions();
            options.centerCrop();
            options.placeholder(R.drawable.app_icon);
-           Glide.with(mcontext)
+           GlideApp.with(mcontext)
                    .load(customer_image)
                    .apply(options)
                    .into(viewHolderForCat.image);

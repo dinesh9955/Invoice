@@ -77,6 +77,7 @@ import java.util.Map;
 import com.lowagie.text.Font;
 import com.receipt.invoice.stock.sirproject.InvoiceReminder.SendInvoiceReminderActivity;
 import com.receipt.invoice.stock.sirproject.ThankYouNote.SendThankYouNoteActivity;
+import com.receipt.invoice.stock.sirproject.Utils.AppRater;
 import com.receipt.invoice.stock.sirproject.Utils.SublimePickerFragment;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
@@ -155,9 +156,15 @@ public class Abc extends AppCompatActivity{
 ////                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, contentType);
 //                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, params);
 
-                Bundle params2 = new Bundle();
-                params2.putString("event_name", "App Open");
-                firebaseAnalytics.logEvent("app_open", params2);
+
+
+                AppRater.app_launched(Abc.this);
+
+
+
+//                Bundle params2 = new Bundle();
+//                params2.putString("event_name", "App Open");
+//                firebaseAnalytics.logEvent("app_open", params2);
 
                 int a = 2;
                 int b = 10;

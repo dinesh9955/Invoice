@@ -17,6 +17,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Details.User_Detail_Activity;
 import com.receipt.invoice.stock.sirproject.Model.User_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 
 import java.util.ArrayList;
 
@@ -100,7 +101,7 @@ public class User_Listing_Adapter extends RecyclerView.Adapter<User_Listing_Adap
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.app_icon);
-        Glide.with(mcontext)
+        GlideApp.with(mcontext)
                 .load(logourl)
                 .apply(options)
                 .into(viewHolderForCat.image);

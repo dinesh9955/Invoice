@@ -18,6 +18,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Details.Vendor_Detail_Activity;
 import com.receipt.invoice.stock.sirproject.Model.Vendor_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 
 import java.util.ArrayList;
 
@@ -98,7 +99,7 @@ public class Vendro_Listing_Adapter extends RecyclerView.Adapter<Vendro_Listing_
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.app_icon);
-        Glide.with(mcontext)
+        GlideApp.with(mcontext)
                 .load(image_path)
                 .apply(options)
                 .into(viewHolderForCat.image);

@@ -14,12 +14,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.R;
 
 import java.util.ArrayList;
 
-public class FAQsActivity extends AppCompatActivity{
+public class FAQsActivity extends BaseActivity {
 
     private static final String TAG = "FAQsActivity";
     RecyclerView recycler_invoices;

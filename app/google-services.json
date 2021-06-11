@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "505961951460",
-    "project_id": "sir-invoices",
-    "storage_bucket": "sir-invoices.appspot.com"
+    "project_number": "643890149019",
+    "project_id": "sir-app-5a482",
+    "storage_bucket": "sir-app-5a482.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:505961951460:android:55ab5e899812518ee4bcf1",
+        "mobilesdk_app_id": "1:643890149019:android:4c80836b3464529a7d783e",
         "android_client_info": {
           "package_name": "com.receipt.invoice.stock.sirproject"
         }
       },
       "oauth_client": [
         {
-          "client_id": "505961951460-nrqejbh9smdbfc7uk40u5145r4cmhcn7.apps.googleusercontent.com",
+          "client_id": "643890149019-oeiplul6ojddkgsj2fjpqargrl50c0kq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAv1SwQb64YE85mX4b9EPqgxntWZ9CQHyE"
+          "current_key": "AIzaSyBaVFTlSxcG4G6h3hEeBYexiyaU8RW-5gg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "505961951460-nrqejbh9smdbfc7uk40u5145r4cmhcn7.apps.googleusercontent.com",
+              "client_id": "643890149019-oeiplul6ojddkgsj2fjpqargrl50c0kq.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "643890149019-athj4q5h4eg7gpgr85t0eanv5cnkigm9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sir-app"
+              }
             }
           ]
         }

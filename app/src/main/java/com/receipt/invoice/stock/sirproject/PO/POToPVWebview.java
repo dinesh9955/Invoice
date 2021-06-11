@@ -112,7 +112,7 @@ public class POToPVWebview extends BaseActivity {
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Invoice");
+        titleView.setText(getString(R.string.preview));
 
         drableimagebase64 = "iVBORw0KGgoAAAANSUhEUgAAAC4AAAAnCAYAAABwtnr/AAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAALqADAAQAAAABAAAAJwAAAAB8SmRPAAAAeklEQVRYCe3SQQrAIBTEUPX+d67iCbIIBSGuw/B57fzOGw++9eDN9+QO//vLJZ44FOhXgVBalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYcSh1BalrhGCYc2r3IESll5TkQAAAAASUVORK5CYII=";
 
@@ -151,9 +151,9 @@ public class POToPVWebview extends BaseActivity {
                 if(!sltcustomer_address.equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_address+"</br>");
                 }
-//                if(!sltcustomer_contact.equalsIgnoreCase("")){
-//                    stringBuilderBillTo.append(sltcustomer_contact+"</br>");
-//                }
+                if(!sltcustomer_contact.equalsIgnoreCase("")){
+                    stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+                }
                 if(!sltcustomer_phone_number.equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
                 }

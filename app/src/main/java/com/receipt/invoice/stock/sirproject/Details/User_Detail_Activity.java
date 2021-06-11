@@ -36,8 +36,11 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
@@ -46,6 +49,7 @@ import com.receipt.invoice.stock.sirproject.Model.Company_list;
 import com.receipt.invoice.stock.sirproject.Model.User_list;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.User.User_Activity;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
@@ -61,7 +65,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class User_Detail_Activity extends AppCompatActivity {
+public class User_Detail_Activity extends BaseActivity {
     TextView nametxt,save,cancel,emailtxt,phonetxt;
     EditText name,email,password;
     CircleImageView image;
@@ -121,7 +125,7 @@ public class User_Detail_Activity extends AppCompatActivity {
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.app_icon);
-        Glide.with(this)
+        GlideApp.with(this)
                 .load(image_path)
                 .apply(options)
                 .into(image);
@@ -744,7 +748,7 @@ public class User_Detail_Activity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Glide.with(this).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
+                GlideApp.with(this).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
@@ -753,7 +757,7 @@ public class User_Detail_Activity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Glide.with(this).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
+                GlideApp.with(this).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
 
             }
 
@@ -846,8 +850,9 @@ public class User_Detail_Activity extends AppCompatActivity {
 
         String token = Constant.GetSharedPreferences(User_Detail_Activity.this,Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(Constant.BASE_URL + "user/editSubUser", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "user/editSubUser", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 

@@ -6,12 +6,21 @@ package com.receipt.invoice.stock.sirproject.Model;
 
 public class InvoiceData {
 
-
+    String link = "";
     String is_viewed = "";
 
     String paypal = "";
     String stripe = "";
     String paypal_type = "";
+
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public String getPaypal() {
         return paypal;

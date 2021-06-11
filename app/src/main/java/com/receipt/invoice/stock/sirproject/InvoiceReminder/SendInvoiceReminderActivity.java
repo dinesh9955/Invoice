@@ -24,6 +24,7 @@ import androidx.core.content.FileProvider;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.Gson;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
@@ -557,7 +558,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
                     multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
 
 
-                            .replaceAll("#ATTACHMENT_1#", "http://13.126.22.0/saad/app/uploads/invoice/"+invoice_imageDto.get(i).getImage());
+                            .replaceAll("#ATTACHMENT_1#", AllSirApi.BASE+"uploads/invoice/"+invoice_imageDto.get(i).getImage());
 
 
                     multipleimage = multipleimage + multipagepath;
@@ -752,14 +753,12 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             cheque_payableTo = cheque_payable_to;
 
 
-            paimnetdetailstrtxt=" Payment Details ";
-
-
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
                 bycheckstrtxt="By cheque :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
@@ -767,16 +766,21 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             }else{
                 pemailpaidstr = paypal_emailstr;
                 paypalstrtxt="Pay Pal :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
-            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+            if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
+                payment_currencystr = "";
             }else{
                 payment_bankstr = payment_bank_name;
                 if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
                     payment_currencystr = payment_currency;
+                }else{
+                    payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){

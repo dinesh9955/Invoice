@@ -17,7 +17,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PAYMENT GATEWAY"
+            android:text="PAYMENT GATEWAYS"
             android:textAllCaps="true"
             android:layout_centerVertical="true"
             android:textStyle="bold"
@@ -28,70 +28,123 @@
 
 
 
+    <RelativeLayout
+        android:id="@+id/rel_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_header"
+        android:visibility="visible">
+
         <Switch
             android:id="@+id/switch1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:text="PayPal"
-            android:layout_centerVertical="true"
             android:textSize="@dimen/_13sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_15sdp"
             android:padding="@dimen/_5sdp"
-            android:layout_below="@+id/rel_header"
             android:layout_marginTop="@dimen/_10sdp"/>
 
 
 
 
-
-
-    <RadioGroup
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/switch1"
-        android:weightSum="1"
-        android:id="@+id/radioGroup"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"
-        android:visibility="visible"
-
-       >
-
-        <RadioButton
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Standard"
-            android:id="@+id/radioButton"
-            android:checked="false"
-            android:textSize="@dimen/_13sdp"
-            android:paddingLeft="@dimen/_10sdp"
-            />
+            android:layout_below="@+id/switch1"
+            android:weightSum="1"
+            android:id="@+id/radioGroup"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:visibility="visible"
 
-        <RadioButton
+            >
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Standard"
+                android:id="@+id/radioButton"
+                android:checked="false"
+                android:textSize="@dimen/_13sdp"
+                android:paddingLeft="@dimen/_10sdp"
+                />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Business"
+                android:id="@+id/radioButton2"
+                android:checked="false"
+                android:textSize="@dimen/_13sdp"
+                android:paddingLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"/>
+        </RadioGroup>
+
+
+
+        <Switch
+            android:id="@+id/switch2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Business"
-            android:id="@+id/radioButton2"
-            android:checked="false"
+            android:layout_height="@dimen/_40sdp"
+            android:text="Stripe"
+            android:layout_centerVertical="true"
             android:textSize="@dimen/_13sdp"
-            android:paddingLeft="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_15sdp"/>
-    </RadioGroup>
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:padding="@dimen/_5sdp"
+            android:layout_below="@+id/radioGroup"
+            android:layout_marginTop="@dimen/_5sdp"/>
+    </RelativeLayout>
 
 
 
-    <Switch
-        android:id="@+id/switch2"
+    <RelativeLayout
+        android:id="@+id/rel_footer2"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:text="Stripe"
-        android:layout_centerVertical="true"
-        android:textSize="@dimen/_13sdp"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginRight="@dimen/_15sdp"
-        android:padding="@dimen/_5sdp"
-        android:layout_below="@+id/radioGroup"
-        android:layout_marginTop="@dimen/_5sdp"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_header"
+        android:padding="@dimen/_10sdp"
+        android:background="@color/lightwhite"
+        android:layout_margin="@dimen/_5sdp"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/textView3_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Receive Payments Online"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sdp"/>
+
+        <TextView
+            android:id="@+id/textView3_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accept Payments Online Set up a payment gateway and get paid faster"
+            android:textStyle="normal"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sdp"
+            android:layout_below="@+id/textView3_2"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_toLeftOf="@+id/textView3_4"
+            android:layout_marginRight="@dimen/_5sdp"/>
+
+        <TextView
+            android:id="@+id/textView3_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Setup Now"
+            android:textStyle="bold"
+            android:textColor="@color/darkblue"
+            android:textSize="@dimen/_11sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

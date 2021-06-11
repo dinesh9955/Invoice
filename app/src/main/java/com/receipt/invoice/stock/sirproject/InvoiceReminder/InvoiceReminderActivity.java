@@ -24,7 +24,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper2;
@@ -176,8 +178,9 @@ public class InvoiceReminderActivity extends BaseActivity {
 //        avi.smoothToShow();
         String token = Constant.GetSharedPreferences(InvoiceReminderActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -285,9 +288,9 @@ public class InvoiceReminderActivity extends BaseActivity {
         String token = Constant.GetSharedPreferences(InvoiceReminderActivity.this, Constant.ACCESS_TOKEN);
 
         AsyncHttpClient client = new AsyncHttpClient();
-
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -475,7 +478,7 @@ public class InvoiceReminderActivity extends BaseActivity {
 
 
     private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink) {
-        String urlPDF = Constant.BASE_URL_PDF + pdflink;
+        String urlPDF = AllSirApi.BASE_URL_PDF + pdflink;
 
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(InvoiceReminderActivity.this).inflate(R.layout.bottominvoiceview, null);

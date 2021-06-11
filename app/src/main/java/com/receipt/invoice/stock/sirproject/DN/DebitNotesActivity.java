@@ -17,12 +17,13 @@ import androidx.viewpager.widget.ViewPager;
 import com.crystalviewpager.widgets.CrystalViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.receipt.invoice.stock.sirproject.Adapter.CustomViewPagerAdapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.CN.FragmentCreate_CreditNote;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
-public class DebitNotesActivity extends AppCompatActivity {
+public class DebitNotesActivity extends BaseActivity {
 
 
     LockableViewPager viewPager;
@@ -37,7 +38,7 @@ public class DebitNotesActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(DebitNotesActivity.this,"Debit Notes");
+        Constant.toolbar(DebitNotesActivity.this,getString(R.string.header_debit_notes));
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
@@ -53,8 +54,8 @@ public class DebitNotesActivity extends AppCompatActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("CREATE DEBIT NOTES");
-        addcustomer.setText("LIST OF DEBIT NOTES");
+        addcustomer.setText(getString(R.string.header_debit_notes_list));
+        customers.setText(getString(R.string.header_debit_notes_create));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -77,8 +78,8 @@ public class DebitNotesActivity extends AppCompatActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ListOfDebitNotes(),"LIST OF DEBIT NOTES");
-        adapter.addFragment(new FragmentCreate_DebitNote(), "CREATE DEBIT NOTES");
+        adapter.addFragment(new ListOfDebitNotes(), getString(R.string.header_debit_notes_list));
+        adapter.addFragment(new FragmentCreate_DebitNote(), getString(R.string.header_debit_notes_create));
         pager.setAdapter(adapter);
 
     }

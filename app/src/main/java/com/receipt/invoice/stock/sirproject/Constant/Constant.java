@@ -58,10 +58,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class Constant {
     private static final String TAG = "Constant";
-    public static String BASE_URL = "http://13.126.22.0/saad/app/index.php/api/";
-    public static String BASE_URL_PDF = "http://13.126.22.0/saad/app/uploads/invoice/pdf/";
-    public static String BASE_URL_SUPPORT = "http://13.126.22.0/saad/wp-content/api/";
-    public static String BASE_URL_PAYMENT = "http://prod.webdevelopmentsolution.net/saad/app/index.php/api/";
+
+
 
 
 
@@ -145,28 +143,28 @@ public class Constant {
 
 
         //Drawer Items
-        PrimaryDrawerItem item = new PrimaryDrawerItem().withIdentifier(1).withIcon(R.drawable.add_new_user_2).withName("Add New User").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withIcon(R.drawable.companies_2).withName("My Companies").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withIcon(R.drawable.products_2).withName("My Products (Tracked)").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withIcon(R.drawable.items_2).withName("My Items").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.tax_2).withName("Add Taxes").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(6).withIcon(R.drawable.customers_2).withName("Customers").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item7 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.suppliers_2).withName("Suppliers").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item8 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.stocks_2).withName("Stocks").withTextColor(Color.WHITE);
+        PrimaryDrawerItem item = new PrimaryDrawerItem().withIdentifier(1).withIcon(R.drawable.add_new_user_2).withName(activity.getString(R.string.add_new_user)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withIcon(R.drawable.companies_2).withName(activity.getString(R.string.my_companies)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withIcon(R.drawable.products_2).withName(activity.getString(R.string.my_products)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withIcon(R.drawable.items_2).withName(activity.getString(R.string.my_items)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.tax_2).withName(activity.getString(R.string.add_taxes)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(6).withIcon(R.drawable.customers_2).withName(activity.getString(R.string.home_customers)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item7 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.suppliers_2).withName(activity.getString(R.string.suppliers)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item8 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.stocks_2).withName(activity.getString(R.string.stocks)).withTextColor(Color.WHITE);
 
         //2 space
-        PrimaryDrawerItem item9 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.settings_2).withName("Settings").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item10 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.logout_2).withName("Logout").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item13 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.invoices_2).withName("Invoices").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item14 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.estimate_2).withName("Estimates").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item15 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.purchase_order_2).withName("Purchase Orders").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item16 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.recepits_2).withName("Receipts").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item17 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.payment_vocher_2).withName("Payment Vouchers").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item18 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.reports_2).withName("Reports").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item19 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.credit_notes_2).withName("Credit Notes").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item20 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.debit_note_2).withName("Debit Notes").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item21 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.thanku_note_2).withName("Thank You Note").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item22 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.invoice_reminder_2).withName("Invoice Reminders").withTextColor(Color.WHITE);
+        PrimaryDrawerItem item9 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.settings_2).withName(activity.getString(R.string.settings)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item10 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.logout_2).withName(activity.getString(R.string.logout)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item13 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.invoices_2).withName(activity.getString(R.string.invoices)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item14 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.estimate_2).withName(activity.getString(R.string.estimate)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item15 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.purchase_order_2).withName(activity.getString(R.string.purchase_orders)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item16 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.recepits_2).withName(activity.getString(R.string.receipts)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item17 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.payment_vocher_2).withName(activity.getString(R.string.payment_vouchers)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item18 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.reports_2).withName(activity.getString(R.string.reports)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item19 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.credit_notes_2).withName(activity.getString(R.string.credit_notes)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item20 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.debit_note_2).withName(activity.getString(R.string.debit_notes)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item21 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.thanku_note_2).withName(activity.getString(R.string.thank_you_note)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item22 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.invoice_reminder_2).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE);
 
         PrimaryDrawerItem item11 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
         PrimaryDrawerItem item12 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
@@ -564,11 +562,11 @@ public class Constant {
        // ImageView addproperty = activity.findViewById(R.id.addprop);
 
         AHBottomNavigation bottomNavigation = (AHBottomNavigation) activity.findViewById(R.id.bottom_navigation);
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem("Home", R.drawable.nav_home_2, R.color.white);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem("Estimates", R.drawable.nav_estimate_2, R.color.white);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem("Invoices", R.drawable.nav_invoice_2, R.color.white);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem("Receipts", R.drawable.nav_receipt_2, R.color.white);
-        AHBottomNavigationItem item5 = new AHBottomNavigationItem("PO", R.drawable.nav_po_2, R.color.white);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(activity.getString(R.string.home), R.drawable.nav_home_2, R.color.white);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(activity.getString(R.string.estimate), R.drawable.nav_estimate_2, R.color.white);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(activity.getString(R.string.invoices), R.drawable.nav_invoice_2, R.color.white);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(activity.getString(R.string.receipts), R.drawable.nav_receipt_2, R.color.white);
+        AHBottomNavigationItem item5 = new AHBottomNavigationItem(activity.getString(R.string.po), R.drawable.nav_po_2, R.color.white);
         bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);
         bottomNavigation.addItem(item3);

@@ -49,6 +49,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +73,9 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.Customer_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Product_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Products_Adapter;
@@ -107,9 +110,11 @@ import com.receipt.invoice.stock.sirproject.Receipts.EditEditReceiptActivity;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
+import com.receipt.invoice.stock.sirproject.Settings.OnlinePaymentGatewayActivity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
@@ -376,7 +381,11 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
     String stringStripe = "";
     String stringToken = "";
 
+
+
     View viewPayment;
+    RelativeLayout relativeLayoutPaymentButtons, relativeLayoutPaymentSetup;
+    TextView textViewSetUp;
     Switch switchPaypal, switchStripe;
     RadioGroup radioGroupPaypal;
     RadioButton radioButton1, radioButton2;
@@ -393,6 +402,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
         viewPayment = findViewById(R.id.payment_id);
         viewPayment.setVisibility(View.GONE);
+        relativeLayoutPaymentButtons = findViewById(R.id.rel_footer);
+        relativeLayoutPaymentSetup = findViewById(R.id.rel_footer2);
+        textViewSetUp  = findViewById(R.id.textView3_4);
         switchPaypal = findViewById(R.id.switch1);
         switchStripe = findViewById(R.id.switch2);
         radioGroupPaypal = findViewById(R.id.radioGroup);
@@ -482,7 +494,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
         verifyStroagePermissions(this);
 
-        requestManager = Glide.with(this);
+        requestManager = GlideApp.with(this);
         mCompressor = new FileCompressor(this);
 
 
@@ -585,7 +597,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
-        companyget();
+
         getinvoicedata();
 
     }
@@ -1686,8 +1698,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "invoice/add", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "invoice/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -1985,7 +1998,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             recycler_products.setLayoutManager(layoutManager);
             recycler_products.setHasFixedSize(true);
 
-            product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog,"estimate");
+            product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog,"invoice");
             recycler_products.setAdapter(product_bottom_adapter);
             product_bottom_adapter.notifyDataSetChanged();
             txtproducts.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
@@ -2655,6 +2668,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                                 txtdays.setText(credit_terms);
                                 edduedate.setClickable(true);
                                 bottomSheetDialog.dismiss();
+
+                                edduedate.setText(duedate.getText().toString());
+
                             } else if (credit_terms.equals("immediately")) {
                                 String myFormat = "yyyy-MM-dd"; //In which you need put here
                                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -2927,8 +2943,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         cids.clear();
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3000,8 +3017,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(ConvertToInvoiceActivity.this, Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -3059,6 +3077,12 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        if(wids.size() == 0){
+                            selectButton.setVisibility(View.VISIBLE);
+                        }else{
+                            selectButton.setVisibility(View.GONE);
+                        }
                     }
                 }
             });
@@ -3073,8 +3097,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
         String token = Constant.GetSharedPreferences(ConvertToInvoiceActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -3189,8 +3214,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -3363,8 +3389,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         Log.e("token", token);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3428,26 +3455,27 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
 
                         if(stringPaypal.equalsIgnoreCase("0") && stringStripe.equalsIgnoreCase("0")){
-                            viewPayment.setVisibility(View.GONE);
+                            viewPayment.setVisibility(View.VISIBLE);
+                            relativeLayoutPaymentButtons.setVisibility(View.GONE);
+                            relativeLayoutPaymentSetup.setVisibility(View.VISIBLE);
+
+                            textViewSetUp.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(ConvertToInvoiceActivity.this , OnlinePaymentGatewayActivity.class);
+                                    startActivityForResult(intent , 128);
+                                }
+                            });
+
                         }else{
                             Log.e(TAG , "stringPaypalAA "+stringPaypal);
-
+                            relativeLayoutPaymentButtons.setVisibility(View.VISIBLE);
+                            relativeLayoutPaymentSetup.setVisibility(View.GONE);
                             radioGroupPaypal.setVisibility(View.GONE);
                             if(stringPaypal.equalsIgnoreCase("1")){
                                 viewPayment.setVisibility(View.VISIBLE);
                                 switchPaypal.setVisibility(View.VISIBLE);
-                                //switchPaypal.setChecked(true);
-//                                booleanSwitchPaypal = true;
-//                                if(stringPaypalEmail_2_Type.equalsIgnoreCase("STANDARD")){
-//                                    radioGroupPaypal.setVisibility(View.VISIBLE);
-//                                    radioButton1.setChecked(true);
-//                                    radioButton2.setChecked(false);
-//                                }
-//                                if(stringPaypalEmail_2_Type.equalsIgnoreCase("BUSINESS")){
-//                                    radioGroupPaypal.setVisibility(View.VISIBLE);
-//                                    radioButton1.setChecked(false);
-//                                    radioButton2.setChecked(true);
-//                                }
+
                                 switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -3509,6 +3537,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                                 booleanSwitchStripe = false;
                             }
                         }
+
+
 
 
 
@@ -3616,8 +3646,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3873,14 +3904,16 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                 if (selectedtaxt.size() > 0) {
                     // taxAmount = Tax_amountdto;
                     if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
-                        taxAmount = Tax_amountdto * subtotalAmount / (100+ Tax_amountdto);
-                        afterTaxAmount = subtotalAmount;
+//                        taxAmount = Tax_amountdto * subtotalAmount / (100+ Tax_amountdto);
+//                        afterTaxAmount = subtotalAmount;
+                        taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + " incl." );
 //                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                     } else { // include off
-                        taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
-                        afterTaxAmount = subtotalAmount + taxAmount;
+//                        taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
+//                        afterTaxAmount = subtotalAmount + taxAmount;
+                        taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + "" );
 //                    taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
@@ -4693,24 +4726,13 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 //        Log.e(TAG, "onRestart selectedTemplate"+defaultClick);
 //    }
 //
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        Log.e(TAG, "onResume selectedTemplate"+defaultClick);
-//
-//        if(defaultClick == 1){
-//                SavePref pref = new SavePref();
-//                pref.SavePref(editInvoiceActivity.this);
-//
-//                selectedTemplate = pref.getTemplate();
-//                Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
-//
-//                if(selectedTemplate != 0){
-//                    itemstxtTemplate.setText("Template "+selectedTemplate);
-//                }
-//            }
-//
-//    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        companyget();
+    }
 
 
 
@@ -5351,14 +5373,12 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             cheque_payableTo = cheque_payable_to;
 
 
-            paimnetdetailstrtxt=" Payment Details ";
-
-
             if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
                 bycheckstrtxt="By cheque :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
@@ -5366,16 +5386,21 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             }else{
                 pemailpaidstr = paypal_emailstr;
                 paypalstrtxt="Pay Pal :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
-            if ( Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+            if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
                 payment_bankstr = "";
+                payment_currencystr = "";
             }else{
                 payment_bankstr = payment_bank_name;
                 if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
                     payment_currencystr = payment_currency;
+                }else{
+                    payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
+                paimnetdetailstrtxt =" Payment Details ";
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -5391,6 +5416,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             }
 
             hiddenpaidrow="";
+
 
         }
 

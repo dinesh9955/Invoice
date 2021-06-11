@@ -116,7 +116,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Debit Notes");
+        titleView.setText(getString(R.string.preview));
 
 
         getinvoicedata();

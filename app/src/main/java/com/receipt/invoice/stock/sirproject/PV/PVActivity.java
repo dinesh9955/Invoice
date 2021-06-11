@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.crystalviewpager.widgets.CrystalViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.receipt.invoice.stock.sirproject.Adapter.CustomViewPagerAdapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.PO.Fragment_Create_PO;
 import com.receipt.invoice.stock.sirproject.PO.List_of_PO;
@@ -24,7 +25,7 @@ import com.receipt.invoice.stock.sirproject.PO.POActivity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
-public class PVActivity extends AppCompatActivity {
+public class PVActivity extends BaseActivity {
 
 
     private static final String TAG = "PVActivity";
@@ -40,7 +41,7 @@ public class PVActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(PVActivity.this,"Payment Vouchers");
+        Constant.toolbar(PVActivity.this,getString(R.string.header_payment_vouchers));
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
@@ -56,8 +57,8 @@ public class PVActivity extends AppCompatActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        addcustomer.setText("Payment Vouchers");
-        customers.setText("Create Payment Vouchers");
+        addcustomer.setText(getString(R.string.header_payment_vouchers_list));
+        customers.setText(getString(R.string.header_payment_vouchers_create));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -80,8 +81,8 @@ public class PVActivity extends AppCompatActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new List_of_PV(),"Payment Vouchers");
-        adapter.addFragment(new Fragment_Create_PV(), "Create Payment Vouchers");
+        adapter.addFragment(new List_of_PV(), getString(R.string.header_payment_vouchers_list));
+        adapter.addFragment(new Fragment_Create_PV(), getString(R.string.header_payment_vouchers_create));
         pager.setAdapter(adapter);
 
 

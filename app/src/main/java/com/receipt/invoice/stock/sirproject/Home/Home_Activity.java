@@ -56,6 +56,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import okhttp3.FormBody;
@@ -153,13 +154,17 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         if (username.equals("")) {
 
-            hello.setText("Hello");
+            hello.setText(getString(R.string.home_hello));
 
         } else {
 
-            hello.setText("Hello " + username);
+            hello.setText(getString(R.string.home_hello)+" " + username);
 
         }
+
+
+        Locale current = getResources().getConfiguration().locale;
+        Log.e(TAG,  "currentAAAA "+current.getLanguage());
 
 
         Map<String, Object> eventValue = new HashMap<String, Object>();
@@ -213,7 +218,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         txtinvoice = findViewById(R.id.txtinvoice);
 
 
-        COMPANYListingApi();
+       // COMPANYListingApi();
 
 
 
@@ -282,117 +287,120 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
                 String result = "";
                 customerModelArrayList = new ArrayList<>();
-                try {
 
-                    result = response.body().string();
-                    Log.e(TAG, "result:: "+result);
 
-                } catch (Exception e) {
-
-                    e.printStackTrace();
-
-                }
-
-              // Log.e("HomeResponse", "result " + result);
-
-                if (response.isSuccessful()) {
-
+                if(response != null){
                     try {
 
-                        JSONObject jsonObject = new JSONObject(result);
+                        result = response.body().string();
+                        Log.e(TAG, "result:: "+result);
 
-                        JSONObject object_data = jsonObject.getJSONObject("data");
-                     String supplier_image_path=object_data.getString("supplier_image_path");
-                        String customer_image_path=object_data.getString("customer_image_path");
-                       Log.e("customer_image_path",customer_image_path);
-                        Log.e("supplier_image_path",supplier_image_path);
+                    } catch (Exception e) {
 
+                        e.printStackTrace();
 
+                    }
 
-                        JSONArray customer_array = object_data.getJSONArray("customer");
-                        //Log.e("detail Image", "result " + customer_array);
+                    // Log.e("HomeResponse", "result " + result);
 
-                        customerModelArrayList.clear();
-                        for (int j = 0; j <customer_array.length(); j++) {
+                    if (response.isSuccessful()) {
 
-                            JSONObject obj_customer = customer_array.getJSONObject(j);
+                        try {
 
-                            CustomerModel customerModel = new CustomerModel();
+                            JSONObject jsonObject = new JSONObject(result);
 
-                            customerModel.setCustomerId(obj_customer.getString("customer_id"));
-                            customerModel.setCustomerName(obj_customer.getString("customer_name"));
-                            customerModel.setImage(obj_customer.getString("image"));
-                            customerModel.setCustomer_image_path(customer_image_path);
-                            String strresult=obj_customer.getString("customer_name");
-
-
-                            //Log.e("CompanyList Image", "result " + strresult);
-                            customerModelArrayList.add(customerModel);
-                        }
-
-
-                        JSONArray invoice_array = object_data.getJSONArray("invoice");
-
-                        invoiceModelArrayList.clear();
-                        for (int i=0; i<invoice_array.length(); i++){
-
-                            JSONObject obj_invoice = invoice_array.getJSONObject(i);
-
-                            InvoiceModel invoiceModel=new InvoiceModel();
-
-                            invoiceModel.setInvoice_id(obj_invoice.getString("invoice_id"));
-                            invoiceModel.setInvoice_no(obj_invoice.getString("invoice_no"));
-                            invoiceModel.setTotal(obj_invoice.getString("total"));
-                            invoiceModel.setPayment_currency(obj_invoice.getString("currency_symbol"));
-                            invoiceModelArrayList.add(invoiceModel);
-
-                        }
+                            JSONObject object_data = jsonObject.getJSONObject("data");
+                            String supplier_image_path=object_data.getString("supplier_image_path");
+                            String customer_image_path=object_data.getString("customer_image_path");
+                            Log.e("customer_image_path",customer_image_path);
+                            Log.e("supplier_image_path",supplier_image_path);
 
 
 
-                        invoiceDueDateModelArrayList.clear();
-                        for (int i=0; i<invoice_array.length(); i++){
-                            JSONObject obj_invoice = invoice_array.getJSONObject(i);
-                            InvoiceModel invoiceModel=new InvoiceModel();
-                            invoiceModel.setInvoice_id(obj_invoice.getString("invoice_id"));
-                            invoiceModel.setInvoice_no(obj_invoice.getString("invoice_no"));
-                            invoiceModel.setTotal(obj_invoice.getString("total"));
-                            invoiceModel.setPayment_currency(obj_invoice.getString("currency_symbol"));
-                            String customer_name = obj_invoice.getString("customer_name");
-                            invoiceModel.setCustomer_name(customer_name);
+                            JSONArray customer_array = object_data.getJSONArray("customer");
+                            //Log.e("detail Image", "result " + customer_array);
 
-                          //  invoiceModel.setCustomer_name(customer_name);
-                            String customer_id = obj_invoice.getString("customer_id");
-                            String imageSS = getCustomerImageById(customerModelArrayList, customer_id);
-                            Log.e(TAG, "imageSS "+imageSS);
-                            invoiceModel.setCustomer_logo(customer_image_path+imageSS);
+                            customerModelArrayList.clear();
+                            for (int j = 0; j <customer_array.length(); j++) {
 
-                            String due_date = obj_invoice.getString("due_date");
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                            try {
-                                Date date = sdf.parse(due_date);
-                                long millis = date.getTime();
-                              //  Log.e(TAG, "millisAAA "+millis);
+                                JSONObject obj_customer = customer_array.getJSONObject(j);
+
+                                CustomerModel customerModel = new CustomerModel();
+
+                                customerModel.setCustomerId(obj_customer.getString("customer_id"));
+                                customerModel.setCustomerName(obj_customer.getString("customer_name"));
+                                customerModel.setImage(obj_customer.getString("image"));
+                                customerModel.setCustomer_image_path(customer_image_path);
+                                String strresult=obj_customer.getString("customer_name");
 
 
-                                String todayCurrent = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                                Date dateCurrent = sdf.parse(todayCurrent);
-                                long millisCurrent = dateCurrent.getTime();
-                             //   Log.e(TAG, "dateCurrentAAA "+millisCurrent);
+                                //Log.e("CompanyList Image", "result " + strresult);
+                                customerModelArrayList.add(customerModel);
+                            }
 
-                                if(millisCurrent > millis){
-                                    String order_status_id = obj_invoice.getString("order_status_id");
-                                    if(order_status_id.equalsIgnoreCase("1")){
-                                        invoiceDueDateModelArrayList.add(invoiceModel);
-                                    }
-                                }
 
-                            }catch (Exception e){
+                            JSONArray invoice_array = object_data.getJSONArray("invoice");
+
+                            invoiceModelArrayList.clear();
+                            for (int i=0; i<invoice_array.length(); i++){
+
+                                JSONObject obj_invoice = invoice_array.getJSONObject(i);
+
+                                InvoiceModel invoiceModel=new InvoiceModel();
+
+                                invoiceModel.setInvoice_id(obj_invoice.getString("invoice_id"));
+                                invoiceModel.setInvoice_no(obj_invoice.getString("invoice_no"));
+                                invoiceModel.setTotal(obj_invoice.getString("total"));
+                                invoiceModel.setPayment_currency(obj_invoice.getString("currency_symbol"));
+                                invoiceModelArrayList.add(invoiceModel);
 
                             }
 
 
-                        }
+
+                            invoiceDueDateModelArrayList.clear();
+                            for (int i=0; i<invoice_array.length(); i++){
+                                JSONObject obj_invoice = invoice_array.getJSONObject(i);
+                                InvoiceModel invoiceModel=new InvoiceModel();
+                                invoiceModel.setInvoice_id(obj_invoice.getString("invoice_id"));
+                                invoiceModel.setInvoice_no(obj_invoice.getString("invoice_no"));
+                                invoiceModel.setTotal(obj_invoice.getString("total"));
+                                invoiceModel.setPayment_currency(obj_invoice.getString("currency_symbol"));
+                                String customer_name = obj_invoice.getString("customer_name");
+                                invoiceModel.setCustomer_name(customer_name);
+
+                                //  invoiceModel.setCustomer_name(customer_name);
+                                String customer_id = obj_invoice.getString("customer_id");
+                                String imageSS = getCustomerImageById(customerModelArrayList, customer_id);
+                                Log.e(TAG, "imageSS "+imageSS);
+                                invoiceModel.setCustomer_logo(customer_image_path+imageSS);
+
+                                String due_date = obj_invoice.getString("due_date");
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                try {
+                                    Date date = sdf.parse(due_date);
+                                    long millis = date.getTime();
+                                    //  Log.e(TAG, "millisAAA "+millis);
+
+
+                                    String todayCurrent = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                                    Date dateCurrent = sdf.parse(todayCurrent);
+                                    long millisCurrent = dateCurrent.getTime();
+                                    //   Log.e(TAG, "dateCurrentAAA "+millisCurrent);
+
+                                    if(millisCurrent > millis){
+                                        String order_status_id = obj_invoice.getString("order_status_id");
+                                        if(order_status_id.equalsIgnoreCase("1")){
+                                            invoiceDueDateModelArrayList.add(invoiceModel);
+                                        }
+                                    }
+
+                                }catch (Exception e){
+
+                                }
+
+
+                            }
 
 
 
@@ -400,105 +408,134 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
 
 
-                        JSONArray supplier_array = object_data.getJSONArray("supplier");
+                            JSONArray supplier_array = object_data.getJSONArray("supplier");
 
-                        supplierModelArrayList.clear();
-                        for (int k=0; k<supplier_array.length(); k++){
+                            supplierModelArrayList.clear();
+                            for (int k=0; k<supplier_array.length(); k++){
 
-                            JSONObject obj_supplier = supplier_array.getJSONObject(k);
+                                JSONObject obj_supplier = supplier_array.getJSONObject(k);
 
-                            SupplierModel supplierModel=new SupplierModel();
+                                SupplierModel supplierModel=new SupplierModel();
 
-                            supplierModel.setSupplierId(obj_supplier.getString("supplier_id"));
-                            supplierModel.setSupplierName(obj_supplier.getString("supplier_name"));
-                            supplierModel.setImage(obj_supplier.getString("image"));
-                            supplierModel.setSupplier_image_path(supplier_image_path);
+                                supplierModel.setSupplierId(obj_supplier.getString("supplier_id"));
+                                supplierModel.setSupplierName(obj_supplier.getString("supplier_name"));
+                                supplierModel.setImage(obj_supplier.getString("image"));
+                                supplierModel.setSupplier_image_path(supplier_image_path);
 
-                            String strresult1=obj_supplier.getString("image");
-                          //  Log.e("CompanyList Image", "result " + strresult1);
+                                String strresult1=obj_supplier.getString("image");
+                                //  Log.e("CompanyList Image", "result " + strresult1);
 
 
-                            supplierModelArrayList.add(supplierModel);
+                                supplierModelArrayList.add(supplierModel);
 
-                        }
+                            }
 
-                        businessactivitiesRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                        HomeInvoiceAdapter homeInvoiceAdapter = new HomeInvoiceAdapter(Home_Activity.this);
-                        businessactivitiesRV.setAdapter(homeInvoiceAdapter);
+                            businessactivitiesRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                            HomeInvoiceAdapter homeInvoiceAdapter = new HomeInvoiceAdapter(Home_Activity.this);
+                            businessactivitiesRV.setAdapter(homeInvoiceAdapter);
 
 //                        LicenseListAdapter licenseListAdapter = new LicenseListAdapter(Home_Activity.this);
 //                        businessactivitiesRV.setAdapter(licenseListAdapter);
-                        if (invoiceModelArrayList.size()>0) {
-                            txtinvoice.setVisibility(View.GONE);
-                        } else {
-                            txtinvoice.setVisibility(View.VISIBLE);
+                            if (invoiceModelArrayList.size()>0) {
+                                txtinvoice.setVisibility(View.GONE);
+                            } else {
+                                txtinvoice.setVisibility(View.VISIBLE);
+                            }
+
+                            homeInvoiceAdapter.setData(invoiceModelArrayList);
+
+
+
+                            invoiceoverdueRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                            Invoice_OverDue_Adapter invoice_overDue_adapter = new Invoice_OverDue_Adapter(Home_Activity.this);
+                            invoiceoverdueRV.setAdapter(invoice_overDue_adapter);
+
+                            if (invoiceDueDateModelArrayList.size() > 0) {
+                                no_overduetxt.setVisibility(View.GONE);
+                            } else {
+                                no_overduetxt.setVisibility(View.VISIBLE);
+                            }
+
+                            invoice_overDue_adapter.setData(invoiceDueDateModelArrayList);
+
+
+
+
+                            int numberOfColumns = 3;
+                            recyclerVinder.setLayoutManager(new GridLayoutManager(Home_Activity.this, numberOfColumns));
+                            HomeSupplierAdapter homeSupplierAdapter = new HomeSupplierAdapter(Home_Activity.this);
+                            recyclerVinder.setAdapter(homeSupplierAdapter);
+
+                            if (supplierModelArrayList.size()>0) {
+                                txtNo.setVisibility(View.GONE);
+                            } else {
+                                txtNo.setVisibility(View.VISIBLE);
+                            }
+                            homeSupplierAdapter.setData(supplierModelArrayList);
+
+
+                            int numberOfColumns2 = 3;
+                            recycleCustomers.setLayoutManager(new GridLayoutManager(Home_Activity.this, numberOfColumns2));
+                            HomeCustomerAdapter homeCustomerAdapter = new HomeCustomerAdapter(Home_Activity.this);
+
+                            recycleCustomers.setAdapter(homeCustomerAdapter);
+
+                            if (customerModelArrayList.size()>0) {
+                                no_customer.setVisibility(View.GONE);
+                            } else {
+                                no_customer.setVisibility(View.VISIBLE);
+                            }
+                            homeCustomerAdapter.setData(customerModelArrayList);
+
+
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
+
                         }
 
-                        homeInvoiceAdapter.setData(invoiceModelArrayList);
+                    } else {
 
+                        try {
 
+                            JSONObject jsonObject = new JSONObject(result);
+                            // util.showToast(Home_Activity.this, jsonObject.getString("message"));
 
-                        invoiceoverdueRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                        Invoice_OverDue_Adapter invoice_overDue_adapter = new Invoice_OverDue_Adapter(Home_Activity.this);
-                        invoiceoverdueRV.setAdapter(invoice_overDue_adapter);
+                        } catch (JSONException e) {
 
-                        if (invoiceDueDateModelArrayList.size() > 0) {
-                            no_overduetxt.setVisibility(View.GONE);
-                        } else {
-                            no_overduetxt.setVisibility(View.VISIBLE);
+                            e.printStackTrace();
+
                         }
-
-                        invoice_overDue_adapter.setData(invoiceDueDateModelArrayList);
-
-
-
-
-                        int numberOfColumns = 3;
-                        recyclerVinder.setLayoutManager(new GridLayoutManager(Home_Activity.this, numberOfColumns));
-                        HomeSupplierAdapter homeSupplierAdapter = new HomeSupplierAdapter(Home_Activity.this);
-                        recyclerVinder.setAdapter(homeSupplierAdapter);
-
-                        if (supplierModelArrayList.size()>0) {
-                            txtNo.setVisibility(View.GONE);
-                        } else {
-                            txtNo.setVisibility(View.VISIBLE);
-                        }
-                        homeSupplierAdapter.setData(supplierModelArrayList);
-
-
-                        int numberOfColumns2 = 3;
-                        recycleCustomers.setLayoutManager(new GridLayoutManager(Home_Activity.this, numberOfColumns2));
-                        HomeCustomerAdapter homeCustomerAdapter = new HomeCustomerAdapter(Home_Activity.this);
-
-                        recycleCustomers.setAdapter(homeCustomerAdapter);
-
-                        if (customerModelArrayList.size()>0) {
-                            no_customer.setVisibility(View.GONE);
-                         } else {
-                            no_customer.setVisibility(View.VISIBLE);
-                        }
-                        homeCustomerAdapter.setData(customerModelArrayList);
-
-
-                    } catch (JSONException e) {
-
-                        e.printStackTrace();
-
+                    }
+                }else{
+                    if (invoiceModelArrayList.size()>0) {
+                        txtinvoice.setVisibility(View.GONE);
+                    } else {
+                        txtinvoice.setVisibility(View.VISIBLE);
                     }
 
-                } else {
+                    if (invoiceDueDateModelArrayList.size()>0) {
+                        no_overduetxt.setVisibility(View.GONE);
+                    } else {
+                        no_overduetxt.setVisibility(View.VISIBLE);
+                    }
 
-                    try {
+                    if (customerModelArrayList.size()>0) {
+                        txtNo.setVisibility(View.GONE);
+                    } else {
+                        txtNo.setVisibility(View.VISIBLE);
+                    }
 
-                        JSONObject jsonObject = new JSONObject(result);
-                       // util.showToast(Home_Activity.this, jsonObject.getString("message"));
-
-                    } catch (JSONException e) {
-
-                        e.printStackTrace();
-
+                    if (supplierModelArrayList.size()>0) {
+                        no_customer.setVisibility(View.GONE);
+                    } else {
+                        no_customer.setVisibility(View.VISIBLE);
                     }
                 }
+
+
+
+
             }
 
             @Override
@@ -527,104 +564,141 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);
+
+
+
         FormBody.Builder formBuilder = new FormBody.Builder();
         RequestBody formBody = formBuilder.build();
         GetAsyncPost mAsync = new GetAsyncPost(Home_Activity.this, AllSirApi.COMPANYListing, formBody, dialog, "") {
             @Override
             public void getValueParse(Response response) {
+                Log.e(TAG, "getValueParse "+response);
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
+
                 String result = "";
                 companyModelArrayList = new ArrayList<>();
 
-                try {
 
-                    result = response.body().string();
+//                if(response == null){
+//
+//                }
 
-                } catch (Exception e) {
 
-                    e.printStackTrace();
-
-                }
-
-                Log.e("CompanyListResponse", "result " + result);
-
-                if (response.isSuccessful()) {
-
+                if(response != null){
                     try {
 
-                        JSONObject jsonObject = new JSONObject(result);
+                        result = response.body().string();
 
-                        JSONObject object_data = jsonObject.getJSONObject("data");
+                    } catch (Exception e) {
 
-                        JSONArray invoice_array = object_data.getJSONArray("company");
+                        e.printStackTrace();
 
-                        for (int i=0; i<invoice_array.length(); i++){
+                    }
 
-                            JSONObject obj_invoice = invoice_array.getJSONObject(i);
+                    Log.e("CompanyListResponse", "result " + result);
 
-                            CompanyModel companyModel=new CompanyModel();
-                            companyModel.setCompany_name(obj_invoice.getString("name"));
-                            companyModel.setCompany_id(obj_invoice.getString("company_id"));
+                    if (response.isSuccessful()) {
 
-                            compantId=obj_invoice.getString("company_id");
-                            Log.e("Company Id",compantId);
+                        try {
 
-                            companyModelArrayList.add(companyModel);
+                            JSONObject jsonObject = new JSONObject(result);
 
-                            if(i == 0){
-                                description.setText(""+obj_invoice.getString("name"));
-                                HomeApi(compantId);
+                            JSONObject object_data = jsonObject.getJSONObject("data");
+
+                            JSONArray invoice_array = object_data.getJSONArray("company");
+
+                            for (int i=0; i<invoice_array.length(); i++){
+
+                                JSONObject obj_invoice = invoice_array.getJSONObject(i);
+
+                                CompanyModel companyModel=new CompanyModel();
+                                companyModel.setCompany_name(obj_invoice.getString("name"));
+                                companyModel.setCompany_id(obj_invoice.getString("company_id"));
+
+                                compantId=obj_invoice.getString("company_id");
+                                Log.e("Company Id",compantId);
+
+                                companyModelArrayList.add(companyModel);
+
+                                if(i == 0){
+                                    description.setText(""+obj_invoice.getString("name"));
+                                    HomeApi(compantId);
+                                }
+
+
+
                             }
 
 
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
 
                         }
 
+                    } else {
 
-                    } catch (JSONException e) {
+                        try {
 
-                        e.printStackTrace();
+                            JSONObject jsonObject = new JSONObject(result);
+                            // util.showToast(Home_Activity.this, jsonObject.getString("message"));
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
-                } else {
 
-                    try {
-
-                        JSONObject jsonObject = new JSONObject(result);
-                       // util.showToast(Home_Activity.this, jsonObject.getString("message"));
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    if (invoiceModelArrayList.size()>0) {
+                        txtinvoice.setVisibility(View.GONE);
+                    } else {
+                        txtinvoice.setVisibility(View.VISIBLE);
                     }
-                }
 
+                    if (invoiceDueDateModelArrayList.size()>0) {
+                        no_overduetxt.setVisibility(View.GONE);
+                    } else {
+                        no_overduetxt.setVisibility(View.VISIBLE);
+                    }
 
-                if (invoiceModelArrayList.size()>0) {
-                    txtinvoice.setVisibility(View.GONE);
-                } else {
-                    txtinvoice.setVisibility(View.VISIBLE);
-                }
+                    if (customerModelArrayList.size()>0) {
+                        txtNo.setVisibility(View.GONE);
+                    } else {
+                        txtNo.setVisibility(View.VISIBLE);
+                    }
 
-                if (invoiceDueDateModelArrayList.size()>0) {
-                    no_overduetxt.setVisibility(View.GONE);
-                } else {
-                    no_overduetxt.setVisibility(View.VISIBLE);
-                }
+                    if (supplierModelArrayList.size()>0) {
+                        no_customer.setVisibility(View.GONE);
+                    } else {
+                        no_customer.setVisibility(View.VISIBLE);
+                    }
+                }else{
+                    if (invoiceModelArrayList.size()>0) {
+                        txtinvoice.setVisibility(View.GONE);
+                    } else {
+                        txtinvoice.setVisibility(View.VISIBLE);
+                    }
 
-                if (customerModelArrayList.size()>0) {
-                    txtNo.setVisibility(View.GONE);
-                } else {
-                    txtNo.setVisibility(View.VISIBLE);
-                }
+                    if (invoiceDueDateModelArrayList.size()>0) {
+                        no_overduetxt.setVisibility(View.GONE);
+                    } else {
+                        no_overduetxt.setVisibility(View.VISIBLE);
+                    }
 
-                if (supplierModelArrayList.size()>0) {
-                    no_customer.setVisibility(View.GONE);
-                } else {
-                    no_customer.setVisibility(View.VISIBLE);
+                    if (customerModelArrayList.size()>0) {
+                        txtNo.setVisibility(View.GONE);
+                    } else {
+                        txtNo.setVisibility(View.VISIBLE);
+                    }
+
+                    if (supplierModelArrayList.size()>0) {
+                        no_customer.setVisibility(View.GONE);
+                    } else {
+                        no_customer.setVisibility(View.VISIBLE);
+                    }
                 }
 
 
@@ -633,6 +707,9 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
             @Override
             public void retry() {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
+                Log.e(TAG, "retry");
             }
         };
 

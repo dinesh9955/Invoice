@@ -20,7 +20,10 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Go_Premium_Activity;
 import com.receipt.invoice.stock.sirproject.R;
@@ -31,7 +34,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Verification_Code_Activity extends AppCompatActivity {
+public class Verification_Code_Activity extends BaseActivity {
 
 
     ImageView imgback,imgsucess;
@@ -278,7 +281,8 @@ public class Verification_Code_Activity extends AppCompatActivity {
             params.add("code",verification_code);
 
             AsyncHttpClient client = new AsyncHttpClient();
-            client.post(Constant.BASE_URL + "user/verification", params, new AsyncHttpResponseHandler() {
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+            client.post(AllSirApi.BASE_URL + "user/verification", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -360,7 +364,8 @@ public class Verification_Code_Activity extends AppCompatActivity {
             params.add("email",mail);
 
             AsyncHttpClient client = new AsyncHttpClient();
-            client.post(Constant.BASE_URL + "user/resendCode", params, new AsyncHttpResponseHandler() {
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+            client.post(AllSirApi.BASE_URL + "user/resendCode", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 

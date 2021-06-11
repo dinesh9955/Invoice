@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Home.Model.InvoiceModel;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class Invoice_OverDue_Adapter extends RecyclerView.Adapter<Invoice_OverDu
 
     @Override
     public void onBindViewHolder(@NonNull final Invoice_OverDue_Adapter.ViewHolderForCat viewHolderForCat, final int i) {
-        Glide.with(mcontext).load(invoiceModelArrayList.get(i).customer_logo).placeholder(R.drawable.app_icon).into(viewHolderForCat.image);
+        GlideApp.with(mcontext).load(invoiceModelArrayList.get(i).customer_logo).placeholder(R.drawable.app_icon).into(viewHolderForCat.image);
         viewHolderForCat.name.setText(invoiceModelArrayList.get(i).getInvoice_no());
         viewHolderForCat.companyname.setText(invoiceModelArrayList.get(i).getCustomer_name());
 

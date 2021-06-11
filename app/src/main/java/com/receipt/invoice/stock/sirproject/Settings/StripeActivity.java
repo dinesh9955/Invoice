@@ -98,7 +98,7 @@ public class StripeActivity extends BaseActivity {
 //        RequestOptions options = new RequestOptions();
 //        options.centerCrop();
 //        options.placeholder(R.drawable.app_icon);
-//        Glide.with(StripeActivity.this)
+//        GlideApp.with(StripeActivity.this)
 //                .load(companyImage)
 //                .apply(options)
 //                .into(roundedImageView);

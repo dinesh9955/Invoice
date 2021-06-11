@@ -15,6 +15,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Stock_Products;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.text.DecimalFormat;
@@ -68,7 +69,7 @@ public class Stock_Products_Details_Adapter extends RecyclerView.Adapter<Stock_P
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.app_icon);
-        Glide.with(mcontext)
+        GlideApp.with(mcontext)
                 .load(stock_products.getImagepath()+stock_products.getImage())
                 .apply(options)
                 .into(viewHolderForCat.image);

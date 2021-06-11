@@ -14,11 +14,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.receipt.invoice.stock.sirproject.Adapter.CustomViewPagerAdapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.LockableViewPager;
 
-public class ReceiptsActivity extends AppCompatActivity {
+public class ReceiptsActivity extends BaseActivity {
 
 
     LockableViewPager viewPager;
@@ -33,7 +34,7 @@ public class ReceiptsActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(ReceiptsActivity.this,"Create Receipts");
+        Constant.toolbar(ReceiptsActivity.this, getString(R.string.header_receipts));
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
@@ -49,8 +50,8 @@ public class ReceiptsActivity extends AppCompatActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("CREATE RECEIPTS");
-        addcustomer.setText("LIST OF RECEIPTS");
+        addcustomer.setText(getString(R.string.header_receipts_list));
+        customers.setText(getString(R.string.header_receipts_create));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -63,18 +64,8 @@ public class ReceiptsActivity extends AppCompatActivity {
         }
 
 
-//        viewPager.setOnTouchListener(new View.OnTouchListener()
-//        {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event)
-//            {
-//                return true;
-//            }
-//        });
 
         viewPager.setSwipeable(false);
-
-
 
     }
 
@@ -85,8 +76,8 @@ public class ReceiptsActivity extends AppCompatActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ListOfReceipts(),"LIST OF RECEIPTS");
-        adapter.addFragment(new FragmentCreate_Receipts(), "CREATE RECEIPTS");
+        adapter.addFragment(new ListOfReceipts(), getString(R.string.header_receipts_list));
+        adapter.addFragment(new FragmentCreate_Receipts(), getString(R.string.header_receipts_create));
         pager.setAdapter(adapter);
 
     }

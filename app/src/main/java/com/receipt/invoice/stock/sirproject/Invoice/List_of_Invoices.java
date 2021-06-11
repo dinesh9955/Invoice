@@ -39,8 +39,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.InvoicelistAdapterdt;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 //import com.receipt.invoice.stock.sirproject.Model.Product_List;
@@ -55,21 +58,28 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.cert.Certificate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLPeerUnverifiedException;
+
 import cz.msebera.android.httpclient.Header;
 
 
-public class List_of_Invoices extends Fragment implements InvoiceCallBack{
+public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
     private static final String TAG = "List_of_Invoices";
 
@@ -110,7 +120,7 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
     String invoiceidbypos = "";
     String receipt_count, estimate_count, invoice_useriddt, invoice_count;
     String templatestr = "1";
-    String shareInvoicelink = "http://13.126.22.0/saad/app/index.php/view/invoice/";
+    String shareInvoicelink = AllSirApi.BASE_URL_INDEX+"view/invoice/";
 //  Shaare invoice lnk
     String BaseurlForShareInvoice = "";
     String invoicelistbyurl = "";
@@ -289,7 +299,8 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                                     String ilnvoiceStatus = temp.get(pos).getInvocestatus();
                                     String pdflink = temp.get(pos).getInvoicepdflink();
                                     String sahrelink = temp.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
-                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
+                                    String link = temp.get(pos).getLink();
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName);
                                 }else{
                                     customerName = list.get(pos).getInvoicustomer_name();
                                     dataNo = list.get(pos).getInvoice_nobdt();
@@ -304,7 +315,8 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                                     String ilnvoiceStatus = list.get(pos).getInvocestatus();
                                     String pdflink = list.get(pos).getInvoicepdflink();
                                     String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
-                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink);
+                                    String link = list.get(pos).getLink();
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName);
                                 }
 
 
@@ -602,8 +614,9 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         Log.e("token", token);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -694,9 +707,9 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
 
         AsyncHttpClient client = new AsyncHttpClient();
-
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -774,6 +787,7 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                             company_list.setPaypal(item.getString("paypal"));
                             company_list.setStripe(item.getString("stripe"));
                             company_list.setPaypal_type(item.getString("paypal_type"));
+                            company_list.setLink(item.getString("link"));
                             list.add(company_list);
 
 
@@ -846,8 +860,9 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
             Log.e("s order status", s);
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "invoice/updateStatus", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "invoice/updateStatus", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -926,8 +941,9 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 //            Log.e("s order status", s);
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "invoice/delete", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "invoice/delete", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -996,8 +1012,9 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 //            Log.e("s order status", s);
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "invoice/updateVoidStatus", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "invoice/updateVoidStatus", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1047,8 +1064,8 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
 
 
-    private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink) {
-        String urlPDF = Constant.BASE_URL_PDF + pdflink;
+    private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink, String link, String customerName) {
+        String urlPDF = AllSirApi.BASE_URL_PDF + pdflink;
 
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.bottominvoiceview, null);
@@ -1206,11 +1223,14 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 //                            Log.e(TAG, "pdflink: "+pdflink);
                             Log.e(TAG, "dataNo: "+dataNo);
 
+                            pref.setCustomerName(customerName);
 
+
+                            String newLink = AllSirApi.BASE_URL_INDEX+"view/invoice/"+link;
 
                             String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
                             String txt = "Your Invoice can be viewed, printed and downloaded from below link." +
-                                    "\n\n" +urlPDF ;
+                                    "\n\n" +newLink ;
 
                             try {
 
@@ -1232,43 +1252,43 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 //                                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 
 
-
-
-
-//                                    String to = "";
-//                                    //  String subject= "Hi I am subject";
-//                                    //  String body="Hi I am test body";
-//                                    String mailTo = "mailto:" + to +
-//                                            "?&subject=" + Uri.encode(subject) +
-//                                            "&body=" + Uri.encode(txt);
 //
-//                                    Intent intent = new Intent(Intent.ACTION_SENDTO);
-//                                    // intent.setType("text/plain");
-//                                    String message="File to be shared is " + "file_name" + ".";
-////                                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-//                                    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
-////                                intent.putExtra(Intent.EXTRA_TEXT, message);
-//                                    //intent.setData(Uri.parse("mailto:xyz@gmail.com"));
-//                                    intent.setData(Uri.parse(mailTo));
-//                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                    startActivity(intent);
-
-//                                    Intent share = new Intent(Intent.ACTION_SEND);
-//                                    share.setType("image/jpeg");
-//                                    share.putExtra(Intent.EXTRA_SUBJECT, subject);
-//                                    share.putExtra(Intent.EXTRA_TEXT, txt);
 //
-//                                    share.putExtra(Intent.EXTRA_STREAM,
-//                                            Uri.parse("file:///sdcard/share.jpg"));
 //
-//                                    if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")){
-//                                        share.setPackage("com.google.android.gm");
-//                                    }
-//                                    startActivity(share);
-
+////                                    String to = "";
+////                                    //  String subject= "Hi I am subject";
+////                                    //  String body="Hi I am test body";
+////                                    String mailTo = "mailto:" + to +
+////                                            "?&subject=" + Uri.encode(subject) +
+////                                            "&body=" + Uri.encode(txt);
+////
+////                                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+////                                    // intent.setType("text/plain");
+////                                    String message="File to be shared is " + "file_name" + ".";
+//////                                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+////                                    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
+//////                                intent.putExtra(Intent.EXTRA_TEXT, message);
+////                                    //intent.setData(Uri.parse("mailto:xyz@gmail.com"));
+////                                    intent.setData(Uri.parse(mailTo));
+////                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+////                                    startActivity(intent);
+//
+////                                    Intent share = new Intent(Intent.ACTION_SEND);
+////                                    share.setType("image/jpeg");
+////                                    share.putExtra(Intent.EXTRA_SUBJECT, subject);
+////                                    share.putExtra(Intent.EXTRA_TEXT, txt);
+////
+////                                    share.putExtra(Intent.EXTRA_STREAM,
+////                                            Uri.parse("file:///sdcard/share.jpg"));
+////
+////                                    if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")){
+////                                        share.setPackage("com.google.android.gm");
+////                                    }
+////                                    startActivity(share);
+//
                                     String url = urlPDF;
                                     //String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
-                                    new DownloadFileAttach(getActivity(), subject, txt).execute(url);
+                                    new DownloadFileAttach(getActivity(), subject, txt).execute(url.replace("https", "http"));
                                 }
 
 
@@ -1312,7 +1332,7 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                                             //Get the URL entered
                                             String url = urlPDF;
                                             String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
-                                            new DownloadFile(getActivity(), subject).execute(url);
+                                            new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
                                         }
@@ -1615,8 +1635,9 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
         avi.smoothToShow();
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+       client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1648,10 +1669,12 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                                 cids.add(company_id);
                                 arrayColor.add(colorCode);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cnames);
-                                selectcompany.setAdapter(namesadapter);
+
 
                             }
+
+                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cnames);
+                            selectcompany.setAdapter(namesadapter);
                         }
                     }
                 } catch (JSONException e) {
@@ -1887,6 +1910,12 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
                 URL url = new URL(f_url[0]);
                 URLConnection connection = url.openConnection();
                 connection.connect();
+
+//                print_https_cert(connection);
+//
+//                //dump all the content
+//                print_content(connection);
+
                 // getting file length
                 int lengthOfFile = connection.getContentLength();
 
@@ -1983,6 +2012,7 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
             //context.startActivity(Intent.createChooser(share, "Share File"));
 
 
+            Log.e(TAG, "fileWithinMyDir "+message);
 
             Intent intentShareFile = new Intent(Intent.ACTION_SEND);
             File fileWithinMyDir = new File(message);
@@ -2052,6 +2082,66 @@ public class List_of_Invoices extends Fragment implements InvoiceCallBack{
 
         }
     }
+
+
+
+
+    private void print_https_cert(HttpsURLConnection con){
+
+        if(con!=null){
+
+            try {
+
+                System.out.println("Response Code : " + con.getResponseCode());
+                System.out.println("Cipher Suite : " + con.getCipherSuite());
+                System.out.println("\n");
+
+                Certificate[] certs = con.getServerCertificates();
+                for(Certificate cert : certs){
+                    System.out.println("Cert Type : " + cert.getType());
+                    System.out.println("Cert Hash Code : " + cert.hashCode());
+                    System.out.println("Cert Public Key Algorithm : "
+                            + cert.getPublicKey().getAlgorithm());
+                    System.out.println("Cert Public Key Format : "
+                            + cert.getPublicKey().getFormat());
+                    System.out.println("\n");
+                }
+
+            } catch (SSLPeerUnverifiedException e) {
+                e.printStackTrace();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    private void print_content(HttpsURLConnection con){
+        if(con!=null){
+
+            try {
+
+                System.out.println("****** Content of the URL ********");
+                BufferedReader br =
+                        new BufferedReader(
+                                new InputStreamReader(con.getInputStream()));
+
+                String input;
+
+                while ((input = br.readLine()) != null){
+                    System.out.println(input);
+                }
+                br.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
 
 
 

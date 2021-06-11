@@ -19,6 +19,7 @@ import com.receipt.invoice.stock.sirproject.Customer.Customer_Detail_Activity2;
 import com.receipt.invoice.stock.sirproject.Details.Customer_Detail_Activity;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 
 import java.util.ArrayList;
 
@@ -110,7 +111,7 @@ public class Customer_Listing_Adapter extends RecyclerView.Adapter<Customer_List
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.app_icon);
-        Glide.with(mcontext)
+        GlideApp.with(mcontext)
                 .load(customer_image)
                 .apply(options)
                 .into(viewHolderForCat.image);

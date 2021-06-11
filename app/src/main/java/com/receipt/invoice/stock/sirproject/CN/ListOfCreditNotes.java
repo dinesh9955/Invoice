@@ -39,7 +39,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Invoice.CheckForSDCard;
 import com.receipt.invoice.stock.sirproject.Invoice.ConvertToReceiptsActivity;
@@ -71,7 +74,7 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ListOfCreditNotes extends Fragment {
+public class ListOfCreditNotes extends BaseFragment {
 
     private static final String TAG = "ListOfCreditNotes";
     // List Of Invoice Dtata
@@ -103,7 +106,7 @@ public class ListOfCreditNotes extends Fragment {
     String invoiceidbypos = "";
     String receipt_count, estimate_count, invoice_useriddt, invoice_count;
     String templatestr = "1";
-    String shareInvoicelink = "http://13.126.22.0/saad/app/index.php/view/invoice/";
+    String shareInvoicelink = AllSirApi.BASE_URL_INDEX+"view/invoice/";
     //  Shaare invoice lnk
     String BaseurlForShareInvoice = "";
     String invoicelistbyurl = "";
@@ -378,8 +381,9 @@ public class ListOfCreditNotes extends Fragment {
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         Log.e("token", token);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -516,9 +520,9 @@ public class ListOfCreditNotes extends Fragment {
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
 
         AsyncHttpClient client = new AsyncHttpClient();
-
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -625,8 +629,9 @@ public class ListOfCreditNotes extends Fragment {
 //            Log.e("s order status", s);
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "creditnote/delete", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "creditnote/delete", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -696,8 +701,9 @@ public class ListOfCreditNotes extends Fragment {
             Log.e("s order status", s);
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "invoice/updateStatus", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "invoice/updateStatus", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -1016,7 +1022,7 @@ public class ListOfCreditNotes extends Fragment {
                                             //Get the URL entered
                                             String url = sharelink;
                                             String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+customerName;
-                                            new DownloadFile(getActivity(), subject).execute(url);
+                                            new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
                                         }
@@ -1321,8 +1327,9 @@ public class ListOfCreditNotes extends Fragment {
         avi.smoothToShow();
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

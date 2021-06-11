@@ -71,7 +71,9 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.Customer_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Product_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Adapter.Products_Adapter;
@@ -109,6 +111,7 @@ import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
+import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
@@ -459,7 +462,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
         verifyStroagePermissions(this);
 
-        requestManager = Glide.with(this);
+        requestManager = GlideApp.with(this);
         mCompressor = new FileCompressor(this);
 
 
@@ -1616,8 +1619,9 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "receipt/add", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "receipt/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -1916,7 +1920,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             recycler_products.setLayoutManager(layoutManager);
             recycler_products.setHasFixedSize(true);
 
-            product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog,"invoice");
+            product_bottom_adapter = new Product_Bottom_Adapter(this, product_bottom, this, bottomSheetDialog,"receipt");
             recycler_products.setAdapter(product_bottom_adapter);
             product_bottom_adapter.notifyDataSetChanged();
             txtproducts.setTypeface(Typeface.createFromAsset(this.getAssets(), "Fonts/AzoSans-Medium.otf"));
@@ -2556,6 +2560,9 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                             txtdays.setText(credit_terms);
                             edduedate.setClickable(true);
                             bottomSheetDialog.dismiss();
+
+                            edduedate.setText(duedate.getText().toString());
+
                         } else if (credit_terms.equals("immediately")) {
                             String myFormat = "yyyy-MM-dd"; //In which you need put here
                             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -2825,8 +2832,9 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         cids.clear();
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -2892,8 +2900,9 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(ConvertToReceiptsActivity.this, Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            client.post(Constant.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
+            client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
@@ -2961,8 +2970,9 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
         String token = Constant.GetSharedPreferences(ConvertToReceiptsActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -3070,8 +3080,9 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
@@ -3244,8 +3255,9 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         Log.e("token", token);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3397,8 +3409,9 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
         String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(Constant.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3577,7 +3590,6 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             textViewNoItems.setVisibility(View.GONE);
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         //  double Grossamount_strdto = 0.0,  Discountamountstrdto = 0.0,  Subtotalamountdto = 0.0, Tax_amountdto = 0.0,
         //  Shippingamountdto = 0.0, Netamountvaluedto = 0.0, Paidamountstrdto = 0.0, Blanceamountstrdto = 0.0;
@@ -3651,14 +3663,18 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                 if (selectedtaxt.size() > 0) {
                     // taxAmount = Tax_amountdto;
                     if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
-                        taxAmount = Tax_amountdto * subtotalAmount / (100+ Tax_amountdto);
-                        afterTaxAmount = subtotalAmount;
+                        taxAmount = Tax_amountdto;
+//                        taxAmount = Tax_amountdto * subtotalAmount / (100+ Tax_amountdto);
+//                        afterTaxAmount = subtotalAmount;
+                        Log.e(TAG, "afterTaxAmountOOOO11 "+afterTaxAmount);
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + " incl." );
 //                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                     } else { // include off
-                        taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
-                        afterTaxAmount = subtotalAmount + taxAmount;
+                        taxAmount = Tax_amountdto;
+//                        taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
+//                        afterTaxAmount = subtotalAmount + taxAmount;
+                        Log.e(TAG, "afterTaxAmountOOOO22 "+afterTaxAmount);
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + "" );
 //                    taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
