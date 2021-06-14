@@ -53,12 +53,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -84,7 +82,6 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
-import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceTotalsItemDto;
@@ -1376,6 +1373,7 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
 
             if (company_stampFileimage != null) {
                 try {
+                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -3478,7 +3476,7 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
             textViewNoItems.setVisibility(View.GONE);
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+       // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         //  double Grossamount_strdto = 0.0,  Discountamountstrdto = 0.0,  Subtotalamountdto = 0.0, Tax_amountdto = 0.0,
         //  Shippingamountdto = 0.0, Netamountvaluedto = 0.0, Paidamountstrdto = 0.0, Blanceamountstrdto = 0.0;
@@ -3552,16 +3550,42 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
                 if (selectedtaxt.size() > 0) {
                     // taxAmount = Tax_amountdto;
                     if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
-//                        taxAmount = Tax_amountdto * subtotalAmount / (100+ Tax_amountdto);
+                        double taxAm = 0.0;
+                        try{
+                            taxAm = Double.parseDouble(taxtrateamt);
+                        }catch (Exception e){
+
+                        }
+
+                        if(taxAm != 0){
+                            taxAmount = taxAm * subtotalAmount / ( 100 + taxAm);
+                        }
+
+
+                        afterTaxAmount = subtotalAmount;
 //                        afterTaxAmount = subtotalAmount;
-                        taxAmount = Tax_amountdto;
+
+                        Log.e(TAG, "1111111AAAAA");
+
+                        //taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + " incl." );
 //                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                     } else { // include off
-//                        taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
+                        double taxAm = 0.0;
+                        try{
+                            taxAm = Double.parseDouble(taxtrateamt);
+                        }catch (Exception e){
+
+                        }
+
+                        taxAmount = subtotalAmount * taxAm / 100;
+                        afterTaxAmount = subtotalAmount + taxAmount;
 //                        afterTaxAmount = subtotalAmount + taxAmount;
-                        taxAmount = Tax_amountdto;
+
+                        Log.e(TAG, "1111111BBBBB");
+
+                        //taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + "" );
 //                    taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
@@ -3605,6 +3629,7 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
 
                 }
             }
+
 
 
 
@@ -4490,22 +4515,22 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
             }
 
 
-            if(!sltcustonername.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustonername+"</br>");
             }
-            if(!sltcustomer_address.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_address+"</br>");
             }
-            if(!sltcustomer_contact.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_contact+"</br>");
             }
-            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
             }
-            if(!sltcustomer_website.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_website+"</br>");
             }
-            if(!sltcustomer_email.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_email+"");
             }
 
@@ -4961,23 +4986,23 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "receipt1.html";
-        String nameName = "file:///android_asset/receipt1.html";
+        String name = "receipt.html";
+        String nameName = "file:///android_asset/receipt.html";
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }
 
 

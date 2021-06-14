@@ -1144,9 +1144,42 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
 
                 if (multimgpath != null) {
                     for (int i = 0; i < multimgpath.size(); i++) {
-                        File imgFile = new File(multimgpath.get(i));
+                       // File imgFile = new File(multimgpath.get(i));
                         // company_stampFileimage=imgFile;
-                        multiple[i] = imgFile;
+                       // multiple[i] = imgFile;
+
+                        Log.e(TAG, "imgFile: "+multimgpath.get(i));
+                        if(i == 0){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 1){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage2(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 2){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage3(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 3){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage4(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 4){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage5(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }
                     }
                 }
 
@@ -1253,8 +1286,6 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
     }
 
     private void multiimagepicker() {
-
-
         multiImageDisposable = TedRxBottomPicker.with(this)
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
@@ -1289,7 +1320,18 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                 try {
                     String decoded = URLDecoder.decode(attchedmentimagepath, "UTF-8");
                     String replaceString = decoded.replaceAll("file://", "");
-                    multimgpath.add(replaceString);
+
+//                    if(i == 0){
+//
+                        multimgpath.add(replaceString);
+//                    }else if( i == 1){
+//
+//                    }else if( i == 2){
+//
+//                    }
+
+
+
                 } catch (Exception e) {
 
                 }
@@ -1390,6 +1432,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
 
             if (company_stampFileimage != null) {
                 try {
+                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -3617,16 +3660,36 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                 if (selectedtaxt.size() > 0) {
                     // taxAmount = Tax_amountdto;
                     if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
-//                        taxAmount = Tax_amountdto * subtotalAmount / (100+ Tax_amountdto);
+                        double taxAm = 0.0;
+                        try{
+                            taxAm = Double.parseDouble(taxtrateamt);
+                        }catch (Exception e){
+
+                        }
+
+                        if(taxAm != 0){
+                            taxAmount = taxAm * subtotalAmount / ( 100 + taxAm);
+                        }
+
+
+                        afterTaxAmount = subtotalAmount;
 //                        afterTaxAmount = subtotalAmount;
-                        taxAmount = Tax_amountdto;
+                       // taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + " incl." );
 //                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                     } else { // include off
-//                        taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
+                        double taxAm = 0.0;
+                        try{
+                            taxAm = Double.parseDouble(taxtrateamt);
+                        }catch (Exception e){
+
+                        }
+
+                        taxAmount = subtotalAmount * taxAm / 100;
+                        afterTaxAmount = subtotalAmount + taxAmount;
 //                        afterTaxAmount = subtotalAmount + taxAmount;
-                        taxAmount = Tax_amountdto;
+                       // taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + "" );
 //                    taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
@@ -4620,24 +4683,25 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
             }
 
 
-            if(!sltcustonername.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustonername+"</br>");
             }
-            if(!sltcustomer_address.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_address+"</br>");
             }
-            if(!sltcustomer_contact.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_contact+"</br>");
             }
-            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
             }
-            if(!sltcustomer_website.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_website+"</br>");
             }
-            if(!sltcustomer_email.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_email+"");
             }
+
         }
 
         if (shippingfirstname.equalsIgnoreCase("")) {

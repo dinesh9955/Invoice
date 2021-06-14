@@ -50,6 +50,7 @@ import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
+import com.receipt.invoice.stock.sirproject.ThankYouNote.SendThankYouNoteActivity;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -104,6 +105,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
     String company_id, company_name, company_address, company_contact, company_email, company_website, payment_bank_name, payment_currency, payment_iban, payment_swift_bic;
     ImageView imageViewmenu;
     String selectedCompanyId = "";
+    String selectedCompanyName = "";
     String invoice_idstr;
     BottomSheetDialog bottomSheetDialog;
     // Custom Invoice Detail
@@ -557,6 +559,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             public void onItemSelected(int position, String itemAtPosition) {
                 selectedCompanyId = cids.get(position);
                 colorCode = arrayColor.get(position);
+                selectedCompanyName = cnames.get(position);
                 Log.e("colorCode",colorCode);
                Log.e("company_id",selectedCompanyId);
                 String parmavalue = "All";
@@ -1228,7 +1231,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                             String newLink = AllSirApi.BASE_URL_INDEX+"view/invoice/"+link;
 
-                            String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
+                            String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+selectedCompanyName;
                             String txt = "Your Invoice can be viewed, printed and downloaded from below link." +
                                     "\n\n" +newLink ;
 
@@ -1331,7 +1334,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = urlPDF;
-                                            String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
+                                            String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -2014,17 +2017,29 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
             Log.e(TAG, "fileWithinMyDir "+message);
 
-            Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+
+            File mFile2 = new File("/sdcard/share.jpg");
+            Uri imageUri2 = FileProvider.getUriForFile(
+                    context,
+                    "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
+                    mFile2);
+
             File fileWithinMyDir = new File(message);
-            Uri photoURI = FileProvider.getUriForFile(context,
+            Uri imageUri1 = FileProvider.getUriForFile(context,
                     "com.receipt.invoice.stock.sirproject.provider",
                     fileWithinMyDir);
 
             if(fileWithinMyDir.exists()) {
-                intentShareFile.setType("application/pdf");
+                //intentShareFile.setType("application/pdf");
 //                intentShareFile.setType("image/jpeg");
-                intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
 
+                ArrayList<Uri> uriArrayList = new ArrayList<>();
+                uriArrayList.add(imageUri1);
+                uriArrayList.add(imageUri2);
+
+                intentShareFile.setType("application/pdf/*|image/*");
+                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
                 //  intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/share.jpg"));
 
 

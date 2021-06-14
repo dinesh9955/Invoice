@@ -48,6 +48,7 @@ import com.receipt.invoice.stock.sirproject.Invoice.CheckForSDCard;
 import com.receipt.invoice.stock.sirproject.Invoice.InvoiceCallBack;
 import com.receipt.invoice.stock.sirproject.Invoice.InvoiceViewActivityWebViewPayment;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
+import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper;
 import com.receipt.invoice.stock.sirproject.Invoice.SwipeHelper2;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.R;
@@ -97,6 +98,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
     String company_id, company_name, company_address, company_contact, company_email, company_website, payment_bank_name, payment_currency, payment_iban, payment_swift_bic;
     ImageView imageViewmenu;
     String selectedCompanyId = "";
+    String selectedCompanyName = "";
     String invoice_idstr;
     BottomSheetDialog bottomSheetDialog;
     // Custom Invoice Detail
@@ -443,6 +445,28 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
             @Override
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
 
+//                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+//                        "Delete",
+//                        0,
+//                        Color.parseColor("#ff0000"),
+//
+//                        new SwipeHelper2.UnderlayButtonClickListener() {
+//                            @Override
+//                            public void onClick(final int pos) {
+//                                if(temp.size() > 0){
+//                                    String  invoiceidbypos = temp.get(pos).getInvoice_userid();
+//                                    Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+//                                    deleteInvoice(invoiceidbypos);
+//                                }else{
+//                                    String  invoiceidbypos = list.get(pos).getInvoice_userid();
+//                                    Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+//                                    deleteInvoice(invoiceidbypos);
+//                                }
+//
+//                            }
+//                        }
+//                ));
+
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
                         "More",
                         0,
@@ -585,7 +609,6 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                     }else{
                         deliveryStatus = list.get(viewHolder.getPosition()).getInvocestatus();
                     }
-
                 }
 
                 Log.e(TAG, "voidStatusAA " + voidStatus);
@@ -600,75 +623,81 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                 }
 
 
-                underlayButtons.add(new SwipeHelper2.UnderlayButton(
-                        markAsVoidTxt,
-                        0,
-                        Color.parseColor(colorDelivery),
-                        new SwipeHelper2.UnderlayButtonClickListener() {
-                            @Override
-                            public void onClick(final int pos) {
+                Log.e(TAG, "isProduct "+list.get(viewHolder.getPosition()).isProduct());
+                if(list.get(viewHolder.getPosition()).isProduct() == true){
+                    underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                            markAsVoidTxt,
+                            0,
+                            Color.parseColor(colorDelivery),
+                            new SwipeHelper2.UnderlayButtonClickListener() {
+                                @Override
+                                public void onClick(final int pos) {
 
-                                if(temp.size() > 0){
-                                    String invoiceidbypos = temp.get(pos).getInvoice_userid();
+                                    if(temp.size() > 0){
+                                        String invoiceidbypos = temp.get(pos).getInvoice_userid();
 
-                                    Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+                                        Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
 
-                                    String invoiceVoidStatus = temp.get(pos).getInvocestatus();
+                                        String invoiceVoidStatus = temp.get(pos).getInvocestatus();
 
-                                    String voidPassValue = "1";
+                                        String voidPassValue = "1";
 
-                                    if(invoiceVoidStatus.equalsIgnoreCase("1")){
-                                        voidPassValue = "2";
-                                        // colorVoid = "#ff9900";
+                                        if(invoiceVoidStatus.equalsIgnoreCase("1")){
+                                            voidPassValue = "2";
+                                            // colorVoid = "#ff9900";
 
-                                        deliveryStatus(invoiceidbypos, voidPassValue);
-                                    }
-
-//                                    if(invoiceVoidStatus.equalsIgnoreCase("2")){
-//                                        voidPassValue = "1";
-//                                        //colorVoid = "#99cc00";
-//                                    }
-
-                                    Log.e(TAG, "instantiateUnderlayButton");
-
-                                    invoicelistAdapterdt.updateList(temp);
-
-
-
-                                }else{
-                                    String invoiceidbypos = list.get(pos).getInvoice_userid();
-
-                                    Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
-
-                                    String invoiceVoidStatus = list.get(pos).getInvocestatus();
-
-                                    String voidPassValue = "1";
-
-                                    if(invoiceVoidStatus.equalsIgnoreCase("1")){
-                                        voidPassValue = "2";
-                                        // colorVoid = "#ff9900";
-
-                                        deliveryStatus(invoiceidbypos, voidPassValue);
-                                    }
+                                            deliveryStatus(invoiceidbypos, voidPassValue);
+                                        }
 
 //                                    if(invoiceVoidStatus.equalsIgnoreCase("2")){
 //                                        voidPassValue = "1";
 //                                        //colorVoid = "#99cc00";
 //                                    }
 
-                                    Log.e(TAG, "instantiateUnderlayButton");
+                                        Log.e(TAG, "instantiateUnderlayButton");
 
-                                    invoicelistAdapterdt.updateList(list);
+                                        invoicelistAdapterdt.updateList(temp);
+
+
+
+                                    }else{
+                                        String invoiceidbypos = list.get(pos).getInvoice_userid();
+
+                                        Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+
+                                        String invoiceVoidStatus = list.get(pos).getInvocestatus();
+
+                                        String voidPassValue = "1";
+
+                                        if(invoiceVoidStatus.equalsIgnoreCase("1")){
+                                            voidPassValue = "2";
+                                            // colorVoid = "#ff9900";
+
+                                            deliveryStatus(invoiceidbypos, voidPassValue);
+                                        }
+
+//                                    if(invoiceVoidStatus.equalsIgnoreCase("2")){
+//                                        voidPassValue = "1";
+//                                        //colorVoid = "#99cc00";
+//                                    }
+
+                                        Log.e(TAG, "instantiateUnderlayButton");
+
+                                        invoicelistAdapterdt.updateList(list);
+
+                                    }
+
 
                                 }
 
 
+
                             }
+                    ));
+                }
 
 
 
-                        }
-                ));
 
 
 
@@ -1203,6 +1232,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
             public void onItemSelected(int position, String itemAtPosition) {
                 selectedCompanyId = cids.get(position);
                 colorCode = arrayColor.get(position);
+                selectedCompanyName = cnames.get(position);
                 Log.e("colorCode",colorCode);
                 Log.e("company_id",selectedCompanyId);
                 String parmavalue = "All";
@@ -1410,6 +1440,24 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 
                             InvoiceData company_list = new InvoiceData();
 
+
+                            boolean isProduct = false;
+                            JSONArray customerobjArr = item.getJSONArray("products");
+                            if(customerobjArr.length() > 0){
+                                for(int j = 0 ; j < customerobjArr.length() ; j++){
+                                    JSONObject jsonObject1 = customerobjArr.getJSONObject(j);
+                                    String product_type = jsonObject1.getString("product_type");
+
+                                    if(product_type.equalsIgnoreCase("PRODUCT")){
+                                        isProduct = true;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            company_list.setProduct(isProduct);
+                            //company_list.setProductsTypeArray();
+
                             company_list.setInvoice_userid(invoice_idstr);
                             company_list.setPayment_currency(payment_currency);
                             company_list.setInvoicustomer_name(customer_name);
@@ -1567,7 +1615,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 //            Constant.ErrorToast(getActivity(), "Invoice not found");
 //        } else {
 
-        params.add("invoice_id", s);
+        params.add("purchase_order_id", s);
         //  params.add("order_status_id", s);
 //
 //            Log.e("invoice_idupdate", invoice_idstr);
@@ -1576,7 +1624,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "invoice/delete", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "purchaseorder/delete", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -1660,7 +1708,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                     if (status.equals("true")) {
 
                         if(voidPassValue.equalsIgnoreCase("2")){
-                            Constant.SuccessToast(getActivity(), "Delivery received successfully!");
+                            Constant.SuccessToast(getActivity(), "Quantity Successfully added to warehouse!");
                         }
 
                         parmsvalue = "All";
@@ -1934,7 +1982,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 
 
 
-                            String subject = Utility.getRealValuePOWithoutPlus(dataNo)+" from "+customerName;
+                            String subject = Utility.getRealValuePOWithoutPlus(dataNo)+" from "+selectedCompanyName;
                             String txt = "Your Purchase Order can be viewed, printed and downloaded from below link." +
                                     "\n\n" +sharelink ;
 
@@ -2035,7 +2083,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValuePOWithoutPlus(dataNo)+" from "+customerName;
+                                            String subject = Utility.getRealValuePOWithoutPlus(dataNo)+" from "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -2368,11 +2416,14 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                                 cids.add(company_id);
                                 arrayColor.add(colorCode);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cnames);
-                                selectcompany.setAdapter(namesadapter);
+
 
                             }
                         }
+
+                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cnames);
+                        selectcompany.setAdapter(namesadapter);
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

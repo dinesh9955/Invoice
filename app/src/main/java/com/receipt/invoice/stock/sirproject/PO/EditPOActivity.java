@@ -1241,9 +1241,41 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                 if (multimgpath.size() > 0) {
                     for (int i = 0; i < multimgpath.size(); i++) {
-                        File imgFile = new File(multimgpath.get(i));
-                        // company_stampFileimage=imgFile;
-                        multiple[i] = imgFile;
+//                        File imgFile = new File(multimgpath.get(i));
+//                        // company_stampFileimage=imgFile;
+//                        multiple[i] = imgFile;
+                        Log.e(TAG, "imgFile: "+multimgpath.get(i));
+                        if(i == 0){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 1){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage2(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 2){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage3(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 3){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage4(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 4){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage5(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }
                     }
                 }
 
@@ -1320,7 +1352,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         });
 
 
-        selectButton.setVisibility(View.GONE);
+        selectButton.setVisibility(View.VISIBLE);
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1537,6 +1569,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
             if (company_stampFileimage != null) {
                 try {
+                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -2235,6 +2268,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                 @Override
                 public void onClick(View v) {
 
+                    Log.e(TAG, "paymentmodeAAA "+paymentmode);
                     paidamountstr = edamount.getText().toString();
                     String paiddate = eddate.getText().toString();
 
@@ -2244,11 +2278,13 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Toast.makeText(EditPOActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
-                        eddate.requestFocus();
-                    } else if (paymentmode.equals("")) {
+                        Constant.ErrorToastTop(EditPOActivity.this, "Date Required");
+                        //Toast.makeText(EditPOActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
+//                        eddate.requestFocus();
+                    } else if (Utility.isEmptyNull(paymentmode).equalsIgnoreCase("")) {
+                        Constant.ErrorToastTop(EditPOActivity.this, "Payment Mode Required");
 //                        Constant.ErrorToast(EditPOActivity.this, "Payment Mode Required");
-                        Toast.makeText(EditPOActivity.this, "Payment Mode Required", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(EditPOActivity.this, "Payment Mode Required", Toast.LENGTH_SHORT).show();
                     } else {
                         if (paidamountstr != null) {
                             paidamount.setText(paidamountstr);
@@ -3855,16 +3891,36 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                 if (selectedtaxt.size() > 0) {
                     // taxAmount = Tax_amountdto;
                     if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
-//                        taxAmount = Tax_amountdto * subtotalAmount / (100+ Tax_amountdto);
+                        double taxAm = 0.0;
+                        try{
+                            taxAm = Double.parseDouble(taxtrateamt);
+                        }catch (Exception e){
+
+                        }
+
+                        if(taxAm != 0){
+                            taxAmount = taxAm * subtotalAmount / ( 100 + taxAm);
+                        }
+
+
+                        afterTaxAmount = subtotalAmount;
 //                        afterTaxAmount = subtotalAmount;
-                        taxAmount = Tax_amountdto;
+                        //taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + " incl." );
 //                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                     } else { // include off
-//                        taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
+                        double taxAm = 0.0;
+                        try{
+                            taxAm = Double.parseDouble(taxtrateamt);
+                        }catch (Exception e){
+
+                        }
+
+                        taxAmount = subtotalAmount * taxAm / 100;
+                        afterTaxAmount = subtotalAmount + taxAmount;
 //                        afterTaxAmount = subtotalAmount + taxAmount;
-                        taxAmount = Tax_amountdto;
+//                        taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + "" );
 //                    taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
@@ -4179,11 +4235,11 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                             Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
 
                                     if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
-                                        if (itemQuantity.getEn_quantity() <= en_quantity) {
-                                            mybuilder.show();
-                                            Constant.ErrorToast(EditPOActivity.this, "Insufficient Quantity Available");
-                                            mybuilder.dismiss();
-                                        } else {
+//                                        if (itemQuantity.getEn_quantity() <= en_quantity) {
+//                                            mybuilder.show();
+//                                            Constant.ErrorToast(EditPOActivity.this, "Insufficient Quantity Available");
+//                                            mybuilder.dismiss();
+//                                        } else {
                                             sh_price = Double.parseDouble(edprice.getText().toString());
                                             double multiply = en_quantity * sh_price;
                                             String s_multiply = String.valueOf(multiply);
@@ -4214,7 +4270,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                                             products_adapter.notifyDataSetChanged();
 
                                             mybuilder.dismiss();
-                                        }
+//                                        }
                                     }
 
                                     else

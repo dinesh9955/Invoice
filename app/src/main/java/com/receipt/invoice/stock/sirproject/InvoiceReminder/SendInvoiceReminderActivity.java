@@ -48,7 +48,10 @@ import org.apache.commons.io.IOUtils;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -235,25 +238,24 @@ public class SendInvoiceReminderActivity extends BaseActivity {
                 sltcustomer_contact = invoiceCustomerDto.getContactName();
 
 
-                if(!sltcustonername.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustonername+"</br>");
                 }
-                if(!sltcustomer_address.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_address+"</br>");
                 }
-                if(!sltcustomer_contact.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_contact+"</br>");
                 }
-                if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
                 }
-                if(!sltcustomer_website.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_website+"</br>");
                 }
-                if(!sltcustomer_email.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_email+"");
                 }
-
 
                 shippingfirstname = invoiceCustomerDto.getShippingFirstname();
                 shippinglastname = invoiceCustomerDto.getShippingLastname();
@@ -456,7 +458,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
     private void createWebPrintJob(WebView webView) {
 
         //create object of print manager in your device
-        PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
+        PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
 
 
 
@@ -934,7 +936,10 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             }
 
 
-
+            Calendar myCalendar = Calendar.getInstance();
+            String myFormat = "yyyy-MM-dd";
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            String dateCurrent = sdf.format(myCalendar.getTime());
 
             try {
                 content = IOUtils.toString(getAssets().open(name))
@@ -944,7 +949,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
 //                        .replaceAll("Website", company_website)
 //                        .replaceAll("Email", company_email)
                         .replaceAll("Name!", company_name)
-                        .replaceAll("CusName", date)
+                        .replaceAll("CusName", dateCurrent)
                         .replaceAll("INV-564", "" + invoicenumber)
                         .replaceAll("invD", date)
                         .replaceAll("DueDate", due_date)

@@ -1,5 +1,7 @@
 package com.receipt.invoice.stock.sirproject.Model;
 
+import java.util.ArrayList;
+
 /**
  * Created by Fawad on 4/17/2020.
  */
@@ -13,6 +15,26 @@ public class InvoiceData {
     String stripe = "";
     String paypal_type = "";
 
+    boolean isProduct = false;
+
+
+    public boolean isProduct() {
+        return isProduct;
+    }
+
+    public void setProduct(boolean product) {
+        isProduct = product;
+    }
+
+    ArrayList<String> productsTypeArray = new ArrayList<>();
+
+    public ArrayList<String> getProductsTypeArray() {
+        return productsTypeArray;
+    }
+
+    public void setProductsTypeArray(ArrayList<String> productsTypeArray) {
+        this.productsTypeArray = productsTypeArray;
+    }
 
     public String getLink() {
         return link;

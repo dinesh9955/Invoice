@@ -1,6 +1,5 @@
 package com.receipt.invoice.stock.sirproject.Invoice;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
@@ -33,7 +32,6 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class InvoiceToReceiptsWebview extends BaseActivity {
@@ -145,22 +143,22 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
                 }
 
 
-                if(!sltcustonername.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustonername+"</br>");
                 }
-                if(!sltcustomer_address.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_address+"</br>");
                 }
-                if(!sltcustomer_contact.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_contact+"</br>");
                 }
-                if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
                 }
-                if(!sltcustomer_website.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_website+"</br>");
                 }
-                if(!sltcustomer_email.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_email+"");
                 }
 
@@ -376,7 +374,7 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
     private void createWebPrintJob(WebView webView) {
 
         //create object of print manager in your device
-        PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
+        PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
 
         //create object of print adapter
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
@@ -726,23 +724,23 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
 
         Log.e(TAG, "selectedTemplate "+selectedTemplate);
 
-        String name = "receipt1.html";
-        String nameName = "file:///android_asset/receipt1.html";
+        String name = "receipt.html";
+        String nameName = "file:///android_asset/receipt.html";
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }
 
 

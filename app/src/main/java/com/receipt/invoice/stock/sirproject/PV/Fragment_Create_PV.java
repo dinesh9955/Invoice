@@ -1071,6 +1071,7 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
 
             if (company_stampFileimage != null) {
                 try {
+                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -4015,22 +4016,22 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
 
             }
 
-            if(!sltcustonername.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustonername+"</br>");
             }
-            if(!sltcustomer_address.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_address+"</br>");
             }
-            if(!sltcustomer_contact.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_contact+"</br>");
             }
-            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
             }
-            if(!sltcustomer_website.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_website+"</br>");
             }
-            if(!sltcustomer_email.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_email+"");
             }
 

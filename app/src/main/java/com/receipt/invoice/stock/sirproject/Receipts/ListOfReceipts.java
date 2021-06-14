@@ -91,6 +91,7 @@ public class ListOfReceipts extends BaseFragment {
     String company_id, company_name, company_address, company_contact, company_email, company_website, payment_bank_name, payment_currency, payment_iban, payment_swift_bic;
     ImageView imageViewmenu;
     String selectedCompanyId = "";
+    String selectedCompanyName = "";
     String invoice_idstr;
     BottomSheetDialog bottomSheetDialog;
     // Custom Invoice Detail
@@ -1033,8 +1034,9 @@ public class ListOfReceipts extends BaseFragment {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValueReceiptWithoutPlus(dataNo)+" from "+customerName;
-                                            new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
+                                            String subject = Utility.getRealValueReceiptWithoutPlus(dataNo)+" from "+selectedCompanyName;
+                                            String txt = "Thank you for your payment. Kindly find below receipt.";
+                                            new DownloadFile(getActivity(), subject, txt).execute(url.replace("https", "http"));
                                         } else {
 
                                         }
@@ -1367,11 +1369,14 @@ public class ListOfReceipts extends BaseFragment {
                                 cids.add(company_id);
                                 arrayColor.add(colorCode);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cnames);
-                                selectcompany.setAdapter(namesadapter);
+
 
                             }
                         }
+
+                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cnames);
+                        selectcompany.setAdapter(namesadapter);
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1417,11 +1422,13 @@ public class ListOfReceipts extends BaseFragment {
         private boolean isDownloaded;
         Context context;
 
-        String subject;
+        String subject = "";
+        String txt = "";
 
-        DownloadFile(Context c, String sub) {
+        DownloadFile(Context c, String sub, String text) {
             context = c;
             subject = sub;
+            txt = text;
         }
 
 
@@ -1546,6 +1553,9 @@ public class ListOfReceipts extends BaseFragment {
 
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
                         subject);
+                intentShareFile.putExtra(Intent.EXTRA_TEXT,
+                        txt);
+
 
 //                if (Utility.isAppAvailable(context, "com.google.android.gm")){
 //                    intentShareFile.setPackage("com.google.android.gm");

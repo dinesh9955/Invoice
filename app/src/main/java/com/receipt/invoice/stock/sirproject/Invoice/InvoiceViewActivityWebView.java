@@ -31,6 +31,7 @@ import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
+import com.receipt.invoice.stock.sirproject.Utils.LocaleHelper;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import org.apache.commons.io.IOUtils;
@@ -156,22 +157,22 @@ public class InvoiceViewActivityWebView extends BaseActivity {
                 sltcustomer_contact = invoiceCustomerDto.getContactName();
 
 
-                if(!sltcustonername.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustonername+"</br>");
                 }
-                if(!sltcustomer_address.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_address+"</br>");
                 }
-                if(!sltcustomer_contact.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_contact+"</br>");
                 }
-                if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
                 }
-                if(!sltcustomer_website.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_website+"</br>");
                 }
-                if(!sltcustomer_email.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_email+"");
                 }
 
@@ -367,7 +368,7 @@ public class InvoiceViewActivityWebView extends BaseActivity {
     private void createWebPrintJob(WebView webView) {
 
         //create object of print manager in your device
-        PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
+        PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
 
 
 
@@ -380,6 +381,9 @@ public class InvoiceViewActivityWebView extends BaseActivity {
         PrintAttributes.Builder builder = new PrintAttributes.Builder();
         builder.setMediaSize( PrintAttributes.MediaSize.ISO_A4);
         printManager.print(jobName, printAdapter, builder.build());
+
+
+
     }
 
 
@@ -923,6 +927,7 @@ public class InvoiceViewActivityWebView extends BaseActivity {
 
         invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
     }
+
 
 
 }

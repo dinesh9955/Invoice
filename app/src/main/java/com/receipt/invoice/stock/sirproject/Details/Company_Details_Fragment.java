@@ -11,6 +11,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -44,7 +46,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.datatransport.cct.internal.LogEvent;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -71,8 +75,10 @@ import com.wang.avi.AVLoadingIndicatorView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -459,6 +465,7 @@ public class Company_Details_Fragment extends BaseFragment {
         getActivity().startActivityForResult(pickPhoto, GALLARY_aCTION_PICK_CODE);
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     public  void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -484,7 +491,10 @@ public class Company_Details_Fragment extends BaseFragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
+//                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
+
+                Utility.glideSet(getActivity() , fileimage , image);
+
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
 
               /*  Uri selectedImageUri = data.getData();
@@ -494,11 +504,27 @@ public class Company_Details_Fragment extends BaseFragment {
                 Uri selectedImage = data.getData();
                 try {
                     fileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+
+                    //fileimage = Utility.getJPEGtoPNG(fileimage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
+                Utility.glideSet(getActivity() , fileimage , image);
+
+                Log.e(TAG, "fileimageAAA "+fileimage);
+//                GlideApp.with(getActivity())
+//                        .load(fileimage)
+//                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                        .skipMemoryCache(true)
+//                        .apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon))
+//                        .placeholder(R.drawable.app_icon)
+//                        .into(image);
+
+//                GlideApp.with(getActivity())
+//                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                        .skipMemoryCache(true)
+//                        .load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
 
             }
 

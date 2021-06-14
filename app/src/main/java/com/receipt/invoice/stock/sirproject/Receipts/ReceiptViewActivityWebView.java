@@ -16,7 +16,6 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
@@ -34,7 +33,6 @@ import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -160,22 +158,22 @@ public class ReceiptViewActivityWebView extends BaseActivity {
 
 
 
-                if(!sltcustonername.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustonername+"</br>");
                 }
-                if(!sltcustomer_address.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_address+"</br>");
                 }
-                if(!sltcustomer_contact.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_contact+"</br>");
                 }
-                if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
                 }
-                if(!sltcustomer_website.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_website+"</br>");
                 }
-                if(!sltcustomer_email.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_email+"");
                 }
 
@@ -364,7 +362,7 @@ public class ReceiptViewActivityWebView extends BaseActivity {
     private void createWebPrintJob(WebView webView) {
 
         //create object of print manager in your device
-        PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
+        PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
 
         //create object of print adapter
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
@@ -726,15 +724,15 @@ public class ReceiptViewActivityWebView extends BaseActivity {
 
 
         //Log.e(TAG , "templateSelect"+templateSelect);
-        String name = "receipt1.html";
-        String nameName = "file:///android_asset/receipt1.html";
+        String name = "receipt.html";
+        String nameName = "file:///android_asset/receipt.html";
         if(templatestr.equals("1")) {
             if(templateSelect.equalsIgnoreCase("0")){
-                name = "receipt1.html";
-                nameName = "file:///android_asset/receipt1.html";
+                name = "receipt.html";
+                nameName = "file:///android_asset/receipt.html";
             }else if(templateSelect.equalsIgnoreCase("1")){
-                name = "receipt1.html";
-                nameName = "file:///android_asset/receipt1.html";
+                name = "receipt.html";
+                nameName = "file:///android_asset/receipt.html";
             }else if(templateSelect.equalsIgnoreCase("2")){
                 name = "invoice2.html";
                 nameName = "file:///android_asset/invoice2.html";

@@ -65,6 +65,7 @@ import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.R;
 
 import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -338,7 +339,8 @@ public class Add_Vendor extends BaseFragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                Utility.glideSet(getActivity() , fileimage , uploadimage);
+               // GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
@@ -346,8 +348,8 @@ public class Add_Vendor extends BaseFragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                Utility.glideSet(getActivity() , fileimage , uploadimage);
+                //GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
 
             }else if(requestCode== PICK_CONTACT)
             {

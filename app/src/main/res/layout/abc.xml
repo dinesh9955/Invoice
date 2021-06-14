@@ -22,4 +22,13 @@
         android:textAllCaps="true"
         android:capitalize="words"/>
 
+    <WebView
+        android:layout_below="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:padding="20dp"
+        android:id="@+id/invoiceweb"
+        />
+
 </RelativeLayout>

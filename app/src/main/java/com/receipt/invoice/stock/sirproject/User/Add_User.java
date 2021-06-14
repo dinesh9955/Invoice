@@ -11,6 +11,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -56,6 +57,7 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.API.SavePref;
+import com.receipt.invoice.stock.sirproject.Settings.OnlinePaymentGatewayActivity;
 import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -404,7 +406,7 @@ public class Add_User extends BaseFragment {
             }
         });
 
-        companyget();
+
 
         userrole.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
@@ -756,6 +758,25 @@ public class Add_User extends BaseFragment {
                         if (status.equals("false")) {
                             String message = jsonObject.getString("message");
                             Constant.ErrorToast(getActivity(), message);
+
+                            if( jsonObject.has("code")){
+                                String code = jsonObject.getString("code");
+
+                                if(code.equalsIgnoreCase("subscription")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(getActivity(), OnlinePaymentGatewayActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 1000);
+                                }
+                            }else{
+
+                            }
+
+
+
                         }
 
 
@@ -794,4 +815,9 @@ public class Add_User extends BaseFragment {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        companyget();
+    }
 }

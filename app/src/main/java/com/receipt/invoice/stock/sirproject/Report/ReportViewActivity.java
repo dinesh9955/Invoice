@@ -2470,7 +2470,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     private void createWebPrintJob(WebView webView) {
 
         //create object of print manager in your device
-        PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
+        PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
 
         //create object of print adapter
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();

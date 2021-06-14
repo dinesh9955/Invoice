@@ -293,6 +293,8 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                     bottomSheetDialog.dismiss();
                 }
 
+                Log.e(TAG, "po0000 "+receipt);
+
                 try {
                     double en_quantity = Double.parseDouble(edquantity.getText().toString());
 

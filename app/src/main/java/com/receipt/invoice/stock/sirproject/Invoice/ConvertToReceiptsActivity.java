@@ -53,12 +53,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -99,11 +97,8 @@ import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.SelectedTaxlist;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
-import com.receipt.invoice.stock.sirproject.PO.POActivity;
-import com.receipt.invoice.stock.sirproject.PV.EditEditPVActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
-import com.receipt.invoice.stock.sirproject.Receipts.EditReceiptActivity;
 import com.receipt.invoice.stock.sirproject.Receipts.ReceiptsActivity;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
@@ -133,7 +128,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -676,10 +670,17 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
                 Log.e("Selected_house",selectwarehouseId+"  ");
 
-                datedto = invoiceDtoInvoice.getInvoiceDate();
-                due_datedto = invoiceDtoInvoice.getDueDate();
+                //datedto = invoiceDtoInvoice.getInvoiceDate();
+                Calendar myCalendar = Calendar.getInstance();
+                String myFormat = "yyyy-MM-dd";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                String dateCurrent = sdf.format(myCalendar.getTime());
+                datedto = dateCurrent;
+
                 duedate.setText(datedto);
                 invoice_date = datedto;
+
+                due_datedto = invoiceDtoInvoice.getDueDate();
                 invoice_due_date = due_datedto;
                 edduedate.setText(due_datedto);
 
@@ -1429,6 +1430,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
             if (company_stampFileimage != null) {
                 try {
+                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -3663,16 +3665,36 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                 if (selectedtaxt.size() > 0) {
                     // taxAmount = Tax_amountdto;
                     if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
-                        taxAmount = Tax_amountdto;
-//                        taxAmount = Tax_amountdto * subtotalAmount / (100+ Tax_amountdto);
+                       // taxAmount = Tax_amountdto;
+                        double taxAm = 0.0;
+                        try{
+                            taxAm = Double.parseDouble(taxtrateamt);
+                        }catch (Exception e){
+
+                        }
+
+                        if(taxAm != 0){
+                            taxAmount = taxAm * subtotalAmount / ( 100 + taxAm);
+                        }
+
+
+                        afterTaxAmount = subtotalAmount;
 //                        afterTaxAmount = subtotalAmount;
                         Log.e(TAG, "afterTaxAmountOOOO11 "+afterTaxAmount);
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + " incl." );
 //                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                     } else { // include off
-                        taxAmount = Tax_amountdto;
-//                        taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
+//                        taxAmount = Tax_amountdto;
+                        double taxAm = 0.0;
+                        try{
+                            taxAm = Double.parseDouble(taxtrateamt);
+                        }catch (Exception e){
+
+                        }
+
+                        taxAmount = subtotalAmount * taxAm / 100;
+                        afterTaxAmount = subtotalAmount + taxAmount;
 //                        afterTaxAmount = subtotalAmount + taxAmount;
                         Log.e(TAG, "afterTaxAmountOOOO22 "+afterTaxAmount);
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
@@ -4670,22 +4692,22 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             }
 
 
-            if(!sltcustonername.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustonername+"</br>");
             }
-            if(!sltcustomer_address.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_address+"</br>");
             }
-            if(!sltcustomer_contact.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_contact+"</br>");
             }
-            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
             }
-            if(!sltcustomer_website.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_website+"</br>");
             }
-            if(!sltcustomer_email.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_email+"");
             }
 
@@ -5144,23 +5166,23 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "receipt1.html";
-        String nameName = "file:///android_asset/receipt1.html";
+        String name = "receipt.html";
+        String nameName = "file:///android_asset/receipt.html";
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }
 
         StringBuilder stringBuilderCompany = new StringBuilder();

@@ -19,12 +19,15 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.receipt.invoice.stock.sirproject.Model.ItemQuantity;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.R;
@@ -577,8 +580,7 @@ public class Utility {
     }
 
     public static File getFileLogo(Activity activity) {
-        Bitmap icon = BitmapFactory.decodeResource(activity.getResources(),
-                R.drawable.thanksimg);
+        Bitmap icon = BitmapFactory.decodeResource(activity.getResources(), R.drawable.thanksimg);
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         File f = new File(Environment.getExternalStorageDirectory()
@@ -601,21 +603,25 @@ public class Utility {
         if(s.equalsIgnoreCase("0")){
             NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
             nf.setMinimumFractionDigits(2);
+            nf.setMaximumFractionDigits(2);
             defaultPattern = nf.format(value);
 //            defaultPattern = "###,###,###,##0.00";
         }else if(s.equalsIgnoreCase("1")){
             NumberFormat nf = NumberFormat.getInstance(new Locale("en", "IN"));
             nf.setMinimumFractionDigits(2);
+            nf.setMaximumFractionDigits(2);
             defaultPattern = nf.format(value);
 //            defaultPattern = "##,##,##,##0.00";
         }else if(s.equalsIgnoreCase("2")){
             NumberFormat nf = NumberFormat.getInstance(new Locale("da", "DK"));
             nf.setMinimumFractionDigits(2);
+            nf.setMaximumFractionDigits(2);
             defaultPattern = nf.format(value);
 //            defaultPattern = "###.###.###.##0,00";
         }else if(s.equalsIgnoreCase("3")){
             NumberFormat nf = NumberFormat.getInstance(new Locale("sk", "SK"));
             nf.setMinimumFractionDigits(2);
+            nf.setMaximumFractionDigits(2);
             defaultPattern = nf.format(value);
 //            defaultPattern = "### ### ### ###,00";
         }
@@ -789,4 +795,183 @@ public class Utility {
     public static String DEFAULT_DN = "DN # 1";
     public static String DEFAULT_PO = "PO # 1";
     public static String DEFAULT_PV = "PVN # 1";
+
+
+
+    public static File getJPEGtoPNG(File fileimage) {
+        Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "upload.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //fileimage = f;
+        Log.e(TAG, "fileimageBBBf "+f);
+        return f;
+    }
+
+
+    public static File getJPEGtoPNGIssuer(File fileimage) {
+        Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "upload1.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //fileimage = f;
+        Log.e(TAG, "fileimageBBBf "+f);
+        return f;
+    }
+
+    public static File getJPEGtoPNGReceiver(File fileimage) {
+        Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "upload2.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //fileimage = f;
+        Log.e(TAG, "fileimageBBBf "+f);
+        return f;
+    }
+
+    public static File getJPEGtoPNGCompanySeal(File fileimage) {
+        Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "upload3.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //fileimage = f;
+        Log.e(TAG, "fileimageBBBf "+f);
+        return f;
+    }
+
+
+
+    public static File getJPEGtoPNGImage1(File fileimage) {
+        Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "image1.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //fileimage = f;
+        Log.e(TAG, "fileimageBBBf "+f);
+        return f;
+    }
+
+
+    public static File getJPEGtoPNGImage2(File fileimage) {
+        Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "image2.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //fileimage = f;
+        Log.e(TAG, "fileimageBBBf "+f);
+        return f;
+    }
+
+    public static File getJPEGtoPNGImage3(File fileimage) {
+        Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "image3.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //fileimage = f;
+        Log.e(TAG, "fileimageBBBf "+f);
+        return f;
+    }
+
+    public static File getJPEGtoPNGImage4(File fileimage) {
+        Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "image4.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //fileimage = f;
+        Log.e(TAG, "fileimageBBBf "+f);
+        return f;
+    }
+
+    public static File getJPEGtoPNGImage5(File fileimage) {
+        Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "image5.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //fileimage = f;
+        Log.e(TAG, "fileimageBBBf "+f);
+        return f;
+    }
+
+
+    public static void glideSet(Context context, File fileimage, ImageView image) {
+        GlideApp.with(context)
+                .load(fileimage)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon))
+                .placeholder(R.drawable.app_icon)
+                .into(image);
+    }
 }

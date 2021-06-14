@@ -440,7 +440,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         mCompressor = new FileCompressor(getActivity());
 
 
-    //    invoicenum.setEnabled(false);
+        invoicenum.setEnabled(false);
 
 
 
@@ -898,7 +898,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 //        });
 
 
-        selectButton.setVisibility(View.GONE);
+        selectButton.setVisibility(View.VISIBLE);
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1093,6 +1093,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
             if (company_stampFileimage != null) {
                 try {
+                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -1103,6 +1104,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
             if (signatureofinvoicemaker != null) {
                 try {
+                    //signatureofinvoicemaker = Utility.getJPEGtoPNGIssuer(signatureofinvoicemaker);
                     params.put("signature_of_maker", signatureofinvoicemaker);
                     //  Log.e("signature_of_issuer", signatureofinvoicemaker.toString());
                 } catch (FileNotFoundException e) {
@@ -1112,6 +1114,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
             if (signaturinvoicereceiver != null) {
                 try {
+                    //signaturinvoicereceiver = Utility.getJPEGtoPNGReceiver(signaturinvoicereceiver);
                     params.put("signature_of_receiver", signaturinvoicereceiver);
                     // Log.e("signature_of_issuer", signaturinvoicereceiver.toString());
                 } catch (FileNotFoundException e) {
@@ -3484,6 +3487,10 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                 tax.setText(Utility.getPatternFormat(""+numberPostion, taxAmount)+""+cruncycode);
             }
 
+            String patternA = Utility.getPatternFormat(""+numberPostion, taxAmount)+""+cruncycode;
+
+            Log.e(TAG, "taxAmount2 "+patternA);
+
             if(shippingAmount == 0){
                 freight.setText("0");
             }else{
@@ -3983,22 +3990,22 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
             }
 
 
-            if(!sltcustonername.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustonername+"</br>");
             }
-            if(!sltcustomer_address.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_address+"</br>");
             }
-            if(!sltcustomer_contact.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_contact+"</br>");
             }
-            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
             }
-            if(!sltcustomer_website.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_website+"</br>");
             }
-            if(!sltcustomer_email.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_email+"");
             }
         }

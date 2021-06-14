@@ -510,7 +510,8 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                GlideApp.with(activity).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                Utility.glideSet(Customer_Detail_Activity2.this , fileimage , uploadimage);
+                //GlideApp.with(activity).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
@@ -518,8 +519,8 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                GlideApp.with(activity).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                Utility.glideSet(Customer_Detail_Activity2.this , fileimage , uploadimage);
+                //GlideApp.with(activity).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
 
             }else if(requestCode== PICK_CONTACT)
             {

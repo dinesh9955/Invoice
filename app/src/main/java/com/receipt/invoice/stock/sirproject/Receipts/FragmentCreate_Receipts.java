@@ -56,14 +56,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -90,7 +88,6 @@ import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
-import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.Model.Moving;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
@@ -121,7 +118,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URLDecoder;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1075,6 +1071,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
 
             if (company_stampFileimage != null) {
                 try {
+                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -3975,22 +3972,22 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
             }
 
 
-            if(!sltcustonername.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustonername+"</br>");
             }
-            if(!sltcustomer_address.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_address+"</br>");
             }
-            if(!sltcustomer_contact.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_contact+"</br>");
             }
-            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
             }
-            if(!sltcustomer_website.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_website+"</br>");
             }
-            if(!sltcustomer_email.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_email+"");
             }
 
@@ -4446,23 +4443,23 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "receipt1.html";
-        String nameName = "file:///android_asset/receipt1.html";
+        String name = "receipt.html";
+        String nameName = "file:///android_asset/receipt.html";
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "receipt1.html";
-            nameName = "file:///android_asset/receipt1.html";
+            name = "receipt.html";
+            nameName = "file:///android_asset/receipt.html";
         }
 
 

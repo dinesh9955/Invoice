@@ -1407,6 +1407,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
 
             if (company_stampFileimage != null) {
                 try {
+                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -3650,16 +3651,34 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                 if (selectedtaxt.size() > 0) {
                     // taxAmount = Tax_amountdto;
                     if (taxtypeclusive.equalsIgnoreCase("Inclusive")) { // exclude on
-//                        taxAmount = Tax_amountdto * subtotalAmount / (100+ Tax_amountdto);
-//                        afterTaxAmount = subtotalAmount;
-                        taxAmount = Tax_amountdto;
+                        double taxAm = 0.0;
+                        try{
+                            taxAm = Double.parseDouble(taxtrateamt);
+                        }catch (Exception e){
+
+                        }
+
+                        if(taxAm != 0){
+                            taxAmount = taxAm * subtotalAmount / ( 100 + taxAm);
+                        }
+
+
+                        afterTaxAmount = subtotalAmount;
+//                        taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + " incl." );
 //                    taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                     } else { // include off
-//                        taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
-//                        afterTaxAmount = subtotalAmount + taxAmount;
-                        taxAmount = Tax_amountdto;
+                        double taxAm = 0.0;
+                        try{
+                            taxAm = Double.parseDouble(taxtrateamt);
+                        }catch (Exception e){
+
+                        }
+
+                        taxAmount = subtotalAmount * taxAm / 100;
+                        afterTaxAmount = subtotalAmount + taxAmount;
+//                        taxAmount = Tax_amountdto;
 //                    String subStrinng = taxrname + " " + taxtrateamt + "%";
 //                    txttax.setText(  subStrinng + "" );
 //                    taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
@@ -4656,22 +4675,22 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
 
 
 
-            if(!sltcustonername.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustonername+"</br>");
             }
-            if(!sltcustomer_address.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_address+"</br>");
             }
-//            if(!sltcustomer_contact.equalsIgnoreCase("")){
-//                stringBuilderBillTo.append(sltcustomer_contact+"</br>");
-//            }
-            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
+                stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+            }
+            if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
             }
-            if(!sltcustomer_website.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_website+"</br>");
             }
-            if(!sltcustomer_email.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_email+"");
             }
 

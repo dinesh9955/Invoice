@@ -767,9 +767,37 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 if (multimgpath != null) {
                     Log.e(TAG, "multimgpathAA "+multimgpath.size());
                     for (int i = 0; i < multimgpath.size(); i++) {
-                        File imgFile = new File(multimgpath.get(i));
-                        // company_stampFileimage=imgFile;
-                        multiple[i] = imgFile;
+                        if(i == 0){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 1){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage2(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 2){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage3(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 3){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage4(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }else if(i == 4){
+                            File imgFile = new File(multimgpath.get(i));
+                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                                imgFile = new File(""+Utility.getJPEGtoPNGImage5(new File(multimgpath.get(i))));
+                            }
+                            multiple[i] = imgFile;
+                        }
 
                     }
                 }
@@ -905,7 +933,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 //        });
 
 
-        selectButton.setVisibility(View.GONE);
+        selectButton.setVisibility(View.VISIBLE);
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -977,7 +1005,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             attchmentimage.add(uri.toString());
             attachmenttxtimg.setVisibility(View.VISIBLE);
         }
-        int sizen = attchmentimage.size();
+        //int sizen = attchmentimage.size();
         String attchedmentimagepath;
         if (attchmentimage != null) {
             for (int i = 0; i < attchmentimage.size(); i++) {
@@ -1108,6 +1136,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
             if (company_stampFileimage != null) {
                 try {
+                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -1865,11 +1894,13 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Toast.makeText(getActivity(), "Date Required", Toast.LENGTH_SHORT).show();
-                        eddate.requestFocus();
-                    } else if (paymentmode.equals("")) {
+                        Constant.ErrorToastTop(getActivity(), "Date Required");
+//                        Toast.makeText(getActivity(), "Date Required", Toast.LENGTH_SHORT).show();
+//                        eddate.requestFocus();
+                    } else if (Utility.isEmptyNull(paymentmode).equalsIgnoreCase("")) {
+                        Constant.ErrorToastTop(getActivity(), "Payment Mode Required");
                         // Constant.ErrorToast(getActivity(), "Payment Mode Required");
-                        Toast.makeText(getActivity(), "Payment Mode Required", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "Payment Mode Required", Toast.LENGTH_SHORT).show();
                     } else {
                         if (paidamountstr != null) {
                             try{
@@ -3962,22 +3993,22 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
             }
 
-            if(!sltcustonername.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustonername+"</br>");
             }
-            if(!sltcustomer_address.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_address+"</br>");
             }
-            if(!sltcustomer_contact.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_contact+"</br>");
             }
-            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
             }
-            if(!sltcustomer_website.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_website+"</br>");
             }
-            if(!sltcustomer_email.equalsIgnoreCase("")){
+            if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                 stringBuilderBillTo.append(sltcustomer_email+"");
             }
 

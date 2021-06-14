@@ -44,6 +44,8 @@ import cz.msebera.android.httpclient.Header;
 public class Customer_Listing extends BaseFragment {
 
 
+    private static final String TAG = "Customer_Listing";
+
     public Customer_Listing() {
         // Required empty public constructor
     }
@@ -162,11 +164,13 @@ public class Customer_Listing extends BaseFragment {
                                 cnames.add(company_name);
                                 cids.add(company_id);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,cnames);
-                                selectcompany.setAdapter(namesadapter);
+
 
                             }
                         }
+
+                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,cnames);
+                        selectcompany.setAdapter(namesadapter);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -209,7 +213,7 @@ public class Customer_Listing extends BaseFragment {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 String response = new String(responseBody);
-                Log.e("responsecustomer",response);
+                Log.e(TAG, "responsecustomerName "+response);
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
                 try {

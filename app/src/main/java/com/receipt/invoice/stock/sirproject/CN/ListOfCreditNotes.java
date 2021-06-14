@@ -90,6 +90,7 @@ public class ListOfCreditNotes extends BaseFragment {
     String company_id, company_name, company_address, company_contact, company_email, company_website, payment_bank_name, payment_currency, payment_iban, payment_swift_bic;
     ImageView imageViewmenu;
     String selectedCompanyId = "";
+    String selectedCompanyName = "";
     String invoice_idstr;
     BottomSheetDialog bottomSheetDialog;
     // Custom Invoice Detail
@@ -323,6 +324,7 @@ public class ListOfCreditNotes extends BaseFragment {
             public void onItemSelected(int position, String itemAtPosition) {
                 selectedCompanyId = cids.get(position);
                 colorCode = arrayColor.get(position);
+                selectedCompanyName = cnames.get(position);
                 Log.e("colorCode",colorCode);
                 Log.e("company_id",selectedCompanyId);
                 String parmavalue = "All";
@@ -906,7 +908,7 @@ public class ListOfCreditNotes extends BaseFragment {
                             Log.e(TAG, "customerName:: "+customerName);
                             Log.e(TAG, "dataNo:: "+dataNo);
 
-                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+customerName;
+                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+selectedCompanyName;
                             String txt = "Your Credit Note can be viewed, printed and downloaded from below link." +
                                     "\n\n" +sharelink ;
 
@@ -1021,7 +1023,7 @@ public class ListOfCreditNotes extends BaseFragment {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+customerName;
+                                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" from "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -1361,11 +1363,13 @@ public class ListOfCreditNotes extends BaseFragment {
                                 cids.add(company_id);
                                 arrayColor.add(colorCode);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cnames);
-                                selectcompany.setAdapter(namesadapter);
+
 
                             }
                         }
+
+                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cnames);
+                        selectcompany.setAdapter(namesadapter);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

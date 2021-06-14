@@ -240,25 +240,24 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
                 sltcustomer_contact = invoiceCustomerDto.getContactName();
 
 
-                if(!sltcustonername.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustonername+"</br>");
                 }
-                if(!sltcustomer_address.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_address+"</br>");
                 }
-                if(!sltcustomer_contact.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_contact+"</br>");
                 }
-                if(!sltcustomer_phone_number.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
                 }
-                if(!sltcustomer_website.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_website+"</br>");
                 }
-                if(!sltcustomer_email.equalsIgnoreCase("")){
+                if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
                     stringBuilderBillTo.append(sltcustomer_email+"");
                 }
-
 
                 shippingfirstname = invoiceCustomerDto.getShippingFirstname();
                 shippinglastname = invoiceCustomerDto.getShippingLastname();
@@ -463,7 +462,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
     private void createWebPrintJob(WebView webView) {
 
         //create object of print manager in your device
-        PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
+        PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
 
 
 

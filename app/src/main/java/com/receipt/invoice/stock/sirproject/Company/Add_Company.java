@@ -415,7 +415,8 @@ public class Add_Company extends BaseFragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                Utility.glideSet(getActivity() , fileimage , uploadimage);
+//            GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
         } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
 
                     Uri selectedImage = data.getData();
@@ -424,8 +425,8 @@ public class Add_Company extends BaseFragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                Utility.glideSet(getActivity() , fileimage , uploadimage);
+               // GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
 
             }
 

@@ -21,6 +21,9 @@ public class BaseActivity extends AppCompatActivity {
 
     public FirebaseAnalytics firebaseAnalytics;
     public SavePref pref = new SavePref();
+
+    public Context primaryBaseActivity;//THIS WILL KEEP ORIGINAL INSTANCE
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +41,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(LocaleHelper.onAttach(base));
+        primaryBaseActivity = base;
+        super.attachBaseContext(LocaleHelper.onAttach(primaryBaseActivity));
     }
 }

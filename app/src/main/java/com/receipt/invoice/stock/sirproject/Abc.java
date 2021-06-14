@@ -19,8 +19,12 @@ import android.os.Bundle;
 import android.os.Environment;
 //import android.print.PdfConverter;
 //import android.print.PdfConverter;
+import android.print.PrintAttributes;
+import android.print.PrintDocumentAdapter;
+import android.print.PrintManager;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -75,9 +79,11 @@ import java.util.Map;
 //import io.github.lucasfsc.html2pdf.Html2Pdf;
 
 import com.lowagie.text.Font;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.InvoiceReminder.SendInvoiceReminderActivity;
 import com.receipt.invoice.stock.sirproject.ThankYouNote.SendThankYouNoteActivity;
 import com.receipt.invoice.stock.sirproject.Utils.AppRater;
+import com.receipt.invoice.stock.sirproject.Utils.LocaleHelper;
 import com.receipt.invoice.stock.sirproject.Utils.SublimePickerFragment;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
@@ -86,11 +92,14 @@ import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import cz.msebera.android.httpclient.util.ByteArrayBuffer;
 import ru.slybeaver.slycalendarview.SlyCalendarDialog;
 
-public class Abc extends AppCompatActivity{
+public class Abc extends BaseActivity {
 
     FirebaseAnalytics firebaseAnalytics;
     private static final String TAG = "Abc";
     private ProgressDialog pd;
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +135,38 @@ public class Abc extends AppCompatActivity{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+               WebView invoiceweb = findViewById(R.id.invoiceweb);
+                //create object of print manager in your device
+                PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
+
+
+
+                //create object of print adapter
+                PrintDocumentAdapter printAdapter = invoiceweb.createPrintDocumentAdapter();
+
+                //provide name to your newly generated pdf file
+                String jobName = getString(R.string.app_name) + " Print Test";
+
+                PrintAttributes.Builder builder = new PrintAttributes.Builder();
+                builder.setMediaSize( PrintAttributes.MediaSize.ISO_A4);
+                printManager.print(jobName, printAdapter, builder.build());
+
+
+
+
+                double vv = 987898.7272727273;
+
+                NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
+                nf.setMinimumFractionDigits(2);
+                nf.setMaximumFractionDigits(2);
+                String defaultPattern = nf.format(vv);
+
+
+               // String patternA = Utility.getPatternFormat(""+0, vv)+"";
+
+                Log.e(TAG, "taxAmount2 "+defaultPattern);
+
               //  materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
 
 //                Map<String, Object> eventValue = new HashMap<String, Object>();
@@ -158,7 +199,7 @@ public class Abc extends AppCompatActivity{
 
 
 
-                AppRater.app_launched(Abc.this);
+              //  AppRater.app_launched(Abc.this);
 
 
 
@@ -1111,5 +1152,17 @@ public class Abc extends AppCompatActivity{
         }
     }
 
+
+
+//
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        primaryBaseActivity=newBase;//SAVE ORIGINAL INSTANCE
+//
+//        /*Some locale handling stuff right here*/
+//        /*LocaleHelper's onAttach is returning a *new* context in Android N which will void PrintManager's context*/
+//        super.attachBaseContext(LocaleHelper.onAttach(primaryBaseActivity));
+//
+//    }
 
 }
