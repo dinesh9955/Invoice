@@ -1,16 +1,20 @@
 package com.receipt.invoice.stock.sirproject.Report;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.print.PDFPrint;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +25,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,20 +39,29 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.Adapter.Customer_Bottom_Adapter;
+import com.receipt.invoice.stock.sirproject.Adapter.Product_Bottom_Adapter;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
+import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.Home.Model.CompanyModel;
 import com.receipt.invoice.stock.sirproject.Invoice.SavePref;
 import com.receipt.invoice.stock.sirproject.InvoiceReminder.ViewInvoiceActivity;
+import com.receipt.invoice.stock.sirproject.Model.Customer_list;
+import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
+import com.receipt.invoice.stock.sirproject.Model.Product_list;
+import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.SublimePickerFragment;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
+import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 
@@ -70,11 +84,29 @@ import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ReportViewActivity extends BaseActivity {
+public class ReportViewActivity extends BaseActivity implements Customer_Bottom_Adapter.Callback, Product_Bottom_Adapter.Callback{
 
     private static final String TAG = "ViewInvoice_Activity";
 
+    BottomSheetDialog bottomSheetDialog;
 
+    String filterCustomerSupplier = "";
+
+//    TextView txtcustomer, txtname, txtcontactname;
+//    EditText search_customers;
+//    RecyclerView recycler_customers;
+//    Customer_Bottom_Adapter customer_bottom_adapter;
+
+
+//    String customer_id = "";
+//    String customer_name = "";
+    ArrayList<Customer_list> customer_bottom = new ArrayList<>();
+
+//    String supplier_id = "";
+//    String supplier_name = "";
+    ArrayList<Customer_list> supplier_bottom = new ArrayList<>();
+
+    ArrayList<Product_list> product_bottom = new ArrayList<>();
 
     File fileWithinMyDir = null;
 
@@ -99,6 +131,8 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     String company_id = "";
     String product_id = "";
 
+    String selectedCompanyId = "";
+
     @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +152,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         titleView.setText("Preview Report");
 
+        bottomSheetDialog = new BottomSheetDialog(ReportViewActivity.this);
 
 
 //        invoiceweb.setWebViewClient(new WebViewClient() {
@@ -150,7 +185,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         });
 
         Bundle bundle = getIntent().getExtras();
+        selectedCompanyId = bundle.getString("company_id");
 
+        customer_list(selectedCompanyId);
+        supplier_list(selectedCompanyId);
+        product_list(selectedCompanyId);
 
         positionNext = bundle.getInt("positionNext");
         company_image_path = bundle.getString("company_image_path");
@@ -165,11 +204,12 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         } else if(positionNext == 2){
             fileName = "TotalSalesReport";
             company_id = bundle.getString("company_id");
-            totalSalesReport(company_id, "", "", "");
+            totalSalesReportPaidUnpaid(selectedCompanyId, company_id, "", "", "", "");
+           // totalSalesReport(company_id, "", "", "");
         } else if(positionNext == 3){
             fileName = "TotalPurchaseReport";
             company_id = bundle.getString("company_id");
-            totalPurchaseReport(company_id, "", "", "");
+            totalPurchaseReport(company_id, "", "", "", "");
         } else if(positionNext == 4){
             fileName = "CustomerAgeingReport";
             company_id = bundle.getString("company_id");
@@ -450,13 +490,13 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-                        if(filterID.equalsIgnoreCase("date")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
-                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
-                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
-                                }
-                            });
-                        }
+//                        if(filterID.equalsIgnoreCase("date")){
+//                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
+//                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
+//                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
+//                                }
+//                            });
+//                        }
 
                         //Collections.reverse(customerReportItemArrayList);
 
@@ -492,8 +532,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
     private void customerReportWeb(CustomerItem customerItem, ArrayList<CustomerReportItem> customerReportItemArrayList) {
 
-
         double totalAmount = 0.0;
+
+        double balanceAmount = 0.0;
 
         String name = "report/CustomerReport.html";
         String nameName = "file:///android_asset/report/CustomerReport.html";
@@ -503,38 +544,48 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String cruncycode = "";
         try {
-            for (int i = 0; i < customerReportItemArrayList.size(); i++) {
+            for (int i = 0; i < customerReportItemArrayList.size() ; i++) {
                 cruncycode = customerItem.getCurrency_symbol();
 
 //                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                 double getDebit = Double.parseDouble(customerReportItemArrayList.get(i).getDebit());
                 double getCredit = Double.parseDouble(customerReportItemArrayList.get(i).getCredit());
-                double getBalance = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
+               // double getBalance = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
 
                 String stringDebit = "";
                 String stringCredit = "";
                 String stringBalance = "";
 
+                balanceAmount = balanceAmount + getDebit;
+                Log.e(TAG, "balanceAmountAA "+balanceAmount);
+
+                balanceAmount = balanceAmount - getCredit;
+                Log.e(TAG, "balanceAmountBB "+balanceAmount);
+
                 if(getDebit == 0){
                     stringDebit = "";
                 }else{
-                    String stringDebit1 = customerReportItemArrayList.get(i).getDebit();
-                    stringDebit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringDebit1)) + Utility.getReplaceDollor(cruncycode);
+                   // String stringDebit1 = customerReportItemArrayList.get(i).getDebit();
+                    stringDebit = Utility.getPatternFormat(""+numberPostion, getDebit) + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(getCredit == 0){
                     stringCredit = "";
                 }else{
-                    String stringCredit1 = customerReportItemArrayList.get(i).getCredit();
-                    stringCredit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringCredit1)) + Utility.getReplaceDollor(cruncycode);
+                    //String stringCredit1 = customerReportItemArrayList.get(i).getCredit();
+                    stringCredit = Utility.getPatternFormat(""+numberPostion, getCredit) + Utility.getReplaceDollor(cruncycode);
                 }
 
-                if(getBalance == 0){
-                    stringBalance = "";
+
+                if(balanceAmount == 0){
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, balanceAmount) + Utility.getReplaceDollor(cruncycode);
                 }else{
-                    String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
-                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
+                    //String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, balanceAmount) + Utility.getReplaceDollor(cruncycode);
                 }
+
+
+
 
 
 
@@ -547,21 +598,18 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 productitemlist = productitemlist + productitem;
 
 
-                double allAmount = 0.0;
-                if(i == customerReportItemArrayList.size() - 1){
-                    try{
-                        allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
-                    }catch (Exception e){
-
-                    }
-                }
-
-
-
-                totalAmount =   totalAmount + allAmount;
+//                double allAmount = 0.0;
+//                if(i == customerReportItemArrayList.size() - 1){
+//                    try{
+//                        allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
+//                    }catch (Exception e){
+//
+//                    }
+//                }
+//                totalAmount =   totalAmount + allAmount;
             }
 
-
+            totalAmount = balanceAmount;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -724,13 +772,13 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                             }
                         }
 
-                        if(filterID.equalsIgnoreCase("date")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
-                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
-                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
-                                }
-                            });
-                        }
+//                        if(filterID.equalsIgnoreCase("date")){
+//                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
+//                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
+//                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
+//                                }
+//                            });
+//                        }
 
                         supplierReportWeb(customerItem, customerReportItemArrayList);
 
@@ -764,7 +812,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     private void supplierReportWeb(SupplierItem customerItem, ArrayList<CustomerReportItem> customerReportItemArrayList) {
 
         double totalAmount = 0.0;
-
+        double balanceAmount = 0.0;
         String name = "report/SupplierReport.html";
         String nameName = "file:///android_asset/report/SupplierReport.html";
 
@@ -779,31 +827,38 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                 double getDebit = Double.parseDouble(customerReportItemArrayList.get(i).getDebit());
                 double getCredit = Double.parseDouble(customerReportItemArrayList.get(i).getCredit());
-                double getBalance = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
+                //double getBalance = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
 
                 String stringDebit = "";
                 String stringCredit = "";
                 String stringBalance = "";
 
+                balanceAmount = balanceAmount + getDebit;
+                Log.e(TAG, "balanceAmountAA "+balanceAmount);
+
+                balanceAmount = balanceAmount - getCredit;
+                Log.e(TAG, "balanceAmountBB "+balanceAmount);
+
+
                 if(getDebit == 0){
                     stringDebit = "";
                 }else{
-                    String stringDebit1 = customerReportItemArrayList.get(i).getDebit();
-                    stringDebit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringDebit1)) + Utility.getReplaceDollor(cruncycode);
+                    // String stringDebit1 = customerReportItemArrayList.get(i).getDebit();
+                    stringDebit = Utility.getPatternFormat(""+numberPostion, getDebit) + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(getCredit == 0){
                     stringCredit = "";
                 }else{
-                    String stringCredit1 = customerReportItemArrayList.get(i).getCredit();
-                    stringCredit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringCredit1)) + Utility.getReplaceDollor(cruncycode);
+                    //String stringCredit1 = customerReportItemArrayList.get(i).getCredit();
+                    stringCredit = Utility.getPatternFormat(""+numberPostion, getCredit) + Utility.getReplaceDollor(cruncycode);
                 }
 
-                if(getBalance == 0){
-                    stringBalance = "";
+                if(balanceAmount == 0){
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, balanceAmount) + Utility.getReplaceDollor(cruncycode);
                 }else{
-                    String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
-                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
+                    //String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, balanceAmount) + Utility.getReplaceDollor(cruncycode);
                 }
 
 
@@ -816,19 +871,19 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 productitemlist = productitemlist + productitem;
 
 
-                double allAmount = 0.0;
-                if(i == customerReportItemArrayList.size() - 1){
-                    try{
-                        allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
-                    }catch (Exception e){
-
-                    }
-                }
-
-                totalAmount =   totalAmount + allAmount;
+//                double allAmount = 0.0;
+//                if(i == customerReportItemArrayList.size() - 1){
+//                    try{
+//                        allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
+//                    }catch (Exception e){
+//
+//                    }
+//                }
+//
+//                totalAmount =   totalAmount + allAmount;
             }
 
-
+            totalAmount = balanceAmount;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -873,10 +928,84 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     }
 
 
+    private void totalSalesReportPaidUnpaid(String company_id, String customer_id, String filterID, String fDate, String sDate, String customerName) {
+        ArrayList<InvoiceData> invoiceDataArrayList = new ArrayList<>();
 
-    private void totalSalesReport(String customer_id, String filterID, String fDate, String sDate) {
         RequestParams params = new RequestParams();
-        params.add("company_id", customer_id);
+        params.add("company_id", company_id);
+
+        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        client.post(AllSirApi.BASE_URL + "invoice/getListingByCompany", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e(TAG, "responsecompanySS"+ response);
+
+                //  avi.smoothToHide();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true")) {
+
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        JSONArray invoice = data.getJSONArray("invoice");
+
+                        if (invoice.length() > 0) {
+                            for (int i = 0; i < invoice.length(); i++) {
+                                JSONObject item = invoice.getJSONObject(i);
+
+                                String invoice_idstr = item.getString("invoice_id");
+//                                String invoice_no = item.getString("invoice_no");
+//                                String due_date = item.getString("due_date");
+//                                String total = item.getString("total");
+//
+//                                String void_status = item.getString("void_status");
+
+                                String statusinvoice = item.getString("order_status_id");
+
+                                InvoiceData company_list = new InvoiceData();
+
+                                company_list.setInvoice_userid(invoice_idstr);
+
+//                                company_list.setInvoice_nobdt(invoice_no);
+//                                company_list.setInvoicedue_date(due_date);
+//                                company_list.setInvoicetotlaprice(total);
+                                company_list.setInvocestatus(statusinvoice);
+//                                company_list.setVoid_status(void_status);
+                                invoiceDataArrayList.add(company_list);
+
+                                Log.e(TAG , invoice_idstr+ " invoice_no "+statusinvoice);
+                            }
+                        }
+
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                    totalSalesReport(invoiceDataArrayList, company_id, filterID, fDate, sDate, customerName);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    //avi.smoothToHide();
+                    Log.e(TAG, "responsecompanyF"+ response);
+                    totalSalesReport(invoiceDataArrayList, company_id, filterID, fDate, sDate, customerName);
+                }
+            }
+        });
+    }
+
+    private void totalSalesReport( ArrayList<InvoiceData> list, String company_id, String filterID, String fDate, String sDate, String customerName) {
+        RequestParams params = new RequestParams();
+        params.add("company_id", company_id);
 
         String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
@@ -923,6 +1052,10 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                         ArrayList<TotalSalesReportItem> customerReportItemArrayList = new ArrayList<>();
 
                         JSONArray statement = data.getJSONArray("total_sales");
+
+
+
+
                         if (statement.length() > 0) {
                             for (int i = 0; i < statement.length(); i++) {
                                 JSONObject item = statement.getJSONObject(i);
@@ -935,8 +1068,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 String total = item.getString("total");
 
 
-
-
                                 TotalSalesReportItem customerReportItem = new TotalSalesReportItem();
                                 customerReportItem.setInvoice_id(invoice_id);
                                 customerReportItem.setInvoice_no(invoice_no);
@@ -944,6 +1075,16 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 customerReportItem.setContact_name(contact_name);
                                 customerReportItem.setCustomer_name(customer_name);
                                 customerReportItem.setTotal(total);
+
+
+
+
+                                String paidUnpaid = getPaidUnpaid(list, invoice_id);
+                                customerReportItem.setPaidUnpaid(paidUnpaid);
+
+                                Log.e(TAG, "filterIDPaid "+filterID);
+                                Log.e(TAG, "paidUnpaid "+paidUnpaid);
+                                Log.e(TAG, "customerName "+customerName);
 
                                 if(filterID.equalsIgnoreCase("date")){
                                     if(!fDate.equalsIgnoreCase("") && !sDate.equalsIgnoreCase("")){
@@ -968,33 +1109,57 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                                     }
 
-                                }else{
+                                }
+                                else if(filterID.equalsIgnoreCase("paid")){
+
+                                    if(paidUnpaid.equalsIgnoreCase("2")){
+                                        customerReportItemArrayList.add(customerReportItem);
+                                    }
+                                }
+
+                                else if(filterID.equalsIgnoreCase("unpaid")){
+                                    if(paidUnpaid.equalsIgnoreCase("1")){
+                                        customerReportItemArrayList.add(customerReportItem);
+                                    }
+                                }
+
+                                else if(filterID.equalsIgnoreCase("customer")){
+                                    if(customer_name.toLowerCase().equalsIgnoreCase(customerName.toLowerCase())){
+                                        customerReportItemArrayList.add(customerReportItem);
+                                    }
+                                }
+
+                                else{
                                     customerReportItemArrayList.add(customerReportItem);
                                 }
                             }
                         }
 
-                        if(filterID.equalsIgnoreCase("date")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TotalSalesReportItem>() {
-                                public int compare(TotalSalesReportItem o1, TotalSalesReportItem o2) {
-                                    return o1.getInvoice_date().compareTo(o2.getInvoice_date());
-                                }
-                            });
-                        } else if(filterID.equalsIgnoreCase("customer")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TotalSalesReportItem>() {
-                                public int compare(TotalSalesReportItem o1, TotalSalesReportItem o2) {
-                                    return o1.getCustomer_name().compareTo(o2.getCustomer_name());
-                                }
-                            });
-                        } else if(filterID.equalsIgnoreCase("paid")){
+//                        if(filterID.equalsIgnoreCase("date")){
+//                            Collections.sort(customerReportItemArrayList, new Comparator<TotalSalesReportItem>() {
+//                                public int compare(TotalSalesReportItem o1, TotalSalesReportItem o2) {
+//                                    return o1.getInvoice_date().compareTo(o2.getInvoice_date());
+//                                }
+//                            });
+//                        } else
+
+//                        if(filterID.equalsIgnoreCase("customer")){
 //                            Collections.sort(customerReportItemArrayList, new Comparator<TotalSalesReportItem>() {
 //                                public int compare(TotalSalesReportItem o1, TotalSalesReportItem o2) {
 //                                    return o1.getCustomer_name().compareTo(o2.getCustomer_name());
 //                                }
 //                            });
-                        } else if(filterID.equalsIgnoreCase("unpaid")){
-
-                        }
+//                        } else
+//
+//                            if(filterID.equalsIgnoreCase("paid")){
+////                            Collections.sort(customerReportItemArrayList, new Comparator<TotalSalesReportItem>() {
+////                                public int compare(TotalSalesReportItem o1, TotalSalesReportItem o2) {
+////                                    return o1.getCustomer_name().compareTo(o2.getCustomer_name());
+////                                }
+////                            });
+//                        } else if(filterID.equalsIgnoreCase("unpaid")){
+//
+//                        }
 
                         totalSalesReportWeb(customerItem, customerReportItemArrayList);
 
@@ -1022,6 +1187,23 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 }
             }
         });
+    }
+
+    private String getPaidUnpaid(ArrayList<InvoiceData> list, String invoice_id) {
+        String paidUnpaid = "";
+        if(list != null){
+            for(int i = 0 ; i < list.size() ; i++){
+                Log.e(TAG, list.get(i).getInvoice_userid()+" getPaidUnpaid "+invoice_id);
+                if(list.get(i).getInvoice_userid().equalsIgnoreCase(invoice_id)){
+                    if(list.get(i).getInvocestatus().equalsIgnoreCase("2")){
+                        paidUnpaid = "2";
+                    }else{
+                        paidUnpaid = "1";
+                    }
+                }
+            }
+        }
+        return paidUnpaid;
     }
 
 
@@ -1128,7 +1310,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void totalPurchaseReport(String customer_id, String filterID, String fDate, String sDate) {
+    private void totalPurchaseReport(String customer_id, String filterID, String fDate, String sDate, String supplierName) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
@@ -1222,25 +1404,37 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                                     }
 
-                                }else{
+                                }
+                                if(filterID.equalsIgnoreCase("supplier")){
+                                    if(supplier_name.toLowerCase().equalsIgnoreCase(supplierName.toLowerCase())){
+                                        customerReportItemArrayList.add(customerReportItem);
+                                    }
+                                }
+
+
+                                else{
                                     customerReportItemArrayList.add(customerReportItem);
                                 }
                             }
                         }
 
-                        if(filterID.equalsIgnoreCase("date")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TotalPurchaseReportItem>() {
-                                public int compare(TotalPurchaseReportItem o1, TotalPurchaseReportItem o2) {
-                                    return o1.getOrder_date().compareTo(o2.getOrder_date());
-                                }
-                            });
-                        } else if(filterID.equalsIgnoreCase("supplier")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TotalPurchaseReportItem>() {
-                                public int compare(TotalPurchaseReportItem o1, TotalPurchaseReportItem o2) {
-                                    return o1.getSupplier_name().compareTo(o2.getSupplier_name());
-                                }
-                            });
-                        }
+
+
+
+
+//                        if(filterID.equalsIgnoreCase("date")){
+//                            Collections.sort(customerReportItemArrayList, new Comparator<TotalPurchaseReportItem>() {
+//                                public int compare(TotalPurchaseReportItem o1, TotalPurchaseReportItem o2) {
+//                                    return o1.getOrder_date().compareTo(o2.getOrder_date());
+//                                }
+//                            });
+//                        } else if(filterID.equalsIgnoreCase("supplier")){
+//                            Collections.sort(customerReportItemArrayList, new Comparator<TotalPurchaseReportItem>() {
+//                                public int compare(TotalPurchaseReportItem o1, TotalPurchaseReportItem o2) {
+//                                    return o1.getSupplier_name().compareTo(o2.getSupplier_name());
+//                                }
+//                            });
+//                        }
 
 
                         totalPurchaseReportWeb(customerItem, customerReportItemArrayList);
@@ -2486,14 +2680,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-
-
-
-
-
-
-
-
     public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
         private static final String TAG = "MenuAdapter";
@@ -2613,13 +2799,17 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 3){
                 filterDate(company_id, positionNext);
             }else if(i == 4){
-                totalSalesReport(company_id, "customer", "", "");
+                //totalSalesReport(company_id, "customer", "", "");
+                filterCustomerSupplier = "customer";
+                createbottomsheet_customers();
             }else if(i == 5){
-                totalSalesReport(company_id, "paid", "", "");
+                totalSalesReportPaidUnpaid(selectedCompanyId, company_id, "paid", "", "" , "");
+                //totalSalesReport(null, company_id, "paid", "", "");
             }else if(i == 6){
-                totalSalesReport(company_id, "unpaid", "", "");
+                totalSalesReportPaidUnpaid(selectedCompanyId, company_id, "unpaid", "", "", "");
+//                totalSalesReport(null, company_id, "unpaid", "", "");
             }else if(i == 7){
-                totalSalesReport(company_id, "", "", "");
+                totalSalesReportPaidUnpaid(selectedCompanyId, company_id, "", "", "", "");
             }
         } else if(positionNext == 3){
             if(i == 0){
@@ -2633,9 +2823,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 //                totalPurchaseReport(company_id, "date");
                 filterDate(company_id, positionNext);
             }else if(i == 4){
-                totalPurchaseReport(company_id, "supplier", "", "");
+                filterCustomerSupplier = "supplier";
+                createbottomsheet_supplier();
+                //totalPurchaseReport(company_id, "supplier", "", "");
             }else if(i == 5){
-                totalPurchaseReport(company_id, "", "", "");
+                totalPurchaseReport(company_id, "", "", "", "");
             }
         } else if(positionNext == 4){
             if(i == 0){
@@ -2777,9 +2969,10 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                         } else if(position == 1){
                             supplierReport(customer_id, "date", fDate, sDate);
                         } else if(position == 2){
-                            totalSalesReport(customer_id, "date", fDate, sDate);
+                            //totalSalesReport(null, customer_id, "date", fDate, sDate, "");
+                            totalSalesReportPaidUnpaid(selectedCompanyId, customer_id, "date", fDate, sDate, "");
                         }else if(position == 3){
-                            totalPurchaseReport(customer_id, "date", fDate, sDate);
+                            totalPurchaseReport(customer_id, "date", fDate, sDate, "");
                         }else if(position == 4){
                         }else if(position == 5){
                             taxCollectedReport(customer_id, "date", fDate, sDate);
@@ -2816,6 +3009,698 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
+
+
+
+
+    TextView txtcustomer, txtname, txtcontactname;
+    EditText search_customers;
+    RecyclerView recycler_customers;
+    Customer_Bottom_Adapter customer_bottom_adapter;
+
+    public void createbottomsheet_customers() {
+
+        if (bottomSheetDialog != null) {
+            View view = LayoutInflater.from(ReportViewActivity.this).inflate(R.layout.customer_bottom_sheet, null);
+            txtcustomer = view.findViewById(R.id.txtcustomer);
+            search_customers = view.findViewById(R.id.search_customers);
+            TextView add_customer = view.findViewById(R.id.add_customer);
+            add_customer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ReportViewActivity.this, Customer_Activity.class);
+                    startActivityForResult(intent, 123);
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+            recycler_customers = view.findViewById(R.id.recycler_customers);
+            txtname = view.findViewById(R.id.name);
+            txtcontactname = view.findViewById(R.id.contactname);
+            search_customers.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+
+                    if (customer_bottom.size() > 0) {
+                        filterCustomers(s.toString());
+                    }
+                }
+            });
+
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ReportViewActivity.this, LinearLayoutManager.VERTICAL, false);
+            recycler_customers.setLayoutManager(layoutManager);
+            recycler_customers.setHasFixedSize(true);
+
+            customer_bottom_adapter = new Customer_Bottom_Adapter(ReportViewActivity.this, customer_bottom, this);
+            recycler_customers.setAdapter(customer_bottom_adapter);
+            customer_bottom_adapter.notifyDataSetChanged();
+
+
+            txtcustomer.setTypeface(Typeface.createFromAsset(ReportViewActivity.this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            // txtname.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Medium.otf"));
+            // txtcontactname.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Medium.otf"));
+
+            bottomSheetDialog = new BottomSheetDialog(ReportViewActivity.this);
+            bottomSheetDialog.setContentView(view);
+
+            bottomSheetDialog.show();
+
+
+        }
+    }
+
+
+    public void createbottomsheet_supplier() {
+
+        if (bottomSheetDialog != null) {
+            View view = LayoutInflater.from(ReportViewActivity.this).inflate(R.layout.customer_bottom_sheet, null);
+            txtcustomer = view.findViewById(R.id.txtcustomer);
+            txtcustomer.setText("Select Supplier");
+            search_customers = view.findViewById(R.id.search_customers);
+            search_customers.setHint("Select Suppliers");
+            TextView add_customer = view.findViewById(R.id.add_customer);
+            add_customer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ReportViewActivity.this, Vendor_Activity.class);
+                    startActivityForResult(intent, 124);
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+            recycler_customers = view.findViewById(R.id.recycler_customers);
+            txtname = view.findViewById(R.id.name);
+            txtcontactname = view.findViewById(R.id.contactname);
+            search_customers.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+
+                    if (supplier_bottom.size() > 0) {
+                        filterSupplier(s.toString());
+                    }
+                }
+            });
+
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ReportViewActivity.this, LinearLayoutManager.VERTICAL, false);
+            recycler_customers.setLayoutManager(layoutManager);
+            recycler_customers.setHasFixedSize(true);
+
+            customer_bottom_adapter = new Customer_Bottom_Adapter(ReportViewActivity.this, supplier_bottom, this);
+            recycler_customers.setAdapter(customer_bottom_adapter);
+            customer_bottom_adapter.notifyDataSetChanged();
+
+
+            txtcustomer.setTypeface(Typeface.createFromAsset(ReportViewActivity.this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            // txtname.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Medium.otf"));
+            // txtcontactname.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Medium.otf"));
+
+            bottomSheetDialog = new BottomSheetDialog(ReportViewActivity.this);
+            bottomSheetDialog.setContentView(view);
+
+            bottomSheetDialog.show();
+
+
+        }
+    }
+
+
+    Product_Bottom_Adapter product_bottom_adapter;
+
+    public void createbottomsheet_product() {
+
+        if (bottomSheetDialog != null) {
+            View view = LayoutInflater.from(ReportViewActivity.this).inflate(R.layout.customer_bottom_sheet, null);
+            txtcustomer = view.findViewById(R.id.txtcustomer);
+            txtcustomer.setText("Select Product");
+            search_customers = view.findViewById(R.id.search_customers);
+            search_customers.setHint("Select Products");
+            TextView add_customer = view.findViewById(R.id.add_customer);
+            add_customer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ReportViewActivity.this, Product_Activity.class);
+                    startActivityForResult(intent, 125);
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+            recycler_customers = view.findViewById(R.id.recycler_customers);
+            txtname = view.findViewById(R.id.name);
+            txtcontactname = view.findViewById(R.id.contactname);
+            search_customers.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+
+                    if (product_bottom.size() > 0) {
+                        filterProduct(s.toString());
+                    }
+                }
+            });
+
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ReportViewActivity.this, LinearLayoutManager.VERTICAL, false);
+            recycler_customers.setLayoutManager(layoutManager);
+            recycler_customers.setHasFixedSize(true);
+
+            product_bottom_adapter = new Product_Bottom_Adapter(ReportViewActivity.this, product_bottom, this, bottomSheetDialog ,"report");
+            recycler_customers.setAdapter(product_bottom_adapter);
+            product_bottom_adapter.notifyDataSetChanged();
+
+
+            txtcustomer.setTypeface(Typeface.createFromAsset(ReportViewActivity.this.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            // txtname.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Medium.otf"));
+            // txtcontactname.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Medium.otf"));
+
+            bottomSheetDialog = new BottomSheetDialog(ReportViewActivity.this);
+            bottomSheetDialog.setContentView(view);
+
+            bottomSheetDialog.show();
+
+
+        }
+    }
+
+
+
+
+
+    void filterCustomers(String text) {
+        ArrayList<Customer_list> temp = new ArrayList();
+        for (Customer_list d : customer_bottom) {
+            if (d.getCustomer_name().toLowerCase().contains(text.toLowerCase())) {
+                temp.add(d);
+            }
+        }
+        customer_bottom_adapter.updateList(temp);
+    }
+
+
+    void filterSupplier(String text) {
+        ArrayList<Customer_list> temp = new ArrayList();
+        for (Customer_list d : customer_bottom) {
+            if (d.getCustomer_name().toLowerCase().contains(text.toLowerCase())) {
+                temp.add(d);
+            }
+        }
+        customer_bottom_adapter.updateList(temp);
+    }
+
+
+    void filterProduct(String text) {
+        ArrayList<Product_list> temp = new ArrayList();
+        for (Product_list d : product_bottom) {
+            if (d.getProduct_name().toLowerCase().contains(text.toLowerCase())) {
+                temp.add(d);
+            }
+        }
+        product_bottom_adapter.updateList(temp);
+    }
+
+
+
+    @Override
+    public void onPostExecute(Customer_list customer_list) {
+
+        if (bottomSheetDialog != null) {
+            bottomSheetDialog.dismiss();
+        }
+
+        String customer_id = customer_list.getCustomer_id();
+        String customer_name = customer_list.getCustomer_name();
+
+        if(filterCustomerSupplier.equalsIgnoreCase("customer")){
+            totalSalesReportPaidUnpaid(selectedCompanyId, company_id, "customer", "", "", customer_name);
+        } else if(filterCustomerSupplier.equalsIgnoreCase("supplier")){
+            totalPurchaseReport(company_id, "supplier", "", "", customer_name);
+        }
+
+
+
+        Log.e(TAG, "customer_idAAAAAAA "+customer_id);
+       // Log.e(TAG, "customer_name "+customer_name);
+
+//        Intent intent = new Intent(ReportViewActivity.this, ReportViewActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//        //intent.putExtra("titleName", titleName);
+//
+//        intent.putExtra("positionNext", positionNext);
+//
+//        if(positionNext == 0){
+//            intent.putExtra("customer_id", customer_id);
+//        } else if(positionNext == 1){
+//            intent.putExtra("supplier_id", customer_id);
+//        } else if(positionNext == 7){
+//            intent.putExtra("product_id", customer_id);
+//        } else{
+//            intent.putExtra("company_id", selectedCompanyId);
+//        }
+//
+//        startActivity(intent);
+    }
+
+
+
+    @Override
+    public void onPostExecutecall(Product_list selected_item, String s, String price) {
+        if (bottomSheetDialog != null) {
+            bottomSheetDialog.dismiss();
+        }
+
+        String customer_id = selected_item.getProduct_id();
+
+        Log.e(TAG, "customer_idBBBBBBB "+customer_id);
+        //Log.e(TAG, "customer_name "+customer_name);
+
+//        Intent intent = new Intent(ReportViewActivity.this, ReportViewActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//        //intent.putExtra("titleName", titleName);
+//
+//        intent.putExtra("positionNext", positionNext);
+//
+//        if(positionNext == 7){
+//            intent.putExtra("product_id", customer_id);
+////            intent.putExtra("companyName", companyName);
+////            intent.putExtra("companyAddress", companyAddress);
+////            intent.putExtra("companyContactNo", companyContactNo);
+////            intent.putExtra("companyWebsite", companyWebsite);
+////            intent.putExtra("companyEmail", companyEmail);
+////            intent.putExtra("companyLogo", companyLogo);
+//        }
+//
+//        startActivity(intent);
+    }
+
+
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.e(TAG, "onActivityResult requestCode:: "+requestCode);
+
+        if(requestCode == 123){
+            Log.e(TAG, "requestCode "+requestCode);
+            customer_list(selectedCompanyId);
+        }
+
+        if(requestCode == 124){
+            Log.e(TAG, "requestCode "+requestCode);
+            supplier_list(selectedCompanyId);
+        }
+
+        if(requestCode == 125){
+            Log.e(TAG, "requestCode "+requestCode);
+            product_list(selectedCompanyId);
+        }
+
+
+    }
+
+
+
+    @Override
+    public void closeDialog() {
+        if(bottomSheetDialog != null){
+            bottomSheetDialog.dismiss();
+        }
+    }
+
+
+
+
+
+
+    public void customer_list(String selectedCompanyId) {
+        customer_bottom.clear();
+        RequestParams params = new RequestParams();
+        params.add("company_id", this.selectedCompanyId);
+
+        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        client.post(AllSirApi.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e("response customers", response);
+
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true")) {
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        JSONArray customer = data.getJSONArray("customer");
+                        String image_path = data.getString("customer_image_path");
+
+                        String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
+
+                        String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
+
+
+                        for (int i = 0; i < customer.length(); i++) {
+                            JSONObject item = customer.getJSONObject(i);
+
+                            customer_id = item.getString("customer_id");
+
+                            Log.e("Customer Id", customer_id);
+                            customer_name = item.getString("customer_name");
+                            custoner_contact_name = item.getString("contact_name");
+                            String image = item.getString("image");
+                            customer_email = item.getString("email");
+                            customer_contact = item.getString("phone_number");
+                            customer_address = item.getString("address");
+                            customer_website = item.getString("website");
+                            shipping_firstname = item.getString("shipping_firstname");
+                            shipping_lastname = item.getString("shipping_lastname");
+                            shipping_address_1 = item.getString("shipping_address_1");
+
+                            shipping_address_2 = item.getString("shipping_address_2");
+                            shipping_city = item.getString("shipping_city");
+                            shipping_postcode = item.getString("shipping_postcode");
+                            shipping_country = item.getString("shipping_country");
+                            shipping_zone = item.getString("shipping_zone");
+
+                            Customer_list customer_list = new Customer_list();
+
+                            customer_list.setCustomer_email(customer_email);
+                            customer_list.setCustomer_address(customer_address);
+                            customer_list.setCustomer_website(customer_website);
+                            customer_list.setCustomer_phone(customer_contact);
+
+                            customer_list.setCustomer_id(customer_id);
+                            customer_list.setCustomer_name(customer_name);
+                            customer_list.setCustomer_contact_person(custoner_contact_name);
+                            customer_list.setCustomer_image_path(image_path);
+                            customer_list.setCustomer_image(image);
+
+                            customer_list.setShipping_firstname(shipping_firstname);
+                            customer_list.setShipping_lastname(shipping_lastname);
+                            customer_list.setShipping_address_1(shipping_address_1);
+                            customer_list.setShipping_address_2(shipping_address_2);
+                            customer_list.setShipping_city(shipping_city);
+                            customer_list.setShipping_postcode(shipping_postcode);
+                            customer_list.setShipping_country(shipping_country);
+                            customer_list.setShipping_zone(shipping_zone);
+
+                            customer_bottom.add(customer_list);
+
+
+                        }
+
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+
+                        String status = jsonObject.getString("status");
+                        if (status.equals("false")) {
+                            //Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // Constant.ErrorToast(ReportActivity.this, "Something went wrong, try again!");
+                }
+            }
+        });
+    }
+
+
+    public void supplier_list(String selectedCompanyId) {
+        supplier_bottom.clear();
+        RequestParams params = new RequestParams();
+        params.add("company_id", this.selectedCompanyId);
+
+        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        client.post(AllSirApi.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e("response customers", response);
+
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true")) {
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        JSONArray customer = data.getJSONArray("supplier");
+                        String image_path = data.getString("supplier_image_path");
+
+                        String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
+
+                        String shipping_firstname, shipping_lastname, shipping_address_1, shipping_address_2, shipping_city, shipping_postcode, shipping_country, shipping_zone;
+
+
+                        for (int i = 0; i < customer.length(); i++) {
+                            JSONObject item = customer.getJSONObject(i);
+
+                            customer_id = item.getString("supplier_id");
+
+                            Log.e("supplier_id", customer_id);
+                            customer_name = item.getString("supplier_name");
+                            custoner_contact_name = item.getString("contact_name");
+                            String image = item.getString("image");
+                            customer_email = item.getString("email");
+                            customer_contact = item.getString("phone_number");
+                            customer_address = item.getString("address");
+                            customer_website = item.getString("website");
+
+
+//                            shipping_firstname = item.getString("shipping_firstname");
+//                            shipping_lastname = item.getString("shipping_lastname");
+//                            shipping_address_1 = item.getString("shipping_address_1");
+//
+//                            shipping_address_2 = item.getString("shipping_address_2");
+//                            shipping_city = item.getString("shipping_city");
+//                            shipping_postcode = item.getString("shipping_postcode");
+//                            shipping_country = item.getString("shipping_country");
+//                            shipping_zone = item.getString("shipping_zone");
+
+                            Customer_list customer_list = new Customer_list();
+
+                            customer_list.setCustomer_email(customer_email);
+                            customer_list.setCustomer_address(customer_address);
+                            customer_list.setCustomer_website(customer_website);
+                            customer_list.setCustomer_phone(customer_contact);
+
+                            customer_list.setCustomer_id(customer_id);
+                            customer_list.setCustomer_name(customer_name);
+                            customer_list.setCustomer_contact_person(custoner_contact_name);
+                            customer_list.setCustomer_image_path(image_path);
+                            customer_list.setCustomer_image(image);
+
+//                            customer_list.setShipping_firstname(shipping_firstname);
+//                            customer_list.setShipping_lastname(shipping_lastname);
+//                            customer_list.setShipping_address_1(shipping_address_1);
+//                            customer_list.setShipping_address_2(shipping_address_2);
+//                            customer_list.setShipping_city(shipping_city);
+//                            customer_list.setShipping_postcode(shipping_postcode);
+//                            customer_list.setShipping_country(shipping_country);
+//                            customer_list.setShipping_zone(shipping_zone);
+
+                            supplier_bottom.add(customer_list);
+
+
+                        }
+
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+
+                        String status = jsonObject.getString("status");
+                        if (status.equals("false")) {
+                            //Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    //Constant.ErrorToast(ReportActivity.this, "Something went wrong, try again!");
+                }
+            }
+        });
+    }
+
+
+    public void product_list(String selectedCompanyId) {
+        product_bottom.clear();
+        RequestParams params = new RequestParams();
+        params.add("company_id", this.selectedCompanyId);
+
+        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        client.post(AllSirApi.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e(TAG, "responseproductAAA"+ response);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true")) {
+                        JSONObject data = jsonObject.getJSONObject("data");
+
+                        String product_image_path = data.getString("product_image_path");
+
+                        JSONArray product = data.getJSONArray("product");
+                        if (product.length() > 0) {
+                            for (int i = 0; i < product.length(); i++) {
+                                JSONObject item = product.getJSONObject(i);
+                                String product_id = item.getString("product_id");
+                                String company_id = item.getString("company_id");
+                                String product_name = item.getString("name");
+                                String product_description = item.getString("description");
+                                String product_status = item.getString("status");
+                                String product_image = item.getString("image");
+                                String product_price = item.getString("price");
+                                String product_taxable = item.getString("is_taxable");
+                                String product_category = item.getString("category");
+                                String currency_symbol = item.getString("currency_symbol");
+                                String quantity = item.getString("quantity");
+
+                                String measurement_unit = item.getString("measurement_unit");
+                                Log.e(TAG, "measurement_unit: "+measurement_unit);
+
+
+
+                                String minimum = item.getString("minimum");
+
+                                Product_list product_list = new Product_list();
+
+                                product_list.setProduct_measurement_unit(measurement_unit);
+                                product_list.setCompany_id(company_id);
+                                product_list.setProduct_id(product_id);
+                                product_list.setProduct_name(product_name);
+                                product_list.setProduct_description(product_description);
+                                product_list.setProduct_status(product_status);
+                                product_list.setProduct_image(product_image);
+                                product_list.setProduct_image_path(product_image_path);
+                                product_list.setProduct_price(product_price);
+                                product_list.setProduct_taxable(product_taxable);
+                                product_list.setProduct_category(product_category);
+                                product_list.setCurrency_code(currency_symbol);
+                                product_list.setQuantity(quantity);
+                                product_list.setMinimum(minimum);
+
+//                                Product_list product_list = new Customer_list();
+//                                product_list.setCompany_id(company_id);
+//                                product_list.setCustomer_id(product_id);
+//                                product_list.setCustomer_name(product_name);
+//                                product_list.setCustomer_image(product_image_path+product_image);
+//                                product_list.setPrice(product_price);
+//                                product_list.setCurrency_symbol(currency_symbol);
+//                                product_list.setType("product");
+                                product_bottom.add(product_list);
+
+                            }
+                        } else {
+                            //Constant.ErrorToast(ReportActivity.this, jsonObject.getString("Product Not Found"));
+                        }
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+
+                        String status = jsonObject.getString("status");
+                        if (status.equals("false")) {
+                            //Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    //Constant.ErrorToast(ReportActivity.this, "Something went wrong, try again!");
+                }
+            }
+        });
+    }
 
 
 

@@ -221,11 +221,13 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 //                                cEmail.add(company_email);
 //                                cLogo.add(logo);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ReportActivity.this, android.R.layout.simple_spinner_item, cnames);
-                                selectcompany.setAdapter(namesadapter);
+
 
                             }
                         }
+
+                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ReportActivity.this, android.R.layout.simple_spinner_item, cnames);
+                        selectcompany.setAdapter(namesadapter);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -884,7 +886,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         //intent.putExtra("titleName", titleName);
 
         intent.putExtra("positionNext", positionNext);
-
+        intent.putExtra("company_id", selectedCompanyId);
         if(positionNext == 0){
             intent.putExtra("customer_id", customer_id);
         } else if(positionNext == 1){
@@ -914,8 +916,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         Intent intent = new Intent(ReportActivity.this, ReportViewActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         //intent.putExtra("titleName", titleName);
-
         intent.putExtra("positionNext", positionNext);
+        intent.putExtra("company_id", selectedCompanyId);
 
         if(positionNext == 7){
             intent.putExtra("product_id", customer_id);
@@ -966,4 +968,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
             bottomSheetDialog.dismiss();
         }
     }
+
+
+
 }

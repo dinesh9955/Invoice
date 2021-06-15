@@ -3,6 +3,8 @@ package com.receipt.invoice.stock.sirproject.Settings;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,30 +110,35 @@ public class FAQsAdapter extends RecyclerView.Adapter<FAQsAdapter.ViewHolderForC
             textView.setText("While creating the company, you need to select color as per preference or matching your brand identity. The color selected will be applied to the different templates in Invoices / Estimates. Select any template as per your choice while creating Invoice / Estimate. If no color has been selected, all templates will display the standard format.");
         }else if(position == 15){
             textView.setText("If warehouse selected does not have sufficient quantity for invoicing, then you will have to first add sufficient quantity to the particular warehouse. Go to Stocks module from the side menu, then you can either add quantity from update stock option or move stock from one warehouse to another from stock movement option, on the top.");
+//        }else if(position == 16){
+//            textView.setText("To perform any of the above functions, go to Invoices, then select the company, then go to the specific Invoice and Swipe left, then click on more and select your preference.");
         }else if(position == 16){
-            textView.setText("To perform any of the above functions, go to Invoices, then select the company, then go to the specific Invoice and Swipe left, then click on more and select your preference.");
-        }else if(position == 17){
             textView.setText("Invoice seen status can be checked only if invoice is shared as a link. When the link is opened by the receiver, the status will automatically change from pending to seen in Invoice module Summary. If the invoice is shared only in PDF format, then seen status cannot be determined and will show as pending.");
+        }else if(position == 17){
+            textView.setText("To mark invoices as paid, go to Invoices module from side menu, then select company, then go to the invoice from the list which needs to be marked as paid and Swipe left, then click on mark as paid. If an invoice is marked as paid then a receipt should be created to reflect in customer statement of account. Similarly, if a purchase order is paid then a payment voucher should be created to reflect in supplier statement of account.");
         }else if(position == 18){
-            textView.setText("To mark invoices as paid, go to Invoices module from side menu, then select company, then go to the invoice from the list which needs to be marked as paid and Swipe right, then click on mark as paid. If an invoice is marked as paid then a receipt should be created to reflect in customer statement of account. Similarly, if a purchase order is paid then a payment voucher should be created to reflect in supplier statement of account.");
+            textView.setText("First go to invoices summary, swipe the particular invoice left and Mark as paid. Then swipe the invoice left, under more, click on Convert to Receipt then click create receipt.");
         }else if(position == 19){
-            textView.setText("First go to invoices summary, swipe the particular invoice right and Mark as paid. Then swipe the invoice left, under more, click on Convert to Receipt then click create receipt.");
+            textView.setText("Mark Purchase order as delivery received to add quantity to inventory. To mark purchase order as delivery received, go to Purchase orders module from the side menu and select the company, then go to the specific purchase order, then swipe left and click on Mark as delivery received.");
         }else if(position == 20){
-            textView.setText("Mark Purchase order as delivery received to add quantity to inventory. To mark purchase order as delivery received, go to Purchase orders module from the side menu and select the company, then go to the specific purchase order, then swipe right and click on Mark as delivery received.");
-        }else if(position == 21){
             textView.setText("To delete an invoice, you need to create a credit note. To delete a Purchase order, you need to create a debit note. Since items in invoice / purchase order are linked to inventory they cannot be deleted directly.\n" +
                     "Alternatively, you can mark the particular Invoice / Purchase order as void, then it will not display in the relevant reports. If you are tracking products inventory, then after marking void, you need to go to Stocks module and add / delete the quantity in void Invoice / Purchase order through update stocks or wastage option.\n");
+        }else if(position == 21){
+            textView.setText("To mark as void, go to particular invoice / purchase order, swipe left then select Mark as Void. ");
         }else if(position == 22){
-            textView.setText("To mark as void, go to particular invoice / purchase order, swipe left then click on more then select Mark as Void. ");
-        }else if(position == 23){
             textView.setText("To create a debit note, go to debit notes from the side menu, then click on create debit notes on top right, then record the transaction and click on create debit note on the bottom. Quantity entered in the debit note will be reduced from the Stock inventory balance.\n" +
                     "To create a Credit note, go to credit notes from the side menu, then click on create credit notes on top right, then record the transaction and click on create credit note on the bottom. Quantity entered in the credit note will be added back to the Stock inventory balance.\n");
+        }else if(position == 23){
+            textView.setText("If a created estimate is converted to invoice, status changes from pending to completed. To convert an estimate to invoice, go to estimates summary, swipe the particular estimate right then click on more then select Convert to Invoice and then click on create invoice.");
         }else if(position == 24){
             textView.setText("Details of the first company created by the user will display on home screen by default. To switch companies, click on the star icon on top right on home screen then select the required company. The company selected shall display on home screen as and when required.");
         }else if(position == 25){
             textView.setText("It takes a few minutes to set up with Stripe or PayPal. Simply enable online payments in your app and follow the instructions.");
         }else if(position == 26){
-            textView.setText("There is no upfront or monthly fee. There is a charge per transaction, which varies by country. To check the charges in your country, please visit Stripe pricing or https://www.paypal.com/us/webapps/mpp/merchant-fees");
+           // textView.setText("There is no upfront or monthly fee. There is a charge per transaction, which varies by country. To check the charges in your country, please visit Stripe pricing or https://www.paypal.com/us/webapps/mpp/merchant-fees");
+            String value = "<html>There is no upfront or monthly fee. There is a charge per transaction, which varies by country. To check the charges in your country, please visit <a href=\"https://www.stripe.com/us/pricing\">Stripe pricing</a> or  <a href=\"https://www.paypal.com/us/webapps/mpp/merchant-fees\">https://www.paypal.com/us/webapps/mpp/merchant-fees</a></html>";
+            textView.setText(Html.fromHtml(value));
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
         }else if(position == 27){
             textView.setText("To change comma format in numbers, go to settings then click on comma format selection then select your preference. Format selected will be applicable throughout the user account.");
         }else if(position == 28){
@@ -141,8 +148,12 @@ public class FAQsAdapter extends RecyclerView.Adapter<FAQsAdapter.ViewHolderForC
         }else if(position == 30){
             textView.setText("Your first payment will take 7 business days and all subsequent payments will take between 2-7 business days to reach your account. You can check the estimated arrival date of your payment using your Stripe / PayPal dashboard.");
         }else if(position == 31){
-            textView.setText("SIR handles card payments through Stripe, a market leader in processing payments. Setting up with Stripe is easy and there are No set up costs. You only pay per transaction. For more details, visit the Stripe pricing page.\n" +
-                    "On Stripe dashboard you can have complete visibility of all your transactions including card payments, pending payments and fees.\n");
+//            textView.setText("SIR handles card payments through Stripe, a market leader in processing payments. Setting up with Stripe is easy and there are No set up costs. You only pay per transaction. For more details, visit the Stripe pricing page.\n" +
+//                    "On Stripe dashboard you can have complete visibility of all your transactions including card payments, pending payments and fees.\n");
+            String value = "<html>SIR handles card payments through Stripe, a market leader in processing payments. Setting up with Stripe is easy and there are No set up costs. You only pay per transaction. For more details, visit the <a href=\"https://www.stripe.com/us/pricing\">Stripe pricing</a> page. +\n" +
+                    "On Stripe dashboard you can have complete visibility of all your transactions including card payments, pending payments and fees.</html>";
+            textView.setText(Html.fromHtml(value));
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
         }else if(position == 32){
             textView.setText("To switch / restore / upgrade a subscription, go to Settings then click on Subscription and select your preference accordingly. Terms and conditions apply.");
         }else if(position == 33){

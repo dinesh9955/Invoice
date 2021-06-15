@@ -22,10 +22,13 @@ import android.os.Environment;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -98,13 +101,15 @@ public class Abc extends BaseActivity {
     private static final String TAG = "Abc";
     private ProgressDialog pd;
 
-
+    TextView textView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.abc);
+
+        textView = findViewById(R.id.textView3);
 
         Button button = (Button) findViewById(R.id.button2);
         firebaseAnalytics = FirebaseAnalytics.getInstance(Abc.this);
@@ -132,25 +137,38 @@ public class Abc extends BaseActivity {
                     }
                 });
 
+        //String value = "<html>Visit my blog <a href=\"http://www.maxartists.com\">mysite</a> View <a href=\"sherif-activity://myactivity?author=sherif&nick=king\">myactivity</a> callback</html>";
+//        textView.setText("This is link https://www.google.co.in/");
+        //textView.setText(Html.fromHtml(value));
+        //textView.setMovementMethod(LinkMovementMethod.getInstance());
+
+        String value = "<html>There is no upfront or monthly fee. There is a charge per transaction, which varies by country. To check the charges in your country, please visit <a href=\"https://www.stripe.com/us/pricing\">Stripe pricing</a> or  <a href=\"https://www.paypal.com/us/webapps/mpp/merchant-fees\">https://www.paypal.com/us/webapps/mpp/merchant-fees</a></html>";
+//        textView.setText("<html>There is no upfront or monthly fee. There is a charge per transaction, which varies by country. To check the charges in your country, please visit <a href=\"http://www.maxartists.com\">mysite</a>Stripe pricing or https://www.paypal.com/us/webapps/mpp/merchant-fees</html>");
+        textView.setText(Html.fromHtml(value));
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               WebView invoiceweb = findViewById(R.id.invoiceweb);
-                //create object of print manager in your device
-                PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
-
-
-
-                //create object of print adapter
-                PrintDocumentAdapter printAdapter = invoiceweb.createPrintDocumentAdapter();
-
-                //provide name to your newly generated pdf file
-                String jobName = getString(R.string.app_name) + " Print Test";
-
-                PrintAttributes.Builder builder = new PrintAttributes.Builder();
-                builder.setMediaSize( PrintAttributes.MediaSize.ISO_A4);
-                printManager.print(jobName, printAdapter, builder.build());
+//               WebView invoiceweb = findViewById(R.id.invoiceweb);
+//                //create object of print manager in your device
+//                PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
+//
+//
+//
+//                //create object of print adapter
+//                PrintDocumentAdapter printAdapter = invoiceweb.createPrintDocumentAdapter();
+//
+//                //provide name to your newly generated pdf file
+//                String jobName = getString(R.string.app_name) + " Print Test";
+//
+//                PrintAttributes.Builder builder = new PrintAttributes.Builder();
+//                builder.setMediaSize( PrintAttributes.MediaSize.ISO_A4);
+//                printManager.print(jobName, printAdapter, builder.build());
 
 
 

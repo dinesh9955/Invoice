@@ -73,7 +73,7 @@ public class WebShowActivity extends BaseActivity {
         webView.getSettings().setDisplayZoomControls(false);
 
 
-        webView.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+        webView.getSettings().setTextSize(WebSettings.TextSize.LARGEST);
 
         Bundle bundle = getIntent().getExtras();
 

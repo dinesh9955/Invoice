@@ -8,7 +8,15 @@ public class TotalSalesReportItem {
     String contact_name = "";
     String customer_name = "";
     String total = "";
+    String paidUnpaid = "";
 
+    public String getPaidUnpaid() {
+        return paidUnpaid;
+    }
+
+    public void setPaidUnpaid(String paidUnpaid) {
+        this.paidUnpaid = paidUnpaid;
+    }
 
     public String getInvoice_id() {
         return invoice_id;

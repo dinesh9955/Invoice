@@ -291,11 +291,13 @@ public class PreviewItActivity extends BaseActivity {
     }
 
 
+
+
     private void customerReportWeb(CustomerItem customerItem, ArrayList<CustomerReportItem> customerReportItemArrayList) {
 
-
-
         double totalAmount = 0.0;
+
+        double balanceAmount = 0.0;
 
         String name = "report/CustomerReport.html";
         String nameName = "file:///android_asset/report/CustomerReport.html";
@@ -305,38 +307,48 @@ public class PreviewItActivity extends BaseActivity {
 
         String cruncycode = "";
         try {
-            for (int i = 0; i < customerReportItemArrayList.size(); i++) {
+            for (int i = 0; i < customerReportItemArrayList.size() ; i++) {
                 cruncycode = customerItem.getCurrency_symbol();
 
 //                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                 double getDebit = Double.parseDouble(customerReportItemArrayList.get(i).getDebit());
                 double getCredit = Double.parseDouble(customerReportItemArrayList.get(i).getCredit());
-                double getBalance = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
+                // double getBalance = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
 
                 String stringDebit = "";
                 String stringCredit = "";
                 String stringBalance = "";
 
+                balanceAmount = balanceAmount + getDebit;
+                Log.e(TAG, "balanceAmountAA "+balanceAmount);
+
+                balanceAmount = balanceAmount - getCredit;
+                Log.e(TAG, "balanceAmountBB "+balanceAmount);
+
                 if(getDebit == 0){
                     stringDebit = "";
                 }else{
-                    String stringDebit1 = customerReportItemArrayList.get(i).getDebit();
-                    stringDebit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringDebit1)) + Utility.getReplaceDollor(cruncycode);
+                    // String stringDebit1 = customerReportItemArrayList.get(i).getDebit();
+                    stringDebit = Utility.getPatternFormat(""+numberPostion, getDebit) + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(getCredit == 0){
                     stringCredit = "";
                 }else{
-                    String stringCredit1 = customerReportItemArrayList.get(i).getCredit();
-                    stringCredit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringCredit1)) + Utility.getReplaceDollor(cruncycode);
+                    //String stringCredit1 = customerReportItemArrayList.get(i).getCredit();
+                    stringCredit = Utility.getPatternFormat(""+numberPostion, getCredit) + Utility.getReplaceDollor(cruncycode);
                 }
 
-                if(getBalance == 0){
-                    stringBalance = "";
+
+                if(balanceAmount == 0){
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, balanceAmount) + Utility.getReplaceDollor(cruncycode);
                 }else{
-                    String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
-                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
+                    //String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, balanceAmount) + Utility.getReplaceDollor(cruncycode);
                 }
+
+
+
 
 
 
@@ -349,19 +361,18 @@ public class PreviewItActivity extends BaseActivity {
                 productitemlist = productitemlist + productitem;
 
 
-                double allAmount = 0.0;
-                if(i == customerReportItemArrayList.size() - 1){
-                    try{
-                        allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
-                    }catch (Exception e){
-
-                    }
-                }
-
-                totalAmount =   totalAmount + allAmount;
+//                double allAmount = 0.0;
+//                if(i == customerReportItemArrayList.size() - 1){
+//                    try{
+//                        allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
+//                    }catch (Exception e){
+//
+//                    }
+//                }
+//                totalAmount =   totalAmount + allAmount;
             }
 
-
+            totalAmount = balanceAmount;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -530,7 +541,7 @@ public class PreviewItActivity extends BaseActivity {
     private void supplierReportWeb(SupplierItem customerItem, ArrayList<CustomerReportItem> customerReportItemArrayList) {
 
         double totalAmount = 0.0;
-
+        double balanceAmount = 0.0;
         String name = "report/SupplierReport.html";
         String nameName = "file:///android_asset/report/SupplierReport.html";
 
@@ -545,31 +556,38 @@ public class PreviewItActivity extends BaseActivity {
 //                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                 double getDebit = Double.parseDouble(customerReportItemArrayList.get(i).getDebit());
                 double getCredit = Double.parseDouble(customerReportItemArrayList.get(i).getCredit());
-                double getBalance = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
+                //double getBalance = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
 
                 String stringDebit = "";
                 String stringCredit = "";
                 String stringBalance = "";
 
+                balanceAmount = balanceAmount + getDebit;
+                Log.e(TAG, "balanceAmountAA "+balanceAmount);
+
+                balanceAmount = balanceAmount - getCredit;
+                Log.e(TAG, "balanceAmountBB "+balanceAmount);
+
+
                 if(getDebit == 0){
                     stringDebit = "";
                 }else{
-                    String stringDebit1 = customerReportItemArrayList.get(i).getDebit();
-                    stringDebit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringDebit1)) + Utility.getReplaceDollor(cruncycode);
+                    // String stringDebit1 = customerReportItemArrayList.get(i).getDebit();
+                    stringDebit = Utility.getPatternFormat(""+numberPostion, getDebit) + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(getCredit == 0){
                     stringCredit = "";
                 }else{
-                    String stringCredit1 = customerReportItemArrayList.get(i).getCredit();
-                    stringCredit = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringCredit1)) + Utility.getReplaceDollor(cruncycode);
+                    //String stringCredit1 = customerReportItemArrayList.get(i).getCredit();
+                    stringCredit = Utility.getPatternFormat(""+numberPostion, getCredit) + Utility.getReplaceDollor(cruncycode);
                 }
 
-                if(getBalance == 0){
-                    stringBalance = "";
+                if(balanceAmount == 0){
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, balanceAmount) + Utility.getReplaceDollor(cruncycode);
                 }else{
-                    String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
-                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
+                    //String stringBalance1 = customerReportItemArrayList.get(i).getBalance();
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, balanceAmount) + Utility.getReplaceDollor(cruncycode);
                 }
 
 
@@ -582,25 +600,25 @@ public class PreviewItActivity extends BaseActivity {
                 productitemlist = productitemlist + productitem;
 
 
-                double allAmount = 0.0;
-                if(i == customerReportItemArrayList.size() - 1){
-                    try{
-                        allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
-                    }catch (Exception e){
-
-                    }
-                }
-
-
-                totalAmount =   totalAmount + allAmount;
+//                double allAmount = 0.0;
+//                if(i == customerReportItemArrayList.size() - 1){
+//                    try{
+//                        allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getBalance());
+//                    }catch (Exception e){
+//
+//                    }
+//                }
+//
+//                totalAmount =   totalAmount + allAmount;
             }
 
-
+            totalAmount = balanceAmount;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+
 
         StringBuilder stringBuilderBillTo = new StringBuilder();
         if(!customerItem.getCompany_address().equalsIgnoreCase("")){
