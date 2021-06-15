@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:layout_marginBottom="45dp"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -17,6 +17,7 @@
         android:text="Income Tax"
         android:textColor="@color/darkgray"
         android:textSize="18sp"
+        android:layout_marginTop="@dimen/_5sdp"
         />
 
     <TextView
@@ -30,25 +31,25 @@
         android:text="17.00%"
         android:textColor="@android:color/darker_gray" />
 
-    <ImageView
-        android:id="@+id/imgincome"
-        android:layout_alignRight="@+id/txtincome"
+    <TextView
+        android:id="@+id/txtincomepercent_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txtincome"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/checkmark"
-        android:tint="@color/dark_blue"
-        android:visibility="visible" />
+        android:layout_below="@+id/txtincomepercent"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="India Mart"
+        android:textColor="@android:color/darker_gray" />
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_below="@+id/txtincomepercent"
-        android:layout_marginTop="20dp"
-        android:background="@color/darkgray">
+        android:layout_below="@+id/txtincomepercent_name"
+        android:layout_marginTop="10dp"
+        android:background="@color/darkgray"
+        >
 
     </View>
 

@@ -24,11 +24,13 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
@@ -40,6 +42,7 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
@@ -57,8 +60,12 @@ import com.receipt.invoice.stock.sirproject.InvoiceReminder.ViewInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.Model.Product_list;
+import com.receipt.invoice.stock.sirproject.Model.Tax_List;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Settings.OnlinePaymentGatewayActivity;
+import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
+import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Utils.SublimePickerFragment;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
@@ -88,7 +95,7 @@ public class ReportViewActivity extends BaseActivity implements Customer_Bottom_
 
     private static final String TAG = "ViewInvoice_Activity";
 
-    BottomSheetDialog bottomSheetDialog;
+    BottomSheetDialog bottomSheetDialog, bottomSheetDialog3;
 
     String filterCustomerSupplier = "";
 
@@ -107,6 +114,8 @@ public class ReportViewActivity extends BaseActivity implements Customer_Bottom_
     ArrayList<Customer_list> supplier_bottom = new ArrayList<>();
 
     ArrayList<Product_list> product_bottom = new ArrayList<>();
+
+    ArrayList<Tax_List> tax_list_array = new ArrayList<Tax_List>();
 
     File fileWithinMyDir = null;
 
@@ -153,7 +162,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         titleView.setText("Preview Report");
 
         bottomSheetDialog = new BottomSheetDialog(ReportViewActivity.this);
-
+        bottomSheetDialog3 = new BottomSheetDialog(ReportViewActivity.this);
 
 //        invoiceweb.setWebViewClient(new WebViewClient() {
 //            public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -190,6 +199,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         customer_list(selectedCompanyId);
         supplier_list(selectedCompanyId);
         product_list(selectedCompanyId);
+        companyInformation(selectedCompanyId);
 
         positionNext = bundle.getInt("positionNext");
         company_image_path = bundle.getString("company_image_path");
@@ -213,15 +223,15 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         } else if(positionNext == 4){
             fileName = "CustomerAgeingReport";
             company_id = bundle.getString("company_id");
-            customerAgeingReport(company_id,"");
+            customerAgeingReport(company_id,"", "");
         } else if(positionNext == 5){
             fileName = "TaxCollecteReport";
             company_id = bundle.getString("company_id");
-            taxCollectedReport(company_id, "", "", "");
+            taxCollectedReport(company_id, "", "", "", "");
         } else if(positionNext == 6){
             fileName = "StockReport";
             company_id = bundle.getString("company_id");
-            stockReport(company_id, "");
+            stockReport(company_id, "", "");
         } else if(positionNext == 7){
             fileName = "ProductMovementReport";
             product_id = bundle.getString("product_id");
@@ -1568,7 +1578,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void customerAgeingReport(String customer_id, String filterID) {
+    private void customerAgeingReport(String customer_id, String filterID, String customerName) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
@@ -1621,8 +1631,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                             for (int i = 0; i < statement.length(); i++) {
                                 JSONObject item = statement.getJSONObject(i);
 
-
-
                                 String customer_id = item.getString("customer_id");
 
                                 String contact_name = item.getString("contact_name");
@@ -1638,8 +1646,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 String total = item.getString("total");
 
 
-
-
                                 CustomerAgeingReportItem customerReportItem = new CustomerAgeingReportItem();
                                 customerReportItem.setCustomer_id(customer_id);
                                 customerReportItem.setContact_name(contact_name);
@@ -1653,17 +1659,28 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                                 customerReportItem.setTotal(total);
 
-                                customerReportItemArrayList.add(customerReportItem);
+
+                                if(filterID.equalsIgnoreCase("ageing")){
+                                    if(customer_name.toLowerCase().equalsIgnoreCase(customerName.toLowerCase())){
+                                        customerReportItemArrayList.add(customerReportItem);
+                                    }
+                                }else{
+                                     customerReportItemArrayList.add(customerReportItem);
+                                }
+
                             }
                         }
 
-                        if(filterID.equalsIgnoreCase("customer")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerAgeingReportItem>() {
-                                public int compare(CustomerAgeingReportItem o1, CustomerAgeingReportItem o2) {
-                                    return o1.getCustomer_name().compareTo(o2.getCustomer_name());
-                                }
-                            });
-                        }
+//                        if(filterID.equalsIgnoreCase("customer")){
+////                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerAgeingReportItem>() {
+////                                public int compare(CustomerAgeingReportItem o1, CustomerAgeingReportItem o2) {
+////                                    return o1.getCustomer_name().compareTo(o2.getCustomer_name());
+////                                }
+////                            });
+//
+//                           // if(customer_name. customerName)
+//
+//                        }
 
                         customerAgeingReportWeb(customerItem, customerReportItemArrayList);
 
@@ -1728,25 +1745,25 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
                 if(slab1 == 0){
-                    slab1Txt = "";
+                    slab1Txt = slab1Txt11 + Utility.getReplaceDollor(cruncycode);
                 }else{
                     slab1Txt = slab1Txt11 + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(slab2 == 0){
-                    slab2Txt = "";
+                    slab2Txt = slab1Txt22 + Utility.getReplaceDollor(cruncycode);
                 }else{
                     slab2Txt = slab1Txt22 + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(slab3 == 0){
-                    slab3Txt = "";
+                    slab3Txt = slab1Txt22 + Utility.getReplaceDollor(cruncycode);
                 }else{
-                    slab3Txt = slab1Txt33 + Utility.getReplaceDollor(cruncycode);
+                    slab3Txt = slab1Txt22 + Utility.getReplaceDollor(cruncycode);
                 }
 
                 if(slab4 == 0){
-                    slab4Txt = "";
+                    slab4Txt = slab1Txt44 + Utility.getReplaceDollor(cruncycode);
                 }else{
                     slab4Txt = slab1Txt44 + Utility.getReplaceDollor(cruncycode);
                 }
@@ -1772,7 +1789,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 }
 
                 productitem = IOUtils.toString(getAssets().open("report/customer_ageing_single_item.html"))
-                        .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getContact_name())
+                        .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getCustomer_name())
                         .replaceAll("#Currentdue#", stringNotDue)
                         .replaceAll("#Slab1#", slab1Txt)
                         .replaceAll("#Slab2#", slab2Txt)
@@ -1838,7 +1855,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void taxCollectedReport(String customer_id, String filterID, String fDate, String sDate) {
+    private void taxCollectedReport(String customer_id, String filterID, String fDate, String sDate, String taxName) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
@@ -1934,25 +1951,39 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                                     }
 
-                                }else{
+                                }
+
+                                else if(filterID.equalsIgnoreCase("tax")){
+
+                                    Log.e(TAG, tax_name.toLowerCase()+" ::: "+taxName.toLowerCase());
+                                    if(tax_name.toLowerCase().trim().equalsIgnoreCase(taxName.toLowerCase().trim())){
+                                        Log.e(TAG, tax_name.toLowerCase()+" equalsIgnoreCase "+taxName.toLowerCase());
+                                        customerReportItemArrayList.add(customerReportItem);
+                                    }
+                                }
+
+                                else{
                                     customerReportItemArrayList.add(customerReportItem);
                                 }
                             }
                         }
 
-                        if(filterID.equalsIgnoreCase("date")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TaxCollectedReportItem>() {
-                                public int compare(TaxCollectedReportItem o1, TaxCollectedReportItem o2) {
-                                    return o1.getDate_added().compareTo(o2.getDate_added());
-                                }
-                            });
-                        }else if(filterID.equalsIgnoreCase("tax")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<TaxCollectedReportItem>() {
-                                public int compare(TaxCollectedReportItem o1, TaxCollectedReportItem o2) {
-                                    return o1.getTax_name().compareTo(o2.getTax_name());
-                                }
-                            });
-                        }
+
+
+
+//                        if(filterID.equalsIgnoreCase("date")){
+//                            Collections.sort(customerReportItemArrayList, new Comparator<TaxCollectedReportItem>() {
+//                                public int compare(TaxCollectedReportItem o1, TaxCollectedReportItem o2) {
+//                                    return o1.getDate_added().compareTo(o2.getDate_added());
+//                                }
+//                            });
+//                        }else if(filterID.equalsIgnoreCase("tax")){
+//                            Collections.sort(customerReportItemArrayList, new Comparator<TaxCollectedReportItem>() {
+//                                public int compare(TaxCollectedReportItem o1, TaxCollectedReportItem o2) {
+//                                    return o1.getTax_name().compareTo(o2.getTax_name());
+//                                }
+//                            });
+//                        }
 
                         taxCollectedReportWeb(customerItem, customerReportItemArrayList);
 
@@ -2094,7 +2125,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-    private void stockReport(String customer_id, String filterID) {
+    private void stockReport(String customer_id, String filterID, String productName) {
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
@@ -2162,12 +2193,27 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                 customerReportItem.setName(nameA);
                                 customerReportItem.setMinimum(minimum);
                                 customerReportItem.setQuantity(quantity);
+
                                 customerReportItem.setQuantity_status(quantity_status);
                                 customerReportItem.setPrice(price);
                                 customerReportItem.setValue(value);
                                 customerReportItem.setDate_added(date_added);
 
-                                if(quantity_status.equalsIgnoreCase("In Stock")){
+                                Log.e(TAG, "filterIDZZZZ "+filterID);
+
+                                if(filterID.toLowerCase().equalsIgnoreCase("instock".toLowerCase())){
+                                    if(quantity_status.toLowerCase().equalsIgnoreCase("in stock".toLowerCase())){
+                                        customerReportItemArrayList.add(customerReportItem);
+                                    }
+                                }else if(filterID.toLowerCase().equalsIgnoreCase("reorder".toLowerCase())){
+                                    if(quantity_status.toLowerCase().equalsIgnoreCase("Re-Order".toLowerCase())){
+                                        customerReportItemArrayList.add(customerReportItem);
+                                    }
+                                }else if(filterID.toLowerCase().equalsIgnoreCase("product".toLowerCase())){
+                                    if(nameA.toLowerCase().equalsIgnoreCase(productName.toLowerCase())){
+                                        customerReportItemArrayList.add(customerReportItem);
+                                    }
+                                }else{
                                     customerReportItemArrayList.add(customerReportItem);
                                 }
 
@@ -2175,19 +2221,19 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                             }
                         }
 
-                        if(filterID.equalsIgnoreCase("reorder")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<StockReportItem>() {
-                                public int compare(StockReportItem o1, StockReportItem o2) {
-                                    return o1.getMinimum().compareTo(o2.getMinimum());
-                                }
-                            });
-                        }else if(filterID.equalsIgnoreCase("product")){
-                            Collections.sort(customerReportItemArrayList, new Comparator<StockReportItem>() {
-                                public int compare(StockReportItem o1, StockReportItem o2) {
-                                    return o1.getName().compareTo(o2.getName());
-                                }
-                            });
-                        }
+//                        if(filterID.equalsIgnoreCase("reorder")){
+//                            Collections.sort(customerReportItemArrayList, new Comparator<StockReportItem>() {
+//                                public int compare(StockReportItem o1, StockReportItem o2) {
+//                                    return o1.getMinimum().compareTo(o2.getMinimum());
+//                                }
+//                            });
+//                        }else if(filterID.equalsIgnoreCase("product")){
+//                            Collections.sort(customerReportItemArrayList, new Comparator<StockReportItem>() {
+//                                public int compare(StockReportItem o1, StockReportItem o2) {
+//                                    return o1.getName().compareTo(o2.getName());
+//                                }
+//                            });
+//                        }
 
                         stockReportWeb(customerItem, customerReportItemArrayList);
 
@@ -2838,9 +2884,13 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 2){
                 shareWeb("Customer Ageing Report");
             }else if(i == 3){
-                customerAgeingReport(company_id, "customer");
+                filterCustomerSupplier = "ageing";
+                createbottomsheet_customers();
+              //  customerAgeingReport(company_id, "customer");
             }else if(i == 4){
-                customerAgeingReport(company_id, "");
+                filterCustomerSupplier = "ageing";
+               // createbottomsheet_customers();
+                customerAgeingReport(company_id, "", "");
             }
         } else if(positionNext == 5){
             if(i == 0){
@@ -2854,9 +2904,10 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 //taxCollectedReport(company_id, "date");
                 filterDate(company_id, positionNext);
             }else if(i == 4){
-                taxCollectedReport(company_id, "tax", "", "");
+                createbottomsheet_tax();
+                //taxCollectedReport(company_id, "tax", "", "");
             }else if(i == 5){
-                taxCollectedReport(company_id, "", "", "");
+                taxCollectedReport(company_id, "", "", "", "tax");
             }
         } else if(positionNext == 6){
             if(i == 0){
@@ -2867,13 +2918,14 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 2){
                 shareWeb("Stock Report");
             }else if(i == 3){
-                stockReport(company_id, "instock");
+                stockReport(company_id, "instock", "");
             }else if(i == 4){
-                stockReport(company_id, "reorder");
+                stockReport(company_id, "reorder", "");
             }else if(i == 5){
-                stockReport(company_id, "product");
+                createbottomsheet_product();
+               // stockReport(company_id, "product", "");
             }else if(i == 6){
-                stockReport(company_id, "");
+                stockReport(company_id, "", "");
             }
         } else if(positionNext == 7){
             if(i == 0){
@@ -2975,7 +3027,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                             totalPurchaseReport(customer_id, "date", fDate, sDate, "");
                         }else if(position == 4){
                         }else if(position == 5){
-                            taxCollectedReport(customer_id, "date", fDate, sDate);
+                            taxCollectedReport(customer_id, "date", fDate, sDate, "");
                         }else if(position == 6){
                         }else if(position == 7){
                         }
@@ -3264,12 +3316,14 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             totalSalesReportPaidUnpaid(selectedCompanyId, company_id, "customer", "", "", customer_name);
         } else if(filterCustomerSupplier.equalsIgnoreCase("supplier")){
             totalPurchaseReport(company_id, "supplier", "", "", customer_name);
+        } else if(filterCustomerSupplier.equalsIgnoreCase("ageing")){
+            customerAgeingReport(company_id, "ageing",  customer_name);
         }
 
 
-
+        Log.e(TAG, "filterCustomerSupplierAAAAAAA "+filterCustomerSupplier);
         Log.e(TAG, "customer_idAAAAAAA "+customer_id);
-       // Log.e(TAG, "customer_name "+customer_name);
+        Log.e(TAG, "customer_nameAAAAAA "+customer_name);
 
 //        Intent intent = new Intent(ReportViewActivity.this, ReportViewActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -3299,8 +3353,13 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         }
 
         String customer_id = selected_item.getProduct_id();
+        String productName = selected_item.getProduct_name();
 
         Log.e(TAG, "customer_idBBBBBBB "+customer_id);
+
+        stockReport(company_id, "product", productName);
+
+
         //Log.e(TAG, "customer_name "+customer_name);
 
 //        Intent intent = new Intent(ReportViewActivity.this, ReportViewActivity.class);
@@ -3703,5 +3762,262 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     }
 
 
+    private void companyInformation(String selectedCompanyId) {
+        tax_list_array.clear();
+        RequestParams params = new RequestParams();
+        params.add("company_id", selectedCompanyId);
+//        params.add("product", "1");
+//        params.add("service", "1");
+//        params.add("customer", "1");
+        params.add("tax", "1");
+//        //   params.add("receipt", "1");
+//        params.add("invoice", "1");
+//        params.add("warehouse", "1");
 
-}
+
+        String token = Constant.GetSharedPreferences(ReportViewActivity.this, Constant.ACCESS_TOKEN);
+        Log.e("token", token);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e(TAG, "Company_Information"+ response);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+
+                    if (status.equals("true")) {
+                        JSONObject data = jsonObject.getJSONObject("data");
+
+
+                       // JSONArray company = data.getJSONArray("company");
+
+                        JSONArray tax_list = data.getJSONArray("tax");
+
+                        for (int j = 0; j < tax_list.length(); j++) {
+//                                Tax_List student = new Gson().fromJson(tax_list.get(j).toString(), Tax_List.class);
+                            JSONObject jsonObject1 = tax_list.getJSONObject(j);
+//                                String name = jsonObject1.getString("name");
+                            Tax_List student = new Tax_List();
+                            student.setTax_id(jsonObject1.getString("tax_id"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            student.setCompany_name(jsonObject1.getString("company_name"));
+                            student.setTax_rate(jsonObject1.getString("rate"));
+                            student.setCompanyid(jsonObject1.getString("company_id"));
+                            student.setType(jsonObject1.getString("type"));
+                            tax_list_array.add(student);
+
+
+                        }
+
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+
+                        String status = jsonObject.getString("status");
+                        if (status.equals("false")) {
+                            //Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+
+                }
+            }
+        });
+
+
+    }
+
+
+
+
+    public void createbottomsheet_tax() {
+
+        if (bottomSheetDialog3 != null) {
+            View view = LayoutInflater.from(ReportViewActivity.this).inflate(R.layout.tax_bottom_item_report_layout, null);
+
+
+            RecyclerView taxrecycler = view.findViewById(R.id.taxrecycler);
+
+
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ReportViewActivity.this, LinearLayoutManager.VERTICAL, false);
+            taxrecycler.setLayoutManager(layoutManager);
+            taxrecycler.setHasFixedSize(true);
+
+            Log.e(TAG,  "tax_list_array "+tax_list_array.size());
+
+            CustomTaxAdapter customTaxAdapter = new CustomTaxAdapter(ReportViewActivity.this, tax_list_array);
+            taxrecycler.setAdapter(customTaxAdapter);
+            customTaxAdapter.notifyDataSetChanged();
+
+
+            bottomSheetDialog3 = new BottomSheetDialog(ReportViewActivity.this);
+            bottomSheetDialog3.setContentView(view);
+            bottomSheetDialog3.show();
+        }
+    }
+
+
+
+
+
+
+
+    public class CustomTaxAdapter  extends RecyclerView.Adapter<CustomTaxAdapter.ViewHolderForCat> {
+
+        private static final String TAG = "CustomTaxAdapter";
+        private Context mcontext;
+        ArrayList<Tax_List> mlist = new ArrayList<>();
+
+
+
+
+        // private int selectedPos = -100;
+        public CustomTaxAdapter(Context mcontext, ArrayList<Tax_List> list) {
+            this.mcontext = mcontext;
+            mlist = list;
+            //   this.callback = callback;
+
+        }
+
+
+        @NonNull
+        @Override
+        public CustomTaxAdapter.ViewHolderForCat onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View myitem = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragmenttaxtcustom_tax, viewGroup, false);
+            CustomTaxAdapter.ViewHolderForCat viewHolderForCat = new CustomTaxAdapter.ViewHolderForCat(myitem);
+            return viewHolderForCat;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull final CustomTaxAdapter.ViewHolderForCat viewHolderForCat, final int i) {
+
+
+            final Tax_List service_list = mlist.get(i);
+            String taxname = service_list.getTax_name();
+            String taxvalue = service_list.getTax_rate();
+            String typestr = service_list.getType();
+            String company_name = service_list.getCompany_name();
+
+            Log.e("type", typestr);
+
+
+
+//            if(taxID == service_list.getTax_id()){
+//                //viewHolderForCat.imgincome.setVisibility(View.VISIBLE);
+//                selectedPos = viewHolderForCat.getAdapterPosition();
+//            }else{
+//                selectedPos = -100;
+//                //  viewHolderForCat.imgincome.setVisibility(View.INVISIBLE);
+//            }
+
+            if (taxname != null) {
+                viewHolderForCat.txtincome.setText(taxname);
+            }
+
+            SavePref pref = new SavePref();
+            pref.SavePref(mcontext);
+            int numberPostion = pref.getNumberFormatPosition();
+            double vc = 0.0;
+            try {
+                vc = Double.parseDouble(taxvalue);
+            } catch (Exception e) {
+
+            }
+            String stringFormat = Utility.getPatternFormat("" + numberPostion, vc);
+
+            if (typestr.equals("P")) {
+                viewHolderForCat.txtincomepercent.setText(stringFormat + " %");
+            } else {
+                viewHolderForCat.txtincomepercent.setText(stringFormat);
+            }
+
+
+            viewHolderForCat.txtincomepercent_name.setText(company_name);
+
+//            if(i == selectedPos)
+//            {
+//                viewHolderForCat.imgincome.setVisibility(View.VISIBLE);
+//            } else {
+//                viewHolderForCat.imgincome.setVisibility(View.INVISIBLE);
+//            }
+
+            viewHolderForCat.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    bottomSheetDialog3.dismiss();
+
+                    String tax_name = service_list.getTax_name();
+
+                    taxCollectedReport(company_id, "tax", "", "", tax_name);
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return mlist.size();
+            //return 2;
+        }
+
+//        public void updateTaxSelect(String taxID) {
+//            this.taxID = taxID;
+//            Log.e(TAG, "taxID" + taxID);
+//            notifyDataSetChanged();
+//        }
+
+
+        public class ViewHolderForCat extends RecyclerView.ViewHolder {
+
+
+            TextView txtincome, txtincomepercent, txtincomepercent_name;
+            // ImageView imgincome;
+
+            public ViewHolderForCat(@NonNull View itemView) {
+                super(itemView);
+
+                // imgincome = itemView.findViewById(R.id.imgincome);
+                txtincome = itemView.findViewById(R.id.txtincome);
+                txtincomepercent = itemView.findViewById(R.id.txtincomepercent);
+                txtincomepercent_name = itemView.findViewById(R.id.txtincomepercent_name);
+                txtincomepercent.setTypeface(Typeface.createFromAsset(mcontext.getAssets(), "Fonts/AzoSans-Light.otf"));
+                txtincome.setTypeface(Typeface.createFromAsset(mcontext.getAssets(), "Fonts/Ubuntu-Bold.ttf"));
+
+
+            }
+
+        }
+
+        public void updateList(ArrayList<Tax_List> list) {
+            mlist = list;
+            notifyDataSetChanged();
+        }
+
+    }
+
+
+
+    }
