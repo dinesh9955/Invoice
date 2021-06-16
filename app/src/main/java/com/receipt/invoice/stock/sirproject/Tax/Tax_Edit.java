@@ -239,7 +239,7 @@ public class Tax_Edit extends BaseActivity {
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
-                            },1500);
+                            },1000);
 
                         }
 

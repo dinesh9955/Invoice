@@ -668,7 +668,7 @@ public class Add_Company extends BaseFragment {
                                    startActivity(intent);
 
                                 }
-                            },1500);
+                            },1000);
                         }
 
                         if (status.equals("false"))

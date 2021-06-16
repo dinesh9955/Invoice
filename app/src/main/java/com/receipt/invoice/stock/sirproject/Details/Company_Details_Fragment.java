@@ -700,7 +700,7 @@ public class Company_Details_Fragment extends BaseFragment {
                                     //intent.putExtra("add","add");
                                     startActivity(intent);
                                 }
-                            },1500);
+                            },1000);
                         }
 
                         if (status.equals("false"))

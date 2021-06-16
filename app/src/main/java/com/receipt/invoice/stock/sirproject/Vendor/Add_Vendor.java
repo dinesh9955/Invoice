@@ -504,7 +504,7 @@ public class Add_Vendor extends BaseFragment {
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                     }
-                                },1500);
+                                },1000);
 
                             }
 
@@ -634,7 +634,7 @@ public class Add_Vendor extends BaseFragment {
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                     }
-                                },1500);
+                                },1000);
                             }
 //
 //                            if (status.equals("false")){

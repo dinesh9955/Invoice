@@ -875,7 +875,7 @@ public class User_Detail_Activity extends BaseActivity {
                                 Intent intent = new Intent(User_Detail_Activity.this,Home_Activity.class);
                                 startActivity(intent);
                             }
-                        },1500);
+                        },1000);
 
 
 

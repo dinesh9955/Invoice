@@ -1053,7 +1053,8 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
             progressDialog.show();
             RequestParams params = new RequestParams();
             params.add("company_id", selectedCompanyId);
-//            params.add("warehouse", selectwarehouseId);
+            params.add("warehouse", "jeep foundry");
+            params.add("warehouse_id", selectwarehouseId);
 //            params.add("warehouse_id[0]", selectwarehouseId);
             params.add("credit_note_date", invoice_date);
             params.add("due_date", invoice_due_date);
@@ -1210,7 +1211,6 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                                 }
                             }, 500);
 
-                            JSONObject data = jsonObject.getJSONObject("data");
 
 
                         }

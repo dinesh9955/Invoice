@@ -710,7 +710,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                     }
-                                },1500);
+                                },1000);
 
                             }
 
@@ -841,7 +841,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                     }
-                                },1500);
+                                },1000);
 
                             }
 

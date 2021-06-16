@@ -311,7 +311,7 @@ public class Verification_Code_Activity extends BaseActivity {
                                     intent.putExtra("pwd",pwd);
                                     startActivity(intent);
                                 }
-                            },1500);
+                            },1000);
 
 
                         }

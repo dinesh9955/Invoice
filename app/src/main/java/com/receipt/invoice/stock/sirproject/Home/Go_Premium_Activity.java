@@ -409,7 +409,7 @@ public class Go_Premium_Activity extends Activity implements BillingProcessor.IB
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 }
-                            },1500);
+                            },1000);
 
 
 

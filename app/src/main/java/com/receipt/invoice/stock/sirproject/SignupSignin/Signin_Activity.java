@@ -310,7 +310,7 @@ public class Signin_Activity extends BaseActivity {
                                         startActivity(intent);
                                         finish();
                                     }
-                                },1500);
+                                },1000);
 
                             }
 
