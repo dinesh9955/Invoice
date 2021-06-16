@@ -1,6 +1,8 @@
 package com.receipt.invoice.stock.sirproject.Report;
 
-public class TaxCollectedReportItem {
+import java.io.Serializable;
+
+public class TaxCollectedReportItem implements Serializable {
     String date_added = "";
     String particulars = "";
     String contact_name = "";

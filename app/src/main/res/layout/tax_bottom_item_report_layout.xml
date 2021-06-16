@@ -1,53 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/createbottomsheet_curve">
 
-    <TextView
-        android:id="@+id/txttax"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Select Tax"
-        android:textColor="@color/dark_blue"
-        android:textSize="20sp" />
-
-    <EditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/search_icon"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="Search"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/txttax"
-        android:id="@+id/search_customers"
-        android:padding="10dp"
-        android:background="@drawable/edittextshape"
-        android:elevation="3dp"
-        android:maxLines="1"
-        android:visibility="gone"/>
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/r1"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@+id/search_customers"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="30dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/taxrecycler"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/search"
-            tools:listitem="@layout/fragmenttaxtcustom_tax">
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/txttax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="Select Tax"
+                android:textColor="@color/dark_blue"
+                android:textSize="20sp" />
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/search_icon"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="Search"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/txttax"
+                android:id="@+id/search_customers"
+                android:padding="10dp"
+                android:background="@drawable/edittextshape"
+                android:elevation="3dp"
+                android:maxLines="1"
+                android:visibility="visible"/>
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/r1"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/search_customers"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/taxrecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/search"
+                    tools:listitem="@layout/fragmenttaxtcustom_tax">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
 
 </RelativeLayout>

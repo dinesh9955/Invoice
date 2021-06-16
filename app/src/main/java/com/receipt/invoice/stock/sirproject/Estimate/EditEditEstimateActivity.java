@@ -105,6 +105,7 @@ import com.receipt.invoice.stock.sirproject.Receipts.EditEditReceiptActivity;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
+import com.receipt.invoice.stock.sirproject.Settings.SubscribeActivity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
@@ -1639,6 +1640,20 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
                         if (status.equals("false")) {
                             Constant.ErrorToast(EditEditEstimateActivity.this, jsonObject.getString("message"));
+
+                            if( jsonObject.has("code")){
+                                String code = jsonObject.getString("code");
+
+                                if(code.equalsIgnoreCase("subscription")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(EditEditEstimateActivity.this, SubscribeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 1000);
+                                }
+                            }
                         }
 
                     } catch (JSONException e) {
@@ -2122,10 +2137,11 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Toast.makeText(EditEditEstimateActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
-                        eddate.requestFocus();
+//                        Toast.makeText(EditEditEstimateActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
+//                        eddate.requestFocus();
+                        Constant.ErrorToastTop(EditEditEstimateActivity.this, "Date Required");
                     } else if (paimentmodespinerstr.equals("")) {
-                        Constant.ErrorToast(EditEditEstimateActivity.this, "Payment Mode Required");
+                        Constant.ErrorToastTop(EditEditEstimateActivity.this, "Payment Mode Required");
                     } else {
                         if (paidamountstr != null) {
                             paidamount.setText(paidamountstr);

@@ -54,6 +54,7 @@ import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Settings.SubscribeActivity;
 import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -715,7 +716,24 @@ public class Customer_Detail_Activity2 extends BaseActivity {
 
                             if (status.equals("false")){
                                 Constant.ErrorToast(activity,jsonObject.getString("message"));
+
+                                if( jsonObject.has("code")){
+                                    String code = jsonObject.getString("code");
+
+                                    if(code.equalsIgnoreCase("subscription")){
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Intent intent = new Intent(Customer_Detail_Activity2.this, SubscribeActivity.class);
+                                                startActivity(intent);
+                                            }
+                                        }, 1000);
+                                    }
+                                }
                             }
+
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -740,7 +758,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                             }
                         }
                         else {
-                            Constant.ErrorToast(activity,"Something went wrong, try again!");
+                            //Constant.ErrorToast(activity,"Something went wrong, try again!");
                         }
 
                     }
@@ -826,6 +844,24 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                                 },1500);
 
                             }
+
+                            if (status.equals("false")){
+                                if( jsonObject.has("code")){
+                                    String code = jsonObject.getString("code");
+
+                                    if(code.equalsIgnoreCase("subscription")){
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Intent intent = new Intent(Customer_Detail_Activity2.this, SubscribeActivity.class);
+                                                startActivity(intent);
+                                            }
+                                        }, 1000);
+                                    }
+                                }
+                            }
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -852,7 +888,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                             }
                         }
                         else {
-                            Constant.ErrorToast(activity,"Something went wrong, try again!");
+                            //Constant.ErrorToast(activity,"Something went wrong, try again!");
                         }
 
                     }

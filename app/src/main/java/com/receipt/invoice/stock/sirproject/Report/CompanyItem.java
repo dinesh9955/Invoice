@@ -1,6 +1,8 @@
 package com.receipt.invoice.stock.sirproject.Report;
 
-public class CompanyItem {
+import java.io.Serializable;
+
+public class CompanyItem implements Serializable {
     String name = "";
     String address = "";
     String phone_number = "";

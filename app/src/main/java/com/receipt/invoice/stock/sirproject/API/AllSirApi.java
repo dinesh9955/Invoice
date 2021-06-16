@@ -39,7 +39,7 @@ public class AllSirApi {
 //    public static String BASE_URL_PAYMENT = "http://prod.webdevelopmentsolution.net/saad/app/index.php/api/";
 
     public static String BASE_URL_PDF = BASE+"uploads/invoice/pdf/";
-    public static String BASE_URL_SUPPORT = BASE_URL+"saad/wp-content/api/";
+    public static String BASE_URL_SUPPORT = BASE_LEVEL+"wp-content/api/";
     public static String BASE_URL_PAYMENT = "http://prod.webdevelopmentsolution.net/saad/app/index.php/api/";
 
 }

@@ -112,6 +112,7 @@ import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Settings.OnlinePaymentGatewayActivity;
+import com.receipt.invoice.stock.sirproject.Settings.SubscribeActivity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
@@ -1776,6 +1777,20 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
                         if (status.equals("false")) {
                             Constant.ErrorToast(ConvertToInvoiceActivity.this, jsonObject.getString("message"));
+
+                            if( jsonObject.has("code")){
+                                String code = jsonObject.getString("code");
+
+                                if(code.equalsIgnoreCase("subscription")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(ConvertToInvoiceActivity.this, SubscribeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 1000);
+                                }
+                            }
                         }
 
                     } catch (JSONException e) {
@@ -2260,7 +2275,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                     } else if (paiddate.isEmpty()) {
                         Constant.ErrorToastTop(ConvertToInvoiceActivity.this, "Date Required");
                     } else if (Utility.isEmptyNull(paymentmode).equalsIgnoreCase("")) {
-                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Payment Mode Required");
+                        Constant.ErrorToastTop(ConvertToInvoiceActivity.this, "Payment Mode Required");
                     } else {
                         if (paidamountstr != null) {
                             strpaid_amount = paidamountstr;

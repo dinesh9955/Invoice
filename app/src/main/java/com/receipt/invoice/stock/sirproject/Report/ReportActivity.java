@@ -846,7 +846,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
     void filterSupplier(String text) {
         ArrayList<Customer_list> temp = new ArrayList();
-        for (Customer_list d : customer_bottom) {
+        for (Customer_list d : supplier_bottom) {
             if (d.getCustomer_name().toLowerCase().contains(text.toLowerCase())) {
                 temp.add(d);
             }

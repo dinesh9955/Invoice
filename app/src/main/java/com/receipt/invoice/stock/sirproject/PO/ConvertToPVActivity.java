@@ -82,6 +82,7 @@ import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
+import com.receipt.invoice.stock.sirproject.Estimate.EditEditEstimateActivity;
 import com.receipt.invoice.stock.sirproject.Estimate.Estimate_image;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
@@ -106,6 +107,7 @@ import com.receipt.invoice.stock.sirproject.Receipts.EditReceiptActivity;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
+import com.receipt.invoice.stock.sirproject.Settings.SubscribeActivity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
@@ -1612,6 +1614,20 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
 
                         if (status.equals("false")) {
                             Constant.ErrorToast(ConvertToPVActivity.this, jsonObject.getString("message"));
+
+                            if( jsonObject.has("code")){
+                                String code = jsonObject.getString("code");
+
+                                if(code.equalsIgnoreCase("subscription")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(ConvertToPVActivity.this, SubscribeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 1000);
+                                }
+                            }
                         }
 
                     } catch (JSONException e) {
@@ -2094,10 +2110,9 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Toast.makeText(ConvertToPVActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
-                        eddate.requestFocus();
+                        Constant.ErrorToastTop(ConvertToPVActivity.this, "Date Required");
                     } else if (paimentmodespinerstr.equals("")) {
-                        Constant.ErrorToast(ConvertToPVActivity.this, "Payment Mode Required");
+                        Constant.ErrorToastTop(ConvertToPVActivity.this, "Payment Mode Required");
                     } else {
                         if (paidamountstr != null) {
                             paidamount.setText(paidamountstr);

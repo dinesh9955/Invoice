@@ -1,6 +1,8 @@
 package com.receipt.invoice.stock.sirproject.Report;
 
-public class CustomerAgeingReportItem {
+import java.io.Serializable;
+
+public class CustomerAgeingReportItem implements Serializable {
     String customer_id = "";
 
     String contact_name = "";

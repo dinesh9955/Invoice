@@ -80,6 +80,7 @@ import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
+import com.receipt.invoice.stock.sirproject.Estimate.EditEditEstimateActivity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
@@ -94,11 +95,13 @@ import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.SelectedTaxlist;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
+import com.receipt.invoice.stock.sirproject.PO.EditPOActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
+import com.receipt.invoice.stock.sirproject.Settings.SubscribeActivity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
@@ -1545,6 +1548,20 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
 
                         if (status.equals("false")) {
                             Constant.ErrorToast(EditReceiptActivity.this, jsonObject.getString("message"));
+
+                            if( jsonObject.has("code")){
+                                String code = jsonObject.getString("code");
+
+                                if(code.equalsIgnoreCase("subscription")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(EditReceiptActivity.this, SubscribeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 1000);
+                                }
+                            }
                         }
 
                     } catch (JSONException e) {
@@ -2031,10 +2048,9 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Toast.makeText(EditReceiptActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
-                        eddate.requestFocus();
+                        Constant.ErrorToastTop(EditReceiptActivity.this, "Date Required");
                     } else if (paimentmodespinerstr.equals("")) {
-                        Constant.ErrorToast(EditReceiptActivity.this, "Payment Mode Required");
+                        Constant.ErrorToastTop(EditReceiptActivity.this, "Payment Mode Required");
                     } else {
                         if (paidamountstr != null) {
                             paidamount.setText(paidamountstr);

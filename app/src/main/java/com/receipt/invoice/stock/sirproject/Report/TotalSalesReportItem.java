@@ -1,6 +1,8 @@
 package com.receipt.invoice.stock.sirproject.Report;
 
-public class TotalSalesReportItem {
+import java.io.Serializable;
+
+public class TotalSalesReportItem implements Serializable {
 
     String invoice_id = "";
     String invoice_no = "";

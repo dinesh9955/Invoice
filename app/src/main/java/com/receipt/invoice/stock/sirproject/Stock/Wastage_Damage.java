@@ -30,6 +30,7 @@ import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Settings.SubscribeActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -295,7 +296,7 @@ public class Wastage_Damage extends BaseFragment {
                     }
                 }
                 else {
-                    Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                 }
             }
         });
@@ -445,10 +446,24 @@ public class Wastage_Damage extends BaseFragment {
                                 }
                             },1500);
                         }
+                        
 
-                        if (status.equals("false"))
-                        {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                        if (status.equals("false")){
+                            Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
+
+                            if( jsonObject.has("code")){
+                                String code = jsonObject.getString("code");
+
+                                if(code.equalsIgnoreCase("subscription")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 1000);
+                                }
+                            }
                         }
 
 

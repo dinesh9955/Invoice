@@ -280,7 +280,7 @@ public class Stock_Product_List extends BaseFragment {
                     }
                 }
                 else {
-                    Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                 }
 
             }

@@ -1,6 +1,8 @@
 package com.receipt.invoice.stock.sirproject.Report;
 
-public class TotalPurchaseReportItem {
+import java.io.Serializable;
+
+public class TotalPurchaseReportItem implements Serializable {
     String purchase_order_id = "";
     String purchase_order_no = "";
     String order_date = "";

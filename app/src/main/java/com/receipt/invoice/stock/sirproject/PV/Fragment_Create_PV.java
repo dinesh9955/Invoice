@@ -96,9 +96,11 @@ import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.SelectedTaxlist;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
+import com.receipt.invoice.stock.sirproject.PO.EditPOActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
+import com.receipt.invoice.stock.sirproject.Settings.SubscribeActivity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
@@ -1250,6 +1252,20 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
                         if (status.equals("false")) {
                             Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                             createinvoice.setEnabled(true);
+
+                            if( jsonObject.has("code")){
+                                String code = jsonObject.getString("code");
+
+                                if(code.equalsIgnoreCase("subscription")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 1000);
+                                }
+                            }
                         }
 
 
@@ -1827,11 +1843,9 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Toast.makeText(getActivity(), "Date Required", Toast.LENGTH_SHORT).show();
-                        eddate.requestFocus();
+                        Constant.ErrorToastTop(getActivity(), "Date Required");
                     } else if (paymentmode.equals("")) {
-                        // Constant.ErrorToast(getActivity(), "Payment Mode Required");
-                        Toast.makeText(getActivity(), "Payment Mode Required", Toast.LENGTH_SHORT).show();
+                        Constant.ErrorToastTop(getActivity(), "Payment Mode Required");
                     } else {
                         if (paidamountstr != null) {
                             calculateTotalAmount(total_price);

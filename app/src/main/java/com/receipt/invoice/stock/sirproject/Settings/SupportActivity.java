@@ -55,6 +55,8 @@ public class SupportActivity extends BaseActivity {
         editTextMessage = findViewById(R.id.login_message);
         buttonPress = findViewById(R.id.createinvoice);
 
+        String email = Constant.GetSharedPreferences(SupportActivity.this, Constant.EMAIL);
+        editTextEmail.setText(""+email);
 
         buttonPress.setOnClickListener(new View.OnClickListener() {
             @Override

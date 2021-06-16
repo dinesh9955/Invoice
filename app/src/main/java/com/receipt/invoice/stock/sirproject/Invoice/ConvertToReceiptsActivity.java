@@ -81,6 +81,7 @@ import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
+import com.receipt.invoice.stock.sirproject.Estimate.EditEstimateActivity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCompanyDto;
 import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceCustomerDto;
@@ -97,12 +98,14 @@ import com.receipt.invoice.stock.sirproject.Model.Product_list;
 import com.receipt.invoice.stock.sirproject.Model.SelectedTaxlist;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.Model.Tax_List;
+import com.receipt.invoice.stock.sirproject.PV.EditEditPVActivity;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Receipts.ReceiptsActivity;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
+import com.receipt.invoice.stock.sirproject.Settings.SubscribeActivity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Taxlistbycompany;
@@ -1656,6 +1659,20 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
                         if (status.equals("false")) {
                             Constant.ErrorToast(ConvertToReceiptsActivity.this, jsonObject.getString("message"));
+
+                            if( jsonObject.has("code")){
+                                String code = jsonObject.getString("code");
+
+                                if(code.equalsIgnoreCase("subscription")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(ConvertToReceiptsActivity.this, SubscribeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 1000);
+                                }
+                            }
                         }
 
                     } catch (JSONException e) {
@@ -2133,11 +2150,13 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Toast.makeText(ConvertToReceiptsActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
-                        eddate.requestFocus();
+//                        Toast.makeText(ConvertToReceiptsActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
+//                        eddate.requestFocus();
+                        Constant.ErrorToastTop(ConvertToReceiptsActivity.this, "Date Required");
                     } else if (paymentmode.equals("")) {
 //                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Payment Mode Required");
-                        Toast.makeText(ConvertToReceiptsActivity.this, "Payment Mode Required", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(ConvertToReceiptsActivity.this, "Payment Mode Required", Toast.LENGTH_SHORT).show();
+                        Constant.ErrorToastTop(ConvertToReceiptsActivity.this, "Payment Mode Required");
                     } else {
                         if (paidamountstr != null) {
                             paidamount.setText(paidamountstr);

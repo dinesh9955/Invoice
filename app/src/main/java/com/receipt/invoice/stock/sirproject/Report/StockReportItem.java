@@ -1,6 +1,8 @@
 package com.receipt.invoice.stock.sirproject.Report;
 
-public class StockReportItem {
+import java.io.Serializable;
+
+public class StockReportItem implements Serializable {
 
     String date_added = "";
     String product_id = "";

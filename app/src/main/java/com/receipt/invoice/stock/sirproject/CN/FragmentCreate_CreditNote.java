@@ -91,6 +91,7 @@ import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
+import com.receipt.invoice.stock.sirproject.Estimate.ConvertToInvoiceActivity;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.Invoice.ChooseTemplate;
 import com.receipt.invoice.stock.sirproject.Invoice.EditInvoiceActivity;
@@ -104,6 +105,7 @@ import com.receipt.invoice.stock.sirproject.Model.Tax_List;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
+import com.receipt.invoice.stock.sirproject.Settings.SubscribeActivity;
 import com.receipt.invoice.stock.sirproject.Tax.CustomTaxAdapter;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
@@ -1215,6 +1217,20 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                         if (status.equals("false")) {
                             Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                             createinvoice.setEnabled(true);
+
+                            if( jsonObject.has("code")){
+                                String code = jsonObject.getString("code");
+
+                                if(code.equalsIgnoreCase("subscription")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }, 1000);
+                                }
+                            }
                         }
 
 
@@ -1797,10 +1813,12 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                         edamount.setError("Required");
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Toast.makeText(getActivity(), "Date Required", Toast.LENGTH_SHORT).show();
-                        eddate.requestFocus();
+                     //   Toast.makeText(getActivity(), "Date Required", Toast.LENGTH_SHORT).show();
+                        Constant.ErrorToastTop(getActivity(), "Date Required");
+                        //eddate.requestFocus();
                     } else if (paimentmodespinerstr.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Payment Mode Required");
+                     //   Constant.ErrorToast(getActivity(), "Payment Mode Required");
+                        Constant.ErrorToastTop(getActivity(), "Payment Mode Required");
                     } else {
                         if (paidamountstr != null) {
 

@@ -61,9 +61,11 @@ import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Customer.Customer_Activity;
+import com.receipt.invoice.stock.sirproject.Customer.Customer_Detail_Activity2;
 import com.receipt.invoice.stock.sirproject.ImageResource.FileCompressor;
 import com.receipt.invoice.stock.sirproject.R;
 
+import com.receipt.invoice.stock.sirproject.Settings.SubscribeActivity;
 import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -639,6 +641,24 @@ public class Add_Vendor extends BaseFragment {
 //                                Constant.ErrorToast(getActivity(), ""+jsonObject.getString("message"));
 //                            }
 
+                            if (status.equals("false")){
+                                Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
+
+                                if( jsonObject.has("code")){
+                                    String code = jsonObject.getString("code");
+
+                                    if(code.equalsIgnoreCase("subscription")){
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                                startActivity(intent);
+                                            }
+                                        }, 1000);
+                                    }
+                                }
+                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.e(TAG, "JSONException "+e.getMessage());
@@ -667,7 +687,7 @@ public class Add_Vendor extends BaseFragment {
                             }
                         }
                         else {
-                            Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
+                            //Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                         }
 
                     }
