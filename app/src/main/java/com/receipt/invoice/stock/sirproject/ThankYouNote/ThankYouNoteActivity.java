@@ -89,7 +89,7 @@ public class ThankYouNoteActivity extends BaseActivity {
         overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(ThankYouNoteActivity.this, "Thank You Note");
+        Constant.toolbar(ThankYouNoteActivity.this, getString(R.string.header_thank_you_note));
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);

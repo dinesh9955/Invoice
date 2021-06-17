@@ -378,7 +378,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.edit_editpvactivity);
-        Constant.toolbar(EditEditPVActivity.this, "Edit PV");
+        Constant.toolbar(EditEditPVActivity.this, getString(R.string.header_edit_pv));
 
         taxvalueText = findViewById(R.id.taxvalue);
 

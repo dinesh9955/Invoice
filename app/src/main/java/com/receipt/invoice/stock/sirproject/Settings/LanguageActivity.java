@@ -63,7 +63,7 @@ public class LanguageActivity extends BaseActivity implements LanguageCallback{
 
         TextView textViewDone = toolbar.findViewById(R.id.textViewDone);
 
-        titleView.setText("Select Language");
+        titleView.setText(getString(R.string.header_select_language));
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
@@ -153,13 +153,13 @@ public class LanguageActivity extends BaseActivity implements LanguageCallback{
 
 
     public void setLocale(String localeName) {
-//            Context context = LocaleHelper.setLocale(this, localeName);
-//            Locale myLocale = new Locale(localeName);
-//            Resources res = context.getResources();
-//            DisplayMetrics dm = res.getDisplayMetrics();
-//            Configuration conf = res.getConfiguration();
-//            conf.locale = myLocale;
-//            res.updateConfiguration(conf, dm);
+            Context context = LocaleHelper.setLocale(this, localeName);
+            Locale myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
             Intent intent = new Intent(this, Home_Activity.class);
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

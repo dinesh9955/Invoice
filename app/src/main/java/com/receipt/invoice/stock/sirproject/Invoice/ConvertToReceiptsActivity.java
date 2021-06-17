@@ -371,7 +371,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.fragment_convert_to_receipts);
-        Constant.toolbar(ConvertToReceiptsActivity.this, "Convert to Receipt");
+        Constant.toolbar(ConvertToReceiptsActivity.this, getString(R.string.header_convert_to_receipt));
 
         taxvalueText = findViewById(R.id.taxvalue);
 

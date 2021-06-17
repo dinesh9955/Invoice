@@ -37,7 +37,7 @@ public class FAQsDetailActivity extends BaseActivity {
         TextView textViewDone = toolbar.findViewById(R.id.textViewDone);
         textViewDone.setVisibility(View.GONE);
 
-        titleView.setText("FAQs");
+        titleView.setText(getString(R.string.header_faqs));
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 

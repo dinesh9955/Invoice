@@ -93,7 +93,7 @@ public class PreviewItActivity extends BaseActivity {
 
 
 
-        titleView.setText("Preview Report");
+        titleView.setText(getString(R.string.preview));
 
         WebSettings webSettings = invoiceweb.getSettings();
 

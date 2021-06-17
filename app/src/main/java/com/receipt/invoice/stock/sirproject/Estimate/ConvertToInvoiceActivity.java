@@ -400,7 +400,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.editinvoiceactivity);
-        Constant.toolbar(ConvertToInvoiceActivity.this, "Convert to Invoice");
+        Constant.toolbar(ConvertToInvoiceActivity.this, getString(R.string.header_convert_to_invoice));
 
         viewPayment = findViewById(R.id.payment_id);
         viewPayment.setVisibility(View.GONE);

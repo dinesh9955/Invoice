@@ -135,78 +135,11 @@ public class SendThankYouNoteActivity extends BaseActivity {
         printimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                final File savedPDFFile = FileManager.getInstance().createTempFile(getApplicationContext(), "pdf", false);
-//
-//                String content  = " <!DOCTYPE html>\n" +
-//                        "<html>\n" +
-//                        "<body>\n" +
-//                        "\n" +
-//                        "<h1>My First Heading</h1>\n" +
-//                        "<p>My first paragraph.</p>\n" +
-//                        " <a href='https://www.example.com'>This is a link</a>" +
-//                        "\n" +
-//                        "</body>\n" +
-//                        "</html> ";
-//
-//
-//                PDFUtil.generatePDFFromHTML(getApplicationContext(), savedPDFFile, contentAll , new PDFPrint.OnPDFPrintListener() {
-//                    @SuppressLint("LongLogTag")
-//                    @Override
-//                    public void onSuccess(File file) {
-//
-//                        Log.e(TAG, "file!!! "+file);
-//
-//                        // Open Pdf Viewer
-//                        // Uri pdfUri = Uri.fromFile(file);
-//
-//
-//                        //File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/example.pdf");
-////                        Intent intent = new Intent(Intent.ACTION_VIEW);
-////                        intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-////                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-////                        startActivity(intent);
-//
-//
-//
-//                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-//                        //File fileWithinMyDir = new File(pdfUri);
-//
-//                        if(file.exists()) {
-//                            Uri photoURI = FileProvider.getUriForFile(InvoiceViewActivityWebView.this,
-//                                    "com.receipt.invoice.stock.sirproject.provider",
-//                                    file);
-//                            intentShareFile.setType("application/pdf");
-//                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
-//
-//                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-//                                    "Share As Pdf");
-//                            //  intentShareFile.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
-//
-//                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
-//                        }
-//        if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
-//            companylogopathdto= company_image_path + companylogopath;
-//        }else{
-//            companylogopathdto = "/android_res/drawable/white_img.png";
-//        }
-////                        Intent intentPdfViewer = new Intent(Abc.this, PDFViewerActivity.class);
-////                        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri);
-////
-////                        startActivity(intentPdfViewer);
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception exception) {
-//                        exception.printStackTrace();
-//                    }
-//                });
-
                 createWebPrintJob(invoiceweb);
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Invoice");
+        titleView.setText(getString(R.string.preview));
 
 
         getinvoicedata();

@@ -31,7 +31,7 @@ public class Companies_Activity extends BaseActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        Constant.toolbar(Companies_Activity.this,"Companies");
+        Constant.toolbar(Companies_Activity.this,getString(R.string.header_company));
         Constant.bottomNav(Companies_Activity.this,-1);
 
         viewPager = findViewById(R.id.viewPagerLayout);
@@ -46,8 +46,8 @@ public class Companies_Activity extends BaseActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("MY COMPANIES");
-        addcustomer.setText("ADD COMPANY");
+        customers.setText(getString(R.string.header_company_list));
+        addcustomer.setText(getString(R.string.header_company_add));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -68,8 +68,8 @@ public class Companies_Activity extends BaseActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Company_Listing(), "MY COMPANIES");
-        adapter.addFragment(new Add_Company(), "ADD COMPANY");
+        adapter.addFragment(new Company_Listing(), getString(R.string.header_company_list));
+        adapter.addFragment(new Add_Company(), getString(R.string.header_company_add));
         pager.setAdapter(adapter);
 
     }

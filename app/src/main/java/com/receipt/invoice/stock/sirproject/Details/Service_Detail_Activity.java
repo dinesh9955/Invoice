@@ -36,7 +36,7 @@ public class Service_Detail_Activity extends BaseActivity {
         setContentView(R.layout.activity_service__detail_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        Constant.toolbar(Service_Detail_Activity.this,"Details");
+        Constant.toolbar(Service_Detail_Activity.this,getString(R.string.header_details));
         Constant.bottomNav(Service_Detail_Activity.this,-1);
 
         avi = findViewById(R.id.avi);

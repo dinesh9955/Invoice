@@ -364,7 +364,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.editreceiptactivity);
-        Constant.toolbar(EditEditReceiptActivity.this, "Edit Receipt");
+        Constant.toolbar(EditEditReceiptActivity.this, getString(R.string.header_edit_receipt));
 
         taxvalueText = findViewById(R.id.taxvalue);
 

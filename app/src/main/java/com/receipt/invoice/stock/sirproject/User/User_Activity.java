@@ -32,7 +32,7 @@ public class User_Activity extends BaseActivity {
         setContentView(R.layout.activity_user_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        Constant.toolbar(User_Activity.this,"Users");
+        Constant.toolbar(User_Activity.this, getString(R.string.header_users));
         Constant.bottomNav(User_Activity.this,-1);
 
         viewPager = findViewById(R.id.viewPagerLayout);
@@ -47,8 +47,8 @@ public class User_Activity extends BaseActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("USERS");
-        addcustomer.setText("ADD USER");
+        customers.setText(getString(R.string.header_users_list));
+        addcustomer.setText(getString(R.string.header_users_add));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -63,8 +63,8 @@ public class User_Activity extends BaseActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new User_Listing(), "USERS");
-        adapter.addFragment(new Add_User(), "ADD USER");
+        adapter.addFragment(new User_Listing(), getString(R.string.header_users_list));
+        adapter.addFragment(new Add_User(), getString(R.string.header_users_add));
         pager.setAdapter(adapter);
 
     }

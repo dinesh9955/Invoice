@@ -84,7 +84,7 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         TextView textViewDone = toolbar.findViewById(R.id.textViewDone);
         textViewDone.setVisibility(View.GONE);
 
-        titleView.setText("Online Payment Gateway");
+        titleView.setText(getString(R.string.header_online_payment_gateway));
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 

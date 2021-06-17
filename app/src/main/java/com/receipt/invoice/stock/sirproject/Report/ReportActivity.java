@@ -109,7 +109,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(ReportActivity.this, "Report");
+        Constant.toolbar(ReportActivity.this, getString(R.string.header_report));
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);

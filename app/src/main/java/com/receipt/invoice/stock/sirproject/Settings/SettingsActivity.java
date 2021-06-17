@@ -41,7 +41,7 @@ public class SettingsActivity extends BaseActivity {
         overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(SettingsActivity.this, "Settings");
+        Constant.toolbar(SettingsActivity.this, getString(R.string.header_settings));
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 

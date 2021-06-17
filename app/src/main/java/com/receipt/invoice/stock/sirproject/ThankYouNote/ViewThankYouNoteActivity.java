@@ -131,7 +131,7 @@ public class ViewThankYouNoteActivity extends BaseActivity {
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Invoice");
+        titleView.setText(getString(R.string.preview));
 
         Map<String, Object> eventValue = new HashMap<String, Object>();
         eventValue.put(AFInAppEventParameterName.PARAM_1, "thankyounotes_view");

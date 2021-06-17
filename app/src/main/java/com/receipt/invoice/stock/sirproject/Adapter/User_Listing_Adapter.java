@@ -113,7 +113,7 @@ public class User_Listing_Adapter extends RecyclerView.Adapter<User_Listing_Adap
         viewHolderForCat.userdetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mcontext,User_Detail_Activity.class);
+                Intent intent = new Intent(mcontext, User_Detail_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("namee",fullname);
                 intent.putExtra("email",user_email);

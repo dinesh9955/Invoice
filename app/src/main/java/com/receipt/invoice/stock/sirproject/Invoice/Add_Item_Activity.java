@@ -64,7 +64,7 @@ public class Add_Item_Activity extends BaseActivity {
 
 
 
-        Constant.toolbar(Add_Item_Activity.this,"Add Items");
+        Constant.toolbar(Add_Item_Activity.this, getString(R.string.header_add_item));
 
         avi = findViewById(R.id.avi);
         avibackground = findViewById(R.id.avibackground);

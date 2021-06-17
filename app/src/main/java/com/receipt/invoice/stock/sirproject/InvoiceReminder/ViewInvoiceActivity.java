@@ -122,7 +122,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             }
         });
         setSupportActionBar(toolbar);
-        titleView.setText("Preview Invoice");
+        titleView.setText(getString(R.string.preview));
 
 
         getinvoicedata();

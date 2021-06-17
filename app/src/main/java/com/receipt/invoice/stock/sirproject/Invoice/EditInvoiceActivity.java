@@ -400,7 +400,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.editinvoiceactivity);
-        Constant.toolbar(EditInvoiceActivity.this, "Edit Invoice");
+        Constant.toolbar(EditInvoiceActivity.this, getString(R.string.header_edit_invoice));
 
         viewPayment = findViewById(R.id.payment_id);
         viewPayment.setVisibility(View.GONE);

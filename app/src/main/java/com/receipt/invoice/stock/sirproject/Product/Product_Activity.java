@@ -32,7 +32,7 @@ public class Product_Activity extends BaseActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        Constant.toolbar(Product_Activity.this,"Products");
+        Constant.toolbar(Product_Activity.this,getString(R.string.header_product));
         Constant.bottomNav(Product_Activity.this,-1);
 
         viewPager = findViewById(R.id.viewPagerLayout);
@@ -47,8 +47,8 @@ public class Product_Activity extends BaseActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("PRODUCTS");
-        addcustomer.setText("ADD PRODUCT");
+        customers.setText(getString(R.string.header_product_list));
+        addcustomer.setText(getString(R.string.header_product_add));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -64,8 +64,8 @@ public class Product_Activity extends BaseActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Product_Listing(), "PRODUCTS");
-        adapter.addFragment(new Add_Product(), "ADD PRODUCT");
+        adapter.addFragment(new Product_Listing(), getString(R.string.header_product_list));
+        adapter.addFragment(new Add_Product(), getString(R.string.header_product_add));
         pager.setAdapter(adapter);
 
     }

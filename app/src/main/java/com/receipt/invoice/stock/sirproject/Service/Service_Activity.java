@@ -22,7 +22,7 @@ public class Service_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_service_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        Constant.toolbar(Service_Activity.this,"Items");
+        Constant.toolbar(Service_Activity.this,getString(R.string.header_items));
         Constant.bottomNav(Service_Activity.this,-1);
         viewPager = findViewById(R.id.viewPagerLayout);
         tabs = findViewById(R.id.tabs);
@@ -37,8 +37,8 @@ public class Service_Activity extends AppCompatActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("ITEMS");
-        addcustomer.setText("ADD ITEMS");
+        customers.setText(getString(R.string.header_items_list));
+        addcustomer.setText(getString(R.string.header_items_add));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -52,8 +52,8 @@ public class Service_Activity extends AppCompatActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Service_Listing(), "ITEMS");
-        adapter.addFragment(new Add_Services(), "ADD ITEMS");
+        adapter.addFragment(new Service_Listing(), getString(R.string.header_items_list));
+        adapter.addFragment(new Add_Services(), getString(R.string.header_items_add));
         pager.setAdapter(adapter);
 
     }

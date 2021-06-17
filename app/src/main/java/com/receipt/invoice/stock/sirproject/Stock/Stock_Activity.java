@@ -24,7 +24,7 @@ public class Stock_Activity extends BaseActivity {
         setContentView(R.layout.activity_stock_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        Constant.toolbar(Stock_Activity.this,"Stocks");
+        Constant.toolbar(Stock_Activity.this, getString(R.string.header_stock));
         Constant.bottomNav(Stock_Activity.this,-1);
 
         viewPager = findViewById(R.id.viewPagerLayout);
@@ -50,10 +50,10 @@ public class Stock_Activity extends BaseActivity {
         wastage.setTextColor(getResources().getColor(R.color.lightpurple));
 
 
-        customers.setText("UPDATE STOCK");
-        addcustomer.setText("STOCK MOVEMENT");
-        products.setText("PRODUCTS");
-        wastage.setText("WASTAGE/DAMAGE");
+        products.setText(getString(R.string.header_stock_product));
+        customers.setText(getString(R.string.header_stock_update));
+        addcustomer.setText(getString(R.string.header_stock_movement));
+        wastage.setText(getString(R.string.header_stock_waste));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -68,10 +68,10 @@ public class Stock_Activity extends BaseActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Stock_Product_List(), "PRODUCTS");
-        adapter.addFragment(new Update_Stock(), "UPDATE STOCK");
-        adapter.addFragment(new Stock_Movement(), "STOCK MOVEMENT");
-        adapter.addFragment(new Wastage_Damage(), "WASTAGE & DAMAGE");
+        adapter.addFragment(new Stock_Product_List(), getString(R.string.header_stock_product));
+        adapter.addFragment(new Update_Stock(), getString(R.string.header_stock_update));
+        adapter.addFragment(new Stock_Movement(), getString(R.string.header_stock_movement));
+        adapter.addFragment(new Wastage_Damage(), getString(R.string.header_stock_waste));
         pager.setAdapter(adapter);
 
     }

@@ -184,7 +184,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         invoiceweb = findViewById(R.id.invoiceweb);
 
-        titleView.setText("Preview Report");
+        titleView.setText(getString(R.string.preview));
 
         bottomSheetDialog = new BottomSheetDialog(ReportViewActivity.this);
         bottomSheetDialog3 = new BottomSheetDialog(ReportViewActivity.this);

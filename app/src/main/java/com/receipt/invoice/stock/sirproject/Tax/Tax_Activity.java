@@ -25,7 +25,7 @@ public class Tax_Activity extends BaseActivity {
         setContentView(R.layout.activity_tax_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        Constant.toolbar(Tax_Activity.this,"Taxes");
+        Constant.toolbar(Tax_Activity.this, getString(R.string.header_tax));
         Constant.bottomNav(Tax_Activity.this,-1);
         viewPager = findViewById(R.id.viewPagerLayout);
         tabs = findViewById(R.id.tabs);
@@ -39,8 +39,8 @@ public class Tax_Activity extends BaseActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("TAXES");
-        addcustomer.setText("ADD TAX");
+        customers.setText(getString(R.string.header_tax_list));
+        addcustomer.setText(getString(R.string.header_tax_add));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -52,8 +52,8 @@ public class Tax_Activity extends BaseActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Tax_Listing(), "TAXES");
-        adapter.addFragment(new Add_Tax(), "ADD TAX");
+        adapter.addFragment(new Tax_Listing(), getString(R.string.header_tax_list));
+        adapter.addFragment(new Add_Tax(), getString(R.string.header_tax_add));
         pager.setAdapter(adapter);
 
     }

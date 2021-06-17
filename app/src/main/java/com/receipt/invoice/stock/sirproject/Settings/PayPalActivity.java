@@ -61,7 +61,7 @@ public class PayPalActivity extends BaseActivity {
         TextView textViewDone = toolbar.findViewById(R.id.textViewDone);
         textViewDone.setVisibility(View.GONE);
 
-        titleView.setText("PayPal");
+        titleView.setText( getString(R.string.header_payPal));
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);

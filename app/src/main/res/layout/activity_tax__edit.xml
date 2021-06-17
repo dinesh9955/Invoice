@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:spinnerDirection="ltr"
-        app:spinnerHint="Select Company"
+        app:spinnerHint="@string/tax_Select_Company"
         android:layout_marginTop="?actionBarSize"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -26,7 +26,7 @@
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tax Name"
+        android:hint="@string/tax_Tax_Name"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="12dp"
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/taxname"
-        android:hint="Tax Rate(%)"
+        android:hint="@string/tax_Tax_Rate"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="12dp"
@@ -59,7 +59,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
-        android:text="Tax Calculation"
+        android:text="@string/tax_Tax_Calculation"
         android:textColor="@color/lightpurple"
         />
 
@@ -78,13 +78,13 @@
             android:layout_marginLeft="10dp"
             android:textColor="@color/d_grey"
             android:buttonTint="@color/lightpurple"
-            android:text="Inclusive" />
+            android:text="@string/tax_Inclusive" />
 
         <RadioButton
             android:textColor="@color/d_grey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Exclusive"
+            android:text="@string/tax_Exclusiven"
             android:buttonTint="@color/lightpurple"
             android:layout_marginLeft="80dp"
             android:id="@+id/rexclusive"
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="Save"
+        android:text="@string/all_Save"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:layout_marginTop="?actionBarSize"

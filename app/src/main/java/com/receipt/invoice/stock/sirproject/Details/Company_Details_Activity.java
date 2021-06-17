@@ -31,8 +31,8 @@ public class Company_Details_Activity extends BaseActivity {
         setContentView(R.layout.activity_company__details_);
         //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        Constant.toolbar(Company_Details_Activity.this,"Details");
-        Constant.bottomNav(Company_Details_Activity.this,1);
+        Constant.toolbar(Company_Details_Activity.this,getString(R.string.header_details));
+        Constant.bottomNav(Company_Details_Activity.this,-1);
 
         viewPager = findViewById(R.id.viewPagerLayout);
         tabs = findViewById(R.id.tabs);
@@ -48,9 +48,10 @@ public class Company_Details_Activity extends BaseActivity {
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
         addwarehouse.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("COMPANY");
-        addcustomer.setText("WAREHOUSE (S)");
-        addwarehouse.setText("ADD WAREHOUSE");
+
+        customers.setText(getString(R.string.header_company_detail_company));
+        addwarehouse.setText(getString(R.string.header_company_detail_add_warehouse));
+        addcustomer.setText(getString(R.string.header_company_detail_warehouse));
 
         customers.setTextSize(12);
         addcustomer.setTextSize(12);
@@ -83,9 +84,9 @@ public class Company_Details_Activity extends BaseActivity {
 
     private void setUpViewPager(ViewPager pager) {
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Company_Details_Fragment(), "COMPANY");
-        adapter.addFragment(new Add_Warehouse_Fragment(), "ADD WAREHOUSE");
-        adapter.addFragment(new Warehouse_Listing_Fragment(), "WAREHOUSE (S)");
+        adapter.addFragment(new Company_Details_Fragment(), getString(R.string.header_company_detail_company));
+        adapter.addFragment(new Add_Warehouse_Fragment(), getString(R.string.header_company_detail_add_warehouse));
+        adapter.addFragment(new Warehouse_Listing_Fragment(), getString(R.string.header_company_detail_warehouse));
         pager.setAdapter(adapter);
 
     }

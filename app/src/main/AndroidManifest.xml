@@ -11,7 +11,7 @@
 
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
 
-    <uses-permission android:name="com.android.vending.BILLING" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -23,6 +23,7 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -35,6 +36,7 @@
 
 
     <application
+
         android:name=".SAADApplication"
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
@@ -44,7 +46,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        android:windowSoftInputMode="stateHidden|adjustPan">
+        android:windowSoftInputMode="stateHidden|adjustPan"
+        >
 
         <activity
             android:name=".Invoice.ViewInvoice_Activity"

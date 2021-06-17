@@ -74,7 +74,7 @@ public class SubscribeActivity extends BaseActivity{
 
         TextView textViewDone = toolbar.findViewById(R.id.textViewDone);
         textViewDone.setVisibility(View.GONE);
-        titleView.setText("GO PREMIUM");
+        titleView.setText(getString(R.string.header_GO_PREMIUM));
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 

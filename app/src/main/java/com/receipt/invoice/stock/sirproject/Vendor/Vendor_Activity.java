@@ -29,7 +29,7 @@ public class Vendor_Activity extends BaseActivity {
         setContentView(R.layout.activity_vendor_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        Constant.toolbar(Vendor_Activity.this,"Supplier");
+        Constant.toolbar(Vendor_Activity.this, getString(R.string.header_suppliers));
         Constant.bottomNav(Vendor_Activity.this,-1);
 
         viewPager = findViewById(R.id.viewPagerLayout);
@@ -44,8 +44,8 @@ public class Vendor_Activity extends BaseActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("SUPPLIERS");
-        addcustomer.setText("ADD SUPPLIER");
+        customers.setText(getString(R.string.header_suppliers_list));
+        addcustomer.setText(getString(R.string.header_suppliers_add));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -60,8 +60,8 @@ public class Vendor_Activity extends BaseActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Vendor_Listing(), "SUPPLIERS");
-        adapter.addFragment(new Add_Vendor(), "ADD SUPPLIER");
+        adapter.addFragment(new Vendor_Listing(), getString(R.string.header_suppliers_list));
+        adapter.addFragment(new Add_Vendor(), getString(R.string.header_suppliers_add));
         pager.setAdapter(adapter);
 
     }

@@ -12,7 +12,7 @@
         android:drawableRight="@drawable/search_icon"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Search Tax"
+        android:hint="@string/tax_Search_Tax"
         android:layout_marginTop="30dp"
         android:id="@+id/search"
         android:padding="10dp"

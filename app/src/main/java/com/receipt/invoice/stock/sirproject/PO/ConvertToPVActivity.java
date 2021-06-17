@@ -372,7 +372,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.edit_editpvactivity);
-        Constant.toolbar(ConvertToPVActivity.this, "Convert to PV");
+        Constant.toolbar(ConvertToPVActivity.this, getString(R.string.header_convert_to_pv));
 
         taxvalueText = findViewById(R.id.taxvalue);
 

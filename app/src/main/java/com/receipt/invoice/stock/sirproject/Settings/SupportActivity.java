@@ -44,7 +44,7 @@ public class SupportActivity extends BaseActivity {
         overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(SupportActivity.this, "Support");
+        Constant.toolbar(SupportActivity.this, getString(R.string.header_support));
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 

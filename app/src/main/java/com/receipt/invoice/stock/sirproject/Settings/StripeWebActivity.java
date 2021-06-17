@@ -36,7 +36,7 @@ public class StripeWebActivity extends BaseActivity {
         TextView textViewDone = toolbar.findViewById(R.id.textViewDone);
         textViewDone.setVisibility(View.GONE);
 
-        titleView.setText("Stripe");
+        titleView.setText(getString(R.string.header_stripe));
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 

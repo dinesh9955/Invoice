@@ -31,7 +31,7 @@ public class Vendor_Detail_Activity extends BaseActivity {
         setContentView(R.layout.activity_vendor__detail_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        Constant.toolbar(Vendor_Detail_Activity.this,"Details");
+        Constant.toolbar(Vendor_Detail_Activity.this,getString(R.string.header_details));
         Constant.bottomNav(Vendor_Detail_Activity.this,-1);
 
         FindByIds();

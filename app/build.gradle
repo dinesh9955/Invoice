@@ -185,8 +185,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
 
-    def billing_version = "3.0.0"
-    implementation "com.android.billingclient:billing:$billing_version"
+//    def billing_version = "3.0.0"
+//    implementation "com.android.billingclient:billing:$billing_version"
 
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
 

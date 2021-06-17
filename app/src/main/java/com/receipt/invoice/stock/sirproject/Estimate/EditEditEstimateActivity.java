@@ -368,7 +368,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.edit_estimate_activity);
-        Constant.toolbar(EditEditEstimateActivity.this, "Edit Estimate");
+        Constant.toolbar(EditEditEstimateActivity.this, getString(R.string.header_edit_estimate));
 
         taxvalueText = findViewById(R.id.taxvalue);
 

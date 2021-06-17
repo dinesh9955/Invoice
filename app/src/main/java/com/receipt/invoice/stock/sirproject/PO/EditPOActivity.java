@@ -388,7 +388,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.editpoactivity);
-        Constant.toolbar(EditPOActivity.this, "Edit PO");
+        Constant.toolbar(EditPOActivity.this, getString(R.string.header_edit_po));
 
 
         selectButton = findViewById(R.id.selectButton);

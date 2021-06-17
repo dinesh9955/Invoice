@@ -30,7 +30,7 @@ public class Customer_Activity extends BaseActivity {
         setContentView(R.layout.activity_customer_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        Constant.toolbar(Customer_Activity.this,"Customers");
+        Constant.toolbar(Customer_Activity.this, getString(R.string.header_customers));
         Constant.bottomNav(Customer_Activity.this,-1);
 
         viewPager = findViewById(R.id.viewPagerLayout);
@@ -45,8 +45,8 @@ public class Customer_Activity extends BaseActivity {
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
-        customers.setText("CUSTOMERS");
-        addcustomer.setText("ADD CUSTOMER");
+        customers.setText( getString(R.string.header_customers_list));
+        addcustomer.setText( getString(R.string.header_customers_add));
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
@@ -62,8 +62,8 @@ public class Customer_Activity extends BaseActivity {
     private void setUpViewPager(ViewPager pager) {
 
         CustomViewPagerAdapter adapter = new CustomViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Customer_Listing(), "CUSTOMERS");
-        adapter.addFragment(new Add_Customer(), "ADD CUSTOMER");
+        adapter.addFragment(new Customer_Listing(),  getString(R.string.header_customers_list));
+        adapter.addFragment(new Add_Customer(),  getString(R.string.header_customers_add));
         pager.setAdapter(adapter);
 
     }

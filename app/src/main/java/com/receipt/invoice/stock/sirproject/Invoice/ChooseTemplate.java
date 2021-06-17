@@ -72,7 +72,7 @@ public class ChooseTemplate extends BaseActivity {
 
         mAdapter.updateColor(colorCode);
 
-        titleView.setText("Choose Template");
+        titleView.setText(getString(R.string.header_choose_template));
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override

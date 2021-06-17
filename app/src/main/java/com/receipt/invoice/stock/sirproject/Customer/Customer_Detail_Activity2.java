@@ -118,7 +118,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
 
 
         activity = this;
-        Constant.toolbar(activity,"Details");
+        Constant.toolbar(activity, getString(R.string.header_details));
 
         FindByIds();
         setFonts();

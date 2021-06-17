@@ -85,7 +85,7 @@ public class InvoiceReminderActivity extends BaseActivity {
         overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        Constant.toolbar(InvoiceReminderActivity.this, "Invoice Reminders");
+        Constant.toolbar(InvoiceReminderActivity.this, getString(R.string.header_invoice_reminders));
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
