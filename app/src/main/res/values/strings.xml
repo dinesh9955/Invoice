@@ -203,6 +203,8 @@
     <string name="item_Add_Item">Add Item</string>
     <string name="item_search_items">Search Items</string>
 
+    <string name="item_SearchProducts">Search Products</string>
+
 
 
     <string name="tax_Select_Company">Select Company</string>
@@ -214,6 +216,161 @@
     <string name="tax_Exclusiven">Exclusive</string>
     <string name="tax_Add_new_tax">Add new tax</string>
     <string name="tax_Search_Tax">Search Tax</string>
+    <string name="tax_edit">Edit</string>
+
+
+    <string name="customer_Upload_customer_logo">Upload customer/company logo</string>
+    <string name="customer_Name">Name</string>
+    <string name="customer_Email">Email</string>
+    <string name="customer_Phone_Number">Phone Number</string>
+    <string name="customer_Mobile_Number">Mobile Number</string>
+    <string name="customer_Website">Website</string>
+    <string name="customer_Choose_Default_Currency">Choose Default Currency</string>
+    <string name="customer_SHIPPING_DETAILS">SHIPPING DETAILS</string>
+    <string name="customer_First_Name">First Name</string>
+    <string name="customer_Last_Name">Last Name</string>
+    <string name="customer_Post_Code">Post Code</string>
+    <string name="customer_City">City</string>
+    <string name="customer_Country">Country</string>
+    <string name="customer_Address">Address</string>
+    <string name="customer_Shipping_Address_1">Shipping Address 1</string>
+    <string name="customer_Shipping_Address_2">Shipping Address 2</string>
+    <string name="customer_Add_Customer">Add Customer</string>
+    <string name="customer_IMPORT_CUSTOMER_FROM_CONTACT">IMPORT CUSTOMER FROM CONTACT</string>
+    <string name="customer_Inclusive">Inclusive</string>
+    <string name="customer_Exclusiven">Exclusive</string>
+    <string name="customer_CustomerCompany_Name">Customer/Company Name</string>
+    <string name="customer_CustomerCompany_EmailAddress">Customer/Company Email Address</string>
+    <string name="customer_Contact_Person">Contact Person</string>
+    <string name="customer_CustomerCompany_Address">Customer/Company Address</string>
+    <string name="customer_Select_Company">Select Company</string>
+    <string name="customer_Search_Customer">Search Customer</string>
+
+
+
+    <string name="supplier_Upload_supplier_logo">Upload supplier/company logo</string>
+    <string name="supplier_SupplierCompany_Name">Supplier/Company Name</string>
+    <string name="supplier_SupplierCompany_Email_Address">Supplier/Company Email Address</string>
+    <string name="supplier_Contact_Person">Contact Person</string>
+    <string name="supplier_Phone_Number">Phone Number</string>
+    <string name="supplier_Mobile_Number">Mobile Number</string>
+    <string name="supplier_Website">Website</string>
+    <string name="supplier_SupplierCompany_Address">Supplier/Company Address</string>
+    <string name="supplier_Choose_Default_Currency">Choose Default Currency</string>
+    <string name="supplier_Add_Supplier">Add Supplier</string>
+    <string name="supplier_IMPORT_SUPPLIER_FROM_CONTACT">IMPORT SUPPLIER FROM CONTACT</string>
+    <string name="supplier_Select_Company">Select Company</string>
+    <string name="supplier_Search_Supplier">Search Supplier</string>
+
+
+
+    <string name="stock_Manage_your_stock">Manage your stock from here, move products between warehouse (s).</string>
+    <string name="stock_Select_Company">Select Company</string>
+    <string name="stock_Select_Product">Select Product</string>
+    <string name="stock_Send_from_warehouse">Send from warehouse: </string>
+    <string name="stock_Select_Warehouse">Select Warehouse</string>
+    <string name="stock_Send_to_warehouse">Send to warehouse: </string>
+    <string name="stock_Quantity_of_Product">Quantity of Product</string>
+    <string name="stock_Enter_Quantity">Enter Quantity</string>
+    <string name="stock_Move">Move</string>
+    <string name="stock_SearchProducts">Search Products</string>
+    <string name="stock_PricePerUnit">Price Per Unit</string>
+    <string name="stock_EnterPricePerUnit">Enter Price Per Unit</string>
+    <string name="stock_Update">Update</string>
+    <string name="stock_SelectWarehouse">Select Warehouse (s)</string>
+    <string name="stock_Status">Status: </string>
+    <string name="stock_SearchWarehouse">Search Warehouse</string>
+    <string name="stock_damage_or_waste_productse">If your company has some damage or waste products, then remove it from here.</string>
+    <string name="stock_Reason_to_remove">Reason to remove</string>
+    <string name="stock_EnterReason">Enter Reason</string>
+    <string name="stock_Remove_from_stock">Remove from stock</string>
+
+
+
+    <string name="report_SelectCompany">Select Company</string>
+    <string name="report_Previewit">Preview it</string>
+    <string name="report_Print">Print</string>
+    <string name="report_ExportShare">Export/Share</string>
+    <string name="report_FilterByDate">Filter By Date</string>
+    <string name="report_RemoveFilter">Remove Filter</string>
+    <string name="reportByCustomerName">By Customer Name</string>
+    <string name="report_Paid">Paid</string>
+    <string name="report_UnPaid">UnPaid</string>
+    <string name="report_BySupplier">By Supplier</string>
+    <string name="report_ByTaxName">By Tax Name</string>
+    <string name="report_InStock">In Stock</string>
+    <string name="report_Reorder">Reorder</string>
+    <string name="report_FilterByProductName">Filter By Product Name</string>
+    <string name="report_CustomerStatementofAccount">Customer Statement of Account</string>
+    <string name="report_SupplierStatementofAccount">Supplier Statement of Account</string>
+    <string name="report_TotalSalesReport">Total Sales Report</string>
+    <string name="report_TotalPurchaseReport">Total Purchase Report</string>
+    <string name="report_CustomerAgeingReport">Customer Ageing Report</string>
+    <string name="report_TaxCollectedReport">Tax Collected Report</string>
+    <string name="report_StockReport">Stock Report</string>
+    <string name="report_ProductMovementReport">Product Movement Report</string>
+    <string name="report_Go_ahead">Go ahead!</string>
+    <string name="report_Kindly_select_the_option">Kindly select the option as per your requirement</string>
+    <string name="report_Cancel">Cancel</string>
+
+
+
+    <string name="thank_SelectCompany">Select Company</string>
+    <string name="thank_Search_by_Invoice_number">Search by Invoice number</string>
+    <string name="thank_No_Paid_invoices">No Paid invoices</string>
+    <string name="thank_Status">Status :</string>
+
+
+
+    <string name="invoiceReminder_SelectCompany">Select Company</string>
+    <string name="invoiceReminder_Search_by_Invoice_number">Search by Invoice number</string>
+    <string name="invoiceReminder_No_UnPaid_invoices">No UnPaid invoices</string>
+    <string name="invoiceReminder_Status">Status :</string>
+
+
+
+    <string name="invoice_SelectCompany">Select Company</string>
+    <string name="invoice_SelectWarehouse">Select Warehouse</string>
+    <string name="invoice_EnterName">Enter Name</string>
+    <string name="invoice_CreditTerms">Credit Terms</string>
+    <string name="invoice_ReferenceNo">Reference No</string>
+    <string name="invoice_EnterReferenceNo">Enter Reference No.</string>
+    <string name="invoice_NoItems">No Items</string>
+    <string name="invoice_AddItems">Add Items</string>
+    <string name="invoice_GrossAmount">Gross Amount</string>
+    <string name="invoice_Tax">Tax</string>
+    <string name="invoice_Shipping">Shipping</string>
+    <string name="invoice_NetAmount">Net Amount</string>
+    <string name="invoice_PaidAmount">Paid Amount</string>
+    <string name="invoice_BalanceDue">Balance Due</string>
+    <string name="invoice_Signature_of_invoice_maker">Signature of invoice maker</string>
+    <string name="invoice_Signature_of_Receiver">Signature of Receiver</string>
+    <string name="invoice_Upload_Company_Seal">Upload Company Seal</string>
+    <string name="invoice_Upload_Invoice_Images">Upload Invoice Images</string>
+    <string name="invoice_Notes">Notes</string>
+    <string name="invoice_Search_by_Invoice_number">Search by Invoice number</string>
+
+
+    <string name="credit_notes_Recipient">Recipient</string>
+    <string name="credit_notes_Signature_of_credit_maker">Signature of Credit Note maker</string>
+
+
+    <string name="debit_notes_Supplier">Supplier</string>
+    <string name="debit_notes_Signature_of_debit_maker">Signature of Debit Note maker</string>
+
+
+    <string name="estimate_Signature_of_estimate_maker">Signature of Estimate maker</string>
+    <string name="estimate_Upload_Estimate_Images">Upload Estimate Images</string>
+
+
+    <string name="pv_Supplier">Supplier</string>
+    <string name="pv_Signature_of_Payment_Voucher_maker">Signature of Payment Voucher maker</string>
+    <string name="pv_Search_by_PV_number">Search by PV number</string>
+
+
+    <string name="po_Upload_purchase_order_Images">Upload Purchase Order Images</string>
+    <string name="po_Signature_of_Purchase_Order_maker">Signature of Purchase Order maker</string>
+    <string name="po_Search_by_PO_number">Search by PO number</string>
 
 
 
@@ -226,6 +383,8 @@
     <string name="home_no_overdue_invoices">No Overdue Invoices</string>
     <string name="home_no_customers">No Customers</string>
     <string name="home_no_suppliers">No Suppliers</string>
+    <string name="home_Invoice_Overdue">Invoice Overdue</string>
+
 
     <string name="home">Home</string>
     <string name="estimate">Estimates</string>
@@ -306,7 +465,7 @@
     <string name="template">Choose Template</string>
     <string name="choose_color">Choose Color</string>
 
-    <string name="additem">Add products</string>
+    <string name="additem">Add Products</string>
     <string name="SubTotal">Sub Total</string>
     <string name="Discount">Discount</string>
     <string name="Tax">Tax</string>

@@ -30,7 +30,7 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/edittextshape"
         android:layout_below="@+id/appbar"
-        app:spinnerHint="Select Company" />
+        app:spinnerHint="@string/report_SelectCompany" />
 
 
     <androidx.recyclerview.widget.RecyclerView

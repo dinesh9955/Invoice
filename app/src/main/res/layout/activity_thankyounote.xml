@@ -30,7 +30,7 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/edittextshape"
         android:layout_below="@+id/appbar"
-        app:spinnerHint="Select Company" />
+        app:spinnerHint="@string/thank_SelectCompany" />
 
 
 
@@ -44,7 +44,7 @@
         android:drawableRight="@drawable/search_icon"
         android:layout_below="@+id/selectcompany"
         android:elevation="3dp"
-        android:hint="Search by Invoice number"
+        android:hint="@string/thank_Search_by_Invoice_number"
         android:maxLines="1"
         android:padding="10dp"
         />
@@ -68,7 +68,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No Paid invoices"
+        android:text="@string/thank_No_Paid_invoices"
         android:textSize="14dp"
         android:textColor="@color/darkgray"
         android:id="@+id/txtinvoice"

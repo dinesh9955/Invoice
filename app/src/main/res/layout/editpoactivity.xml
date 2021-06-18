@@ -119,7 +119,7 @@
                 android:layout_below="@+id/view"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
-                android:text="Supplier"/>
+                android:text="@string/pv_Supplier"/>
 
             <TextView
                 android:id="@+id/invoicerecipnt"
@@ -128,7 +128,7 @@
                 android:layout_below="@+id/invoicetotxt"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
-                android:hint="Enter Name"
+                android:hint="@string/invoice_EnterName"
                 android:textColor="@color/lightpurple" />
 
             <TextView
@@ -140,7 +140,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
-                android:text="Credit Terms" />
+                android:text="@string/invoice_CreditTerms" />
 
             <TextView
                 android:id="@+id/txtdays"
@@ -153,7 +153,7 @@
                 android:layout_marginTop="5dp"
                 android:gravity="end"
                 android:layout_marginRight="20dp"
-                android:hint="7days"
+                android:hint="0days"
                 android:textColor="@color/lightpurple" />
 
             <View
@@ -173,7 +173,7 @@
                 android:layout_below="@+id/v3"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
-                android:text="Reference No" />
+                android:text="@string/invoice_ReferenceNo" />
 
             <EditText
                 android:id="@+id/edreferenceno"
@@ -183,7 +183,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/nobackgroundedittext"
-                android:hint="Enter Reference No."
+                android:hint="@string/invoice_EnterReferenceNo"
                 android:textColor="@color/lightpurple"
                 android:textSize="12sp" />
 
@@ -289,7 +289,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="75dp"
-                android:text="No items"
+                android:text="@string/invoice_NoItems"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp"
                 android:layout_below="@+id/itemstxt"
@@ -319,7 +319,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/light_button_curve"
-                android:text="Add items"
+                android:text="@string/invoice_AddItems"
                 android:textAllCaps="false"
                 android:textColor="@color/lightpurple" />
 
@@ -338,7 +338,7 @@
                 android:layout_below="@+id/view3"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:text="Gross Amount"
+                android:text="@string/invoice_GrossAmount"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp" />
 
@@ -415,7 +415,7 @@
                 android:layout_below="@+id/subtotal"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
-                android:text="Tax"
+                android:text="@string/invoice_Tax"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp"
                 android:visibility="visible"/>
@@ -428,7 +428,7 @@
                 android:layout_below="@+id/subtotal"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
-                android:text="Tax"
+                android:text="@string/invoice_Tax"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp"
                 android:visibility="gone"/>
@@ -455,7 +455,7 @@
                 android:layout_below="@+id/tax"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
-                android:text="Shipping"
+                android:text="@string/invoice_Shipping"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp" />
 
@@ -481,7 +481,7 @@
                 android:layout_below="@+id/freight"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
-                android:text="Net Amount"
+                android:text="@string/invoice_NetAmount"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp" />
 
@@ -505,7 +505,7 @@
                 android:layout_below="@+id/netamount"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
-                android:text="Paid Amount"
+                android:text="@string/invoice_PaidAmount"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp" />
 
@@ -532,7 +532,7 @@
                 android:layout_below="@+id/paidamount"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
-                android:text="Balance Due"
+                android:text="@string/invoice_BalanceDue"
                 android:textColor="@color/darkgray"
                 android:textSize="18sp" />
 
@@ -568,7 +568,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
-                android:text="Signature of purchase order maker"
+                android:text="@string/po_Signature_of_Purchase_Order_maker"
                 android:textColor="@color/lightpurple"
                 android:textSize="16sp" />
 
@@ -591,7 +591,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
-                android:text="Signature of Receiver"
+                android:text="@string/invoice_Signature_of_Receiver"
                 android:textColor="@color/lightpurple"
                 android:textSize="16sp" />
 
@@ -614,7 +614,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
-                android:text="Upload Company Seal"
+                android:text="@string/invoice_Upload_Company_Seal"
                 android:textColor="@color/lightpurple"
                 android:textSize="16sp" />
 
@@ -639,7 +639,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
-                android:text="Upload purchase order Images"
+                android:text="@string/po_Upload_purchase_order_Images"
                 android:textColor="@color/lightpurple"
                 android:textSize="16sp" />
 
@@ -669,7 +669,7 @@
                 android:background="@drawable/edittextshape"
                 android:elevation="2dp"
                 android:gravity="start|top"
-                android:hint="Notes"
+                android:hint="@string/invoice_Notes"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"

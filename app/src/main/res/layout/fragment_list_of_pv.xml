@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:spinnerDirection="ltr"
-        app:spinnerHint="Select Company" />
+        app:spinnerHint="@string/invoice_SelectCompany" />
 
 
     <EditText
@@ -34,7 +34,7 @@
         android:background="@drawable/edittextshape"
         android:drawableRight="@drawable/search_icon"
         android:elevation="3dp"
-        android:hint="Search by PV number"
+        android:hint="@string/pv_Search_by_PV_number"
         android:maxLines="1"
         android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/recycler_invoices"

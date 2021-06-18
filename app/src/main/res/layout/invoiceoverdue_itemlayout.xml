@@ -33,7 +33,7 @@
             android:layout_toRightOf="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Invoice Overdue"
+            android:text="@string/home_Invoice_Overdue"
             android:id="@+id/invoiceoverduetxt"
             android:textColor="@color/white"
             android:textSize="18sp"

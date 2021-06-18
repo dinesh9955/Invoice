@@ -216,7 +216,7 @@ public class Add_Item_Activity extends BaseActivity {
                     }
                 }
                 else {
-                    Constant.ErrorToast(Add_Item_Activity.this,"Something went wrong, try again!");
+                   // Constant.ErrorToast(Add_Item_Activity.this,"Something went wrong, try again!");
                 }
 
                 avi.smoothToHide();

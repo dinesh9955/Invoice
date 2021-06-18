@@ -362,45 +362,45 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     }
 
     private void addFilterData(int positionNext) {
-        arrayListFilter.add("Preview it");
-        arrayListFilter.add("Print");
+        arrayListFilter.add(getString(R.string.report_Previewit));
+        arrayListFilter.add(getString(R.string.report_Print));
         if(positionNext == 0){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("Filter By Date");
-            arrayListFilter.add("Remove Filter");
+            arrayListFilter.add(getString(R.string.report_ExportShare));
+            arrayListFilter.add(getString(R.string.report_FilterByDate));
+            arrayListFilter.add(getString(R.string.report_RemoveFilter));
         } else if(positionNext == 1){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("Filter By Date");
-            arrayListFilter.add("Remove Filter");
+            arrayListFilter.add(getString(R.string.report_ExportShare));
+            arrayListFilter.add(getString(R.string.report_FilterByDate));
+            arrayListFilter.add(getString(R.string.report_RemoveFilter));
         } else if(positionNext == 2){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("Filter By Date");
-            arrayListFilter.add("By Customer Name");
-            arrayListFilter.add("Paid");
-            arrayListFilter.add("UnPaid");
-            arrayListFilter.add("Remove Filter");
+            arrayListFilter.add(getString(R.string.report_ExportShare));
+            arrayListFilter.add(getString(R.string.report_FilterByDate));
+            arrayListFilter.add(getString(R.string.reportByCustomerName));
+            arrayListFilter.add(getString(R.string.report_Paid));
+            arrayListFilter.add(getString(R.string.report_UnPaid));
+            arrayListFilter.add(getString(R.string.report_RemoveFilter));
         } else if(positionNext == 3){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("Filter By Date");
-            arrayListFilter.add("By Supplier");
-            arrayListFilter.add("Remove Filter");
+            arrayListFilter.add(getString(R.string.report_ExportShare));
+            arrayListFilter.add(getString(R.string.report_FilterByDate));
+            arrayListFilter.add(getString(R.string.report_BySupplier));
+            arrayListFilter.add(getString(R.string.report_RemoveFilter));
         } else if(positionNext == 4){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("By Customer Name");
-            arrayListFilter.add("Remove Filter");
+            arrayListFilter.add(getString(R.string.report_ExportShare));
+            arrayListFilter.add(getString(R.string.reportByCustomerName));
+            arrayListFilter.add(getString(R.string.report_RemoveFilter));
         } else if(positionNext == 5){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("Filter By Date");
-            arrayListFilter.add("By Tax Name");
-            arrayListFilter.add("Remove Filter");
+            arrayListFilter.add(getString(R.string.report_ExportShare));
+            arrayListFilter.add(getString(R.string.report_FilterByDate));
+            arrayListFilter.add(getString(R.string.report_ByTaxName));
+            arrayListFilter.add(getString(R.string.report_RemoveFilter));
         } else if(positionNext == 6){
-            arrayListFilter.add("Export/Share");
-            arrayListFilter.add("In Stock");
-            arrayListFilter.add("Reorder");
-            arrayListFilter.add("Filter By Product Name");
-            arrayListFilter.add("Remove Filter");
+            arrayListFilter.add(getString(R.string.report_ExportShare));
+            arrayListFilter.add(getString(R.string.report_InStock));
+            arrayListFilter.add(getString(R.string.report_Reorder));
+            arrayListFilter.add(getString(R.string.report_FilterByProductName));
+            arrayListFilter.add(getString(R.string.report_RemoveFilter));
         } else if(positionNext == 7){
-            arrayListFilter.add("Export/Share");
+            arrayListFilter.add(getString(R.string.report_ExportShare));
         } else{
 
         }

@@ -145,14 +145,16 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         });
 
 
-        arrayListNames.add("Customer Statement of Account");
-        arrayListNames.add("Supplier Statement of Account");
-        arrayListNames.add("Total Sales Report");
-        arrayListNames.add("Total Purchase Report");
-        arrayListNames.add("Customer Ageing Report");
-        arrayListNames.add("Tax Collected Report");
-        arrayListNames.add("Stock Report");
-        arrayListNames.add("Product Movement Report");
+        arrayListNames.add(getString(R.string.report_CustomerStatementofAccount));
+        arrayListNames.add(getString(R.string.report_SupplierStatementofAccount));
+        arrayListNames.add(getString(R.string.report_TotalSalesReport));
+        arrayListNames.add(getString(R.string.report_TotalPurchaseReport));
+        arrayListNames.add(getString(R.string.report_CustomerAgeingReport));
+        arrayListNames.add(getString(R.string.report_TaxCollectedReport));
+        arrayListNames.add(getString(R.string.report_StockReport));
+        arrayListNames.add(getString(R.string.report_ProductMovementReport));
+
+
 
         invoicelistAdapterdt = new ReportAdapter(ReportActivity.this, arrayListNames);
         recycler_invoices.setAdapter(invoicelistAdapterdt);

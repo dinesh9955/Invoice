@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Manage your stock from here, move products between warehouse (s)."
+                android:text="@string/stock_Manage_your_stock"
                 android:layout_marginTop="?actionBarSize"
                 android:id="@+id/description"
                 android:textColor="@color/darkgray"
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:spinnerDirection="ltr"
-                app:spinnerHint="Select Company"
+                app:spinnerHint="@string/stock_Select_Company"
                 android:layout_below="@+id/description"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="20dp"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:spinnerDirection="ltr"
-                app:spinnerHint="Select Product"
+                app:spinnerHint="@string/stock_Select_Product"
                 android:layout_below="@+id/companyspinner"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="20dp"
@@ -73,15 +73,16 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="20dp"
-                android:text="Send from warehouse: "
-                android:textColor="@color/lightpurple" />
+                android:text="@string/stock_Send_from_warehouse"
+                android:textColor="@color/lightpurple"
+                android:textStyle="normal"/>
 
-            <com.isapanah.awesomespinner.AwesomeSpinner
+t            <com.isapanah.awesomespinner.AwesomeSpinner
                 android:id="@+id/fromwarehousespinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:spinnerDirection="ltr"
-                app:spinnerHint="Select Warehouse"
+                app:spinnerHint="@string/stock_Select_Warehouse"
                 android:layout_below="@+id/selectfromtext"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="20dp"
@@ -97,15 +98,16 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="20dp"
-                android:text="Send to warehouse: "
-                android:textColor="@color/lightpurple" />
+                android:text="@string/stock_Send_to_warehouse"
+                android:textColor="@color/lightpurple"
+                android:textStyle="normal"/>
 
             <com.isapanah.awesomespinner.AwesomeSpinner
                 android:id="@+id/sendtospinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:spinnerDirection="ltr"
-                app:spinnerHint="Select Warehouse"
+                app:spinnerHint="@string/stock_Select_Warehouse"
                 android:layout_below="@+id/fromwarehousespinner"
                 android:layout_marginTop="?actionBarSize"
                 android:layout_marginLeft="20dp"
@@ -116,7 +118,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quantity of Product"
+                android:text="@string/stock_Quantity_of_Product"
                 android:id="@+id/quantitydescription"
                 android:layout_below="@+id/sendtospinner"
                 android:layout_marginLeft="20dp"
@@ -128,7 +130,7 @@
                 android:layout_below="@+id/quantitydescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Quantity"
+                android:hint="@string/stock_Enter_Quantity"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textSize="12dp"
@@ -150,7 +152,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="90dp"
                 android:background="@drawable/buttonshape"
-                android:text="Move"
+                android:text="@string/stock_Move"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 

@@ -414,7 +414,7 @@ public class ThankYouNoteActivity extends BaseActivity {
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(ThankYouNoteActivity.this, "Something went wrong, try again!");
+                    //Constant.ErrorToast(ThankYouNoteActivity.this, "Something went wrong, try again!");
                 }
             }
         });
