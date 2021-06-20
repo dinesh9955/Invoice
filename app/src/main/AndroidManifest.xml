@@ -665,14 +665,6 @@
         </activity>
 
         <activity
-            android:name=".Settings.FAQsDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
-
-        </activity>
-
-        <activity
             android:name=".Settings.OnlinePaymentGatewayActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
@@ -682,14 +674,6 @@
 
         <activity
             android:name=".Settings.PayPalActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize">
-
-        </activity>
-
-        <activity
-            android:name=".Settings.StripeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize">

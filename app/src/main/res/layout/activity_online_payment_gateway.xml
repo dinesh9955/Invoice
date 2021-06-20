@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edittextshape"
-                app:spinnerHint="Select Company" />
+                app:spinnerHint="@string/user_Select_Company" />
 
 
                 <RelativeLayout
@@ -77,7 +77,7 @@
                         android:layout_width="60dp"
                         android:layout_height="40dp"
                         android:background="@drawable/blue_btn_curve"
-                        android:text="Setup"
+                        android:text="@string/setting_Setup"
                         android:textColor="@color/white"
                         android:textAllCaps="false"
                         style="?android:attr/borderlessButtonStyle"
@@ -142,7 +142,7 @@
                             android:layout_width="60dp"
                             android:layout_height="40dp"
                             android:background="@drawable/blue_btn_curve"
-                            android:text="Setup"
+                            android:text="@string/setting_Setup"
                             android:textColor="@color/white"
                             android:textAllCaps="false"
                             style="?android:attr/borderlessButtonStyle"

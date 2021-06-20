@@ -25,15 +25,16 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
 
     private Context mcontext;
 
-    ArrayList<String> arrayListNames = new ArrayList<>();
+//    ArrayList<String> arrayListNames = new ArrayList<>();
 
     private int selectedPos = -1;
 
     LanguageActivity activity;
+    String[] languageArray;
 
-    public LanguageAdapter(Context mcontext, ArrayList<String> list, LanguageActivity languageActivity) {
+    public LanguageAdapter(Context mcontext, String[] languageArray2, LanguageActivity languageActivity) {
         this.mcontext = mcontext;
-        arrayListNames = list;
+        languageArray = languageArray2;
         activity = languageActivity;
     }
 
@@ -52,7 +53,7 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull final LanguageAdapter.ViewHolderForCat viewHolderForCat, final int i) {
 
-        viewHolderForCat.textViewName.setText(""+arrayListNames.get(i));
+        viewHolderForCat.textViewName.setText(""+languageArray[i]);
 
         if(i == selectedPos)
         {
@@ -88,7 +89,7 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return arrayListNames.size();
+        return languageArray.length;
     }
 
     @Override
@@ -125,8 +126,8 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
         }
 
     }
-    public void updateList(ArrayList<String> list){
-        arrayListNames = list;
-        notifyDataSetChanged();
-    }
+//    public void updateList(ArrayList<String> list){
+//        arrayListNames = list;
+//        notifyDataSetChanged();
+//    }
 }

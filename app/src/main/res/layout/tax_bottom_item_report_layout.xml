@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:text="Select Tax"
+                android:text="@string/tax_SelectTax"
                 android:textColor="@color/dark_blue"
                 android:textSize="20sp" />
 
@@ -28,7 +28,7 @@
                 android:drawableRight="@drawable/search_icon"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:hint="Search"
+                android:hint="@string/tax_Search"
                 android:layout_marginTop="20dp"
                 android:layout_below="@id/txttax"
                 android:id="@+id/search_customers"

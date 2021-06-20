@@ -24,7 +24,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:padding="10dp"
-                android:text="Done"
+                android:text="@string/done"
                 android:textColor="@color/darkblue"
                 android:textStyle="bold"
                 android:textSize="16dp"

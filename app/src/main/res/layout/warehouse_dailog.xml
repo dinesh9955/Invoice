@@ -17,7 +17,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select Warehouse (s)"
+            android:text="@string/product_Select_Warehouse"
             android:gravity="center_horizontal"
             android:textColor="@color/white"
             android:textStyle="bold"/>
@@ -44,7 +44,7 @@
         android:paddingRight="10dp"
         android:layout_marginEnd="28dp"
         android:layout_marginTop="10dp"
-        android:text="Done"
+        android:text="@string/setting_Done"
         android:textColor="@color/lightpurple"
         android:layout_marginBottom="10dp"
         />

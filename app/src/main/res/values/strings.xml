@@ -11,6 +11,7 @@
     <string name="all_Save">Save</string>
     <string name="all_Cancel">Cancel</string>
     <string name="preview">Preview</string>
+    <string name="back">Back</string>
 
     <string name="yes">yes</string>
     <string name="no">No</string>
@@ -202,6 +203,8 @@
     <string name="item_TAXABLE">TAXABLE</string>
     <string name="item_Add_Item">Add Item</string>
     <string name="item_search_items">Search Items</string>
+    <string name="item_SelectItems">Select Items</string>
+
 
     <string name="item_SearchProducts">Search Products</string>
 
@@ -217,6 +220,16 @@
     <string name="tax_Add_new_tax">Add new tax</string>
     <string name="tax_Search_Tax">Search Tax</string>
     <string name="tax_edit">Edit</string>
+    <string name="tax_Add">Add</string>
+    <string name="tax_Search">Search</string>
+    <string name="tax_SelectTax">Select Tax</string>
+
+    <string name="signature_drawSignature">Draw your signature here</string>
+    <string name="signature_Clear">Clear</string>
+
+    <string name="dialog_EnterPrice">Enter Price</string>
+    <string name="dialog_EnterPriceQuantity">Enter Price and Quantity</string>
+    <string name="dialog_OK">OK</string>
 
 
     <string name="customer_Upload_customer_logo">Upload customer/company logo</string>
@@ -415,6 +428,27 @@
 
 
 
+
+
+    <string name="setting_Setup">Setup</string>
+    <string name="setting_Email">Email</string>
+    <string name="setting_ConfirmEmail">Confirm Email</string>
+    <string name="setting_NeedSomeHelp">Need Some Help?</string>
+    <string name="setting_enter_email">Enter Email</string>
+    <string name="setting_write_message">Write a message...</string>
+    <string name="setting_Submit">Submit</string>
+    <string name="setting_PaymentOptions">Payment Options</string>
+    <string name="setting_Standard">Standard</string>
+    <string name="setting_Business">Business</string>
+    <string name="setting_PaymentOptions">Payment Options</string>
+    <string name="setting_SelectNumberFormat">Select Number Format</string>
+    <string name="setting_Done">Done</string>
+    <string name="service_AddNew">Add New</string>
+    <string name="service_SelectQuantity">Select Quantity</string>
+
+
+
+
     <string name="internet_error">Check your Internet Connection</string>
     <string name="condiotn">Terms &amp; Conditions</string>
     <string name="connection_not_found">You must have a connection to the internet</string>
@@ -480,5 +514,107 @@
 
 
     <string name="createdebit">Create Debit Note</string>
+
+
+
+
+
+
+
+
+
+    <string-array name="faqQuestionArray">
+        <item>How to get started / How does the app function?</item>
+        <item>If data is created from add new functionality directly from creation page, newly created data not display?</item>
+        <item>How to add users?</item>
+        <item>How to add a warehouse?</item>
+        <item>How to track warehouse?</item>
+        <item>How to record opening stock?</item>
+        <item>How to account physical stock taking records?</item>
+        <item>How to move stock between warehouse?</item>
+        <item>How to inventory will be updated automaticallty?</item>
+        <item>How is stock value calculated?</item>
+        <item>How to create an invoice?</item>
+        <item>When should I select warehouse while creating Invoice / Purchase order?</item>
+        <item>When should I create a Product?</item>
+        <item>How to view, duplicate or share an invoice?</item>
+        <item>How will my brand color reflect in templates?</item>
+        <item>If warehouse selected does not have sufficient quantity for invoicing, how can I process the invoices?</item>
+        <item>How to check invoice seen status?</item>
+        <item>How to Mark invoices as paid?</item>
+        <item>How to convert invoice to receipt?</item>
+        <item>How to Mark purchase order as delivery received?</item>
+        <item>How to delete an Invoice / Purchase order?</item>
+        <item>How to Mark an Invoice / Purchase order as void?</item>
+        <item>How to create debit / credit note and their effect?</item>
+        <item>How will estimate status change?</item>
+        <item>Which details are visible on home screen and how to switch companies?</item>
+        <item>How can I set up online payments?</item>
+        <item>How much does it cost to integrate payment gateways?</item>
+        <item>How to change number format?</item>
+        <item>How to share invoice with payment links?</item>
+        <item>How will I know if an invoice has been paid online?</item>
+        <item>When will I receive the money in my bank account?</item>
+        <item>How does SIR handle card payments?</item>
+        <item>How to switch / restore / upgrade subscription?</item>
+        <item>How to change language?</item>
+        <item>Is my data secure?</item>
+        <item>My query is not listed here?</item>
+    </string-array>
+
+
+
+
+    <string-array name="faqAnswerArray">
+        <item>To get started, click on sign up here and create an account. Then log in with your credentials. First, you need to create a company from My companies module. Enter as much details, logo, payment details, etc.; as required to display on Invoices and other documents. Then create products, services, taxes, customers, suppliers from respective modules in the side menu. You can edit any of these details at anytime. This is in accordance with the controlling feature of the app so the users can track any activity / inventory at anytime and have all available data stored within the app for future reference/ reporting. Once above is done, then you can create invoices, estimates, purchase orders, receipts, payment vouchers from respective modules in side menu or tray icons in the bottom of home screen within seconds.</item>
+        <item>If you add new companies, customers, suppliers, products, items and taxes directly from Create Invoice or other pages, then you need to refresh by selecting the company name again on top, while creating invoice or other documents, to display the newly created data.</item>
+        <item>To add new users, go to add new users module from the side menu, then click on add users on the top right, then enter the details and select single / multiple access rights to be granted, then click on add user. The new user added can access the app through the username and password entered while adding user. The new user can reset password from the login screen by clicking on forgot password and following the steps there to.</item>
+        <item>To add a warehouse, go to My companies module from the side menu, then click on the company in which warehouse should be added, then click on add warehouse from top right, then enter the details and click on save and continue.</item>
+        <item>To track quantity in a particular warehouse, go to Stocks module from the side menu, then select the company, then click on any product which will display the quantity available in each warehouse.</item>
+        <item>To record opening stock of items, go to Stocks module then select update stock and record the transaction.</item>
+        <item>To record additional items found during stock taking, go to Stocks module then select update stock and then record the items. To remove missing items during stock taking, go to Stocks module then select wastage / damage and then record the missing items.</item>
+        <item>To move stock between warehouses, go to Stocks module from the main menu then select stock movement and then record the transaction.</item>
+        <item>When an issued purchase order is marked as delivery received, stock items in the purchase order will be automatically added to the inventory stock. When a sales invoice is issued, stock items in the sales invoice will be automatically reduced from the inventory stock.</item>
+        <item>Stock value is calculated as per the product rate entered while creating product in My Products module.</item>
+        <item>To create an Invoice, Go to Invoices Module from the side menu or from the tray icon, then click on create invoice at top right, then select company and enter the relevant details, then preview invoice if required by clicking on more icon next to create invoice, then click on create invoice, your Invoice will be created and can be viewed / shared from summary page of Invoices module.</item>
+        <item>Warehouse should be selected only when product is selected to enable inventory tracking. If you select an item, do not select warehouse.</item>
+        <item>To perform any of the above functions, go to Invoices, then select the company, then go to the specific Invoice and swipe left, then click on more and select your preference.</item>
+        <item>While creating the company, you need to select color as per preference or matching your brand identity. The color selected will be applied to the different templates in Invoices / Estimates. Select any template as per your choice while creating Invoice / Estimate. If no color has been selected, all templates will display the standard format.</item>
+        <item>If warehouse selected does not have sufficient quantity for invoicing, then you will have to first add sufficient quantity to the particular warehouse. Go to Stocks module from the side menu, then you can either add quantity from update stock option or move stock from one warehouse to another from stock movement option, on the top.</item>
+        <item>To perform any of the above functions, go to Invoices, then select the company, then go to the specific Invoice and Swipe left, then click on more and select your preference.</item>
+        <item>Invoice seen status can be checked only if invoice is shared as a link. When the link is opened by the receiver, the status will automatically change from pending to seen in Invoice module Summary. If the invoice is shared only in PDF format, then seen status cannot be determined and will show as pending.</item>
+        <item>To mark invoices as paid, go to Invoices module from side menu, then select company, then go to the invoice from the list which needs to be marked as paid and Swipe left, then click on mark as paid. If an invoice is marked as paid then a receipt should be created to reflect in customer statement of account. Similarly, if a purchase order is paid then a payment voucher should be created to reflect in supplier statement of account.</item>
+        <item>First go to invoices summary, swipe the particular invoice left and Mark as paid. Then swipe the invoice left, under more, click on Convert to Receipt then click create receipt.</item>
+        <item>Mark Purchase order as delivery received to add quantity to inventory. To mark purchase order as delivery received, go to Purchase orders module from the side menu and select the company, then go to the specific purchase order, then swipe left and click on Mark as delivery received.</item>
+        <item>To delete an invoice, you need to create a credit note. To delete a Purchase order, you need to create a debit note. Since items in invoice / purchase order are linked to inventory they cannot be deleted directly. Alternatively, you can mark the particular Invoice / Purchase order as void, then it will not display in the relevant reports. If you are tracking products inventory, then after marking void, you need to go to Stocks module and add / delete the quantity in void Invoice / Purchase order through update stocks or wastage option.\n</item>
+        <item>To mark as void, go to particular invoice / purchase order, swipe left then select Mark as Void.</item>
+        <item>To create a debit note, go to debit notes from the side menu, then click on create debit notes on top right, then record the transaction and click on create debit note on the bottom. Quantity entered in the debit note will be reduced from the Stock inventory balance. To create a Credit note, go to credit notes from the side menu, then click on create credit notes on top right, then record the transaction and click on create credit note on the bottom. Quantity entered in the credit note will be added back to the Stock inventory balance.\n</item>
+        <item>If a created estimate is converted to invoice, status changes from pending to completed. To convert an estimate to invoice, go to estimates summary, swipe the particular estimate right then click on more then select Convert to Invoice and then click on create invoice.</item>
+        <item>Details of the first company created by the user will display on home screen by default. To switch companies, click on the star icon on top right on home screen then select the required company. The company selected shall display on home screen as and when required.</item>
+        <item>It takes a few minutes to set up with Stripe or PayPal. Simply enable online payments in your app and follow the instructions.</item>
+        <item>There is no upfront or monthly fee. There is a charge per transaction, which varies by country. To check the charges in your country, please visit &lt;a href="https://www.stripe.com/us/pricing"&gt;Stripe pricing &lt;/a&gt; or &lt;a href="https://www.paypal.com/us/webapps/mpp/merchant-fees"&gt;https://www.paypal.com/us/webapps/mpp/merchant-fees&lt;/a&gt;</item>
+        <item>To change comma format in numbers, go to settings then click on comma format selection then select your preference. Format selected will be applicable throughout the user account.</item>
+        <item>To share an invoice with payment links, first you need to set up online payment gateways from settings. Then, while creating invoice, select the respective payment gateway you wish to get paid through. You can select both options as well. Then share invoice as link only. The payment links will be automatically displayed in the email.</item>
+        <item>If an invoice has been paid through the shared payment links, then particular invoice will display "Paid" in Invoices summary. Alternatively, you will be notified by the respective payment gateway platform.</item>
+        <item>Your first payment will take 7 business days and all subsequent payments will take between 2-7 business days to reach your account. You can check the estimated arrival date of your payment using your Stripe / PayPal dashboard.</item>
+        <item>SIR handles card payments through Stripe, a market leader in processing payments. Setting up with Stripe is easy and there are No set up costs. You only pay per transaction. For more details, visit the &lt;a href="https://www.stripe.com/us/pricing" &gt;Stripe pricing &lt;/a&gt; page. On Stripe dashboard you can have complete visibility of all your transactions including card payments, pending payments and fees.</item>
+        <item>To switch / restore / upgrade a subscription, go to Settings then click on Subscription and select your preference accordingly. Terms and conditions apply.</item>
+        <item>To switch language, go to settings then click on language and select your preference.</item>
+        <item>All your data is totally safe and secure on our Cloud based server.</item>
+        <item>If your query is not listed here, contact us via support feature in settings and we shall get back to you as soon as possible.</item>
+    </string-array>
+
+
+
+    <string-array name="languageArray">
+        <item>English</item>
+        <item>Arabic</item>
+        <item>German</item>
+        <item>Dutch</item>
+        <item>French</item>
+        <item>Italian</item>
+        <item>Spanish</item>
+        <item>Portuguese</item>
+    </string-array>
 
 </resources>

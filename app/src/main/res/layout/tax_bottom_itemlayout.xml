@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:padding="5dp"
-        android:text="Add New"
+        android:text="@string/tax_Add"
         android:textColor="@color/dark_blue"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -55,7 +55,7 @@
         android:layout_marginTop="5dp"
         android:checked="false"
 
-        android:text="Inclusive"
+        android:text="@string/tax_Inclusive"
         android:textColor="@color/dark_blue" />
 
     <Button
@@ -65,7 +65,7 @@
         android:layout_below="@id/taxswitch"
         android:layout_margin="20dp"
         android:background="@drawable/buttonshape"
-        android:text="Done"
+        android:text="@string/done"
         android:textAllCaps="false"
         android:textColor="@color/white" />
 

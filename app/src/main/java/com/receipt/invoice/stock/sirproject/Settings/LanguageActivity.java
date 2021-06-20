@@ -39,7 +39,7 @@ public class LanguageActivity extends BaseActivity implements LanguageCallback{
 
     LanguageAdapter invoicelistAdapterdt;
 
-    ArrayList<String> arrayListNames = new ArrayList<>();
+//    ArrayList<String> arrayListNames = new ArrayList<>();
 
     int languagePostion = 0;
 
@@ -113,19 +113,21 @@ public class LanguageActivity extends BaseActivity implements LanguageCallback{
 
         recycler_invoices = findViewById(R.id.recycler_invoices);
 
-        arrayListNames.add("English");
-        arrayListNames.add("Arabic");
-        arrayListNames.add("German");
-        arrayListNames.add("Dutch");
-        arrayListNames.add("French");
-        arrayListNames.add("Italian");
-        arrayListNames.add("Spanish");
-        arrayListNames.add("Portuguese");
+        String[] languageArray = getResources().getStringArray(R.array.languageArray);
+
+//        arrayListNames.add("English");
+//        arrayListNames.add("Arabic");
+//        arrayListNames.add("German");
+//        arrayListNames.add("Dutch");
+//        arrayListNames.add("French");
+//        arrayListNames.add("Italian");
+//        arrayListNames.add("Spanish");
+//        arrayListNames.add("Portuguese");
 
 
 
 
-        invoicelistAdapterdt = new LanguageAdapter(LanguageActivity.this, arrayListNames, LanguageActivity.this);
+        invoicelistAdapterdt = new LanguageAdapter(LanguageActivity.this, languageArray, LanguageActivity.this);
         recycler_invoices.setAdapter(invoicelistAdapterdt);
         invoicelistAdapterdt.updateLanguagePosition(languagePostion);
         recycler_invoices.setLayoutManager(new LinearLayoutManager(LanguageActivity.this, LinearLayoutManager.VERTICAL, false));
