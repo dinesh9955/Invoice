@@ -207,8 +207,12 @@
 
 
     <string name="item_SearchProducts">Search Products</string>
+    <string name="item_Other">Other</string>
+    <string name="item_MeasurementUnitDots">Measurement Unit:</string>
+    <string name="item_TaxableNo">Taxable: No</string>
+    <string name="item_TaxableYes">Taxable: Yes</string>
 
-
+    <string name="item_NoWarehouseFound">No Warehouse Found</string>
 
     <string name="tax_Select_Company">Select Company</string>
     <string name="tax_Tax_Name">Tax Name</string>
@@ -625,9 +629,18 @@
     <string name="debit_note_msg">Debit Note created successfully</string>
     <string name="estimate_msg">Estimate created successfully</string>
     <string name="invoice_msg">Invoice created successfully</string>
-    <string name="po_msg">Purchase Order created successfully</string>
-    <string name="pv_msg">Payment Voucher created successfully</string>
+    <string name="po_msg">PO created successfully</string>
+    <string name="duplicate_po_msg">Duplicate PO created successfully</string>
+    <string name="pv_msg">PV created successfully</string>
     <string name="receipt_msg">Receipt created successfully</string>
+    <string name="duplicate_estimate_msg">Duplicate Estimate created successfully</string>
+    <string name="estimate_updated_msg">Estimate updated successfully</string>
+    <string name="invoice_duplicate_msg">Duplicate Invoice created successfully</string>
+    <string name="receipt_duplicate_msg">Duplicate Receipt created successfully</string>
+    <string name="receipt_updated_msg">Receipt updated successfully</string>
+    <string name="pv_updated_msg">PV updated successfully</string>
+
+
 
     <string name="logged_in_msg">Logged in successfully!</string>
 
@@ -646,7 +659,8 @@
 
 
 
-
+    <string name="dialog_TaxNotFound">Tax Not Found</string>
+    <string name="dialog_PerUnit">Per Unit</string>
     <string name="dialog_Please_select_currency">Please select currency</string>
     <string name="dialog_CompanyCreatedSuccessfully">Company created successfully</string>
     <string name="dialog_Required">Required</string>
@@ -676,6 +690,8 @@
     <string name="dialog_Measurement_Unit_required">Measurement Unit is required</string>
     <string name="dialog_Company_required">Company is required</string>
     <string name="dialog_Item_category_required">Item category is required</string>
+    <string name="dialog_Product_category_required">Product category is required</string>
+    <string name="dialog_ProductAdded">Product Added</string>
     <string name="dialog_ProductNotFound">Product Not Found</string>
     <string name="dialog_Password_not_matched">Password not matched</string>
     <string name="dialog_reset_your_password_sucessfully">You have reset your password sucessfully.</string>
@@ -688,6 +704,12 @@
     <string name="dialog_PleaseEnterCity">Please Enter City</string>
     <string name="dialog_SPleaseEnterPostcode">Please Enter Postcode</string>
     <string name="dialog_PleaseEnterCountry">Please Enter Country</string>
+
+    <string name="dialog_PleaseEnterIBAN">Please Enter IBAN</string>
+    <string name="dialog_PleaseEnterBankName">Please Enter Bank Name</string>
+    <string name="dialog_PleaseEnterSwiftBIC">Please Enter Swift BIC</string>
+    <string name="dialog_Companyupdated">Company updated</string>
+
 
 
 

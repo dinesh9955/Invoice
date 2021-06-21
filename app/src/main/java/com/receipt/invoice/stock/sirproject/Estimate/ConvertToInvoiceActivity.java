@@ -1759,7 +1759,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(ConvertToInvoiceActivity.this, "Invoice created successfully");
+                            Constant.SuccessToast(ConvertToInvoiceActivity.this, getString(R.string.invoice_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

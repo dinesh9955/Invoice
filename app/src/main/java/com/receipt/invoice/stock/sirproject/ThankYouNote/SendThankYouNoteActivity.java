@@ -525,7 +525,7 @@ public class SendThankYouNoteActivity extends BaseActivity {
         try {
             for (int i = 0; i < productsItemDtos.size(); i++) {
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                //DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                 double productQuantity= Double.parseDouble(productsItemDtos.get(i).getQuantity());
                 double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
                 double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());

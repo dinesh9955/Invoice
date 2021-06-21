@@ -1634,7 +1634,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(EditEstimateActivity.this, "Duplicate Estimate created successfully");
+                            Constant.SuccessToast(EditEstimateActivity.this, getString(R.string.duplicate_estimate_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

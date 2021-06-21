@@ -144,7 +144,7 @@ public class Product_Detail_Activity extends BaseActivity {
                             //double stratingvalue = Double.parseDouble(invoiceModelArrayList.get(position).getTotal());
                             int numberPostion = pref.getNumberFormatPosition();
                             String stringFormatproductcurrency = Utility.getPatternFormat(""+numberPostion, vc);
-                            price.setText(stringFormatproductcurrency +" "+currency_code+" / Per Unit");
+                            price.setText(stringFormatproductcurrency +" "+currency_code+" / "+getString(R.string.dialog_PerUnit));
                         }
 
                         if (p_category.equals("") || p_category.equals("null")) {
@@ -165,10 +165,10 @@ public class Product_Detail_Activity extends BaseActivity {
                         if (measurement_unit.equals("") || measurement_unit.equals("null")) {
                             measurement.setText("");
                         } else {
-                            if(measurement_unit.equals("Other")) {
-                                measurement.setText("Measurement Unit: " + otherproductmeasrement);
+                            if(measurement_unit.equals(getString(R.string.item_Other))) {
+                                measurement.setText(getString(R.string.item_MeasurementUnitDots)+" " + otherproductmeasrement);
                             }else {
-                                measurement.setText("Measurement Unit: " + measurement_unit);
+                                measurement.setText(getString(R.string.item_MeasurementUnitDots)+" " + measurement_unit);
                             }
                         }
 
@@ -177,9 +177,9 @@ public class Product_Detail_Activity extends BaseActivity {
                             taxable.setText("");
                         }
                         else if (is_taxable.equals("0")) {
-                            taxable.setText("Taxable: No");
+                            taxable.setText(getString(R.string.item_TaxableNo));
                         } else if (is_taxable.equals("1")) {
-                            taxable.setText("Taxable: Yes");
+                            taxable.setText(getString(R.string.item_TaxableYes));
                         }
 
                         RequestOptions options = new RequestOptions();
@@ -229,7 +229,7 @@ public class Product_Detail_Activity extends BaseActivity {
 
                 }
                 else {
-                    Constant.ErrorToast(Product_Detail_Activity.this,"Something went wrong, try again!");
+                   // Constant.ErrorToast(Product_Detail_Activity.this,"Something went wrong, try again!");
                 }
 
 

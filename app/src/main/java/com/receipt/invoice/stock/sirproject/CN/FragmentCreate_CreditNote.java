@@ -1127,7 +1127,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                             params2.putString("event_name", "Credit Notes");
                             firebaseAnalytics.logEvent("creditnotes_create", params2);
 
-                            Constant.SuccessToast(getActivity(), "Credit Note created successfully");
+                            Constant.SuccessToast(getActivity(), getString(R.string.credit_note_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

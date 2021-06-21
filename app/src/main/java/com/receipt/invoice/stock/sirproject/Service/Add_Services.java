@@ -174,7 +174,7 @@ public class Add_Services extends BaseFragment {
 
                 String mesasurmentunitchck= itemAtPosition;
 
-                if( mesasurmentunitchck.equals("Other"))
+                if( mesasurmentunitchck.equals(getString(R.string.item_Other)))
                 {
                     mesurementunitedittxt.setVisibility(View.VISIBLE);
                     selectedMeasuremetnId = measurementIds.get(position);

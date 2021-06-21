@@ -71,7 +71,7 @@ public class Service_Detail_Activity extends BaseActivity {
             }
             else
             {
-                measurement.setText("Measurement Unit: " +measurement_unit);
+                measurement.setText(getString(R.string.item_MeasurementUnitDots)+" " +measurement_unit);
             }
 
 
@@ -115,11 +115,11 @@ public class Service_Detail_Activity extends BaseActivity {
             }
             else if (service_taxable.equals("0"))
             {
-                servicetaxable.setText("Taxable: No");
+                servicetaxable.setText(getString(R.string.item_TaxableNo));
             }
             else if (service_taxable.equals("1"))
             {
-                servicetaxable.setText("Taxable: Yes");
+                servicetaxable.setText(getString(R.string.item_TaxableYes));
             }
 
 

@@ -1217,7 +1217,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                             params2.putString("event_name", "Receipts");
                             firebaseAnalytics.logEvent("receipt_create", params2);
 
-                            Constant.SuccessToast(getActivity(), "Receipt created successfully");
+                            Constant.SuccessToast(getActivity(), getString(R.string.receipt_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

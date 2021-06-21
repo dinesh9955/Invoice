@@ -1641,7 +1641,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(ConvertToReceiptsActivity.this, "Receipt created successfully");
+                            Constant.SuccessToast(ConvertToReceiptsActivity.this, getString(R.string.receipt_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

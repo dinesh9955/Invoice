@@ -1786,7 +1786,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(EditPOActivity.this, "Duplicate PO created successfully");
+                            Constant.SuccessToast(EditPOActivity.this, getString(R.string.duplicate_po_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

@@ -1532,7 +1532,7 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(EditReceiptActivity.this, "Duplicate Receipt created successfully");
+                            Constant.SuccessToast(EditReceiptActivity.this, getString(R.string.receipt_duplicate_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

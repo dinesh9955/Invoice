@@ -174,7 +174,7 @@ public class Warehouse_Listing_Fragment extends BaseFragment {
                             }
                         }
                         else {
-                            Constant.ErrorToast(getActivity(),jsonObject.getString("Tax Not Found"));
+                            Constant.ErrorToast(getActivity(), getString(R.string.dialog_TaxNotFound));
                         }
                     }
 
@@ -205,7 +205,7 @@ public class Warehouse_Listing_Fragment extends BaseFragment {
 
                 }
                 else {
-                    Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
+                   // Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                 }
 
             }

@@ -78,7 +78,7 @@ public class Add_Warehouse_Fragment extends BaseFragment {
         edwarehouseaddress = v.findViewById(R.id.edwarehouseaddress);
         add = v.findViewById(R.id.add);
 
-        SpannableString content = new SpannableString("ADD WAREHOUSE");
+        SpannableString content = new SpannableString(getString(R.string.company_AddWarehouseCap));
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         addwarehouse.setText(content);
     }
@@ -110,11 +110,11 @@ public class Add_Warehouse_Fragment extends BaseFragment {
     public void warehouseadd()
     {
         if (TextUtils.isEmpty(edwarehousename.getText())) {
-            edwarehousename.setError("Field is required");
+            edwarehousename.setError(getString(R.string.dialog_Fieldisrequired));
             edwarehousename.requestFocus();
         }
         else if (TextUtils.isEmpty(edwarehouseaddress.getText())) {
-            edwarehouseaddress.setError("Field is required");
+            edwarehouseaddress.setError(getString(R.string.dialog_Fieldisrequired));
             edwarehouseaddress.requestFocus();
         }
 

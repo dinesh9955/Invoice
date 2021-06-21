@@ -1193,7 +1193,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                             params2.putString("event_name", "Debit Notes");
                             firebaseAnalytics.logEvent("debitnotes_crreate", params2);
 
-                            Constant.SuccessToast(getActivity(), "Debit Note created successfully");
+                            Constant.SuccessToast(getActivity(), getString(R.string.debit_note_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

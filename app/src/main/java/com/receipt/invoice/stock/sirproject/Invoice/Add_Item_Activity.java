@@ -184,7 +184,7 @@ public class Add_Item_Activity extends BaseActivity {
                             }
                         }
                         else {
-                            Constant.ErrorToast(Add_Item_Activity.this,jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(Add_Item_Activity.this, getString(R.string.dialog_ProductNotFound));
                         }
                     }
 

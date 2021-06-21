@@ -1555,7 +1555,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                         JSONObject jsonObject = new JSONObject(response);
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
-                            Constant.SuccessToast(EditEditReceiptActivity.this, "Receipt updated successfully");
+                            Constant.SuccessToast(EditEditReceiptActivity.this, getString(R.string.receipt_updated_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

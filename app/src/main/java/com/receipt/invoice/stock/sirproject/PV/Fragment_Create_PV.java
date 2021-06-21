@@ -1234,7 +1234,7 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
                             firebaseAnalytics.logEvent("paymentVoucher_create", params2);
 
 
-                            Constant.SuccessToast(getActivity(), "PV created successfully");
+                            Constant.SuccessToast(getActivity(), getString(R.string.pv_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

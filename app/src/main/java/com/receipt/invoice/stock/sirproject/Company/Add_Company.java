@@ -747,13 +747,13 @@ public class Add_Company extends BaseFragment {
             Log.e(TAG, "AAAAAAAAAAA");
         }else{
             if (iban.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter IBAN");
+                Constant.ErrorToast(getActivity(), getString(R.string.dialog_PleaseEnterIBAN));
                 isEntered = false;
             }else if(bank.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter Bank Name");
+                Constant.ErrorToast(getActivity(), getString(R.string.dialog_PleaseEnterBankName));
                 isEntered = false;
             }else if(swift.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter Swift BIC");
+                Constant.ErrorToast(getActivity(), getString(R.string.dialog_PleaseEnterSwiftBIC));
                 isEntered = false;
             }else{
                 isEntered = true;

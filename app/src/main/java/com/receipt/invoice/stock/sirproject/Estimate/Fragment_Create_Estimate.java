@@ -1243,7 +1243,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                             params2.putString("event_name", "Estimates");
                             firebaseAnalytics.logEvent("estimate_create", params2);
 
-                            Constant.SuccessToast(getActivity(), "Estimate created successfully");
+                            Constant.SuccessToast(getActivity(), getString(R.string.estimate_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

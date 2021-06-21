@@ -653,21 +653,21 @@ public class User_Detail_Activity extends BaseActivity {
 */
     }
     private void SelectImage() {
-        final CharSequence[] items={"Camera","Gallery", "Cancel"};
+        final CharSequence[] items={getString(R.string.dialog_Camera), getString(R.string.dialog_Gallery), getString(R.string.dialog_Cancel)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Add Image");
+        builder.setTitle(getString(R.string.dialog_AddImage));
 
         builder.setItems(items, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (items[i].equals("Camera")) {
+                if (items[i].equals(getString(R.string.dialog_Camera))) {
                     requestStoragePermission(true);
-                } else if (items[i].equals("Gallery")) {
+                } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
 
                     requestStoragePermission(false);
-                } else if (items[i].equals("Cancel")) {
+                } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
                     dialogInterface.dismiss();
                 }
             }

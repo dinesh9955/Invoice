@@ -1670,7 +1670,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(EditEditPVActivity.this, "PV updated successfully");
+                            Constant.SuccessToast(EditEditPVActivity.this, getString(R.string.pv_updated_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

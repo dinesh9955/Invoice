@@ -369,21 +369,21 @@ public class Company_Details_Fragment extends BaseFragment {
 
     private void SelectImage() {
 
-        final CharSequence[] items={"Camera","Gallery", "Cancel"};
+        final CharSequence[] items={getString(R.string.dialog_Camera), getString(R.string.dialog_Gallery), getString(R.string.dialog_Cancel)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add Image");
+        builder.setTitle(getString(R.string.dialog_AddImage));
 
         builder.setItems(items, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (items[i].equals("Camera")) {
+                if (items[i].equals(getString(R.string.dialog_Camera))) {
 
                     // Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     //  startActivityForResult(intent, REQUEST_CAMERA);
                     requestStoragePermission(true);
-                } else if (items[i].equals("Gallery")) {
+                } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
 
                     requestStoragePermission(false);
 
@@ -391,7 +391,7 @@ public class Company_Details_Fragment extends BaseFragment {
 //                    intent.setType("image/*");
 //                    startActivityForResult(intent, SELECT_FILE);
 
-                } else if (items[i].equals("Cancel")) {
+                } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
                     dialogInterface.dismiss();
                 }
             }
@@ -618,11 +618,11 @@ public class Company_Details_Fragment extends BaseFragment {
 
 
         if (TextUtils.isEmpty(name.getText())) {
-            name.setError("Field is required");
+            name.setError(getString(R.string.dialog_Fieldisrequired));
             name.requestFocus();
         } else if (currencyid.equals(""))
         {
-            Constant.ErrorToast(getActivity(),"Please select currency");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Please_select_currency));
         }else{
 
             boolean isEnter = isEnter();
@@ -693,7 +693,7 @@ public class Company_Details_Fragment extends BaseFragment {
                         String status = jsonObject.getString("status");
                         if (status.equals("true"))
                         {
-                            Constant.SuccessToast(getActivity(),"Company updated");
+                            Constant.SuccessToast(getActivity(),getString(R.string.dialog_Companyupdated));
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -742,7 +742,7 @@ public class Company_Details_Fragment extends BaseFragment {
                         }
                     }
                     else {
-                        Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
+                       // Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                     }
 
 
@@ -776,13 +776,13 @@ public class Company_Details_Fragment extends BaseFragment {
             Log.e(TAG, "AAAAAAAAAAA");
         }else{
             if (iban.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter IBAN");
+                Constant.ErrorToast(getActivity(),getString(R.string.dialog_PleaseEnterIBAN));
                 isEntered = false;
             }else if(bank.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter Bank Name");
+                Constant.ErrorToast(getActivity(),getString(R.string.dialog_PleaseEnterBankName));
                 isEntered = false;
             }else if(swift.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter Swift BIC");
+                Constant.ErrorToast(getActivity(),getString(R.string.dialog_PleaseEnterSwiftBIC));
                 isEntered = false;
             }else{
                 isEntered = true;

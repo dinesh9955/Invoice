@@ -1423,7 +1423,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             params2.putString("event_name", "Invoice");
                             firebaseAnalytics.logEvent("invoice_create", params2);
 
-                            Constant.SuccessToast(getActivity(), "Invoice created successfully");
+                            Constant.SuccessToast(getActivity(), getString(R.string.invoice_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

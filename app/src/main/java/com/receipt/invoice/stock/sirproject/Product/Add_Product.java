@@ -235,7 +235,7 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
 
                 String mesasurmentunitchck= itemAtPosition;
 
-                if( mesasurmentunitchck.equals("Other"))
+                if( mesasurmentunitchck.equals(getString(R.string.item_Other)))
                 {
                     mesurementunitedittxt.setVisibility(View.VISIBLE);
                     selectedMeasuremetnId = measurementIds.get(position);
@@ -289,21 +289,21 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
     }
 
     private void SelectImage() {
-        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
+        final CharSequence[] items={getString(R.string.dialog_Camera),getString(R.string.dialog_Gallery),getString(R.string.dialog_Cancel)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add Image");
+        builder.setTitle(getString(R.string.dialog_AddImage));
 
         builder.setItems(items, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (items[i].equals("Camera")) {
+                if (items[i].equals(getString(R.string.dialog_Camera))) {
                     requestStoragePermission(true);
-                } else if (items[i].equals("Gallery")) {
+                } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
 
                     requestStoragePermission(false);
-                } else if (items[i].equals("Cancel")) {
+                } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
                     dialogInterface.dismiss();
                 }
             }
@@ -646,19 +646,19 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
         otherunitstr=mesurementunitedittxt.getText().toString();
         Log.e("selectedMeasuremetnId", selectedMeasuremetnId);
         if (pname.isEmpty()) {
-            productname.setError("Required");
+            productprice.setError(getString(R.string.dialog_Required));
             productname.requestFocus();
         } else if (price.isEmpty()) {
-            productprice.setError("Required");
+            productprice.setError(getString(R.string.dialog_Required));
             productprice.requestFocus();
         }  else if (selectedMeasuremetnId.equals("")) {
-            Constant.ErrorToast(getActivity(), "Measurement unit is required");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Measurement_Unit_required));
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(getActivity(), "Company is required");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Company_required));
 //        } else if (selectedTaxable.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Tax information is required");
         } else if (selectedCategoryId.equals("") && othercat.isEmpty()) {
-            Constant.ErrorToast(getActivity(), "Product category is required");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Product_category_required));
         } else {
 
 
@@ -748,7 +748,7 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                                 params2.putString("event_name", "My Products");
                                 firebaseAnalytics.logEvent("product_addnew", params2);
 
-                                Constant.SuccessToast(getActivity(), "Product Added");
+                                Constant.SuccessToast(getActivity(), getString(R.string.dialog_ProductAdded));
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -848,7 +848,7 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
         mybuilder.dismiss();
 
         if(wherehousenamstrSelect.equalsIgnoreCase("")){
-            selectwarehouse.setText("Select Warehouse (s)");
+            selectwarehouse.setText( getString(R.string.product_Select_Warehouse));
         }else {
             selectwarehouse.setText(warehouseList);
         }

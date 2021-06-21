@@ -1601,7 +1601,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(ConvertToPVActivity.this, "PV created successfully");
+                            Constant.SuccessToast(ConvertToPVActivity.this, getString(R.string.pv_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

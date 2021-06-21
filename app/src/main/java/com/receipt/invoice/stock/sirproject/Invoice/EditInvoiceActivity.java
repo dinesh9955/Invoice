@@ -1822,7 +1822,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(EditInvoiceActivity.this, "Duplicate Invoice created successfully");
+                            Constant.SuccessToast(EditInvoiceActivity.this, getString(R.string.invoice_duplicate_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

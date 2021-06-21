@@ -1623,7 +1623,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                         String status = jsonObject.getString("status");
                         if (status.equals("true")) {
 
-                            Constant.SuccessToast(EditEditEstimateActivity.this, "Estimate updated successfully");
+                            Constant.SuccessToast(EditEditEstimateActivity.this, getString(R.string.estimate_updated_msg));
 
 
                             new Handler().postDelayed(new Runnable() {

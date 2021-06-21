@@ -191,7 +191,7 @@ public class Stock_Products_Detail extends BaseActivity {
 
                         }
                         else {
-                            Constant.ErrorToast(Stock_Products_Detail.this,"No Warehouse Found");
+                            Constant.ErrorToast(Stock_Products_Detail.this, getString(R.string.item_NoWarehouseFound));
                         }
                     }
 
@@ -228,7 +228,7 @@ public class Stock_Products_Detail extends BaseActivity {
 
                 }
                 else {
-                    Constant.ErrorToast(Stock_Products_Detail.this,"Something went wrong, try again!");
+                   // Constant.ErrorToast(Stock_Products_Detail.this,"Something went wrong, try again!");
                 }
 
 

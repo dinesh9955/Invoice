@@ -1301,7 +1301,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                             params2.putString("event_name", "Purchase Orders");
                             firebaseAnalytics.logEvent("purchaseorder_create", params2);
 
-                            Constant.SuccessToast(getActivity(), "PO created successfully");
+                            Constant.SuccessToast(getActivity(), getString(R.string.po_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override
