@@ -1292,6 +1292,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1385,6 +1386,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1543,6 +1545,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "invoice/updateStatus", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1624,6 +1627,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "purchaseorder/delete", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1695,6 +1699,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "purchaseorder/updateStatus", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1768,6 +1773,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "purchaseorder/updateVoidStatus", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2384,7 +2390,9 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

@@ -66,19 +66,19 @@ public class SettingsActivity extends BaseActivity {
         arrayListIcons.add(R.drawable.support_st);
 
 
-        arrayListNames.add("Comma Format Selection");
-        arrayListNames.add("Online Payment Gateway");
-        arrayListNames.add("Subscribe");
-        arrayListNames.add("Upgrade");
-        arrayListNames.add("Restore Purchases");
-        arrayListNames.add("Invite Friends");
-        arrayListNames.add("FAQs");
-        arrayListNames.add("Language");
-        arrayListNames.add("About the app");
-        arrayListNames.add("Rate the app");
-        arrayListNames.add("Terms of use");
-        arrayListNames.add("Privacy Policy");
-        arrayListNames.add("Support");
+        arrayListNames.add(getString(R.string.setting_CommaFormatSelection));
+        arrayListNames.add(getString(R.string.setting_OnlinePaymentGateway));
+        arrayListNames.add(getString(R.string.setting_Subscribe));
+        arrayListNames.add(getString(R.string.setting_Upgrade));
+        arrayListNames.add(getString(R.string.setting_RestorePurchases));
+        arrayListNames.add(getString(R.string.setting_InviteFriends));
+        arrayListNames.add(getString(R.string.setting_FAQs));
+        arrayListNames.add(getString(R.string.setting_Language));
+        arrayListNames.add(getString(R.string.setting_Abouttheapp));
+        arrayListNames.add(getString(R.string.setting_Ratetheapp));
+        arrayListNames.add(getString(R.string.setting_Termsofuse));
+        arrayListNames.add(getString(R.string.setting_PrivacyPolicy));
+        arrayListNames.add(getString(R.string.setting_Support));
 
 
         invoicelistAdapterdt = new SettingsAdapter(SettingsActivity.this, arrayListIcons, arrayListNames);

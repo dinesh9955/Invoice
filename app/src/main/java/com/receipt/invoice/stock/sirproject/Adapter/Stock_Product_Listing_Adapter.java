@@ -83,7 +83,7 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
         //quantity
         if (quantity.equals("") || quantity.equals("null"))
         {
-            viewHolderForCat.productquantity.setText("Quantity: ");
+            viewHolderForCat.productquantity.setText(mcontext.getString(R.string.invoice_Quantity)+"");
         }
         else
         {
@@ -98,13 +98,13 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
             String stringFormat = Utility.getPatternFormat(""+numberPostion, vz);
 
            // grosstotal.setText(formatter.format(stratingvalue) +cruncycode);
-            viewHolderForCat.productquantity.setText("Quantity: "+stringFormat);
+            viewHolderForCat.productquantity.setText(mcontext.getString(R.string.invoice_Quantity)+" "+stringFormat);
         }
 
         //value
         if (value.equals("") || value.equals("null"))
         {
-            viewHolderForCat.productvalue.setText("Value:");
+            viewHolderForCat.productvalue.setText(mcontext.getString(R.string.invoice_Value)+"");
         }
         else
         {
@@ -119,10 +119,10 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
             String stringFormat = Utility.getPatternFormat(""+numberPostion, vz);
 
             if (currency_symbol.equals("") || currency_symbol.equals("null")){
-                viewHolderForCat.productvalue.setText("Value: "+stringFormat+" "+product_list.getCurrency_code());
+                viewHolderForCat.productvalue.setText(mcontext.getString(R.string.invoice_Value)+" "+stringFormat+" "+product_list.getCurrency_code());
             }
             else {
-                viewHolderForCat.productvalue.setText("Value: "+stringFormat+" "+currency_symbol);
+                viewHolderForCat.productvalue.setText(mcontext.getString(R.string.invoice_Value)+" "+stringFormat+" "+currency_symbol);
             }
         }
 
@@ -132,8 +132,8 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
 
         if (quantity.equals("") || quantity.equals("null"))
         {
-            viewHolderForCat.productquantity.setText("Quantity: ");
-            viewHolderForCat.statusvalue.setText("Reorder");
+            viewHolderForCat.productquantity.setText(mcontext.getString(R.string.invoice_Quantity)+" ");
+            viewHolderForCat.statusvalue.setText(mcontext.getString(R.string.invoice_Reorder)+"");
             viewHolderForCat.statusvalue.setTextColor(mcontext.getResources().getColor(R.color.green));
 
         }
@@ -141,14 +141,14 @@ public class Stock_Product_Listing_Adapter extends RecyclerView.Adapter<Stock_Pr
         {
             if (Integer.parseInt(quantity) > Integer.parseInt(mninimum)){
 
-                viewHolderForCat.statusvalue.setText("In Stock");
+                viewHolderForCat.statusvalue.setText(mcontext.getString(R.string.invoice_InStock)+"");
                 viewHolderForCat.statusvalue.setTextColor(mcontext.getResources().getColor(R.color.green));
 
             }
             else{
 
 
-                viewHolderForCat.statusvalue.setText("Reorder");
+                viewHolderForCat.statusvalue.setText(mcontext.getString(R.string.invoice_Reorder)+"");
                 viewHolderForCat.statusvalue.setTextColor(mcontext.getResources().getColor(R.color.red));
 
 

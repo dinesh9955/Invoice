@@ -1170,6 +1170,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "debitnote/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2590,7 +2591,9 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -2659,6 +2662,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2731,6 +2735,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2839,6 +2844,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3021,6 +3027,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @SuppressLint("LongLogTag")
             @Override
@@ -3218,6 +3225,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

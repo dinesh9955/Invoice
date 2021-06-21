@@ -135,7 +135,9 @@ public class Add_Tax extends BaseFragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -194,15 +196,15 @@ public class Add_Tax extends BaseFragment {
         String rate=taxpercent.getText().toString();
         String amount=taxamounttxt.getText().toString();
         if (name.isEmpty()){
-            taxname.setError("Required");
+            taxname.setError(getString(R.string.dialog_Required));
             taxname.requestFocus();
         }
         else if (rate.isEmpty() && amount.isEmpty()){
-            taxpercent.setError("Required");
+            taxpercent.setError(getString(R.string.dialog_Required));
             taxpercent.requestFocus();
         }
         else if (selectedCompanyId.equals("")){
-            Constant.ErrorToast(getActivity(),"Select Company");
+            Constant.ErrorToast(getActivity(),getString(R.string.select_company));
 
         }
         else{
@@ -228,6 +230,7 @@ public class Add_Tax extends BaseFragment {
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "tax/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -250,7 +253,7 @@ public class Add_Tax extends BaseFragment {
                             params2.putString("event_name", "Add Taxes");
                             firebaseAnalytics.logEvent("taxes_addnew", params2);
 
-                            Constant.SuccessToast(getActivity(),"Tax Added");
+                            Constant.SuccessToast(getActivity(), getString(R.string.dialog_TaxAdded));
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {

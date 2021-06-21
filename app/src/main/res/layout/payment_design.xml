@@ -17,7 +17,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PAYMENT GATEWAYS"
+            android:text="@string/service_PAYMENTGATEWAYS"
             android:textAllCaps="true"
             android:layout_centerVertical="true"
             android:textStyle="bold"
@@ -64,7 +64,7 @@
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Standard"
+                android:text="@string/setting_Standard"
                 android:id="@+id/radioButton"
                 android:checked="false"
                 android:textSize="@dimen/_13sdp"
@@ -74,7 +74,7 @@
             <RadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Business"
+                android:text="@string/setting_Business"
                 android:id="@+id/radioButton2"
                 android:checked="false"
                 android:textSize="@dimen/_13sdp"

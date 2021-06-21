@@ -126,7 +126,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
     private void getinvoicedata() {
 
         String token = Constant.GetSharedPreferences(DebitNotesViewActivityWebView.this, Constant.ACCESS_TOKEN);
-        Call<DebitNoteResponseDto> resposresult = apiInterface.getDebitNoteDetail(token, invoiceId);
+        Call<DebitNoteResponseDto> resposresult = apiInterface.getDebitNoteDetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<DebitNoteResponseDto>() {
             @SuppressLint("LongLogTag")
             @Override

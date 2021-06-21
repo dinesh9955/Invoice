@@ -691,6 +691,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
                 client.addHeader("Access-Token",token);
+                params.add("language", ""+getLanguage());
                 client.post(AllSirApi.BASE_URL + "customer/update", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -822,6 +823,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
                 client.addHeader("Access-Token",token);
+                params.add("language", ""+getLanguage());
                 client.post(AllSirApi.BASE_URL + "customer/add", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

@@ -52,7 +52,7 @@ public class Stock_Products_Details_Adapter extends RecyclerView.Adapter<Stock_P
         }
 
         if (stock_products.getTotal_quantity().equals("") || stock_products.getTotal_quantity().equals("null")){
-            viewHolderForCat.stock.setText("Quantity: ");
+            viewHolderForCat.stock.setText(mcontext.getString(R.string.invoice_Quantity)+" ");
 
         }
         else {
@@ -63,7 +63,7 @@ public class Stock_Products_Details_Adapter extends RecyclerView.Adapter<Stock_P
             int numberPostion = pref.getNumberFormatPosition();
 
             String stringFormat = Utility.getPatternFormat(""+numberPostion, vz);
-            viewHolderForCat.stock.setText("Quantity: "+stringFormat);
+            viewHolderForCat.stock.setText(mcontext.getString(R.string.invoice_Quantity)+" "+stringFormat);
         }
 
         RequestOptions options = new RequestOptions();

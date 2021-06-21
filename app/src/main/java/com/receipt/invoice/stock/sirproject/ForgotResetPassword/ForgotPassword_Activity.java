@@ -251,6 +251,7 @@ public class ForgotPassword_Activity extends BaseActivity {
             params.add("email",email);
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "user/forgotPassword", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

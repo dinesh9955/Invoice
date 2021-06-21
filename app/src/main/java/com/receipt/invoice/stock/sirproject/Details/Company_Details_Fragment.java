@@ -675,6 +675,7 @@ public class Company_Details_Fragment extends BaseFragment {
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "company/update", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

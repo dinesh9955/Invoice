@@ -124,7 +124,7 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
            // String producttotatlps=formatter.format(Double.parseDouble(service_quantity));
             double vc = Double.parseDouble(service_quantity);
             String patternFormat= Utility.getPatternFormat(""+numberPostion, vc);
-            viewHolderForCat.servicedescription.setText("Quantity Available:"+" "+patternFormat);
+            viewHolderForCat.servicedescription.setText(mcontext.getString(R.string.invoice_QuantityAvailable)+" "+patternFormat);
         }
 
 
@@ -138,7 +138,7 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
         }
         else
         {
-            viewHolderForCat.serviceunit2.setText("Unit:"+" "+measurement_unit);
+            viewHolderForCat.serviceunit2.setText(mcontext.getString(R.string.invoice_Unit)+" "+measurement_unit);
             viewHolderForCat.serviceunit2.setVisibility(View.VISIBLE);
         }
 

@@ -609,7 +609,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         Log.e(TAG, "invoiceIdAAA "+invoiceId);
 
         String token = Constant.GetSharedPreferences(ConvertToInvoiceActivity.this, Constant.ACCESS_TOKEN);
-        Call<EstimateResponseDto> resposresult = apiInterface.getEstimateDetail(token, invoiceId);
+        Call<EstimateResponseDto> resposresult = apiInterface.getEstimateDetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<EstimateResponseDto>() {
             @Override
             public void onResponse(Call<EstimateResponseDto> call, retrofit2.Response<EstimateResponseDto> response) {
@@ -1744,6 +1744,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "invoice/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3002,7 +3003,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3076,6 +3079,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3156,6 +3160,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3273,6 +3278,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3448,6 +3454,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3705,6 +3712,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

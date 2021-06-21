@@ -571,7 +571,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
         Log.e(TAG, "invoiceIdAAA "+invoiceId);
 
         String token = Constant.GetSharedPreferences(ConvertToPVActivity.this, Constant.ACCESS_TOKEN);
-        Call<POResponseDto> resposresult = apiInterface.getPODetail(token, invoiceId);
+        Call<POResponseDto> resposresult = apiInterface.getPODetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<POResponseDto>() {
             @Override
             public void onResponse(Call<POResponseDto> call, retrofit2.Response<POResponseDto> response) {
@@ -650,8 +650,13 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
 
                 Log.e("Selected_house",selectwarehouseId+"  "+wnames.toString());
 
-                datedto = invoiceDtoInvoice.getOrder_date();
+               // datedto = invoiceDtoInvoice.getOrder_date();
                 due_datedto = invoiceDtoInvoice.getDueDate();
+                Calendar myCalendar = Calendar.getInstance();
+                String myFormat = "yyyy-MM-dd";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                String dateCurrent = sdf.format(myCalendar.getTime());
+                datedto = dateCurrent;
                 duedate.setText(datedto);
                 invoice_date = datedto;
                 invoice_due_date = due_datedto;
@@ -800,7 +805,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                 productsRecycler.setAdapter(products_adapter);
 
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+             //   DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
 
                 int numsize = grosamontdto.size();
@@ -1581,6 +1586,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "paymentvoucher/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2822,7 +2828,9 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -2894,6 +2902,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2962,6 +2971,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3072,6 +3082,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3250,6 +3261,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3410,6 +3422,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

@@ -415,6 +415,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "report/customerStatement", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -526,13 +527,13 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-//                        if(filterID.equalsIgnoreCase("date")){
-//                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
-//                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
-//                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
-//                                }
-//                            });
-//                        }
+                        if(filterID.equalsIgnoreCase("date")){
+                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
+                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
+                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
+                                }
+                            });
+                        }
 
                         //Collections.reverse(customerReportItemArrayList);
 
@@ -703,6 +704,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "report/supplierStatement", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -809,13 +811,15 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                             }
                         }
 
-//                        if(filterID.equalsIgnoreCase("date")){
-//                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
-//                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
-//                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
-//                                }
-//                            });
-//                        }
+                        if(filterID.equalsIgnoreCase("date")){
+                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
+                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
+                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
+                                }
+                            });
+                        }
+
+
                         supplierItemAA = customerItem;
                         supplierReportItemArrayListAA = customerReportItemArrayList;
                         supplierReportWeb(customerItem, customerReportItemArrayList);
@@ -977,6 +981,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "invoice/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1050,6 +1055,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "report/totalSales", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1352,6 +1358,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
     private void totalPurchaseReport(String customer_id, String filterID, String fDate, String sDate, String supplierName) {
+
         RequestParams params = new RequestParams();
         params.add("company_id", customer_id);
 
@@ -1359,6 +1366,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "report/totalPurchases", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1398,6 +1406,8 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                         customerItem.setCurrency_symbol(currency_symbol);
 
                         ArrayList<TotalPurchaseReportItem> customerReportItemArrayList = new ArrayList<>();
+
+
 
                         JSONArray statement = data.getJSONArray("total_purchases");
                         if (statement.length() > 0) {
@@ -1445,16 +1455,16 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                                     }
 
-                                }
-                                if(filterID.equalsIgnoreCase("supplier")){
+                                    Log.e(TAG, "filterID111");
+                                } else if(filterID.equalsIgnoreCase("supplier")){
                                     if(supplier_name.toLowerCase().equalsIgnoreCase(supplierName.toLowerCase())){
                                         customerReportItemArrayList.add(customerReportItem);
                                     }
-                                }
 
-
-                                else{
+                                    Log.e(TAG, "filterID222");
+                                } else{
                                     customerReportItemArrayList.add(customerReportItem);
+                                    Log.e(TAG, "filterID333");
                                 }
                             }
                         }
@@ -1618,6 +1628,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "report/customerAgeing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1936,6 +1947,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "report/taxation", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2208,6 +2220,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "report/stock", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2492,6 +2505,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "report/productMovement", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2643,7 +2657,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     } else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("invoice")){
                         salesTxt = valueSS;
                     } else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("credit")){
-                        salesTxt = valueSS;
+                        purchasesTxt = valueSS;
                     } else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("debit")){
                         salesTxt = valueSS;
                     }else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("wastage")){
@@ -3588,6 +3602,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3701,6 +3716,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3816,6 +3832,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3936,6 +3953,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

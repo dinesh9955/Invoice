@@ -24,6 +24,7 @@ import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.Service_Listing_Adapter;
+import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Model.Service_list;
 import com.receipt.invoice.stock.sirproject.R;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Service_Listing extends Fragment {
+public class Service_Listing extends BaseFragment {
 
     public Service_Listing() {
         // Required empty public constructor
@@ -136,7 +137,9 @@ public class Service_Listing extends Fragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -200,6 +203,7 @@ public class Service_Listing extends Fragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL+"service/getListingByCompany", params,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -249,7 +253,7 @@ public class Service_Listing extends Fragment {
                             }
                         }
                         else {
-                            Constant.ErrorToast(getActivity(),jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(getActivity(),jsonObject.getString(getString(R.string.dialog_ProductNotFound)));
                         }
                     }
 

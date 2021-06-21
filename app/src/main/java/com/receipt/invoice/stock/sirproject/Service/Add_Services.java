@@ -220,7 +220,9 @@ public class Add_Services extends BaseFragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -280,6 +282,7 @@ public class Add_Services extends BaseFragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "product/getMeasurementUnit",params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -335,7 +338,9 @@ public class Add_Services extends BaseFragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"category/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"category/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -400,11 +405,11 @@ public class Add_Services extends BaseFragment {
        // String pweight = weight.getText().toString();
 
         if (pname.isEmpty()){
-            servicename.setError("Required");
+            servicename.setError(getString(R.string.dialog_Required));
             servicename.requestFocus();
         }
         else if (price.isEmpty()){
-            servicerate.setError("Required");
+            servicerate.setError(getString(R.string.dialog_Required));
             servicerate.requestFocus();
         }
 //        else if (pdesc.isEmpty()){
@@ -412,16 +417,16 @@ public class Add_Services extends BaseFragment {
 //            servicedescription.requestFocus();
 //        }
         else if (selectedMeasurementunit.equals("")){
-            Constant.ErrorToast(getActivity(),"Measurement Unit is required");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Measurement_Unit_required));
         }
         else if (selectedCompanyId.equals("")){
-            Constant.ErrorToast(getActivity(),"Company is required");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Company_required));
         }
 //        else if (selectedTaxable.equals("")){
 //            Constant.ErrorToast(getActivity(),"Tax information is required");
 //        }
         else if (selectedCategoryId.equals("") && othercat.isEmpty()){
-            Constant.ErrorToast(getActivity(),"Item category is required");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Item_category_required));
         }
         else {
 
@@ -475,6 +480,7 @@ public class Add_Services extends BaseFragment {
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "product/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -499,7 +505,7 @@ public class Add_Services extends BaseFragment {
                                 params2.putString("event_name", "My Services");
                                 firebaseAnalytics.logEvent("service_addnew", params2);
 
-                                Constant.SuccessToast(getActivity(),"Item Added");
+                                Constant.SuccessToast(getActivity(), getString(R.string.dialog_ItemAdded));
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -564,7 +570,7 @@ public class Add_Services extends BaseFragment {
                         }
                     }
                     else {
-                        Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
+                        //Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                     }
 
                 }

@@ -130,7 +130,7 @@ public class ReceiptViewActivityWebView extends BaseActivity {
     private void getinvoicedata() {
 
         String token = Constant.GetSharedPreferences(ReceiptViewActivityWebView.this, Constant.ACCESS_TOKEN);
-        Call<ReceiptResponseDto> resposresult = apiInterface.getReceiptDetail(token, invoiceId);
+        Call<ReceiptResponseDto> resposresult = apiInterface.getReceiptDetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<ReceiptResponseDto>() {
             @SuppressLint("LongLogTag")
             @Override

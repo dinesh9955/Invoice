@@ -82,13 +82,13 @@ public class ResetPassword_Activity extends BaseActivity {
                     edreentertpassword.requestFocus();*/
                     txtsuccess.setVisibility(View.VISIBLE);
                     txtsuccess.setTextColor(Color.RED);
-                   txtsuccess.setText("Password not matched");
+                   txtsuccess.setText(getString(R.string.dialog_Password_not_matched));
 
                 }
                 else {
                     txtsuccess.setVisibility(View.VISIBLE);
                     txtsuccess.setTextColor(Color.GREEN);
-                    txtsuccess.setText("You have reset your password sucessfully.");
+                    txtsuccess.setText(getString(R.string.dialog_reset_your_password_sucessfully));
                     ResetPassword();
                 }
             }
@@ -139,12 +139,12 @@ public class ResetPassword_Activity extends BaseActivity {
 
         if(TextUtils.isEmpty(edpassword.getText()))
         {
-            edpassword.setError("Field is required");
+            edpassword.setError(getString(R.string.dialog_Fieldisrequired));
             edpassword.requestFocus();
         }
         else if(TextUtils.isEmpty(edreentertpassword.getText()))
         {
-            edreentertpassword.setError("Field is required");
+            edreentertpassword.setError(getString(R.string.dialog_Fieldisrequired));
             edreentertpassword.requestFocus();
         }
         else if (password1.equals(password2)){
@@ -158,6 +158,7 @@ public class ResetPassword_Activity extends BaseActivity {
 
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "user/resetPassword", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

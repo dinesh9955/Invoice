@@ -309,21 +309,21 @@ public class Add_Company extends BaseFragment {
 
     }
     private void SelectImage() {
-        final CharSequence[] items={"Camera","Gallery", "Cancel"};
+        final CharSequence[] items={getString(R.string.dialog_Camera),getString(R.string.dialog_Gallery),getString(R.string.dialog_Cancel)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add Image");
+        builder.setTitle(getString(R.string.dialog_AddImage));
 
         builder.setItems(items, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (items[i].equals("Camera")) {
+                if (items[i].equals(getString(R.string.dialog_Camera))) {
 
                     // Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     //  startActivityForResult(intent, REQUEST_CAMERA);
                     requestStoragePermission(true);
-                } else if (items[i].equals("Gallery")) {
+                } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
 
                     requestStoragePermission(false);
 
@@ -331,7 +331,7 @@ public class Add_Company extends BaseFragment {
 //                    intent.setType("image/*");
 //                    startActivityForResult(intent, SELECT_FILE);
 
-                } else if (items[i].equals("Cancel")) {
+                } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
                     dialogInterface.dismiss();
                 }
             }
@@ -511,7 +511,10 @@ public class Add_Company extends BaseFragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL + "currency/all", new AsyncHttpResponseHandler() {
+
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "currency/all", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -578,11 +581,11 @@ public class Add_Company extends BaseFragment {
 
 
         if (TextUtils.isEmpty(name.getText())) {
-            name.setError("Field is required");
+            name.setError(getActivity().getString(R.string.dialog_Fieldisrequired));
             name.requestFocus();
         } else if (selected_currency.equals(""))
         {
-            Constant.ErrorToast(getActivity(),"Please select currency");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Please_select_currency));
         }
 
 
@@ -629,6 +632,8 @@ public class Add_Company extends BaseFragment {
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
+
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "company/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -658,7 +663,7 @@ public class Add_Company extends BaseFragment {
                             params2.putString("event_name", "My Companies");
                             firebaseAnalytics.logEvent("companies_addnew", params2);
 
-                            Constant.SuccessToast(getActivity(),"Company created successfully");
+                            Constant.SuccessToast(getActivity(), getString(R.string.dialog_CompanyCreatedSuccessfully));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override

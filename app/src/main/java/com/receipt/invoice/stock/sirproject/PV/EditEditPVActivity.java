@@ -583,7 +583,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
     private void getinvoicedata() {
 
         String token = Constant.GetSharedPreferences(EditEditPVActivity.this, Constant.ACCESS_TOKEN);
-        Call<PVResponseDto> resposresult = apiInterface.getPVDetail(token, invoiceId);
+        Call<PVResponseDto> resposresult = apiInterface.getPVDetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<PVResponseDto>() {
             @Override
             public void onResponse(Call<PVResponseDto> call, retrofit2.Response<PVResponseDto> response) {
@@ -1655,6 +1655,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "paymentvoucher/update", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2884,7 +2885,9 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -2952,6 +2955,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3022,6 +3026,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3132,6 +3137,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3309,6 +3315,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3468,6 +3475,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -4044,11 +4052,11 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                         Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
 
                         if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
-                            if (itemQuantity.getEn_quantity() <= en_quantity) {
-                                mybuilder.show();
-                                Constant.ErrorToast(EditEditPVActivity.this, "Insufficient Quantity Available");
-                                mybuilder.dismiss();
-                            } else {
+//                            if (itemQuantity.getEn_quantity() <= en_quantity) {
+//                                mybuilder.show();
+//                                Constant.ErrorToast(EditEditPVActivity.this, "Insufficient Quantity Available");
+//                                mybuilder.dismiss();
+//                            } else {
                                 sh_price = Double.parseDouble(edprice.getText().toString());
                                 double multiply = en_quantity * sh_price;
                                 String s_multiply = String.valueOf(multiply);
@@ -4079,7 +4087,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                                 products_adapter.notifyDataSetChanged();
 
                                 mybuilder.dismiss();
-                            }
+//                            }
                         }
 
                         else

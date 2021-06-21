@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:spinnerDirection="ltr"
-                app:spinnerHint="Select Vendor"
+                app:spinnerHint="@string/supplier_SelectVendor"
                 android:layout_below="@+id/companyspinner"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="20dp"

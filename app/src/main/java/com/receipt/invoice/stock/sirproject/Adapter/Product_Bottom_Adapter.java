@@ -118,7 +118,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
            // String producttotatlps=formatter.format(Double.parseDouble(quantity));
             double vc = Double.parseDouble(quantity);
             String patternFormat= Utility.getPatternFormat(""+numberPostion, vc);
-            viewHolderForCat.productquantity.setText("Quantity Available: "+patternFormat);
+            viewHolderForCat.productquantity.setText(mcontext.getString(R.string.invoice_QuantityAvailable)+" "+patternFormat);
         }
         if (product_price.equals("") || product_price.equals("null"))
         {
@@ -172,7 +172,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                     String quentityproduct=product_list.getQuantity();
                     if(quentityproduct.equals("null"))
                     {
-                        Constant.ErrorToast((Activity) mcontext,"Insufficient Quantity Available");
+                        Constant.ErrorToast((Activity) mcontext, mcontext.getString(R.string.invoice_InsufficientQuantityAvailable));
 
                         if(bottomSheetDialog != null){
                             bottomSheetDialog.dismiss();
@@ -324,7 +324,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                         Log.e(TAG, "invoice");
                         if (sh_quantity < en_quantity) {
                             Log.e(TAG, "invoice1");
-                            Constant.ErrorToast((Activity) mcontext,"Insufficient Quantity Available");
+                            Constant.ErrorToast((Activity) mcontext,mcontext.getString(R.string.invoice_InsufficientQuantityAvailable));
                         } else{
                             Log.e(TAG, "invoice2");
                             sh_price = Double.parseDouble(edprice.getText().toString().trim());
@@ -363,7 +363,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                         Log.e(TAG, "debitnotes");
                         if (sh_quantity < en_quantity) {
                             Log.e(TAG, "invoice1");
-                            Constant.ErrorToast((Activity) mcontext,"Insufficient Quantity Available");
+                            Constant.ErrorToast((Activity) mcontext, mcontext.getString(R.string.invoice_InsufficientQuantityAvailable));
                         } else{
                             sh_price = Double.parseDouble(edprice.getText().toString().trim());
                             callback.onPostExecutecall(mlist.get(i),String.valueOf(en_quantity),String.valueOf(sh_price));

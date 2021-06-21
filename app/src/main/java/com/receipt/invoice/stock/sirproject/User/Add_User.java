@@ -424,21 +424,21 @@ public class Add_User extends BaseFragment {
     }
 
     private void SelectImage() {
-            final CharSequence[] items={"Camera","Gallery", "Cancel"};
+            final CharSequence[] items={getString(R.string.dialog_Camera), getString(R.string.dialog_Gallery), getString(R.string.dialog_Cancel)};
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Add Image");
+            builder.setTitle(getString(R.string.dialog_AddImage));
 
             builder.setItems(items, new DialogInterface.OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    if (items[i].equals("Camera")) {
+                    if (items[i].equals(getString(R.string.dialog_Camera))) {
                        requestStoragePermission(true);
-                    } else if (items[i].equals("Gallery")) {
+                    } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
 
                         requestStoragePermission(false);
-                   } else if (items[i].equals("Cancel")) {
+                   } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
                         dialogInterface.dismiss();
                     }
                 }
@@ -610,7 +610,9 @@ public class Add_User extends BaseFragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -669,20 +671,20 @@ public class Add_User extends BaseFragment {
 
     public void add_user() {
          if (TextUtils.isEmpty(username.getText())) {
-            username.setError("Field is required");
+            username.setError(getString(R.string.dialog_Fieldisrequired));
             username.requestFocus();
         }
         else if (TextUtils.isEmpty(useremail.getText())) {
-            useremail.setError("Field is required");
+            useremail.setError(getString(R.string.dialog_Fieldisrequired));
             useremail.requestFocus();
         } else if (!Patterns.EMAIL_ADDRESS.matcher(useremail.getText().toString()).matches()) {
-            useremail.setError("Invalid Pattern");
+            useremail.setError(getString(R.string.dialog_InvalidEmailAddress));
             useremail.requestFocus();
         } else if (TextUtils.isEmpty(password.getText())) {
-            password.setError("Field is required");
+            password.setError(getString(R.string.dialog_Fieldisrequired));
             password.requestFocus();
         }else if (!(password.getText().toString().trim().length() >= 6)) {
-             password.setError("Password should be min 6 characters");
+             password.setError(getString(R.string.dialog_PasswordCharacters));
              password.requestFocus();
          } else {
 
@@ -728,6 +730,7 @@ public class Add_User extends BaseFragment {
             AsyncHttpClient client = new AsyncHttpClient();
              client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
              client.addHeader("Access-Token",token);
+             params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "user/addSubUser", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -751,7 +754,7 @@ public class Add_User extends BaseFragment {
                             params2.putString("event_name", "Add new User");
                             firebaseAnalytics.logEvent("user_addnew", params2);
 
-                            Constant.SuccessToast(getActivity(), "User Added Successfully");
+                            Constant.SuccessToast(getActivity(), getString(R.string.dialog_UserAddedSuccessfully));
                             Intent intent = new Intent(getContext(), User_Activity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);

@@ -176,7 +176,9 @@ public class Wastage_Damage extends BaseFragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"company/listing", params,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -241,6 +243,7 @@ public class Wastage_Damage extends BaseFragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL+"product/getListingByCompany",params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -306,7 +309,7 @@ public class Wastage_Damage extends BaseFragment {
         warehousename.clear();
         warehouseids.clear();
         if (id.equals("")){
-            Constant.ErrorToast(getActivity(),"Select Company");
+            Constant.ErrorToast(getActivity(), getString(R.string.select_company));
         }
         else{
             RequestParams params = new RequestParams();
@@ -315,6 +318,7 @@ public class Wastage_Damage extends BaseFragment {
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -382,22 +386,22 @@ public class Wastage_Damage extends BaseFragment {
         String reas = reason.getText().toString();
 
         if (quant.isEmpty()){
-            quantity.setError("Required");
+            quantity.setError(getString(R.string.dialog_Required));
             quantity.requestFocus();
         }
         else if (reas.isEmpty()){
-            reason.setError("Required");
+            reason.setError(getString(R.string.dialog_Required));
             reason.requestFocus();
         }
         else if (selectedCompanyId.equals("")){
-            Constant.ErrorToast(getActivity(),"Select A Company");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_SelectACompany));
         }
 
         else if (selectedProductId.equals("")){
-            Constant.ErrorToast(getActivity(),"Select A Product");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_SelectAProduct));
         }
         else if (selectedfromId.equals("")){
-            Constant.ErrorToast(getActivity(),"Select Sender Warehouse");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_SelectSenderWarehouse));
         }
         else {
 
@@ -415,6 +419,7 @@ public class Wastage_Damage extends BaseFragment {
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "product/addWastage", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -436,7 +441,7 @@ public class Wastage_Damage extends BaseFragment {
                             params2.putString("event_name", "Stocks Remove");
                             firebaseAnalytics.logEvent("stocks_remove", params2);
 
-                            Constant.SuccessToast(getActivity(),"Stock Removed");
+                            Constant.SuccessToast(getActivity(), getString(R.string.dialog_StockRemoved));
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -492,7 +497,7 @@ public class Wastage_Damage extends BaseFragment {
                         }
                     }
                     else {
-                        Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
+                       // Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                     }
 
                 }

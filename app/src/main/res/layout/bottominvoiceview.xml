@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="View Invoice"
+                android:text="@string/dialog_ViewInvoice"
                 android:textSize="15sp"
                 android:padding="10dp"
                 android:layout_marginStart="10dp"
@@ -98,7 +98,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Duplicate Invoice"
+                android:text="@string/dialog_DuplicateInvoice"
                 android:textSize="15sp"
                 android:layout_marginStart="10dp"
                 android:padding="10dp"
@@ -131,7 +131,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Share Invoice"
+                android:text="@string/dialog_ShareInvoice"
                 android:textSize="15sp"
                 android:layout_marginStart="10dp"
                 android:padding="10dp"
@@ -172,7 +172,7 @@
                 android:layout_below="@+id/shareinvoice"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/dark_blue"
-                android:text="Convert To Receipt"
+                android:text="@string/dialog_ConvertToReceipt"
 
                 android:id="@+id/recepitsviewtxt"
                 />

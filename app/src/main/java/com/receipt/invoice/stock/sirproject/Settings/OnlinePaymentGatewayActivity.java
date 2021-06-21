@@ -156,15 +156,15 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                 selectedStringStripe = stringStripe.get(position);
 
                 if(selectedStringPaypal.equalsIgnoreCase("1")){
-                    buttonPaypal.setText("Edit");
+                    buttonPaypal.setText(getString(R.string.tax_edit));
                 }else{
-                    buttonPaypal.setText("Setup");
+                    buttonPaypal.setText(getString(R.string.setting_Setup));
                 }
 
                 if(selectedStringStripe.equalsIgnoreCase("1")){
-                    buttonStripe.setText("Edit");
+                    buttonStripe.setText(getString(R.string.tax_edit));
                 }else{
-                    buttonStripe.setText("Setup");
+                    buttonStripe.setText(getString(R.string.setting_Setup));
                 }
 
             }
@@ -213,7 +213,9 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -326,7 +328,7 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         String token = Constant.GetSharedPreferences(OnlinePaymentGatewayActivity.this, Constant.ACCESS_TOKEN);
         client.addHeader("Access-Token", token);
-
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL_PAYMENT+ "settings/add", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

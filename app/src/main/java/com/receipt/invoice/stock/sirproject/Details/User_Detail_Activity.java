@@ -852,6 +852,7 @@ public class User_Detail_Activity extends BaseActivity {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "user/editSubUser", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

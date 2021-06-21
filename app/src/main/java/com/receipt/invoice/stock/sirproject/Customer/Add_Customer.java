@@ -258,21 +258,21 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
     }
 
     private void SelectImage() {
-        final CharSequence[] items={"Camera","Gallery", "Cancel"};
+        final CharSequence[] items={getString(R.string.dialog_Camera),getString(R.string.dialog_Gallery),getString(R.string.dialog_Cancel)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add Image");
+        builder.setTitle(getString(R.string.dialog_AddImage));
 
         builder.setItems(items, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (items[i].equals("Camera")) {
+                if (items[i].equals(getString(R.string.dialog_Camera))) {
 
                     // Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     //  startActivityForResult(intent, REQUEST_CAMERA);
                     requestStoragePermission(true);
-                } else if (items[i].equals("Gallery")) {
+                } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
 
                     requestStoragePermission(false);
 
@@ -280,7 +280,7 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
 //                    intent.setType("image/*");
 //                    startActivityForResult(intent, SELECT_FILE);
 
-                } else if (items[i].equals("Cancel")) {
+                } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
                     dialogInterface.dismiss();
                 }
             }
@@ -499,11 +499,11 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
             }
 
             else if (!cemail.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(cemail).matches()){
-                email.setError("Invalid email");
+                email.setError(getString(R.string.dialog_InvalidEmail));
                 email.requestFocus();
             }
             else if (selectedCompanyId.equals("")){
-                Constant.ErrorToast(getActivity(),"Select Company");
+                Constant.ErrorToast(getActivity(),getString(R.string.select_company));
             }
             else{
 
@@ -548,6 +548,7 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
                 client.addHeader("Access-Token",token);
+                params.add("language", ""+getLanguage());
                 client.post(AllSirApi.BASE_URL + "customer/add", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -559,7 +560,7 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("true")){
-                                Constant.SuccessToast(getActivity(),"Customer Added");
+                                Constant.SuccessToast(getActivity(), getString(R.string.dialog_CustomerAdded));
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -623,66 +624,66 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
         else {
 
             if (cemail.isEmpty()){
-                email.setError("Required");
+                email.setError(getString(R.string.dialog_Required));
                 email.requestFocus();
             }
             else if (!Patterns.EMAIL_ADDRESS.matcher(cemail).matches()){
-                email.setError("Invalid email");
+                email.setError(getString(R.string.dialog_InvalidEmail));
                 email.requestFocus();
             }
             else if (cperson.isEmpty()){
-                contactperson.setError("Required");
+                contactperson.setError(getString(R.string.dialog_Required));
                 contactperson.requestFocus();
             }
             else if (cphone.isEmpty()){
-                phone.setError("Required");
+                phone.setError(getString(R.string.dialog_Required));
                 phone.requestFocus();
             }
             else if (cmobile.isEmpty()){
-                mobile.setError("Required");
+                mobile.setError(getString(R.string.dialog_Required));
                 mobile.requestFocus();
             }
             else if (cwebsite.isEmpty()){
-                website.setError("Required");
+                website.setError(getString(R.string.dialog_Required));
                 website.requestFocus();
             }
             else if (caddress.isEmpty()){
-                CompanyAddress.setError("Required");
+                CompanyAddress.setError(getString(R.string.dialog_Required));
                 CompanyAddress.requestFocus();
             }
             else if (selectedCompanyId.equals("")){
-                Constant.ErrorToast(getActivity(),"Select Company");
+                Constant.ErrorToast(getActivity(),getString(R.string.select_company));
             }
 
 
 
 
             else if (f_name.isEmpty()){
-                edfirstname.setError("Required");
+                edfirstname.setError(getString(R.string.dialog_Required));
                 edfirstname.requestFocus();
             }
             else if (l_name.equals("")){
-                edlastname.setError("Required");
+                edlastname.setError(getString(R.string.dialog_Required));
                 edlastname.requestFocus();
             }
             else if (address1.isEmpty()){
-                edaddress1.setError("Required");
+                edaddress1.setError(getString(R.string.dialog_Required));
                 edaddress1.requestFocus();
             }
             else if (address2.equals("")){
-                edaddress2.setError("Required");
+                edaddress2.setError(getString(R.string.dialog_Required));
                 edaddress2.requestFocus();
             }
             else if (city.isEmpty()){
-                edcity.setError("Required");
+                edcity.setError(getString(R.string.dialog_Required));
                 edcity.requestFocus();
             }
             else if (postcode.equals("")){
-                edpostcode.setError("Required");
+                edpostcode.setError(getString(R.string.dialog_Required));
                 edpostcode.requestFocus();
             }
             else if (country.equals("")){
-                edcountry.setError("Required");
+                edcountry.setError(getString(R.string.dialog_Required));
                 edcountry.requestFocus();
             }
 
@@ -713,6 +714,7 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
                 client.addHeader("Access-Token",token);
+                params.add("language", ""+getLanguage());
                 client.post(AllSirApi.BASE_URL + "customer/add", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -733,7 +735,7 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                                 params2.putString("event_name", "Customers");
                                 firebaseAnalytics.logEvent("customer_addnew", params2);
 
-                                Constant.SuccessToast(getActivity(),"Customer Added");
+                                Constant.SuccessToast(getActivity(),getString(R.string.dialog_CustomerAdded));
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -819,25 +821,25 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
             Log.e(TAG, "AAAAAAAAAAA");
         }else{
             if (f_name.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter First Name");
+                Constant.ErrorToast(getActivity(),getString(R.string.dialog_PleaseEnterFirstName));
                 isEntered = false;
             }else if(l_name.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter Last Name");
+                Constant.ErrorToast(getActivity(),getString(R.string.dialog_PleaseEnterLastName));
                 isEntered = false;
             }else if(address1.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter Shipping Address 1");
+                Constant.ErrorToast(getActivity(),getString(R.string.dialog_ShippingAddress1));
                 isEntered = false;
             }else if(address2.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter Shipping Address 2");
+                Constant.ErrorToast(getActivity(),getString(R.string.dialog_ShippingAddress2));
                 isEntered = false;
             }else if(city.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter City");
+                Constant.ErrorToast(getActivity(),getString(R.string.dialog_PleaseEnterCity));
                 isEntered = false;
             }else if(postcode.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter Postcode");
+                Constant.ErrorToast(getActivity(),getString(R.string.dialog_SPleaseEnterPostcode));
                 isEntered = false;
             }else if(country.equals("")){
-                Constant.ErrorToast(getActivity(),"Please Enter Country");
+                Constant.ErrorToast(getActivity(),getString(R.string.dialog_PleaseEnterCountry));
                 isEntered = false;
             }else{
                 isEntered = true;
@@ -855,7 +857,9 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

@@ -239,21 +239,22 @@ public class Add_Vendor extends BaseFragment {
     }
 
     private void SelectImage() {
-        final CharSequence[] items={"Camera","Gallery", "Cancel"};
+
+        final CharSequence[] items={getString(R.string.dialog_Camera),getString(R.string.dialog_Gallery), getString(R.string.dialog_Cancel)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add Image");
+        builder.setTitle(getString(R.string.dialog_AddImage));
 
         builder.setItems(items, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (items[i].equals("Camera")) {
+                if (items[i].equals(getString(R.string.dialog_Camera))) {
 
                     // Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     //  startActivityForResult(intent, REQUEST_CAMERA);
                     requestStoragePermission(true);
-                } else if (items[i].equals("Gallery")) {
+                } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
 
                     requestStoragePermission(false);
 
@@ -261,7 +262,7 @@ public class Add_Vendor extends BaseFragment {
 //                    intent.setType("image/*");
 //                    startActivityForResult(intent, SELECT_FILE);
 
-                } else if (items[i].equals("Cancel")) {
+                } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
                     dialogInterface.dismiss();
                 }
             }
@@ -449,7 +450,7 @@ public class Add_Vendor extends BaseFragment {
 
         if (customertype.equals("company")){
             if (companyname.isEmpty()){
-                name.setError("Required");
+                name.setError( getString(R.string.dialog_Required));
                 name.requestFocus();
             }
             else if (!cemail.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(cemail).matches()){
@@ -458,7 +459,7 @@ public class Add_Vendor extends BaseFragment {
             }
 
             else if (selectedCompanyId.equals("")){
-                Constant.ErrorToast(getActivity(),"Select Company");
+                Constant.ErrorToast(getActivity(), getString(R.string.select_company));
             }
             else{
                 avi.smoothToShow();
@@ -485,6 +486,7 @@ public class Add_Vendor extends BaseFragment {
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
                 client.addHeader("Access-Token",token);
+                params.add("language", ""+getLanguage());
                 client.post(AllSirApi.BASE_URL + "supplier/add", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -496,7 +498,7 @@ public class Add_Vendor extends BaseFragment {
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("true")){
-                                Constant.SuccessToast(getActivity(),"Supplier Added");
+                                Constant.SuccessToast(getActivity(), getString(R.string.dialog_SupplierAdded));
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -541,7 +543,7 @@ public class Add_Vendor extends BaseFragment {
 
                         }
                         else {
-                            Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
+                           // Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                         }
 
                     }
@@ -551,7 +553,7 @@ public class Add_Vendor extends BaseFragment {
         else{
 
             if (cemail.isEmpty()){
-                email.setError("Required");
+                email.setError(getString(R.string.dialog_Required));
                 email.requestFocus();
             }
             else if (!Patterns.EMAIL_ADDRESS.matcher(cemail).matches()){
@@ -559,27 +561,27 @@ public class Add_Vendor extends BaseFragment {
                 email.requestFocus();
             }
             else if (cperson.isEmpty()){
-                contactperson.setError("Required");
+                contactperson.setError(getString(R.string.dialog_Required));
                 contactperson.requestFocus();
             }
             else if (cphone.isEmpty()){
-                phone.setError("Required");
+                phone.setError(getString(R.string.dialog_Required));
                 phone.requestFocus();
             }
             else if (cmobile.isEmpty()){
-                mobile.setError("Required");
+                mobile.setError(getString(R.string.dialog_Required));
                 mobile.requestFocus();
             }
             else if (cwebsite.isEmpty()){
-                website.setError("Required");
+                website.setError(getString(R.string.dialog_Required));
                 website.requestFocus();
             }
             else if (caddress.isEmpty()){
-                CompanyAddress.setError("Required");
+                CompanyAddress.setError(getString(R.string.dialog_Required));
                 CompanyAddress.requestFocus();
             }
             else if (selectedCompanyId.equals("")){
-                Constant.ErrorToast(getActivity(),"Select Company");
+                Constant.ErrorToast(getActivity(),getString(R.string.select_company));
             }
             else{
                 avi.smoothToShow();
@@ -604,6 +606,7 @@ public class Add_Vendor extends BaseFragment {
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
                 client.addHeader("Access-Token",token);
+                params.add("language", ""+getLanguage());
                 client.post(AllSirApi.BASE_URL + "supplier/add", params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -626,7 +629,7 @@ public class Add_Vendor extends BaseFragment {
                                 params2.putString("event_name", "Suppliers");
                                 firebaseAnalytics.logEvent("supplier_addnew", params2);
 
-                                Constant.SuccessToast(getActivity(),"Supplier Added");
+                                Constant.SuccessToast(getActivity(), getString(R.string.dialog_SupplierAdded));
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -705,7 +708,9 @@ public class Add_Vendor extends BaseFragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

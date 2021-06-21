@@ -123,7 +123,7 @@ public class POViewActivityWebViewPayment extends BaseActivity {
     private void getinvoicedata() {
 
         String token = Constant.GetSharedPreferences(POViewActivityWebViewPayment.this, Constant.ACCESS_TOKEN);
-        Call<POResponseDto> resposresult = apiInterface.getPODetail(token, invoiceId);
+        Call<POResponseDto> resposresult = apiInterface.getPODetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<POResponseDto>() {
             @SuppressLint("LongLogTag")
             @Override

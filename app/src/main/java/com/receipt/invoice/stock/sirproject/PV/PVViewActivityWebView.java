@@ -125,7 +125,7 @@ public class PVViewActivityWebView extends BaseActivity {
     private void getinvoicedata() {
 
         String token = Constant.GetSharedPreferences(PVViewActivityWebView.this, Constant.ACCESS_TOKEN);
-        Call<PVResponseDto> resposresult = apiInterface.getPVDetail(token, invoiceId);
+        Call<PVResponseDto> resposresult = apiInterface.getPVDetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<PVResponseDto>() {
             @SuppressLint("LongLogTag")
             @Override

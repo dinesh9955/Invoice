@@ -204,7 +204,7 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         recyclerwarehouse.setHasFixedSize(true);
 
         if (id.equals("")){
-            Constant.ErrorToast(getActivity(),"Select Company");
+            Constant.ErrorToast(getActivity(),getActivity().getString(R.string.select_company));
         }
         else{
             avi.smoothToShow();
@@ -215,6 +215,7 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -299,7 +300,9 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -360,7 +363,9 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"supplier/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"supplier/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -428,6 +433,7 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL+"product/getOnlyProductsListingByCompany",params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -495,15 +501,15 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         String quant = quantity.getText().toString();
         String pricee = price.getText().toString();
         if (quant.isEmpty()){
-            quantity.setError("Required");
+            quantity.setError(getString(R.string.dialog_Required));
             quantity.requestFocus();
         }
         else if (pricee.isEmpty()){
-            price.setError("Required");
+            price.setError(getString(R.string.dialog_Required));
             price.requestFocus();
         }
         else if (selectedProductId.equals("")){
-            Constant.ErrorToast(getActivity(),"Select A Product");
+            Constant.ErrorToast(getActivity(),getString(R.string.dialog_SelectAProduct));
 
         }
        /* else if (selectedVendorId.equals("")){
@@ -511,7 +517,7 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
 
         }*/
         else if (warehouses.equalsIgnoreCase("")){
-            Constant.ErrorToast(getActivity(),"Select Warehouse");
+            Constant.ErrorToast(getActivity(),getString(R.string.stock_Select_Warehouse));
         }
         else{
             avi.smoothToShow();
@@ -530,6 +536,7 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "product/addQuantity", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -551,7 +558,7 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
                             params2.putString("event_name", "Stocks Update");
                             firebaseAnalytics.logEvent("stocks_update", params2);
 
-                            Constant.SuccessToast(getActivity(),"Updated Stock");
+                            Constant.SuccessToast(getActivity(), getActivity().getString(R.string.dialog_UpdatedStock));
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -624,7 +631,7 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         mybuilder.dismiss();
 
         if(wherehousenamstrSelect.equalsIgnoreCase("")){
-            selectwarehouse.setText("Select Warehouse (s)");
+            selectwarehouse.setText(getString(R.string.stock_SelectWarehouse));
         }else {
             selectwarehouse.setText(warehouseList);
         }

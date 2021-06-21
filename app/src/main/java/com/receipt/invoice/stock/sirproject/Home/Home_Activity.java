@@ -744,10 +744,10 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
     public void messagebar() {
         new Flashbar.Builder(Home_Activity.this)
                 .gravity(Flashbar.Gravity.BOTTOM)
-                .title("\nSuccess")
+                .title(getString(R.string.dialog_Success))
                 .titleTypeface(Typeface.createFromAsset(getAssets(), "Fonts/AzoSans-Bold.otf"))
                 .titleSizeInSp(15)
-                .message("Logged in successfully!")
+                .message(getString(R.string.logged_in_msg))
                 //.messageTypeface(Typeface.createFromAsset(getAssets(),"fonts/CatamaraBold.ttf"))
                 .backgroundDrawable(getResources().getDrawable(R.drawable.success_toast_background))
                 .duration(3000)

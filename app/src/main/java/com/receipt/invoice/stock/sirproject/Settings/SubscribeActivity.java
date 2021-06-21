@@ -174,32 +174,32 @@ public class SubscribeActivity extends BaseActivity{
         itemSubscribe1.setSubscription_type("oneyear");
         itemSubscribe1.setProductId("com.sirapp.oneyear");
         itemSubscribe1.setPlan("35.99");
-        itemSubscribe1.setPlanName("Annual Plan");
-        itemSubscribe1.setDescription("Subscribe to Annual Package and get upto 25% off. USD 35.99 only annually with unlimited access to all features except Stock Tracking.");
+        itemSubscribe1.setPlanName(getString(R.string.settings_paln_title_1));
+        itemSubscribe1.setDescription(getString(R.string.settings_paln_desc_1));
         itemSubscribeArrayList.add(itemSubscribe1);
 
         ItemSubscribe itemSubscribe2 = new ItemSubscribe();
         itemSubscribe2.setSubscription_type("onemonth");
         itemSubscribe2.setProductId("com.sirapp.onemonth");
         itemSubscribe2.setPlan("3.99");
-        itemSubscribe2.setPlanName("Value Plan");
-        itemSubscribe2.setDescription("Monthly package starts at USD 3.99 only with unlimited access to all features except Stock Tracking.");
+        itemSubscribe2.setPlanName(getString(R.string.settings_paln_title_2));
+        itemSubscribe2.setDescription(getString(R.string.settings_paln_desc_2));
         itemSubscribeArrayList.add(itemSubscribe2);
 
         ItemSubscribe itemSubscribe3 = new ItemSubscribe();
         itemSubscribe3.setSubscription_type("onemonth_add");
         itemSubscribe3.setProductId("com.sirapp.onemonth_add");
         itemSubscribe3.setPlan("3.99");
-        itemSubscribe3.setPlanName("Extra Users");
-        itemSubscribe3.setDescription("Assign additional users with limited or unlimited access for one time payment of USD 3.99 only per user.");
+        itemSubscribe3.setPlanName(getString(R.string.settings_paln_title_3));
+        itemSubscribe3.setDescription(getString(R.string.settings_paln_desc_3));
         itemSubscribeArrayList.add(itemSubscribe3);
 
         ItemSubscribe itemSubscribe4 = new ItemSubscribe();
         itemSubscribe4.setSubscription_type("oneyear_add");
         itemSubscribe4.setProductId("com.sirapp.oneyear_add");
         itemSubscribe4.setPlan("11.99");
-        itemSubscribe4.setPlanName("Extra Companies");
-        itemSubscribe4.setDescription("Create additional companies under the same credentials for one time payment of USD 11.99 only per additional company.");
+        itemSubscribe4.setPlanName(getString(R.string.settings_paln_title_4));
+        itemSubscribe4.setDescription(getString(R.string.settings_paln_desc_4));
         itemSubscribeArrayList.add(itemSubscribe4);
 
         return itemSubscribeArrayList;
@@ -239,7 +239,7 @@ public class SubscribeActivity extends BaseActivity{
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         String token = Constant.GetSharedPreferences(SubscribeActivity.this, Constant.ACCESS_TOKEN);
         client.addHeader("Access-Token", token);
-
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "subscription/add", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

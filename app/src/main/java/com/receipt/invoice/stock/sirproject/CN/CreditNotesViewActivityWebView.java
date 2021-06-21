@@ -127,7 +127,7 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
     private void getinvoicedata() {
 
         String token = Constant.GetSharedPreferences(CreditNotesViewActivityWebView.this, Constant.ACCESS_TOKEN);
-        Call<CreditNoteResponseDto> resposresult = apiInterface.getCreditNoteDetail(token, invoiceId);
+        Call<CreditNoteResponseDto> resposresult = apiInterface.getCreditNoteDetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<CreditNoteResponseDto>() {
             @SuppressLint("LongLogTag")
             @Override

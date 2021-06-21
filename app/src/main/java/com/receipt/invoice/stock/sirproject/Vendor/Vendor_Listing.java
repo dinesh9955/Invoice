@@ -139,7 +139,9 @@ public class Vendor_Listing extends BaseFragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -203,6 +205,8 @@ public class Vendor_Listing extends BaseFragment {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
+
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL+"supplier/getListingByCompany", params,new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -253,7 +257,7 @@ public class Vendor_Listing extends BaseFragment {
                                 }
                             }
                             else {
-                                Constant.ErrorToast(getActivity(),jsonObject.getString("Customer Not Found"));
+                                Constant.ErrorToast(getActivity(),jsonObject.getString(getString(R.string.dialog_CustomerNotFound)));
                             }
 
 
@@ -283,7 +287,7 @@ public class Vendor_Listing extends BaseFragment {
                     }
                 }
                 else {
-                    Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
+                   // Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                 }
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);

@@ -116,7 +116,9 @@ public class Tax_Edit extends BaseActivity {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -202,7 +204,7 @@ public class Tax_Edit extends BaseActivity {
             taxpercent.requestFocus();
         }
         else if (selectedCompanyId.equals("")){
-            Constant.ErrorToast(Tax_Edit.this,"Select Company");
+            Constant.ErrorToast(Tax_Edit.this,getString(R.string.select_company));
         }
         else{
             Utility.hideKeypad(Tax_Edit.this);
@@ -219,6 +221,7 @@ public class Tax_Edit extends BaseActivity {
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token",token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "tax/update", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -231,7 +234,7 @@ public class Tax_Edit extends BaseActivity {
                         JSONObject jsonObject = new JSONObject(response);
                         String status = jsonObject.getString("status");
                         if (status.equals("true")){
-                            Constant.SuccessToast(Tax_Edit.this,"Tax Updated");
+                            Constant.SuccessToast(Tax_Edit.this, getString(R.string.tax_TaxUpdated));
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {

@@ -129,6 +129,7 @@ public class Add_Item_Activity extends BaseActivity {
         String token = Constant.GetSharedPreferences(getApplication(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        params.add("language", ""+getLanguage());
         client.addHeader("Access-Token",token);
         client.post(AllSirApi.BASE_URL+"product/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
@@ -234,8 +235,10 @@ public class Add_Item_Activity extends BaseActivity {
         String token = Constant.GetSharedPreferences(getApplication(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
         client.addHeader("Access-Token",token);
-        client.post(AllSirApi.BASE_URL+"company/listing", new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

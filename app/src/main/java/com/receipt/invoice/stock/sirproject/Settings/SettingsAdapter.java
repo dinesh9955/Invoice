@@ -106,7 +106,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
                         String shareMessage= mcontext.getString(R.string.app_name)+"\n\n";
                         shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID+"\n\n";
                         shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
-                        mcontext.startActivity(Intent.createChooser(shareIntent, "Choose One"));
+                        mcontext.startActivity(Intent.createChooser(shareIntent, mcontext.getString(R.string.setting_ChooseOne)));
                     } catch(Exception e) {
                         //e.toString();
                     }

@@ -613,7 +613,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
             public void onClick(View view) {
 
                 if (selectwarehouseId.equals("")) {
-                    Constant.ErrorToast(getActivity(), "Select Warehouse");
+                    Constant.ErrorToast(getActivity(), getString(R.string.invoice_SelectWarehouse));
 
                 } else {
                     createbottomsheet_products();
@@ -667,86 +667,11 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
             }
         });
 
-        //invoicenum.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-
-//        invoicenum.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @SuppressLint("LongLogTag")
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                if(invoicenum.getText().toString().length() > 0){
-//
-//                    // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-//
-//                    boolean gg = isNumeric(invoicenum.getText().toString());
-//                    Log.e(TAG, "gggggg "+gg);
-//
-//                    boolean dd = isChar(invoicenum.getText().toString());
-//                    Log.e(TAG, "dddddd "+dd);
-//
-//                    if(gg == false && dd == false){
-//                        Log.e(TAG, "truee ");
-//                        Boolean flag = Character.isDigit(invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1));
-//                        Log.e(TAG, "cccccc "+flag);
-//                        if(flag == true){
-//                            String str = invoicenum.getText().toString();
-//                            String cc = extractInt(str);
-//                            if(cc.contains(" ")){
-//                                String vv[] = cc.split(" ");
-//                                Log.e(TAG , "extractInt "+vv[vv.length - 1]);
-//                            }
-//                            if(!cc.contains(" ")){
-//                                Log.e(TAG , "extractInt2 "+cc);
-//                            }
-//                        }
-//                    }else{
-//                        Log.e(TAG, "falsee ");
-//                    }
-//                }
-//
-//
-//            }
-//        });
-//
 
         createinvoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//
-//                invoice_no = invoicenumtxt.getText().toString();
-//                strnotes = ednotes.getText().toString();
-//                ref_no = edreferenceno.getText().toString();
-//
-//                strdiscountvalue = discount.getText().toString();
-//                strpaid_amount = paidamount.getText().toString();
-//
-//                invoice_date = duedate.getText().toString();
-//                invoice_due_date = edduedate.getText().toString();
-//                invoicetaxamount = tax.getText().toString();
-//
-//                if (multimgpath != null) {
-//                    for (int i = 0; i < multimgpath.size(); i++) {
-//                        File imgFile = new File(multimgpath.get(i));
-//                        // company_stampFileimage=imgFile;
-//                        multiple[i] = imgFile;
-//
-//
-//                    }
-//                }
-//
-//                createinvoicewithdetail();
-
-               // createinvoice.setEnabled(false);
 
                 invoice_no = invoicenumtxt.getText().toString();
 //                strnotes = ednotes.getText().toString();
@@ -1172,18 +1097,21 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
             Log.e(TAG, "postingallparams:: "+params.toString());
 
+
+
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "creditnote/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     String response = new String(responseBody);
                     progressDialog.dismiss();
                     avi.smoothToHide();
-                    Log.e("Create Invoicedata", response);
+                    Log.e("CreateInvoicedata", response);
                     try {
                         Log.e("Create Invoicedata", response);
 
@@ -2601,7 +2529,9 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -2670,6 +2600,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2742,6 +2673,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2850,6 +2782,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3030,6 +2963,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @SuppressLint("LongLogTag")
             @Override
@@ -3229,6 +3163,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

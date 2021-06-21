@@ -62,9 +62,9 @@ public class SupportActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(editTextEmail.getText().toString().equalsIgnoreCase("")){
-                    Constant.ErrorToast(SupportActivity.this, "Enter Email");
+                    Constant.ErrorToast(SupportActivity.this, getString(R.string.setting_enter_email));
                 }else if(editTextMessage.getText().toString().equalsIgnoreCase("")){
-                    Constant.ErrorToast(SupportActivity.this, "Enter Message");
+                    Constant.ErrorToast(SupportActivity.this, getString(R.string.setting_enter_message));
                 }else{
 
                     callMethod();
@@ -88,6 +88,7 @@ public class SupportActivity extends BaseActivity {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL_SUPPORT + "support.php", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -133,7 +134,7 @@ public class SupportActivity extends BaseActivity {
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(SupportActivity.this, "Something went wrong, try again!");
+                    ///Constant.ErrorToast(SupportActivity.this, "Something went wrong, try again!");
                 }
             }
         });

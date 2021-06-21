@@ -20,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
+import com.loopj.android.http.RequestParams;
 import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
@@ -103,7 +104,9 @@ public class WebShowActivity extends BaseActivity {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(url, new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

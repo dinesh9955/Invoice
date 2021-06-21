@@ -96,7 +96,7 @@ public class Service_Listing_Adapter extends RecyclerView.Adapter<Service_Listin
         }
         else
         {
-            viewHolderForCat.servicecategory.setText("Category : "+service_category);
+            viewHolderForCat.servicecategory.setText(mcontext.getString(R.string.invoice_Category)+" "+service_category);
 
         }
 

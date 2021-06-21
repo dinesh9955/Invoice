@@ -124,13 +124,13 @@ public class PayPalActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                if(editTextEmail.getText().toString().equalsIgnoreCase("")){
-                   Constant.ErrorToast(PayPalActivity.this, "Enter Email");
+                   Constant.ErrorToast(PayPalActivity.this, getString(R.string.setting_enter_email));
                } else if(editTextConfirmEmail.getText().toString().equalsIgnoreCase("")){
-                   Constant.ErrorToast(PayPalActivity.this, "Enter Confirm Email");
+                   Constant.ErrorToast(PayPalActivity.this, getString(R.string.dialog_EnterConfirmEmail));
                } else if(!editTextEmail.getText().toString().equals(editTextConfirmEmail.getText().toString())){
-                   Constant.ErrorToast(PayPalActivity.this, "Confirm Email does not match");
+                   Constant.ErrorToast(PayPalActivity.this, getString(R.string.dialog_ConfirmEmaildoesnotmatch));
                } else if(optionType.equalsIgnoreCase("")){
-                   Constant.ErrorToast(PayPalActivity.this, "Please select Payment Options");
+                   Constant.ErrorToast(PayPalActivity.this, getString(R.string.dialog_Please_select_Payment_Options));
                }else{
                    callMethod();
                }
@@ -144,7 +144,7 @@ public class PayPalActivity extends BaseActivity {
 
     private void callMethod() {
         final ProgressDialog progressDialog = new ProgressDialog(PayPalActivity.this);
-        progressDialog.setMessage("Please wait");
+        progressDialog.setMessage(getString(R.string.dialog_Please_wait));
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
@@ -158,7 +158,7 @@ public class PayPalActivity extends BaseActivity {
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         String token = Constant.GetSharedPreferences(PayPalActivity.this, Constant.ACCESS_TOKEN);
         client.addHeader("Access-Token", token);
-
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "settings/add", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

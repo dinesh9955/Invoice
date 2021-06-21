@@ -21,4 +21,29 @@ public class BaseFragment extends Fragment {
         numberPostion = pref.getNumberFormatPosition();
         languagePosition = pref.getLanguagePosition();
     }
+
+
+
+
+    public String getLanguage(){
+        String languageName = "english";
+        if(languagePosition == 0){
+            languageName = "english";
+        }else if(languagePosition == 1){
+            languageName = "arabic";
+        }else if(languagePosition == 2){
+            languageName = "german";
+        }else if(languagePosition == 3){
+            languageName = "dutch";
+        }else if(languagePosition == 4){
+            languageName = "french";
+        }else if(languagePosition == 5){
+            languageName = "italian";
+        }else if(languagePosition == 6){
+            languageName = "spanish";
+        }else if(languagePosition == 7){
+            languageName = "pt";
+        }
+        return languageName;
+    }
 }

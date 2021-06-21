@@ -592,7 +592,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
     private void getinvoicedata() {
 
         String token = Constant.GetSharedPreferences(EditPOActivity.this, Constant.ACCESS_TOKEN);
-        Call<POResponseDto> resposresult = apiInterface.getPODetail(token, invoiceId);
+        Call<POResponseDto> resposresult = apiInterface.getPODetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<POResponseDto>() {
             @Override
             public void onResponse(Call<POResponseDto> call, retrofit2.Response<POResponseDto> response) {
@@ -1771,6 +1771,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "purchaseorder/duplicate", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3041,7 +3042,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -3110,6 +3113,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3192,6 +3196,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3309,6 +3314,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3486,6 +3492,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3650,6 +3657,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

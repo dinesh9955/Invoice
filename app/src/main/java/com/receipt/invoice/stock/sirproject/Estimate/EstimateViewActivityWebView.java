@@ -123,7 +123,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
     private void getinvoicedata() {
 
         String token = Constant.GetSharedPreferences(EstimateViewActivityWebView.this, Constant.ACCESS_TOKEN);
-        Call<EstimateResponseDto> resposresult = apiInterface.getEstimateDetail(token, invoiceId);
+        Call<EstimateResponseDto> resposresult = apiInterface.getEstimateDetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<EstimateResponseDto>() {
             @SuppressLint("LongLogTag")
             @Override

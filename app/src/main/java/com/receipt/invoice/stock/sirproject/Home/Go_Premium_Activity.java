@@ -27,6 +27,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.receipt.invoice.stock.sirproject.API.AllSirApi;
+import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.SignupSignin.Signup_Activity;
@@ -37,7 +38,7 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class Go_Premium_Activity extends Activity implements BillingProcessor.IBillingHandler {
+public class Go_Premium_Activity extends BaseActivity implements BillingProcessor.IBillingHandler {
 
     ImageView back;
     TextView heading;
@@ -341,6 +342,8 @@ public class Go_Premium_Activity extends Activity implements BillingProcessor.IB
 
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL+"user/login",params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

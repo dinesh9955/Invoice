@@ -104,15 +104,15 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
             viewHolderForCat.statustxt.setText("");
         } else {
             if(voidStatus.equalsIgnoreCase("1")){
-                viewHolderForCat.statustxt.setText("Void");
+                viewHolderForCat.statustxt.setText(mcontext.getString(R.string.report_Paid));
                 viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
             }else{
                 if (strstatus.equals("2")) {
-                    viewHolderForCat.statustxt.setText("Paid");
+                    viewHolderForCat.statustxt.setText(mcontext.getString(R.string.report_Paid));
                     viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
 
                 }else {
-                    viewHolderForCat.statustxt.setText("Unpaid");
+                    viewHolderForCat.statustxt.setText(mcontext.getString(R.string.report_UnPaid));
                     viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
                 }
             }
@@ -120,10 +120,10 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
         }
 
         if (is_viewed.equalsIgnoreCase("0")) {
-            viewHolderForCat.invoicesttsuspend.setText("Pending");
+            viewHolderForCat.invoicesttsuspend.setText(mcontext.getString(R.string.invoice_Pending));
             viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#FF0000"));
         }else{
-            viewHolderForCat.invoicesttsuspend.setText("Seen");
+            viewHolderForCat.invoicesttsuspend.setText(mcontext.getString(R.string.invoice_Seen));
             viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#008000"));
         }
 

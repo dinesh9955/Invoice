@@ -18,7 +18,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Customer"
+                android:text="@string/dialog_SelectCustomer"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/dark_blue"
@@ -32,7 +32,7 @@
                 android:drawableRight="@drawable/search_icon"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:hint="Search Customers"
+                android:hint="@string/dialog_SearchCustomer"
                 android:layout_marginTop="20dp"
                 android:layout_below="@id/txtcustomer"
                 android:id="@+id/search_customers"
@@ -45,7 +45,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add New"
+                android:text="@string/service_AddNew"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/dark_blue"

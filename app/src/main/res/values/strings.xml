@@ -223,6 +223,8 @@
     <string name="tax_Add">Add</string>
     <string name="tax_Search">Search</string>
     <string name="tax_SelectTax">Select Tax</string>
+    <string name="tax_TaxUpdated">Tax Updated</string>
+
 
     <string name="signature_drawSignature">Draw your signature here</string>
     <string name="signature_Clear">Clear</string>
@@ -230,6 +232,13 @@
     <string name="dialog_EnterPrice">Enter Price</string>
     <string name="dialog_EnterPriceQuantity">Enter Price and Quantity</string>
     <string name="dialog_OK">OK</string>
+    <string name="dialog_Please_wait">Please wait</string>
+    <string name="dialog_EnterConfirmEmail">Enter Confirm Email</string>
+    <string name="dialog_ConfirmEmaildoesnotmatch">Confirm Email does not match</string>
+    <string name="dialog_Please_select_Payment_Options">Please select Payment Options</string>
+
+
+
 
 
     <string name="customer_Upload_customer_logo">Upload customer/company logo</string>
@@ -274,7 +283,8 @@
     <string name="supplier_IMPORT_SUPPLIER_FROM_CONTACT">IMPORT SUPPLIER FROM CONTACT</string>
     <string name="supplier_Select_Company">Select Company</string>
     <string name="supplier_Search_Supplier">Search Supplier</string>
-
+    <string name="supplier_SelectVendor">Select Vendor</string>
+    <string name="supplier_ChooseTemplate">Choose Template</string>
 
 
     <string name="stock_Manage_your_stock">Manage your stock from here, move products between warehouse (s).</string>
@@ -399,6 +409,117 @@
     <string name="home_Invoice_Overdue">Invoice Overdue</string>
 
 
+
+    <string name="setting_Setup">Setup</string>
+    <string name="setting_Email">Email</string>
+    <string name="setting_ConfirmEmail">Confirm Email</string>
+    <string name="setting_NeedSomeHelp">Need Some Help?</string>
+    <string name="setting_enter_email">Enter Email</string>
+    <string name="setting_write_message">Write a message...</string>
+    <string name="setting_enter_message">Enter Message</string>
+    <string name="setting_Submit">Submit</string>
+    <string name="setting_PaymentOptions">Payment Options</string>
+    <string name="setting_Standard">Standard</string>
+    <string name="setting_Business">Business</string>
+    <string name="setting_SelectNumberFormat">Select Number Format</string>
+    <string name="setting_Done">Done</string>
+
+    <string name="setting_CommaFormatSelection">Comma Format Selection</string>
+    <string name="setting_OnlinePaymentGateway">Online Payment Gateway</string>
+    <string name="setting_Subscribe">Subscribe</string>
+    <string name="setting_Upgrade">Upgrade</string>
+    <string name="setting_RestorePurchases">Restore Purchases</string>
+    <string name="setting_InviteFriends">Invite Friends</string>
+    <string name="setting_FAQs">FAQs</string>
+    <string name="setting_Language">Language</string>
+    <string name="setting_Abouttheapp">About the app</string>
+    <string name="setting_Ratetheapp">Rate the app</string>
+    <string name="setting_Termsofuse">Terms of use</string>
+    <string name="setting_PrivacyPolicy">Privacy Policy</string>
+    <string name="setting_Support">Support</string>
+    <string name="setting_ChooseOne">Choose One</string>
+
+    <string name="service_AddNew">Add New</string>
+    <string name="service_SelectQuantity">Select Quantity</string>
+
+    <string name="service_PAYMENTGATEWAYS">PAYMENT GATEWAYS</string>
+    <string name="service_EnterAmount">Enter Amount</string>
+    <string name="service_Amount">Amount</string>
+    <string name="service_EnterDate">Enter Date</string>
+    <string name="service_SelectPaymentMode">Select Payment Mode</string>
+    <string name="service_ShippingAmount">Shipping Amount</string>
+    <string name="service_EnterShippingAmount">Enter Shipping Amount</string>
+    <string name="service_ShippingAmountInvoice">Do you want to add Shipping amount for\nthis Invoice?</string>
+
+
+    <string name="waste_some_damage">If your company has some damage or waste products, then remove it from here.</string>
+
+
+    <string name="filter_Filter">Filter</string>
+    <string name="filter_UnpaidInvoices">Unpaid Invoices</string>
+    <string name="filter_PaidInvoices">Paid Invoices</string>
+    <string name="filter_ByDate">By Date</string>
+    <string name="filter_All">All</string>
+
+
+    <string name="dialog_ClearData">Clear Data</string>
+    <string name="dialog_ViewInvoice">View Invoice</string>
+    <string name="dialog_DuplicateInvoice">Duplicate Invoice</string>
+    <string name="dialog_ShareInvoice">Share Invoice</string>
+    <string name="dialog_ConvertToReceipt">Convert To Receipt</string>
+
+
+    <string name="dialog_EnterDiscount">Enter Discount</string>
+    <string name="dialog_Percentage">Percentage</string>
+    <string name="dialog_ChooseAOption">Choose A Option</string>
+    <string name="dialog_SendAsLink">Send As Link</string>
+    <string name="dialog_SendAsPDF">Send As PDF</string>
+    <string name="dialog_SelectCreditTerms">Select Credit Terms</string>
+    <string name="dialog_EnterManually_days">Enter Manually(days)</string>
+
+    <string name="dialog_SelectCustomer">Select Customer</string>
+    <string name="dialog_SearchCustomer">Search Customers</string>
+
+
+
+
+
+
+
+
+
+    <string name="dialog_DateNone">none</string>
+    <string name="dialog_DateDue_on_Receipt"> Due on Receipt</string>
+    <string name="dialog_Date3days">3 days</string>
+    <string name="dialog_Date7days">7 days</string>
+    <string name="dialog_Date14days">14 days</string>
+    <string name="dialog_Date21days">21 days</string>
+    <string name="dialog_Date30days">30 days</string>
+    <string name="dialog_Date45days">45 days</string>
+    <string name="dialog_Date60days">60 days</string>
+    <string name="dialog_Date90days">90 days</string>
+    <string name="dialog_Date120days">120 days</string>
+    <string name="dialog_Date365days">365 days</string>
+    <string name="dialog_DateOR">OR</string>
+
+
+
+    <string name="settings_paln_title_1">Annual Plan</string>
+    <string name="settings_paln_title_2">Value Plan</string>
+    <string name="settings_paln_title_3">Extra Users</string>
+    <string name="settings_paln_title_4">Extra Companies</string>
+
+    <string name="settings_paln_desc_1">Subscribe to Annual Package and get upto 25% off. USD 35.99 only annually with unlimited access to all features except Stock Tracking.</string>
+    <string name="settings_paln_desc_2">Monthly package starts at USD 3.99 only with unlimited access to all features except Stock Tracking.</string>
+    <string name="settings_paln_desc_3">Assign additional users with limited or unlimited access for one time payment of USD 3.99 only per user</string>
+    <string name="settings_paln_desc_4">Create additional companies under the same credentials for one time payment of USD 11.99 only per additional company</string>
+
+    getString(R.string.setting_enter_message)
+
+    <string name="dialog_Success">Success</string>
+
+
+
     <string name="home">Home</string>
     <string name="estimate">Estimates</string>
     <string name="invoices">Invoices</string>
@@ -429,22 +550,6 @@
 
 
 
-
-    <string name="setting_Setup">Setup</string>
-    <string name="setting_Email">Email</string>
-    <string name="setting_ConfirmEmail">Confirm Email</string>
-    <string name="setting_NeedSomeHelp">Need Some Help?</string>
-    <string name="setting_enter_email">Enter Email</string>
-    <string name="setting_write_message">Write a message...</string>
-    <string name="setting_Submit">Submit</string>
-    <string name="setting_PaymentOptions">Payment Options</string>
-    <string name="setting_Standard">Standard</string>
-    <string name="setting_Business">Business</string>
-    <string name="setting_PaymentOptions">Payment Options</string>
-    <string name="setting_SelectNumberFormat">Select Number Format</string>
-    <string name="setting_Done">Done</string>
-    <string name="service_AddNew">Add New</string>
-    <string name="service_SelectQuantity">Select Quantity</string>
 
 
 
@@ -516,10 +621,73 @@
     <string name="createdebit">Create Debit Note</string>
 
 
+    <string name="credit_note_msg">Credit Note created successfully</string>
+    <string name="debit_note_msg">Debit Note created successfully</string>
+    <string name="estimate_msg">Estimate created successfully</string>
+    <string name="invoice_msg">Invoice created successfully</string>
+    <string name="po_msg">Purchase Order created successfully</string>
+    <string name="pv_msg">Payment Voucher created successfully</string>
+    <string name="receipt_msg">Receipt created successfully</string>
+
+    <string name="logged_in_msg">Logged in successfully!</string>
+
+
+    <string name="invoice_Pending">Pending</string>
+    <string name="invoice_Seen">Seen</string>
+    <string name="invoice_Void">Void</string>
+    <string name="invoice_InsufficientQuantityAvailable">Insufficient Quantity Available</string>
+    <string name="invoice_QuantityAvailable">Quantity Available: </string>
+    <string name="invoice_Category">Category: </string>
+    <string name="invoice_Unit">Unit: </string>
+    <string name="invoice_Quantity">Quantity: </string>
+    <string name="invoice_Value">Value: </string>
+    <string name="invoice_Reorder">Reorder</string>
+    <string name="invoice_InStock">In Stock</string>
 
 
 
 
+    <string name="dialog_Please_select_currency">Please select currency</string>
+    <string name="dialog_CompanyCreatedSuccessfully">Company created successfully</string>
+    <string name="dialog_Required">Required</string>
+    <string name="dialog_SupplierAdded">Supplier Added</string>
+    <string name="dialog_Camera">Camera</string>
+    <string name="dialog_Gallery">Gallery</string>
+    <string name="dialog_Cancel">Cancel</string>
+    <string name="dialog_AddImage">Add Image</string>
+    <string name="dialog_CustomerNotFound">Customer Not Found</string>
+    <string name="dialog_UserAddedSuccessfully">User Added Successfully</string>
+    <string name="dialog_Fieldisrequired">Field is required</string>
+    <string name="dialog_InvalidEmailAddress">Invalid Email Address</string>
+    <string name="dialog_InvalidEmail">Invalid Email</string>
+    <string name="dialog_PasswordCharacters">Password should be min 6 characters</string>
+    <string name="dialog_TaxAdded">Tax Added</string>
+    <string name="dialog_SelectAProduct">Select A Product</string>
+    <string name="dialog_SelectSenderWarehouse">Select Sender Warehouse</string>
+
+
+    <string name="dialog_CustomerAdded">Customer Added</string>
+    <string name="dialog_StockMoved">Stock Moved</string>
+    <string name="dialog_StockRemoved">Stock Removed</string>
+    <string name="dialog_SelectReceiverWarehouse">Select Receiver Warehouse</string>
+    <string name="dialog_UpdatedStock">Updated Stock</string>
+    <string name="dialog_SelectACompany">Select A Company</string>
+    <string name="dialog_ItemAdded">Item Added</string>
+    <string name="dialog_Measurement_Unit_required">Measurement Unit is required</string>
+    <string name="dialog_Company_required">Company is required</string>
+    <string name="dialog_Item_category_required">Item category is required</string>
+    <string name="dialog_ProductNotFound">Product Not Found</string>
+    <string name="dialog_Password_not_matched">Password not matched</string>
+    <string name="dialog_reset_your_password_sucessfully">You have reset your password sucessfully.</string>
+
+
+    <string name="dialog_PleaseEnterFirstName">Please Enter First Name</string>
+    <string name="dialog_PleaseEnterLastName">Please Enter Last Name</string>
+    <string name="dialog_ShippingAddress1">Please Enter Shipping Address 1</string>
+    <string name="dialog_ShippingAddress2">Please Enter Shipping Address 2</string>
+    <string name="dialog_PleaseEnterCity">Please Enter City</string>
+    <string name="dialog_SPleaseEnterPostcode">Please Enter Postcode</string>
+    <string name="dialog_PleaseEnterCountry">Please Enter Country</string>
 
 
 

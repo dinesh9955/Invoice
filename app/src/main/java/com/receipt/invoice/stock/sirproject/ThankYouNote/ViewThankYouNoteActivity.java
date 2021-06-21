@@ -150,7 +150,7 @@ public class ViewThankYouNoteActivity extends BaseActivity {
     private void getinvoicedata() {
 
         String token = Constant.GetSharedPreferences(ViewThankYouNoteActivity.this, Constant.ACCESS_TOKEN);
-        Call<InvoiceResponseDto> resposresult = apiInterface.getInvoiceDetail(token, invoiceId);
+        Call<InvoiceResponseDto> resposresult = apiInterface.getInvoiceDetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<InvoiceResponseDto>() {
             @SuppressLint("LongLogTag")
             @Override
