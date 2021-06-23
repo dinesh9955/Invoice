@@ -618,7 +618,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             public void onClick(View view) {
 
                 if (selectwarehouseId.equals("")) {
-                    Constant.ErrorToast(getActivity(), "Select Warehouse");
+                    Constant.ErrorToast(getActivity(), getString(R.string.invoice_SelectWarehouse));
 
                 } else {
                     createbottomsheet_products();
@@ -942,7 +942,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 Log.e(TAG, "setOnClickListener");
                 int ddd = wids.size();
                 if(ddd == 0){
-                    Constant.ErrorToast(getActivity(), "No warehouse found!");
+                    Constant.ErrorToast(getActivity(), getString(R.string.item_NoWarehouseFound));
                 }
             }
         });
@@ -983,8 +983,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
                 .showTitle(false)
-                .setCompleteButtonText("Done")
-                .setEmptySelectionText("No Select")
+                .setCompleteButtonText(getString(R.string.done))
+                .setEmptySelectionText(getString(R.string.noSelect))
                 .setSelectMaxCount(5)
                 .setSelectMinCount(1)
 
@@ -1041,19 +1041,19 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
      //   Log.e(TAG , "invoicenovalue::"+getInvoiceValue(invoicenum.getText().toString()));
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
-            Constant.ErrorToast(getActivity(), "Select A Company");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
             createinvoice.setEnabled(true);
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_PO).equalsIgnoreCase("")) {
-            Constant.ErrorToast(getActivity(), "Purchase Order No. should be letters followed by Digits");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_Shipping_amountPurchaseOrderNoDigits));
             createinvoice.setEnabled(true);
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select PO Date");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectDate));
             createinvoice.setEnabled(true);
         } else if (customer_name.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select A Supplier");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectASupplier));
             createinvoice.setEnabled(true);
         } else if (credit_terms.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select Credit Term");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectCreditTerms));
             createinvoice.setEnabled(true);
 //        } else if (ref_no.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Ref number");
@@ -1067,7 +1067,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
 
         else if (tempList.size() == 0) {
-            Constant.ErrorToast(getActivity(), "Select Product First");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectProductFirst));
             bottomSheetDialog2.dismiss();
         }
 
@@ -1075,7 +1075,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
             Log.e(TAG, "Selectedcustomer_id "+Selectedcustomer_id);
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("Please wait");
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
             RequestParams params = new RequestParams();
@@ -1278,6 +1278,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "purchaseorder/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1300,7 +1301,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                             params2.putString("event_name", "Purchase Orders");
                             firebaseAnalytics.logEvent("purchaseorder_create", params2);
 
-                            Constant.SuccessToast(getActivity(), "PO created successfully");
+                            Constant.SuccessToast(getActivity(), getString(R.string.po_msg));
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -1560,9 +1561,9 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
 
             if(selectedTemplate != 0){
-                itemstxtTemplate.setText("Template "+selectedTemplate);
+                itemstxtTemplate.setText(getString(R.string.header_template)+" "+selectedTemplate);
             }else{
-                itemstxtTemplate.setText("Choose Template");
+                itemstxtTemplate.setText(getString(R.string.header_choose_template));
             }
 
         }
@@ -1907,14 +1908,14 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                     Paymentamountdate = paiddate;
 
                     if (paidamountstr.isEmpty()) {
-                        edamount.setError("Required");
+                        edamount.setError(getString(R.string.dialog_Required));
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Constant.ErrorToastTop(getActivity(), "Date Required");
+                        Constant.ErrorToastTop(getActivity(), getString(R.string.dialog_DateRequired));
 //                        Toast.makeText(getActivity(), "Date Required", Toast.LENGTH_SHORT).show();
 //                        eddate.requestFocus();
                     } else if (Utility.isEmptyNull(paymentmode).equalsIgnoreCase("")) {
-                        Constant.ErrorToastTop(getActivity(), "Payment Mode Required");
+                        Constant.ErrorToastTop(getActivity(), getString(R.string.dialog_PaymentModeRequired));
                         // Constant.ErrorToast(getActivity(), "Payment Mode Required");
                         //Toast.makeText(getActivity(), "Payment Mode Required", Toast.LENGTH_SHORT).show();
                     } else {
@@ -1941,7 +1942,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         if (bottomSheetDialog2 != null) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.dots_bottomsheet, null);
             btnviewinvoice = view.findViewById(R.id.btnviewinvoice);
-            btnviewinvoice.setText("View Purchase Order");
+            btnviewinvoice.setText(getString(R.string.dialog_ViewPurchaseOrder));
 
             btnclear = view.findViewById(R.id.btnclear);
             btndotcancel = view.findViewById(R.id.btndotcancel);
@@ -1979,16 +1980,16 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Company");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Date");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectDate));
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Supplier");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectASupplier));
                         bottomSheetDialog2.dismiss();
                     } else if (credit_terms.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Credit Term");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectCreditTerms));
                         bottomSheetDialog2.dismiss();
                     }
 //                    else if (selectwarehouseId.equals("")) {
@@ -1997,7 +1998,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 //                    }
 
                     else if (tempList.size() == 0) {
-                        Constant.ErrorToast(getActivity(), "Select Product First");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectProductFirst));
                         bottomSheetDialog2.dismiss();
                     }
 
@@ -2163,7 +2164,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
-        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Purchase Order?");
+        txtfreightdes.setText(getString(R.string.select_Shipping_amount_PurchaseOrder));
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 
@@ -2240,11 +2241,11 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
 
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
-                        eddisount.setHint("Enter Discount in %");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
-                        eddisount.setHint("Enter Discount in Amount");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
                 }
@@ -2355,10 +2356,10 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                     String xxDate = duedate.getText().toString();
 
                     if(xxDate.equalsIgnoreCase("")){
-                        Toast.makeText(getActivity(), "Please Select Date", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.dialog_PleaseSelectDate), Toast.LENGTH_LONG).show();
                     }else{
                         if(!dayss.equals("")){
-                            String replaceString = dayss.replaceAll("days", "");
+                            String replaceString = dayss.replaceAll(getString(R.string.dialog_days), "");
                             String dayswith = replaceString.trim();
 
                             try {
@@ -2379,7 +2380,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                                 Log.e("Date Long22", simple.format(sumresultdate));
                                 edduedate.setText(simple.format(sumresultdate));
                                 edduedate.setClickable(false);
-                                txtdays.setText(dayss+" days");
+                                txtdays.setText(dayss+getString(R.string.dialog_days));
                             }catch (Exception e){
                                 txtdays.setText(dayswith);
                                 edduedate.setText(duedate.getText().toString());
@@ -2387,14 +2388,14 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                             bottomSheetDialog.dismiss();
                         }else if (!credit_terms.equals("")) {
 
-                            if (credit_terms.equals("none")) {
+                            if (credit_terms.equals(getString(R.string.dialog_DateNone))) {
                                 txtdays.setText(credit_terms);
                                 edduedate.setClickable(true);
                                 bottomSheetDialog.dismiss();
 
                                 edduedate.setText(duedate.getText().toString());
 
-                            } else if (credit_terms.equals("immediately")) {
+                            } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
                                 String myFormat = "yyyy-MM-dd"; //In which you need put here
                                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
@@ -2406,7 +2407,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                             } else {
 
 
-                                String replaceString = credit_terms.replaceAll("days", "");
+                                String replaceString = credit_terms.replaceAll(getString(R.string.dialog_days), "");
                                 String dayswith = replaceString.trim();
 
 
@@ -2440,7 +2441,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                             }
 
                         }else{
-                            Toast.makeText(getActivity(), "Please Select One Value", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), getString(R.string.dialog_PleaseSelectOneValue), Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -2661,16 +2662,16 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 Log.e("Date Long", simple.format(result));
                 edduedate.setText(simple.format(result));
                 edduedate.setClickable(true);
-                txtdays.setText(dayss + " " + "days");
+                txtdays.setText(dayss + " " + getString(R.string.dialog_days));
                 edduedate.setClickable(false);
             }
             else if (credit_terms != null && dayss.equals(""))
             {
-                if (credit_terms.equals("none"))
+                if (credit_terms.equals(getString(R.string.dialog_DateNone)))
                 {
                     txtdays.setText(credit_terms);
                     edduedate.setClickable(true);
-                } else if (credit_terms.equals("immediately")) {
+                } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
                     String myFormat2 = "yyyy-MM-dd"; //In which you need put here
                     SimpleDateFormat sdf3 = new SimpleDateFormat(myFormat2, Locale.US);
 
@@ -2680,7 +2681,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 } else {
 
 
-                    String replaceString = credit_terms.replaceAll("days", "");
+                    String replaceString = credit_terms.replaceAll(getString(R.string.dialog_days), "");
                     String dayswith = replaceString.trim();
                     double daysvalue = Double.parseDouble(dayswith);
 
@@ -2724,7 +2725,9 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -2786,13 +2789,14 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
         RequestParams params = new RequestParams();
         if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
-            Constant.ErrorToast(getActivity(), "Select Company");
+            Constant.ErrorToast(getActivity(), getString(R.string.select_company));
         } else {
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2865,6 +2869,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2921,7 +2926,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
                             }
                         } else {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(getActivity(), getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -2974,6 +2979,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3022,7 +3028,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
                             }
                         } else {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(getActivity(), getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3074,9 +3080,9 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.customer_bottom_sheet, null);
             txtcustomer = view.findViewById(R.id.txtcustomer);
-            txtcustomer.setText("Select Supplier");
+            txtcustomer.setText(getString(R.string.dialog_SelectSupplier));
             search_customers = view.findViewById(R.id.search_customers);
-            search_customers.setHint("Search Supplier");
+            search_customers.setHint(getString(R.string.dialog_SearchSupplier));
 
             TextView add_customer = view.findViewById(R.id.add_customer);
             add_customer.setOnClickListener(new View.OnClickListener() {
@@ -3153,6 +3159,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3361,6 +3368,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -4263,13 +4271,13 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
         String notestringvalue = "";
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = "Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -4278,7 +4286,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             if(company_stamp.toLowerCase().endsWith("white_img.png")){
                 companyname = "";
             }else{
-                companyname = "Company Seal";
+                companyname = getString(R.string.html_CompanySeal);
             }
         }else{
             company_stamp = "/android_res/drawable/white_img.png";
@@ -4291,7 +4299,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             if(signatureofreceiverst.toLowerCase().endsWith("white_img.png")){
                 signature_of_receivername = "";
             }else{
-                signature_of_receivername = "Signature of Receiver";
+                signature_of_receivername = getString(R.string.html_SignatureofReceiver);
             }
         }else{
             signatureofreceiverst = "/android_res/drawable/white_img.png";
@@ -4304,7 +4312,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             if(signature_of_issuer.toLowerCase().endsWith("white_img.png")){
                 signature_of_issuername = "";
             }else{
-                signature_of_issuername = "Signature of Issuer";
+                signature_of_issuername = getString(R.string.html_SignatureofIssuer);
             }
         }else{
             signature_of_issuer = "/android_res/drawable/white_img.png";
@@ -4350,7 +4358,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
 
@@ -4363,7 +4371,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
 
@@ -4407,7 +4415,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             }
 
 
-            shipingvaluetxt = "Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
         if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
@@ -4454,11 +4462,11 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         } else {
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount;
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrreptxt = getString(R.string.html_PaidAmount);
             if(Paymentamountdate.equalsIgnoreCase("")){
-                paidamountstrreptxt = "Paid Amount ";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount);
             }else{
-                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
             }
 
             pemailpaidstr = paypal_emailstr;
@@ -4473,16 +4481,16 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
-                bycheckstrtxt="By cheque :";
-                paimnetdetailstrtxt =" Payment Details ";
+                bycheckstrtxt= getString(R.string.html_Bycheque);
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
-                paypalstrtxt="Pay Pal :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paypalstrtxt= "Pay Pal :";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
@@ -4496,7 +4504,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                     payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -4543,7 +4551,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue= getString(R.string.html_ReferenceNo);
 
 
         }

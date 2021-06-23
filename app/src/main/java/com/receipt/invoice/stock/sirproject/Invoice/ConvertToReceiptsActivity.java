@@ -697,7 +697,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
                 selectedTemplate = Integer.parseInt(invoiceDtoInvoice.getTemplate_type());
                 if(selectedTemplate != 0){
-                    itemstxtTemplate.setText("Template "+selectedTemplate);
+                    itemstxtTemplate.setText(getString(R.string.header_template)+" "+selectedTemplate);
                 }
                 strnotes = invoiceDtoInvoice.getNotes();
                 ednotes.setText(Html.fromHtml(strnotes));
@@ -1093,7 +1093,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
                 if (selectwarehouseId.equals(""))
                 {
-                    Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Warehouse");
+                    Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.stock_Select_Warehouse));
                 } else {
                     createbottomsheet_products();
                     bottomSheetDialog.show();
@@ -1286,8 +1286,8 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
                 .showTitle(false)
-                .setCompleteButtonText("Done")
-                .setEmptySelectionText("No Select")
+                .setCompleteButtonText(getString(R.string.done))
+                .setEmptySelectionText(getString(R.string.noSelect))
                 .setSelectMaxCount(5)
                 .setSelectMinCount(1)
 
@@ -1347,22 +1347,22 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
         avi.smoothToShow();
         if (customer_name.equals("")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Customer");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.header_template));
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_RECEIPT).equalsIgnoreCase("")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Receipt No. should be letters followed by Digits");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.dialog_ReceiptDigits));
 
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Invoice Date");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.dialog_SelectDate));
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Company");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.dialog_SelectACompany));
 
         }
 //        else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Warehouse");
 //        }
         else if (tempList.size() == 0) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Product First");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.dialog_SelectProductFirst));
         }
 //        else if (credit_terms.equals("")) {
 //            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Credit Term");
@@ -1371,7 +1371,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         else {
 
             final ProgressDialog progressDialog = new ProgressDialog(ConvertToReceiptsActivity.this);
-            progressDialog.setMessage("Please wait");
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
@@ -2148,16 +2148,16 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                     Paymentamountdate = paiddate;
 
                     if (paidamountstr.isEmpty()) {
-                        edamount.setError("Required");
+                        edamount.setError(getString(R.string.dialog_Required));
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
 //                        Toast.makeText(ConvertToReceiptsActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
 //                        eddate.requestFocus();
-                        Constant.ErrorToastTop(ConvertToReceiptsActivity.this, "Date Required");
+                        Constant.ErrorToastTop(ConvertToReceiptsActivity.this, getString(R.string.dialog_DateRequired));
                     } else if (paymentmode.equals("")) {
 //                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Payment Mode Required");
 //                        Toast.makeText(ConvertToReceiptsActivity.this, "Payment Mode Required", Toast.LENGTH_SHORT).show();
-                        Constant.ErrorToastTop(ConvertToReceiptsActivity.this, "Payment Mode Required");
+                        Constant.ErrorToastTop(ConvertToReceiptsActivity.this, getString(R.string.dialog_PaymentModeRequired));
                     } else {
                         if (paidamountstr != null) {
                             paidamount.setText(paidamountstr);
@@ -2176,7 +2176,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         if (bottomSheetDialog2 != null) {
             View view = LayoutInflater.from(this).inflate(R.layout.dots_bottomsheet, null);
             btnviewinvoice = view.findViewById(R.id.btnviewinvoice);
-            btnviewinvoice.setText("View Receipt");
+            btnviewinvoice.setText(getString(R.string.list_ViewReceipt));
             btnclear = view.findViewById(R.id.btnclear);
             btndotcancel = view.findViewById(R.id.btndotcancel);
 
@@ -2209,13 +2209,13 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Company");
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Date");
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.dialog_SelectDate));
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select A Customer");
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.dialog_SelectACustomer));
                         bottomSheetDialog2.dismiss();
                     }
 //                    else if (credit_terms.equals("")) {
@@ -2223,7 +2223,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 //                        bottomSheetDialog2.dismiss();
 //                    }
                     else if (tempList.size() == 0) {
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Product First");
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.dialog_SelectProductFirst));
                         bottomSheetDialog2.dismiss();
                     }
 //                    else if (selectwarehouseId.equals("")) {
@@ -2376,7 +2376,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
-        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Receipt?");
+        txtfreightdes.setText(getString(R.string.dialog_Shipping_amountReceipt));
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 
@@ -2456,11 +2456,11 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
-                        eddisount.setHint("Enter Discount in %");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
-                        eddisount.setHint("Enter Discount in Amount");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
                 }
@@ -2556,7 +2556,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                     dayss = edmanual.getText().toString();
 
                     if (dayss.equals("") && credit_terms.equals("")) {
-                        Toast.makeText(ConvertToReceiptsActivity.this, "Please Select Atleast One", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ConvertToReceiptsActivity.this, getString(R.string.dialog_PleaseSelectAtleastOne), Toast.LENGTH_LONG).show();
                     } else if (dayss != null && credit_terms.equals("")) {
 
                         String dayswith = dayss.trim();
@@ -2574,18 +2574,18 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                         Log.e("Date Long", simple.format(result));
                         edduedate.setText(simple.format(result));
                         edduedate.setClickable(true);
-                        txtdays.setText(dayss + " " + "days");
+                        txtdays.setText(dayss + " " + getString(R.string.dialog_days));
                         bottomSheetDialog.dismiss();
                         edduedate.setClickable(false);
                     } else if (credit_terms != null && dayss.equals("")) {
-                        if (credit_terms.equals("none")) {
+                        if (credit_terms.equals(getString(R.string.dialog_DateNone))) {
                             txtdays.setText(credit_terms);
                             edduedate.setClickable(true);
                             bottomSheetDialog.dismiss();
 
                             edduedate.setText(duedate.getText().toString());
 
-                        } else if (credit_terms.equals("immediately")) {
+                        } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
                             String myFormat = "yyyy-MM-dd"; //In which you need put here
                             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
@@ -2597,7 +2597,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                         } else {
 
 
-                            String replaceString = credit_terms.replaceAll("days", "");
+                            String replaceString = credit_terms.replaceAll(getString(R.string.dialog_days), "");
                             String dayswith = replaceString.trim();
 
                             try {
@@ -2627,7 +2627,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
 
                     } else if (dayss != null && credit_terms != null) {
-                        Toast.makeText(ConvertToReceiptsActivity.this, "Please Select One Value", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ConvertToReceiptsActivity.this, getString(R.string.dialog_PleaseSelectAtleastOne), Toast.LENGTH_LONG).show();
 
                     }
 
@@ -2919,7 +2919,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
         RequestParams params = new RequestParams();
         if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
-            Constant.ErrorToast(ConvertToReceiptsActivity.this, "Select Company");
+            Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.select_company));
         } else {
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(ConvertToReceiptsActivity.this, Constant.ACCESS_TOKEN);
@@ -3055,7 +3055,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
                             }
                         } else {
-                            Constant.ErrorToast(ConvertToReceiptsActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3159,7 +3159,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
                             }
                         } else {
-                            Constant.ErrorToast(ConvertToReceiptsActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3659,10 +3659,10 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             grandAmount = total_price;
 
 
-            if (strdiscount.equalsIgnoreCase("Percentage")) {
+            if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equalsIgnoreCase("Amount")) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{
@@ -4007,9 +4007,9 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
 
                     if(edprice.getText().toString().length() == 0){
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this,"Please enter amount!");
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this,getString(R.string.select_Please_enter_amount));
                     }else if(edquantity.getText().toString().length() == 0){
-                        Constant.ErrorToast(ConvertToReceiptsActivity.this,"Please enter quantity!");
+                        Constant.ErrorToast(ConvertToReceiptsActivity.this,getString(R.string.select_Please_enter_quantity));
                     }else{
                         double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
@@ -4025,7 +4025,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                         if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
                             if (itemQuantity.getEn_quantity() <= en_quantity) {
                                 mybuilder.show();
-                                Constant.ErrorToast(ConvertToReceiptsActivity.this, "Insufficient Quantity Available");
+                                Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.invoice_InsufficientQuantityAvailable));
                                 mybuilder.dismiss();
                             } else {
                                 sh_price = Double.parseDouble(edprice.getText().toString());
@@ -4745,7 +4745,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         if (shippingfirstname.equalsIgnoreCase("")) {
             Shiping_tostr = "";
         } else {
-            Shiping_tostr = "Ship To:";
+            Shiping_tostr = getString(R.string.html_ShipTo) ;
 
             if(!shippingfirstname.equalsIgnoreCase("")){
                 stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
@@ -4961,13 +4961,13 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
         String notestringvalue = "";
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = "Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -4976,7 +4976,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             if(company_stamp.toLowerCase().endsWith("white_img.png")){
                 companyname = "";
             }else{
-                companyname = "Company Seal";
+                companyname = getString(R.string.html_CompanySeal);
             }
         }else{
             company_stamp = "/android_res/drawable/white_img.png";
@@ -4989,7 +4989,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             if(signatureofreceiverst.toLowerCase().endsWith("white_img.png")){
                 signature_of_receivername = "";
             }else{
-                signature_of_receivername = "Signature of Receiver";
+                signature_of_receivername = getString(R.string.html_SignatureofReceiver);
             }
         }else{
             signatureofreceiverst = "/android_res/drawable/white_img.png";
@@ -5002,7 +5002,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             if(signature_of_issuer.toLowerCase().endsWith("white_img.png")){
                 signature_of_issuername = "";
             }else{
-                signature_of_issuername = "Signature of Issuer";
+                signature_of_issuername = getString(R.string.html_SignatureofIssuer);
             }
         }else{
             signature_of_issuer = "/android_res/drawable/white_img.png";
@@ -5037,7 +5037,6 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             taxtamountstr = invoicetaxamount;
             taxtamountstrvalue = ""+txttax.getText().toString();
         }
-
         String discountvalue = "";
         String discounttxtreplace = "";
 
@@ -5049,7 +5048,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
         String subTotalTxt = "";
@@ -5059,7 +5058,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
 
@@ -5102,7 +5101,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             }
 
 
-            shipingvaluetxt = "Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
         if (companylogopath.toLowerCase().endsWith(".gif") || companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
@@ -5150,7 +5149,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount;
 
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrreptxt = getString(R.string.html_PaidAmount);
 
 //            paidamountstrreptxt = "Paid Amount "+"("+Paymentamountdate+")";
 
@@ -5183,7 +5182,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue = getString(R.string.html_ReferenceNo);
 
 
         }

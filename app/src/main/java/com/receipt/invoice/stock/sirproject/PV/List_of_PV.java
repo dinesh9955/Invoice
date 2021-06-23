@@ -352,7 +352,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
 
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
-                        "Delete",
+                        getString(R.string.list_Delete),
                         0,
                         Color.parseColor("#ff0000"),
 
@@ -421,7 +421,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
             public void onClick(View v) {
 
                 if (selectedCompanyId.equals("")) {
-                    Constant.ErrorToast(getActivity(), "Select A Company");
+                    Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
 
                 } else {
 
@@ -1011,10 +1011,10 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
 //            shareinvoicetxt.setVisibility(View.GONE);
 
-            viewinvoicebotom.setText("View PV");
-            duplicateinvoitxt.setText("Edit PV");
-            shareinvoicetxt.setText("Share PV");
-            recepitsviewtxt.setText("Convert to Payment Voucher");
+            viewinvoicebotom.setText(getString(R.string.dialog_ViewPV));
+            duplicateinvoitxt.setText(getString(R.string.dialog_EditPV));
+            shareinvoicetxt.setText(getString(R.string.dialog_SharePV));
+            recepitsviewtxt.setText(getString(R.string.dialog_Convert_to_PaymentVoucher));
 
 
             viewinvoicebotom.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
@@ -1053,7 +1053,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Company");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog.show();
                     } else {
 
@@ -1141,14 +1141,14 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
 
 
-                            String subject = Utility.getRealValuePVWithoutPlus(dataNo)+" from "+selectedCompanyName;
-                            String txt = "Your Payment Voucher can be viewed, printed and downloaded from below link." +
+                            String subject = Utility.getRealValuePVWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                            String txt = getString(R.string.list_PaymentVoucherviewed) +
                                     "\n\n" +sharelink ;
 
                             try {
 
                                 if (!sharelink.endsWith(".pdf")) {
-                                    Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), getString(R.string.list_NoFileFound), Toast.LENGTH_LONG).show();
                                 } else {
                                     BaseurlForShareInvoice = shareInvoicelink + sharelink;
                                     //String finalurl =BaseurlForShareInvoice;
@@ -1217,7 +1217,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
                             Log.e(TAG, "pdflink:: "+sharelink);
                             try {
                                 if (!sharelink.endsWith(".pdf")) {
-                                    Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), getString(R.string.list_NoFileFound), Toast.LENGTH_LONG).show();
                                 } else {
 //                    /*              String pdfurl = "http://13.126.22.0/saad/app/uploads/invoice/pdf/" + pdflink;
 //                                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -1240,7 +1240,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValuePVWithoutPlus(dataNo)+" from "+selectedCompanyName;
+                                            String subject = Utility.getRealValuePVWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -1768,7 +1768,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 //                    intentShareFile.setPackage("com.google.android.gm");
 //                }
 //                context.startActivity(intentShareFile);
-                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                context.startActivity(Intent.createChooser(intentShareFile, context.getString(R.string.list_ShareFile)));
             }
 
         }

@@ -298,6 +298,7 @@
     <string name="stock_Manage_your_stock">Manage your stock from here, move products between warehouse (s).</string>
     <string name="stock_Select_Company">Select Company</string>
     <string name="stock_Select_Product">Select Product</string>
+    <string name="stock_Select_Products">Select Products</string>
     <string name="stock_Send_from_warehouse">Send from warehouse: </string>
     <string name="stock_Select_Warehouse">Select Warehouse</string>
     <string name="stock_Send_to_warehouse">Send to warehouse: </string>
@@ -334,15 +335,23 @@
     <string name="report_FilterByProductName">Filter By Product Name</string>
     <string name="report_CustomerStatementofAccount">Customer Statement of Account</string>
     <string name="report_SupplierStatementofAccount">Supplier Statement of Account</string>
+
+
+    <string name="report_Go_ahead">Go ahead!</string>
+    <string name="report_Kindly_select_the_option">Kindly select the option as per your requirement</string>
+    <string name="report_Cancel">Cancel</string>
+
+    <string name="report_SelectDateTo">Select Date (To)</string>
+    <string name="report_SelectDateFrom">Select Date (From)</string>
+
+    <string name="report_CustomerStatementReport">Customer Statement Report</string>
+    <string name="report_SupplierStatementReport">Supplier Statement Report</string>
     <string name="report_TotalSalesReport">Total Sales Report</string>
     <string name="report_TotalPurchaseReport">Total Purchase Report</string>
     <string name="report_CustomerAgeingReport">Customer Ageing Report</string>
     <string name="report_TaxCollectedReport">Tax Collected Report</string>
     <string name="report_StockReport">Stock Report</string>
     <string name="report_ProductMovementReport">Product Movement Report</string>
-    <string name="report_Go_ahead">Go ahead!</string>
-    <string name="report_Kindly_select_the_option">Kindly select the option as per your requirement</string>
-    <string name="report_Cancel">Cancel</string>
 
 
 
@@ -384,6 +393,8 @@
     <string name="invoice_Search_by_Invoice_number">Search by Invoice number</string>
 
 
+
+    <string name="html_SearchByCustomerName">Search By Customer Name</string>
     <string name="html_ReferenceNo">Reference No:</string>
     <string name="html_Attachments">Attachments</string>
     <string name="html_Notes">Notes:</string>
@@ -404,7 +415,13 @@
 
 
 
+    <string name="list_ChargeCustomer">Charge Customer</string>
+    <string name="list_ViewPO">View PO</string>
+    <string name="list_DuplicatePO">Duplicate PO</string>
+    <string name="list_SharePO">Share PO</string>
+    <string name="list_ConverttoPaymentVoucher">Convert to Payment Voucher</string>
 
+    <string name="list_Quantity_added_to_warehouse">Quantity Successfully added to warehouse!</string>
     <string name="list_SearchByReceiptNumber">Search By Receipt Number</string>
     <string name="list_SearchByCreditNoteNumber">Search By Credit Note Number</string>
     <string name="list_Invoicenotfound">Invoice not found</string>
@@ -416,8 +433,15 @@
     <string name="list_EditCreditNote">Edit Credit Note</string>
     <string name="list_DuplicateCreditNote">Duplicate Credit Note</string>
     <string name="list_ShareCreditNote">Share Credit Note</string>
+
     <string name="list_YourCreditNoteviewed">Your Credit Note can be viewed, printed and downloaded from below link.</string>
     <string name="list_YourDebitNoteviewed">Your Debit Note can be viewed, printed and downloaded from below link.</string>
+    <string name="list_PurchaseOrderviewed">Your Purchase Order can be viewed, printed and downloaded from below link.</string>
+    <string name="list_PaymentVoucherviewed">Your Payment Voucher can be viewed, printed and downloaded from below link.</string>
+    <string name="list_Estimateviewed">Your Estimate can be viewed, printed and downloaded from below link.</string>
+
+
+
     <string name="list_SearchByDebitNoteNumber">Search By Debit Note Number</string>
     <string name="list_ViewDebitNote">View Debit Note</string>
     <string name="list_EditDebitNote">Edit Debit Note</string>
@@ -430,6 +454,13 @@
     <string name="list_ViewEditReceipt">Edit Receipt</string>
     <string name="list_DuplicateReceipt">Duplicate Receipt</string>
     <string name="list_ShareReceipt">Share Receipt</string>
+
+
+    <string name="listViewEstimate">View Estimate</string>
+    <string name="list_EditEstimate">Edit Estimate</string>
+    <string name="list_DuplicateEstimate">Duplicate Estimate</string>
+    <string name="list_ShareEstimate">Share Estimate</string>
+    <string name="list_ConvertToInvoice">Convert To Invoice</string>
 
     <string name="list_Delete">Delete</string>
 
@@ -513,8 +544,8 @@
     <string name="service_SelectPaymentMode">Select Payment Mode</string>
     <string name="service_ShippingAmount">Shipping Amount</string>
     <string name="service_EnterShippingAmount">Enter Shipping Amount</string>
-    <string name="service_ShippingAmountInvoice">Do you want to add Shipping amount for\nthis Invoice?</string>
-
+    <string name="service_ShippingAmountInvoice">Do you want to add Shipping amount for this Invoice?</string>
+    <string name="service_ShippingAmountEstimate">Do you want to add Shipping amount for this Estimate?</string>
 
     <string name="waste_some_damage">If your company has some damage or waste products, then remove it from here.</string>
 
@@ -538,7 +569,7 @@
     <string name="dialog_ChooseAOption">Choose A Option</string>
     <string name="dialog_SendAsLink">Send As Link</string>
     <string name="dialog_SendAsPDF">Send As PDF</string>
-    <string name="dialog_SelectCreditTerms">Select Credit Terms</string>
+    <string name="dialog_SelectCreditTerms">Select Credit Term</string>
     <string name="dialog_EnterManually_days">Enter Manually(days)</string>
 
     <string name="dialog_SelectCustomer">Select Customer</string>
@@ -548,11 +579,11 @@
 
 
 
-
+    <string name="dialog_PleaseSelectDate">Please Select Date</string>
     <string name="dialog_days">days</string>
-
     <string name="dialog_immediately">immediately</string>
     <string name="dialog_DateNone">none</string>
+
     <string name="dialog_DateDue_on_Receipt"> Due on Receipt</string>
     <string name="dialog_Date3days">3 days</string>
     <string name="dialog_Date7days">7 days</string>
@@ -615,7 +646,8 @@
     <string name="select_Please_enter_quantity">Please enter quantity!</string>
     <string name="select_We_appreciateThank_you">We appreciate your Business. Kindly find below Thank you note.</string>
 
-
+    <string name="select_Shipping_amount_PurchaseOrder">Do you want to add Shipping amount for this Purchase Order?</string>
+    <string name="select_Shipping_amount_PaymentVoucher">Do you want to add Shipping amount for this Payment Voucher?</string>
 
 
 
@@ -705,7 +737,7 @@
 
     <string name="logged_in_msg">Logged in successfully!</string>
 
-
+    <string name="invoice_Completed">Completed</string>
     <string name="invoice_Pending">Pending</string>
     <string name="invoice_Seen">Seen</string>
     <string name="invoice_Void">Void</string>
@@ -719,6 +751,10 @@
     <string name="invoice_InStock">In Stock</string>
 
 
+    <string name="dialog_ViewPV">View PV</string>
+    <string name="dialog_EditPV">Edit PV</string>
+    <string name="dialog_SharePV">Share PV</string>
+    <string name="dialog_Convert_to_PaymentVoucher">Convert to Payment Voucher</string>
 
     <string name="dialog_TaxNotFound">Tax Not Found</string>
     <string name="dialog_PerUnit">Per Unit</string>
@@ -730,7 +766,7 @@
     <string name="dialog_ViewCreditNote">View Credit Note</string>
     <string name="dialog_ViewRecepit">View Recepit</string>
     <string name="dialog_ViewPaymentVoucher">View Payment Voucher</string>
-
+    <string name="dialog_ViewPurchaseOrder">View Purchase Order</string>
 
 
     <string name="dialog_SupplierAdded">Supplier Added</string>
@@ -758,7 +794,11 @@
     <string name="dialog_CreditNoteDigits">Credit Note No. should be letters followed by Digits</string>
     <string name="dialog_DeditNoteDigits">Dedit Note No. should be letters followed by Digits</string>
     <string name="dialog_ReceiptDigits">Receipt No. should be letters followed by Digits</string>
+    <string name="dialog_InvoiceDigits">Invoice No. should be letters followed by Digits</string>
+    <string name="dialog_EstimateDigits">Estimate No. should be letters followed by Digits</string>
 
+
+    <string name="dialog_SelectInvoiceDate">Select Invoice Date</string>
 
 
     <string name="dialog_SelectDate">Select Date</string>
@@ -770,13 +810,14 @@
     <string name="dialog_PaymentVoucherNoalready_exists">Payment Voucher No. already exists</string>
     <string name="dialog_PaymentVoucherNoDigits">Payment Voucher No. should be letters followed by Digits</string>
     <string name="dialog_Shipping_amountPaymentVoucher">Do you want to add Shipping amount for this Payment Voucher?</string>
-
+    <string name="dialog_Shipping_amountPurchaseOrderNoDigits">Purchase Order No. should be letters followed by Digits</string>
 
     <string name="dialog_EnterDiscountinPercent">Enter Discount in %</string>
     <string name="dialog_EnterDiscountinAmount">Enter Discount in Amount</string>
     <string name="dialog_SelectASupplier">Select A Supplier</string>
     <string name="dialog_SelectSupplier">Select Supplier</string>
     <string name="dialog_SearchSupplier">Search Supplier</string>
+    <string name="dialog_SelectSuppliers">Select Suppliers</string>
 
     <string name="dialog_SelectReceiptDate">Select Receipt Date</string>
 

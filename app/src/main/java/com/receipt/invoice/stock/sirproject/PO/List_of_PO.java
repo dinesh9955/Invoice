@@ -1046,171 +1046,171 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 //
 
 
-    private void enableSwipe2(){
-
-
-        SwipeHelper2 swipeHelper2 = new SwipeHelper2(getContext(), recycler_invoices) {
-            @Override
-            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
-
-                underlayButtons.add(new UnderlayButton(
-                        "More",
-                        0,
-                        Color.parseColor("#669933"),
-
-                        new UnderlayButtonClickListener() {
-                            @Override
-                            public void onClick(final int pos) {
-                                customerName = list.get(pos).getInvoicustomer_name();
-                                dataNo = list.get(pos).getInvoice_nobdt();
-                                templateSelect = list.get(pos).getTemplate_type();
-                                Log.e(TAG, "templateSelect: "+templateSelect);
-                                invoiceidbypos = list.get(pos).getInvoice_userid();
-                                String ilnvoiceStatus = list.get(pos).getInvocestatus();
-                                String pdflink = list.get(pos).getInvoicepdflink();
-                                String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
-                                Log.e(TAG, "pdflink1: "+pdflink);
-                                Log.e(TAG, "sahrelink1: "+sahrelink);
-
-                                String link = shareInvoicelink+""+pdflink;
-
-                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, link, link);
-                                invoicelistAdapterdt.notifyDataSetChanged();
-                                bottomSheetDialog.show();
-                            }
-                        }
-                ));
-
-
-                if (list.size() > 0) {
-                    voidStatus = list.get(viewHolder.getPosition()).getVoid_status();
-                }
-
-                Log.e(TAG, "voidStatusAA " + voidStatus);
-
-                if (voidStatus.equalsIgnoreCase("0")) {
-                    colorVoid = "#ff9900";
-                    markAsVoidTxt = "Mark as void";
-                }
-                if (voidStatus.equalsIgnoreCase("1")) {
-                    colorVoid = "#99cc00";
-                    markAsVoidTxt = "Mark as unvoid";
-                }
-
-
-
-                underlayButtons.add(new UnderlayButton(
-                        markAsVoidTxt,
-                        0,
-                        Color.parseColor(colorVoid),
-                        new UnderlayButtonClickListener() {
-                            @Override
-                            public void onClick(final int pos) {
-
-                                String invoiceidbypos = list.get(pos).getInvoice_userid();
-
-                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
-
-                                String invoiceVoidStatus = list.get(pos).getVoid_status();
-
-                                String voidPassValue = "0";
-
-                                if(invoiceVoidStatus.equalsIgnoreCase("0")){
-                                    voidPassValue = "1";
-                                    // colorVoid = "#ff9900";
-                                }
-
-                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
-                                    voidPassValue = "0";
-                                    //colorVoid = "#99cc00";
-                                }
-
-                                Log.e(TAG, "instantiateUnderlayButton");
-
-                                invoicelistAdapterdt.notifyDataSetChanged();
-                                markVoidInvoice(invoiceidbypos, voidPassValue);
-
-                            }
-                        }
-                ));
-
-
-
-            }
-        };
-
-
-
-
-
-
-//        SwipeHelper swipeHelper = new SwipeHelper(getContext(), recycler_invoices) {
+//    private void enableSwipe2(){
+//
+//
+//        SwipeHelper2 swipeHelper2 = new SwipeHelper2(getContext(), recycler_invoices) {
 //            @Override
 //            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
 //
+//                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+//                        getString(R.string.cancel)"More",
+//                        0,
+//                        Color.parseColor("#669933"),
+//
+//                        new SwipeHelper2.UnderlayButtonClickListener() {
+//                            @Override
+//                            public void onClick(final int pos) {
+//                                customerName = list.get(pos).getInvoicustomer_name();
+//                                dataNo = list.get(pos).getInvoice_nobdt();
+//                                templateSelect = list.get(pos).getTemplate_type();
+//                                Log.e(TAG, "templateSelect: "+templateSelect);
+//                                invoiceidbypos = list.get(pos).getInvoice_userid();
+//                                String ilnvoiceStatus = list.get(pos).getInvocestatus();
+//                                String pdflink = list.get(pos).getInvoicepdflink();
+//                                String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
+//                                Log.e(TAG, "pdflink1: "+pdflink);
+//                                Log.e(TAG, "sahrelink1: "+sahrelink);
+//
+//                                String link = shareInvoicelink+""+pdflink;
+//
+//                                createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, link, link);
+//                                invoicelistAdapterdt.notifyDataSetChanged();
+//                                bottomSheetDialog.show();
+//                            }
+//                        }
+//                ));
+//
+//
 //                if (list.size() > 0) {
-//                    deliveryStatus = list.get(viewHolder.getPosition()).getInvocestatus();
+//                    voidStatus = list.get(viewHolder.getPosition()).getVoid_status();
 //                }
 //
 //                Log.e(TAG, "voidStatusAA " + voidStatus);
 //
-//                if (deliveryStatus.equalsIgnoreCase("1")) {
-//                    colorDelivery = "#ff4d4d";
-//                    markAsVoidTxt = "Mark as delivery received";
+//                if (voidStatus.equalsIgnoreCase("0")) {
+//                    colorVoid = "#ff9900";
+//                    markAsVoidTxt = "Mark as void";
 //                }
-//                if (deliveryStatus.equalsIgnoreCase("2")) {
-//                    colorDelivery = "#33cc33";
-//                    markAsVoidTxt = "Delivery received";
+//                if (voidStatus.equalsIgnoreCase("1")) {
+//                    colorVoid = "#99cc00";
+//                    markAsVoidTxt = "Mark as unvoid";
 //                }
 //
-//                underlayButtons.add(new SwipeHelper.UnderlayButton(
-//                        "More",
-//                        0,
-//                        Color.parseColor("#ff00ff"),
-//                        new SwipeHelper.UnderlayButtonClickListener() {
 //
-//                            @Override
-//                            public void onClick(int pos) {
 //
-//                            }
-//                        },
+//                underlayButtons.add(new SwipeHelper2.UnderlayButton(
 //                        markAsVoidTxt,
 //                        0,
-//                        Color.parseColor(colorDelivery),
-//                        new SwipeHelper.UnderlayButtonClickListener2() {
+//                        Color.parseColor(colorVoid),
+//                        new SwipeHelper2.UnderlayButtonClickListener() {
 //                            @Override
-//                            public void onClick(int pos) {
+//                            public void onClick(final int pos) {
+//
 //                                String invoiceidbypos = list.get(pos).getInvoice_userid();
 //
 //                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
 //
-//                                String invoiceVoidStatus = list.get(pos).getInvocestatus();
+//                                String invoiceVoidStatus = list.get(pos).getVoid_status();
 //
-//                                String voidPassValue = "1";
+//                                String voidPassValue = "0";
 //
-//                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
-//                                    voidPassValue = "2";
+//                                if(invoiceVoidStatus.equalsIgnoreCase("0")){
+//                                    voidPassValue = "1";
 //                                    // colorVoid = "#ff9900";
 //                                }
 //
-//                                if(invoiceVoidStatus.equalsIgnoreCase("2")){
-//                                    voidPassValue = "1";
+//                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
+//                                    voidPassValue = "0";
 //                                    //colorVoid = "#99cc00";
 //                                }
 //
 //                                Log.e(TAG, "instantiateUnderlayButton");
 //
 //                                invoicelistAdapterdt.notifyDataSetChanged();
-//                                deliveryStatus(invoiceidbypos, voidPassValue);
+//                                markVoidInvoice(invoiceidbypos, voidPassValue);
+//
 //                            }
 //                        }
 //                ));
 //
+//
+//
 //            }
 //        };
-
-    }
-
+//
+//
+//
+//
+//
+//
+////        SwipeHelper swipeHelper = new SwipeHelper(getContext(), recycler_invoices) {
+////            @Override
+////            public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
+////
+////                if (list.size() > 0) {
+////                    deliveryStatus = list.get(viewHolder.getPosition()).getInvocestatus();
+////                }
+////
+////                Log.e(TAG, "voidStatusAA " + voidStatus);
+////
+////                if (deliveryStatus.equalsIgnoreCase("1")) {
+////                    colorDelivery = "#ff4d4d";
+////                    markAsVoidTxt = "Mark as delivery received";
+////                }
+////                if (deliveryStatus.equalsIgnoreCase("2")) {
+////                    colorDelivery = "#33cc33";
+////                    markAsVoidTxt = "Delivery received";
+////                }
+////
+////                underlayButtons.add(new SwipeHelper.UnderlayButton(
+////                        "More",
+////                        0,
+////                        Color.parseColor("#ff00ff"),
+////                        new SwipeHelper.UnderlayButtonClickListener() {
+////
+////                            @Override
+////                            public void onClick(int pos) {
+////
+////                            }
+////                        },
+////                        markAsVoidTxt,
+////                        0,
+////                        Color.parseColor(colorDelivery),
+////                        new SwipeHelper.UnderlayButtonClickListener2() {
+////                            @Override
+////                            public void onClick(int pos) {
+////                                String invoiceidbypos = list.get(pos).getInvoice_userid();
+////
+////                                Log.e(TAG, "invoiceidbypos: "+invoiceidbypos);
+////
+////                                String invoiceVoidStatus = list.get(pos).getInvocestatus();
+////
+////                                String voidPassValue = "1";
+////
+////                                if(invoiceVoidStatus.equalsIgnoreCase("1")){
+////                                    voidPassValue = "2";
+////                                    // colorVoid = "#ff9900";
+////                                }
+////
+////                                if(invoiceVoidStatus.equalsIgnoreCase("2")){
+////                                    voidPassValue = "1";
+////                                    //colorVoid = "#99cc00";
+////                                }
+////
+////                                Log.e(TAG, "instantiateUnderlayButton");
+////
+////                                invoicelistAdapterdt.notifyDataSetChanged();
+////                                deliveryStatus(invoiceidbypos, voidPassValue);
+////                            }
+////                        }
+////                ));
+////
+////            }
+////        };
+//
+//    }
+//
 
 
     void filter(String text) {
@@ -1246,7 +1246,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
             public void onClick(View v) {
 
                 if (selectedCompanyId.equals("")) {
-                    Constant.ErrorToast(getActivity(), "Select A Company");
+                    Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
 
                 } else {
 
@@ -1276,82 +1276,83 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         });
     }
 
-    private void CompanyInformation(String selectedCompanyId) {
-
-        RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
-        params.add("product", "1");
-        params.add("service", "1");
-        params.add("customer", "1");
-        params.add("tax", "1");
-//        params.add("receipt", "1");
-        params.add("purchase_order", "1");
-        params.add("warehouse", "1");
-        String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
-        Log.e("token", token);
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-        client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String response = new String(responseBody);
-                Log.e("Company Information", response);
-
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String status = jsonObject.getString("status");
-
-                    if (status.equals("true")) {
-                        JSONObject data = jsonObject.getJSONObject("data");
-                        String image_path = data.getString("customer_image_path");
-                        Log.e("imagepath customer", image_path);
-                        receipt_count = data.getString("receipt_count");
-                        estimate_count = data.getString("estimate_count");
-                        invoice_count = data.getString("invoice_count");
-                        Log.e("estimate_count", estimate_count);
-                        //  Log.e("invoice_count",invoice_count);
-
-
-                   /*    companyreceiptno = Integer.parseInt(receipt_count) + 1;
-                        Log.e("companyreceiptno", String.valueOf(companyreceiptno));
-*/
-                        JSONArray company = data.getJSONArray("company");
-
-
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                if (responseBody != null) {
-                    String response = new String(responseBody);
-                    Log.e("responsecustomersF", response);
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-
-                        String status = jsonObject.getString("status");
-                        if (status.equals("false")) {
-                            //Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
-                }
-            }
-        });
-
-
-    }
+//    private void CompanyInformation(String selectedCompanyId) {
+//
+//        RequestParams params = new RequestParams();
+//        params.add("company_id", this.selectedCompanyId);
+//        params.add("product", "1");
+//        params.add("service", "1");
+//        params.add("customer", "1");
+//        params.add("tax", "1");
+////        params.add("receipt", "1");
+//        params.add("purchase_order", "1");
+//        params.add("warehouse", "1");
+//        String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
+//        Log.e("token", token);
+//        AsyncHttpClient client = new AsyncHttpClient();
+//        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+//        client.addHeader("Access-Token", token);
+//        params.add("language", ""+getLanguage());
+//        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+//                String response = new String(responseBody);
+//                Log.e("Company Information", response);
+//
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    String status = jsonObject.getString("status");
+//
+//                    if (status.equals("true")) {
+//                        JSONObject data = jsonObject.getJSONObject("data");
+//                        String image_path = data.getString("customer_image_path");
+//                        Log.e("imagepath customer", image_path);
+//                        receipt_count = data.getString("receipt_count");
+//                        estimate_count = data.getString("estimate_count");
+//                        invoice_count = data.getString("invoice_count");
+//                        Log.e("estimate_count", estimate_count);
+//                        //  Log.e("invoice_count",invoice_count);
+//
+//
+//                   /*    companyreceiptno = Integer.parseInt(receipt_count) + 1;
+//                        Log.e("companyreceiptno", String.valueOf(companyreceiptno));
+//*/
+//                        JSONArray company = data.getJSONArray("company");
+//
+//
+//                    }
+//
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+//                if (responseBody != null) {
+//                    String response = new String(responseBody);
+//                    Log.e("responsecustomersF", response);
+//
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response);
+//
+//                        String status = jsonObject.getString("status");
+//                        if (status.equals("false")) {
+//                            //Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+//                }
+//            }
+//        });
+//
+//
+//    }
 
     private void InvoicelistData(String paramsvalue) {
 
@@ -1385,6 +1386,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1531,7 +1533,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         avi.smoothToShow();
         RequestParams params = new RequestParams();
         if (invoice_idstr.equals("") || invoice_idstr.equals("null")) {
-            Constant.ErrorToast(getActivity(), "Invoice not found");
+            Constant.ErrorToast(getActivity(), getString(R.string.list_Invoicenotfound));
         } else {
 
             params.add("invoice_id", invoice_useriddt);
@@ -1543,6 +1545,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "invoice/updateStatus", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1597,7 +1600,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                        //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }
                 }
             });
@@ -1624,6 +1627,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "purchaseorder/delete", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1667,7 +1671,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -1695,6 +1699,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "purchaseorder/updateStatus", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1708,7 +1713,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                     if (status.equals("true")) {
 
                         if(voidPassValue.equalsIgnoreCase("2")){
-                            Constant.SuccessToast(getActivity(), "Quantity Successfully added to warehouse!");
+                            Constant.SuccessToast(getActivity(), getString(R.string.list_Quantity_added_to_warehouse));
                         }
 
                         parmsvalue = "All";
@@ -1768,6 +1773,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "purchaseorder/updateVoidStatus", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1844,10 +1850,10 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
             duplicateinvoitxt = view.findViewById(R.id.duplicateinvoitxt);
             shareinvoicetxt = view.findViewById(R.id.shareinvoicetxt);
 
-            viewinvoicebotom.setText("View PO");
-            duplicateinvoitxt.setText("Duplicate PO");
-            shareinvoicetxt.setText("Share PO");
-            recepitsviewtxt.setText("Convert to Payment Voucher");
+            viewinvoicebotom.setText(getString(R.string.list_ViewPO));
+            duplicateinvoitxt.setText(getString(R.string.list_DuplicatePO));
+            shareinvoicetxt.setText(getString(R.string.list_SharePO));
+            recepitsviewtxt.setText(getString(R.string.list_ConverttoPaymentVoucher));
 
 
             viewinvoicebotom.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
@@ -1858,7 +1864,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 
             LinearLayout linearLayoutChangeTemp= view.findViewById(R.id.viewicetemplate);
             linearLayoutChangeTemp.setVisibility(View.VISIBLE);
-            viewinvoicetemplate.setText("Charge Customer");
+            viewinvoicetemplate.setText(getString(R.string.list_ChargeCustomer));
 
             if (stringPaypal.equals("") || stringPaypal.equals("0") && stringStripe.equals("") || stringStripe.equals("0")) {
                 linearLayoutChangeTemp.setVisibility(View.GONE);
@@ -1982,14 +1988,14 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 
 
 
-                            String subject = Utility.getRealValuePOWithoutPlus(dataNo)+" from "+selectedCompanyName;
-                            String txt = "Your Purchase Order can be viewed, printed and downloaded from below link." +
+                            String subject = Utility.getRealValuePOWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                            String txt = getString(R.string.list_PurchaseOrderviewed)+
                                     "\n\n" +sharelink ;
 
                             try {
 
                                 if (!sharelink.endsWith(".pdf")) {
-                                    Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), getString(R.string.list_NoFileFound), Toast.LENGTH_LONG).show();
                                 } else {
                                     BaseurlForShareInvoice = shareInvoicelink + sharelink;
                                     //String finalurl =BaseurlForShareInvoice;
@@ -2060,7 +2066,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                             Log.e(TAG, "pdflink:: "+sharelink);
                             try {
                                 if (!sharelink.endsWith(".pdf")) {
-                                    Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), getString(R.string.list_NoFileFound), Toast.LENGTH_LONG).show();
                                 } else {
 //                    /*              String pdfurl = "http://13.126.22.0/saad/app/uploads/invoice/pdf/" + pdflink;
 //                                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -2083,7 +2089,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValuePOWithoutPlus(dataNo)+" from "+selectedCompanyName;
+                                            String subject = Utility.getRealValuePOWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -2384,7 +2390,9 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -2607,7 +2615,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 //                    intentShareFile.setPackage("com.google.android.gm");
 //                }
 //                context.startActivity(intentShareFile);
-                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                context.startActivity(Intent.createChooser(intentShareFile, context.getString(R.string.list_ShareFile)));
             }
 
         }

@@ -849,7 +849,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
 
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+             //   DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
 
 
@@ -1037,9 +1037,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                         }
 
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            paidamount.setText(formatter.format(Paidamountstrdto));
+                            paidamount.setText(Utility.getPatternFormat(""+numberPostion, Paidamountstrdto));
                         } else {
-                            paidamount.setText(formatter.format(Paidamountstrdto) + currency_codedto);
+                            paidamount.setText(Utility.getPatternFormat(""+numberPostion, Paidamountstrdto) + currency_codedto);
                         }
 
                     } else if (code.equals("remaining_balance")) {
@@ -1050,9 +1050,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                         }
 
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            balance.setText(formatter.format(Blanceamountstrdto));
+                            balance.setText(Utility.getPatternFormat(""+numberPostion, Blanceamountstrdto));
                         } else {
-                            balance.setText(formatter.format(Blanceamountstrdto) + currency_codedto);
+                            balance.setText(Utility.getPatternFormat(""+numberPostion, Blanceamountstrdto) + currency_codedto);
                         }
 
                     }
@@ -1364,7 +1364,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                 Log.e(TAG, "setOnClickListener");
                 int ddd = wids.size();
                 if(ddd == 0){
-                    Constant.ErrorToast(ConvertToInvoiceActivity.this, "No warehouse found!");
+                    Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.item_NoWarehouseFound));
                 }
             }
         });
@@ -1408,8 +1408,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
                 .showTitle(false)
-                .setCompleteButtonText("Done")
-                .setEmptySelectionText("No Select")
+                .setCompleteButtonText(getString(R.string.done))
+                .setEmptySelectionText(getString(R.string.noSelect))
                 .setSelectMaxCount(5)
                 .setSelectMinCount(1)
 
@@ -1455,15 +1455,15 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
     private void createinvoicewithdetail(File file) {
         avi.smoothToShow();
         if (customer_name.equals("")) {
-            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select A Customer");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_SelectACustomer));
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_INVOICE).equalsIgnoreCase("")) {
-            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Invoice No. should be letters followed by Digits");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_InvoiceDigits));
 
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Invoice Date");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_SelectInvoiceDate));
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select A Company");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_SelectACompany));
 
         }
 
@@ -1474,10 +1474,10 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 //        }
 
         else if (tempList.size() == 0) {
-            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Product First");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_SelectProductFirst));
         }
         else if (credit_terms.equals("")) {
-            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Credit Term");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_SelectCreditTerms));
 
         }  else {
 
@@ -1485,7 +1485,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
 
             final ProgressDialog progressDialog = new ProgressDialog(ConvertToInvoiceActivity.this);
-            progressDialog.setMessage("Please wait");
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
             RequestParams params = new RequestParams();
@@ -2271,12 +2271,12 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                     Paymentamountdate = paiddate;
 
                     if (paidamountstr.isEmpty()) {
-                        edamount.setError("Required");
+                        edamount.setError(getString(R.string.dialog_Required));
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Constant.ErrorToastTop(ConvertToInvoiceActivity.this, "Date Required");
+                        Constant.ErrorToastTop(ConvertToInvoiceActivity.this, getString(R.string.dialog_DateRequired));
                     } else if (Utility.isEmptyNull(paymentmode).equalsIgnoreCase("")) {
-                        Constant.ErrorToastTop(ConvertToInvoiceActivity.this, "Payment Mode Required");
+                        Constant.ErrorToastTop(ConvertToInvoiceActivity.this, getString(R.string.dialog_PaymentModeRequired));
                     } else {
                         if (paidamountstr != null) {
                             strpaid_amount = paidamountstr;
@@ -2303,7 +2303,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         if (bottomSheetDialog2 != null) {
             View view = LayoutInflater.from(this).inflate(R.layout.dots_bottomsheet, null);
             btnviewinvoice = view.findViewById(R.id.btnviewinvoice);
-            btnviewinvoice.setText("View Invoice");
+            btnviewinvoice.setText(getString(R.string.dialog_ViewInvoice));
             btnclear = view.findViewById(R.id.btnclear);
             btndotcancel = view.findViewById(R.id.btndotcancel);
 
@@ -2336,16 +2336,16 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select A Company");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Date");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_SelectDate));
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select A Customer");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_SelectACustomer));
                         bottomSheetDialog2.dismiss();
                     } else if (credit_terms.equals("")) {
-                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Credit Term");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_SelectCreditTerms));
                         bottomSheetDialog2.dismiss();
                     }
 //                    else if (Utility.isEmptyNull(selectwarehouseId).equalsIgnoreCase("")) {
@@ -2353,7 +2353,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 //                        bottomSheetDialog2.dismiss();
 //                    }
                     else if (tempList.size() == 0) {
-                        Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Product First");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_SelectProductFirst));
                         bottomSheetDialog2.dismiss();
                     }
                     else {
@@ -2501,7 +2501,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
-        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Invoice?");
+        txtfreightdes.setText(getString(R.string.service_ShippingAmountInvoice));
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 
@@ -2581,11 +2581,11 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
-                        eddisount.setHint("Enter Discount in %");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
-                        eddisount.setHint("Enter Discount in Amount");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
                 }
@@ -2690,10 +2690,10 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                     String xxDate = duedate.getText().toString();
 
                     if(xxDate.equalsIgnoreCase("")){
-                        Toast.makeText(ConvertToInvoiceActivity.this, "Please Select Date", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ConvertToInvoiceActivity.this, getString(R.string.dialog_PleaseSelectDate), Toast.LENGTH_LONG).show();
                     }else{
                         if(!dayss.equals("")){
-                            String replaceString = dayss.replaceAll("days", "");
+                            String replaceString = dayss.replaceAll(getString(R.string.dialog_days), "");
                             String dayswith = replaceString.trim();
 
                             try {
@@ -2714,7 +2714,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                                 Log.e("Date Long22", simple.format(sumresultdate));
                                 edduedate.setText(simple.format(sumresultdate));
                                 edduedate.setClickable(false);
-                                txtdays.setText(dayss+" days");
+                                txtdays.setText(dayss+getString(R.string.dialog_days));
                             }catch (Exception e){
                                 txtdays.setText(dayswith);
                                 edduedate.setText(duedate.getText().toString());
@@ -2722,14 +2722,14 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                             bottomSheetDialog.dismiss();
                         }else if (!credit_terms.equals("")) {
 
-                            if (credit_terms.equals("none")) {
+                            if (credit_terms.equals(getString(R.string.dialog_DateNone))) {
                                 txtdays.setText(credit_terms);
                                 edduedate.setClickable(true);
                                 bottomSheetDialog.dismiss();
 
                                 edduedate.setText(duedate.getText().toString());
 
-                            } else if (credit_terms.equals("immediately")) {
+                            } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
                                 String myFormat = "yyyy-MM-dd"; //In which you need put here
                                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
@@ -2741,7 +2741,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                             } else {
 
 
-                                String replaceString = credit_terms.replaceAll("days", "");
+                                String replaceString = credit_terms.replaceAll(getString(R.string.dialog_days), "");
                                 String dayswith = replaceString.trim();
 
 
@@ -2775,7 +2775,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                             }
 
                         }else{
-                            Toast.makeText(ConvertToInvoiceActivity.this, "Please Select One Value", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ConvertToInvoiceActivity.this, getString(R.string.dialog_PleaseSelectOneValue), Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -3072,7 +3072,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
         RequestParams params = new RequestParams();
         if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
-            Constant.ErrorToast(ConvertToInvoiceActivity.this, "Select Company");
+            Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.select_company));
         } else {
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(ConvertToInvoiceActivity.this, Constant.ACCESS_TOKEN);
@@ -3225,7 +3225,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
                             }
                         } else {
-                            Constant.ErrorToast(ConvertToInvoiceActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3329,7 +3329,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
                             }
                         } else {
-                            Constant.ErrorToast(ConvertToInvoiceActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3936,10 +3936,10 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             grandAmount = total_price;
 
 
-            if (strdiscount.equalsIgnoreCase("Percentage")) {
+            if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equalsIgnoreCase("Amount")) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{
@@ -4294,9 +4294,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
 
                     if(edprice.getText().toString().length() == 0){
-                        Constant.ErrorToast(ConvertToInvoiceActivity.this,"Please enter amount!");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this,getString(R.string.select_Please_enter_amount));
                     }else if(edquantity.getText().toString().length() == 0){
-                        Constant.ErrorToast(ConvertToInvoiceActivity.this,"Please enter quantity!");
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this,getString(R.string.select_Please_enter_quantity));
                     }else{
                         double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
@@ -4312,7 +4312,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                         if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
                             if (itemQuantity.getEn_quantity() <= en_quantity) {
                                 mybuilder.show();
-                                Constant.ErrorToast(ConvertToInvoiceActivity.this, "Insufficient Quantity Available");
+                                Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.invoice_InsufficientQuantityAvailable));
                                 mybuilder.dismiss();
                             } else {
                                 sh_price = Double.parseDouble(edprice.getText().toString());
@@ -5028,7 +5028,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         if (shippingfirstname.equalsIgnoreCase("")) {
             Shiping_tostr = "";
         } else {
-            Shiping_tostr = "Ship To:";
+            Shiping_tostr = getString(R.string.html_ShipTo);
 
             if(!shippingfirstname.equalsIgnoreCase("")){
                 stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
@@ -5334,7 +5334,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
 
@@ -5345,7 +5345,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
 
@@ -5389,7 +5389,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             }
 
 
-            shipingvaluetxt = "Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
 
@@ -5444,9 +5444,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             paidamountstrrepvalue = strpaid_amount;
 
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
-                paidamountstrreptxt = "Paid Amount ";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount);
             }else{
-                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
             }
 
 
@@ -5462,8 +5462,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
-                bycheckstrtxt="By cheque :";
-                paimnetdetailstrtxt =" Payment Details ";
+                bycheckstrtxt = getString(R.string.html_Bycheque);
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
@@ -5471,7 +5471,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             }else{
                 pemailpaidstr = paypal_emailstr;
                 paypalstrtxt="Pay Pal :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
@@ -5485,7 +5485,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                     payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -5525,7 +5525,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue = getString(R.string.html_ReferenceNo);
 
 
         }

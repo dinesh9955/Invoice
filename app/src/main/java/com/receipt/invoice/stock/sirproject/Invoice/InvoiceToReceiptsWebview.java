@@ -168,7 +168,7 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
             if (shippingfirstname.equalsIgnoreCase("")) {
                 Shiping_tostr = "";
             } else {
-                Shiping_tostr = "Ship To:";
+                Shiping_tostr = getString(R.string.html_ShipTo);
                 Log.e(TAG, "shippingfirstnameAA "+shippingfirstname);
 
                 if(!shippingfirstname.equalsIgnoreCase("")){
@@ -498,13 +498,13 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
         String notestringvalue = "";
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = "Notes:";
+            notestringvalue = getString(R.string.select_company);
         }
 
 
@@ -514,7 +514,7 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
             company_stamp = "/android_res/drawable/white_img.png";
             companyname = "";
         } else {
-            companyname = "Company Seal";
+            companyname = getString(R.string.html_CompanySeal);
         }
 
         String signature_of_receivername = "";
@@ -522,7 +522,7 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
             signature_of_receiver = "/android_res/drawable/white_img.png";
             signature_of_receivername = "";
         } else {
-            signature_of_receivername = "Signature of Receiver";
+            signature_of_receivername = getString(R.string.html_SignatureofReceiver);
         }
 
 
@@ -531,7 +531,7 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
             signature_of_issuer = "/android_res/drawable/white_img.png";
             signature_of_issuername = "";
         } else {
-            signature_of_issuername = "Signature of Issuer";
+            signature_of_issuername = getString(R.string.html_SignatureofIssuer);
         }
 
         try {
@@ -572,7 +572,7 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
 
@@ -584,7 +584,7 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
 
@@ -629,7 +629,7 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
             }
 
 
-            shipingvaluetxt = "Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
         String companylogopathdto="";
@@ -682,9 +682,9 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
             paidamountstrrepvalue =strpaid_amount;
 
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
-                paidamountstrreptxt = "Paid Amount ";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount);
             }else{
-                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
             }
 
 
@@ -717,7 +717,7 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue = getString(R.string.html_ReferenceNo);
 
 
         }

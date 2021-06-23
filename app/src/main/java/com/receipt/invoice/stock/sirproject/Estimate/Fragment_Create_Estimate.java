@@ -955,13 +955,12 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
 
     private void multiimagepicker() {
 
-
         multiImageDisposable = TedRxBottomPicker.with(getActivity())
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
                 .showTitle(false)
-                .setCompleteButtonText("Done")
-                .setEmptySelectionText("No Select")
+                .setCompleteButtonText(getString(R.string.done))
+                .setEmptySelectionText(getString(R.string.noSelect))
                 .setSelectMaxCount(5)
                 .setSelectMinCount(1)
 
@@ -1012,16 +1011,16 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
        // Log.e(TAG , "invoicenovalue::"+getInvoiceValue(invoicenum.getText().toString()));
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
-            Constant.ErrorToast(getActivity(), "Select a Company");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
             createinvoice.setEnabled(true);
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_ESTIMATE).equalsIgnoreCase("")) {
-            Constant.ErrorToast(getActivity(), "Estimate No. should be letters followed by Digits");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_EstimateDigits));
             createinvoice.setEnabled(true);
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select Estimate Date");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectDate));
             createinvoice.setEnabled(true);
         } else if (customer_name.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select A Customer");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACustomer));
             createinvoice.setEnabled(true);
 //        } else if (credit_terms.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Credit Tearm");
@@ -1033,13 +1032,13 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
 //            Constant.ErrorToast(getActivity(), "Select A Where House");
 
         } else if (tempList.size() == 0) {
-            Constant.ErrorToast(getActivity(), "Select Product First");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectProductFirst));
             createinvoice.setEnabled(true);
         }
         else {
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("Please wait");
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
             RequestParams params = new RequestParams();
@@ -1500,9 +1499,9 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
             Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
 
             if(selectedTemplate != 0){
-                itemstxtTemplate.setText("Template "+selectedTemplate);
+                itemstxtTemplate.setText(getString(R.string.header_template)+" "+selectedTemplate);
             }else{
-                itemstxtTemplate.setText("Choose Template");
+                itemstxtTemplate.setText(getString(R.string.header_choose_template));
             }
 
 //            Log.e(TAG, "requestCode Path"+requestCode);
@@ -1852,14 +1851,14 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                     Paymentamountdate = paiddate;
 
                     if (paidamountstr.isEmpty()) {
-                        edamount.setError("Required");
+                        edamount.setError(getString(R.string.dialog_Required));
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
 //                        Toast.makeText(getActivity(), "Date Required", Toast.LENGTH_SHORT).show();
 //                        eddate.requestFocus();
-                        Constant.ErrorToastTop(getActivity(), "Date Required");
+                        Constant.ErrorToastTop(getActivity(), getString(R.string.dialog_DateRequired));
                     } else if (paimentmodespinerstr.equals("")) {
-                        Constant.ErrorToastTop(getActivity(), "Payment Mode Required");
+                        Constant.ErrorToastTop(getActivity(), getString(R.string.dialog_PaymentModeRequired));
                     } else {
                         if (paidamountstr != null) {
 
@@ -1880,7 +1879,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
         if (bottomSheetDialog2 != null) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.dots_bottomsheet, null);
             btnviewinvoice = view.findViewById(R.id.btnviewinvoice);
-            btnviewinvoice.setText("View Estimate");
+            btnviewinvoice.setText(getString(R.string.listViewEstimate));
             btnclear = view.findViewById(R.id.btnclear);
             btndotcancel = view.findViewById(R.id.btndotcancel);
 
@@ -1918,13 +1917,13 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select a Company");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Date");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectDate));
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Customer");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACustomer));
                         bottomSheetDialog2.dismiss();
 //                    } else if (credit_terms.equals("")) {
 //                        Constant.ErrorToast(getActivity(), "Select Credit Tearm");
@@ -1935,7 +1934,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                     }
 
                      else if (tempList.size() == 0) {
-                        Constant.ErrorToast(getActivity(), "Select Product First");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectProductFirst));
                         bottomSheetDialog2.dismiss();
                     }
 
@@ -2107,7 +2106,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
-        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Estimate?");
+        txtfreightdes.setText(getString(R.string.service_ShippingAmountEstimate));
 
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
@@ -2184,11 +2183,11 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
-                        eddisount.setHint("Enter Discount in %");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
-                        eddisount.setHint("Enter Discount in Amount");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
                 }
@@ -2292,7 +2291,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
 
                     if (dayss.equals("") && credit_terms.equals(""))
                     {
-                        Toast.makeText(getActivity(), "Please Select Atleast One", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.dialog_PleaseSelectAtleastOne), Toast.LENGTH_LONG).show();
                     }
                     else if (dayss != null && credit_terms.equals(""))
                     {
@@ -2312,20 +2311,20 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                         Log.e("Date Long", simple.format(result));
                         edduedate.setText(simple.format(result));
                         edduedate.setClickable(true);
-                        txtdays.setText(dayss + " " + "days");
+                        txtdays.setText(dayss + " " + getString(R.string.dialog_days));
                         bottomSheetDialog.dismiss();
                         edduedate.setClickable(false);
                     }
                     else if (credit_terms != null && dayss.equals(""))
                     {
-                        if (credit_terms.equals("none")) {
+                        if (credit_terms.equals(getString(R.string.dialog_DateNone))) {
                             txtdays.setText(credit_terms);
                             edduedate.setClickable(true);
                             bottomSheetDialog.dismiss();
 
                             edduedate.setText(duedate.getText().toString());
 
-                        } else if (credit_terms.equals("immediately")) {
+                        } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
                             String myFormat = "yyyy-MM-dd"; //In which you need put here
                             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
@@ -2337,7 +2336,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                         } else {
 
 
-                            String replaceString = credit_terms.replaceAll("days", "");
+                            String replaceString = credit_terms.replaceAll(getString(R.string.dialog_DateNone), "");
                             String dayswith = replaceString.trim();
                             Double daysvalue = Double.parseDouble(dayswith);
 
@@ -2362,7 +2361,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                     }
                     else if (dayss != null && credit_terms != null)
                     {
-                        Toast.makeText(getActivity(), "Please Select One Value", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.dialog_PleaseSelectOneValue), Toast.LENGTH_LONG).show();
                     }
 
 
@@ -2584,16 +2583,16 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                 Log.e("Date Long", simple.format(result));
                 edduedate.setText(simple.format(result));
                 edduedate.setClickable(true);
-                txtdays.setText(dayss + " " + "days");
+                txtdays.setText(dayss + " " + getString(R.string.dialog_days));
                 edduedate.setClickable(false);
             }
             else if (credit_terms != null && dayss.equals(""))
             {
-                if (credit_terms.equals("none"))
+                if (credit_terms.equals(getString(R.string.dialog_DateNone)))
                 {
                     txtdays.setText(credit_terms);
                     edduedate.setClickable(true);
-                } else if (credit_terms.equals("immediately")) {
+                } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
                     String myFormat2 = "yyyy-MM-dd"; //In which you need put here
                     SimpleDateFormat sdf3 = new SimpleDateFormat(myFormat2, Locale.US);
 
@@ -2603,7 +2602,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                 } else {
 
 
-                    String replaceString = credit_terms.replaceAll("days", "");
+                    String replaceString = credit_terms.replaceAll(getString(R.string.dialog_days), "");
                     String dayswith = replaceString.trim();
                     double daysvalue = Double.parseDouble(dayswith);
 
@@ -2711,7 +2710,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
 
         RequestParams params = new RequestParams();
         if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
-            Constant.ErrorToast(getActivity(), "Select Company");
+            Constant.ErrorToast(getActivity(), getString(R.string.select_company));
         } else {
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
@@ -2836,7 +2835,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
 
                             }
                         } else {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(getActivity(), getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3459,10 +3458,10 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
 
             grandAmount = total_price;
 
-            if (strdiscount.equals("Percentage")) {
+            if (strdiscount.equals(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equals("Amount")) {
+            } else if (strdiscount.equals(getString(R.string.service_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{
@@ -4053,7 +4052,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
         if (shippingfirstname.equalsIgnoreCase("")) {
             Shiping_tostr = "";
         } else {
-            Shiping_tostr = "Ship To:";
+            Shiping_tostr = getString(R.string.html_ShipTo);
 
             if(!shippingfirstname.equalsIgnoreCase("")){
                 stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
@@ -4265,13 +4264,13 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
         String notestringvalue = "";
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = "Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -4280,7 +4279,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
             if(company_stamp.toLowerCase().endsWith("white_img.png")){
                 companyname = "";
             }else{
-                companyname = "Company Seal";
+                companyname = getString(R.string.html_CompanySeal);
             }
         }else{
             company_stamp = "/android_res/drawable/white_img.png";
@@ -4293,7 +4292,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
             if(signatureofreceiverst.toLowerCase().endsWith("white_img.png")){
                 signature_of_receivername = "";
             }else{
-                signature_of_receivername = "Signature of Receiver";
+                signature_of_receivername = getString(R.string.html_SignatureofReceiver);
             }
         }else{
             signatureofreceiverst = "/android_res/drawable/white_img.png";
@@ -4306,7 +4305,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
             if(signature_of_issuer.toLowerCase().endsWith("white_img.png")){
                 signature_of_issuername = "";
             }else{
-                signature_of_issuername = "Signature of Issuer";
+                signature_of_issuername = getString(R.string.html_SignatureofIssuer);
             }
         }else{
             signature_of_issuer = "/android_res/drawable/white_img.png";
@@ -4353,7 +4352,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
 
@@ -4364,7 +4363,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
 
@@ -4408,7 +4407,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
             }
 
 
-            shipingvaluetxt = "Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
         if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
@@ -4454,7 +4453,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
         } else {
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount;
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrreptxt = getString(R.string.html_PaidAmount);
 
 
             pemailpaidstr = paypal_emailstr;
@@ -4464,7 +4463,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
             payment_currencystr = payment_currency;
             payment_swiftstr = payment_swift_bic;
 
-            paimnetdetailstrtxt=" Payment Details ";
+            paimnetdetailstrtxt= getString(R.string.html_PaymentDetails);
             bycheckstrtxt="By cheque :";
             paypalstrtxt="Pay Pal :";
             bankstrtxt="Bank :";
@@ -4485,7 +4484,7 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue= getString(R.string.html_ReferenceNo);
 
 
         }

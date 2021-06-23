@@ -660,7 +660,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
                 selectedTemplate = Integer.parseInt(invoiceDtoInvoice.getTemplate_type());
                 if(selectedTemplate != 0){
-                    itemstxtTemplate.setText("Template "+selectedTemplate);
+                    itemstxtTemplate.setText(getString(R.string.header_template)+" "+selectedTemplate);
                 }
                 strnotes = invoiceDtoInvoice.getNotes();
                 ednotes.setText(Html.fromHtml(strnotes));
@@ -798,7 +798,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
                 productsRecycler.setAdapter(products_adapter);
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+               // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
 
 
@@ -1300,8 +1300,8 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
                 .showTitle(false)
-                .setCompleteButtonText("Done")
-                .setEmptySelectionText("No Select")
+                .setCompleteButtonText(getString(R.string.done))
+                .setEmptySelectionText(getString(R.string.noSelect))
                 .setSelectMaxCount(5)
                 .setSelectMinCount(1)
 
@@ -1347,15 +1347,15 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
     private void createinvoicewithdetail(File file) {
         avi.smoothToShow();
         if (customer_name.equals("")) {
-            Constant.ErrorToast(EditEditEstimateActivity.this, "Select A Customer");
+            Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.dialog_SelectACustomer));
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_ESTIMATE).equalsIgnoreCase("")) {
-            Constant.ErrorToast(EditEditEstimateActivity.this, "Estimate No. should be letters followed by Digits");
+            Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.dialog_EstimateDigits));
 
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(EditEditEstimateActivity.this, "Select Estimate Date");
+            Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.dialog_SelectDate));
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(EditEditEstimateActivity.this, "Select A Company");
+            Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.dialog_SelectACompany));
 
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(EditEstimateActivity.this, "Select A Where House");
@@ -1364,12 +1364,12 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 //            Constant.ErrorToast(EditEstimateActivity.this, "Select Credit Tearm");
 
          }   else if (tempList.size() == 0) {
-                Constant.ErrorToast(EditEditEstimateActivity.this, "Select Product First");
+                Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.dialog_SelectProductFirst));
         }
         else {
 
             final ProgressDialog progressDialog = new ProgressDialog(EditEditEstimateActivity.this);
-            progressDialog.setMessage("Please wait");
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
             RequestParams params = new RequestParams();
@@ -1800,7 +1800,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
             Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
 
             if(selectedTemplate != 0){
-                itemstxtTemplate.setText("Template "+selectedTemplate);
+                itemstxtTemplate.setText(getString(R.string.header_template)+" "+selectedTemplate);
             }
         }
 
@@ -2135,14 +2135,14 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                     Paymentamountdate = paiddate;
 
                     if (paidamountstr.isEmpty()) {
-                        edamount.setError("Required");
+                        edamount.setError(getString(R.string.dialog_Required));
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
 //                        Toast.makeText(EditEditEstimateActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
 //                        eddate.requestFocus();
-                        Constant.ErrorToastTop(EditEditEstimateActivity.this, "Date Required");
+                        Constant.ErrorToastTop(EditEditEstimateActivity.this, getString(R.string.dialog_DateRequired));
                     } else if (paimentmodespinerstr.equals("")) {
-                        Constant.ErrorToastTop(EditEditEstimateActivity.this, "Payment Mode Required");
+                        Constant.ErrorToastTop(EditEditEstimateActivity.this, getString(R.string.dialog_PaymentModeRequired));
                     } else {
                         if (paidamountstr != null) {
                             paidamount.setText(paidamountstr);
@@ -2163,7 +2163,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
         if (bottomSheetDialog2 != null) {
             View view = LayoutInflater.from(this).inflate(R.layout.dots_bottomsheet, null);
             btnviewinvoice = view.findViewById(R.id.btnviewinvoice);
-            btnviewinvoice.setText("View Estimate");
+            btnviewinvoice.setText(getString(R.string.listViewEstimate));
             btnclear = view.findViewById(R.id.btnclear);
             btndotcancel = view.findViewById(R.id.btndotcancel);
 
@@ -2197,13 +2197,13 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(EditEditEstimateActivity.this, "Select A Company");
+                        Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(EditEditEstimateActivity.this, "Select Date");
+                        Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.dialog_SelectDate));
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(EditEditEstimateActivity.this, "Select A Customer");
+                        Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.dialog_SelectACustomer));
                         bottomSheetDialog2.dismiss();
 //                    } else if (credit_terms.equals("")) {
 //                        Constant.ErrorToast(EditEstimateActivity.this, "Select Credit Tearm");
@@ -2214,7 +2214,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                     }
 
                      else if (tempList.size() == 0) {
-                        Constant.ErrorToast(EditEditEstimateActivity.this, "Select Product First");
+                        Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.dialog_SelectProductFirst));
                     }
 
                     else {
@@ -2357,7 +2357,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
-        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Estimate?");
+        txtfreightdes.setText(getString(R.string.service_ShippingAmountEstimate));
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 
@@ -2437,11 +2437,11 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
-                        eddisount.setHint("Enter Discount in %");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
-                        eddisount.setHint("Enter Discount in Amount");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
                 }
@@ -2537,7 +2537,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                     dayss = edmanual.getText().toString();
 
                     if (dayss.equals("") && credit_terms.equals("")) {
-                        Toast.makeText(EditEditEstimateActivity.this, "Please Select Atleast One", Toast.LENGTH_LONG).show();
+                        Toast.makeText(EditEditEstimateActivity.this, getString(R.string.dialog_PleaseSelectAtleastOne), Toast.LENGTH_LONG).show();
                     } else if (dayss != null && credit_terms.equals("")) {
 
                         String dayswith = dayss.trim();
@@ -2555,18 +2555,18 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                         Log.e("Date Long", simple.format(result));
                         edduedate.setText(simple.format(result));
                         edduedate.setClickable(true);
-                        txtdays.setText(dayss + " " + "days");
+                        txtdays.setText(dayss + " " + getString(R.string.dialog_days));
                         bottomSheetDialog.dismiss();
                         edduedate.setClickable(false);
                     } else if (credit_terms != null && dayss.equals("")) {
-                        if (credit_terms.equals("none")) {
+                        if (credit_terms.equals(getString(R.string.dialog_DateNone))) {
                             txtdays.setText(credit_terms);
                             edduedate.setClickable(true);
                             bottomSheetDialog.dismiss();
 
                             edduedate.setText(duedate.getText().toString());
 
-                        } else if (credit_terms.equals("immediately")) {
+                        } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
                             String myFormat = "yyyy-MM-dd"; //In which you need put here
                             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
@@ -2578,7 +2578,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                         } else {
 
 
-                            String replaceString = credit_terms.replaceAll("days", "");
+                            String replaceString = credit_terms.replaceAll(getString(R.string.dialog_days), "");
                             String dayswith = replaceString.trim();
                             Double daysvalue = Double.parseDouble(dayswith);
 
@@ -2601,7 +2601,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
 
                     } else if (dayss != null && credit_terms != null) {
-                        Toast.makeText(EditEditEstimateActivity.this, "Please Select One Value", Toast.LENGTH_LONG).show();
+                        Toast.makeText(EditEditEstimateActivity.this, getString(R.string.dialog_PleaseSelectAtleastOne), Toast.LENGTH_LONG).show();
 
                     }
 
@@ -2899,7 +2899,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
         RequestParams params = new RequestParams();
         if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
-            Constant.ErrorToast(EditEditEstimateActivity.this, "Select Company");
+            Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.select_company));
         } else {
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(EditEditEstimateActivity.this, Constant.ACCESS_TOKEN);
@@ -3031,7 +3031,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
                             }
                         } else {
-                            Constant.ErrorToast(EditEditEstimateActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3135,7 +3135,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
                             }
                         } else {
-                            Constant.ErrorToast(EditEditEstimateActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(EditEditEstimateActivity.this, getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3975,9 +3975,9 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                     mybuilder.dismiss();
 
                     if(edprice.getText().toString().length() == 0){
-                        Constant.ErrorToast(EditEditEstimateActivity.this,"Please enter amount!");
+                        Constant.ErrorToast(EditEditEstimateActivity.this,getString(R.string.select_Please_enter_amount));
                     }else if(edquantity.getText().toString().length() == 0){
-                        Constant.ErrorToast(EditEditEstimateActivity.this,"Please enter quantity!");
+                        Constant.ErrorToast(EditEditEstimateActivity.this,getString(R.string.select_Please_enter_quantity));
                     }else{
                         double en_quantity = 0.0;
                         try{
@@ -4003,7 +4003,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                         if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")){
                             if (itemQuantity.getEn_quantity() <= en_quantity){
                                 mybuilder.show();
-                                Constant.ErrorToast(EditEditEstimateActivity.this,"Insufficient Quantity Available");
+                                Constant.ErrorToast(EditEditEstimateActivity.this,getString(R.string.invoice_InsufficientQuantityAvailable));
                                 mybuilder.dismiss();
                             }else{
                                 sh_price = Double.parseDouble(edprice.getText().toString());
@@ -4798,7 +4798,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
         if (shippingfirstname.equalsIgnoreCase("")) {
             Shiping_tostr = "";
         } else {
-            Shiping_tostr = "Ship To:";
+            Shiping_tostr = getString(R.string.html_ShipTo);
 
             if(!shippingfirstname.equalsIgnoreCase("")){
                 stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
@@ -5207,7 +5207,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
         } else {
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount;
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrreptxt = getString(R.string.html_PaidAmount);
 
 
             pemailpaidstr = paypal_emailstr;
@@ -5238,7 +5238,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue = getString(R.string.html_ReferenceNo);
 
 
         }

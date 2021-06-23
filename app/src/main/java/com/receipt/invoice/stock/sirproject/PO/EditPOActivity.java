@@ -679,7 +679,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                 //invoice Data
                 invoiceDtoInvoice = data.getPoDtoPO();
-                // Log.e(TAG, "selectwarehouseIdAACC "+invoiceDtoInvoice.getWarehouse_id());
+               // Log.e(TAG, "selectwarehouseIdAACC "+invoiceDtoInvoice.getWarehouse_id());
 
                 Gson gson = new Gson();
                 String json2 = gson.toJson(invoiceDtoInvoice);
@@ -718,7 +718,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
 //                selectedTemplate = Integer.parseInt(invoiceDtoInvoice.getTemplate_type());
                 if(selectedTemplate != 0){
-                    itemstxtTemplate.setText("Template "+selectedTemplate);
+                    itemstxtTemplate.setText(getString(R.string.header_template)+" "+selectedTemplate);
                 }
                 strnotes = invoiceDtoInvoice.getNotes();
                 ednotes.setText(Html.fromHtml(strnotes));
@@ -855,7 +855,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                 productsRecycler.setAdapter(products_adapter);
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+              //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
 
 
@@ -1046,9 +1046,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                         }
 
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            paidamount.setText(formatter.format(Paidamountstrdto));
+                            paidamount.setText(Utility.getPatternFormat(""+numberPostion, Paidamountstrdto));
                         } else {
-                            paidamount.setText(formatter.format(Paidamountstrdto) + currency_codedto);
+                            paidamount.setText(Utility.getPatternFormat(""+numberPostion, Paidamountstrdto) + currency_codedto);
                         }
 
                     } else if (code.equals("remaining_balance")) {
@@ -1059,9 +1059,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                         }
 
                         if (currency_codedto.equals("null") || currency_codedto.equals("")) {
-                            balance.setText(formatter.format(Blanceamountstrdto));
+                            balance.setText(Utility.getPatternFormat(""+numberPostion, Blanceamountstrdto));
                         } else {
-                            balance.setText(formatter.format(Blanceamountstrdto) + currency_codedto);
+                            balance.setText(Utility.getPatternFormat(""+numberPostion, Blanceamountstrdto) + currency_codedto);
                         }
 
                     }
@@ -1166,7 +1166,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                 if (selectwarehouseId.equals(""))
                 {
-                    Constant.ErrorToast(EditPOActivity.this, "Select Warehouse");
+                    Constant.ErrorToast(EditPOActivity.this, getString(R.string.stock_Select_Warehouse));
                 } else {
                     createbottomsheet_products();
                     bottomSheetDialog.show();
@@ -1361,7 +1361,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                 Log.e(TAG, "setOnClickListener");
                 int ddd = wids.size();
                 if(ddd == 0){
-                    Constant.ErrorToast(EditPOActivity.this, "No warehouse found!");
+                    Constant.ErrorToast(EditPOActivity.this, getString(R.string.item_NoWarehouseFound));
                 }
             }
         });
@@ -1405,8 +1405,8 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
                 .showTitle(false)
-                .setCompleteButtonText("Done")
-                .setEmptySelectionText("No Select")
+                .setCompleteButtonText(getString(R.string.done))
+                .setEmptySelectionText(getString(R.string.noSelect))
                 .setSelectMaxCount(5)
                 .setSelectMinCount(1)
 
@@ -1466,15 +1466,15 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
         avi.smoothToShow();
         if (customer_name.equals("")) {
-            Constant.ErrorToast(EditPOActivity.this, "Select A Supplier");
+            Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_SelectASupplier));
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_PO).equalsIgnoreCase("")) {
-            Constant.ErrorToast(EditPOActivity.this, "Purchase Order No. should be letters followed by Digits");
+            Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_Shipping_amountPurchaseOrderNoDigits));
 
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(EditPOActivity.this, "Select Date");
+            Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_SelectDate));
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(EditPOActivity.this, "Select A Company");
+            Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_SelectACompany));
 
         }
 //        else if (selectwarehouseId.equals("")) {
@@ -1482,15 +1482,15 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 //
 //        }
         else if (tempList.size() == 0) {
-            Constant.ErrorToast(EditPOActivity.this, "Select Product First");
+            Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_SelectProductFirst));
         }
         else if (credit_terms.equals("")) {
-            Constant.ErrorToast(EditPOActivity.this, "Select Credit Term");
+            Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_SelectCreditTerms));
 
         }  else {
 
             final ProgressDialog progressDialog = new ProgressDialog(EditPOActivity.this);
-            progressDialog.setMessage("Please wait");
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
@@ -1962,7 +1962,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
 
             if(selectedTemplate != 0){
-                itemstxtTemplate.setText("Template "+selectedTemplate);
+                itemstxtTemplate.setText(getString(R.string.header_template)+" "+selectedTemplate);
             }
         }
 
@@ -2292,14 +2292,14 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                     Paymentamountdate = paiddate;
 
                     if (paidamountstr.isEmpty()) {
-                        edamount.setError("Required");
+                        edamount.setError(getString(R.string.dialog_Required));
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Constant.ErrorToastTop(EditPOActivity.this, "Date Required");
+                        Constant.ErrorToastTop(EditPOActivity.this, getString(R.string.dialog_DateRequired));
                         //Toast.makeText(EditPOActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
 //                        eddate.requestFocus();
                     } else if (Utility.isEmptyNull(paymentmode).equalsIgnoreCase("")) {
-                        Constant.ErrorToastTop(EditPOActivity.this, "Payment Mode Required");
+                        Constant.ErrorToastTop(EditPOActivity.this, getString(R.string.dialog_PaymentModeRequired));
 //                        Constant.ErrorToast(EditPOActivity.this, "Payment Mode Required");
                         //Toast.makeText(EditPOActivity.this, "Payment Mode Required", Toast.LENGTH_SHORT).show();
                     } else {
@@ -2325,7 +2325,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         if (bottomSheetDialog2 != null) {
             View view = LayoutInflater.from(this).inflate(R.layout.dots_bottomsheet, null);
             btnviewinvoice = view.findViewById(R.id.btnviewinvoice);
-            btnviewinvoice.setText("View Purchase Order");
+            btnviewinvoice.setText(getString(R.string.dialog_ViewPurchaseOrder));
             btnclear = view.findViewById(R.id.btnclear);
             btndotcancel = view.findViewById(R.id.btndotcancel);
 
@@ -2358,16 +2358,16 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(EditPOActivity.this, "Select A Company");
+                        Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(EditPOActivity.this, "Select Invoice Date");
+                        Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_SelectDate));
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(EditPOActivity.this, "Select A Supplier");
+                        Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_SelectASupplier));
                         bottomSheetDialog2.dismiss();
                     } else if (credit_terms.equals("")) {
-                        Constant.ErrorToast(EditPOActivity.this, "Select Credit Term");
+                        Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_SelectCreditTerms));
                         bottomSheetDialog2.dismiss();
                     }
 //                    else if (selectwarehouseId.equals("")) {
@@ -2376,13 +2376,13 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 //                    }
 
                     else if (tempList.size() == 0) {
-                        Constant.ErrorToast(EditPOActivity.this, "Select Product First");
+                        Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_SelectProductFirst));
                         bottomSheetDialog2.dismiss();
                     }
 
                     else {
-                        // Customer_list customer_lists = selected.get(0);
-                        //  Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
+                       // Customer_list customer_lists = selected.get(0);
+                      //  Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
 
 
@@ -2541,7 +2541,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
-        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Purchase Order?");
+        txtfreightdes.setText(getString(R.string.select_Shipping_amount_PurchaseOrder));
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 
@@ -2621,11 +2621,11 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
-                        eddisount.setHint("Enter Discount in %");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
-                        eddisount.setHint("Enter Discount in Amount");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
                 }
@@ -2730,10 +2730,10 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                     String xxDate = duedate.getText().toString();
 
                     if(xxDate.equalsIgnoreCase("")){
-                        Toast.makeText(EditPOActivity.this, "Please Select Date", Toast.LENGTH_LONG).show();
+                        Toast.makeText(EditPOActivity.this, getString(R.string.dialog_PleaseSelectDate), Toast.LENGTH_LONG).show();
                     }else{
                         if(!dayss.equals("")){
-                            String replaceString = dayss.replaceAll("days", "");
+                            String replaceString = dayss.replaceAll(getString(R.string.dialog_days), "");
                             String dayswith = replaceString.trim();
 
                             try {
@@ -2754,7 +2754,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                                 Log.e("Date Long22", simple.format(sumresultdate));
                                 edduedate.setText(simple.format(sumresultdate));
                                 edduedate.setClickable(false);
-                                txtdays.setText(dayss+" days");
+                                txtdays.setText(dayss+" "+getString(R.string.dialog_days));
                             }catch (Exception e){
                                 txtdays.setText(dayswith);
                                 edduedate.setText(duedate.getText().toString());
@@ -2762,14 +2762,14 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                             bottomSheetDialog.dismiss();
                         }else if (!credit_terms.equals("")) {
 
-                            if (credit_terms.equals("none")) {
+                            if (credit_terms.equals(getString(R.string.dialog_DateNone))) {
                                 txtdays.setText(credit_terms);
                                 edduedate.setClickable(true);
                                 bottomSheetDialog.dismiss();
 
                                 edduedate.setText(duedate.getText().toString());
 
-                            } else if (credit_terms.equals("immediately")) {
+                            } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
                                 String myFormat = "yyyy-MM-dd"; //In which you need put here
                                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
@@ -2781,7 +2781,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                             } else {
 
 
-                                String replaceString = credit_terms.replaceAll("days", "");
+                                String replaceString = credit_terms.replaceAll(getString(R.string.dialog_days), "");
                                 String dayswith = replaceString.trim();
 
 
@@ -2815,7 +2815,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                             }
 
                         }else{
-                            Toast.makeText(EditPOActivity.this, "Please Select One Value", Toast.LENGTH_LONG).show();
+                            Toast.makeText(EditPOActivity.this, getString(R.string.dialog_PleaseSelectOneValue), Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -3106,7 +3106,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
         RequestParams params = new RequestParams();
         if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
-            Constant.ErrorToast(EditPOActivity.this, "Select Company");
+            Constant.ErrorToast(EditPOActivity.this, getString(R.string.select_company));
         } else {
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(EditPOActivity.this, Constant.ACCESS_TOKEN);
@@ -3259,7 +3259,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                             }
                         } else {
-                            Constant.ErrorToast(EditPOActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3365,7 +3365,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                             }
                         } else {
-                            Constant.ErrorToast(EditPOActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(EditPOActivity.this, getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3417,9 +3417,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(this).inflate(R.layout.customer_bottom_sheet, null);
             txtcustomer = view.findViewById(R.id.txtcustomer);
-            txtcustomer.setText("Select Supplier");
+            txtcustomer.setText(getString(R.string.dialog_SelectSupplier));
             search_customers = view.findViewById(R.id.search_customers);
-            search_customers.setHint("Search Supplier");
+            search_customers.setHint(getString(R.string.dialog_SearchSupplier));
             TextView add_customer = view.findViewById(R.id.add_customer);
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3511,8 +3511,11 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                         invoicenovalue = Integer.parseInt(Invoiceno) + 1;
                   /*      if (Invoiceno != null) {
+
                             invoicenum.setText("Inv # " + invoicenovalue);
+
                             Log.e("imagepath customer", String.valueOf(invoicenovalue));
+
                         }*/
                         String company_image_path = data.getString("company_image_path");
                         Log.e("company_image_path", company_image_path);
@@ -3836,7 +3839,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             textViewNoItems.setVisibility(View.GONE);
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+    //    DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         //  double Grossamount_strdto = 0.0,  Discountamountstrdto = 0.0,  Subtotalamountdto = 0.0, Tax_amountdto = 0.0,
         //  Shippingamountdto = 0.0, Netamountvaluedto = 0.0, Paidamountstrdto = 0.0, Blanceamountstrdto = 0.0;
@@ -3879,10 +3882,10 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             grandAmount = total_price;
 
 
-            if (strdiscount.equalsIgnoreCase("Percentage")) {
+            if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equalsIgnoreCase("Amount")) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{
@@ -4240,94 +4243,94 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                     mybuilder.dismiss();
 
                     if(edprice.getText().toString().length() == 0){
-                        Constant.ErrorToast(EditPOActivity.this,"Please enter amount!");
+                        Constant.ErrorToast(EditPOActivity.this,getString(R.string.select_Please_enter_amount));
                     }else if(edquantity.getText().toString().length() == 0){
-                        Constant.ErrorToast(EditPOActivity.this,"Please enter quantity!");
+                        Constant.ErrorToast(EditPOActivity.this,getString(R.string.select_Please_enter_quantity));
                     }else{
-                        double en_quantity = Double.parseDouble(edquantity.getText().toString());
+            double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
-                        double sh_quantity = 0;
-                        double sh_price = 0.0;
+                            double sh_quantity = 0;
+                            double sh_price = 0.0;
 
 
 
-                        ItemQuantity itemQuantity = Utility.getQuantityByProductId(product_bottom, tempList.get(str).getProduct_id());
-                        Log.e(TAG, "itemQuantityAA "+itemQuantity.getEn_quantity());
-                        Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
+                            ItemQuantity itemQuantity = Utility.getQuantityByProductId(product_bottom, tempList.get(str).getProduct_id());
+                            Log.e(TAG, "itemQuantityAA "+itemQuantity.getEn_quantity());
+                            Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
 
-                        if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
+                                    if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
 //                                        if (itemQuantity.getEn_quantity() <= en_quantity) {
 //                                            mybuilder.show();
 //                                            Constant.ErrorToast(EditPOActivity.this, "Insufficient Quantity Available");
 //                                            mybuilder.dismiss();
 //                                        } else {
-                            sh_price = Double.parseDouble(edprice.getText().toString());
-                            double multiply = en_quantity * sh_price;
-                            String s_multiply = String.valueOf(multiply);
+                                            sh_price = Double.parseDouble(edprice.getText().toString());
+                                            double multiply = en_quantity * sh_price;
+                                            String s_multiply = String.valueOf(multiply);
 
 
 
-                            producprice.remove(str);
-                            totalpriceproduct.remove(str);
-                            tempQuantity.remove(str);
+                                            producprice.remove(str);
+                                            totalpriceproduct.remove(str);
+                                            tempQuantity.remove(str);
 
-                            producprice.add(str, String.valueOf(sh_price));
-                            totalpriceproduct.add(str, String.valueOf(sh_price));
-                            tempQuantity.add(str, edquantity.getText().toString());
-
-
-                            double dd = 0.0;
-                            for (int i = 0; i < producprice.size(); i++){
-                                double aa = Double.parseDouble(producprice.get(i));
-                                double bb = Double.parseDouble(tempQuantity.get(i));
-
-                                double cc = aa * bb;
-                                dd = dd + cc;
-                            }
-                            total_price = dd;
+                                            producprice.add(str, String.valueOf(sh_price));
+                                            totalpriceproduct.add(str, String.valueOf(sh_price));
+                                            tempQuantity.add(str, edquantity.getText().toString());
 
 
-                            calculateTotalAmount(total_price);
-                            products_adapter.notifyDataSetChanged();
+                                            double dd = 0.0;
+                                            for (int i = 0; i < producprice.size(); i++){
+                                                double aa = Double.parseDouble(producprice.get(i));
+                                                double bb = Double.parseDouble(tempQuantity.get(i));
 
-                            mybuilder.dismiss();
+                                                double cc = aa * bb;
+                                                dd = dd + cc;
+                                            }
+                                            total_price = dd;
+
+
+                                            calculateTotalAmount(total_price);
+                                            products_adapter.notifyDataSetChanged();
+
+                                            mybuilder.dismiss();
 //                                        }
-                        }
+                                    }
 
-                        else
-                        {
-                            sh_price = Double.parseDouble(edprice.getText().toString());
-                            double multiply = en_quantity * sh_price;
-                            String s_multiply = String.valueOf(multiply);
-
-
-
-                            producprice.remove(str);
-                            totalpriceproduct.remove(str);
-                            tempQuantity.remove(str);
-
-                            producprice.add(str, String.valueOf(sh_price));
-                            totalpriceproduct.add(str, String.valueOf(sh_price));
-                            tempQuantity.add(str, edquantity.getText().toString());
+                                    else
+                                    {
+                                        sh_price = Double.parseDouble(edprice.getText().toString());
+                                        double multiply = en_quantity * sh_price;
+                                        String s_multiply = String.valueOf(multiply);
 
 
-                            double dd = 0.0;
-                            for (int i = 0; i < producprice.size(); i++){
-                                double aa = Double.parseDouble(producprice.get(i));
-                                double bb = Double.parseDouble(tempQuantity.get(i));
 
-                                double cc = aa * bb;
-                                dd = dd + cc;
-                            }
-                            total_price = dd;
+                                        producprice.remove(str);
+                                        totalpriceproduct.remove(str);
+                                        tempQuantity.remove(str);
+
+                                        producprice.add(str, String.valueOf(sh_price));
+                                        totalpriceproduct.add(str, String.valueOf(sh_price));
+                                        tempQuantity.add(str, edquantity.getText().toString());
 
 
-                            calculateTotalAmount(total_price);
-                            products_adapter.notifyDataSetChanged();
+                                        double dd = 0.0;
+                                        for (int i = 0; i < producprice.size(); i++){
+                                            double aa = Double.parseDouble(producprice.get(i));
+                                            double bb = Double.parseDouble(tempQuantity.get(i));
 
-                            mybuilder.dismiss();
-                        }
-                    }
+                                            double cc = aa * bb;
+                                            dd = dd + cc;
+                                        }
+                                        total_price = dd;
+
+
+                                        calculateTotalAmount(total_price);
+                                        products_adapter.notifyDataSetChanged();
+
+                                        mybuilder.dismiss();
+                                    }
+                                }
 
 
 
@@ -5207,13 +5210,13 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
         String notestringvalue = "";
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = "Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -5222,7 +5225,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             if(company_stamp.toLowerCase().endsWith("white_img.png")){
                 companyname = "";
             }else{
-                companyname = "Company Seal";
+                companyname = getString(R.string.html_CompanySeal);
             }
         }else{
             company_stamp = "/android_res/drawable/white_img.png";
@@ -5235,7 +5238,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             if(signatureofreceiverst.toLowerCase().endsWith("white_img.png")){
                 signature_of_receivername = "";
             }else{
-                signature_of_receivername = "Signature of Receiver";
+                signature_of_receivername = getString(R.string.html_SignatureofReceiver);
             }
         }else{
             signatureofreceiverst = "/android_res/drawable/white_img.png";
@@ -5248,7 +5251,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             if(signature_of_issuer.toLowerCase().endsWith("white_img.png")){
                 signature_of_issuername = "";
             }else{
-                signature_of_issuername = "Signature of Issuer";
+                signature_of_issuername = getString(R.string.html_SignatureofIssuer);
             }
         }else{
             signature_of_issuer = "/android_res/drawable/white_img.png";
@@ -5294,7 +5297,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
         String subTotalTxt = "";
@@ -5304,7 +5307,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
 
@@ -5347,7 +5350,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             }
 
 
-            shipingvaluetxt = "Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
         if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
@@ -5400,9 +5403,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             paidamountstrrepvalue =strpaid_amount;
 
             if(Paymentamountdate.equalsIgnoreCase("")){
-                paidamountstrreptxt = "Paid Amount ";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount);
             }else{
-                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
             }
 
 
@@ -5421,8 +5424,8 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
-                bycheckstrtxt="By cheque :";
-                paimnetdetailstrtxt =" Payment Details ";
+                bycheckstrtxt= getString(R.string.html_Bycheque);
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
@@ -5430,7 +5433,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             }else{
                 pemailpaidstr = paypal_emailstr;
                 paypalstrtxt="Pay Pal :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
@@ -5444,7 +5447,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                     payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -5478,7 +5481,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue= getString(R.string.html_ReferenceNo);
 
 
         }

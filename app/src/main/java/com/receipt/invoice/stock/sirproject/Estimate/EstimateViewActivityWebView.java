@@ -354,7 +354,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
             Log.e("sltcustonername",sltcustonername);
             Shiping_tostr="";
         }else {
-            Shiping_tostr="Ship To:";
+            Shiping_tostr = getString(R.string.html_ShipTo);
 
             if(!shippingfirstname.equalsIgnoreCase("")){
                 stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
@@ -419,7 +419,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
 
 
@@ -492,7 +492,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
             notestringvalue="";
         }else
         {
-            notestringvalue="Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -504,7 +504,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
             companyname="";
         }else {
             invoice_image_pathcompanystemp=invoice_image_path + company_stamp;
-            companyname="Company Seal";
+            companyname = getString(R.string.html_CompanySeal);
         }
 
         String signature_of_receivername="";
@@ -514,7 +514,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
             signature_of_receivername="";
         }else {
             invoice_image_pathreceiverpath=invoice_image_path + signature_of_receiver;
-            signature_of_receivername="Signature of Receiver";
+            signature_of_receivername = getString(R.string.html_SignatureofReceiver);
         }
 
 
@@ -525,7 +525,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
             signature_of_issuername="";
         }else {
             invoice_image_pathissuverpath=invoice_image_path + signature_of_issuer;
-            signature_of_issuername="Signature of Issuer";
+            signature_of_issuername = getString(R.string.html_SignatureofIssuer);
         }
 
         try {
@@ -557,7 +557,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
             // null response or Exception occur
 
             Shipingcosstbyct=""+freight_cost+currency_code;
-            shipingvaluetxt="Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
         String paidamountstrrepvalue = "";
@@ -600,7 +600,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
 
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount+currency_code;
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrreptxt = getString(R.string.html_PaidAmount);
 
 
             pemailpaidstr = paypal_emailstr;
@@ -631,7 +631,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue = getString(R.string.html_ReferenceNo);
 
 
         }
@@ -671,7 +671,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue + currency_code;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
 
@@ -683,7 +683,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Subtotalamount + ""+ Utility.getReplaceDollor(currency_code);
         }
 

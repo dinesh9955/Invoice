@@ -607,7 +607,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         positionNext = i;
         bottomSheetDialog = new BottomSheetDialog(ReportActivity.this);
         if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(ReportActivity.this, "Select A Company");
+            Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_SelectACompany));
         } else {
             //createbottomsheet_FilterData();
 
@@ -777,9 +777,9 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(ReportActivity.this).inflate(R.layout.customer_bottom_sheet, null);
             txtcustomer = view.findViewById(R.id.txtcustomer);
-            txtcustomer.setText("Select Product");
+            txtcustomer.setText(getString(R.string.stock_Select_Product));
             search_customers = view.findViewById(R.id.search_customers);
-            search_customers.setHint("Select Products");
+            search_customers.setHint(getString(R.string.stock_Select_Products));
             TextView add_customer = view.findViewById(R.id.add_customer);
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override

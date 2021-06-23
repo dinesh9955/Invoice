@@ -2909,7 +2909,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 1){
                 createWebPrintJob(invoiceweb);
             }else if(i == 2){
-                shareWeb("Customer Statement Report");
+                shareWeb(getString(R.string.report_CustomerStatementReport));
             }else if(i == 3){
                 //customerReport(customer_id, "date");
 //                customerFilterDate(customer_id, positionNext);
@@ -2928,7 +2928,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 1){
                 createWebPrintJob(invoiceweb);
             }else if(i == 2){
-                shareWeb("Supplier Statement Report");
+                shareWeb(getString(R.string.report_SupplierStatementReport));
             }else if(i == 3){
                 filterDate(supplier_id, positionNext);
             }else if(i == 4){
@@ -2943,7 +2943,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 1){
                 createWebPrintJob(invoiceweb);
             }else if(i == 2){
-                shareWeb("Total Sales Report");
+                shareWeb(getString(R.string.report_TotalSalesReport));
             }else if(i == 3){
                 filterDate(company_id, positionNext);
             }else if(i == 4){
@@ -2968,7 +2968,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 1){
                 createWebPrintJob(invoiceweb);
             }else if(i == 2){
-                shareWeb("Total Purchase Report");
+                shareWeb(getString(R.string.report_TotalPurchaseReport));
             }else if(i == 3){
 //                totalPurchaseReport(company_id, "date");
                 filterDate(company_id, positionNext);
@@ -2988,7 +2988,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 1){
                 createWebPrintJob(invoiceweb);
             }else if(i == 2){
-                shareWeb("Customer Ageing Report");
+                shareWeb(getString(R.string.report_CustomerAgeingReport));
             }else if(i == 3){
                 filterCustomerSupplier = "ageing";
                 createbottomsheet_customers();
@@ -3007,7 +3007,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 1){
                 createWebPrintJob(invoiceweb);
             }else if(i == 2){
-                shareWeb("Tax Collected Report");
+                shareWeb(getString(R.string.report_TaxCollectedReport));
             }else if(i == 3){
                 //taxCollectedReport(company_id, "date");
                 filterDate(company_id, positionNext);
@@ -3026,7 +3026,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 1){
                 createWebPrintJob(invoiceweb);
             }else if(i == 2){
-                shareWeb("Stock Report");
+                shareWeb(getString(R.string.report_StockReport));
             }else if(i == 3){
                 stockReport(company_id, "instock", "");
             }else if(i == 4){
@@ -3046,7 +3046,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }else if(i == 1){
                 createWebPrintJob(invoiceweb);
             }else if(i == 2){
-                shareWeb("Product Movement Report");
+                shareWeb(getString(R.string.report_ProductMovementReport));
             }
         } else{
 
@@ -3091,7 +3091,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.setMessage("Select Date (From)");
+        datePickerDialog.setMessage(getString(R.string.report_SelectDateFrom));
         datePickerDialog.show();
     }
 
@@ -3146,7 +3146,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                     }
                 }, mYear, mMonth, mDay);
-        datePickerDialog.setMessage("Select Date (To)");
+        datePickerDialog.setMessage(getString(R.string.report_SelectDateTo));
         datePickerDialog.show();
     }
 
@@ -3164,7 +3164,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 //Uri outputFileUri = Uri.fromFile(fileWithinMyDir);
                 intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT, title);
-                startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                startActivity(Intent.createChooser(intentShareFile, getString(R.string.list_ShareFile)));
             }
         }
 
@@ -3250,9 +3250,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(ReportViewActivity.this).inflate(R.layout.customer_bottom_sheet, null);
             txtcustomer = view.findViewById(R.id.txtcustomer);
-            txtcustomer.setText("Select Supplier");
+            txtcustomer.setText(getString(R.string.dialog_SelectSupplier));
             search_customers = view.findViewById(R.id.search_customers);
-            search_customers.setHint("Select Suppliers");
+            search_customers.setHint(getString(R.string.dialog_SelectSuppliers));
             TextView add_customer = view.findViewById(R.id.add_customer);
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -3317,9 +3317,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(ReportViewActivity.this).inflate(R.layout.customer_bottom_sheet, null);
             txtcustomer = view.findViewById(R.id.txtcustomer);
-            txtcustomer.setText("Select Product");
+            txtcustomer.setText(getString(R.string.stock_Select_Product));
             search_customers = view.findViewById(R.id.search_customers);
-            search_customers.setHint("Search Products");
+            search_customers.setHint(getString(R.string.stock_Select_Products));
             TextView add_customer = view.findViewById(R.id.add_customer);
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override

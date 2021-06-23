@@ -178,7 +178,7 @@ public class ViewInvoice_Activity extends BaseActivity {
             if (shippingfirstname.equalsIgnoreCase("")) {
                 Shiping_tostr = "";
             } else {
-                Shiping_tostr = "Ship To:";
+                Shiping_tostr = getString(R.string.html_ShipTo);
                 Log.e(TAG, "shippingfirstnameAA "+shippingfirstname);
 
                 if(!shippingfirstname.equalsIgnoreCase("")){
@@ -539,13 +539,13 @@ public class ViewInvoice_Activity extends BaseActivity {
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
         String notestringvalue = "";
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = "Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -556,7 +556,7 @@ public class ViewInvoice_Activity extends BaseActivity {
             company_stamp = "/android_res/drawable/white_img.png";
             companyname = "";
         } else {
-            companyname = "Company Seal";
+            companyname = getString(R.string.html_CompanySeal);
         }
 
         String signature_of_receivername = "";
@@ -564,7 +564,7 @@ public class ViewInvoice_Activity extends BaseActivity {
             signature_of_receiver = "/android_res/drawable/white_img.png";
             signature_of_receivername = "";
         } else {
-            signature_of_receivername = "Signature of Receiver";
+            signature_of_receivername = getString(R.string.html_SignatureofReceiver);
         }
 
 
@@ -573,7 +573,7 @@ public class ViewInvoice_Activity extends BaseActivity {
             signature_of_issuer = "/android_res/drawable/white_img.png";
             signature_of_issuername = "";
         } else {
-            signature_of_issuername = "Signature of Issuer";
+            signature_of_issuername = getString(R.string.html_SignatureofIssuer);
         }
 
         try {
@@ -614,7 +614,7 @@ public class ViewInvoice_Activity extends BaseActivity {
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
 
@@ -626,7 +626,7 @@ public class ViewInvoice_Activity extends BaseActivity {
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
 
@@ -671,7 +671,7 @@ public class ViewInvoice_Activity extends BaseActivity {
             }
 
 
-            shipingvaluetxt = "Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
 
@@ -723,9 +723,9 @@ public class ViewInvoice_Activity extends BaseActivity {
             paidamountstrrepvalue = strpaid_amount;
 
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
-                paidamountstrreptxt = "Paid Amount ";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount);
             }else{
-                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
             }
 
 
@@ -743,8 +743,8 @@ public class ViewInvoice_Activity extends BaseActivity {
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
-                bycheckstrtxt="By cheque :";
-                paimnetdetailstrtxt =" Payment Details ";
+                bycheckstrtxt = getString(R.string.html_Bycheque);
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
@@ -752,7 +752,7 @@ public class ViewInvoice_Activity extends BaseActivity {
             }else{
                 pemailpaidstr = paypal_emailstr;
                 paypalstrtxt="Pay Pal :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
@@ -766,7 +766,7 @@ public class ViewInvoice_Activity extends BaseActivity {
                     payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -812,7 +812,7 @@ public class ViewInvoice_Activity extends BaseActivity {
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue = getString(R.string.html_ReferenceNo);
 
 
         }

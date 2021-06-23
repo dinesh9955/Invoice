@@ -142,7 +142,8 @@ public class List_of_Estimate extends BaseFragment {
         avibackground = view.findViewById(R.id.avibackground);
         recycler_invoices = view.findViewById(R.id.recycler_invoices);
         search = view.findViewById(R.id.search);
-        search.setHint("Search  By Customer Name");
+        search.setHint(getString(R.string.html_SearchByCustomerName));
+
         selectcompany = view.findViewById(R.id.selectcompany);
         imageViewmenu = view.findViewById(R.id.imageViewmenu);
 
@@ -187,7 +188,7 @@ public class List_of_Estimate extends BaseFragment {
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
 
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
-                        "More",
+                        getString(R.string.list_More),
                         0,
                         Color.parseColor("#669933"),
 
@@ -227,7 +228,7 @@ public class List_of_Estimate extends BaseFragment {
 
 
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
-                        "Delete",
+                        getString(R.string.list_Delete),
                         0,
                         Color.parseColor("#ff0000"),
 
@@ -342,7 +343,7 @@ public class List_of_Estimate extends BaseFragment {
             public void onClick(View v) {
 
                 if (selectedCompanyId.equals("")) {
-                    Constant.ErrorToast(getActivity(), "Select A Company");
+                    Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
 
                 } else {
 
@@ -660,7 +661,7 @@ public class List_of_Estimate extends BaseFragment {
         avi.smoothToShow();
         RequestParams params = new RequestParams();
         if (invoice_idstr.equals("") || invoice_idstr.equals("null")) {
-            Constant.ErrorToast(getActivity(), "Invoice not found");
+            Constant.ErrorToast(getActivity(), getString(R.string.list_Invoicenotfound));
         } else {
 
             params.add("invoice_id", invoice_useriddt);
@@ -768,11 +769,11 @@ public class List_of_Estimate extends BaseFragment {
             LinearLayout linearLayoutChangeTemp= view.findViewById(R.id.viewicetemplate);
             linearLayoutChangeTemp.setVisibility(View.VISIBLE);
 
-            viewinvoicebotom.setText("View Estimate");
-            viewinvoicetemplate.setText("Edit Estimate");
-            duplicateinvoitxt.setText("Duplicate Estimate");
-            shareinvoicetxt.setText("Share Estimate");
-            recepitsviewtxt.setText("Convert To Invoice");
+            viewinvoicebotom.setText(getString(R.string.listViewEstimate));
+            viewinvoicetemplate.setText(getString(R.string.list_EditEstimate));
+            duplicateinvoitxt.setText(getString(R.string.list_DuplicateEstimate));
+            shareinvoicetxt.setText(getString(R.string.list_ShareEstimate));
+            recepitsviewtxt.setText(getString(R.string.list_ConvertToInvoice));
 
             viewinvoicebotom.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -889,13 +890,13 @@ public class List_of_Estimate extends BaseFragment {
                             Log.e(TAG, "customerName:: "+customerName);
                             Log.e(TAG, "dataNo:: "+dataNo);
 
-                            String subject = Utility.getRealValueEstimateWithoutPlus(dataNo)+" from "+selectedCompanyName;
-                            String txt = "Your Estimate can be viewed, printed and downloaded from below link." +
+                            String subject = Utility.getRealValueEstimateWithoutPlus(dataNo)+" "+ getString(R.string.list_From)+" "+selectedCompanyName;
+                            String txt = getString(R.string.list_Estimateviewed) +
                                     "\n\n" +sharelink ;
 
                             try {
                                 if (!sharelink.endsWith(".pdf")) {
-                                    Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), getString(R.string.list_NoFileFound), Toast.LENGTH_LONG).show();
                                 } else {
                                     BaseurlForShareInvoice = shareInvoicelink + sharelink;
                                 }
@@ -1000,7 +1001,7 @@ public class List_of_Estimate extends BaseFragment {
                             Log.e(TAG, "pdflink:: "+sharelink);
                             try {
                                 if (!sharelink.endsWith(".pdf")) {
-                                    Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), getString(R.string.list_NoFileFound), Toast.LENGTH_LONG).show();
                                 } else {
 //                    /*              String pdfurl = "http://13.126.22.0/saad/app/uploads/invoice/pdf/" + pdflink;
 //                                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -1023,7 +1024,8 @@ public class List_of_Estimate extends BaseFragment {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValueEstimateWithoutPlus(dataNo)+" from "+selectedCompanyName;
+
+                                            String subject = Utility.getRealValueEstimateWithoutPlus(dataNo)+" "+getString(R.string.html_SearchByCustomerName)+" "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -1253,8 +1255,8 @@ public class List_of_Estimate extends BaseFragment {
         allinvoicetxt = mybuilder.findViewById(R.id.allinvoicetxt);
         cancelinvoicetxt = mybuilder.findViewById(R.id.cancelinvoicetxt);
 
-        unpaidinvoicetxt.setText("Pending");
-        paidinvoicetxt.setText("Completed");
+        unpaidinvoicetxt.setText(getString(R.string.invoice_Pending));
+        paidinvoicetxt.setText(getString(R.string.invoice_Completed));
 
         bydateinvoicetxt.setVisibility(View.GONE);
         allinvoicetxt.setVisibility(View.GONE);
@@ -1552,7 +1554,7 @@ public class List_of_Estimate extends BaseFragment {
 //                    intentShareFile.setPackage("com.google.android.gm");
 //                }
 //                context.startActivity(intentShareFile);
-                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                context.startActivity(Intent.createChooser(intentShareFile, context.getString(R.string.list_ShareFile)));
             }
 
         }
