@@ -930,8 +930,8 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
                 .showTitle(false)
-                .setCompleteButtonText("Done")
-                .setEmptySelectionText("No Select")
+                .setCompleteButtonText(getString(R.string.done))
+                .setEmptySelectionText(getString(R.string.noSelect))
                 .setSelectMaxCount(5)
                 .setSelectMinCount(1)
 
@@ -982,16 +982,16 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
        // Log.e(TAG , "invoicenovalue::"+getInvoiceValue(invoicenum.getText().toString()));
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
-            Constant.ErrorToast(getActivity(), "Select A Company");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
             createinvoice.setEnabled(true);
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_RECEIPT).equalsIgnoreCase("")) {
-            Constant.ErrorToast(getActivity(), "Receipt No. should be letters followed by Digits");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_ReceiptDigits));
             createinvoice.setEnabled(true);
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select Date");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectDate));
             createinvoice.setEnabled(true);
         } else if (customer_name.equals("")) {
-            Constant.ErrorToast(getActivity(), "Select A Customer");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACustomer));
             createinvoice.setEnabled(true);
 //        } else if (credit_terms.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Select Credit Tearm");
@@ -1009,7 +1009,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
         }
 
         else if (tempList.size() == 0) {
-            Constant.ErrorToast(getActivity(), "Select Product First");
+            Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectProductFirst));
             createinvoice.setEnabled(true);
         }
 
@@ -1021,7 +1021,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
 
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("Please wait");
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
             RequestParams params = new RequestParams();
@@ -1479,9 +1479,9 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
             Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
 
             if(selectedTemplate != 0){
-                itemstxtTemplate.setText("Template "+selectedTemplate);
+                itemstxtTemplate.setText(getString(R.string.header_template)+" "+selectedTemplate);
             }else{
-                itemstxtTemplate.setText("Choose Template");
+                itemstxtTemplate.setText(getString(R.string.header_choose_template));
             }
 
 //            Log.e(TAG, "requestCode Path"+requestCode);
@@ -1822,12 +1822,12 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                     Paymentamountdate = paiddate;
 
                     if (paidamountstr.isEmpty()) {
-                        edamount.setError("Required");
+                        edamount.setError(getString(R.string.dialog_Required));
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Constant.ErrorToastTop(getActivity(), "Date Required");
+                        Constant.ErrorToastTop(getActivity(), getString(R.string.dialog_DateRequired));
                     } else if (paimentmodespinerstr.equals("")) {
-                        Constant.ErrorToastTop(getActivity(), "Payment Mode Required");
+                        Constant.ErrorToastTop(getActivity(), getString(R.string.dialog_PaymentModeRequired));
                     } else {
                         if (paidamountstr != null) {
 
@@ -1883,13 +1883,13 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
 
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Company");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select Date");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectDate));
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Customer");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACustomer));
                         bottomSheetDialog2.dismiss();
 //                    } else if (credit_terms.equals("")) {
 //                        Constant.ErrorToast(getActivity(), "Select Credit Tearm");
@@ -1900,7 +1900,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                     }
 
                     else if (tempList.size() == 0) {
-                        Constant.ErrorToast(getActivity(), "Select Product First");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectProductFirst));
                         bottomSheetDialog2.dismiss();
                     }
 
@@ -2067,7 +2067,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
         txtfreight = mybuilder.findViewById(R.id.txtfreight);
         edfreight = mybuilder.findViewById(R.id.edfreight);
         txtfreightdes = mybuilder.findViewById(R.id.txtfreightdes);
-        txtfreightdes.setText("Do you want to add Shipping amount for\nthis Receipt?");
+        txtfreightdes.setText(getString(R.string.dialog_Shipping_amountReceipt));
         btnok = mybuilder.findViewById(R.id.btnok);
         btncancel = mybuilder.findViewById(R.id.btncancel);
 
@@ -2142,11 +2142,11 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                 if (null != rb && checkedId > -1) {
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
-                        eddisount.setHint("Enter Discount in %");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
-                        eddisount.setHint("Enter Discount in Amount");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
                 }
@@ -2251,7 +2251,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
 
                     if (dayss.equals("") && credit_terms.equals(""))
                     {
-                        Toast.makeText(getActivity(), "Please Select Atleast One", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.dialog_PleaseSelectAtleastOne), Toast.LENGTH_LONG).show();
                     }
                     else if (dayss != null && credit_terms.equals(""))
                     {
@@ -2271,20 +2271,20 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                         Log.e("Date Long", simple.format(result));
                         edduedate.setText(simple.format(result));
                         edduedate.setClickable(true);
-                        txtdays.setText(dayss + " " + "days");
+                        txtdays.setText(dayss + " " + getString(R.string.dialog_days));
                         bottomSheetDialog.dismiss();
                         edduedate.setClickable(false);
                     }
                     else if (credit_terms != null && dayss.equals(""))
                     {
-                        if (credit_terms.equals("none")) {
+                        if (credit_terms.equals(getString(R.string.dialog_DateNone))) {
                             txtdays.setText(credit_terms);
                             edduedate.setClickable(true);
                             bottomSheetDialog.dismiss();
 
                             edduedate.setText(duedate.getText().toString());
 
-                        } else if (credit_terms.equals("immediately")) {
+                        } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
                             String myFormat = "yyyy-MM-dd"; //In which you need put here
                             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
@@ -2296,7 +2296,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                         } else {
 
 
-                            String replaceString = credit_terms.replaceAll("days", "");
+                            String replaceString = credit_terms.replaceAll(getString(R.string.dialog_days), "");
                             String dayswith = replaceString.trim();
                             Double daysvalue = Double.parseDouble(dayswith);
 
@@ -2321,7 +2321,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                     }
                     else if (dayss != null && credit_terms != null)
                     {
-                        Toast.makeText(getActivity(), "Please Select One Value", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.dialog_PleaseSelectOneValue), Toast.LENGTH_LONG).show();
                     }
 
                     credit_terms = txtdays.getText().toString();
@@ -2540,16 +2540,16 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                 Log.e("Date Long", simple.format(result));
                 edduedate.setText(simple.format(result));
                 edduedate.setClickable(true);
-                txtdays.setText(dayss + " " + "days");
+                txtdays.setText(dayss + " " + getString(R.string.dialog_days));
                 edduedate.setClickable(false);
             }
             else if (credit_terms != null && dayss.equals(""))
             {
-                if (credit_terms.equals("none"))
+                if (credit_terms.equals(getString(R.string.dialog_DateNone)))
                 {
                     txtdays.setText(credit_terms);
                     edduedate.setClickable(true);
-                } else if (credit_terms.equals("immediately")) {
+                } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
                     String myFormat2 = "yyyy-MM-dd"; //In which you need put here
                     SimpleDateFormat sdf3 = new SimpleDateFormat(myFormat2, Locale.US);
 
@@ -2559,7 +2559,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                 } else {
 
 
-                    String replaceString = credit_terms.replaceAll("days", "");
+                    String replaceString = credit_terms.replaceAll(getString(R.string.dialog_days), "");
                     String dayswith = replaceString.trim();
                     double daysvalue = Double.parseDouble(dayswith);
 
@@ -2667,7 +2667,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
 
         RequestParams params = new RequestParams();
         if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
-            Constant.ErrorToast(getActivity(), "Select Company");
+            Constant.ErrorToast(getActivity(), getString(R.string.select_company));
         } else {
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
@@ -2794,7 +2794,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
 
                             }
                         } else {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(getActivity(), getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -2896,7 +2896,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
 
                             }
                         } else {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(getActivity(), getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -4234,13 +4234,13 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
         String notestringvalue = "";
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = "Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -4249,7 +4249,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
             if(company_stamp.toLowerCase().endsWith("white_img.png")){
                 companyname = "";
             }else{
-                companyname = "Company Seal";
+                companyname = getString(R.string.html_CompanySeal);
             }
         }else{
             company_stamp = "/android_res/drawable/white_img.png";
@@ -4264,7 +4264,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
             if(signatureofreceiverst.toLowerCase().endsWith("white_img.png")){
                 signature_of_receivername = "";
             }else{
-                signature_of_receivername = "Signature of Receiver";
+                signature_of_receivername = getString(R.string.html_SignatureofReceiver);
             }
         }else{
             signatureofreceiverst = "/android_res/drawable/white_img.png";
@@ -4277,7 +4277,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
             if(signature_of_issuer.toLowerCase().endsWith("white_img.png")){
                 signature_of_issuername = "";
             }else{
-                signature_of_issuername = "Signature of Issuer";
+                signature_of_issuername = getString(R.string.html_SignatureofIssuer);
             }
         }else{
             signature_of_issuer = "/android_res/drawable/white_img.png";
@@ -4324,7 +4324,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
 
@@ -4335,7 +4335,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
 
@@ -4379,7 +4379,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
             }
 
 
-            shipingvaluetxt = "Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
         if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
@@ -4425,7 +4425,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
         } else {
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount;
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrreptxt = getString(R.string.html_PaidAmount);
 
 
             pemailpaidstr = paypal_emailstr;
@@ -4435,7 +4435,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
             payment_currencystr = payment_currency;
             payment_swiftstr = payment_swift_bic;
 
-            paimnetdetailstrtxt=" Payment Details ";
+            paimnetdetailstrtxt= getString(R.string.html_PaymentDetails);
             bycheckstrtxt="By cheque :";
             paypalstrtxt="Pay Pal :";
             bankstrtxt="Bank :";
@@ -4456,7 +4456,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue= getString(R.string.html_ReferenceNo);
 
 
         }

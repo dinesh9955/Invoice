@@ -1278,7 +1278,6 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "purchaseorder/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1301,7 +1300,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                             params2.putString("event_name", "Purchase Orders");
                             firebaseAnalytics.logEvent("purchaseorder_create", params2);
 
-                            Constant.SuccessToast(getActivity(), getString(R.string.po_msg));
+                            Constant.SuccessToast(getActivity(), "PO created successfully");
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -2725,9 +2724,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        RequestParams params = new RequestParams();
-        params.add("language", ""+getLanguage());
-        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
@@ -2796,7 +2793,6 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2869,7 +2865,6 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2979,7 +2974,6 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3159,7 +3153,6 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3368,7 +3361,6 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -4780,7 +4772,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
 
         @Override
-        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
             final View v = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.menu_item, viewGroup, false);
 //            SellerFeedbackAdapter.ViewHolder viewHolder = new SellerFeedbackAdapter.ViewHolder(v);
@@ -4789,12 +4781,12 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
 //            val v = LayoutInflater.from(viewGroup.context)
 //                    .inflate(R.layout.mybooking_item, viewGroup, false)
-            return new MenuAdapter.ViewHolder(v);
+            return new ViewHolder(v);
         }
 
 
         @Override
-        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
+        public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
             viewHolder.textViewName.setText(""+cnames.get(i));
             viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {

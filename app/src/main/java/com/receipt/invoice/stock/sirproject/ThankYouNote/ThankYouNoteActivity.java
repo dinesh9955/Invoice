@@ -505,9 +505,9 @@ public class ThankYouNoteActivity extends BaseActivity {
             duplicateinvoitxt = view.findViewById(R.id.duplicateinvoitxt);
             shareinvoicetxt = view.findViewById(R.id.shareinvoicetxt);
 
-            viewinvoicetemplate.setText("Send Thank You Note");
-            duplicateinvoitxt.setText("View Thank You Note");
-            shareinvoicetxt.setText("Cancel");
+            viewinvoicetemplate.setText(getString(R.string.thank_SendThankYouNote));
+            duplicateinvoitxt.setText(getString(R.string.thank_ViewThankYouNote));
+            shareinvoicetxt.setText(getString(R.string.cancel));
             shareinvoicetxt.setVisibility(View.GONE);
 
             viewinvoicebotom.setTypeface(Typeface.createFromAsset(getAssets(), "Fonts/AzoSans-Bold.otf"));

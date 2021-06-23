@@ -144,7 +144,7 @@ public class ListOfDebitNotes extends BaseFragment {
         avibackground = view.findViewById(R.id.avibackground);
         recycler_invoices = view.findViewById(R.id.recycler_invoices);
         search = view.findViewById(R.id.search);
-        search.setHint("Search  By Debit Note Number");
+        search.setHint(getString(R.string.list_SearchByDebitNoteNumber));
         selectcompany = view.findViewById(R.id.selectcompany);
         imageViewmenu = view.findViewById(R.id.imageViewmenu);
 
@@ -189,7 +189,7 @@ public class ListOfDebitNotes extends BaseFragment {
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
 
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
-                        "More",
+                        getString(R.string.list_More),
                         0,
                         Color.parseColor("#669933"),
 
@@ -338,7 +338,7 @@ public class ListOfDebitNotes extends BaseFragment {
             public void onClick(View v) {
 
                 if (selectedCompanyId.equals("")) {
-                    Constant.ErrorToast(getActivity(), "Select A Company");
+                    Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
 
                 } else {
 
@@ -650,7 +650,7 @@ public class ListOfDebitNotes extends BaseFragment {
         avi.smoothToShow();
         RequestParams params = new RequestParams();
         if (invoice_idstr.equals("") || invoice_idstr.equals("null")) {
-            Constant.ErrorToast(getActivity(), "Invoice not found");
+            Constant.ErrorToast(getActivity(), getString(R.string.list_Invoicenotfound));
         } else {
 
             params.add("invoice_id", invoice_useriddt);
@@ -760,10 +760,10 @@ public class ListOfDebitNotes extends BaseFragment {
             linearLayoutviewiceduplicate.setVisibility(View.GONE);
 
 
-            viewinvoicebotom.setText("View Debit Note");
-            viewinvoicetemplate.setText("Edit Debit Note");
-            duplicateinvoitxt.setText("Duplicate Debit Note");
-            shareinvoicetxt.setText("Share Debit Note");
+            viewinvoicebotom.setText(getString(R.string.list_ViewDebitNote));
+            viewinvoicetemplate.setText(getString(R.string.list_EditDebitNote));
+            duplicateinvoitxt.setText(getString(R.string.list_DuplicateDebitNote));
+            shareinvoicetxt.setText(getString(R.string.list_ShareDebitNote));
 
             viewinvoicebotom.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -791,7 +791,7 @@ public class ListOfDebitNotes extends BaseFragment {
 
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(getActivity(), "Select A Company");
+                        Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog.show();
                     } else {
 
@@ -869,8 +869,8 @@ public class ListOfDebitNotes extends BaseFragment {
                             Log.e(TAG, "customerName:: "+customerName);
                             Log.e(TAG, "dataNo:: "+dataNo);
 
-                            String subject = Utility.getRealValueDebitNoteWithoutPlus(dataNo)+" from "+selectedCompanyName;
-                            String txt = "Your Debit Note can be viewed, printed and downloaded from below link." +
+                            String subject = Utility.getRealValueDebitNoteWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                            String txt = getString(R.string.list_YourDebitNoteviewed) +
                                     "\n\n" +sharelink ;
 
                             try {
@@ -959,7 +959,7 @@ public class ListOfDebitNotes extends BaseFragment {
                             Log.e(TAG, "pdflink:: "+sharelink);
                             try {
                                 if (!sharelink.endsWith(".pdf")) {
-                                    Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), getString(R.string.list_NoFileFound), Toast.LENGTH_LONG).show();
                                 } else {
 //                    /*              String pdfurl = "http://13.126.22.0/saad/app/uploads/invoice/pdf/" + pdflink;
 //                                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -982,7 +982,7 @@ public class ListOfDebitNotes extends BaseFragment {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValueDebitNoteWithoutPlus(dataNo)+" from "+selectedCompanyName;
+                                            String subject = Utility.getRealValueDebitNoteWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -1509,7 +1509,7 @@ public class ListOfDebitNotes extends BaseFragment {
                 //context.startActivity(intentShareFile);
 
                 //startActivityForResult(intentShareFile, 101);
-                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                context.startActivity(Intent.createChooser(intentShareFile, context.getString(R.string.list_ShareFile)));
 
             }
 

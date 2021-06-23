@@ -144,7 +144,7 @@ public class ListOfReceipts extends BaseFragment {
         avibackground = view.findViewById(R.id.avibackground);
         recycler_invoices = view.findViewById(R.id.recycler_invoices);
         search = view.findViewById(R.id.search);
-        search.setHint("Search  By Receipt Number");
+        search.setHint(getString(R.string.list_SearchByReceiptNumber));
         selectcompany = view.findViewById(R.id.selectcompany);
         imageViewmenu = view.findViewById(R.id.imageViewmenu);
 
@@ -187,7 +187,7 @@ public class ListOfReceipts extends BaseFragment {
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
 
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
-                        "More",
+                        getString(R.string.list_More),
                         0,
                         Color.parseColor("#669933"),
 
@@ -225,7 +225,7 @@ public class ListOfReceipts extends BaseFragment {
 
 
                 underlayButtons.add(new SwipeHelper.UnderlayButton(
-                        "Delete",
+                        getString(R.string.list_Delete),
                         0,
                         Color.parseColor("#ff0000"),
 
@@ -338,7 +338,7 @@ public class ListOfReceipts extends BaseFragment {
             public void onClick(View v) {
 
                 if (selectedCompanyId.equals("")) {
-                    Constant.ErrorToast(getActivity(), "Select A Company");
+                    Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
 
                 } else {
 
@@ -703,7 +703,7 @@ public class ListOfReceipts extends BaseFragment {
         avi.smoothToShow();
         RequestParams params = new RequestParams();
         if (invoice_idstr.equals("") || invoice_idstr.equals("null")) {
-            Constant.ErrorToast(getActivity(), "Invoice not found");
+            Constant.ErrorToast(getActivity(), getString(R.string.list_Invoicenotfound));
         } else {
 
             params.add("invoice_id", invoice_useriddt);
@@ -809,10 +809,10 @@ public class ListOfReceipts extends BaseFragment {
             LinearLayout linearLayoutChangeTemp= view.findViewById(R.id.viewicetemplate);
             linearLayoutChangeTemp.setVisibility(View.VISIBLE);
 
-            viewinvoicebotom.setText("View Receipt");
-            viewinvoicetemplate.setText("Edit Receipt");
-            duplicateinvoitxt.setText("Duplicate Receipt");
-            shareinvoicetxt.setText("Share Receipt");
+            viewinvoicebotom.setText(getString(R.string.list_ViewReceipt));
+            viewinvoicetemplate.setText(getString(R.string.list_ViewEditReceipt));
+            duplicateinvoitxt.setText(getString(R.string.list_DuplicateReceipt));
+            shareinvoicetxt.setText(getString(R.string.list_ShareReceipt));
 
 
             viewinvoicebotom.setOnClickListener(new View.OnClickListener() {
@@ -1038,8 +1038,8 @@ public class ListOfReceipts extends BaseFragment {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValueReceiptWithoutPlus(dataNo)+" from "+selectedCompanyName;
-                                            String txt = "Thank you for your payment. Kindly find below receipt.";
+                                            String subject = Utility.getRealValueReceiptWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                                            String txt = getString(R.string.list_Thank_you_for_receipt);
                                             new DownloadFile(getActivity(), subject, txt).execute(url.replace("https", "http"));
                                         } else {
 
@@ -1567,7 +1567,7 @@ public class ListOfReceipts extends BaseFragment {
 //                    intentShareFile.setPackage("com.google.android.gm");
 //                }
 //                context.startActivity(intentShareFile);
-                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                context.startActivity(Intent.createChooser(intentShareFile, context.getString(R.string.list_ShareFile)));
             }
 
         }

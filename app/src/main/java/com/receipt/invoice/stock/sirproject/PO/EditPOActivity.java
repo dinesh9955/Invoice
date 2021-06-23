@@ -679,7 +679,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                 //invoice Data
                 invoiceDtoInvoice = data.getPoDtoPO();
-               // Log.e(TAG, "selectwarehouseIdAACC "+invoiceDtoInvoice.getWarehouse_id());
+                // Log.e(TAG, "selectwarehouseIdAACC "+invoiceDtoInvoice.getWarehouse_id());
 
                 Gson gson = new Gson();
                 String json2 = gson.toJson(invoiceDtoInvoice);
@@ -2381,8 +2381,8 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                     }
 
                     else {
-                       // Customer_list customer_lists = selected.get(0);
-                      //  Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
+                        // Customer_list customer_lists = selected.get(0);
+                        //  Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
 
 
 
@@ -3511,11 +3511,8 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                         invoicenovalue = Integer.parseInt(Invoiceno) + 1;
                   /*      if (Invoiceno != null) {
-
                             invoicenum.setText("Inv # " + invoicenovalue);
-
                             Log.e("imagepath customer", String.valueOf(invoicenovalue));
-
                         }*/
                         String company_image_path = data.getString("company_image_path");
                         Log.e("company_image_path", company_image_path);
@@ -4247,90 +4244,90 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                     }else if(edquantity.getText().toString().length() == 0){
                         Constant.ErrorToast(EditPOActivity.this,"Please enter quantity!");
                     }else{
-            double en_quantity = Double.parseDouble(edquantity.getText().toString());
+                        double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
-                            double sh_quantity = 0;
-                            double sh_price = 0.0;
+                        double sh_quantity = 0;
+                        double sh_price = 0.0;
 
 
 
-                            ItemQuantity itemQuantity = Utility.getQuantityByProductId(product_bottom, tempList.get(str).getProduct_id());
-                            Log.e(TAG, "itemQuantityAA "+itemQuantity.getEn_quantity());
-                            Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
+                        ItemQuantity itemQuantity = Utility.getQuantityByProductId(product_bottom, tempList.get(str).getProduct_id());
+                        Log.e(TAG, "itemQuantityAA "+itemQuantity.getEn_quantity());
+                        Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
 
-                                    if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
+                        if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
 //                                        if (itemQuantity.getEn_quantity() <= en_quantity) {
 //                                            mybuilder.show();
 //                                            Constant.ErrorToast(EditPOActivity.this, "Insufficient Quantity Available");
 //                                            mybuilder.dismiss();
 //                                        } else {
-                                            sh_price = Double.parseDouble(edprice.getText().toString());
-                                            double multiply = en_quantity * sh_price;
-                                            String s_multiply = String.valueOf(multiply);
+                            sh_price = Double.parseDouble(edprice.getText().toString());
+                            double multiply = en_quantity * sh_price;
+                            String s_multiply = String.valueOf(multiply);
 
 
 
-                                            producprice.remove(str);
-                                            totalpriceproduct.remove(str);
-                                            tempQuantity.remove(str);
+                            producprice.remove(str);
+                            totalpriceproduct.remove(str);
+                            tempQuantity.remove(str);
 
-                                            producprice.add(str, String.valueOf(sh_price));
-                                            totalpriceproduct.add(str, String.valueOf(sh_price));
-                                            tempQuantity.add(str, edquantity.getText().toString());
-
-
-                                            double dd = 0.0;
-                                            for (int i = 0; i < producprice.size(); i++){
-                                                double aa = Double.parseDouble(producprice.get(i));
-                                                double bb = Double.parseDouble(tempQuantity.get(i));
-
-                                                double cc = aa * bb;
-                                                dd = dd + cc;
-                                            }
-                                            total_price = dd;
+                            producprice.add(str, String.valueOf(sh_price));
+                            totalpriceproduct.add(str, String.valueOf(sh_price));
+                            tempQuantity.add(str, edquantity.getText().toString());
 
 
-                                            calculateTotalAmount(total_price);
-                                            products_adapter.notifyDataSetChanged();
+                            double dd = 0.0;
+                            for (int i = 0; i < producprice.size(); i++){
+                                double aa = Double.parseDouble(producprice.get(i));
+                                double bb = Double.parseDouble(tempQuantity.get(i));
 
-                                            mybuilder.dismiss();
+                                double cc = aa * bb;
+                                dd = dd + cc;
+                            }
+                            total_price = dd;
+
+
+                            calculateTotalAmount(total_price);
+                            products_adapter.notifyDataSetChanged();
+
+                            mybuilder.dismiss();
 //                                        }
-                                    }
+                        }
 
-                                    else
-                                    {
-                                        sh_price = Double.parseDouble(edprice.getText().toString());
-                                        double multiply = en_quantity * sh_price;
-                                        String s_multiply = String.valueOf(multiply);
-
-
-
-                                        producprice.remove(str);
-                                        totalpriceproduct.remove(str);
-                                        tempQuantity.remove(str);
-
-                                        producprice.add(str, String.valueOf(sh_price));
-                                        totalpriceproduct.add(str, String.valueOf(sh_price));
-                                        tempQuantity.add(str, edquantity.getText().toString());
+                        else
+                        {
+                            sh_price = Double.parseDouble(edprice.getText().toString());
+                            double multiply = en_quantity * sh_price;
+                            String s_multiply = String.valueOf(multiply);
 
 
-                                        double dd = 0.0;
-                                        for (int i = 0; i < producprice.size(); i++){
-                                            double aa = Double.parseDouble(producprice.get(i));
-                                            double bb = Double.parseDouble(tempQuantity.get(i));
 
-                                            double cc = aa * bb;
-                                            dd = dd + cc;
-                                        }
-                                        total_price = dd;
+                            producprice.remove(str);
+                            totalpriceproduct.remove(str);
+                            tempQuantity.remove(str);
+
+                            producprice.add(str, String.valueOf(sh_price));
+                            totalpriceproduct.add(str, String.valueOf(sh_price));
+                            tempQuantity.add(str, edquantity.getText().toString());
 
 
-                                        calculateTotalAmount(total_price);
-                                        products_adapter.notifyDataSetChanged();
+                            double dd = 0.0;
+                            for (int i = 0; i < producprice.size(); i++){
+                                double aa = Double.parseDouble(producprice.get(i));
+                                double bb = Double.parseDouble(tempQuantity.get(i));
 
-                                        mybuilder.dismiss();
-                                    }
-                                }
+                                double cc = aa * bb;
+                                dd = dd + cc;
+                            }
+                            total_price = dd;
+
+
+                            calculateTotalAmount(total_price);
+                            products_adapter.notifyDataSetChanged();
+
+                            mybuilder.dismiss();
+                        }
+                    }
 
 
 

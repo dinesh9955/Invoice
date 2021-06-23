@@ -408,7 +408,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             Log.e("sltcustonername",sltcustonername);
             Shiping_tostr="";
         }else {
-            Shiping_tostr="Ship To:";
+            Shiping_tostr = getString(R.string.html_ShipTo);
 
             if(!shippingfirstname.equalsIgnoreCase("")){
                 stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
@@ -467,7 +467,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
 
 
@@ -544,7 +544,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             notestringvalue="";
         }else
         {
-            notestringvalue="Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -560,7 +560,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             companyname="";
         }else {
             invoice_image_pathcompanystemp=invoice_image_path + company_stamp;
-            companyname="Company Seal";
+            companyname = getString(R.string.html_CompanySeal);
         }
 
         String signature_of_receivername="";
@@ -570,7 +570,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             signature_of_receivername="";
         }else {
             invoice_image_pathreceiverpath=invoice_image_path + signature_of_receiver;
-            signature_of_receivername="Signature of Receiver";
+            signature_of_receivername = getString(R.string.html_SignatureofReceiver);
         }
 
 
@@ -581,7 +581,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             signature_of_issuername="";
         }else {
             invoice_image_pathissuverpath=invoice_image_path + signature_of_issuer;
-            signature_of_issuername="Signature of Issuer";
+            signature_of_issuername = getString(R.string.html_SignatureofIssuer);
         }
 
         try {
@@ -619,7 +619,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             // null response or Exception occur
 
             Shipingcosstbyct=""+freight_cost+currency_code;
-            shipingvaluetxt="Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
 
@@ -665,9 +665,9 @@ public class ViewInvoiceActivity extends BaseActivity {
             paidamountstrrepvalue = strpaid_amount;
 
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
-                paidamountstrreptxt = "Paid Amount ";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount);
             }else{
-                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
             }
 
 
@@ -684,7 +684,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             }else{
                 cheque_payableTo = cheque_payable_to;
                 bycheckstrtxt="By cheque :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
@@ -692,7 +692,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             }else{
                 pemailpaidstr = paypal_emailstr;
                 paypalstrtxt="Pay Pal :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
@@ -706,7 +706,7 @@ public class ViewInvoiceActivity extends BaseActivity {
                     payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -754,7 +754,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue = getString(R.string.html_ReferenceNo);
 
 
         }
@@ -795,7 +795,7 @@ public class ViewInvoiceActivity extends BaseActivity {
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue + currency_code;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
 
@@ -808,7 +808,7 @@ public class ViewInvoiceActivity extends BaseActivity {
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Subtotalamount + ""+ Utility.getReplaceDollor(currency_code);
         }
 

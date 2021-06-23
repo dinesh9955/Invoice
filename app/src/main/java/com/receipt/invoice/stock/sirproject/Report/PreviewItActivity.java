@@ -642,6 +642,8 @@ public class PreviewItActivity extends BaseActivity {
     }
 
 
+
+
     private void customerAgeingReportWeb(CompanyItem customerItem, ArrayList<CustomerAgeingReportItem> customerReportItemArrayList) {
 
         double totalAmount = 0.0;
@@ -754,7 +756,9 @@ public class PreviewItActivity extends BaseActivity {
                     totalDD = slab4 + doubleBalance;
                     stringBalance = Utility.getPatternFormat(""+numberPostion, totalDD) + Utility.getReplaceDollor(cruncycode);
                 } else{
-                    stringBalance = "0.0" + Utility.getReplaceDollor(cruncycode);
+                    String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
+                    totalDD = doubleBalance;
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
                 }
 
 
@@ -822,6 +826,8 @@ public class PreviewItActivity extends BaseActivity {
         invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
 
     }
+
+
 
 
     private void taxCollectedReportWeb(CompanyItem customerItem, ArrayList<TaxCollectedReportItem> customerReportItemArrayList) {

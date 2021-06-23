@@ -1868,7 +1868,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     totalDD = slab4 + doubleBalance;
                     stringBalance = Utility.getPatternFormat(""+numberPostion, totalDD) + Utility.getReplaceDollor(cruncycode);
                 } else{
-                    stringBalance = "0.0" + Utility.getReplaceDollor(cruncycode);
+                    String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
+                    totalDD = doubleBalance;
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
                 }
 
 

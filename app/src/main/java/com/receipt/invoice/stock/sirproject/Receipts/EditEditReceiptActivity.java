@@ -656,7 +656,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
                 // selectedTemplate = Integer.parseInt(invoiceDtoInvoice.getTemplate_type());
                 if(selectedTemplate != 0){
-                    itemstxtTemplate.setText("Template "+selectedTemplate);
+                    itemstxtTemplate.setText(getString(R.string.header_template)+" "+selectedTemplate);
                 }
                 strnotes = invoiceDtoInvoice.getNotes();
                 ednotes.setText(Html.fromHtml(strnotes));
@@ -1238,8 +1238,8 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
                 .showTitle(false)
-                .setCompleteButtonText("Done")
-                .setEmptySelectionText("No Select")
+                .setCompleteButtonText(getString(R.string.done))
+                .setEmptySelectionText(getString(R.string.noSelect))
                 .setSelectMaxCount(5)
                 .setSelectMinCount(1)
 
@@ -1288,15 +1288,15 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
     private void createinvoicewithdetail(File file) {
         avi.smoothToShow();
         if (customer_name.equals("")) {
-            Constant.ErrorToast(EditEditReceiptActivity.this, "Select A Customer");
+            Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.dialog_SelectACustomer));
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_RECEIPT).equalsIgnoreCase("")) {
-            Constant.ErrorToast(EditEditReceiptActivity.this, "Receipt No. should be letters followed by Digits");
+            Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.dialog_ReceiptDigits));
 
         }else if (invoice_date.equals("")) {
-            Constant.ErrorToast(EditEditReceiptActivity.this, "Select Receipt Date");
+            Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.dialog_SelectReceiptDate));
 
         } else if (selectedCompanyId.equals("")) {
-            Constant.ErrorToast(EditEditReceiptActivity.this, "Select A Company");
+            Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.dialog_SelectACompany));
 
 //        } else if (selectwarehouseId.equals("")) {
 //            Constant.ErrorToast(EditReceiptActivity.this, "Select A Where House");
@@ -1307,7 +1307,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
         }
 
         else if (tempList.size() == 0) {
-            Constant.ErrorToast(EditEditReceiptActivity.this, "Select Product First");
+            Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.done));
         }
 
         else {
@@ -1731,7 +1731,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
 
             if(selectedTemplate != 0){
-                itemstxtTemplate.setText("Template "+selectedTemplate);
+                itemstxtTemplate.setText(getString(R.string.header_template)+" "+selectedTemplate);
             }
         }
 
@@ -2066,12 +2066,12 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                     Paymentamountdate = paiddate;
 
                     if (paidamountstr.isEmpty()) {
-                        edamount.setError("Required");
+                        edamount.setError(getString(R.string.dialog_Required));
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
-                        Constant.ErrorToastTop(EditEditReceiptActivity.this, "Date Required");
+                        Constant.ErrorToastTop(EditEditReceiptActivity.this, getString(R.string.dialog_DateRequired));
                     } else if (paimentmodespinerstr.equals("")) {
-                        Constant.ErrorToastTop(EditEditReceiptActivity.this, "Payment Mode Required");
+                        Constant.ErrorToastTop(EditEditReceiptActivity.this, getString(R.string.dialog_PaymentModeRequired));
                     } else {
                         if (paidamountstr != null) {
                             paidamount.setText(paidamountstr);
@@ -2092,7 +2092,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
         if (bottomSheetDialog2 != null) {
             View view = LayoutInflater.from(this).inflate(R.layout.dots_bottomsheet, null);
             btnviewinvoice = view.findViewById(R.id.btnviewinvoice);
-            btnviewinvoice.setText("View Recepit");
+            btnviewinvoice.setText(getString(R.string.dialog_ViewRecepit));
             btnclear = view.findViewById(R.id.btnclear);
             btndotcancel = view.findViewById(R.id.btndotcancel);
 
@@ -2125,13 +2125,13 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                     strnotes = Html.toHtml(textNotes);
 
                     if (selectedCompanyId.equals("")) {
-                        Constant.ErrorToast(EditEditReceiptActivity.this, "Select A Company");
+                        Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog2.dismiss();
                     } else if (invoice_date.equals("")) {
-                        Constant.ErrorToast(EditEditReceiptActivity.this, "Select Receipt Date");
+                        Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.dialog_SelectReceiptDate));
                         bottomSheetDialog2.dismiss();
                     } else if (customer_name.equals("")) {
-                        Constant.ErrorToast(EditEditReceiptActivity.this, "Select A Customer");
+                        Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.dialog_SelectACustomer));
                         bottomSheetDialog2.dismiss();
 //                    } else if (credit_terms.equals("")) {
 //                        Constant.ErrorToast(EditReceiptActivity.this, "Select Credit Tearm");
@@ -2142,7 +2142,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                     }
 
                     else if (tempList.size() == 0) {
-                        Constant.ErrorToast(EditEditReceiptActivity.this, "Select Product First");
+                        Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.dialog_SelectProductFirst));
                         bottomSheetDialog2.dismiss();
                     }
 
@@ -2367,11 +2367,11 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
-                        eddisount.setHint("Enter Discount in %");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
-                        eddisount.setHint("Enter Discount in Amount");
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
                 }
@@ -2467,7 +2467,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                     dayss = edmanual.getText().toString();
 
                     if (dayss.equals("") && credit_terms.equals("")) {
-                        Toast.makeText(EditEditReceiptActivity.this, "Please Select Atleast One", Toast.LENGTH_LONG).show();
+                        Toast.makeText(EditEditReceiptActivity.this, getString(R.string.dialog_PleaseSelectAtleastOne), Toast.LENGTH_LONG).show();
                     } else if (dayss != null && credit_terms.equals("")) {
 
                         String dayswith = dayss.trim();
@@ -2485,18 +2485,18 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                         Log.e("Date Long", simple.format(result));
                         edduedate.setText(simple.format(result));
                         edduedate.setClickable(true);
-                        txtdays.setText(dayss + " " + "days");
+                        txtdays.setText(dayss + " " + getString(R.string.dialog_days));
                         bottomSheetDialog.dismiss();
                         edduedate.setClickable(false);
                     } else if (credit_terms != null && dayss.equals("")) {
-                        if (credit_terms.equals("none")) {
+                        if (credit_terms.equals(getString(R.string.dialog_DateNone))) {
                             txtdays.setText(credit_terms);
                             edduedate.setClickable(true);
                             bottomSheetDialog.dismiss();
 
                             edduedate.setText(duedate.getText().toString());
 
-                        } else if (credit_terms.equals("immediately")) {
+                        } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
                             String myFormat = "yyyy-MM-dd"; //In which you need put here
                             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
@@ -2508,7 +2508,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                         } else {
 
 
-                            String replaceString = credit_terms.replaceAll("days", "");
+                            String replaceString = credit_terms.replaceAll(getString(R.string.dialog_days), "");
                             String dayswith = replaceString.trim();
                             Double daysvalue = Double.parseDouble(dayswith);
 
@@ -2531,7 +2531,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
 
                     } else if (dayss != null && credit_terms != null) {
-                        Toast.makeText(EditEditReceiptActivity.this, "Please Select One Value", Toast.LENGTH_LONG).show();
+                        Toast.makeText(EditEditReceiptActivity.this, getString(R.string.dialog_PleaseSelectOneValue), Toast.LENGTH_LONG).show();
 
                     }
 
@@ -2826,7 +2826,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
         RequestParams params = new RequestParams();
         if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
-            Constant.ErrorToast(EditEditReceiptActivity.this, "Select Company");
+            Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.select_company));
         } else {
             params.add("company_id", this.selectedCompanyId);
             String token = Constant.GetSharedPreferences(EditEditReceiptActivity.this, Constant.ACCESS_TOKEN);
@@ -2956,7 +2956,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
                             }
                         } else {
-                            Constant.ErrorToast(EditEditReceiptActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3060,7 +3060,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
                             }
                         } else {
-                            Constant.ErrorToast(EditEditReceiptActivity.this, jsonObject.getString("Product Not Found"));
+                            Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.dialog_ProductNotFound));
                         }
                     }
 
@@ -3520,7 +3520,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             textViewNoItems.setVisibility(View.GONE);
         }
 
-        DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+       // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
         //  double Grossamount_strdto = 0.0,  Discountamountstrdto = 0.0,  Subtotalamountdto = 0.0, Tax_amountdto = 0.0,
         //  Shippingamountdto = 0.0, Netamountvaluedto = 0.0, Paidamountstrdto = 0.0, Blanceamountstrdto = 0.0;
@@ -3561,10 +3561,10 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             grandAmount = total_price;
 
 
-            if (strdiscount.equalsIgnoreCase("Percentage")) {
+            if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equalsIgnoreCase("Amount")) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{
@@ -3897,9 +3897,9 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
 
                     if(edprice.getText().toString().length() == 0){
-                        Constant.ErrorToast(EditEditReceiptActivity.this,"Please enter amount!");
+                        Constant.ErrorToast(EditEditReceiptActivity.this,getString(R.string.select_Please_enter_amount));
                     }else if(edquantity.getText().toString().length() == 0){
-                        Constant.ErrorToast(EditEditReceiptActivity.this,"Please enter quantity!");
+                        Constant.ErrorToast(EditEditReceiptActivity.this,getString(R.string.select_Please_enter_quantity));
                     }else{
                         double en_quantity = Double.parseDouble(edquantity.getText().toString());
 
@@ -3915,7 +3915,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                         if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
                             if (itemQuantity.getEn_quantity() <= en_quantity) {
                                 mybuilder.show();
-                                Constant.ErrorToast(EditEditReceiptActivity.this, "Insufficient Quantity Available");
+                                Constant.ErrorToast(EditEditReceiptActivity.this, getString(R.string.invoice_InsufficientQuantityAvailable));
                                 mybuilder.dismiss();
                             } else {
                                 sh_price = Double.parseDouble(edprice.getText().toString());
@@ -4540,7 +4540,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
         if (shippingfirstname.equalsIgnoreCase("")) {
             Shiping_tostr = "";
         } else {
-            Shiping_tostr = "Ship To:";
+            Shiping_tostr = getString(R.string.html_ShipTo);
 
             if(!shippingfirstname.equalsIgnoreCase("")){
                 stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
@@ -4759,13 +4759,13 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
         String notestringvalue = "";
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = "Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -4774,7 +4774,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             if(company_stamp.toLowerCase().endsWith("white_img.png")){
                 companyname = "";
             }else{
-                companyname = "Company Seal";
+                companyname = getString(R.string.html_CompanySeal);
             }
         }else{
             company_stamp = "/android_res/drawable/white_img.png";
@@ -4787,7 +4787,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             if(signatureofreceiverst.toLowerCase().endsWith("white_img.png")){
                 signature_of_receivername = "";
             }else{
-                signature_of_receivername = "Signature of Receiver";
+                signature_of_receivername = getString(R.string.html_SignatureofReceiver);
             }
         }else{
             signatureofreceiverst = "/android_res/drawable/white_img.png";
@@ -4800,7 +4800,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             if(signature_of_issuer.toLowerCase().endsWith("white_img.png")){
                 signature_of_issuername = "";
             }else{
-                signature_of_issuername = "Signature of Issuer";
+                signature_of_issuername = getString(R.string.html_SignatureofIssuer);
             }
         }else{
             signature_of_issuer = "/android_res/drawable/white_img.png";
@@ -4846,7 +4846,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
         String subTotalTxt = "";
@@ -4856,7 +4856,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
 
@@ -4899,7 +4899,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             }
 
 
-            shipingvaluetxt = "Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
         if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
@@ -4946,7 +4946,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
         } else {
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount;
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrreptxt = getString(R.string.html_PaidAmount);
 
 
             pemailpaidstr = paypal_emailstr;
@@ -4956,7 +4956,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             payment_currencystr = payment_currency;
             payment_swiftstr = payment_swift_bic;
 
-            paimnetdetailstrtxt=" Payment Details ";
+            paimnetdetailstrtxt= getString(R.string.html_PaymentDetails);
             bycheckstrtxt="By cheque :";
             paypalstrtxt="Pay Pal :";
             bankstrtxt="Bank :";
@@ -4977,7 +4977,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue= getString(R.string.done);
 
 
         }

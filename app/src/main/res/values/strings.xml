@@ -13,8 +13,11 @@
     <string name="preview">Preview</string>
     <string name="back">Back</string>
 
-    <string name="yes">yes</string>
+    <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="done">Done</string>
+    <string name="noSelect">No Select</string>
+
 
 
     <string name="header_users">Users</string>
@@ -97,6 +100,7 @@
     <string name="header_convert_to_invoice">Convert to Invoice</string>
     <string name="header_convert_to_receipt">Convert to Receipt</string>
     <string name="header_choose_template">Choose Template</string>
+    <string name="header_template">Template</string>
     <string name="header_edit_invoice">Edit Invoice</string>
     <string name="header_add_item">Add Items</string>
     <string name="header_convert_to_pv">Convert to PV</string>
@@ -346,6 +350,8 @@
     <string name="thank_Search_by_Invoice_number">Search by Invoice number</string>
     <string name="thank_No_Paid_invoices">No Paid invoices</string>
     <string name="thank_Status">Status :</string>
+    <string name="thank_SendThankYouNote">Send Thank You Note</string>
+    <string name="thank_ViewThankYouNote">View Thank You Note</string>
 
 
 
@@ -376,6 +382,60 @@
     <string name="invoice_Upload_Invoice_Images">Upload Invoice Images</string>
     <string name="invoice_Notes">Notes</string>
     <string name="invoice_Search_by_Invoice_number">Search by Invoice number</string>
+
+
+    <string name="html_ReferenceNo">Reference No:</string>
+    <string name="html_Attachments">Attachments</string>
+    <string name="html_Notes">Notes:</string>
+    <string name="html_CompanySeal">Company Seal</string>
+    <string name="html_SignatureofReceiver">Signature of Receiver</string>
+    <string name="html_SignatureofIssuer">Signature of Issuer</string>
+    <string name="html_Discount">Discount</string>
+    <string name="html_SubTotal">SubTotal</string>
+    <string name="html_Shipping">Shipping</string>
+    <string name="html_PaidAmount">Paid Amount</string>
+    <string name="html_PaymentDetails">Payment Details</string>
+    <string name="html_Bycheque">By cheque:</string>
+    <string name="html_ShipTo">Ship To:</string>
+    <string name="html_InvoiceDueDateReminder">Invoice Due Date Reminder</string>
+    <string name="html_Your_invoice_reminder_note">Your invoice is due for payment. Kindly find below reminder note.</string>
+
+
+
+
+
+
+    <string name="list_SearchByReceiptNumber">Search By Receipt Number</string>
+    <string name="list_SearchByCreditNoteNumber">Search By Credit Note Number</string>
+    <string name="list_Invoicenotfound">Invoice not found</string>
+    <string name="list_ShareFile">Share File</string>
+    <string name="list_From">from</string>
+    <string name="list_NoFileFound">No File Found</string>
+    <string name="list_More">More</string>
+    <string name="list_ViewCreditNote">View Credit Note</string>
+    <string name="list_EditCreditNote">Edit Credit Note</string>
+    <string name="list_DuplicateCreditNote">Duplicate Credit Note</string>
+    <string name="list_ShareCreditNote">Share Credit Note</string>
+    <string name="list_YourCreditNoteviewed">Your Credit Note can be viewed, printed and downloaded from below link.</string>
+    <string name="list_YourDebitNoteviewed">Your Debit Note can be viewed, printed and downloaded from below link.</string>
+    <string name="list_SearchByDebitNoteNumber">Search By Debit Note Number</string>
+    <string name="list_ViewDebitNote">View Debit Note</string>
+    <string name="list_EditDebitNote">Edit Debit Note</string>
+    <string name="list_DuplicateDebitNote">Duplicate Debit Note</string>
+    <string name="list_ShareDebitNote">Share Debit Note</string>
+    <string name="list_Thank_you_for_receipt">Thank you for your payment. Kindly find below receipt.</string>
+
+
+    <string name="list_ViewReceipt">View Receipt</string>
+    <string name="list_ViewEditReceipt">Edit Receipt</string>
+    <string name="list_DuplicateReceipt">Duplicate Receipt</string>
+    <string name="list_ShareReceipt">Share Receipt</string>
+
+    <string name="list_Delete">Delete</string>
+
+    <string name="list_SendReminderNote">Send Reminder Note</string>
+    <string name="list_ViewReminderNote">View Reminder Note</string>
+
 
 
     <string name="credit_notes_Recipient">Recipient</string>
@@ -484,14 +544,14 @@
     <string name="dialog_SelectCustomer">Select Customer</string>
     <string name="dialog_SearchCustomer">Search Customers</string>
 
+    <string name="dialog_PleaseSelectAtleastOne">Please Select Atleast One</string>
 
 
 
 
+    <string name="dialog_days">days</string>
 
-
-
-
+    <string name="dialog_immediately">immediately</string>
     <string name="dialog_DateNone">none</string>
     <string name="dialog_DateDue_on_Receipt"> Due on Receipt</string>
     <string name="dialog_Date3days">3 days</string>
@@ -505,7 +565,7 @@
     <string name="dialog_Date120days">120 days</string>
     <string name="dialog_Date365days">365 days</string>
     <string name="dialog_DateOR">OR</string>
-
+    <string name="dialog_PleaseSelectOneValue">Please Select One Value</string>
 
 
     <string name="settings_paln_title_1">Annual Plan</string>
@@ -551,8 +611,9 @@
     <string name="select_company">Select Company</string>
     <string name="cancel">Cancel</string>
 
-
-
+    <string name="select_Please_enter_amount">Please enter amount!</string>
+    <string name="select_Please_enter_quantity">Please enter quantity!</string>
+    <string name="select_We_appreciateThank_you">We appreciate your Business. Kindly find below Thank you note.</string>
 
 
 
@@ -617,7 +678,7 @@
     <string name="createcredit">Create Credit Note</string>
     <string name="createestimate">Create Estimate</string>
     <string name="create_purchaseorder">Create Purchase Order</string>
-+
+
     <string name="create_paymentvoucher">Create Payment Voucher</string>
 
 
@@ -664,6 +725,14 @@
     <string name="dialog_Please_select_currency">Please select currency</string>
     <string name="dialog_CompanyCreatedSuccessfully">Company created successfully</string>
     <string name="dialog_Required">Required</string>
+    <string name="dialog_DateRequired">Date Required</string>
+    <string name="dialog_PaymentModeRequired">Payment Mode Required</string>
+    <string name="dialog_ViewCreditNote">View Credit Note</string>
+    <string name="dialog_ViewRecepit">View Recepit</string>
+    <string name="dialog_ViewPaymentVoucher">View Payment Voucher</string>
+
+
+
     <string name="dialog_SupplierAdded">Supplier Added</string>
     <string name="dialog_Camera">Camera</string>
     <string name="dialog_Gallery">Gallery</string>
@@ -686,6 +755,33 @@
     <string name="dialog_SelectReceiverWarehouse">Select Receiver Warehouse</string>
     <string name="dialog_UpdatedStock">Updated Stock</string>
     <string name="dialog_SelectACompany">Select A Company</string>
+    <string name="dialog_CreditNoteDigits">Credit Note No. should be letters followed by Digits</string>
+    <string name="dialog_DeditNoteDigits">Dedit Note No. should be letters followed by Digits</string>
+    <string name="dialog_ReceiptDigits">Receipt No. should be letters followed by Digits</string>
+
+
+
+    <string name="dialog_SelectDate">Select Date</string>
+    <string name="dialog_SelectACustomer">Select A Customer</string>
+    <string name="dialog_SelectProductFirst">Select Product First</string>
+    <string name="dialog_Shipping_amountCreditNote">Do you want to add Shipping amount for this Credit Note?</string>
+    <string name="dialog_Shipping_amountDebitNote">Do you want to add Shipping amount for this Debit Note?</string>
+    <string name="dialog_Shipping_amountReceipt">Do you want to add Shipping amount for this Receipt?</string>
+    <string name="dialog_PaymentVoucherNoalready_exists">Payment Voucher No. already exists</string>
+    <string name="dialog_PaymentVoucherNoDigits">Payment Voucher No. should be letters followed by Digits</string>
+    <string name="dialog_Shipping_amountPaymentVoucher">Do you want to add Shipping amount for this Payment Voucher?</string>
+
+
+    <string name="dialog_EnterDiscountinPercent">Enter Discount in %</string>
+    <string name="dialog_EnterDiscountinAmount">Enter Discount in Amount</string>
+    <string name="dialog_SelectASupplier">Select A Supplier</string>
+    <string name="dialog_SelectSupplier">Select Supplier</string>
+    <string name="dialog_SearchSupplier">Search Supplier</string>
+
+    <string name="dialog_SelectReceiptDate">Select Receipt Date</string>
+
+
+
     <string name="dialog_ItemAdded">Item Added</string>
     <string name="dialog_Measurement_Unit_required">Measurement Unit is required</string>
     <string name="dialog_Company_required">Company is required</string>

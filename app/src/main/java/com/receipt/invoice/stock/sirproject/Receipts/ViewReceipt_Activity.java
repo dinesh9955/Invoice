@@ -169,7 +169,7 @@ public class ViewReceipt_Activity extends BaseActivity {
             if (shippingfirstname.equalsIgnoreCase("")) {
                 Shiping_tostr = "";
             } else {
-                Shiping_tostr = "Ship To:";
+                Shiping_tostr = getString(R.string.html_ShipTo);
                 Log.e(TAG, "shippingfirstnameAA "+shippingfirstname);
 
                 if(!shippingfirstname.equalsIgnoreCase("")){
@@ -496,13 +496,13 @@ public class ViewReceipt_Activity extends BaseActivity {
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
         String notestringvalue = "";
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = "Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -513,7 +513,7 @@ public class ViewReceipt_Activity extends BaseActivity {
             company_stamp = "/android_res/drawable/white_img.png";
             companyname = "";
         } else {
-            companyname = "Company Seal";
+            companyname = getString(R.string.html_CompanySeal);
         }
 
         String signature_of_receivername = "";
@@ -521,7 +521,7 @@ public class ViewReceipt_Activity extends BaseActivity {
             signature_of_receiver = "/android_res/drawable/white_img.png";
             signature_of_receivername = "";
         } else {
-            signature_of_receivername = "Signature of Receiver";
+            signature_of_receivername = getString(R.string.html_SignatureofReceiver);
         }
 
 
@@ -530,7 +530,7 @@ public class ViewReceipt_Activity extends BaseActivity {
             signature_of_issuer = "/android_res/drawable/white_img.png";
             signature_of_issuername = "";
         } else {
-            signature_of_issuername = "Signature of Issuer";
+            signature_of_issuername = getString(R.string.html_SignatureofIssuer);
         }
 
 
@@ -582,7 +582,7 @@ public class ViewReceipt_Activity extends BaseActivity {
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
 
@@ -626,7 +626,7 @@ public class ViewReceipt_Activity extends BaseActivity {
             }
 
 
-            shipingvaluetxt = "Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
         if (companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
@@ -673,7 +673,7 @@ public class ViewReceipt_Activity extends BaseActivity {
         } else {
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount;
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrreptxt = getString(R.string.html_PaidAmount);
 
 
             pemailpaidstr = paypal_emailstr;
@@ -683,7 +683,7 @@ public class ViewReceipt_Activity extends BaseActivity {
             payment_currencystr = payment_currency;
             payment_swiftstr = payment_swift_bic;
 
-            paimnetdetailstrtxt=" Payment Details ";
+            paimnetdetailstrtxt= getString(R.string.html_PaymentDetails);
             bycheckstrtxt="By cheque :";
             paypalstrtxt="Pay Pal :";
             bankstrtxt="Bank :";
@@ -706,7 +706,7 @@ public class ViewReceipt_Activity extends BaseActivity {
             // null response or Exception occur
 
             strreferencenovalue = ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue= getString(R.string.html_ReferenceNo);
 
 
         }

@@ -418,7 +418,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             Log.e("sltcustonername",sltcustonername);
             Shiping_tostr="";
         }else {
-            Shiping_tostr="Ship To:";
+            Shiping_tostr = getString(R.string.html_ShipTo);
 
             if(!shippingfirstname.equalsIgnoreCase("")){
                 stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
@@ -478,7 +478,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
 
 
@@ -513,7 +513,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
         try {
             for (int i = 0; i < productsItemDtos.size(); i++) {
 
-                DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+              //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                 double productQuantity= Double.parseDouble(productsItemDtos.get(i).getQuantity());
                 double producpriceRate = Double.parseDouble(productsItemDtos.get(i).getPrice());
                 double producpriceAmount = Double.parseDouble(productsItemDtos.get(i).getTotal());
@@ -553,7 +553,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             notestringvalue="";
         }else
         {
-            notestringvalue="Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -569,7 +569,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             companyname="";
         }else {
             invoice_image_pathcompanystemp=invoice_image_path + company_stamp;
-            companyname="Company Seal";
+            companyname = getString(R.string.html_CompanySeal);
         }
 
         String signature_of_receivername="";
@@ -579,7 +579,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             signature_of_receivername="";
         }else {
             invoice_image_pathreceiverpath=invoice_image_path + signature_of_receiver;
-            signature_of_receivername="Signature of Receiver";
+            signature_of_receivername = getString(R.string.html_SignatureofReceiver);
         }
 
 
@@ -590,7 +590,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             signature_of_issuername="";
         }else {
             invoice_image_pathissuverpath=invoice_image_path + signature_of_issuer;
-            signature_of_issuername="Signature of Issuer";
+            signature_of_issuername = getString(R.string.html_SignatureofIssuer);
         }
 
         try {
@@ -628,7 +628,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             // null response or Exception occur
 
             Shipingcosstbyct=""+freight_cost+currency_code;
-            shipingvaluetxt="Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
 
@@ -674,9 +674,9 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             paidamountstrrepvalue = strpaid_amount;
 
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
-                paidamountstrreptxt = "Paid Amount ";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount);
             }else{
-                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
             }
 
 
@@ -693,7 +693,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             }else{
                 cheque_payableTo = cheque_payable_to;
                 bycheckstrtxt="By cheque :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
@@ -701,7 +701,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             }else{
                 pemailpaidstr = paypal_emailstr;
                 paypalstrtxt="Pay Pal :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
@@ -715,7 +715,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
                     payment_currencystr = "";
                 }
                 bankstrtxt="Bank :";
-                paimnetdetailstrtxt =" Payment Details ";
+                paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
             if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
@@ -764,7 +764,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue = getString(R.string.html_ReferenceNo);
 
 
         }
@@ -805,7 +805,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue + currency_code;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
 
@@ -818,7 +818,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Subtotalamount + ""+ Utility.getReplaceDollor(currency_code);
         }
 
@@ -998,15 +998,15 @@ public class SendInvoiceReminderActivity extends BaseActivity {
                                 intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
 
                                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-                                        "Invoice Due Date Reminder");
+                                        getString(R.string.html_InvoiceDueDateReminder));
                                 intentShareFile.putExtra(Intent.EXTRA_TEXT,
-                                        "Your invoice is due for payment. Kindly find below reminder note.");
+                                        getString(R.string.html_Your_invoice_reminder_note));
 
 //                                if (Utility.isAppAvailable(SendInvoiceReminderActivity.this, "com.google.android.gm")){
 ////                                    intentShareFile.setPackage("com.google.android.gm");
 ////                                }
 ////                                startActivity(intentShareFile);
-                                startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                                startActivity(Intent.createChooser(intentShareFile, getString(R.string.list_ShareFile)));
                                 finish();
                             }
 

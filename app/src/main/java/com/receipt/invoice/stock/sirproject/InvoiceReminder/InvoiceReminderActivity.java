@@ -437,7 +437,7 @@ public class InvoiceReminderActivity extends BaseActivity {
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
 
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
-                        "More",
+                        getString(R.string.list_More),
                         0,
                         Color.parseColor("#669933"),
 
@@ -506,9 +506,9 @@ public class InvoiceReminderActivity extends BaseActivity {
             duplicateinvoitxt = view.findViewById(R.id.duplicateinvoitxt);
             shareinvoicetxt = view.findViewById(R.id.shareinvoicetxt);
 
-            viewinvoicetemplate.setText("Send Reminder Note");
-            duplicateinvoitxt.setText("View Reminder Note");
-            shareinvoicetxt.setText("Cancel");
+            viewinvoicetemplate.setText(getString(R.string.list_SendReminderNote));
+            duplicateinvoitxt.setText(getString(R.string.list_ViewReminderNote));
+            shareinvoicetxt.setText(getString(R.string.cancel));
             shareinvoicetxt.setVisibility(View.GONE);
 
             viewinvoicebotom.setTypeface(Typeface.createFromAsset(getAssets(), "Fonts/AzoSans-Bold.otf"));

@@ -467,12 +467,12 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 //                        }
 //                ));
 
-                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                underlayButtons.add(new UnderlayButton(
                         "More",
                         0,
                         Color.parseColor("#669933"),
 
-                        new SwipeHelper2.UnderlayButtonClickListener() {
+                        new UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
                                 if(temp.size() > 0){
@@ -538,11 +538,11 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                 }
 
 
-                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                underlayButtons.add(new UnderlayButton(
                         markAsVoidTxt,
                         0,
                         Color.parseColor(colorVoid),
-                        new SwipeHelper2.UnderlayButtonClickListener() {
+                        new UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
                                 if(temp.size() > 0){
@@ -625,11 +625,11 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 
                 Log.e(TAG, "isProduct "+list.get(viewHolder.getPosition()).isProduct());
                 if(list.get(viewHolder.getPosition()).isProduct() == true){
-                    underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                    underlayButtons.add(new UnderlayButton(
                             markAsVoidTxt,
                             0,
                             Color.parseColor(colorDelivery),
-                            new SwipeHelper2.UnderlayButtonClickListener() {
+                            new UnderlayButtonClickListener() {
                                 @Override
                                 public void onClick(final int pos) {
 
@@ -1053,12 +1053,12 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
             @Override
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
 
-                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                underlayButtons.add(new UnderlayButton(
                         "More",
                         0,
                         Color.parseColor("#669933"),
 
-                        new SwipeHelper2.UnderlayButtonClickListener() {
+                        new UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
                                 customerName = list.get(pos).getInvoicustomer_name();
@@ -1099,11 +1099,11 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 
 
 
-                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                underlayButtons.add(new UnderlayButton(
                         markAsVoidTxt,
                         0,
                         Color.parseColor(colorVoid),
-                        new SwipeHelper2.UnderlayButtonClickListener() {
+                        new UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
 
@@ -1292,7 +1292,6 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1386,7 +1385,6 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1545,7 +1543,6 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            params.add("language", ""+getLanguage());
             client.post(AllSirApi.BASE_URL + "invoice/updateStatus", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1627,7 +1624,6 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "purchaseorder/delete", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1699,7 +1695,6 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "purchaseorder/updateStatus", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1773,7 +1768,6 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "purchaseorder/updateVoidStatus", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2390,9 +2384,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        RequestParams params = new RequestParams();
-        params.add("language", ""+getLanguage());
-        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "company/listing", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
