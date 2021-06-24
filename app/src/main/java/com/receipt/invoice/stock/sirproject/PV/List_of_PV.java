@@ -304,7 +304,8 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
 
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
-                        "More",
+                        getActivity(),
+                        getString(R.string.list_More),
                         0,
                         Color.parseColor("#669933"),
 
@@ -352,6 +353,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
 
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                        getActivity(),
                         getString(R.string.list_Delete),
                         0,
                         Color.parseColor("#ff0000"),

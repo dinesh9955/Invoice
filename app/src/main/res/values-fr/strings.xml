@@ -94,17 +94,17 @@
     <string name="DebitNo">Note de débit Non.</string>
 
     <string name="CreditNo">Note de crédit Non.</string>
-    <string name="ReceiptNo">" Reçu Non."</string>
-    <string name="InvoiceNo">" Facture Non."</string>
+    <string name="ReceiptNo">"Reçu Non."</string>
+    <string name="InvoiceNo">"Facture Non."</string>
     <string name="EstiateNo">Estimation Non.</string>
 
-    <string name="poNo">PO No.</string>
-    <string name="pvNo">PV No.</string>
+    <string name="poNo">PO Non.</string>
+    <string name="pvNo">PV Non.</string>
 
-    <string name="DueDate">Date de réception</string>
+    <string name="DueDate">Date d\'échéance</string>
 
-    <string name="ReceiptDate">Receipt Date</string>
-    <string name="Date">Destinataire</string>
+    <string name="ReceiptDate">Date de réception</string>
+    <string name="Date">Date</string>
     <string name="InvoiceTo">Destinataire</string>
     <string name="ITEMS">ÉLÉMENTS</string>
     <string name="INVOICEITEMS">ARTICLES DE FACTURE</string>
@@ -632,6 +632,36 @@
     <string name="list_Delete">Effacer</string>
     <string name="list_SendReminderNote">Envoyer une note de rappel</string>
     <string name="list_ViewReminderNote">Afficher la note de rappel</string>
+
+
+    <string name="list_Mark_as_delivery_received">Marquer comme livraison reçue</string>
+    <string name="list_Delivery_received">Livraison reçue</string>
+
+    <string name="list_Mark_as_delivery_received1">Marquer comme</string>
+    <string name="list_Mark_as_delivery_received2">livraison reçue</string>
+
+
+    <string name="list_Mark_as_void">Marquer comme nul</string>
+    <string name="list_Mark_as_unvoid">Marquer comme non nul</string>
+
+    <string name="list_Mark_as_void1">Marquer</string>
+    <string name="list_Mark_as_void2">comme nul</string>
+
+    <string name="list_Mark_as_unvoid1">Marquer comme</string>
+    <string name="list_Mark_as_unvoid2">non nul</string>
+
+
+    <string name="list_Mark_as_paid">Marquer comme payé</string>
+    <string name="list_Mark_as_unpaid">Marquer comme non payé</string>
+
+    <string name="list_Mark_as_paid1">Marquer</string>
+    <string name="list_Mark_as_paid2">comme payé</string>
+
+    <string name="list_Mark_as_unpaid1">Marquer comme</string>
+    <string name="list_Mark_as_unpaid2">non payé</string>
+
+
+
     <string name="service_ShippingAmountEstimate">Voulez-vous ajouter un montant d\'expédition pour cette estimation ?</string>
     <string name="dialog_PleaseSelectAtleastOne">Veuillez sélectionner au moins un</string>
     <string name="dialog_PleaseSelectDate">Veuillez sélectionner la date</string>
@@ -645,8 +675,8 @@
     <string name="select_Shipping_amount_PaymentVoucher">Voulez-vous ajouter un montant d\'expédition pour ce bon de paiement ?</string>
     <string name="invoice_Completed">Complété</string>
     <string name="dialog_ViewPV">Vue PV</string>
-    <string name="dialog_EditPV">Edit PV</string>
-    <string name="dialog_SharePV">Share PV</string>
+    <string name="dialog_EditPV">Éditer PV</string>
+    <string name="dialog_SharePV">Partager PV</string>
     <string name="dialog_Convert_to_PaymentVoucher">Convertir en Payment Voucher</string>
     <string name="dialog_DateRequired">"Date requise "</string>
     <string name="dialog_PaymentModeRequired">Mode de paiement requis</string>
@@ -683,5 +713,112 @@
     <string name="report_CustomerStatementReport">Rapport de relevé client</string>
     <string name="report_SupplierStatementReport">Rapport de déclaration du fournisseur</string>
     <string name="dialog_SelectSuppliers">Sélectionnez le fournisseur</string>
+
+    <string name="report_Paid">Payé</string>
+    <string name="report_UnPaid">Non payé</string>
+    <string name="list_Date">Date</string>
+    <string name="invoice_Due">Dû</string>
+
+
+
+
+
+
+
+    <string-array name="faqQuestionArray">
+        <item>Comment commencer / Comment fonctionne l\'application ?</item>
+        <item>Si les données sont créées à partir de l\'ajout de nouvelles fonctionnalités directement à partir de la page de création, les données nouvellement créées ne s\'affichent pas ?</item>
+        <item>Comment ajouter des utilisateurs ?</item>
+        <item>Comment ajouter un entrepôt ?</item>
+        <item>Commentaire ajouter un entrepôt ?</item>
+        <item>Comment enregistrer le stock d\'ouverture?</item>
+        <item>Comment comptabiliser les enregistrements d\'inventaire physique ?</item>
+        <item>Comment déplacer le stock entre les entrepôts ?</item>
+        <item>Comment l\'inventaire sera-t-il mis à jour automatiquement ?</item>
+        <item>Comment la valeur des actions est-elle calculée ?</item>
+        <item>Comment créer une facture ?</item>
+        <item>Quand dois-je sélectionner l\'entrepôt lors de la création de la facture / du bon de commande ?</item>
+        <item>Quand dois-je créer un produit ?</item>
+        <item>Comment visualiser, dupliquer ou partager une facture ?</item>
+        <item>Comment la couleur de ma marque se reflétera-t-elle dans les modèles ?</item>
+        <item>Si l\'entrepôt sélectionné n\'a pas une quantité suffisante pour la facturation, comment puis-je traiter les factures ?</item>
+        <item>Comment vérifier le statut de la facture vue ?</item>
+        <item>Comment marquer les factures comme payées ?</item>
+        <item>Comment convertir une facture en reçu ?</item>
+        <item>Comment marquer le bon de commande comme livraison reçue ?</item>
+        <item>Comment supprimer une facture / un bon de commande ?</item>
+        <item>Comment marquer une facture / un bon de commande comme nul ?</item>
+        <item>Comment créer une note de débit/crédit et leur effet ?</item>
+        <item>Comment l\'estimation du statut changera-t-elle ?</item>
+        <item>Quels détails sont visibles sur l\'écran d\'accueil et comment changer d\'entreprise ?</item>
+        <item>Comment configurer les paiements en ligne ?</item>
+        <item>Combien coûte l\'intégration des passerelles de paiement ?</item>
+        <item>Comment changer le format des nombres ?</item>
+        <item>Comment partager une facture avec des liens de paiement ?</item>
+        <item>Comment saurai-je si une facture a été payée en ligne ?</item>
+        <item>Quand vais-je recevoir l\'argent sur mon compte bancaire ?</item>
+        <item>Comment SIR gère-t-il les paiements par carte ?</item>
+        <item>Comment changer / restaurer / mettre à niveau l\'abonnement ?</item>
+        <item>Comment changer de langue ?</item>
+        <item>Mes données sont-elles sécurisées ?</item>
+        <item>Ma requête n\'est pas répertoriée ici ?</item>
+    </string-array>
+
+
+
+    <string-array name="faqAnswerArray">
+        <item>Pour commencer, cliquez sur s\'inscrire ici et créez un compte. Connectez-vous ensuite avec vos identifiants. Tout d\'abord, vous devez créer une entreprise à partir du module Mes entreprises. Entrez autant de détails, logo, détails de paiement, etc.; tel que requis pour afficher sur les factures et autres documents. Créez ensuite des produits, services, taxes, clients, fournisseurs à partir des modules respectifs dans le menu latéral. Vous pouvez modifier n\'importe lequel de ces détails à tout moment. Ceci est conforme à la fonction de contrôle de l\'application afin que les utilisateurs puissent suivre toute activité / inventaire à tout moment et disposer de toutes les données disponibles stockées dans l\'application pour référence / rapport futur. Une fois que c\'est fait, vous pouvez créer des factures, des devis, des bons de commande, des reçus, des bons de paiement à partir des modules respectifs dans le menu latéral ou les icônes de la barre d\'état au bas de l\'écran d\'accueil en quelques secondes.</item>
+        <item>Si vous ajoutez de nouvelles entreprises, clients, fournisseurs, produits, articles et taxes directement à partir de Créer une facture ou d\'autres pages, vous devez actualiser en sélectionnant à nouveau le nom de l\'entreprise en haut, lors de la création de la facture ou d\'autres documents, pour afficher les données nouvellement créées.</item>
+        <item>Pour ajouter de nouveaux utilisateurs, allez dans le module d\'ajout de nouveaux utilisateurs dans le menu latéral, puis cliquez sur ajouter des utilisateurs en haut à droite, puis entrez les détails et sélectionnez les droits d\'accès simples/multiples à accorder, puis cliquez sur ajouter un utilisateur. Le nouvel utilisateur ajouté peut accéder à l\'application via le nom d\'utilisateur et le mot de passe saisis lors de l\'ajout de l\'utilisateur. Le nouvel utilisateur peut réinitialiser le mot de passe à partir de l\'écran de connexion en cliquant sur mot de passe oublié et en suivant les étapes qui s\'y trouvent.</item>
+        <item>Pour ajouter un entrepôt, allez dans le module Mes entreprises dans le menu latéral, puis cliquez sur l\'entreprise dans laquelle l\'entrepôt doit être ajouté, puis cliquez sur ajouter un entrepôt en haut à droite, puis entrez les détails et cliquez sur enregistrer et continuer.</item>
+        <item>Pour suivre la quantité dans un entrepôt particulier, accédez au module Stocks dans le menu latéral, puis sélectionnez l\'entreprise, puis cliquez sur n\'importe quel produit qui affichera la quantité disponible dans chaque entrepôt.</item>
+        <item>Pour enregistrer le stock d\'ouverture des articles, allez dans le module Stocks puis sélectionnez Mettre à jour le stock et enregistrez la transaction.</item>
+        <item>Pour enregistrer des articles supplémentaires trouvés lors de l\'inventaire, accédez au module Stocks puis sélectionnez Mettre à jour le stock, puis enregistrez les articles. Pour supprimer les articles manquants lors de l\'inventaire, rendez-vous dans le module Stocks puis sélectionnez gaspillage/endommagement puis enregistrez les articles manquants.</item>
+        <item>Pour déplacer le stock entre les entrepôts, allez dans le module Stocks du menu principal puis sélectionnez le mouvement de stock puis enregistrez la transaction.</item>
+        <item>Lorsqu\'un bon de commande émis est marqué comme livraison reçue, les articles en stock dans le bon de commande seront automatiquement ajoutés au stock en stock. Lorsqu\'une facture de vente est émise, les articles en stock dans la facture de vente seront automatiquement réduits du stock d\'inventaire.</item>
+        <item>La valeur du stock est calculée en fonction du taux de produit saisi lors de la création du produit dans le module Mes produits.</item>
+        <item>Pour créer une facture, accédez au module Factures dans le menu latéral ou à partir de l\'icône de la barre d\'état système, puis cliquez sur créer une facture en haut à droite, puis sélectionnez l\'entreprise et entrez les détails pertinents, puis prévisualisez la facture si nécessaire en cliquant sur l\'icône plus à côté de créer facture, puis cliquez sur créer une facture, votre facture sera créée et pourra être consultée/partagée à partir de la page récapitulative du module Factures.</item>
+        <item>L\'entrepôt doit être sélectionné uniquement lorsque le produit est sélectionné pour permettre le suivi des stocks. Si vous sélectionnez un article, ne sélectionnez pas l\'entrepôt.</item>
+        <item>Pour exécuter l\'une des fonctions ci-dessus, accédez à Factures, puis sélectionnez l\'entreprise, puis accédez à la facture spécifique et balayez vers la gauche, puis cliquez sur Plus et sélectionnez votre préférence.</item>
+        <item>Lors de la création de l\'entreprise, vous devez sélectionner la couleur selon vos préférences ou en fonction de votre identité de marque. La couleur sélectionnée sera appliquée aux différents modèles dans Factures / Devis. Sélectionnez n\'importe quel modèle selon votre choix lors de la création de la facture / de l\'estimation. Si aucune couleur n\'a été sélectionnée, tous les modèles afficheront le format standard.</item>
+        <item>Si l\'entrepôt sélectionné n\'a pas une quantité suffisante pour la facturation, vous devrez d\'abord ajouter une quantité suffisante à l\'entrepôt particulier. Accédez au module Stocks dans le menu latéral, puis vous pouvez soit ajouter la quantité à partir de l\'option de mise à jour du stock, soit déplacer le stock d\'un entrepôt à un autre à partir de l\'option de mouvement de stock, en haut.</item>
+        <item>Pour exécuter l\'une des fonctions ci-dessus, accédez à Factures, sélectionnez l\'entreprise, puis accédez à la facture spécifique et balayez vers la gauche, puis cliquez sur Plus et sélectionnez votre préférence.</item>
+        <item>Le statut de la facture vue ne peut être vérifié que si la facture est partagée sous forme de lien. Lorsque le lien est ouvert par le destinataire, le statut passe automatiquement d\'en attente à visible dans le résumé du module Facture. Si la facture est partagée uniquement au format PDF, le statut vu ne peut pas être déterminé et apparaîtra comme en attente.</item>
+        <item>Pour marquer les factures comme payées, accédez au module Factures dans le menu latéral, puis sélectionnez l\'entreprise, puis accédez à la facture dans la liste qui doit être marquée comme payée et balayez vers la gauche, puis cliquez sur Marquer comme payé. Si une facture est marquée comme payée, un reçu doit être créé pour refléter le relevé de compte du client. De même, si un bon de commande est payé, un bon de paiement doit être créé pour refléter le relevé de compte du fournisseur.</item>
+        <item>Allez d\'abord au récapitulatif des factures, faites glisser la facture en question vers la gauche et marquez comme payée. Ensuite, faites glisser la facture vers la gauche, sous Plus, cliquez sur Convertir en reçu, puis cliquez sur Créer un reçu.</item>
+        <item>Marquez le bon de commande comme livraison reçue pour ajouter une quantité à l\'inventaire. Pour marquer le bon de commande comme livraison reçue, accédez au module Bons de commande dans le menu latéral et sélectionnez l\'entreprise, puis accédez au bon de commande spécifique, puis balayez vers la gauche et cliquez sur Marquer comme livraison reçue.</item>
+        <item>Pour supprimer une facture, vous devez créer un avoir. Pour supprimer un bon de commande, vous devez créer une note de débit. Étant donné que les articles de la facture / du bon de commande sont liés à l\'inventaire, ils ne peuvent pas être supprimés directement. Alternativement, vous pouvez marquer la facture / le bon de commande particulier comme nul, puis il ne s\'affichera pas dans les rapports correspondants. Si vous suivez l\'inventaire des produits, après avoir marqué l\'annulation, vous devez accéder au module Stocks et ajouter / supprimer la quantité en annulation Facture / Bon de commande via la mise à jour des stocks ou l\'option de gaspillage.</item>
+        <item>Pour marquer comme annulé, accédez à une facture/un bon de commande particulier, balayez vers la gauche, puis sélectionnez Marquer comme annulé.</item>
+        <item>Pour créer une note de débit, allez dans les notes de débit dans le menu latéral, puis cliquez sur créer des notes de débit en haut à droite, puis enregistrez la transaction et cliquez sur créer une note de débit en bas. La quantité saisie dans la note de débit sera déduite du solde du stock. Pour créer un avoir, allez dans avoirs dans le menu latéral, puis cliquez sur créer des avoirs en haut à droite, puis enregistrez la transaction et cliquez sur créer un avoir en bas. La quantité saisie dans la note de crédit sera rajoutée au solde du stock.</item>
+        <item>Si un devis créé est converti en facture, le statut passe d\'en attente à terminé. Pour convertir un devis en facture, accédez au récapitulatif des devis, faites glisser le devis particulier vers la gauche, cliquez sur plus, puis sélectionnez Convertir en facture, puis cliquez sur Créer une facture.</item>
+        <item>Les détails de la première entreprise créée par l\'utilisateur s\'afficheront par défaut sur l\'écran d\'accueil. Pour changer d\'entreprise, cliquez sur l\'icône en forme d\'étoile en haut à droite de l\'écran d\'accueil puis sélectionnez l\'entreprise souhaitée. L\'entreprise sélectionnée s\'affichera sur l\'écran d\'accueil au fur et à mesure des besoins.</item>
+        <item>La configuration avec Stripe ou PayPal prend quelques minutes. Activez simplement les paiements en ligne dans votre application et suivez les instructions.</item>
+        <item>Il n\'y a pas de frais initiaux ou mensuels. Il y a des frais par transaction, qui varient selon les pays. Pour vérifier les frais dans votre pays, veuillez visiter &lt;a href="https://www.stripe.com/us/pricing"&gt;Stripe pricing&lt;/a&gt; ou alors &lt;a href="https://www.paypal.com/us/webapps/mpp/merchant-fees"&gt;https://www.paypal.com/us/webapps/mpp/merchant-fees&lt;/a&gt;</item>
+        <item>Pour changer le format de virgule dans les nombres, allez dans les paramètres puis cliquez sur la sélection du format de virgule puis sélectionnez votre préférence. Le format sélectionné sera applicable dans tout le compte utilisateur.</item>
+        <item>Pour partager une facture avec des liens de paiement, vous devez d\'abord configurer des passerelles de paiement en ligne à partir des paramètres. Ensuite, lors de la création de la facture, sélectionnez la passerelle de paiement respective par laquelle vous souhaitez être payé. Vous pouvez également sélectionner les deux options. Ensuite, partagez la facture sous forme de lien uniquement. Les liens de paiement seront automatiquement affichés dans l\'e-mail.</item>
+        <item>Si une facture a été payée via les liens de paiement partagés, une facture particulière affichera "Payé" dans le récapitulatif des factures. Alternativement, vous serez averti par la plate-forme de passerelle de paiement respective.</item>
+        <item>Votre premier paiement prendra 7 jours ouvrables et tous les paiements suivants prendront entre 2 et 7 jours ouvrables pour atteindre votre compte. Vous pouvez vérifier la date d\'arrivée estimée de votre paiement en utilisant votre tableau de bord Stripe / PayPal.</item>
+        <item>SIR gère les paiements par carte via Stripe, un leader du marché du traitement des paiements. L\'installation avec Stripe est facile et il n\'y a pas de frais d\'installation. Vous ne payez que par transaction. Pour plus de détails, visitez le &lt;a href="https://www.stripe.com/us/pricing" &gt;Stripe pricing&lt;/a&gt; page. Sur le tableau de bord Stripe, vous pouvez avoir une visibilité complète de toutes vos transactions, y compris les paiements par carte, les paiements en attente et les frais.</item>
+        <item>Pour changer/restaurer/mettre à niveau un abonnement, allez dans Paramètres puis cliquez sur Abonnement et sélectionnez votre préférence en conséquence. Thermes et conditions d\'application.</item>
+        <item>Pour changer de langue, allez dans les paramètres puis cliquez sur la langue et sélectionnez votre préférence.</item>
+        <item>Toutes vos données sont totalement sécurisées et sécurisées sur notre serveur Cloud.</item>
+        <item>Si votre requête n\'est pas répertoriée ici, contactez-nous via la fonction d\'assistance dans les paramètres et nous vous répondrons dans les plus brefs délais.</item>
+    </string-array>
+
+
+
+
+
+    <string-array name="languageArray">
+        <item>Anglaise</item>
+        <item>arabe</item>
+        <item>Allemande</item>
+        <item>Néerlandaise</item>
+        <item>français</item>
+        <item>Italien</item>
+        <item>Espanol</item>
+        <item>Portugais</item>
+    </string-array>
+
 
 </resources>

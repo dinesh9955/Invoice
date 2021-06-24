@@ -641,7 +641,7 @@ public class ViewInvoiceActivity extends BaseActivity {
 
         Log.e(TAG, "strpaid_amount:: "+strpaid_amount);
 
-        if (strpaid_amount.equals("0") || strpaid_amount.equals("0.00") || strpaid_amount.equals(".00Rs") || strpaid_amount.equals(".00")) {
+        if (strpaid_amount.equals("0") || strpaid_amount.equals("0.00") || strpaid_amount.equals(".00Rs") || strpaid_amount.equals(".00") || strpaid_amount.equals("")) {
             // Do you work here on success
             paidamountstrrepvalue = "";
             paidamountstrreptxt = "";

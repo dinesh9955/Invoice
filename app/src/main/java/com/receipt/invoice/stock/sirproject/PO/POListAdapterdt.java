@@ -82,7 +82,7 @@ public class POListAdapterdt extends RecyclerView.Adapter<POListAdapterdt.ViewHo
         if (invoicedue_date.equals("") && invoicedue_date.equals("null")) {
             viewHolderForCat.invoiceduetxt.setText("");
         } else {
-            viewHolderForCat.invoiceduetxt.setText("| Due: "+invoicedue_date);
+            viewHolderForCat.invoiceduetxt.setText("| "+mcontext.getString(R.string.invoice_Due)+": "+invoicedue_date);
         }
 
         if (invoicetotlaprice.equals("") && invoicetotlaprice.equals("null")) {
@@ -111,7 +111,7 @@ public class POListAdapterdt extends RecyclerView.Adapter<POListAdapterdt.ViewHo
 
 
         if(voidStatus.equalsIgnoreCase("1")){
-            viewHolderForCat.statustxt.setText("Void");
+            viewHolderForCat.statustxt.setText(mcontext.getString(R.string.invoice_Void));
             viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
             viewHolderForCat.statustxt.setVisibility(View.VISIBLE);
         }else{

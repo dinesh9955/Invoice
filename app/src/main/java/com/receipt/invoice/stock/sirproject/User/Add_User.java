@@ -60,6 +60,7 @@ import com.receipt.invoice.stock.sirproject.API.SavePref;
 import com.receipt.invoice.stock.sirproject.Settings.OnlinePaymentGatewayActivity;
 import com.receipt.invoice.stock.sirproject.Settings.SubscribeActivity;
 import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
 
@@ -519,7 +520,8 @@ public class Add_User extends BaseFragment {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                    //GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                    Utility.glideSet(getActivity(), fileimage, uploadimage);
                 } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                     Uri selectedImage = data.getData();
                     try {
@@ -527,8 +529,8 @@ public class Add_User extends BaseFragment {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-                    GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                    Utility.glideSet(getActivity(), fileimage, uploadimage);
+                   // GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
 
                 }
 

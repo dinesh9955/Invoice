@@ -50,6 +50,7 @@ import com.receipt.invoice.stock.sirproject.Model.User_list;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.User.User_Activity;
 import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
@@ -748,7 +749,8 @@ public class User_Detail_Activity extends BaseActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                GlideApp.with(this).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
+                Utility.glideSet(this, fileimage, image);
+              //  GlideApp.with(this).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
@@ -756,8 +758,8 @@ public class User_Detail_Activity extends BaseActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                GlideApp.with(this).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
+                Utility.glideSet(this, fileimage, image);
+               // GlideApp.with(this).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
 
             }
 

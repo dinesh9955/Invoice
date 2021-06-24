@@ -280,7 +280,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
 
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
-                        "More",
+                        getActivity(),
+                        getString(R.string.list_More),
                         0,
                         Color.parseColor("#669933"),
 
@@ -345,14 +346,15 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //
                 if (voidStatus.equalsIgnoreCase("0")) {
                     colorVoid = "#ff9900";
-                    markAsVoidTxt = "Mark as void";
+                    markAsVoidTxt = getString(R.string.list_Mark_as_void);
                 }
                 if (voidStatus.equalsIgnoreCase("1")) {
                     colorVoid = "#99cc00";
-                    markAsVoidTxt = "Mark as unvoid";
+                    markAsVoidTxt = getString(R.string.list_Mark_as_unvoid);
                 }
 
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                        getActivity(),
                         markAsVoidTxt,
                         0,
                         Color.parseColor(colorVoid),
@@ -436,14 +438,15 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //
                 if (paidStatus.equalsIgnoreCase("2")) {
                     colorPaid = "#FF0000";
-                    markAsPaidTxt = "Mark as Unpaid";
+                    markAsPaidTxt = getString(R.string.list_Mark_as_unpaid);
                 }
                 if (paidStatus.equalsIgnoreCase("1")) {
                     colorPaid = "#80c904";
-                    markAsPaidTxt = "Mark as Paid";
+                    markAsPaidTxt = getString(R.string.list_Mark_as_paid);
                 }
 
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                        getActivity(),
                         markAsPaidTxt,
                         0,
                         Color.parseColor(colorPaid),

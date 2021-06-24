@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import androidx.appcompat.widget.Toolbar;
@@ -47,8 +49,11 @@ import com.receipt.invoice.stock.sirproject.Stock.Stock_Activity;
 import com.receipt.invoice.stock.sirproject.Tax.Tax_Activity;
 import com.receipt.invoice.stock.sirproject.ThankYouNote.ThankYouNoteActivity;
 import com.receipt.invoice.stock.sirproject.User.User_Activity;
+import com.receipt.invoice.stock.sirproject.Utils.LocaleHelper;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
+
+import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -456,6 +461,15 @@ public class Constant {
 
                             pref.setNumberFormatPosition(0);
                             pref.setLanguagePosition(0);
+
+                            Context context = LocaleHelper.setLocale(activity, "en");
+                            Locale myLocale = new Locale("en");
+                            Resources res = context.getResources();
+                            DisplayMetrics dm = res.getDisplayMetrics();
+                            Configuration conf = res.getConfiguration();
+                            conf.locale = myLocale;
+                            res.updateConfiguration(conf, dm);
+
 
 
                             Intent intent = new Intent(activity, Signin_Activity.class);

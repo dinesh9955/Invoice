@@ -468,7 +468,8 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 //                ));
 
                 underlayButtons.add(new UnderlayButton(
-                        "More",
+                        getActivity(),
+                        getString(R.string.list_More),
                         0,
                         Color.parseColor("#669933"),
 
@@ -530,15 +531,16 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 //
                 if (voidStatus.equalsIgnoreCase("0")) {
                     colorVoid = "#ff9900";
-                    markAsVoidTxt = "Mark as void";
+                    markAsVoidTxt = getString(R.string.list_Mark_as_void);
                 }
                 if (voidStatus.equalsIgnoreCase("1")) {
                     colorVoid = "#99cc00";
-                    markAsVoidTxt = "Mark as unvoid";
+                    markAsVoidTxt = getString(R.string.list_Mark_as_unvoid);
                 }
 
 
                 underlayButtons.add(new UnderlayButton(
+                        getActivity(),
                         markAsVoidTxt,
                         0,
                         Color.parseColor(colorVoid),
@@ -615,17 +617,18 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 
                 if (deliveryStatus.equalsIgnoreCase("1")) {
                     colorDelivery = "#ff4d4d";
-                    markAsVoidTxt = "Mark as delivery received";
+                    markAsVoidTxt = getString(R.string.list_Mark_as_delivery_received);
                 }
                 if (deliveryStatus.equalsIgnoreCase("2")) {
                     colorDelivery = "#33cc33";
-                    markAsVoidTxt = "Delivery received";
+                    markAsVoidTxt = getString(R.string.list_Delivery_received);
                 }
 
 
                 Log.e(TAG, "isProduct "+list.get(viewHolder.getPosition()).isProduct());
                 if(list.get(viewHolder.getPosition()).isProduct() == true){
                     underlayButtons.add(new UnderlayButton(
+                            getActivity(),
                             markAsVoidTxt,
                             0,
                             Color.parseColor(colorDelivery),

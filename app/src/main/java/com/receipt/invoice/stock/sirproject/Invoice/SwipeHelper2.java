@@ -20,6 +20,8 @@ import android.view.View;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.receipt.invoice.stock.sirproject.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -37,6 +39,8 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
     private float swipeThreshold = 0.5f;
     private Map<Integer, List<UnderlayButton>> buttonsBuffer;
     private Queue<Integer> recoverQueue;
+
+
 
     private GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener(){
         @Override
@@ -79,11 +83,12 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
         }
     };
 
-    public SwipeHelper2(Context context, RecyclerView recyclerView) {
+    public SwipeHelper2(Context context1, RecyclerView recyclerView) {
         super(0, ItemTouchHelper.LEFT);
         this.recyclerView = recyclerView;
         this.buttons = new ArrayList<>();
-        this.gestureDetector = new GestureDetector(context, gestureListener);
+
+        this.gestureDetector = new GestureDetector(context1, gestureListener);
         this.recyclerView.setOnTouchListener(onTouchListener);
         buttonsBuffer = new HashMap<>();
         recoverQueue = new LinkedList<Integer>(){
@@ -95,6 +100,7 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
                     return super.add(o);
             }
         };
+
 
         attachSwipe();
     }
@@ -220,19 +226,28 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
 
     public abstract void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons);
 
+
+
+
     public static class UnderlayButton {
+
+
         private String text;
         private int imageResId;
         private int color;
         private int pos;
         private RectF clickRegion;
         private UnderlayButtonClickListener clickListener;
+        private Context context;
 
-        public UnderlayButton(String text, int imageResId, int color, UnderlayButtonClickListener clickListener) {
+
+        public UnderlayButton(Context context1,  String text, int imageResId, int color, UnderlayButtonClickListener clickListener) {
             this.text = text;
             this.imageResId = imageResId;
             this.color = color;
             this.clickListener = clickListener;
+            context = context1;
+
         }
 
         public boolean onClick(float x, float y){
@@ -264,13 +279,36 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
             float y = cHeight / 2f + r.height() / 2f - r.bottom;
 
 
-            String t1 = "Mark as delivery";
-            String t2 = "received";
 
-            if(text.equalsIgnoreCase("Mark as delivery received")){
+
+            if(text.equalsIgnoreCase(context.getString(R.string.list_Mark_as_delivery_received))){
+                String t1 = context.getString(R.string.list_Mark_as_delivery_received1);
+                String t2 = context.getString(R.string.list_Mark_as_delivery_received2);
                 c.drawText(t1, rect.left + x, rect.top + y, p);
                 c.drawText(t2, rect.left + x, rect.top + y + 30, p);
-            }else{
+            } else if(text.equalsIgnoreCase(context.getString(R.string.list_Delivery_received))){
+                c.drawText(text, rect.left + x, rect.top + y+10, p);
+            } else if(text.equalsIgnoreCase(context.getString(R.string.list_Mark_as_void))){
+                String t1 = context.getString(R.string.list_Mark_as_void1);
+                String t2 = context.getString(R.string.list_Mark_as_void2);
+                c.drawText(t1, rect.left + x, rect.top + y, p);
+                c.drawText(t2, rect.left + x, rect.top + y + 30, p);
+            } else if(text.equalsIgnoreCase(context.getString(R.string.list_Mark_as_unvoid))){
+                String t1 = context.getString(R.string.list_Mark_as_unvoid1);
+                String t2 = context.getString(R.string.list_Mark_as_unvoid2);
+                c.drawText(t1, rect.left + x, rect.top + y, p);
+                c.drawText(t2, rect.left + x, rect.top + y + 30, p);
+            } else if(text.equalsIgnoreCase(context.getString(R.string.list_Mark_as_paid))){
+                String t1 = context.getString(R.string.list_Mark_as_paid1);
+                String t2 = context.getString(R.string.list_Mark_as_paid2);
+                c.drawText(t1, rect.left + x, rect.top + y, p);
+                c.drawText(t2, rect.left + x, rect.top + y + 30, p);
+            } else if(text.equalsIgnoreCase(context.getString(R.string.list_Mark_as_unpaid))){
+                String t1 = context.getString(R.string.list_Mark_as_unpaid1);
+                String t2 = context.getString(R.string.list_Mark_as_unpaid2);
+                c.drawText(t1, rect.left + x, rect.top + y, p);
+                c.drawText(t2, rect.left + x, rect.top + y + 30, p);
+            } else{
                 c.drawText(text, rect.left + x, rect.top + y+10, p);
             }
 

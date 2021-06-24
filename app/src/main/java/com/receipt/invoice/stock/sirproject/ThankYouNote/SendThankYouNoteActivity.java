@@ -620,6 +620,11 @@ public class SendThankYouNoteActivity extends BaseActivity {
         }
 
 
+
+        Log.e(TAG, "invoice_image_pathcompanystemp: "+invoice_image_pathcompanystemp);
+        Log.e(TAG, "invoice_image_pathreceiverpath: "+invoice_image_pathreceiverpath);
+        Log.e(TAG, "invoice_image_pathissuverpath: "+invoice_image_pathissuverpath);
+
         String content = null;
 
 
@@ -881,6 +886,8 @@ public class SendThankYouNoteActivity extends BaseActivity {
             if(!company_email.equalsIgnoreCase("")){
                 stringBuilderCompany.append(company_email+"");
             }
+
+
 
 
             Calendar myCalendar = Calendar.getInstance();

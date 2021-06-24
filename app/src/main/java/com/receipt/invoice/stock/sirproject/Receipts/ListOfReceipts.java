@@ -324,6 +324,7 @@ public class ListOfReceipts extends BaseFragment {
             public void onItemSelected(int position, String itemAtPosition) {
                 selectedCompanyId = cids.get(position);
                 colorCode = arrayColor.get(position);
+                selectedCompanyName = cnames.get(position);
                 Log.e("colorCode",colorCode);
                 Log.e("company_id",selectedCompanyId);
                 String parmavalue = "All";

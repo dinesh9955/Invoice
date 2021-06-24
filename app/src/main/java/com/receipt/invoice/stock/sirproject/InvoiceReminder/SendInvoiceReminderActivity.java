@@ -3,8 +3,11 @@ package com.receipt.invoice.stock.sirproject.InvoiceReminder;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.print.PDFPrint;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -51,13 +54,14 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 
 public class SendInvoiceReminderActivity extends BaseActivity {
-    private final String TAG = "ViewThankYouNoteActivity";
+    private final String TAG = "SendInvoiceReminderActivity";
     WebView invoiceweb;
     String invoiceId = "";
     String templateSelect = "";
@@ -449,18 +453,18 @@ public class SendInvoiceReminderActivity extends BaseActivity {
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
-        invoiceweb.setWebViewClient(new WebViewClient() {
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return false;
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-
-                //if page loaded successfully then show print button
-                //findViewById(R.id.fab).setVisibility(View.VISIBLE);
-            }
-        });
+//        invoiceweb.setWebViewClient(new WebViewClient() {
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                return false;
+//            }
+//
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//
+//                //if page loaded successfully then show print button
+//                //findViewById(R.id.fab).setVisibility(View.VISIBLE);
+//            }
+//        });
 
         // Uri uri = Uri.parse("android.resource://com.receipt.invoice.stock.sirproject/drawable/white_img.png");
 
@@ -604,6 +608,11 @@ public class SendInvoiceReminderActivity extends BaseActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        Log.e(TAG, "invoice_image_pathcompanystemp: "+invoice_image_pathcompanystemp);
+        Log.e(TAG, "invoice_image_pathreceiverpath: "+invoice_image_pathreceiverpath);
+        Log.e(TAG, "invoice_image_pathissuverpath: "+invoice_image_pathissuverpath);
 
 
         String content = null;
@@ -912,6 +921,10 @@ public class SendInvoiceReminderActivity extends BaseActivity {
                         .replaceAll("dataimageCompany_Stamp", invoice_image_pathcompanystemp)
                         .replaceAll("dataimageRecieverImage", invoice_image_pathreceiverpath)
 
+//                Log.e(TAG, "invoice_image_pathcompanystemp: "+invoice_image_pathcompanystemp);
+//                Log.e(TAG, "invoice_image_pathreceiverpath: "+invoice_image_pathreceiverpath);
+//                Log.e(TAG, "invoice_image_pathissuverpath: "+invoice_image_pathissuverpath);
+
                         .replaceAll("Company Seal", companyname)
                         .replaceAll("Authorized Signatory", signature_of_receivername)
 
@@ -961,68 +974,90 @@ public class SendInvoiceReminderActivity extends BaseActivity {
 
 
 
-        invoiceweb.setWebViewClient(new WebViewClient() {
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return false;
-            }
 
-            @Override
-            public void onPageFinished(WebView view, String url) {
 
-                //if page loaded successfully then show print button
-                //findViewById(R.id.fab).setVisibility(View.VISIBLE);
-                final File savedPDFFile = FileManager.getInstance().createTempFile(SendInvoiceReminderActivity.this, "InvoiceReminder.pdf", true);
 
-                PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
+
+
+
+
+
+                invoiceweb.setWebViewClient(new WebViewClient() {
+                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                        return false;
+                    }
+
                     @Override
-                    public void onSuccess(File file) {
-                        // Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-                        if(file.exists()) {
+                    public void onPageFinished(WebView view, String url) {
 
-                            Log.e(TAG, "FILENAME" +file);
-                            //  Log.e(TAG, "customer_name" +customer_name);
+                        //if page loaded successfully then show print button
+                        //findViewById(R.id.fab).setVisibility(View.VISIBLE);
 
-                            // createinvoicewithdetail(file);
+                                final File savedPDFFile = FileManager.getInstance().createTempFile(SendInvoiceReminderActivity.this, "InvoiceReminder.pdf", true);
+
+                                PDFUtil.generatePDFFromWebView(savedPDFFile, view, new PDFPrint.OnPDFPrintListener() {
+                                    @Override
+                                    public void onSuccess(File file) {
+                                        // Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+                                        if(file.exists()) {
+
+                                            Log.e(TAG, "FILENAME" +file);
+                                            //  Log.e(TAG, "customer_name" +customer_name);
+
+                                            // createinvoicewithdetail(file);
 
 
 
-                            Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-                            // File fileWithinMyDir = new File(message);
-                            Uri photoURI = FileProvider.getUriForFile(SendInvoiceReminderActivity.this,
-                                    "com.receipt.invoice.stock.sirproject.provider",
-                                    file);
+                                            Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+                                            // File fileWithinMyDir = new File(message);
+                                            Uri photoURI = FileProvider.getUriForFile(SendInvoiceReminderActivity.this,
+                                                    "com.receipt.invoice.stock.sirproject.provider",
+                                                    file);
 
-                            if(file.exists()) {
-                                intentShareFile.setType("application/pdf");
-                                //Uri outputFileUri = Uri.fromFile(file);
-                                intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
+                                            if(file.exists()) {
+                                                intentShareFile.setType("application/pdf");
+                                                //Uri outputFileUri = Uri.fromFile(file);
+                                                intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
 
-                                intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-                                        getString(R.string.html_InvoiceDueDateReminder));
-                                intentShareFile.putExtra(Intent.EXTRA_TEXT,
-                                        getString(R.string.html_Your_invoice_reminder_note));
+//                                                List<ResolveInfo> resInfoList = getPackageManager().queryIntentActivities(intentShareFile, PackageManager.MATCH_DEFAULT_ONLY);
+//                                                for (ResolveInfo resolveInfo : resInfoList) {
+//                                                    String packageName = resolveInfo.activityInfo.packageName;
+//                                                    grantUriPermission(packageName, photoURI, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                                                }
+
+                                                intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                                                        getString(R.string.html_InvoiceDueDateReminder));
+                                                intentShareFile.putExtra(Intent.EXTRA_TEXT,
+                                                        getString(R.string.html_Your_invoice_reminder_note));
 
 //                                if (Utility.isAppAvailable(SendInvoiceReminderActivity.this, "com.google.android.gm")){
 ////                                    intentShareFile.setPackage("com.google.android.gm");
 ////                                }
 ////                                startActivity(intentShareFile);
-                                startActivity(Intent.createChooser(intentShareFile, getString(R.string.list_ShareFile)));
-                                finish();
-                            }
+                                                startActivity(Intent.createChooser(intentShareFile, getString(R.string.list_ShareFile)));
+                                                finish();
+                                            }
 
 
-                        }
+                                        }
 
-                    }
+                                    }
 
-                    @Override
-                    public void onError(Exception exception) {
-                        exception.printStackTrace();
+                                    @Override
+                                    public void onError(Exception exception) {
+                                        exception.printStackTrace();
+                                    }
+                                });
+
                     }
                 });
 
-            }
-        });
+
+
+
+
+
+
     }
 
 

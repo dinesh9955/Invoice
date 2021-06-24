@@ -72,7 +72,7 @@ public class EstimateListAdapterdt extends RecyclerView.Adapter<EstimateListAdap
         if (invoicedue_date.equals("") && invoicedue_date.equals("null")) {
             viewHolderForCat.invoiceduetxt.setText("");
         } else {
-            viewHolderForCat.invoiceduetxt.setText("| Date: "+invoicedue_date);
+            viewHolderForCat.invoiceduetxt.setText("| "+mcontext.getString(R.string.list_Date)+": "+invoicedue_date);
         }
 
         if (invoicetotlaprice.equals("") && invoicetotlaprice.equals("null")) {
@@ -94,13 +94,13 @@ public class EstimateListAdapterdt extends RecyclerView.Adapter<EstimateListAdap
         } else {
             Log.e(TAG, "strstatusAA "+strstatus);
             if (strstatus.equalsIgnoreCase("1")) {
-                viewHolderForCat.invoicesttsuspend.setText("Pending");
+                viewHolderForCat.invoicesttsuspend.setText(mcontext.getString(R.string.invoice_Pending));
                 viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#FF0000"));
 
             }
 
             if (strstatus.equalsIgnoreCase("3")) {
-                viewHolderForCat.invoicesttsuspend.setText("Completed");
+                viewHolderForCat.invoicesttsuspend.setText(mcontext.getString(R.string.invoice_Completed));
                 viewHolderForCat.invoicesttsuspend.setTextColor(Color.parseColor("#008000"));
 
             }

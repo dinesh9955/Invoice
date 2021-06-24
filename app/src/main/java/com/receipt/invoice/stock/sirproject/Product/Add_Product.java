@@ -384,7 +384,8 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+//                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                Utility.glideSet(getActivity(), fileimage, uploadimage);
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
@@ -392,8 +393,8 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+//                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
+                Utility.glideSet(getActivity(), fileimage, uploadimage);
 
             }
 

@@ -70,7 +70,7 @@ public class ReceiptlistAdapterdt extends RecyclerView.Adapter<ReceiptlistAdapte
         if (invoicedue_date.equals("") && invoicedue_date.equals("null")) {
             viewHolderForCat.invoiceduetxt.setText("");
         } else {
-            viewHolderForCat.invoiceduetxt.setText("| Date: "+invoicedue_date);
+            viewHolderForCat.invoiceduetxt.setText("| "+mcontext.getString(R.string.Date)+": "+invoicedue_date);
         }
 
         if (invoicetotlaprice.equals("") && invoicetotlaprice.equals("null")) {
@@ -89,11 +89,11 @@ public class ReceiptlistAdapterdt extends RecyclerView.Adapter<ReceiptlistAdapte
         } else {
             if (strstatus.equals("2")) {
 
-                viewHolderForCat.statustxt.setText("Paid");
+                viewHolderForCat.statustxt.setText(mcontext.getString(R.string.report_Paid));
                 viewHolderForCat.statustxt.setTextColor(Color.parseColor("#008000"));
 
             }else {
-                viewHolderForCat.statustxt.setText("Unpaid");
+                viewHolderForCat.statustxt.setText(mcontext.getString(R.string.report_UnPaid));
                 viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
             }
         }

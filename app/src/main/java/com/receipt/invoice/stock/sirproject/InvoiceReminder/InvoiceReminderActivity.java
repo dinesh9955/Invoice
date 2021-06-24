@@ -437,6 +437,7 @@ public class InvoiceReminderActivity extends BaseActivity {
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
 
                 underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                        InvoiceReminderActivity.this,
                         getString(R.string.list_More),
                         0,
                         Color.parseColor("#669933"),

@@ -1637,6 +1637,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         pickPhoto.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//        Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
         getActivity().startActivityForResult(pickPhoto, GALLARY_aCTION_PICK_CODE);
     }
 
@@ -2633,6 +2635,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             signaturePad = view.findViewById(R.id.signaturepad);
             btnclear1 = view.findViewById(R.id.btnclear);
             btnsave = view.findViewById(R.id.btnsave);
+
 
             signaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
                 @Override

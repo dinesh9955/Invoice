@@ -4002,11 +4002,11 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                         Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
 
                         if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
-                            if (itemQuantity.getEn_quantity() <= en_quantity) {
-                                mybuilder.show();
-                                Constant.ErrorToast(EditEstimateActivity.this, getString(R.string.invoice_InsufficientQuantityAvailable));
-                                mybuilder.dismiss();
-                            } else {
+//                            if (itemQuantity.getEn_quantity() <= en_quantity) {
+//                                mybuilder.show();
+//                                Constant.ErrorToast(EditEstimateActivity.this, getString(R.string.invoice_InsufficientQuantityAvailable));
+//                                mybuilder.dismiss();
+//                            } else {
                                 sh_price = Double.parseDouble(edprice.getText().toString());
                                 double multiply = en_quantity * sh_price;
                                 String s_multiply = String.valueOf(multiply);
@@ -4038,7 +4038,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
 
                                 mybuilder.dismiss();
                             }
-                        }
+//                        }
 
                         else
                         {

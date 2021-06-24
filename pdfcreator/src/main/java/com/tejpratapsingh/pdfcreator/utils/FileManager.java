@@ -382,7 +382,14 @@ public class FileManager {
      */
     public String getTempFolder(Context context) {
         File tempDirectory = new File(context.getExternalFilesDir(null) + File.separator + tempDirectoryName);
+//
+//        if (tempDirectory.exists()) {
+//            tempDirectory.delete();
+//            Log.e(TAG, "getTempFolder delete");
+//        }
+
         if (!tempDirectory.exists()) {
+            Log.e(TAG, "getTempFolder mkdir");
             System.out.println("creating directory: temp");
             tempDirectory.mkdir();
         }
@@ -399,6 +406,18 @@ public class FileManager {
      * @return created temp file
      */
     public File createTempFile(Context context, String withExtension, boolean withDuplicate) {
+
+
+     //   File tempFile = new File(getTempFolder(context), tempFileName);
+        File tempDirectory = new File(context.getExternalFilesDir(null) + File.separator + tempDirectoryName+"/"+withExtension);
+
+        Log.e(TAG, "tempDirectory: "+tempDirectory);
+
+        if (tempDirectory.exists()) {
+            tempDirectory.delete();
+            Log.e(TAG, "getTempFolder delete");
+        }
+
         // Actual temp file
        String tempFileName = Long.toString(new Date().getTime());
 
@@ -415,7 +434,7 @@ public class FileManager {
         File tempFile = new File(getTempFolder(context), tempFileName);
         if (withDuplicate) {
             // Duplicate of temp file
-            File tempDuplicateFile = new File(getTempFolder(context), tempFileName + tempDuplicateFileNameSuffix);
+            //File tempDuplicateFile = new File(getTempFolder(context), tempFileName + tempDuplicateFileNameSuffix);
         }
 
         Log.e(TAG , "tempFile_tempFile "+tempFile);

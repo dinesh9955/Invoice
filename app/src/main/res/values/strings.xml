@@ -109,8 +109,8 @@
     <string name="header_edit_receipt">Edit Receipt</string>
     <string name="header_select_language">Select Language</string>
     <string name="header_online_payment_gateway">Online Payment Gateway</string>
-    <string name="header_payPal">PayPal</string>
-    <string name="header_stripe">Stripe</string>
+    <string name="header_payPal" translatable="false">PayPal</string>
+    <string name="header_stripe" translatable="false">Stripe</string>
     <string name="header_settings">Settings</string>
     <string name="header_support">Support</string>
     <string name="header_GO_PREMIUM">GO PREMIUM</string>
@@ -223,8 +223,8 @@
     <string name="tax_Tax_Rate">Tax Rate(%)</string>
     <string name="tax_Tax_Rate_as_amount">Tax Rate as amount</string>
     <string name="tax_Tax_Calculation">Tax Calculation</string>
-    <string name="tax_Inclusive">Inclusive</string>
-    <string name="tax_Exclusiven">Exclusive</string>
+    <string name="tax_Inclusive" translatable="false">Inclusive</string>
+    <string name="tax_Exclusiven" translatable="false">Exclusive</string>
     <string name="tax_Add_new_tax">Add new tax</string>
     <string name="tax_Search_Tax">Search Tax</string>
     <string name="tax_edit">Edit</string>
@@ -267,8 +267,8 @@
     <string name="customer_Shipping_Address_2">Shipping Address 2</string>
     <string name="customer_Add_Customer">Add Customer</string>
     <string name="customer_IMPORT_CUSTOMER_FROM_CONTACT">IMPORT CUSTOMER FROM CONTACT</string>
-    <string name="customer_Inclusive">Inclusive</string>
-    <string name="customer_Exclusiven">Exclusive</string>
+    <string name="customer_Inclusive" translatable="false">Inclusive</string>
+    <string name="customer_Exclusiven" translatable="false">Exclusive</string>
     <string name="customer_CustomerCompany_Name">Customer/Company Name</string>
     <string name="customer_CustomerCompany_EmailAddress">Customer/Company Email Address</string>
     <string name="customer_Contact_Person">Contact Person</string>
@@ -414,6 +414,7 @@
 
 
 
+    <string name="list_Date">Date</string>
 
     <string name="list_ChargeCustomer">Charge Customer</string>
     <string name="list_ViewPO">View PO</string>
@@ -468,6 +469,33 @@
     <string name="list_ViewReminderNote">View Reminder Note</string>
 
 
+    <string name="list_Mark_as_delivery_received">Mark as delivery received</string>
+    <string name="list_Delivery_received">Delivery received</string>
+
+    <string name="list_Mark_as_delivery_received1">Mark as delivery</string>
+    <string name="list_Mark_as_delivery_received2">received</string>
+
+
+    <string name="list_Mark_as_void">Mark as void</string>
+    <string name="list_Mark_as_unvoid">Mark as unvoid</string>
+
+    <string name="list_Mark_as_void1">Mark</string>
+    <string name="list_Mark_as_void2">as void</string>
+
+    <string name="list_Mark_as_unvoid1">Mark</string>
+    <string name="list_Mark_as_unvoid2">as unvoid</string>
+
+
+    <string name="list_Mark_as_paid">Mark as Paid</string>
+    <string name="list_Mark_as_unpaid">Mark as Unpaid</string>
+
+    <string name="list_Mark_as_paid1">Mark</string>
+    <string name="list_Mark_as_paid2">as Paid</string>
+
+    <string name="list_Mark_as_unpaid1">Mark</string>
+    <string name="list_Mark_as_unpaid2">as Unpaid</string>
+
+
 
     <string name="credit_notes_Recipient">Recipient</string>
     <string name="credit_notes_Signature_of_credit_maker">Signature of Credit Note maker</string>
@@ -514,8 +542,8 @@
     <string name="setting_enter_message">Enter Message</string>
     <string name="setting_Submit">Submit</string>
     <string name="setting_PaymentOptions">Payment Options</string>
-    <string name="setting_Standard">Standard</string>
-    <string name="setting_Business">Business</string>
+    <string name="setting_Standard" translatable="false">Standard</string>
+    <string name="setting_Business" translatable="false">Business</string>
     <string name="setting_SelectNumberFormat">Select Number Format</string>
     <string name="setting_Done">Done</string>
 
@@ -737,6 +765,8 @@
 
     <string name="logged_in_msg">Logged in successfully!</string>
 
+    <string name="invoice_Due">Due</string>
+
     <string name="invoice_Completed">Completed</string>
     <string name="invoice_Pending">Pending</string>
     <string name="invoice_Seen">Seen</string>
@@ -916,15 +946,15 @@
         <item>To delete an invoice, you need to create a credit note. To delete a Purchase order, you need to create a debit note. Since items in invoice / purchase order are linked to inventory they cannot be deleted directly. Alternatively, you can mark the particular Invoice / Purchase order as void, then it will not display in the relevant reports. If you are tracking products inventory, then after marking void, you need to go to Stocks module and add / delete the quantity in void Invoice / Purchase order through update stocks or wastage option.\n</item>
         <item>To mark as void, go to particular invoice / purchase order, swipe left then select Mark as Void.</item>
         <item>To create a debit note, go to debit notes from the side menu, then click on create debit notes on top right, then record the transaction and click on create debit note on the bottom. Quantity entered in the debit note will be reduced from the Stock inventory balance. To create a Credit note, go to credit notes from the side menu, then click on create credit notes on top right, then record the transaction and click on create credit note on the bottom. Quantity entered in the credit note will be added back to the Stock inventory balance.\n</item>
-        <item>If a created estimate is converted to invoice, status changes from pending to completed. To convert an estimate to invoice, go to estimates summary, swipe the particular estimate right then click on more then select Convert to Invoice and then click on create invoice.</item>
+        <item>If a created estimate is converted to invoice, status changes from pending to completed. To convert an estimate to invoice, go to estimates summary, swipe the particular estimate left then click on more then select Convert to Invoice and then click on create invoice.</item>
         <item>Details of the first company created by the user will display on home screen by default. To switch companies, click on the star icon on top right on home screen then select the required company. The company selected shall display on home screen as and when required.</item>
         <item>It takes a few minutes to set up with Stripe or PayPal. Simply enable online payments in your app and follow the instructions.</item>
-        <item>There is no upfront or monthly fee. There is a charge per transaction, which varies by country. To check the charges in your country, please visit &lt;a href="https://www.stripe.com/us/pricing"&gt;Stripe pricing &lt;/a&gt; or &lt;a href="https://www.paypal.com/us/webapps/mpp/merchant-fees"&gt;https://www.paypal.com/us/webapps/mpp/merchant-fees&lt;/a&gt;</item>
+        <item>There is no upfront or monthly fee. There is a charge per transaction, which varies by country. To check the charges in your country, please visit &lt;a href="https://www.stripe.com/us/pricing"&gt;Stripe pricing&lt;/a&gt; or &lt;a href="https://www.paypal.com/us/webapps/mpp/merchant-fees"&gt;https://www.paypal.com/us/webapps/mpp/merchant-fees&lt;/a&gt;</item>
         <item>To change comma format in numbers, go to settings then click on comma format selection then select your preference. Format selected will be applicable throughout the user account.</item>
         <item>To share an invoice with payment links, first you need to set up online payment gateways from settings. Then, while creating invoice, select the respective payment gateway you wish to get paid through. You can select both options as well. Then share invoice as link only. The payment links will be automatically displayed in the email.</item>
         <item>If an invoice has been paid through the shared payment links, then particular invoice will display "Paid" in Invoices summary. Alternatively, you will be notified by the respective payment gateway platform.</item>
         <item>Your first payment will take 7 business days and all subsequent payments will take between 2-7 business days to reach your account. You can check the estimated arrival date of your payment using your Stripe / PayPal dashboard.</item>
-        <item>SIR handles card payments through Stripe, a market leader in processing payments. Setting up with Stripe is easy and there are No set up costs. You only pay per transaction. For more details, visit the &lt;a href="https://www.stripe.com/us/pricing" &gt;Stripe pricing &lt;/a&gt; page. On Stripe dashboard you can have complete visibility of all your transactions including card payments, pending payments and fees.</item>
+        <item>SIR handles card payments through Stripe, a market leader in processing payments. Setting up with Stripe is easy and there are No set up costs. You only pay per transaction. For more details, visit the &lt;a href="https://www.stripe.com/us/pricing" &gt;Stripe pricing&lt;/a&gt; page. On Stripe dashboard you can have complete visibility of all your transactions including card payments, pending payments and fees.</item>
         <item>To switch / restore / upgrade a subscription, go to Settings then click on Subscription and select your preference accordingly. Terms and conditions apply.</item>
         <item>To switch language, go to settings then click on language and select your preference.</item>
         <item>All your data is totally safe and secure on our Cloud based server.</item>
