@@ -244,7 +244,7 @@
     <string name="company_Address">Adresse</string>
     <string name="company_Payment_Bank_Name">Nom de la banque de paiement</string>
     <string name="company_Payment_Swift_BIC">Paiement Swift BIC</string>
-    <string name="company_Paypal_Email">Paypal E-mail</string>
+    <string name="company_Paypal_Email">Paiement Swift BIC</string>
     <string name="company_Cheque_Payable_To">Chèque à l\'ordre de</string>
     <string name="company_IBAN_Number">IBAN Nombre</string>
     <string name="product_Upload_product_image">Télécharger l\'image du produit</string>

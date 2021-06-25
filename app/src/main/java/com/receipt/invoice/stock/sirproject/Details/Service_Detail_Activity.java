@@ -93,7 +93,7 @@ public class Service_Detail_Activity extends BaseActivity {
             else
             {
                 double vc = Double.parseDouble(service_price);
-              //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+               //  DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
                 String stringFormat = Utility.getPatternFormat(""+numberPostion, vc);
 
