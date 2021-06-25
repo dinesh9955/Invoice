@@ -18,6 +18,7 @@
     <string name="done">Done</string>
     <string name="noSelect">No Select</string>
 
+    <string name="error">Error</string>
 
 
     <string name="header_users">Users</string>
@@ -612,7 +613,7 @@
     <string name="dialog_immediately">immediately</string>
     <string name="dialog_DateNone">none</string>
 
-    <string name="dialog_DateDue_on_Receipt"> Due on Receipt</string>
+    <string name="dialog_DateDue_on_Receipt">Due on Receipt</string>
     <string name="dialog_Date3days">3 days</string>
     <string name="dialog_Date7days">7 days</string>
     <string name="dialog_Date14days">14 days</string>
@@ -637,7 +638,7 @@
     <string name="settings_paln_desc_3">Assign additional users with limited or unlimited access for one time payment of USD 3.99 only per user</string>
     <string name="settings_paln_desc_4">Create additional companies under the same credentials for one time payment of USD 11.99 only per additional company</string>
 
-    getString(R.string.setting_enter_message)
+
 
     <string name="dialog_Success">Success</string>
 
@@ -935,6 +936,7 @@
         <item>Stock value is calculated as per the product rate entered while creating product in My Products module.</item>
         <item>To create an Invoice, Go to Invoices Module from the side menu or from the tray icon, then click on create invoice at top right, then select company and enter the relevant details, then preview invoice if required by clicking on more icon next to create invoice, then click on create invoice, your Invoice will be created and can be viewed / shared from summary page of Invoices module.</item>
         <item>Warehouse should be selected only when product is selected to enable inventory tracking. If you select an item, do not select warehouse.</item>
+
         <item>To perform any of the above functions, go to Invoices, then select the company, then go to the specific Invoice and swipe left, then click on more and select your preference.</item>
         <item>While creating the company, you need to select color as per preference or matching your brand identity. The color selected will be applied to the different templates in Invoices / Estimates. Select any template as per your choice while creating Invoice / Estimate. If no color has been selected, all templates will display the standard format.</item>
         <item>If warehouse selected does not have sufficient quantity for invoicing, then you will have to first add sufficient quantity to the particular warehouse. Go to Stocks module from the side menu, then you can either add quantity from update stock option or move stock from one warehouse to another from stock movement option, on the top.</item>
@@ -947,6 +949,8 @@
         <item>To mark as void, go to particular invoice / purchase order, swipe left then select Mark as Void.</item>
         <item>To create a debit note, go to debit notes from the side menu, then click on create debit notes on top right, then record the transaction and click on create debit note on the bottom. Quantity entered in the debit note will be reduced from the Stock inventory balance. To create a Credit note, go to credit notes from the side menu, then click on create credit notes on top right, then record the transaction and click on create credit note on the bottom. Quantity entered in the credit note will be added back to the Stock inventory balance.\n</item>
         <item>If a created estimate is converted to invoice, status changes from pending to completed. To convert an estimate to invoice, go to estimates summary, swipe the particular estimate left then click on more then select Convert to Invoice and then click on create invoice.</item>
+
+
         <item>Details of the first company created by the user will display on home screen by default. To switch companies, click on the star icon on top right on home screen then select the required company. The company selected shall display on home screen as and when required.</item>
         <item>It takes a few minutes to set up with Stripe or PayPal. Simply enable online payments in your app and follow the instructions.</item>
         <item>There is no upfront or monthly fee. There is a charge per transaction, which varies by country. To check the charges in your country, please visit &lt;a href="https://www.stripe.com/us/pricing"&gt;Stripe pricing&lt;/a&gt; or &lt;a href="https://www.paypal.com/us/webapps/mpp/merchant-fees"&gt;https://www.paypal.com/us/webapps/mpp/merchant-fees&lt;/a&gt;</item>

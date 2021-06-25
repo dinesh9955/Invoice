@@ -7,7 +7,7 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
-
+    <string name="error">Fout</string>
 
     <string name="preview">Voorbeeld</string>
     <string name="done">Gedaan</string>
@@ -32,100 +32,100 @@
     <string name="home_no_customers">Geen klanten</string>
     <string name="home_no_suppliers">Geen leveranciers</string>
 
-    <string name="home">Domicile</string>
-    <string name="estimate">Estimations</string>
-    <string name="invoices">Factures</string>
-    <string name="receipts">Reçus</string>
+    <string name="home">Huis</string>
+    <string name="estimate">schattingen</string>
+    <string name="invoices">Facturen</string>
+    <string name="receipts">Ontvangsten</string>
     <string name="po">PO</string>
 
-    <string name="add_new_user">Ajouter un nouvel utilisateur</string>
-    <string name="my_companies">Mes entreprises</string>
-    <string name="my_products">Mes produits (suivi)</string>
-    <string name="my_items">Mes articles</string>
-    <string name="add_taxes">Ajouter des taxes</string>
+    <string name="add_new_user">Voeg een nieuwe gebruiker toe</string>
+    <string name="my_companies">Mijn bedrijven</string>
+    <string name="my_products">Mijn producten (bijgehouden)</string>
+    <string name="my_items">Mijn spullen</string>
+    <string name="add_taxes">Belastingen toevoegen</string>
 
-    <string name="suppliers">Fournisseuses</string>
-    <string name="stocks">Actions</string>
-    <string name="settings">Paramètres</string>
-    <string name="logout">Se déconnecter</string>
-    <string name="purchase_orders">Acheter en ligne</string>
-    <string name="payment_vouchers">Bons de paiement</string>
-    <string name="reports">Rapports</string>
-    <string name="credit_notes">Notes de crédit</string>
-    <string name="debit_notes">Notes de débit</string>
-    <string name="thank_you_note">Remerciements</string>
-    <string name="invoice_reminders">Rappels de factures</string>
+    <string name="suppliers">leveranciers</string>
+    <string name="stocks">Aandelen</string>
+    <string name="settings">Instellingen</string>
+    <string name="logout">Uitloggen</string>
+    <string name="purchase_orders">Inkooporders</string>
+    <string name="payment_vouchers">Betalingsvouchers</string>
+    <string name="reports">Rapporten</string>
+    <string name="credit_notes">Creditnota\'s</string>
+    <string name="debit_notes">Debetnota</string>
+    <string name="thank_you_note">Bedankbriefje</string>
+    <string name="invoice_reminders">Factuurherinneringen</string>
 
-    <string name="select_company">Sélectionnez l\'entreprise</string>
-    <string name="cancel">Annuler</string>
+    <string name="select_company">Selecteer bedrijf</string>
+    <string name="cancel">annuleren</string>
 
 
 
-    <string name="internet_error">Check your Internet Connection</string>
-    <string name="condiotn">Terms &amp; Conditions</string>
-    <string name="connection_not_found">You must have a connection to the internet</string>
-    <string name="GOPREMIUM">GO PREMIUM</string>
-    <string name="AnnualPlan">Annual Plan *</string>
-    <string name="dollaryear">$ 35.99/year</string>
-    <string name="ValuePlan">Value Plan *</string>
-    <string name="dollarmonth">$ 3.99/month</string>
-    <string name="Restore">Restaurer</string>
-    <string name="Purchases">Achats</string>
-    <string name="Termsconditionsapply">*Terms &amp; conditions apply:</string>
-    <string name="USD1199">USD 11.99</string>
-    <string name="oneimepaymentforcreatinganewcompany">\u0020 one-time payment for creating a new company within the same credentials</string>
-    <string name="USD399">USD 3.99</string>
-    <string name="onetimepaymentperadditionaluser">\u0020 one-time payment per additional user (for assigning additional users)</string>
-    <string name="Skipsubscription">Ignorer l\'abonnement</string>
-    <string name="trytheappforaperiodof14days">Essayez l\'application pendant une période de 14 jours</string>
-    <string name="startfreetrial">Commencer l\'essai gratuit</string>
+    <string name="internet_error">Controleer je internetverbinding</string>
+    <string name="condiotn">Voorwaarden &amp; Voorwaarden</string>
+    <string name="connection_not_found">Je moet een internetverbinding hebben</string>
+    <string name="GOPREMIUM">GA PREMIUM</string>
+    <string name="AnnualPlan">Jaarplan *</string>
+    <string name="dollaryear">$ 35.99/jaar</string>
+    <string name="ValuePlan">Waardeplan *</string>
+    <string name="dollarmonth">$ 3,99 / maand</string>
+    <string name="Restore">Herstellen</string>
+    <string name="Purchases">Aankopen</string>
+    <string name="Termsconditionsapply">*Algemene voorwaarden zijn van toepassing:</string>
+    <string name="USD1199">$ 11,99</string>
+    <string name="oneimepaymentforcreatinganewcompany">\\u0020 eenmalige betaling voor het maken van een nieuw bedrijf met dezelfde inloggegevens</string>
+    <string name="USD399">USD 3,99</string>
+    <string name="onetimepaymentperadditionaluser">\\u0020 eenmalige betaling per extra gebruiker (voor het toewijzen van extra gebruikers)</string>
+    <string name="Skipsubscription">Abonnement overslaan</string>
+    <string name="trytheappforaperiodof14days">Probeer de app 14 dagen</string>
+    <string name="startfreetrial">Gratis proefperiode starten</string>
 
-    <string name="Customizeyourexperience">Personnalisez votre expérience</string>
-    <string name="InviteFriends">Inviter des amis</string>
-    <string name="Customize">Personnaliser</string>
-    <string name="FAQs">FAQs</string>
-    <string name="Language">Langue</string>
-    <string name="Abouttheapp">À propos de l\'application</string>
-    <string name="Ratetheapp">Évaluer l\'application</string>
-    <string name="TermsofUse">Conditions d\'utilisation</string>
-    <string name="PrivacyPolicy">Politique de confidentialité</string>
-    <string name="Support">Support</string>
+    <string name="Customizeyourexperience">Pas uw ervaring aan</string>
+    <string name="InviteFriends">Nodig vrienden uit</string>
+    <string name="Customize">Aanpassen</string>
+    <string name="FAQs">Veelgestelde vragen</string>
+    <string name="Language">Taal</string>
+    <string name="Abouttheapp">Over de app</string>
+    <string name="Ratetheapp">Beoordeel de app</string>
+    <string name="TermsofUse">Gebruiksvoorwaarden</string>
+    <string name="PrivacyPolicy">Privacybeleid</string>
+    <string name="Support">Ondersteuning</string>
 
-    <string name="DebitNo">Note de débit Non.</string>
+    <string name="DebitNo">Debetnota nr.</string>
 
-    <string name="CreditNo">Note de crédit Non.</string>
-    <string name="ReceiptNo">"Reçu Non."</string>
-    <string name="InvoiceNo">"Facture Non."</string>
-    <string name="EstiateNo">Estimation Non.</string>
+    <string name="CreditNo">Creditnota nr.</string>
+    <string name="ReceiptNo">Ontvangst nr.</string>
+    <string name="InvoiceNo">Factuur nr.</string>
+    <string name="EstiateNo">Schatting Nr.</string>
 
-    <string name="poNo">PO Non.</string>
-    <string name="pvNo">PV Non.</string>
+    <string name="poNo">PO-nr.</string>
+    <string name="pvNo">PV-nr.</string>
 
-    <string name="DueDate">Date d\'échéance</string>
+    <string name="DueDate">Opleveringsdatum</string>
 
-    <string name="ReceiptDate">Date de réception</string>
-    <string name="Date">Date</string>
-    <string name="InvoiceTo">Destinataire</string>
-    <string name="ITEMS">ÉLÉMENTS</string>
-    <string name="INVOICEITEMS">ARTICLES DE FACTURE</string>
-    <string name="template">Choisir le modèle</string>
-    <string name="choose_color">Choisissez la couleur</string>
+    <string name="ReceiptDate">Ontvangstdatum</string>
+    <string name="Date">Datum</string>
+    <string name="InvoiceTo">Ontvanger</string>
+    <string name="ITEMS">ITEMS</string>
+    <string name="INVOICEITEMS">FACTUUR ITEMS</string>
+    <string name="template">Kies sjabloon</string>
+    <string name="choose_color">Kies een kleur</string>
 
-    <string name="additem">Ajouter des produits</string>
-    <string name="SubTotal">Sous-total</string>
-    <string name="Discount">Rabais</string>
-    <string name="Tax">Impôt</string>
-    <string name="createinvoice">Créer une facture</string>
-    <string name="createreceipt">Créer un reçu</string>
-    <string name="createcredit">Créer une note de crédit</string>
-    <string name="createestimate">Créer une estimation</string>
-    <string name="create_purchaseorder">Créer un bon de commande</string>
+    <string name="additem">Producten toevoegen</string>
+    <string name="SubTotal">Subtotaal</string>
+    <string name="Discount">Korting</string>
+    <string name="Tax">belasting</string>
+    <string name="createinvoice">Factuur maken</string>
+    <string name="createreceipt">Ontvangstbewijs maken</string>
+    <string name="createcredit">Creditnota maken</string>
+    <string name="createestimate">Schatting maken</string>
+    <string name="create_purchaseorder">Inkooporder maken</string>
 +
-    <string name="create_paymentvoucher">Créer un justificatif de paiement</string>
+    <string name="create_paymentvoucher">Betalingsvoucher maken</string>
 
 
 
-    <string name="createdebit">Créer une note de débit</string>
+    <string name="createdebit">Debetnota maken</string>
     <string name="all_Save">Sparen</string>
     <string name="all_Cancel">annuleren</string>
     <string name="back">Terug</string>
@@ -368,74 +368,74 @@
     <string name="report_FilterByDate">Filteren op datum</string>
     <string name="report_RemoveFilter">Filter verwijderen</string>
     <string name="reportByCustomerName">Op naam van de klant</string>
-    <string name="dialog_TaxNotFound">Taxe non trouvée</string>
-    <string name="dialog_PerUnit">Par unité</string>
-    <string name="dialog_Please_select_currency">Veuillez sélectionner la devise</string>
-    <string name="dialog_CompanyCreatedSuccessfully">Entreprise créée avec succès</string>
-    <string name="dialog_Required">Obligatoire</string>
-    <string name="dialog_SupplierAdded">Fournisseur ajouté</string>
-    <string name="dialog_Camera">Caméra</string>
-    <string name="dialog_Gallery">Galerie</string>
-    <string name="dialog_Cancel">Annuler</string>
-    <string name="dialog_AddImage">Ajouter une image</string>
-    <string name="dialog_CustomerNotFound">Client non trouvé</string>
-    <string name="dialog_UserAddedSuccessfully">Utilisateur ajouté avec succès</string>
-    <string name="dialog_Fieldisrequired">Champ requis</string>
-    <string name="dialog_InvalidEmailAddress">Adresse e-mail invalide</string>
-    <string name="dialog_InvalidEmail">Email invalide</string>
-    <string name="dialog_PasswordCharacters">Le mot de passe doit comporter au moins 6 caractères</string>
-    <string name="dialog_TaxAdded">Taxe ajoutée</string>
-    <string name="dialog_SelectAProduct">Choisissez un produit</string>
-    <string name="dialog_SelectSenderWarehouse">Sélectionnez l\'entrepôt de l\'expéditeur</string>
-    <string name="dialog_CustomerAdded">Client ajouté</string>
-    <string name="dialog_StockMoved">Stock déplacé</string>
-    <string name="dialog_StockRemoved">Stock supprimé</string>
-    <string name="dialog_SelectReceiverWarehouse">Sélectionnez l\'entrepôt de réception</string>
-    <string name="dialog_UpdatedStock">Stock mis à jour</string>
-    <string name="dialog_SelectACompany">Sélectionnez une entreprise</string>
-    <string name="dialog_ItemAdded">Article ajouté</string>
-    <string name="dialog_Measurement_Unit_required">L\'unité de mesure est requise</string>
-    <string name="dialog_Company_required">La société est requise</string>
-    <string name="dialog_Item_category_required">La catégorie d\'article est obligatoire</string>
-    <string name="dialog_Product_category_required">La catégorie de produit est obligatoire</string>
-    <string name="dialog_ProductAdded">Produit ajouté</string>
-    <string name="dialog_ProductNotFound">Produit non trouvé</string>
-    <string name="dialog_Password_not_matched">Le mot de passe ne correspond pas</string>
-    <string name="dialog_reset_your_password_sucessfully">Vous avez réinitialisé votre mot de passe avec succès.</string>
-    <string name="dialog_PleaseEnterFirstName">Veuillez saisir le prénom</string>
-    <string name="dialog_PleaseEnterLastName">Veuillez entrer le nom de famille</string>
-    <string name="dialog_ShippingAddress1">Veuillez saisir l\'adresse de livraison 1</string>
-    <string name="dialog_ShippingAddress2">Veuillez saisir l\'adresse de livraison 2</string>
-    <string name="dialog_PleaseEnterCity">Veuillez entrer la ville</string>
-    <string name="dialog_SPleaseEnterPostcode">Veuillez entrer le code postal</string>
-    <string name="dialog_PleaseEnterCountry">Veuillez entrer le pays</string>
-    <string name="dialog_PleaseEnterIBAN">Entrez s\'il vous plait  IBAN</string>
-    <string name="dialog_PleaseEnterBankName">Veuillez saisir le nom de la banque</string>
-    <string name="dialog_PleaseEnterSwiftBIC">Entrez s\'il vous plait Swift BIC</string>
-    <string name="dialog_Companyupdated">Société mise à jour</string>
-    <string name="invoice_InsufficientQuantityAvailable">Quantité insuffisante disponible</string>
-    <string name="invoice_QuantityAvailable">"Quantité disponible: "</string>
-    <string name="invoice_Category">"Catégorie: "</string>
-    <string name="invoice_Unit">" Unité: "</string>
-    <string name="invoice_Quantity">"Quantité: "</string>
-    <string name="invoice_Value">"Valeur: "</string>
-    <string name="invoice_Reorder">Réorganiser</string>
-    <string name="invoice_InStock">En stock</string>
-    <string name="pv_updated_msg">PV Mis à jour avec succés</string>
-    <string name="logged_in_msg">Connecté avec succès!</string>
-    <string name="receipt_updated_msg">Reçu mis à jour avec succès</string>
-    <string name="receipt_duplicate_msg">Reçu en double créé avec succès</string>
-    <string name="invoice_duplicate_msg">Facture en double créée avec succès</string>
-    <string name="estimate_updated_msg">Estimation mise à jour avec succès</string>
-    <string name="duplicate_estimate_msg">Estimation en double créée avec succès</string>
-    <string name="receipt_msg">Reçu créé avec succès</string>
-    <string name="pv_msg">PV créé avec succès</string>
-    <string name="duplicate_po_msg">Bon de commande en double créé avec succès</string>
-    <string name="po_msg">Bon de commande créé avec succès</string>
-    <string name="invoice_msg">Facture créée avec succès</string>
-    <string name="estimate_msg">Estimation créée avec succès</string>
-    <string name="debit_note_msg">Note de débit créée avec succès</string>
-    <string name="credit_note_msg">Note de crédit créée avec succès</string>
+    <string name="dialog_TaxNotFound">Belasting niet gevonden</string>
+    <string name="dialog_PerUnit">Per eenheid</string>
+    <string name="dialog_Please_select_currency">Selecteer valuta</string>
+    <string name="dialog_CompanyCreatedSuccessfully">Bedrijf succesvol aangemaakt</string>
+    <string name="dialog_Required">Verplicht</string>
+    <string name="dialog_SupplierAdded">Leverancier toegevoegd</string>
+    <string name="dialog_Camera">Camera</string>
+    <string name="dialog_Gallery">Galerij</string>
+    <string name="dialog_Cancel">annuleren</string>
+    <string name="dialog_AddImage">Voeg afbeelding toe</string>
+    <string name="dialog_CustomerNotFound">Klant niet gevonden</string>
+    <string name="dialog_UserAddedSuccessfully">Gebruiker succesvol toegevoegd</string>
+    <string name="dialog_Fieldisrequired">Veld is verplicht</string>
+    <string name="dialog_InvalidEmailAddress">Ongeldig e-mailadres</string>
+    <string name="dialog_InvalidEmail">Ongeldig e-mail</string>
+    <string name="dialog_PasswordCharacters">Wachtwoord moet minimaal 6 tekens lang zijn</string>
+    <string name="dialog_TaxAdded">Toegevoegde belasting</string>
+    <string name="dialog_SelectAProduct">Selecteer een product</string>
+    <string name="dialog_SelectSenderWarehouse">Selecteer Afzender Magazijn</string>
+    <string name="dialog_CustomerAdded">Klant toegevoegd</string>
+    <string name="dialog_StockMoved">Voorraad verplaatst</string>
+    <string name="dialog_StockRemoved">Voorraad verwijderd</string>
+    <string name="dialog_SelectReceiverWarehouse">Selecteer Ontvanger Magazijn</string>
+    <string name="dialog_UpdatedStock">Bijgewerkte voorraad</string>
+    <string name="dialog_SelectACompany">Selecteer een bedrijf</string>
+    <string name="dialog_ItemAdded">Artikel toegevoegd</string>
+    <string name="dialog_Measurement_Unit_required">Meeteenheid is vereist</string>
+    <string name="dialog_Company_required">Bedrijf is vereist</string>
+    <string name="dialog_Item_category_required">Artikelcategorie is verplicht</string>
+    <string name="dialog_Product_category_required">Productcategorie is vereist</string>
+    <string name="dialog_ProductAdded">Product toegevoegd</string>
+    <string name="dialog_ProductNotFound">Product niet gevonden</string>
+    <string name="dialog_Password_not_matched">Wachtwoord komt niet overeen</string>
+    <string name="dialog_reset_your_password_sucessfully">U heeft uw wachtwoord succesvol opnieuw ingesteld.</string>
+    <string name="dialog_PleaseEnterFirstName">Vul a.u.b. voornaam in</string>
+    <string name="dialog_PleaseEnterLastName">Voer a.u.b. achternaam in</string>
+    <string name="dialog_ShippingAddress1">Voer het verzendadres in 1</string>
+    <string name="dialog_ShippingAddress2">Voer het verzendadres in 2</string>
+    <string name="dialog_PleaseEnterCity">Voer a.u.b. plaats in</string>
+    <string name="dialog_SPleaseEnterPostcode">Voer de postcode in</string>
+    <string name="dialog_PleaseEnterCountry">Voer a.u.b. land in</string>
+    <string name="dialog_PleaseEnterIBAN">Voer IBAN in</string>
+    <string name="dialog_PleaseEnterBankName">Voer de naam van de bank in</string>
+    <string name="dialog_PleaseEnterSwiftBIC">Voer een Swift BIC in</string>
+    <string name="dialog_Companyupdated">Bedrijf bijgewerkt</string>
+    <string name="invoice_InsufficientQuantityAvailable">Onvoldoende hoeveelheid beschikbaar</string>
+    <string name="invoice_QuantityAvailable">Hoeveelheid beschikbaar:</string>
+    <string name="invoice_Category">Categorie:</string>
+    <string name="invoice_Unit">Eenheid:</string>
+    <string name="invoice_Quantity">Aantal stuks:</string>
+    <string name="invoice_Value">Waarde:</string>
+    <string name="invoice_Reorder">Opnieuw ordenen</string>
+    <string name="invoice_InStock">Op voorraad</string>
+    <string name="pv_updated_msg">PV succesvol geüpdatet</string>
+    <string name="logged_in_msg">Succesvol ingelogd!</string>
+    <string name="receipt_updated_msg">Ontvangst succesvol geüpdatet</string>
+    <string name="receipt_duplicate_msg">Dubbele bon succesvol aangemaakt created</string>
+    <string name="invoice_duplicate_msg">Dubbele factuur succesvol aangemaakt</string>
+    <string name="estimate_updated_msg">Schatting succesvol bijgewerkt</string>
+    <string name="duplicate_estimate_msg">Dubbele schatting gemaakt</string>
+    <string name="receipt_msg">Ontvangst succesvol aangemaakt</string>
+    <string name="pv_msg">PV succesvol aangemaakt</string>
+    <string name="duplicate_po_msg">Dubbele PO succesvol aangemaakt created</string>
+    <string name="po_msg">PO succesvol aangemaakt created</string>
+    <string name="invoice_msg">Factuur succesvol aangemaakt</string>
+    <string name="estimate_msg">Schatting met succes gemaakt</string>
+    <string name="debit_note_msg">Debetnota succesvol aangemaakt</string>
+    <string name="credit_note_msg">Creditnota succesvol aangemaakt</string>
     <string name="report_BySupplier">Door leverancier</string>
     <string name="report_ByTaxName">Op belastingnaam</string>
     <string name="report_InStock">Op voorraad</string>
@@ -492,87 +492,87 @@
     <string name="po_Upload_purchase_order_Images">Afbeeldingen van inkooporders uploaden</string>
     <string name="po_Signature_of_Purchase_Order_maker">Handtekening van de maker van de inkooporder</string>
     <string name="po_Search_by_PO_number">Zoeken op PO-nummer</string>
-    <string name="home_Invoice_Overdue">Facture en retard</string>
-    <string name="setting_Setup">Installer</string>
+    <string name="home_Invoice_Overdue">Factuur achterstallig</string>
+    <string name="setting_Setup">Opstelling</string>
     <string name="setting_Email">E-mail</string>
-    <string name="setting_ConfirmEmail">Confirmez votre e-mail</string>
-    <string name="setting_NeedSomeHelp">Besoin d\'aide?</string>
-    <string name="setting_enter_email">Entrez l\'e-mail</string>
-    <string name="setting_write_message">Écrire un message...</string>
-    <string name="setting_enter_message">Entrer un message</string>
-    <string name="setting_Submit">Soumettre</string>
-    <string name="setting_PaymentOptions">Options de paiement</string>
-    <string name="setting_SelectNumberFormat">Sélectionnez le format de nombre</string>
-    <string name="setting_Done">Fait</string>
-    <string name="setting_CommaFormatSelection">Sélection du format de virgule</string>
-    <string name="setting_OnlinePaymentGateway">Passerelle de paiement en ligne</string>
-    <string name="setting_Subscribe">S\'abonner</string>
-    <string name="setting_Upgrade">Améliorer</string>
-    <string name="setting_RestorePurchases">Restaurer les achats</string>
-    <string name="setting_InviteFriends">Inviter des amis</string>
-    <string name="setting_FAQs">FAQs</string>
-    <string name="setting_Language">Langue</string>
-    <string name="setting_Abouttheapp">À propos de l\'application</string>
-    <string name="setting_Ratetheapp">Évaluer l\'application</string>
-    <string name="setting_Termsofuse">Conditions d\'utilisation</string>
-    <string name="setting_PrivacyPolicy">Politique de confidentialité</string>
-    <string name="setting_Support">Support</string>
-    <string name="setting_ChooseOne">Choisissez-en un</string>
-    <string name="service_AddNew">Ajouter un nouveau</string>
-    <string name="service_SelectQuantity">Sélectionnez la quantité</string>
-    <string name="service_PAYMENTGATEWAYS">PASSERELLES DE PAIEMENT</string>
-    <string name="service_EnterAmount">Entrer le montant</string>
-    <string name="service_Amount">Montante</string>
-    <string name="service_EnterDate">Entrer la date</string>
-    <string name="service_SelectPaymentMode">Sélectionnez le mode de paiement</string>
-    <string name="service_ShippingAmount">Montant d\'expédition</string>
-    <string name="service_EnterShippingAmount">Saisir le montant d\'expédition</string>
-    <string name="service_ShippingAmountInvoice">Voulez-vous ajouter le montant de l\'expédition pour cette facture ?</string>
-    <string name="waste_some_damage">Si votre entreprise a des dommages ou des déchets, retirez-les d\'ici.</string>
-    <string name="filter_Filter">Filtre</string>
-    <string name="filter_UnpaidInvoices">Factures impayées</string>
-    <string name="filter_PaidInvoices">Factures payées</string>
-    <string name="filter_ByDate">Par date</string>
-    <string name="filter_All">Toute</string>
-    <string name="dialog_ClearData">Effacer les données</string>
-    <string name="dialog_ViewInvoice">Voir la facture</string>
-    <string name="dialog_DuplicateInvoice">Facture en double</string>
-    <string name="dialog_ShareInvoice">Partager la facture</string>
-    <string name="dialog_ConvertToReceipt">Convertir en reçu</string>
-    <string name="dialog_EnterDiscount">Entrer la remise</string>
-    <string name="dialog_Percentage">Pourcentage</string>
-    <string name="dialog_ChooseAOption">Choisissez une option</string>
-    <string name="dialog_SendAsLink">Envoyer en tant que lien</string>
-    <string name="dialog_SendAsPDF">Envoyer en PDF</string>
-    <string name="dialog_SelectCreditTerms">Sélectionnez les conditions de crédit</string>
-    <string name="dialog_EnterManually_days">Entrer manuellement (jours)</string>
-    <string name="dialog_SelectCustomer">Sélectionnez le client</string>
-    <string name="dialog_SearchCustomer">Rechercher des clients</string>
-    <string name="dialog_DateNone">rien</string>
-    <string name="dialog_DateDue_on_Receipt">En raison de la réception</string>
-    <string name="dialog_Date3days">" 3 jours"</string>
-    <string name="dialog_Date7days">" 7 jours"</string>
-    <string name="dialog_Date14days">" 14 jours"</string>
-    <string name="dialog_Date21days">" 21 jours"</string>
-    <string name="dialog_Date30days">" 30 jours"</string>
-    <string name="dialog_Date45days">" 45 jours"</string>
-    <string name="dialog_Date60days">" 60 jours"</string>
-    <string name="dialog_Date90days">" 90 jours"</string>
-    <string name="dialog_Date120days">" 120 jours"</string>
-    <string name="dialog_Date365days">" 365 jours"</string>
-    <string name="dialog_DateOR">OU ALORS</string>
-    <string name="settings_paln_title_1">Plan annuel</string>
-    <string name="settings_paln_title_2">Plan de valeur</string>
-    <string name="settings_paln_title_3">Utilisateurs supplémentaires</string>
-    <string name="settings_paln_title_4">Entreprises supplémentaires</string>
-    <string name="settings_paln_desc_1">Abonnez-vous au forfait annuel et obtenez jusqu\'à 25% de réduction. 35,99 USD uniquement par an avec un accès illimité à toutes les fonctionnalités, à l\'exception du suivi des stocks.</string>
-    <string name="settings_paln_desc_2">Le forfait mensuel commence à 3,99 USD uniquement avec un accès illimité à toutes les fonctionnalités, à l\'exception du suivi des stocks.</string>
-    <string name="settings_paln_desc_3">Attribuez des utilisateurs supplémentaires avec un accès limité ou illimité pour un paiement unique de 3,99 USD par utilisateur uniquement</string>
-    <string name="settings_paln_desc_4">Créez des entreprises supplémentaires sous les mêmes informations d\'identification pour un paiement unique de 11,99 USD uniquement par entreprise supplémentaire</string>
-    <string name="dialog_Success">Succès</string>
-    <string name="invoice_Pending">" En attente"</string>
-    <string name="invoice_Seen">Vue</string>
-    <string name="invoice_Void">Annuler</string>
+    <string name="setting_ConfirmEmail">Bevestig Email</string>
+    <string name="setting_NeedSomeHelp">Hulp nodig?</string>
+    <string name="setting_enter_email">Voer email in</string>
+    <string name="setting_write_message">Schrijf een bericht...</string>
+    <string name="setting_enter_message">Voer bericht in</string>
+    <string name="setting_Submit">Verzenden</string>
+    <string name="setting_PaymentOptions">Betalingsmogelijkheden</string>
+    <string name="setting_SelectNumberFormat">Selecteer getalnotatie</string>
+    <string name="setting_Done">Gedaan</string>
+    <string name="setting_CommaFormatSelection">Selectie komma-indeling</string>
+    <string name="setting_OnlinePaymentGateway">Online betalingsgateway</string>
+    <string name="setting_Subscribe">Abonneren</string>
+    <string name="setting_Upgrade">Upgrade</string>
+    <string name="setting_RestorePurchases">Aankopen herstellen</string>
+    <string name="setting_InviteFriends">Nodig vrienden uit</string>
+    <string name="setting_FAQs">Veelgestelde vragen</string>
+    <string name="setting_Language">Taal</string>
+    <string name="setting_Abouttheapp">Over de app</string>
+    <string name="setting_Ratetheapp">Beoordeel de app</string>
+    <string name="setting_Termsofuse">Gebruiksvoorwaarden</string>
+    <string name="setting_PrivacyPolicy">Privacybeleid</string>
+    <string name="setting_Support">Ondersteuning</string>
+    <string name="setting_ChooseOne">Kies er een</string>
+    <string name="service_AddNew">Nieuw toevoegen</string>
+    <string name="service_SelectQuantity">Selecteer de gewenste hoeveelheid</string>
+    <string name="service_PAYMENTGATEWAYS">BETALING GATEWAYS</string>
+    <string name="service_EnterAmount">Voer een bedrag in</string>
+    <string name="service_Amount">Bedrag</string>
+    <string name="service_EnterDate">Datum invoeren</string>
+    <string name="service_SelectPaymentMode">Selecteer betalingsmodus</string>
+    <string name="service_ShippingAmount">Verzendbedrag:</string>
+    <string name="service_EnterShippingAmount">Voer het verzendbedrag in</string>
+    <string name="service_ShippingAmountInvoice">Wilt u verzendkosten toevoegen voor deze factuur?</string>
+    <string name="waste_some_damage">Heeft uw bedrijf schade of afvalproducten, verwijder deze dan hier.</string>
+    <string name="filter_Filter">Filter</string>
+    <string name="filter_UnpaidInvoices">Onbetaalde facturen</string>
+    <string name="filter_PaidInvoices">Betaalde facturen</string>
+    <string name="filter_ByDate">Op datum</string>
+    <string name="filter_All">Alle</string>
+    <string name="dialog_ClearData">Verwijder gegevens</string>
+    <string name="dialog_ViewInvoice">Bekijk factuur</string>
+    <string name="dialog_DuplicateInvoice">Dubbele factuur</string>
+    <string name="dialog_ShareInvoice">Factuur delen</string>
+    <string name="dialog_ConvertToReceipt">Converteren naar bon</string>
+    <string name="dialog_EnterDiscount">Voer korting in</string>
+    <string name="dialog_Percentage">Percentage</string>
+    <string name="dialog_ChooseAOption">Kies een optie</string>
+    <string name="dialog_SendAsLink">Verzenden als link</string>
+    <string name="dialog_SendAsPDF">Verzenden als PDF</string>
+    <string name="dialog_SelectCreditTerms">Selecteer krediettermijn</string>
+    <string name="dialog_EnterManually_days">Handmatig invoeren (dagen)</string>
+    <string name="dialog_SelectCustomer">Selecteer klant</string>
+    <string name="dialog_SearchCustomer">Klanten zoeken</string>
+    <string name="dialog_DateNone">geen</string>
+    <string name="dialog_DateDue_on_Receipt">Verschuldigd bij ontvangst</string>
+    <string name="dialog_Date3days">3 dagen</string>
+    <string name="dialog_Date7days">7 dagen</string>
+    <string name="dialog_Date14days">14 dagen</string>
+    <string name="dialog_Date21days">21 dagen</string>
+    <string name="dialog_Date30days">30 dagen</string>
+    <string name="dialog_Date45days">45 dagen</string>
+    <string name="dialog_Date60days">60 dagen</string>
+    <string name="dialog_Date90days">90 dagen</string>
+    <string name="dialog_Date120days">120 dagen</string>
+    <string name="dialog_Date365days">365 dagen</string>
+    <string name="dialog_DateOR">OF</string>
+    <string name="settings_paln_title_1">Jaarplan</string>
+    <string name="settings_paln_title_2">Waardeplan</string>
+    <string name="settings_paln_title_3">Extra gebruikers</string>
+    <string name="settings_paln_title_4">Extra bedrijven</string>
+    <string name="settings_paln_desc_1">Abonneer u op het jaarpakket en ontvang tot 25% korting. USD 35,99 alleen per jaar met onbeperkte toegang tot alle functies behalve Stock Tracking.</string>
+    <string name="settings_paln_desc_2">Maandelijks pakket begint bij USD 3,99 alleen met onbeperkte toegang tot alle functies behalve Stock Tracking.</string>
+    <string name="settings_paln_desc_3">Wijs extra gebruikers toe met beperkte of onbeperkte toegang voor een eenmalige betaling van slechts USD 3,99 per gebruiker</string>
+    <string name="settings_paln_desc_4">Creëer extra bedrijven onder dezelfde inloggegevens voor een eenmalige betaling van USD 11,99 alleen per extra bedrijf</string>
+    <string name="dialog_Success">Succes</string>
+    <string name="invoice_Pending">In afwachting</string>
+    <string name="invoice_Seen">gezien</string>
+    <string name="invoice_Void">nietig</string>
     <string name="header_template">Sjabloon</string>
     <string name="thank_SendThankYouNote">Stuur een bedankje</string>
     <string name="thank_ViewThankYouNote">Bekijk bedankbriefje</string>
@@ -662,62 +662,62 @@
 
 
 
-    <string name="service_ShippingAmountEstimate">Voulez-vous ajouter un montant d\'expédition pour cette estimation ?</string>
-    <string name="dialog_PleaseSelectAtleastOne">Veuillez sélectionner au moins un</string>
-    <string name="dialog_PleaseSelectDate">Veuillez sélectionner la date</string>
-    <string name="dialog_days">journées</string>
-    <string name="dialog_immediately">immédiatement</string>
-    <string name="dialog_PleaseSelectOneValue">Veuillez sélectionner une valeur</string>
-    <string name="select_Please_enter_amount">" Veuillez saisir le montant!"</string>
-    <string name="select_Please_enter_quantity">Veuillez saisir la quantité!</string>
-    <string name="select_We_appreciateThank_you">Nous apprécions votre entreprise. Veuillez trouver ci-dessous la note de remerciement.</string>
-    <string name="select_Shipping_amount_PurchaseOrder">Voulez-vous ajouter un montant d\'expédition pour ce bon de commande ?</string>
-    <string name="select_Shipping_amount_PaymentVoucher">Voulez-vous ajouter un montant d\'expédition pour ce bon de paiement ?</string>
-    <string name="invoice_Completed">Complété</string>
-    <string name="dialog_ViewPV">Vue PV</string>
-    <string name="dialog_EditPV">Éditer PV</string>
-    <string name="dialog_SharePV">Partager PV</string>
-    <string name="dialog_Convert_to_PaymentVoucher">Convertir en Payment Voucher</string>
-    <string name="dialog_DateRequired">"Date requise "</string>
-    <string name="dialog_PaymentModeRequired">Mode de paiement requis</string>
-    <string name="dialog_ViewCreditNote">Voir la note de crédit</string>
-    <string name="dialog_ViewRecepit">Vue Recepit</string>
-    <string name="dialog_ViewPaymentVoucher">Vue Payment Voucher</string>
-    <string name="dialog_ViewPurchaseOrder">Vue Purchase Order</string>
-    <string name="dialog_CreditNoteDigits">Le numéro de note de crédit doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_DeditNoteDigits">Dedit Note No. doit être des lettres suivies de chiffres</string>
-    <string name="dialog_ReceiptDigits">Le numéro de reçu doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_InvoiceDigits">Le numéro de facture doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_EstimateDigits">Le numéro d\'estimation doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_SelectInvoiceDate">Sélectionnez la date de la facture</string>
-    <string name="dialog_SelectDate">Sélectionner une date</string>
-    <string name="dialog_SelectACustomer">Sélectionnez un client</string>
-    <string name="dialog_SelectProductFirst">Sélectionnez d\'abord le produit</string>
-    <string name="dialog_Shipping_amountCreditNote">Voulez-vous ajouter un montant d\'expédition pour cette note de crédit ?</string>
-    <string name="dialog_Shipping_amountDebitNote">Souhaitez-vous ajouter un montant d\'expédition pour cette note de débit ?</string>
-    <string name="dialog_Shipping_amountReceipt">Voulez-vous ajouter un montant d\'expédition pour ce reçu ?</string>
-    <string name="dialog_PaymentVoucherNoalready_exists">Le numéro de bon de paiement existe déjà</string>
-    <string name="dialog_PaymentVoucherNoDigits">Le numéro du bon de paiement doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_Shipping_amountPaymentVoucher">Voulez-vous ajouter un montant d\'expédition pour ce bon de paiement ?</string>
-    <string name="dialog_Shipping_amountPurchaseOrderNoDigits">Le numéro de bon de commande doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_EnterDiscountinPercent">Entrer la remise en %</string>
-    <string name="dialog_EnterDiscountinAmount">Entrer la remise dans le montant</string>
-    <string name="dialog_SelectASupplier">Sélectionnez un fournisseur</string>
-    <string name="dialog_SelectSupplier">Sélectionnez le fournisseur</string>
-    <string name="dialog_SearchSupplier">Rechercher un fournisseur</string>
-    <string name="dialog_SelectReceiptDate">Sélectionnez la date de réception</string>
+    <string name="service_ShippingAmountEstimate">Wilt u het verzendbedrag voor deze schatting toevoegen?</string>
+    <string name="dialog_PleaseSelectAtleastOne">Selecteer ten minste één</string>
+    <string name="dialog_PleaseSelectDate">Selecteer datum a.u.b.</string>
+    <string name="dialog_days">dagen</string>
+    <string name="dialog_immediately">direct</string>
+    <string name="dialog_PleaseSelectOneValue">Selecteer een waarde a.u.b.</string>
+    <string name="select_Please_enter_amount">Vul a.u.b. bedrag in!</string>
+    <string name="select_Please_enter_quantity">Vul a.u.b. aantal in!</string>
+    <string name="select_We_appreciateThank_you">We waarderen uw bedrijf. Gelieve hieronder te vinden Dank u nota.</string>
+    <string name="select_Shipping_amount_PurchaseOrder">Wilt u het verzendbedrag voor deze inkooporder toevoegen?</string>
+    <string name="select_Shipping_amount_PaymentVoucher">Wilt u verzendkosten toevoegen voor deze betalingsvoucher?</string>
+    <string name="invoice_Completed">Voltooid</string>
+    <string name="dialog_ViewPV">Bekijk PV</string>
+    <string name="dialog_EditPV">PV bewerken</string>
+    <string name="dialog_SharePV">Deel PV</string>
+    <string name="dialog_Convert_to_PaymentVoucher">Converteren naar betalingsvoucher</string>
+    <string name="dialog_DateRequired">Datum benodigd</string>
+    <string name="dialog_PaymentModeRequired">Betaalwijze vereist</string>
+    <string name="dialog_ViewCreditNote">Creditnota bekijken</string>
+    <string name="dialog_ViewRecepit">Bekijk bonnetje</string>
+    <string name="dialog_ViewPaymentVoucher">Betalingsvoucher bekijken</string>
+    <string name="dialog_ViewPurchaseOrder">Inkooporder bekijken</string>
+    <string name="dialog_CreditNoteDigits">Creditnota nr. moet letters zijn gevolgd door Cijfers</string>
+    <string name="dialog_DeditNoteDigits">Dedit Note No. moet letters zijn gevolgd door Cijfers</string>
+    <string name="dialog_ReceiptDigits">Ontvangstnummer moet letters zijn gevolgd door Cijfers</string>
+    <string name="dialog_InvoiceDigits">Factuurnummer moet letters zijn gevolgd door Cijfers</string>
+    <string name="dialog_EstimateDigits">Schattingsnummer moet letters zijn gevolgd door cijfers</string>
+    <string name="dialog_SelectInvoiceDate">Selecteer factuurdatum</string>
+    <string name="dialog_SelectDate">Selecteer een datum</string>
+    <string name="dialog_SelectACustomer">Selecteer een klant</string>
+    <string name="dialog_SelectProductFirst">Selecteer eerst product</string>
+    <string name="dialog_Shipping_amountCreditNote">Wilt u het verzendbedrag voor deze creditnota toevoegen?</string>
+    <string name="dialog_Shipping_amountDebitNote">Wilt u verzendkosten toevoegen voor deze debetnota?</string>
+    <string name="dialog_Shipping_amountReceipt">Wilt u het Verzendbedrag voor dit ontvangstbewijs toevoegen?</string>
+    <string name="dialog_PaymentVoucherNoalready_exists">Betaalbon nr. bestaat al</string>
+    <string name="dialog_PaymentVoucherNoDigits">Betalingsvoucher nr. moet letters zijn gevolgd door cijfers</string>
+    <string name="dialog_Shipping_amountPaymentVoucher">Wilt u verzendkosten toevoegen voor deze betalingsvoucher?</string>
+    <string name="dialog_Shipping_amountPurchaseOrderNoDigits">Inkoopordernummer moet letters zijn gevolgd door cijfers</string>
+    <string name="dialog_EnterDiscountinPercent">Voer korting in % in</string>
+    <string name="dialog_EnterDiscountinAmount">Voer korting in bedrag in</string>
+    <string name="dialog_SelectASupplier">Selecteer een leverancier</string>
+    <string name="dialog_SelectSupplier">Selecteer leverancier</string>
+    <string name="dialog_SearchSupplier">Leverancier zoeken</string>
+    <string name="dialog_SelectReceiptDate">Selecteer ontvangstdatum</string>
     <string name="noSelect">Geen selectie</string>
     <string name="stock_Select_Products">Selecteer producten</string>
     <string name="report_SelectDateTo">Selecteer Datum (tot)</string>
     <string name="report_SelectDateFrom">Selecteer Datum (Van)</string>
     <string name="report_CustomerStatementReport">Rapport klantverklaring</string>
     <string name="report_SupplierStatementReport">Rapport leveranciersverklaring</string>
-    <string name="dialog_SelectSuppliers">Sélectionnez le fournisseur</string>
+    <string name="dialog_SelectSuppliers">Selecteer leveranciers</string>
 
     <string name="report_Paid">Betaald</string>
     <string name="report_UnPaid">Onbetaald</string>
     <string name="list_Date">Datum</string>
-    <string name="invoice_Due">Dû</string>
+    <string name="invoice_Due">Ten gevolge</string>
 
 
 
@@ -726,83 +726,85 @@
 
 
     <string-array name="faqQuestionArray">
-        <item>Comment commencer / Comment fonctionne l\'application ?</item>
-        <item>Si les données sont créées à partir de l\'ajout de nouvelles fonctionnalités directement à partir de la page de création, les données nouvellement créées ne s\'affichent pas ?</item>
-        <item>Comment ajouter des utilisateurs ?</item>
-        <item>Comment ajouter un entrepôt ?</item>
-        <item>Commentaire ajouter un entrepôt ?</item>
-        <item>Comment enregistrer le stock d\'ouverture?</item>
-        <item>Comment comptabiliser les enregistrements d\'inventaire physique ?</item>
-        <item>Comment déplacer le stock entre les entrepôts ?</item>
-        <item>Comment l\'inventaire sera-t-il mis à jour automatiquement ?</item>
-        <item>Comment la valeur des actions est-elle calculée ?</item>
-        <item>Comment créer une facture ?</item>
-        <item>Quand dois-je sélectionner l\'entrepôt lors de la création de la facture / du bon de commande ?</item>
-        <item>Quand dois-je créer un produit ?</item>
-        <item>Comment visualiser, dupliquer ou partager une facture ?</item>
-        <item>Comment la couleur de ma marque se reflétera-t-elle dans les modèles ?</item>
-        <item>Si l\'entrepôt sélectionné n\'a pas une quantité suffisante pour la facturation, comment puis-je traiter les factures ?</item>
-        <item>Comment vérifier le statut de la facture vue ?</item>
-        <item>Comment marquer les factures comme payées ?</item>
-        <item>Comment convertir une facture en reçu ?</item>
-        <item>Comment marquer le bon de commande comme livraison reçue ?</item>
-        <item>Comment supprimer une facture / un bon de commande ?</item>
-        <item>Comment marquer une facture / un bon de commande comme nul ?</item>
-        <item>Comment créer une note de débit/crédit et leur effet ?</item>
-        <item>Comment l\'estimation du statut changera-t-elle ?</item>
-        <item>Quels détails sont visibles sur l\'écran d\'accueil et comment changer d\'entreprise ?</item>
-        <item>Comment configurer les paiements en ligne ?</item>
-        <item>Combien coûte l\'intégration des passerelles de paiement ?</item>
-        <item>Comment changer le format des nombres ?</item>
-        <item>Comment partager une facture avec des liens de paiement ?</item>
-        <item>Comment saurai-je si une facture a été payée en ligne ?</item>
-        <item>Quand vais-je recevoir l\'argent sur mon compte bancaire ?</item>
-        <item>Comment SIR gère-t-il les paiements par carte ?</item>
-        <item>Comment changer / restaurer / mettre à niveau l\'abonnement ?</item>
-        <item>Comment changer de langue ?</item>
-        <item>Mes données sont-elles sécurisées ?</item>
-        <item>Ma requête n\'est pas répertoriée ici ?</item>
+        <item>Hoe te beginnen / Hoe werkt de app?</item>
+        <item>Als gegevens zijn gemaakt vanuit nieuwe functionaliteit toevoegen direct vanaf de aanmaakpagina, worden nieuw gemaakte gegevens niet weergegeven?</item>
+        <item>Hoe voeg ik gebruikers toe?</item>
+        <item>Hoe voeg ik een magazijn toe?</item>
+        <item>Hoe magazijn volgen?</item>
+        <item>Hoe beginvoorraad registreren?</item>
+        <item>Hoe rekening houden met fysieke inventarisatiegegevens?</item>
+        <item>Hoe verplaats ik voorraad tussen magazijnen?</item>
+        <item>Hoe wordt de inventaris automatisch bijgewerkt?</item>
+        <item>Hoe wordt de voorraadwaarde berekend?</item>
+        <item>Hoe maak ik een factuur aan?</item>
+        <item>Wanneer moet ik een magazijn selecteren bij het aanmaken van een factuur/inkooporder?</item>
+        <item>Wanneer moet ik een product maken?</item>
+        <item>Hoe een factuur bekijken, dupliceren of delen?</item>
+        <item>Hoe komt mijn merkkleur tot uiting in sjablonen?</item>
+        <item>Als het geselecteerde magazijn niet voldoende hoeveelheid heeft om te factureren, hoe kan ik de facturen dan verwerken?</item>
+        <item>Hoe de status van factuur gezien te controleren?</item>
+        <item>Hoe facturen als betaald markeren?</item>
+        <item>Hoe zet ik een factuur om in een ontvangstbewijs?</item>
+        <item>Hoe een inkooporder markeren als ontvangen levering?</item>
+        <item>Hoe verwijder ik een factuur/aankooporder?</item>
+        <item>Hoe markeer ik een factuur/aankooporder als ongeldig?</item>
+        <item>Hoe maak ik een debet-/creditnota en hun effect aan?</item>
+        <item>Hoe zal de geschatte status veranderen?</item>
+        <item>Welke details zijn zichtbaar op het startscherm en hoe wissel je van bedrijf?</item>
+        <item>Hoe kan ik online betalingen instellen?</item>
+        <item>Hoeveel kost het om betalingsgateways te integreren?</item>
+        <item>Hoe verander ik de getalnotatie?</item>
+        <item>Hoe kan ik een factuur delen met betalingslinks?</item>
+        <item>Hoe weet ik of een factuur online is betaald?</item>
+        <item>Wanneer ontvang ik het geld op mijn bankrekening?</item>
+        <item>Hoe gaat SIR om met kaartbetalingen?</item>
+        <item>Hoe van abonnement wisselen / herstellen / upgraden?</item>
+        <item>Hoe verander ik de taal?</item>
+        <item>Zijn mijn gegevens veilig?</item>
+        <item>Mijn vraag staat hier niet vermeld?</item>
     </string-array>
 
 
 
+
+
     <string-array name="faqAnswerArray">
-        <item>Pour commencer, cliquez sur s\'inscrire ici et créez un compte. Connectez-vous ensuite avec vos identifiants. Tout d\'abord, vous devez créer une entreprise à partir du module Mes entreprises. Entrez autant de détails, logo, détails de paiement, etc.; tel que requis pour afficher sur les factures et autres documents. Créez ensuite des produits, services, taxes, clients, fournisseurs à partir des modules respectifs dans le menu latéral. Vous pouvez modifier n\'importe lequel de ces détails à tout moment. Ceci est conforme à la fonction de contrôle de l\'application afin que les utilisateurs puissent suivre toute activité / inventaire à tout moment et disposer de toutes les données disponibles stockées dans l\'application pour référence / rapport futur. Une fois que c\'est fait, vous pouvez créer des factures, des devis, des bons de commande, des reçus, des bons de paiement à partir des modules respectifs dans le menu latéral ou les icônes de la barre d\'état au bas de l\'écran d\'accueil en quelques secondes.</item>
-        <item>Si vous ajoutez de nouvelles entreprises, clients, fournisseurs, produits, articles et taxes directement à partir de Créer une facture ou d\'autres pages, vous devez actualiser en sélectionnant à nouveau le nom de l\'entreprise en haut, lors de la création de la facture ou d\'autres documents, pour afficher les données nouvellement créées.</item>
-        <item>Pour ajouter de nouveaux utilisateurs, allez dans le module d\'ajout de nouveaux utilisateurs dans le menu latéral, puis cliquez sur ajouter des utilisateurs en haut à droite, puis entrez les détails et sélectionnez les droits d\'accès simples/multiples à accorder, puis cliquez sur ajouter un utilisateur. Le nouvel utilisateur ajouté peut accéder à l\'application via le nom d\'utilisateur et le mot de passe saisis lors de l\'ajout de l\'utilisateur. Le nouvel utilisateur peut réinitialiser le mot de passe à partir de l\'écran de connexion en cliquant sur mot de passe oublié et en suivant les étapes qui s\'y trouvent.</item>
-        <item>Pour ajouter un entrepôt, allez dans le module Mes entreprises dans le menu latéral, puis cliquez sur l\'entreprise dans laquelle l\'entrepôt doit être ajouté, puis cliquez sur ajouter un entrepôt en haut à droite, puis entrez les détails et cliquez sur enregistrer et continuer.</item>
-        <item>Pour suivre la quantité dans un entrepôt particulier, accédez au module Stocks dans le menu latéral, puis sélectionnez l\'entreprise, puis cliquez sur n\'importe quel produit qui affichera la quantité disponible dans chaque entrepôt.</item>
-        <item>Pour enregistrer le stock d\'ouverture des articles, allez dans le module Stocks puis sélectionnez Mettre à jour le stock et enregistrez la transaction.</item>
-        <item>Pour enregistrer des articles supplémentaires trouvés lors de l\'inventaire, accédez au module Stocks puis sélectionnez Mettre à jour le stock, puis enregistrez les articles. Pour supprimer les articles manquants lors de l\'inventaire, rendez-vous dans le module Stocks puis sélectionnez gaspillage/endommagement puis enregistrez les articles manquants.</item>
-        <item>Pour déplacer le stock entre les entrepôts, allez dans le module Stocks du menu principal puis sélectionnez le mouvement de stock puis enregistrez la transaction.</item>
-        <item>Lorsqu\'un bon de commande émis est marqué comme livraison reçue, les articles en stock dans le bon de commande seront automatiquement ajoutés au stock en stock. Lorsqu\'une facture de vente est émise, les articles en stock dans la facture de vente seront automatiquement réduits du stock d\'inventaire.</item>
-        <item>La valeur du stock est calculée en fonction du taux de produit saisi lors de la création du produit dans le module Mes produits.</item>
-        <item>Pour créer une facture, accédez au module Factures dans le menu latéral ou à partir de l\'icône de la barre d\'état système, puis cliquez sur créer une facture en haut à droite, puis sélectionnez l\'entreprise et entrez les détails pertinents, puis prévisualisez la facture si nécessaire en cliquant sur l\'icône plus à côté de créer facture, puis cliquez sur créer une facture, votre facture sera créée et pourra être consultée/partagée à partir de la page récapitulative du module Factures.</item>
-        <item>L\'entrepôt doit être sélectionné uniquement lorsque le produit est sélectionné pour permettre le suivi des stocks. Si vous sélectionnez un article, ne sélectionnez pas l\'entrepôt.</item>
-        <item>Pour exécuter l\'une des fonctions ci-dessus, accédez à Factures, puis sélectionnez l\'entreprise, puis accédez à la facture spécifique et balayez vers la gauche, puis cliquez sur Plus et sélectionnez votre préférence.</item>
-        <item>Lors de la création de l\'entreprise, vous devez sélectionner la couleur selon vos préférences ou en fonction de votre identité de marque. La couleur sélectionnée sera appliquée aux différents modèles dans Factures / Devis. Sélectionnez n\'importe quel modèle selon votre choix lors de la création de la facture / de l\'estimation. Si aucune couleur n\'a été sélectionnée, tous les modèles afficheront le format standard.</item>
-        <item>Si l\'entrepôt sélectionné n\'a pas une quantité suffisante pour la facturation, vous devrez d\'abord ajouter une quantité suffisante à l\'entrepôt particulier. Accédez au module Stocks dans le menu latéral, puis vous pouvez soit ajouter la quantité à partir de l\'option de mise à jour du stock, soit déplacer le stock d\'un entrepôt à un autre à partir de l\'option de mouvement de stock, en haut.</item>
-        <item>Pour exécuter l\'une des fonctions ci-dessus, accédez à Factures, sélectionnez l\'entreprise, puis accédez à la facture spécifique et balayez vers la gauche, puis cliquez sur Plus et sélectionnez votre préférence.</item>
-        <item>Le statut de la facture vue ne peut être vérifié que si la facture est partagée sous forme de lien. Lorsque le lien est ouvert par le destinataire, le statut passe automatiquement d\'en attente à visible dans le résumé du module Facture. Si la facture est partagée uniquement au format PDF, le statut vu ne peut pas être déterminé et apparaîtra comme en attente.</item>
-        <item>Pour marquer les factures comme payées, accédez au module Factures dans le menu latéral, puis sélectionnez l\'entreprise, puis accédez à la facture dans la liste qui doit être marquée comme payée et balayez vers la gauche, puis cliquez sur Marquer comme payé. Si une facture est marquée comme payée, un reçu doit être créé pour refléter le relevé de compte du client. De même, si un bon de commande est payé, un bon de paiement doit être créé pour refléter le relevé de compte du fournisseur.</item>
-        <item>Allez d\'abord au récapitulatif des factures, faites glisser la facture en question vers la gauche et marquez comme payée. Ensuite, faites glisser la facture vers la gauche, sous Plus, cliquez sur Convertir en reçu, puis cliquez sur Créer un reçu.</item>
-        <item>Marquez le bon de commande comme livraison reçue pour ajouter une quantité à l\'inventaire. Pour marquer le bon de commande comme livraison reçue, accédez au module Bons de commande dans le menu latéral et sélectionnez l\'entreprise, puis accédez au bon de commande spécifique, puis balayez vers la gauche et cliquez sur Marquer comme livraison reçue.</item>
-        <item>Pour supprimer une facture, vous devez créer un avoir. Pour supprimer un bon de commande, vous devez créer une note de débit. Étant donné que les articles de la facture / du bon de commande sont liés à l\'inventaire, ils ne peuvent pas être supprimés directement. Alternativement, vous pouvez marquer la facture / le bon de commande particulier comme nul, puis il ne s\'affichera pas dans les rapports correspondants. Si vous suivez l\'inventaire des produits, après avoir marqué l\'annulation, vous devez accéder au module Stocks et ajouter / supprimer la quantité en annulation Facture / Bon de commande via la mise à jour des stocks ou l\'option de gaspillage.</item>
-        <item>Pour marquer comme annulé, accédez à une facture/un bon de commande particulier, balayez vers la gauche, puis sélectionnez Marquer comme annulé.</item>
-        <item>Pour créer une note de débit, allez dans les notes de débit dans le menu latéral, puis cliquez sur créer des notes de débit en haut à droite, puis enregistrez la transaction et cliquez sur créer une note de débit en bas. La quantité saisie dans la note de débit sera déduite du solde du stock. Pour créer un avoir, allez dans avoirs dans le menu latéral, puis cliquez sur créer des avoirs en haut à droite, puis enregistrez la transaction et cliquez sur créer un avoir en bas. La quantité saisie dans la note de crédit sera rajoutée au solde du stock.</item>
-        <item>Si un devis créé est converti en facture, le statut passe d\'en attente à terminé. Pour convertir un devis en facture, accédez au récapitulatif des devis, faites glisser le devis particulier vers la gauche, cliquez sur plus, puis sélectionnez Convertir en facture, puis cliquez sur Créer une facture.</item>
-        <item>Les détails de la première entreprise créée par l\'utilisateur s\'afficheront par défaut sur l\'écran d\'accueil. Pour changer d\'entreprise, cliquez sur l\'icône en forme d\'étoile en haut à droite de l\'écran d\'accueil puis sélectionnez l\'entreprise souhaitée. L\'entreprise sélectionnée s\'affichera sur l\'écran d\'accueil au fur et à mesure des besoins.</item>
-        <item>La configuration avec Stripe ou PayPal prend quelques minutes. Activez simplement les paiements en ligne dans votre application et suivez les instructions.</item>
-        <item>Il n\'y a pas de frais initiaux ou mensuels. Il y a des frais par transaction, qui varient selon les pays. Pour vérifier les frais dans votre pays, veuillez visiter &lt;a href="https://www.stripe.com/us/pricing"&gt;Stripe pricing&lt;/a&gt; ou alors &lt;a href="https://www.paypal.com/us/webapps/mpp/merchant-fees"&gt;https://www.paypal.com/us/webapps/mpp/merchant-fees&lt;/a&gt;</item>
-        <item>Pour changer le format de virgule dans les nombres, allez dans les paramètres puis cliquez sur la sélection du format de virgule puis sélectionnez votre préférence. Le format sélectionné sera applicable dans tout le compte utilisateur.</item>
-        <item>Pour partager une facture avec des liens de paiement, vous devez d\'abord configurer des passerelles de paiement en ligne à partir des paramètres. Ensuite, lors de la création de la facture, sélectionnez la passerelle de paiement respective par laquelle vous souhaitez être payé. Vous pouvez également sélectionner les deux options. Ensuite, partagez la facture sous forme de lien uniquement. Les liens de paiement seront automatiquement affichés dans l\'e-mail.</item>
-        <item>Si une facture a été payée via les liens de paiement partagés, une facture particulière affichera "Payé" dans le récapitulatif des factures. Alternativement, vous serez averti par la plate-forme de passerelle de paiement respective.</item>
-        <item>Votre premier paiement prendra 7 jours ouvrables et tous les paiements suivants prendront entre 2 et 7 jours ouvrables pour atteindre votre compte. Vous pouvez vérifier la date d\'arrivée estimée de votre paiement en utilisant votre tableau de bord Stripe / PayPal.</item>
-        <item>SIR gère les paiements par carte via Stripe, un leader du marché du traitement des paiements. L\'installation avec Stripe est facile et il n\'y a pas de frais d\'installation. Vous ne payez que par transaction. Pour plus de détails, visitez le &lt;a href="https://www.stripe.com/us/pricing" &gt;Stripe pricing&lt;/a&gt; page. Sur le tableau de bord Stripe, vous pouvez avoir une visibilité complète de toutes vos transactions, y compris les paiements par carte, les paiements en attente et les frais.</item>
-        <item>Pour changer/restaurer/mettre à niveau un abonnement, allez dans Paramètres puis cliquez sur Abonnement et sélectionnez votre préférence en conséquence. Thermes et conditions d\'application.</item>
-        <item>Pour changer de langue, allez dans les paramètres puis cliquez sur la langue et sélectionnez votre préférence.</item>
-        <item>Toutes vos données sont totalement sécurisées et sécurisées sur notre serveur Cloud.</item>
-        <item>Si votre requête n\'est pas répertoriée ici, contactez-nous via la fonction d\'assistance dans les paramètres et nous vous répondrons dans les plus brefs délais.</item>
+    <item>Om te beginnen, klik hier op aanmelden en maak een account aan. Log dan in met uw inloggegevens. Eerst moet u een bedrijf aanmaken vanuit de module Mijn bedrijven. Vul zoveel mogelijk gegevens, logo, betalingsgegevens, etc. in; zoals vereist om weer te geven op facturen en andere documenten. Maak vervolgens producten, diensten, belastingen, klanten, leveranciers van respectieve modules in het zijmenu. U kunt al deze gegevens op elk moment bewerken. Dit is in overeenstemming met de controlefunctie van de app, zodat de gebruikers elke activiteit / inventaris op elk moment kunnen volgen en alle beschikbare gegevens in de app kunnen opslaan voor toekomstig gebruik / rapportage. Als het bovenstaande is gedaan, kunt u binnen enkele seconden facturen, schattingen, inkooporders, ontvangstbewijzen, betalingsvouchers maken van de respectieve modules in het zijmenu of systeemvakpictogrammen onder aan het startscherm.</item>
+    <item>Als u nieuwe bedrijven, klanten, leveranciers, producten, artikelen en belastingen rechtstreeks toevoegt vanaf Factuur aanmaken of andere pagina\'s, dan moet u vernieuwen door de bedrijfsnaam bovenaan opnieuw te selecteren, terwijl u een factuur of andere documenten aanmaakt, om de nieuw aangemaakte gegevens.</item>
+    <item>Om nieuwe gebruikers toe te voegen, ga naar de module nieuwe gebruikers toevoegen in het zijmenu, klik vervolgens op gebruikers toevoegen in de rechterbovenhoek, voer vervolgens de details in en selecteer enkele / meerdere toegangsrechten die moeten worden verleend en klik vervolgens op gebruiker toevoegen. De nieuwe gebruiker die is toegevoegd, heeft toegang tot de app via de gebruikersnaam en het wachtwoord die zijn ingevoerd tijdens het toevoegen van de gebruiker. De nieuwe gebruiker kan het wachtwoord opnieuw instellen vanaf het inlogscherm door op wachtwoord vergeten te klikken en de stappen daar te volgen.</item>
+    <item>Om een ​​magazijn toe te voegen, gaat u naar de module Mijn bedrijven in het zijmenu, klikt u op het bedrijf waarin het magazijn moet worden toegevoegd, klikt u rechtsboven op magazijn toevoegen, voert u de gegevens in en klikt u op opslaan en doorgaan. </item>
+    <item>Als u de hoeveelheid in een bepaald magazijn wilt volgen, gaat u naar de module Voorraden in het zijmenu, selecteert u het bedrijf en klikt u op een product dat de beschikbare hoeveelheid in elk magazijn weergeeft.</item>
+    <item>Als u de openingsvoorraad van artikelen wilt vastleggen, gaat u naar de module Voorraden, selecteert u voorraad bijwerken en registreert u de transactie.</item>
+    <item>Om extra artikelen te registreren die tijdens de inventarisatie zijn gevonden, gaat u naar de module Voorraden, selecteert u voorraad bijwerken en registreert u de artikelen. Om ontbrekende items te verwijderen tijdens de inventarisatie, gaat u naar de module Voorraden, selecteert u verspilling / schade en noteert u de ontbrekende items.</item>
+    <item>Als u voorraad wilt verplaatsen tussen magazijnen, gaat u naar de module Voorraden in het hoofdmenu, selecteert u voorraadverplaatsing en registreert u de transactie.</item>
+    <item>Wanneer een uitgegeven inkooporder is gemarkeerd als ontvangen levering, worden voorraadartikelen in de inkooporder automatisch toegevoegd aan de voorraadvoorraad. Wanneer een verkoopfactuur wordt uitgegeven, worden de voorraadartikelen op de verkoopfactuur automatisch verminderd met de voorraadvoorraad.</item>
+    <item>Voorraadwaarde wordt berekend op basis van het producttarief dat is ingevoerd tijdens het maken van een product in de module Mijn producten.</item>
+    <item>Om een ​​factuur aan te maken, ga naar Facturenmodule vanuit het zijmenu of vanuit het systeemvakpictogram, klik vervolgens op factuur maken rechtsboven, selecteer vervolgens het bedrijf en voer de relevante details in, en bekijk de factuur indien nodig door op het meer-pictogram naast factuur aanmaken, klik dan op factuur aanmaken, uw factuur wordt aangemaakt en kan worden bekeken/gedeeld vanaf de overzichtspagina van de module Facturen.</item>
+    <item>Magazijn moet alleen worden geselecteerd als het product is geselecteerd om voorraadtracering in te schakelen. Als je een artikel selecteert, selecteer dan geen magazijn.</item>
+    <item>Als u een van de bovenstaande functies wilt uitvoeren, gaat u naar Facturen, selecteert u het bedrijf, gaat u naar de specifieke factuur en veegt u naar links, klikt u op meer en selecteert u uw voorkeur.</item>
+    <item>Tijdens het creëren van het bedrijf, moet u de kleur naar voorkeur selecteren of overeenkomen met uw merkidentiteit. De geselecteerde kleur wordt toegepast op de verschillende sjablonen in Facturen / Schattingen. Selecteer een sjabloon naar keuze tijdens het maken van een factuur / schatting. Als er geen kleur is geselecteerd, zullen alle sjablonen het standaardformaat weergeven.</item>
+    <item>Als het geselecteerde magazijn niet voldoende hoeveelheid heeft voor facturering, moet u eerst voldoende hoeveelheid toevoegen aan het betreffende magazijn. Ga naar de Voorraadmodule in het zijmenu, dan kunt u ofwel hoeveelheid toevoegen vanuit de optie voorraad bijwerken of voorraad van het ene magazijn naar het andere verplaatsen vanuit de optie voorraadverplaatsing bovenaan.</item>
+    <item>Als u een van de bovenstaande functies wilt uitvoeren, gaat u naar Facturen, selecteert u het bedrijf, gaat u naar de specifieke factuur en veegt u naar links, klikt u op meer en selecteert u uw voorkeur.</item>
+    De status van <item>Factuur gezien kan alleen worden gecontroleerd als de factuur als link wordt gedeeld. Wanneer de link wordt geopend door de ontvanger, verandert de status automatisch van in behandeling naar gezien in Factuurmodule Samenvatting. Als de factuur alleen in PDF-indeling wordt gedeeld, kan de status gezien niet worden bepaald en wordt deze weergegeven als in behandeling.</item>
+    <item>Om facturen als betaald te markeren, gaat u naar de module Facturen in het zijmenu, selecteert u vervolgens het bedrijf, gaat u naar de factuur in de lijst die moet worden gemarkeerd als betaald en veegt u naar links en klikt u vervolgens op markeren als betaald. Als een factuur is gemarkeerd als betaald, moet een ontvangstbewijs worden gemaakt om in het rekeningoverzicht van de klant weer te geven. Evenzo, als een inkooporder wordt betaald, moet er een betalingsvoucher worden gemaakt om in het rekeningoverzicht van de leverancier weer te geven.</item>
+    <item>Ga eerst naar het facturenoverzicht, veeg de betreffende factuur naar links en markeer als betaald. Veeg vervolgens de factuur naar links, klik onder meer op Converteren naar ontvangstbewijs en klik vervolgens op ontvangstbewijs maken.</item>
+    <item>Markeer inkooporder als ontvangen levering om hoeveelheid toe te voegen aan de voorraad. Om de inkooporder te markeren als ontvangen levering, gaat u naar de module Inkooporders in het zijmenu en selecteert u het bedrijf, gaat u naar de specifieke inkooporder, veegt u naar links en klikt u op Markeren als ontvangen levering.</item>
+    <item>Om een ​​factuur te verwijderen, moet u een creditnota aanmaken. Om een ​​Inkooporder te verwijderen, moet u een debetnota aanmaken. Aangezien artikelen op factuur / inkooporder gekoppeld zijn aan voorraad, kunnen ze niet direct worden verwijderd. Als alternatief kunt u de betreffende factuur / inkooporder als ongeldig markeren, dan wordt deze niet weergegeven in de relevante rapporten. Als u de productvoorraad bijhoudt, moet u na het markeren van ongeldigheid naar de module Voorraden gaan en het aantal ongeldige factuur/inkooporder toevoegen/verwijderen via de optie voorraden bijwerken of verspilling.\n</item>
+    <item>Om als ongeldig te markeren, gaat u naar een bepaalde factuur/inkooporder, veegt u naar links en selecteert u Markeer als ongeldig.</item>
+    <item>Om een ​​debetnota aan te maken, gaat u naar debetnota\'s in het zijmenu, klikt u rechtsboven op debetnota\'s maken, registreert u de transactie en klikt u onderaan op debetnota maken. De op de debetnota ingevoerde hoeveelheid wordt afgetrokken van het voorraadsaldo. Om een ​​creditnota aan te maken, gaat u naar creditnota\'s in het zijmenu, klikt u rechtsboven op creditnota\'s maken, registreert u de transactie en klikt u onderaan op creditnota maken. De hoeveelheid die op de creditnota is ingevoerd, wordt weer toegevoegd aan het voorraadvoorraadsaldo.\n</item>
+    <item>Als een gemaakte schatting wordt geconverteerd naar een factuur, verandert de status van in behandeling in voltooid. Om een ​​schatting naar een factuur te converteren, ga je naar het schattingsoverzicht, veeg je de specifieke schatting naar links en klik je op meer, selecteer je Converteren naar factuur en klik je op factuur maken.</item>
+        <item>Details van het eerste bedrijf dat door de gebruiker is aangemaakt, worden standaard op het startscherm weergegeven. Om van bedrijf te wisselen, klikt u op het sterpictogram rechtsboven op het startscherm en selecteert u het gewenste bedrijf. Het geselecteerde bedrijf wordt indien nodig op het startscherm weergegeven.</item>
+        <item>Het duurt een paar minuten om in te stellen met Stripe of PayPal. Schakel eenvoudig online betalingen in uw app in en volg de instructies.</item>
+        <item>Er zijn geen kosten vooraf of maandelijks. Er zijn kosten per transactie, die per land verschillen. Ga naar &lt;a href="https://www.stripe.com/us/pricing"&gt;Stripe pricing&lt;/a&gt; om de kosten in uw land te controleren. of &lt;a href="https://www.paypal.com/us/webapps/mpp/merchant-fees"&gt;https://www.paypal.com/us/webapps/mpp/merchant-fees&lt;/ a&gt;</item>
+        <item>Als u de komma-indeling in cijfers wilt wijzigen, gaat u naar instellingen, klikt u op de selectie van de komma-indeling en selecteert u uw voorkeur. Het geselecteerde formaat is van toepassing op het hele gebruikersaccount.</item>
+        <item>Als u een factuur met betalingslinks wilt delen, moet u eerst online betalingsgateways instellen via de instellingen. Selecteer vervolgens tijdens het maken van de factuur de respectieve betalingsgateway waarmee u betaald wilt worden. U kunt ook beide opties selecteren. Deel factuur dan alleen als link. De betalingslinks worden automatisch weergegeven in de e-mail.</item>
+        <item>Als een factuur is betaald via de gedeelde betalingslinks, wordt in het overzicht van facturen "Betaald" weergegeven. Als alternatief wordt u op de hoogte gesteld door het respectieve betalingsgatewayplatform.</item>
+        <item>Uw eerste betaling duurt 7 werkdagen en het duurt 2-7 werkdagen voordat alle volgende betalingen op uw rekening staan. U kunt de geschatte aankomstdatum van uw betaling controleren via uw Stripe / PayPal-dashboard.</item>
+        <item>SIR verwerkt kaartbetalingen via Stripe, een marktleider in het verwerken van betalingen. Het opzetten met Stripe is eenvoudig en er zijn geen opstartkosten. U betaalt alleen per transactie. Ga voor meer informatie naar de &lt;a href="https://www.stripe.com/us/pricing" &gt;Stripe-prijzen&lt;/a&gt; bladzijde. Op het Stripe-dashboard heb je volledig inzicht in al je transacties, inclusief kaartbetalingen, lopende betalingen en vergoedingen.</item>
+        <item>Als u een abonnement wilt wijzigen / herstellen / upgraden, gaat u naar Instellingen en klikt u vervolgens op Abonnement en selecteert u uw voorkeur dienovereenkomstig. Algemene voorwaarden zijn van toepassing.</item>
+        <item>Als u van taal wilt wisselen, gaat u naar instellingen, klikt u op taal en selecteert u uw voorkeur.</item>
+        <item>Al uw gegevens zijn volledig veilig en beveiligd op onze cloudgebaseerde server.</item>
+        <item>Als uw vraag hier niet wordt vermeld, neem dan contact met ons op via de ondersteuningsfunctie in de instellingen en we nemen zo snel mogelijk contact met u op.</item>
     </string-array>
 
 
@@ -810,14 +812,14 @@
 
 
     <string-array name="languageArray">
-        <item>Anglaise</item>
-        <item>arabe</item>
-        <item>Allemande</item>
-        <item>Néerlandaise</item>
-        <item>français</item>
-        <item>Italien</item>
-        <item>Espanol</item>
-        <item>Portugais</item>
+        <item>Engels</item>
+        <item>Arabisch</item>
+        <item>Duits</item>
+        <item>Nederlands</item>
+        <item>Frans</item>
+        <item>Italiaans</item>
+        <item>Spaans</item>
+        <item>Portugees</item>
     </string-array>
 
 

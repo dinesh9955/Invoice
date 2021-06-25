@@ -7,817 +7,818 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
+    <string name="error">خطأ</string>
+
+    <string name="preview">معاينة</string>
+    <string name="done">منجز</string>
 
 
-    <string name="preview">Aperçu</string>
-    <string name="done">Fait</string>
-
-    <string name="header_receipts">Reçus</string>
-    <string name="header_invoices">Factures</string>
-    <string name="header_debit_notes">Notes de débit</string>
-    <string name="header_credit_notes">Notes de crédit</string>
-    <string name="header_estimates">Estimations</string>
-    <string name="header_purchase_orders">Acheter en ligne</string>
-    <string name="header_payment_vouchers">Bons de paiement</string>
+    <string name="header_receipts">الإيصالات</string>
+    <string name="header_invoices">الفواتير</string>
+    <string name="header_debit_notes">مذكرات الخصم</string>
+    <string name="header_credit_notes">إشعارات الائتمان</string>
+    <string name="header_estimates">تقديرات</string>
+    <string name="header_purchase_orders">طلبات الشراء</string>
+    <string name="header_payment_vouchers">سندات الدفع</string>
 
 
 
 
-    <string name="home_hello">Bonjour</string>
-    <string name="home_quick_look">Un aperçu rapide de vos principales activités commerciales</string>
-    <string name="home_customers">Les clients</string>
-    <string name="home_suppliers">Fournisseuses</string>
-    <string name="home_no_unpaid_invoices">Pas de factures impayées</string>
-    <string name="home_no_overdue_invoices">Aucune facture en retard</string>
-    <string name="home_no_customers">Aucun client</string>
-    <string name="home_no_suppliers">Aucun fournisseur</string>
+    <string name="home_hello">مرحبا</string>
+    <string name="home_quick_look">نظرة سريعة على الأنشطة التجارية الرئيسية الخاصة بك</string>
+    <string name="home_customers">عملاء</string>
+    <string name="home_suppliers">الموردين</string>
+    <string name="home_no_unpaid_invoices">لا فواتير غير مدفوعة</string>
+    <string name="home_no_overdue_invoices">لا فواتير متأخرة</string>
+    <string name="home_no_customers">لا زبائن</string>
+    <string name="home_no_suppliers">لا يوجد موردون</string>
 
-    <string name="home">Domicile</string>
-    <string name="estimate">Estimations</string>
-    <string name="invoices">Factures</string>
-    <string name="receipts">Reçus</string>
+    <string name="home">منزل، بيت</string>
+    <string name="estimate">تقديرات</string>
+    <string name="invoices">الفواتير</string>
+    <string name="receipts">الإيصالات</string>
     <string name="po">PO</string>
 
-    <string name="add_new_user">Ajouter un nouvel utilisateur</string>
-    <string name="my_companies">Mes entreprises</string>
-    <string name="my_products">Mes produits (suivi)</string>
-    <string name="my_items">Mes articles</string>
-    <string name="add_taxes">Ajouter des taxes</string>
+    <string name="add_new_user">إضافة مستخدم جديد</string>
+    <string name="my_companies">شركاتي</string>
+    <string name="my_products">منتجاتي (مجنزرة)</string>
+    <string name="my_items">أشيائي</string>
+    <string name="add_taxes">أضف الضرائب</string>
 
-    <string name="suppliers">Fournisseuses</string>
-    <string name="stocks">Actions</string>
-    <string name="settings">Paramètres</string>
-    <string name="logout">Se déconnecter</string>
-    <string name="purchase_orders">Acheter en ligne</string>
-    <string name="payment_vouchers">Bons de paiement</string>
-    <string name="reports">Rapports</string>
-    <string name="credit_notes">Notes de crédit</string>
-    <string name="debit_notes">Notes de débit</string>
-    <string name="thank_you_note">Remerciements</string>
-    <string name="invoice_reminders">Rappels de factures</string>
+    <string name="suppliers">الموردين</string>
+    <string name="stocks">مخازن</string>
+    <string name="settings">إعدادات</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="purchase_orders">طلبات الشراء</string>
+    <string name="payment_vouchers">سندات الدفع</string>
+    <string name="reports">التقارير</string>
+    <string name="credit_notes">إشعارات الائتمان</string>
+    <string name="debit_notes">مذكرات الخصم</string>
+    <string name="thank_you_note">شكرا لك ملاحظة</string>
+    <string name="invoice_reminders">تذكير الفاتورة</string>
 
-    <string name="select_company">Sélectionnez l\'entreprise</string>
-    <string name="cancel">Annuler</string>
+    <string name="select_company">حدد شركة</string>
+    <string name="cancel">يلغي</string>
 
 
 
-    <string name="internet_error">Check your Internet Connection</string>
-    <string name="condiotn">Terms &amp; Conditions</string>
-    <string name="connection_not_found">You must have a connection to the internet</string>
-    <string name="GOPREMIUM">GO PREMIUM</string>
-    <string name="AnnualPlan">Annual Plan *</string>
-    <string name="dollaryear">$ 35.99/year</string>
-    <string name="ValuePlan">Value Plan *</string>
-    <string name="dollarmonth">$ 3.99/month</string>
-    <string name="Restore">Restaurer</string>
-    <string name="Purchases">Achats</string>
-    <string name="Termsconditionsapply">*Terms &amp; conditions apply:</string>
-    <string name="USD1199">USD 11.99</string>
-    <string name="oneimepaymentforcreatinganewcompany">\u0020 one-time payment for creating a new company within the same credentials</string>
-    <string name="USD399">USD 3.99</string>
-    <string name="onetimepaymentperadditionaluser">\u0020 one-time payment per additional user (for assigning additional users)</string>
-    <string name="Skipsubscription">Ignorer l\'abonnement</string>
-    <string name="trytheappforaperiodof14days">Essayez l\'application pendant une période de 14 jours</string>
-    <string name="startfreetrial">Commencer l\'essai gratuit</string>
+    <string name="internet_error">تحقق من اتصال الإنترنت الخاص بك</string>
+    <string name="condiotn">شروط وأمبير. الظروف</string>
+    <string name="connection_not_found">يجب أن يكون لديك اتصال بالإنترنت</string>
+    <string name="GOPREMIUM">احصل على الاشتراك الرئيسي</string>
+    <string name="AnnualPlan">الخطة السنوية *</string>
+    <string name="dollaryear">35.99 دولارًا في السنة</string>
+    <string name="ValuePlan">خطة القيمة *</string>
+    <string name="dollarmonth">3.99 دولارات شهريًا</string>
+    <string name="Restore">يعيد</string>
+    <string name="Purchases">المشتريات</string>
+    <string name="Termsconditionsapply">* شروط وأمبير. تطبق الشروط:</string>
+    <string name="USD1199">11.99 دولارًا أمريكيًا</string>
+    <string name="oneimepaymentforcreatinganewcompany">\\ u0020 دفعة لمرة واحدة لإنشاء شركة جديدة بنفس بيانات الاعتماد</string>
+    <string name="USD399">3.99 دولارًا أمريكيًا</string>
+    <string name="onetimepaymentperadditionaluser">\\ u0020 دفعة لمرة واحدة لكل مستخدم إضافي (لتعيين مستخدمين إضافيين)</string>
+    <string name="Skipsubscription">تخطي الاشتراك</string>
+    <string name="trytheappforaperiodof14days">جرب التطبيق لمدة 14 يومًا</string>
+    <string name="startfreetrial">ابدأ الإصدار التجريبي المجاني</string>
 
-    <string name="Customizeyourexperience">Personnalisez votre expérience</string>
-    <string name="InviteFriends">Inviter des amis</string>
-    <string name="Customize">Personnaliser</string>
-    <string name="FAQs">FAQs</string>
-    <string name="Language">Langue</string>
-    <string name="Abouttheapp">À propos de l\'application</string>
-    <string name="Ratetheapp">Évaluer l\'application</string>
-    <string name="TermsofUse">Conditions d\'utilisation</string>
-    <string name="PrivacyPolicy">Politique de confidentialité</string>
-    <string name="Support">Support</string>
+    <string name="Customizeyourexperience">تخصيص تجربتك</string>
+    <string name="InviteFriends">ادعو أصدقاء</string>
+    <string name="Customize">يعدل أو يكيف</string>
+    <string name="FAQs">أسئلة وأجوبة</string>
+    <string name="Language">لغة</string>
+    <string name="Abouttheapp">حول التطبيق</string>
+    <string name="Ratetheapp">قيم التطبيق</string>
+    <string name="TermsofUse">شروط الاستخدام</string>
+    <string name="PrivacyPolicy">سياسة الخصوصية</string>
+    <string name="Support">الدعم</string>
 
-    <string name="DebitNo">Note de débit Non.</string>
+    <string name="DebitNo">مذكرة الخصم رقم</string>
 
-    <string name="CreditNo">Note de crédit Non.</string>
-    <string name="ReceiptNo">"Reçu Non."</string>
-    <string name="InvoiceNo">"Facture Non."</string>
-    <string name="EstiateNo">Estimation Non.</string>
+    <string name="CreditNo">مذكرة ائتمان رقم</string>
+    <string name="ReceiptNo">رقم الإيصال.</string>
+    <string name="InvoiceNo">رقم الفاتورة.</string>
+    <string name="EstiateNo">تقدير رقم</string>
 
-    <string name="poNo">PO Non.</string>
-    <string name="pvNo">PV Non.</string>
+    <string name="poNo">رقم PO</string>
+    <string name="pvNo">رقم PV</string>
 
-    <string name="DueDate">Date d\'échéance</string>
+    <string name="DueDate">تاريخ الاستحقاق</string>
 
-    <string name="ReceiptDate">Date de réception</string>
-    <string name="Date">Date</string>
-    <string name="InvoiceTo">Destinataire</string>
-    <string name="ITEMS">ÉLÉMENTS</string>
-    <string name="INVOICEITEMS">ARTICLES DE FACTURE</string>
-    <string name="template">Choisir le modèle</string>
-    <string name="choose_color">Choisissez la couleur</string>
+    <string name="ReceiptDate">تاريخ استلام</string>
+    <string name="Date">تاريخ</string>
+    <string name="InvoiceTo">متلقي</string>
+    <string name="ITEMS">العناصر</string>
+    <string name="INVOICEITEMS">بنود الفاتورة</string>
+    <string name="template">اختيار القالب</string>
+    <string name="choose_color">اختر اللون</string>
 
-    <string name="additem">Ajouter des produits</string>
-    <string name="SubTotal">Sous-total</string>
-    <string name="Discount">Rabais</string>
-    <string name="Tax">Impôt</string>
-    <string name="createinvoice">Créer une facture</string>
-    <string name="createreceipt">Créer un reçu</string>
-    <string name="createcredit">Créer une note de crédit</string>
-    <string name="createestimate">Créer une estimation</string>
-    <string name="create_purchaseorder">Créer un bon de commande</string>
+    <string name="additem">أضف المنتجات</string>
+    <string name="SubTotal">المجموع الفرعي</string>
+    <string name="Discount">خصم</string>
+    <string name="Tax">ضريبة</string>
+    <string name="createinvoice">إنشاء فاتورة</string>
+    <string name="createreceipt">إنشاء إيصال</string>
+    <string name="createcredit">إنشاء مذكرة ائتمان</string>
+    <string name="createestimate">إنشاء تقدير</string>
+    <string name="create_purchaseorder">إنشاء أمر شراء</string>
 +
-    <string name="create_paymentvoucher">Créer un justificatif de paiement</string>
+    <string name="create_paymentvoucher">إنشاء إيصال دفع</string>
 
 
 
-    <string name="createdebit">Créer une note de débit</string>
+    <string name="createdebit">إنشاء مذكرة الخصم</string>
     <string name="all_Save">يحفظ</string>
-    <string name="all_Cancel">"يلغي "</string>
-    <string name="back">Dos</string>
-    <string name="yes">Oui</string>
-    <string name="no">Non</string>
-    <string name="header_users">Utilisatrices</string>
-    <string name="header_users_list">Utilisatrices</string>
-    <string name="header_users_add">Ajouter un utilisateur</string>
-    <string name="header_company">Entreprises</string>
-    <string name="header_company_list">Mes entreprises</string>
-    <string name="header_company_add">Ajouter une entreprise</string>
-    <string name="header_company_detail_company">Compagnie</string>
-    <string name="header_company_detail_warehouse">Entrepôt(s)</string>
-    <string name="header_company_detail_add_warehouse">Ajouter un entrepôt</string>
-    <string name="header_product">Des produits</string>
-    <string name="header_product_list">Des produits</string>
-    <string name="header_product_add">Ajouter un produit</string>
-    <string name="header_items">Articles</string>
-    <string name="header_items_list">Articles</string>
-    <string name="header_items_add">Ajouter un item</string>
-    <string name="header_tax">Impôts</string>
-    <string name="header_tax_list">Impôts</string>
-    <string name="header_customers">Les clients</string>
-    <string name="header_tax_add">" Ajouter une taxe"</string>
-    <string name="header_customers_list">Les clients</string>
-    <string name="header_customers_add">Ajouter un client</string>
-    <string name="header_suppliers">Fournisseuses</string>
-    <string name="header_suppliers_list">Fournisseuses</string>
-    <string name="header_suppliers_add">"Ajouter un fournisseur "</string>
-    <string name="header_stock">Actions</string>
-    <string name="header_stock_product">Des produits</string>
-    <string name="header_stock_update">Mettre à jour le stock</string>
-    <string name="header_stock_movement">Mouvement de stock</string>
-    <string name="header_stock_waste">Déchets/Dégâts</string>
-    <string name="header_receipts_list">Reçus</string>
-    <string name="header_invoices_list">Factures</string>
-    <string name="header_receipts_create">Créer un reçu</string>
-    <string name="header_invoices_create">Créer une facture</string>
-    <string name="header_debit_notes_list">Notes de débit</string>
-    <string name="header_credit_notes_list">Notes de crédit</string>
-    <string name="header_estimates_list">Estimations</string>
-    <string name="header_debit_notes_create">Créer une note de débit</string>
-    <string name="header_credit_notes_create">Créer une note de débit</string>
-    <string name="header_estimates_create">Créer une estimation</string>
-    <string name="header_purchase_orders_list">Acheter en ligne</string>
-    <string name="header_purchase_orders_create">Créer un bon de commande</string>
-    <string name="header_payment_vouchers_list">Bons de paiement</string>
-    <string name="header_payment_vouchers_create">Créer un justificatif de paiement</string>
-    <string name="header_report">Rapports</string>
-    <string name="header_thank_you_note">Remerciements</string>
-    <string name="header_invoice_reminders">Rappels de factures</string>
-    <string name="header_details">Des détails</string>
-    <string name="header_warehouses">Entrepôt(s)</string>
-    <string name="header_edit_estimate">Modifier l\'estimation</string>
-    <string name="header_convert_to_invoice">Convertir en facture</string>
-    <string name="header_convert_to_receipt">Convertir en reçu</string>
-    <string name="header_choose_template">Choisir le modèle</string>
-    <string name="header_edit_invoice">Modifier la facture</string>
-    <string name="header_add_item">Ajouter des articles</string>
-    <string name="header_convert_to_pv">Convertir en PV</string>
-    <string name="header_edit_po">Modifier PO</string>
-    <string name="header_edit_pv">Modifier PV</string>
-    <string name="header_edit_receipt">Modifier le reçu</string>
-    <string name="header_select_language">Choisir la langue</string>
-    <string name="header_online_payment_gateway">Passerelle de paiement en ligne</string>
-    <string name="header_settings">Paramètres</string>
-    <string name="header_support">Support</string>
-    <string name="header_GO_PREMIUM">PASSER EN PREMIUM</string>
-    <string name="header_faqs">FAQs</string>
-    <string name="header_edit_tax">Modifier la taxe</string>
-    <string name="user_Upload_photo">Envoyer la photo</string>
-    <string name="user_Name">Nom</string>
-    <string name="user_Email_Addess">E-mail</string>
-    <string name="user_Password">Mot de passe</string>
-    <string name="user_Select_Company">Sélectionnez l\'entreprise</string>
-    <string name="user_ACCESS_RIGHTS">DES DROITS D\'ACCÈS</string>
-    <string name="user_Invoices">Factures</string>
-    <string name="user_Estimates">Estimations</string>
-    <string name="user_Receipts">Reçus</string>
-    <string name="user_Purchase_Order">Bon de commande</string>
-    <string name="user_Products">Des produits</string>
-    <string name="user_Credit_Notes">Notes de crédit</string>
-    <string name="user_Customers">Les clients</string>
-    <string name="user_Payments_Voucher">Bon de paiement</string>
-    <string name="user_Stock">Stocker</string>
-    <string name="user_Taxes">Impôts</string>
-    <string name="user_Sub_Admin">Sous-administrateur</string>
-    <string name="user_Items">Articles</string>
-    <string name="user_Suppliers">Fournisseuses</string>
-    <string name="user_Debit_Notes">Notes de débit</string>
-    <string name="user_Add_new_user">Ajouter un nouvel utilisateur</string>
-    <string name="user_one_time_payment">Paiement unique de 3,99 USD par utilisateur supplémentaire (pour l\'attribution d\'utilisateurs supplémentaires)</string>
-    <string name="user_Search_Users">Rechercher des utilisateurs</string>
-    <string name="company_Upload_company_logo">Télécharger le logo de l\'entreprise</string>
-    <string name="company_Company_Name">Nom de la compagnie</string>
-    <string name="company_Company_Email_Address">Adresse e-mail de l\'entreprise</string>
-    <string name="company_Company_Phone_Number">Numéro de téléphone de l\'entreprise</string>
-    <string name="company_Website">Site Internet</string>
-    <string name="company_Company_Address">Adresse de la société</string>
-    <string name="company_Choose_Default_Currency">Choisissez la devise par défaut</string>
-    <string name="company_PAYMENT_DETAILS">DÉTAILS DE PAIEMENT</string>
-    <string name="company_Enter_IBAN">Entrée IBAN</string>
-    <string name="company_Enter_Bank_Name">Entrée Nom de banque</string>
-    <string name="company_Enter_Swift_BIC">Entrée Swift BIC</string>
-    <string name="company_Paypal_Email_Address">Paypal Adresse e-mail</string>
-    <string name="company_Make_Cheque_Payable_To">Faire le chèque à l\'ordre</string>
-    <string name="company_Save_and_continue">Sauvegarder et continuer</string>
-    <string name="company_SearchCompany">Rechercher une entreprise</string>
-    <string name="company_AddWarehouseCap">AJOUTER UN ENTREPT</string>
-    <string name="company_AddWarehouseSml">Ajouter un entrepôt</string>
-    <string name="company_WarehouseName">Nom de l\'entrepôt</string>
-    <string name="company_WarehouseAddress">Adresse de l\'entrepôt</string>
-    <string name="company_Name">Nom</string>
-    <string name="company_Email">E-mail</string>
-    <string name="company_Phone_Number">Numéro de téléphone</string>
-    <string name="company_Address">Adresse</string>
-    <string name="company_Payment_Bank_Name">Nom de la banque de paiement</string>
-    <string name="company_Payment_Swift_BIC">Paiement Swift BIC</string>
-    <string name="company_Paypal_Email">Paiement Swift BIC</string>
-    <string name="company_Cheque_Payable_To">Chèque à l\'ordre de</string>
-    <string name="company_IBAN_Number">IBAN Nombre</string>
-    <string name="product_Upload_product_image">Télécharger l\'image du produit</string>
-    <string name="product_Product_Name">Nom du produit</string>
-    <string name="product_Per_Unit_Price">Prix ​​unitaire</string>
-    <string name="product_Reorder_Level">Niveau de réapprovisionnement</string>
-    <string name="product_Product_Category">catégorie de produit</string>
-    <string name="product_Other_Category_if_not_listed">Autre catégorie si non répertorié</string>
-    <string name="product_Measurement_Unit">"Unité de mesure "</string>
-    <string name="product_Other_Measurement_unit">Autre unité de mesure</string>
-    <string name="product_Product_Description">Description du produit</string>
-    <string name="product_Select_Company">Sélectionnez l\'entreprise</string>
-    <string name="product_Select_Warehouse">Sélectionnez Entrepôt(s)</string>
-    <string name="product_TAXABLE">IMPOSABLE</string>
-    <string name="product_Add_Product">Ajouter un produit</string>
-    <string name="product_Search_Products">Recherche de produits</string>
-    <string name="product_Reorder_Level_">Niveau de réapprovisionnement:</string>
-    <string name="item_Item_Name">Nom de l\'article</string>
-    <string name="item_Item_Rate">Tarif de l\'article</string>
-    <string name="item_Select_Category">Choisir une catégorie</string>
-    <string name="item_Other_Category_if_not_listed">Autre catégorie si non répertorié</string>
-    <string name="item_Measurement_Unit">Unité de mesure</string>
-    <string name="item_Other_Measurement_unit">Autre unité de mesure</string>
-    <string name="item_Weight">Poids</string>
-    <string name="item_Item_Description">Description de l\'article</string>
-    <string name="item_Select_Company">Sélectionnez l\'entreprise</string>
-    <string name="item_TAXABLE">IMPOSABLE</string>
-    <string name="item_Add_Item">Ajouter un item</string>
-    <string name="item_search_items">Rechercher des articles</string>
-    <string name="item_SelectItems">Sélectionner des articles</string>
-    <string name="item_SearchProducts">Recherche de produits</string>
-    <string name="item_Other">Autre</string>
-    <string name="item_MeasurementUnitDots">Unité de mesure:</string>
-    <string name="item_TaxableNo">Imposable : Non</string>
-    <string name="item_TaxableYes">Imposable : Oui</string>
-    <string name="item_NoWarehouseFound">Aucun entrepôt trouvé</string>
-    <string name="tax_Select_Company">Sélectionnez l\'entreprise</string>
-    <string name="tax_Tax_Name">Nom de la taxe</string>
-    <string name="tax_Tax_Rate">Taux d\'imposition(%)</string>
-    <string name="tax_Tax_Rate_as_amount">Taux d\'imposition comme montant</string>
-    <string name="tax_Tax_Calculation">Calcul de la taxe</string>
-    <string name="tax_Add_new_tax">Ajouter une nouvelle taxe</string>
-    <string name="tax_Search_Tax">Recherche d\'impôt</string>
-    <string name="tax_edit">Éditer</string>
-    <string name="tax_Add">Ajouter</string>
-    <string name="tax_Search">Rechercher</string>
-    <string name="tax_SelectTax">Sélectionnez la taxe</string>
-    <string name="tax_TaxUpdated">Taxe mise à jour</string>
-    <string name="signature_drawSignature">Dessinez votre signature ici</string>
-    <string name="signature_Clear">Dégager</string>
-    <string name="dialog_EnterPrice">Entrer le prix</string>
-    <string name="dialog_EnterPriceQuantity">Entrez le prix et la quantité</string>
-    <string name="dialog_OK">d\'accord</string>
-    <string name="dialog_Please_wait">S\'il vous plaît, attendez</string>
-    <string name="dialog_EnterConfirmEmail">Entrez Confirmer l\'e-mail</string>
-    <string name="dialog_ConfirmEmaildoesnotmatch">Confirmer que l\'e-mail ne correspond pas</string>
-    <string name="dialog_Please_select_Payment_Options">Veuillez sélectionner les options de paiement</string>
-    <string name="customer_Upload_customer_logo">Télécharger le logo client/entreprise</string>
-    <string name="customer_Name">Nom</string>
-    <string name="customer_Email">E-mail</string>
-    <string name="customer_Phone_Number">Numéro de téléphone</string>
-    <string name="customer_Mobile_Number">Numéro de portable</string>
-    <string name="customer_Website">Site Internet</string>
-    <string name="customer_Choose_Default_Currency">" Choisissez la devise par défaut"</string>
-    <string name="customer_SHIPPING_DETAILS">LES DÉTAILS D\'EXPÉDITION</string>
-    <string name="customer_First_Name">Prénom</string>
-    <string name="customer_Last_Name">Nom de famille</string>
-    <string name="customer_Post_Code">Code postal</string>
-    <string name="customer_City">Ville</string>
-    <string name="customer_Country">Pays</string>
-    <string name="customer_Address">Adresse</string>
-    <string name="customer_Shipping_Address_1">Adresse de livraison 1</string>
-    <string name="customer_Shipping_Address_2">Adresse de livraison 2</string>
-    <string name="customer_Add_Customer">Ajouter un client</string>
-    <string name="customer_IMPORT_CUSTOMER_FROM_CONTACT">IMPORTER LE CLIENT DE CONTACT</string>
-    <string name="customer_CustomerCompany_Name">Nom du client/de l\'entreprise</string>
-    <string name="customer_CustomerCompany_EmailAddress">Adresse e-mail du client/de l\'entreprise</string>
-    <string name="customer_Contact_Person">Personne de contact</string>
-    <string name="customer_CustomerCompany_Address">Adresse du client/de l\'entreprise</string>
-    <string name="customer_Select_Company">Sélectionnez l\'entreprise</string>
-    <string name="customer_Search_Customer">Rechercher un client</string>
-    <string name="supplier_Upload_supplier_logo">Télécharger le logo du fournisseur/de l\'entreprise</string>
-    <string name="supplier_SupplierCompany_Name">Nom du fournisseur/de l\'entreprise</string>
-    <string name="supplier_SupplierCompany_Email_Address">Adresse e-mail du fournisseur/de l\'entreprise</string>
-    <string name="supplier_Contact_Person">Personne de contact</string>
-    <string name="supplier_Phone_Number">Numéro de téléphone</string>
-    <string name="supplier_Mobile_Number">Numéro de portable</string>
-    <string name="supplier_Website">Site Internet</string>
-    <string name="supplier_SupplierCompany_Address">Adresse du fournisseur/de l\'entreprise</string>
-    <string name="supplier_Choose_Default_Currency">Choisissez la devise par défaut</string>
-    <string name="supplier_Add_Supplier">Ajouter un fournisseur</string>
-    <string name="supplier_IMPORT_SUPPLIER_FROM_CONTACT">IMPORTER LE FOURNISSEUR DE CONTACT</string>
-    <string name="supplier_Select_Company">Sélectionnez l\'entreprise</string>
-    <string name="supplier_Search_Supplier">Rechercher un fournisseur</string>
-    <string name="supplier_SelectVendor">Sélectionnez le fournisseur</string>
-    <string name="supplier_ChooseTemplate">Choisir le modèle</string>
-    <string name="stock_Manage_your_stock">Gérez votre stock à partir d\'ici, déplacez les produits entre les entrepôts.</string>
-    <string name="stock_Select_Company">Sélectionnez l\'entreprise</string>
-    <string name="stock_Select_Product">Sélectionner un produit</string>
-    <string name="stock_Send_from_warehouse">Envoi depuis l\'entrepôt :</string>
-    <string name="stock_Select_Warehouse">Sélectionnez l\'entrepôt</string>
-    <string name="stock_Send_to_warehouse">Envoyer à l\'entrepôt :</string>
-    <string name="stock_Quantity_of_Product">Quantité de produit</string>
-    <string name="stock_Enter_Quantity">Entrer la quantité</string>
-    <string name="stock_Move">" Bouge toi"</string>
-    <string name="stock_SearchProducts">Recherche de produits</string>
-    <string name="stock_PricePerUnit">Prix ​​par unité</string>
-    <string name="stock_EnterPricePerUnit">Entrez le prix unitaire</string>
-    <string name="stock_Update">Mettre à jour</string>
-    <string name="stock_SelectWarehouse">Sélectionnez Entrepôt(s)</string>
-    <string name="stock_Status">Statut:</string>
-    <string name="stock_SearchWarehouse">Rechercher un entrepôt</string>
-    <string name="stock_damage_or_waste_productse">Si votre entreprise a des dommages ou des déchets, retirez-les d\'ici.</string>
-    <string name="stock_Reason_to_remove">Raison de la suppression</string>
-    <string name="stock_EnterReason">Entrez la raison</string>
-    <string name="stock_Remove_from_stock">Retirer du stock</string>
-    <string name="report_SelectCompany">Sélectionnez l\'entreprise</string>
-    <string name="report_Previewit">Prévisualisez-le</string>
-    <string name="report_Print">Imprimer</string>
-    <string name="report_ExportShare">Exporter/Partager</string>
-    <string name="report_FilterByDate">Filtrer par date</string>
-    <string name="report_RemoveFilter">Supprimer le filtre</string>
-    <string name="reportByCustomerName">Par nom de client</string>
-    <string name="dialog_TaxNotFound">Taxe non trouvée</string>
-    <string name="dialog_PerUnit">Par unité</string>
-    <string name="dialog_Please_select_currency">Veuillez sélectionner la devise</string>
-    <string name="dialog_CompanyCreatedSuccessfully">Entreprise créée avec succès</string>
-    <string name="dialog_Required">Obligatoire</string>
-    <string name="dialog_SupplierAdded">Fournisseur ajouté</string>
-    <string name="dialog_Camera">Caméra</string>
-    <string name="dialog_Gallery">Galerie</string>
-    <string name="dialog_Cancel">Annuler</string>
-    <string name="dialog_AddImage">Ajouter une image</string>
-    <string name="dialog_CustomerNotFound">Client non trouvé</string>
-    <string name="dialog_UserAddedSuccessfully">Utilisateur ajouté avec succès</string>
-    <string name="dialog_Fieldisrequired">Champ requis</string>
-    <string name="dialog_InvalidEmailAddress">Adresse e-mail invalide</string>
-    <string name="dialog_InvalidEmail">Email invalide</string>
-    <string name="dialog_PasswordCharacters">Le mot de passe doit comporter au moins 6 caractères</string>
-    <string name="dialog_TaxAdded">Taxe ajoutée</string>
-    <string name="dialog_SelectAProduct">Choisissez un produit</string>
-    <string name="dialog_SelectSenderWarehouse">Sélectionnez l\'entrepôt de l\'expéditeur</string>
-    <string name="dialog_CustomerAdded">Client ajouté</string>
-    <string name="dialog_StockMoved">Stock déplacé</string>
-    <string name="dialog_StockRemoved">Stock supprimé</string>
-    <string name="dialog_SelectReceiverWarehouse">Sélectionnez l\'entrepôt de réception</string>
-    <string name="dialog_UpdatedStock">Stock mis à jour</string>
-    <string name="dialog_SelectACompany">Sélectionnez une entreprise</string>
-    <string name="dialog_ItemAdded">Article ajouté</string>
-    <string name="dialog_Measurement_Unit_required">L\'unité de mesure est requise</string>
-    <string name="dialog_Company_required">La société est requise</string>
-    <string name="dialog_Item_category_required">La catégorie d\'article est obligatoire</string>
-    <string name="dialog_Product_category_required">La catégorie de produit est obligatoire</string>
-    <string name="dialog_ProductAdded">Produit ajouté</string>
-    <string name="dialog_ProductNotFound">Produit non trouvé</string>
-    <string name="dialog_Password_not_matched">Le mot de passe ne correspond pas</string>
-    <string name="dialog_reset_your_password_sucessfully">Vous avez réinitialisé votre mot de passe avec succès.</string>
-    <string name="dialog_PleaseEnterFirstName">Veuillez saisir le prénom</string>
-    <string name="dialog_PleaseEnterLastName">Veuillez entrer le nom de famille</string>
-    <string name="dialog_ShippingAddress1">Veuillez saisir l\'adresse de livraison 1</string>
-    <string name="dialog_ShippingAddress2">Veuillez saisir l\'adresse de livraison 2</string>
-    <string name="dialog_PleaseEnterCity">Veuillez entrer la ville</string>
-    <string name="dialog_SPleaseEnterPostcode">Veuillez entrer le code postal</string>
-    <string name="dialog_PleaseEnterCountry">Veuillez entrer le pays</string>
-    <string name="dialog_PleaseEnterIBAN">Entrez s\'il vous plait  IBAN</string>
-    <string name="dialog_PleaseEnterBankName">Veuillez saisir le nom de la banque</string>
-    <string name="dialog_PleaseEnterSwiftBIC">Entrez s\'il vous plait Swift BIC</string>
-    <string name="dialog_Companyupdated">Société mise à jour</string>
-    <string name="invoice_InsufficientQuantityAvailable">Quantité insuffisante disponible</string>
-    <string name="invoice_QuantityAvailable">"Quantité disponible: "</string>
-    <string name="invoice_Category">"Catégorie: "</string>
-    <string name="invoice_Unit">" Unité: "</string>
-    <string name="invoice_Quantity">"Quantité: "</string>
-    <string name="invoice_Value">"Valeur: "</string>
-    <string name="invoice_Reorder">Réorganiser</string>
-    <string name="invoice_InStock">En stock</string>
-    <string name="pv_updated_msg">PV Mis à jour avec succés</string>
-    <string name="logged_in_msg">Connecté avec succès!</string>
-    <string name="receipt_updated_msg">Reçu mis à jour avec succès</string>
-    <string name="receipt_duplicate_msg">Reçu en double créé avec succès</string>
-    <string name="invoice_duplicate_msg">Facture en double créée avec succès</string>
-    <string name="estimate_updated_msg">Estimation mise à jour avec succès</string>
-    <string name="duplicate_estimate_msg">Estimation en double créée avec succès</string>
-    <string name="receipt_msg">Reçu créé avec succès</string>
-    <string name="pv_msg">PV créé avec succès</string>
-    <string name="duplicate_po_msg">Bon de commande en double créé avec succès</string>
-    <string name="po_msg">Bon de commande créé avec succès</string>
-    <string name="invoice_msg">Facture créée avec succès</string>
-    <string name="estimate_msg">Estimation créée avec succès</string>
-    <string name="debit_note_msg">Note de débit créée avec succès</string>
-    <string name="credit_note_msg">Note de crédit créée avec succès</string>
-    <string name="report_BySupplier">Par fournisseur</string>
-    <string name="report_ByTaxName">" Par nom fiscal"</string>
-    <string name="report_InStock">En stock</string>
-    <string name="report_Reorder">" Réorganiser"</string>
-    <string name="report_FilterByProductName">Filtrer par nom de produit</string>
-    <string name="report_CustomerStatementofAccount">Relevé de compte client</string>
-    <string name="report_SupplierStatementofAccount">Supplier Statement of Account</string>
-    <string name="report_TotalSalesReport">Rapport des ventes totales</string>
-    <string name="report_TotalPurchaseReport">Rapport d\'achat total</string>
-    <string name="report_CustomerAgeingReport">Rapport sur le vieillissement des clients</string>
-    <string name="report_TaxCollectedReport">Rapport de taxes perçues</string>
-    <string name="report_StockReport">Rapport de stock</string>
-    <string name="report_ProductMovementReport">Rapport de mouvement de produit</string>
-    <string name="report_Go_ahead">Vas-y!</string>
-    <string name="report_Kindly_select_the_option">Veuillez sélectionner l\'option selon vos besoins</string>
-    <string name="report_Cancel">Annuler</string>
-    <string name="thank_SelectCompany">Sélectionnez l\'entreprise</string>
-    <string name="thank_Search_by_Invoice_number">Recherche par numéro de facture</string>
-    <string name="thank_No_Paid_invoices">Pas de factures payées</string>
-    <string name="thank_Status">Statut :</string>
-    <string name="invoiceReminder_SelectCompany">Sélectionnez l\'entreprise</string>
-    <string name="invoiceReminder_Search_by_Invoice_number">Recherche par numéro de facture</string>
-    <string name="invoiceReminder_No_UnPaid_invoices">Pas de factures impayées</string>
-    <string name="invoiceReminder_Status">Statut :</string>
-    <string name="invoice_SelectCompany">Sélectionnez l\'entreprise</string>
-    <string name="invoice_SelectWarehouse">Sélectionnez l\'entrepôt</string>
-    <string name="invoice_EnterName">Entrez le nom</string>
-    <string name="invoice_CreditTerms">Conditions de crédit</string>
-    <string name="invoice_ReferenceNo">Numéro de référence</string>
-    <string name="invoice_EnterReferenceNo">Entrez le numéro de référence.</string>
-    <string name="invoice_NoItems">Pas d\'objet</string>
-    <string name="invoice_AddItems">Ajouter des articles</string>
-    <string name="invoice_GrossAmount">Montant brut</string>
-    <string name="invoice_Tax">Impôt</string>
-    <string name="invoice_Shipping">Expédition</string>
-    <string name="invoice_NetAmount">Montant net</string>
-    <string name="invoice_PaidAmount">Montant payé</string>
-    <string name="invoice_BalanceDue">Solde dû</string>
-    <string name="invoice_Signature_of_invoice_maker">Signature du facturier</string>
-    <string name="invoice_Signature_of_Receiver">Signature du séquestre</string>
-    <string name="invoice_Upload_Company_Seal">Télécharger le sceau de l\'entreprise</string>
-    <string name="invoice_Upload_Invoice_Images">Télécharger des images de facture</string>
-    <string name="invoice_Notes">Remarques</string>
-    <string name="invoice_Search_by_Invoice_number">Recherche par numéro de facture</string>
-    <string name="credit_notes_Recipient">Destinataire</string>
-    <string name="credit_notes_Signature_of_credit_maker">Signature de l\'auteur de la note de crédit</string>
-    <string name="debit_notes_Supplier">Fournisseuse</string>
-    <string name="debit_notes_Signature_of_debit_maker">Signature de l\'auteur de la note de débit</string>
-    <string name="estimate_Signature_of_estimate_maker">Signature de l\'Estimateur</string>
-    <string name="estimate_Upload_Estimate_Images">Télécharger des images estimées</string>
-    <string name="pv_Supplier">Fournisseuse</string>
-    <string name="pv_Signature_of_Payment_Voucher_maker">Signature du créateur du bon de paiement</string>
-    <string name="pv_Search_by_PV_number">Recherche par numéro de PV</string>
-    <string name="po_Upload_purchase_order_Images">Télécharger des images de bon de commande</string>
-    <string name="po_Signature_of_Purchase_Order_maker">Signature du responsable du bon de commande</string>
-    <string name="po_Search_by_PO_number">Recherche par numéro de bon de commande</string>
-    <string name="home_Invoice_Overdue">Facture en retard</string>
-    <string name="setting_Setup">Installer</string>
-    <string name="setting_Email">E-mail</string>
-    <string name="setting_ConfirmEmail">Confirmez votre e-mail</string>
-    <string name="setting_NeedSomeHelp">Besoin d\'aide?</string>
-    <string name="setting_enter_email">Entrez l\'e-mail</string>
-    <string name="setting_write_message">Écrire un message...</string>
-    <string name="setting_enter_message">Entrer un message</string>
-    <string name="setting_Submit">Soumettre</string>
-    <string name="setting_PaymentOptions">Options de paiement</string>
-    <string name="setting_SelectNumberFormat">Sélectionnez le format de nombre</string>
-    <string name="setting_Done">Fait</string>
-    <string name="setting_CommaFormatSelection">Sélection du format de virgule</string>
-    <string name="setting_OnlinePaymentGateway">Passerelle de paiement en ligne</string>
-    <string name="setting_Subscribe">S\'abonner</string>
-    <string name="setting_Upgrade">Améliorer</string>
-    <string name="setting_RestorePurchases">Restaurer les achats</string>
-    <string name="setting_InviteFriends">Inviter des amis</string>
-    <string name="setting_FAQs">FAQs</string>
-    <string name="setting_Language">Langue</string>
-    <string name="setting_Abouttheapp">À propos de l\'application</string>
-    <string name="setting_Ratetheapp">Évaluer l\'application</string>
-    <string name="setting_Termsofuse">Conditions d\'utilisation</string>
-    <string name="setting_PrivacyPolicy">Politique de confidentialité</string>
-    <string name="setting_Support">Support</string>
-    <string name="setting_ChooseOne">Choisissez-en un</string>
-    <string name="service_AddNew">Ajouter un nouveau</string>
-    <string name="service_SelectQuantity">Sélectionnez la quantité</string>
-    <string name="service_PAYMENTGATEWAYS">PASSERELLES DE PAIEMENT</string>
-    <string name="service_EnterAmount">Entrer le montant</string>
-    <string name="service_Amount">Montante</string>
-    <string name="service_EnterDate">Entrer la date</string>
-    <string name="service_SelectPaymentMode">Sélectionnez le mode de paiement</string>
-    <string name="service_ShippingAmount">Montant d\'expédition</string>
-    <string name="service_EnterShippingAmount">Saisir le montant d\'expédition</string>
-    <string name="service_ShippingAmountInvoice">Voulez-vous ajouter le montant de l\'expédition pour cette facture ?</string>
-    <string name="waste_some_damage">Si votre entreprise a des dommages ou des déchets, retirez-les d\'ici.</string>
-    <string name="filter_Filter">Filtre</string>
-    <string name="filter_UnpaidInvoices">Factures impayées</string>
-    <string name="filter_PaidInvoices">Factures payées</string>
-    <string name="filter_ByDate">Par date</string>
-    <string name="filter_All">Toute</string>
-    <string name="dialog_ClearData">Effacer les données</string>
-    <string name="dialog_ViewInvoice">Voir la facture</string>
-    <string name="dialog_DuplicateInvoice">Facture en double</string>
-    <string name="dialog_ShareInvoice">Partager la facture</string>
-    <string name="dialog_ConvertToReceipt">Convertir en reçu</string>
-    <string name="dialog_EnterDiscount">Entrer la remise</string>
-    <string name="dialog_Percentage">Pourcentage</string>
-    <string name="dialog_ChooseAOption">Choisissez une option</string>
-    <string name="dialog_SendAsLink">Envoyer en tant que lien</string>
-    <string name="dialog_SendAsPDF">Envoyer en PDF</string>
-    <string name="dialog_SelectCreditTerms">Sélectionnez les conditions de crédit</string>
-    <string name="dialog_EnterManually_days">Entrer manuellement (jours)</string>
-    <string name="dialog_SelectCustomer">Sélectionnez le client</string>
-    <string name="dialog_SearchCustomer">Rechercher des clients</string>
-    <string name="dialog_DateNone">rien</string>
-    <string name="dialog_DateDue_on_Receipt">En raison de la réception</string>
-    <string name="dialog_Date3days">" 3 jours"</string>
-    <string name="dialog_Date7days">" 7 jours"</string>
-    <string name="dialog_Date14days">" 14 jours"</string>
-    <string name="dialog_Date21days">" 21 jours"</string>
-    <string name="dialog_Date30days">" 30 jours"</string>
-    <string name="dialog_Date45days">" 45 jours"</string>
-    <string name="dialog_Date60days">" 60 jours"</string>
-    <string name="dialog_Date90days">" 90 jours"</string>
-    <string name="dialog_Date120days">" 120 jours"</string>
-    <string name="dialog_Date365days">" 365 jours"</string>
-    <string name="dialog_DateOR">OU ALORS</string>
-    <string name="settings_paln_title_1">Plan annuel</string>
-    <string name="settings_paln_title_2">Plan de valeur</string>
-    <string name="settings_paln_title_3">Utilisateurs supplémentaires</string>
-    <string name="settings_paln_title_4">Entreprises supplémentaires</string>
-    <string name="settings_paln_desc_1">Abonnez-vous au forfait annuel et obtenez jusqu\'à 25% de réduction. 35,99 USD uniquement par an avec un accès illimité à toutes les fonctionnalités, à l\'exception du suivi des stocks.</string>
-    <string name="settings_paln_desc_2">Le forfait mensuel commence à 3,99 USD uniquement avec un accès illimité à toutes les fonctionnalités, à l\'exception du suivi des stocks.</string>
-    <string name="settings_paln_desc_3">Attribuez des utilisateurs supplémentaires avec un accès limité ou illimité pour un paiement unique de 3,99 USD par utilisateur uniquement</string>
-    <string name="settings_paln_desc_4">Créez des entreprises supplémentaires sous les mêmes informations d\'identification pour un paiement unique de 11,99 USD uniquement par entreprise supplémentaire</string>
-    <string name="dialog_Success">Succès</string>
-    <string name="invoice_Pending">" En attente"</string>
-    <string name="invoice_Seen">Vue</string>
-    <string name="invoice_Void">Annuler</string>
-    <string name="header_template">Modèle</string>
-    <string name="thank_SendThankYouNote">Envoyer une note de remerciement</string>
-    <string name="thank_ViewThankYouNote">Voir la note de remerciement</string>
-    <string name="html_SearchByCustomerName">Recherche par nom de client</string>
-    <string name="html_ReferenceNo">Numéro de référence:</string>
-    <string name="html_Attachments">Pièces jointes</string>
-    <string name="html_Notes">Remarques:</string>
-    <string name="html_CompanySeal">Sceau de la société</string>
-    <string name="html_SignatureofReceiver">Signature du séquestre</string>
-    <string name="html_SignatureofIssuer">Signature de l\'émetteur</string>
-    <string name="html_Discount">Rabais</string>
-    <string name="html_SubTotal">Total</string>
-    <string name="html_Shipping">Expédition</string>
-    <string name="html_PaidAmount">Montant payé</string>
-    <string name="html_PaymentDetails">Détails de paiement</string>
-    <string name="html_Bycheque">Par chèque:</string>
-    <string name="html_ShipTo">Envoyez à:</string>
-    <string name="html_InvoiceDueDateReminder">Rappel de la date d\'échéance de la facture</string>
-    <string name="html_Your_invoice_reminder_note">Votre facture est due pour le paiement. Veuillez trouver ci-dessous la note de rappel.</string>
-    <string name="list_ChargeCustomer">Facturer le client</string>
-    <string name="list_ViewPO">Vue PO</string>
-    <string name="list_DuplicatePO">Dupliquer PO</string>
-    <string name="list_SharePO">Partager PO</string>
-    <string name="list_ConverttoPaymentVoucher">Convertir en bon de paiement</string>
-    <string name="list_Quantity_added_to_warehouse">Quantité Ajouté avec succès à l\'entrepôt !</string>
-    <string name="list_SearchByReceiptNumber">Recherche par numéro de reçu</string>
-    <string name="list_SearchByCreditNoteNumber">Recherche par numéro de note de crédit</string>
-    <string name="list_Invoicenotfound">Facture introuvable</string>
-    <string name="list_ShareFile">Partagez le fichier</string>
-    <string name="list_From">de</string>
-    <string name="list_NoFileFound">Aucun fichier trouvé</string>
-    <string name="list_More">Suite</string>
-    <string name="list_ViewCreditNote">Voir la note de crédit</string>
-    <string name="list_EditCreditNote">Modifier la note de crédit</string>
-    <string name="list_DuplicateCreditNote">Note de crédit en double</string>
-    <string name="list_ShareCreditNote">Partager l\'avoir</string>
-    <string name="list_YourCreditNoteviewed">Votre note de crédit peut être consultée, imprimée et téléchargée à partir du lien ci-dessous.</string>
-    <string name="list_YourDebitNoteviewed">Votre note de débit peut être consultée, imprimée et téléchargée à partir du lien ci-dessous.</string>
-    <string name="list_PurchaseOrderviewed">Votre bon de commande peut être consulté, imprimé et téléchargé à partir du lien ci-dessous.</string>
-    <string name="list_PaymentVoucherviewed">Votre bon de paiement peut être consulté, imprimé et téléchargé à partir du lien ci-dessous.</string>
-    <string name="list_Estimateviewed">Votre estimation peut être consultée, imprimée et téléchargée à partir du lien ci-dessous.</string>
-    <string name="list_SearchByDebitNoteNumber">Recherche par numéro de note de débit</string>
-    <string name="list_ViewDebitNote">Voir la note de débit</string>
-    <string name="list_EditDebitNote">Modifier la note de débit</string>
-    <string name="list_DuplicateDebitNote">Note de débit en double</string>
-    <string name="list_ShareDebitNote">Partager la note de débit</string>
-    <string name="list_Thank_you_for_receipt">Merci pour votre paiement. Veuillez trouver ci-dessous le reçu.</string>
-    <string name="list_ViewReceipt">Voir le reçu</string>
-    <string name="list_ViewEditReceipt">Modifier le reçu</string>
-    <string name="list_DuplicateReceipt">Reçu en double</string>
-    <string name="list_ShareReceipt">Partager le reçu</string>
-    <string name="listViewEstimate">Voir l\'estimation</string>
-    <string name="list_EditEstimate">Modifier l\'estimation</string>
-    <string name="list_DuplicateEstimate">Estimation en double</string>
-    <string name="list_ShareEstimate">Partager Estimation</string>
-    <string name="list_ConvertToInvoice">Convertir en facture</string>
-    <string name="list_Delete">Effacer</string>
-    <string name="list_SendReminderNote">Envoyer une note de rappel</string>
-    <string name="list_ViewReminderNote">Afficher la note de rappel</string>
+    <string name="all_Cancel">يلغي</string>
+    <string name="back">عودة</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="header_users">المستخدمون</string>
+    <string name="header_users_list">المستخدمون</string>
+    <string name="header_users_add">إضافة مستخدم</string>
+    <string name="header_company">شركات</string>
+    <string name="header_company_list">شركاتي</string>
+    <string name="header_company_add">أضف شركة</string>
+    <string name="header_company_detail_company">شركة</string>
+    <string name="header_company_detail_warehouse">المستودعات</string>
+    <string name="header_company_detail_add_warehouse">إضافة مستودع</string>
+    <string name="header_product">منتجات</string>
+    <string name="header_product_list">منتجات</string>
+    <string name="header_product_add">أضف منتج</string>
+    <string name="header_items">العناصر</string>
+    <string name="header_items_list">العناصر</string>
+    <string name="header_items_add">اضافة عنصر</string>
+    <string name="header_tax">الضرائب</string>
+    <string name="header_tax_list">الضرائب</string>
+    <string name="header_customers">عملاء</string>
+    <string name="header_tax_add">أضف ضريبة</string>
+    <string name="header_customers_list">عملاء</string>
+    <string name="header_customers_add">أضف الزبون</string>
+    <string name="header_suppliers">الموردين</string>
+    <string name="header_suppliers_list">الموردين</string>
+    <string name="header_suppliers_add">إضافة مورد</string>
+    <string name="header_stock">مخازن</string>
+    <string name="header_stock_product">منتجات</string>
+    <string name="header_stock_update">تحديث المخزون</string>
+    <string name="header_stock_movement">حركة الأسهم</string>
+    <string name="header_stock_waste">الهدر / التلف</string>
+    <string name="header_receipts_list">الإيصالات</string>
+    <string name="header_invoices_list">الفواتير</string>
+    <string name="header_receipts_create">إنشاء إيصال</string>
+    <string name="header_invoices_create">إنشاء فاتورة</string>
+    <string name="header_debit_notes_list">مذكرات الخصم</string>
+    <string name="header_credit_notes_list">إشعارات الائتمان</string>
+    <string name="header_estimates_list">تقديرات</string>
+    <string name="header_debit_notes_create">إنشاء مذكرة الخصم</string>
+    <string name="header_credit_notes_create">إنشاء مذكرة ائتمان</string>
+    <string name="header_estimates_create">إنشاء تقدير</string>
+    <string name="header_purchase_orders_list">طلبات الشراء</string>
+    <string name="header_purchase_orders_create">إنشاء أمر شراء</string>
+    <string name="header_payment_vouchers_list">سندات الدفع</string>
+    <string name="header_payment_vouchers_create">إنشاء إيصال دفع</string>
+    <string name="header_report">التقارير</string>
+    <string name="header_thank_you_note">شكرا لك ملاحظة</string>
+    <string name="header_invoice_reminders">تذكير الفاتورة</string>
+    <string name="header_details">تفاصيل</string>
+    <string name="header_warehouses">المستودعات</string>
+    <string name="header_edit_estimate">تحرير التقدير</string>
+    <string name="header_convert_to_invoice">تحويل إلى فاتورة</string>
+    <string name="header_convert_to_receipt">تحويل إلى إيصال</string>
+    <string name="header_choose_template">اختيار القالب</string>
+    <string name="header_edit_invoice">تحرير الفاتورة</string>
+    <string name="header_add_item">إضافة عناصر</string>
+    <string name="header_convert_to_pv">قم بالتحويل إلى PV</string>
+    <string name="header_edit_po">تحرير صندوق البريد</string>
+    <string name="header_edit_pv">تحرير PV</string>
+    <string name="header_edit_receipt">تحرير الإيصال</string>
+    <string name="header_select_language">اختار اللغة</string>
+    <string name="header_online_payment_gateway">بوابة الدفع عبر الإنترنت</string>
+    <string name="header_settings">إعدادات</string>
+    <string name="header_support">الدعم</string>
+    <string name="header_GO_PREMIUM">احصل على الاشتراك الرئيسي</string>
+    <string name="header_faqs">أسئلة وأجوبة</string>
+    <string name="header_edit_tax">تحرير الضرائب</string>
+    <string name="user_Upload_photo">حمل الصورة</string>
+    <string name="user_Name">اسم</string>
+    <string name="user_Email_Addess">بريد إلكتروني</string>
+    <string name="user_Password">كلمه السر</string>
+    <string name="user_Select_Company">حدد شركة</string>
+    <string name="user_ACCESS_RIGHTS">حقوق الوصول</string>
+    <string name="user_Invoices">الفواتير</string>
+    <string name="user_Estimates">تقديرات</string>
+    <string name="user_Receipts">الإيصالات</string>
+    <string name="user_Purchase_Order">أمر شراء</string>
+    <string name="user_Products">منتجات</string>
+    <string name="user_Credit_Notes">إشعارات الائتمان</string>
+    <string name="user_Customers">عملاء</string>
+    <string name="user_Payments_Voucher">قسيمة دفع</string>
+    <string name="user_Stock">المخزون</string>
+    <string name="user_Taxes">الضرائب</string>
+    <string name="user_Sub_Admin">إدارة فرعية</string>
+    <string name="user_Items">العناصر</string>
+    <string name="user_Suppliers">الموردين</string>
+    <string name="user_Debit_Notes">مذكرات الخصم</string>
+    <string name="user_Add_new_user">إضافة مستخدم جديد</string>
+    <string name="user_one_time_payment">3.99 دولارًا أمريكيًا دفعة واحدة لكل مستخدم إضافي (لتعيين مستخدمين إضافيين)</string>
+    <string name="user_Search_Users">بحث في المستخدمين</string>
+    <string name="company_Upload_company_logo">تحميل شعار الشركة</string>
+    <string name="company_Company_Name">اسم الشركة</string>
+    <string name="company_Company_Email_Address">عنوان البريد الإلكتروني للشركة</string>
+    <string name="company_Company_Phone_Number">رقم هاتف الشركة</string>
+    <string name="company_Website">موقع إلكتروني</string>
+    <string name="company_Company_Address">عنوان الشركة</string>
+    <string name="company_Choose_Default_Currency">اختر العملة الافتراضية</string>
+    <string name="company_PAYMENT_DETAILS">بيانات الدفع</string>
+    <string name="company_Enter_IBAN">أدخل رقم الحساب بصيغة IBAN</string>
+    <string name="company_Enter_Bank_Name">أدخل اسم البنك</string>
+    <string name="company_Enter_Swift_BIC">أدخل Swift BIC</string>
+    <string name="company_Paypal_Email_Address">عنوان البريد الإلكتروني لبيبال</string>
+    <string name="company_Make_Cheque_Payable_To">جعل الشيك مستحق الدفع ل</string>
+    <string name="company_Save_and_continue">احفظ وتابع</string>
+    <string name="company_SearchCompany">البحث عن شركة</string>
+    <string name="company_AddWarehouseCap">إضافة مستودع</string>
+    <string name="company_AddWarehouseSml">إضافة مستودع</string>
+    <string name="company_WarehouseName">اسم المستودع</string>
+    <string name="company_WarehouseAddress">عنوان المستودع</string>
+    <string name="company_Name">اسم</string>
+    <string name="company_Email">بريد إلكتروني</string>
+    <string name="company_Phone_Number">رقم الهاتف</string>
+    <string name="company_Address">عنوان</string>
+    <string name="company_Payment_Bank_Name">اسم بنك الدفع</string>
+    <string name="company_Payment_Swift_BIC">الدفع Swift BIC</string>
+    <string name="company_Paypal_Email">بريد باي بال</string>
+    <string name="company_Cheque_Payable_To">الشيك مستحق الدفع ل</string>
+    <string name="company_IBAN_Number">رقم الآيبان</string>
+    <string name="product_Upload_product_image">تحميل صورة المنتج</string>
+    <string name="product_Product_Name">اسم المنتج</string>
+    <string name="product_Per_Unit_Price">سعر الوحدة</string>
+    <string name="product_Reorder_Level">إعادة ترتيب المستوى</string>
+    <string name="product_Product_Category">فئة المنتج</string>
+    <string name="product_Other_Category_if_not_listed">فئة أخرى إذا لم تكن مدرجة</string>
+    <string name="product_Measurement_Unit">وحدة قياس</string>
+    <string name="product_Other_Measurement_unit">وحدة قياس أخرى</string>
+    <string name="product_Product_Description">وصف المنتج</string>
+    <string name="product_Select_Company">حدد شركة</string>
+    <string name="product_Select_Warehouse">حدد المستودعات</string>
+    <string name="product_TAXABLE">خاضع للضريبة</string>
+    <string name="product_Add_Product">أضف منتج</string>
+    <string name="product_Search_Products">البحث عن المنتجات</string>
+    <string name="product_Reorder_Level_">مستوى إعادة الطلب:</string>
+    <string name="item_Item_Name">اسم العنصر</string>
+    <string name="item_Item_Rate">سعر البند</string>
+    <string name="item_Select_Category">اختر الفئة</string>
+    <string name="item_Other_Category_if_not_listed">فئة أخرى إذا لم تكن مدرجة</string>
+    <string name="item_Measurement_Unit">وحدة قياس</string>
+    <string name="item_Other_Measurement_unit">وحدة قياس أخرى</string>
+    <string name="item_Weight">وزن</string>
+    <string name="item_Item_Description">وصف السلعة</string>
+    <string name="item_Select_Company">حدد شركة</string>
+    <string name="item_TAXABLE">خاضع للضريبة</string>
+    <string name="item_Add_Item">اضافة عنصر</string>
+    <string name="item_search_items">عناصر البحث</string>
+    <string name="item_SelectItems">اختيار العناصر</string>
+    <string name="item_SearchProducts">البحث عن المنتجات</string>
+    <string name="item_Other">آخر</string>
+    <string name="item_MeasurementUnitDots">وحدة قياس:</string>
+    <string name="item_TaxableNo">خاضع للضريبة: لا</string>
+    <string name="item_TaxableYes">خاضع للضريبة: نعم</string>
+    <string name="item_NoWarehouseFound">لم يتم العثور على مستودع</string>
+    <string name="tax_Select_Company">حدد شركة</string>
+    <string name="tax_Tax_Name">الاسم الضريبي</string>
+    <string name="tax_Tax_Rate">معدل الضريبة(٪)</string>
+    <string name="tax_Tax_Rate_as_amount">معدل الضريبة كمبلغ</string>
+    <string name="tax_Tax_Calculation">حساب الضريبة</string>
+    <string name="tax_Add_new_tax">أضف ضريبة جديدة</string>
+    <string name="tax_Search_Tax">البحث عن الضرائب</string>
+    <string name="tax_edit">يحرر</string>
+    <string name="tax_Add">يضيف</string>
+    <string name="tax_Search">يبحث</string>
+    <string name="tax_SelectTax">حدد الضرائب</string>
+    <string name="tax_TaxUpdated">تم تحديث الضريبة</string>
+    <string name="signature_drawSignature">ارسم توقيعك هنا</string>
+    <string name="signature_Clear">صافي</string>
+    <string name="dialog_EnterPrice">أدخل السعر</string>
+    <string name="dialog_EnterPriceQuantity">أدخل السعر والكمية</string>
+    <string name="dialog_OK">نعم</string>
+    <string name="dialog_Please_wait">أرجو الإنتظار</string>
+    <string name="dialog_EnterConfirmEmail">أدخل تأكيد البريد الإلكتروني</string>
+    <string name="dialog_ConfirmEmaildoesnotmatch">تأكيد البريد الإلكتروني لا يتطابق</string>
+    <string name="dialog_Please_select_Payment_Options">الرجاء تحديد خيارات الدفع</string>
+    <string name="customer_Upload_customer_logo">تحميل شعار العميل / الشركة</string>
+    <string name="customer_Name">اسم</string>
+    <string name="customer_Email">بريد إلكتروني</string>
+    <string name="customer_Phone_Number">رقم الهاتف</string>
+    <string name="customer_Mobile_Number">رقم الهاتف المحمول</string>
+    <string name="customer_Website">موقع إلكتروني</string>
+    <string name="customer_Choose_Default_Currency">اختر العملة الافتراضية</string>
+    <string name="customer_SHIPPING_DETAILS">تفاصيل الشحن</string>
+    <string name="customer_First_Name">الاسم الأول</string>
+    <string name="customer_Last_Name">الكنية</string>
+    <string name="customer_Post_Code">الرمز البريدي</string>
+    <string name="customer_City">مدينة</string>
+    <string name="customer_Country">دولة</string>
+    <string name="customer_Address">عنوان</string>
+    <string name="customer_Shipping_Address_1">عنوان الشحن 1</string>
+    <string name="customer_Shipping_Address_2">عنوان الشحن 2</string>
+    <string name="customer_Add_Customer">أضف الزبون</string>
+    <string name="customer_IMPORT_CUSTOMER_FROM_CONTACT">استيراد العميل من جهة الاتصال</string>
+    <string name="customer_CustomerCompany_Name">اسم العميل / الشركة</string>
+    <string name="customer_CustomerCompany_EmailAddress">عنوان البريد الإلكتروني للعميل / الشركة</string>
+    <string name="customer_Contact_Person">الشخص الذي يمكن الاتصال به</string>
+    <string name="customer_CustomerCompany_Address">عنوان العميل / الشركة</string>
+    <string name="customer_Select_Company">حدد شركة</string>
+    <string name="customer_Search_Customer">البحث عن العملاء</string>
+    <string name="supplier_Upload_supplier_logo">تحميل شعار المورد / الشركة</string>
+    <string name="supplier_SupplierCompany_Name">اسم المورد / الشركة</string>
+    <string name="supplier_SupplierCompany_Email_Address">عنوان البريد الإلكتروني للمورد / الشركة</string>
+    <string name="supplier_Contact_Person">الشخص الذي يمكن الاتصال به</string>
+    <string name="supplier_Phone_Number">رقم الهاتف</string>
+    <string name="supplier_Mobile_Number">رقم الهاتف المحمول</string>
+    <string name="supplier_Website">موقع إلكتروني</string>
+    <string name="supplier_SupplierCompany_Address">عنوان المورد / الشركة</string>
+    <string name="supplier_Choose_Default_Currency">اختر العملة الافتراضية</string>
+    <string name="supplier_Add_Supplier">إضافة مورد</string>
+    <string name="supplier_IMPORT_SUPPLIER_FROM_CONTACT">استيراد المورد من جهة الاتصال</string>
+    <string name="supplier_Select_Company">حدد شركة</string>
+    <string name="supplier_Search_Supplier">بحث عن مورد</string>
+    <string name="supplier_SelectVendor">حدد البائع</string>
+    <string name="supplier_ChooseTemplate">اختيار القالب</string>
+    <string name="stock_Manage_your_stock">قم بإدارة مخزونك من هنا ، وانقل المنتجات بين المستودعات.</string>
+    <string name="stock_Select_Company">حدد شركة</string>
+    <string name="stock_Select_Product">حدد المنتج</string>
+    <string name="stock_Send_from_warehouse">إرسال من المستودع:</string>
+    <string name="stock_Select_Warehouse">حدد المستودع</string>
+    <string name="stock_Send_to_warehouse">أرسل إلى المستودع:</string>
+    <string name="stock_Quantity_of_Product">كمية المنتج</string>
+    <string name="stock_Enter_Quantity">أدخل الكمية</string>
+    <string name="stock_Move">يتحرك</string>
+    <string name="stock_SearchProducts">البحث عن المنتجات</string>
+    <string name="stock_PricePerUnit">السعر لكل وحدة</string>
+    <string name="stock_EnterPricePerUnit">أدخل السعر لكل وحدة</string>
+    <string name="stock_Update">تحديث</string>
+    <string name="stock_SelectWarehouse">حدد المستودعات</string>
+    <string name="stock_Status">حالة:</string>
+    <string name="stock_SearchWarehouse">مستودع البحث</string>
+    <string name="stock_damage_or_waste_productse">إذا تعرضت شركتك لبعض التلف أو النفايات ، فقم بإزالتها من هنا.</string>
+    <string name="stock_Reason_to_remove">سبب الإزالة</string>
+    <string name="stock_EnterReason">أدخل السبب</string>
+    <string name="stock_Remove_from_stock">إزالة من المخزون</string>
+    <string name="report_SelectCompany">حدد شركة</string>
+    <string name="report_Previewit">قم بمعاينته</string>
+    <string name="report_Print">مطبعة</string>
+    <string name="report_ExportShare">تصدير / مشاركة</string>
+    <string name="report_FilterByDate">تصفية حسب التاريخ</string>
+    <string name="report_RemoveFilter">إزالة عامل التصفية</string>
+    <string name="reportByCustomerName">حسب اسم العميل</string>
+    <string name="dialog_TaxNotFound">لم يتم العثور على الضريبة</string>
+    <string name="dialog_PerUnit">لكل وحدة</string>
+    <string name="dialog_Please_select_currency">الرجاء تحديد العملة</string>
+    <string name="dialog_CompanyCreatedSuccessfully">تم إنشاء الشركة بنجاح</string>
+    <string name="dialog_Required">مطلوب</string>
+    <string name="dialog_SupplierAdded">تمت إضافة المورد</string>
+    <string name="dialog_Camera">آلة تصوير</string>
+    <string name="dialog_Gallery">صالة عرض</string>
+    <string name="dialog_Cancel">يلغي</string>
+    <string name="dialog_AddImage">إضافة صورة</string>
+    <string name="dialog_CustomerNotFound">الزبون غير موجود</string>
+    <string name="dialog_UserAddedSuccessfully">تمت إضافة المستخدم بنجاح</string>
+    <string name="dialog_Fieldisrequired">الحقل مطلوب</string>
+    <string name="dialog_InvalidEmailAddress">عنوان البريد الإلكتروني غير صالح</string>
+    <string name="dialog_InvalidEmail">بريد إلكتروني خاطئ</string>
+    <string name="dialog_PasswordCharacters">يجب ألا تقل كلمة المرور عن 6 أحرف</string>
+    <string name="dialog_TaxAdded">تم اضافة الضريبة</string>
+    <string name="dialog_SelectAProduct">اختر المنتج</string>
+    <string name="dialog_SelectSenderWarehouse">حدد مستودع المرسل</string>
+    <string name="dialog_CustomerAdded">تمت إضافة العميل</string>
+    <string name="dialog_StockMoved">انتقل المخزون</string>
+    <string name="dialog_StockRemoved">تمت إزالة المخزون</string>
+    <string name="dialog_SelectReceiverWarehouse">حدد مستودع المستلم</string>
+    <string name="dialog_UpdatedStock">تحديث المخزون</string>
+    <string name="dialog_SelectACompany">حدد شركة</string>
+    <string name="dialog_ItemAdded">تمت إضافة العنصر</string>
+    <string name="dialog_Measurement_Unit_required">مطلوب وحدة القياس</string>
+    <string name="dialog_Company_required">مطلوب شركة</string>
+    <string name="dialog_Item_category_required">فئة العنصر مطلوبة</string>
+    <string name="dialog_Product_category_required">فئة المنتج مطلوبة</string>
+    <string name="dialog_ProductAdded">تمت إضافة المنتج</string>
+    <string name="dialog_ProductNotFound">الصنف غير موجود</string>
+    <string name="dialog_Password_not_matched">كلمة المرور غير متطابقة</string>
+    <string name="dialog_reset_your_password_sucessfully">لقد قمت بإعادة تعيين كلمة المرور الخاصة بك بنجاح.</string>
+    <string name="dialog_PleaseEnterFirstName">الرجاء إدخال الاسم الأول</string>
+    <string name="dialog_PleaseEnterLastName">الرجاء إدخال الاسم الأخير</string>
+    <string name="dialog_ShippingAddress1">الرجاء إدخال عنوان الشحن 1</string>
+    <string name="dialog_ShippingAddress2">الرجاء إدخال عنوان الشحن 2</string>
+    <string name="dialog_PleaseEnterCity">الرجاء إدخال المدينة</string>
+    <string name="dialog_SPleaseEnterPostcode">يرجى إدخال الرمز البريدي</string>
+    <string name="dialog_PleaseEnterCountry">الرجاء إدخال الدولة</string>
+    <string name="dialog_PleaseEnterIBAN">الرجاء إدخال رقم الحساب المصرفي الدولي (IBAN)</string>
+    <string name="dialog_PleaseEnterBankName">الرجاء إدخال اسم البنك</string>
+    <string name="dialog_PleaseEnterSwiftBIC">الرجاء إدخال Swift BIC</string>
+    <string name="dialog_Companyupdated">تم تحديث الشركة</string>
+    <string name="invoice_InsufficientQuantityAvailable">الكمية المتاحة غير كافية</string>
+    <string name="invoice_QuantityAvailable">الكمية متاحة:</string>
+    <string name="invoice_Category">فئة:</string>
+    <string name="invoice_Unit">وحدة:</string>
+    <string name="invoice_Quantity">كمية:</string>
+    <string name="invoice_Value">قيمة:</string>
+    <string name="invoice_Reorder">إعادة ترتيب</string>
+    <string name="invoice_InStock">في المخزن</string>
+    <string name="pv_updated_msg">تم تحديث PV بنجاح</string>
+    <string name="logged_in_msg">تم تسجيل الدخول بنجاح!</string>
+    <string name="receipt_updated_msg">تم تحديث الإيصال بنجاح</string>
+    <string name="receipt_duplicate_msg">تم إنشاء إيصال مكرر بنجاح</string>
+    <string name="invoice_duplicate_msg">تم إنشاء فاتورة مكررة بنجاح</string>
+    <string name="estimate_updated_msg">تم تحديث التقدير بنجاح</string>
+    <string name="duplicate_estimate_msg">تم إنشاء تقدير مكرر بنجاح</string>
+    <string name="receipt_msg">تم إنشاء الإيصال بنجاح</string>
+    <string name="pv_msg">تم إنشاء PV بنجاح</string>
+    <string name="duplicate_po_msg">تم إنشاء أمر الشراء المكرر بنجاح</string>
+    <string name="po_msg">تم إنشاء أمر الشراء بنجاح</string>
+    <string name="invoice_msg">تم إنشاء الفاتورة بنجاح</string>
+    <string name="estimate_msg">تم إنشاء التقدير بنجاح</string>
+    <string name="debit_note_msg">تم إنشاء مذكرة الخصم بنجاح</string>
+    <string name="credit_note_msg">تم إنشاء مذكرة الائتمان بنجاح</string>
+    <string name="report_BySupplier">حسب المورد</string>
+    <string name="report_ByTaxName">حسب الاسم الضريبي</string>
+    <string name="report_InStock">في المخزن</string>
+    <string name="report_Reorder">إعادة ترتيب</string>
+    <string name="report_FilterByProductName">تصفية حسب اسم المنتج</string>
+    <string name="report_CustomerStatementofAccount">كشف حساب العميل</string>
+    <string name="report_SupplierStatementofAccount">كشف حساب المورد</string>
+    <string name="report_TotalSalesReport">تقرير إجمالي المبيعات</string>
+    <string name="report_TotalPurchaseReport">تقرير إجمالي الشراء</string>
+    <string name="report_CustomerAgeingReport">تقرير شيخوخة العميل</string>
+    <string name="report_TaxCollectedReport">تقرير الضرائب المحصلة</string>
+    <string name="report_StockReport">تقرير الاسهم</string>
+    <string name="report_ProductMovementReport">تقرير حركة المنتج</string>
+    <string name="report_Go_ahead">تفضل!</string>
+    <string name="report_Kindly_select_the_option">يرجى تحديد الخيار حسب متطلباتك</string>
+    <string name="report_Cancel">يلغي</string>
+    <string name="thank_SelectCompany">حدد شركة</string>
+    <string name="thank_Search_by_Invoice_number">البحث عن طريق رقم الفاتورة</string>
+    <string name="thank_No_Paid_invoices">لا فواتير مدفوعة</string>
+    <string name="thank_Status">حالة :</string>
+    <string name="invoiceReminder_SelectCompany">حدد شركة</string>
+    <string name="invoiceReminder_Search_by_Invoice_number">البحث عن طريق رقم الفاتورة</string>
+    <string name="invoiceReminder_No_UnPaid_invoices">لا توجد فواتير غير مدفوعة</string>
+    <string name="invoiceReminder_Status">حالة :</string>
+    <string name="invoice_SelectCompany">حدد شركة</string>
+    <string name="invoice_SelectWarehouse">حدد المستودع</string>
+    <string name="invoice_EnterName">أدخل الاسم</string>
+    <string name="invoice_CreditTerms">شروط الائتمان</string>
+    <string name="invoice_ReferenceNo">رقم المرجع</string>
+    <string name="invoice_EnterReferenceNo">أدخل رقم المرجع</string>
+    <string name="invoice_NoItems">لا توجد عناصر</string>
+    <string name="invoice_AddItems">إضافة عناصر</string>
+    <string name="invoice_GrossAmount">المبلغ الإجمالي</string>
+    <string name="invoice_Tax">ضريبة</string>
+    <string name="invoice_Shipping">شحن</string>
+    <string name="invoice_NetAmount">كمية الشبكة</string>
+    <string name="invoice_PaidAmount">المبلغ المدفوع</string>
+    <string name="invoice_BalanceDue">الرصيد المستحق</string>
+    <string name="invoice_Signature_of_invoice_maker">توقيع صانع الفاتورة</string>
+    <string name="invoice_Signature_of_Receiver">توقيع المتلقي</string>
+    <string name="invoice_Upload_Company_Seal">تحميل ختم الشركة</string>
+    <string name="invoice_Upload_Invoice_Images">تحميل صور الفاتورة</string>
+    <string name="invoice_Notes">ملاحظات</string>
+    <string name="invoice_Search_by_Invoice_number">البحث عن طريق رقم الفاتورة</string>
+    <string name="credit_notes_Recipient">متلقي</string>
+    <string name="credit_notes_Signature_of_credit_maker">توقيع صانع مذكرة الائتمان</string>
+    <string name="debit_notes_Supplier">المورد</string>
+    <string name="debit_notes_Signature_of_debit_maker">توقيع صانع السندات المدينة</string>
+    <string name="estimate_Signature_of_estimate_maker">توقيع صانع التقدير</string>
+    <string name="estimate_Upload_Estimate_Images">تحميل تقدير الصور</string>
+    <string name="pv_Supplier">المورد</string>
+    <string name="pv_Signature_of_Payment_Voucher_maker">توقيع صانع قسيمة الدفع</string>
+    <string name="pv_Search_by_PV_number">البحث عن طريق رقم PV</string>
+    <string name="po_Upload_purchase_order_Images">تحميل صور طلب الشراء</string>
+    <string name="po_Signature_of_Purchase_Order_maker">توقيع صانع أمر الشراء</string>
+    <string name="po_Search_by_PO_number">البحث برقم أمر الشراء</string>
+    <string name="home_Invoice_Overdue">فاتورة متأخرة</string>
+    <string name="setting_Setup">يثبت</string>
+    <string name="setting_Email">بريد إلكتروني</string>
+    <string name="setting_ConfirmEmail">تأكيد عنوان البريد الإلكتروني</string>
+    <string name="setting_NeedSomeHelp">بحاجة لبعض المساعدة؟</string>
+    <string name="setting_enter_email">أدخل البريد الإلكتروني</string>
+    <string name="setting_write_message">اكتب رسالة...</string>
+    <string name="setting_enter_message">أدخل رسالة</string>
+    <string name="setting_Submit">إرسال</string>
+    <string name="setting_PaymentOptions">خيارات الدفع</string>
+    <string name="setting_SelectNumberFormat">حدد تنسيق الأرقام</string>
+    <string name="setting_Done">منجز</string>
+    <string name="setting_CommaFormatSelection">تحديد تنسيق الفاصلة</string>
+    <string name="setting_OnlinePaymentGateway">بوابة الدفع عبر الإنترنت</string>
+    <string name="setting_Subscribe">الإشتراك</string>
+    <string name="setting_Upgrade">رفع مستوى</string>
+    <string name="setting_RestorePurchases">استعادة المشتريات</string>
+    <string name="setting_InviteFriends">ادعو أصدقاء</string>
+    <string name="setting_FAQs">أسئلة وأجوبة</string>
+    <string name="setting_Language">لغة</string>
+    <string name="setting_Abouttheapp">حول التطبيق</string>
+    <string name="setting_Ratetheapp">قيم التطبيق</string>
+    <string name="setting_Termsofuse">تعليمات الاستخدام</string>
+    <string name="setting_PrivacyPolicy">سياسة الخصوصية</string>
+    <string name="setting_Support">الدعم</string>
+    <string name="setting_ChooseOne">اختر واحدة</string>
+    <string name="service_AddNew">اضف جديد</string>
+    <string name="service_SelectQuantity">حدد الكمية</string>
+    <string name="service_PAYMENTGATEWAYS">بوابات الدفع</string>
+    <string name="service_EnterAmount">أدخل المبلغ</string>
+    <string name="service_Amount">كمية</string>
+    <string name="service_EnterDate">أدخل التاريخ</string>
+    <string name="service_SelectPaymentMode">حدد وضع الدفع</string>
+    <string name="service_ShippingAmount">كمية الشحن</string>
+    <string name="service_EnterShippingAmount">أدخل مبلغ الشحن</string>
+    <string name="service_ShippingAmountInvoice">هل تريد إضافة مبلغ الشحن لهذه الفاتورة؟</string>
+    <string name="waste_some_damage">إذا تعرضت شركتك لبعض التلف أو النفايات ، فقم بإزالتها من هنا.</string>
+    <string name="filter_Filter">منقي</string>
+    <string name="filter_UnpaidInvoices">فواتير غير مدفوعة</string>
+    <string name="filter_PaidInvoices">فواتير مدفوعة</string>
+    <string name="filter_ByDate">حسب التاريخ</string>
+    <string name="filter_All">الجميع</string>
+    <string name="dialog_ClearData">امسح البيانات</string>
+    <string name="dialog_ViewInvoice">عرض الفاتورة</string>
+    <string name="dialog_DuplicateInvoice">فاتورة مكررة</string>
+    <string name="dialog_ShareInvoice">مشاركة الفاتورة</string>
+    <string name="dialog_ConvertToReceipt">تحويل إلى إيصال</string>
+    <string name="dialog_EnterDiscount">أدخل الخصم</string>
+    <string name="dialog_Percentage">نسبة مئوية</string>
+    <string name="dialog_ChooseAOption">اختر خيارا</string>
+    <string name="dialog_SendAsLink">إرسال كارتباط</string>
+    <string name="dialog_SendAsPDF">إرسال بتنسيق PDF</string>
+    <string name="dialog_SelectCreditTerms">حدد مدة الائتمان</string>
+    <string name="dialog_EnterManually_days">أدخل يدويًا (أيام)</string>
+    <string name="dialog_SelectCustomer">حدد العميل</string>
+    <string name="dialog_SearchCustomer">البحث عن العملاء</string>
+    <string name="dialog_DateNone">لا أحد</string>
+    <string name="dialog_DateDue_on_Receipt">المستحقة على إيصال</string>
+    <string name="dialog_Date3days">3 أيام</string>
+    <string name="dialog_Date7days">7 أيام</string>
+    <string name="dialog_Date14days">14 يوما</string>
+    <string name="dialog_Date21days">21 يوم</string>
+    <string name="dialog_Date30days">30 يوما</string>
+    <string name="dialog_Date45days">45 يوما</string>
+    <string name="dialog_Date60days">60 يوما</string>
+    <string name="dialog_Date90days">90 يومًا</string>
+    <string name="dialog_Date120days">120 يومًا</string>
+    <string name="dialog_Date365days">365 يوما</string>
+    <string name="dialog_DateOR">أو</string>
+    <string name="settings_paln_title_1">الخطة السنوية</string>
+    <string name="settings_paln_title_2">خطة القيمة</string>
+    <string name="settings_paln_title_3">مستخدمون إضافيون</string>
+    <string name="settings_paln_title_4">شركات اضافية</string>
+    <string name="settings_paln_desc_1">اشترك في الباقة السنوية واحصل على خصم يصل إلى 25٪. 35.99 دولارًا أمريكيًا سنويًا فقط مع وصول غير محدود إلى جميع الميزات باستثناء تتبع المخزون.</string>
+    <string name="settings_paln_desc_2">تبدأ الحزمة الشهرية من 3.99 دولارًا أمريكيًا فقط مع وصول غير محدود إلى جميع الميزات باستثناء تتبع المخزون.</string>
+    <string name="settings_paln_desc_3">قم بتعيين مستخدمين إضافيين مع وصول محدود أو غير محدود مقابل دفع 3.99 دولارًا أمريكيًا لمرة واحدة فقط لكل مستخدم</string>
+    <string name="settings_paln_desc_4">أنشئ شركات إضافية بنفس بيانات الاعتماد مقابل دفع 11.99 دولارًا أمريكيًا لمرة واحدة فقط لكل شركة إضافية</string>
+    <string name="dialog_Success">نجاح</string>
+    <string name="invoice_Pending">قيد الانتظار</string>
+    <string name="invoice_Seen">مرئي</string>
+    <string name="invoice_Void">فارغ</string>
+    <string name="header_template">قالب</string>
+    <string name="thank_SendThankYouNote">أرسل ملاحظة شكر</string>
+    <string name="thank_ViewThankYouNote">مشاهدة ملف Thank You Note</string>
+    <string name="html_SearchByCustomerName">البحث عن طريق اسم العميل</string>
+    <string name="html_ReferenceNo">رقم المرجع:</string>
+    <string name="html_Attachments">المرفقات</string>
+    <string name="html_Notes">ملاحظات:</string>
+    <string name="html_CompanySeal">ختم الشركة</string>
+    <string name="html_SignatureofReceiver">توقيع المتلقي</string>
+    <string name="html_SignatureofIssuer">توقيع المُصدر</string>
+    <string name="html_Discount">خصم</string>
+    <string name="html_SubTotal">المجموع الفرعي</string>
+    <string name="html_Shipping">شحن</string>
+    <string name="html_PaidAmount">المبلغ المدفوع</string>
+    <string name="html_PaymentDetails">بيانات الدفع</string>
+    <string name="html_Bycheque">بواسطة شيك:</string>
+    <string name="html_ShipTo">سافر على متن سفينة ل:</string>
+    <string name="html_InvoiceDueDateReminder">تذكير تاريخ استحقاق الفاتورة</string>
+    <string name="html_Your_invoice_reminder_note">فاتورتك مستحقة الدفع. يرجى الاطلاع أدناه مذكرة تذكير.</string>
+    <string name="list_ChargeCustomer">العميل المسؤول</string>
+    <string name="list_ViewPO">مشاهدة ملف PO</string>
+    <string name="list_DuplicatePO">صندوق بريد مكرر</string>
+    <string name="list_SharePO">مشاركة PO</string>
+    <string name="list_ConverttoPaymentVoucher">قم بالتحويل إلى سند الدفع</string>
+    <string name="list_Quantity_added_to_warehouse">تمت إضافة الكمية بنجاح إلى المستودع!</string>
+    <string name="list_SearchByReceiptNumber">البحث عن طريق رقم الاستلام</string>
+    <string name="list_SearchByCreditNoteNumber">البحث عن طريق رقم مذكرة الائتمان</string>
+    <string name="list_Invoicenotfound">الفاتورة غير موجودة</string>
+    <string name="list_ShareFile">مشاركة الملفات</string>
+    <string name="list_From">من عند</string>
+    <string name="list_NoFileFound">لم يتم العثور على ملف</string>
+    <string name="list_More">أكثر</string>
+    <string name="list_ViewCreditNote">عرض مذكرة الائتمان</string>
+    <string name="list_EditCreditNote">تحرير مذكرة الائتمان</string>
+    <string name="list_DuplicateCreditNote">مذكرة ائتمان مكررة</string>
+    <string name="list_ShareCreditNote">مذكرة ائتمان الأسهم</string>
+    <string name="list_YourCreditNoteviewed">يمكن الاطلاع على مذكرة الائتمان الخاصة بك وطباعتها وتنزيلها من الرابط أدناه.</string>
+    <string name="list_YourDebitNoteviewed">يمكن الاطلاع على مذكرة الخصم الخاصة بك وطباعتها وتنزيلها من الرابط أدناه.</string>
+    <string name="list_PurchaseOrderviewed">يمكن الاطلاع على طلب الشراء وطباعته وتنزيله من الرابط أدناه.</string>
+    <string name="list_PaymentVoucherviewed">يمكن الاطلاع على سند الدفع وطباعته وتنزيله من الرابط أدناه</string>
+    <string name="list_Estimateviewed">يمكن الاطلاع على تقديراتك وطباعتها وتنزيلها من الرابط أدناه.</string>
+    <string name="list_SearchByDebitNoteNumber">البحث عن طريق رقم مذكرة الخصم</string>
+    <string name="list_ViewDebitNote">عرض مذكرة الخصم</string>
+    <string name="list_EditDebitNote">تحرير مذكرة الخصم</string>
+    <string name="list_DuplicateDebitNote">مذكرة خصم مكررة</string>
+    <string name="list_ShareDebitNote">ملاحظة الخصم المباشر</string>
+    <string name="list_Thank_you_for_receipt">شكرا لتسديدك. يرجى الاطلاع أدناه على الإيصال.</string>
+    <string name="list_ViewReceipt">استلام عرض</string>
+    <string name="list_ViewEditReceipt">تحرير الإيصال</string>
+    <string name="list_DuplicateReceipt">إيصال مكرر</string>
+    <string name="list_ShareReceipt">إيصال المشاركة</string>
+    <string name="listViewEstimate">مشاهدة ملف Estimate</string>
+    <string name="list_EditEstimate">تحرير التقدير</string>
+    <string name="list_DuplicateEstimate">تقدير مكرر</string>
+    <string name="list_ShareEstimate">حصة التقدير</string>
+    <string name="list_ConvertToInvoice">تحويل إلى فاتورة</string>
+    <string name="list_Delete">حذف</string>
+    <string name="list_SendReminderNote">إرسال مذكرة تذكير</string>
+    <string name="list_ViewReminderNote">عرض مذكرة التذكير</string>
 
 
-    <string name="list_Mark_as_delivery_received">Marquer comme livraison reçue</string>
-    <string name="list_Delivery_received">Livraison reçue</string>
+    <string name="list_Mark_as_delivery_received">وضع علامة على أنه تم استلام التسليم</string>
+    <string name="list_Delivery_received">تم استلام التسليم</string>
 
-    <string name="list_Mark_as_delivery_received1">Marquer comme</string>
-    <string name="list_Mark_as_delivery_received2">livraison reçue</string>
-
-
-    <string name="list_Mark_as_void">Marquer comme nul</string>
-    <string name="list_Mark_as_unvoid">Marquer comme non nul</string>
-
-    <string name="list_Mark_as_void1">Marquer</string>
-    <string name="list_Mark_as_void2">comme nul</string>
-
-    <string name="list_Mark_as_unvoid1">Marquer comme</string>
-    <string name="list_Mark_as_unvoid2">non nul</string>
+    <string name="list_Mark_as_delivery_received1">وضع علامة التسليم</string>
+    <string name="list_Mark_as_delivery_received2">تم الاستلام</string>
 
 
-    <string name="list_Mark_as_paid">Marquer comme payé</string>
-    <string name="list_Mark_as_unpaid">Marquer comme non payé</string>
+    <string name="list_Mark_as_void">وضع علامة باطل</string>
+    <string name="list_Mark_as_unvoid">وضع علامة غير باطل</string>
 
-    <string name="list_Mark_as_paid1">Marquer</string>
-    <string name="list_Mark_as_paid2">comme payé</string>
+    <string name="list_Mark_as_void1">علامة</string>
+    <string name="list_Mark_as_void2">باطلة</string>
 
-    <string name="list_Mark_as_unpaid1">Marquer comme</string>
-    <string name="list_Mark_as_unpaid2">non payé</string>
+    <string name="list_Mark_as_unvoid1">علامة</string>
+    <string name="list_Mark_as_unvoid2">لا مفر منه</string>
 
 
+    <string name="list_Mark_as_paid">وضع علامة كمدفوع</string>
+    <string name="list_Mark_as_unpaid">وضع علامة على أنها غير مدفوعة</string>
 
-    <string name="service_ShippingAmountEstimate">Voulez-vous ajouter un montant d\'expédition pour cette estimation ?</string>
-    <string name="dialog_PleaseSelectAtleastOne">Veuillez sélectionner au moins un</string>
-    <string name="dialog_PleaseSelectDate">Veuillez sélectionner la date</string>
-    <string name="dialog_days">journées</string>
-    <string name="dialog_immediately">immédiatement</string>
-    <string name="dialog_PleaseSelectOneValue">Veuillez sélectionner une valeur</string>
-    <string name="select_Please_enter_amount">" Veuillez saisir le montant!"</string>
-    <string name="select_Please_enter_quantity">Veuillez saisir la quantité!</string>
-    <string name="select_We_appreciateThank_you">Nous apprécions votre entreprise. Veuillez trouver ci-dessous la note de remerciement.</string>
-    <string name="select_Shipping_amount_PurchaseOrder">Voulez-vous ajouter un montant d\'expédition pour ce bon de commande ?</string>
-    <string name="select_Shipping_amount_PaymentVoucher">Voulez-vous ajouter un montant d\'expédition pour ce bon de paiement ?</string>
-    <string name="invoice_Completed">Complété</string>
-    <string name="dialog_ViewPV">Vue PV</string>
-    <string name="dialog_EditPV">Éditer PV</string>
-    <string name="dialog_SharePV">Partager PV</string>
-    <string name="dialog_Convert_to_PaymentVoucher">Convertir en Payment Voucher</string>
-    <string name="dialog_DateRequired">"Date requise "</string>
-    <string name="dialog_PaymentModeRequired">Mode de paiement requis</string>
-    <string name="dialog_ViewCreditNote">Voir la note de crédit</string>
-    <string name="dialog_ViewRecepit">Vue Recepit</string>
-    <string name="dialog_ViewPaymentVoucher">Vue Payment Voucher</string>
-    <string name="dialog_ViewPurchaseOrder">Vue Purchase Order</string>
-    <string name="dialog_CreditNoteDigits">Le numéro de note de crédit doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_DeditNoteDigits">Dedit Note No. doit être des lettres suivies de chiffres</string>
-    <string name="dialog_ReceiptDigits">Le numéro de reçu doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_InvoiceDigits">Le numéro de facture doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_EstimateDigits">Le numéro d\'estimation doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_SelectInvoiceDate">Sélectionnez la date de la facture</string>
-    <string name="dialog_SelectDate">Sélectionner une date</string>
-    <string name="dialog_SelectACustomer">Sélectionnez un client</string>
-    <string name="dialog_SelectProductFirst">Sélectionnez d\'abord le produit</string>
-    <string name="dialog_Shipping_amountCreditNote">Voulez-vous ajouter un montant d\'expédition pour cette note de crédit ?</string>
-    <string name="dialog_Shipping_amountDebitNote">Souhaitez-vous ajouter un montant d\'expédition pour cette note de débit ?</string>
-    <string name="dialog_Shipping_amountReceipt">Voulez-vous ajouter un montant d\'expédition pour ce reçu ?</string>
-    <string name="dialog_PaymentVoucherNoalready_exists">Le numéro de bon de paiement existe déjà</string>
-    <string name="dialog_PaymentVoucherNoDigits">Le numéro du bon de paiement doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_Shipping_amountPaymentVoucher">Voulez-vous ajouter un montant d\'expédition pour ce bon de paiement ?</string>
-    <string name="dialog_Shipping_amountPurchaseOrderNoDigits">Le numéro de bon de commande doit être composé de lettres suivies de chiffres</string>
-    <string name="dialog_EnterDiscountinPercent">Entrer la remise en %</string>
-    <string name="dialog_EnterDiscountinAmount">Entrer la remise dans le montant</string>
-    <string name="dialog_SelectASupplier">Sélectionnez un fournisseur</string>
-    <string name="dialog_SelectSupplier">Sélectionnez le fournisseur</string>
-    <string name="dialog_SearchSupplier">Rechercher un fournisseur</string>
-    <string name="dialog_SelectReceiptDate">Sélectionnez la date de réception</string>
-    <string name="noSelect">Non Sélectionner</string>
-    <string name="stock_Select_Products">Sélectionner un produit</string>
-    <string name="report_SelectDateTo">" Sélectionnez la date (À)"</string>
-    <string name="report_SelectDateFrom">" Sélectionnez la date (de)"</string>
-    <string name="report_CustomerStatementReport">Rapport de relevé client</string>
-    <string name="report_SupplierStatementReport">Rapport de déclaration du fournisseur</string>
-    <string name="dialog_SelectSuppliers">Sélectionnez le fournisseur</string>
+    <string name="list_Mark_as_paid1">علامة</string>
+    <string name="list_Mark_as_paid2">على النحو المدفوع</string>
 
-    <string name="report_Paid">Payé</string>
-    <string name="report_UnPaid">Non payé</string>
-    <string name="list_Date">Date</string>
-    <string name="invoice_Due">Dû</string>
+    <string name="list_Mark_as_unpaid1">علامة</string>
+    <string name="list_Mark_as_unpaid2">على أنها غير مدفوعة الأجر</string>
 
 
 
+    <string name="service_ShippingAmountEstimate">هل تريد إضافة مبلغ الشحن لهذا التقدير؟</string>
+    <string name="dialog_PleaseSelectAtleastOne">يرجى تحديد Atleast One</string>
+    <string name="dialog_PleaseSelectDate">يرجى تحديد التاريخ</string>
+    <string name="dialog_days">أيام</string>
+    <string name="dialog_immediately">فورا</string>
+    <string name="dialog_PleaseSelectOneValue">يرجى تحديد قيمة واحدة</string>
+    <string name="select_Please_enter_amount">الرجاء إدخال المبلغ!</string>
+    <string name="select_Please_enter_quantity">الرجاء إدخال الكمية!</string>
+    <string name="select_We_appreciateThank_you">نحن نقدر عملك. تجد يرجى أدناه شكرا لك ملاحظة.</string>
+    <string name="select_Shipping_amount_PurchaseOrder">هل تريد إضافة مبلغ الشحن لأمر الشراء هذا؟</string>
+    <string name="select_Shipping_amount_PaymentVoucher">هل تريد إضافة مبلغ الشحن لسند الدفع هذا؟</string>
+    <string name="invoice_Completed">مكتمل</string>
+    <string name="dialog_ViewPV">مشاهدة ملف PV</string>
+    <string name="dialog_EditPV">تحرير PV</string>
+    <string name="dialog_SharePV">مشاركة PV</string>
+    <string name="dialog_Convert_to_PaymentVoucher">قم بالتحويل إلى سند الدفع</string>
+    <string name="dialog_DateRequired">التاريخ مطلوب</string>
+    <string name="dialog_PaymentModeRequired">مطلوب وضع الدفع</string>
+    <string name="dialog_ViewCreditNote">عرض مذكرة الائتمان</string>
+    <string name="dialog_ViewRecepit">مشاهدة ملف Recepit</string>
+    <string name="dialog_ViewPaymentVoucher">عرض إيصال الدفع</string>
+    <string name="dialog_ViewPurchaseOrder">عرض طلب الشراء</string>
+    <string name="dialog_CreditNoteDigits">يجب أن يكون رقم مذكرة الائتمان بحروف متبوعة بأرقام</string>
+    <string name="dialog_DeditNoteDigits">يجب أن يكون رقم مذكرة Dedit عبارة عن أحرف متبوعة بأرقام</string>
+    <string name="dialog_ReceiptDigits">يجب أن يكون رقم الإيصال عبارة عن أحرف متبوعة بأرقام</string>
+    <string name="dialog_InvoiceDigits">يجب أن يكون رقم الفاتورة عبارة عن أحرف متبوعة بأرقام</string>
+    <string name="dialog_EstimateDigits">يجب أن يكون رقم التقدير أحرفًا متبوعة بأرقام</string>
+    <string name="dialog_SelectInvoiceDate">حدد تاريخ الفاتورة</string>
+    <string name="dialog_SelectDate">حدد تاريخ</string>
+    <string name="dialog_SelectACustomer">حدد العميل</string>
+    <string name="dialog_SelectProductFirst">حدد المنتج أولاً</string>
+    <string name="dialog_Shipping_amountCreditNote">هل تريد إضافة مبلغ الشحن لسند الائتمان هذا؟</string>
+    <string name="dialog_Shipping_amountDebitNote">هل تريد إضافة مبلغ الشحن لسند الخصم هذا؟</string>
+    <string name="dialog_Shipping_amountReceipt">هل تريد إضافة مبلغ الشحن لهذا الإيصال؟</string>
+    <string name="dialog_PaymentVoucherNoalready_exists">رقم قسيمة الدفع موجود بالفعل</string>
+    <string name="dialog_PaymentVoucherNoDigits">يجب أن يكون رقم قسيمة الدفع بأحرف متبوعة بأرقام</string>
+    <string name="dialog_Shipping_amountPaymentVoucher">هل تريد إضافة مبلغ الشحن لسند الدفع هذا؟</string>
+    <string name="dialog_Shipping_amountPurchaseOrderNoDigits">يجب أن يكون رقم طلب الشراء بأحرف متبوعة بأرقام</string>
+    <string name="dialog_EnterDiscountinPercent">أدخل الخصم في٪</string>
+    <string name="dialog_EnterDiscountinAmount">أدخل الخصم بالمبلغ</string>
+    <string name="dialog_SelectASupplier">حدد مورد</string>
+    <string name="dialog_SelectSupplier">حدد المورد</string>
+    <string name="dialog_SearchSupplier">بحث عن مورد</string>
+    <string name="dialog_SelectReceiptDate">حدد تاريخ الاستلام</string>
+    <string name="noSelect">لا اختر</string>
+    <string name="stock_Select_Products">حدد المنتجات</string>
+    <string name="report_SelectDateTo">حدد التاريخ (إلى)</string>
+    <string name="report_SelectDateFrom">حدد التاريخ (من)</string>
+    <string name="report_CustomerStatementReport">تقرير كشف حساب العميل</string>
+    <string name="report_SupplierStatementReport">تقرير بيان المورد</string>
+    <string name="dialog_SelectSuppliers">حدد الموردين</string>
+
+    <string name="report_Paid">مدفوع</string>
+    <string name="report_UnPaid">غير مدفوعة</string>
+    <string name="list_Date">تاريخ</string>
+    <string name="invoice_Due">بسبب</string>
 
 
 
 
-    <string-array name="faqQuestionArray">
-        <item>Comment commencer / Comment fonctionne l\'application ?</item>
-        <item>Si les données sont créées à partir de l\'ajout de nouvelles fonctionnalités directement à partir de la page de création, les données nouvellement créées ne s\'affichent pas ?</item>
-        <item>Comment ajouter des utilisateurs ?</item>
-        <item>Comment ajouter un entrepôt ?</item>
-        <item>Commentaire ajouter un entrepôt ?</item>
-        <item>Comment enregistrer le stock d\'ouverture?</item>
-        <item>Comment comptabiliser les enregistrements d\'inventaire physique ?</item>
-        <item>Comment déplacer le stock entre les entrepôts ?</item>
-        <item>Comment l\'inventaire sera-t-il mis à jour automatiquement ?</item>
-        <item>Comment la valeur des actions est-elle calculée ?</item>
-        <item>Comment créer une facture ?</item>
-        <item>Quand dois-je sélectionner l\'entrepôt lors de la création de la facture / du bon de commande ?</item>
-        <item>Quand dois-je créer un produit ?</item>
-        <item>Comment visualiser, dupliquer ou partager une facture ?</item>
-        <item>Comment la couleur de ma marque se reflétera-t-elle dans les modèles ?</item>
-        <item>Si l\'entrepôt sélectionné n\'a pas une quantité suffisante pour la facturation, comment puis-je traiter les factures ?</item>
-        <item>Comment vérifier le statut de la facture vue ?</item>
-        <item>Comment marquer les factures comme payées ?</item>
-        <item>Comment convertir une facture en reçu ?</item>
-        <item>Comment marquer le bon de commande comme livraison reçue ?</item>
-        <item>Comment supprimer une facture / un bon de commande ?</item>
-        <item>Comment marquer une facture / un bon de commande comme nul ?</item>
-        <item>Comment créer une note de débit/crédit et leur effet ?</item>
-        <item>Comment l\'estimation du statut changera-t-elle ?</item>
-        <item>Quels détails sont visibles sur l\'écran d\'accueil et comment changer d\'entreprise ?</item>
-        <item>Comment configurer les paiements en ligne ?</item>
-        <item>Combien coûte l\'intégration des passerelles de paiement ?</item>
-        <item>Comment changer le format des nombres ?</item>
-        <item>Comment partager une facture avec des liens de paiement ?</item>
-        <item>Comment saurai-je si une facture a été payée en ligne ?</item>
-        <item>Quand vais-je recevoir l\'argent sur mon compte bancaire ?</item>
-        <item>Comment SIR gère-t-il les paiements par carte ?</item>
-        <item>Comment changer / restaurer / mettre à niveau l\'abonnement ?</item>
-        <item>Comment changer de langue ?</item>
-        <item>Mes données sont-elles sécurisées ?</item>
-        <item>Ma requête n\'est pas répertoriée ici ?</item>
+
+
+    <string-array name = "faqQuestionArray">
+        <item> كيف تبدأ / كيف يعمل التطبيق؟ </item>
+        <item> إذا تم إنشاء البيانات من إضافة وظائف جديدة مباشرة من صفحة الإنشاء ، فلن يتم عرض البيانات التي تم إنشاؤها حديثًا؟</item>
+        <item> كيف تضيف المستخدمين؟ </item>
+        <item> كيف تضيف مستودعًا؟ </item>
+        <item> كيف يمكن تتبع المستودع؟ </item>
+        <item> كيف تسجل الأسهم الافتتاحية؟ </item>
+        <item> كيف يتم حساب سجلات الجرد المادي؟ </item>
+        <item> كيف تنقل المخزون بين المستودعات؟ </item>
+        <item> كيف سيتم تحديث المخزون تلقائيًا؟ </item>
+        <item> كيف يتم حساب قيمة المخزون؟ </item>
+        <item> كيف تُنشئ فاتورة؟ </item>
+        <item> متى يجب تحديد المستودع أثناء إنشاء الفاتورة / أمر الشراء؟ </item>
+        <item> متى يجب إنشاء منتج؟ </item>
+        <item> كيف يمكنني عرض فاتورة أو نسخها أو مشاركتها؟ </item>
+        <item> كيف سينعكس لون علامتي التجارية في النماذج؟ </item>
+        <item> إذا لم يكن المستودع المحدد يحتوي على كمية كافية للفواتير ، فكيف يمكنني معالجة الفواتير؟ </item>
+        <item> كيف تتحقق من حالة عرض الفاتورة؟ </item>
+        <item> كيف يمكنني تمييز الفواتير على أنها مدفوعة؟ </item>
+        <item> كيف تحول الفاتورة إلى إيصال؟ </item>
+        <item> كيف يتم وضع علامة على أمر الشراء على أنه تم استلام؟ </item>
+        <item> كيف أحذف فاتورة / أمر شراء؟ </item>
+        <item> كيف يمكنني وضع علامة باطل على فاتورة / أمر شراء؟ </item>
+        <item> كيف تُنشئ إشعار الخصم / الدائن وتأثيرها؟ </item>
+        <item> كيف سيتغير تقدير الحالة؟ </item>
+        <item> ما التفاصيل التي تظهر على الشاشة الرئيسية وكيفية التبديل بين الشركات؟ </item>
+        <item> كيف يمكنني إعداد المدفوعات عبر الإنترنت؟ </item>
+        <item> ما هي تكلفة دمج بوابات الدفع؟ </item>
+        <item> كيف أغير تنسيق الأرقام؟ </item>
+        <item> كيف تشارك الفاتورة مع روابط الدفع؟ </item>
+        <item> كيف أعرف ما إذا تم دفع الفاتورة عبر الإنترنت؟ </item>
+        <item> متى سأستلم الأموال في حسابي المصرفي؟ </item>
+        <item> كيف يتعامل SIR مع مدفوعات البطاقات؟ </item>
+        <item> كيف يمكنني تبديل / استعادة / ترقية الاشتراك؟ </item>
+        <item> كيف أغير اللغة؟ </item>
+        <item> هل بياناتي آمنة؟ </item>
+        <item> استعلامي غير مدرج هنا؟ </item>
     </string-array>
 
 
 
-    <string-array name="faqAnswerArray">
-        <item>Pour commencer, cliquez sur s\'inscrire ici et créez un compte. Connectez-vous ensuite avec vos identifiants. Tout d\'abord, vous devez créer une entreprise à partir du module Mes entreprises. Entrez autant de détails, logo, détails de paiement, etc.; tel que requis pour afficher sur les factures et autres documents. Créez ensuite des produits, services, taxes, clients, fournisseurs à partir des modules respectifs dans le menu latéral. Vous pouvez modifier n\'importe lequel de ces détails à tout moment. Ceci est conforme à la fonction de contrôle de l\'application afin que les utilisateurs puissent suivre toute activité / inventaire à tout moment et disposer de toutes les données disponibles stockées dans l\'application pour référence / rapport futur. Une fois que c\'est fait, vous pouvez créer des factures, des devis, des bons de commande, des reçus, des bons de paiement à partir des modules respectifs dans le menu latéral ou les icônes de la barre d\'état au bas de l\'écran d\'accueil en quelques secondes.</item>
-        <item>Si vous ajoutez de nouvelles entreprises, clients, fournisseurs, produits, articles et taxes directement à partir de Créer une facture ou d\'autres pages, vous devez actualiser en sélectionnant à nouveau le nom de l\'entreprise en haut, lors de la création de la facture ou d\'autres documents, pour afficher les données nouvellement créées.</item>
-        <item>Pour ajouter de nouveaux utilisateurs, allez dans le module d\'ajout de nouveaux utilisateurs dans le menu latéral, puis cliquez sur ajouter des utilisateurs en haut à droite, puis entrez les détails et sélectionnez les droits d\'accès simples/multiples à accorder, puis cliquez sur ajouter un utilisateur. Le nouvel utilisateur ajouté peut accéder à l\'application via le nom d\'utilisateur et le mot de passe saisis lors de l\'ajout de l\'utilisateur. Le nouvel utilisateur peut réinitialiser le mot de passe à partir de l\'écran de connexion en cliquant sur mot de passe oublié et en suivant les étapes qui s\'y trouvent.</item>
-        <item>Pour ajouter un entrepôt, allez dans le module Mes entreprises dans le menu latéral, puis cliquez sur l\'entreprise dans laquelle l\'entrepôt doit être ajouté, puis cliquez sur ajouter un entrepôt en haut à droite, puis entrez les détails et cliquez sur enregistrer et continuer.</item>
-        <item>Pour suivre la quantité dans un entrepôt particulier, accédez au module Stocks dans le menu latéral, puis sélectionnez l\'entreprise, puis cliquez sur n\'importe quel produit qui affichera la quantité disponible dans chaque entrepôt.</item>
-        <item>Pour enregistrer le stock d\'ouverture des articles, allez dans le module Stocks puis sélectionnez Mettre à jour le stock et enregistrez la transaction.</item>
-        <item>Pour enregistrer des articles supplémentaires trouvés lors de l\'inventaire, accédez au module Stocks puis sélectionnez Mettre à jour le stock, puis enregistrez les articles. Pour supprimer les articles manquants lors de l\'inventaire, rendez-vous dans le module Stocks puis sélectionnez gaspillage/endommagement puis enregistrez les articles manquants.</item>
-        <item>Pour déplacer le stock entre les entrepôts, allez dans le module Stocks du menu principal puis sélectionnez le mouvement de stock puis enregistrez la transaction.</item>
-        <item>Lorsqu\'un bon de commande émis est marqué comme livraison reçue, les articles en stock dans le bon de commande seront automatiquement ajoutés au stock en stock. Lorsqu\'une facture de vente est émise, les articles en stock dans la facture de vente seront automatiquement réduits du stock d\'inventaire.</item>
-        <item>La valeur du stock est calculée en fonction du taux de produit saisi lors de la création du produit dans le module Mes produits.</item>
-        <item>Pour créer une facture, accédez au module Factures dans le menu latéral ou à partir de l\'icône de la barre d\'état système, puis cliquez sur créer une facture en haut à droite, puis sélectionnez l\'entreprise et entrez les détails pertinents, puis prévisualisez la facture si nécessaire en cliquant sur l\'icône plus à côté de créer facture, puis cliquez sur créer une facture, votre facture sera créée et pourra être consultée/partagée à partir de la page récapitulative du module Factures.</item>
-        <item>L\'entrepôt doit être sélectionné uniquement lorsque le produit est sélectionné pour permettre le suivi des stocks. Si vous sélectionnez un article, ne sélectionnez pas l\'entrepôt.</item>
-        <item>Pour exécuter l\'une des fonctions ci-dessus, accédez à Factures, puis sélectionnez l\'entreprise, puis accédez à la facture spécifique et balayez vers la gauche, puis cliquez sur Plus et sélectionnez votre préférence.</item>
-        <item>Lors de la création de l\'entreprise, vous devez sélectionner la couleur selon vos préférences ou en fonction de votre identité de marque. La couleur sélectionnée sera appliquée aux différents modèles dans Factures / Devis. Sélectionnez n\'importe quel modèle selon votre choix lors de la création de la facture / de l\'estimation. Si aucune couleur n\'a été sélectionnée, tous les modèles afficheront le format standard.</item>
-        <item>Si l\'entrepôt sélectionné n\'a pas une quantité suffisante pour la facturation, vous devrez d\'abord ajouter une quantité suffisante à l\'entrepôt particulier. Accédez au module Stocks dans le menu latéral, puis vous pouvez soit ajouter la quantité à partir de l\'option de mise à jour du stock, soit déplacer le stock d\'un entrepôt à un autre à partir de l\'option de mouvement de stock, en haut.</item>
-        <item>Pour exécuter l\'une des fonctions ci-dessus, accédez à Factures, sélectionnez l\'entreprise, puis accédez à la facture spécifique et balayez vers la gauche, puis cliquez sur Plus et sélectionnez votre préférence.</item>
-        <item>Le statut de la facture vue ne peut être vérifié que si la facture est partagée sous forme de lien. Lorsque le lien est ouvert par le destinataire, le statut passe automatiquement d\'en attente à visible dans le résumé du module Facture. Si la facture est partagée uniquement au format PDF, le statut vu ne peut pas être déterminé et apparaîtra comme en attente.</item>
-        <item>Pour marquer les factures comme payées, accédez au module Factures dans le menu latéral, puis sélectionnez l\'entreprise, puis accédez à la facture dans la liste qui doit être marquée comme payée et balayez vers la gauche, puis cliquez sur Marquer comme payé. Si une facture est marquée comme payée, un reçu doit être créé pour refléter le relevé de compte du client. De même, si un bon de commande est payé, un bon de paiement doit être créé pour refléter le relevé de compte du fournisseur.</item>
-        <item>Allez d\'abord au récapitulatif des factures, faites glisser la facture en question vers la gauche et marquez comme payée. Ensuite, faites glisser la facture vers la gauche, sous Plus, cliquez sur Convertir en reçu, puis cliquez sur Créer un reçu.</item>
-        <item>Marquez le bon de commande comme livraison reçue pour ajouter une quantité à l\'inventaire. Pour marquer le bon de commande comme livraison reçue, accédez au module Bons de commande dans le menu latéral et sélectionnez l\'entreprise, puis accédez au bon de commande spécifique, puis balayez vers la gauche et cliquez sur Marquer comme livraison reçue.</item>
-        <item>Pour supprimer une facture, vous devez créer un avoir. Pour supprimer un bon de commande, vous devez créer une note de débit. Étant donné que les articles de la facture / du bon de commande sont liés à l\'inventaire, ils ne peuvent pas être supprimés directement. Alternativement, vous pouvez marquer la facture / le bon de commande particulier comme nul, puis il ne s\'affichera pas dans les rapports correspondants. Si vous suivez l\'inventaire des produits, après avoir marqué l\'annulation, vous devez accéder au module Stocks et ajouter / supprimer la quantité en annulation Facture / Bon de commande via la mise à jour des stocks ou l\'option de gaspillage.</item>
-        <item>Pour marquer comme annulé, accédez à une facture/un bon de commande particulier, balayez vers la gauche, puis sélectionnez Marquer comme annulé.</item>
-        <item>Pour créer une note de débit, allez dans les notes de débit dans le menu latéral, puis cliquez sur créer des notes de débit en haut à droite, puis enregistrez la transaction et cliquez sur créer une note de débit en bas. La quantité saisie dans la note de débit sera déduite du solde du stock. Pour créer un avoir, allez dans avoirs dans le menu latéral, puis cliquez sur créer des avoirs en haut à droite, puis enregistrez la transaction et cliquez sur créer un avoir en bas. La quantité saisie dans la note de crédit sera rajoutée au solde du stock.</item>
-        <item>Si un devis créé est converti en facture, le statut passe d\'en attente à terminé. Pour convertir un devis en facture, accédez au récapitulatif des devis, faites glisser le devis particulier vers la gauche, cliquez sur plus, puis sélectionnez Convertir en facture, puis cliquez sur Créer une facture.</item>
-        <item>Les détails de la première entreprise créée par l\'utilisateur s\'afficheront par défaut sur l\'écran d\'accueil. Pour changer d\'entreprise, cliquez sur l\'icône en forme d\'étoile en haut à droite de l\'écran d\'accueil puis sélectionnez l\'entreprise souhaitée. L\'entreprise sélectionnée s\'affichera sur l\'écran d\'accueil au fur et à mesure des besoins.</item>
-        <item>La configuration avec Stripe ou PayPal prend quelques minutes. Activez simplement les paiements en ligne dans votre application et suivez les instructions.</item>
-        <item>Il n\'y a pas de frais initiaux ou mensuels. Il y a des frais par transaction, qui varient selon les pays. Pour vérifier les frais dans votre pays, veuillez visiter &lt;a href="https://www.stripe.com/us/pricing"&gt;Stripe pricing&lt;/a&gt; ou alors &lt;a href="https://www.paypal.com/us/webapps/mpp/merchant-fees"&gt;https://www.paypal.com/us/webapps/mpp/merchant-fees&lt;/a&gt;</item>
-        <item>Pour changer le format de virgule dans les nombres, allez dans les paramètres puis cliquez sur la sélection du format de virgule puis sélectionnez votre préférence. Le format sélectionné sera applicable dans tout le compte utilisateur.</item>
-        <item>Pour partager une facture avec des liens de paiement, vous devez d\'abord configurer des passerelles de paiement en ligne à partir des paramètres. Ensuite, lors de la création de la facture, sélectionnez la passerelle de paiement respective par laquelle vous souhaitez être payé. Vous pouvez également sélectionner les deux options. Ensuite, partagez la facture sous forme de lien uniquement. Les liens de paiement seront automatiquement affichés dans l\'e-mail.</item>
-        <item>Si une facture a été payée via les liens de paiement partagés, une facture particulière affichera "Payé" dans le récapitulatif des factures. Alternativement, vous serez averti par la plate-forme de passerelle de paiement respective.</item>
-        <item>Votre premier paiement prendra 7 jours ouvrables et tous les paiements suivants prendront entre 2 et 7 jours ouvrables pour atteindre votre compte. Vous pouvez vérifier la date d\'arrivée estimée de votre paiement en utilisant votre tableau de bord Stripe / PayPal.</item>
-        <item>SIR gère les paiements par carte via Stripe, un leader du marché du traitement des paiements. L\'installation avec Stripe est facile et il n\'y a pas de frais d\'installation. Vous ne payez que par transaction. Pour plus de détails, visitez le &lt;a href="https://www.stripe.com/us/pricing" &gt;Stripe pricing&lt;/a&gt; page. Sur le tableau de bord Stripe, vous pouvez avoir une visibilité complète de toutes vos transactions, y compris les paiements par carte, les paiements en attente et les frais.</item>
-        <item>Pour changer/restaurer/mettre à niveau un abonnement, allez dans Paramètres puis cliquez sur Abonnement et sélectionnez votre préférence en conséquence. Thermes et conditions d\'application.</item>
-        <item>Pour changer de langue, allez dans les paramètres puis cliquez sur la langue et sélectionnez votre préférence.</item>
-        <item>Toutes vos données sont totalement sécurisées et sécurisées sur notre serveur Cloud.</item>
-        <item>Si votre requête n\'est pas répertoriée ici, contactez-nous via la fonction d\'assistance dans les paramètres et nous vous répondrons dans les plus brefs délais.</item>
-    </string-array>
+    <string-array name = "faqAnswerArray">
+        <item> للبدء ، انقر فوق تسجيل هنا وأنشئ حسابًا. ثم قم بتسجيل الدخول باستخدام بيانات الاعتماد الخاصة بك. أولاً ، تحتاج إلى إنشاء شركة من وحدة الشركات الخاصة بي. أدخل أكبر قدر من التفاصيل والشعار وتفاصيل الدفع وما إلى ذلك ؛ كما هو مطلوب للعرض على الفواتير والمستندات الأخرى. ثم قم بإنشاء المنتجات والخدمات والضرائب والعملاء والموردين من الوحدات النمطية المعنية في القائمة الجانبية. يمكنك تعديل أي من هذه التفاصيل في أي وقت. هذا يتوافق مع ميزة التحكم في التطبيق بحيث يمكن للمستخدمين تتبع أي نشاط / مخزون في أي وقت وتخزين جميع البيانات المتاحة داخل التطبيق للرجوع إليها / إعداد التقارير في المستقبل. بمجرد الانتهاء من ذلك أعلاه ، يمكنك إنشاء الفواتير والتقديرات وأوامر الشراء والإيصالات وقسائم الدفع من الوحدات المعنية في القائمة الجانبية أو أيقونات الدرج في الجزء السفلي من الشاشة الرئيسية في غضون ثوانٍ. </item>
+        <item>البند البيانات التي تم إنشاؤها حديثًا. </item>
+    <item> لإضافة مستخدمين جدد ، انتقل إلى إضافة وحدة مستخدمين جديدة من القائمة الجانبية ، ثم انقر فوق إضافة مستخدمين في الجزء العلوي الأيمن ، ثم أدخل التفاصيل وحدد حقوق وصول فردية / متعددة لمنحها ، ثم انقر فوق إضافة مستخدم. يمكن للمستخدم الجديد المضاف الوصول إلى التطبيق من خلال اسم المستخدم وكلمة المرور اللذين يتم إدخالهما أثناء إضافة المستخدم. يمكن للمستخدم الجديد إعادة تعيين كلمة المرور من شاشة تسجيل الدخول من خلال النقر على نسيت كلمة المرور واتباع الخطوات هناك لـ. </item>
+    <item> لإضافة مستودع ، انتقل إلى وحدة الشركات الخاصة بي من القائمة الجانبية ، ثم انقر فوق الشركة التي يجب إضافة المستودع إليها ، ثم انقر فوق إضافة مستودع من أعلى اليمين ، ثم أدخل التفاصيل وانقر فوق حفظ ومتابعة. </item>
+    <item> لتتبع الكمية في مستودع معين ، انتقل إلى وحدة المخزونات من القائمة الجانبية ، ثم حدد الشركة ، ثم انقر على أي منتج سيعرض الكمية المتوفرة في كل مستودع. </item>
+    <item> لتسجيل المخزون الافتتاحي للعناصر ، انتقل إلى وحدة المخزونات ثم حدد تحديث المخزون وسجل المعاملة. </item>
+    <item> لتسجيل العناصر الإضافية التي تم العثور عليها أثناء إجراء الجرد ، انتقل إلى وحدة المخزونات ثم حدد تحديث المخزون ثم قم بتسجيل العناصر. لإزالة العناصر المفقودة أثناء جرد المخزون ، انتقل إلى وحدة المخزونات ثم حدد الهدر / التلف ثم سجل العناصر المفقودة. </item>
+    <item> لنقل المخزون بين المستودعات ، انتقل إلى وحدة المخزونات من القائمة الرئيسية ثم حدد حركة المخزون ثم سجل المعاملة. </item>
+    <item> عندما يتم وضع علامة على أمر شراء صادر على أنه تسليم مستلم ، ستتم إضافة أصناف المخزون في أمر الشراء تلقائيًا إلى مخزون المخزون. عند إصدار فاتورة مبيعات ، سيتم تخفيض أصناف المخزون في فاتورة المبيعات تلقائيًا من مخزون المخزون. </item>
+    <item> يتم حساب قيمة المخزون وفقًا لمعدل المنتج الذي تم إدخاله أثناء إنشاء المنتج في وحدة "منتجاتي". </item>
+    <item> لإنشاء فاتورة ، انتقل إلى وحدة الفواتير من القائمة الجانبية أو من أيقونة العلبة ، ثم انقر فوق إنشاء فاتورة في أعلى اليمين ، ثم حدد الشركة وأدخل التفاصيل ذات الصلة ، ثم قم بمعاينة الفاتورة إذا لزم الأمر بالنقر فوق رمز المزيد بجوار إنشاء الفاتورة ، ثم انقر فوق إنشاء فاتورة ، وسيتم إنشاء فاتورتك ويمكن عرضها / مشاركتها من صفحة ملخص وحدة الفواتير. </item>
+    <item> Warehouse فقط عند تحديد المنتج لتمكين تتبع المخزون. إذا حددت عنصرًا ، فلا تحدد المستودع. </item>
+
+    <item> لإجراء أي من الوظائف المذكورة أعلاه ، انتقل إلى "الفواتير" ، ثم حدد الشركة ، ثم انتقل إلى الفاتورة المحددة ومرر لليسار ، ثم انقر على "المزيد" وحدد ما تفضله. </item>
+    <item> أثناء إنشاء الشركة ، تحتاج إلى تحديد اللون حسب التفضيل أو مطابقة هوية علامتك التجارية. سيتم تطبيق اللون المحدد على القوالب المختلفة في الفواتير / التقديرات. حدد أي قالب حسب اختيارك أثناء إنشاء الفاتورة / التقدير. إذا لم يتم تحديد أي لون ، فستعرض جميع النماذج التنسيق القياسي. </item>
+    <item> إذا لم يكن المستودع المحدد يحتوي على كمية كافية للفواتير ، فسيتعين عليك أولاً إضافة كمية كافية إلى المستودع المحدد. انتقل إلى وحدة الأسهم من القائمة الجانبية ، ثم يمكنك إما إضافة كمية من خيار تحديث المخزون أو نقل المخزون من مستودع إلى آخر من خيار حركة المخزون ، في الأعلى. </item>
+    <item> لإجراء أي من الوظائف المذكورة أعلاه ، انتقل إلى الفواتير ، ثم حدد الشركة ، ثم انتقل إلى الفاتورة المحددة ومرر لليسار ، ثم انقر على المزيد وحدد تفضيلاتك. </item>
+        <item> يمكن التحقق من حالة عرض الفاتورة فقط إذا تمت مشاركة الفاتورة كارتباط. عندما يفتح المستلم الرابط ، ستتغير الحالة تلقائيًا من معلق إلى ما يُرى في ملخص وحدة الفاتورة. إذا تمت مشاركة الفاتورة بتنسيق PDF فقط ، فلا يمكن تحديد الحالة المرئية وستظهر على أنها معلقة. </item>
+    <item> لتمييز الفواتير على أنها مدفوعة ، انتقل إلى وحدة الفواتير من القائمة الجانبية ، ثم حدد الشركة ، ثم انتقل إلى الفاتورة من القائمة التي يجب تمييزها على أنها مدفوعة ومرر لليسار ، ثم انقر فوق وضع علامة كمدفوع. إذا تم تمييز الفاتورة على أنها مدفوعة ، فيجب إنشاء إيصال ليعكس في كشف حساب العميل. وبالمثل ، إذا تم دفع أمر شراء ، فيجب إنشاء قسيمة دفع لتنعكس في كشف حساب المورد. </item>
+    <item> انتقل أولاً إلى ملخص الفواتير ، واسحب الفاتورة المحددة إلى اليسار وحددها كمدفوع. ثم اسحب الفاتورة إلى اليسار ، أسفل المزيد ، انقر فوق تحويل إلى إيصال ثم انقر فوق إنشاء إيصال. </item>
+    <item> ضع علامة على أمر الشراء باعتباره تسليمًا مستلمًا لإضافة كمية إلى المخزون. لتمييز أمر الشراء على أنه تسليم مستلم ، انتقل إلى وحدة أوامر الشراء من القائمة الجانبية وحدد الشركة ، ثم انتقل إلى أمر الشراء المحدد ، ثم اسحب لليسار وانقر على وضع علامة على أنه تم استلام التسليم. </item>
+    <item> لحذف فاتورة ، تحتاج إلى إنشاء إشعار دائن. لحذف أمر شراء ، تحتاج إلى إنشاء مذكرة خصم. نظرًا لأن العناصر الموجودة في الفاتورة / أمر الشراء مرتبطة بالمخزون ، فلا يمكن حذفها مباشرةً. بدلاً من ذلك ، يمكنك وضع علامة باطل على الفاتورة / أمر الشراء المحدد ، ثم لن يتم عرضه في التقارير ذات الصلة. إذا كنت تتعقب مخزون المنتجات ، فبعد وضع علامة على الفراغ ، تحتاج إلى الانتقال إلى وحدة الأسهم وإضافة / حذف الكمية في فاتورة / أمر شراء باطل من خلال تحديث المخزونات أو خيار الهدر. \ n </item>
+    <item> لوضع علامة باطل ، انتقل إلى فاتورة / أمر شراء معين ، مرر إلى اليسار ثم حدد وضع علامة باطل. </item>
+    <item> لإنشاء مذكرة خصم ، انتقل إلى ملاحظات الخصم من القائمة الجانبية ، ثم انقر فوق إنشاء ملاحظات الخصم في أعلى اليمين ، ثم سجل المعاملة وانقر فوق إنشاء مذكرة الخصم في الأسفل. سيتم تخفيض الكمية المدخلة في إشعار الخصم من رصيد مخزون المخزون. لإنشاء مذكرة ائتمان ، انتقل إلى ملاحظات الائتمان من القائمة الجانبية ، ثم انقر فوق إنشاء ملاحظات ائتمانية في أعلى اليمين ، ثم قم بتسجيل المعاملة وانقر فوق إنشاء ملاحظة ائتمان في الأسفل. ستتم إضافة الكمية التي تم إدخالها في مذكرة الائتمان مرة أخرى إلى رصيد مخزون المخزون. \ n </item>
+    <item> إذا تم تحويل تقدير تم إنشاؤه إلى فاتورة ، تتغير الحالة من معلق إلى مكتمل. لتحويل تقدير إلى فاتورة ، انتقل إلى ملخص التقديرات ، واسحب التقدير المحدد إلى اليسار ، ثم انقر فوق المزيد ، ثم حدد تحويل إلى فاتورة ، ثم انقر فوق إنشاء فاتورة. </item>
+
+    <item> سيتم عرض تفاصيل الشركة الأولى التي أنشأها المستخدم على الشاشة الرئيسية بشكل افتراضي. للتبديل بين الشركات ، انقر فوق رمز النجمة في أعلى يمين الشاشة الرئيسية ثم حدد الشركة المطلوبة. يتم عرض الشركة المحددة على الشاشة الرئيسية عند الاقتضاء. </item>
+    <item> يستغرق الإعداد باستخدام Stripe أو PayPal بضع دقائق. ما عليك سوى تمكين المدفوعات عبر الإنترنت في تطبيقك واتباع التعليمات. </item>
+    <item> لا توجد رسوم شهرية أو مقدمة. هناك رسوم لكل معاملة ، والتي تختلف حسب الدولة. للتحقق من الرسوم في بلدك ، يرجى زيارة &amp; lt؛ a href = "https://www.stripe.com/us/pricing" &amp; gt؛ Stripe pricing &amp; lt؛ / a &amp; gt؛ أو &amp; lt؛ a href = "https://www.paypal.com/us/webapps/mpp/merchant-fees" &amp; gt؛ https: //www.paypal.com/us/webapps/mpp/merchant-fees&amp;lt؛ / أ &amp; GT؛ </item>
+    <item> لتغيير تنسيق الفاصلة بالأرقام ، انتقل إلى الإعدادات ثم انقر فوق اختيار تنسيق الفاصلة ثم حدد ما تفضله. سيكون التنسيق المحدد قابلاً للتطبيق في جميع أنحاء حساب المستخدم. </item>
+    <item> لمشاركة فاتورة مع روابط الدفع ، تحتاج أولاً إلى إعداد بوابات الدفع عبر الإنترنت من الإعدادات. ثم ، أثناء إنشاء الفاتورة ، حدد بوابة الدفع المعنية التي ترغب في الحصول على أموال من خلالها. يمكنك تحديد كلا الخيارين أيضًا. ثم مشاركة الفاتورة كارتباط فقط. سيتم عرض روابط الدفع تلقائيًا في البريد الإلكتروني. </item>
+    <item> إذا تم دفع فاتورة من خلال روابط الدفع المشتركة ، فستعرض فاتورة معينة "مدفوعة" في ملخص الفواتير. بدلاً من ذلك ، سيتم إخطارك من خلال منصة بوابة الدفع المعنية. </item>
+    <item> ستستغرق دفعتك الأولى 7 أيام عمل وستستغرق جميع الدفعات اللاحقة ما بين 2 إلى 7 أيام عمل للوصول إلى حسابك. يمكنك التحقق من تاريخ الوصول المقدر لدفعتك باستخدام لوحة تحكم Stripe / PayPal. </item>
+    <item> SIR يتعامل مع مدفوعات البطاقات من خلال Stripe ، الشركة الرائدة في السوق في معالجة المدفوعات. يعد الإعداد باستخدام Stripe أمرًا سهلاً ولا توجد تكاليف إعداد. أنت تدفع فقط لكل معاملة. لمزيد من التفاصيل ، قم بزيارة &amp; lt؛ a href = "https://www.stripe.com/us/pricing" &amp; gt؛ Stripe pricing &amp; lt؛ / a &amp; gt؛ صفحة. على لوحة تحكم Stripe ، يمكنك الحصول على رؤية كاملة لجميع معاملاتك بما في ذلك مدفوعات البطاقات والمدفوعات المعلقة والرسوم. </item>
+    <item> للتبديل / استعادة / ترقية اشتراك ، انتقل إلى الإعدادات ثم انقر فوق "اشتراك" وحدد تفضيلاتك وفقًا لذلك. تطبق الشروط والأحكام. </item>
+    <item> لتبديل اللغة ، انتقل إلى الإعدادات ثم انقر على اللغة وحدد تفضيلاتك. </item>
+    <item> جميع بياناتك آمنة تمامًا وآمنة على خادمنا المستند إلى السحابة. </item>
+    <item> إذا لم يكن استفسارك مدرجًا هنا ، فاتصل بنا عبر ميزة الدعم في الإعدادات وسنعاود الاتصال بك في أقرب وقت ممكن. </item>
+</string-array>
 
 
 
 
-
-    <string-array name="languageArray">
-        <item>Anglaise</item>
-        <item>arabe</item>
-        <item>Allemande</item>
-        <item>Néerlandaise</item>
-        <item>français</item>
-        <item>Italien</item>
-        <item>Espanol</item>
-        <item>Portugais</item>
+    <string-array name = "languageArray">
+        <item> الإنجليزية </item>
+        <item> العربية </item>
+        <item> الألمانية </item>
+        <item> الهولندية </item>
+        <item> الفرنسية </item>
+        <item> الإيطالية </item>
+        <item> الإسبانية </item>
+        <item> البرتغالية </item>
     </string-array>
 
 

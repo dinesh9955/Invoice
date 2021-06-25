@@ -36,17 +36,17 @@
 
 
     <application
-
         android:name=".SAADApplication"
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/app_icon"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden|adjustPan"
+        tools:replace="android:supportsRtl"
         >
 
         <activity

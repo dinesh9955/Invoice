@@ -576,7 +576,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             public void onClick(View v) {
 
                 if (selectedCompanyId.equals("")) {
-                    Constant.ErrorToast(getActivity(), "Select A Company");
+                    Constant.ErrorToast(getActivity(), getString(R.string.select_company));
 
                 } else {
 

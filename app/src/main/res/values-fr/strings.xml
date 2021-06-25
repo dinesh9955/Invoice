@@ -7,7 +7,7 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
-
+    <string name="error">Erreur</string>
 
     <string name="preview">Aperçu</string>
     <string name="done">Fait</string>
@@ -669,7 +669,7 @@
     <string name="dialog_immediately">immédiatement</string>
     <string name="dialog_PleaseSelectOneValue">Veuillez sélectionner une valeur</string>
     <string name="select_Please_enter_amount">" Veuillez saisir le montant!"</string>
-    <string name="select_Please_enter_quantity">Veuillez saisir la quantité!</string>
+    <string name="select_Please_enter_quantity">Veuillez saisir0 la quantité!</string>
     <string name="select_We_appreciateThank_you">Nous apprécions votre entreprise. Veuillez trouver ci-dessous la note de remerciement.</string>
     <string name="select_Shipping_amount_PurchaseOrder">Voulez-vous ajouter un montant d\'expédition pour ce bon de commande ?</string>
     <string name="select_Shipping_amount_PaymentVoucher">Voulez-vous ajouter un montant d\'expédition pour ce bon de paiement ?</string>

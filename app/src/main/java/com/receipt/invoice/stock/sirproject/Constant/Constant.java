@@ -658,7 +658,7 @@ public class Constant {
         Utility.hideKeypad(context);
         new Flashbar.Builder(context)
                 .gravity(Flashbar.Gravity.BOTTOM)
-                .title("\nSuccess")
+                .title(context.getString(R.string.dialog_Success))
                 .titleTypeface(Typeface.createFromAsset(context.getAssets(),"Fonts/AzoSans-Bold.otf"))
                 .titleSizeInSp(15)
                 .message(message)
@@ -685,7 +685,7 @@ public class Constant {
 
         new Flashbar.Builder(context)
                 .gravity(Flashbar.Gravity.BOTTOM)
-                .title("\nError")
+                .title(context.getString(R.string.error))
                 .titleTypeface(Typeface.createFromAsset(context.getAssets(),"Fonts/AzoSans-Bold.otf"))
                 .titleSizeInSp(15)
                 .message(message)
@@ -714,7 +714,7 @@ public class Constant {
 
         new Flashbar.Builder(context)
                 .gravity(Flashbar.Gravity.TOP)
-                .title("\nError")
+                .title(context.getString(R.string.error))
                 .titleTypeface(Typeface.createFromAsset(context.getAssets(),"Fonts/AzoSans-Bold.otf"))
                 .titleSizeInSp(15)
                 .message(message)
