@@ -42,6 +42,7 @@ import com.receipt.invoice.stock.sirproject.Invoice.response.ProductsItemDto;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
+import com.receipt.invoice.stock.sirproject.ThankYouNote.SendThankYouNoteActivity;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
@@ -918,16 +919,16 @@ public class SendInvoiceReminderActivity extends BaseActivity {
 //                        .replaceAll("Client E", sltcustomer_email)
                         .replaceAll("Notes-", strnotes)
                       //  .replaceAll("#SIGNATURES#", signatureinvoice)
-                        .replaceAll("dataimageCompany_Stamp", invoice_image_pathcompanystemp)
-                        .replaceAll("dataimageRecieverImage", invoice_image_pathreceiverpath)
+//                        .replaceAll("dataimageCompany_Stamp", invoice_image_pathcompanystemp)
+//                        .replaceAll("dataimageRecieverImage", invoice_image_pathreceiverpath)
 
 //                Log.e(TAG, "invoice_image_pathcompanystemp: "+invoice_image_pathcompanystemp);
 //                Log.e(TAG, "invoice_image_pathreceiverpath: "+invoice_image_pathreceiverpath);
 //                Log.e(TAG, "invoice_image_pathissuverpath: "+invoice_image_pathissuverpath);
 
-                        .replaceAll("Company Seal", companyname)
-                        .replaceAll("Authorized Signatory", signature_of_receivername)
-
+//                        .replaceAll("Company Seal", companyname)
+//                        .replaceAll("Authorized Signatory", signature_of_receivername)
+                        .replaceAll("#SIGNATURES#", signatureinvoice)
                         .replaceAll("#ITEMS#", productitemlist)
                         .replaceAll("#LOGO_IMAGE#",companylogopathdto)
                         .replaceAll("#Shipp", ""+stringBuilderShipTo.toString())
@@ -1006,37 +1007,52 @@ public class SendInvoiceReminderActivity extends BaseActivity {
 
                                             // createinvoicewithdetail(file);
 
-
-
-                                            Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-                                            // File fileWithinMyDir = new File(message);
-                                            Uri photoURI = FileProvider.getUriForFile(SendInvoiceReminderActivity.this,
-                                                    "com.receipt.invoice.stock.sirproject.provider",
+                                            Uri imageUri1 = FileProvider.getUriForFile(
+                                                    SendInvoiceReminderActivity.this,
+                                                    "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
                                                     file);
+                                            ArrayList<Uri> uriArrayList = new ArrayList<>();
+                                            uriArrayList.add(imageUri1);
+                                            Intent sharingIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                                            sharingIntent.setType("application/pdf/*|image/*");
+                                            sharingIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+                                            sharingIntent.putExtra(Intent.EXTRA_SUBJECT,
+                                                    getString(R.string.html_InvoiceDueDateReminder));
+                                            sharingIntent.putExtra(Intent.EXTRA_TEXT,
+                                                    getString(R.string.html_Your_invoice_reminder_note));
+                                            startActivity(Intent.createChooser(sharingIntent, getString(R.string.list_ShareFile)));
+                                            finish();
 
-                                            if(file.exists()) {
-                                                intentShareFile.setType("application/pdf");
-                                                //Uri outputFileUri = Uri.fromFile(file);
-                                                intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
 
-//                                                List<ResolveInfo> resInfoList = getPackageManager().queryIntentActivities(intentShareFile, PackageManager.MATCH_DEFAULT_ONLY);
-//                                                for (ResolveInfo resolveInfo : resInfoList) {
-//                                                    String packageName = resolveInfo.activityInfo.packageName;
-//                                                    grantUriPermission(packageName, photoURI, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                                                }
-
-                                                intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-                                                        getString(R.string.html_InvoiceDueDateReminder));
-                                                intentShareFile.putExtra(Intent.EXTRA_TEXT,
-                                                        getString(R.string.html_Your_invoice_reminder_note));
-
-//                                if (Utility.isAppAvailable(SendInvoiceReminderActivity.this, "com.google.android.gm")){
-////                                    intentShareFile.setPackage("com.google.android.gm");
-////                                }
-////                                startActivity(intentShareFile);
-                                                startActivity(Intent.createChooser(intentShareFile, getString(R.string.list_ShareFile)));
-                                                finish();
-                                            }
+//                                            Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//                                            // File fileWithinMyDir = new File(message);
+//                                            Uri photoURI = FileProvider.getUriForFile(SendInvoiceReminderActivity.this,
+//                                                    "com.receipt.invoice.stock.sirproject.provider",
+//                                                    file);
+//
+//                                            if(file.exists()) {
+//                                                intentShareFile.setType("application/pdf");
+//                                                //Uri outputFileUri = Uri.fromFile(file);
+//                                                intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
+//
+////                                                List<ResolveInfo> resInfoList = getPackageManager().queryIntentActivities(intentShareFile, PackageManager.MATCH_DEFAULT_ONLY);
+////                                                for (ResolveInfo resolveInfo : resInfoList) {
+////                                                    String packageName = resolveInfo.activityInfo.packageName;
+////                                                    grantUriPermission(packageName, photoURI, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+////                                                }
+//
+//                                                intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+//                                                        getString(R.string.html_InvoiceDueDateReminder));
+//                                                intentShareFile.putExtra(Intent.EXTRA_TEXT,
+//                                                        getString(R.string.html_Your_invoice_reminder_note));
+//
+////                                if (Utility.isAppAvailable(SendInvoiceReminderActivity.this, "com.google.android.gm")){
+//////                                    intentShareFile.setPackage("com.google.android.gm");
+//////                                }
+//////                                startActivity(intentShareFile);
+//                                                startActivity(Intent.createChooser(intentShareFile, getString(R.string.list_ShareFile)));
+//                                                finish();
+//                                            }
 
 
                                         }

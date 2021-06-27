@@ -139,15 +139,15 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.View
 
         Log.e(TAG, "product_description: "+product_description);
 
-//
-//        if (product_description.equals("") || product_description.equals("null"))
-//        {
-//            viewHolderForCat.productdistxt.setText("");
-//        }
-//        else
-//        {
-//            viewHolderForCat.productdistxt.setText(String.valueOf(product_description));
-//        }
+
+        if (product_description.equals("") || product_description.equals("null"))
+        {
+            viewHolderForCat.productdistxt.setText("");
+        }
+        else
+        {
+            viewHolderForCat.productdistxt.setText(String.valueOf(product_description));
+        }
 
         viewHolderForCat.deleteimg.setOnClickListener(new View.OnClickListener() {
             @Override

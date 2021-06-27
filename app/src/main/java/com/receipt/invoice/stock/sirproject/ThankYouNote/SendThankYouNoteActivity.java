@@ -931,12 +931,12 @@ public class SendThankYouNoteActivity extends BaseActivity {
 //                        .replaceAll("Client Web", sltcustomer_website)
 //                        .replaceAll("Client E", sltcustomer_email)
                         .replaceAll("Notes-", strnotes)
-                    //    .replaceAll("#SIGNATURES#", signatureinvoice)
-                        .replaceAll("dataimageCompany_Stamp", invoice_image_pathcompanystemp)
-                        .replaceAll("dataimageRecieverImage", invoice_image_pathreceiverpath)
-
-                        .replaceAll("Company Seal", companyname)
-                        .replaceAll("Authorized Signatory", signature_of_receivername)
+                        .replaceAll("#SIGNATURES#", signatureinvoice)
+//                        .replaceAll("dataimageCompany_Stamp", invoice_image_pathcompanystemp)
+//                        .replaceAll("dataimageRecieverImage", invoice_image_pathreceiverpath)
+//
+//                        .replaceAll("Company Seal", companyname)
+//                        .replaceAll("Authorized Signatory", signature_of_receivername)
 
                         .replaceAll("#ITEMS#", productitemlist)
                         .replaceAll("#LOGO_IMAGE#",companylogopathdto)
@@ -1020,13 +1020,14 @@ public class SendThankYouNoteActivity extends BaseActivity {
 //                                intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
 
                                // File mFile1 = new File(pdf);
-                                File mFile2 = new File("/sdcard/share.jpg");
+
 
                                 Uri imageUri1 = FileProvider.getUriForFile(
                                         SendThankYouNoteActivity.this,
                                         "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
                                         file);
 
+                                File mFile2 = new File("/sdcard/share.jpg");
                                 Uri imageUri2 = FileProvider.getUriForFile(
                                         SendThankYouNoteActivity.this,
                                         "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )

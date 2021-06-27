@@ -96,6 +96,8 @@ public class Customer_Bottom_Adapter extends RecyclerView.Adapter<Customer_Botto
            }
 
 
+
+
            RequestOptions options = new RequestOptions();
            options.centerCrop();
            options.placeholder(R.drawable.app_icon);
@@ -153,6 +155,7 @@ public class Customer_Bottom_Adapter extends RecyclerView.Adapter<Customer_Botto
 
             name = itemView.findViewById(R.id.name);
             contactname = itemView.findViewById(R.id.contactname);
+
             image = itemView.findViewById(R.id.image);
 
             name.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Light.otf"));

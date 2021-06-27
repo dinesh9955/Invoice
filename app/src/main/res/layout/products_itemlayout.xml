@@ -42,15 +42,15 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="33dp"
-        android:text="Qty: 10"
+        android:text="Description"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/quantity"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/quantity"
-        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/quantity"
         app:layout_constraintVertical_bias="0.727"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 
     <TextView
         android:id="@+id/price"

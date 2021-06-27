@@ -145,6 +145,17 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
             viewHolderForCat.productcurrencyunit.setText(currency_code);
         }
 
+
+        if (product_description.equals("") || product_description.equals("null"))
+        {
+            viewHolderForCat.description.setText("");
+        }
+        else
+        {
+            viewHolderForCat.description.setText(product_description);
+        }
+
+
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.app_icon);
@@ -202,7 +213,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
     public class ViewHolderForCat extends RecyclerView.ViewHolder {
 
 
-        TextView productname,productquantity,productcurrency,productcurrencyunit;
+        TextView productname,productquantity,productcurrency,productcurrencyunit, description;
         RoundedImageView image;
 
 
@@ -213,6 +224,8 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
             productquantity = itemView.findViewById(R.id.productquantity);
             productcurrency = itemView.findViewById(R.id.productcurrency);
             productcurrencyunit = itemView.findViewById(R.id.productcurrencyunit);
+            description = itemView.findViewById(R.id.description);
+
             image = itemView.findViewById(R.id.image);
 
             productname.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));

@@ -154,6 +154,20 @@ public class Abc extends BaseActivity {
             @Override
             public void onClick(View v) {
 
+
+                double quantity = 10.0;
+
+                double bb = 11.0;
+
+                if(quantity < bb){
+                    Log.e(TAG, "AAAAAAAAAA");
+                }else{
+                    Log.e(TAG, "BBBBBBBBBB");
+                }
+
+
+
+
 //               WebView invoiceweb = findViewById(R.id.invoiceweb);
 //                //create object of print manager in your device
 //                PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);

@@ -4023,7 +4023,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                         Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
 
                         if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
-                            if (itemQuantity.getEn_quantity() <= en_quantity) {
+                            if (itemQuantity.getEn_quantity() < en_quantity) {
                                 mybuilder.show();
                                 Constant.ErrorToast(ConvertToReceiptsActivity.this, getString(R.string.invoice_InsufficientQuantityAvailable));
                                 mybuilder.dismiss();
@@ -4997,6 +4997,8 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         }
 
 
+        signature_of_issuer = "";
+
         String signature_of_issuername = "";
         if (signature_of_issuer.toLowerCase().endsWith(".gif") || signature_of_issuer.toLowerCase().endsWith(".jpg") || signature_of_issuer.toLowerCase().endsWith(".jpeg") || signature_of_issuer.toLowerCase().endsWith(".png")){
             if(signature_of_issuer.toLowerCase().endsWith("white_img.png")){
@@ -5273,8 +5275,8 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                     .replaceAll("#SIGNATURES#", Signatureincoicestr)
                     .replaceAll("#ITEMS#", productitemlist)
                     .replaceAll("#Shipp", ""+stringBuilderShipTo.toString())
-                    .replaceAll("#ATTACHMENTS#", multipleimage)
-                    .replaceAll("Attachments", attachmentimage)
+                    .replaceAll("#ATTACHMENTS#", "")
+                    .replaceAll("Attachments", "")
                     .replaceAll("Notes:", notestringvalue)
                     .replaceAll("Ship To:", Shiping_tostr)
                     .replaceAll(" Shipping ", shipingvaluetxt)

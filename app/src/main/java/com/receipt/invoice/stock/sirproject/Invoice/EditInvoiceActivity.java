@@ -4378,7 +4378,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                             Log.e(TAG, "itemQuantityBB "+itemQuantity.getProduct_type());
 
                                     if(itemQuantity.getProduct_type().equalsIgnoreCase("PRODUCT")) {
-                                        if (itemQuantity.getEn_quantity() <= en_quantity) {
+                                        if (itemQuantity.getEn_quantity() < en_quantity) {
                                             mybuilder.show();
                                             Constant.ErrorToast(EditInvoiceActivity.this, getString(R.string.invoice_InsufficientQuantityAvailable));
                                             mybuilder.dismiss();

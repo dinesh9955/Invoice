@@ -46,6 +46,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Description"
+        android:id="@+id/description"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/productquantity"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:text="120.00"
