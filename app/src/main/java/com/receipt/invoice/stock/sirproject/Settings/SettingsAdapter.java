@@ -98,6 +98,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
                 } else if(i == 4){
 //                    Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
 //                    mcontext.startActivity(intent);
+                    ((SettingsActivity)mcontext).restorePurchase();
                 } else if(i == 5){
                     try {
                         Intent shareIntent = new Intent(Intent.ACTION_SEND);
