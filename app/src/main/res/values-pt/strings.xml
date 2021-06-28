@@ -21,7 +21,15 @@
     <string name="header_payment_vouchers">Vouchers de pagamento</string>
 
 
+    <string name = "home_NoInvoice"> Sem faturas </string>
+    <string name = "home_NoCN"> Sem notas de crédito </string>
+    <string name = "home_NoDN"> Sem notas de débito </string>
+    <string name = "home_NoEstimates"> Sem estimativas </string>
+    <string name = "home_NoPO"> Sem ordens de compra </string>
+    <string name = "home_NoPV"> Sem comprovantes de pagamento </string>
+    <string name = "home_NoReceipts"> Sem recibos </string>
 
+    <string name="invoice_AuthorizedSignatory">Signatário autorizado</string>
 
     <string name="home_hello">Olá</string>
     <string name="home_quick_look">Uma rápida olhada em suas principais atividades de negócios</string>

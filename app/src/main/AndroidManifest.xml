@@ -262,7 +262,10 @@
         <activity
             android:name=".Home.Go_Premium_Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/GoPremium" />
+            android:theme="@style/GoPremium" >
+
+
+        </activity>
         <activity
             android:name=".Home.Home_Activity"
             android:launchMode="singleTask"

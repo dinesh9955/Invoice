@@ -121,6 +121,7 @@ public class ListOfDebitNotes extends BaseFragment {
     String customerName = "";
     String dataNo = "";
 
+    TextView textViewMsg;
     public ListOfDebitNotes() {
         // Required empty public constructor
     }
@@ -147,6 +148,10 @@ public class ListOfDebitNotes extends BaseFragment {
         search.setHint(getString(R.string.list_SearchByDebitNoteNumber));
         selectcompany = view.findViewById(R.id.selectcompany);
         imageViewmenu = view.findViewById(R.id.imageViewmenu);
+
+        textViewMsg = view.findViewById(R.id.txtinvoice);
+        textViewMsg.setText(getString(R.string.home_NoDN));
+        textViewMsg.setVisibility(View.VISIBLE);
 
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
         search.addTextChangedListener(new TextWatcher() {
@@ -313,6 +318,12 @@ public class ListOfDebitNotes extends BaseFragment {
             }
         }
         invoicelistAdapterdt.updateList(temp);
+
+        if (temp.size() == 0){
+            textViewMsg.setVisibility(View.VISIBLE);
+        }else{
+            textViewMsg.setVisibility(View.GONE);
+        }
     }
 
 
@@ -534,7 +545,11 @@ public class ListOfDebitNotes extends BaseFragment {
                         }
 
                         invoicelistAdapterdt.updateList(list);
-
+                        if (list.size() == 0){
+                            textViewMsg.setVisibility(View.VISIBLE);
+                        }else{
+                            textViewMsg.setVisibility(View.GONE);
+                        }
                     }
 
 
@@ -564,6 +579,8 @@ public class ListOfDebitNotes extends BaseFragment {
                 } else {
                     Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
+
+                textViewMsg.setVisibility(View.VISIBLE);
             }
         });
     }

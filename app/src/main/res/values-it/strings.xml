@@ -20,8 +20,14 @@
     <string name="header_purchase_orders">Ordini di acquisto</string>
     <string name="header_payment_vouchers">Buoni di pagamento</string>
 
-
-
+    <string name="home_NoInvoice">Nessuna fattura</string>
+    <string name="home_NoCN">Nessuna nota di credito</string>
+    <string name="home_NoDN">Nessuna nota di addebito</string>
+    <string name="home_NoEstimates">Nessuna stima</string>
+    <string name="home_NoPO">Nessun ordine di acquisto</string>
+    <string name="home_NoPV">Nessun buono di pagamento</string>
+    <string name="home_NoReceipts">Nessuna ricevuta</string>
+    <string name="invoice_AuthorizedSignatory">Firmatario autorizzato</string>
 
     <string name="home_hello">Ciao</string>
     <string name="home_quick_look">Una rapida occhiata alle tue principali attività commerciali</string>

@@ -21,6 +21,15 @@
     <string name="header_payment_vouchers">Bons de paiement</string>
 
 
+    <string name="home_NoInvoice">Aucune facture</string>
+    <string name="home_NoCN">Aucune note de crédit</string>
+    <string name="home_NoDN">Aucune note de débit</string>
+    <string name="home_NoEstimates">Aucune estimation</string>
+    <string name="home_NoPO">Aucun bon de commande</string>
+    <string name="home_NoPV">Pas de bons de paiement</string>
+    <string name="home_NoReceipts">Aucun reçu</string>
+
+    <string name="invoice_AuthorizedSignatory">Signataire autorisé</string>
 
 
     <string name="home_hello">Bonjour</string>

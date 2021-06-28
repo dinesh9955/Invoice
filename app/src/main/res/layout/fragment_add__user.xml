@@ -405,7 +405,7 @@
                 android:layout_marginTop="30dp"
                 android:text="@string/Termsconditionsapply"
                 android:textColor="@color/dark_grey"
-                android:textSize="12sp"
+                android:textSize="@dimen/_9sdp"
                 android:layout_below="@id/adduser"
                 android:id="@+id/txtterms"
                 />
@@ -415,11 +415,13 @@
                 android:layout_centerHorizontal="true"
                 android:text="@string/user_one_time_payment"
                 android:textColor="@color/dark_grey"
-                android:textSize="8sp"
+                android:textSize="@dimen/_7sdp"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/txtterms"
                 android:id="@+id/txtdescription"
                 android:layout_marginBottom="80dp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
                 />
 
         </RelativeLayout>

@@ -164,14 +164,14 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
 
                 InvoiceCustomerDto invoiceCustomerDto = data.getInvoice().getCustomer();
 
-
-
-                sltcustonername = invoiceCustomerDto.getCustomerName();
-                sltcustomer_address = invoiceCustomerDto.getAddress();
-                sltcustomer_phone_number = invoiceCustomerDto.getPhoneNumber();
-                sltcustomer_website = invoiceCustomerDto.getWebsite();
-                sltcustomer_email = invoiceCustomerDto.getEmail();
-                sltcustomer_contact = invoiceCustomerDto.getContactName();
+                if(invoiceCustomerDto != null){
+                    sltcustonername = invoiceCustomerDto.getCustomerName();
+                    sltcustomer_address = invoiceCustomerDto.getAddress();
+                    sltcustomer_phone_number = invoiceCustomerDto.getPhoneNumber();
+                    sltcustomer_website = invoiceCustomerDto.getWebsite();
+                    sltcustomer_email = invoiceCustomerDto.getEmail();
+                    sltcustomer_contact = invoiceCustomerDto.getContactName();
+                }
 
 
                 if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
@@ -193,14 +193,19 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
                     stringBuilderBillTo.append(sltcustomer_email+"");
                 }
 
-                shippingfirstname = invoiceCustomerDto.getShippingFirstname();
-                shippinglastname = invoiceCustomerDto.getShippingLastname();
-                shippingaddress1 = invoiceCustomerDto.getShippingAddress1();
-                shippingaddress2 = invoiceCustomerDto.getShippingAddress2();
-                shippingcity = invoiceCustomerDto.getShippingCity();
-                shippingcountry = invoiceCustomerDto.getShippingCountry();
-                shippingpostcode = invoiceCustomerDto.getShippingPostcode();
-                shippingzone = (String) invoiceCustomerDto.getShippingZone();
+
+
+                if(invoiceCustomerDto != null){
+                    shippingfirstname = invoiceCustomerDto.getShippingFirstname();
+                    shippinglastname = invoiceCustomerDto.getShippingLastname();
+                    shippingaddress1 = invoiceCustomerDto.getShippingAddress1();
+                    shippingaddress2 = invoiceCustomerDto.getShippingAddress2();
+                    shippingcity = invoiceCustomerDto.getShippingCity();
+                    shippingcountry = invoiceCustomerDto.getShippingCountry();
+                    shippingpostcode = invoiceCustomerDto.getShippingPostcode();
+                    shippingzone = (String) invoiceCustomerDto.getShippingZone();
+                }
+
 
                 // Company Detail
                 InvoiceCompanyDto companyDto = data.getInvoice().getCompany();
@@ -578,6 +583,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
             companyname = getString(R.string.html_CompanySeal);
         }
 
+        signature_of_receiver = "";
         String signature_of_receivername="";
         if(signature_of_receiver.equals("") || signature_of_receiver.endsWith("white_img.png"))
         {
@@ -596,7 +602,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
             signature_of_issuername="";
         }else {
             invoice_image_pathissuverpath=invoice_image_path + signature_of_issuer;
-            signature_of_issuername = getString(R.string.html_SignatureofIssuer);
+            signature_of_issuername = getString(R.string.invoice_AuthorizedSignatory);
         }
 
         Log.e(TAG, "invoice_image_pathcompanystemp "+invoice_image_pathcompanystemp);

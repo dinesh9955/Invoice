@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/title1"
                 android:text="heading"
-                android:textSize="20sp"
+                android:textSize="@dimen/_18sdp"
                 android:textColor="@color/darkblue"
                 android:layout_centerInParent="true"
                 android:textStyle="bold"

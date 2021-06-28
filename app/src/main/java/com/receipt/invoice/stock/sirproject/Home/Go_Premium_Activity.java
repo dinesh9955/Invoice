@@ -77,11 +77,11 @@ public class Go_Premium_Activity extends BaseActivity implements BillingProcesso
         setFonts();
         setListeners();
 
-        if (getIntent().hasExtra("signup")){
-            mail = getIntent().getStringExtra("mail");
-            pwd = getIntent().getStringExtra("pwd");
-            fromsignup="yes";
-        }
+//        if (getIntent().hasExtra("signup")){
+//            mail = getIntent().getStringExtra("mail");
+//            pwd = getIntent().getStringExtra("pwd");
+//            fromsignup="yes";
+//        }
 
     }
 
@@ -226,7 +226,8 @@ public class Go_Premium_Activity extends BaseActivity implements BillingProcesso
 
                     restoretxt.setTextColor(getResources().getColor(R.color.lightwhite));
                     purchasestxt.setTextColor(getResources().getColor(R.color.lightwhite));
-
+//                    bp.subscribe(Go_Premium_Activity.this,"android.test.purchased");
+                    bp.subscribe(Go_Premium_Activity.this,"monthly_3.99");
                     //perform action after 2 secs
                     new Handler().postDelayed(new Runnable() {
                         @Override

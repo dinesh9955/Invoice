@@ -40,6 +40,8 @@ public class SettingsActivity extends BaseActivity {
     ArrayList<String> arrayListNames = new ArrayList<>();
     ArrayList<Integer> arrayListIcons = new ArrayList<>();
 
+    private BillingProcessor bp;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,10 +97,9 @@ public class SettingsActivity extends BaseActivity {
         recycler_invoices.setLayoutManager(new LinearLayoutManager(SettingsActivity.this, LinearLayoutManager.VERTICAL, false));
         recycler_invoices.setHasFixedSize(true);
         invoicelistAdapterdt.notifyDataSetChanged();
-    }
 
-    private BillingProcessor bp;
-    public void restorePurchase() {
+
+
         bp = new BillingProcessor(this, AllSirApi.LICENSE_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
@@ -113,7 +114,7 @@ public class SettingsActivity extends BaseActivity {
                 Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
                 String date = simple.format(purchaseTime);
 
-               // callAPI(productId, purchaseToken, date);
+                // callAPI(productId, purchaseToken, date);
 
 
 //                SkuDetails dd = bp.getPurchaseListingDetails("");
@@ -141,14 +142,38 @@ public class SettingsActivity extends BaseActivity {
                 //updateTextViews();
 
 
-                SkuDetails ddd = bp.getPurchaseListingDetails("");
+                // SkuDetails ddd = bp.getPurchaseListingDetails("");
 
-//                ddd.
+
+                TransactionDetails premiumTransactionDetails = bp.getPurchaseTransactionDetails("premium_id");
+
+                if (premiumTransactionDetails == null) {
+                    Log.i(TAG, "onPurchaseHistoryRestored(): Havn't bought premium yet.");
+                    // purchasePremiumButton.setEnabled(true);
+                    Constant.ErrorToast(SettingsActivity.this , "You have not subscribe plan");
+                }
+                else {
+                    Log.i(TAG, "onPurchaseHistoryRestored(): Already purchases premium.");
+
+                    Constant.SuccessToast(SettingsActivity.this , "You have already subscribe plan");
+
+//                    purchasePremiumButton.setText(getString(R.string.you_have_premium));
+//                    purchasePremiumButton.setEnabled(false);
+//                    statusTextView.setVisibility(View.INVISIBLE);
+                }
+
+
             }
         });
 
 
-//        bp.purchase(this, itemSubscribe2.getProductId());
+    }
+
+
+    public void restorePurchase() {
+        Log.e(TAG, "restorePurchase ");
+
+        bp.purchase(this, "FunnyStickerPaid");
 //        BillingHelper.restoreTransactionInformation(BillingSecurity.generateNonce())
     }
 }

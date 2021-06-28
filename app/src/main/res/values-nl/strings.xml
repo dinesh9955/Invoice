@@ -21,7 +21,15 @@
     <string name="header_payment_vouchers">Betalingsvouchers</string>
 
 
+    <string name="invoice_AuthorizedSignatory">Geautoriseerd ondertekenaar</string>
 
+    <string name="home_NoInvoice">Geen facturen</string>
+    <string name="home_NoCN">Geen creditnota\'s</string>
+    <string name="home_NoDN">Geen debetnota\'s</string>
+    <string name="home_NoEstimates">Geen schattingen</string>
+    <string name="home_NoPO">Geen inkooporders</string>
+    <string name="home_NoPV">Geen betalingsvouchers</string>
+    <string name="home_NoReceipts">Geen ontvangsten</string>
 
     <string name="home_hello">Hallo</string>
     <string name="home_quick_look">Een snelle blik op uw belangrijkste bedrijfsactiviteiten</string>

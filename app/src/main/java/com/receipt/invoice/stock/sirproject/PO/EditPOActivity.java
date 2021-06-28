@@ -2228,6 +2228,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymode);
             selectpaymentmode.setAdapter(namesadapter);
 
+            paimentmodespinerstr = "";
 
             selectpaymentmode.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
                 @Override
@@ -2298,7 +2299,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                         Constant.ErrorToastTop(EditPOActivity.this, getString(R.string.dialog_DateRequired));
                         //Toast.makeText(EditPOActivity.this, "Date Required", Toast.LENGTH_SHORT).show();
 //                        eddate.requestFocus();
-                    } else if (Utility.isEmptyNull(paymentmode).equalsIgnoreCase("")) {
+                    } else if (Utility.isEmptyNull(paimentmodespinerstr).equalsIgnoreCase("")) {
                         Constant.ErrorToastTop(EditPOActivity.this, getString(R.string.dialog_PaymentModeRequired));
 //                        Constant.ErrorToast(EditPOActivity.this, "Payment Mode Required");
                         //Toast.makeText(EditPOActivity.this, "Payment Mode Required", Toast.LENGTH_SHORT).show();

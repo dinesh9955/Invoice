@@ -162,6 +162,16 @@ public class SubscribeActivity extends BaseActivity{
             }
         });
 
+
+
+//        ArrayList<String> products = new ArrayList<>();
+//        products.add(DONATION_1);
+//        products.add(DONATION_2);
+//        products.add(DONATION_3);
+//        products.add(DONATION_5);
+//        products.add(DONATION_10);
+//        products.add(DONATION_20);
+//        bp.
     }
 
 

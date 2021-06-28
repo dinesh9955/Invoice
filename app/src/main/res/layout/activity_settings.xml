@@ -37,7 +37,7 @@
                 android:text="@string/Customizeyourexperience"
                 android:id="@+id/customerstxt"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp"
+                android:textSize="@dimen/_12sdp"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="10dp"
                 />

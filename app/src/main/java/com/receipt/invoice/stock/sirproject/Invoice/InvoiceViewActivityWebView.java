@@ -655,7 +655,7 @@ public class InvoiceViewActivityWebView extends BaseActivity {
             Log.e(TAG, "strpaid_amount2:: "+strpaid_amount);
 
             // null response or Exception occur
-            paidamountstrrepvalue =strpaid_amount+currency_code;
+            paidamountstrrepvalue = strpaid_amount+currency_code;
             paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
 
 
@@ -794,7 +794,7 @@ public class InvoiceViewActivityWebView extends BaseActivity {
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = getString(R.string.html_Shipping);
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Subtotalamount + ""+ Utility.getReplaceDollor(currency_code);
         }
 

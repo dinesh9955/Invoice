@@ -504,7 +504,7 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = getString(R.string.select_company);
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 

@@ -2263,6 +2263,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
             ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, paymode);
             selectpaymentmode.setAdapter(namesadapter);
 
+            paimentmodespinerstr = "";
 
             selectpaymentmode.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
                 @Override
@@ -2330,7 +2331,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                         edamount.requestFocus();
                     } else if (paiddate.isEmpty()) {
                         Constant.ErrorToastTop(EditInvoiceActivity.this, getString(R.string.dialog_DateRequired));
-                    } else if (Utility.isEmptyNull(paymentmode).equalsIgnoreCase("")) {
+                    } else if (Utility.isEmptyNull(paimentmodespinerstr).equalsIgnoreCase("")) {
                         Constant.ErrorToastTop(EditInvoiceActivity.this, getString(R.string.dialog_PaymentModeRequired));
                     } else {
                         if (paidamountstr != null) {

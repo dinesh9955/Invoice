@@ -120,6 +120,7 @@ public class ListOfCreditNotes extends BaseFragment {
     String customerName = "";
     String dataNo = "";
 
+    TextView textViewMsg;
     public ListOfCreditNotes() {
         // Required empty public constructor
     }
@@ -147,6 +148,10 @@ public class ListOfCreditNotes extends BaseFragment {
         search.setHint(getString(R.string.list_SearchByCreditNoteNumber));
         selectcompany = view.findViewById(R.id.selectcompany);
         imageViewmenu = view.findViewById(R.id.imageViewmenu);
+
+        textViewMsg = view.findViewById(R.id.txtinvoice);
+        textViewMsg.setText(getString(R.string.home_NoCN));
+        textViewMsg.setVisibility(View.VISIBLE);
 
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
         search.addTextChangedListener(new TextWatcher() {
@@ -314,6 +319,12 @@ public class ListOfCreditNotes extends BaseFragment {
             }
         }
         invoicelistAdapterdt.updateList(temp);
+
+        if (temp.size() == 0){
+            textViewMsg.setVisibility(View.VISIBLE);
+        }else{
+            textViewMsg.setVisibility(View.GONE);
+        }
     }
 
 
@@ -578,12 +589,18 @@ public class ListOfCreditNotes extends BaseFragment {
                          //   company_list.setTemplate_type(item.getString("template_type"));
                             list.add(company_list);
                            // if (list.size() < 20) {
-                                invoicelistAdapterdt.updateList(list);
+
                           //  }
 
                         }
 
 
+                        invoicelistAdapterdt.updateList(list);
+                        if (list.size() == 0){
+                            textViewMsg.setVisibility(View.VISIBLE);
+                        }else{
+                            textViewMsg.setVisibility(View.GONE);
+                        }
                     }
 
 
@@ -613,6 +630,8 @@ public class ListOfCreditNotes extends BaseFragment {
                 } else {
                     Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
+
+                textViewMsg.setVisibility(View.VISIBLE);
             }
         });
     }

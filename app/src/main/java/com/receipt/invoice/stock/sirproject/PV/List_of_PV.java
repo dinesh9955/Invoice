@@ -127,6 +127,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
     String customerName = "";
     String dataNo = "";
 
+    TextView textViewMsg;
     public List_of_PV() {
         // Required empty public constructor
     }
@@ -153,6 +154,11 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
         selectcompany = view.findViewById(R.id.selectcompany);
         imageViewmenu = view.findViewById(R.id.imageViewmenu);
         imageViewmenu.setVisibility(View.GONE);
+
+        textViewMsg = view.findViewById(R.id.txtinvoice);
+        textViewMsg.setText(getString(R.string.home_NoPV));
+        textViewMsg.setVisibility(View.VISIBLE);
+
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -400,6 +406,12 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
             }
         }
         invoicelistAdapterdt.updateList(temp);
+
+        if (temp.size() == 0){
+            textViewMsg.setVisibility(View.VISIBLE);
+        }else{
+            textViewMsg.setVisibility(View.GONE);
+        }
     }
 
 
@@ -652,7 +664,11 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
                         invoicelistAdapterdt.updateList(list);
                         invoicelistAdapterdt.notifyDataSetChanged();
-
+                        if (list.size() == 0){
+                            textViewMsg.setVisibility(View.VISIBLE);
+                        }else{
+                            textViewMsg.setVisibility(View.GONE);
+                        }
                         //  enableSwipe();
 
                     }
@@ -688,6 +704,8 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
                 } else {
                     //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
+
+                textViewMsg.setVisibility(View.VISIBLE);
             }
         });
     }

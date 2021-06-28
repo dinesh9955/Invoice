@@ -328,7 +328,7 @@
     <string name="report_RemoveFilter">Remove Filter</string>
     <string name="reportByCustomerName">By Customer Name</string>
     <string name="report_Paid">Paid</string>
-    <string name="report_UnPaid">UnPaid</string>
+    <string name="report_UnPaid">Unpaid</string>
     <string name="report_BySupplier">By Supplier</string>
     <string name="report_ByTaxName">By Tax Name</string>
     <string name="report_InStock">In Stock</string>
@@ -367,7 +367,7 @@
 
     <string name="invoiceReminder_SelectCompany">Select Company</string>
     <string name="invoiceReminder_Search_by_Invoice_number">Search by Invoice number</string>
-    <string name="invoiceReminder_No_UnPaid_invoices">No UnPaid invoices</string>
+    <string name="invoiceReminder_No_UnPaid_invoices">No Unpaid invoices</string>
     <string name="invoiceReminder_Status">Status :</string>
 
 
@@ -532,7 +532,13 @@
     <string name="home_no_suppliers">No Suppliers</string>
     <string name="home_Invoice_Overdue">Invoice Overdue</string>
 
-
+    <string name="home_NoInvoice">No Invoices</string>
+    <string name="home_NoCN">No Credit Notes</string>
+    <string name="home_NoDN">No Debit Notes</string>
+    <string name="home_NoEstimates">No Estimates</string>
+    <string name="home_NoPO">No Purchase Orders</string>
+    <string name="home_NoPV">No Payment Vouchers</string>
+    <string name="home_NoReceipts">No Receipts</string>
 
     <string name="setting_Setup">Setup</string>
     <string name="setting_Email">Email</string>
@@ -763,7 +769,7 @@
     <string name="pv_updated_msg">PV updated successfully</string>
 
 
-
+    <string name="invoice_AuthorizedSignatory">Authorized Signatory</string>
     <string name="logged_in_msg">Logged in successfully!</string>
 
     <string name="invoice_Due">Due</string>

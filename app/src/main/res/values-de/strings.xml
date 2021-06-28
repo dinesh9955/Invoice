@@ -21,7 +21,15 @@
     <string name="header_payment_vouchers">Zahlungsgutscheine</string>
 
 
+    <string name="invoice_AuthorizedSignatory">Zeichnungsberechtigte</string>
 
+    <string name="home_NoInvoice">Keine Rechnungen</string>
+    <string name="home_NoCN">Keine Gutschriften</string>
+    <string name="home_NoDN">Keine Lastschriften</string>
+    <string name="home_NoEstimates">Keine Schätzungen</string>
+    <string name="home_NoPO">Keine Bestellungen</string>
+    <string name="home_NoPV">Keine Zahlungsbelege</string>
+    <string name="home_NoReceipts">Keine Belege</string>
 
     <string name="home_hello">Hallo</string>
     <string name="home_quick_look">Ein kurzer Blick auf Ihre wichtigsten Geschäftsaktivitäten</string>

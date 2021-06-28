@@ -119,6 +119,8 @@ public class List_of_Estimate extends BaseFragment {
     String customerName = "";
     String dataNo = "";
 
+    TextView textViewMsg;
+
     public List_of_Estimate() {
         // Required empty public constructor
     }
@@ -146,6 +148,10 @@ public class List_of_Estimate extends BaseFragment {
 
         selectcompany = view.findViewById(R.id.selectcompany);
         imageViewmenu = view.findViewById(R.id.imageViewmenu);
+
+        textViewMsg = view.findViewById(R.id.txtinvoice);
+        textViewMsg.setText(getString(R.string.home_NoEstimates));
+        textViewMsg.setVisibility(View.VISIBLE);
 
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Light.otf"));
         search.addTextChangedListener(new TextWatcher() {
@@ -317,6 +323,12 @@ public class List_of_Estimate extends BaseFragment {
             }
         }
         invoicelistAdapterdt.updateList(temp);
+
+        if (temp.size() == 0){
+            textViewMsg.setVisibility(View.VISIBLE);
+        }else{
+            textViewMsg.setVisibility(View.GONE);
+        }
     }
 
 
@@ -546,7 +558,11 @@ public class List_of_Estimate extends BaseFragment {
                         }
 
                         invoicelistAdapterdt.updateList(list);
-
+                        if (list.size() == 0){
+                            textViewMsg.setVisibility(View.VISIBLE);
+                        }else{
+                            textViewMsg.setVisibility(View.GONE);
+                        }
                     }
 
 
@@ -576,6 +592,8 @@ public class List_of_Estimate extends BaseFragment {
                 } else {
                   //  Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
+
+                textViewMsg.setVisibility(View.VISIBLE);
             }
         });
     }

@@ -21,8 +21,15 @@
     <string name="header_purchase_orders">طلبات الشراء</string>
     <string name="header_payment_vouchers">سندات الدفع</string>
 
+    <string name="invoice_AuthorizedSignatory">المفوض بالتوقيع</string>
 
-
+    <string name = "home_NoInvoice"> بلا فواتير </string>
+    <string name = "home_NoCN"> لا توجد إشعارات دائنة </string>
+    <string name = "home_NoDN"> لا توجد ملاحظات مدين </string>
+    <string name = "home_NoEstimates"> لا توجد تقديرات </string>
+    <string name = "home_NoPO"> لا توجد أوامر شراء </string>
+    <string name = "home_NoPV"> لا توجد سندات دفع </string>
+    <string name = "home_NoReceipts"> بلا إيصالات </string>
 
     <string name="home_hello">مرحبا</string>
     <string name="home_quick_look">نظرة سريعة على الأنشطة التجارية الرئيسية الخاصة بك</string>

@@ -307,7 +307,7 @@
                     android:text="@string/Termsconditionsapply"
                     android:layout_marginTop="30dp"
                     android:layout_centerHorizontal="true"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_9sdp"
                     android:textColor="@color/darkgray"
                     android:id="@+id/terms"/>
 
@@ -318,7 +318,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_below="@+id/terms"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
@@ -329,7 +329,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/USD1199"
-                        android:textSize="8sp"
+                        android:textSize="@dimen/_7sdp"
                         android:textStyle="bold"
                         android:id="@+id/termsdescprice1"/>
 
@@ -337,9 +337,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/oneimepaymentforcreatinganewcompany"
-                        android:textSize="8sp"
+                        android:textSize="@dimen/_7sdp"
                         android:layout_gravity="center_horizontal"
-                        android:gravity="center_horizontal"
+
                         android:id="@+id/termdescription1"/>
 
                 </LinearLayout>

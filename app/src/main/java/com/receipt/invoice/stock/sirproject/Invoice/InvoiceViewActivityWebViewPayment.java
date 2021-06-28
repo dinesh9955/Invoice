@@ -838,7 +838,7 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = getString(R.string.html_Shipping);
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Subtotalamount + ""+ Utility.getReplaceDollor(currency_code);
         }
 
