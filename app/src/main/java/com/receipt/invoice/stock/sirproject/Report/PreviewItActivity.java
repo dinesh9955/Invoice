@@ -967,7 +967,7 @@ public class PreviewItActivity extends BaseActivity {
 
                 String minimumTxt = "";
                 if(minimum == 0){
-                    minimumTxt = "";
+                    minimumTxt = "0.00";
                 }else{
                     String minimumSS = Utility.getPatternFormat(""+numberPostion, minimum);
                     minimumTxt = minimumSS;
@@ -975,7 +975,7 @@ public class PreviewItActivity extends BaseActivity {
 
                 String quantityTxt = "";
                 if(quantity == 0){
-                    quantityTxt = "";
+                    quantityTxt =  "0.00";
                 }else{
                     String quantitySS = Utility.getPatternFormat(""+numberPostion, quantity);
                     quantityTxt = quantitySS;
@@ -1141,7 +1141,7 @@ public class PreviewItActivity extends BaseActivity {
                 String totalQuantityTxt = "";
                 if(getTotal_quantity == 0){
 //                    String valueSS = Utility.getPatternFormat(""+numberPostion, getTotal_quantity);
-                    totalQuantityTxt = "";
+                    totalQuantityTxt = "0.00";
                 }else{
                     String valueSS = Utility.getPatternFormat(""+numberPostion, getTotal_quantity);
                     totalQuantityTxt = valueSS;

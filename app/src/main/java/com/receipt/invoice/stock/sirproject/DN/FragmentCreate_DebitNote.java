@@ -2127,10 +2127,10 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
                     if(strdiscount.equalsIgnoreCase("Percentage")){
-                        eddisount.setHint("Enter Discount in %");
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
                     if(strdiscount.equalsIgnoreCase("Amount")){
-                        eddisount.setHint("Enter Discount in Amount");
+                        eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
                 }

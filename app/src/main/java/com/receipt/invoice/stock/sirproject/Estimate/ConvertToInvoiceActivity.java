@@ -372,7 +372,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
     double afterTaxAmountZZ = 0.0;
     double shippingAmountZZ = 0.0;
     double netAmountZZ = 0.0;
-
+    double paidAmountZZ = 0.0;
+    double balanceAmountZZ = 0.0;
 //    String templateSelect = "0";
 //    String colorCode = "#ffffff";
 
@@ -1507,8 +1508,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 //            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
             params.add("freight_cost", ""+shippingAmountZZ);
             params.add("discount", ""+discountAmountZZ);
-            params.add("paid_amount", Utility.getReplaceCurrency(strpaid_amount, cruncycode));
-//            params.add("paid_amount", );
+//            params.add("paid_amount", Utility.getReplaceCurrency(strpaid_amount, cruncycode));
+            params.add("paid_amount", ""+paidAmountZZ);
             params.add("paid_amount_date", Paymentamountdate);
             params.add("shipping_firstname", shippingfirstname);
             params.add("shipping_lastname", shippinglastname);
@@ -4128,7 +4129,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             afterTaxAmountZZ = afterTaxAmount;
             shippingAmountZZ = shippingAmount;
             netAmountZZ = netAmount;
-
+            paidAmountZZ = paidAmount;
+            balanceAmountZZ = balanceAmount;
 
 
         } else {

@@ -845,8 +845,38 @@ public class POViewActivityWebView extends BaseActivity {
             }
 
 
+
+//            String htmlview_credit_note = getString(R.string.htmlview_pv);
+//            String htmlview_Recipient = getString(R.string.htmlview_Recipient);
+//            String htmlview_CreditNoteNo = getString(R.string.htmlview_PONo);
+//            String htmlview_CreditNoteDate = getString(R.string.htmlview_PODate);
+//            String htmlview_Terms = getString(R.string.htmlview_Terms);
+//            String htmlview_DueDate = getString(R.string.htmlview_DueDate);
+//            String htmlview_ReferenceNo = getString(R.string.htmlview_ReferenceNo);
+//            String htmlview_SUMMARY = getString(R.string.htmlview_SUMMARY);
+//            String htmlview_ProductItem = getString(R.string.htmlview_ProductItem);
+//            String htmlview_UnitofMeasurement = getString(R.string.htmlview_UnitofMeasurement);
+//            String htmlview_Quantity = getString(R.string.htmlview_Quantity);
+//            String htmlview_Rate = getString(R.string.htmlview_Rate);
+//            String htmlview_Amount = getString(R.string.htmlview_Amount);
+//            String htmlview_GrossAmount = getString(R.string.htmlview_GrossAmount);
+//            String htmlview_Discount = getString(R.string.htmlview_Discount);
+//            String htmlview_SubTotal = getString(R.string.htmlview_SubTotal);
+//            String htmlview_Tax = getString(R.string.htmlview_Tax);
+//            String htmlview_Shipping = getString(R.string.htmlview_Shipping);
+//            String htmlview_NetAmount = getString(R.string.htmlview_NetAmount);
+//            String htmlview_Notes = getString(R.string.htmlview_Notes);
+//            String htmlview_Attachments = getString(R.string.htmlview_Attachments);
+//            String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
+
+
             try {
                 content = IOUtils.toString(getAssets().open(name))
+
+
+
+
+
                         .replaceAll("Company Name", company_name)
                         .replaceAll("Address", stringBuilderCompany.toString())
 //                        .replaceAll("Contact No.", company_contact)

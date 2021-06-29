@@ -527,13 +527,13 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 
-                        if(filterID.equalsIgnoreCase("date")){
+                       // if(filterID.equalsIgnoreCase("date")){
                             Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
                                 public int compare(CustomerReportItem o1, CustomerReportItem o2) {
                                     return o1.getCreated_date().compareTo(o2.getCreated_date());
                                 }
                             });
-                        }
+                       // }
 
                         //Collections.reverse(customerReportItemArrayList);
 
@@ -794,7 +794,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                                 Log.e(TAG, "datemillis1 "+simple.format(fDateC));
                                                 Log.e(TAG, "datemillis2 "+simple.format(sDateC));
                                                 Log.e(TAG, "datemillis3 "+simple.format(date));
-                                                customerReportItemArrayList.add(customerReportItem);
+                                                if(!code.equalsIgnoreCase("purchase_order")){
+                                                    customerReportItemArrayList.add(customerReportItem);
+                                                }
                                             }
                                         }catch (Exception e){
 
@@ -805,19 +807,21 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                     }
 
                                 }else{
-                                    customerReportItemArrayList.add(customerReportItem);
+                                     if(!code.equalsIgnoreCase("purchase_order")){
+                                                    customerReportItemArrayList.add(customerReportItem);
+                                     }
                                 }
 
                             }
                         }
 
-                        if(filterID.equalsIgnoreCase("date")){
+                    //    if(filterID.equalsIgnoreCase("date")){
                             Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
                                 public int compare(CustomerReportItem o1, CustomerReportItem o2) {
                                     return o1.getCreated_date().compareTo(o2.getCreated_date());
                                 }
                             });
-                        }
+                      //  }
 
 
                         supplierItemAA = customerItem;
@@ -2382,7 +2386,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                 String minimumTxt = "";
                 if(minimum == 0){
-                    minimumTxt = "";
+                    minimumTxt = "0.00";
                 }else{
                     String minimumSS = Utility.getPatternFormat(""+numberPostion, minimum);
                     minimumTxt = minimumSS;
@@ -2390,7 +2394,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                 String quantityTxt = "";
                 if(quantity == 0){
-                    quantityTxt = "";
+                    quantityTxt =  "0.00";
                 }else{
                     String quantitySS = Utility.getPatternFormat(""+numberPostion, quantity);
                     quantityTxt = quantitySS;
@@ -2418,7 +2422,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 double quantityPricePerUnit = quantity * pricePerUnit;
                 String valueTxt = "";
                 if(quantityPricePerUnit == 0){
-                    valueTxt = "";
+                    valueTxt =  "0.00" + Utility.getReplaceDollor(cruncycode);
                 }else{
                     String valueSS = Utility.getPatternFormat(""+numberPostion, quantityPricePerUnit) + Utility.getReplaceDollor(cruncycode);
                     valueTxt = valueSS;
@@ -2675,7 +2679,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 String totalQuantityTxt = "";
                 if(getTotal_quantity == 0){
 //                    String valueSS = Utility.getPatternFormat(""+numberPostion, getTotal_quantity);
-                    totalQuantityTxt = "";
+                    totalQuantityTxt = "0.00";
                 }else{
                     String valueSS = Utility.getPatternFormat(""+numberPostion, getTotal_quantity);
                     totalQuantityTxt = valueSS;

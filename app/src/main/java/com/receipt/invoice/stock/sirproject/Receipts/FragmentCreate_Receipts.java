@@ -2142,10 +2142,10 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                 if (null != rb && checkedId > -1) {
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                    if(strdiscount.equalsIgnoreCase("Percentage")){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                    if(strdiscount.equalsIgnoreCase("Amount")){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 

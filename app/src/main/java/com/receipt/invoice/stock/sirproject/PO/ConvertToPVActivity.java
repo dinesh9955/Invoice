@@ -1378,8 +1378,8 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
 //            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
             params.add("freight_cost", ""+shippingAmountZZ);
             params.add("discount", ""+discountAmountZZ);
-            params.add("paid_amount", strpaid_amount);
-            params.add("paid_amount_date", Paymentamountdate);
+//            params.add("paid_amount", strpaid_amount);
+//            params.add("paid_amount_date", Paymentamountdate);
             params.add("shipping_firstname", shippingfirstname);
             params.add("shipping_lastname", shippinglastname);
             params.add("shipping_address_1", shippingaddress1);

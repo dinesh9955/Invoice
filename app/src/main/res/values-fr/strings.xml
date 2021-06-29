@@ -7,6 +7,46 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
+
+    <string name="htmlview_credit_note">NOTE DE CRÉDIT</string>
+    <string name="htmlview_Recipient">Destinataire</string>
+    <string name="htmlview_CreditNoteNo">Non de note de crédit</string>
+    <string name="htmlview_CreditNoteDate">Date de la note de crédit</string>
+    <string name="htmlview_ReferenceNo">N° de référence</string>
+    <string name="htmlview_SUMMARY">SUMMARY</string>
+    <string name="htmlview_ProductItem">Produit/Article</string>
+    <string name="htmlview_UnitofMeasurement">Unité de mesure</string>
+    <string name="htmlview_Quantity">Quantité</string>
+    <string name="htmlview_Rate">Taux</string>
+    <string name="htmlview_Amount">Montant</string>
+    <string name="htmlview_GrossAmount">Montant brut</string>
+    <string name="htmlview_Discount">Remise</string>
+    <string name="htmlview_SubTotal">Sous-Total</string>
+    <string name="htmlview_Tax">Taxe</string>
+    <string name="htmlview_Shipping">Livraison</string>
+    <string name="htmlview_NetAmount">Montant net</string>
+    <string name="htmlview_PaidAmount">Paid Amount</string>
+    <string name="htmlview_Notes">Remarques</string>
+    <string name="htmlview_Attachments">Pièces jointes</string>
+
+    <string name="htmlview_debit_note">NOTE DE DÉBIT</string>
+    <string name="htmlview_DebitNoteNo">Note de débit non</string>
+    <string name="htmlview_DebitNoteDate">Date de la note de débit</string>
+
+    <string name="htmlview_receipt">REÇU</string>
+    <string name="htmlview_ReceiptNo">Non de reçu</string>
+    <string name="htmlview_ReceiptDate">Date de réception</string>
+    <string name="htmlview_ReceivedFrom">Reçu de</string>
+
+
+
+    <string name="htmlview_pv">BON DE PAIEMENT</string>
+    <string name="htmlview_PaidTo">Payé à</string>
+    <string name="htmlview_PVNo">PV Non</string>
+    <string name="htmlview_PVDate">Date PV</string>
+
+
+
     <string name="error">Erreur</string>
 
     <string name="preview">Aperçu</string>

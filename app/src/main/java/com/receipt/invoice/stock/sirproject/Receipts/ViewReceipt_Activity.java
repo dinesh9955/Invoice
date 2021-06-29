@@ -720,22 +720,22 @@ public class ViewReceipt_Activity extends BaseActivity {
 
         String name = "receipt.html";
         String nameName = "file:///android_asset/receipt.html";
-        if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "receipt.html";
-            nameName = "file:///android_asset/receipt.html";
-        }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "receipt.html";
-            nameName = "file:///android_asset/receipt.html";
-        }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "receipt.html";
-            nameName = "file:///android_asset/receipt.html";
-        }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "receipt.html";
-            nameName = "file:///android_asset/receipt.html";
-        }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "receipt.html";
-            nameName = "file:///android_asset/receipt.html";
-        }
+//        if(selectedTemplate.equalsIgnoreCase("0")){
+//            name = "receipt.html";
+//            nameName = "file:///android_asset/receipt.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("1")){
+//            name = "receipt.html";
+//            nameName = "file:///android_asset/receipt.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("2")){
+//            name = "receipt.html";
+//            nameName = "file:///android_asset/receipt.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("3")){
+//            name = "receipt.html";
+//            nameName = "file:///android_asset/receipt.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("4")){
+//            name = "receipt.html";
+//            nameName = "file:///android_asset/receipt.html";
+//        }
 
        Log.e(TAG, "strreferencenovalueAA "+strreferencenovalue);
 
@@ -757,9 +757,56 @@ public class ViewReceipt_Activity extends BaseActivity {
         }
 
 
+
+
+            String htmlview_credit_note = getString(R.string.htmlview_receipt);
+            String htmlview_Recipient = getString(R.string.htmlview_ReceivedFrom);
+            String htmlview_CreditNoteNo = getString(R.string.htmlview_ReceiptNo);
+            String htmlview_CreditNoteDate = getString(R.string.htmlview_ReceiptDate);
+            String htmlview_ReferenceNo = getString(R.string.htmlview_ReferenceNo);
+            String htmlview_SUMMARY = getString(R.string.htmlview_SUMMARY);
+            String htmlview_ProductItem = getString(R.string.htmlview_ProductItem);
+            String htmlview_UnitofMeasurement = getString(R.string.htmlview_UnitofMeasurement);
+            String htmlview_Quantity = getString(R.string.htmlview_Quantity);
+            String htmlview_Rate = getString(R.string.htmlview_Rate);
+            String htmlview_Amount = getString(R.string.htmlview_Amount);
+            String htmlview_GrossAmount = getString(R.string.htmlview_GrossAmount);
+            String htmlview_Discount = getString(R.string.htmlview_Discount);
+            String htmlview_SubTotal = getString(R.string.htmlview_SubTotal);
+            String htmlview_Tax = getString(R.string.htmlview_Tax);
+            String htmlview_Shipping = getString(R.string.htmlview_Shipping);
+            String htmlview_NetAmount = getString(R.string.htmlview_NetAmount);
+            String htmlview_Notes = getString(R.string.htmlview_Notes);
+            String htmlview_Attachments = getString(R.string.htmlview_Attachments);
+            String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
+
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+
+                    .replaceAll("Title_", htmlview_credit_note)
+                    .replaceAll("Received From", htmlview_Recipient)
+                    .replaceAll("Receipt No", htmlview_CreditNoteNo)
+                    .replaceAll("Receipt Date", htmlview_CreditNoteDate)
+//                        .replaceAll("Reference No", htmlview_ReferenceNo)
+                    .replaceAll("SUMMARY", htmlview_SUMMARY)
+                    .replaceAll("Product/Item", htmlview_ProductItem)
+                    .replaceAll("Unit of Measurement", htmlview_UnitofMeasurement)
+                    .replaceAll("Quantity", htmlview_Quantity)
+                    .replaceAll("Rate", htmlview_Rate)
+                    .replaceAll("Amount_", htmlview_Amount)
+                    .replaceAll("Gross Amount", htmlview_GrossAmount)
+//                        .replaceAll("Discount", htmlview_Discount)
+//                        .replaceAll("SubTotal", htmlview_SubTotal)
+//                        .replaceAll("Tax", htmlview_Tax)
+//                        .replaceAll("Shipping", htmlview_Shipping)
+                    .replaceAll("Net Amount", htmlview_NetAmount)
+//                        .replaceAll("Paid Amount", htmlview_PaidAmount)
+//                        .replaceAll("Notes:", htmlview_Notes)
+//                        .replaceAll("Attachments", htmlview_Attachments)
+
 
 //                    .replaceAll("INVOICE", "RECEIPT")
 //                    .replaceAll("Bill To", "Received From")

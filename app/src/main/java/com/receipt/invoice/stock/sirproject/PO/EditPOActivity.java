@@ -1532,7 +1532,8 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             Log.e(TAG, "strpaid_amountXXX "+strpaid_amount);
             Log.e(TAG, "PaymentamountdateXXX "+Paymentamountdate);
 
-            params.add("paid_amount", ""+strpaid_amount);
+            params.add("paid_amount", ""+paidAmountZZ);
+//            params.add("paid_amount", ""+strpaid_amount);
             params.add("paid_amount_date", ""+Paymentamountdate);
 
             params.add("shipping_firstname", shippingfirstname);

@@ -2345,10 +2345,10 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                    if(strdiscount.equalsIgnoreCase("Percentage")){
                         eddisount.setHint(getString(R.string.header_template));
                     }
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                    if(strdiscount.equalsIgnoreCase("Amount")){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 

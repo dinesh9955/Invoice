@@ -8,6 +8,54 @@
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
 
+
+    <string name="htmlview_credit_note">CREDIT NOTE</string>
+    <string name="htmlview_Recipient">Recipient</string>
+    <string name="htmlview_CreditNoteNo">Credit Note No</string>
+    <string name="htmlview_CreditNoteDate">Credit Note Date</string>
+    <string name="htmlview_ReferenceNo">Reference No</string>
+    <string name="htmlview_SUMMARY">SUMMARY</string>
+    <string name="htmlview_ProductItem">Product/Item</string>
+    <string name="htmlview_UnitofMeasurement">Unit of Measurement</string>
+    <string name="htmlview_Quantity">Quantity</string>
+    <string name="htmlview_Rate">Rate</string>
+    <string name="htmlview_Amount">Amount</string>
+    <string name="htmlview_GrossAmount">Gross Amount</string>
+    <string name="htmlview_Discount">Discount</string>
+    <string name="htmlview_SubTotal">SubTotal</string>
+    <string name="htmlview_Tax">Tax</string>
+    <string name="htmlview_Shipping">Shipping</string>
+    <string name="htmlview_NetAmount">Net Amount</string>
+    <string name="htmlview_PaidAmount">Paid Amount</string>
+    <string name="htmlview_Notes">Notes</string>
+    <string name="htmlview_Attachments">Attachments</string>
+
+    <string name="htmlview_debit_note">DEBIT NOTE</string>
+    <string name="htmlview_DebitNoteNo">Debit Note No</string>
+    <string name="htmlview_DebitNoteDate">Debit Note Date</string>
+
+    <string name="htmlview_receipt">RECEIPT</string>
+    <string name="htmlview_ReceiptNo">Receipt No</string>
+    <string name="htmlview_ReceiptDate">Receipt Date</string>
+    <string name="htmlview_ReceivedFrom">Received From</string>
+
+<!--    <string name="htmlview_po">PURCHASE ORDER</string>-->
+<!--    <string name="htmlview_PONo">PO No</string>-->
+<!--    <string name="htmlview_PODate">PO Date</string>-->
+<!--    <string name="htmlview_Terms">Terms</string>-->
+<!--    <string name="htmlview_DueDate">Due Date</string>-->
+<!--    <string name="htmlview_Terms">Terms</string>-->
+
+
+    <string name="htmlview_pv">PAYMENT VOUCHER</string>
+    <string name="htmlview_PaidTo">Paid To</string>
+    <string name="htmlview_PVNo">PV No</string>
+    <string name="htmlview_PVDate">PV Date</string>
+
+
+
+
+
     <string name="all_Save">Save</string>
     <string name="all_Cancel">Cancel</string>
     <string name="preview">Preview</string>

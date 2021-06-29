@@ -390,7 +390,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
             Log.e("sltcustonername",sltcustonername);
             Shiping_tostr="";
         }else {
-            Shiping_tostr="Ship To:";
+            Shiping_tostr = getString(R.string.html_ShipTo);
 
             if(!shippingfirstname.equalsIgnoreCase("")){
                 stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
@@ -453,7 +453,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
 
 
@@ -527,7 +527,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
             notestringvalue="";
         }else
         {
-            notestringvalue="Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -541,7 +541,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
             companyname="";
         }else {
             invoice_image_pathcompanystemp=invoice_image_path + company_stamp;
-            companyname="Company Seal";
+            companyname = getString(R.string.html_CompanySeal);
         }
 
         String signature_of_receivername="";
@@ -551,7 +551,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
             signature_of_receivername="";
         }else {
             invoice_image_pathreceiverpath=invoice_image_path + signature_of_receiver;
-            signature_of_receivername="Signature of Receiver";
+            signature_of_receivername = getString(R.string.html_SignatureofReceiver);
         }
 
 
@@ -562,7 +562,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
             signature_of_issuername="";
         }else {
             invoice_image_pathissuverpath=invoice_image_path + signature_of_issuer;
-            signature_of_issuername="Signature of Issuer";
+            signature_of_issuername = getString(R.string.html_SignatureofIssuer);
         }
 
         try {
@@ -593,7 +593,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
             // null response or Exception occur
 
             Shipingcosstbyct=""+freight_cost+currency_code;
-            shipingvaluetxt="Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
         String paidamountstrrepvalue = "";
@@ -636,7 +636,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
 
             // null response or Exception occur
             paidamountstrrepvalue =strpaid_amount+currency_code;
-            paidamountstrreptxt = "Paid Amount";
+            paidamountstrreptxt = getString(R.string.html_PaidAmount);
 
 
             pemailpaidstr = paypal_emailstr;
@@ -667,7 +667,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue = getString(R.string.html_ReferenceNo);
 
 
         }
@@ -713,7 +713,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue + currency_code;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
 
@@ -726,7 +726,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Subtotalamount + ""+ Utility.getReplaceDollor(currency_code);
         }
 
@@ -748,22 +748,10 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
         String nameName = "file:///android_asset/debit.html";
         if(templatestr.equals("1")) {
 
-            if(templateSelect.equalsIgnoreCase("0")){
+
                 name = "debit.html";
                 nameName = "file:///android_asset/debit.html";
-            }else if(templateSelect.equalsIgnoreCase("1")){
-                name = "debit.html";
-                nameName = "file:///android_asset/debit.html";
-            }else if(templateSelect.equalsIgnoreCase("2")){
-                name = "debit.html";
-                nameName = "file:///android_asset/debit.html";
-            }else if(templateSelect.equalsIgnoreCase("3")){
-                name = "debit.html";
-                nameName = "file:///android_asset/debit.html";
-            }else if(templateSelect.equalsIgnoreCase("4")){
-                name = "debit.html";
-                nameName = "file:///android_asset/debit.html";
-            }
+
 
 
             StringBuilder stringBuilderCompany = new StringBuilder();
@@ -784,8 +772,57 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
 
 
 
+            String htmlview_debit_note = getString(R.string.htmlview_debit_note);
+            String htmlview_Recipient = getString(R.string.htmlview_Recipient);
+            String htmlview_DebitNoteNo = getString(R.string.htmlview_DebitNoteNo);
+            String htmlview_DebitNoteDate = getString(R.string.htmlview_DebitNoteDate);
+          //  String htmlview_ReferenceNo = getString(R.string.htmlview_ReferenceNo);
+            String htmlview_SUMMARY = getString(R.string.htmlview_SUMMARY);
+            String htmlview_ProductItem = getString(R.string.htmlview_ProductItem);
+            String htmlview_UnitofMeasurement = getString(R.string.htmlview_UnitofMeasurement);
+            String htmlview_Quantity = getString(R.string.htmlview_Quantity);
+            String htmlview_Rate = getString(R.string.htmlview_Rate);
+            String htmlview_Amount = getString(R.string.htmlview_Amount);
+            String htmlview_GrossAmount = getString(R.string.htmlview_GrossAmount);
+            String htmlview_Discount = getString(R.string.htmlview_Discount);
+            String htmlview_SubTotal = getString(R.string.htmlview_SubTotal);
+            String htmlview_Tax = getString(R.string.htmlview_Tax);
+            String htmlview_Shipping = getString(R.string.htmlview_Shipping);
+            String htmlview_NetAmount = getString(R.string.htmlview_NetAmount);
+            String htmlview_Notes = getString(R.string.htmlview_Notes);
+            String htmlview_Attachments = getString(R.string.htmlview_Attachments);
+            String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
+
+
+
+
             try {
                 content = IOUtils.toString(getAssets().open(name))
+
+                        .replaceAll("Title_", htmlview_debit_note)
+                        .replaceAll("Recipient", htmlview_Recipient)
+                        .replaceAll("Debit Note No", htmlview_DebitNoteNo)
+                        .replaceAll("Debit Note Date", htmlview_DebitNoteDate)
+                       // .replaceAll("Reference No", htmlview_ReferenceNo)
+                        .replaceAll("SUMMARY", htmlview_SUMMARY)
+                        .replaceAll("Product/Item", htmlview_ProductItem)
+                        .replaceAll("Unit of Measurement", htmlview_UnitofMeasurement)
+                        .replaceAll("Quantity", htmlview_Quantity)
+                        .replaceAll("Rate", htmlview_Rate)
+                        .replaceAll("Amount_", htmlview_Amount)
+                        .replaceAll("Gross Amount", htmlview_GrossAmount)
+////                        .replaceAll("Discount", htmlview_Discount)
+////                        .replaceAll("SubTotal", htmlview_SubTotal)
+////                        .replaceAll("Tax", htmlview_Tax)
+////                        .replaceAll("Shipping", htmlview_Shipping)
+                        .replaceAll("Net Amount", htmlview_NetAmount)
+////                        .replaceAll("Paid Amount", htmlview_PaidAmount)
+////                        .replaceAll("Notes:", htmlview_Notes)
+////                        .replaceAll("Attachments", htmlview_Attachments)
+
+
+
+
                         .replaceAll("Company Name", company_name)
                         .replaceAll("Address", stringBuilderCompany.toString())
 //                        .replaceAll("Contact No.", company_contact)
