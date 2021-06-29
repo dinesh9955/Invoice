@@ -1124,12 +1124,11 @@ public class PreviewItActivity extends BaseActivity {
                     } else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("invoice")){
                         salesTxt = valueSS;
                     } else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("credit")){
-                        salesTxt = valueSS;
+                        purchasesTxt = valueSS;
                     } else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("debit")){
                         salesTxt = valueSS;
                     }else if(customerReportItemArrayList.get(i).getCode().equalsIgnoreCase("wastage")){
                         wastageTxt = valueSS;
-
                     }
 
 
@@ -1202,7 +1201,7 @@ public class PreviewItActivity extends BaseActivity {
 
         String lastQuantityTxt ="";
         if(lastQuantity == 0){
-            lastQuantityTxt = "";
+            lastQuantityTxt = "0.00";
         }else{
             String valueSS = Utility.getPatternFormat(""+numberPostion, lastQuantity);
             lastQuantityTxt = valueSS;
@@ -1210,7 +1209,7 @@ public class PreviewItActivity extends BaseActivity {
 
         String priceTxt ="";
         if(price == 0){
-            priceTxt = "";
+            priceTxt = "0.00"+Utility.getReplaceDollor(cruncycode);
         }else{
             String valueSS = Utility.getPatternFormat(""+numberPostion, price)+Utility.getReplaceDollor(cruncycode);
             priceTxt = valueSS;
@@ -1220,7 +1219,7 @@ public class PreviewItActivity extends BaseActivity {
 
         String totalPriceTxt ="";
         if(totalPrice == 0){
-            totalPriceTxt = "";
+            totalPriceTxt = "0.00"+Utility.getReplaceDollor(cruncycode);
         }else{
             String valueSS = Utility.getPatternFormat(""+numberPostion, totalPrice)+Utility.getReplaceDollor(cruncycode);
             totalPriceTxt = valueSS;

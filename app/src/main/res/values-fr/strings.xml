@@ -38,12 +38,27 @@
     <string name="htmlview_ReceiptDate">Date de réception</string>
     <string name="htmlview_ReceivedFrom">Reçu de</string>
 
+    <string name="htmlview_po">BON DE COMMANDE</string>
+    <string name="htmlview_PONo">Non de bon de commande</string>
+    <string name="htmlview_PODate">Date du bon de commande</string>
+    <string name="htmlview_DueDate">Date d\'échéance :</string>
+    <string name="htmlview_Terms">Termes :</string>
+    <string name="htmlview_BalanceDue">Solde dû</string>
 
 
     <string name="htmlview_pv">BON DE PAIEMENT</string>
     <string name="htmlview_PaidTo">Payé à</string>
     <string name="htmlview_PVNo">PV Non</string>
     <string name="htmlview_PVDate">Date PV</string>
+
+    <string name="htmlview_ESTIMATE">ESTIMATION</string>
+    <string name="htmlview_BillTo">Facturer</string>
+    <string name="htmlview_ESTIMATENo">Estimer non</string>
+    <string name="htmlview_ESTIMATEDate">Date d\'estimation</string>
+
+    <string name="htmlview_INVOICE">FACTURER</string>
+    <string name="htmlview_InvoiceNo">Facture no</string>
+    <string name="htmlview_InvoiceDate">Date de facturation</string>
 
 
 

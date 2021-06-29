@@ -794,9 +794,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                                 Log.e(TAG, "datemillis1 "+simple.format(fDateC));
                                                 Log.e(TAG, "datemillis2 "+simple.format(sDateC));
                                                 Log.e(TAG, "datemillis3 "+simple.format(date));
-                                                if(!code.equalsIgnoreCase("purchase_order")){
+                                              //  if(!code.equalsIgnoreCase("purchase_order")){
                                                     customerReportItemArrayList.add(customerReportItem);
-                                                }
+                                               // }
                                             }
                                         }catch (Exception e){
 
@@ -807,9 +807,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                     }
 
                                 }else{
-                                     if(!code.equalsIgnoreCase("purchase_order")){
+                                  //   if(!code.equalsIgnoreCase("purchase_order")){
                                                     customerReportItemArrayList.add(customerReportItem);
-                                     }
+                                  //   }
                                 }
 
                             }
@@ -2740,7 +2740,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String lastQuantityTxt ="";
         if(lastQuantity == 0){
-            lastQuantityTxt = "";
+            lastQuantityTxt = "0.00";
          }else{
              String valueSS = Utility.getPatternFormat(""+numberPostion, lastQuantity);
              lastQuantityTxt = valueSS;
@@ -2748,7 +2748,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String priceTxt ="";
         if(price == 0){
-            priceTxt = "";
+            priceTxt = "0.00"+Utility.getReplaceDollor(cruncycode);
         }else{
             String valueSS = Utility.getPatternFormat(""+numberPostion, price)+Utility.getReplaceDollor(cruncycode);
             priceTxt = valueSS;
@@ -2758,7 +2758,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String totalPriceTxt ="";
         if(totalPrice == 0){
-            totalPriceTxt = "";
+            totalPriceTxt = "0.00"+Utility.getReplaceDollor(cruncycode);
         }else{
             String valueSS = Utility.getPatternFormat(""+numberPostion, totalPrice)+Utility.getReplaceDollor(cruncycode);
             totalPriceTxt = valueSS;

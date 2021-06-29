@@ -519,7 +519,7 @@ public class ViewPO_Activity extends BaseActivity {
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = "Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
         String signatureinvoice = null;
@@ -839,9 +839,61 @@ public class ViewPO_Activity extends BaseActivity {
         }
 
 
+            String htmlview_credit_note = getString(R.string.htmlview_po);
+            String htmlview_Recipient = getString(R.string.htmlview_Recipient);
+            String htmlview_CreditNoteNo = getString(R.string.htmlview_PONo);
+            String htmlview_CreditNoteDate = getString(R.string.htmlview_PODate);
+            String htmlview_Terms = getString(R.string.htmlview_Terms);
+            String htmlview_DueDate = getString(R.string.htmlview_DueDate);
+            String htmlview_ReferenceNo = getString(R.string.htmlview_ReferenceNo);
+            String htmlview_SUMMARY = getString(R.string.htmlview_SUMMARY);
+            String htmlview_ProductItem = getString(R.string.htmlview_ProductItem);
+            String htmlview_UnitofMeasurement = getString(R.string.htmlview_UnitofMeasurement);
+            String htmlview_Quantity = getString(R.string.htmlview_Quantity);
+            String htmlview_Rate = getString(R.string.htmlview_Rate);
+            String htmlview_Amount = getString(R.string.htmlview_Amount);
+            String htmlview_GrossAmount = getString(R.string.htmlview_GrossAmount);
+            String htmlview_Discount = getString(R.string.htmlview_Discount);
+            String htmlview_SubTotal = getString(R.string.htmlview_SubTotal);
+            String htmlview_Tax = getString(R.string.htmlview_Tax);
+            String htmlview_Shipping = getString(R.string.htmlview_Shipping);
+            String htmlview_NetAmount = getString(R.string.htmlview_NetAmount);
+            String htmlview_Notes = getString(R.string.htmlview_Notes);
+            String htmlview_Attachments = getString(R.string.htmlview_Attachments);
+            String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
+            String htmlview_BalanceDue = getString(R.string.htmlview_BalanceDue);
+
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+
+                    .replaceAll("Title_", htmlview_credit_note)
+                    .replaceAll("Recipient", htmlview_Recipient)
+                    .replaceAll("PO No", htmlview_CreditNoteNo)
+                    .replaceAll("PO Date", htmlview_CreditNoteDate)
+                    .replaceAll("Terms:", htmlview_Terms)
+                    .replaceAll("Due Date:", htmlview_DueDate)
+//                        .replaceAll("Reference No", htmlview_ReferenceNo)
+                    .replaceAll("SUMMARY", htmlview_SUMMARY)
+                    .replaceAll("Product/Item", htmlview_ProductItem)
+                    .replaceAll("Unit of Measurement", htmlview_UnitofMeasurement)
+                    .replaceAll("Quantity", htmlview_Quantity)
+                    .replaceAll("Rate", htmlview_Rate)
+                    .replaceAll("Amount_", htmlview_Amount)
+                    .replaceAll("Gross Amount", htmlview_GrossAmount)
+//                        .replaceAll("Discount", htmlview_Discount)
+//                        .replaceAll("SubTotal", htmlview_SubTotal)
+//                        .replaceAll("Tax", htmlview_Tax)
+//                        .replaceAll("Shipping", htmlview_Shipping)
+                    .replaceAll("Net Amount", htmlview_NetAmount)
+//                        .replaceAll("Paid Amount", htmlview_PaidAmount)
+                    .replaceAll("Balance Due_", htmlview_BalanceDue)
+//                        .replaceAll("Notes:", htmlview_Notes)
+//                        .replaceAll("Attachments", htmlview_Attachments)
+
+
 
                     .replaceAll("Company Name", company_name)
                     .replaceAll("Address", stringBuilderCompany.toString())

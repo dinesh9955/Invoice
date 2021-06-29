@@ -510,13 +510,13 @@ public class POToPVWebview extends BaseActivity {
             attachmentimage = "";
 
         } else {
-            attachmentimage = "Attachments";
+            attachmentimage = getString(R.string.html_Attachments);
         }
         String notestringvalue = "";
         if (strnotes.equals("")) {
             notestringvalue = "";
         } else {
-            notestringvalue = "Notes:";
+            notestringvalue = getString(R.string.html_Notes);
         }
 
 
@@ -526,7 +526,7 @@ public class POToPVWebview extends BaseActivity {
             company_stamp = "/android_res/drawable/white_img.png";
             companyname = "";
         } else {
-            companyname = "Company Seal";
+            companyname = getString(R.string.html_CompanySeal);
         }
 
         String signature_of_receivername = "";
@@ -534,7 +534,7 @@ public class POToPVWebview extends BaseActivity {
             signature_of_receiver = "/android_res/drawable/white_img.png";
             signature_of_receivername = "";
         } else {
-            signature_of_receivername = "Signature of Receiver";
+            signature_of_receivername = getString(R.string.html_SignatureofReceiver);
         }
 
 
@@ -543,7 +543,7 @@ public class POToPVWebview extends BaseActivity {
             signature_of_issuer = "/android_res/drawable/white_img.png";
             signature_of_issuername = "";
         } else {
-            signature_of_issuername = "Signature of Issuer";
+            signature_of_issuername = getString(R.string.html_SignatureofIssuer);
         }
 
         try {
@@ -584,7 +584,7 @@ public class POToPVWebview extends BaseActivity {
         } else {
             // null response or Exception occur
             discountvalue = strdiscountvalue;
-            discounttxtreplace = " Discount ";
+            discounttxtreplace = getString(R.string.html_Discount);
         }
 
 
@@ -596,7 +596,7 @@ public class POToPVWebview extends BaseActivity {
             subTotalTxt = "";
             subTotalValueTxt = "";
         }else{
-            subTotalTxt = "SubTotal";
+            subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
 
@@ -641,7 +641,7 @@ public class POToPVWebview extends BaseActivity {
             }
 
 
-            shipingvaluetxt = "Shipping";
+            shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
 
@@ -703,9 +703,9 @@ public class POToPVWebview extends BaseActivity {
             paidamountstrrepvalue =strpaid_amount;
 
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
-                paidamountstrreptxt = "Paid Amount ";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount);
             }else{
-                paidamountstrreptxt = "Paid Amount </br>"+"("+Paymentamountdate+")";
+                paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
             }
 
 
@@ -738,7 +738,7 @@ public class POToPVWebview extends BaseActivity {
             // null response or Exception occur
 
             strreferencenovalue=ref_no;
-            strreferencenotxtvalue=" Reference No:";
+            strreferencenotxtvalue = getString(R.string.html_ReferenceNo);
 
 
         }
@@ -779,9 +779,58 @@ public class POToPVWebview extends BaseActivity {
             stringBuilderCompany.append(company_email+"");
         }
 
+
+        String htmlview_credit_note = getString(R.string.htmlview_pv);
+        String htmlview_PaidTo = getString(R.string.htmlview_PaidTo);
+        String htmlview_CreditNoteNo = getString(R.string.htmlview_PVNo);
+        String htmlview_CreditNoteDate = getString(R.string.htmlview_PVDate);
+//            String htmlview_Terms = getString(R.string.htmlview_Terms);
+//            String htmlview_DueDate = getString(R.string.htmlview_DueDate);
+        String htmlview_ReferenceNo = getString(R.string.htmlview_ReferenceNo);
+        String htmlview_SUMMARY = getString(R.string.htmlview_SUMMARY);
+        String htmlview_ProductItem = getString(R.string.htmlview_ProductItem);
+        String htmlview_UnitofMeasurement = getString(R.string.htmlview_UnitofMeasurement);
+        String htmlview_Quantity = getString(R.string.htmlview_Quantity);
+        String htmlview_Rate = getString(R.string.htmlview_Rate);
+        String htmlview_Amount = getString(R.string.htmlview_Amount);
+        String htmlview_GrossAmount = getString(R.string.htmlview_GrossAmount);
+        String htmlview_Discount = getString(R.string.htmlview_Discount);
+        String htmlview_SubTotal = getString(R.string.htmlview_SubTotal);
+        String htmlview_Tax = getString(R.string.htmlview_Tax);
+        String htmlview_Shipping = getString(R.string.htmlview_Shipping);
+        String htmlview_NetAmount = getString(R.string.htmlview_NetAmount);
+        String htmlview_Notes = getString(R.string.htmlview_Notes);
+        String htmlview_Attachments = getString(R.string.htmlview_Attachments);
+        String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
+
+
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+                    .replaceAll("Title_", htmlview_credit_note)
+                    .replaceAll("Paid To", htmlview_PaidTo)
+                    .replaceAll("PV No", htmlview_CreditNoteNo)
+                    .replaceAll("PV Date", htmlview_CreditNoteDate)
+//                        .replaceAll("Reference No", htmlview_ReferenceNo)
+                    .replaceAll("SUMMARY", htmlview_SUMMARY)
+                    .replaceAll("Product/Item", htmlview_ProductItem)
+                    .replaceAll("Unit of Measurement", htmlview_UnitofMeasurement)
+                    .replaceAll("Quantity", htmlview_Quantity)
+                    .replaceAll("Rate", htmlview_Rate)
+                    .replaceAll("Amount_", htmlview_Amount)
+                    .replaceAll("Gross Amount", htmlview_GrossAmount)
+//                        .replaceAll("Discount", htmlview_Discount)
+//                        .replaceAll("SubTotal", htmlview_SubTotal)
+//                        .replaceAll("Tax", htmlview_Tax)
+//                        .replaceAll("Shipping", htmlview_Shipping)
+                    .replaceAll("Net Amount", htmlview_NetAmount)
+//                        .replaceAll("Paid Amount", htmlview_PaidAmount)
+//                        .replaceAll("Notes:", htmlview_Notes)
+//                        .replaceAll("Attachments", htmlview_Attachments)
+
+
 
                     .replaceAll("Company Name", company_name)
                     .replaceAll("Address", stringBuilderCompany.toString())

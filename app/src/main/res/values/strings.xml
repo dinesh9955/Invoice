@@ -39,20 +39,26 @@
     <string name="htmlview_ReceiptDate">Receipt Date</string>
     <string name="htmlview_ReceivedFrom">Received From</string>
 
-<!--    <string name="htmlview_po">PURCHASE ORDER</string>-->
-<!--    <string name="htmlview_PONo">PO No</string>-->
-<!--    <string name="htmlview_PODate">PO Date</string>-->
-<!--    <string name="htmlview_Terms">Terms</string>-->
-<!--    <string name="htmlview_DueDate">Due Date</string>-->
-<!--    <string name="htmlview_Terms">Terms</string>-->
-
+    <string name="htmlview_po">PURCHASE ORDER</string>
+    <string name="htmlview_PONo">PO No</string>
+    <string name="htmlview_PODate">PO Date</string>
+    <string name="htmlview_DueDate">Due Date:</string>
+    <string name="htmlview_Terms">Terms:</string>
+    <string name="htmlview_BalanceDue">Balance Due</string>
 
     <string name="htmlview_pv">PAYMENT VOUCHER</string>
     <string name="htmlview_PaidTo">Paid To</string>
     <string name="htmlview_PVNo">PV No</string>
     <string name="htmlview_PVDate">PV Date</string>
 
+    <string name="htmlview_ESTIMATE">ESTIMATE</string>
+    <string name="htmlview_BillTo">Bill To</string>
+    <string name="htmlview_ESTIMATENo">ESTIMATE No</string>
+    <string name="htmlview_ESTIMATEDate">ESTIMATE Date</string>
 
+    <string name="htmlview_INVOICE">INVOICE</string>
+    <string name="htmlview_InvoiceNo">Invoice No</string>
+    <string name="htmlview_InvoiceDate">Invoice Date</string>
 
 
 
