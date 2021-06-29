@@ -104,7 +104,7 @@ public class InvoicelistAdapterdt extends RecyclerView.Adapter<InvoicelistAdapte
             viewHolderForCat.statustxt.setText("");
         } else {
             if(voidStatus.equalsIgnoreCase("1")){
-                viewHolderForCat.statustxt.setText(mcontext.getString(R.string.report_Paid));
+                viewHolderForCat.statustxt.setText(mcontext.getString(R.string.invoice_Void));
                 viewHolderForCat.statustxt.setTextColor(Color.parseColor("#FF0000"));
             }else{
                 if (strstatus.equals("2")) {
