@@ -1,9 +1,16 @@
 package com.receipt.invoice.stock.sirproject.Settings;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +25,7 @@ import com.anjlab.android.iab.v3.TransactionDetails;
 import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
+import com.receipt.invoice.stock.sirproject.Home.Home_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Report.ReportActivity;
 import com.receipt.invoice.stock.sirproject.Report.ReportAdapter;
@@ -175,5 +183,73 @@ public class SettingsActivity extends BaseActivity {
 
         bp.purchase(this, "FunnyStickerPaid");
 //        BillingHelper.restoreTransactionInformation(BillingSecurity.generateNonce())
+    }
+
+    int imageClickID = 0;
+    public void upgradePackage() {
+        final Dialog mybuilder = new Dialog(SettingsActivity.this);
+        mybuilder.setContentView(R.layout.upgrade_dialog_list);
+
+        ImageView imageView = (ImageView) mybuilder.findViewById(R.id.imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                if(imageClickID == 0){
+//                    imageClickID = 1;
+//                    imageView.setImageResource(R.drawable.radio_uncheck);
+//                }else{
+                    imageView.setImageResource(R.drawable.radio_check);
+                    imageClickID = 1;
+//                }
+            }
+        });
+
+        TextView txtBack = (TextView) mybuilder.findViewById(R.id.txtBack);
+        txtBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mybuilder.dismiss();
+            }
+        });
+
+        TextView txtSave = (TextView) mybuilder.findViewById(R.id.txtSave);
+        txtSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                pref.setNumberFormatPosition(languagePostion);
+                mybuilder.dismiss();
+//                Intent intent = new Intent(mcontext, Home_Activity.class);
+//                mcontext.startActivity(intent);
+//                // mcontext.finishAffinity();
+//                mcontext.finish();
+            }
+        });
+
+//        RecyclerView recycler_invoices = mybuilder.findViewById(R.id.recycler_list);
+//
+//        ArrayList<String> arrayListNames = new ArrayList<>();
+//        arrayListNames.add("1,000,000.00");
+//        arrayListNames.add("1,00,00,000.00");
+//        arrayListNames.add("1.000.000,00");
+//        arrayListNames.add("1 000 000,00");
+//
+//
+//        languagePostion = pref.getNumberFormatPosition();
+//
+//        NumberFormatAdapter invoicelistAdapterdt = new NumberFormatAdapter(mcontext, arrayListNames, settingsAdapter);
+//        recycler_invoices.setAdapter(invoicelistAdapterdt);
+//        invoicelistAdapterdt.updateLanguagePosition(languagePostion);
+//        recycler_invoices.setLayoutManager(new LinearLayoutManager(mcontext, LinearLayoutManager.VERTICAL, false));
+//        recycler_invoices.setHasFixedSize(true);
+//        invoicelistAdapterdt.notifyDataSetChanged();
+
+
+
+        mybuilder.show();
+        mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        Window window = mybuilder.getWindow();
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawableResource(R.color.transparent);
+
     }
 }

@@ -87,6 +87,10 @@
     <string name="html_Bank">Bank:</string>
 
 
+
+    <string name="setting_ChooseUpgradePackage">Upgrade-Paket auswählen</string>
+    <string name="setting_UpgradePlan1">Upgrade auf unsere exklusive Bestandsverfolgungsfunktion für zusätzliche 23,99 USD pro Jahr und erhalte bis zu 33 %</string>
+
     <string name="error">Error</string>
 
     <string name="preview">Vorschau</string>

@@ -634,6 +634,9 @@
     <string name="setting_SelectNumberFormat">Select Number Format</string>
     <string name="setting_Done">Done</string>
 
+    <string name="setting_ChooseUpgradePackage">Choose Upgrade Package</string>
+    <string name="setting_UpgradePlan1">Upgrade to our exclusive Stock Tracking feature at additional USD 23.99 annually and get upto 33%</string>
+
     <string name="setting_CommaFormatSelection">Comma Format Selection</string>
     <string name="setting_OnlinePaymentGateway">Online Payment Gateway</string>
     <string name="setting_Subscribe">Subscribe</string>

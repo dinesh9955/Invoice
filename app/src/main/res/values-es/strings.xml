@@ -82,6 +82,10 @@
 
 
 
+
+    <string name = "setting_ChooseUpgradePackage"> Elija el paquete de actualización </string>
+    <string name = "setting_UpgradePlan1"> Actualice a nuestra función exclusiva de seguimiento de existencias por USD 23,99 adicionales al año y obtenga hasta un 33% </string>
+
     <string name="error">Error</string>
 
     <string name="preview">Avance</string>

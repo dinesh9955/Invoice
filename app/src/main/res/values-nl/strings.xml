@@ -84,6 +84,10 @@
 
 
 
+    <string name="setting_ChooseUpgradePackage">Kies upgradepakket</string>
+    <string name="setting_UpgradePlan1">Upgrade naar onze exclusieve Stock Tracking-functie voor $ 23,99 extra per jaar en krijg tot 33%</string>
+
+
     <string name="error">Fout</string>
 
     <string name="preview">Voorbeeld</string>

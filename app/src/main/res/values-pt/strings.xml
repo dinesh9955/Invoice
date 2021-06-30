@@ -84,7 +84,8 @@
 
 
 
-
+    <string name = "setting_ChooseUpgradePackage"> Escolha o pacote de atualização </string>
+    <string name = "setting_UpgradePlan1"> Faça upgrade para nosso recurso exclusivo de rastreamento de estoque por US $ 23,99 adicionais anualmente e ganhe até 33% </string>
 
     <string name="error">Erro</string>
 

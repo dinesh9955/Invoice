@@ -95,6 +95,7 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
                 } else if(i == 3){
 //                    Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
 //                    mcontext.startActivity(intent);
+                    ((SettingsActivity)mcontext).upgradePackage();
                 } else if(i == 4){
 //                    Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
 //                    mcontext.startActivity(intent);

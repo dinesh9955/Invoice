@@ -81,7 +81,8 @@
 
 
 
-
+    <string name="setting_ChooseUpgradePackage">Choisir le package de mise à niveau</string>
+    <string name="setting_UpgradePlan1">Passez à notre fonction exclusive de suivi des stocks pour 23,99 USD supplémentaires par an et obtenez jusqu\'à 33 %</string>
 
     <string name="error">Erreur</string>
 

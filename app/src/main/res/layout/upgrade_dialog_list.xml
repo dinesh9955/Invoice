@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/_15sdp">
+
+    <RelativeLayout
+        android:id="@+id/r"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+        >
+
+
+        <TextView
+
+            android:id="@+id/txtheadvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/setting_ChooseUpgradePackage"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            />
+
+
+        <TextView
+
+            android:id="@+id/txtBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="@string/back"
+            android:textColor="@color/light_blue"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_toLeftOf="@+id/txtSave"
+            />
+
+
+
+        <TextView
+
+            android:id="@+id/txtSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/all_Save"
+            android:textColor="@color/light_blue"
+            android:layout_alignParentRight="true"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="60dp"
+        android:layout_below="@+id/r"
+        android:layout_marginTop="@dimen/_10sdp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_UpgradePlan1"
+            android:id="@+id/text_setting"
+            android:textColor="@color/fragmentfont"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:textStyle="normal"
+            android:layout_toRightOf="@+id/imageView"
+            />
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/radio_uncheck"
+            android:tint="@color/darkblue"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

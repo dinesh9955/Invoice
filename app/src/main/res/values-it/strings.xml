@@ -81,7 +81,8 @@
 
 
 
-
+    <string name="setting_ChooseUpgradePackage">Scegli pacchetto di aggiornamento</string>
+    <string name="setting_UpgradePlan1">Esegui l\'upgrade alla nostra esclusiva funzione di monitoraggio delle scorte a 23,99 USD aggiuntivi all\'anno e ottieni fino al 33%</string>
 
     <string name="error">Errore</string>
 
