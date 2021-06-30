@@ -7,6 +7,83 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
+
+
+
+    <string name="htmlview_credit_note">CREDIT NOTE</string>
+    <string name="htmlview_Recipient">Ontvanger</string>
+    <string name="htmlview_CreditNoteNo">Creditnota Nee</string>
+    <string name="htmlview_CreditNoteDate">datum creditnota</string>
+    <string name="htmlview_ReferenceNo">Referentienummer</string>
+    <string name="htmlview_SUMMARY">OVERZICHT</string>
+    <string name="htmlview_ProductItem">Product/Artikel</string>
+    <string name="htmlview_UnitofMeasurement">Maateenheid</string>
+    <string name="htmlview_Quantity">Hoeveelheid</string>
+    <string name="htmlview_Rate">Tarief</string>
+    <string name="htmlview_Amount">Bedrag</string>
+    <string name="htmlview_GrossAmount">Brutobedrag</string>
+    <string name="htmlview_Discount">Korting</string>
+    <string name="htmlview_SubTotal">SubTotaal</string>
+    <string name="htmlview_Tax">Belasting</string>
+    <string name="htmlview_Shipping">Verzending</string>
+    <string name="htmlview_NetAmount">Nettobedrag</string>
+    <string name="htmlview_PaidAmount">Betaald bedrag</string>
+    <string name="htmlview_Notes">Notities</string>
+    <string name="htmlview_Attachments">Bijlagen</string>
+
+    <string name="htmlview_debit_note">BETAALOPMERKING</string>
+    <string name="htmlview_DebitNoteNo">Debetnota Nee</string>
+    <string name="htmlview_DebitNoteDate">Debetnotadatum</string>
+
+    <string name="htmlview_receipt">RECEIPT</string>
+    <string name="htmlview_ReceiptNo">ReceiptNo</string>
+    <string name="htmlview_ReceiptDate">Ontvangstdatum</string>
+    <string name="htmlview_ReceivedFrom">Ontvangen van</string>
+
+    <string name="htmlview_po">KOOPORDER</string>
+    <string name="htmlview_PONo">PO Nee</string>
+    <string name="htmlview_PODate">PO-datum</string>
+    <string name="htmlview_DueDate">Vervaldatum:</string>
+    <string name="htmlview_Terms">Voorwaarden:</string>
+    <string name="htmlview_BalanceDue">Te betalen saldo</string>
+
+    <string name="htmlview_pv">BETALINGSBON</string>
+    <string name="htmlview_PaidTo">Betaald aan</string>
+    <string name="htmlview_PVNo">PV Nee</string>
+    <string name="htmlview_PVDate">PV-datum</string>
+
+    <string name="htmlview_ESTIMATE">SCHATTING</string>
+    <string name="htmlview_BillTo">Factureren aan</string>
+    <string name="htmlview_ESTIMATENo">SCHATTING Nee</string>
+    <string name="htmlview_ESTIMATEDate">GESCHATTE datum</string>
+
+    <string name="htmlview_INVOICE">FACTUUR</string>
+    <string name="htmlview_InvoiceNo">Factuurnr</string>
+    <string name="htmlview_InvoiceDate">Factuurdatum</string>
+
+
+    <string name="htmlview_THANKYOUNOTE">BEDANKT</string>
+    <string name="htmlview_DearClient">Geachte klant,</string>
+    <string name="htmlview_Date">Datum:</string>
+    <string name="htmlview_GreetingsfromCompany">Groeten van Bedrijf</string>
+    <string name="htmlview_Wejustwanted">We wilden je even laten weten dat we het erg leuk vinden om met je samen te werken en dat we ons vereerd voelen om de door jou gekozen artikelleverancier te zijn.</string>
+    <string name="htmlview_Yourbusinessis">Uw bedrijf wordt zeer gewaardeerd en we zullen ons uiterste best doen om aan uw hoge verwachtingen te blijven voldoen.</string>
+    <string name="htmlview_Yourcontinuedpatronage">Uw voortdurende steun is een essentieel onderdeel van onze groei en daarvoor zijn we u zeer dankbaar.</string>
+    <string name="htmlview_Wewouldlike">We willen je bedanken voor je bedrijf en we kijken ernaar uit je nog vele jaren van dienst te mogen zijn.</string>
+
+
+    <string name="htmlview_INVOICEDUEDATEREMINDER">HERINNERING FACTURATIEVERVALDATUM</string>
+    <string name="htmlview_CreditTerms">Kredietvoorwaarden</string>
+    <string name="htmlview_DueDate2">Vervaldatum</string>
+    <string name="htmlview_Wewouldliketobring">We willen u erop wijzen dat het bovengenoemde factuurnummer nu te laat is voor betaling.</string>
+    <string name="htmlview_Weherebyrequest">Hierbij verzoeken wij u vriendelijk om dit onmiddellijk te regelen.</string>
+    <string name="htmlview_Welookforward">We kijken ernaar uit van u te horen in dit verband.</string>
+    <string name="htmlview_Note">Opmerking:</string>
+    <string name="htmlview_Ifpaymenthas">Als de betaling al is gedaan, negeer deze melding dan alstublieft.</string>
+
+
+
+
     <string name="error">Fout</string>
 
     <string name="preview">Voorbeeld</string>

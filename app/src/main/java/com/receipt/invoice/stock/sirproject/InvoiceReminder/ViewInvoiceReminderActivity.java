@@ -705,7 +705,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
                 cheque_payableTo = "";
             }else{
                 cheque_payableTo = cheque_payable_to;
-                bycheckstrtxt="By cheque :";
+                bycheckstrtxt = getString(R.string.html_Bycheque);
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
@@ -713,7 +713,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
-                paypalstrtxt="Pay Pal :";
+                paypalstrtxt = getString(R.string.html_PayPal);
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
@@ -727,7 +727,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
                 }else{
                     payment_currencystr = "";
                 }
-                bankstrtxt="Bank :";
+                bankstrtxt = getString(R.string.html_Bank);
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
@@ -885,8 +885,43 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
             String dateCurrent = sdf.format(myCalendar.getTime());
 
 
+
+            String htmlview_credit_note = getString(R.string.htmlview_INVOICEDUEDATEREMINDER);
+            String htmlview_DearClient = getString(R.string.htmlview_DearClient);
+            String htmlview_Date = getString(R.string.htmlview_Date);
+            String htmlview_InvoiceNo = getString(R.string.htmlview_InvoiceNo);
+            String htmlview_InvoiceDate = getString(R.string.htmlview_InvoiceDate);
+            String htmlview_CreditTerms = getString(R.string.htmlview_CreditTerms);
+            String htmlview_DueDate = getString(R.string.htmlview_DueDate2);
+            String htmlview_GreetingsfromCompany = getString(R.string.htmlview_GreetingsfromCompany);
+            String htmlview_Wewouldliketobring = getString(R.string.htmlview_Wewouldliketobring);
+            String htmlview_Weherebyrequest = getString(R.string.htmlview_Weherebyrequest);
+            String htmlview_Welookforward = getString(R.string.htmlview_Welookforward);
+            String htmlview_Note = getString(R.string.htmlview_Note);
+            String htmlview_Ifpaymenthas = getString(R.string.htmlview_Ifpaymenthas);
+
+
             try {
                 content = IOUtils.toString(getAssets().open(name))
+
+                        .replaceAll("INVOICE DUE DATE REMINDER", htmlview_credit_note)
+                        .replaceAll("Dear Client,", htmlview_DearClient)
+                        .replaceAll("Greetings from Company", htmlview_GreetingsfromCompany)
+                        .replaceAll("Date:", htmlview_Date)
+                        .replaceAll("Invoice No", htmlview_InvoiceNo)
+                        .replaceAll("Invoice Date", htmlview_InvoiceDate)
+                        .replaceAll("Credit Terms", htmlview_CreditTerms)
+                        .replaceAll("Due Date", htmlview_DueDate)
+                        .replaceAll("We would like to bring to your notice that the above mentioned Invoice number is now overdue for payment.", htmlview_Wewouldliketobring)
+                        .replaceAll("We hereby request you to kindly make immediate settlement of the same.", htmlview_Weherebyrequest)
+                        .replaceAll("We look forward to hearing from you in this regard.", htmlview_Welookforward)
+                        .replaceAll("Note:", htmlview_Note)
+                        .replaceAll("If payment has already been done, kindly disregard this notification.", htmlview_Ifpaymenthas)
+
+
+
+
+
                         .replaceAll("Company Name", company_name)
                         .replaceAll("Address", stringBuilderCompany.toString())
 //                        .replaceAll("Contact No.", company_contact)

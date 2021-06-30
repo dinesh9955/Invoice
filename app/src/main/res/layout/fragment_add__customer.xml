@@ -49,14 +49,29 @@
                     android:id="@+id/description"/>
 
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contacts"
+                    android:layout_below="@+id/description"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="70dp"
+                    android:text="@string/customer_IMPORT_CUSTOMER_FROM_CONTACT"
+                    android:textColor="@color/lightpurple"
+                    android:drawableRight="@drawable/import_contact"
+                    android:layout_marginBottom="10dp"
+                    />
+
+
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="30dp"
                     android:id="@+id/uploadimage"
                     android:src="@drawable/upload_company_logo"
-                    android:layout_below="@+id/description"
+                    android:layout_below="@+id/contacts"
                     android:scaleType="centerCrop"/>
 
                 <TextView
@@ -410,19 +425,6 @@
 
                     />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/contacts"
-                    android:layout_below="@+id/add"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="30dp"
-                    android:text="@string/customer_IMPORT_CUSTOMER_FROM_CONTACT"
-                    android:textColor="@color/lightpurple"
-                    android:drawableRight="@drawable/import_contact"
-                    android:layout_marginBottom="10dp"
-                    />
 
 
 

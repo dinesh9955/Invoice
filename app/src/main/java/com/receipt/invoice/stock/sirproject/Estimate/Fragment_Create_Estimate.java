@@ -2183,10 +2183,10 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                    if(strdiscount.equalsIgnoreCase("Percentage")){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                    if(strdiscount.equalsIgnoreCase("Amount")){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 

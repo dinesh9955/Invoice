@@ -61,6 +61,30 @@
     <string name="htmlview_InvoiceDate">Invoice Date</string>
 
 
+    <string name="htmlview_THANKYOUNOTE">THANK YOU NOTE</string>
+    <string name="htmlview_DearClient">Dear Client,</string>
+    <string name="htmlview_Date">Date:</string>
+    <string name="htmlview_GreetingsfromCompany">Greetings from Company</string>
+    <string name="htmlview_Wejustwanted">We just wanted you to know that we truly enjoy working with you and feel honored to be your chosen item provider.</string>
+    <string name="htmlview_Yourbusinessis">Your business is much appreciated and we will do our very best to continue to meet your high expectations.</string>
+    <string name="htmlview_Yourcontinuedpatronage">Your continued patronage is a vital part of our growth and for that we are most grateful.</string>
+    <string name="htmlview_Wewouldlike">We would like to thank you for your business and we look forward to serving you for many years to come.</string>
+
+
+    <string name="htmlview_INVOICEDUEDATEREMINDER">INVOICE DUE DATE REMINDER</string>
+    <string name="htmlview_CreditTerms">Credit Terms</string>
+    <string name="htmlview_DueDate2">Due Date</string>
+    <string name="htmlview_Wewouldliketobring">We would like to bring to your notice that the above mentioned Invoice number is now overdue for payment.</string>
+    <string name="htmlview_Weherebyrequest">We hereby request you to kindly make immediate settlement of the same.</string>
+    <string name="htmlview_Welookforward">We look forward to hearing from you in this regard.</string>
+    <string name="htmlview_Note">Note:</string>
+    <string name="htmlview_Ifpaymenthas">If payment has already been done, kindly disregard this notification.</string>
+
+
+
+
+
+
 
     <string name="all_Save">Save</string>
     <string name="all_Cancel">Cancel</string>
@@ -462,6 +486,8 @@
     <string name="html_PaidAmount">Paid Amount</string>
     <string name="html_PaymentDetails">Payment Details</string>
     <string name="html_Bycheque">By cheque:</string>
+    <string name="html_PayPal">Pay Pal:</string>
+    <string name="html_Bank">Bank:</string>
     <string name="html_ShipTo">Ship To:</string>
     <string name="html_InvoiceDueDateReminder">Invoice Due Date Reminder</string>
     <string name="html_Your_invoice_reminder_note">Your invoice is due for payment. Kindly find below reminder note.</string>

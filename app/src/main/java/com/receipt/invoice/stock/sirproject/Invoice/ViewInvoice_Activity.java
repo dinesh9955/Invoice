@@ -751,7 +751,7 @@ public class ViewInvoice_Activity extends BaseActivity {
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
-                paypalstrtxt="Pay Pal :";
+                paypalstrtxt = getString(R.string.html_PayPal);
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
@@ -765,7 +765,7 @@ public class ViewInvoice_Activity extends BaseActivity {
                 }else{
                     payment_currencystr = "";
                 }
-                bankstrtxt="Bank :";
+                bankstrtxt = getString(R.string.html_Bank);
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
@@ -888,9 +888,9 @@ public class ViewInvoice_Activity extends BaseActivity {
 
 
                     .replaceAll("Title_", htmlview_credit_note)
-                    .replaceAll("Recipient", htmlview_BillTo)
-                    .replaceAll("PO No", htmlview_CreditNoteNo)
-                    .replaceAll("PO Date", htmlview_CreditNoteDate)
+                    .replaceAll("Bill To", htmlview_BillTo)
+                    .replaceAll("Invoice No", htmlview_CreditNoteNo)
+                    .replaceAll("Invoice Date", htmlview_CreditNoteDate)
                     .replaceAll("Terms:", htmlview_Terms)
                     .replaceAll("Due Date:", htmlview_DueDate)
 //                        .replaceAll("Reference No", htmlview_ReferenceNo)

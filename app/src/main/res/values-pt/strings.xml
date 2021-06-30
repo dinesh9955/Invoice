@@ -7,6 +7,85 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
+
+
+
+
+    <string name = "htmlview_credit_note"> NOTA DE CRÉDITO </string>
+    <string name = "htmlview_Recipient"> Destinatário </string>
+    <string name = "htmlview_CreditNoteNo"> Nota de crédito nº </string>
+    <string name = "htmlview_CreditNoteDate"> Data da nota de crédito </string>
+    <string name = "htmlview_ReferenceNo"> Nº de referência </string>
+    <string name = "htmlview_SUMMARY"> RESUMO </string>
+    <string name = "htmlview_ProductItem"> Produto / Item </string>
+    <string name = "htmlview_UnitofMeasurement"> Unidade de medida </string>
+    <string name = "htmlview_Quantity"> Quantidade </string>
+    <string name = "htmlview_Rate"> Taxa </string>
+    <string name = "htmlview_Amount"> Quantidade </string>
+    <string name = "htmlview_GrossAmount"> Valor bruto </string>
+    <string name = "htmlview_Discount"> Desconto </string>
+    <string name = "htmlview_SubTotal"> SubTotal </string>
+    <string name = "htmlview_Tax"> Imposto </string>
+    <string name = "htmlview_Shipping"> Frete </string>
+    <string name = "htmlview_NetAmount"> Valor líquido </string>
+    <string name = "htmlview_PaidAmount"> Valor pago </string>
+    <string name = "htmlview_Notes"> Notas </string>
+    <string name = "htmlview_Attachments"> Anexos </string>
+
+    <string name = "htmlview_debit_note"> NOTA DE DÉBITO </string>
+    <string name = "htmlview_DebitNoteNo"> Nota de débito nº </string>
+    <string name = "htmlview_DebitNoteDate"> Data da nota de débito </string>
+
+    <string name = "htmlview_receipt"> RECIBO </string>
+    <string name = "htmlview_ReceiptNo"> Recibo Não </string>
+    <string name = "htmlview_ReceiptDate"> Data de recebimento </string>
+    <string name = "htmlview_ReceivedFrom"> Recebido de </string>
+
+    <string name = "htmlview_po"> PEDIDO DE COMPRA </string>
+    <string name = "htmlview_PONo"> PO Não </string>
+    <string name = "htmlview_PODate"> Data do pedido </string>
+    <string name = "htmlview_DueDate"> Data de vencimento: </string>
+    <string name = "htmlview_Terms"> Termos: </string>
+    <string name = "htmlview_BalanceDue"> Saldo devedor </string>
+
+    <string name = "htmlview_pv"> VOUCHER DE PAGAMENTO </string>
+    <string name = "htmlview_PaidTo"> Pago a </string>
+    <string name = "htmlview_PVNo"> PV Não </string>
+    <string name = "htmlview_PVDate"> Data PV </string>
+
+    <string name = "htmlview_ESTIMATE"> ESTIMATIVA </string>
+    <string name = "htmlview_BillTo"> Cobrar </string>
+    <string name = "htmlview_ESTIMATENo"> ESTIMATIVA Não </string>
+    <string name = "htmlview_ESTIMATEDate"> ESTIMATIVA Data </string>
+
+    <string name = "htmlview_INVOICE"> INVOICE </string>
+    <string name = "htmlview_InvoiceNo"> Fatura nº </string>
+    <string name = "htmlview_InvoiceDate"> Data da fatura </string>
+
+
+    <string name = "htmlview_THANKYOUNOTE"> NOTA DE OBRIGADO </string>
+    <string name = "htmlview_DearClient"> Caro cliente, </string>
+    <string name = "htmlview_Date"> Data: </string>
+    <string name = "htmlview_GreetingsfromCompany"> Saudações da empresa </string>
+    <string name = "htmlview_Wejustwanted"> Queríamos apenas que soubesse que realmente gostamos de trabalhar com você e nos sentimos honrados por ser o seu fornecedor de itens escolhido. </string>
+    <string name = "htmlview_Yourbusinessis"> Sua empresa é muito apreciada e faremos o possível para continuar atendendo às suas expectativas. </string>
+    <string name = "htmlview_Yourcontinuedpatronage"> Seu patrocínio contínuo é uma parte vital de nosso crescimento e por isso somos muito gratos. </string>
+    <string name = "htmlview_Wewouldlike"> Gostaríamos de agradecê-lo por seu negócio e esperamos atendê-lo por muitos anos. </string>
+
+
+    <string name = "htmlview_INVOICEDUEDATEREMINDER"> LEMBRETE DA DATA DE VENCIMENTO DA FATURA </string>
+    <string name = "htmlview_CreditTerms"> Termos de crédito </string>
+    <string name = "htmlview_DueDate2"> Data de vencimento </string>
+    <string name = "htmlview_Wewouldliketobring"> Gostaríamos de informar que o pagamento do número da fatura mencionado acima está vencido. </string>
+    <string name = "htmlview_Weherebyrequest"> Por meio deste, solicitamos que você faça o pagamento imediato do mesmo. </string>
+    <string name = "htmlview_Welookforward"> Esperamos ouvir de você a esse respeito. </string>
+    <string name = "htmlview_Note"> Observação: </string>
+    <string name = "htmlview_Ifpaymenthas"> Se o pagamento já foi feito, por favor, desconsidere esta notificação. </string>
+
+
+
+
+
     <string name="error">Erro</string>
 
     <string name="preview">Antevisão</string>

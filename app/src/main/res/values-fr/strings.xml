@@ -60,6 +60,27 @@
     <string name="htmlview_InvoiceNo">Facture no</string>
     <string name="htmlview_InvoiceDate">Date de facturation</string>
 
+    <string name="htmlview_THANKYOUNOTE">REMERCIEMENT</string>
+    <string name="htmlview_DearClient">Cher client,</string>
+    <string name="htmlview_Date">Date :</string>
+    <string name="htmlview_GreetingsfromCompany">Salutations de l\'entreprise</string>
+    <string name="htmlview_Wejustwanted">Nous voulions simplement que vous sachiez que nous aimons vraiment travailler avec vous et que nous nous sentons honorés d\'être le fournisseur d\'articles que vous avez choisi.</string>
+    <string name="htmlview_Yourbusinessis">Votre entreprise est très appréciée et nous ferons de notre mieux pour continuer à répondre à vos attentes élevées.</string>
+    <string name="htmlview_Yourcontinuedpatronage">Votre mécénat continu est un élément essentiel de notre croissance et nous vous en sommes très reconnaissants.</string>
+    <string name="htmlview_Wewouldlike">Nous tenons à vous remercier pour votre entreprise et nous sommes impatients de vous servir pendant de nombreuses années.</string>
+
+    <string name="htmlview_INVOICEDUEDATEREMINDER">RAPPEL DE DATE D\'ÉCHÉANCE DE FACTURE</string>
+    <string name="htmlview_CreditTerms">Conditions de crédit</string>
+    <string name="htmlview_DueDate2">Date d\'échéance</string>
+    <string name="htmlview_Wewouldliketobring">Nous souhaitons vous signaler que le numéro de facture mentionné ci-dessus est maintenant en retard de paiement.</string>
+    <string name="htmlview_Weherebyrequest">Nous vous prions par la présente de bien vouloir effectuer le règlement immédiat de la même chose.</string>
+    <string name="htmlview_Welookforward">Nous sommes impatients de vous entendre à ce sujet.</string>
+    <string name="htmlview_Note">Remarque :</string>
+    <string name="htmlview_Ifpaymenthas">Si le paiement a déjà été effectué, veuillez ignorer cette notification.</string>
+
+
+
+
 
 
     <string name="error">Erreur</string>

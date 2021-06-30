@@ -20,7 +20,7 @@
         android:text="@string/Customizeyourexperience"
         android:id="@+id/text_setting"
         android:textColor="@color/fragmentfont"
-        android:textSize="@dimen/_12sdp"
+        android:textSize="@dimen/_11sdp"
         android:layout_marginLeft="20dp"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/icon_setting"

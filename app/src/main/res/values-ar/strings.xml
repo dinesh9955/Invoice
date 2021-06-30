@@ -7,10 +7,89 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
+
+
+    <string name = "htmlview_credit_note"> ملاحظة ائتمانية </string>
+    <string name = "htmlview_Recipient"> المستلم </string>
+    <string name = "htmlview_CreditNoteNo"> رقم ملاحظة الائتمان </string>
+    <string name = "htmlview_CreditNoteDate"> تاريخ مذكرة الائتمان </string>
+    <string name = "htmlview_ReferenceNo"> رقم المرجع </string>
+    <string name = "htmlview_SUMMARY"> ملخص </string>
+    <string name = "htmlview_ProductItem"> المنتج / العنصر </string>
+    <string name = "htmlview_UnitofMeasurement"> وحدة القياس </string>
+    <string name = "htmlview_Quantity"> الكمية </string>
+    <string name = "htmlview_Rate"> معدل </string>
+    <string name = "htmlview_Amount"> المبلغ </string>
+    <string name = "htmlview_GrossAmount"> المبلغ الإجمالي </string>
+    <string name = "htmlview_Discount"> خصم </string>
+    <string name = "htmlview_SubTotal"> المجموع الفرعي </string>
+    <string name = "htmlview_Tax"> الضرائب </string>
+    <string name = "htmlview_Shipping"> الشحن </string>
+    <string name = "htmlview_NetAmount"> صافي المبلغ </string>
+    <string name = "htmlview_PaidAmount"> المبلغ المدفوع </string>
+    <string name = "htmlview_Notes"> ملاحظات </string>
+    <string name = "htmlview_Attachments"> المرفقات </string>
+
+    <string name = "htmlview_debit_note"> مذكرة الخصم </string>
+    <string name = "htmlview_DebitNoteNo"> ملاحظة الخصم لا </string>
+    <string name = "htmlview_DebitNoteDate"> تاريخ ملاحظة الخصم </string>
+
+    <string name = "htmlview_receipt"> استلام </string>
+    <string name = "htmlview_ReceiptNo"> رقم الإيصال </string>
+    <string name = "htmlview_ReceiptDate"> تاريخ الاستلام </string>
+    <string name = "htmlview_ReceivedFrom"> مستلم من </string>
+
+    <string name = "htmlview_po"> طلب الشراء </string>
+    <string name = "htmlview_PONo"> رقم صندوق البريد </string>
+    <string name = "htmlview_PODate"> تاريخ أمر الشراء </string>
+    <string name = "htmlview_DueDate"> تاريخ الاستحقاق: </string>
+    <string name = "htmlview_Terms"> المصطلحات: </string>
+    <string name = "htmlview_BalanceDue"> الرصيد المستحق </string>
+
+    <string name = "htmlview_pv"> قسيمة الدفع </string>
+    <string name = "htmlview_PaidTo"> مدفوع إلى </string>
+    <string name = "htmlview_PVNo"> PV لا </string>
+    <string name = "htmlview_PVDate"> تاريخ PV </string>
+
+    <string name = "htmlview_ESTIMATE"> تقدير </string>
+    <string name = "htmlview_BillTo"> إرسال فاتورة إلى </string>
+    <string name = "htmlview_ESTIMATENo"> تقدير لا </string>
+    <string name = "htmlview_ESTIMATEDate"> تقدير التاريخ </string>
+
+    <string name = "htmlview_INVOICE"> الفاتورة </string>
+    <string name = "htmlview_InvoiceNo"> رقم الفاتورة </string>
+    <string name = "htmlview_InvoiceDate"> تاريخ الفاتورة </string>
+
+
+    <string name = "htmlview_THANKYOUNOTE"> شكرًا لك على الملاحظة </string>
+    <string name = "htmlview_DearClient"> عزيزي العميل ، </string>
+    <string name = "htmlview_Date"> التاريخ: </string>
+    <string name = "htmlview_GreetingsfromCompany"> تحيات الشركة </string>
+    <string name = "htmlview_Wejustwanted"> أردنا منك فقط أن تعرف أننا نستمتع حقًا بالعمل معك ونشعر بالفخر لكوننا مزود العنصر الذي اخترته. </string>
+    <string name = "htmlview_Yourbusinessis"> عملك موضع تقدير كبير وسنبذل قصارى جهدنا لمواصلة تلبية توقعاتك العالية. </string>
+    <string name = "htmlview_Yourcontinuedpatronage"> تعتبر رعايتك المستمرة جزءًا حيويًا من نمونا ولهذا نحن في غاية الامتنان. </string>
+    <string name = "htmlview_Wewouldlike"> نود أن نشكرك على عملك ونتطلع إلى خدمتك لسنوات عديدة قادمة. </string>
+
+
+    <string name = "htmlview_INVOICEDUEDATEREMINDER"> تذكير بتاريخ الفاتورة </string>
+    <string name = "htmlview_CreditTerms"> شروط الائتمان </string>
+    <string name = "htmlview_DueDate2"> تاريخ الاستحقاق </string>
+    <string name = "htmlview_Wewouldliketobring"> نود أن نبلغك بأن رقم الفاتورة المذكور أعلاه قد فات موعد السداد. </string>
+    <string name = "htmlview_Weherebyrequest"> نطلب منك بموجب هذا التفضل بإجراء تسوية فورية لنفس الأمر. </string>
+    <string name = "htmlview_Welookforward"> نتطلع إلى تلقي رد منك في هذا الصدد. </string>
+    <string name = "htmlview_Note"> ملاحظة: </string>
+    <string name = "htmlview_Ifpaymenthas"> إذا تم الدفع بالفعل ، فيرجى تجاهل هذا الإشعار. </string>
+
+
+
+
+
     <string name="error">خطأ</string>
 
     <string name="preview">معاينة</string>
     <string name="done">منجز</string>
+
+
 
 
     <string name="header_receipts">الإيصالات</string>

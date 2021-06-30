@@ -7,6 +7,86 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
+
+
+
+    <string name="htmlview_credit_note">KREDITHINWEIS</string>
+    <string name="htmlview_Recipient">Empfänger</string>
+    <string name="htmlview_CreditNoteNo">Gutschriftsnr.</string>
+    <string name="htmlview_CreditNoteDate">Gutschriftsdatum</string>
+    <string name="htmlview_ReferenceNo">Referenznummer</string>
+    <string name="htmlview_SUMMARY">ZUSAMMENFASSUNG</string>
+    <string name="htmlview_ProductItem">Produkt/Artikel</string>
+    <string name="htmlview_UnitofMeasurement">Maßeinheit</string>
+    <string name="htmlview_Quantity">Menge</string>
+    <string name="htmlview_Rate">Preis</string>
+    <string name="htmlview_Amount">Betrag</string>
+    <string name="htmlview_GrossAmount">Bruttobetrag</string>
+    <string name="htmlview_Discount">Rabatt</string>
+    <string name="htmlview_SubTotal">Zwischensumme</string>
+    <string name="htmlview_Tax">Steuer</string>
+    <string name="htmlview_Shipping">Versand</string>
+    <string name="htmlview_NetAmount">Nettobetrag</string>
+    <string name="htmlview_PaidAmount">Bezahlter Betrag</string>
+    <string name="htmlview_Notes">Notizen</string>
+    <string name="htmlview_Attachments">Anhänge</string>
+
+    <string name="htmlview_debit_note">SCHULDVERMERK</string>
+    <string name="htmlview_DebitNoteNo">Lastschrift Nr.</string>
+    <string name="htmlview_DebitNoteDate">Lastschriftdatum</string>
+
+    <string name="htmlview_receipt">RECEIPT</string>
+    <string name="htmlview_ReceiptNo">Quittungsnummer</string>
+    <string name="htmlview_ReceiptDate">Eingangsdatum</string>
+    <string name="htmlview_ReceivedFrom">Empfangen von</string>
+
+    <string name="htmlview_po">BESTELLUNG</string>
+    <string name="htmlview_PONo">Bestellnummer</string>
+    <string name="htmlview_PODate">Bestelldatum</string>
+    <string name="htmlview_DueDate">Fälligkeitsdatum:</string>
+    <string name="htmlview_Terms">Bedingungen:</string>
+    <string name="htmlview_BalanceDue">Guthaben fällig</string>
+
+    <string name="htmlview_pv">ZAHLUNGSGUTSCHEIN</string>
+    <string name="htmlview_PaidTo">Bezahlt an</string>
+    <string name="htmlview_PVNo">PV-Nr</string>
+    <string name="htmlview_PVDate">PV-Datum</string>
+
+    <string name="htmlview_ESTIMATE">SCHÄTZUNG</string>
+    <string name="htmlview_BillTo">Rechnen an</string>
+    <string name="htmlview_ESTIMATENo">SCHÄTZUNG Nein</string>
+    <string name="htmlview_ESTIMATEDate">ESTIMATE-Datum</string>
+
+    <string name="htmlview_INVOICE">RECHNUNG</string>
+    <string name="htmlview_InvoiceNo">Rechnungsnummer</string>
+    <string name="htmlview_InvoiceDate">Rechnungsdatum</string>
+
+
+    <string name="htmlview_THANKYOUNOTE">DANKESCHÖN</string>
+    <string name="htmlview_DearClient">Sehr geehrter Kunde,</string>
+    <string name="htmlview_Date">Datum:</string>
+    <string name="htmlview_GreetingsfromCompany">Grüße vom Unternehmen</string>
+    <string name="htmlview_Wejustwanted">Wir möchten Sie nur wissen lassen, dass wir wirklich gerne mit Ihnen zusammenarbeiten und uns geehrt fühlen, Ihr ausgewählter Artikelanbieter zu sein.</string>
+    <string name="htmlview_Yourbusinessis">Ihr Geschäft wird sehr geschätzt und wir werden unser Bestes tun, um Ihre hohen Erwartungen weiterhin zu erfüllen.</string>
+    <string name="htmlview_Yourcontinuedpatronage">Ihre anhaltende Schirmherrschaft ist ein wesentlicher Bestandteil unseres Wachstums und dafür sind wir Ihnen sehr dankbar.</string>
+    <string name="htmlview_Wewouldlike">Wir möchten uns für Ihr Geschäft bedanken und freuen uns darauf, Ihnen noch viele Jahre zu dienen.</string>
+
+
+    <string name="htmlview_INVOICEDUEDATEREMINDER">Erinnerung an das Fälligkeitsdatum der Rechnung</string>
+    <string name="htmlview_CreditTerms">Kreditbedingungen</string>
+    <string name="htmlview_DueDate2">Fälligkeitsdatum</string>
+    <string name="htmlview_Wewouldliketobring">Wir möchten Sie darauf hinweisen, dass die oben genannte Rechnungsnummer nun zur Zahlung überfällig ist.</string>
+    <string name="htmlview_Weherebyrequest">Hiermit bitten wir Sie, diese umgehend zu regeln.</string>
+    <string name="htmlview_Welookforward">Wir freuen uns, diesbezüglich von dir zu hören.</string>
+    <string name="htmlview_Note">Hinweis:</string>
+    <string name="htmlview_Ifpaymenthas">Wenn die Zahlung bereits erfolgt ist, ignorieren Sie diese Benachrichtigung bitte.</string>
+
+
+
+    <string name="html_PayPal">Pay Pal:</string>
+    <string name="html_Bank">Bank:</string>
+
+
     <string name="error">Error</string>
 
     <string name="preview">Vorschau</string>

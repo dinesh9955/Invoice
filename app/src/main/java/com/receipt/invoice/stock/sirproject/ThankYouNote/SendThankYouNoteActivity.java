@@ -724,7 +724,7 @@ public class SendThankYouNoteActivity extends BaseActivity {
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
-                paypalstrtxt = "Pay Pal :";
+                paypalstrtxt = getString(R.string.html_PayPal);
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
@@ -738,7 +738,7 @@ public class SendThankYouNoteActivity extends BaseActivity {
                 }else{
                     payment_currencystr = "";
                 }
-                bankstrtxt="Bank :";
+                bankstrtxt = getString(R.string.html_Bank);
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
@@ -900,8 +900,31 @@ public class SendThankYouNoteActivity extends BaseActivity {
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
             String dateCurrent = sdf.format(myCalendar.getTime());
 
+
+
+            String htmlview_credit_note = getString(R.string.htmlview_THANKYOUNOTE);
+            String htmlview_DearClient = getString(R.string.htmlview_DearClient);
+            String htmlview_Date = getString(R.string.htmlview_Date);
+            String htmlview_GreetingsfromCompany = getString(R.string.htmlview_GreetingsfromCompany);
+            String htmlview_Wejustwanted = getString(R.string.htmlview_Wejustwanted);
+            String htmlview_Yourbusinessis = getString(R.string.htmlview_Yourbusinessis);
+            String htmlview_Yourcontinuedpatronage = getString(R.string.htmlview_Yourcontinuedpatronage);
+            String htmlview_Wewouldlike = getString(R.string.htmlview_Wewouldlike);
+
             try {
                 content = IOUtils.toString(getAssets().open(name))
+
+                        .replaceAll("THANK YOU NOTE", htmlview_credit_note)
+                        .replaceAll("Dear Client,", htmlview_DearClient)
+                        .replaceAll("Date:", htmlview_Date)
+                        .replaceAll("Greetings from Company", htmlview_GreetingsfromCompany)
+                        .replaceAll("We just wanted you to know that we truly enjoy working with you and feel honored to be your chosen item provider.", htmlview_Wejustwanted)
+                        .replaceAll("Your business is much appreciated and we will do our very best to continue to meet your high expectations.", htmlview_Yourbusinessis)
+                        .replaceAll("Your continued patronage is a vital part of our growth and for that we are most grateful.", htmlview_Yourcontinuedpatronage)
+                        .replaceAll("We would like to thank you for your business and we look forward to serving you for many years to come.", htmlview_Wewouldlike)
+
+
+
                         .replaceAll("Company Name", company_name)
                         .replaceAll("Address", stringBuilderCompany.toString())
 //                        .replaceAll("Contact No.", company_contact)

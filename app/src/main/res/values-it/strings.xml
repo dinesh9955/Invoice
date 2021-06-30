@@ -7,6 +7,82 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
+
+    <string name="htmlview_credit_note">NOTA DI CREDITO</string>
+    <string name="htmlview_Recipient">Destinatario</string>
+    <string name="htmlview_CreditNoteNo">Nota di credito n.</string>
+    <string name="htmlview_CreditNoteDate">Data nota di accredito</string>
+    <string name="htmlview_ReferenceNo">N. di riferimento</string>
+    <string name="htmlview_SUMMARY">SOMMARIO</string>
+    <string name="htmlview_ProductItem">Prodotto/Articolo</string>
+    <string name="htmlview_UnitofMeasurement">Unità di misura</string>
+    <string name="htmlview_Quantity">Quantità</string>
+    <string name="htmlview_Rate">Tariffa</string>
+    <string name="htmlview_Amount">Importo</string>
+    <string name="htmlview_GrossAmount">Importo lordo</string>
+    <string name="htmlview_Discount">Sconto</string>
+    <string name="htmlview_SubTotal">SubTotal</string>
+    <string name="htmlview_Tax">Imposta</string>
+    <string name="htmlview_Shipping">Spedizione</string>
+    <string name="htmlview_NetAmount">Importo netto</string>
+    <string name="htmlview_PaidAmount">Importo pagato</string>
+    <string name="htmlview_Notes">Note</string>
+    <string name="htmlview_Attachments">Allegati</string>
+
+    <string name="htmlview_debit_note">NOTA DI DEBITO</string>
+    <string name="htmlview_DebitNoteNo">Nota di addebito n.</string>
+    <string name="htmlview_DebitNoteDate">Data nota di addebito</string>
+
+    <string name="htmlview_receipt">RICEVUTA</string>
+    <string name="htmlview_ReceiptNo">Numero di ricevuta</string>string
+    <string name="htmlview_ReceiptDate">Data di ricezione</string>
+    <string name="htmlview_ReceivedFrom">Ricevuto da</string>
+
+    <string name="htmlview_po">ORDINE DI ACQUISTO</string>
+    <string name="htmlview_PONo">No PO</string>
+    <string name="htmlview_PODate">Data PO</string>
+    <string name="htmlview_DueDate">Data di scadenza:</string>
+    <string name="htmlview_Terms">Termini:</string>
+    <string name="htmlview_BalanceDue">Saldo dovuto</string>
+
+    <string name="htmlview_pv">VOUCHER DI PAGAMENTO</string>
+    <string name="htmlview_PaidTo">Pagato a</string>
+    <string name="htmlview_PVNo">Numero PV</string>
+    <string name="htmlview_PVDate">Data PV</string>
+
+    <string name="htmlview_ESTIMATE">STIMA</string>
+    <string name="htmlview_BillTo">Fattura a</string>
+    <string name="htmlview_ESTIMATENo">STIMA No</string>
+    <string name="htmlview_ESTIMATEDate">Data STIMA</string>
+
+    <string name="htmlview_INVOICE">FATTURA</string>
+    <string name="htmlview_InvoiceNo">Numero fattura</string>
+    <string name="htmlview_InvoiceDate">Data fattura</string>
+
+
+    <string name="htmlview_THANKYOUNOTE">NOTA DI RINGRAZIAMENTO</string>
+    <string name="htmlview_DearClient">Gentile cliente,</string>
+    <string name="htmlview_Date">Data:</string>
+    <string name="htmlview_GreetingsfromCompany">Saluti dall\'azienda</string>
+    <string name="htmlview_Wejustwanted">Volevamo solo che tu sapessi che ci piace davvero lavorare con te e che ci sentiamo onorati di essere il tuo fornitore di articoli scelto.</string>
+    <string name="htmlview_Yourbusinessis">La tua attività è molto apprezzata e faremo del nostro meglio per continuare a soddisfare le tue elevate aspettative.</string>
+    <string name="htmlview_Yourcontinuedpatronage">Il tuo continuo patrocinio è una parte vitale della nostra crescita e per questo ti siamo molto grati.</string>
+    <string name="htmlview_Wewouldlike">Vorremmo ringraziarti per la tua attività e non vediamo l\'ora di servirti per molti anni a venire.</string>
+
+
+    <string name="htmlview_INVOICEDUEDATEREMINDER">PROMEMORIA DELLA DATA DI SCADENZA DELLA FATTURA</string>
+    <string name="htmlview_CreditTerms">Termini di credito</string>
+    <string name="htmlview_DueDate2">Data di scadenza</string>
+    <string name="htmlview_Wewouldliketobring">Vorremmo informarla che il numero di fattura sopra menzionato è scaduto per il pagamento.</string>
+    <string name="htmlview_Weherebyrequest">Con la presente vi preghiamo di provvedere immediatamente alla liquidazione dello stesso.</string>
+    <string name="htmlview_Welookforward">Non vediamo l\'ora di sentirti in merito.</string>
+    <string name="htmlview_Note">Nota:</string>
+    <string name="htmlview_Ifpaymenthas">Se il pagamento è già stato effettuato, ignora gentilmente questa notifica.</string>
+
+
+
+
+
     <string name="error">Errore</string>
 
     <string name="preview">Anteprima</string>
