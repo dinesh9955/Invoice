@@ -79,6 +79,55 @@
     <string name="htmlview_Ifpaymenthas">Si le paiement a déjà été effectué, veuillez ignorer cette notification.</string>
 
 
+    <string name="html_Particulars">Particuliers</string>
+    <string name="html_DebitAmount">Montant du débit</string>
+    <string name="html_CreditAmount">Montant du crédit</string>
+    <string name="html_Balance">Solde</string>
+    <string name="html_TotalAmount">Montant total</string>
+    <string name="html_CustomerName">Nom du client</string>
+    <string name="html_SupplierName">Nom du fournisseur</string>
+    <string name="html_Currentdue">Échéance actuelle</string>
+    <string name="html_daysoverdue">jours de retard</string>
+    <string name="html_total">Total</string>
+    <string name="html_Amount">Montant</string>
+    <string name="html_TaxName">Nom de la taxe</string>
+    <string name="html_TaxRate">Taux de taxe</string>
+    <string name="html_SNo">S.No.</string>
+    <string name="html_Product">Produit</string>
+    <string name="html_ReorderLevel">Niveau de réapprovisionnement</string>
+    <string name="html_QuantityAvaliable">Quantité disponible</string>
+    <string name="html_Status">État</string>
+    <string name="html_PerUnitPrice">Prix unitaire</string>
+    <string name="html_InventoryValue">Valeur d\'inventaire</string>
+    <string name="html_OpeningStock">Stock d\'ouverture</string>
+    <string name="html_Purchases">Achats</string>
+    <string name="html_Sales">Ventes</string>
+    <string name="html_WastagesDamages">Gains/Dommages</string>
+    <string name="html_NetQuantity">Quantité nette</string>
+    <string name="html_NetQuantityAvailable">Quantité nette disponible</string>
+    <string name="html_PricePerUnit">Prix par unité</string>
+
+
+    <string name="dialog_no_customer_statement_report">Aucun rapport de relevé client</string>
+    <string name="dialog_no_supplier_statement_report">Aucun rapport de déclaration de fournisseur</string>
+    <string name="dialog_no_total_sales_report">Aucun rapport sur les ventes totales</string>
+    <string name="dialog_no_total_purchase_report">Aucun rapport d\'achat total</string>
+    <string name="dialog_no_customer_ageing_report">Aucun rapport de vieillissement des clients</string>
+    <string name="dialog_no_tax_collected_report">Rapport d\'absence de taxe perçue</string>
+    <string name="dialog_no_stock_report">Aucun rapport de stock</string>
+    <string name="dialog_no_product_movement_report">Aucun rapport de mouvement de produit</string>
+
+
+    <string name="share_CreditNote">Note de crédit</string>
+    <string name="share_DebitNote">Note de débit</string>
+    <string name="share_Invoice">Facture</string>
+    <string name="share_Estimate">Estimation</string>
+    <string name="share_Receipt">Reçu</string>
+    <string name="share_PurchaseOrder">Bon de commande</string>
+    <string name="share_PaymentVoucher">Bon de paiement</string>
+
+    <string name="list_Invoiceviewed">Votre facture peut être consultée, imprimée et téléchargée à partir du lien ci-dessous.</string>
+
 
 
     <string name="setting_ChooseUpgradePackage">Choisir le package de mise à niveau</string>

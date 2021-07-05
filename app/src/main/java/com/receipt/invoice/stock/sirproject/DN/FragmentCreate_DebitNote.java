@@ -1477,7 +1477,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
         if(requestCode == 124){
             Log.e(TAG, "requestCode "+requestCode);
-            productget(selectedCompanyId);
+            productget(selectwarehouseId);
         }
 
         if(requestCode == 125){

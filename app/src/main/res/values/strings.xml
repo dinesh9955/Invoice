@@ -81,9 +81,14 @@
     <string name="htmlview_Ifpaymenthas">If payment has already been done, kindly disregard this notification.</string>
 
 
-
-
-
+    <string name="dialog_no_customer_statement_report">No customer statement report</string>
+    <string name="dialog_no_supplier_statement_report">No supplier statement report</string>
+    <string name="dialog_no_total_sales_report">No total sales report</string>
+    <string name="dialog_no_total_purchase_report">No total purchase report</string>
+    <string name="dialog_no_customer_ageing_report">No customer ageing report</string>
+    <string name="dialog_no_tax_collected_report">No tax collected report</string>
+    <string name="dialog_no_stock_report">No stock report</string>
+    <string name="dialog_no_product_movement_report">No product movement report</string>
 
 
     <string name="all_Save">Save</string>
@@ -494,6 +499,44 @@
 
 
 
+    <string name="html_Particulars">Particulars</string>
+    <string name="html_DebitAmount">Debit Amount</string>
+    <string name="html_CreditAmount">Credit Amount</string>
+    <string name="html_Balance">Balance</string>
+    <string name="html_TotalAmount">Total Amount</string>
+    <string name="html_CustomerName">Customer Name</string>
+    <string name="html_SupplierName">Supplier Name</string>
+    <string name="html_Currentdue">Current due</string>
+    <string name="html_daysoverdue">days overdue</string>
+    <string name="html_total">Total</string>
+    <string name="html_Amount">Amount</string>
+    <string name="html_TaxName">Tax Name</string>
+    <string name="html_TaxRate">Tax Rate</string>
+    <string name="html_SNo">S.No.</string>
+    <string name="html_Product">Product</string>
+    <string name="html_ReorderLevel">Re-order Level</string>
+    <string name="html_QuantityAvaliable">Quantity Avaliable</string>
+    <string name="html_Status">Status</string>
+    <string name="html_PerUnitPrice">Per Unit Price</string>
+    <string name="html_InventoryValue">Inventory Value</string>
+    <string name="html_OpeningStock">Opening Stock</string>
+    <string name="html_Purchases">Purchases</string>
+    <string name="html_Sales">Sales</string>
+    <string name="html_WastagesDamages">Wastages/Damages</string>
+    <string name="html_NetQuantity">Net Quantity</string>
+    <string name="html_NetQuantityAvailable">Net Quantity Available</string>
+    <string name="html_PricePerUnit">Price Per Unit</string>
+
+    <string name="share_CreditNote">Credit Note</string>
+    <string name="share_DebitNote">Debit Note</string>
+    <string name="share_Invoice">Invoice</string>
+    <string name="share_Estimate">Estimate</string>
+    <string name="share_Receipt">Receipt</string>
+    <string name="share_PurchaseOrder">Purchase Order</string>
+    <string name="share_PaymentVoucher">Payment Voucher</string>
+
+
+
 
     <string name="list_Date">Date</string>
 
@@ -521,7 +564,7 @@
     <string name="list_PurchaseOrderviewed">Your Purchase Order can be viewed, printed and downloaded from below link.</string>
     <string name="list_PaymentVoucherviewed">Your Payment Voucher can be viewed, printed and downloaded from below link.</string>
     <string name="list_Estimateviewed">Your Estimate can be viewed, printed and downloaded from below link.</string>
-
+    <string name="list_Invoiceviewed">Your Invoice can be viewed, printed and downloaded from below link.</string>
 
 
     <string name="list_SearchByDebitNoteNumber">Search By Debit Note Number</string>

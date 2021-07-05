@@ -84,6 +84,56 @@
 
 
 
+    <string name = "html_Particulars"> Particulares </string>
+    <string name = "html_DebitAmount"> Valor de débito </string>
+    <string name = "html_CreditAmount"> Valor do crédito </string>
+    <string name = "html_Balance"> Saldo </string>
+    <string name = "html_TotalAmount"> Valor total </string>
+    <string name = "html_CustomerName"> Nome do cliente </string>
+    <string name = "html_SupplierName"> Nome do fornecedor </string>
+    <string name = "html_Currentdue"> Vencimento atual </string>
+    <string name = "html_daysoverdue"> dias atrasados ​​</string>
+    <string name = "html_total"> Total </string>
+    <string name = "html_Amount"> Quantidade </string>
+    <string name = "html_TaxName"> Nome fiscal </string>
+    <string name = "html_TaxRate"> Taxa de imposto </string>
+    <string name = "html_SNo"> S.No. </string>
+    <string name = "html_Product"> Produto </string>
+    <string name = "html_ReorderLevel"> Reordenar nível </string>
+    <string name = "html_QuantityAvaliable"> Quantidade disponível </string>
+    <string name = "html_Status"> Status </string>
+    <string name = "html_PerUnitPrice"> Preço por unidade </string>
+    <string name = "html_InventoryValue"> Valor de estoque </string>
+    <string name = "html_OpeningStock"> Estoque de abertura </string>
+    <string name = "html_Purchases"> Compras </string>
+    <string name = "html_Sales"> Vendas </string>
+    <string name = "html_WastagesDamages"> Desperdícios / danos </string>
+    <string name = "html_NetQuantity"> Quantidade líquida </string>
+    <string name = "html_NetQuantityAvailable"> Quantidade líquida disponível </string>
+    <string name = "html_PricePerUnit"> Preço por unidade </string>
+
+
+    <string name = "dialog_no_customer_statement_report"> Nenhum relatório de declaração do cliente </string>
+    <string name = "dialog_no_supplier_statement_report"> Nenhum relatório de declaração do fornecedor </string>
+    <string name = "dialog_no_total_sales_report"> Nenhum relatório de vendas totais </string>
+    <string name = "dialog_no_total_purchase_report"> Nenhum relatório de compra total </string>
+    <string name = "dialog_no_customer_ageing_report"> Nenhum relatório de envelhecimento do cliente </string>
+    <string name = "dialog_no_tax_collected_report"> Nenhum relatório de imposto recolhido </string>
+    <string name = "dialog_no_stock_report"> Nenhum relatório de estoque </string>
+    <string name = "dialog_no_product_movement_report"> Nenhum relatório de movimentação de produto </string>
+
+
+
+    <string name = "share_CreditNote"> Nota de crédito </string>
+    <string name = "share_DebitNote"> Nota de débito </string>
+    <string name = "share_Invoice"> Fatura </string>
+    <string name = "share_Estimate"> Estimativa </string>
+    <string name = "share_Receipt"> Recibo </string>
+    <string name = "share_PurchaseOrder"> Ordem de Compra </string>
+    <string name = "share_PaymentVoucher"> Comprovante de pagamento </string>
+
+    <string name = "list_Invoiceviewed"> Sua fatura pode ser visualizada, impressa e baixada do link abaixo. </string>
+
     <string name = "setting_ChooseUpgradePackage"> Escolha o pacote de atualização </string>
     <string name = "setting_UpgradePlan1"> Faça upgrade para nosso recurso exclusivo de rastreamento de estoque por US $ 23,99 adicionais anualmente e ganhe até 33% </string>
 

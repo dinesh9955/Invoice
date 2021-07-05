@@ -1059,7 +1059,7 @@ public class ListOfReceipts extends BaseFragment {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValueReceiptWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                                            String subject = Utility.getRealValueReceiptWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                                             String txt = getString(R.string.list_Thank_you_for_receipt);
                                             new DownloadFile(getActivity(), subject, txt).execute(url.replace("https", "http"));
                                         } else {
@@ -1498,7 +1498,7 @@ public class ListOfReceipts extends BaseFragment {
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStorageDirectory() + File.separator + "SAAR/";
+                folder = Environment.getExternalStorageDirectory() + File.separator + "SIR/";
 
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);

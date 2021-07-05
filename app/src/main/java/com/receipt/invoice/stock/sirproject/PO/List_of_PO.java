@@ -2010,7 +2010,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
 
 
 
-                            String subject = Utility.getRealValuePOWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                            String subject = Utility.getRealValuePOWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                             String txt = getString(R.string.list_PurchaseOrderviewed)+
                                     "\n\n" +sharelink ;
 
@@ -2111,7 +2111,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValuePOWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                                            String subject = Utility.getRealValuePOWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -2549,7 +2549,7 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStorageDirectory() + File.separator + "SAAR/";
+                folder = Environment.getExternalStorageDirectory() + File.separator + "SIR/";
 
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);

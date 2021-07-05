@@ -44,7 +44,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -623,12 +628,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
                 createbottomsheet_product();
                 bottomSheetDialog.show();
             }else{
-                Intent intent = new Intent(ReportActivity.this, ReportViewActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("positionNext", positionNext);
-                intent.putExtra("company_id", selectedCompanyId);
-                intent.putExtra("company_image_path", company_image_path);
-                startActivity(intent);
+                allReport(positionNext, selectedCompanyId, company_image_path);
             }
 
         }
@@ -710,9 +710,9 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(ReportActivity.this).inflate(R.layout.customer_bottom_sheet, null);
             txtcustomer = view.findViewById(R.id.txtcustomer);
-            txtcustomer.setText("Select Supplier");
+            txtcustomer.setText(getString(R.string.dialog_SelectSupplier));
             search_customers = view.findViewById(R.id.search_customers);
-            search_customers.setHint("Select Suppliers");
+            search_customers.setHint(getString(R.string.dialog_SelectSuppliers));
             TextView add_customer = view.findViewById(R.id.add_customer);
             add_customer.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -888,23 +888,44 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         Log.e(TAG, "customer_id "+customer_id);
         Log.e(TAG, "customer_name "+customer_name);
 
-        Intent intent = new Intent(ReportActivity.this, ReportViewActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        //intent.putExtra("titleName", titleName);
-
-        intent.putExtra("positionNext", positionNext);
-        intent.putExtra("company_id", selectedCompanyId);
         if(positionNext == 0){
-            intent.putExtra("customer_id", customer_id);
+            customerReport(customer_id, selectedCompanyId, positionNext);
         } else if(positionNext == 1){
-            intent.putExtra("supplier_id", customer_id);
-        } else if(positionNext == 7){
-            intent.putExtra("product_id", customer_id);
-        } else{
-            intent.putExtra("company_id", selectedCompanyId);
+            supplierReport(customer_id, selectedCompanyId, positionNext);
+        } else if(positionNext == 2){
+
+        } else if(positionNext == 3){
+
+        } else if(positionNext == 4){
+
+        } else if(positionNext == 5){
+
+        } else if(positionNext == 6){
+
+        }else if(positionNext == 7){
+
         }
 
-        startActivity(intent);
+
+
+
+
+//        Intent intent = new Intent(ReportActivity.this, ReportViewActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//
+//        intent.putExtra("positionNext", positionNext);
+//        intent.putExtra("company_id", selectedCompanyId);
+//        if(positionNext == 0){
+//            intent.putExtra("customer_id", customer_id);
+//        } else if(positionNext == 1){
+//            intent.putExtra("supplier_id", customer_id);
+//        } else if(positionNext == 7){
+//            intent.putExtra("product_id", customer_id);
+//        } else{
+//            intent.putExtra("company_id", selectedCompanyId);
+//        }
+//
+//        startActivity(intent);
     }
 
 
@@ -918,25 +939,20 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         String customer_id = selected_item.getProduct_id();
 
         Log.e(TAG, "customer_id "+customer_id);
-        //Log.e(TAG, "customer_name "+customer_name);
 
-        Intent intent = new Intent(ReportActivity.this, ReportViewActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        //intent.putExtra("titleName", titleName);
-        intent.putExtra("positionNext", positionNext);
-        intent.putExtra("company_id", selectedCompanyId);
+//        Intent intent = new Intent(ReportActivity.this, ReportViewActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.putExtra("positionNext", positionNext);
+//        intent.putExtra("company_id", selectedCompanyId);
+//
+//        if(positionNext == 7){
+//            intent.putExtra("product_id", customer_id);
+//        }
+//
+//        startActivity(intent);
 
-        if(positionNext == 7){
-            intent.putExtra("product_id", customer_id);
-//            intent.putExtra("companyName", companyName);
-//            intent.putExtra("companyAddress", companyAddress);
-//            intent.putExtra("companyContactNo", companyContactNo);
-//            intent.putExtra("companyWebsite", companyWebsite);
-//            intent.putExtra("companyEmail", companyEmail);
-//            intent.putExtra("companyLogo", companyLogo);
-        }
 
-        startActivity(intent);
+        productMovementReport(customer_id, selectedCompanyId, positionNext);
     }
 
 
@@ -976,6 +992,273 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         }
     }
 
+
+
+
+
+
+
+
+
+    private void customerReport(String customer_id, String companyID, int positionNext) {
+        RequestParams params = new RequestParams();
+        params.add("customer_id", customer_id);
+
+        String token = Constant.GetSharedPreferences(ReportActivity.this, Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "report/customerStatement", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e(TAG, "responsecompanyCSS"+ response);
+
+                //  avi.smoothToHide();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true")) {
+
+                        JSONObject data = jsonObject.getJSONObject("data");
+
+                        JSONArray statement = data.getJSONArray("statement");
+
+                        if(statement.length() == 0){
+                            Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_customer_statement_report));
+                        }else{
+                            Intent intent = new Intent(ReportActivity.this, ReportViewActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.putExtra("positionNext", positionNext);
+                            intent.putExtra("company_id", companyID);
+                            intent.putExtra("customer_id", customer_id);
+                            startActivity(intent);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e(TAG, "responsecompanyF"+ response);
+                }
+
+                Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_customer_statement_report));
+            }
+        });
+    }
+
+
+
+    private void supplierReport(String customer_id, String companyID, int positionNext) {
+        RequestParams params = new RequestParams();
+        params.add("supplier_id", customer_id);
+
+        String token = Constant.GetSharedPreferences(ReportActivity.this, Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "report/supplierStatement", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e(TAG, "responsecompanySS"+ response);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true")) {
+
+                        JSONObject data = jsonObject.getJSONObject("data");
+
+                        JSONArray statement = data.getJSONArray("statement");
+                        if(statement.length() == 0){
+                            Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_supplier_statement_report));
+                        }else{
+                            Intent intent = new Intent(ReportActivity.this, ReportViewActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.putExtra("positionNext", positionNext);
+                            intent.putExtra("company_id", companyID);
+                            intent.putExtra("supplier_id", customer_id);
+                            startActivity(intent);
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e(TAG, "responsecompanyF"+ response);
+
+                }
+                Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_supplier_statement_report));
+            }
+        });
+    }
+
+
+
+    private void productMovementReport(String customer_id, String companyID, int positionNext) {
+        RequestParams params = new RequestParams();
+        params.add("product_id", customer_id);
+
+        String token = Constant.GetSharedPreferences(ReportActivity.this, Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "report/productMovement", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e(TAG, "responsecompanySS"+ response);
+
+                //  avi.smoothToHide();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true")) {
+
+                        JSONObject data = jsonObject.getJSONObject("data");
+
+                        JSONArray statement = data.getJSONArray("product_movement");
+                        if(statement.length() == 0){
+                            Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_product_movement_report));
+                        }else{
+                            Intent intent = new Intent(ReportActivity.this, ReportViewActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.putExtra("positionNext", positionNext);
+                            intent.putExtra("company_id", companyID);
+                            intent.putExtra("product_id", customer_id);
+                            startActivity(intent);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                }
+                Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_product_movement_report));
+
+            }
+        });
+    }
+
+
+
+    private void allReport(int positionNext, String companyID, String company_image_path) {
+        RequestParams params = new RequestParams();
+        params.add("company_id", companyID);
+
+        String token = Constant.GetSharedPreferences(ReportActivity.this, Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
+
+        String url_ = "";
+        if(positionNext == 2){
+            url_ = "report/totalSales";
+        }else if(positionNext == 3){
+            url_ = "report/totalPurchases";
+        }else if(positionNext == 4){
+            url_ = "report/customerAgeing";
+        }else if(positionNext == 5){
+            url_ = "report/taxation";
+        }else if(positionNext == 6){
+            url_ = "report/stock";
+        }
+
+        client.post(AllSirApi.BASE_URL + url_, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e(TAG, "responsecompanySS"+ response);
+
+                //  avi.smoothToHide();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true")) {
+
+                        JSONObject data = jsonObject.getJSONObject("data");
+
+                        JSONArray statement = null;
+                        if(positionNext == 2){
+                            statement = data.getJSONArray("total_sales");
+                            if(statement.length() == 0){
+                                Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_total_sales_report));
+                            }
+                        }else if(positionNext == 3){
+                            statement = data.getJSONArray("total_purchases");
+                            if(statement.length() == 0){
+                                Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_total_purchase_report));
+                            }
+                        }else if(positionNext == 4){
+                            statement = data.getJSONArray("customer_ageing");
+                            if(statement.length() == 0){
+                                Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_customer_ageing_report));
+                            }
+                        }else if(positionNext == 5){
+                            statement = data.getJSONArray("taxation");
+                            if(statement.length() == 0){
+                                Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_tax_collected_report));
+                            }
+                        }else if(positionNext == 6){
+                            statement = data.getJSONArray("stock");
+                            if(statement.length() == 0){
+                                Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_stock_report));
+                            }
+                        }
+
+
+
+
+                        if(statement != null){
+                            if(statement.length() != 0){
+                                Intent intent = new Intent(ReportActivity.this, ReportViewActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("positionNext", positionNext);
+                                intent.putExtra("company_id", companyID);
+                                intent.putExtra("company_image_path", company_image_path);
+                                startActivity(intent);
+                            }
+                        }else{
+
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                }
+                Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_no_product_movement_report));
+
+            }
+        });
+    }
 
 
 }

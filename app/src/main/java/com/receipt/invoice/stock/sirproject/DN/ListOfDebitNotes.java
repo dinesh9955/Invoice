@@ -886,7 +886,7 @@ public class ListOfDebitNotes extends BaseFragment {
                             Log.e(TAG, "customerName:: "+customerName);
                             Log.e(TAG, "dataNo:: "+dataNo);
 
-                            String subject = Utility.getRealValueDebitNoteWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                            String subject = Utility.getRealValueDebitNoteWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                             String txt = getString(R.string.list_YourDebitNoteviewed) +
                                     "\n\n" +sharelink ;
 
@@ -999,7 +999,7 @@ public class ListOfDebitNotes extends BaseFragment {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValueDebitNoteWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                                            String subject = Utility.getRealValueDebitNoteWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -1438,7 +1438,7 @@ public class ListOfDebitNotes extends BaseFragment {
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStorageDirectory() + File.separator + "SAAR/";
+                folder = Environment.getExternalStorageDirectory() + File.separator + "SIR/";
 
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);

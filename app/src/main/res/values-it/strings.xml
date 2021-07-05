@@ -81,6 +81,59 @@
 
 
 
+    <string name="dialog_no_customer_statement_report">Nessun rapporto sull\'estratto conto del cliente</string>
+    <string name="dialog_no_supplier_statement_report">Nessun rapporto di dichiarazione del fornitore</string>
+    <string name="dialog_no_total_sales_report">Nessun rapporto sulle vendite totali</string>
+    <string name="dialog_no_total_purchase_report">Nessun rapporto di acquisto totale</string>
+    <string name="dialog_no_customer_ageing_report">Nessun rapporto sull\'invecchiamento del cliente</string>
+    <string name="dialog_no_tax_collected_report">Nessun rapporto di riscossione delle imposte</string>
+    <string name="dialog_no_stock_report">Nessun rapporto sulle scorte</string>
+    <string name="dialog_no_product_movement_report">Nessun rapporto sui movimenti del prodotto</string>
+
+
+
+
+    <string name="html_Particulars">Particolari</string>
+    <string name="html_DebitAmount">Importo a debito</string>
+    <string name="html_CreditAmount">Importo del credito</string>
+    <string name="html_Balance">Saldo</string>
+    <string name="html_TotalAmount">Importo totale</string>
+    <string name="html_CustomerName">Nome cliente</string>
+    <string name="html_SupplierName">Nome del fornitore</string>
+    <string name="html_Currentdue">In scadenza</string>
+    <string name="html_daysoverdue">giorni scaduti</string>
+    <string name="html_total">Totale</string>
+    <string name="html_Amount">Importo</string>
+    <string name="html_TaxName">Nome imposta</string>
+    <string name="html_TaxRate">Aliquota fiscale</string>
+    <string name="html_SNo">S.No.</string>
+    <string name="html_Product">Prodotto</string>
+    <string name="html_ReorderLevel">Livello di riordino</string>
+    <string name="html_QuantityAvaliable">Quantità disponibile</string>
+    <string name="html_Status">Stato</string>
+    <string name="html_PerUnitPrice">Prezzo unitario</string>
+    <string name="html_InventoryValue">Valore inventario</string>
+    <string name="html_OpeningStock">Titolo di apertura</string>
+    <string name="html_Purchases">Acquisti</string>
+    <string name="html_Sales">Vendite</string>
+    <string name="html_WastagesDamages">Sprechi/Danni</string>
+    <string name="html_NetQuantity">Quantità netta</string>
+    <string name="html_NetQuantityAvailable">Quantità netta disponibile</string>
+    <string name="html_PricePerUnit">Prezzo per unità</string>
+
+
+
+    <string name="share_CreditNote">Nota di credito</string>
+    <string name="share_DebitNote">Nota di addebito</string>
+    <string name="share_Invoice">Fattura</string>
+    <string name="share_Estimate">Stima</string>
+    <string name="share_Receipt">Ricevuta</string>
+    <string name="share_PurchaseOrder">Ordine d\'acquisto</string>
+    <string name="share_PaymentVoucher">Buono di pagamento</string>
+
+    <string name="list_Invoiceviewed">La tua fattura può essere visualizzata, stampata e scaricata dal link sottostante.</string>
+
+
     <string name="setting_ChooseUpgradePackage">Scegli pacchetto di aggiornamento</string>
     <string name="setting_UpgradePlan1">Esegui l\'upgrade alla nostra esclusiva funzione di monitoraggio delle scorte a 23,99 USD aggiuntivi all\'anno e ottieni fino al 33%</string>
 

@@ -1260,14 +1260,14 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                             String newLink = AllSirApi.BASE_URL_INDEX+"view/invoice/"+link;
 
-                            String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+selectedCompanyName;
-                            String txt = "Your Invoice can be viewed, printed and downloaded from below link." +
+                            String subject = Utility.getRealValueInvoiceWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                            String txt = getString(R.string.list_Invoiceviewed)+
                                     "\n\n" +newLink ;
 
                             try {
 
                                 if (!urlPDF.endsWith(".pdf")) {
-                                    Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), getString(R.string.list_NoFileFound), Toast.LENGTH_LONG).show();
                                 } else {
                                     BaseurlForShareInvoice = shareInvoicelink + sharelink;
                                     //String finalurl =BaseurlForShareInvoice;
@@ -1340,7 +1340,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                             Log.e(TAG, "pdflink:: "+urlPDF);
                             try {
                                 if (!urlPDF.endsWith(".pdf")) {
-                                    Toast.makeText(getActivity(), "No File Found", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(),  getString(R.string.list_NoFileFound), Toast.LENGTH_LONG).show();
                                 } else {
 //                    /*              String pdfurl = "http://13.126.22.0/saad/app/uploads/invoice/pdf/" + pdflink;
 //                                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -1363,7 +1363,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = urlPDF;
-                                            String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+selectedCompanyName;
+                                            String subject = Utility.getRealValueInvoiceWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -1808,7 +1808,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStorageDirectory() + File.separator + "SAAR/";
+                folder = Environment.getExternalStorageDirectory() + File.separator + "SIR/";
 
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);
@@ -1966,7 +1966,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStorageDirectory() + File.separator + "SAAR/";
+                folder = Environment.getExternalStorageDirectory() + File.separator + "SIR/";
 
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);

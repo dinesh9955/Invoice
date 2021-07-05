@@ -853,13 +853,10 @@ public class ListOfCreditNotes extends BaseFragment {
             viewinvoicetemplate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
                     if (selectedCompanyId.equals("")) {
                         Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog.show();
                     } else {
-
                         ViewTamlatemethodh();
                         bottomSheetDialog.show();
                     }
@@ -934,7 +931,7 @@ public class ListOfCreditNotes extends BaseFragment {
                             Log.e(TAG, "customerName:: "+customerName);
                             Log.e(TAG, "dataNo:: "+dataNo);
 
-                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                            String subject = Utility.getRealValueCreditNoteWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                             String txt = getString(R.string.list_YourCreditNoteviewed) +
                                     "\n\n" +sharelink ;
 
@@ -1049,7 +1046,7 @@ public class ListOfCreditNotes extends BaseFragment {
                                         if (checkPermission()) {
                                             //Get the URL entered
                                             String url = sharelink;
-                                            String subject = Utility.getRealValueCreditNoteWithoutPlus(dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
+                                            String subject = Utility.getRealValueCreditNoteWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -1488,7 +1485,7 @@ public class ListOfCreditNotes extends BaseFragment {
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStorageDirectory() + File.separator + "SAAR/";
+                folder = Environment.getExternalStorageDirectory() + File.separator + "SIR/";
 
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);
@@ -1558,7 +1555,7 @@ public class ListOfCreditNotes extends BaseFragment {
 //                                    //String app_url = "file:///home/apptunix/Desktop/invoice.html";
 //                                    shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
 //                                    context.startActivity(Intent.createChooser(shareIntent, "Share via"));
-///storage/emulated/0/SAAR/CreditNote.pdf
+///storage/emulated/0/SIR/CreditNote.pdf
 
             Intent intentShareFile = new Intent(Intent.ACTION_SEND);
             File fileWithinMyDir = new File(message);

@@ -908,7 +908,7 @@ public class List_of_Estimate extends BaseFragment {
                             Log.e(TAG, "customerName:: "+customerName);
                             Log.e(TAG, "dataNo:: "+dataNo);
 
-                            String subject = Utility.getRealValueEstimateWithoutPlus(dataNo)+" "+ getString(R.string.list_From)+" "+selectedCompanyName;
+                            String subject = Utility.getRealValueEstimateWithoutPlus(getActivity(), dataNo)+" "+ getString(R.string.list_From)+" "+selectedCompanyName;
                             String txt = getString(R.string.list_Estimateviewed) +
                                     "\n\n" +sharelink ;
 
@@ -1043,7 +1043,7 @@ public class List_of_Estimate extends BaseFragment {
                                             //Get the URL entered
                                             String url = sharelink;
 
-                                            String subject = Utility.getRealValueEstimateWithoutPlus(dataNo)+" "+getString(R.string.html_SearchByCustomerName)+" "+selectedCompanyName;
+                                            String subject = Utility.getRealValueEstimateWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.html_SearchByCustomerName)+" "+selectedCompanyName;
                                             new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
                                         } else {
 
@@ -1485,7 +1485,7 @@ public class List_of_Estimate extends BaseFragment {
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStorageDirectory() + File.separator + "SAAR/";
+                folder = Environment.getExternalStorageDirectory() + File.separator + "SIR/";
 
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);

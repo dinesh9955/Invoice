@@ -83,6 +83,57 @@
 
 
 
+    <string name="dialog_no_customer_statement_report">لا يوجد تقرير كشف حساب العميل</string>
+    <string name="dialog_no_supplier_statement_report">لا يوجد تقرير بيان المورد</string>
+    <string name="dialog_no_total_sales_report">لا يوجد تقرير إجمالي المبيعات</string>
+    <string name="dialog_no_total_purchase_report">لا يوجد تقرير إجمالي الشراء</string>
+    <string name="dialog_no_customer_ageing_report">لا يوجد تقرير عمر العميل</string>
+    <string name="dialog_no_tax_collected_report">لا يوجد تقرير جمع الضرائب</string>
+    <string name="dialog_no_stock_report">لا يوجد تقرير مخزون</string>
+    <string name="dialog_no_product_movement_report">لا يوجد تقرير عن حركة المنتج</string>
+
+
+    <string name = "html_Particulars"> تفاصيل </string>
+    <string name = "html_DebitAmount"> مبلغ الخصم </string>
+    <string name = "html_CreditAmount"> مبلغ الائتمان </string>
+    <string name = "html_Balance"> التوازن </string>
+    <string name = "html_TotalAmount"> المبلغ الإجمالي </string>
+    <string name = "html_CustomerName"> اسم العميل </string>
+    <string name = "html_SupplierName"> اسم المورد </string>
+    <string name = "html_Currentdue"> الاستحقاق الحالي </string>
+    <string name = "html_daysoverdue"> الأيام المتأخرة </string>
+    <string name = "html_total"> الإجمالي </string>
+    <string name = "html_Amount"> المبلغ </string>
+    <string name = "html_TaxName"> اسم الضريبة </string>
+    <string name = "html_TaxRate"> معدل الضريبة </string>
+    <string name = "html_SNo"> لا. </string>
+    <string name = "html_Product"> المنتج </string>
+    <string name = "html_ReorderLevel"> إعادة ترتيب المستوى </string>
+    <string name = "html_QuantityAvaliable"> الكمية المتاحة </string>
+    <string name = "html_Status"> الحالة </string>
+    <string name = "html_PerUnitPrice"> سعر الوحدة </string>
+    <string name = "html_InventoryValue"> قيمة المخزون </string>
+    <string name = "html_OpeningStock"> فتح المخزون </string>
+    <string name = "html_Purchases"> المشتريات </string>
+    <string name = "html_Sales"> المبيعات </string>
+    <string name = "html_WastagesDamages"> الخسائر / الأضرار </string>
+    <string name = "html_NetQuantity"> صافي الكمية </string>
+    <string name = "html_NetQuantityAvailable"> صافي الكمية المتوفرة </string>
+    <string name = "html_PricePerUnit"> السعر لكل وحدة </string>
+
+
+
+    <string name = "share_CreditNote"> مذكرة دائنة </string>
+    <string name = "share_DebitNote"> مذكرة الخصم </string>
+    <string name = "share_Invoice"> فاتورة </string>
+    <string name = "share_Estimate"> تقدير </string>
+    <string name = "share_Receipt"> الإيصال </string>
+    <string name = "share_PurchaseOrder"> أمر الشراء </string>
+    <string name = "share_PaymentVoucher"> سند الدفع </string>
+
+
+    <string name = "list_Invoiceviewed"> يمكن عرض فاتورتك وطباعتها وتنزيلها من الرابط أدناه. </string>
+
     <string name = "setting_ChooseUpgradePackage"> اختر حزمة الترقية </string>
     <string name = "setting_UpgradePlan1"> قم بالترقية إلى ميزة تتبع المخزون الحصرية لدينا مقابل 23.99 دولارًا أمريكيًا إضافيًا سنويًا واحصل على 33٪ </string>
 

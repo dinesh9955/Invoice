@@ -83,6 +83,57 @@
 
 
 
+    <string name="dialog_no_customer_statement_report">Geen klantverklaringrapport</string>
+    <string name="dialog_no_supplier_statement_report">Geen leveranciersverklaring</string>
+    <string name="dialog_no_total_sales_report">Geen totaal verkooprapport</string>
+    <string name="dialog_no_total_purchase_report">Geen totaal aankooprapport</string>
+    <string name="dialog_no_customer_ageing_report">Geen rapport over veroudering van klanten</string>
+    <string name="dialog_no_tax_collected_report">Geen belasting geïnd rapport</string>
+    <string name="dialog_no_stock_report">Geen voorraadrapport</string>
+    <string name="dialog_no_product_movement_report">Geen rapport over productbewegingen</string>
+
+
+
+
+    <string name="html_Particulars">Bijzonderheden</string>
+    <string name="html_DebitAmount">Debetbedrag</string>
+    <string name="html_CreditAmount">Kredietbedrag</string>
+    <string name="html_Balance">Saldo</string>
+    <string name="html_TotalAmount">Totaal bedrag</string>
+    <string name="html_CustomerName">Klantnaam</string>
+    <string name="html_SupplierName">Naam leverancier</string>
+    <string name="html_Currentdue">Huidige vervaldatum</string>
+    <string name="html_daysoverdue">dagen te laat</string>
+    <string name="html_total">Totaal</string>
+    <string name="html_Amount">Bedrag</string>
+    <string name="html_TaxName">Belastingnaam</string>
+    <string name="html_TaxRate">Belastingtarief</string>
+    <string name="html_SNo">S.Nr.</string>
+    <string name="html_Product">Product</string>
+    <string name="html_ReorderLevel">Niveau voor opnieuw bestellen</string>
+    <string name="html_QuantityAvaliable">Beschikbare hoeveelheid</string>
+    <string name="html_Status">Status</string>
+    <string name="html_PerUnitPrice">Prijs per eenheid</string>
+    <string name="html_InventoryValue">Voorraadwaarde</string>
+    <string name="html_OpeningStock">Openingsvoorraad</string>
+    <string name="html_Purchases">Aankopen</string>
+    <string name="html_Sales">Verkoop</string>
+    <string name="html_WastagesDamages">Verspilling/Schade</string>
+    <string name="html_NetQuantity">Nettohoeveelheid</string>
+    <string name="html_NetQuantityAvailable">Netto beschikbare hoeveelheid</string>
+    <string name="html_PricePerUnit">Prijs per eenheid</string>
+
+
+
+    <string name="share_CreditNote">Creditnota</string>
+    <string name="share_DebitNote">Debetnota</string>
+    <string name="share_Invoice">Factuur</string>
+    <string name="share_Estimate">Schatting</string>
+    <string name="share_Receipt">Ontvangst</string>
+    <string name="share_PurchaseOrder">Aankooporder</string>
+    <string name="share_PaymentVoucher">Betalingsvoucher</string>
+
+    <string name="list_Invoiceviewed">Uw factuur kan worden bekeken, afgedrukt en gedownload via onderstaande link.</string>
 
     <string name="setting_ChooseUpgradePackage">Kies upgradepakket</string>
     <string name="setting_UpgradePlan1">Upgrade naar onze exclusieve Stock Tracking-functie voor $ 23,99 extra per jaar en krijg tot 33%</string>

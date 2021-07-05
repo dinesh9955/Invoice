@@ -967,7 +967,7 @@ public class PreviewItActivity extends BaseActivity {
 
                 String minimumTxt = "";
                 if(minimum == 0){
-                    minimumTxt = "0.00";
+                    minimumTxt = Utility.getPatternFormat(""+numberPostion, 0.00);
                 }else{
                     String minimumSS = Utility.getPatternFormat(""+numberPostion, minimum);
                     minimumTxt = minimumSS;
@@ -975,7 +975,7 @@ public class PreviewItActivity extends BaseActivity {
 
                 String quantityTxt = "";
                 if(quantity == 0){
-                    quantityTxt =  "0.00";
+                    quantityTxt =  Utility.getPatternFormat(""+numberPostion, 0.00);
                 }else{
                     String quantitySS = Utility.getPatternFormat(""+numberPostion, quantity);
                     quantityTxt = quantitySS;
@@ -1140,7 +1140,7 @@ public class PreviewItActivity extends BaseActivity {
                 String totalQuantityTxt = "";
                 if(getTotal_quantity == 0){
 //                    String valueSS = Utility.getPatternFormat(""+numberPostion, getTotal_quantity);
-                    totalQuantityTxt = "0.00";
+                    totalQuantityTxt = Utility.getPatternFormat(""+numberPostion, 0.00);
                 }else{
                     String valueSS = Utility.getPatternFormat(""+numberPostion, getTotal_quantity);
                     totalQuantityTxt = valueSS;
@@ -1201,7 +1201,7 @@ public class PreviewItActivity extends BaseActivity {
 
         String lastQuantityTxt ="";
         if(lastQuantity == 0){
-            lastQuantityTxt = "0.00";
+            lastQuantityTxt = Utility.getPatternFormat(""+numberPostion, 0.00);
         }else{
             String valueSS = Utility.getPatternFormat(""+numberPostion, lastQuantity);
             lastQuantityTxt = valueSS;
@@ -1209,7 +1209,7 @@ public class PreviewItActivity extends BaseActivity {
 
         String priceTxt ="";
         if(price == 0){
-            priceTxt = "0.00"+Utility.getReplaceDollor(cruncycode);
+            priceTxt = Utility.getPatternFormat(""+numberPostion, 0.00) + Utility.getReplaceDollor(cruncycode);
         }else{
             String valueSS = Utility.getPatternFormat(""+numberPostion, price)+Utility.getReplaceDollor(cruncycode);
             priceTxt = valueSS;
@@ -1219,7 +1219,7 @@ public class PreviewItActivity extends BaseActivity {
 
         String totalPriceTxt ="";
         if(totalPrice == 0){
-            totalPriceTxt = "0.00"+Utility.getReplaceDollor(cruncycode);
+            totalPriceTxt = Utility.getPatternFormat(""+numberPostion, 0.00) + Utility.getReplaceDollor(cruncycode);
         }else{
             String valueSS = Utility.getPatternFormat(""+numberPostion, totalPrice)+Utility.getReplaceDollor(cruncycode);
             totalPriceTxt = valueSS;

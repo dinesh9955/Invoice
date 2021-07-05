@@ -675,6 +675,16 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+                    .replaceAll("Customer Statement of Account", getString(R.string.report_CustomerStatementofAccount))
+                    .replaceAll("Date", getString(R.string.list_Date))
+                    .replaceAll("Particulars", getString(R.string.html_Particulars))
+                    .replaceAll("Debit Amount", getString(R.string.html_DebitAmount))
+                    .replaceAll("Credit Amount", getString(R.string.html_CreditAmount))
+                    .replaceAll("Balance", getString(R.string.html_Balance))
+                    .replaceAll("Total Amount_", getString(R.string.html_TotalAmount))
+
+
                     .replaceAll("Company Name", customerItem.getCompany_name())
                     .replaceAll("Address", ""+stringBuilderBillTo.toString())
                             .replaceAll("Customer Name", customerItem.getCustomer_name())
@@ -954,6 +964,16 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+                    .replaceAll("Supplier Statement of Account", getString(R.string.report_SupplierStatementofAccount))
+                    .replaceAll("Date", getString(R.string.list_Date))
+                    .replaceAll("Particulars", getString(R.string.html_Particulars))
+                    .replaceAll("Debit Amount", getString(R.string.html_DebitAmount))
+                    .replaceAll("Credit Amount", getString(R.string.html_CreditAmount))
+                    .replaceAll("Balance", getString(R.string.html_Balance))
+                    .replaceAll("Total Amount_", getString(R.string.html_TotalAmount))
+
+
                     .replaceAll("Company Name", customerItem.getCompany_name())
                     .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("Customer Name", customerItem.getSupplier_name())
@@ -1340,6 +1360,15 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+                    .replaceAll("Total Sales Report", getString(R.string.report_TotalSalesReport))
+                    .replaceAll("Date", getString(R.string.list_Date))
+                    .replaceAll("Particulars", getString(R.string.html_Particulars))
+                    .replaceAll("Customer Name", getString(R.string.html_CustomerName))
+                    .replaceAll("Amount_", getString(R.string.service_Amount))
+                    .replaceAll("Total Amount_", getString(R.string.html_TotalAmount))
+
+
                     .replaceAll("Company Name", customerItem.getName())
                     .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
@@ -1603,6 +1632,15 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+                    .replaceAll("Total Purchase Report", getString(R.string.report_TotalPurchaseReport))
+                    .replaceAll("Date", getString(R.string.list_Date))
+                    .replaceAll("Particulars", getString(R.string.html_Particulars))
+                    .replaceAll("Supplier Name", getString(R.string.html_SupplierName))
+                    .replaceAll("Amount_", getString(R.string.service_Amount))
+                    .replaceAll("Total Amount_", getString(R.string.html_TotalAmount))
+
+
                     .replaceAll("Company Name", customerItem.getName())
                     .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
@@ -1924,6 +1962,15 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+                    .replaceAll("Customer Ageing Report", getString(R.string.report_CustomerAgeingReport))
+                    .replaceAll("Customer Name", getString(R.string.html_CustomerName))
+                    .replaceAll("Current due", getString(R.string.html_Currentdue))
+                    .replaceAll("days overdue", getString(R.string.html_daysoverdue))
+                    .replaceAll("Total_", getString(R.string.html_total))
+                    .replaceAll("Total Amount_", getString(R.string.html_TotalAmount))
+
+
                     .replaceAll("Company Name", customerItem.getName())
                     .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
@@ -2197,6 +2244,16 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+                    .replaceAll("Tax Collected Report", getString(R.string.report_TaxCollectedReport))
+                    .replaceAll("Date", getString(R.string.list_Date))
+                    .replaceAll("Particulars", getString(R.string.html_Particulars))
+                    .replaceAll("Customer Name", getString(R.string.html_CustomerName))
+                    .replaceAll("Tax Name", getString(R.string.html_TaxName))
+                    .replaceAll("Tax Rate", getString(R.string.html_TaxRate))
+                    .replaceAll("Amount_", getString(R.string.html_Amount))
+                    .replaceAll("Total Amount_", getString(R.string.html_TotalAmount))
+
                     .replaceAll("Company Name", customerItem.getName())
                     .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
@@ -2386,7 +2443,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                 String minimumTxt = "";
                 if(minimum == 0){
-                    minimumTxt = "0.00";
+                    minimumTxt = Utility.getPatternFormat(""+numberPostion, 0.00);
                 }else{
                     String minimumSS = Utility.getPatternFormat(""+numberPostion, minimum);
                     minimumTxt = minimumSS;
@@ -2394,7 +2451,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                 String quantityTxt = "";
                 if(quantity == 0){
-                    quantityTxt =  "0.00";
+                    quantityTxt = Utility.getPatternFormat(""+numberPostion, 0.00);
                 }else{
                     String quantitySS = Utility.getPatternFormat(""+numberPostion, quantity);
                     quantityTxt = quantitySS;
@@ -2422,7 +2479,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 double quantityPricePerUnit = quantity * pricePerUnit;
                 String valueTxt = "";
                 if(quantityPricePerUnit == 0){
-                    valueTxt =  "0.00" + Utility.getReplaceDollor(cruncycode);
+                    valueTxt =  Utility.getPatternFormat(""+numberPostion, 0.00) + Utility.getReplaceDollor(cruncycode);
                 }else{
                     String valueSS = Utility.getPatternFormat(""+numberPostion, quantityPricePerUnit) + Utility.getReplaceDollor(cruncycode);
                     valueTxt = valueSS;
@@ -2482,6 +2539,17 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+                    .replaceAll("Stock Report", getString(R.string.report_StockReport))
+                    .replaceAll("S.No.", getString(R.string.html_SNo))
+                    .replaceAll("Product", getString(R.string.html_Product))
+                    .replaceAll("Re-order Level", getString(R.string.html_ReorderLevel))
+                    .replaceAll("Quantity Avaliable", getString(R.string.html_QuantityAvaliable))
+                    .replaceAll("Status", getString(R.string.html_Status))
+                    .replaceAll("Per Unit Price", getString(R.string.html_PerUnitPrice))
+                    .replaceAll("Inventory Value", getString(R.string.html_InventoryValue))
+                    .replaceAll("Total Amount_", getString(R.string.html_TotalAmount))
+
                     .replaceAll("Company Name", customerItem.getName())
                     .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())
@@ -2679,7 +2747,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 String totalQuantityTxt = "";
                 if(getTotal_quantity == 0){
 //                    String valueSS = Utility.getPatternFormat(""+numberPostion, getTotal_quantity);
-                    totalQuantityTxt = "0.00";
+                    totalQuantityTxt = Utility.getPatternFormat(""+numberPostion, 0.00);
                 }else{
                     String valueSS = Utility.getPatternFormat(""+numberPostion, getTotal_quantity);
                     totalQuantityTxt = valueSS;
@@ -2740,7 +2808,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String lastQuantityTxt ="";
         if(lastQuantity == 0){
-            lastQuantityTxt = "0.00";
+            lastQuantityTxt = Utility.getPatternFormat(""+numberPostion, 0.00);
          }else{
              String valueSS = Utility.getPatternFormat(""+numberPostion, lastQuantity);
              lastQuantityTxt = valueSS;
@@ -2748,7 +2816,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String priceTxt ="";
         if(price == 0){
-            priceTxt = "0.00"+Utility.getReplaceDollor(cruncycode);
+            priceTxt = Utility.getPatternFormat(""+numberPostion, 0.00) + Utility.getReplaceDollor(cruncycode);
         }else{
             String valueSS = Utility.getPatternFormat(""+numberPostion, price)+Utility.getReplaceDollor(cruncycode);
             priceTxt = valueSS;
@@ -2758,7 +2826,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         String totalPriceTxt ="";
         if(totalPrice == 0){
-            totalPriceTxt = "0.00"+Utility.getReplaceDollor(cruncycode);
+            totalPriceTxt = Utility.getPatternFormat(""+numberPostion, 0.00) + Utility.getReplaceDollor(cruncycode);
         }else{
             String valueSS = Utility.getPatternFormat(""+numberPostion, totalPrice)+Utility.getReplaceDollor(cruncycode);
             totalPriceTxt = valueSS;
@@ -2782,6 +2850,18 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+                    .replaceAll("Product Movement Report", getString(R.string.report_ProductMovementReport))
+                    .replaceAll("Date", getString(R.string.list_Date))
+                    .replaceAll("Particulars", getString(R.string.html_Particulars))
+                    .replaceAll("Opening Stock", getString(R.string.html_OpeningStock))
+                    .replaceAll("Purchases", getString(R.string.html_Purchases))
+                    .replaceAll("Sales", getString(R.string.html_Sales))
+                    .replaceAll("Wastages/Damages", getString(R.string.html_WastagesDamages))
+                    .replaceAll("Net Quantity_", getString(R.string.html_NetQuantity))
+                    .replaceAll("Net Quantity Available", getString(R.string.html_NetQuantityAvailable))
+                    .replaceAll("Price Per Unit", getString(R.string.html_PricePerUnit))
+                    .replaceAll("Total Amount_", getString(R.string.html_TotalAmount))
+
                     .replaceAll("Company Name", customerItem.getName())
                     .replaceAll("Address", ""+stringBuilderBillTo.toString())
                      .replaceAll("Product Name", customerItem.getProductName())

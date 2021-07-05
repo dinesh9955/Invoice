@@ -66,7 +66,7 @@ public class Utility {
     }
 
 
-    public static String getRealValueInvoiceWithoutPlus(String sss) {
+    public static String getRealValueInvoiceWithoutPlus(Context context, String sss) {
         String valueIs = "";
 
         if(sss.toString().length() > 0){
@@ -87,14 +87,14 @@ public class Utility {
                 String result = sb.toString();
 
                 Log.e(TAG, "ccccccresult "+result);
-                valueIs = "Invoice # "+result;
+                valueIs = context.getString(R.string.share_Invoice)+" # "+result;
             }
         }
 
         return valueIs;
     }
 
-    public static String getRealValueEstimateWithoutPlus(String sss) {
+    public static String getRealValueEstimateWithoutPlus(Context context, String sss) {
         String valueIs = "";
 
         if(sss.toString().length() > 0){
@@ -115,15 +115,14 @@ public class Utility {
                 String result = sb.toString();
 
                 Log.e(TAG, "ccccccresult "+result);
-                valueIs = "Estimate # "+result;
+                valueIs = context.getString(R.string.share_Estimate)+" # "+result;
             }
         }
 
         return valueIs;
     }
 
-
-    public static String getRealValueReceiptWithoutPlus(String sss) {
+    public static String getRealValueReceiptWithoutPlus(Context context, String sss) {
         String valueIs = "";
 
         if(sss.toString().length() > 0){
@@ -144,15 +143,14 @@ public class Utility {
                 String result = sb.toString();
 
                 Log.e(TAG, "ccccccresult "+result);
-                valueIs = "Receipt # "+result;
+                valueIs = context.getString(R.string.share_Receipt)+" # "+result;
             }
         }
 
         return valueIs;
     }
 
-
-    public static String getRealValueCreditNoteWithoutPlus(String sss) {
+    public static String getRealValueCreditNoteWithoutPlus(Context context, String sss) {
         String valueIs = "";
 
         if(sss.toString().length() > 0){
@@ -173,15 +171,14 @@ public class Utility {
                 String result = sb.toString();
 
                 Log.e(TAG, "ccccccresult "+result);
-                valueIs = "Credit Note # "+result;
+                valueIs = context.getString(R.string.share_CreditNote)+" # "+result;
             }
         }
 
         return valueIs;
     }
 
-
-    public static String getRealValueDebitNoteWithoutPlus(String sss) {
+    public static String getRealValueDebitNoteWithoutPlus(Context context, String sss) {
         String valueIs = "";
 
         if(sss.toString().length() > 0){
@@ -202,15 +199,14 @@ public class Utility {
                 String result = sb.toString();
 
                 Log.e(TAG, "ccccccresult "+result);
-                valueIs = "Debit Note # "+result;
+                valueIs = context.getString(R.string.share_DebitNote)+" # "+result;
             }
         }
 
         return valueIs;
     }
 
-
-    public static String getRealValuePOWithoutPlus(String sss) {
+    public static String getRealValuePOWithoutPlus(Context context, String sss) {
         String valueIs = "";
 
         if(sss.toString().length() > 0){
@@ -231,15 +227,14 @@ public class Utility {
                 String result = sb.toString();
 
                 Log.e(TAG, "ccccccresult "+result);
-                valueIs = "Purchase Order # "+result;
+                valueIs = context.getString(R.string.share_PurchaseOrder)+" # "+result;
             }
         }
 
         return valueIs;
     }
 
-
-    public static String getRealValuePVWithoutPlus(String sss) {
+    public static String getRealValuePVWithoutPlus(Context context, String sss) {
         String valueIs = "";
 
         if(sss.toString().length() > 0){
@@ -260,7 +255,7 @@ public class Utility {
                 String result = sb.toString();
 
                 Log.e(TAG, "ccccccresult "+result);
-                valueIs = "Payment Voucher # "+result;
+                valueIs = context.getString(R.string.share_PaymentVoucher)+" # "+result;
             }
         }
 

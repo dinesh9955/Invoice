@@ -455,7 +455,7 @@ public class Xyz extends AppCompatActivity {
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStorageDirectory() + File.separator + "SAAR/";
+                folder = Environment.getExternalStorageDirectory() + File.separator + "SIR/";
 
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);
@@ -800,7 +800,7 @@ public class Xyz extends AppCompatActivity {
                     String mailTo = "mailto:" + to;
 //
 //                Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-//                File fileWithinMyDir = new File("/storage/emulated/0/SAAR/CreditNote.pdf");
+//                File fileWithinMyDir = new File("/storage/emulated/0/SIR/CreditNote.pdf");
 //                Uri photoURI = FileProvider.getUriForFile(Xyz.this,
 //                        "com.receipt.invoice.stock.sirproject.provider",
 //                        fileWithinMyDir);

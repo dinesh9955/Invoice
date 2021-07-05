@@ -83,6 +83,59 @@
 
 
 
+    <string name = "dialog_no_customer_statement_report"> Sin informe de estado de cuenta del cliente </string>
+    <string name = "dialog_no_supplier_statement_report"> Sin informe de declaración del proveedor </string>
+    <string name = "dialog_no_total_sales_report"> Sin informe de ventas totales </string>
+    <string name = "dialog_no_total_purchase_report"> Sin informe de compras totales </string>
+    <string name = "dialog_no_customer_ageing_report"> Sin informe de antigüedad del cliente </string>
+    <string name = "dialog_no_tax_collected_report"> Informe de impuestos no recaudados </string>
+    <string name = "dialog_no_stock_report"> Sin informe de existencias </string>
+    <string name = "dialog_no_product_movement_report"> Sin informe de movimiento de productos </string>
+
+
+
+    <string name = "html_Particulars"> Detalles </string>
+    <string name = "html_DebitAmount"> Monto del débito </string>
+    <string name = "html_CreditAmount"> Monto del crédito </string>
+    <string name = "html_Balance"> Saldo </string>
+    <string name = "html_TotalAmount"> Importe total </string>
+    <string name = "html_CustomerName"> Nombre del cliente </string>
+    <string name = "html_SupplierName"> Nombre del proveedor </string>
+    <string name = "html_Currentdue"> Vencimiento actual </string>
+    <string name = "html_daysoverdue"> días de retraso </string>
+    <string name = "html_total"> Total </string>
+    <string name = "html_Amount"> Cantidad </string>
+    <string name = "html_TaxName"> Nombre fiscal </string>
+    <string name = "html_TaxRate"> Tasa de impuestos </string>
+    <string name = "html_SNo"> S.No. </string>
+    <string name = "html_Product"> Producto </string>
+    <string name = "html_ReorderLevel"> Nivel de reorden </string>
+    <string name = "html_QuantityAvaliable"> Cantidad disponible </string>
+    <string name = "html_Status"> Estado </string>
+    <string name = "html_PerUnitPrice"> Precio por unidad </string>
+    <string name = "html_InventoryValue"> Valor de inventario </string>
+    <string name = "html_OpeningStock"> Acciones iniciales </string>
+    <string name = "html_Purchases"> Compras </string>
+    <string name = "html_Sales"> Ventas </string>
+    <string name = "html_WastagesDamages"> Desperdicios / Daños </string>
+    <string name = "html_NetQuantity"> Cantidad neta </string>
+    <string name = "html_NetQuantityAvailable"> Cantidad neta disponible </string>
+    <string name = "html_PricePerUnit"> Precio por unidad </string>
+
+
+
+    <string name = "share_CreditNote"> Nota de crédito </string>
+    <string name = "share_DebitNote"> Nota de débito </string>
+    <string name = "share_Invoice"> Factura </string>
+    <string name = "share_Estimate"> Estimación </string>
+    <string name = "share_Receipt"> Recibo </string>
+    <string name = "share_PurchaseOrder"> Orden de compra </string>
+    <string name = "share_PaymentVoucher"> Vale de pago </string>
+
+
+    <string name = "list_Invoiceviewed"> Su factura se puede ver, imprimir y descargar desde el siguiente enlace. </string>
+
+
     <string name = "setting_ChooseUpgradePackage"> Elija el paquete de actualización </string>
     <string name = "setting_UpgradePlan1"> Actualice a nuestra función exclusiva de seguimiento de existencias por USD 23,99 adicionales al año y obtenga hasta un 33% </string>
 

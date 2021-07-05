@@ -83,6 +83,60 @@
 
 
 
+
+    <string name="dialog_no_customer_statement_report">Kein Kundenauszugsbericht</string>
+    <string name="dialog_no_supplier_statement_report">Kein Lieferantenerklärungsbericht supplier</string>
+    <string name="dialog_no_total_sales_report">Kein Gesamtumsatzbericht</string>
+    <string name="dialog_no_total_purchase_report">Kein Gesamtkaufbericht</string>
+    <string name="dialog_no_customer_ageing_report">Kein Bericht über die Kundenalterung</string>
+    <string name="dialog_no_tax_collected_report">Kein Bericht zur Steuererhebung</string>
+    <string name="dialog_no_stock_report">Kein Aktienbericht</string>
+    <string name="dialog_no_product_movement_report">Kein Produktbewegungsbericht</string>
+
+
+
+    <string name="html_Particulars">Angaben</string>
+    <string name="html_DebitAmount">Abbuchungsbetrag</string>
+    <string name="html_CreditAmount">Guthabenbetrag</string>
+    <string name="html_Balance">Guthaben</string>
+    <string name="html_TotalAmount">Gesamtbetrag</string>
+    <string name="html_CustomerName">Kundenname</string>
+    <string name="html_SupplierName">Lieferantenname</string>
+    <string name="html_Currentdue">Aktuell fällig</string>
+    <string name="html_daysoverdue">Tage überfällig</string>
+    <string name="html_total">Gesamt</string>
+    <string name="html_Amount">Betrag</string>
+    <string name="html_TaxName">Steuername</string>
+    <string name="html_TaxRate">Steuersatz</string>
+    <string name="html_SNo">S.Nr.</string>
+    <string name="html_Product">Produkt</string>
+    <string name="html_ReorderLevel">Re-Order-Level</string>
+    <string name="html_QuantityAvaliable">Verfügbare Menge</string>
+    <string name="html_Status">Status</string>
+    <string name="html_PerUnitPrice">Preis pro Einheit</string>
+    <string name="html_InventoryValue">Inventarwert</string>
+    <string name="html_OpeningStock">Eröffnungsbestand</string>
+    <string name="html_Purchases">Käufe</string>
+    <string name="html_Sales">Verkauf</string>
+    <string name="html_WastagesDamages">Verschwendung/Schaden</string>
+    <string name="html_NetQuantity">Nettomenge</string>
+    <string name="html_NetQuantityAvailable">Verfügbare Nettomenge</string>
+    <string name="html_PricePerUnit">Preis pro Einheit</string>
+
+
+
+    <string name="share_CreditNote">Gutschrift</string>
+    <string name="share_DebitNote">Lastschrift</string>
+    <string name="share_Invoice">Rechnung</string>
+    <string name="share_Estimate">Schätzung</string>
+    <string name="share_Receipt">Quittung</string>
+    <string name="share_PurchaseOrder">Bestellung</string>
+    <string name="share_PaymentVoucher">Zahlungsgutschein</string>
+
+
+    <string name="list_Invoiceviewed">Ihre Rechnung kann über den folgenden Link eingesehen, gedruckt und heruntergeladen werden.</string>
+
+
     <string name="html_PayPal">Pay Pal:</string>
     <string name="html_Bank">Bank:</string>
 

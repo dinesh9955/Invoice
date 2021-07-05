@@ -868,7 +868,6 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
     private void multiimagepicker() {
 
-
         multiImageDisposable = TedRxBottomPicker.with(getActivity())
                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                 .setPeekHeight(1600)
@@ -1410,7 +1409,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
         if(requestCode == 124){
             Log.e(TAG, "requestCode "+requestCode);
-            productget(selectedCompanyId);
+            productget(selectwarehouseId);
         }
 
         if(requestCode == 125){
