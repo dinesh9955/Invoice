@@ -2078,13 +2078,19 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 uriArrayList.add(imageUri1);
                 uriArrayList.add(imageUri2);
 
-                intentShareFile.setType("application/pdf/*|image/*");
+                intentShareFile.setType("application/pdf/*|image/*|text/html");
                 intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
                 //  intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/share.jpg"));
 
 
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
-                intentShareFile.putExtra(Intent.EXTRA_TEXT, text);
+
+
+                String ss = "<![CDATA[Hey,<br/>I just downloaded App on my Android. \n" +
+                        "<br/>It is a smartphone Manager.<br/>App is available for Android.<br/>\n" +
+                        "    Get it now from http://www.exampleapp.com/download]]>";
+
+                intentShareFile.putExtra(Intent.EXTRA_TEXT,  Html.fromHtml(ss));
 
                 if (Utility.isAppAvailable(context, "com.google.android.gm")) {
                     intentShareFile.setPackage("com.google.android.gm");
