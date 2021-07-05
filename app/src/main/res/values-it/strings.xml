@@ -133,6 +133,7 @@
 
     <string name="list_Invoiceviewed">La tua fattura può essere visualizzata, stampata e scaricata dal link sottostante.</string>
 
+    <string name="list_Invoicepayment_link">Puoi anche scegliere di pagarlo online facendo clic sul link di pagamento sottostante.</string>
 
     <string name="setting_ChooseUpgradePackage">Scegli pacchetto di aggiornamento</string>
     <string name="setting_UpgradePlan1">Esegui l\'upgrade alla nostra esclusiva funzione di monitoraggio delle scorte a 23,99 USD aggiuntivi all\'anno e ottieni fino al 33%</string>

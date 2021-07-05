@@ -565,6 +565,9 @@
     <string name="list_PaymentVoucherviewed">Your Payment Voucher can be viewed, printed and downloaded from below link.</string>
     <string name="list_Estimateviewed">Your Estimate can be viewed, printed and downloaded from below link.</string>
     <string name="list_Invoiceviewed">Your Invoice can be viewed, printed and downloaded from below link.</string>
+    <string name="list_Invoicepayment_link">You can also choose to pay it online by clicking on the payment link below.</string>
+
+
 
 
     <string name="list_SearchByDebitNoteNumber">Search By Debit Note Number</string>

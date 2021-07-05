@@ -128,7 +128,7 @@
 
     <string name="list_Invoiceviewed">Votre facture peut être consultée, imprimée et téléchargée à partir du lien ci-dessous.</string>
 
-
+    <string name="list_Invoicepayment_link">Vous pouvez également choisir de le payer en ligne en cliquant sur le lien de paiement ci-dessous.</string>
 
     <string name="setting_ChooseUpgradePackage">Choisir le package de mise à niveau</string>
     <string name="setting_UpgradePlan1">Passez à notre fonction exclusive de suivi des stocks pour 23,99 USD supplémentaires par an et obtenez jusqu\'à 33 %</string>

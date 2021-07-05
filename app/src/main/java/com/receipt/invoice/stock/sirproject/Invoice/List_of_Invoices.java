@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -1260,9 +1261,17 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                             String newLink = AllSirApi.BASE_URL_INDEX+"view/invoice/"+link;
 
+                           // String  body = "<!DOCTYPE html><html><body><img src=\"http://en.wikipedia.org/wiki/Krka_National_Park#mediaviewer/File:Krk_waterfalls.jpg\">";
+                            String html = "<!DOCTYPE html><html><body><a href=\"http://www.w3schools.com\" target=\"_blank\">Visit W3Schools.com!</a>" + "<p>If you set the target attribute to \"_blank\", the link will open in a new browser window/tab.</p></body></html>";
+
                             String subject = Utility.getRealValueInvoiceWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                             String txt = getString(R.string.list_Invoiceviewed)+
-                                    "\n\n" +newLink ;
+                                    "\n\n" +newLink +
+                                    "\n\n" +getString(R.string.list_Invoicepayment_link) ;
+
+//                                    "\n\n" + Html.fromHtml(html) ;
+
+
 
                             try {
 

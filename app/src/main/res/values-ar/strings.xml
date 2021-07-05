@@ -134,6 +134,8 @@
 
     <string name = "list_Invoiceviewed"> يمكن عرض فاتورتك وطباعتها وتنزيلها من الرابط أدناه. </string>
 
+    <string name = "list_Invoicepayment_link"> يمكنك أيضًا اختيار الدفع عبر الإنترنت من خلال النقر على رابط الدفع أدناه. </string>
+
     <string name = "setting_ChooseUpgradePackage"> اختر حزمة الترقية </string>
     <string name = "setting_UpgradePlan1"> قم بالترقية إلى ميزة تتبع المخزون الحصرية لدينا مقابل 23.99 دولارًا أمريكيًا إضافيًا سنويًا واحصل على 33٪ </string>
 

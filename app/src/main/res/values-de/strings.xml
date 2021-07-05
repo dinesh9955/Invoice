@@ -136,6 +136,8 @@
 
     <string name="list_Invoiceviewed">Ihre Rechnung kann über den folgenden Link eingesehen, gedruckt und heruntergeladen werden.</string>
 
+    <string name="list_Invoicepayment_link">Sie können es auch online bezahlen, indem Sie auf den untenstehenden Zahlungslink klicken.</string>
+
 
     <string name="html_PayPal">Pay Pal:</string>
     <string name="html_Bank">Bank:</string>

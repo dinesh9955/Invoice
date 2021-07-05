@@ -134,6 +134,8 @@
 
     <string name = "list_Invoiceviewed"> Sua fatura pode ser visualizada, impressa e baixada do link abaixo. </string>
 
+    <string name = "list_Invoicepayment_link"> Você também pode optar por pagar online clicando no link de pagamento abaixo. </string>
+
     <string name = "setting_ChooseUpgradePackage"> Escolha o pacote de atualização </string>
     <string name = "setting_UpgradePlan1"> Faça upgrade para nosso recurso exclusivo de rastreamento de estoque por US $ 23,99 adicionais anualmente e ganhe até 33% </string>
 

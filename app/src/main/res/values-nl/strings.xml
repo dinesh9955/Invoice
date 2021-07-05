@@ -135,6 +135,8 @@
 
     <string name="list_Invoiceviewed">Uw factuur kan worden bekeken, afgedrukt en gedownload via onderstaande link.</string>
 
+    <string name="list_Invoicepayment_link">Je kunt er ook voor kiezen om online te betalen door op de onderstaande betalingslink te klikken.</string>
+
     <string name="setting_ChooseUpgradePackage">Kies upgradepakket</string>
     <string name="setting_UpgradePlan1">Upgrade naar onze exclusieve Stock Tracking-functie voor $ 23,99 extra per jaar en krijg tot 33%</string>
 

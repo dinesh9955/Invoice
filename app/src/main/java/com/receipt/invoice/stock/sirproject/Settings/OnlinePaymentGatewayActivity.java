@@ -219,7 +219,7 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
-                Log.e("responsecompany", response);
+                Log.e(TAG, "responsecompanyQQ "+ response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
@@ -241,15 +241,18 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                                 company_website = item.getString("website");
                                 logo = item.getString("logo");
 
-                                payment_bank_name = item.getString("payment_bank_name");
-                                payment_currency = item.getString("payment_currency");
-                                payment_iban = item.getString("payment_iban");
-                                payment_swift_bic = item.getString("payment_swift_bic");
-                                String colorCode = item.getString("color");
-                                Log.e("CompanyId",company_id);
+//                                payment_bank_name = item.getString("payment_bank_name");
+//                                payment_currency = item.getString("payment_currency");
+//                                payment_iban = item.getString("payment_iban");
+//                                payment_swift_bic = item.getString("payment_swift_bic");
+//                                String colorCode = item.getString("color");
+//                                Log.e("CompanyId",company_id);
 
                                 String paypal = item.getString("paypal");
                                 String stripe = item.getString("stripe");
+
+                                Log.e(TAG, "paypalQQ "+ paypal);
+                                Log.e(TAG, "stripeQQ "+ stripe);
 
                                 stringPaypal.add(paypal);
                                 stringStripe.add(stripe);
@@ -315,7 +318,7 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
 
     private void callMethod(String responseCode) {
         final ProgressDialog progressDialog = new ProgressDialog(OnlinePaymentGatewayActivity.this);
-        progressDialog.setMessage("Please wait");
+        progressDialog.setMessage(getString(R.string.dialog_Please_wait));
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
@@ -329,7 +332,7 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         String token = Constant.GetSharedPreferences(OnlinePaymentGatewayActivity.this, Constant.ACCESS_TOKEN);
         client.addHeader("Access-Token", token);
         params.add("language", ""+getLanguage());
-        client.post(AllSirApi.BASE_URL_PAYMENT+ "settings/add", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL+ "settings/add", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);

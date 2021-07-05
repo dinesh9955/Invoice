@@ -135,6 +135,7 @@
 
     <string name = "list_Invoiceviewed"> Su factura se puede ver, imprimir y descargar desde el siguiente enlace. </string>
 
+    <string name = "list_Invoicepayment_link"> También puede optar por pagarlo en línea haciendo clic en el enlace de pago a continuación. </string>
 
     <string name = "setting_ChooseUpgradePackage"> Elija el paquete de actualización </string>
     <string name = "setting_UpgradePlan1"> Actualice a nuestra función exclusiva de seguimiento de existencias por USD 23,99 adicionales al año y obtenga hasta un 33% </string>
