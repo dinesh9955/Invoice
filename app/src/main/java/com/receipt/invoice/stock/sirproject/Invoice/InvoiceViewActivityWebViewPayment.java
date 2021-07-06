@@ -896,18 +896,21 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
                 hide2 = "hidden";
                 hide3 = "hidden";
             }else{
-                if(stringPaypal.equalsIgnoreCase("1")){
-                    //hide1 = "hidden";
+                if(stringStripe.equalsIgnoreCase("1")){
+                   // hide1 = "hidden";
                 }else{
                     hide2 = "hidden";
                 }
 
-                if(stringStripe.equalsIgnoreCase("1")){
-                   // hide1 = "hidden";
+                if(stringPaypal.equalsIgnoreCase("1")){
+                    //hide1 = "hidden";
                 }else{
                     hide3 = "hidden";
                 }
             }
+
+            Log.e(TAG, "stringPaypalAA "+stringPaypal);
+            Log.e(TAG, "stringStripeAA "+stringStripe);
 
 
 

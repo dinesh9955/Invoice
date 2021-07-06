@@ -220,11 +220,11 @@ public class Company_Details_Fragment extends BaseFragment {
         website.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
         address.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
         description.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-        nametxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Light.ttf"));
-        emailtxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Light.ttf"));
-        phonetxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Light.ttf"));
-        webtxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Light.ttf"));
-        addresstxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Light.ttf"));
+        nametxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Medium.ttf"));
+        emailtxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Medium.ttf"));
+        phonetxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Medium.ttf"));
+        webtxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Medium.ttf"));
+        addresstxt.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Medium.ttf"));
         cancel.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Regular.otf"));
         save.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Regular.otf"));
 
@@ -237,11 +237,11 @@ public class Company_Details_Fragment extends BaseFragment {
         chequepayabletoid.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Regular.otf"));
         Ibnnumbertxtid.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Regular.otf"));
 
-        txtchequepayableto.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Light.ttf"));
-        txtIbnnumber.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Light.ttf"));
-        txtPaymentswiftbic.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Light.ttf"));
-        txtPaypalemail.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Light.ttf"));
-        txtPaymentbankname.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Light.ttf"));
+        txtchequepayableto.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Medium.ttf"));
+        txtIbnnumber.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Medium.ttf"));
+        txtPaymentswiftbic.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Medium.ttf"));
+        txtPaypalemail.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Medium.ttf"));
+        txtPaymentbankname.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/Ubuntu-Medium.ttf"));
 
 
     }

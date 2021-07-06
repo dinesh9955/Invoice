@@ -16,6 +16,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/edittextshape"
+        android:textColorHint="@color/dark_grey"
         />
 
     <EditText
@@ -31,7 +32,8 @@
         android:padding="10dp"
         android:background="@drawable/edittextshape"
         android:elevation="3dp"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:textColorHint="@color/dark_grey"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

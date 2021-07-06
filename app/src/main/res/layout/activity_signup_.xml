@@ -58,6 +58,7 @@
         android:text="And start creating Invoices for your business."
         android:textSize="16dp"
         android:id="@+id/txtsignupdes"
+        android:textColor="@color/dark_grey"
         />
 
 
@@ -69,7 +70,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
         android:hint="Full Name"
-        android:textColorHint="@color/d_grey"
+        android:textColorHint="@color/dark_grey"
         android:textSize="14dp"
         android:paddingTop="0dp"
         android:paddingLeft="10dp"
@@ -77,6 +78,7 @@
         android:background="@drawable/edittextshape"
         android:elevation="2dp"
         android:singleLine="true"
+
         />
 
     <View
@@ -103,7 +105,7 @@
         android:layout_marginTop="20dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:textColorHint="@color/d_grey"
+        android:textColorHint="@color/dark_grey"
         android:textSize="14dp"
         android:paddingTop="0dp"
         android:paddingLeft="10dp"
@@ -136,7 +138,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:hint="Password"
-        android:textColorHint="@color/d_grey"
+        android:textColorHint="@color/dark_grey"
         android:textSize="14dp"
         android:paddingTop="0dp"
         android:paddingLeft="10dp"

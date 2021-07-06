@@ -65,10 +65,6 @@ public class Constant {
     private static final String TAG = "Constant";
 
 
-
-
-
-
    // public static String BASE_URL = "https://infinitmobility.com/sir/index.php/api/";
    public static final String ACCESS_TOKEN = "mndnkdcnn";
     public static final String FULLNAME = "fn";

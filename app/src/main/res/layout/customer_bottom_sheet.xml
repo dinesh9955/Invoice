@@ -39,7 +39,8 @@
                 android:padding="10dp"
                 android:background="@drawable/edittextshape"
                 android:elevation="3dp"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:textColorHint="@color/dark_grey"/>
 
 
             <TextView

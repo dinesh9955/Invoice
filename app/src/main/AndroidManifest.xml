@@ -786,6 +786,13 @@
             </intent-filter>
         </receiver>
 
+
+        <provider
+            android:name=".Utils.HtmlService.provider.CacheFileProvider"
+            android:authorities="com.receipt.invoice.stock.sirproject.cacheFileProvider"
+            android:exported="true" />
+
+
     </application>
 
 </manifest>

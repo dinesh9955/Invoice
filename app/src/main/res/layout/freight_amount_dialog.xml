@@ -31,7 +31,6 @@
             />
 
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/service_ShippingAmountInvoice"
@@ -39,7 +38,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:id="@+id/txtfreightdes"
-
+            android:textColor="@color/dark_grey"
             />
 
         <EditText
@@ -51,7 +50,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="40dp"
             android:hint="@string/service_EnterShippingAmount"
-            android:textColorHint="@color/d_grey"
+            android:textColorHint="@color/dark_grey"
             android:textSize="14dp"
             android:paddingTop="0dp"
             android:paddingLeft="10dp"
@@ -59,6 +58,7 @@
             android:background="@drawable/edittextshape"
             android:elevation="2dp"
             android:inputType="numberDecimal"
+
             />
 
 

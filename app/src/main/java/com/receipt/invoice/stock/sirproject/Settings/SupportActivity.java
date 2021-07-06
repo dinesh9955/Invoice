@@ -68,6 +68,7 @@ public class SupportActivity extends BaseActivity {
                 }else{
 
                     callMethod();
+                    callMethod2();
                 }
             }
         });
@@ -78,7 +79,7 @@ public class SupportActivity extends BaseActivity {
 
     private void callMethod() {
         final ProgressDialog progressDialog = new ProgressDialog(SupportActivity.this);
-        progressDialog.setMessage("Please wait");
+        progressDialog.setMessage(getString(R.string.dialog_Please_wait));
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
@@ -139,4 +140,73 @@ public class SupportActivity extends BaseActivity {
             }
         });
     }
+
+
+
+
+    private void callMethod2() {
+        final ProgressDialog progressDialog = new ProgressDialog(SupportActivity.this);
+        progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+        progressDialog.setCanceledOnTouchOutside(false);
+       // progressDialog.show();
+
+        RequestParams params = new RequestParams();
+        params.add("user_email", editTextEmail.getText().toString());
+        params.add("user_message", editTextMessage.getText().toString());
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL_SUPPORT + "support/add", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+               // progressDialog.dismiss();
+
+                Log.e("Create Invoicedata", response);
+//                try {
+//                    Log.e("Create Invoicedata", response);
+//
+////                    JSONObject jsonObject = new JSONObject(response);
+////                    String status = jsonObject.getString("status");
+////                    String message = jsonObject.getString("message");
+////                    if (status.equals("1")) {
+////                        Constant.SuccessToast(SupportActivity.this, message);
+////                        editTextEmail.setText("");
+////                        editTextMessage.setText("");
+////                    }else{
+////                        Constant.ErrorToast(SupportActivity.this, message);
+////                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                progressDialog.dismiss();
+
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response);
+//                        String status = jsonObject.getString("status");
+//                        String message = jsonObject.getString("message");
+//                        if (status.equals("1")) {
+//                            Constant.ErrorToast(SupportActivity.this, message);
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+                } else {
+                    ///Constant.ErrorToast(SupportActivity.this, "Something went wrong, try again!");
+                }
+            }
+        });
+    }
+
+
 }

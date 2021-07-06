@@ -152,9 +152,9 @@ public class Tax_Listing_Adapter extends RecyclerView.Adapter<Tax_Listing_Adapte
             edit = itemView.findViewById(R.id.edit);
 
             taxname.setTypeface(Typeface.createFromAsset(mcontext.getAssets(), "Fonts/AzoSans-Medium.otf"));
-            taxpercent.setTypeface(Typeface.createFromAsset(mcontext.getAssets(), "Fonts/AzoSans-Light.otf"));
-            companyname.setTypeface(Typeface.createFromAsset(mcontext.getAssets(), "Fonts/AzoSans-Light.otf"));
-            edit.setTypeface(Typeface.createFromAsset(mcontext.getAssets(), "Fonts/Ubuntu-Light.ttf"));
+            taxpercent.setTypeface(Typeface.createFromAsset(mcontext.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            companyname.setTypeface(Typeface.createFromAsset(mcontext.getAssets(), "Fonts/AzoSans-Medium.otf"));
+            edit.setTypeface(Typeface.createFromAsset(mcontext.getAssets(), "Fonts/Ubuntu-Medium.ttf"));
 
         }
 

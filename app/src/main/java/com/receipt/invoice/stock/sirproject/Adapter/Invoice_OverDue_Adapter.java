@@ -88,9 +88,9 @@ public class Invoice_OverDue_Adapter extends RecyclerView.Adapter<Invoice_OverDu
             companyname = itemView.findViewById(R.id.companyname);
             image = itemView.findViewById(R.id.image);
 
-            name.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Light.otf"));
+            name.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
             invoiceoverduetxt.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Bold.otf"));
-            companyname.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Light.otf"));
+            companyname.setTypeface(Typeface.createFromAsset(mcontext.getAssets(),"Fonts/AzoSans-Medium.otf"));
 
         }
     }

@@ -15,25 +15,21 @@ import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 //import android.print.PdfConverter;
 //import android.print.PdfConverter;
-import android.print.PrintAttributes;
-import android.print.PrintDocumentAdapter;
-import android.print.PrintManager;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 import androidx.core.util.Pair;
 import androidx.fragment.app.DialogFragment;
@@ -41,17 +37,9 @@ import androidx.fragment.app.DialogFragment;
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AFInAppEventType;
-import com.appsflyer.AppsFlyerConversionListener;
-import com.appsflyer.AppsFlyerLib;
-import com.google.android.material.datepicker.CalendarConstraints;
-import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.google.gson.Gson;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
@@ -68,40 +56,50 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 //import io.github.lucasfsc.html2pdf.Html2Pdf;
 
 import com.lowagie.text.Font;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
-import com.receipt.invoice.stock.sirproject.InvoiceReminder.SendInvoiceReminderActivity;
-import com.receipt.invoice.stock.sirproject.ThankYouNote.SendThankYouNoteActivity;
-import com.receipt.invoice.stock.sirproject.Utils.AppRater;
-import com.receipt.invoice.stock.sirproject.Utils.LocaleHelper;
+import com.receipt.invoice.stock.sirproject.Utils.HtmlService.task.CreateHtmlTask;
 import com.receipt.invoice.stock.sirproject.Utils.SublimePickerFragment;
-import com.receipt.invoice.stock.sirproject.Utils.Utility;
-import com.tejpratapsingh.pdfcreator.utils.FileManager;
+import com.receipt.invoice.stock.sirproject.Utils.HtmlService.domain.HtmlFile;
 //import com.tejpratapsingh.pdfcreator.utils.FileManager;
+
+import org.apache.commons.io.IOUtils;
 
 import cz.msebera.android.httpclient.util.ByteArrayBuffer;
 import ru.slybeaver.slycalendarview.SlyCalendarDialog;
 
-public class Abc extends BaseActivity {
+public class Abc extends BaseActivity implements CreateHtmlTask.OnTaskFinishedListener {
 
     FirebaseAnalytics firebaseAnalytics;
     private static final String TAG = "Abc";
     private ProgressDialog pd;
 
     TextView textView;
+
+
+    private void sendMail(String appName, String playStoreLink) {
+        String msg = "<HTML><BODY>Hello,<br>Recently,I downloaded <b><font color=\"red\">"+appName+"</font></b>"+
+                " from Play Store.I found this very challenging and a great game."+
+                "<br>I would like to suggest you this game.<br><br><a href="+playStoreLink+">Download</a><br><br>"+
+                "<br>Thank You</BODY></HTML>";
+        String sub = "Get it now. It is there in Play Store";
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.setType("text/html");
+        email.putExtra(Intent.EXTRA_SUBJECT, sub);
+        email.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(msg));
+        email.setType("message/rfc822");
+        startActivity(Intent.createChooser(email, "Choose an Email client :"));
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -151,19 +149,96 @@ public class Abc extends BaseActivity {
 
 
         button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
 
+                String name = "debit.html";
+                String nameName = "file:///android_asset/debit.html";
 
-                double quantity = 10.0;
+                String contentAA = null;
+                try {
+                    contentAA = IOUtils.toString(Abc.this.getAssets().open(name));
 
-                double bb = 11.0;
+                } catch (IOException e) {
+                    e.printStackTrace();
 
-                if(quantity < bb){
-                    Log.e(TAG, "AAAAAAAAAA");
-                }else{
-                    Log.e(TAG, "BBBBBBBBBB");
                 }
+
+
+                //String name = params[0];
+                StringBuilder builder = new StringBuilder();
+
+                builder.append("<!DOCTYPE html>");
+                builder.append("<html>");
+                builder.append("<head>");
+                builder.append("</head>");
+                builder.append("<body>");
+                builder.append("<p>");
+                builder.append(contentAA);
+                builder.append("<button type=\"button\">Click Me!</button>");
+                builder.append("<img src=\"file://android_res/drawable/white_img.png\"/>");
+                builder.append("</body>");
+                builder.append("</html>");
+                String content = builder.toString();
+
+
+String dd = "<html>\n" +
+        "    <p style=\"color: #5987c6\">My Shared Itinerary - John Smith.</p>\n" +
+        "    <p>Hello.</p>\n" +
+        "    <p>I want to share my Memmingen, DE trip itinerary with you.</p>\n" +
+        "    <p>Shared using \n" +
+        "        <span style=\"color: #5987c6\">Blah</span> by BlahBlah\n" +
+        "    </p>\n" +
+        "</html>";
+
+
+//                String emailList[]= {"dinesh.kumar@apptunix.com"};
+//                Intent intent = new Intent(Intent.ACTION_SEND);
+//                intent.setType("message/rfc822");
+//                intent.putExtra(Intent.EXTRA_EMAIL,emailList);
+//                intent.putExtra(Intent.EXTRA_SUBJECT,"Email Subject");
+//                intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(content));
+//                startActivity(Intent.createChooser(intent,"Choice email APP"));
+
+
+                String body = "<!DOCTYPE html><html>I am <b>bold text</b> and I am <i>italic text</i> and I am normal text.</html>";
+
+                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setType("text/html; charset=utf-8");
+
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "subject");
+              //  emailIntent.putExtra(Intent.EXTRA_TEXT,  Html.fromHtml("<a href =www.example.com/"+"result"+ " + > click here! </a> " ,0));
+                emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(body));
+//                emailIntent.putExtra(
+//                        Intent.EXTRA_TEXT,
+//                        Html.fromHtml(new StringBuilder()
+//                                .append("<html>")
+//                                .append("<p><b>Some Content</b></p>")
+//                                .append("<small><p>More content</p></small>")
+//                                .append("<a href=\"https://www.w3docs.com/\" class=\"button\">Click Here</a>")
+//                                .append("</html>")
+//                                .toString())
+//                );
+//                emailIntent.addCategory()
+//                emailIntent.setContent(str,"text/html; charset=utf-8");
+                startActivity(Intent.createChooser(emailIntent, "Email:"));
+
+             //   new CreateHtmlTask(getCacheDir(), Abc.this).execute("input");
+
+
+             //   sendMail("appa ", "link");
+
+
+//                double quantity = 10.0;
+//
+//                double bb = 11.0;
+//
+//                if(quantity < bb){
+//                    Log.e(TAG, "AAAAAAAAAA");
+//                }else{
+//                    Log.e(TAG, "BBBBBBBBBB");
+//                }
 
 
 
@@ -928,6 +1003,36 @@ public class Abc extends BaseActivity {
         Log.e(TAG , "onActivityResult "+requestCode);
 
     }
+
+    @Override
+    public void onHtmlCreated(HtmlFile html) {
+        startSendEmailIntent(html.getFilePath());
+    }
+
+
+    private void startSendEmailIntent(Uri attachmentUri) {
+        File mFile2 = new File("/sdcard/share.jpg");
+        Uri imageUri2 = FileProvider.getUriForFile(
+                Abc.this,
+                "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
+                mFile2);
+
+        ArrayList<Uri> uriArrayList = new ArrayList<>();
+        uriArrayList.add(attachmentUri);
+       // uriArrayList.add(imageUri2);
+
+
+        Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+        //intent.setType("text/html");
+        intent.setType("application/pdf/*|image/*|text/html");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+//        intent.putExtra(Intent.EXTRA_STREAM, attachmentUri);
+        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+        intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml("Message body. <b>Funky!</b> <i>not</i>"));
+        Intent chooser = Intent.createChooser(intent, "Send Email");
+        startActivity(chooser);
+    }
+
 
 
     class MyAsyncTasks extends AsyncTask<String, String, String> {

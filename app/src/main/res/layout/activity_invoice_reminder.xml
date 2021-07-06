@@ -47,6 +47,7 @@
         android:hint="@string/invoiceReminder_Search_by_Invoice_number"
         android:maxLines="1"
         android:padding="10dp"
+        android:textColorHint="@color/dark_grey"
       />
 
 

@@ -207,7 +207,7 @@ public class MyReciever extends WakefulBroadcastReceiver
                 // .setColor(ContextCompat.getColor(context, R.color.color))
                 .setWhen(System.currentTimeMillis())
                 .setContentTitle(context11.getString(R.string.app_name))
-                .setContentText("Your invoice has been seen by "+  pref.getCustomerName())
+                .setContentText(context11.getString(R.string.noti_invoice_seen)+" "+  pref.getCustomerName())
                 // .setContentText("Level: "+level+"% | Remaining Time: "+(hour)+"h "+(min)+"min")
                 .setPriority(Notification.PRIORITY_MAX)
 //                .setCategory(Notification.CATEGORY_SERVICE)

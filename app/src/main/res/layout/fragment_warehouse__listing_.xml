@@ -17,6 +17,7 @@
         android:id="@+id/search"
         android:padding="10dp"
         android:background="@drawable/edittextshape"
+        android:textColorHint="@color/dark_grey"
         android:elevation="3dp"
         android:maxLines="1"/>
 

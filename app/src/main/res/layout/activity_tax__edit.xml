@@ -33,7 +33,8 @@
         android:padding="15dp"
         android:background="@drawable/edittextshape"
         android:elevation="2dp"
-        android:id="@+id/taxname"/>
+        android:id="@+id/taxname"
+        android:textColorHint="@color/dark_grey"/>
 
     <EditText
         android:layout_marginTop="30dp"
@@ -47,7 +48,8 @@
         android:padding="15dp"
         android:background="@drawable/edittextshape"
         android:elevation="2dp"
-        android:id="@+id/taxpercent" />
+        android:id="@+id/taxpercent"
+        android:textColorHint="@color/dark_grey"/>
 
 
     <TextView

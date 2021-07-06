@@ -8,6 +8,10 @@
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
 
+    <string name="dialog_CustomerUpdated">Cliente aggiornato</string>
+
+    <string name="noti_invoice_seen">La tua fattura è stata vista da</string>
+
     <string name="htmlview_credit_note">NOTA DI CREDITO</string>
     <string name="htmlview_Recipient">Destinatario</string>
     <string name="htmlview_CreditNoteNo">Nota di credito n.</string>

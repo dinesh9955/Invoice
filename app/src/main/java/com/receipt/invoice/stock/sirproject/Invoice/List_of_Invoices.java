@@ -1,6 +1,7 @@
 package com.receipt.invoice.stock.sirproject.Invoice;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,7 +15,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,7 +32,6 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,8 +50,9 @@ import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
 import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
-import com.receipt.invoice.stock.sirproject.ThankYouNote.SendThankYouNoteActivity;
+import com.receipt.invoice.stock.sirproject.Utils.HtmlService.task.CreateHtmlTask;
 import com.receipt.invoice.stock.sirproject.Utils.Utility;
+import com.receipt.invoice.stock.sirproject.Utils.HtmlService.domain.HtmlFile;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -142,6 +142,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
     TextView textViewMsg;
 
+
+    Activity activity;
+
     public List_of_Invoices() {
         // Required empty public constructor
     }
@@ -150,6 +153,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         File logoPath = Utility.getFileLogo(getActivity());
+
+        activity = getActivity();
     }
 
     @Override
@@ -312,7 +317,18 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                     String pdflink = temp.get(pos).getInvoicepdflink();
                                     String sahrelink = temp.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
                                     String link = temp.get(pos).getLink();
-                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName);
+                                    String paypal = temp.get(pos).getPaypal();
+                                    String stripe = temp.get(pos).getStripe();
+
+                                    String linkWitch = "";
+                                    if(!paypal.equalsIgnoreCase("") || !paypal.equalsIgnoreCase("0")){
+                                        linkWitch = "1";
+                                    }else{
+                                        if(!stripe.equalsIgnoreCase("") || !stripe.equalsIgnoreCase("0")){
+                                            linkWitch = "2";
+                                        }
+                                    }
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName, linkWitch);
                                 }else{
                                     customerName = list.get(pos).getInvoicustomer_name();
                                     dataNo = list.get(pos).getInvoice_nobdt();
@@ -328,7 +344,17 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                     String pdflink = list.get(pos).getInvoicepdflink();
                                     String sahrelink = list.get(pos).getInvoice_share_link().replace("13.233.155.0", "13.126.22.0");
                                     String link = list.get(pos).getLink();
-                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName);
+                                    String paypal = list.get(pos).getPaypal();
+                                    String stripe = list.get(pos).getStripe();
+                                    String linkWitch = "";
+                                    if(!paypal.equalsIgnoreCase("") || !paypal.equalsIgnoreCase("0")){
+                                        linkWitch = "1";
+                                    }else{
+                                        if(!stripe.equalsIgnoreCase("") || !stripe.equalsIgnoreCase("0")){
+                                            linkWitch = "2";
+                                        }
+                                    }
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName, linkWitch);
                                 }
 
 
@@ -1097,7 +1123,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
 
-    private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink, String link, String customerName) {
+    private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink, String link, String customerName, String linkWitch) {
         String urlPDF = AllSirApi.BASE_URL_PDF + pdflink;
 
         if (bottomSheetDialog != null) {
@@ -1261,8 +1287,6 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                             String newLink = AllSirApi.BASE_URL_INDEX+"view/invoice/"+link;
 
-                           // String  body = "<!DOCTYPE html><html><body><img src=\"http://en.wikipedia.org/wiki/Krka_National_Park#mediaviewer/File:Krk_waterfalls.jpg\">";
-                            String html = "<!DOCTYPE html><html><body><a href=\"http://www.w3schools.com\" target=\"_blank\">Visit W3Schools.com!</a>" + "<p>If you set the target attribute to \"_blank\", the link will open in a new browser window/tab.</p></body></html>";
 
                             String subject = Utility.getRealValueInvoiceWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
                             String txt = getString(R.string.list_Invoiceviewed)+
@@ -1329,7 +1353,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //
                                     String url = urlPDF;
                                     //String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
-                                    new DownloadFileAttach(getActivity(), subject, txt).execute(url.replace("https", "http"));
+                                    new DownloadFileAttach(getActivity(), subject, txt, link, linkWitch).execute(url.replace("https", "http"));
                                 }
 
 
@@ -1761,7 +1785,6 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
 
-
     private static class DownloadFile extends AsyncTask<String, String, String> {
 
         private ProgressDialog progressDialog;
@@ -1918,15 +1941,18 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
         private String fileName;
         private String folder;
         private boolean isDownloaded;
-        Context context;
+        Activity context;
 
         String subject;
         String text;
-
-        DownloadFileAttach(Context c, String sub, String txt) {
+        String link;
+        String linkWitch;
+        DownloadFileAttach(Activity c, String sub, String txt, String newLink, String linkWitch1) {
             context = c;
             subject = sub;
             text = txt;
+            link = newLink;
+            linkWitch = linkWitch1;
         }
 
 
@@ -2033,116 +2059,101 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             // dismiss the dialog after the file was downloaded
             this.progressDialog.dismiss();
 
-//            Intent share = new Intent(Intent.ACTION_SEND);
-//            share.setType("image/jpeg");
-//            share.putExtra(Intent.EXTRA_SUBJECT, subject);
-//            share.putExtra(Intent.EXTRA_TEXT, text);
-//
-//            File fileWithinMyDir = new File(message);
-//            Uri photoURI = FileProvider.getUriForFile(context,
-//                    "com.receipt.invoice.stock.sirproject.provider",
-//                    fileWithinMyDir);
-//
-//            share.putExtra(Intent.EXTRA_STREAM, photoURI);
-//
-////            share.putExtra(Intent.EXTRA_STREAM,
-////                    Uri.parse("file:///sdcard/share.jpg"));
-//
-//            if (Utility.isAppAvailable(context, "com.google.android.gm")){
-//                share.setPackage("com.google.android.gm");
-//            }
-//            context.startActivity(share);
-            //context.startActivity(Intent.createChooser(share, "Share File"));
+            String linkTypeName = "";
 
+            if(linkWitch.equalsIgnoreCase("1")){
+                linkTypeName = "paypal";
+            }else if(linkWitch.equalsIgnoreCase("1")){
+                linkTypeName = "stripe";
+            }
+
+            String url = AllSirApi.BASE+"view/"+linkTypeName+"/"+link;
+
+            new CreateHtmlTask(context.getCacheDir(), new CreateHtmlTask.OnTaskFinishedListener() {
+                @Override
+                public void onHtmlCreated(HtmlFile html) {
+                    Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+
+                    File mFile2 = new File("/sdcard/share.jpg");
+                    Uri imageUri2 = FileProvider.getUriForFile(
+                            context,
+                            "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
+                            mFile2);
+
+                    File fileWithinMyDir = new File(message);
+                    Uri imageUri1 = FileProvider.getUriForFile(context,
+                            "com.receipt.invoice.stock.sirproject.provider",
+                            fileWithinMyDir);
+
+                    if(fileWithinMyDir.exists()) {
+                        //intentShareFile.setType("application/pdf");
+//                intentShareFile.setType("image/jpeg");
+
+                        ArrayList<Uri> uriArrayList = new ArrayList<>();
+                        uriArrayList.add(imageUri1);
+                        uriArrayList.add(imageUri2);
+                        uriArrayList.add(html.getFilePath());
+
+                        intentShareFile.setType("application/pdf/*|image/*|text/html");
+                        intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+                        //  intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/share.jpg"));
+
+
+                        intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+
+
+                        intentShareFile.putExtra(Intent.EXTRA_TEXT, text);
+
+                        if (Utility.isAppAvailable(context, "com.google.android.gm")) {
+                            intentShareFile.setPackage("com.google.android.gm");
+                        }
+                        context.startActivity(intentShareFile);
+                        //context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                    }
+
+                }
+            }).execute(url);
 
             Log.e(TAG, "fileWithinMyDir "+message);
 
-            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
-
-            File mFile2 = new File("/sdcard/share.jpg");
-            Uri imageUri2 = FileProvider.getUriForFile(
-                    context,
-                    "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
-                    mFile2);
-
-            File fileWithinMyDir = new File(message);
-            Uri imageUri1 = FileProvider.getUriForFile(context,
-                    "com.receipt.invoice.stock.sirproject.provider",
-                    fileWithinMyDir);
-
-            if(fileWithinMyDir.exists()) {
-                //intentShareFile.setType("application/pdf");
-//                intentShareFile.setType("image/jpeg");
-
-                ArrayList<Uri> uriArrayList = new ArrayList<>();
-                uriArrayList.add(imageUri1);
-                uriArrayList.add(imageUri2);
-
-                intentShareFile.setType("application/pdf/*|image/*|text/html");
-                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-                //  intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/share.jpg"));
 
 
-                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
-
-
-                String ss = "<![CDATA[Hey,<br/>I just downloaded App on my Android. \n" +
-                        "<br/>It is a smartphone Manager.<br/>App is available for Android.<br/>\n" +
-                        "    Get it now from http://www.exampleapp.com/download]]>";
-
-                intentShareFile.putExtra(Intent.EXTRA_TEXT,  Html.fromHtml(ss));
-
-                if (Utility.isAppAvailable(context, "com.google.android.gm")) {
-                    intentShareFile.setPackage("com.google.android.gm");
-                }
-                context.startActivity(intentShareFile);
-                //context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
             }
 
 
-//            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
-//            File fileWithinMyDir = new File(message);
-//            Uri photoURI = FileProvider.getUriForFile(context,
-//                    "com.receipt.invoice.stock.sirproject.provider",
-//                    fileWithinMyDir);
-//
-////            if(fileWithinMyDir.exists()) {
-////                intentShareFile.setType("application/pdf");
-//                intentShareFile.setType("image/jpeg");
-//                //intentShareFile.putExtra(Intent.EXTRA_STREAM, photoURI);
-//
-//                  intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/share.jpg"));
-//
-//
-//                intentShareFile.putExtra(Intent.EXTRA_SUBJECT,  subject);
-//                intentShareFile.putExtra(Intent.EXTRA_TEXT, text);
-//
-//
-//                ArrayList<Uri> uris = new ArrayList<Uri>();
-//                uris.add(Uri.parse("file:///sdcard/share.jpg"));
-//                uris.add(Uri.parse("file:///sdcard/share.jpg"));
-//
-////                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-//
-//
-//
-//                if (Utility.isAppAvailable(context, "com.google.android.gm")){
-//                    intentShareFile.setPackage("com.google.android.gm");
-//                }
-//
-//                context.startActivity(intentShareFile);
-
-
-
-
-
-
-
-
-//            }
-
-        }
     }
+
+
+
+//    @Override
+//    public void onHtmlCreated(HtmlFile html) {
+//        startSendEmailIntent(html.getFilePath());
+//    }
+
+
+//    private void startSendEmailIntent(Uri attachmentUri) {
+//        File mFile2 = new File("/sdcard/share.jpg");
+//        Uri imageUri2 = FileProvider.getUriForFile(
+//                Abc.this,
+//                "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
+//                mFile2);
+//
+//        ArrayList<Uri> uriArrayList = new ArrayList<>();
+//        uriArrayList.add(attachmentUri);
+//        // uriArrayList.add(imageUri2);
+//
+//
+//        Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+//        //intent.setType("text/html");
+//        intent.setType("application/pdf/*|image/*|text/html");
+//        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+////        intent.putExtra(Intent.EXTRA_STREAM, attachmentUri);
+//        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+//        intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml("Message body. <b>Funky!</b> <i>not</i>"));
+//        Intent chooser = Intent.createChooser(intent, "Send Email");
+//        startActivity(chooser);
+//    }
+
 
 
 

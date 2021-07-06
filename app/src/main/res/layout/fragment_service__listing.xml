@@ -31,7 +31,8 @@
         android:background="@drawable/edittextshape"
         android:elevation="3dp"
         android:maxLines="1"
-        android:layout_below="@+id/selectcompany"/>
+        android:layout_below="@+id/selectcompany"
+        android:textColorHint="@color/dark_grey"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

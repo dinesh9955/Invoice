@@ -39,10 +39,10 @@ public class Stock_Activity extends BaseActivity {
         TextView products = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview, null);
         TextView wastage = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview, null);
 
-        customers.setTextSize(10);
-        addcustomer.setTextSize(10);
-        products.setTextSize(10);
-        wastage.setTextSize(10);
+        customers.setTextSize(13);
+        addcustomer.setTextSize(13);
+        products.setTextSize(13);
+        wastage.setTextSize(13);
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));

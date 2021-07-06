@@ -114,7 +114,8 @@
                 android:background="@drawable/edittextshape"
                 android:elevation="2dp"
                 android:id="@+id/quantity"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal"
+                android:textColorHint="@color/dark_grey"/>
 
 
             <TextView
@@ -140,7 +141,8 @@
                 android:padding="15dp"
                 android:background="@drawable/edittextshape"
                 android:elevation="2dp"
-                android:id="@+id/reason"/>
+                android:id="@+id/reason"
+                android:textColorHint="@color/dark_grey"/>
 
             <Button
                 android:layout_width="match_parent"

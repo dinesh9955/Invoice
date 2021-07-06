@@ -8,6 +8,7 @@
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
 
+    <string name="noti_invoice_seen">Your invoice has been seen by</string>
 
     <string name="htmlview_credit_note">CREDIT NOTE</string>
     <string name="htmlview_Recipient">Recipient</string>
@@ -491,8 +492,8 @@
     <string name="html_PaidAmount">Paid Amount</string>
     <string name="html_PaymentDetails">Payment Details</string>
     <string name="html_Bycheque">By cheque:</string>
-    <string name="html_PayPal">Pay Pal:</string>
-    <string name="html_Bank">Bank:</string>
+    <string name="html_PayPal" translatable="false">Pay Pal:</string>
+    <string name="html_Bank" translatable="false">Bank:</string>
     <string name="html_ShipTo">Ship To:</string>
     <string name="html_InvoiceDueDateReminder">Invoice Due Date Reminder</string>
     <string name="html_Your_invoice_reminder_note">Your invoice is due for payment. Kindly find below reminder note.</string>
@@ -945,6 +946,7 @@
     <string name="dialog_Fieldisrequired">Field is required</string>
     <string name="dialog_InvalidEmailAddress">Invalid Email Address</string>
     <string name="dialog_InvalidEmail">Invalid Email</string>
+    <string name="dialog_CustomerUpdated">Customer Updated</string>
     <string name="dialog_PasswordCharacters">Password should be min 6 characters</string>
     <string name="dialog_TaxAdded">Tax Added</string>
     <string name="dialog_SelectAProduct">Select A Product</string>

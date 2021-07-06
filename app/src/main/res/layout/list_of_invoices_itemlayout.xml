@@ -34,6 +34,7 @@
         android:layout_below="@id/invoicename"
         android:text="Invoice #345632 | 10/08/2018"
         android:id="@+id/invoicenum"
+        android:textColor="@color/dark_grey"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -55,6 +56,7 @@
         android:layout_below="@id/invoicestatus"
         android:text="78 Andover Rd.Eugene,OR 97402"
         android:id="@+id/invoiceaddress"
+        android:textColor="@color/dark_grey"
         />
     <View
         android:layout_width="match_parent"

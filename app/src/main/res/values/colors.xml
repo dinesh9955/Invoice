@@ -7,7 +7,7 @@
     <color name="dark_blue">#1B60FB</color>
     <color name="black">#000000</color>
     <color name="d_grey">#c5c5c5</color>
-    <color name="dark_grey">#7D7D7D</color>
+    <color name="dark_grey">#656565</color>
     <color name="white">#FFFFFF</color>
     <color name="light_grey">#ECECEC</color>
     <color name="light_blue">#6695FF</color>
@@ -27,7 +27,7 @@
     <color name="blue">#0000FF</color>
     <color name="lightgray">#DCDCDC</color>
     <color name="darkgray">#7D7D7D</color>
-    <color name="gray">#AAAAAA</color>
+    <color name="gray">#656565</color>
     <color name="bluecolor">#656565</color>
     <color name="yellowtheme">#ffff00</color>
     <color name="splash">#F4FAFD</color>

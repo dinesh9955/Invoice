@@ -71,9 +71,10 @@
                     android:layout_marginLeft="20dp"
                     android:layout_below="@+id/uploadimage"
                     android:layout_marginTop="20dp"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:id="@+id/imagedescription"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/dark_grey"/>
 
                 <EditText
                     android:layout_marginTop="?actionBarSize"
@@ -87,7 +88,8 @@
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/name"/>
+                    android:id="@+id/name"
+                    android:textColorHint="@color/dark_grey"/>
 
                 <EditText
                     android:layout_marginTop="20dp"
@@ -102,7 +104,8 @@
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
                     android:id="@+id/email"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="@color/dark_grey"/>
 
                 <EditText
                     android:layout_marginTop="20dp"
@@ -117,7 +120,8 @@
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
                     android:id="@+id/phone"
-                    android:inputType="phone"/>
+                    android:inputType="phone"
+                    android:textColorHint="@color/dark_grey"/>
 
                 <EditText
                     android:layout_marginTop="20dp"
@@ -132,6 +136,7 @@
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
                     android:id="@+id/website"
+                    android:textColorHint="@color/dark_grey"
                     />
 
                 <EditText
@@ -149,6 +154,7 @@
                     android:id="@+id/CompanyAddress"
                     android:gravity="start"
                     android:maxHeight="150dp"
+                    android:textColorHint="@color/dark_grey"
                     />
 
 
@@ -212,6 +218,7 @@
                     android:id="@+id/ediban"
                     android:gravity="start"
                     android:maxHeight="150dp"
+                    android:textColorHint="@color/dark_grey"
                     />
 
                 <EditText
@@ -229,6 +236,7 @@
                     android:id="@+id/edbank"
                     android:gravity="start"
                     android:maxHeight="150dp"
+                    android:textColorHint="@color/dark_grey"
                     />
                 <EditText
                     android:layout_marginTop="20dp"
@@ -245,6 +253,7 @@
                     android:id="@+id/edswift"
                     android:gravity="start"
                     android:maxHeight="150dp"
+                    android:textColorHint="@color/dark_grey"
                     />
 
                 <EditText
@@ -262,6 +271,7 @@
                     android:id="@+id/edpaypal"
                     android:gravity="start"
                     android:maxHeight="150dp"
+                    android:textColorHint="@color/dark_grey"
                     />
 
 
@@ -282,6 +292,7 @@
                     android:id="@+id/edcheque"
                     android:gravity="start"
                     android:maxHeight="150dp"
+                    android:textColorHint="@color/dark_grey"
                     />
 
                 <Button
@@ -331,7 +342,8 @@
                         android:text="@string/USD1199"
                         android:textSize="@dimen/_7sdp"
                         android:textStyle="bold"
-                        android:id="@+id/termsdescprice1"/>
+                        android:id="@+id/termsdescprice1"
+                        android:textColor="@color/dark_grey"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -339,7 +351,7 @@
                         android:text="@string/oneimepaymentforcreatinganewcompany"
                         android:textSize="@dimen/_7sdp"
                         android:layout_gravity="center_horizontal"
-
+                        android:textColor="@color/dark_grey"
                         android:id="@+id/termdescription1"/>
 
                 </LinearLayout>

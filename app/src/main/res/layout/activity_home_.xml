@@ -61,8 +61,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
                     android:id="@+id/description"
-                    android:textColor="@color/darkgray"
-                    android:textSize="15sp"/>
+                    android:textColor="@color/bluecolor"
+                    android:textSize="16sp"/>
 
 
 
@@ -147,8 +147,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/home_customers"
                     android:id="@+id/customerstxt"
-                    android:textColor="@color/darkgray"
-                    android:textSize="12sp"
+                    android:textColor="@color/bluecolor"
+                    android:textSize="16sp"
 
                     />
 
@@ -215,8 +215,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/home_suppliers"
                     android:id="@+id/vendorstxt"
-                    android:textColor="@color/darkgray"
-                    android:textSize="12sp"/>
+                    android:textColor="@color/bluecolor"
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"

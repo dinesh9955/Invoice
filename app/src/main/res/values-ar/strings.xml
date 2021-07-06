@@ -7,7 +7,9 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
+    <string name="dialog_CustomerUpdated">تم تحديث العميل</string>
 
+    <string name = "noti_invoice_seen"> تمت رؤية فاتورتك بواسطة </string>
 
     <string name = "htmlview_credit_note"> ملاحظة ائتمانية </string>
     <string name = "htmlview_Recipient"> المستلم </string>

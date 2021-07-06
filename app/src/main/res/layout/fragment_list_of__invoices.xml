@@ -40,7 +40,8 @@
         app:layout_constraintBottom_toTopOf="@+id/recycler_invoices"
         app:layout_constraintEnd_toStartOf="@+id/imageViewmenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectcompany" />
+        app:layout_constraintTop_toBottomOf="@+id/selectcompany"
+        android:textColorHint="@color/dark_grey"/>
 
 
     <ImageView

@@ -26,10 +26,10 @@
         android:id="@+id/quantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:textColor="@color/dark_grey"
         android:layout_marginStart="5dp"
         android:text="Qty: 10"
-        android:textColor="@android:color/darker_gray"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"
@@ -43,7 +43,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="33dp"
         android:text="Description"
-        android:textColor="@android:color/darker_gray"
+        android:textColorHint="@color/dark_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/quantity"
         app:layout_constraintHorizontal_bias="1.0"

@@ -241,9 +241,9 @@ public class Customer_Detail_Activity2 extends BaseActivity {
     private void setFonts() {
 
         type.setTypeface(Typeface.createFromAsset(activity.getAssets(), "Fonts/Ubuntu-Regular.ttf"));
-        individual.setTypeface(Typeface.createFromAsset(activity.getAssets(), "Fonts/Ubuntu-Light.ttf"));
-        company.setTypeface(Typeface.createFromAsset(activity.getAssets(), "Fonts/Ubuntu-Light.ttf"));
-        imagedescription.setTypeface(Typeface.createFromAsset(activity.getAssets(), "Fonts/Ubuntu-Light.ttf"));
+        individual.setTypeface(Typeface.createFromAsset(activity.getAssets(), "Fonts/Ubuntu-Regular.ttf"));
+        company.setTypeface(Typeface.createFromAsset(activity.getAssets(), "Fonts/Ubuntu-Regular.ttf"));
+        imagedescription.setTypeface(Typeface.createFromAsset(activity.getAssets(), "Fonts/Ubuntu-Regular.ttf"));
         CompanyAddress.setTypeface(Typeface.createFromAsset(activity.getAssets(), "Fonts/Ubuntu-Regular.ttf"));
         website.setTypeface(Typeface.createFromAsset(activity.getAssets(), "Fonts/Ubuntu-Regular.ttf"));
         phone.setTypeface(Typeface.createFromAsset(activity.getAssets(), "Fonts/Ubuntu-Regular.ttf"));
@@ -407,23 +407,57 @@ public class Customer_Detail_Activity2 extends BaseActivity {
 
 
 
+//
+//    private void SelectImage() {
+//        final CharSequence[] items={"Camera","Gallery", "Cancel"};
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+//        builder.setTitle("Add Image");
+//
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                if (items[i].equals("Camera")) {
+//
+//                    // Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    //  startActivityForResult(intent, REQUEST_CAMERA);
+//                    requestStoragePermission(true);
+//                } else if (items[i].equals("Gallery")) {
+//
+//                    requestStoragePermission(false);
+//
+////                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+////                    intent.setType("image/*");
+////                    startActivityForResult(intent, SELECT_FILE);
+//
+//                } else if (items[i].equals("Cancel")) {
+//                    dialogInterface.dismiss();
+//                }
+//            }
+//        });
+//        builder.show();
+//
+//    }
+
+
 
     private void SelectImage() {
-        final CharSequence[] items={"Camera","Gallery", "Cancel"};
+        final CharSequence[] items={getString(R.string.dialog_Camera),getString(R.string.dialog_Gallery),getString(R.string.dialog_Cancel)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Add Image");
+        builder.setTitle(getString(R.string.dialog_AddImage));
 
         builder.setItems(items, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (items[i].equals("Camera")) {
+                if (items[i].equals(getString(R.string.dialog_Camera))) {
 
                     // Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     //  startActivityForResult(intent, REQUEST_CAMERA);
                     requestStoragePermission(true);
-                } else if (items[i].equals("Gallery")) {
+                } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
 
                     requestStoragePermission(false);
 
@@ -431,7 +465,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
 //                    intent.setType("image/*");
 //                    startActivityForResult(intent, SELECT_FILE);
 
-                } else if (items[i].equals("Cancel")) {
+                } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
                     dialogInterface.dismiss();
                 }
             }
@@ -439,6 +473,9 @@ public class Customer_Detail_Activity2 extends BaseActivity {
         builder.show();
 
     }
+
+
+
 
     private void requestStoragePermission(boolean isCamera) {
         Dexter.withActivity(activity).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
@@ -637,12 +674,12 @@ public class Customer_Detail_Activity2 extends BaseActivity {
 
         if (customertype.equals("company")){
             if (companyname.isEmpty()){
-                name.setError("Required");
+                name.setError(getString(R.string.dialog_Required));
                 name.requestFocus();
             }
 
             else if (!cemail.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(cemail).matches()){
-                email.setError("Invalid email");
+                email.setError(getString(R.string.dialog_InvalidEmail));
                 email.requestFocus();
             }
 //            else if (selectedCompanyId.equals("")){
@@ -703,7 +740,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("true")){
-                                Constant.SuccessToast(activity,"Customer Updated");
+                                Constant.SuccessToast(activity,getString(R.string.dialog_CustomerUpdated));
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -769,31 +806,31 @@ public class Customer_Detail_Activity2 extends BaseActivity {
         else {
 
             if (cemail.isEmpty()){
-                email.setError("Required");
+                email.setError(getString(R.string.dialog_Required));
                 email.requestFocus();
             }
             else if (!Patterns.EMAIL_ADDRESS.matcher(cemail).matches()){
-                email.setError("Invalid email");
+                email.setError(getString(R.string.dialog_InvalidEmail));
                 email.requestFocus();
             }
             else if (cperson.isEmpty()){
-                contactperson.setError("Required");
+                contactperson.setError(getString(R.string.dialog_Required));
                 contactperson.requestFocus();
             }
             else if (cphone.isEmpty()){
-                phone.setError("Required");
+                phone.setError(getString(R.string.dialog_Required));
                 phone.requestFocus();
             }
             else if (cmobile.isEmpty()){
-                mobile.setError("Required");
+                mobile.setError(getString(R.string.dialog_Required));
                 mobile.requestFocus();
             }
             else if (cwebsite.isEmpty()){
-                website.setError("Required");
+                website.setError(getString(R.string.dialog_Required));
                 website.requestFocus();
             }
             else if (caddress.isEmpty()){
-                CompanyAddress.setError("Required");
+                CompanyAddress.setError(getString(R.string.dialog_Required));
                 CompanyAddress.requestFocus();
             }
 //            else if (selectedCompanyId.equals("")){
@@ -835,7 +872,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("true")){
-                                Constant.SuccessToast(activity,"Customer Added");
+                                Constant.SuccessToast(activity, getString(R.string.dialog_CustomerAdded));
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -927,25 +964,25 @@ public class Customer_Detail_Activity2 extends BaseActivity {
             Log.e(TAG, "AAAAAAAAAAA");
         }else{
             if (f_name.equals("")){
-                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter First Name");
+                Constant.ErrorToast(Customer_Detail_Activity2.this,getString(R.string.dialog_PleaseEnterFirstName));
                 isEntered = false;
             }else if(l_name.equals("")){
-                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter Last Name");
+                Constant.ErrorToast(Customer_Detail_Activity2.this,getString(R.string.dialog_PleaseEnterLastName));
                 isEntered = false;
             }else if(address1.equals("")){
-                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter Shipping Address 1");
+                Constant.ErrorToast(Customer_Detail_Activity2.this,getString(R.string.dialog_ShippingAddress1));
                 isEntered = false;
             }else if(address2.equals("")){
-                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter Shipping Address 2");
+                Constant.ErrorToast(Customer_Detail_Activity2.this,getString(R.string.dialog_ShippingAddress2));
                 isEntered = false;
             }else if(city.equals("")){
-                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter City");
+                Constant.ErrorToast(Customer_Detail_Activity2.this,getString(R.string.dialog_PleaseEnterCity));
                 isEntered = false;
             }else if(postcode.equals("")){
-                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter Postcode");
+                Constant.ErrorToast(Customer_Detail_Activity2.this,getString(R.string.dialog_SPleaseEnterPostcode));
                 isEntered = false;
             }else if(country.equals("")){
-                Constant.ErrorToast(Customer_Detail_Activity2.this,"Please Enter Country");
+                Constant.ErrorToast(Customer_Detail_Activity2.this,getString(R.string.dialog_PleaseEnterCountry));
                 isEntered = false;
             }else{
                 isEntered = true;
@@ -985,7 +1022,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     builder.setTitle("Contacts access needed");
                     builder.setPositiveButton(android.R.string.ok, null);
-                    builder.setMessage("please confirm Contacts access");//TODO put real question
+                    builder.setMessage("Please confirm Contacts access");//TODO put real question
                     builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @TargetApi(Build.VERSION_CODES.M)
                         @Override
