@@ -121,7 +121,7 @@
     <string name = "dialog_no_customer_ageing_report"> Nenhum relatório de envelhecimento do cliente </string>
     <string name = "dialog_no_tax_collected_report"> Nenhum relatório de imposto recolhido </string>
     <string name = "dialog_no_stock_report"> Nenhum relatório de estoque </string>
-    <string name = "dialog_no_product_movement_report"> Nenhum relatório de movimentação de produto </string>
+    <string name = "dialog_no_product_movement_report">Nenhum movimento de produto notado</string>
 
 
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,7 +58,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
     private static final String TAG = "ReportActivity" ;
     ApiInterface apiInterface;
     private AVLoadingIndicatorView avi;
-
+    ImageView avibackground;
     AwesomeSpinner selectcompany;
 
     ArrayList<String> cids = new ArrayList<>();
@@ -125,6 +126,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
         apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
         avi = findViewById(R.id.avi);
+        avibackground = findViewById(R.id.avibackground);
+
         recycler_invoices = findViewById(R.id.recycler_invoices);
         selectcompany = findViewById(R.id.selectcompany);
 
@@ -183,6 +186,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         cnames.clear();
         cids.clear();
         avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         String token = Constant.GetSharedPreferences(ReportActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
@@ -195,6 +199,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
                 String response = new String(responseBody);
                 Log.e("responsecompany", response);
                 avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
@@ -248,6 +253,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
                     Log.e("responsecompanyF", response);
                     try {
                         JSONObject jsonObject = new JSONObject(response);
@@ -266,6 +272,9 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
     public void customer_list(String selectedCompanyId) {
         customer_bottom.clear();
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
+
         RequestParams params = new RequestParams();
         params.add("company_id", this.selectedCompanyId);
 
@@ -507,6 +516,9 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         client.post(AllSirApi.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
+
                 String response = new String(responseBody);
                 Log.e(TAG, "responseproductAAA"+ response);
 
@@ -584,6 +596,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecustomersF", response);

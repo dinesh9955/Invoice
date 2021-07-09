@@ -133,7 +133,6 @@ public class Stock_Products_Detail extends BaseActivity {
 
                         if (product_quantity.length()>0){
 
-
                             for (int i = 0; i<product_quantity.length(); i++) {
                                 Stock_Products stock_products = new Stock_Products();
                                 JSONObject item = product_quantity.getJSONObject(i);

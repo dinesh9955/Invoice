@@ -82,7 +82,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Milestone"
+        android:text="following"
         android:id="@+id/serviceDesc"
         android:layout_toRightOf="@+id/helper"
         android:layout_marginLeft="11dp"
@@ -98,8 +98,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"
-        android:layout_below="@+id/servicecategory"
-        android:layout_marginTop="30dp">
+        android:layout_below="@+id/serviceDesc"
+        android:layout_marginTop="10dp">
 
     </View>
 

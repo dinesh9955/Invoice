@@ -92,7 +92,7 @@
     <string name="dialog_no_customer_ageing_report">Geen rapport over veroudering van klanten</string>
     <string name="dialog_no_tax_collected_report">Geen belasting geïnd rapport</string>
     <string name="dialog_no_stock_report">Geen voorraadrapport</string>
-    <string name="dialog_no_product_movement_report">Geen rapport over productbewegingen</string>
+    <string name="dialog_no_product_movement_report">Geen productbeweging opgemerkt</string>
 
 
 

@@ -92,7 +92,7 @@
     <string name="dialog_no_customer_ageing_report">Kein Bericht über die Kundenalterung</string>
     <string name="dialog_no_tax_collected_report">Kein Bericht zur Steuererhebung</string>
     <string name="dialog_no_stock_report">Kein Aktienbericht</string>
-    <string name="dialog_no_product_movement_report">Kein Produktbewegungsbericht</string>
+    <string name="dialog_no_product_movement_report">Keine Produktbewegung bemerkt</string>
 
 
 

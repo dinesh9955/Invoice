@@ -92,7 +92,7 @@
     <string name="dialog_no_customer_ageing_report">Nessun rapporto sull\'invecchiamento del cliente</string>
     <string name="dialog_no_tax_collected_report">Nessun rapporto di riscossione delle imposte</string>
     <string name="dialog_no_stock_report">Nessun rapporto sulle scorte</string>
-    <string name="dialog_no_product_movement_report">Nessun rapporto sui movimenti del prodotto</string>
+    <string name="dialog_no_product_movement_report">Nessun movimento del prodotto notato</string>
 
 
 

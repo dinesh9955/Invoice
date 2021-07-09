@@ -527,7 +527,7 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
             params.add("product_id",selectedProductId);
             params.add("quantity",quant);
             params.add("price",pricee);
-            params.add("warehouse_id[0]", ""+warehouses);
+            params.add("warehouse_id", ""+warehouses);
             params.add("supplier_id",selectedVendorId);
 
             Log.e(TAG, "quantAAA "+quant +" "+params.toString());

@@ -547,6 +547,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
         list.clear();
         avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         RequestParams params = new RequestParams();
 
         if (paramsvalue.equals("All")) {
@@ -582,7 +583,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
                 String response = new String(responseBody);
                 Log.e("responsecustomers", response);
                 avi.smoothToHide();
-
+                avibackground.setVisibility(View.GONE);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
@@ -687,6 +688,8 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecustomersF", response);
@@ -1559,6 +1562,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
         cnames.clear();
         cids.clear();
         avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
@@ -1571,6 +1575,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
                 String response = new String(responseBody);
                 Log.e("responsecompany", response);
                 avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
@@ -1613,6 +1618,8 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     avi.smoothToHide();

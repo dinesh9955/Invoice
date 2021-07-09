@@ -1148,7 +1148,7 @@ public class PreviewItActivity extends BaseActivity {
 
 
                 productitem = IOUtils.toString(getAssets().open("report/product_movement_single_item.html"))
-                        .replaceAll("#DATE#", customerReportItemArrayList.get(i).getDate())
+                        .replaceAll("#DATE#", customerReportItemArrayList.get(i).getDate_added())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getParticulars())
                         .replaceAll("#OpeningStock#", ""+openingStockTxt)
                         .replaceAll("#Purchases#", ""+purchasesTxt)

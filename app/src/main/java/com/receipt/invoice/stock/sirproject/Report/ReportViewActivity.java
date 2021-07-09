@@ -2640,7 +2640,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                             for (int i = 0; i < statement.length(); i++) {
                                 JSONObject item = statement.getJSONObject(i);
 
-                                String date_added = item.getString("date_added");
+                                String date_added = item.getString("date_added").split(" ")[0];
                                 String date = item.getString("date");
                                 String particulars = item.getString("particulars");
                                 String quantity = item.getString("quantity");
@@ -2755,7 +2755,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
                 productitem = IOUtils.toString(getAssets().open("report/product_movement_single_item.html"))
-                        .replaceAll("#DATE#", customerReportItemArrayList.get(i).getDate())
+                        .replaceAll("#DATE#", customerReportItemArrayList.get(i).getDate_added())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getParticulars())
                         .replaceAll("#OpeningStock#", ""+openingStockTxt)
                         .replaceAll("#Purchases#", ""+purchasesTxt)

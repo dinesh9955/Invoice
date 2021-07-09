@@ -89,7 +89,7 @@
     <string name="dialog_no_customer_ageing_report">No customer ageing report</string>
     <string name="dialog_no_tax_collected_report">No tax collected report</string>
     <string name="dialog_no_stock_report">No stock report</string>
-    <string name="dialog_no_product_movement_report">No product movement report</string>
+    <string name="dialog_no_product_movement_report">No product movement noticed</string>
 
 
     <string name="all_Save">Save</string>

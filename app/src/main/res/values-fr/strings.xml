@@ -121,7 +121,7 @@
     <string name="dialog_no_customer_ageing_report">Aucun rapport de vieillissement des clients</string>
     <string name="dialog_no_tax_collected_report">Rapport d\'absence de taxe perçue</string>
     <string name="dialog_no_stock_report">Aucun rapport de stock</string>
-    <string name="dialog_no_product_movement_report">Aucun rapport de mouvement de produit</string>
+    <string name="dialog_no_product_movement_report">Aucun mouvement de produit remarqué</string>
 
 
     <string name="share_CreditNote">Note de crédit</string>
