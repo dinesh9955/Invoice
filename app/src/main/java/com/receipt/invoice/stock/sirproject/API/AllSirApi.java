@@ -6,13 +6,13 @@ public class AllSirApi {
 //    public static final String BASE = BASE_LEVEL+"app/";
 //    public static final String BASE_URL = BASE+"api/";
 
-    public static final String BASE_LEVEL ="http://13.126.22.0/saad/";
-    public static final String BASE = BASE_LEVEL+"app/";
-    public static final String BASE_URL = BASE+"index.php/api/";
-
-//    public static final String BASE_LEVEL ="http://prod.webdevelopmentsolution.net/saad/";
+//    public static final String BASE_LEVEL ="http://13.126.22.0/saad/";
 //    public static final String BASE = BASE_LEVEL+"app/";
 //    public static final String BASE_URL = BASE+"index.php/api/";
+
+    public static final String BASE_LEVEL ="http://prod.webdevelopmentsolution.net/saad/";
+    public static final String BASE = BASE_LEVEL+"app/";
+    public static final String BASE_URL = BASE+"index.php/api/";
 
 //    public static final String BASE_URL = BASE+"index.php/api/";
 

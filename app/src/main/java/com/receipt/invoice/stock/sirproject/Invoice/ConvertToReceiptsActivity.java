@@ -329,6 +329,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
     String Selectedcompanyname, taxrname;
     //    int newinvoice_count;
     private AVLoadingIndicatorView avi;
+    ImageView avibackground;
     private SignaturePad signaturePad;
     private Button btnclear1;
     private Button btnsave;
@@ -402,6 +403,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
         //newinvoice_count = Integer.parseInt(invoice_count) + 1;
         avi = findViewById(R.id.avi);
+        avibackground = findViewById(R.id.avibackground);
         invoicenumtxt = findViewById(R.id.invoicenumtxt);
         invoicenum = findViewById(R.id.invoivenum);
         duedatetxt = findViewById(R.id.duedatetxt);
@@ -571,12 +573,16 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
 
     private void getinvoicedata() {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
 
         String token = Constant.GetSharedPreferences(ConvertToReceiptsActivity.this, Constant.ACCESS_TOKEN);
         Call<InvoiceResponseDto> resposresult = apiInterface.getInvoiceDetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<InvoiceResponseDto>() {
             @Override
             public void onResponse(Call<InvoiceResponseDto> call, retrofit2.Response<InvoiceResponseDto> response) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
 
                 company_image_pathdto = response.body().getData().getCompanyImagePath();
                 customer_image_pathdto = response.body().getData().getCustomerImagePath();
@@ -1036,7 +1042,8 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
             @Override
             public void onFailure(Call<InvoiceResponseDto> call, Throwable t) {
-
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
             }
         });
 
@@ -2459,7 +2466,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                     if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
@@ -2914,6 +2921,8 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
     }
 
     public void warehouse_list(String selectedCompanyId) {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         wids.clear();
         wnames.clear();
 
@@ -2930,6 +2939,8 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
                     String response = new String(responseBody);
                     //Log.e("warehouseResp", response);
 
@@ -2969,6 +2980,8 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
                     if (responseBody != null) {
                         String response = new String(responseBody);
                         //  Log.e("responsevendorF", response);
@@ -3662,7 +3675,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
             if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{

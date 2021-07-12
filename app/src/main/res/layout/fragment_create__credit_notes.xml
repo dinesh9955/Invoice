@@ -756,7 +756,9 @@
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
 
 
     <com.wang.avi.AVLoadingIndicatorView

@@ -336,6 +336,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
     String Selectedcompanyname, taxrname;
     //    int newinvoice_count;
     private AVLoadingIndicatorView avi;
+    ImageView avibackground;
     private SignaturePad signaturePad;
     private Button btnclear1;
     private Button btnsave;
@@ -409,6 +410,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
 
         //newinvoice_count = Integer.parseInt(invoice_count) + 1;
         avi = findViewById(R.id.avi);
+        avibackground = findViewById(R.id.avibackground);
         invoicenumtxt = findViewById(R.id.invoicenumtxt);
         invoicenum = findViewById(R.id.invoivenum);
         duedatetxt = findViewById(R.id.duedatetxt);
@@ -581,13 +583,15 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
 
 
     private void getinvoicedata() {
-
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         String token = Constant.GetSharedPreferences(EditEditPVActivity.this, Constant.ACCESS_TOKEN);
         Call<PVResponseDto> resposresult = apiInterface.getPVDetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<PVResponseDto>() {
             @Override
             public void onResponse(Call<PVResponseDto> call, retrofit2.Response<PVResponseDto> response) {
-
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 company_image_pathdto = response.body().getData().getCompanyImagePath();
                 customer_image_pathdto = response.body().getData().getSupplier_image_path();
                 invoiceshre_linkdto = response.body().getData().getPayment_voucher_share_link();
@@ -1053,7 +1057,8 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
 
             @Override
             public void onFailure(Call<PVResponseDto> call, Throwable t) {
-
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
             }
         });
 
@@ -2491,7 +2496,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                     if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
@@ -2943,6 +2948,8 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
     }
 
     public void warehouse_list(String selectedCompanyId) {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         wids.clear();
         wnames.clear();
 
@@ -2959,6 +2966,8 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
                     String response = new String(responseBody);
                     //Log.e("warehouseResp", response);
 
@@ -2998,6 +3007,8 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
                     if (responseBody != null) {
                         String response = new String(responseBody);
                         //  Log.e("responsevendorF", response);
@@ -3702,7 +3713,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
             if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{

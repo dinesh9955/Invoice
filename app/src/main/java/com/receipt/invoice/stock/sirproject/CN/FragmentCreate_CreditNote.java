@@ -308,6 +308,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
     WebView webViewpdffile;
     WebView invoiceweb;
     private AVLoadingIndicatorView avi;
+    ImageView avibackground;
     private SignaturePad signaturePad;
     private Button btnclear1;
     private Button btnsave;
@@ -383,6 +384,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
         selectcompany = view.findViewById(R.id.selectcompany);
         avi = view.findViewById(R.id.avi);
+        avibackground = view.findViewById(R.id.avibackground);
         invoicenumtxt = view.findViewById(R.id.invoicenumtxt);
         invoicenum = view.findViewById(R.id.invoivenum);
         duedatetxt = view.findViewById(R.id.duedatetxt);
@@ -977,8 +979,8 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
             progressDialog.show();
             RequestParams params = new RequestParams();
             params.add("company_id", selectedCompanyId);
-            params.add("warehouse", "jeep foundry");
-            params.add("warehouse_id", selectwarehouseId);
+//            params.add("warehouse", "jeep foundry");
+//            params.add("warehouse_id", selectwarehouseId);
 //            params.add("warehouse_id[0]", selectwarehouseId);
             params.add("credit_note_date", invoice_date);
             params.add("due_date", invoice_due_date);
@@ -1016,7 +1018,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                 }
             }
 
-            Log.e("posting params",params.toString());
+            Log.e("posting_params",params.toString());
 
             if (company_stampFileimage != null) {
                 try {
@@ -1052,14 +1054,16 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
             for (int i = 0; i < tempList.size(); i++) {
 
-                Log.e("product id", tempList.get(i).getProduct_id());
-                params.add("product[" + i + "]" + "[product_id]", tempList.get(i).getProduct_id());
-                params.add("product[" + i + "]" + "[price]", producprice.get(i));
-                params.add("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
+                Log.e("productid", tempList.get(i).getProduct_id());
+                params.add("product[" + i + "]" + "[product_id]", ""+tempList.get(i).getProduct_id());
+                params.add("product[" + i + "]" + "[price]", ""+producprice.get(i));
+                params.add("product[" + i + "]" + "[quantity]", ""+tempQuantity.get(i));
+                params.add("product[" + i + "]" + "[warehouse_id]", ""+selectwarehouseId);
 
-                Log.e("tempListpid",tempList.get(i).getProduct_id());
-                Log.e("tempListprice",tempList.get(i).getProduct_price());
-                Log.e("tempQuantity",tempQuantity.get(i));
+
+                Log.e("tempListpid", ""+tempList.get(i).getProduct_id());
+                Log.e("tempListprice", ""+producprice.get(i));
+                Log.e("tempQuantity", ""+tempQuantity.get(i));
 
                 Log.e(TAG, "productdetails "+params.toString());
 
@@ -1069,7 +1073,6 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
-
                     params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
                     params.add("tax[" + i + "]" + "[amount]", ""+taxAmountZZ);
                     params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
@@ -2062,11 +2065,11 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                 RadioButton rb = group.findViewById(checkedId);
                 if (null != rb && checkedId > -1) {
                     strdiscount = rb.getText().toString();
-                    Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
+                    Log.e(TAG, "Radio_Button_value"+ strdiscount);
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
@@ -2521,7 +2524,8 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         cnames.clear();
 
         cids.clear();
-
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
@@ -2532,6 +2536,8 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e("responsecompany", response);
 
@@ -2568,6 +2574,8 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecompanyF", response);
@@ -2617,6 +2625,8 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                                 String company_id = item.getString("company_id");
                                 String warehouse_name = item.getString("name");
 
+                                Log.e(TAG, "warehouse_idZZ "+warehouse_id);
+
                                 wids.add(warehouse_id);
                                 wnames.add(warehouse_name);
 
@@ -2664,6 +2674,8 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
     public void productget(String selectedCompanyId) {
         product_bottom.clear();
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         RequestParams params = new RequestParams();
         params.add("warehouse_id", selectedCompanyId);
 
@@ -2675,7 +2687,8 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e(TAG, "response_productAAA "+response);
 
@@ -2738,9 +2751,11 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
-                    //  Log.e("responseproductF", response);
+                      Log.e("responseproductF", response);
 
                     try {
                         JSONObject jsonObject = new JSONObject(response);
@@ -3362,10 +3377,10 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
             grandAmount = total_price;
 
-            if (strdiscount.equals("Percentage")) {
+            if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equals("Amount")) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{
@@ -4773,6 +4788,8 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                     mybuilder.dismiss();
                     // description.setText(""+alName.get(i).getCompany_name());
                     // HomeApi(alName.get(i).company_id);
+
+                    Log.e(TAG, "selectedCompanyIdXX "+selectedCompanyId);
 
                     selectedCompanyId = cids.get(i);
 

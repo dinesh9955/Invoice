@@ -305,6 +305,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
     WebView webViewpdffile;
     WebView invoiceweb;
     private AVLoadingIndicatorView avi;
+    ImageView avibackground;
     private SignaturePad signaturePad;
     private Button btnclear1;
     private Button btnsave;
@@ -380,6 +381,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
         selectcompany = view.findViewById(R.id.selectcompany);
         avi = view.findViewById(R.id.avi);
+        avibackground = view.findViewById(R.id.avibackground);
         invoicenumtxt = view.findViewById(R.id.invoicenumtxt);
         invoicenum = view.findViewById(R.id.invoivenum);
         duedatetxt = view.findViewById(R.id.duedatetxt);
@@ -1122,6 +1124,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                 params.add("product[" + i + "]" + "[product_id]", tempList.get(i).getProduct_id());
                 params.add("product[" + i + "]" + "[price]", producprice.get(i));
                 params.add("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
+                params.add("product[" + i + "]" + "[warehouse_id]", ""+selectwarehouseId);
 
                 Log.e("tempListpid",tempList.get(i).getProduct_id());
                 Log.e("tempListprice",tempList.get(i).getProduct_price());
@@ -2126,10 +2129,10 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
@@ -2581,6 +2584,8 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
     }
 
     public void companyget() {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         cnames.clear();
 
         cids.clear();
@@ -2594,6 +2599,8 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e("responsecompany", response);
 
@@ -2630,6 +2637,8 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecompanyF", response);
@@ -2726,6 +2735,8 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
     public void productget(String selectedCompanyId) {
         product_bottom.clear();
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         RequestParams params = new RequestParams();
         params.add("warehouse_id", selectedCompanyId);
 
@@ -2737,7 +2748,8 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e("response product", response);
 
@@ -2800,6 +2812,8 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     //  Log.e("responseproductF", response);
@@ -3426,10 +3440,10 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
             grandAmount = total_price;
 
-            if (strdiscount.equals(getString(R.string.dialog_Percentage))) {
+            if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equals(getString(R.string.service_Amount))) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{

@@ -667,7 +667,7 @@
     <string name="service_SelectQuantity">حدد الكمية</string>
     <string name="service_PAYMENTGATEWAYS">بوابات الدفع</string>
     <string name="service_EnterAmount">أدخل المبلغ</string>
-    <string name="service_Amount">كمية</string>
+
     <string name="service_EnterDate">أدخل التاريخ</string>
     <string name="service_SelectPaymentMode">حدد وضع الدفع</string>
     <string name="service_ShippingAmount">كمية الشحن</string>
@@ -686,6 +686,8 @@
     <string name="dialog_ConvertToReceipt">تحويل إلى إيصال</string>
     <string name="dialog_EnterDiscount">أدخل الخصم</string>
     <string name="dialog_Percentage">نسبة مئوية</string>
+    <string name="dialog_Amount">كمية</string>
+    <string name="service_Amount">كمية</string>
     <string name="dialog_ChooseAOption">اختر خيارا</string>
     <string name="dialog_SendAsLink">إرسال كارتباط</string>
     <string name="dialog_SendAsPDF">إرسال بتنسيق PDF</string>

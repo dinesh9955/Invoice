@@ -335,6 +335,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
     String Selectedcompanyname, taxrname;
     //    int newinvoice_count;
     private AVLoadingIndicatorView avi;
+    ImageView avibackground;
     private SignaturePad signaturePad;
     private Button btnclear1;
     private Button btnsave;
@@ -440,6 +441,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         selectButton = findViewById(R.id.selectButton);
 
         avi = findViewById(R.id.avi);
+        avibackground = findViewById(R.id.avibackground);
         invoicenumtxt = findViewById(R.id.invoicenumtxt);
         invoicenum = findViewById(R.id.invoivenum);
         duedatetxt = findViewById(R.id.duedatetxt);
@@ -2586,7 +2588,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                     if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
@@ -2998,6 +3000,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
     }
 
     public void companyget() {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         cnames.clear();
 
         cids.clear();
@@ -3010,6 +3014,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e("responsecompany", response);
 
@@ -3051,6 +3057,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecompanyF", response);
@@ -3069,6 +3077,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
     }
 
     public void warehouse_list(String selectedCompanyId) {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         wids.clear();
         wnames.clear();
 
@@ -3085,6 +3095,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
                     String response = new String(responseBody);
                     //Log.e("warehouseResp", response);
 
@@ -3128,6 +3140,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
                     if (responseBody != null) {
                         String response = new String(responseBody);
                         //  Log.e("responsevendorF", response);
@@ -3941,7 +3955,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{

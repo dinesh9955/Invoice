@@ -334,6 +334,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
     String Selectedcompanyname, taxrname;
     //    int newinvoice_count;
     private AVLoadingIndicatorView avi;
+    ImageView avibackground;
     private SignaturePad signaturePad;
     private Button btnclear1;
     private Button btnsave;
@@ -422,6 +423,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
         //newinvoice_count = Integer.parseInt(invoice_count) + 1;
         avi = findViewById(R.id.avi);
+        avibackground = findViewById(R.id.avibackground);
         invoicenumtxt = findViewById(R.id.invoicenumtxt);
         invoicenum = findViewById(R.id.invoivenum);
         duedatetxt = findViewById(R.id.duedatetxt);
@@ -590,12 +592,15 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
 
     private void getinvoicedata() {
-
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         String token = Constant.GetSharedPreferences(EditPOActivity.this, Constant.ACCESS_TOKEN);
         Call<POResponseDto> resposresult = apiInterface.getPODetail(token, invoiceId, ""+getLanguage());
         resposresult.enqueue(new Callback<POResponseDto>() {
             @Override
             public void onResponse(Call<POResponseDto> call, retrofit2.Response<POResponseDto> response) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
 
                 company_image_pathdto = response.body().getData().getCompanyImagePath();
                 customer_image_pathdto = response.body().getData().getSupplier_image_path();
@@ -1109,7 +1114,8 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
             @Override
             public void onFailure(Call<POResponseDto> call, Throwable t) {
-
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
             }
         });
 
@@ -2626,7 +2632,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                     if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))){
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
@@ -3103,6 +3109,8 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
     }
 
     public void warehouse_list(String selectedCompanyId) {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         wids.clear();
         wnames.clear();
 
@@ -3119,6 +3127,8 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
                     String response = new String(responseBody);
                     //Log.e("warehouseResp", response);
 
@@ -3164,6 +3174,8 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
                     if (responseBody != null) {
                         String response = new String(responseBody);
                         //  Log.e("responsevendorF", response);
@@ -3887,7 +3899,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
             if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{

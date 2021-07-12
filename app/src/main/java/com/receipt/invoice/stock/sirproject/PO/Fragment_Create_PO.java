@@ -311,6 +311,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
     WebView webViewpdffile;
     WebView invoiceweb;
     private AVLoadingIndicatorView avi;
+    ImageView avibackground;
     private SignaturePad signaturePad;
     private Button btnclear1;
     private Button btnsave;
@@ -389,6 +390,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
         selectcompany = view.findViewById(R.id.selectcompany);
         avi = view.findViewById(R.id.avi);
+        avibackground = view.findViewById(R.id.avibackground);
+
         invoicenumtxt = view.findViewById(R.id.invoicenumtxt);
         invoicenum = view.findViewById(R.id.invoivenum);
         duedatetxt = view.findViewById(R.id.duedatetxt);
@@ -2241,13 +2244,12 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
 
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
-
                 }
 
             }
@@ -2717,6 +2719,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
     }
 
     public void companyget() {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         cnames.clear();
 
         cids.clear();
@@ -2730,6 +2734,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e("responsecompany", response);
 
@@ -2766,6 +2772,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecompanyF", response);
@@ -2861,6 +2869,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
     }
 
     public void productget(String selectedCompanyId) {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         product_bottom.clear();
         RequestParams params = new RequestParams();
         params.add("warehouse_id", selectedCompanyId);
@@ -2873,6 +2883,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
 
                 String response = new String(responseBody);
                 Log.e("response product", response);
@@ -2937,6 +2949,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     //  Log.e("responseproductF", response);
@@ -3578,10 +3592,10 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
             grandAmount = total_price;
 
-            if (strdiscount.equals("Percentage")) {
+            if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equals("Amount")) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{

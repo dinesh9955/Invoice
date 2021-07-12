@@ -36,7 +36,7 @@
     <string name="htmlview_DebitNoteNo">Lastschrift Nr.</string>
     <string name="htmlview_DebitNoteDate">Lastschriftdatum</string>
 
-    <string name="htmlview_receipt">RECEIPT</string>
+    <string name="htmlview_receipt">KASSENBON</string>
     <string name="htmlview_ReceiptNo">Quittungsnummer</string>
     <string name="htmlview_ReceiptDate">Eingangsdatum</string>
     <string name="htmlview_ReceivedFrom">Empfangen von</string>
@@ -106,7 +106,7 @@
     <string name="html_Currentdue">Aktuell fällig</string>
     <string name="html_daysoverdue">Tage überfällig</string>
     <string name="html_total">Gesamt</string>
-    <string name="html_Amount">Betrag</string>
+    <string name="html_Amount">Menge</string>
     <string name="html_TaxName">Steuername</string>
     <string name="html_TaxRate">Steuersatz</string>
     <string name="html_SNo">S.Nr.</string>
@@ -671,7 +671,7 @@
     <string name="service_SelectQuantity">Wählen Sie die Menge</string>
     <string name="service_PAYMENTGATEWAYS">ZAHLUNGSGATEWAYS</string>
     <string name="service_EnterAmount">Menge eingeben</string>
-    <string name="service_Amount">Menge</string>
+
     <string name="service_EnterDate">Datum eingeben</string>
     <string name="service_SelectPaymentMode">Zahlungsmodus auswählen</string>
     <string name="service_ShippingAmount">Versandbetrag</string>
@@ -690,6 +690,8 @@
     <string name="dialog_ConvertToReceipt">In Quittung umwandeln</string>
     <string name="dialog_EnterDiscount">Rabatt eingeben</string>
     <string name="dialog_Percentage">Prozentsatz</string>
+    <string name="dialog_Amount">Menge</string>
+    <string name="service_Amount">Menge</string>
     <string name="dialog_ChooseAOption">Wählen Sie eine Option</string>
     <string name="dialog_SendAsLink">Als Link senden</string>
     <string name="dialog_SendAsPDF">Als PDF senden</string>
@@ -959,7 +961,7 @@
 
 
     <string-array name="languageArray">
-        <item>Deutsch</item>
+        <item>Englisch</item>
         <item>Arabisch</item>
         <item>Deutsch</item>
         <item>Niederländisch</item>

@@ -232,6 +232,8 @@ public class Product_Listing extends BaseFragment {
 
     public void companyget()
     {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
 
         cnames.clear();
         cids.clear();
@@ -244,6 +246,8 @@ public class Product_Listing extends BaseFragment {
         client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e("responsecompany",response);
 
@@ -276,6 +280,8 @@ public class Product_Listing extends BaseFragment {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if(responseBody!=null){
                     String response = new String(responseBody);
                     Log.e("responsecompanyF",response);

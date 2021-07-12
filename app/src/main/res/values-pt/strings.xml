@@ -663,7 +663,7 @@
     <string name="service_SelectQuantity">Selecione a quantidade</string>
     <string name="service_PAYMENTGATEWAYS">PORTÕES DE PAGAMENTO</string>
     <string name="service_EnterAmount">Insira o valor</string>
-    <string name="service_Amount">Resultar</string>
+
     <string name="service_EnterDate">Insira a data</string>
     <string name="service_SelectPaymentMode">Selecione o modo de pagamento</string>
     <string name="service_ShippingAmount">Quantidade de remessa</string>
@@ -682,6 +682,8 @@
     <string name="dialog_ConvertToReceipt">Converter para recibo</string>
     <string name="dialog_EnterDiscount">Insira o desconto</string>
     <string name="dialog_Percentage">Percentagem</string>
+    <string name="dialog_Amount">Resultar</string>
+    <string name="service_Amount">Resultar</string>
     <string name="dialog_ChooseAOption">Escolha uma opção</string>
     <string name="dialog_SendAsLink">Enviar como link</string>
     <string name="dialog_SendAsPDF">Enviar como PDF</string>

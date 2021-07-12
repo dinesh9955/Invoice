@@ -37,7 +37,7 @@
     <string name="htmlview_DebitNoteNo">Debetnota Nee</string>
     <string name="htmlview_DebitNoteDate">Debetnotadatum</string>
 
-    <string name="htmlview_receipt">RECEIPT</string>
+    <string name="htmlview_receipt">BON</string>
     <string name="htmlview_ReceiptNo">ReceiptNo</string>
     <string name="htmlview_ReceiptDate">Ontvangstdatum</string>
     <string name="htmlview_ReceivedFrom">Ontvangen van</string>
@@ -666,7 +666,7 @@
     <string name="service_SelectQuantity">Selecteer de gewenste hoeveelheid</string>
     <string name="service_PAYMENTGATEWAYS">BETALING GATEWAYS</string>
     <string name="service_EnterAmount">Voer een bedrag in</string>
-    <string name="service_Amount">Bedrag</string>
+
     <string name="service_EnterDate">Datum invoeren</string>
     <string name="service_SelectPaymentMode">Selecteer betalingsmodus</string>
     <string name="service_ShippingAmount">Verzendbedrag:</string>
@@ -685,6 +685,8 @@
     <string name="dialog_ConvertToReceipt">Converteren naar bon</string>
     <string name="dialog_EnterDiscount">Voer korting in</string>
     <string name="dialog_Percentage">Percentage</string>
+    <string name="dialog_Amount">Bedrag</string>
+    <string name="service_Amount">Bedrag</string>
     <string name="dialog_ChooseAOption">Kies een optie</string>
     <string name="dialog_SendAsLink">Verzenden als link</string>
     <string name="dialog_SendAsPDF">Verzenden als PDF</string>

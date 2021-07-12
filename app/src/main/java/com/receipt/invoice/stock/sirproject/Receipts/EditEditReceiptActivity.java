@@ -327,6 +327,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
     String Selectedcompanyname, taxrname;
     //    int newinvoice_count;
     private AVLoadingIndicatorView avi;
+    ImageView avibackground;
     private SignaturePad signaturePad;
     private Button btnclear1;
     private Button btnsave;
@@ -390,6 +391,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
         //newinvoice_count = Integer.parseInt(invoice_count) + 1;
         avi = findViewById(R.id.avi);
+        avibackground = findViewById(R.id.avibackground);
         invoicenumtxt = findViewById(R.id.invoicenumtxt);
         invoicenum = findViewById(R.id.invoivenum);
         invoicenum.setEnabled(false);
@@ -2367,10 +2369,10 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
-                    if(strdiscount.equalsIgnoreCase("Percentage")){
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase("Amount")){
+                    if(strdiscount.equalsIgnoreCase(getString(R.string.html_Amount))){
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
 
@@ -2750,6 +2752,8 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
     }
 
     public void companyget() {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         cnames.clear();
 
         cids.clear();
@@ -2762,6 +2766,8 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
         client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e("responsecompany", response);
 
@@ -2803,6 +2809,8 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecompanyF", response);
@@ -2821,6 +2829,8 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
     }
 
     public void warehouse_list(String selectedCompanyId) {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         wids.clear();
         wnames.clear();
 
@@ -2837,6 +2847,8 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
                     String response = new String(responseBody);
                     //Log.e("warehouseResp", response);
 
@@ -2870,6 +2882,8 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
                     if (responseBody != null) {
                         String response = new String(responseBody);
                         //  Log.e("responsevendorF", response);
@@ -3564,7 +3578,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
             if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                 double value = grandAmount * discountAmountDD / 100;
                 discountAmount = value;
-            } else if (strdiscount.equalsIgnoreCase(getString(R.string.service_Amount))) {
+            } else if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
             }else{

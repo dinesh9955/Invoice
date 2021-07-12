@@ -510,7 +510,6 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         }
         else if (selectedProductId.equals("")){
             Constant.ErrorToast(getActivity(),getString(R.string.dialog_SelectAProduct));
-
         }
        /* else if (selectedVendorId.equals("")){
             Constant.ErrorToast(getActivity(),"Select a Vendor");
@@ -524,11 +523,11 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
             avibackground.setVisibility(View.VISIBLE);
 
             RequestParams params = new RequestParams();
-            params.add("product_id",selectedProductId);
-            params.add("quantity",quant);
-            params.add("price",pricee);
-            params.add("warehouse_id", ""+warehouses);
-            params.add("supplier_id",selectedVendorId);
+            params.add("product_id", ""+selectedProductId);
+            params.add("quantity", ""+quant);
+            params.add("price", ""+pricee);
+            params.add("warehouse_id[0]", ""+warehouses);
+          //  params.add("supplier_id",selectedVendorId);
 
             Log.e(TAG, "quantAAA "+quant +" "+params.toString());
 

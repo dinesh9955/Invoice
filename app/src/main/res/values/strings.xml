@@ -704,7 +704,7 @@
 
     <string name="service_PAYMENTGATEWAYS">PAYMENT GATEWAYS</string>
     <string name="service_EnterAmount">Enter Amount</string>
-    <string name="service_Amount">Amount</string>
+
     <string name="service_EnterDate">Enter Date</string>
     <string name="service_SelectPaymentMode">Select Payment Mode</string>
     <string name="service_ShippingAmount">Shipping Amount</string>
@@ -731,6 +731,8 @@
 
     <string name="dialog_EnterDiscount">Enter Discount</string>
     <string name="dialog_Percentage">Percentage</string>
+    <string name="dialog_Amount">Amount</string>
+    <string name="service_Amount">Amount</string>
     <string name="dialog_ChooseAOption">Choose A Option</string>
     <string name="dialog_SendAsLink">Send As Link</string>
     <string name="dialog_SendAsPDF">Send As PDF</string>
