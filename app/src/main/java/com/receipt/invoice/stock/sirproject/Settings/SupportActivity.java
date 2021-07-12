@@ -67,7 +67,7 @@ public class SupportActivity extends BaseActivity {
                     Constant.ErrorToast(SupportActivity.this, getString(R.string.setting_enter_message));
                 }else{
 
-                    callMethod();
+                //    callMethod();
                     callMethod2();
                 }
             }
@@ -148,7 +148,7 @@ public class SupportActivity extends BaseActivity {
         final ProgressDialog progressDialog = new ProgressDialog(SupportActivity.this);
         progressDialog.setMessage(getString(R.string.dialog_Please_wait));
         progressDialog.setCanceledOnTouchOutside(false);
-       // progressDialog.show();
+        progressDialog.show();
 
         RequestParams params = new RequestParams();
         params.add("user_email", editTextEmail.getText().toString());
@@ -156,30 +156,32 @@ public class SupportActivity extends BaseActivity {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        String token = Constant.GetSharedPreferences(SupportActivity.this, Constant.ACCESS_TOKEN);
+        client.addHeader("Access-Token", token);
         params.add("language", ""+getLanguage());
-        client.post(AllSirApi.BASE_URL_SUPPORT + "support/add", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "support/add", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
-               // progressDialog.dismiss();
+                progressDialog.dismiss();
 
                 Log.e("Create Invoicedata", response);
-//                try {
-//                    Log.e("Create Invoicedata", response);
-//
-////                    JSONObject jsonObject = new JSONObject(response);
-////                    String status = jsonObject.getString("status");
-////                    String message = jsonObject.getString("message");
-////                    if (status.equals("1")) {
-////                        Constant.SuccessToast(SupportActivity.this, message);
-////                        editTextEmail.setText("");
-////                        editTextMessage.setText("");
-////                    }else{
-////                        Constant.ErrorToast(SupportActivity.this, message);
-////                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    Log.e("Create Invoicedata", response);
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    String message = jsonObject.getString("message");
+                    if (status.equals("1")) {
+                        Constant.SuccessToast(SupportActivity.this, message);
+//                        editTextEmail.setText("");
+                        editTextMessage.setText("");
+                    }else{
+                        Constant.ErrorToast(SupportActivity.this, message);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
 
@@ -191,16 +193,16 @@ public class SupportActivity extends BaseActivity {
                     String response = new String(responseBody);
                     Log.e("responsecustomersF", response);
 
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(response);
-//                        String status = jsonObject.getString("status");
-//                        String message = jsonObject.getString("message");
-//                        if (status.equals("1")) {
-//                            Constant.ErrorToast(SupportActivity.this, message);
-//                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String status = jsonObject.getString("status");
+                        String message = jsonObject.getString("message");
+                        if (status.equals("false")) {
+                            Constant.ErrorToast(SupportActivity.this, message);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     ///Constant.ErrorToast(SupportActivity.this, "Something went wrong, try again!");
                 }
