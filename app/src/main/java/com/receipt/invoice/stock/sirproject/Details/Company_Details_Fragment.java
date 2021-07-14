@@ -161,6 +161,8 @@ public class Company_Details_Fragment extends BaseFragment {
         website.setText(comapny_website);
         address.setText(comapny_address);
         itemstxtColor.setText(colorCode);
+//        itemstxtColor.setClickable(false);
+        itemstxtColor.setEnabled(false);
 
         RequestOptions options = new RequestOptions();
         options.centerCrop();
@@ -177,6 +179,7 @@ public class Company_Details_Fragment extends BaseFragment {
 
     private void FindByIds(View v){
         itemstxtColor = v.findViewById(R.id.itemstxtColor);
+
         name = v.findViewById(R.id.name);
         email = v.findViewById(R.id.email);
         phone = v.findViewById(R.id.phone);
@@ -308,6 +311,7 @@ public class Company_Details_Fragment extends BaseFragment {
                 chequepayabletoid.setEnabled(true);
                 Ibnnumbertxtid.setEnabled(true);
                 editbtn.setVisibility(View.GONE);
+                itemstxtColor.setEnabled(true);
             }
         });
 
@@ -329,6 +333,7 @@ public class Company_Details_Fragment extends BaseFragment {
                 chequepayabletoid.setEnabled(false);
                 Ibnnumbertxtid.setEnabled(false);
                 editbtn.setVisibility(View.VISIBLE);
+                itemstxtColor.setEnabled(false);
 
                 //if cancel then previous data restore
                 name.setText(company_name);
