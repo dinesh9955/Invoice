@@ -44,6 +44,7 @@ import com.loopj.android.http.RequestParams;
 import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Adapter.InvoicelistAdapterdt;
 import com.receipt.invoice.stock.sirproject.Base.BaseFragment;
+import com.receipt.invoice.stock.sirproject.BuildConfig;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.Model.InvoiceData;
 //import com.receipt.invoice.stock.sirproject.Model.Product_List;
@@ -1921,7 +1922,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             Intent intentShareFile = new Intent(Intent.ACTION_SEND);
             File fileWithinMyDir = new File(message);
             Uri photoURI = FileProvider.getUriForFile(context,
-                    "com.receipt.invoice.stock.sirproject.provider",
+                    BuildConfig.APPLICATION_ID + ".provider",
                     fileWithinMyDir);
 
             if(fileWithinMyDir.exists()) {
@@ -2085,12 +2086,12 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                     File mFile2 = new File("/sdcard/share.jpg");
                     Uri imageUri2 = FileProvider.getUriForFile(
                             context,
-                            "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
+                            BuildConfig.APPLICATION_ID + ".provider", //(use your app signature + ".provider" )
                             mFile2);
 
                     File fileWithinMyDir = new File(message);
                     Uri imageUri1 = FileProvider.getUriForFile(context,
-                            "com.receipt.invoice.stock.sirproject.provider",
+                            BuildConfig.APPLICATION_ID + ".provider",
                             fileWithinMyDir);
 
                     if(fileWithinMyDir.exists()) {

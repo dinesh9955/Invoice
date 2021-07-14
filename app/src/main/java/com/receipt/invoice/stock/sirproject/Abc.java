@@ -1014,7 +1014,7 @@ String dd = "<html>\n" +
         File mFile2 = new File("/sdcard/share.jpg");
         Uri imageUri2 = FileProvider.getUriForFile(
                 Abc.this,
-                "com.receipt.invoice.stock.sirproject.provider", //(use your app signature + ".provider" )
+                BuildConfig.APPLICATION_ID + ".provider", //(use your app signature + ".provider" )
                 mFile2);
 
         ArrayList<Uri> uriArrayList = new ArrayList<>();

@@ -1176,6 +1176,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             params.add("discount", ""+discountAmountZZ);
             Log.e(TAG, "strpaid_amountAA "+paidamountstr);
             params.add("paid_amount", paidamountstr);
+
             params.add("paid_amount_date", Paymentamountdate);
             params.add("shipping_firstname", shippingfirstname);
             params.add("shipping_lastname", shippinglastname);
@@ -1725,18 +1726,14 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         }
 
         if(requestCode == 126){
-            Log.e(TAG, "requestCode "+requestCode);
+            Log.e(TAG, "requestCode_CompanyInformation"+requestCode);
             CompanyInformation(selectedCompanyId);
         }
 
 
-//        if(requestCode == 128){
-//            Log.e(TAG, "requestCode "+requestCode);
-//            cnames.clear();
-//            cids.clear();
-//
-//            companyget();
-//        }
+        if(requestCode == 128){
+            CompanyInformation(selectedCompanyId);
+        }
 
 
     }

@@ -172,7 +172,7 @@ public class SupportActivity extends BaseActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     String status = jsonObject.getString("status");
                     String message = jsonObject.getString("message");
-                    if (status.equals("1")) {
+                    if (status.equals("true")) {
                         Constant.SuccessToast(SupportActivity.this, message);
 //                        editTextEmail.setText("");
                         editTextMessage.setText("");

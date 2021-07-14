@@ -983,7 +983,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 //            params.add("warehouse_id", selectwarehouseId);
 //            params.add("warehouse_id[0]", selectwarehouseId);
             params.add("credit_note_date", invoice_date);
-            params.add("due_date", invoice_due_date);
+            params.add("due_date", invoice_date);
             params.add("customer_id", Selectedcustomer_id);
 //            params.add("invoice_no", String.valueOf(invoicenovalue));
             params.add("credit_note_no", invoicenum.getText().toString());

@@ -29,6 +29,7 @@ import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.ThankYouNote.ThankYouNoteActivity;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,11 +43,16 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
 
     private static final String TAG = "OnlinePaymentGateway";
 
+    private AVLoadingIndicatorView avi;
+    ImageView avibackground;
+
     ImageView imageViewStripeUp, imageViewPaypalUp;
 
     TextView textViewStripe, textViewPaypal;
 
     Button buttonStripe, buttonPaypal;
+
+    int payPalCode = 0;
 
     AwesomeSpinner selectcompany;
 
@@ -91,6 +97,8 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
+
+
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +113,10 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+
+
+        avi = findViewById(R.id.avi);
+        avibackground = findViewById(R.id.avibackground);
 
         selectcompany = findViewById(R.id.selectcompany);
 
@@ -206,7 +218,8 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
 
 
     private void companyget() {
-
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         cnames.clear();
         cids.clear();
         String token = Constant.GetSharedPreferences(OnlinePaymentGatewayActivity.this, Constant.ACCESS_TOKEN);
@@ -218,6 +231,9 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
+
                 String response = new String(responseBody);
                 Log.e(TAG, "responsecompanyQQ "+ response);
                 try {
@@ -260,6 +276,20 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                                 cids.add(company_id);
                                 cidsLogo.add(company_image_path+logo);
 
+                                if(payPalCode == 122){
+                                    if(paypal.equalsIgnoreCase("1")){
+                                        buttonPaypal.setText(getString(R.string.tax_edit));
+                                    }else{
+                                        buttonPaypal.setText(getString(R.string.setting_Setup));
+                                    }
+
+                                    if(stripe.equalsIgnoreCase("1")){
+                                        buttonStripe.setText(getString(R.string.tax_edit));
+                                    }else{
+                                        buttonStripe.setText(getString(R.string.setting_Setup));
+                                    }
+                                }
+
 
                             }
                         }
@@ -275,6 +305,8 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecompanyF", response);
@@ -296,20 +328,18 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.e(TAG, "requestCode:: "+requestCode);
+        Log.e(TAG, "resultCode:: "+resultCode);
 
         if(requestCode == 122){
-            if(resultCode == RESULT_OK){
+                payPalCode = 122;
                 companyget();
-            }
         }
 
         if(requestCode == 123){
-            if(resultCode == RESULT_OK){
                 String responseCode = data.getStringExtra("responseCode");
                 Log.e(TAG, "responseCode:: "+responseCode);
                 callMethod(responseCode);
-
-            }
         }
     }
 

@@ -1043,7 +1043,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
             params.add("warehouse", selectwarehouseId);
             params.add("warehouse_id", selectwarehouseId);
             params.add("debit_note_date", invoice_date);
-            params.add("due_date", invoice_due_date);
+            params.add("due_date", invoice_date);
             params.add("customer_id", Selectedcustomer_id);
 
             params.add("supplier_id", Selectedcustomer_id);
