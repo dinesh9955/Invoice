@@ -815,7 +815,7 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                        //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }
 
                 }

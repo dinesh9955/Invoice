@@ -622,7 +622,6 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
                 if (selectwarehouseId.equals("")) {
                     Constant.ErrorToast(getActivity(), getString(R.string.invoice_SelectWarehouse));
-
                 } else {
                     createbottomsheet_products();
                     bottomSheetDialog.show();
@@ -955,7 +954,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             public void onItemSelected(int position, String itemAtPosition) {
                 selectwarehouseId = wids.get(position);
                 Log.e("selectwarehouseId", selectwarehouseId);
-                productget(selectwarehouseId);
+                productget(selectedCompanyId);
 
             }
         });
@@ -2868,26 +2867,29 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         }
     }
 
+
+
     public void productget(String selectedCompanyId) {
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);
         product_bottom.clear();
         RequestParams params = new RequestParams();
-        params.add("warehouse_id", selectedCompanyId);
-
+//        params.add("warehouse_id", selectedCompanyId);
+        params.add("company_id", selectedCompanyId);
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
         params.add("language", ""+getLanguage());
-        client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
 
                 String response = new String(responseBody);
-                Log.e("response product", response);
+                Log.e("onSuccessresponse_product", ""+response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -2947,14 +2949,17 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 }
             }
 
+            @SuppressLint("LongLogTag")
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
+
+
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     //  Log.e("responseproductF", response);
-
+                    Log.e("onFailureresponse_product", ""+response);
                     try {
                         JSONObject jsonObject = new JSONObject(response);
 
@@ -3071,7 +3076,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                   // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
 
