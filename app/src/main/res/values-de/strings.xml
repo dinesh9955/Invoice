@@ -59,7 +59,7 @@
     <string name="htmlview_ESTIMATEDate">ESTIMATE-Datum</string>
 
     <string name="htmlview_INVOICE">RECHNUNG</string>
-    <string name="htmlview_InvoiceNo">Rechnungsnummer</string>
+    <string name="htmlview_InvoiceNo">Rechnung Nr</string>
     <string name="htmlview_InvoiceDate">Rechnungsdatum</string>
 
 
@@ -75,7 +75,7 @@
 
     <string name="htmlview_INVOICEDUEDATEREMINDER">Erinnerung an das Fälligkeitsdatum der Rechnung</string>
     <string name="htmlview_CreditTerms">Kreditbedingungen</string>
-    <string name="htmlview_DueDate2">Fälligkeitsdatum</string>
+    <string name="htmlview_DueDate2">Geburtstermin</string>
     <string name="htmlview_Wewouldliketobring">Wir möchten Sie darauf hinweisen, dass die oben genannte Rechnungsnummer nun zur Zahlung überfällig ist.</string>
     <string name="htmlview_Weherebyrequest">Hiermit bitten wir Sie, diese umgehend zu regeln.</string>
     <string name="htmlview_Welookforward">Wir freuen uns, diesbezüglich von dir zu hören.</string>

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -76,6 +77,8 @@ public class InvoiceReminderActivity extends BaseActivity {
 
     TextView textViewMessage;
 
+    private AVLoadingIndicatorView avi;
+    ImageView avibackground;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +98,10 @@ public class InvoiceReminderActivity extends BaseActivity {
         StrictMode.setVmPolicy(builder.build());
 
         apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
-//        avi = findViewById(R.id.avi);
+
+        avi = findViewById(R.id.avi);
+        avibackground = findViewById(R.id.avibackground);
+
         recycler_invoices = findViewById(R.id.recycler_invoices);
         selectcompany = findViewById(R.id.selectcompany);
         search = findViewById(R.id.search);
@@ -172,6 +178,8 @@ public class InvoiceReminderActivity extends BaseActivity {
 
 
     private void companyget() {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
 
         cnames.clear();
         cids.clear();
@@ -185,6 +193,8 @@ public class InvoiceReminderActivity extends BaseActivity {
         client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e("responsecompany", response);
 //                avi.smoothToHide();
@@ -239,6 +249,8 @@ public class InvoiceReminderActivity extends BaseActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
 //                    avi.smoothToHide();

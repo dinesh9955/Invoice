@@ -27,8 +27,11 @@ import com.loopj.android.http.RequestParams;
 import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Constant.Constant;
+import com.receipt.invoice.stock.sirproject.Estimate.EditEstimateActivity;
+import com.receipt.invoice.stock.sirproject.Model.Tax_List;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.ThankYouNote.ThankYouNoteActivity;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -53,6 +56,7 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
     Button buttonStripe, buttonPaypal;
 
     int payPalCode = 0;
+    int stripeCode = 0;
 
     AwesomeSpinner selectcompany;
 
@@ -211,7 +215,7 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
 
 
 
-        companyget();
+
 
     }
 
@@ -220,8 +224,13 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
     private void companyget() {
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);
+
         cnames.clear();
         cids.clear();
+        cidsLogo.clear();
+        stringPaypal.clear();
+        stringStripe.clear();
+
         String token = Constant.GetSharedPreferences(OnlinePaymentGatewayActivity.this, Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
@@ -244,31 +253,20 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                         JSONArray company = data.getJSONArray("company");
                         String company_image_path = data.getString("company_image_path");
 
-                        String company_id= "", company_name= "", company_address= "", company_contact= "", company_email= "",
-                                company_website= "", payment_bank_name= "", payment_currency= "", payment_iban= "", payment_swift_bic= "", logo = "";
+
                         if (company.length() > 0) {
                             for (int i = 0; i < company.length(); i++) {
                                 JSONObject item = company.getJSONObject(i);
-                                company_id = item.getString("company_id");
-                                company_name = item.getString("name");
-                                company_address = item.getString("address");
-                                company_contact = item.getString("phone_number");
-                                company_email = item.getString("email");
-                                company_website = item.getString("website");
-                                logo = item.getString("logo");
-
-//                                payment_bank_name = item.getString("payment_bank_name");
-//                                payment_currency = item.getString("payment_currency");
-//                                payment_iban = item.getString("payment_iban");
-//                                payment_swift_bic = item.getString("payment_swift_bic");
-//                                String colorCode = item.getString("color");
-//                                Log.e("CompanyId",company_id);
-
+                                String company_id = item.getString("company_id");
+                                String company_name = item.getString("name");
+                                String logo = item.getString("logo");
                                 String paypal = item.getString("paypal");
                                 String stripe = item.getString("stripe");
 
                                 Log.e(TAG, "paypalQQ "+ paypal);
                                 Log.e(TAG, "stripeQQ "+ stripe);
+
+
 
                                 stringPaypal.add(paypal);
                                 stringStripe.add(stripe);
@@ -276,19 +274,36 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                                 cids.add(company_id);
                                 cidsLogo.add(company_image_path+logo);
 
-                                if(payPalCode == 122){
-                                    if(paypal.equalsIgnoreCase("1")){
-                                        buttonPaypal.setText(getString(R.string.tax_edit));
-                                    }else{
-                                        buttonPaypal.setText(getString(R.string.setting_Setup));
-                                    }
+                                Log.e(TAG, "payPalCodeQQ "+ payPalCode);
 
-                                    if(stripe.equalsIgnoreCase("1")){
-                                        buttonStripe.setText(getString(R.string.tax_edit));
-                                    }else{
-                                        buttonStripe.setText(getString(R.string.setting_Setup));
-                                    }
-                                }
+//                                if(payPalCode == 122){
+//                                    if(paypal.equalsIgnoreCase("1")){
+//                                        buttonPaypal.setText(getString(R.string.tax_edit));
+//                                    }else if(paypal.equalsIgnoreCase("0")){
+//                                        buttonPaypal.setText(getString(R.string.setting_Setup));
+//                                    }
+//
+////                                    if(stripe.equalsIgnoreCase("1")){
+////                                        buttonStripe.setText(getString(R.string.tax_edit));
+////                                    }else if(stripe.equalsIgnoreCase("0")){
+////                                        buttonStripe.setText(getString(R.string.setting_Setup));
+////                                    }
+//                                }
+
+
+//                                if(stripeCode == 123){
+//                                    if(paypal.equalsIgnoreCase("1")){
+//                                        buttonPaypal.setText(getString(R.string.tax_edit));
+//                                    }else{
+//                                        buttonPaypal.setText(getString(R.string.setting_Setup));
+//                                    }
+//
+//                                    if(stripe.equalsIgnoreCase("1")){
+//                                        buttonStripe.setText(getString(R.string.tax_edit));
+//                                    }else{
+//                                        buttonStripe.setText(getString(R.string.setting_Setup));
+//                                    }
+//                                }
 
 
                             }
@@ -325,18 +340,136 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
     }
 
 
+    private void CompanyInformation(String selectedCompanyId) {
+
+//        cnames.clear();
+//        cids.clear();
+//        cidsLogo.clear();
+//        stringPaypal.clear();
+//        stringStripe.clear();
+
+
+        RequestParams params = new RequestParams();
+        params.add("company_id", this.selectedCompanyId);
+//        params.add("product", "1");
+//        params.add("service", "1");
+//        params.add("customer", "1");
+//        params.add("tax", "1");
+//        params.add("estimate", "1");
+//        params.add("warehouse", "1");
+
+
+        String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
+        Log.e("token", token);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e("Company_Information", response);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+
+                    if (status.equals("true")) {
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        String company_image_path = data.getString("company_image_path");
+
+                        JSONArray company = data.getJSONArray("company");
+
+                        for (int i = 0; i < company.length(); i++) {
+                            JSONObject item = company.getJSONObject(i);
+
+                            String company_id = item.getString("company_id");
+                            String company_name = item.getString("name");
+                            String logo = item.getString("logo");
+                            String paypal = item.getString("paypal");
+                            String stripe = item.getString("stripe");
+
+                            Log.e(TAG, "paypalQQ "+ paypal);
+                            Log.e(TAG, "stripeQQ "+ stripe);
+
+
+//                            stringPaypal.add(paypal);
+//                            stringStripe.add(stripe);
+//                            cnames.add(company_name);
+//                            cids.add(company_id);
+//                            cidsLogo.add(company_image_path+logo);
+//
+//
+//                            Log.e(TAG, "paypalQQ "+ paypal);
+//                            Log.e(TAG, "stripeQQ "+ stripe);
+
+
+                            if(payPalCode == 122){
+                                if(paypal.equalsIgnoreCase("1")){
+                                    buttonPaypal.setText(getString(R.string.tax_edit));
+                                }else if(paypal.equalsIgnoreCase("0")){
+                                    buttonPaypal.setText(getString(R.string.setting_Setup));
+                                }
+
+                                    if(stripe.equalsIgnoreCase("1")){
+                                        buttonStripe.setText(getString(R.string.tax_edit));
+                                    }else if(stripe.equalsIgnoreCase("0")){
+                                        buttonStripe.setText(getString(R.string.setting_Setup));
+                                    }
+                            }
+
+
+                        }
+
+
+                    }
+                    if (status.equals("false")) {
+                        //Constant.ErrorToast(OnlinePaymentGatewayActivity.this, jsonObject.getString("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+
+
+                } else {
+                    //Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
+                }
+            }
+        });
+
+
+    }
+
+
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e(TAG, "requestCode:: "+requestCode);
         Log.e(TAG, "resultCode:: "+resultCode);
 
+
+
+
         if(requestCode == 122){
-                payPalCode = 122;
-                companyget();
+            payPalCode = requestCode;
+            CompanyInformation(selectedCompanyId);
         }
 
         if(requestCode == 123){
+            stripeCode = requestCode;
                 String responseCode = data.getStringExtra("responseCode");
                 Log.e(TAG, "responseCode:: "+responseCode);
                 callMethod(responseCode);
@@ -378,14 +511,8 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                     if (status.equalsIgnoreCase("true")) {
                         Constant.SuccessToast(OnlinePaymentGatewayActivity.this, message);
 
-                        companyget();
+                        CompanyInformation(selectedCompanyId);
 
-//                        new Handler().postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                finish();
-//                            }
-//                        }, 500);
 
                     }else{
                         Constant.ErrorToast(OnlinePaymentGatewayActivity.this, message);
@@ -426,6 +553,6 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       // companyget();
+        companyget();
     }
 }

@@ -400,7 +400,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.editinvoiceactivity);
         Constant.toolbar(ConvertToInvoiceActivity.this, getString(R.string.header_convert_to_invoice));
 

@@ -398,7 +398,12 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+//        getActivity().getWindow().setSoftInputMode(
+//                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+//        );
+
         View view = inflater.inflate(R.layout.fragment_fragment__create__invoice, container, false);
 
         viewPayment = view.findViewById(R.id.payment_id);
@@ -3783,6 +3788,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     @Override
     public void onPostExecutecall(Product_list selected_item, String s, String price) {
 
+
+
         bottomSheetDialog.dismiss();
 
         producprice.add(price);
@@ -3798,6 +3805,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         calculateTotalAmount(total_price);
 
         products_adapter.notifyDataSetChanged();
+
+        //Utility.hideKeypad(getActivity());
 
 
 

@@ -370,7 +370,8 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.fragment_convert_to_receipts);
         Constant.toolbar(ConvertToReceiptsActivity.this, getString(R.string.header_convert_to_receipt));
 

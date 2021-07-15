@@ -363,7 +363,8 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.editreceiptactivity);
         Constant.toolbar(EditEditReceiptActivity.this, getString(R.string.header_edit_receipt));
 

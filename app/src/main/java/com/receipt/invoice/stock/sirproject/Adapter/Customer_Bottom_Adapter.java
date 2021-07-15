@@ -17,6 +17,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.receipt.invoice.stock.sirproject.Model.Customer_list;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Utils.GlideApp;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 
 import java.util.ArrayList;
 
@@ -118,6 +119,7 @@ public class Customer_Bottom_Adapter extends RecyclerView.Adapter<Customer_Botto
             @Override
             public void onClick(View view) {
                  callback.onPostExecute(mlist.get(i));
+
             }
         });
 

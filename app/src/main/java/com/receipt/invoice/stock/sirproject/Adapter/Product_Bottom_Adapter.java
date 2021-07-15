@@ -40,7 +40,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_Adapter.ViewHolderForCat> {
 
     private static final String TAG = "Product_Bottom_Adapter";
-    private Context mcontext ;
+    private Activity mcontext ;
     ArrayList<Product_list> mlist=new ArrayList<>();
 
 
@@ -55,7 +55,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
     String product_ida;
     String receipt = "";
 
-    public Product_Bottom_Adapter(Context mcontext , ArrayList<Product_list>list,Callback callback, BottomSheetDialog bottomSheetDialog, String receipt){
+    public Product_Bottom_Adapter(Activity mcontext , ArrayList<Product_list>list,Callback callback, BottomSheetDialog bottomSheetDialog, String receipt){
         this.mcontext = mcontext;
          mlist=list;
         this.callback = callback;
@@ -305,7 +305,7 @@ public class Product_Bottom_Adapter extends RecyclerView.Adapter<Product_Bottom_
                 if(bottomSheetDialog != null){
                     bottomSheetDialog.dismiss();
                 }
-
+                Utility.hideKeypad(mcontext);
                 Log.e(TAG, "po0000 "+receipt);
 
                 try {

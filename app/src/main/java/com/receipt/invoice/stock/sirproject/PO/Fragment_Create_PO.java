@@ -376,7 +376,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         View view = inflater.inflate(R.layout.fragment_create_po, container, false);
 
 

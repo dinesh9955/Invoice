@@ -372,7 +372,9 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+//        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         View view = inflater.inflate(R.layout.fragment_create__credit_notes, container, false);
 
         selectButton = view.findViewById(R.id.selectButton);
