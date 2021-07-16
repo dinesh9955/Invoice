@@ -846,8 +846,8 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
             public void onItemSelected(int position, String itemAtPosition) {
                 selectwarehouseId = wids.get(position);
                 Log.e("selectwarehouseId", selectwarehouseId);
-                productget(selectwarehouseId);
-
+             //   productget(selectwarehouseId);
+                productget(selectedCompanyId);
             }
         });
 
@@ -1414,7 +1414,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
         if(requestCode == 124){
             Log.e(TAG, "requestCode "+requestCode);
-            productget(selectwarehouseId);
+            productget(selectedCompanyId);
         }
 
         if(requestCode == 125){
@@ -2679,14 +2679,15 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);
         RequestParams params = new RequestParams();
-        params.add("warehouse_id", selectedCompanyId);
+//        params.add("warehouse_id", selectedCompanyId);
+        params.add("company_id", selectedCompanyId);
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
         params.add("language", ""+getLanguage());
-        client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
+        client.post(AllSirApi.BASE_URL + "product/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 avi.smoothToHide();

@@ -30,7 +30,7 @@
         android:id="@+id/search"
         android:layout_below="@+id/selectcompany"
         android:padding="10dp"
-        android:background="@drawable/edittextshape"
+        android:background="@drawable/search_shape"
         android:elevation="3dp"
         android:maxLines="1"
         android:textColorHint="@color/dark_grey"/>

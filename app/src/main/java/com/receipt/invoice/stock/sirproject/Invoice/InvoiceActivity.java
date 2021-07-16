@@ -41,7 +41,7 @@ public class InvoiceActivity extends BaseActivity {
         Constant.toolbar(InvoiceActivity.this,getString(R.string.header_invoices));
 
         activity = this;
-        pref.setCustomerName("");
+        //pref.setCustomerName("");
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);

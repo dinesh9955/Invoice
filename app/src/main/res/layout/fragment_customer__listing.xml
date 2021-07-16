@@ -29,7 +29,7 @@
         android:layout_marginTop="30dp"
         android:id="@+id/search"
         android:padding="10dp"
-        android:background="@drawable/edittextshape"
+        android:background="@drawable/search_shape"
         android:elevation="3dp"
         android:maxLines="1"
         android:layout_below="@+id/selectcompany"
