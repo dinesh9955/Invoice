@@ -9,6 +9,15 @@
 
     <string name="dialog_CustomerUpdated">تم تحديث العميل</string>
 
+
+    <string name="dropCash">نقدي</string>
+    <string name="dropCheque">التحقق من</string>
+    <string name="dropBank">بنك</string>
+    <string name="dropCreditCard">بطاقة إئتمان</string>
+    <string name="dropPaypal">باي بال</string>
+    <string name="dropOthers">آحرون</string>
+
+
     <string name = "noti_invoice_seen"> تمت رؤية فاتورتك بواسطة </string>
 
     <string name = "htmlview_credit_note"> ملاحظة ائتمانية </string>

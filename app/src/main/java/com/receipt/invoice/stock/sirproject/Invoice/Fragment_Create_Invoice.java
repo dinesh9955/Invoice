@@ -1986,12 +1986,14 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             btndone2 = view.findViewById(R.id.btndone2);
             selectpaymentmode = view.findViewById(R.id.selectpaymentmode);
             paymode.clear();
-            paymode.add("Cash");
-            paymode.add("Cheque");
-            paymode.add("Bank");
-            paymode.add("Credit card");
-            paymode.add("Paypal");
-            paymode.add("Others");
+
+            paymode.add(getString(R.string.dropCash));
+            paymode.add(getString(R.string.dropCheque));
+            paymode.add(getString(R.string.dropBank));
+            paymode.add(getString(R.string.dropCreditCard));
+            paymode.add(getString(R.string.dropPaypal));
+            paymode.add(getString(R.string.dropOthers));
+
             ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, paymode);
             selectpaymentmode.setAdapter(namesadapter);
 
@@ -2041,7 +2043,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                     }
 
                                     eddate.setText(year + "-" + realMonth + "-" + realDay);
-
 
                                 }
                             }, mYear, mMonth, mDay);

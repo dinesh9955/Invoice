@@ -9,6 +9,13 @@
 
     <string name="dialog_CustomerUpdated">Kunde aktualisiert</string>
 
+    <string name="dropCash">Bargeld</string>
+    <string name="dropCheque">Scheck</string>
+    <string name="dropBank">Bank</string>
+    <string name="dropCreditCard">Kreditkarte</string>
+    <string name="dropPaypal">Paypal</string>
+    <string name="dropOthers">Andere</string>
+
     <string name="noti_invoice_seen">Ihre Rechnung wurde gesehen von</string>
 
     <string name="htmlview_credit_note">KREDITHINWEIS</string>

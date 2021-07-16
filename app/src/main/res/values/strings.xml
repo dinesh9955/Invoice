@@ -8,6 +8,15 @@
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
 
+
+
+    <string name="dropCash">Cash</string>
+    <string name="dropCheque">Cheque</string>
+    <string name="dropBank">Bank</string>
+    <string name="dropCreditCard">Credit Card</string>
+    <string name="dropPaypal">Paypal</string>
+    <string name="dropOthers">Others</string>
+
     <string name="noti_invoice_seen">Your invoice has been seen by</string>
 
     <string name="htmlview_credit_note">CREDIT NOTE</string>

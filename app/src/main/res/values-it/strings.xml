@@ -10,6 +10,14 @@
 
     <string name="dialog_CustomerUpdated">Cliente aggiornato</string>
 
+
+    <string name="dropCash">Contanti</string>
+    <string name="dropCheque">Assegno</string>
+    <string name="dropBank">Banca</string>
+    <string name="dropCreditCard">Carta di credito</string>
+    <string name="dropPaypal">Paypal</string>
+    <string name="dropOthers">Altri</string>
+
     <string name="noti_invoice_seen">La tua fattura è stata vista da</string>
 
     <string name="htmlview_credit_note">NOTA DI CREDITO</string>

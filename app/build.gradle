@@ -4,6 +4,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 30
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.receipt.invoice.stock.sirproject"
         minSdkVersion 23
@@ -13,12 +14,42 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
     }
+
+    signingConfigs {
+        config {
+            keyAlias 'sir'
+            keyPassword 'android'
+            storeFile file('D:\\sir_release.jks')
+            storePassword 'android'
+        }
+    }
+
+
     buildTypes {
         release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            //debuggable true
+        }
+
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
+//    }
+
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -26,6 +57,10 @@ android {
 
     dexOptions {
         javaMaxHeapSize "4g"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
     }
 }
 

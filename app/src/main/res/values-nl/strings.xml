@@ -10,6 +10,14 @@
     <string name="dialog_CustomerUpdated">Klant bijgewerkt</string>
 
 
+    <string name="dropCash">Cash</string>
+    <string name="dropCheque">Cheque</string>
+    <string name="dropBank">Bank</string>
+    <string name="dropCreditCard">Creditcard</string>
+    <string name="dropPaypal">Paypal</string>
+    <string name="dropOthers">Anderen</string>
+
+
     <string name="noti_invoice_seen">Uw factuur is gezien door</string>
 
     <string name="htmlview_credit_note">CREDIT NOTE</string>
