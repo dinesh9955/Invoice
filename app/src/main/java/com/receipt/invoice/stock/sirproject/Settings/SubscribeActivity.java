@@ -182,7 +182,8 @@ public class SubscribeActivity extends BaseActivity{
 
         ItemSubscribe itemSubscribe1 = new ItemSubscribe();
         itemSubscribe1.setSubscription_type("oneyear");
-        itemSubscribe1.setProductId("com.sirapp.oneyear");
+//        itemSubscribe1.setProductId("com.sirapp.oneyear");
+        itemSubscribe1.setProductId("monthly_3.99");
         itemSubscribe1.setPlan("35.99");
         itemSubscribe1.setPlanName(getString(R.string.settings_paln_title_1));
         itemSubscribe1.setDescription(getString(R.string.settings_paln_desc_1));

@@ -46,7 +46,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden|adjustPan"
-        tools:replace="android:supportsRtl"
+        tools:replace="android:supportsRtl,icon"
         >
 
         <activity

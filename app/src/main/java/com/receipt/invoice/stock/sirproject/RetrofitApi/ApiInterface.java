@@ -9,10 +9,12 @@ import com.receipt.invoice.stock.sirproject.PO.POResponseDto;
 import com.receipt.invoice.stock.sirproject.PV.PVResponseDto;
 import com.receipt.invoice.stock.sirproject.Receipts.ReceiptResponseDto;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
@@ -20,6 +22,11 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("invoice/detail/{invoice_id}")
     Call<InvoiceResponseDto> getInvoiceDetail(@Header ("Access-Token") String string, @Field("invoice_id") String id, @Field("language") String language);
+
+
+    @FormUrlEncoded
+    @POST("invoice/detail/{invoice_id}")
+    Call<ResponseBody> getInvoiceDetail2(@Header ("Access-Token") String string, @Field("invoice_id") String id, @Field("language") String language);
 
 
     @FormUrlEncoded

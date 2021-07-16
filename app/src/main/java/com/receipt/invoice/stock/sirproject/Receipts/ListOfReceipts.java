@@ -629,13 +629,13 @@ public class ListOfReceipts extends BaseFragment {
 
                         String status = jsonObject.getString("status");
                         if (status.equals("false")) {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                           // Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                   // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
                 textViewMsg.setVisibility(View.VISIBLE);

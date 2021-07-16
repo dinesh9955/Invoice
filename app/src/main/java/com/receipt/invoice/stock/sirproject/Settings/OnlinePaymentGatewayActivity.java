@@ -420,6 +420,20 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                             }
 
 
+                            if(stripeCode == 123){
+                                if(paypal.equalsIgnoreCase("1")){
+                                    buttonPaypal.setText(getString(R.string.tax_edit));
+                                }else if(paypal.equalsIgnoreCase("0")){
+                                    buttonPaypal.setText(getString(R.string.setting_Setup));
+                                }
+
+                                if(stripe.equalsIgnoreCase("1")){
+                                    buttonStripe.setText(getString(R.string.tax_edit));
+                                }else if(stripe.equalsIgnoreCase("0")){
+                                    buttonStripe.setText(getString(R.string.setting_Setup));
+                                }
+                            }
+
                         }
 
 
@@ -460,9 +474,6 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         Log.e(TAG, "requestCode:: "+requestCode);
         Log.e(TAG, "resultCode:: "+resultCode);
 
-
-
-
         if(requestCode == 122){
             payPalCode = requestCode;
             CompanyInformation(selectedCompanyId);
@@ -470,9 +481,12 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
 
         if(requestCode == 123){
             stripeCode = requestCode;
+            if(data != null){
                 String responseCode = data.getStringExtra("responseCode");
                 Log.e(TAG, "responseCode:: "+responseCode);
                 callMethod(responseCode);
+            }
+
         }
     }
 

@@ -1,7 +1,9 @@
 package com.receipt.invoice.stock.sirproject.Invoice;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
+import android.annotation.TargetApi;
+//import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -103,6 +105,8 @@ public class InvoiceViewActivityWebView extends BaseActivity {
         templateSelect = getIntent().getStringExtra("templateSelect");
         colorCode = getIntent().getStringExtra("colorCode");
 
+        invoiceweb = findViewById(R.id.invoiceweb);
+
         if (invoiceId != null) {
             Log.e("invoiceId", invoiceId);
         }
@@ -137,6 +141,12 @@ public class InvoiceViewActivityWebView extends BaseActivity {
             public void onResponse(Call<InvoiceResponseDto> call, retrofit2.Response<InvoiceResponseDto> response) {
 
                 Log.e("resss ", ""+response.body().toString());
+
+//                Gson gson = new Gson();
+//                String json = gson.toJson(response);
+//
+//                Log.e(TAG , "asssss "+json);
+
                 // image path of all
                 company_image_path = response.body().getData().getCompanyImagePath();
                 customer_image_path = response.body().getData().getCustomerImagePath();
@@ -251,10 +261,10 @@ public class InvoiceViewActivityWebView extends BaseActivity {
                 }
 
 
-                Gson gson = new Gson();
-                String json2 = gson.toJson(invoiceDtoInvoice);
-
-                Log.e(TAG, "jsonAA "+json2);
+//                Gson gson = new Gson();
+//                String json2 = gson.toJson(invoiceDtoInvoice);
+//
+//                Log.e(TAG, "jsonAA "+json2);
 
 
 
@@ -365,10 +375,11 @@ public class InvoiceViewActivityWebView extends BaseActivity {
     }
 
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     private void createWebPrintJob(WebView webView) {
 
         //create object of print manager in your device
-        PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
+        PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(PRINT_SERVICE);
 
 
 

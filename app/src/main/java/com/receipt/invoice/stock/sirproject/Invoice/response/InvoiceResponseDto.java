@@ -1,8 +1,11 @@
 package com.receipt.invoice.stock.sirproject.Invoice.response;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class InvoiceResponseDto {
+import java.io.Serializable;
+
+public class InvoiceResponseDto implements Serializable {
 
 	@SerializedName("data")
 	private InvoiceDto data;

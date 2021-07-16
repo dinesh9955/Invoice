@@ -40,6 +40,7 @@ import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicke
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.gson.Gson;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
@@ -67,6 +68,14 @@ import java.util.Locale;
 
 import com.lowagie.text.Font;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
+import com.receipt.invoice.stock.sirproject.Constant.Constant;
+import com.receipt.invoice.stock.sirproject.Invoice.InvoiceViewActivityWebView;
+import com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceResponseDto;
+import com.receipt.invoice.stock.sirproject.POJO.Invoice.Root;
+import com.receipt.invoice.stock.sirproject.RetrofitApi.APIClient;
+import com.receipt.invoice.stock.sirproject.RetrofitApi.ApiInterface;
+import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitClient;
+import com.receipt.invoice.stock.sirproject.RetrofitApi.RetrofitInstance;
 import com.receipt.invoice.stock.sirproject.Utils.HtmlService.task.CreateHtmlTask;
 import com.receipt.invoice.stock.sirproject.Utils.SublimePickerFragment;
 import com.receipt.invoice.stock.sirproject.Utils.HtmlService.domain.HtmlFile;
@@ -75,6 +84,10 @@ import com.receipt.invoice.stock.sirproject.Utils.HtmlService.domain.HtmlFile;
 import org.apache.commons.io.IOUtils;
 
 import cz.msebera.android.httpclient.util.ByteArrayBuffer;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import ru.slybeaver.slycalendarview.SlyCalendarDialog;
 
 public class Abc extends BaseActivity implements CreateHtmlTask.OnTaskFinishedListener {
@@ -84,7 +97,7 @@ public class Abc extends BaseActivity implements CreateHtmlTask.OnTaskFinishedLi
     private ProgressDialog pd;
 
     TextView textView;
-
+    ApiInterface apiInterface;
 
     private void sendMail(String appName, String playStoreLink) {
         String msg = "<HTML><BODY>Hello,<br>Recently,I downloaded <b><font color=\"red\">"+appName+"</font></b>"+
@@ -108,6 +121,8 @@ public class Abc extends BaseActivity implements CreateHtmlTask.OnTaskFinishedLi
         setContentView(R.layout.abc);
 
         textView = findViewById(R.id.textView3);
+
+        apiInterface = APIClient.getClient().create(ApiInterface.class);
 
         Button button = (Button) findViewById(R.id.button2);
         firebaseAnalytics = FirebaseAnalytics.getInstance(Abc.this);
@@ -152,6 +167,89 @@ public class Abc extends BaseActivity implements CreateHtmlTask.OnTaskFinishedLi
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
+
+                String token = Constant.GetSharedPreferences(Abc.this, Constant.ACCESS_TOKEN);
+//                Call<InvoiceResponseDto> resposresult = apiInterface.getInvoiceDetail(token, "2393", "english");
+//
+//                resposresult.enqueue(new Callback<InvoiceResponseDto>() {
+//                    @Override
+//                    public void onResponse(Call<InvoiceResponseDto> call, Response<InvoiceResponseDto> response) {
+//
+//                        Gson gson = new Gson();
+//                        String json = gson.toJson(response);
+//
+//                        Log.e(TAG, "onResponse:: "+json);
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<InvoiceResponseDto> call, Throwable t) {
+//                        Log.e(TAG, "onFailure:: "+t.getMessage());
+//                    }
+//                });
+//
+//
+//
+                Call<ResponseBody> call = apiInterface.getInvoiceDetail2(token, "2393", "english");
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                        String responseCode = "";
+                        try {
+                            if(response.body() != null) {
+                                responseCode = response.body().string();
+                                Log.e(TAG, "onResponse:: "+responseCode);
+
+                                Gson g = new Gson();
+                                Root p = g.fromJson(responseCode, Root.class);
+
+                                Log.e(TAG, "onResponse:: "+p.data.invoice.company_id);
+
+
+                            }else{
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e(TAG, "onFailure:: "+t.getMessage());
+                    }
+                });
+
+
+//                Call<InvoiceResponseDto> call2 = RetrofitClient.getInstance().getMyApi().getInvoiceDetail(token, "2393", "english");
+//
+//                call2.enqueue(new Callback<InvoiceResponseDto>() {
+//                    @Override
+//                    public void onResponse(Call<InvoiceResponseDto> call, Response<InvoiceResponseDto> response) {
+//
+//                        //In this point we got our hero list
+//                        //thats damn easy right ;)
+//                     //   InvoiceResponseDto heroList = response.body();
+//
+//                        Log.e(TAG, "onResponse2:: "+response.body().toString());
+//
+//                        //now we can do whatever we want with this list
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<InvoiceResponseDto> call, Throwable t) {
+//                        //handle error or failure cases here
+//                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
+
+
+
+
+
+
 
                 String name = "debit.html";
                 String nameName = "file:///android_asset/debit.html";
@@ -222,7 +320,7 @@ String dd = "<html>\n" +
 //                );
 //                emailIntent.addCategory()
 //                emailIntent.setContent(str,"text/html; charset=utf-8");
-                startActivity(Intent.createChooser(emailIntent, "Email:"));
+              //  startActivity(Intent.createChooser(emailIntent, "Email:"));
 
              //   new CreateHtmlTask(getCacheDir(), Abc.this).execute("input");
 

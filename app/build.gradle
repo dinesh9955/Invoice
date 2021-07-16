@@ -4,7 +4,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 30
-    useLibrary 'org.apache.http.legacy'
+//    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.receipt.invoice.stock.sirproject"
         minSdkVersion 23
@@ -27,8 +27,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
             //debuggable true
@@ -61,6 +61,8 @@ android {
 
     lintOptions {
         checkReleaseBuilds false
+        abortOnError false
+        disable 'MissingTranslation'
     }
 }
 
@@ -126,7 +128,10 @@ dependencies {
                 exclude module: 'appcompat-v7'
                 exclude module: 'support-v4'
             }*/
-    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+//    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+
+
+
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.code.gson:gson:2.8.6'
 
@@ -179,8 +184,30 @@ dependencies {
 
     // Retrofit
 
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+//    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+
+
+
+
+//    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+//    implementation 'com.google.code.gson:gson:2.8.4'
+//
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+
+//    implementation 'com.squareup.retrofit2:converter-gson:2.8.5'
+
+
+//    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+//    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+
+
+
+//    implementation 'com.squareup.retrofit2:retrofit:2.0.2'
+//    implementation 'com.squareup.retrofit2:converter-gson:2.0.2'
+
+
 
     //
     implementation 'com.github.ganfra:material-spinner:2.0.0'

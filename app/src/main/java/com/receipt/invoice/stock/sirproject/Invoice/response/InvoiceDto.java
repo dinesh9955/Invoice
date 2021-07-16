@@ -1,10 +1,11 @@
 package com.receipt.invoice.stock.sirproject.Invoice.response;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 import com.receipt.invoice.stock.sirproject.Invoice.Invoice_image;
 
-public class InvoiceDto {
+public class InvoiceDto implements Serializable {
 
 	@SerializedName("invoice_image_path")
 	private String invoiceImagePath;

@@ -229,14 +229,14 @@ public class Go_Premium_Activity extends BaseActivity implements BillingProcesso
 //                    bp.subscribe(Go_Premium_Activity.this,"android.test.purchased");
                     bp.subscribe(Go_Premium_Activity.this,"monthly_3.99");
                     //perform action after 2 secs
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            //bp.subscribe(Go_Premium_Activity.this,"monthly_3.99");
-                            //bp.subscribe(Go_Premium_Activity.this,"android.test.purchased");
-                            Toast.makeText(getApplicationContext(),"Payment coming soon",Toast.LENGTH_SHORT).show();
-                        }
-                    },500);
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            //bp.subscribe(Go_Premium_Activity.this,"monthly_3.99");
+//                            //bp.subscribe(Go_Premium_Activity.this,"android.test.purchased");
+//                            Toast.makeText(getApplicationContext(),"Payment coming soon",Toast.LENGTH_SHORT).show();
+//                        }
+//                    },500);
                 }
                 else{
                     r1.setBackground(getResources().getDrawable(R.drawable.pkg_unselect_curve));
@@ -474,19 +474,19 @@ public class Go_Premium_Activity extends BaseActivity implements BillingProcesso
     //Billing
     @Override
     public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
-        //Toast.makeText(getApplicationContext(),"Purchased: "+productId,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Purchased: "+productId,Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void onPurchaseHistoryRestored() {
-        //Toast.makeText(getApplicationContext(),"Purchase History",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Purchase History",Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void onBillingError(int errorCode, @Nullable Throwable error) {
-        //Toast.makeText(getApplicationContext(),"Purchase Error",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Purchase Error",Toast.LENGTH_SHORT).show();
         //Log.e("errcode", String.valueOf(errorCode));
         //Log.e("errcodemsg", error.toString());
 
@@ -495,7 +495,7 @@ public class Go_Premium_Activity extends BaseActivity implements BillingProcesso
 
     @Override
     public void onBillingInitialized() {
-       // Toast.makeText(getApplicationContext(),"initialized",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"initialized",Toast.LENGTH_SHORT).show();
 
     }
 
