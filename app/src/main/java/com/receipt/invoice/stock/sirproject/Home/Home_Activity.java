@@ -105,6 +105,10 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
     RelativeLayout home_AddyourBusiness, home_AddyourCustomer, home_AddyourProducts, home_AddyourWarehouse,
             home_AddyourItems, home_SetupPayment, home_CreateyourInvoice;
 
+    ImageView imageView_AddyourBusiness, imageView_AddyourCustomer, imageView_AddyourProducts, imageView_AddyourWarehouse,
+            imageView_AddyourItems, imageView_SetupPayment, imageView_CreateyourInvoice;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,6 +222,16 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         home_SetupPayment = findViewById(R.id.home_SetupPayment);
         home_CreateyourInvoice = findViewById(R.id.home_CreateyourInvoice);
 
+        imageView_AddyourBusiness = findViewById(R.id.imageView);
+        imageView_AddyourCustomer = findViewById(R.id.imageView2);
+        imageView_AddyourProducts = findViewById(R.id.imageView4);
+        imageView_AddyourWarehouse = findViewById(R.id.imageView5);
+        imageView_AddyourItems = findViewById(R.id.imageView7);
+        imageView_SetupPayment = findViewById(R.id.imageView8);
+        imageView_CreateyourInvoice = findViewById(R.id.imageView9);
+
+
+
 
 
         businessactivitiesRV = findViewById(R.id.businessactivitiesRV);
@@ -320,6 +334,9 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                 startActivity(intent);
             }
         });
+
+
+
 
 
 
