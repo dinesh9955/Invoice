@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Base.LicenseListAdapter;
+import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
 import com.receipt.invoice.stock.sirproject.Home.Model.CompanyModel;
 import com.receipt.invoice.stock.sirproject.Home.Model.InvoiceModel;
 import com.receipt.invoice.stock.sirproject.Adapter.Invoice_OverDue_Adapter;
@@ -39,7 +41,11 @@ import com.receipt.invoice.stock.sirproject.Home.Model.SupplierModel;
 import com.receipt.invoice.stock.sirproject.Home.adapter.HomeCustomerAdapter;
 import com.receipt.invoice.stock.sirproject.Home.adapter.HomeInvoiceAdapter;
 import com.receipt.invoice.stock.sirproject.Home.adapter.HomeSupplierAdapter;
+import com.receipt.invoice.stock.sirproject.Invoice.InvoiceActivity;
+import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
+import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
+import com.receipt.invoice.stock.sirproject.Settings.OnlinePaymentGatewayActivity;
 import com.receipt.invoice.stock.sirproject.SignupSignin.Signup_Activity;
 import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 import com.receipt.invoice.stock.sirproject.API.AllSirApi;
@@ -95,6 +101,9 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
     public ArrayList<SupplierModel> supplierModelArrayList = new ArrayList<>();
 
     TextView textViewGoPro;
+
+    RelativeLayout home_AddyourBusiness, home_AddyourCustomer, home_AddyourProducts, home_AddyourWarehouse,
+            home_AddyourItems, home_SetupPayment, home_CreateyourInvoice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +210,16 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         textViewGoPro = findViewById(R.id.go_pro);
 
+        home_AddyourBusiness = findViewById(R.id.home_AddyourBusiness);
+        home_AddyourCustomer = findViewById(R.id.home_AddyourCustomer);
+        home_AddyourProducts = findViewById(R.id.home_AddyourProducts);
+        home_AddyourWarehouse = findViewById(R.id.home_AddyourWarehouse);
+        home_AddyourItems = findViewById(R.id.home_AddyourItems);
+        home_SetupPayment = findViewById(R.id.home_SetupPayment);
+        home_CreateyourInvoice = findViewById(R.id.home_CreateyourInvoice);
+
+
+
         businessactivitiesRV = findViewById(R.id.businessactivitiesRV);
         invoiceoverdueRV = findViewById(R.id.invoiceoverdueRV);
         recycleCustomers = findViewById(R.id.recycleCustomers);
@@ -222,8 +241,6 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         txtinvoice = findViewById(R.id.txtinvoice);
 
 
-       // COMPANYListingApi();
-
 
 
     }
@@ -238,6 +255,75 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                 startActivity(intent);
             }
         });
+
+
+
+        home_AddyourBusiness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_Activity.this, Companies_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        home_AddyourCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_Activity.this, Customer_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        home_AddyourProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_Activity.this, Product_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        home_AddyourWarehouse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_Activity.this, Companies_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        home_AddyourItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_Activity.this, Service_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        home_SetupPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_Activity.this, OnlinePaymentGatewayActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+        home_CreateyourInvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+
+
+
 
         seeall.setOnClickListener(new View.OnClickListener() {
             @Override

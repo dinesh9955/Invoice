@@ -73,52 +73,503 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="20dp"
                     android:textSize="15sp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
                     android:textStyle="bold"
                     android:id="@+id/go_pro"
                     android:textColor="@color/white"
                     android:background="@drawable/blue_round_shape"/>
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_quick_look"
-                    android:layout_below="@+id/description"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/darkgray"
-                    android:id="@+id/quick"
-                    android:textSize="12sp"/>
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="110dp"
-                    android:layout_below="@+id/quick"
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/businessactivitiesRV"
-                    >
-
-                </androidx.recyclerview.widget.RecyclerView>
-                <TextView
-                    android:layout_marginTop="100dp"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_no_unpaid_invoices"
-                    android:textSize="14dp"
-                    android:textColor="@color/darkgray"
-                    android:id="@+id/txtinvoice"
-                    android:visibility="gone"
-                    />
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:elevation="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="25dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/relative_lets"
+                android:layout_below="@+id/bluerelative"
+                android:layout_marginTop="15dp"
+                android:background="@color/transparent"
+                >
+
+                <TextView
+                    android:id="@+id/text_lets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_lets"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+
+
+                    />
+
+                <RelativeLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/text_lets"
+                    android:id="@+id/home_AddyourBusiness"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_AddyourBusiness"
+                        android:id="@+id/text_setting"
+                        android:textColor="@color/fragmentfont"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/imageView"
+                        />
+
+                    <View
+                        android:id="@+id/view8"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_grey"
+                        android:layout_alignParentBottom="true"
+                        >
+
+                    </View>
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/radio_uncheck"
+                        android:tint="@color/darkblue"
+                        tools:ignore="UseAppTint" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/home_AddyourBusiness"
+                    android:id="@+id/home_AddyourCustomer">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_AddyourCustomer"
+                        android:id="@+id/text_setting2"
+                        android:textColor="@color/fragmentfont"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/imageView2"
+                        />
+
+                    <View
+                        android:id="@+id/view81"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_grey"
+                        android:layout_alignParentBottom="true"
+                        >
+
+                    </View>
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/radio_uncheck"
+                        android:tint="@color/darkblue"
+                        tools:ignore="UseAppTint" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/home_AddyourCustomer"
+                    android:id="@+id/home_trackinventory">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_trackinventory"
+                        android:id="@+id/text_setting3"
+                        android:textColor="@color/fragmentfont"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/imageView3"
+                        />
+
+                    <View
+                        android:id="@+id/view82"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_grey"
+                        android:layout_alignParentBottom="true"
+                        >
+
+                    </View>
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/radio_check"
+                        android:tint="@color/darkblue"
+                        tools:ignore="UseAppTint"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/home_trackinventory"
+                    android:id="@+id/home_AddyourProducts"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_AddyourProducts"
+                        android:id="@+id/text_setting4"
+                        android:textColor="@color/fragmentfont"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/imageView4"
+                        />
+
+                    <View
+                        android:id="@+id/view83"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_grey"
+                        android:layout_alignParentBottom="true"
+                        >
+
+                    </View>
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/radio_uncheck"
+                        android:tint="@color/darkblue"
+                        tools:ignore="UseAppTint" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/home_AddyourProducts"
+                    android:id="@+id/home_AddyourWarehouse"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_AddyourWarehouse"
+                        android:id="@+id/text_setting5"
+                        android:textColor="@color/fragmentfont"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/imageView5"
+                        />
+
+                    <View
+                        android:id="@+id/view84"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_grey"
+                        android:layout_alignParentBottom="true"
+                        >
+
+                    </View>
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/radio_uncheck"
+                        android:tint="@color/darkblue"
+                        tools:ignore="UseAppTint" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/home_AddyourWarehouse"
+                    android:id="@+id/home_donttrackinventory">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_donttrackinventory"
+                        android:id="@+id/text_setting6"
+                        android:textColor="@color/fragmentfont"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/imageView6"
+                        />
+
+                    <View
+                        android:id="@+id/view85"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_grey"
+                        android:layout_alignParentBottom="true"
+                        >
+
+                    </View>
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/radio_check"
+                        android:tint="@color/darkblue"
+                        tools:ignore="UseAppTint"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/home_donttrackinventory"
+                    android:id="@+id/home_AddyourItems"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_AddyourItems"
+                        android:id="@+id/text_setting7"
+                        android:textColor="@color/fragmentfont"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/imageView7"
+                        />
+
+                    <View
+                        android:id="@+id/view87"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_grey"
+                        android:layout_alignParentBottom="true"
+                        >
+
+                    </View>
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/radio_uncheck"
+                        android:tint="@color/darkblue"
+                        tools:ignore="UseAppTint" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/home_AddyourItems"
+                    android:id="@+id/home_SetupPayment"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_SetupPayment"
+                        android:id="@+id/text_setting8"
+                        android:textColor="@color/fragmentfont"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/imageView8"
+                        />
+
+                    <View
+                        android:id="@+id/view88"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_grey"
+                        android:layout_alignParentBottom="true"
+                        >
+
+                    </View>
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/radio_uncheck"
+                        android:tint="@color/darkblue"
+                        tools:ignore="UseAppTint" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/home_SetupPayment"
+                    android:id="@+id/home_CreateyourInvoice"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_CreateyourInvoice"
+                        android:id="@+id/text_setting9"
+                        android:textColor="@color/fragmentfont"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/imageView9"
+                        />
+
+                    <View
+                        android:id="@+id/view89"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_grey"
+                        android:layout_alignParentBottom="true"
+                        >
+
+                    </View>
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/radio_uncheck"
+                        android:tint="@color/darkblue"
+                        tools:ignore="UseAppTint" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_quick_look"
+                android:layout_below="@+id/relative_lets"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/darkgray"
+                android:id="@+id/quick"
+                android:textSize="13sp"
+                android:visibility="visible"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_below="@+id/quick"
+                android:layout_marginTop="20dp"
+                android:id="@+id/businessactivitiesRV"
+                android:visibility="visible"
+                >
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:layout_marginTop="60dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/quick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_no_unpaid_invoices"
+                android:textSize="14dp"
+                android:textColor="@color/darkgray"
+                android:id="@+id/txtinvoice"
+                android:visibility="gone"
+                />
+
 
             <androidx.recyclerview.widget.RecyclerView
 
@@ -126,20 +577,21 @@
                 android:layout_height="120dp"
                 android:layout_marginTop="20dp"
                 android:id="@+id/invoiceoverdueRV"
-                android:layout_below="@+id/bluerelative">
+                android:layout_below="@+id/businessactivitiesRV"
+                android:layout_marginBottom="90dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
                 android:id="@+id/no_overduetxt"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="60dp"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/home_no_overdue_invoices"
                 android:textSize="14dp"
                 android:textColor="@color/darkgray"
-                android:layout_below="@+id/bluerelative"
+                android:layout_below="@+id/businessactivitiesRV"
                 android:visibility="gone"
                 />
 
@@ -156,7 +608,8 @@
                 android:id="@+id/customers"
                 android:layout_below="@+id/invoiceoverdueRV"
                 android:layout_marginTop="25dp"
-                android:background="@drawable/white_curve">
+                android:background="@drawable/white_curve"
+                android:visibility="gone">
 
                 <TextView
 
@@ -225,7 +678,8 @@
                 android:id="@+id/vendors"
                 android:layout_below="@+id/customers"
                 android:layout_marginTop="35dp"
-                android:background="@drawable/white_curve">
+                android:background="@drawable/white_curve"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"

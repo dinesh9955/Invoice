@@ -12,6 +12,18 @@
 
     <string name="go_pro">Ga Pro</string>
 
+    <string name="home_lets">Laten we beginnen</string>
+    <string name="home_AddyourBusiness">Voeg uw bedrijfsinformatie toe</string>
+    <string name="home_AddyourCustomer">Voeg je klanten toe</string>
+    <string name="home_trackinventory">Als je de voorraad wilt bijhouden</string>
+    <string name="home_AddyourProducts">Voeg je producten toe</string>
+    <string name="home_AddyourWarehouse">Voeg je magazijn toe</string>
+    <string name="home_donttrackinventory">Als je de voorraad niet wilt bijhouden</string>
+    <string name="home_AddyourItems">Voeg je items toe</string>
+    <string name="home_SetupPayment">Betalingsgateway instellen</string>
+    <string name="home_CreateyourInvoice">Maak je factuur</string>
+
+
 
     <string name="dropCash">Cash</string>
     <string name="dropCheque">Cheque</string>

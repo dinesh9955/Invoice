@@ -12,6 +12,19 @@
 
     <string name="go_pro">Go Pro</string>
 
+    <string name="home_lets">Lass uns loslegen</string>
+    <string name="home_AddyourBusiness">Fügen Sie Ihre Unternehmensinformationen hinzu</string>
+    <string name="home_AddyourCustomer">Fügen Sie Ihre Kunden hinzu</string>
+    <string name="home_trackinventory">Wenn Sie Inventar verfolgen möchten</string>
+    <string name="home_AddyourProducts">Fügen Sie Ihre Produkte hinzu</string>
+    <string name="home_AddyourWarehouse">Fügen Sie Ihr Lager hinzu</string>
+    <string name="home_donttrackinventory">Wenn Sie kein Inventar verfolgen möchten</string>
+    <string name="home_AddyourItems">Füge deine Artikel hinzu</string>
+    <string name="home_SetupPayment">Zahlungsgateway einrichten</string>
+    <string name="home_CreateyourInvoice">Erstelle deine Rechnung</string>
+
+
+
     <string name="dropCash">Bargeld</string>
     <string name="dropCheque">Scheck</string>
     <string name="dropBank">Bank</string>

@@ -9,6 +9,17 @@
 
     <string name="go_pro">Go Pro</string>
 
+    <string name="home_lets">Let\'s gets started</string>
+    <string name="home_AddyourBusiness">Add your Business info</string>
+    <string name="home_AddyourCustomer">Add your Customers</string>
+    <string name="home_trackinventory">If you wish to track inventory</string>
+    <string name="home_AddyourProducts">Add your Products</string>
+    <string name="home_AddyourWarehouse">Add your Warehouse</string>
+    <string name="home_donttrackinventory">If you do not wish to track inventory</string>
+    <string name="home_AddyourItems">Add your Items</string>
+    <string name="home_SetupPayment">Set up Payment Gateway</string>
+    <string name="home_CreateyourInvoice">Create your Invoice</string>
+
 
     <string name="dropCash">Cash</string>
     <string name="dropCheque">Cheque</string>

@@ -13,6 +13,17 @@
 
     <string name = "go_pro">Torne-se Pro</string>
 
+    <string name = "home_lets">Vamos começar</string>
+    <string name = "home_AddyourBusiness">Adicione as informações da sua empresa</string>
+    <string name = "home_AddyourCustomer">Adicione seus clientes</string>
+    <string name = "home_trackinventory">Se você deseja rastrear o estoque</string>
+    <string name = "home_AddyourProducts">Adicione seus produtos</string>
+    <string name = "home_AddyourWarehouse">Adicione seu armazém</string>
+    <string name = "home_donttrackinventory">Se você não deseja rastrear o estoque</string>
+    <string name = "home_AddyourItems">Adicione seus itens</string>
+    <string name = "home_SetupPayment">Configurar gateway de pagamento</string>
+    <string name = "home_CreateyourInvoice">Crie sua fatura</string>
+
 
     <string name = "dropCash"> Dinheiro </string>
     <string name = "dropCheque"> Verifique </string>

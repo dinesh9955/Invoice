@@ -11,6 +11,17 @@
 
     <string name="go_pro">Go Pro</string>
 
+    <string name="home_lets">هيا نبدأ</string>
+    <string name="home_AddyourBusiness">أضف معلومات عملك</string>
+    <string name="home_AddyourCustomer">أضف عملائك</string>
+    <string name="home_trackinventory">إذا كنت ترغب في تتبع المخزون</string>
+    <string name="home_AddyourProducts">أضف منتجاتك</string>
+    <string name="home_AddyourWarehouse">أضف المستودع الخاص بك</string>
+    <string name="home_donttrackinventory">إذا كنت لا ترغب في تتبع المخزون</string>
+    <string name="home_AddyourItems">أضف العناصر الخاصة بك</string>
+    <string name="home_SetupPayment">قم بإعداد بوابة الدفع</string>
+    <string name="home_CreateyourInvoice">قم بإنشاء فاتورتك</string>
+
 
     <string name="dropCash">نقدي</string>
     <string name="dropCheque">التحقق من</string>
