@@ -3,7 +3,9 @@ package com.receipt.invoice.stock.sirproject.Home;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +33,7 @@ import com.appsflyer.AppsFlyerLib;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Base.LicenseListAdapter;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
+import com.receipt.invoice.stock.sirproject.Details.Company_Details_Activity;
 import com.receipt.invoice.stock.sirproject.Home.Model.CompanyModel;
 import com.receipt.invoice.stock.sirproject.Home.Model.InvoiceModel;
 import com.receipt.invoice.stock.sirproject.Adapter.Invoice_OverDue_Adapter;
@@ -42,6 +45,7 @@ import com.receipt.invoice.stock.sirproject.Home.adapter.HomeCustomerAdapter;
 import com.receipt.invoice.stock.sirproject.Home.adapter.HomeInvoiceAdapter;
 import com.receipt.invoice.stock.sirproject.Home.adapter.HomeSupplierAdapter;
 import com.receipt.invoice.stock.sirproject.Invoice.InvoiceActivity;
+import com.receipt.invoice.stock.sirproject.Model.Company_list;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
@@ -108,6 +112,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
     ImageView imageView_AddyourBusiness, imageView_AddyourCustomer, imageView_AddyourProducts, imageView_AddyourWarehouse,
             imageView_AddyourItems, imageView_SetupPayment, imageView_CreateyourInvoice;
 
+
+    int companyPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -302,8 +308,42 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         home_AddyourWarehouse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home_Activity.this, Companies_Activity.class);
+                Intent intent = new Intent(Home_Activity.this, Company_Details_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE, Context.MODE_PRIVATE);
+                CompanyModel companyModel = companyModelArrayList.get(companyPosition);
+
+                final String company_id = companyModel.getCompany_id();
+                final String company_email = companyModel.getEmail();
+                final String company_name = companyModel.getName();
+                final String company_phone = companyModel.getPhone_number();
+                final String company_website = companyModel.getWebsite();
+                final String currencyid = companyModel.getCurrency_id();
+                final String address = companyModel.getAddress();
+                final String bankname = companyModel.getPayment_bank_name();
+                final String paypalemail = companyModel.getPaypal_email();
+                final String payment_swiftbic = companyModel.getPayment_swift_bic();
+                final String cheque_payableto = companyModel.getCheque_payable_to();
+                final String ibnnumber = companyModel.getPayment_iban();
+                final String color = companyModel.getColor();
+                final String logo = companyModel.getLogo();
+
+
+                pref.edit().putString(Constant.COMPANY_NAME,company_name).commit();
+                pref.edit().putString(Constant.COMPANY_LOGO,logo).commit();
+                pref.edit().putString(Constant.COMPANY_EMAIL,company_email).commit();
+                pref.edit().putString(Constant.COMPANY_PHONE,company_phone).commit();
+                pref.edit().putString(Constant.COMPANY_WEB,company_website).commit();
+                pref.edit().putString(Constant.COMPANY_ID,company_id).commit();
+                pref.edit().putString(Constant.COMPANY_ADDRESS,address).commit();
+                pref.edit().putString(Constant.CURRENCY_ID,currencyid).commit();
+                pref.edit().putString(Constant.Payment_bank_name,bankname).commit();
+                pref.edit().putString(Constant.Paypal_email,paypalemail).commit();
+                pref.edit().putString(Constant.Payment_swift_bic,payment_swiftbic).commit();
+                pref.edit().putString(Constant.Cheque_payable_to,cheque_payableto).commit();
+                pref.edit().putString(Constant.Ibn_number,ibnnumber).commit();
+                pref.edit().putString("color",color).commit();
                 startActivity(intent);
             }
         });
@@ -432,6 +472,14 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                             Log.e("supplier_image_path",supplier_image_path);
 
 
+//                            JSONArray products_array = object_data.getJSONArray("product");
+//                            if(products_array.length() > 0){
+//                                imageView_AddyourProducts.setImageResource(R.drawable.radio_check);
+//                            }
+
+//                            JSONArray supplier_array = object_data.getJSONArray("supplier");
+//                            JSONArray supplier_array = object_data.getJSONArray("supplier");
+
 
                             JSONArray customer_array = object_data.getJSONArray("customer");
                             //Log.e("detail Image", "result " + customer_array);
@@ -454,6 +502,10 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                                 customerModelArrayList.add(customerModel);
                             }
 
+                            if(customerModelArrayList.size() > 0){
+                                imageView_AddyourCustomer.setImageResource(R.drawable.radio_check);
+                            }
+
 
                             JSONArray invoice_array = object_data.getJSONArray("invoice");
 
@@ -472,6 +524,9 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
                             }
 
+                            if(invoiceModelArrayList.size() > 0){
+                                imageView_CreateyourInvoice.setImageResource(R.drawable.radio_check);
+                            }
 
 
                             invoiceDueDateModelArrayList.clear();
@@ -652,6 +707,10 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
 
 
+
+
+
+
             }
 
             @Override
@@ -731,10 +790,30 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                                 JSONObject obj_invoice = invoice_array.getJSONObject(i);
 
                                 CompanyModel companyModel=new CompanyModel();
-                                companyModel.setCompany_name(obj_invoice.getString("name"));
                                 companyModel.setCompany_id(obj_invoice.getString("company_id"));
+                                companyModel.setUser_id(obj_invoice.getString("user_id"));
+                                companyModel.setColor(obj_invoice.getString("color"));
+                                companyModel.setName(obj_invoice.getString("name"));
+                                companyModel.setPhone_number(obj_invoice.getString("phone_number"));
+                                companyModel.setEmail(obj_invoice.getString("email"));
+                                companyModel.setWebsite(obj_invoice.getString("website"));
+                                companyModel.setLogo(obj_invoice.getString("logo"));
+                                companyModel.setAddress(obj_invoice.getString("address"));
+                                companyModel.setCurrency_id(obj_invoice.getString("currency_id"));
+                                companyModel.setPayment_bank_name(obj_invoice.getString("payment_bank_name"));
+                                companyModel.setPayment_currency(obj_invoice.getString("payment_currency"));
+                                companyModel.setPayment_iban(obj_invoice.getString("payment_iban"));
+                                companyModel.setPayment_swift_bic(obj_invoice.getString("payment_swift_bic"));
+                                companyModel.setPaypal_email(obj_invoice.getString("paypal_email"));
+                                companyModel.setPaypal_email_2(obj_invoice.getString("paypal_email_2"));
+                                companyModel.setPaypal_email_2_type(obj_invoice.getString("paypal_email_2_type"));
+                                companyModel.setStripe_token(obj_invoice.getString("stripe_token"));
+                                companyModel.setPaypal(obj_invoice.getString("paypal"));
+                                companyModel.setStripe(obj_invoice.getString("stripe"));
+                                companyModel.setCheque_payable_to(obj_invoice.getString("cheque_payable_to"));
+                                companyModel.setComma_format(obj_invoice.getString("comma_format"));
 
-                                compantId=obj_invoice.getString("company_id");
+                                compantId = obj_invoice.getString("company_id");
                                 Log.e("Company Id",compantId);
 
                                 companyModelArrayList.add(companyModel);
@@ -815,8 +894,14 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                     } else {
                         no_customer.setVisibility(View.VISIBLE);
                     }
+
                 }
 
+
+
+                if(companyModelArrayList.size() > 0){
+                    imageView_AddyourBusiness.setImageResource(R.drawable.radio_check);
+                }
 
 
             }
@@ -920,13 +1005,14 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         @Override
         public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
 
-            viewHolder.textViewName.setText(""+alName.get(i).getCompany_name());
+            viewHolder.textViewName.setText(""+alName.get(i).getName());
             viewHolder.textViewName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mybuilder.dismiss();
-                    description.setText(""+alName.get(i).getCompany_name());
+                    description.setText(""+alName.get(i).getName());
                     HomeApi(alName.get(i).company_id);
+                    companyPosition = i;
                 }
             });
 
