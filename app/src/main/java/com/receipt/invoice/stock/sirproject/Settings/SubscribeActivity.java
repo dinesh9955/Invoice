@@ -183,7 +183,7 @@ public class SubscribeActivity extends BaseActivity{
         ItemSubscribe itemSubscribe1 = new ItemSubscribe();
         itemSubscribe1.setSubscription_type("oneyear");
 //        itemSubscribe1.setProductId("com.sirapp.oneyear");
-        itemSubscribe1.setProductId("monthly_3.99");
+        itemSubscribe1.setProductId("annual_35.99");
         itemSubscribe1.setPlan("35.99");
         itemSubscribe1.setPlanName(getString(R.string.settings_paln_title_1));
         itemSubscribe1.setDescription(getString(R.string.settings_paln_desc_1));
@@ -192,14 +192,14 @@ public class SubscribeActivity extends BaseActivity{
         ItemSubscribe itemSubscribe2 = new ItemSubscribe();
         itemSubscribe2.setSubscription_type("onemonth");
         itemSubscribe2.setProductId("com.sirapp.onemonth");
-        itemSubscribe2.setPlan("3.99");
+        itemSubscribe2.setPlan("monthly_3.99");
         itemSubscribe2.setPlanName(getString(R.string.settings_paln_title_2));
         itemSubscribe2.setDescription(getString(R.string.settings_paln_desc_2));
         itemSubscribeArrayList.add(itemSubscribe2);
 
         ItemSubscribe itemSubscribe3 = new ItemSubscribe();
         itemSubscribe3.setSubscription_type("onemonth_add");
-        itemSubscribe3.setProductId("com.sirapp.onemonth_add");
+        itemSubscribe3.setProductId("extra_user_3.99");
         itemSubscribe3.setPlan("3.99");
         itemSubscribe3.setPlanName(getString(R.string.settings_paln_title_3));
         itemSubscribe3.setDescription(getString(R.string.settings_paln_desc_3));
@@ -207,7 +207,7 @@ public class SubscribeActivity extends BaseActivity{
 
         ItemSubscribe itemSubscribe4 = new ItemSubscribe();
         itemSubscribe4.setSubscription_type("oneyear_add");
-        itemSubscribe4.setProductId("com.sirapp.oneyear_add");
+        itemSubscribe4.setProductId("extra_company_11.99");
         itemSubscribe4.setPlan("11.99");
         itemSubscribe4.setPlanName(getString(R.string.settings_paln_title_4));
         itemSubscribe4.setDescription(getString(R.string.settings_paln_desc_4));

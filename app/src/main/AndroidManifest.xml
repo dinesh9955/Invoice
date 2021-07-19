@@ -77,6 +77,16 @@
 
 
         <activity
+            android:name=".Home.GoProActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash">
+
+        </activity>
+
+
+
+
+        <activity
             android:name=".CN.ViewCreditNote_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"

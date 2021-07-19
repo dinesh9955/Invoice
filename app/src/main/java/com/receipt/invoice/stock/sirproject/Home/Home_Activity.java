@@ -94,6 +94,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
     public ArrayList<CustomerModel> customerModelArrayList = new ArrayList<>();
     public ArrayList<SupplierModel> supplierModelArrayList = new ArrayList<>();
 
+    TextView textViewGoPro;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,6 +199,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
     private void FindByIds() {
 
+        textViewGoPro = findViewById(R.id.go_pro);
+
         businessactivitiesRV = findViewById(R.id.businessactivitiesRV);
         invoiceoverdueRV = findViewById(R.id.invoiceoverdueRV);
         recycleCustomers = findViewById(R.id.recycleCustomers);
@@ -225,6 +229,15 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
     }
 
     private void setListeners() {
+
+        textViewGoPro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Home_Activity.this, GoProActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
 
         seeall.setOnClickListener(new View.OnClickListener() {
             @Override

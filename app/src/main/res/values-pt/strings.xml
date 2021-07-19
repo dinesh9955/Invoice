@@ -10,6 +10,10 @@
 
     <string name = "dialog_CustomerUpdated"> Cliente atualizado </string>
 
+
+    <string name = "go_pro">Torne-se Pro</string>
+
+
     <string name = "dropCash"> Dinheiro </string>
     <string name = "dropCheque"> Verifique </string>
     <string name = "dropBank"> Banco </string>

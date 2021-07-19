@@ -10,6 +10,9 @@
     <string name="dialog_CustomerUpdated">Klant bijgewerkt</string>
 
 
+    <string name="go_pro">Ga Pro</string>
+
+
     <string name="dropCash">Cash</string>
     <string name="dropCheque">Cheque</string>
     <string name="dropBank">Bank</string>

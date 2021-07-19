@@ -11,6 +11,9 @@
     <string name="dialog_CustomerUpdated">Cliente aggiornato</string>
 
 
+    <string name="go_pro">Vai Pro</string>
+
+
     <string name="dropCash">Contanti</string>
     <string name="dropCheque">Assegno</string>
     <string name="dropBank">Banca</string>

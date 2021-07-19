@@ -9,6 +9,8 @@
 
     <string name="dialog_CustomerUpdated">تم تحديث العميل</string>
 
+    <string name="go_pro">Go Pro</string>
+
 
     <string name="dropCash">نقدي</string>
     <string name="dropCheque">التحقق من</string>

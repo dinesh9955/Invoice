@@ -9,6 +9,9 @@
 
     <string name="dialog_CustomerUpdated">Kunde aktualisiert</string>
 
+
+    <string name="go_pro">Go Pro</string>
+
     <string name="dropCash">Bargeld</string>
     <string name="dropCheque">Scheck</string>
     <string name="dropBank">Bank</string>
