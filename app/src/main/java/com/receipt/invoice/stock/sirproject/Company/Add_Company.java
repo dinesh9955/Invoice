@@ -149,6 +149,13 @@ public class Add_Company extends BaseFragment {
         itemstxtColor = view.findViewById(R.id.itemstxtColor);
 
         defaultcurrency = view.findViewById(R.id.defaultcurrency);
+
+     //   defaultcurrency.setSpinnerHint();
+
+        //defaultcurrency.add("Select Category");
+
+
+
         uploadimage = view.findViewById(R.id.uploadimage);
         heading = view.findViewById(R.id.heading);
         description = view.findViewById(R.id.description);
@@ -257,6 +264,8 @@ public class Add_Company extends BaseFragment {
 
 
        */
+
+
 
         defaultcurrency.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
@@ -535,11 +544,37 @@ public class Add_Company extends BaseFragment {
                                 currencies_id.add(currency_id);
                                 currencies.add(symbol_left+" "+title);
 
-                                ArrayAdapter<String> defaultcurrencyadap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, currencies);
-                                defaultcurrency.setAdapter(defaultcurrencyadap);
-                                defaultcurrency.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
-                                defaultcurrency.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
+
                             }
+
+                            ArrayAdapter<String> defaultcurrencyadap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, currencies);
+                            defaultcurrency.setAdapter(defaultcurrencyadap);
+                            defaultcurrency.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
+                            defaultcurrency.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
+
+
+//                            defaultcurrency = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, categoriesList){
+//
+//                                @Override
+//                                public View getView(int position, View convertView, ViewGroup parent) {
+//
+//                                    View v = super.getView(position, convertView, parent);
+//                                    if (position == getCount()) {
+//                                        ((TextView)v.findViewById(android.R.id.text1)).setText("");
+//                                        ((TextView)v.findViewById(android.R.id.text1)).setHint(getItem(getCount())); //"Hint to be displayed"
+//                                    }
+//
+//                                    return v;
+//                                }
+//
+//                                @Override
+//                                public int getCount() {
+//                                    return super.getCount()-1; // you dont display last item. It is used as hint.
+//                                }
+//
+//                            };
+
+
                         }
                     }
                 } catch (JSONException e) {

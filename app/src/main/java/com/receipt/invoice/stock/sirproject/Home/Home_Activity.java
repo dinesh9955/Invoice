@@ -30,6 +30,10 @@ import com.andrognito.flashbar.Flashbar;
 import com.andrognito.flashbar.anim.FlashAnim;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.MySSLSocketFactory;
+import com.loopj.android.http.RequestParams;
 import com.receipt.invoice.stock.sirproject.Base.BaseActivity;
 import com.receipt.invoice.stock.sirproject.Base.LicenseListAdapter;
 import com.receipt.invoice.stock.sirproject.Company.Companies_Activity;
@@ -46,11 +50,13 @@ import com.receipt.invoice.stock.sirproject.Home.adapter.HomeInvoiceAdapter;
 import com.receipt.invoice.stock.sirproject.Home.adapter.HomeSupplierAdapter;
 import com.receipt.invoice.stock.sirproject.Invoice.InvoiceActivity;
 import com.receipt.invoice.stock.sirproject.Model.Company_list;
+import com.receipt.invoice.stock.sirproject.Model.Tax_List;
 import com.receipt.invoice.stock.sirproject.Product.Product_Activity;
 import com.receipt.invoice.stock.sirproject.R;
 import com.receipt.invoice.stock.sirproject.Service.Service_Activity;
 import com.receipt.invoice.stock.sirproject.Settings.OnlinePaymentGatewayActivity;
 import com.receipt.invoice.stock.sirproject.SignupSignin.Signup_Activity;
+import com.receipt.invoice.stock.sirproject.Utils.Utility;
 import com.receipt.invoice.stock.sirproject.Vendor.Vendor_Activity;
 import com.receipt.invoice.stock.sirproject.API.AllSirApi;
 import com.receipt.invoice.stock.sirproject.API.GetAsyncPost;
@@ -69,6 +75,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import cz.msebera.android.httpclient.Header;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -124,7 +131,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
 
         if (getIntent().hasExtra("login")) {
-            messagebar();
+            //messagebar();
         }
 
         Constant.bottomNav(Home_Activity.this, -1);
@@ -504,6 +511,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
                             if(customerModelArrayList.size() > 0){
                                 imageView_AddyourCustomer.setImageResource(R.drawable.radio_check);
+                            }else{
+                                imageView_AddyourCustomer.setImageResource(R.drawable.radio_uncheck);
                             }
 
 
@@ -526,6 +535,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
                             if(invoiceModelArrayList.size() > 0){
                                 imageView_CreateyourInvoice.setImageResource(R.drawable.radio_check);
+                            }else{
+                                imageView_CreateyourInvoice.setImageResource(R.drawable.radio_uncheck);
                             }
 
 
@@ -723,6 +734,89 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
     }
 
+
+
+
+    @SuppressLint("LongLogTag")
+    private void CompanyInformation(String selectedCompanyId) {
+
+        RequestParams params = new RequestParams();
+        params.add("company_id", selectedCompanyId);
+        params.add("product", "1");
+        params.add("service", "1");
+        params.add("customer", "1");
+        params.add("tax", "1");
+        params.add("credit_note", "1");
+        //  params.add("invoice", "1");
+        params.add("warehouse", "1");
+
+
+        Log.e(TAG, "paramsa"+params);
+
+        String token = Constant.GetSharedPreferences(Home_Activity.this, Constant.ACCESS_TOKEN);
+        Log.e("token", token);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e(TAG, "onSuccess11 "+response);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+
+                    if (status.equals("true")) {
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        Log.e(TAG, "onSuccessdata11 " + data.toString());
+
+                        JSONArray company = data.getJSONArray("company");
+                        JSONArray product = data.getJSONArray("product");
+                        JSONArray service = data.getJSONArray("service");
+                        JSONArray warehouse = data.getJSONArray("warehouse");
+
+                        if(product.length() > 0){
+                            imageView_AddyourProducts.setImageResource(R.drawable.radio_check);
+                        }else{
+                            imageView_AddyourProducts.setImageResource(R.drawable.radio_uncheck);
+                        }
+
+                        if(service.length() > 0){
+                            imageView_AddyourItems.setImageResource(R.drawable.radio_check);
+                        }else{
+                            imageView_AddyourItems.setImageResource(R.drawable.radio_uncheck);
+                        }
+
+                        if(warehouse.length() > 0){
+                            imageView_AddyourWarehouse.setImageResource(R.drawable.radio_check);
+                        }else{
+                            imageView_AddyourWarehouse.setImageResource(R.drawable.radio_uncheck);
+                        }
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+
+
+    }
+
+
+
+
     private String getCustomerImageById(ArrayList<CustomerModel> customerModelArrayList, String customer_id) {
         String path = "";
         if(customerModelArrayList.size() > 0){
@@ -821,6 +915,14 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                                 if(i == 0){
                                     description.setText(""+obj_invoice.getString("name"));
                                     HomeApi(compantId);
+                                    CompanyInformation(compantId);
+                                    if(obj_invoice.getString("paypal").equalsIgnoreCase("0") &&
+                                            obj_invoice.getString("stripe").equalsIgnoreCase("0")){
+                                        imageView_SetupPayment.setImageResource(R.drawable.radio_uncheck);
+                                    }else{
+                                        imageView_SetupPayment.setImageResource(R.drawable.radio_check);
+                                    }
+
                                 }
 
 
@@ -901,6 +1003,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
                 if(companyModelArrayList.size() > 0){
                     imageView_AddyourBusiness.setImageResource(R.drawable.radio_check);
+                }else{
+                    imageView_AddyourBusiness.setImageResource(R.drawable.radio_uncheck);
                 }
 
 
@@ -1012,7 +1116,15 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                     mybuilder.dismiss();
                     description.setText(""+alName.get(i).getName());
                     HomeApi(alName.get(i).company_id);
+                    CompanyInformation(alName.get(i).company_id);
                     companyPosition = i;
+
+                    if(alName.get(i).getPaypal().equalsIgnoreCase("0") &&
+                            alName.get(i).getStripe().equalsIgnoreCase("0")){
+                        imageView_SetupPayment.setImageResource(R.drawable.radio_uncheck);
+                    }else{
+                        imageView_SetupPayment.setImageResource(R.drawable.radio_check);
+                    }
                 }
             });
 

@@ -21,6 +21,41 @@
     <string name="home_CreateyourInvoice">Create your Invoice</string>
 
 
+    <string name="stock_Select_Product_2">Select Product<font color='#FF0000'>*</font></string>
+    <string name="company_Company_Name_2">Company Name<font color='#FF0000'>*</font></string>
+    <string name="company_Choose_Default_Currency_2">Choose Default Currency<font color='#FF0000'>*</font></string>
+    <string name="company_Enter_IBAN_2">Enter IBAN<font color='#FF0000'>*</font></string>
+    <string name="company_Enter_Bank_Name_2">Enter Bank Name<font color='#FF0000'>*</font></string>
+    <string name="company_Enter_Swift_BIC_2">Enter Swift BIC<font color='#FF0000'>*</font></string>
+    <string name="product_Product_Name_2">Product Name<font color='#FF0000'>*</font></string>
+    <string name="product_Per_Unit_Price_2">Per Unit Price<font color='#FF0000'>*</font></string>
+    <string name="product_Product_Category_2">Product Category<font color='#FF0000'>*</font></string>
+    <string name="product_Measurement_Unit_2">Measurement Unit<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Name_2">Item Name<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Rate_2">Item Rate<font color='#FF0000'>*</font></string>
+    <string name="item_Select_Category_2">Select Category<font color='#FF0000'>*</font></string>
+    <string name="item_Measurement_Unit_2">Measurement Unit<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Name_2">Tax Name<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Rate_2">Tax Rate(%)<font color='#FF0000'>*</font></string>
+    <string name="customer_CustomerCompany_Name_2">Customer/Company Name<font color='#FF0000'>*</font></string>
+    <string name="supplier_SupplierCompany_Name_2">Supplier/Company Name<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_from_warehouse_2">Send from warehouse<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_to_warehouse_2">Send to warehouse<font color='#FF0000'>*</font></string>
+    <string name="stock_Enter_Quantity_2">Enter Quantity<font color='#FF0000'>*</font></string>
+    <string name="stock_SelectWarehouse_2">Select Warehouse (s)<font color='#FF0000'>*</font></string>
+    <string name="invoiceInv_2">Inv #<font color='#FF0000'>*</font></string>
+    <string name="invoiceDDMMYYYY_2">DD-MM-YYYY<font color='#FF0000'>*</font></string>
+    <string name="invoice_EnterName_2">Enter Name<font color='#FF0000'>*</font></string>
+    <string name="invoice_0days_2">0days<font color='#FF0000'>*</font></string>
+    <string name="invoiceEst_2">Est #<font color='#FF0000'>*</font></string>
+    <string name="poNo_2">PO No.<font color='#FF0000'>*</font></string>
+    <string name="pvNo_2">PV No.<font color='#FF0000'>*</font></string>
+    <string name="stock_Select_Warehouse_2">Select Warehouse<font color='#FF0000'>*</font></string>
+    <string name="invoiceXDC10220_2">XDC 102-20<font color='#FF0000'>*</font></string>
+
+
+    <string name="invoiceXDC10220">XDC 102-20</string>
+
     <string name="dropCash">Cash</string>
     <string name="dropCheque">Cheque</string>
     <string name="dropBank">Bank</string>
@@ -382,7 +417,6 @@
     <string name="customer_Search_Customer">Search Customer</string>
 
 
-
     <string name="supplier_Upload_supplier_logo">Upload supplier/company logo</string>
     <string name="supplier_SupplierCompany_Name">Supplier/Company Name</string>
     <string name="supplier_SupplierCompany_Email_Address">Supplier/Company Email Address</string>
@@ -404,9 +438,9 @@
     <string name="stock_Select_Company">Select Company</string>
     <string name="stock_Select_Product">Select Product</string>
     <string name="stock_Select_Products">Select Products</string>
-    <string name="stock_Send_from_warehouse">Send from warehouse: </string>
+    <string name="stock_Send_from_warehouse">Send from warehouse</string>
     <string name="stock_Select_Warehouse">Select Warehouse</string>
-    <string name="stock_Send_to_warehouse">Send to warehouse: </string>
+    <string name="stock_Send_to_warehouse">Send to warehouse></string>
     <string name="stock_Quantity_of_Product">Quantity of Product</string>
     <string name="stock_Enter_Quantity">Enter Quantity</string>
     <string name="stock_Move">Move</string>
@@ -707,7 +741,11 @@
     <string name="setting_CommaFormatSelection">Comma Format Selection</string>
     <string name="setting_OnlinePaymentGateway">Online Payment Gateway</string>
     <string name="setting_Subscribe">Subscribe</string>
+
     <string name="setting_Upgrade">Add-ons</string>
+    <string name="setting_UPGRADETODAY">UPGRADE TODAY</string>
+    <string name="setting_SKIP">SKIP</string>
+
     <string name="setting_RestorePurchases">Restore Purchases</string>
     <string name="setting_InviteFriends">Invite Friends</string>
     <string name="setting_FAQs">FAQs</string>

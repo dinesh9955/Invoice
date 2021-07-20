@@ -1663,7 +1663,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(ConvertToPVActivity.this, "Something went wrong, try again!");
+                      //  Constant.ErrorToast(ConvertToPVActivity.this, "Something went wrong, try again!");
                     }
                 }
             });
@@ -3070,7 +3070,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(ConvertToPVActivity.this, "Something went wrong, try again!");
+                    //Constant.ErrorToast(ConvertToPVActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3177,7 +3177,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(ConvertToPVActivity.this, "Something went wrong, try again!");
+//                    Constant.ErrorToast(ConvertToPVActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3419,7 +3419,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(ConvertToPVActivity.this, "Something went wrong, try again!");
+                   // Constant.ErrorToast(ConvertToPVActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3532,7 +3532,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(ConvertToPVActivity.this, "Something went wrong, try again!");
+                   // Constant.ErrorToast(ConvertToPVActivity.this, "Something went wrong, try again!");
                 }
             }
         });

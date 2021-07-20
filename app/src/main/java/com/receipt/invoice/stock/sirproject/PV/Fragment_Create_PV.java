@@ -3374,7 +3374,7 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });

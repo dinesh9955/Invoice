@@ -1281,7 +1281,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                        //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                         createinvoice.setEnabled(true);
                     }
                 }
@@ -2847,7 +2847,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
 
@@ -2952,7 +2952,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
 
@@ -3197,7 +3197,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -3348,7 +3348,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });

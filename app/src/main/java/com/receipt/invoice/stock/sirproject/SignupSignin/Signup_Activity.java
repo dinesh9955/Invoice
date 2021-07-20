@@ -379,7 +379,7 @@ public class Signup_Activity extends BaseActivity {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Intent intent = new Intent(Signup_Activity.this, Home_Activity.class);
+                                    Intent intent = new Intent(Signup_Activity.this, SignupSubscriptionActivity.class);
                                     intent.putExtra("login","login");
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);

@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:spinnerDirection="ltr"
-                app:spinnerHint="@string/stock_Select_Product"
+                app:spinnerHint="@string/stock_Select_Product_2"
                 android:layout_below="@+id/companyspinner"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="20dp"
@@ -73,7 +73,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="20dp"
-                android:text="@string/stock_Send_from_warehouse"
+                android:text="@string/stock_Send_from_warehouse_2"
                 android:textColor="@color/lightpurple"
                 android:textStyle="normal"/>
 
@@ -98,7 +98,7 @@ t            <com.isapanah.awesomespinner.AwesomeSpinner
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="20dp"
-                android:text="@string/stock_Send_to_warehouse"
+                android:text="@string/stock_Send_to_warehouse_2"
                 android:textColor="@color/lightpurple"
                 android:textStyle="normal"/>
 
@@ -130,7 +130,7 @@ t            <com.isapanah.awesomespinner.AwesomeSpinner
                 android:layout_below="@+id/quantitydescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/stock_Enter_Quantity"
+                android:hint="@string/stock_Enter_Quantity_2"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textSize="12dp"

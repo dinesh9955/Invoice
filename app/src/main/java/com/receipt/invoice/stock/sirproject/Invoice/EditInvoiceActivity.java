@@ -1883,7 +1883,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
+                        //Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
                     }
                 }
             });
@@ -3331,7 +3331,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
+                    //Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3438,7 +3438,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
+                   // Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3773,7 +3773,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
+                   // Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3883,7 +3883,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
+                    //Constant.ErrorToast(EditInvoiceActivity.this, "Something went wrong, try again!");
                 }
             }
         });

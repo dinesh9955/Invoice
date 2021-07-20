@@ -6,7 +6,11 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,6 +102,9 @@ public class Stock_Movement extends BaseFragment {
         sendtospinner.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
         productspinner.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
         productspinner.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
+        //productspinner.setSpinnerHint(String.valueOf(Html.fromHtml("Select Produc<font color='#FF0000'>*</font>")));
+
+        //((AwesomeSpinner) productspinner).setSpinnerHint(String.valueOf(Html.fromHtml("Select Produc<font color='#FF0000'>*</font>")));
 
 
         move.setOnClickListener(new View.OnClickListener() {

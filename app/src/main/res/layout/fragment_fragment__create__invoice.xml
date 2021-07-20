@@ -62,7 +62,7 @@
                 android:layout_below="@+id/invoicenumtxt"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
-                android:hint="Inv #"
+                android:hint="@string/invoiceInv_2"
                 android:background="@drawable/nobackgroundedittext"
                 android:textColor="@color/lightpurple"
                 android:textSize="14sp"
@@ -92,7 +92,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:hint="DD-MM-YYYY"
+                android:hint="@string/invoiceDDMMYYYY_2"
                 android:gravity="end"
                 android:textColor="@color/lightpurple" />
 
@@ -124,7 +124,7 @@
                 android:layout_below="@+id/invoicetotxt"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
-                android:hint="@string/invoice_EnterName"
+                android:hint="@string/invoice_EnterName_2"
                 android:textColor="@color/lightpurple" />
 
             <TextView
@@ -147,7 +147,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:hint="0days"
+                android:hint="@string/invoice_0days_2"
                 android:textColor="@color/lightpurple" />
 
             <View

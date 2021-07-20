@@ -450,7 +450,7 @@ public class ListOfDebitNotes extends BaseFragment {
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -581,7 +581,7 @@ public class ListOfDebitNotes extends BaseFragment {
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                   // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
                 textViewMsg.setVisibility(View.VISIBLE);
@@ -654,7 +654,7 @@ public class ListOfDebitNotes extends BaseFragment {
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                  // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -738,7 +738,7 @@ public class ListOfDebitNotes extends BaseFragment {
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                       // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }
                 }
             });

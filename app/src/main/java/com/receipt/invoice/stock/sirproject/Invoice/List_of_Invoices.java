@@ -718,7 +718,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -893,7 +893,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                     }
 
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                   // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
                 textViewMsg.setVisibility(View.VISIBLE);
@@ -977,7 +977,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                     //   Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }
                 }
             });
@@ -1048,7 +1048,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                        //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }
                 }
             });
@@ -1117,7 +1117,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                   // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });

@@ -1851,7 +1851,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
+                       // Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
                     }
                 }
             });
@@ -3300,7 +3300,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
+                    //Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3409,7 +3409,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
+                   // Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3654,7 +3654,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
+                    //Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3766,7 +3766,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
+                    //Constant.ErrorToast(EditPOActivity.this, "Something went wrong, try again!");
                 }
             }
         });

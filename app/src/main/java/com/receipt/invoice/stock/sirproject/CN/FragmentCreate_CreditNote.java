@@ -3122,7 +3122,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                  //  Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -3276,7 +3276,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });

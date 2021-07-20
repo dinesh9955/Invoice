@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sir_invoice"
+                android:adjustViewBounds="true"
+                android:contentDescription="Specs"
+                android:scrollbars="vertical">
+
+            </ImageView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:contentDescription="Specs"
+                android:layout_marginTop="@dimen/_130sdp"
+                android:orientation="horizontal"
+                >
+
+                <LinearLayout
+                    android:id="@+id/linear_12_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_1_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="@dimen/_20sdp"
+                android:orientation="horizontal"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/linear_upgrade_now"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80sdp"
+                    android:orientation="horizontal"
+                    android:background="@color/white">
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+    </ScrollView>
+
+    <ImageView
+        android:layout_alignParentStart="true"
+        android:src="@drawable/back_btn"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:id="@+id/backbtn"
+        android:padding="7dp"
+        android:tint="@color/white"
+        tools:ignore="UseAppTint"
+        android:layout_margin="@dimen/_10sdp"
+        android:visibility="gone"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/_20sdp"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <Button
+            android:id="@+id/button_upgrade_now"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:orientation="horizontal"
+            android:background="@drawable/orange_shape"
+            android:text="@string/setting_UPGRADETODAY"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16sdp"
+            android:textColor="@color/white">
+        </Button>
+
+        <Button
+            android:id="@+id/button_skip"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:orientation="horizontal"
+            android:background="@drawable/orange_shape"
+            android:text="@string/setting_SKIP"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16sdp"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/_10sdp">
+        </Button>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

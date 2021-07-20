@@ -488,7 +488,7 @@ public class Add_Services extends BaseFragment {
                     avibackground.setVisibility(View.GONE);
 
                     if(responseBody.length == 0){
-                        Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                        //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }else{
                         String response = new String(responseBody);
                         Log.e("addserviceResp",response);

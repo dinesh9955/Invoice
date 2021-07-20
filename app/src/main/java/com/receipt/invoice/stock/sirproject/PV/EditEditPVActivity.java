@@ -1733,7 +1733,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(EditEditPVActivity.this, "Something went wrong, try again!");
+                       // Constant.ErrorToast(EditEditPVActivity.this, "Something went wrong, try again!");
                     }
                 }
             });
@@ -3122,7 +3122,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEditPVActivity.this, "Something went wrong, try again!");
+                    //Constant.ErrorToast(EditEditPVActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3229,7 +3229,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEditPVActivity.this, "Something went wrong, try again!");
+                    //Constant.ErrorToast(EditEditPVActivity.this, "Something went wrong, try again!");
                 }
 
 

@@ -253,7 +253,7 @@ public class Service_Listing extends BaseFragment {
                             }
                         }
                         else {
-                            Constant.ErrorToast(getActivity(),jsonObject.getString(getString(R.string.dialog_ProductNotFound)));
+                           // Constant.ErrorToast(getActivity(),jsonObject.getString(getString(R.string.dialog_ProductNotFound)));
                         }
                     }
 
@@ -269,27 +269,28 @@ public class Service_Listing extends BaseFragment {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if(responseBody!=null){
                     String response = new String(responseBody);
                     Log.e("responseserviceF",response);
 
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-
-                        String status = jsonObject.getString("status");
-                        if (status.equals("false"))
-                        {
-                            Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response);
+//
+//                        String status = jsonObject.getString("status");
+//                        if (status.equals("false"))
+//                        {
+//                            Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
                 }
                 else {
-                    Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
+                    //Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                 }
-                avi.smoothToHide();
-                avibackground.setVisibility(View.GONE);
+
 
             }
         });

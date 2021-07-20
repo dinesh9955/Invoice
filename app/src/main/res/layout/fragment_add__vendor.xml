@@ -149,7 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/selectcompany"
-                    android:hint="@string/supplier_SupplierCompany_Name"
+                    android:hint="@string/supplier_SupplierCompany_Name_2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:textSize="12dp"
