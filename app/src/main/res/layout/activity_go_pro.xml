@@ -18,9 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
+                android:id="@+id/imagePay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/sir_invoice"
+                android:src="@drawable/pay2"
                 android:adjustViewBounds="true"
                 android:contentDescription="Specs"
                 android:scrollbars="vertical">

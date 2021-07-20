@@ -45,6 +45,8 @@ public class GoProActivity extends BaseActivity {
     LinearLayout linearLayout_12Month, linearLayout_1Month, linearLayoutUpgradeNow;
     Button buttonUpgrade_now;
 
+    ImageView imageViewPay;
+
     private BillingProcessor bp;
 
 
@@ -58,6 +60,9 @@ public class GoProActivity extends BaseActivity {
         linearLayout_1Month = (LinearLayout) findViewById(R.id.linear_1_month);
         linearLayoutUpgradeNow = (LinearLayout) findViewById(R.id.linear_upgrade_now);
         buttonUpgrade_now = (Button) findViewById(R.id.button_upgrade_now);
+
+        imageViewPay = findViewById(R.id.imagePay);
+
 
 
         ImageView imageView = findViewById(R.id.backbtn);
