@@ -701,6 +701,7 @@
     <string name="po_Search_by_PO_number">Search by PO number</string>
 
 
+    <string name="shared_via" translatable="false"><![CDATA[via <a href="http://google.com">Jimmy News App</a>]]></string>
 
 
     <string name="home_hello">Hello</string>

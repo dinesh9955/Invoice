@@ -48,7 +48,7 @@ public class SignupSubscriptionActivity extends BaseActivity {
 
     private BillingProcessor bp;
 
-
+    ImageView imageViewPay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +61,8 @@ public class SignupSubscriptionActivity extends BaseActivity {
         buttonUpgrade_now = (Button) findViewById(R.id.button_upgrade_now);
         buttonSkip = (Button) findViewById(R.id.button_skip);
 
+        imageViewPay = findViewById(R.id.imagePay);
+
         ImageView imageView = findViewById(R.id.backbtn);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,12 +74,15 @@ public class SignupSubscriptionActivity extends BaseActivity {
         linearLayout_12Month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imageViewPay.setImageResource(R.drawable.pay2);
                 bp.purchase(SignupSubscriptionActivity.this, "annual_35.99");
+
             }
         });
         linearLayout_1Month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imageViewPay.setImageResource(R.drawable.pay1);
                 bp.purchase(SignupSubscriptionActivity.this, "monthly_3.99");
             }
         });

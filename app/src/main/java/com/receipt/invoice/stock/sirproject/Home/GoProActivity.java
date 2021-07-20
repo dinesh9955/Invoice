@@ -76,12 +76,14 @@ public class GoProActivity extends BaseActivity {
         linearLayout_12Month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imageViewPay.setImageResource(R.drawable.pay2);
                 bp.purchase(GoProActivity.this, "annual_35.99");
             }
         });
         linearLayout_1Month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imageViewPay.setImageResource(R.drawable.pay1);
                 bp.purchase(GoProActivity.this, "monthly_3.99");
             }
         });
