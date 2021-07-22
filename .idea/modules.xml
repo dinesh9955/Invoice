@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SirProject.iml" filepath="$PROJECT_DIR$/.idea/SirProject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SirProject.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SirProject.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pdfcreator/SirProject.pdfcreator.iml" filepath="$PROJECT_DIR$/.idea/modules/pdfcreator/SirProject.pdfcreator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Invoice.iml" filepath="$PROJECT_DIR$/.idea/Invoice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Invoice.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Invoice.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pdfcreator/Invoice.pdfcreator.iml" filepath="$PROJECT_DIR$/.idea/modules/pdfcreator/Invoice.pdfcreator.iml" />
     </modules>
   </component>
 </project>
