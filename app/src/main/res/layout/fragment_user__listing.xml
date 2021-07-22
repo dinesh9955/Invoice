@@ -17,7 +17,29 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/edittextshape"
         android:textColorHint="@color/dark_grey"
+        android:visibility="gone"
         />
+
+    <Button
+        android:id="@+id/selectcompany2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+
+        android:background="@drawable/search_shape"
+        android:hint="@string/report_SelectCompany"
+        android:spinnerMode="dialog"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="15dp"
+        android:textStyle="normal"
+        android:textSize="13dp"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        />
+
+
 
     <EditText
         android:layout_width="match_parent"
@@ -28,7 +50,7 @@
         android:hint="@string/user_Search_Users"
         android:layout_marginTop="10dp"
         android:id="@+id/search"
-        android:layout_below="@+id/selectcompany"
+        android:layout_below="@+id/selectcompany2"
         android:padding="10dp"
         android:background="@drawable/search_shape"
         android:elevation="3dp"

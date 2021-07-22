@@ -345,7 +345,7 @@ public class Signin_Activity extends BaseActivity {
                             }
 
                         }else{
-                            Constant.ErrorToast(Signin_Activity.this, "Something went wrong!");
+                           // Constant.ErrorToast(Signin_Activity.this, "Something went wrong!");
                         }
 
                         avi.smoothToHide();

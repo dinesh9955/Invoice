@@ -1687,7 +1687,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                             e.printStackTrace();
                         }
                     } else {
-                        Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
+                       // Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
                     }
                 }
             });
@@ -3073,7 +3073,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
+                    //Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3180,7 +3180,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
+                   // Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3420,7 +3420,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
+                    //Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3531,7 +3531,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
+                   // Constant.ErrorToast(EditEstimateActivity.this, "Something went wrong, try again!");
                 }
             }
         });

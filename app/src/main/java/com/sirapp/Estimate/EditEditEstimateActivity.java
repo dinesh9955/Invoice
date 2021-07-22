@@ -3172,7 +3172,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEditEstimateActivity.this, "Something went wrong, try again!");
+                   // Constant.ErrorToast(EditEditEstimateActivity.this, "Something went wrong, try again!");
                 }
 
 
@@ -3404,7 +3404,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEditEstimateActivity.this, "Something went wrong, try again!");
+                  //  Constant.ErrorToast(EditEditEstimateActivity.this, "Something went wrong, try again!");
                 }
             }
         });
@@ -3515,7 +3515,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                         e.printStackTrace();
                     }
                 } else {
-                    Constant.ErrorToast(EditEditEstimateActivity.this, "Something went wrong, try again!");
+                   // Constant.ErrorToast(EditEditEstimateActivity.this, "Something went wrong, try again!");
                 }
             }
         });
