@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context="com.sir.com.sir.Home.Go_Premium_Activity">
+    tools:context="com.sirapp.com.sir.Home.Go_Premium_Activity">
 
     <ScrollView
         android:layout_width="match_parent"

@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:643890149019:android:b6102521cdb2766f7d783e",
+        "mobilesdk_app_id": "1:643890149019:android:2f0360c9764563787d783e",
         "android_client_info": {
-          "package_name": "com.sir"
+          "package_name": "com.sirapp"
         }
       },
       "oauth_client": [

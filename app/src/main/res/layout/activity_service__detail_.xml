@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sir.com.sir.Details.Service_Detail_Activity"
+    tools:context="com.sirapp.com.sir.Details.Service_Detail_Activity"
     android:background="@color/white">
     <include layout="@layout/toolbar" />
 

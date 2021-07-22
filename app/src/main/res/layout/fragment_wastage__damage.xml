@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.sir.Stock.Update_Stock"
+    tools:context="com.sirapp.Stock.Update_Stock"
     android:background="@color/white">
 
 

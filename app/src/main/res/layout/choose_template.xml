@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sir.Customer.Customer_Activity"
+    tools:context="com.sirapp.Customer.Customer_Activity"
     android:background="@color/white"
     >
 

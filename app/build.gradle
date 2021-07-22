@@ -6,11 +6,11 @@ android {
     compileSdkVersion 30
 //    useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        applicationId "com.sir"
+        applicationId "com.sirapp"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 1
+        versionName "1.0.1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
     }

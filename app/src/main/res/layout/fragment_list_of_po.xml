@@ -5,7 +5,7 @@
     android:id="@+id/relativeLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sir.com.sir.Invoice.List_of_Invoices">
+    tools:context="com.sirapp.com.sir.Invoice.List_of_Invoices">
 
     <com.isapanah.awesomespinner.AwesomeSpinner
         android:id="@+id/selectcompany"

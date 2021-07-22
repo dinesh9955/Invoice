@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.sir.Customer.Customer_Activity">
+    tools:context="com.sirapp.Customer.Customer_Activity">
 
     <WebView
         android:layout_width="match_parent"

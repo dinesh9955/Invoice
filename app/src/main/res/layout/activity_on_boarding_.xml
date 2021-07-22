@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/grey"
-    tools:context="com.sir.com.sir.OnBoardings.OnBoarding_Activity">
+    tools:context="com.sirapp.com.sir.OnBoardings.OnBoarding_Activity">
 
     <com.crystalviewpager.widgets.CrystalViewPager
         android:id="@+id/viewPager"
