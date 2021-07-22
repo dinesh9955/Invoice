@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/r101"
     android:background="@drawable/relativelayoutshade"
-    tools:context="com.receipt.invoice.stock.sirproject.SignupSignin.Signin_Activity">
+    tools:context="com.sir.com.sir.SignupSignin.Signin_Activity">
 
 
 

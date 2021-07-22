@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
-    tools:context="com.receipt.invoice.stock.sirproject.OnBoardings.OnBooarding_Fragment2">
+    tools:context="com.sir.com.sir.OnBoardings.OnBooarding_Fragment2">
 
     <TextView
         android:layout_width="wrap_content"

@@ -20,7 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-#-keepclassmembers enum com.receipt.invoice.stock.sirproject.Invoice.response.InvoiceResponseDto { *; }
+#-keepclassmembers enum InvoiceResponseDto { *; }
 
 #-keepclassmembers enum * {
 #    public static **[] values();

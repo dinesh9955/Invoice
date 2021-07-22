@@ -6,7 +6,7 @@ android {
     compileSdkVersion 30
 //    useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        applicationId "com.receipt.invoice.stock.sirproject"
+        applicationId "com.sir"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 3

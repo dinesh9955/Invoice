@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.receipt.invoice.stock.sirproject.Product.Product_Activity">
+    tools:context="com.sir.com.sir.Product.Product_Activity">
 
 
     <com.google.android.material.appbar.AppBarLayout

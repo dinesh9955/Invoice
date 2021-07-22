@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.receipt.invoice.stock.sirproject",
+  "applicationId": "com.sir",
   "variantName": "processReleaseResources",
   "elements": [
     {

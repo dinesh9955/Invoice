@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Details.Company_Details_Fragment"
+    tools:context="com.sir.Details.Company_Details_Fragment"
     android:background="@color/white">
 
     <include layout="@layout/toolbar"/>
