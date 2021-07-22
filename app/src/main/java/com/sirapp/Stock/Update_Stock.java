@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appsflyer.AFInAppEventParameterName;
@@ -31,6 +32,7 @@ import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Adapter.Select_Warehouse_Adapter;
 import com.sirapp.Constant.Constant;
+import com.sirapp.Product.Add_Product;
 import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
@@ -64,7 +66,10 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
     TextView description,selectwarehouse,quantitydescription,pricedescription;
     Button update;
     EditText quantity,price;
-    AwesomeSpinner companyspinner,productspinner,vendorspinner;
+    AwesomeSpinner companyspinner,vendorspinner;
+
+    Button productcategory1;
+
     RecyclerView recyclerwarehouse;
     ArrayList<String> warehousename=new ArrayList<>();
     ArrayList<String> warehouseids=new ArrayList<>();
@@ -111,8 +116,8 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         //spinners
         companyspinner.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
         companyspinner.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
-        productspinner.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
-        productspinner.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
+//        productspinner.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
+//        productspinner.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
         vendorspinner.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
         vendorspinner.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
 
@@ -135,14 +140,46 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
             }
         });
 
-        productspinner.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//        productspinner.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                selectedProductId = pids.get(position);
+//                Log.e("selectedProduct",selectedProductId);
+//                price.setText(pprice.get(position));
+//            }
+//        });
+
+
+
+
+        productcategory1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                selectedProductId = pids.get(position);
-                Log.e("selectedProduct",selectedProductId);
-                price.setText(pprice.get(position));
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter mAdapter;
+
+                final Dialog mybuilder = new Dialog(getActivity());
+                mybuilder.setContentView(R.layout.select_company_dialog_2);
+
+
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter(pnames, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
+
+
+
 
         vendorspinner.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
             @Override
@@ -171,7 +208,8 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
         quantity = v.findViewById(R.id.quantity);
         price = v.findViewById(R.id.price);
         companyspinner = v.findViewById(R.id.companyspinner);
-        productspinner = v.findViewById(R.id.productspinner);
+     //   productspinner = v.findViewById(R.id.productspinner);
+        productcategory1 = v.findViewById(R.id.productcategory1);
         vendorspinner = v.findViewById(R.id.vendorspinner);
         avi = v.findViewById(R.id.avi);
         avibackground = v.findViewById(R.id.avibackground);
@@ -457,9 +495,9 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
                                 pnames.add(product_name);
                                 pids.add(product_id);
                                 pprice.add(price);
-
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,pnames);
-                                productspinner.setAdapter(namesadapter);
+//
+//                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,pnames);
+//                                productspinner.setAdapter(namesadapter);
 
                             }
                         }
@@ -656,6 +694,81 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
 //
 //
 //        }
+
+
+
+
+    public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+                    selectedProductId = pids.get(i);
+                    productcategory1.setText(cnames.get(i));
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
+
+
 
 
 }

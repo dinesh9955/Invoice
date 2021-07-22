@@ -1,5 +1,6 @@
 package com.sirapp.Report;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,10 +10,14 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -32,6 +37,7 @@ import com.sirapp.Customer.Customer_Activity;
 import com.sirapp.Product.Product_Activity;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
+import com.sirapp.ThankYouNote.ThankYouNoteActivity;
 import com.sirapp.Vendor.Vendor_Activity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
@@ -53,7 +59,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
     ApiInterface apiInterface;
     private AVLoadingIndicatorView avi;
     ImageView avibackground;
-    AwesomeSpinner selectcompany;
+//    AwesomeSpinner selectcompany;
+    Button selectcompany1;
 
     ArrayList<String> cids = new ArrayList<>();
     ArrayList<String> cnames = new ArrayList<>();
@@ -123,28 +130,49 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         avibackground = findViewById(R.id.avibackground);
 
         recycler_invoices = findViewById(R.id.recycler_invoices);
-        selectcompany = findViewById(R.id.selectcompany);
+        selectcompany1 = findViewById(R.id.selectcompany2);
 
 
 
-        selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//        selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                selectedCompanyId = cids.get(position);
+//
+//                customer_list(selectedCompanyId);
+//                supplier_list(selectedCompanyId);
+//                product_list(selectedCompanyId);
+//            }
+//        });
+
+
+        selectcompany1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                selectedCompanyId = cids.get(position);
-//                companyName = cids.get(position);
-//                companyAddress = cAddress.get(position);
-//                companyContactNo = ccontactNo.get(position);
-//                companyWebsite = cWebsite.get(position);
-//                companyEmail = cEmail.get(position);
-//                companyLogo = cLogo.get(position);
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter mAdapter;
 
-//                Log.e(TAG, "companyLogo"+companyLogo);
+                final Dialog mybuilder = new Dialog(ReportActivity.this);
+                mybuilder.setContentView(R.layout.select_company_dialog_3);
 
-                customer_list(selectedCompanyId);
-                supplier_list(selectedCompanyId);
-                product_list(selectedCompanyId);
+
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(ReportActivity.this, LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter(cnames, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
+
+
 
 
         arrayListNames.add(getString(R.string.report_CustomerStatementofAccount));
@@ -234,8 +262,18 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
                             }
                         }
 
-                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ReportActivity.this, android.R.layout.simple_spinner_item, cnames);
-                        selectcompany.setAdapter(namesadapter);
+
+                        if(company.length() == 1){
+                            selectcompany1.setText(cnames.get(0));
+                            selectedCompanyId = cids.get(0);
+
+                            customer_list(selectedCompanyId);
+                            supplier_list(selectedCompanyId);
+                            product_list(selectedCompanyId);
+                        }
+
+//                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ReportActivity.this, android.R.layout.simple_spinner_item, cnames);
+//                        selectcompany.setAdapter(namesadapter);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1267,6 +1305,88 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
             }
         });
     }
+
+
+
+
+
+
+    public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+                    selectcompany1.setText(cnames.get(i));
+                    selectedCompanyId = cids.get(i);
+
+                    customer_list(selectedCompanyId);
+                    supplier_list(selectedCompanyId);
+                    product_list(selectedCompanyId);
+
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
+
+
 
 
 }

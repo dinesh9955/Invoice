@@ -2564,7 +2564,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                         }
 
 
-                        if(company.length() > 0){
+                        if(company.length() == 1){
                             selectedCompanyId = cids.get(0);
                             selectcompany.setText(""+cnames.get(0));
                             warehouse_list(selectedCompanyId);

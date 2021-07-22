@@ -171,16 +171,39 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edittextshape"
+                    android:visibility="gone"
                     />
+
+
+                <Button
+                    android:id="@+id/defaultcurrency1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittextshape"
+                    android:hint="@string/company_Choose_Default_Currency_2"
+                    android:spinnerMode="dialog"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="15dp"
+                    android:textStyle="normal"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    android:textAllCaps="false"
+                    android:layout_below="@+id/CompanyAddress"
+                    />
+
 
                 <Button
                     android:gravity="left|center_vertical"
                     android:id="@+id/itemstxtColor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/defaultcurrency"
+                    android:layout_below="@id/defaultcurrency1"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"

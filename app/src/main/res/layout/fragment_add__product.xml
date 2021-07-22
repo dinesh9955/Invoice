@@ -123,6 +123,8 @@
                     />
 
 
+
+
                 <com.isapanah.awesomespinner.AwesomeSpinner
                     android:id="@+id/productcategory"
                     android:layout_width="match_parent"
@@ -136,13 +138,35 @@
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edittextshape"
                     android:textColorHint="@color/dark_grey"
+                    android:visibility="gone"
                     />
+
+
+                <Button
+                    android:id="@+id/productcategory1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittextshape"
+                    android:hint="@string/product_Product_Category_2"
+                    android:spinnerMode="dialog"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="15dp"
+                    android:textStyle="normal"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    android:textAllCaps="false"
+                    android:layout_below="@+id/reorderlevel"
+                    />
+
 
                 <EditText
                     android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/productcategory"
+                    android:layout_below="@+id/productcategory1"
                     android:hint="@string/product_Other_Category_if_not_listed"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -166,6 +190,28 @@
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edittextshape"
                     android:textColorHint="@color/dark_grey"
+                    android:visibility="gone"
+                    />
+
+
+
+                <Button
+                    android:id="@+id/measurementunit1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittextshape"
+                    android:hint="@string/product_Measurement_Unit_2"
+                    android:spinnerMode="dialog"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="15dp"
+                    android:textStyle="normal"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    android:textAllCaps="false"
+                    android:layout_below="@+id/othercategory"
                     />
 
 
@@ -173,7 +219,7 @@
                     android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/measurementunit"
+                    android:layout_below="@+id/measurementunit1"
                     android:hint="@string/product_Other_Measurement_unit"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"

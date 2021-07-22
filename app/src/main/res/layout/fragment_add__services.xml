@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imagedescription"
-                android:hint="@string/item_Item_Name"
+                android:hint="@string/item_Item_Name_2"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textSize="12dp"
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/servicename"
-                android:hint="@string/item_Item_Rate"
+                android:hint="@string/item_Item_Rate_2"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textSize="12dp"
@@ -52,18 +52,40 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 app:spinnerDirection="ltr"
-                app:spinnerHint="@string/item_Select_Category"
+                app:spinnerHint="@string/item_Select_Category_2"
                 android:layout_below="@+id/servicerate"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:visibility="gone"
                 />
+
+
+            <Button
+                android:id="@+id/selectcategory1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittextshape"
+                android:hint="@string/item_Select_Category_2"
+                android:spinnerMode="dialog"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="15dp"
+                android:textStyle="normal"
+                android:textSize="13dp"
+                android:textColor="@color/black"
+                android:textAllCaps="false"
+                android:layout_below="@+id/servicerate"
+                />
+
 
             <EditText
                 android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/selectcategory"
+                android:layout_below="@+id/selectcategory1"
                 android:hint="@string/item_Other_Category_if_not_listed"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
@@ -74,27 +96,51 @@
                 android:id="@+id/othercategory"
                 android:textColorHint="@color/dark_grey"
                 />
+
+
             <com.isapanah.awesomespinner.AwesomeSpinner
                 android:id="@+id/measurementunit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 app:spinnerDirection="ltr"
-                app:spinnerHint="@string/item_Measurement_Unit"
+                app:spinnerHint="@string/item_Measurement_Unit_2"
                 android:layout_below="@+id/othercategory"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/edittextshape"
                 android:textColorHint="@color/dark_grey"
+                android:visibility="gone"
                 />
+
+
+            <Button
+                android:id="@+id/measurementunit1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittextshape"
+                android:hint="@string/item_Measurement_Unit_2"
+                android:spinnerMode="dialog"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="15dp"
+                android:textStyle="normal"
+                android:textSize="13dp"
+                android:textColor="@color/black"
+                android:textAllCaps="false"
+                android:layout_below="@+id/othercategory"
+                />
+
 
 
             <EditText
                 android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/measurementunit"
+                android:layout_below="@+id/measurementunit1"
                 android:hint="@string/item_Other_Measurement_unit"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"

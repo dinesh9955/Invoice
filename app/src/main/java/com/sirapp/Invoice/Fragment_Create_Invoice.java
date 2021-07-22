@@ -2917,7 +2917,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
 
-                        if(company.length() > 0){
+                        if(company.length() == 1){
                             selectedCompanyId = cids.get(0);
                             selectcompany.setText(""+cnames.get(0));
                             CompanyInformation(selectedCompanyId);

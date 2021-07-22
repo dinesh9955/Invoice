@@ -30,7 +30,30 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/edittextshape"
         android:layout_below="@+id/appbar"
-        app:spinnerHint="@string/report_SelectCompany" />
+        app:spinnerHint="@string/report_SelectCompany"
+        android:visibility="gone"/>
+
+
+    <Button
+        android:id="@+id/selectcompany2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/search_shape"
+        android:hint="@string/report_SelectCompany"
+        android:spinnerMode="dialog"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="15dp"
+        android:textStyle="normal"
+        android:textSize="13dp"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:layout_below="@+id/appbar"
+        />
+
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -38,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:layout_below="@+id/selectcompany">
+        android:layout_below="@+id/selectcompany2">
 
     </androidx.recyclerview.widget.RecyclerView>
 

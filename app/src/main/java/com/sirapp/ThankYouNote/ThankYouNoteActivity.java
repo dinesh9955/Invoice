@@ -1,5 +1,6 @@
 package com.sirapp.ThankYouNote;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -11,11 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +39,7 @@ import com.sirapp.Model.InvoiceData;
 import com.sirapp.R;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
+import com.sirapp.Stock.Update_Stock;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -55,7 +60,8 @@ public class ThankYouNoteActivity extends BaseActivity {
     ApiInterface apiInterface;
 //    private AVLoadingIndicatorView avi;
 
-    AwesomeSpinner selectcompany;
+//    AwesomeSpinner selectcompany;
+    Button selectcompany1;
 
     ArrayList<String> cids = new ArrayList<>();
     ArrayList<String> cnames = new ArrayList<>();
@@ -103,7 +109,7 @@ public class ThankYouNoteActivity extends BaseActivity {
         avi = findViewById(R.id.avi);
         avibackground = findViewById(R.id.avibackground);
         recycler_invoices = findViewById(R.id.recycler_invoices);
-        selectcompany = findViewById(R.id.selectcompany);
+        selectcompany1 = findViewById(R.id.selectcompany2);
         search = findViewById(R.id.search);
         textViewMessage = findViewById(R.id.txtinvoice);
         textViewMessage.setVisibility(View.VISIBLE);
@@ -136,15 +142,44 @@ public class ThankYouNoteActivity extends BaseActivity {
 
 
 
-        selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//        selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                selectedCompanyId = cids.get(position);
+//                colorCode = arrayColor.get(position);
+//                String parmavalue = "PAID";
+//                InvoicelistData(parmavalue);
+//            }
+//        });
+
+
+
+        selectcompany1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                selectedCompanyId = cids.get(position);
-                colorCode = arrayColor.get(position);
-                String parmavalue = "PAID";
-                InvoicelistData(parmavalue);
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter mAdapter;
+
+                final Dialog mybuilder = new Dialog(ThankYouNoteActivity.this);
+                mybuilder.setContentView(R.layout.select_company_dialog_3);
+
+
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(ThankYouNoteActivity.this, LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter(cnames, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
+
 
         bottomSheetDialog = new BottomSheetDialog(ThankYouNoteActivity.this);
         enableSwipe();
@@ -237,8 +272,18 @@ public class ThankYouNoteActivity extends BaseActivity {
                             }
                         }
 
-                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ThankYouNoteActivity.this, android.R.layout.simple_spinner_item, cnames);
-                        selectcompany.setAdapter(namesadapter);
+                        if(company.length() == 1){
+                            selectedCompanyId = cids.get(0);
+                            colorCode = arrayColor.get(0);
+                            String parmavalue = "PAID";
+                            InvoicelistData(parmavalue);
+
+                            selectcompany1.setText(cnames.get(0));
+                        }
+
+
+//                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ThankYouNoteActivity.this, android.R.layout.simple_spinner_item, cnames);
+//                        selectcompany.setAdapter(namesadapter);
 
 
 //                        ArrayAdapter adapter = new ArrayAdapter(ThankYouNoteActivity.this, android.R.layout.simple_spinner_item,
@@ -287,7 +332,8 @@ public class ThankYouNoteActivity extends BaseActivity {
 
     String invoicelistbyurl = "";
     private void InvoicelistData(String paramsvalue) {
-
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         list.clear();
 //        avi.smoothToShow();
         RequestParams params = new RequestParams();
@@ -322,6 +368,8 @@ public class ThankYouNoteActivity extends BaseActivity {
         client.post(AllSirApi.BASE_URL + invoicelistbyurl, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e(TAG, "responsecustomers"+ response);
 //                avi.smoothToHide();
@@ -427,6 +475,8 @@ public class ThankYouNoteActivity extends BaseActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecustomersF", response);
@@ -837,6 +887,85 @@ public class ThankYouNoteActivity extends BaseActivity {
     }
 
 
+
+
+
+
+    public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+//                    selectedProductId = pids.get(i);
+//                    productcategory1.setText(cnames.get(i));
+
+                    selectedCompanyId = cids.get(i);
+                    colorCode = arrayColor.get(i);
+                    String parmavalue = "PAID";
+                    InvoicelistData(parmavalue);
+
+                    selectcompany1.setText(cnames.get(i));
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
 
 
 

@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,10 +29,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appsflyer.AFInAppEventParameterName;
@@ -48,6 +51,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.sirapp.Company.Add_Company;
 import com.sirapp.Constant.Constant;
 import com.sirapp.ImageResource.FileCompressor;
 import com.sirapp.Settings.SubscribeActivity;
@@ -95,7 +99,11 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
     Button addproduct;
     RadioButton ryes, rno;
     RadioGroup radiogroup;
-    AwesomeSpinner productcategory, measurementunit, selectcompany;
+    AwesomeSpinner selectcompany;
+//    AwesomeSpinner productcategory, measurementunit;
+
+    Button productcategory1, measurementunit1;
+
     ArrayList<String> companies = new ArrayList<>();
     File fileimage;
     RecyclerView recyclerwarehouse;
@@ -143,10 +151,12 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
         companyget();
         categoriesget();
 
-        productcategory.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
-        productcategory.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
-        measurementunit.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
-        measurementunit.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
+//        productcategory.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
+//        productcategory.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
+//        measurementunit.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
+//        measurementunit.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
+
+
         selectcompany.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
         selectcompany.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
 
@@ -168,8 +178,9 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
         ryes = view.findViewById(R.id.ryes);
         rno = view.findViewById(R.id.rno);
         radiogroup = view.findViewById(R.id.radiogroup);
-        productcategory = view.findViewById(R.id.productcategory);
-        measurementunit = view.findViewById(R.id.measurementunit);
+
+        productcategory1 = view.findViewById(R.id.productcategory1);
+        measurementunit1 = view.findViewById(R.id.measurementunit1);
 
         mesurementunitedittxt= view.findViewById(R.id.mesurementunitedittxt);
         selectcompany = view.findViewById(R.id.selectcompany);
@@ -214,40 +225,93 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
             }
         });
 
-        productcategory.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
-            @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                selectedCategoryId = catids.get(position);
-                Log.e("selectedCategory", selectedCategoryId);
 
+        productcategory1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter mAdapter;
+
+                final Dialog mybuilder = new Dialog(getActivity());
+                mybuilder.setContentView(R.layout.select_company_dialog_2);
+
+
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter(catnames, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
 
-        measurementunit.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+        measurementunit1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                measurementunit.setSelected(true);
-                //weight.animate().setDuration(1000).alpha(1.0f);
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter2 mAdapter;
 
-                String mesasurmentunitchck= itemAtPosition;
-
-                if( mesasurmentunitchck.equals(getString(R.string.item_Other)))
-                {
-                    mesurementunitedittxt.setVisibility(View.VISIBLE);
-                    selectedMeasuremetnId = measurementIds.get(position);
-
-                    //Log.e("selectedMeasuremetnId", selectedMeasuremetnId);
+                final Dialog mybuilder = new Dialog(getActivity());
+                mybuilder.setContentView(R.layout.select_company_dialog_2);
 
 
-                }else {
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
 
-                    selectedMeasuremetnId = measurementIds.get(position);
-                    mesurementunitedittxt.setVisibility(View.INVISIBLE);
-                   // Log.e("selectedMeasuremetnId", selectedMeasuremetnId);
-                }
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
+                mAdapter = new MenuAdapter2(measurementunits, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
+
+
+//        productcategory.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                selectedCategoryId = catids.get(position);
+//                Log.e("selectedCategory", selectedCategoryId);
+//
+//            }
+//        });
+
+//        measurementunit.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                measurementunit.setSelected(true);
+//                //weight.animate().setDuration(1000).alpha(1.0f);
+//
+//                String mesasurmentunitchck= itemAtPosition;
+//
+//                if( mesasurmentunitchck.equals(getString(R.string.item_Other)))
+//                {
+//                    mesurementunitedittxt.setVisibility(View.VISIBLE);
+//                    selectedMeasuremetnId = measurementIds.get(position);
+//                    //Log.e("selectedMeasuremetnId", selectedMeasuremetnId);
+//
+//
+//                }else {
+//
+//                    selectedMeasuremetnId = measurementIds.get(position);
+//                    mesurementunitedittxt.setVisibility(View.INVISIBLE);
+//                   // Log.e("selectedMeasuremetnId", selectedMeasuremetnId);
+//                }
+//
+//            }
+//        });
 
         ryes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -449,6 +513,8 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
         return mFile;
     }
 
+
+
     private void MeasurementUnits() {
         RequestParams params = new RequestParams();
         params.add("weight_class", "PRODUCT");
@@ -475,10 +541,10 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                                 String units = item.getString("title");
                                 measurementIds.add(weight_class_id);
                                 measurementunits.add(units);
-                                ArrayAdapter<String> munitsadp = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, measurementunits);
-                                measurementunit.setAdapter(munitsadp);
-                                measurementunit.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
-                                measurementunit.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
+//                                ArrayAdapter<String> munitsadp = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, measurementunits);
+//                                measurementunit.setAdapter(munitsadp);
+//                                measurementunit.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
+//                                measurementunit.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
                             }
                         }
                     }
@@ -599,8 +665,8 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
 
                                 }
 
-                                ArrayAdapter<String> catadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, catnames);
-                                productcategory.setAdapter(catadapter);
+//                                ArrayAdapter<String> catadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, catnames);
+//                                productcategory.setAdapter(catadapter);
 
 
                             }
@@ -853,6 +919,170 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
         Log.e(TAG, "warehouseList "+wherehousenamstrSelect);
 
         //warehouses = wherehousenamstrSelect;
+
+    }
+
+
+
+
+
+
+
+    public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+                    selectedCategoryId = catids.get(i);
+                    productcategory1.setText(cnames.get(i));
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
+
+
+
+
+
+
+    public class MenuAdapter2 extends RecyclerView.Adapter<MenuAdapter2.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter2";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter2(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter2.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter2.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter2.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+                    measurementunit1.setText(cnames.get(i));
+
+                    if(cnames.get(i).equalsIgnoreCase(getString(R.string.item_Other)))
+                    {
+                        mesurementunitedittxt.setVisibility(View.VISIBLE);
+                        selectedMeasuremetnId = measurementIds.get(i);
+                        //Log.e("selectedMeasuremetnId", selectedMeasuremetnId);
+
+
+                    }else {
+
+                        selectedMeasuremetnId = measurementIds.get(i);
+                        mesurementunitedittxt.setVisibility(View.INVISIBLE);
+                        // Log.e("selectedMeasuremetnId", selectedMeasuremetnId);
+                    }
+
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
 
     }
 

@@ -2665,7 +2665,7 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
                         }
 
 
-                        if(company.length() > 0){
+                        if(company.length() == 1){
                             selectedCompanyId = cids.get(0);
                             selectcompany.setText(""+cnames.get(0));
                             productget(selectedCompanyId);

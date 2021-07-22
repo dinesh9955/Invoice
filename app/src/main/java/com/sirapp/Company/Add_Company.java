@@ -20,6 +20,7 @@ import android.os.Handler;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
@@ -56,6 +57,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.mikhaellopez.circleview.CircleView;
 import com.sirapp.Constant.Constant;
 import com.sirapp.ImageResource.FileCompressor;
+import com.sirapp.Receipts.FragmentCreate_Receipts;
 import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
@@ -98,7 +100,7 @@ public class Add_Company extends BaseFragment {
     private static final int CAMERA_ACTION_PICK_CODE=9;
     Integer REQUEST_CAMERA=1, SELECT_FILE=0;
     Uri imageurluri;
-    AwesomeSpinner defaultcurrency;
+//    AwesomeSpinner defaultcurrency;
     ArrayList<String> currencies = new ArrayList<>();
     ArrayList<String> currencies_id = new ArrayList<>();
     String selected_currency="";
@@ -122,6 +124,9 @@ public class Add_Company extends BaseFragment {
 
     SavePref savePref;
     FileCompressor mCompressor;
+
+    Button defaultcurrency;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -145,7 +150,7 @@ public class Add_Company extends BaseFragment {
 
         itemstxtColor = view.findViewById(R.id.itemstxtColor);
 
-        defaultcurrency = view.findViewById(R.id.defaultcurrency);
+        defaultcurrency = view.findViewById(R.id.defaultcurrency1);
 
      //   defaultcurrency.setSpinnerHint();
 
@@ -264,14 +269,17 @@ public class Add_Company extends BaseFragment {
 
 
 
-        defaultcurrency.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
-            @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                defaultcurrency.setSelected(true);
-                selected_currency = currencies_id.get(position);
-                Log.e("selected_currecy",selected_currency);
-            }
-        });
+//        defaultcurrency.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                defaultcurrency.setSelected(true);
+//                selected_currency = currencies_id.get(position);
+//                Log.e("selected_currecy",selected_currency);
+//            }
+//        });
+
+
+
         addwarehouse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -287,6 +295,38 @@ public class Add_Company extends BaseFragment {
                 addcompany();
             }
         });
+
+
+
+
+        defaultcurrency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RecyclerView mRecyclerView;
+                MenuAdapter mAdapter;
+
+                final Dialog mybuilder = new Dialog(getActivity());
+                mybuilder.setContentView(R.layout.select_company_dialog_2);
+
+
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter(currencies, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
+
+            }
+        });
+
+
     }
     private void setFonts() {
         list.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/Ubuntu-Regular.ttf"));
@@ -544,33 +584,10 @@ public class Add_Company extends BaseFragment {
 
                             }
 
-                            ArrayAdapter<String> defaultcurrencyadap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, currencies);
-                            defaultcurrency.setAdapter(defaultcurrencyadap);
-                            defaultcurrency.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
-                            defaultcurrency.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
-
-
-//                            defaultcurrency = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, categoriesList){
-//
-//                                @Override
-//                                public View getView(int position, View convertView, ViewGroup parent) {
-//
-//                                    View v = super.getView(position, convertView, parent);
-//                                    if (position == getCount()) {
-//                                        ((TextView)v.findViewById(android.R.id.text1)).setText("");
-//                                        ((TextView)v.findViewById(android.R.id.text1)).setHint(getItem(getCount())); //"Hint to be displayed"
-//                                    }
-//
-//                                    return v;
-//                                }
-//
-//                                @Override
-//                                public int getCount() {
-//                                    return super.getCount()-1; // you dont display last item. It is used as hint.
-//                                }
-//
-//                            };
-
+//                            ArrayAdapter<String> defaultcurrencyadap = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, currencies);
+//                            defaultcurrency.setAdapter(defaultcurrencyadap);
+//                            defaultcurrency.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
+//                            defaultcurrency.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
 
                         }
                     }
@@ -929,6 +946,84 @@ public class Add_Company extends BaseFragment {
 
 
     }
+
+
+
+
+
+
+
+
+    public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+                    selected_currency = cnames.get(i);
+                    defaultcurrency.setText(selected_currency);
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
+
 
 
 
