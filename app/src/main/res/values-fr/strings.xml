@@ -159,8 +159,14 @@
 
     <string name="list_Invoicepayment_link">Vous pouvez également choisir de le payer en ligne en cliquant sur le lien de paiement ci-dessous.</string>
 
-    <string name="setting_ChooseUpgradePackage">Choisir le package de mise à niveau</string>
-    <string name="setting_UpgradePlan1">Passez à notre fonction exclusive de suivi des stocks pour 23,99 USD supplémentaires par an et obtenez jusqu\'à 33 %</string>
+    <string name="setting_ChooseUpgradePackage">Choisissez Modules complémentaires</string>
+    <string name="setting_UpgradePlan1">Attribuez des utilisateurs supplémentaires avec un accès limité ou illimité pour un paiement unique de 3,99 USD par utilisateur uniquement</string>
+
+    <string name="setting_UpgradePlan2">Créez des entreprises supplémentaires sous les mêmes informations d\'identification pour un paiement unique de 11,99 USD uniquement par supplémentaire</string>
+
+    <string name="setting_subscribePlan">Vous n\'avez pas de plan d\'abonnement</string>
+    <string name="setting_notsubscribePlan">Vous avez déjà un forfait d\'abonnement</string>
+    <string name="setting_SelectPlan">Please select a plan</string>
 
     <string name="error">Erreur</string>
 

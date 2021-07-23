@@ -162,9 +162,14 @@
 
     <string name="list_Invoicepayment_link">Je kunt er ook voor kiezen om online te betalen door op de onderstaande betalingslink te klikken.</string>
 
-    <string name="setting_ChooseUpgradePackage">Kies upgradepakket</string>
-    <string name="setting_UpgradePlan1">Upgrade naar onze exclusieve Stock Tracking-functie voor $ 23,99 extra per jaar en krijg tot 33%</string>
+    <string name="setting_ChooseUpgradePackage">Kies add-ons</string>
+    <string name="setting_UpgradePlan1">Wijs extra gebruikers toe met beperkte of onbeperkte toegang voor een eenmalige betaling van slechts USD 3,99 per gebruiker</string>
 
+    <string name="setting_UpgradePlan2">Maak extra bedrijven aan met dezelfde inloggegevens voor een eenmalige betaling van USD 11,99 per extra persoon</string>
+
+    <string name="setting_subscribePlan">You have not subscribe plan</string>
+    <string name="setting_notsubscribePlan">Je hebt al een abonnement</string>
+    <string name="setting_SelectPlan">Selecteer een abonnement</string>
 
     <string name="error">Fout</string>
 

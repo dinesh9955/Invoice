@@ -160,8 +160,14 @@
 
     <string name = "list_Invoicepayment_link"> Você também pode optar por pagar online clicando no link de pagamento abaixo. </string>
 
-    <string name = "setting_ChooseUpgradePackage"> Escolha o pacote de atualização </string>
-    <string name = "setting_UpgradePlan1"> Faça upgrade para nosso recurso exclusivo de rastreamento de estoque por US $ 23,99 adicionais anualmente e ganhe até 33% </string>
+    <string name = "setting_ChooseUpgradePackage">Escolha adicionais</string>
+    <string name = "setting_UpgradePlan1">Atribuir usuários adicionais com acesso limitado ou ilimitado para pagamento único de US $ 3,99 apenas por usuário</string>
+
+    <string name="setting_UpgradePlan2">Criar empresas adicionais com as mesmas credenciais para pagamento único de US $ 11,99 apenas por adicional</string>
+
+    <string name="setting_subscribePlan">Você não assinou o plano</string>
+    <string name="setting_notsubscribePlan">Você já assinou o plano</string>
+    <string name="setting_SelectPlan">Selecione um plano</string>
 
     <string name="error">Erro</string>
 

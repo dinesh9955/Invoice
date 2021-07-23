@@ -168,8 +168,16 @@
 
 
 
-    <string name="setting_ChooseUpgradePackage">Upgrade-Paket auswählen</string>
-    <string name="setting_UpgradePlan1">Upgrade auf unsere exklusive Bestandsverfolgungsfunktion für zusätzliche 23,99 USD pro Jahr und erhalte bis zu 33 %</string>
+    <string name="setting_ChooseUpgradePackage">Wählen Sie Add-ons</string>
+    <string name="setting_UpgradePlan1">Weisen Sie zusätzliche Benutzer mit begrenztem oder unbegrenztem Zugriff für eine einmalige Zahlung von nur 3,99 USD pro Benutzer zu</string>
+
+    <string name="setting_UpgradePlan2">Erstellen Sie zusätzliche Unternehmen mit denselben Anmeldeinformationen für eine einmalige Zahlung von nur 11,99 USD pro zusätzlichem</string>
+
+    <string name="setting_subscribePlan">Sie haben keinen Abonnementplan</string>
+    <string name="setting_notsubscribePlan">Sie haben bereits einen Plan abonniert</string>
+    <string name="setting_SelectPlan">Bitte wählen Sie einen Plan</string>
+
+
 
     <string name="error">Error</string>
 

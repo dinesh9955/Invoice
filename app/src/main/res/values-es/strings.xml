@@ -163,8 +163,15 @@
 
     <string name = "list_Invoicepayment_link"> También puede optar por pagarlo en línea haciendo clic en el enlace de pago a continuación. </string>
 
-    <string name = "setting_ChooseUpgradePackage"> Elija el paquete de actualización </string>
-    <string name = "setting_UpgradePlan1"> Actualice a nuestra función exclusiva de seguimiento de existencias por USD 23,99 adicionales al año y obtenga hasta un 33% </string>
+
+    <string name = "setting_ChooseUpgradePackage">Seleccionar extensiones</string>
+    <string name = "setting_UpgradePlan1">Asignar usuarios adicionales con acceso limitado o ilimitado por un pago único de USD 3.99 solo por usuario</string>
+
+    <string name="setting_UpgradePlan2">Cree empresas adicionales con las mismas credenciales por un pago único de USD 11,99 solo por</string>
+
+    <string name="setting_subscribePlan">No tienes plan de suscripción</string>
+    <string name="setting_notsubscribePlan">Ya te suscribiste al plan</string>
+    <string name="setting_SelectPlan">Por favor seleccione un plan</string>
 
     <string name="error">Error</string>
 

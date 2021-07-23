@@ -62,9 +62,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/relaive111"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="60dp"
@@ -89,6 +87,45 @@
 
         <ImageView
             android:id="@+id/imageView"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/radio_uncheck"
+            android:tint="@color/darkblue"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relaive222"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="60dp"
+        android:layout_below="@+id/relaive111"
+        android:layout_marginTop="@dimen/_10sdp"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_UpgradePlan2"
+            android:id="@+id/text_setting2"
+            android:textColor="@color/fragmentfont"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:textStyle="normal"
+            android:layout_toRightOf="@+id/imageView2"
+            />
+
+
+        <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="20dp"

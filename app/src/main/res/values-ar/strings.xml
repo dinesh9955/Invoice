@@ -160,9 +160,14 @@
 
     <string name = "list_Invoicepayment_link"> يمكنك أيضًا اختيار الدفع عبر الإنترنت من خلال النقر على رابط الدفع أدناه. </string>
 
-    <string name = "setting_ChooseUpgradePackage"> اختر حزمة الترقية </string>
-    <string name = "setting_UpgradePlan1"> قم بالترقية إلى ميزة تتبع المخزون الحصرية لدينا مقابل 23.99 دولارًا أمريكيًا إضافيًا سنويًا واحصل على 33٪ </string>
+    <string name = "setting_ChooseUpgradePackage">اختر اضافات</string>
+    <string name="setting_UpgradePlan1">قم بتعيين مستخدمين إضافيين مع وصول محدود أو غير محدود مقابل دفع 3.99 دولارًا أمريكيًا لمرة واحدة فقط لكل مستخدم</string>
 
+    <string name="setting_UpgradePlan2">أنشئ شركات إضافية تحت نفس بيانات الاعتماد مقابل دفع 11.99 دولارًا أمريكيًا لمرة واحدة فقط لكل إضافية</string>
+
+    <string name="setting_subscribePlan">ليس لديك خطة الاشتراك</string>
+    <string name="setting_notsubscribePlan">لديك بالفعل خطة الاشتراك</string>
+    <string name="setting_SelectPlan">الرجاء تحديد خطة</string>
 
     <string name="error">خطأ</string>
 

@@ -736,8 +736,14 @@
     <string name="setting_SelectNumberFormat">Select Number Format</string>
     <string name="setting_Done">Done</string>
 
-    <string name="setting_ChooseUpgradePackage">Choose Upgrade Package</string>
-    <string name="setting_UpgradePlan1">Upgrade to our exclusive Stock Tracking feature at additional USD 23.99 annually and get upto 33%</string>
+    <string name="setting_ChooseUpgradePackage">Choose Adds-ons</string>
+    <string name="setting_UpgradePlan1">Assign additional users with limited or unlimited access for one time payment of USD 3.99 only per user</string>
+
+    <string name="setting_UpgradePlan2">Create additional companies under the same credentials for one time payment of USD 11.99 only per additional</string>
+
+    <string name="setting_subscribePlan">You have not subscribe plan</string>
+    <string name="setting_notsubscribePlan">You have already subscribe plan</string>
+    <string name="setting_SelectPlan">Please select a plan</string>
 
     <string name="setting_CommaFormatSelection">Comma Format Selection</string>
     <string name="setting_OnlinePaymentGateway">Online Payment Gateway</string>

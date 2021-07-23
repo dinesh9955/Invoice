@@ -161,8 +161,14 @@
 
     <string name="list_Invoicepayment_link">Puoi anche scegliere di pagarlo online facendo clic sul link di pagamento sottostante.</string>
 
-    <string name="setting_ChooseUpgradePackage">Scegli pacchetto di aggiornamento</string>
-    <string name="setting_UpgradePlan1">Esegui l\'upgrade alla nostra esclusiva funzione di monitoraggio delle scorte a 23,99 USD aggiuntivi all\'anno e ottieni fino al 33%</string>
+    <string name="setting_ChooseUpgradePackage">Seleziona componenti aggiuntivi</string>
+    <string name="setting_UpgradePlan1">Assegnare utenti aggiuntivi con accesso limitato o illimitato per un pagamento una tantum di 3,99 USD solo per utente</string>
+
+    <string name="setting_UpgradePlan2">Crea società aggiuntive con le stesse credenziali per un pagamento una tantum di 11,99 USD solo per ulteriore</string>
+
+    <string name="setting_subscribePlan">Non hai un piano di abbonamento</string>
+    <string name="setting_notsubscribePlan">Hai già un piano di abbonamento</string>
+    <string name="setting_SelectPlan">Seleziona un piano</string>
 
     <string name="error">Errore</string>
 
