@@ -130,13 +130,36 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edittextshape"
-
+                    android:visibility="gone"
                     />
+
+                <Button
+                    android:id="@+id/selectcompany2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
+
+                    android:background="@drawable/search_shape"
+                    android:hint="@string/user_Select_Company"
+                    android:spinnerMode="dialog"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="15dp"
+                    android:textStyle="normal"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    android:textAllCaps="false"
+                    android:layout_below="@+id/password"
+                    />
+
+
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/accessrights"
-                    android:layout_below="@+id/userrole"
+                    android:layout_below="@+id/selectcompany2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="30dp"

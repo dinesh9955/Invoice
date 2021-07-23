@@ -3,6 +3,7 @@ package com.sirapp.User;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,10 +29,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
@@ -88,7 +93,8 @@ public class Add_User extends BaseFragment {
     FileCompressor mCompressor;
 
     EditText username,useremail,password;
-    AwesomeSpinner userrole;
+//    AwesomeSpinner userrole;
+    Button selectcompany1;
     TextView accessrights,txtterms,txtdescription,imagedescription;
     CheckBox chkinvoices,chkestimates,chkreceipts,chkpurchase,chkpayment,chkstock,chktax,chksubadmin,chkproducts,chkcustomers,chkcredit,chkservices,chksuppliers,chkdebit;
     Button adduser;
@@ -119,7 +125,7 @@ public class Add_User extends BaseFragment {
         savePref=new SavePref(getContext());
         username = view.findViewById(R.id.username);
         useremail = view.findViewById(R.id.useremail);
-        userrole = view.findViewById(R.id.userrole);
+        selectcompany1 = view.findViewById(R.id.selectcompany2);
         accessrights = view.findViewById(R.id.accessrights);
         imagedescription = view.findViewById(R.id.imagedescription);
         txtterms = view.findViewById(R.id.txtterms);
@@ -404,14 +410,43 @@ public class Add_User extends BaseFragment {
 
 
 
-        userrole.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
-            @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                selectedCompanyId = cids.get(position);
-                Log.e("selectedCompany",selectedCompanyId);
+//        userrole.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                selectedCompanyId = cids.get(position);
+//                Log.e("selectedCompany",selectedCompanyId);
+//
+//            }
+//        });
 
+
+        selectcompany1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter mAdapter;
+
+                final Dialog mybuilder = new Dialog(getActivity());
+                mybuilder.setContentView(R.layout.select_company_dialog_3);
+
+
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter(cnames, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
+
+
 
 
 
@@ -632,11 +667,19 @@ public class Add_User extends BaseFragment {
                                 cnames.add(company_name);
                                 cids.add(company_id);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,cnames);
-                                userrole.setAdapter(namesadapter);
+//                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,cnames);
+//                                userrole.setAdapter(namesadapter);
 
                             }
                         }
+
+                        if(company.length() == 1){
+                            selectedCompanyId = cids.get(0);
+                            Log.e("selectedCompany",selectedCompanyId);
+                            selectcompany1.setText(cnames.get(0));
+                        }
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -818,4 +861,87 @@ public class Add_User extends BaseFragment {
         super.onResume();
         companyget();
     }
+
+
+
+
+
+
+
+
+
+
+
+    public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+                    selectedCompanyId = cids.get(i);
+                    selectcompany1.setText(cnames.get(i));
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
+
+
+
 }

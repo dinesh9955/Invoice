@@ -36,6 +36,7 @@ import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
 import com.sirapp.R;
+import com.sirapp.User.User_Listing;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -63,7 +64,11 @@ public class Wastage_Damage extends BaseFragment {
     TextView selectfromtext,quantitydescription,reasontxt;
     Button remove;
     EditText quantity,reason;
-    AwesomeSpinner companyspinner,fromwarehousespinner;
+    AwesomeSpinner fromwarehousespinner;
+
+    Button selectcompany1;
+
+
     Button productcategory1;
     private AVLoadingIndicatorView avi;
     ImageView avibackground;
@@ -95,8 +100,8 @@ public class Wastage_Damage extends BaseFragment {
         companyget();
 
         //spinners
-        companyspinner.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
-        companyspinner.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
+//        companyspinner.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
+//        companyspinner.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
         fromwarehousespinner.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
         fromwarehousespinner.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
 //        productspinner.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
@@ -111,16 +116,44 @@ public class Wastage_Damage extends BaseFragment {
         });
 
 
-        companyspinner.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
-            @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                selectedCompanyId = cids.get(position);
-                Log.e("selectedCompany",selectedCompanyId);
-                productget(selectedCompanyId);
-                warehouses(selectedCompanyId);
+//        companyspinner.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                selectedCompanyId = cids.get(position);
+//                Log.e("selectedCompany",selectedCompanyId);
+//                productget(selectedCompanyId);
+//                warehouses(selectedCompanyId);
+//
+//            }
+//        });
 
+        selectcompany1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter2 mAdapter;
+
+                final Dialog mybuilder = new Dialog(getActivity());
+                mybuilder.setContentView(R.layout.select_company_dialog_3);
+
+
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter2(cnames, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
+
+
 
 //        productspinner.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
 //            @Override
@@ -181,7 +214,7 @@ public class Wastage_Damage extends BaseFragment {
         quantitydescription = v.findViewById(R.id.quantitydescription);
         remove = v.findViewById(R.id.remove);
         quantity = v.findViewById(R.id.quantity);
-        companyspinner = v.findViewById(R.id.companyspinner);
+        selectcompany1 = v.findViewById(R.id.selectcompany2);
         fromwarehousespinner = v.findViewById(R.id.fromwarehousespinner);
         productcategory1 = v.findViewById(R.id.productcategory1);
         avi = v.findViewById(R.id.avi);
@@ -233,10 +266,20 @@ public class Wastage_Damage extends BaseFragment {
                                 cnames.add(company_name);
                                 cids.add(company_id);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,cnames);
-                                companyspinner.setAdapter(namesadapter);
+//                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,cnames);
+//                                companyspinner.setAdapter(namesadapter);
 
                             }
+                        }
+
+
+
+                        if(company.length() == 1){
+                            selectedCompanyId = cids.get(0);
+                            Log.e("selectedCompany",selectedCompanyId);
+                            selectcompany1.setText(cnames.get(0));
+                            productget(selectedCompanyId);
+                            warehouses(selectedCompanyId);
                         }
                     }
                 } catch (JSONException e) {
@@ -610,6 +653,81 @@ public class Wastage_Damage extends BaseFragment {
 
 
     }
+
+
+
+    public class MenuAdapter2 extends RecyclerView.Adapter<MenuAdapter2.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter2(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter2.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter2.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter2.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+                    selectedCompanyId = cids.get(i);
+                    selectcompany1.setText(cnames.get(i));
+                    productget(selectedCompanyId);
+                    warehouses(selectedCompanyId);
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
+
 
 
 

@@ -1327,12 +1327,16 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
                             String subject = Utility.getRealValueInvoiceWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
-                            String txt = getString(R.string.list_Invoiceviewed)+
+
+
+                            String txt = "";
+                            if(linkWitch.equalsIgnoreCase("1") || linkWitch.equalsIgnoreCase("2")){
+                                  txt = getString(R.string.list_Invoiceviewed)+
                                     "\n\n" +newLink +
                                     "\n\n" +getString(R.string.list_Invoicepayment_link) ;
-
-//                                    "\n\n" + Html.fromHtml(html) ;
-
+                            }else{
+                                  txt = getString(R.string.list_Invoiceviewed);
+                            }
 
 
                             try {
@@ -2148,7 +2152,12 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                         ArrayList<Uri> uriArrayList = new ArrayList<>();
                         uriArrayList.add(imageUri1);
                         uriArrayList.add(imageUri2);
-                        uriArrayList.add(html.getFilePath());
+
+                        if(linkWitch.equalsIgnoreCase("1") || linkWitch.equalsIgnoreCase("2")){
+                            uriArrayList.add(html.getFilePath());
+                        }
+
+
 
                         intentShareFile.setType("application/pdf/*|image/*|text/html");
                         intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);

@@ -69,9 +69,9 @@ public class Add_Services extends BaseFragment {
     Button addservice;
     RadioButton ryes,rno;
     RadioGroup radiogroup;
-    AwesomeSpinner selectcompany;
+//    AwesomeSpinner selectcompany;
 
-    Button selectcategory1, measurementunit1;
+    Button selectcompany1, selectcategory1, measurementunit1;
 
     private AVLoadingIndicatorView avi;
     ImageView avibackground;
@@ -116,7 +116,7 @@ public class Add_Services extends BaseFragment {
 //        measurementunit = view.findViewById(R.id.measurementunit);
         avi = view.findViewById(R.id.avi);
         avibackground = view.findViewById(R.id.avibackground);
-        selectcompany = view.findViewById(R.id.selectcompany);
+        selectcompany1 = view.findViewById(R.id.selectcompany2);
         othercategory = view.findViewById(R.id.othercategory);
         weight = view.findViewById(R.id.weight);
 
@@ -129,8 +129,8 @@ public class Add_Services extends BaseFragment {
 
 //        selectcategory.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
 //        selectcategory.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
-        selectcompany.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
-        selectcompany.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
+//        selectcompany.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
+//        selectcompany.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
 //        measurementunit.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
 //        measurementunit.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
 
@@ -156,11 +156,38 @@ public class Add_Services extends BaseFragment {
         });
 
 
-        selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//        selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                selectedCompanyId = cids.get(position);
+//                Log.e("selectedCompany",selectedCompanyId);
+//            }
+//        });
+
+
+        selectcompany1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                selectedCompanyId = cids.get(position);
-                Log.e("selectedCompany",selectedCompanyId);
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter3 mAdapter;
+
+                final Dialog mybuilder = new Dialog(getActivity());
+                mybuilder.setContentView(R.layout.select_company_dialog_3);
+
+
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter3(cnames, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
 
@@ -317,10 +344,16 @@ public class Add_Services extends BaseFragment {
                                 cnames.add(company_name);
                                 cids.add(company_id);
 
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,cnames);
-                                selectcompany.setAdapter(namesadapter);
+//                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,cnames);
+//                                selectcompany.setAdapter(namesadapter);
 
                             }
+                        }
+
+
+                        if(company.length() == 1){
+                            selectedCompanyId = cids.get(0);
+                            selectcompany1.setText(cnames.get(0));
                         }
                     }
                 } catch (JSONException e) {
@@ -785,6 +818,82 @@ public class Add_Services extends BaseFragment {
                         // Log.e("selectedMeasuremetnId", selectedMeasuremetnId);
                     }
 
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+    public class MenuAdapter3 extends RecyclerView.Adapter<MenuAdapter3.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter3";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter3(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter3.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter3.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter3.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+                    selectcompany1.setText(cnames.get(i));
+                    selectedCompanyId = cids.get(i);
                 }
             });
 
