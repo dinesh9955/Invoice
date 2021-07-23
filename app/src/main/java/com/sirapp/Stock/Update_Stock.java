@@ -582,21 +582,22 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
             quantity.setError(getString(R.string.dialog_Required));
             quantity.requestFocus();
         }
-        else if (pricee.isEmpty()){
-            price.setError(getString(R.string.dialog_Required));
-            price.requestFocus();
-        }
+//        else if (pricee.isEmpty()){
+//            price.setError(getString(R.string.dialog_Required));
+//            price.requestFocus();
+//        }
         else if (selectedProductId.equals("")){
             Constant.ErrorToast(getActivity(),getString(R.string.dialog_SelectAProduct));
         }
-       /* else if (selectedVendorId.equals("")){
-            Constant.ErrorToast(getActivity(),"Select a Vendor");
-
-        }*/
+//       /* else if (selectedVendorId.equals("")){
+//            Constant.ErrorToast(getActivity(),"Select a Vendor");
+//
+//        }*/
         else if (warehouses.equalsIgnoreCase("")){
             Constant.ErrorToast(getActivity(),getString(R.string.stock_Select_Warehouse));
         }
         else{
+            Log.e(TAG, "UpdateStock");
             avi.smoothToShow();
             avibackground.setVisibility(View.VISIBLE);
 

@@ -1,19 +1,26 @@
 package com.sirapp.Settings;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
@@ -23,6 +30,7 @@ import com.loopj.android.http.RequestParams;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
+import com.sirapp.InvoiceReminder.InvoiceReminderActivity;
 import com.sirapp.R;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -50,7 +58,7 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
     int payPalCode = 0;
     int stripeCode = 0;
 
-    AwesomeSpinner selectcompany;
+    Button selectcompany1;
 
     ArrayList<String> cids = new ArrayList<>();
     ArrayList<String> cnames = new ArrayList<>();
@@ -114,7 +122,7 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         avi = findViewById(R.id.avi);
         avibackground = findViewById(R.id.avibackground);
 
-        selectcompany = findViewById(R.id.selectcompany);
+        selectcompany1 = findViewById(R.id.selectcompany2);
 
         imageViewStripeUp = findViewById(R.id.imageViewUp1);
         imageViewPaypalUp = findViewById(R.id.imageViewUp2);
@@ -153,30 +161,61 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
 
 
 
-        selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//        selectcompany.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                selectedCompanyId = cids.get(position);
+//                selectedCompanyName = cnames.get(position);
+//                selectedCompanyImage = cidsLogo.get(position);
+//
+//                selectedStringPaypal = stringPaypal.get(position);
+//                selectedStringStripe = stringStripe.get(position);
+//
+//                if(selectedStringPaypal.equalsIgnoreCase("1")){
+//                    buttonPaypal.setText(getString(R.string.tax_edit));
+//                }else{
+//                    buttonPaypal.setText(getString(R.string.setting_Setup));
+//                }
+//
+//                if(selectedStringStripe.equalsIgnoreCase("1")){
+//                    buttonStripe.setText(getString(R.string.tax_edit));
+//                }else{
+//                    buttonStripe.setText(getString(R.string.setting_Setup));
+//                }
+//
+//            }
+//        });
+
+
+
+
+
+        selectcompany1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                selectedCompanyId = cids.get(position);
-                selectedCompanyName = cnames.get(position);
-                selectedCompanyImage = cidsLogo.get(position);
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter mAdapter;
 
-                selectedStringPaypal = stringPaypal.get(position);
-                selectedStringStripe = stringStripe.get(position);
+                final Dialog mybuilder = new Dialog(OnlinePaymentGatewayActivity.this);
+                mybuilder.setContentView(R.layout.select_company_dialog_3);
 
-                if(selectedStringPaypal.equalsIgnoreCase("1")){
-                    buttonPaypal.setText(getString(R.string.tax_edit));
-                }else{
-                    buttonPaypal.setText(getString(R.string.setting_Setup));
-                }
 
-                if(selectedStringStripe.equalsIgnoreCase("1")){
-                    buttonStripe.setText(getString(R.string.tax_edit));
-                }else{
-                    buttonStripe.setText(getString(R.string.setting_Setup));
-                }
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
 
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(OnlinePaymentGatewayActivity.this, LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter(cnames, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
+
 
 
 
@@ -301,8 +340,31 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                             }
                         }
 
-                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(OnlinePaymentGatewayActivity.this, android.R.layout.simple_spinner_item, cnames);
-                        selectcompany.setAdapter(namesadapter);
+//                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(OnlinePaymentGatewayActivity.this, android.R.layout.simple_spinner_item, cnames);
+//                        selectcompany.setAdapter(namesadapter);
+
+
+                        if(company.length() == 1){
+                            selectcompany1.setText(cnames.get(0));
+                            selectedCompanyId = cids.get(0);
+                            selectedCompanyName = cnames.get(0);
+                            selectedCompanyImage = cidsLogo.get(0);
+
+                            selectedStringPaypal = stringPaypal.get(0);
+                            selectedStringStripe = stringStripe.get(0);
+
+                            if(selectedStringPaypal.equalsIgnoreCase("1")){
+                                buttonPaypal.setText(getString(R.string.tax_edit));
+                            }else{
+                                buttonPaypal.setText(getString(R.string.setting_Setup));
+                            }
+
+                            if(selectedStringStripe.equalsIgnoreCase("1")){
+                                buttonStripe.setText(getString(R.string.tax_edit));
+                            }else{
+                                buttonStripe.setText(getString(R.string.setting_Setup));
+                            }
+                        }
 
                     }
                 } catch (JSONException e) {
@@ -561,4 +623,111 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         super.onResume();
         companyget();
     }
+
+
+
+
+
+
+
+
+
+    public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+//                    selectedProductId = pids.get(i);
+//                    productcategory1.setText(cnames.get(i));
+
+//                    selectedCompanyId = cids.get(i);
+//                    colorCode = arrayColor.get(i);
+//                    String parmavalue = "UNPAID";
+//                    InvoicelistData(parmavalue);
+//
+                    selectcompany1.setText(cnames.get(i));
+
+                    selectedCompanyId = cids.get(i);
+                    selectedCompanyName = cnames.get(i);
+                    selectedCompanyImage = cidsLogo.get(i);
+
+                    selectedStringPaypal = stringPaypal.get(i);
+                    selectedStringStripe = stringStripe.get(i);
+
+                    if(selectedStringPaypal.equalsIgnoreCase("1")){
+                        buttonPaypal.setText(getString(R.string.tax_edit));
+                    }else{
+                        buttonPaypal.setText(getString(R.string.setting_Setup));
+                    }
+
+                    if(selectedStringStripe.equalsIgnoreCase("1")){
+                        buttonStripe.setText(getString(R.string.tax_edit));
+                    }else{
+                        buttonStripe.setText(getString(R.string.setting_Setup));
+                    }
+
+
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
+
 }

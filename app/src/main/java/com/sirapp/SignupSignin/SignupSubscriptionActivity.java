@@ -26,6 +26,7 @@ import com.loopj.android.http.RequestParams;
 import com.sirapp.Constant.Constant;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.Home.Home_Activity;
 import com.sirapp.R;
 
@@ -45,6 +46,8 @@ public class SignupSubscriptionActivity extends BaseActivity {
     Button buttonUpgrade_now, buttonSkip;
 
     private BillingProcessor bp;
+
+    String productID = "com.sir.oneyear";
 
     ImageView imageViewPay;
     @Override
@@ -73,22 +76,24 @@ public class SignupSubscriptionActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 imageViewPay.setImageResource(R.drawable.pay2);
-                bp.purchase(SignupSubscriptionActivity.this, "com.sir.oneyear");
-
+//                bp.purchase(SignupSubscriptionActivity.this, "com.sir.oneyear");
+                productID = "com.sir.oneyear";
             }
         });
         linearLayout_1Month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imageViewPay.setImageResource(R.drawable.pay1);
-                bp.purchase(SignupSubscriptionActivity.this, "com.sirapp.onemonth");
+//                bp.purchase(SignupSubscriptionActivity.this, "com.sirapp.onemonth");
+                productID = "com.sirapp.onemonth";
             }
         });
 
         buttonUpgrade_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                upgradePackage();
+                bp.purchase(SignupSubscriptionActivity.this, productID);
+              // upgradePackage();
             }
         });
 

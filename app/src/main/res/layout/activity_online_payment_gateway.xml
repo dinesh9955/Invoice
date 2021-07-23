@@ -38,14 +38,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edittextshape"
-                app:spinnerHint="@string/user_Select_Company" />
+                app:spinnerHint="@string/user_Select_Company"
+                android:visibility="gone"/>
+
+
+            <Button
+                android:id="@+id/selectcompany2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/search_shape"
+                android:hint="@string/user_Select_Company"
+                android:spinnerMode="dialog"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="15dp"
+                android:textStyle="normal"
+                android:textSize="13dp"
+                android:textColor="@color/black"
+                android:textAllCaps="false"
+
+                />
 
 
                 <RelativeLayout
                 android:id="@+id/relative_stripe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/selectcompany"
+                android:layout_below="@+id/selectcompany2"
                 android:layout_marginTop="50dp"
                 >
 

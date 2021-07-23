@@ -48,6 +48,8 @@ public class GoProActivity extends BaseActivity {
     private BillingProcessor bp;
 
 
+    String productID = "com.sir.oneyear";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,21 +77,24 @@ public class GoProActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 imageViewPay.setImageResource(R.drawable.pay2);
-                bp.purchase(GoProActivity.this, "com.sir.oneyear");
+                productID = "com.sir.oneyear";
+              //  bp.purchase(GoProActivity.this, "com.sir.oneyear");
             }
         });
         linearLayout_1Month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imageViewPay.setImageResource(R.drawable.pay1);
-                bp.purchase(GoProActivity.this, "com.sirapp.onemonth");
+                productID = "com.sirapp.onemonth";
+              //  bp.purchase(GoProActivity.this, "com.sirapp.onemonth");
             }
         });
 
         buttonUpgrade_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                upgradePackage();
+                bp.purchase(GoProActivity.this, productID);
+               // upgradePackage();
             }
         });
 
