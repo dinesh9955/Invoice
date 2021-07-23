@@ -41,11 +41,11 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-
-import com.itextpdf.text.pdf.PdfWriter;
+//import com.itextpdf.text.Document;
+//import com.itextpdf.text.DocumentException;
+//import com.itextpdf.text.Paragraph;
+//
+//import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -66,7 +66,7 @@ import java.util.Locale;
 
 //import io.github.lucasfsc.html2pdf.Html2Pdf;
 
-import com.lowagie.text.Font;
+//import com.lowagie.text.Font;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.POJO.Invoice.Root;
@@ -787,44 +787,44 @@ String dd = "<html>\n" +
 
 
 
-    public void createandDisplayPdf(String text) {
-
-        Document doc = new Document();
-
-        try {
-            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir";
-
-            File dir = new File(path);
-            if(!dir.exists())
-                dir.mkdirs();
-
-            File file = new File(dir, "newFile.pdf");
-            FileOutputStream fOut = new FileOutputStream(file);
-
-            PdfWriter.getInstance(doc, fOut);
-
-            //open the document
-            doc.open();
-
-            Paragraph p1 = new Paragraph(text);
-            Font paraFont= new Font(Font.COURIER);
-            p1.setAlignment(Paragraph.ALIGN_CENTER);
-//            p1.setFont(paraFont);
-
-            //add paragraph to document
-            doc.add(p1);
-
-        } catch (DocumentException de) {
-            Log.e("PDFCreator", "DocumentException:" + de);
-        } catch (IOException e) {
-            Log.e("PDFCreator", "ioException:" + e);
-        }
-        finally {
-            doc.close();
-        }
-
-        //viewPdf("newFile.pdf", "Dir");
-    }
+//    public void createandDisplayPdf(String text) {
+//
+//        Document doc = new Document();
+//
+//        try {
+//            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir";
+//
+//            File dir = new File(path);
+//            if(!dir.exists())
+//                dir.mkdirs();
+//
+//            File file = new File(dir, "newFile.pdf");
+//            FileOutputStream fOut = new FileOutputStream(file);
+//
+//            PdfWriter.getInstance(doc, fOut);
+//
+//            //open the document
+//            doc.open();
+//
+//            Paragraph p1 = new Paragraph(text);
+//            Font paraFont= new Font(Font.COURIER);
+//            p1.setAlignment(Paragraph.ALIGN_CENTER);
+////            p1.setFont(paraFont);
+//
+//            //add paragraph to document
+//            doc.add(p1);
+//
+//        } catch (DocumentException de) {
+//            Log.e("PDFCreator", "DocumentException:" + de);
+//        } catch (IOException e) {
+//            Log.e("PDFCreator", "ioException:" + e);
+//        }
+//        finally {
+//            doc.close();
+//        }
+//
+//        //viewPdf("newFile.pdf", "Dir");
+//    }
 
 
     public void stringtopdf(String data) {
