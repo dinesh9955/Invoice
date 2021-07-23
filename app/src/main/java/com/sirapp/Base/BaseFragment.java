@@ -42,7 +42,7 @@ public class BaseFragment extends Fragment {
         }else if(languagePosition == 6){
             languageName = "spanish";
         }else if(languagePosition == 7){
-            languageName = "pt";
+            languageName = "portuguese";
         }
         return languageName;
     }
