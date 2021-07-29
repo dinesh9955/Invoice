@@ -48,7 +48,7 @@ public class SignupSubscriptionActivity extends BaseActivity {
     private BillingProcessor bp;
 
     String productID = "com.sir.oneyear";
-
+    String subscriptionType = "oneyear";
     ImageView imageViewPay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +78,7 @@ public class SignupSubscriptionActivity extends BaseActivity {
                 imageViewPay.setImageResource(R.drawable.pay2);
 //                bp.purchase(SignupSubscriptionActivity.this, "com.sir.oneyear");
                 productID = "com.sir.oneyear";
+                subscriptionType = "oneyear";
             }
         });
         linearLayout_1Month.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +87,7 @@ public class SignupSubscriptionActivity extends BaseActivity {
                 imageViewPay.setImageResource(R.drawable.pay1);
 //                bp.purchase(SignupSubscriptionActivity.this, "com.sirapp.onemonth");
                 productID = "com.sirapp.onemonth";
+                subscriptionType = "onemonth";
             }
         });
 
@@ -127,7 +129,7 @@ public class SignupSubscriptionActivity extends BaseActivity {
                 Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
                 String date = simple.format(purchaseTime);
 
-                callAPI(productId, purchaseToken, date);
+                callAPI(productId, orderID, date);
 
 
 //                SkuDetails dd = bp.getPurchaseListingDetails("");
@@ -172,7 +174,7 @@ public class SignupSubscriptionActivity extends BaseActivity {
         progressDialog.show();
 
         RequestParams params = new RequestParams();
-        params.add("subscription_type", "oneyear");
+        params.add("subscription_type", subscriptionType);
         params.add("productId", productId);
         params.add("quantity", "1");
         params.add("transactionId", purchaseToken);

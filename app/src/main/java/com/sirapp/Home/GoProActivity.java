@@ -18,7 +18,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.SkuDetails;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
@@ -49,7 +51,7 @@ public class GoProActivity extends BaseActivity {
 
 
     String productID = "com.sir.oneyear";
-
+    String subscriptionType = "oneyear";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +80,11 @@ public class GoProActivity extends BaseActivity {
             public void onClick(View v) {
                 imageViewPay.setImageResource(R.drawable.pay2);
                 productID = "com.sir.oneyear";
+                subscriptionType = "oneyear";
               //  bp.purchase(GoProActivity.this, "com.sir.oneyear");
+               // bp.purchase(GoProActivity.this, "license-test");
+//                bp.loadOwnedPurchasesFromGoogle();
+              //  bp.loadOwnedPurchasesFromGoogle();
             }
         });
         linearLayout_1Month.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +92,7 @@ public class GoProActivity extends BaseActivity {
             public void onClick(View v) {
                 imageViewPay.setImageResource(R.drawable.pay1);
                 productID = "com.sirapp.onemonth";
+                subscriptionType = "onemonth";
               //  bp.purchase(GoProActivity.this, "com.sirapp.onemonth");
             }
         });
@@ -104,37 +111,62 @@ public class GoProActivity extends BaseActivity {
         bp = new BillingProcessor(this, AllSirApi.LICENSE_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
+                Log.e(TAG, "onProductPurchased"+productId);
 //                showToast("onProductPurchased: " + productId);
 //                updateTextViews();
+
+
 
                 String productID = details.productId;
                 String orderID = details.orderId;
                 String purchaseToken = details.purchaseToken;
                 Date purchaseTime = details.purchaseTime;
+
+               // Date date = new Date(Long.parseLong(details.purchaseTime));
+
+//                Gson gson = new Gson();
+//
+//                String json = gson.toJson(details.purchaseInfo.responseData);
+
+//                String json = gson.toJson(bp.consumePurchase(details.productId));
+
+                Log.e(TAG , "productID"+productID);
+                Log.e(TAG , "orderID"+orderID);
+                Log.e(TAG , "purchaseToken"+purchaseToken);
+                Log.e(TAG , "purchaseTime"+purchaseTime);
+
+
                 DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
                 Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
                 String date = simple.format(purchaseTime);
 
-                callAPI(productID, purchaseToken, date);
+                callAPI(productID, orderID, date);
 
 
-//                SkuDetails dd = bp.getPurchaseListingDetails("");
+//                SkuDetails dd = bp.getPurchaseListingDetails(details.productId);
+//
+//                String json22 = gson.toJson(dd);
+//                Log.e(TAG , "json22 "+json22);
+
 //                SkuDetails dd = bp.getSubscriptionListingDetails("");
 //                TransactionDetails dd = bp.getSubscriptionTransactionDetails("");
             }
             @Override
             public void onBillingError(int errorCode, @Nullable Throwable error) {
+                Log.e(TAG, "onBillingError");
 //                showToast("onBillingError: " + Integer.toString(errorCode));
                 // Log.e(TAG, "onBillingError "+error.getMessage());
             }
             @Override
             public void onBillingInitialized() {
+                Log.e(TAG, "onBillingInitialized");
 //                showToast("onBillingInitialized");
 //                readyToPurchase = true;
 //                updateTextViews();
             }
             @Override
             public void onPurchaseHistoryRestored() {
+                Log.e(TAG, "onPurchaseHistoryRestored");
                 //showToast("onPurchaseHistoryRestored");
                 for(String sku : bp.listOwnedProducts())
                     Log.e(TAG, "Owned Managed Product: " + sku);
@@ -143,7 +175,7 @@ public class GoProActivity extends BaseActivity {
                 //updateTextViews();
             }
         });
-
+        bp.initialize();
 
 
     }
@@ -159,7 +191,7 @@ public class GoProActivity extends BaseActivity {
         progressDialog.show();
 
         RequestParams params = new RequestParams();
-        params.add("subscription_type", "oneyear");
+        params.add("subscription_type", subscriptionType);
         params.add("productId", productId);
         params.add("quantity", "1");
         params.add("transactionId", purchaseToken);
@@ -322,5 +354,55 @@ public class GoProActivity extends BaseActivity {
         window.setBackgroundDrawableResource(R.color.transparent);
 
     }
+
+
+
+
+
+
+//    2021-07-2910: 56: 38.55226461-26461/?E/GoProActivity: productID{
+//        "orderId": "transactionId.android.test.purchased",
+//                "productId": "android.test.purchased",
+//                "purchaseInfo": {
+//            "purchaseData": {
+//                "autoRenewing": false,
+//                        "developerPayload": "inapp:android.test.purchased:d6907708-1f4a-4b51-b375-43e187ff11c9",
+//                        "orderId": "transactionId.android.test.purchased",
+//                        "packageName": "com.sirapp",
+//                        "productId": "android.test.purchased",
+//                        "purchaseState": "PurchasedSuccessfully",
+//                        "purchaseToken": "inapp:com.sirapp:android.test.purchased"
+//            },
+//            "responseData": "{\"packageName\":\"com.sirapp\",\"acknowledged\":false,\"orderId\":\"transactionId.android.test.purchased\",\"productId\":\"android.test.purchased\",\"developerPayload\":\"inapp:android.test.purchased:d6907708-1f4a-4b51-b375-43e187ff11c9\",\"purchaseTime\":0,\"purchaseState\":0,\"purchaseToken\":\"inapp:com.sirapp:android.test.purchased\"}",
+//                    "signature": ""
+//        },
+//        "purchaseToken": "inapp:com.sirapp:android.test.purchased"
+//    }
+
+
+
+
+
+//    2021-07-2911: 01: 21.48532642-32642/?E/GoProActivity: productID{
+//        "currency": "INR",
+//                "description": "Sample description for product: android.test.purchased.",
+//                "haveIntroductoryPeriod": false,
+//                "haveTrialPeriod": false,
+//                "introductoryPriceCycles": 0,
+//                "introductoryPriceLong": 0,
+//                "introductoryPricePeriod": "",
+//                "introductoryPriceText": "",
+//                "introductoryPriceValue": 0.0,
+//                "isSubscription": false,
+//                "priceLong": 73720842,
+//                "priceText": "₹73.72",
+//                "priceValue": 73.720842,
+//                "productId": "android.test.purchased",
+//                "subscriptionFreeTrialPeriod": "",
+//                "subscriptionPeriod": "",
+//                "title": "Sample Title"
+//    }
+
+
 
 }

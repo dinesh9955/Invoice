@@ -2,6 +2,7 @@ package com.sirapp.Settings;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -38,6 +39,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -116,6 +118,7 @@ public class SettingsActivity extends BaseActivity {
         bp = new BillingProcessor(this, AllSirApi.LICENSE_KEY, new BillingProcessor.IBillingHandler() {
             @Override
             public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
+                Log.e(TAG, "onProductPurchased");
 //                showToast("onProductPurchased: " + productId);
 //                updateTextViews();
 
@@ -127,7 +130,7 @@ public class SettingsActivity extends BaseActivity {
                 Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
                 String date = simple.format(purchaseTime);
 
-                callAPI(productId, purchaseToken, date);
+                callAPI(productID, orderID, date, "1");
 
 
 //                SkuDetails dd = bp.getPurchaseListingDetails("");
@@ -136,48 +139,47 @@ public class SettingsActivity extends BaseActivity {
             }
             @Override
             public void onBillingError(int errorCode, @Nullable Throwable error) {
+                Log.e(TAG, "onBillingError");
 //                showToast("onBillingError: " + Integer.toString(errorCode));
                 // Log.e(TAG, "onBillingError "+error.getMessage());
             }
             @Override
             public void onBillingInitialized() {
+                Log.e(TAG, "onBillingInitialized");
 //                showToast("onBillingInitialized");
 //                readyToPurchase = true;
 //                updateTextViews();
             }
             @Override
             public void onPurchaseHistoryRestored() {
-                //showToast("onPurchaseHistoryRestored");
-                for(String sku : bp.listOwnedProducts())
-                    Log.e(TAG, "Owned Managed Product: " + sku);
-                for(String sku : bp.listOwnedSubscriptions())
-                    Log.e(TAG, "Owned Subscription: " + sku);
-                //updateTextViews();
+                boolean controlnumber = bp.loadOwnedPurchasesFromGoogle();
+                if(controlnumber) {
+                    for(String sku : bp.listOwnedSubscriptions()){
+                        TransactionDetails details = bp.getSubscriptionTransactionDetails(sku);
+
+                        if (details != null) {
+                            Log.d("TAG", "onBillingInitialized: active");
+                            String productID = details.productId;
+                            String orderID = details.orderId;
+                            String purchaseToken = details.purchaseToken;
+                            Date purchaseTime = details.purchaseTime;
+                            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+                            Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
+                            String date = simple.format(purchaseTime);
+
+                            callAPI(productID, purchaseToken, date, "2");
+                        }
+
+                    }
 
 
-                // SkuDetails ddd = bp.getPurchaseListingDetails("");
-
-
-                TransactionDetails premiumTransactionDetails = bp.getPurchaseTransactionDetails("premium_id");
-
-                if (premiumTransactionDetails == null) {
-                    Log.i(TAG, "onPurchaseHistoryRestored(): Havn't bought premium yet.");
-                    // purchasePremiumButton.setEnabled(true);
-                    Constant.ErrorToast(SettingsActivity.this , getString(R.string.setting_subscribePlan));
-                }
-                else {
-                    Log.i(TAG, "onPurchaseHistoryRestored(): Already purchases premium.");
-
-                    Constant.SuccessToast(SettingsActivity.this ,  getString(R.string.setting_notsubscribePlan));
-
-//                    purchasePremiumButton.setText(getString(R.string.you_have_premium));
-//                    purchasePremiumButton.setEnabled(false);
-//                    statusTextView.setVisibility(View.INVISIBLE);
                 }
 
 
             }
         });
+
+        bp.initialize();
 
 
     }
@@ -186,8 +188,12 @@ public class SettingsActivity extends BaseActivity {
     public void restorePurchase() {
         Log.e(TAG, "restorePurchase ");
 
-        bp.purchase(this, "FunnyStickerPaid");
+       // bp.purchase(this, "android.test.purchased");
 //        BillingHelper.restoreTransactionInformation(BillingSecurity.generateNonce())
+//        bp.initialize();
+
+        bp.loadOwnedPurchasesFromGoogle();
+
     }
 
 
@@ -197,6 +203,7 @@ public class SettingsActivity extends BaseActivity {
 
         ImageView imageView = (ImageView) mybuilder.findViewById(R.id.imageView);
         ImageView imageView2 = (ImageView) mybuilder.findViewById(R.id.imageView2);
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -268,7 +275,7 @@ public class SettingsActivity extends BaseActivity {
 
 
 
-    private void callAPI(String productId, String purchaseToken, String date) {
+    private void callAPI(String productId, String purchaseToken, String date, String witch) {
         final ProgressDialog progressDialog = new ProgressDialog(SettingsActivity.this);
         progressDialog.setMessage("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
@@ -278,10 +285,11 @@ public class SettingsActivity extends BaseActivity {
 
 
         if(imageClickID == 1){
-            params.add("subscription_type", "Additional User");
-        }
-        if(imageClickID == 2){
-            params.add("subscription_type", "Additional Company");
+            params.add("subscription_type", "oneuser");
+        } else if(imageClickID == 2){
+            params.add("subscription_type", "onecompany");
+        } else {
+            params.add("subscription_type", "restore");
         }
 
 
@@ -316,7 +324,12 @@ public class SettingsActivity extends BaseActivity {
                     String status = jsonObject.getString("status");
                     String message = jsonObject.getString("message");
                     if (status.equalsIgnoreCase("true")) {
-                        Constant.SuccessToast(SettingsActivity.this, message);
+                        if(witch.equalsIgnoreCase("1")){
+                            Constant.SuccessToast(SettingsActivity.this, message);
+                        }else if(witch.equalsIgnoreCase("2")){
+                            Constant.SuccessToast(SettingsActivity.this, "Restored successfully.");
+                        }
+
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -364,5 +377,10 @@ public class SettingsActivity extends BaseActivity {
 
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!bp.handleActivityResult(requestCode, resultCode, data))
+            super.onActivityResult(requestCode, resultCode, data);
+    }
 
 }
