@@ -2137,7 +2137,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
             if(linkWitch.equalsIgnoreCase("1")){
                 linkTypeName = "paypal";
-            }else if(linkWitch.equalsIgnoreCase("1")){
+            }else if(linkWitch.equalsIgnoreCase("2")){
                 linkTypeName = "stripe";
             }
 

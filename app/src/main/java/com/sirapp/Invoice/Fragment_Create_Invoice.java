@@ -664,13 +664,14 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
     private void setListeners() {
 
+      //  additem.setEnabled(false);
+
         additem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (selectwarehouseId.equals("")) {
                     Constant.ErrorToast(getActivity(), getString(R.string.stock_Select_Warehouse));
-
                 } else {
                     createbottomsheet_products();
                     bottomSheetDialog.show();
@@ -1718,7 +1719,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         if(requestCode == 124){
             Log.e(TAG, "requestCode "+requestCode);
-            productget(selectedCompanyId);
+            Log.e("selectwarehouseIdAA ", selectwarehouseId);
+           // additem.setClickable(false);
+            productget(selectwarehouseId);
         }
 
         if(requestCode == 125){
@@ -2996,8 +2999,13 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 selectButton.setVisibility(View.GONE);
                             }
 
-                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                            selectwarehouse.setAdapter(namesadapter);
+
+                            if(selectwarehouse != null){
+                                if(wnames != null){
+                                    ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+                                    selectwarehouse.setAdapter(namesadapter);
+                                }
+                            }
 
                         }
                     } catch (JSONException e) {
@@ -3049,7 +3057,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
-                Log.e("response product", response);
+                Log.e("responseproduct", response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -3058,7 +3066,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         JSONObject data = jsonObject.getJSONObject("data");
                         String product_image_path = data.getString("product_image_path");
                         JSONArray product = data.getJSONArray("product");
+
                         if (product.length() > 0) {
+                         //   additem.setClickable(true);
                             for (int i = 0; i < product.length(); i++) {
                                 JSONObject item = product.getJSONObject(i);
                                 String product_id = item.getString("product_id");
