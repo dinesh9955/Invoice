@@ -84,6 +84,7 @@ import com.sirapp.Adapter.Service_bottom_Adapter;
 import com.sirapp.Base.BaseFragment;
 import com.sirapp.Company.Companies_Activity;
 import com.sirapp.Constant.Constant;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
 import com.sirapp.Invoice.ChooseTemplate;
 import com.sirapp.Model.Customer_list;
@@ -94,7 +95,6 @@ import com.sirapp.Model.Service_list;
 import com.sirapp.Model.Tax_List;
 import com.sirapp.Product.Product_Activity;
 import com.sirapp.Service.Service_Activity;
-import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.Tax.CustomTaxAdapter;
 import com.sirapp.Tax.Tax_Activity;
 import com.sirapp.Utils.Utility;
@@ -1259,7 +1259,7 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                            Intent intent = new Intent(getActivity(), GoProActivity.class);
                                             startActivity(intent);
                                         }
                                     }, 1000);

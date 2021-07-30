@@ -23,7 +23,7 @@ import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
-import com.sirapp.Settings.SubscribeActivity;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.Utils.Utility;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.R;
@@ -253,7 +253,7 @@ public class Tax_Edit extends BaseActivity {
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent intent = new Intent(Tax_Edit.this, SubscribeActivity.class);
+                                            Intent intent = new Intent(Tax_Edit.this, GoProActivity.class);
                                             startActivity(intent);
                                         }
                                     }, 1000);

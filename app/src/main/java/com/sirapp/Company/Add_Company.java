@@ -32,7 +32,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,7 +41,6 @@ import android.widget.Toast;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
-import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -56,9 +54,8 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import com.mikhaellopez.circleview.CircleView;
 import com.sirapp.Constant.Constant;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
-import com.sirapp.Receipts.FragmentCreate_Receipts;
-import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
 import com.sirapp.BuildConfig;
@@ -737,7 +734,7 @@ public class Add_Company extends BaseFragment {
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                            Intent intent = new Intent(getActivity(), GoProActivity.class);
                                             startActivity(intent);
                                         }
                                     }, 1000);

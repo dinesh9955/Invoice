@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -28,16 +27,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
 import com.google.gson.Gson;
-import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Constant.Constant;
-import com.sirapp.Product.Add_Product;
-import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.R;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -641,7 +638,7 @@ public class Add_Services extends BaseFragment {
                                         new Handler().postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                                Intent intent = new Intent(getActivity(), GoProActivity.class);
                                                 startActivity(intent);
                                             }
                                         }, 1000);
@@ -803,14 +800,12 @@ public class Add_Services extends BaseFragment {
                 public void onClick(View v) {
                     mybuilder.dismiss();
                     measurementunit1.setText(cnames.get(i));
-
+                    selectedMeasurementunit = measurementIds.get(i);
                     if(cnames.get(i).equalsIgnoreCase(getString(R.string.item_Other)))
                     {
                         mesurementunitedittxt.setVisibility(View.VISIBLE);
                         selectedMeasuremetnId = measurementIds.get(i);
                         //Log.e("selectedMeasuremetnId", selectedMeasuremetnId);
-
-
                     }else {
 
                         selectedMeasuremetnId = measurementIds.get(i);

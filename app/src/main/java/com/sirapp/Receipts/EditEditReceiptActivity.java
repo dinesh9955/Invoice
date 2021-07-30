@@ -70,10 +70,10 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
-import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Adapter.Customer_Bottom_Adapter;
 import com.sirapp.Adapter.Product_Bottom_Adapter;
@@ -1579,7 +1579,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent intent = new Intent(EditEditReceiptActivity.this, SubscribeActivity.class);
+                                            Intent intent = new Intent(EditEditReceiptActivity.this, GoProActivity.class);
                                             startActivity(intent);
                                         }
                                     }, 1000);

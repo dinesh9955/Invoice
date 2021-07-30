@@ -79,11 +79,11 @@ import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Customer.Customer_Activity;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
 import com.sirapp.Product.Product_Activity;
 import com.sirapp.Service.Service_Activity;
 import com.sirapp.Settings.OnlinePaymentGatewayActivity;
-import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Adapter.Customer_Bottom_Adapter;
 import com.sirapp.Adapter.Product_Bottom_Adapter;
@@ -1453,7 +1453,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                            Intent intent = new Intent(getActivity(), GoProActivity.class);
                                             startActivity(intent);
                                         }
                                     }, 1000);

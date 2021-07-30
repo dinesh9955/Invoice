@@ -34,7 +34,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -46,7 +45,6 @@ import android.widget.Toast;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
-import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -57,14 +55,13 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
-import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
 import com.sirapp.BuildConfig;
 import com.sirapp.Constant.Constant;
 import com.sirapp.R;
-import com.sirapp.User.User_Listing;
 import com.sirapp.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -615,7 +612,7 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                                         new Handler().postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                                Intent intent = new Intent(getActivity(), GoProActivity.class);
                                                 startActivity(intent);
                                             }
                                         }, 1000);
@@ -787,7 +784,7 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                            Intent intent = new Intent(getActivity(), GoProActivity.class);
                                             startActivity(intent);
                                         }
                                     }, 1000);

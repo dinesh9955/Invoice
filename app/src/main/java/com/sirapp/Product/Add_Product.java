@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -40,7 +39,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
 import com.google.gson.Gson;
-import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -51,10 +49,9 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
-import com.sirapp.Company.Add_Company;
 import com.sirapp.Constant.Constant;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
-import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Adapter.Select_Warehouse_Adapter;
 import com.sirapp.Base.BaseFragment;
@@ -875,7 +872,7 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                                         new Handler().postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                                Intent intent = new Intent(getActivity(), GoProActivity.class);
                                                 startActivity(intent);
                                             }
                                         }, 1000);

@@ -46,8 +46,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
-import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.BuildConfig;
@@ -760,7 +760,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                                         new Handler().postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Intent intent = new Intent(Customer_Detail_Activity2.this, SubscribeActivity.class);
+                                                Intent intent = new Intent(Customer_Detail_Activity2.this, GoProActivity.class);
                                                 startActivity(intent);
                                             }
                                         }, 1000);
@@ -890,7 +890,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
                                         new Handler().postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
-                                                Intent intent = new Intent(Customer_Detail_Activity2.this, SubscribeActivity.class);
+                                                Intent intent = new Intent(Customer_Detail_Activity2.this, GoProActivity.class);
                                                 startActivity(intent);
                                             }
                                         }, 1000);

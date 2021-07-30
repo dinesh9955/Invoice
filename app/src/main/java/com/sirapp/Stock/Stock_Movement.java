@@ -33,11 +33,10 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Constant.Constant;
-import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.R;
-import com.sirapp.User.User_Listing;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -545,7 +544,7 @@ public class Stock_Movement extends BaseFragment {
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent intent = new Intent(getActivity(), SubscribeActivity.class);
+                                            Intent intent = new Intent(getActivity(), GoProActivity.class);
                                             startActivity(intent);
                                         }
                                     }, 1000);

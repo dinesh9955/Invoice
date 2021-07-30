@@ -83,7 +83,7 @@ public class SubscribeAdapter extends RecyclerView.Adapter<SubscribeAdapter.View
 
                 Log.e(TAG, "viewHolderForCat.getAdapterPosition() "+viewHolderForCat.getAdapterPosition());
 
-                ((SubscribeActivity)mcontext).onClickBack(arrayListNames.get(i));
+             //   ((SubscribeActivity)mcontext).onClickBack(arrayListNames.get(i));
 
                 notifyDataSetChanged();
             }

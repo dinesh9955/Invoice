@@ -80,6 +80,7 @@ import com.sirapp.Base.BaseActivity;
 import com.sirapp.Company.Companies_Activity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Estimate.Estimate_image;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
 import com.sirapp.Invoice.ChooseTemplate;
 import com.sirapp.Invoice.Fragment_Create_Invoice;
@@ -99,7 +100,6 @@ import com.sirapp.Product.Product_Activity;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
 import com.sirapp.Service.Service_Activity;
-import com.sirapp.Settings.SubscribeActivity;
 import com.sirapp.Tax.CustomTaxAdapter;
 import com.sirapp.Tax.Tax_Activity;
 import com.sirapp.Tax.Taxlistbycompany;
@@ -1621,7 +1621,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent intent = new Intent(ConvertToPVActivity.this, SubscribeActivity.class);
+                                            Intent intent = new Intent(ConvertToPVActivity.this, GoProActivity.class);
                                             startActivity(intent);
                                         }
                                     }, 1000);
