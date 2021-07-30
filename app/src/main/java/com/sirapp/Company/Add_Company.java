@@ -988,6 +988,7 @@ public class Add_Company extends BaseFragment {
                     mybuilder.dismiss();
                     selected_currency = cnames.get(i);
                     defaultcurrency.setText(selected_currency);
+                    selected_currency = currencies_id.get(i);
                 }
             });
 

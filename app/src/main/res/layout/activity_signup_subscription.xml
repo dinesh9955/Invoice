@@ -16,7 +16,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_15sdp">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:paddingBottom="@dimen/_20sdp"
+        android:paddingBottom="@dimen/_15sdp"
         android:orientation="vertical"
         android:background="@color/white">
 

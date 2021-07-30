@@ -732,12 +732,13 @@ public class Constant {
                 .build().show();
     }
     public static String GetSharedPreferences(Context context, String key){
-        SharedPreferences preferences = context.getSharedPreferences(Constant.PREF_BASE,Context.MODE_PRIVATE);
         String val="";
-        if (preferences.contains(key)){
-            val = preferences.getString(key,"");
+        if(context != null){
+            SharedPreferences preferences = context.getSharedPreferences(Constant.PREF_BASE,Context.MODE_PRIVATE);
+            if (preferences.contains(key)){
+                val = preferences.getString(key,"");
+            }
         }
-        Log.e("valuFromPrefs",val);
         return val;
     }
 }

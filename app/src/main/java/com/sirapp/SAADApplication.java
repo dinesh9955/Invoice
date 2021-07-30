@@ -99,7 +99,7 @@ public class SAADApplication extends Application {
             crashlytics = FirebaseCrashlytics.getInstance();
             crashlytics.log("Start logging!");
             crashlytics.setCustomKey("DeviceName", "Android" );
-            crashlytics.setCustomKey("Email", "dinesh.kumar@apptunix.com");
+            crashlytics.setCustomKey("Email", "saadkca@gmail.com");
         }catch (Exception e) {
             Log.e(TAG , "getMessage3 "+e.getMessage());
         }
