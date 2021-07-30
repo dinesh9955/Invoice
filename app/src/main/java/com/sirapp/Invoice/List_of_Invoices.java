@@ -331,11 +331,13 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                     String stripe = temp.get(pos).getStripe();
 
                                     String linkWitch = "";
-                                    if(!paypal.equalsIgnoreCase("") || !paypal.equalsIgnoreCase("0")){
+                                    if(paypal.equalsIgnoreCase("1")){
                                         linkWitch = "1";
                                     }else{
-                                        if(!stripe.equalsIgnoreCase("") || !stripe.equalsIgnoreCase("0")){
+                                        if(stripe.equalsIgnoreCase("1")){
                                             linkWitch = "2";
+                                        }else{
+                                            linkWitch = "0";
                                         }
                                     }
                                     createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName, linkWitch);
@@ -361,13 +363,19 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                     String paypal = list.get(pos).getPaypal();
                                     String stripe = list.get(pos).getStripe();
                                     String linkWitch = "";
-                                    if(!paypal.equalsIgnoreCase("") || !paypal.equalsIgnoreCase("0")){
+                                    if(paypal.equalsIgnoreCase("1")){
                                         linkWitch = "1";
                                     }else{
-                                        if(!stripe.equalsIgnoreCase("") || !stripe.equalsIgnoreCase("0")){
+                                        if(stripe.equalsIgnoreCase("1")){
                                             linkWitch = "2";
+                                        }else{
+                                            linkWitch = "0";
                                         }
                                     }
+
+                                    Log.e(TAG , "paypalXXX "+paypal);
+                                    Log.e(TAG , "stripeXXX "+stripe);
+
                                     createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName, linkWitch);
                                 }
 
@@ -1176,6 +1184,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
     private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink, String link, String customerName, String linkWitch) {
         String urlPDF = AllSirApi.BASE_URL_PDF + pdflink;
 
+        Log.e(TAG, "linkWitchAAA "+linkWitch);
+
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.bottominvoiceview, null);
             TextView viewinvoicebotom, viewinvoicetemplate, duplicateinvoitxt, shareinvoicetxt, recepitsviewtxt;
@@ -1410,6 +1420,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //
                                     String url = urlPDF;
                                     //String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
+                                    Log.e(TAG, "linkWitchAA "+linkWitch);
                                     new DownloadFileAttach(getActivity(), subject, txt, link, linkWitch).execute(url.replace("https", "http"));
                                 }
 
