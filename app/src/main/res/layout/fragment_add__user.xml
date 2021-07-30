@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.sirapp.com.sir.User.Add_User"
+
     >
 
     <ScrollView
@@ -82,7 +82,9 @@
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
                     android:id="@+id/username"
-                    android:textColorHint="@color/dark_grey"/>
+                    android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"/>
 
                 <EditText
                     android:layout_marginTop="30dp"
@@ -98,7 +100,9 @@
                     android:elevation="2dp"
                     android:id="@+id/useremail"
                     android:inputType="textEmailAddress"
-                    android:textColorHint="@color/dark_grey"/>
+                    android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"/>
 
                 <EditText
                     android:layout_marginTop="30dp"
@@ -114,7 +118,9 @@
                     android:elevation="2dp"
                     android:id="@+id/password"
                     android:inputType="textPassword"
-                    android:textColorHint="@color/dark_grey"/>
+                    android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"/>
 
 
                 <com.isapanah.awesomespinner.AwesomeSpinner

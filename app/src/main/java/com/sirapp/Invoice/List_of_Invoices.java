@@ -319,6 +319,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                     stringStripe = temp.get(pos).getStripe();
                                     stringPaypalType = temp.get(pos).getPaypal_type();
 
+                                    Log.e(TAG, "stringPaypalA "+stringPaypal);
+                                    Log.e(TAG, "stringStripeA "+stringStripe);
+
                                     invoiceidbypos = temp.get(pos).getInvoice_userid();
                                     String ilnvoiceStatus = temp.get(pos).getInvocestatus();
                                     String pdflink = temp.get(pos).getInvoicepdflink();
@@ -345,6 +348,10 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                     stringPaypal = list.get(pos).getPaypal();
                                     stringStripe = list.get(pos).getStripe();
                                     stringPaypalType = list.get(pos).getPaypal_type();
+
+                                    Log.e(TAG, "stringPaypalB "+stringPaypal);
+                                    Log.e(TAG, "stringStripeB "+stringStripe);
+
 
                                     invoiceidbypos = list.get(pos).getInvoice_userid();
                                     String ilnvoiceStatus = list.get(pos).getInvocestatus();
@@ -871,6 +878,11 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                             company_list.setIs_viewed(is_viewed);
                             company_list.setPaypal(item.getString("paypal"));
                             company_list.setStripe(item.getString("stripe"));
+
+                            Log.e(TAG, "stringPaypalAAA "+item.getString("paypal"));
+                            Log.e(TAG, "stringStripeAAA "+item.getString("stripe"));
+
+
                             company_list.setPaypal_type(item.getString("paypal_type"));
                             company_list.setLink(item.getString("link"));
                             list.add(company_list);
@@ -1199,6 +1211,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //            stringPaypal = temp.get(pos).getPaypal();
 //            stringStripe = temp.get(pos).getStripe();
 //            stringPaypalType = temp.get(pos).getPaypal_type();
+
+            Log.e(TAG, "stringPaypal "+stringPaypal);
+            Log.e(TAG, "stringStripe "+stringStripe);
 
             if (stringPaypal.equals("") || stringPaypal.equals("0") && stringStripe.equals("") || stringStripe.equals("0")) {
                 linearLayoutChangeTemp.setVisibility(View.GONE);
@@ -1735,7 +1750,6 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
     }
 
    private void companyget() {
-
 
         cnames.clear();
         cids.clear();

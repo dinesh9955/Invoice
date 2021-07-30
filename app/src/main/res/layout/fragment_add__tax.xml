@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.sirapp.com.sir.Tax.Add_Tax"
     android:background="@color/white">
 
     <com.isapanah.awesomespinner.AwesomeSpinner
@@ -41,7 +40,6 @@
 
 
     <EditText
-
         android:layout_below="@+id/selectcompany2"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
@@ -55,6 +53,8 @@
         android:elevation="2dp"
         android:id="@+id/taxname"
         android:textColorHint="@color/dark_grey"
+        android:imeOptions="actionNext"
+        android:singleLine="true"
         />
 
     <EditText
@@ -72,7 +72,9 @@
         android:elevation="2dp"
         android:id="@+id/taxpercent"
         android:inputType="numberDecimal"
-        android:textColorHint="@color/dark_grey"/>
+        android:textColorHint="@color/dark_grey"
+        android:imeOptions="actionDone"
+        android:singleLine="true"/>
 
 
 

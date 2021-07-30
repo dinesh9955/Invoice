@@ -1385,11 +1385,13 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     params.put("payment_type", ""+stringPaypalSendType);
                 }
             }
+            Log.e(TAG, "booleanSwitchPaypal "+booleanSwitchPaypal);
 
 
             if(booleanSwitchStripe == true){
                 params.put("stripe", "1");
             }
+            Log.e(TAG, "booleanSwitchStripe "+booleanSwitchStripe);
 
             Log.e(TAG, "postingallparams"+params.toString());
 
@@ -3418,7 +3420,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             if(stringPaypal.equalsIgnoreCase("1")){
                                 viewPayment.setVisibility(View.VISIBLE);
                                 switchPaypal.setVisibility(View.VISIBLE);
-
+                                booleanSwitchPaypal = true;
                                 switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -3449,7 +3451,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                         stringPaypalSendType = "BUSINESS";
                                     }
                                 });
-
                             }else{
                                // switchPaypal.setChecked(false);
                                 switchPaypal.setVisibility(View.GONE);
@@ -3462,8 +3463,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 viewPayment.setVisibility(View.VISIBLE);
                                 switchStripe.setVisibility(View.VISIBLE);
                                 switchStripe.setChecked(true);
-                               // booleanSwitchStripe = true;
-                                switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                booleanSwitchStripe = true;
+                                switchStripe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                         if(isChecked == true){

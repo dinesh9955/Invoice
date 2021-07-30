@@ -82,7 +82,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imagedescription"
                     android:hint="@string/company_Company_Name_2"
-
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:textSize="12dp"
@@ -90,7 +89,9 @@
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
                     android:id="@+id/name"
-                    android:textColorHint="@color/dark_grey"/>
+                    android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"/>
 
                 <EditText
                     android:layout_marginTop="20dp"
@@ -106,7 +107,9 @@
                     android:elevation="2dp"
                     android:id="@+id/email"
                     android:inputType="textEmailAddress"
-                    android:textColorHint="@color/dark_grey"/>
+                    android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"/>
 
                 <EditText
                     android:layout_marginTop="20dp"
@@ -122,7 +125,9 @@
                     android:elevation="2dp"
                     android:id="@+id/phone"
                     android:inputType="phone"
-                    android:textColorHint="@color/dark_grey"/>
+                    android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"/>
 
                 <EditText
                     android:layout_marginTop="20dp"
@@ -138,6 +143,8 @@
                     android:elevation="2dp"
                     android:id="@+id/website"
                     android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     />
 
                 <EditText
@@ -156,6 +163,8 @@
                     android:gravity="start"
                     android:maxHeight="150dp"
                     android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     />
 
 
@@ -243,6 +252,8 @@
                     android:gravity="start"
                     android:maxHeight="150dp"
                     android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     />
 
                 <EditText
@@ -261,6 +272,8 @@
                     android:gravity="start"
                     android:maxHeight="150dp"
                     android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     />
                 <EditText
                     android:layout_marginTop="20dp"
@@ -278,6 +291,8 @@
                     android:gravity="start"
                     android:maxHeight="150dp"
                     android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     />
 
                 <EditText
@@ -296,6 +311,8 @@
                     android:gravity="start"
                     android:maxHeight="150dp"
                     android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     />
 
 
@@ -317,6 +334,8 @@
                     android:gravity="start"
                     android:maxHeight="150dp"
                     android:textColorHint="@color/dark_grey"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
                     />
 
                 <Button

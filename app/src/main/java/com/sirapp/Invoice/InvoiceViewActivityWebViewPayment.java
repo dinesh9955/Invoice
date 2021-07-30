@@ -496,9 +496,10 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
 
         String attachmentimage = "";
 
+        invoice_imageDto.clear();
+
         if (invoice_imageDto.size() < 1) {
             attachmentimage = "";
-
         } else {
             attachmentimage = getString(R.string.html_Attachments);
         }
@@ -585,6 +586,10 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
 
         String signatureinvoice = null;
         String companyname="";
+
+        company_stamp = "";
+        signature_of_receiver = "";
+        signature_of_issuer = "";
 
         if(company_stamp.equals("") || company_stamp.endsWith("white_img.png"))
         {

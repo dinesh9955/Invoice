@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.sirapp.com.sir.Invoice.InvoiceActivity">
+>
 
     <WebView
         android:layout_width="match_parent"
@@ -66,7 +66,8 @@
                 android:background="@drawable/nobackgroundedittext"
                 android:textColor="@color/lightpurple"
                 android:textSize="14sp"
-
+                android:imeOptions="actionNext"
+                android:singleLine="true"
                 />
 
             <TextView
@@ -182,7 +183,9 @@
                 android:background="@drawable/nobackgroundedittext"
                 android:hint="@string/invoice_EnterReferenceNo"
                 android:textColor="@color/lightpurple"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"/>
 
             <TextView
                 android:id="@+id/txtduedate"
@@ -668,7 +671,6 @@
 
 
             <EditText
-
                 android:id="@+id/ednotes"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
@@ -684,7 +686,7 @@
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
                 android:textSize="12dp"
-
+                android:imeOptions="actionDone"
                 />
 
             <LinearLayout

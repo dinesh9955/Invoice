@@ -661,9 +661,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
             Constant.ErrorToast(ReportActivity.this, getString(R.string.dialog_SelectACompany));
         } else {
             //createbottomsheet_FilterData();
-
             titleName = arrayListNames.get(i);
-
             if(positionNext == 0){
                 createbottomsheet_customers();
                 bottomSheetDialog.show();
@@ -720,7 +718,6 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
                 @Override
                 public void afterTextChanged(Editable s) {
-
 
                     if (customer_bottom.size() > 0) {
                         filterCustomers(s.toString());
@@ -1047,6 +1044,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
 
     private void customerReport(String customer_id, String companyID, int positionNext) {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         RequestParams params = new RequestParams();
         params.add("customer_id", customer_id);
 
@@ -1058,6 +1057,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         client.post(AllSirApi.BASE_URL + "report/customerStatement", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e(TAG, "responsecompanyCSS"+ response);
 
@@ -1089,6 +1090,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e(TAG, "responsecompanyF"+ response);
@@ -1102,6 +1105,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
 
     private void supplierReport(String customer_id, String companyID, int positionNext) {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         RequestParams params = new RequestParams();
         params.add("supplier_id", customer_id);
 
@@ -1113,6 +1118,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         client.post(AllSirApi.BASE_URL + "report/supplierStatement", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e(TAG, "responsecompanySS"+ response);
 
@@ -1143,6 +1150,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e(TAG, "responsecompanyF"+ response);
@@ -1156,6 +1165,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
 
     private void productMovementReport(String customer_id, String companyID, int positionNext) {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         RequestParams params = new RequestParams();
         params.add("product_id", customer_id);
 
@@ -1167,6 +1178,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         client.post(AllSirApi.BASE_URL + "report/productMovement", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e(TAG, "responsecompanySS"+ response);
 
@@ -1197,6 +1210,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                 }
@@ -1209,6 +1224,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
 
     private void allReport(int positionNext, String companyID, String company_image_path) {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
         RequestParams params = new RequestParams();
         params.add("company_id", companyID);
 
@@ -1234,6 +1251,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         client.post(AllSirApi.BASE_URL + url_, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
                 Log.e(TAG, "responsecompanySS"+ response);
 
@@ -1297,6 +1316,8 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
                 }
