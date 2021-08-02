@@ -2736,10 +2736,14 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
                                 wids.add(warehouse_id);
                                 wnames.add(warehouse_name);
 
+
+
+                            }
+
+
+                            if (getActivity()!=null){
                                 ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
                                 selectwarehouse.setAdapter(namesadapter);
-
-
                             }
                         }
                     } catch (JSONException e) {

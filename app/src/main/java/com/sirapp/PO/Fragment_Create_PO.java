@@ -139,6 +139,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
     int selectedTemplate = 0;
 
+    boolean numberChange = false;
+
     //    public static int defaultClick = 0;
 //    int selectComapanyCount = 0;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -666,54 +668,27 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             }
         });
 
-//        //invoicenum.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
-//
-//        invoicenum.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                if(invoicenum.getText().toString().length() > 0){
-//
-//                    // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-//
-//                    boolean gg = isNumeric(invoicenum.getText().toString());
-//                    Log.e(TAG, "gggggg "+gg);
-//
-//                    boolean dd = isChar(invoicenum.getText().toString());
-//                    Log.e(TAG, "dddddd "+dd);
-//
-//                    if(gg == false && dd == false){
-//                        Log.e(TAG, "truee ");
-//                        Boolean flag = Character.isDigit(invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1));
-//                        Log.e(TAG, "cccccc "+flag);
-//                        if(flag == true){
-//                            String str = invoicenum.getText().toString();
-//                            String cc = extractInt(str);
-//                            if(cc.contains(" ")){
-//                                String vv[] = cc.split(" ");
-//                                Log.e(TAG , "extractInt "+vv[vv.length - 1]);
-//                            }
-//                            if(!cc.contains(" ")){
-//                                Log.e(TAG , "extractInt2 "+cc);
-//                            }
-//                        }
-//                    }else{
-//                        Log.e(TAG, "falsee ");
-//                    }
-//                }
-//
-//
-//            }
-//        });
+
+
+
+        invoicenum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                numberChange = true;
+            }
+        });
+
+
 
 
         createinvoice.setOnClickListener(new View.OnClickListener() {
@@ -2837,8 +2812,16 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                                 selectButton.setVisibility(View.GONE);
                             }
 
-                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                            selectwarehouse.setAdapter(namesadapter);
+
+
+                                    if(selectwarehouse != null){
+                                        if(wnames.size() > 0){
+                                            if (getActivity()!=null){
+                                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+                                                selectwarehouse.setAdapter(namesadapter);
+                                            }
+                                        }
+                                    }
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -3248,7 +3231,9 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                         JSONArray invoice = data.getJSONArray("purchase_order");
 
                         if(invoice.length() == 0){
-                            invoicenum.setText(Utility.DEFAULT_PO);
+                            if(numberChange == false){
+                                invoicenum.setText(Utility.DEFAULT_PO);
+                            }
                             invoicenum.setEnabled(true);
                         }else{
                             for (int i = 0; i < invoice.length(); i++) {
@@ -3261,7 +3246,9 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                                     Log.e(TAG, "zzzz1 "+i);
                                     Log.e(TAG, "zzzz2 "+invoice.length());
                                     String sss = Utility.getRealValue(invoice_nocompany, Utility.DEFAULT_PO);
-                                    invoicenum.setText(sss);
+                                    if(numberChange == false){
+                                        invoicenum.setText(sss);
+                                    }
 
                                     invoicenum.setEnabled(true);
 

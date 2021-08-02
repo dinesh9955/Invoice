@@ -392,14 +392,14 @@ public class Utility {
 
 
     public static void hideKeypad(Activity mainActivity) {
-        InputMethodManager imm = (InputMethodManager) mainActivity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        View view = mainActivity.getCurrentFocus();
-        if (view == null) {
-            view = new View(mainActivity);
+        if(mainActivity != null){
+            InputMethodManager imm = (InputMethodManager) mainActivity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            View view = mainActivity.getCurrentFocus();
+            if (view == null) {
+                view = new View(mainActivity);
+            }
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
-
     }
 
 

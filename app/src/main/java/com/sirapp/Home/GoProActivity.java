@@ -42,7 +42,7 @@ import cz.msebera.android.httpclient.Header;
 public class GoProActivity extends BaseActivity {
 
     private static final String TAG = "GoProActivity";
-    LinearLayout linearLayout_12Month, linearLayout_1Month, linearLayoutUpgradeNow;
+    LinearLayout linearLayout_12Month, linearLayout_1Month;
     Button buttonUpgrade_now;
 
     ImageView imageViewPay;
@@ -60,7 +60,6 @@ public class GoProActivity extends BaseActivity {
 
         linearLayout_12Month = (LinearLayout) findViewById(R.id.linear_12_month);
         linearLayout_1Month = (LinearLayout) findViewById(R.id.linear_1_month);
-        linearLayoutUpgradeNow = (LinearLayout) findViewById(R.id.linear_upgrade_now);
         buttonUpgrade_now = (Button) findViewById(R.id.button_upgrade_now);
 
         imageViewPay = findViewById(R.id.imagePay);

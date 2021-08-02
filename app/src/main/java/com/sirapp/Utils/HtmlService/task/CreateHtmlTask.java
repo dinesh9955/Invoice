@@ -29,11 +29,19 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 	// The finished listener
 	private final OnTaskFinishedListener taskFinishedListener;
 	private final File folder;
+	String linkWitch = "Cards";
 
 	// Let the listener be set in the constructor (making it obvious to anyone using this class they can be informed when it is finished)
 	// Note they can still pass null to not listen
-	public CreateHtmlTask(File storageFolder, OnTaskFinishedListener taskFinishedListener) {
+	public CreateHtmlTask(File storageFolder, String linkWitch2, OnTaskFinishedListener taskFinishedListener) {
 		this.folder = storageFolder;
+		if(linkWitch2.equalsIgnoreCase("1")){
+			linkWitch = "Paypal";
+		}else if(linkWitch2.equalsIgnoreCase("2")){
+			linkWitch = "Cards";
+		}
+
+
 		this.taskFinishedListener = taskFinishedListener;
 	}
 
@@ -81,12 +89,12 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 					"    </style>\n" +
 					"  </head>\n" +
 					"  <body>\n" +
-					"    <a href=\""+link+"\" class=\"button\">Cards</a>\n" +
+					"    <a href=\""+link+"\" class=\"button\">"+linkWitch+"</a>\n" +
 					"  </body>\n" +
 					"</html>";
 
 
-			File file = createTempFile(folder, "Cards.html", ss);
+			File file = createTempFile(folder, linkWitch+".html", ss);
 			// Create our domain object wrapping the file
 			htmlFile = new HtmlFile(file);
 		} catch (IOException e) {

@@ -109,8 +109,8 @@
 
     <string name="htmlview_ESTIMATE">ESTIMATE</string>
     <string name="htmlview_BillTo">Bill To</string>
-    <string name="htmlview_ESTIMATENo">ESTIMATE No</string>
-    <string name="htmlview_ESTIMATEDate">ESTIMATE Date</string>
+    <string name="htmlview_ESTIMATENo">Estimate No</string>
+    <string name="htmlview_ESTIMATEDate">Estimate Date</string>
 
     <string name="htmlview_INVOICE">INVOICE</string>
     <string name="htmlview_InvoiceNo">Invoice No</string>
@@ -739,7 +739,7 @@
     <string name="setting_ChooseUpgradePackage">Choose Adds-ons</string>
     <string name="setting_UpgradePlan1">Assign additional users with limited or unlimited access for one time payment of USD 3.99 only per user</string>
 
-    <string name="setting_UpgradePlan2">Create additional companies under the same credentials for one time payment of USD 11.99 only per additional</string>
+    <string name="setting_UpgradePlan2">Create additional companies under the same credentials for one time payment of USD 11.99 only per additional company</string>
 
     <string name="setting_subscribePlan">You have not subscribe plan</string>
     <string name="setting_notsubscribePlan">You have already subscribe plan</string>
@@ -1181,5 +1181,12 @@
         <item>Spanish</item>
         <item>Portuguese</item>
     </string-array>
+
+
+
+    <string name="email_subject">Download App for your smartphone.</string>
+    <string name="email_text"><![CDATA[Hey,<br/>I just downloaded App on my Android.<br/>It is a smartphone Manager.This app even lets me book parties,search restaurants.<br/>App is available for Android.<br/>
+        Get it now from http://www.exampleapp.com/download]]></string>
+
 
 </resources>

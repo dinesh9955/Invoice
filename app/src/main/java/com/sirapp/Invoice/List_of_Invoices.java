@@ -2154,7 +2154,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
             String url = AllSirApi.BASE+"view/"+linkTypeName+"/"+link;
 
-            new CreateHtmlTask(context.getCacheDir(), new CreateHtmlTask.OnTaskFinishedListener() {
+            new CreateHtmlTask(context.getCacheDir(), linkWitch, new CreateHtmlTask.OnTaskFinishedListener() {
                 @Override
                 public void onHtmlCreated(HtmlFile html) {
                     Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);

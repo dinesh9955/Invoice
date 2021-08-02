@@ -2645,8 +2645,11 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                                 selectButton.setVisibility(View.GONE);
                             }
 
-                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                            selectwarehouse.setAdapter(namesadapter);
+                            if (getActivity()!=null){
+                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+                                selectwarehouse.setAdapter(namesadapter);
+                            }
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

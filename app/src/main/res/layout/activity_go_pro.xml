@@ -26,8 +26,123 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="Specs"
                 android:scrollbars="vertical">
-
             </ImageView>
+
+        <RelativeLayout
+            android:id="@+id/relaive11_questions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingLeft="@dimen/_18sdp"
+            android:paddingRight="@dimen/_18sdp"
+            android:layout_below="@+id/imagePay"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Frequently Asked\nQuestions"
+                android:gravity="center_horizontal"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold"
+                android:textColor="@color/fade_green"
+                android:id="@+id/txtHead"
+                android:layout_centerHorizontal="true"
+                />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Will this subscription renew automatically?"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:id="@+id/que1"
+                android:layout_below="@+id/txtHead"
+                android:layout_marginTop="@dimen/_15sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All subscriptions renew automatically for your convenience and to avoid any interruption of sevice. Your subscriptions can be managed and auto-renewal turned off by going to your Play Store settings after purchase."
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="normal"
+                android:textColor="@color/fragmentfont"
+                android:id="@+id/ans1"
+                android:layout_below="@+id/que1"
+                android:layout_marginTop="@dimen/_1sdp"
+                />
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="How do I cancel my subscription?"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:id="@+id/que2"
+                android:layout_below="@+id/ans1"
+                android:layout_marginTop="@dimen/_15sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your subscription can be canceled through your Play Store account."
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="normal"
+                android:textColor="@color/fragmentfont"
+                android:id="@+id/ans2"
+                android:layout_below="@+id/que2"
+                android:layout_marginTop="@dimen/_1sdp"
+                />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Can I get my money back if I change my mind?"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:id="@+id/que3"
+                android:layout_below="@+id/ans2"
+                android:layout_marginTop="@dimen/_15sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payments via Play Store can only ba approved and refunded by Google. To receive a refund you need to contact Play Store support within 14 days from the purchase date."
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="normal"
+                android:textColor="@color/fragmentfont"
+                android:id="@+id/ans3"
+                android:layout_below="@+id/que3"
+                android:layout_marginTop="@dimen/_1sdp"
+                />
+
+
+            <LinearLayout
+                android:id="@+id/linear_upgrade_now"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_below="@+id/ans3">
+            </LinearLayout>
+
+        </RelativeLayout>
+
 
 
             <LinearLayout
@@ -59,22 +174,7 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:paddingBottom="@dimen/_15sdp"
-                android:orientation="horizontal"
-                android:background="@color/white">
 
-                <LinearLayout
-                    android:id="@+id/linear_upgrade_now"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_80sdp"
-                    android:orientation="horizontal"
-                    android:background="@color/white">
-                </LinearLayout>
-            </LinearLayout>
         </RelativeLayout>
 
 

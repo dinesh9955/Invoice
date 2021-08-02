@@ -4518,12 +4518,12 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
     }
 
     private class DownloadCompanystempweb extends AsyncTask<String, Void, Void> {
-
+        ProgressDialog progressDialog = new ProgressDialog(EditInvoiceActivity.this);
         @Override
         protected Void doInBackground(String... strings) {
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4573,19 +4573,28 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+
+        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
 
     private class Downloadsignatureissueweb extends AsyncTask<String, Void, Void> {
-
+        ProgressDialog progressDialog = new ProgressDialog(EditInvoiceActivity.this);
         @Override
         protected Void doInBackground(String... strings) {
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4641,20 +4650,29 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+
+        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
 
 
     private class Downloadsignaturereceiverweb extends AsyncTask<String, Void, Void> {
-
+        ProgressDialog progressDialog = new ProgressDialog(EditInvoiceActivity.this);
         @Override
         protected Void doInBackground(String... strings) {
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4710,8 +4728,17 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+
+        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
@@ -4727,10 +4754,9 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
         @Override
         protected Void doInBackground(String... strings) {
 
-
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4794,17 +4820,15 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            progressDialog.setMessage("Please wait");
-//            progressDialog.setCanceledOnTouchOutside(false);
-//            progressDialog.show();
-
-            Log.e(TAG, "onPreExecute");
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-          //  progressDialog.dismiss();
+            progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
@@ -4820,7 +4844,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
         protected Void doInBackground(String... strings) {
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }

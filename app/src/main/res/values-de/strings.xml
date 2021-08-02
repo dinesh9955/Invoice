@@ -171,7 +171,7 @@
     <string name="setting_ChooseUpgradePackage">Wählen Sie Add-ons</string>
     <string name="setting_UpgradePlan1">Weisen Sie zusätzliche Benutzer mit begrenztem oder unbegrenztem Zugriff für eine einmalige Zahlung von nur 3,99 USD pro Benutzer zu</string>
 
-    <string name="setting_UpgradePlan2">Erstellen Sie zusätzliche Unternehmen mit denselben Anmeldeinformationen für eine einmalige Zahlung von nur 11,99 USD pro zusätzlichem</string>
+    <string name="setting_UpgradePlan2">Erstellen Sie zusätzliche Unternehmen mit denselben Anmeldeinformationen für eine einmalige Zahlung von nur 11,99 USD pro zusätzlichem Unternehmen</string>
 
     <string name="setting_subscribePlan">Sie haben keinen Abonnementplan</string>
     <string name="setting_notsubscribePlan">Sie haben bereits einen Plan abonniert</string>

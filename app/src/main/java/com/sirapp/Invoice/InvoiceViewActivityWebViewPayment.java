@@ -142,7 +142,12 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
             @Override
             public void onResponse(Call<InvoiceResponseDto> call, retrofit2.Response<InvoiceResponseDto> response) {
 
-                Log.e("resss ", ""+response.body().toString());
+
+
+                Gson gson = new Gson();
+                String xxx = gson.toJson(response.body().toString());
+                Log.e(TAG, "resssAA "+xxx);
+
                 // image path of all
                 company_image_path = response.body().getData().getCompanyImagePath();
                 customer_image_path = response.body().getData().getCustomerImagePath();
@@ -266,7 +271,7 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
                 }
 
 
-                Gson gson = new Gson();
+              //  Gson gson = new Gson();
                 String json2 = gson.toJson(invoiceDtoInvoice);
 
                 Log.e(TAG, "jsonAA "+json2);

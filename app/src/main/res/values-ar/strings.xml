@@ -163,7 +163,7 @@
     <string name = "setting_ChooseUpgradePackage">اختر اضافات</string>
     <string name="setting_UpgradePlan1">قم بتعيين مستخدمين إضافيين مع وصول محدود أو غير محدود مقابل دفع 3.99 دولارًا أمريكيًا لمرة واحدة فقط لكل مستخدم</string>
 
-    <string name="setting_UpgradePlan2">أنشئ شركات إضافية تحت نفس بيانات الاعتماد مقابل دفع 11.99 دولارًا أمريكيًا لمرة واحدة فقط لكل إضافية</string>
+    <string name="setting_UpgradePlan2">أنشئ شركات إضافية بنفس بيانات الاعتماد مقابل دفع 11.99 دولارًا أمريكيًا لمرة واحدة فقط لكل شركة إضافية</string>
 
     <string name="setting_subscribePlan">ليس لديك خطة الاشتراك</string>
     <string name="setting_notsubscribePlan">لديك بالفعل خطة الاشتراك</string>

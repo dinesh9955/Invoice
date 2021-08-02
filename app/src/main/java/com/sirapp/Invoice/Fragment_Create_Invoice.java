@@ -103,6 +103,7 @@ import com.sirapp.Tax.CustomTaxAdapter;
 import com.sirapp.Tax.Tax_Activity;
 import com.sirapp.Utils.GlideApp;
 import com.sirapp.Utils.Utility;
+import com.sirapp.Utils.Utils;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -137,11 +138,14 @@ import io.reactivex.disposables.Disposable;
 
 public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
 
-   //SavePref pref = new SavePref();
+    //SavePref pref = new SavePref();
 
     int selectedTemplate = 0;
 
-//    public static int defaultClick = 0;
+    boolean numberChange = false;
+    boolean warehouseChange = false;
+
+    //    public static int defaultClick = 0;
 //    int selectComapanyCount = 0;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static final int GALLARY_aCTION_PICK_CODE = 10;
@@ -288,7 +292,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     long datemillis;
     // Invoice no
     String Invoiceno = "";
-//    int invoicenovalue;
+    //    int invoicenovalue;
     // Company logo path
     String companylogopath = "", Subtotalamount = "";
     String taxtypeclusive = "", taxtype = "", taxtrateamt = "" , taxID = "";
@@ -581,7 +585,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //                defaultClick = 1;
                 Intent intent = new Intent(getActivity(), ChooseTemplate.class);
                 intent.putExtra("companycolor", companycolor);
-             //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 getActivity().startActivityForResult(intent, 120);
             }
         });
@@ -597,10 +601,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         datePickerDialog2 = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth, mlistener2,
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog2.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-       // datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+        // datePickerDialog2.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
 
-     //   companyget();
+        //   companyget();
 
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -664,7 +668,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
     private void setListeners() {
 
-      //  additem.setEnabled(false);
+        //  additem.setEnabled(false);
 
         additem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -686,8 +690,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             @Override
             public void onClick(View view) {
 
-                    createbottomsheet_services();
-                    bottomSheetDialog2.show();
+                createbottomsheet_services();
+                bottomSheetDialog2.show();
             }
         });
 
@@ -722,54 +726,24 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             }
         });
 
-        //invoicenum.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
 
-//        invoicenum.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                if(invoicenum.getText().toString().length() > 0){
-//
-//                   // char cc = invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1);
-//
-//                    boolean gg = isNumeric(invoicenum.getText().toString());
-//                    Log.e(TAG, "gggggg "+gg);
-//
-//                    boolean dd = isChar(invoicenum.getText().toString());
-//                    Log.e(TAG, "dddddd "+dd);
-//
-//                    if(gg == false && dd == false){
-//                        Log.e(TAG, "truee ");
-//                        Boolean flag = Character.isDigit(invoicenum.getText().toString().charAt(invoicenum.getText().toString().length() - 1));
-//                        Log.e(TAG, "cccccc "+flag);
-//                        if(flag == true){
-//                            String str = invoicenum.getText().toString();
-//                            String cc = extractInt(str);
-//                            if(cc.contains(" ")){
-//                                String vv[] = cc.split(" ");
-//                                Log.e(TAG , "extractInt "+vv[vv.length - 1]);
-//                            }
-//                            if(!cc.contains(" ")){
-//                                Log.e(TAG , "extractInt2 "+cc);
-//                            }
-//                        }
-//                    }else{
-//                        Log.e(TAG, "falsee ");
-//                    }
-//                }
-//
-//
-//            }
-//        });
+
+        invoicenum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                numberChange = true;
+            }
+        });
 
 
         createinvoice.setOnClickListener(new View.OnClickListener() {
@@ -800,7 +774,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //
 //                createinvoicewithdetail();
 
-              //  createinvoice.setEnabled(false);
+                //  createinvoice.setEnabled(false);
 
 
                 invoice_no = invoicenumtxt.getText().toString();
@@ -918,8 +892,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 txtAddCompany.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                            Intent intent = new Intent(getActivity(),Companies_Activity.class);
-                            getActivity().startActivityForResult(intent, 200);
+                        Intent intent = new Intent(getActivity(),Companies_Activity.class);
+                        getActivity().startActivityForResult(intent, 200);
                         mybuilder.dismiss();
                     }
                 });
@@ -1016,7 +990,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //            }
 //        });
 
-      //  selectwarehouse.setVisibility(View.INVISIBLE);
+        //  selectwarehouse.setVisibility(View.INVISIBLE);
         selectButton.setVisibility(View.VISIBLE);
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1151,7 +1125,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
 
-       else {
+        else {
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage(getString(R.string.dialog_Please_wait));
@@ -1245,7 +1219,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 }
             }
 
-           // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+            // DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
             for (int i = 0; i < tempList.size(); i++) {
 
@@ -1331,7 +1305,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //                        e.printStackTrace();
 //                }
 
-               // params.put("company_stamp", company_stampFileimage);
+                // params.put("company_stamp", company_stampFileimage);
 
 
 //                ArrayList<File> files = new ArrayList<>();
@@ -1363,7 +1337,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //                            params.add("mimeType:", "image/png");
                         }
 
-                       // params.add("images", "[" + multiple[k] + "]");
+                        // params.add("images", "[" + multiple[k] + "]");
 //                        params.put("file", "images" + multiple[k] + ".png");
 //                        params.add("mimeType:", "image/png");
 
@@ -1720,7 +1694,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         if(requestCode == 124){
             Log.e(TAG, "requestCode "+requestCode);
             Log.e("selectwarehouseIdAA ", selectwarehouseId);
-           // additem.setClickable(false);
+            // additem.setClickable(false);
             productget(selectwarehouseId);
         }
 
@@ -1947,7 +1921,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             taxrecycler.setAdapter(customTaxAdapter);
             customTaxAdapter.notifyDataSetChanged();
 
-          //  Log.e(TAG, "taxID" + taxID);
+            //  Log.e(TAG, "taxID" + taxID);
             customTaxAdapter.updateTaxSelect(taxID);
 
 
@@ -2045,7 +2019,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                                 }
                             }, mYear, mMonth, mDay);
-                   // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                    // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                     datePickerDialog.show();
                 }
             });
@@ -2130,13 +2104,13 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     if (selectedCompanyId.equals("")) {
                         Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACompany));
                         bottomSheetDialog2.dismiss();
-                    } else if (invoice_date.equals("")) {
+                    } else if (Utility.isEmptyNull(invoice_date).equals("")) {
                         Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectInvoiceDate));
                         bottomSheetDialog2.dismiss();
-                    } else if (customer_name.equals("")) {
+                    } else if (Utility.isEmptyNull(customer_name).equals("")) {
                         Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectACustomer));
                         bottomSheetDialog2.dismiss();
-                    } else if (credit_terms.equals("")) {
+                    } else if (Utility.isEmptyNull(credit_terms).equals("")) {
                         Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectCreditTerms));
                         bottomSheetDialog2.dismiss();
                     }
@@ -2926,7 +2900,11 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             selectedCompanyId = cids.get(0);
                             selectcompany.setText(""+cnames.get(0));
                             CompanyInformation(selectedCompanyId);
-                            warehouse_list(selectedCompanyId);
+                            if(warehouseChange == false){
+                                warehouseChange = true;
+                                warehouse_list(selectedCompanyId);
+                            }
+
                             serviceget(selectedCompanyId);
                             customer_list(selectedCompanyId);
                         }
@@ -3002,8 +2980,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                             if(selectwarehouse != null){
                                 if(wnames != null){
-                                    ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                                    selectwarehouse.setAdapter(namesadapter);
+                                    if (getActivity()!=null){
+                                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+                                        selectwarehouse.setAdapter(namesadapter);
+                                    }
                                 }
                             }
 
@@ -3022,7 +3002,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                               // Constant.ErrorToast(getActivity(), "No Warehouse Found");
+                                // Constant.ErrorToast(getActivity(), "No Warehouse Found");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -3068,7 +3048,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         JSONArray product = data.getJSONArray("product");
 
                         if (product.length() > 0) {
-                         //   additem.setClickable(true);
+                            //   additem.setClickable(true);
                             for (int i = 0; i < product.length(); i++) {
                                 JSONObject item = product.getJSONObject(i);
                                 String product_id = item.getString("product_id");
@@ -3138,7 +3118,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         e.printStackTrace();
                     }
                 } else {
-                   // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
 
@@ -3330,7 +3310,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         params.add("service", "1");
         params.add("customer", "1");
         params.add("tax", "1");
-     //   params.add("receipt", "1");
+        //   params.add("receipt", "1");
         params.add("invoice", "1");
         params.add("warehouse", "1");
 
@@ -3357,7 +3337,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         Log.e("imagepath customer", image_path);
                         Invoiceno = data.getString("invoice_count");
 
-                       // invoicenovalue = Integer.parseInt(Invoiceno) + 1;
+                        // invoicenovalue = Integer.parseInt(Invoiceno) + 1;
 //                        if (Invoiceno != null) {
 //
 //                            invoicenum.setText("Inv # " + invoicenovalue);
@@ -3430,7 +3410,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             if(stringPaypal.equalsIgnoreCase("1")){
                                 viewPayment.setVisibility(View.VISIBLE);
                                 switchPaypal.setVisibility(View.VISIBLE);
-                                booleanSwitchPaypal = true;
+//                                switchPaypal.setChecked(true);
+//                                booleanSwitchPaypal = true;
                                 switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -3462,7 +3443,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                     }
                                 });
                             }else{
-                               // switchPaypal.setChecked(false);
                                 switchPaypal.setVisibility(View.GONE);
                                 radioGroupPaypal.setVisibility(View.GONE);
                                 booleanSwitchPaypal = false;
@@ -3472,8 +3452,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             if(stringStripe.equalsIgnoreCase("1")){
                                 viewPayment.setVisibility(View.VISIBLE);
                                 switchStripe.setVisibility(View.VISIBLE);
-                                switchStripe.setChecked(true);
-                                booleanSwitchStripe = true;
+//                                switchStripe.setChecked(true);
+//                                booleanSwitchStripe = true;
                                 switchStripe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -3497,12 +3477,15 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
 
-                      //  JSONArray customer = data.getJSONArray("customer");
+                        //  JSONArray customer = data.getJSONArray("customer");
 
                         JSONArray invoice = data.getJSONArray("invoice");
 
                         if(invoice.length() == 0){
-                            invoicenum.setText(Utility.DEFAULT_INVOICE);
+                            if(numberChange == false){
+                                invoicenum.setText(Utility.DEFAULT_INVOICE);
+                            }
+
                             invoicenum.setEnabled(true);
                         }else{
                             for (int i = 0; i < invoice.length(); i++) {
@@ -3517,53 +3500,53 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                                     String sss = Utility.getRealValue(invoice_nocompany, Utility.DEFAULT_INVOICE);
 
-
-
-                                    invoicenum.setText(sss);
+                                    if(numberChange == false){
+                                        invoicenum.setText(sss);
+                                    }
 
                                     invoicenum.setEnabled(true);
 
                                 }
 
                             }
-                         }
+                        }
 
 
 
-                      //  for (int i = 0; i < customer.length(); i++) {
-                           // JSONObject item = customer.getJSONObject(i);
+                        //  for (int i = 0; i < customer.length(); i++) {
+                        // JSONObject item = customer.getJSONObject(i);
 
-                            tax_list_array.clear();
+                        tax_list_array.clear();
 
-                            tax_list_array = new ArrayList<Tax_List>();
+                        tax_list_array = new ArrayList<Tax_List>();
 
-                            JSONArray tax_list = data.getJSONArray("tax");
+                        JSONArray tax_list = data.getJSONArray("tax");
 
-                           // Log.e(TAG, "tax_listAA "+tax_list.toString());
+                        // Log.e(TAG, "tax_listAA "+tax_list.toString());
 
-                            for (int j = 0; j < tax_list.length(); j++) {
+                        for (int j = 0; j < tax_list.length(); j++) {
 //                                Tax_List student = new Gson().fromJson(tax_list.get(j).toString(), Tax_List.class);
-                                JSONObject jsonObject1 = tax_list.getJSONObject(j);
+                            JSONObject jsonObject1 = tax_list.getJSONObject(j);
 //                                String name = jsonObject1.getString("name");
-                                Tax_List student = new Tax_List();
-                                student.setTax_id(jsonObject1.getString("tax_id"));
-                                student.setTax_name(jsonObject1.getString("name"));
-                                student.setCompany_name(jsonObject1.getString("company_name"));
-                                student.setTax_rate(jsonObject1.getString("rate"));
-                                student.setCompanyid(jsonObject1.getString("company_id"));
-                                student.setType(jsonObject1.getString("type"));
-                                student.setTax_name(jsonObject1.getString("name"));
-                                tax_list_array.add(student);
+                            Tax_List student = new Tax_List();
+                            student.setTax_id(jsonObject1.getString("tax_id"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            student.setCompany_name(jsonObject1.getString("company_name"));
+                            student.setTax_rate(jsonObject1.getString("rate"));
+                            student.setCompanyid(jsonObject1.getString("company_id"));
+                            student.setType(jsonObject1.getString("type"));
+                            student.setTax_name(jsonObject1.getString("name"));
+                            tax_list_array.add(student);
 
 
-                            }
+                        }
 
-                            Gson gson = new Gson();
-                            String json2 = gson.toJson(tax_list_array);
+                        Gson gson = new Gson();
+                        String json2 = gson.toJson(tax_list_array);
 
-                            Log.e(TAG, "jsonAA "+json2);
-                           // Log.e("Taxt array", tax_list_array.toString());
-                      //  }
+                        Log.e(TAG, "jsonAA "+json2);
+                        // Log.e("Taxt array", tax_list_array.toString());
+                        //  }
 
 
                     }
@@ -3592,7 +3575,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         e.printStackTrace();
                     }
                 } else {
-                   // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -4313,10 +4296,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 //        Log.e(TAG, "onResume defaultClick"+defaultClick);
 
-       // selectedCompanyId = "0";
-       // if(defaultClick == 0){
-            companyget();
-      //  }
+        // selectedCompanyId = "0";
+        // if(defaultClick == 0){
+        companyget();
+        //  }
 
 //        selectedTemplate = pref.getTemplate();
 //        Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
@@ -4427,7 +4410,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
     String  sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
-//    String  taxamount = "";
+    //    String  taxamount = "";
     String shippingzone = "";
 
 
@@ -4513,7 +4496,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 byte[] b1 = baos1.toByteArray();
                 signature_of_receiverincode = Base64.encodeToString(b1, Base64.DEFAULT);
 
-                 Log.e("Byte array Image", encodedImage);
+                Log.e("Byte array Image", encodedImage);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -4766,7 +4749,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 Log.e(TAG, "TOTAL "+totalpriceproduct.get(i));
                 Log.e(TAG, "TOTAL2 "+tempList.get(i).getCurrency_code());
 
-           //     DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
+                //     DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
                 Double productQuantity = Double.parseDouble(tempQuantity.get(i));
                 Double producpriceRate = Double.parseDouble(producprice.get(i));
@@ -5130,29 +5113,29 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
 
-            String htmlview_credit_note = getString(R.string.htmlview_INVOICE);
-            String htmlview_BillTo = getString(R.string.htmlview_BillTo);
-            String htmlview_CreditNoteNo = getString(R.string.htmlview_InvoiceNo);
-            String htmlview_CreditNoteDate = getString(R.string.htmlview_InvoiceDate);
-            String htmlview_Terms = getString(R.string.htmlview_Terms);
-            String htmlview_DueDate = getString(R.string.htmlview_DueDate);
-            String htmlview_ReferenceNo = getString(R.string.htmlview_ReferenceNo);
-            String htmlview_SUMMARY = getString(R.string.htmlview_SUMMARY);
-            String htmlview_ProductItem = getString(R.string.htmlview_ProductItem);
-            String htmlview_UnitofMeasurement = getString(R.string.htmlview_UnitofMeasurement);
-            String htmlview_Quantity = getString(R.string.htmlview_Quantity);
-            String htmlview_Rate = getString(R.string.htmlview_Rate);
-            String htmlview_Amount = getString(R.string.htmlview_Amount);
-            String htmlview_GrossAmount = getString(R.string.htmlview_GrossAmount);
-            String htmlview_Discount = getString(R.string.htmlview_Discount);
-            String htmlview_SubTotal = getString(R.string.htmlview_SubTotal);
-            String htmlview_Tax = getString(R.string.htmlview_Tax);
-            String htmlview_Shipping = getString(R.string.htmlview_Shipping);
-            String htmlview_NetAmount = getString(R.string.htmlview_NetAmount);
-            String htmlview_Notes = getString(R.string.htmlview_Notes);
-            String htmlview_Attachments = getString(R.string.htmlview_Attachments);
-            String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
-            String htmlview_BalanceDue = getString(R.string.htmlview_BalanceDue);
+        String htmlview_credit_note = getString(R.string.htmlview_INVOICE);
+        String htmlview_BillTo = getString(R.string.htmlview_BillTo);
+        String htmlview_CreditNoteNo = getString(R.string.htmlview_InvoiceNo);
+        String htmlview_CreditNoteDate = getString(R.string.htmlview_InvoiceDate);
+        String htmlview_Terms = getString(R.string.htmlview_Terms);
+        String htmlview_DueDate = getString(R.string.htmlview_DueDate);
+        String htmlview_ReferenceNo = getString(R.string.htmlview_ReferenceNo);
+        String htmlview_SUMMARY = getString(R.string.htmlview_SUMMARY);
+        String htmlview_ProductItem = getString(R.string.htmlview_ProductItem);
+        String htmlview_UnitofMeasurement = getString(R.string.htmlview_UnitofMeasurement);
+        String htmlview_Quantity = getString(R.string.htmlview_Quantity);
+        String htmlview_Rate = getString(R.string.htmlview_Rate);
+        String htmlview_Amount = getString(R.string.htmlview_Amount);
+        String htmlview_GrossAmount = getString(R.string.htmlview_GrossAmount);
+        String htmlview_Discount = getString(R.string.htmlview_Discount);
+        String htmlview_SubTotal = getString(R.string.htmlview_SubTotal);
+        String htmlview_Tax = getString(R.string.htmlview_Tax);
+        String htmlview_Shipping = getString(R.string.htmlview_Shipping);
+        String htmlview_NetAmount = getString(R.string.htmlview_NetAmount);
+        String htmlview_Notes = getString(R.string.htmlview_Notes);
+        String htmlview_Attachments = getString(R.string.htmlview_Attachments);
+        String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
+        String htmlview_BalanceDue = getString(R.string.htmlview_BalanceDue);
 
 
 
@@ -5258,7 +5241,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         Log.e("ViewInvoice__",content);
 
-       // invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
+        // invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
 
 
 
@@ -5360,7 +5343,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
         @Override
-        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
             final View v = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.menu_item, viewGroup, false);
 //            SellerFeedbackAdapter.ViewHolder viewHolder = new SellerFeedbackAdapter.ViewHolder(v);
@@ -5369,20 +5352,20 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 //            val v = LayoutInflater.from(viewGroup.context)
 //                    .inflate(R.layout.mybooking_item, viewGroup, false)
-            return new MenuAdapter.ViewHolder(v);
+            return new ViewHolder(v);
         }
 
 
         @Override
-        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
+        public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
             viewHolder.textViewName.setText(""+cnames.get(i));
             viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mybuilder.dismiss();
-                   // description.setText(""+alName.get(i).getCompany_name());
-                   // HomeApi(alName.get(i).company_id);
+                    // description.setText(""+alName.get(i).getCompany_name());
+                    // HomeApi(alName.get(i).company_id);
 
                     selectedCompanyId = cids.get(i);
 
@@ -5430,11 +5413,11 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
 
-        @Override
+    @Override
     public void closeDialog() {
-          if(bottomSheetDialog != null){
-               bottomSheetDialog.dismiss();
-          }
+        if(bottomSheetDialog != null){
+            bottomSheetDialog.dismiss();
+        }
     }
 
 }

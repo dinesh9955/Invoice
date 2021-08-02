@@ -75,6 +75,7 @@ import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
+import com.sirapp.Invoice.EditInvoiceActivity;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
 import com.sirapp.Settings.OnlinePaymentGatewayActivity;
@@ -4450,12 +4451,12 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
 
     private class DownloadCompanystempweb extends AsyncTask<String, Void, Void> {
-
+        ProgressDialog progressDialog = new ProgressDialog(ConvertToInvoiceActivity.this);
         @Override
         protected Void doInBackground(String... strings) {
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4505,19 +4506,28 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+
+        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
 
     private class Downloadsignatureissueweb extends AsyncTask<String, Void, Void> {
-
+        ProgressDialog progressDialog = new ProgressDialog(ConvertToInvoiceActivity.this);
         @Override
         protected Void doInBackground(String... strings) {
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4573,20 +4583,29 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+
+        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
 
 
     private class Downloadsignaturereceiverweb extends AsyncTask<String, Void, Void> {
-
+        ProgressDialog progressDialog = new ProgressDialog(ConvertToInvoiceActivity.this);
         @Override
         protected Void doInBackground(String... strings) {
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4642,8 +4661,17 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         }
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+
+        @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
@@ -4652,13 +4680,13 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
 
     private class DownloadsImagefromweblogoCom extends AsyncTask<String, Void, Void> {
-
+        ProgressDialog progressDialog = new ProgressDialog(ConvertToInvoiceActivity.this);
         @SuppressLint("LongLogTag")
         @Override
         protected Void doInBackground(String... strings) {
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4720,9 +4748,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
 
     private class DownloadInvoiceImages extends AsyncTask<String, Void, Void> {
-
-        // ProgressDialog progressDialog = new ProgressDialog(EditInvoiceActivity.this);
-
+        ProgressDialog progressDialog = new ProgressDialog(ConvertToInvoiceActivity.this);
 
         @Override
         protected Void doInBackground(String... strings) {
@@ -4730,7 +4756,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4794,17 +4820,15 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-//            progressDialog.setMessage("Please wait");
-//            progressDialog.setCanceledOnTouchOutside(false);
-//            progressDialog.show();
-
-            Log.e(TAG, "onPreExecute");
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            //  progressDialog.dismiss();
+            progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }

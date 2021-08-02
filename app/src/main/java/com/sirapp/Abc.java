@@ -31,6 +31,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
+import androidx.core.text.HtmlCompat;
 import androidx.core.util.Pair;
 import androidx.fragment.app.DialogFragment;
 
@@ -60,6 +61,7 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -77,6 +79,8 @@ import com.sirapp.Utils.HtmlService.task.CreateHtmlTask;
 import com.sirapp.Utils.SublimePickerFragment;
 import com.sirapp.R;
 //import com.tejpratapsingh.pdfcreator.utils.FileManager;
+
+//import net.roganjosh.mailcraft.ComposeActivity;
 
 import org.apache.commons.io.IOUtils;
 
@@ -165,7 +169,39 @@ public class Abc extends BaseActivity implements CreateHtmlTask.OnTaskFinishedLi
             @Override
             public void onClick(View v) {
 
-                String token = Constant.GetSharedPreferences(Abc.this, Constant.ACCESS_TOKEN);
+
+                String html = "<!DOCTYPE html><html><body><a href=\"http://www.w3schools.com\" target=\"_blank\">Visit W3Schools.com!</a>" + "<p>If you set the target attribute to \"_blank\", the link will open in a new browser window/tab.</p></body></html>";
+
+
+//                final Intent emailIntent2 = new Intent(android.content.Intent.ACTION_SEND);
+//                emailIntent2.setType("text/html");
+//                emailIntent2.putExtra(android.content.Intent.EXTRA_SUBJECT, "subject");
+//                emailIntent2.putExtra(Intent.EXTRA_HTML_TEXT, Html.fromHtml(html));
+//                startActivity(Intent.createChooser(emailIntent2, "Email:"));
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                //intent.setType("plain/html");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+//                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"abc@gmailcom"});
+//                intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(html));
+
+                intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml("<html><body><br/> <a href=\"http://www.facebook.com\"> Facebook</a><br/></body><html>", HtmlCompat.FROM_HTML_SEPARATOR_LINE_BREAK_PARAGRAPH));
+                intent.putExtra(Intent.EXTRA_HTML_TEXT, "<html><body><br/> <a href=\"http://www.facebook.com\"> Facebook</a><br/></body><html>");
+                intent.setType("text/html");
+
+                Intent mailer = Intent.createChooser(intent, null);
+                startActivity(mailer);
+
+
+//                Intent intent = new Intent(Abc.this, ComposeActivity.class);
+//                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+//                intent.putExtra(Intent.EXTRA_TEXT, "Text content");
+//                intent.putExtra(Intent.EXTRA_HTML_TEXT, "<h1>HTML content</h1>");
+//                intent.putStringArrayListExtra(Intent.EXTRA_EMAIL, new ArrayList<>(Arrays.asList("dinesh.kumar@apptunix.com")));
+//                startActivity(intent);
+
+
+              //  String token = Constant.GetSharedPreferences(Abc.this, Constant.ACCESS_TOKEN);
 //                Call<InvoiceResponseDto> resposresult = apiInterface.getInvoiceDetail(token, "2393", "english");
 //
 //                resposresult.enqueue(new Callback<InvoiceResponseDto>() {
@@ -187,36 +223,36 @@ public class Abc extends BaseActivity implements CreateHtmlTask.OnTaskFinishedLi
 //
 //
 //
-                Call<ResponseBody> call = apiInterface.getInvoiceDetail2(token, "2393", "english");
-                call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                        String responseCode = "";
-                        try {
-                            if(response.body() != null) {
-                                responseCode = response.body().string();
-                                Log.e(TAG, "onResponse:: "+responseCode);
-
-                                Gson g = new Gson();
-                                Root p = g.fromJson(responseCode, Root.class);
-
-                                Log.e(TAG, "onResponse:: "+p.data.invoice.company_id);
-
-
-                            }else{
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.e(TAG, "onFailure:: "+t.getMessage());
-                    }
-                });
+//                Call<ResponseBody> call = apiInterface.getInvoiceDetail2(token, "2393", "english");
+//                call.enqueue(new Callback<ResponseBody>() {
+//                    @Override
+//                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//
+//                        String responseCode = "";
+//                        try {
+//                            if(response.body() != null) {
+//                                responseCode = response.body().string();
+//                                Log.e(TAG, "onResponse:: "+responseCode);
+//
+//                                Gson g = new Gson();
+//                                Root p = g.fromJson(responseCode, Root.class);
+//
+//                                Log.e(TAG, "onResponse:: "+p.data.invoice.company_id);
+//
+//
+//                            }else{
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                        Log.e(TAG, "onFailure:: "+t.getMessage());
+//                    }
+//                });
 
 
 //                Call<InvoiceResponseDto> call2 = RetrofitClient.getInstance().getMyApi().getInvoiceDetail(token, "2393", "english");
@@ -560,6 +596,8 @@ String dd = "<html>\n" +
 
 
     }
+
+
 
     android.util.Pair<Boolean, SublimeOptions> getOptions() {
         SublimeOptions options = new SublimeOptions();

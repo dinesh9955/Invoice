@@ -265,6 +265,20 @@ dependencies {
 
 
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+//    implementation 'com.github.james3burke:android-mailcraft:0.1.2'
+
+//    compile ('com.google.android.gms:play-services:8.1.0'){
+//        exclude group: 'com.google.guava'
+//    }
+
+//    implementation 'com.google.guava:guava:28.1-android'
+//    implementation ('com.google.apis:google-api-services-youtube:v3-rev204-1.23.0'){
+//        exclude group:'com.google.guava'
+//    }
+
+
+
 }
 apply plugin: 'com.google.gms.google-services'
 

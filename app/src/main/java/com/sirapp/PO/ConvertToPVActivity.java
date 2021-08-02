@@ -707,6 +707,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                     Log.e(TAG, "company_stampdto1111"+ company_stampdto);
                 } else {
                     Log.e(TAG, "company_stampdto2222"+ company_stampdto);
+                    Log.e(TAG,"signatureofreceiverpathBB "+companystempurlpath);
                     new DownloadCompanystempweb().execute(companystempurlpath);
                     imgstampsuccess.setVisibility(View.VISIBLE);
                 }
@@ -718,6 +719,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                 } else {
                     s_r = "2";
                     String signatureofreceiverpath = customer_image_pathdto + signature_of_receiverdto;
+                    Log.e(TAG,"signatureofreceiverpathCC "+signatureofreceiverpath);
                     new Downloadsignaturereceiverweb().execute(signatureofreceiverpath);
                     imgrecsuccess.setVisibility(View.VISIBLE);
                 }
@@ -731,6 +733,7 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
                 } else {
                     s_r = "1";
                     String signatureofreceiverpath = customer_image_pathdto + signature_of_issuerdto;
+                    Log.e(TAG,"signatureofreceiverpathDD "+signatureofreceiverpath);
                     new Downloadsignatureissueweb().execute(signatureofreceiverpath);
                     imgsigsuccess.setVisibility(View.VISIBLE);
                 }
@@ -4136,12 +4139,12 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
 
 
     private class DownloadCompanystempweb extends AsyncTask<String, Void, Void> {
-
+        ProgressDialog progressDialog = new ProgressDialog(ConvertToPVActivity.this);
         @Override
         protected Void doInBackground(String... strings) {
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4190,20 +4193,30 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
             return null;
         }
 
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
 
     private class Downloadsignatureissueweb extends AsyncTask<String, Void, Void> {
-
+        ProgressDialog progressDialog = new ProgressDialog(ConvertToPVActivity.this);
         @Override
         protected Void doInBackground(String... strings) {
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4258,21 +4271,31 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
             return null;
         }
 
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }
 
 
     private class Downloadsignaturereceiverweb extends AsyncTask<String, Void, Void> {
-
+        ProgressDialog progressDialog = new ProgressDialog(ConvertToPVActivity.this);
         @Override
         protected Void doInBackground(String... strings) {
             URL url = null;
             try {
-                url = new URL(strings[0]);
+                url = new URL(strings[0].replace("https", "http"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -4327,9 +4350,19 @@ public class ConvertToPVActivity extends BaseActivity implements Customer_Bottom
             return null;
         }
 
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage(getString(R.string.dialog_Please_wait));
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
+
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            progressDialog.dismiss();
             //  Toast.makeText(ConvertToReceiptsActivity.this,"Image Is save",Toast.LENGTH_LONG).show();
         }
     }

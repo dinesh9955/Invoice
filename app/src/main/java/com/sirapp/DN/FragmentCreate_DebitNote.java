@@ -2704,8 +2704,11 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                                 selectButton.setVisibility(View.GONE);
                             }
 
-                            ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                            selectwarehouse.setAdapter(namesadapter);
+                            if (getActivity()!=null){
+                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+                                selectwarehouse.setAdapter(namesadapter);
+                            }
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -165,7 +165,7 @@
     <string name="setting_ChooseUpgradePackage">Kies add-ons</string>
     <string name="setting_UpgradePlan1">Wijs extra gebruikers toe met beperkte of onbeperkte toegang voor een eenmalige betaling van slechts USD 3,99 per gebruiker</string>
 
-    <string name="setting_UpgradePlan2">Maak extra bedrijven aan met dezelfde inloggegevens voor een eenmalige betaling van USD 11,99 per extra persoon</string>
+    <string name="setting_UpgradePlan2">Creëer extra bedrijven onder dezelfde inloggegevens voor een eenmalige betaling van USD 11,99 alleen per extra bedrijf</string>
 
     <string name="setting_subscribePlan">You have not subscribe plan</string>
     <string name="setting_notsubscribePlan">Je hebt al een abonnement</string>

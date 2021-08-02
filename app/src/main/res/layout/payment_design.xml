@@ -123,7 +123,7 @@
             android:id="@+id/textView3_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Accept Payments Online Set up a payment gateway and get paid faster"
+            android:text="Accept Payments Online\nSet up a payment gateway and get paid faster"
             android:textStyle="normal"
             android:textColor="@color/black"
             android:textSize="@dimen/_11sdp"
