@@ -462,8 +462,11 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         setFonts();
         setListeners();
 
-        products_adapter = new Products_Adapter(getActivity(), product_bottom, tempList, this::onClick, tempQuantity, producprice);
-        productsRecycler.setAdapter(products_adapter);
+        if (getActivity()!=null){
+            products_adapter = new Products_Adapter(getActivity(), product_bottom, tempList, this::onClick, tempQuantity, producprice);
+            productsRecycler.setAdapter(products_adapter);
+        }
+
 
         if(tempList.size() == 0){
             textViewNoItems.setVisibility(View.VISIBLE);
@@ -2645,7 +2648,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                                 selectButton.setVisibility(View.GONE);
                             }
 
-                            if (getActivity()!=null){
+                            if (getActivity() != null){
                                 ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
                                 selectwarehouse.setAdapter(namesadapter);
                             }
