@@ -101,6 +101,8 @@ public class WebShowActivity extends BaseActivity {
         client.addHeader("Access-Token", token);
         RequestParams params = new RequestParams();
         params.add("language", ""+getLanguage());
+        params.add("device_type", "android");
+
         client.post(url, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -132,14 +134,12 @@ public class WebShowActivity extends BaseActivity {
                             @Override
                             public void onPageFinished(WebView view, String url) {
                                 super.onPageFinished(view, url);
-
-                             //   progressBar.setVisibility(View.INVISIBLE);
+//                                webView.loadUrl("document.getElementById('iosVer').style.display = 'none';");
+//                                webView.loadUrl("document.getElementById('iosVer').style.display='none';})()");
+                                webView.loadUrl("javascript:(function() { " +
+                                        "document.getElementsByClassName('iosVer')[0].style.display='none'; })()");
                                 webView.loadUrl("javascript:document.body.style.padding= \"2%\"; void 0");
-                                //webView.setBackgroundColor(0x00000000);
-//                webView.loadUrl(
-//                        "javascript:document.body.style.setProperty(\"color\", \"white\");"
-//                );
-//                webview.loadUrl("javascript:document.body.style.color=\"white\";");
+
                             }
                         });
 
