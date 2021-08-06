@@ -31,14 +31,17 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 	private final File folder;
 	String linkWitch = "Cards";
 
+
+
 	// Let the listener be set in the constructor (making it obvious to anyone using this class they can be informed when it is finished)
 	// Note they can still pass null to not listen
 	public CreateHtmlTask(File storageFolder, String linkWitch2, OnTaskFinishedListener taskFinishedListener) {
 		this.folder = storageFolder;
+
 		if(linkWitch2.equalsIgnoreCase("1")){
 			linkWitch = "Paypal";
-		}else if(linkWitch2.equalsIgnoreCase("2")){
-			linkWitch = "Cards";
+		}else if(linkWitch2.equalsIgnoreCase("1")){
+			linkWitch = "Stripe";
 		}
 
 

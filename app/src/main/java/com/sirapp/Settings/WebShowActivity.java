@@ -30,7 +30,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class WebShowActivity extends BaseActivity {
 
-    private static final String TAG = "ViewInvoice_Activity";
+    private static final String TAG = "WebShowActivity";
     WebView webView;
 
     TextView titleView;

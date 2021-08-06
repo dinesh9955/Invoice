@@ -330,17 +330,17 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                     String paypal = temp.get(pos).getPaypal();
                                     String stripe = temp.get(pos).getStripe();
 
-                                    String linkWitch = "";
-                                    if(paypal.equalsIgnoreCase("1")){
-                                        linkWitch = "1";
-                                    }else{
-                                        if(stripe.equalsIgnoreCase("1")){
-                                            linkWitch = "2";
-                                        }else{
-                                            linkWitch = "0";
-                                        }
-                                    }
-                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName, linkWitch);
+//                                    String linkWitch = "";
+//                                    if(paypal.equalsIgnoreCase("1")){
+//                                        linkWitch = "1";
+//                                    }else{
+//                                        if(stripe.equalsIgnoreCase("1")){
+//                                            linkWitch = "2";
+//                                        }else{
+//                                            linkWitch = "0";
+//                                        }
+//                                    }
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName, paypal, stripe);
                                 }else{
                                     customerName = list.get(pos).getInvoicustomer_name();
                                     dataNo = list.get(pos).getInvoice_nobdt();
@@ -362,21 +362,21 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                     String link = list.get(pos).getLink();
                                     String paypal = list.get(pos).getPaypal();
                                     String stripe = list.get(pos).getStripe();
-                                    String linkWitch = "";
-                                    if(paypal.equalsIgnoreCase("1")){
-                                        linkWitch = "1";
-                                    }else{
-                                        if(stripe.equalsIgnoreCase("1")){
-                                            linkWitch = "2";
-                                        }else{
-                                            linkWitch = "0";
-                                        }
-                                    }
+//                                    String linkWitch = "";
+//                                    if(paypal.equalsIgnoreCase("1")){
+//                                        linkWitch = "1";
+//                                    }else{
+//                                        if(stripe.equalsIgnoreCase("1")){
+//                                            linkWitch = "2";
+//                                        }else{
+//                                            linkWitch = "0";
+//                                        }
+//                                    }
 
                                     Log.e(TAG , "paypalXXX "+paypal);
                                     Log.e(TAG , "stripeXXX "+stripe);
 
-                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName, linkWitch);
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, pdflink, sahrelink, link, customerName, paypal, stripe);
                                 }
 
 
@@ -1181,10 +1181,12 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
 
-    private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink, String link, String customerName, String linkWitch) {
+    private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink,
+                                             String link, String customerName, String paypal, String stripe) {
         String urlPDF = AllSirApi.BASE_URL_PDF + pdflink;
 
-        Log.e(TAG, "linkWitchAAA "+linkWitch);
+        Log.e(TAG, "paypalAAA "+paypal);
+        Log.e(TAG, "stripeAAA "+stripe);
 
         if (bottomSheetDialog != null) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.bottominvoiceview, null);
@@ -1355,7 +1357,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
                             String txt = "";
-                            if(linkWitch.equalsIgnoreCase("1") || linkWitch.equalsIgnoreCase("2")){
+                            if(paypal.equalsIgnoreCase("1") || stripe.equalsIgnoreCase("1")){
                                   txt = getString(R.string.list_Invoiceviewed)+
                                     "\n\n" +newLink +
                                     "\n\n" +getString(R.string.list_Invoicepayment_link) ;
@@ -1420,8 +1422,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //
                                     String url = urlPDF;
                                     //String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
-                                    Log.e(TAG, "linkWitchAA "+linkWitch);
-                                    new DownloadFileAttach(getActivity(), subject, txt, link, linkWitch).execute(url.replace("https", "http"));
+                                    //Log.e(TAG, "linkWitchAA "+linkWitch);
+                                    new DownloadFileAttach(getActivity(), subject, txt, link, paypal, stripe).execute(url.replace("https", "http"));
                                 }
 
 
@@ -2031,13 +2033,15 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
         String subject;
         String text;
         String link;
-        String linkWitch;
-        DownloadFileAttach(Activity c, String sub, String txt, String newLink, String linkWitch1) {
+        String paypal;
+        String stripe;
+        DownloadFileAttach(Activity c, String sub, String txt, String newLink, String paypal2, String stripe2) {
             context = c;
             subject = sub;
             text = txt;
             link = newLink;
-            linkWitch = linkWitch1;
+            paypal = paypal2;
+            stripe = stripe2;
         }
 
 
@@ -2144,65 +2148,74 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             // dismiss the dialog after the file was downloaded
             this.progressDialog.dismiss();
 
-            String linkTypeName = "";
+            String urlPaypalName = "";
+            String urlStripeName = "";
 
-            if(linkWitch.equalsIgnoreCase("1")){
-                linkTypeName = "paypal";
-            }else if(linkWitch.equalsIgnoreCase("2")){
-                linkTypeName = "stripe";
+            if(paypal.equalsIgnoreCase("1")){
+                urlPaypalName = "paypal";
+            }else if(stripe.equalsIgnoreCase("1")){
+                urlStripeName = "stripe";
             }
 
-            String url = AllSirApi.BASE+"view/"+linkTypeName+"/"+link;
 
-            new CreateHtmlTask(context.getCacheDir(), linkWitch, new CreateHtmlTask.OnTaskFinishedListener() {
+            String urlPaypal = AllSirApi.BASE+"view/"+urlPaypalName+"/"+link;
+            String urlStripe = AllSirApi.BASE+"view/"+urlStripeName+"/"+link;
+
+
+
+            new CreateHtmlTask(context.getCacheDir(), paypal, new CreateHtmlTask.OnTaskFinishedListener() {
                 @Override
                 public void onHtmlCreated(HtmlFile html) {
-                    Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
 
-                    File mFile2 = new File("/sdcard/share.jpg");
-                    Uri imageUri2 = FileProvider.getUriForFile(
-                            context,
-                            BuildConfig.APPLICATION_ID + ".provider", //(use your app signature + ".provider" )
-                            mFile2);
+                    new CreateHtmlTask(context.getCacheDir(), stripe, new CreateHtmlTask.OnTaskFinishedListener() {
+                        @Override
+                        public void onHtmlCreated(HtmlFile html2) {
+                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
 
-                    File fileWithinMyDir = new File(message);
-                    Uri imageUri1 = FileProvider.getUriForFile(context,
-                            BuildConfig.APPLICATION_ID + ".provider",
-                            fileWithinMyDir);
+                            File mFile2 = new File("/sdcard/share.jpg");
+                            Uri imageUri2 = FileProvider.getUriForFile(
+                                    context,
+                                    BuildConfig.APPLICATION_ID + ".provider",
+                                    mFile2);
 
-                    if(fileWithinMyDir.exists()) {
-                        //intentShareFile.setType("application/pdf");
-//                intentShareFile.setType("image/jpeg");
+                            File fileWithinMyDir = new File(message);
+                            Uri imageUri1 = FileProvider.getUriForFile(context,
+                                    BuildConfig.APPLICATION_ID + ".provider",
+                                    fileWithinMyDir);
 
-                        ArrayList<Uri> uriArrayList = new ArrayList<>();
-                        uriArrayList.add(imageUri1);
-                        uriArrayList.add(imageUri2);
+                            if(fileWithinMyDir.exists()) {
+                                ArrayList<Uri> uriArrayList = new ArrayList<>();
+                                uriArrayList.add(imageUri1);
+                                uriArrayList.add(imageUri2);
 
-                        if(linkWitch.equalsIgnoreCase("1") || linkWitch.equalsIgnoreCase("2")){
-                            uriArrayList.add(html.getFilePath());
+                                if(paypal.equalsIgnoreCase("1")){
+                                    uriArrayList.add(html.getFilePath());
+                                }
+
+                                if(stripe.equalsIgnoreCase("1")){
+                                    uriArrayList.add(html2.getFilePath());
+                                }
+
+                                intentShareFile.setType("application/pdf/*|image/*|text/html");
+                                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+
+                                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+
+                                intentShareFile.putExtra(Intent.EXTRA_TEXT, text);
+
+                                if (Utility.isAppAvailable(context, "com.google.android.gm")) {
+                                    intentShareFile.setPackage("com.google.android.gm");
+                                }
+                                context.startActivity(intentShareFile);
+                            }
+
                         }
+                    }).execute(urlStripe);
 
 
-
-                        intentShareFile.setType("application/pdf/*|image/*|text/html");
-                        intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-                        //  intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/share.jpg"));
-
-
-                        intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
-
-
-                        intentShareFile.putExtra(Intent.EXTRA_TEXT, text);
-
-                        if (Utility.isAppAvailable(context, "com.google.android.gm")) {
-                            intentShareFile.setPackage("com.google.android.gm");
-                        }
-                        context.startActivity(intentShareFile);
-                        //context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
-                    }
 
                 }
-            }).execute(url);
+            }).execute(urlPaypal);
 
             Log.e(TAG, "fileWithinMyDir "+message);
 
