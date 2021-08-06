@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context="com.sirapp.com.sir.Home.Home_Activity">
+  >
 
     <include layout="@layout/toolbar">
     </include>
@@ -134,7 +134,7 @@
                         android:textSize="16sp"
                         android:layout_marginLeft="10dp"
                         android:layout_centerVertical="true"
-                        android:textStyle="bold"
+                        android:textStyle="normal"
                         android:layout_toRightOf="@+id/imageView"
                         />
 
@@ -181,7 +181,7 @@
                         android:textSize="16sp"
                         android:layout_marginLeft="10dp"
                         android:layout_centerVertical="true"
-                        android:textStyle="bold"
+                        android:textStyle="normal"
                         android:layout_toRightOf="@+id/imageView2"
                         />
 
@@ -275,7 +275,7 @@
                         android:textSize="16sp"
                         android:layout_marginLeft="10dp"
                         android:layout_centerVertical="true"
-                        android:textStyle="bold"
+                        android:textStyle="normal"
                         android:layout_toRightOf="@+id/imageView4"
                         />
 
@@ -319,7 +319,7 @@
                         android:textSize="16sp"
                         android:layout_marginLeft="10dp"
                         android:layout_centerVertical="true"
-                        android:textStyle="bold"
+                        android:textStyle="normal"
                         android:layout_toRightOf="@+id/imageView5"
                         />
 
@@ -412,7 +412,7 @@
                         android:textSize="16sp"
                         android:layout_marginLeft="10dp"
                         android:layout_centerVertical="true"
-                        android:textStyle="bold"
+                        android:textStyle="normal"
                         android:layout_toRightOf="@+id/imageView7"
                         />
 
@@ -456,7 +456,7 @@
                         android:textSize="16sp"
                         android:layout_marginLeft="10dp"
                         android:layout_centerVertical="true"
-                        android:textStyle="bold"
+                        android:textStyle="normal"
                         android:layout_toRightOf="@+id/imageView8"
                         />
 
@@ -500,7 +500,7 @@
                         android:textSize="16sp"
                         android:layout_marginLeft="10dp"
                         android:layout_centerVertical="true"
-                        android:textStyle="bold"
+                        android:textStyle="normal"
                         android:layout_toRightOf="@+id/imageView9"
                         />
 

@@ -3590,7 +3590,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                             if(stringStripe.equalsIgnoreCase("1")){
                                 viewPayment.setVisibility(View.VISIBLE);
                                 switchStripe.setVisibility(View.VISIBLE);
-                                switchStripe.setChecked(true);
+                                //switchStripe.setChecked(true);
                                 // booleanSwitchStripe = true;
                                 switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override

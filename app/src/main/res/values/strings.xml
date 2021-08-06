@@ -24,9 +24,9 @@
     <string name="stock_Select_Product_2">Select Product<font color='#FF0000'>*</font></string>
     <string name="company_Company_Name_2">Company Name<font color='#FF0000'>*</font></string>
     <string name="company_Choose_Default_Currency_2">Choose Default Currency<font color='#FF0000'>*</font></string>
-    <string name="company_Enter_IBAN_2">Enter IBAN<font color='#FF0000'>*</font></string>
-    <string name="company_Enter_Bank_Name_2">Enter Bank Name<font color='#FF0000'>*</font></string>
-    <string name="company_Enter_Swift_BIC_2">Enter Swift BIC<font color='#FF0000'>*</font></string>
+    <string name="company_Enter_IBAN_2">Enter IBAN</string>
+    <string name="company_Enter_Bank_Name_2">Enter Bank Name</string>
+    <string name="company_Enter_Swift_BIC_2">Enter Swift BIC</string>
     <string name="product_Product_Name_2">Product Name<font color='#FF0000'>*</font></string>
     <string name="product_Per_Unit_Price_2">Per Unit Price<font color='#FF0000'>*</font></string>
     <string name="product_Product_Category_2">Product Category<font color='#FF0000'>*</font></string>

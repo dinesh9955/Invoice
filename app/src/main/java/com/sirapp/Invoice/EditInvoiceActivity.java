@@ -3614,7 +3614,9 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                             if(stringPaypal.equalsIgnoreCase("1")){
                                 viewPayment.setVisibility(View.VISIBLE);
                                 switchPaypal.setVisibility(View.VISIBLE);
-
+                                radioGroupPaypal.setVisibility(View.VISIBLE);
+                                switchPaypal.setChecked(true);
+                                booleanSwitchPaypal = true;
                                 switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -3627,6 +3629,19 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                                         }
                                     }
                                 });
+
+
+                                stringPaypalSendType = stringPaypalEmail_2_Type;
+
+                                if(stringPaypalEmail_2_Type.equalsIgnoreCase("STANDARD")){
+                                    radioButton1.setChecked(true);
+                                    radioButton2.setChecked(false);
+                                }
+
+                                if(stringPaypalEmail_2_Type.equalsIgnoreCase("BUSINESS")){
+                                    radioButton1.setChecked(false);
+                                    radioButton2.setChecked(true);
+                                }
 
                                 radioButton1.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -3658,7 +3673,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                                 viewPayment.setVisibility(View.VISIBLE);
                                 switchStripe.setVisibility(View.VISIBLE);
                                 switchStripe.setChecked(true);
-                                // booleanSwitchStripe = true;
+                                booleanSwitchStripe = true;
                                 switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -3669,7 +3684,6 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                                         }
                                     }
                                 });
-
                             }else{
                                 switchStripe.setVisibility(View.GONE);
                                 switchStripe.setChecked(false);
