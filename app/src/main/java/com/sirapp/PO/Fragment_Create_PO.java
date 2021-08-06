@@ -123,6 +123,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -459,7 +460,6 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 s_r = "1";
                 createbottom_signaturepad();
                 bottomSheetDialog.show();
-
             }
         });
 
@@ -931,6 +931,9 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         invoicerecipnt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Log.e(TAG, "selectwarehouseIdA "+ customer_bottom.size());
+
 
                 createbottomsheet_customers(); // ye method kia kr rha hai?//bottom sheet open kar rha
                 //bottomSheetDialog.show();
@@ -3372,7 +3375,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
     public void customer_list(String selectedCompanyId) {
         customer_bottom.clear();
         RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
+        params.add("company_id", selectedCompanyId);
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
@@ -3383,7 +3386,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
-                Log.e("response customers", response);
+                Log.e("response_customers", response);
 
 
                 try {
@@ -3404,7 +3407,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
                             String customer_idBB = item.getString("supplier_id");
 
-                            Log.e("Customer Id", customer_idBB);
+                            Log.e("CustomerId", customer_idBB);
                             customer_name = item.getString("supplier_name");
                             custoner_contact_name = item.getString("contact_name");
                             String image = item.getString("image");
@@ -3450,6 +3453,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
 
                         }
+
+                        Log.e(TAG, "CustomerId"+customer_bottom.size());
 
 
                     }
