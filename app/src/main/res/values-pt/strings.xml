@@ -13,6 +13,8 @@
 
     <string name = "go_pro">Torne-se Pro</string>
 
+    <string name="invoice_SelectWarehouseForProduct">Selecione Armazém (para produtos)</string>
+
     <string name = "home_lets">Vamos começar</string>
     <string name = "home_AddyourBusiness">Adicione as informações da sua empresa</string>
     <string name = "home_AddyourCustomer">Adicione seus clientes</string>

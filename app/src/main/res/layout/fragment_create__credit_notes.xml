@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.sirapp.com.sir.Invoice.InvoiceActivity">
+>
 
     <WebView
         android:layout_width="match_parent"
@@ -243,7 +243,7 @@
                 android:layout_marginRight="0dp"
                 android:background="@drawable/edittextshape"
                 app:spinnerDirection="ltr"
-                app:spinnerHint="@string/invoice_SelectWarehouse"
+                app:spinnerHint="@string/invoice_SelectWarehouseForProduct"
                 android:visibility="visible"/>
 
 

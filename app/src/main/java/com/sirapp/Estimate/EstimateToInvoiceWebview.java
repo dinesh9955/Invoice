@@ -808,9 +808,55 @@ public class EstimateToInvoiceWebview extends BaseActivity {
             stringBuilderCompany.append(company_email+"");
         }
 
+
+
+        String htmlview_credit_note = getString(R.string.htmlview_INVOICE);
+        String htmlview_BillTo = getString(R.string.htmlview_BillTo);
+        String htmlview_CreditNoteNo = getString(R.string.htmlview_InvoiceNo);
+        String htmlview_CreditNoteDate = getString(R.string.htmlview_InvoiceDate);
+        String htmlview_Terms = getString(R.string.htmlview_Terms);
+        String htmlview_DueDate = getString(R.string.htmlview_DueDate);
+        String htmlview_ReferenceNo = getString(R.string.htmlview_ReferenceNo);
+        String htmlview_SUMMARY = getString(R.string.htmlview_SUMMARY);
+        String htmlview_ProductItem = getString(R.string.htmlview_ProductItem);
+        String htmlview_UnitofMeasurement = getString(R.string.htmlview_UnitofMeasurement);
+        String htmlview_Quantity = getString(R.string.htmlview_Quantity);
+        String htmlview_Rate = getString(R.string.htmlview_Rate);
+        String htmlview_Amount = getString(R.string.htmlview_Amount);
+        String htmlview_GrossAmount = getString(R.string.htmlview_GrossAmount);
+        String htmlview_Discount = getString(R.string.htmlview_Discount);
+        String htmlview_SubTotal = getString(R.string.htmlview_SubTotal);
+        String htmlview_Tax = getString(R.string.htmlview_Tax);
+        String htmlview_Shipping = getString(R.string.htmlview_Shipping);
+        String htmlview_NetAmount = getString(R.string.htmlview_NetAmount);
+        String htmlview_Notes = getString(R.string.htmlview_Notes);
+        String htmlview_Attachments = getString(R.string.htmlview_Attachments);
+        String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
+        String htmlview_BalanceDue = getString(R.string.htmlview_BalanceDue);
+
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+                    .replaceAll("Title_", htmlview_credit_note)
+                    .replaceAll("Bill To", htmlview_BillTo)
+                    .replaceAll("Invoice No", htmlview_CreditNoteNo)
+                    .replaceAll("Invoice Date", htmlview_CreditNoteDate)
+                    .replaceAll("Terms:", htmlview_Terms)
+                    .replaceAll("Due Date:", htmlview_DueDate)
+//                        .replaceAll("Reference No", htmlview_ReferenceNo)
+                    .replaceAll("SUMMARY", htmlview_SUMMARY)
+                    .replaceAll("Product/Item", htmlview_ProductItem)
+                    .replaceAll("Unit of Measurement", htmlview_UnitofMeasurement)
+                    .replaceAll("Quantity", htmlview_Quantity)
+                    .replaceAll("Rate", htmlview_Rate)
+                    .replaceAll("Amount_", htmlview_Amount)
+                    .replaceAll("Gross Amount", htmlview_GrossAmount)
+                    .replaceAll("Net Amount", htmlview_NetAmount)
+                    .replaceAll("Balance Due_", htmlview_BalanceDue)
+
+
+
 
                     .replaceAll("Company Name", company_name)
                     .replaceAll("Address", stringBuilderCompany.toString())

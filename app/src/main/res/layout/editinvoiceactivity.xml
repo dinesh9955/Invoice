@@ -240,7 +240,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/edittextshape"
                 app:spinnerDirection="ltr"
-                app:spinnerHint="Select Warehouse" />
+                app:spinnerHint="@string/invoice_SelectWarehouseForProduct" />
 
             <Button
                 android:id="@+id/selectButton"

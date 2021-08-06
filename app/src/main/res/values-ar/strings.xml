@@ -11,6 +11,8 @@
 
     <string name="go_pro">Go Pro</string>
 
+    <string name="invoice_SelectWarehouseForProduct">حدد المستودع (للمنتجات)</string>
+
     <string name="home_lets">هيا نبدأ</string>
     <string name="home_AddyourBusiness">أضف معلومات عملك</string>
     <string name="home_AddyourCustomer">أضف عملائك</string>

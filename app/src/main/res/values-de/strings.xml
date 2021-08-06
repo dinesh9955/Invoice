@@ -12,6 +12,8 @@
 
     <string name="go_pro">Go Pro</string>
 
+    <string name="invoice_SelectWarehouseForProduct">Lager auswählen (für Produkte)</string>
+
     <string name="home_lets">Lass uns loslegen</string>
     <string name="home_AddyourBusiness">Fügen Sie Ihre Unternehmensinformationen hinzu</string>
     <string name="home_AddyourCustomer">Fügen Sie Ihre Kunden hinzu</string>

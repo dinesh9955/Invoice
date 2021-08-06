@@ -12,6 +12,8 @@
 
     <string name="go_pro">Ga Pro</string>
 
+    <string name="invoice_SelectWarehouseForProduct">Selecteer Magazijn (Voor Producten)</string>
+
     <string name="home_lets">Laten we beginnen</string>
     <string name="home_AddyourBusiness">Voeg uw bedrijfsinformatie toe</string>
     <string name="home_AddyourCustomer">Voeg je klanten toe</string>

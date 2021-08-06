@@ -509,6 +509,7 @@
     <string name="invoiceReminder_Status">Status :</string>
 
 
+    <string name="invoice_SelectWarehouseForProduct">Select Warehouse (For Products)</string>
 
     <string name="invoice_SelectCompany">Select Company</string>
     <string name="invoice_SelectWarehouse">Select Warehouse</string>
