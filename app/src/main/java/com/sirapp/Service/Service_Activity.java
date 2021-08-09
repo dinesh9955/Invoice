@@ -47,6 +47,10 @@ public class Service_Activity extends AppCompatActivity {
         tabs.getTabAt(0).setCustomView(customers);
         tabs.getTabAt(1).setCustomView(addcustomer);
 
+        if (getIntent().hasExtra("key")){
+            viewPager.setCurrentItem(1);
+        }
+
 
     }
 

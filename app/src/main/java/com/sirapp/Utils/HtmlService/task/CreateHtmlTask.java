@@ -21,6 +21,8 @@ import com.sirapp.Utils.HtmlService.domain.HtmlFile;
  */
 public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 
+	String TAG = "CreateHtmlTask";
+
 	// This is an interface so whoever started this task can be informed when it is finished
 	public interface OnTaskFinishedListener {
 		void onHtmlCreated(HtmlFile html);
@@ -38,11 +40,13 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 	public CreateHtmlTask(File storageFolder, String linkWitch2, OnTaskFinishedListener taskFinishedListener) {
 		this.folder = storageFolder;
 
-		if(linkWitch2.equalsIgnoreCase("1")){
+		if(linkWitch2.equalsIgnoreCase("Paypal")){
 			linkWitch = "Paypal";
-		}else if(linkWitch2.equalsIgnoreCase("1")){
+		}else if(linkWitch2.equalsIgnoreCase("Stripe")){
 			linkWitch = "Stripe";
 		}
+
+		Log.e(TAG, "linkWitch2 "+linkWitch2);
 
 
 		this.taskFinishedListener = taskFinishedListener;
@@ -56,23 +60,27 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 		try {
 			// Create whatever HTML you want here - don't forget to escape strings
 			String link = params[0];
-			StringBuilder builder = new StringBuilder();
-			builder.append("<html>");
-			builder.append("<head>");
-			builder.append("</head>");
-			builder.append("<body>");
-			builder.append("<p>");
-			builder.append("Hello ");
-			builder.append("<a href=\"https://www.w3docs.com/\" class=\"button\">Click Here</a>");
-			builder.append("<button type=\"button\">Click Me!</button>");
-//			builder.append("<img src=\"http://developer.android.com/images/jb-android-4.1.png\"/>");
-			builder.append("</body>");
-			builder.append("</html>");
-			String content = builder.toString();
-			// Store the file
+
+//			StringBuilder builder = new StringBuilder();
+//			builder.append("<html>");
+//			builder.append("<head>");
+//			builder.append("</head>");
+//			builder.append("<body>");
+//			builder.append("<p>");
+//			builder.append("Hello ");
+//			builder.append("<a href=\"http://www.stackoverflow.com\">\n" +
+//					"  <input type=\"button\" value=\"Button\" />\n" +
+//					"</a>");
+//			builder.append("<button type=\"button\">Click Me!</button>");
+////			builder.append("<img src=\"http://developer.android.com/images/jb-android-4.1.png\"/>");
+//			builder.append("</body>");
+//			builder.append("</html>");
+//			String content = builder.toString();
 
 
-			String ss = "<!DOCTYPE html>\n" +
+
+
+					String ss = "<!DOCTYPE html>\n" +
 					"<html>\n" +
 					"  <head>\n" +
 					"    <title>Title of the document</title>\n" +
@@ -93,6 +101,7 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 					"  </head>\n" +
 					"  <body>\n" +
 					"    <a href=\""+link+"\" class=\"button\">"+linkWitch+"</a>\n" +
+//					"    <a href=\"https://google.com\" class=\"button\">"+linkWitch+"</a>\n" +
 					"  </body>\n" +
 					"</html>";
 

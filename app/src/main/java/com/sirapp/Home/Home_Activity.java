@@ -282,6 +282,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Home_Activity.this, Companies_Activity.class);
+                intent.putExtra("key" , "home");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -291,6 +292,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Home_Activity.this, Customer_Activity.class);
+                intent.putExtra("key" , "home");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -300,6 +302,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Home_Activity.this, Product_Activity.class);
+                intent.putExtra("key" , "home");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -309,6 +312,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Home_Activity.this, Company_Details_Activity.class);
+                intent.putExtra("key" , "home");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE, Context.MODE_PRIVATE);
@@ -352,6 +356,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Home_Activity.this, Service_Activity.class);
+                intent.putExtra("key" , "home");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -370,6 +375,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
+                intent.putExtra("key" , "home");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }

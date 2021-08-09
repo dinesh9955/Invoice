@@ -2743,7 +2743,6 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
     }
 
     public void productget(String selectedCompanyId) {
-        product_bottom.clear();
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);
         RequestParams params = new RequestParams();
@@ -2757,6 +2756,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                product_bottom.clear();
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
@@ -2807,7 +2807,10 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
                                 product_bottom.add(product_list);
 
+                            }
 
+                            if(product_bottom_adapter != null){
+                                product_bottom_adapter.notifyDataSetChanged();
                             }
                         } else {
                             Constant.ErrorToast(getActivity(), getString(R.string.dialog_ProductNotFound));
@@ -2821,6 +2824,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                product_bottom.clear();
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
@@ -2857,9 +2861,8 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
     }
 
     public void serviceget(String selectedCompanyId) {
-        service_bottom.clear();
         RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
+        params.add("company_id", selectedCompanyId);
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
@@ -2869,7 +2872,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
+                service_bottom.clear();
                 String response = new String(responseBody);
                 Log.e("responseservice", response);
 
@@ -2913,6 +2916,10 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
 
                             }
+
+                            if(service_bottom_adapter != null){
+                                service_bottom_adapter.notifyDataSetChanged();
+                            }
                         } else {
                             Constant.ErrorToast(getActivity(), getString(R.string.dialog_ProductNotFound));
                         }
@@ -2928,6 +2935,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                service_bottom.clear();
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responseserviceF", response);
@@ -3161,6 +3169,11 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                             tax_list_array.add(student);
 
                         }
+
+                        if(customTaxAdapter != null){
+                            customTaxAdapter.notifyDataSetChanged();
+                        }
+
                         Log.e("Taxt array", tax_list_array.toString());
                     }
 
@@ -3238,7 +3251,6 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 //    }
 
     public void customer_list(String selectedCompanyId) {
-        customer_bottom.clear();
         RequestParams params = new RequestParams();
         params.add("company_id", this.selectedCompanyId);
 
@@ -3250,6 +3262,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         client.post(AllSirApi.BASE_URL + "supplier/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                customer_bottom.clear();
                 String response = new String(responseBody);
                 Log.e("response customersAA", response);
 
@@ -3318,6 +3331,10 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                         }
 
 
+                        if(customer_bottom_adapter != null){
+                            customer_bottom_adapter.notifyDataSetChanged();
+                        }
+
                     }
 
 
@@ -3329,6 +3346,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                customer_bottom.clear();
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecustomersF", response);

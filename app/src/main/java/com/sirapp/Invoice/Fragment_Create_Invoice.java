@@ -3022,7 +3022,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     public void productget(String selectedCompanyId) {
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);
-        product_bottom.clear();
+
         RequestParams params = new RequestParams();
         params.add("warehouse_id", selectedCompanyId);
 
@@ -3034,6 +3034,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                product_bottom.clear();
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
                 String response = new String(responseBody);
@@ -3089,6 +3090,11 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
                             }
+
+                            if(product_bottom_adapter != null){
+                                product_bottom_adapter.notifyDataSetChanged();
+                            }
+
                         } else {
                             Constant.ErrorToast(getActivity(), getString(R.string.dialog_ProductNotFound));
                         }
@@ -3101,6 +3107,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                product_bottom.clear();
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
@@ -3137,9 +3144,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     }
 
     public void serviceget(String selectedCompanyId) {
-        service_bottom.clear();
+
         RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
+        params.add("company_id", selectedCompanyId);
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
@@ -3149,7 +3156,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
+                service_bottom.clear();
                 String response = new String(responseBody);
                 Log.e("responseservice", response);
 
@@ -3193,6 +3200,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
                             }
+
+                            if(service_bottom_adapter != null){
+                                service_bottom_adapter.notifyDataSetChanged();
+                            }
                         } else {
                             Constant.ErrorToast(getActivity(), getString(R.string.dialog_ProductNotFound));
                         }
@@ -3208,6 +3219,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                service_bottom.clear();
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responseserviceF", response);
@@ -3305,7 +3317,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     private void CompanyInformation(String selectedCompanyId) {
         tax_list_array.clear();
         RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
+        params.add("company_id", selectedCompanyId);
         params.add("product", "1");
         params.add("service", "1");
         params.add("customer", "1");
@@ -3541,6 +3553,12 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                         }
 
+
+                        if(customTaxAdapter != null){
+                            customTaxAdapter.notifyDataSetChanged();
+                        }
+
+
                         Gson gson = new Gson();
                         String json2 = gson.toJson(tax_list_array);
 
@@ -3621,9 +3639,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //    }
 
     public void customer_list(String selectedCompanyId) {
-        customer_bottom.clear();
         RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
+        params.add("company_id", selectedCompanyId);
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
@@ -3633,6 +3650,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         client.post(AllSirApi.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                customer_bottom.clear();
                 String response = new String(responseBody);
                 Log.e("response customers", response);
 
@@ -3700,6 +3718,11 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                         }
 
+                        if(customer_bottom_adapter != null){
+                            customer_bottom_adapter.notifyDataSetChanged();
+                        }
+
+
 
                     }
 
@@ -3712,6 +3735,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                customer_bottom.clear();
                 if (responseBody != null) {
                     String response = new String(responseBody);
                     Log.e("responsecustomersF", response);

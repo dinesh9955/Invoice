@@ -1183,6 +1183,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
     private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink,
                                              String link, String customerName, String paypal, String stripe) {
+
+
+
         String urlPDF = AllSirApi.BASE_URL_PDF + pdflink;
 
         Log.e(TAG, "paypalAAA "+paypal);
@@ -1300,8 +1303,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             });
 
 
-
-
+            String finalPaypal = paypal;
+            String finalStripe = stripe;
             shareinvoicetxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1357,7 +1360,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
                             String txt = "";
-                            if(paypal.equalsIgnoreCase("1") || stripe.equalsIgnoreCase("1")){
+                            if(finalPaypal.equalsIgnoreCase("1") || finalStripe.equalsIgnoreCase("1")){
                                   txt = getString(R.string.list_Invoiceviewed)+
                                     "\n\n" +newLink +
                                     "\n\n" +getString(R.string.list_Invoicepayment_link) ;
@@ -1423,7 +1426,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                     String url = urlPDF;
                                     //String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
                                     //Log.e(TAG, "linkWitchAA "+linkWitch);
-                                    new DownloadFileAttach(getActivity(), subject, txt, link, paypal, stripe).execute(url.replace("https", "http"));
+                                    new DownloadFileAttach(getActivity(), subject, txt, link, finalPaypal, finalStripe).execute(url.replace("https", "http"));
                                 }
 
 
@@ -2042,6 +2045,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             link = newLink;
             paypal = paypal2;
             stripe = stripe2;
+//            paypal = "0";
+//            stripe = "0";
         }
 
 
@@ -2151,23 +2156,31 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             String urlPaypalName = "";
             String urlStripeName = "";
 
+           // String filterPage = "";
+
             if(paypal.equalsIgnoreCase("1")){
                 urlPaypalName = "paypal";
-            }else if(stripe.equalsIgnoreCase("1")){
+            }
+
+            if(stripe.equalsIgnoreCase("1")){
                 urlStripeName = "stripe";
             }
 
+            Log.e(TAG, "paypalXX "+urlPaypalName);
+            Log.e(TAG, "stripeXX "+urlStripeName);
 
             String urlPaypal = AllSirApi.BASE+"view/"+urlPaypalName+"/"+link;
             String urlStripe = AllSirApi.BASE+"view/"+urlStripeName+"/"+link;
 
 
+            String urlStripeNameFilter = urlStripeName;
 
-            new CreateHtmlTask(context.getCacheDir(), paypal, new CreateHtmlTask.OnTaskFinishedListener() {
+
+            new CreateHtmlTask(context.getCacheDir(), urlPaypalName, new CreateHtmlTask.OnTaskFinishedListener() {
                 @Override
                 public void onHtmlCreated(HtmlFile html) {
 
-                    new CreateHtmlTask(context.getCacheDir(), stripe, new CreateHtmlTask.OnTaskFinishedListener() {
+                    new CreateHtmlTask(context.getCacheDir(), urlStripeNameFilter, new CreateHtmlTask.OnTaskFinishedListener() {
                         @Override
                         public void onHtmlCreated(HtmlFile html2) {
                             Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);

@@ -652,84 +652,91 @@ public class Constant {
     }
 
     public static void SuccessToast(Activity context,String message){
-        Utility.hideKeypad(context);
-        new Flashbar.Builder(context)
-                .gravity(Flashbar.Gravity.BOTTOM)
-                .title(context.getString(R.string.dialog_Success))
-                .titleTypeface(Typeface.createFromAsset(context.getAssets(),"Fonts/AzoSans-Bold.otf"))
-                .titleSizeInSp(15)
-                .message(message)
-                //.messageTypeface(Typeface.createFromAsset(getAssets(),"fonts/CatamaraBold.ttf"))
-                .backgroundDrawable(context.getResources().getDrawable(R.drawable.success_toast_background))
-                .duration(2000)
-                .enableSwipeToDismiss()
-                .castShadow(false)
-                .enterAnimation(FlashAnim.with(context)
-                        .animateBar()
-                        .duration(750)
-                        .alpha()
-                        .overshoot())
-                .exitAnimation(FlashAnim.with(context)
-                        .animateBar()
-                        .duration(400)
-                        .accelerateDecelerate())
-                .build().show();
+        if(context != null){
+            Utility.hideKeypad(context);
+            new Flashbar.Builder(context)
+                    .gravity(Flashbar.Gravity.BOTTOM)
+                    .title(context.getString(R.string.dialog_Success))
+                    .titleTypeface(Typeface.createFromAsset(context.getAssets(),"Fonts/AzoSans-Bold.otf"))
+                    .titleSizeInSp(15)
+                    .message(message)
+                    //.messageTypeface(Typeface.createFromAsset(getAssets(),"fonts/CatamaraBold.ttf"))
+                    .backgroundDrawable(context.getResources().getDrawable(R.drawable.success_toast_background))
+                    .duration(2000)
+                    .enableSwipeToDismiss()
+                    .castShadow(false)
+                    .enterAnimation(FlashAnim.with(context)
+                            .animateBar()
+                            .duration(750)
+                            .alpha()
+                            .overshoot())
+                    .exitAnimation(FlashAnim.with(context)
+                            .animateBar()
+                            .duration(400)
+                            .accelerateDecelerate())
+                    .build().show();
+        }
+
     }
 
     public static void ErrorToast(Activity context,String message){
+        if(context != null){
+            Utility.hideKeypad(context);
 
-        Utility.hideKeypad(context);
+            new Flashbar.Builder(context)
+                    .gravity(Flashbar.Gravity.BOTTOM)
+                    .title(context.getString(R.string.error))
+                    .titleTypeface(Typeface.createFromAsset(context.getAssets(),"Fonts/AzoSans-Bold.otf"))
+                    .titleSizeInSp(15)
+                    .message(message)
+                    //.messageTypeface(Typeface.createFromAsset(getAssets(),"fonts/CatamaraBold.ttf"))
+                    .backgroundDrawable(context.getResources().getDrawable(R.drawable.error_toast_background))
+                    .duration(3000)
+                    .enableSwipeToDismiss()
+                    .castShadow(false)
+                    .enterAnimation(FlashAnim.with(context)
+                            .animateBar()
+                            .duration(750)
+                            .alpha()
+                            .overshoot())
+                    .exitAnimation(FlashAnim.with(context)
+                            .animateBar()
+                            .duration(400)
+                            .accelerateDecelerate())
+                    .build().show();
+        }
 
-        new Flashbar.Builder(context)
-                .gravity(Flashbar.Gravity.BOTTOM)
-                .title(context.getString(R.string.error))
-                .titleTypeface(Typeface.createFromAsset(context.getAssets(),"Fonts/AzoSans-Bold.otf"))
-                .titleSizeInSp(15)
-                .message(message)
-                //.messageTypeface(Typeface.createFromAsset(getAssets(),"fonts/CatamaraBold.ttf"))
-                .backgroundDrawable(context.getResources().getDrawable(R.drawable.error_toast_background))
-                .duration(3000)
-                .enableSwipeToDismiss()
-                .castShadow(false)
-                .enterAnimation(FlashAnim.with(context)
-                        .animateBar()
-                        .duration(750)
-                        .alpha()
-                        .overshoot())
-                .exitAnimation(FlashAnim.with(context)
-                        .animateBar()
-                        .duration(400)
-                        .accelerateDecelerate())
-                .build().show();
     }
 
 
 
     public static void ErrorToastTop(Activity context,String message){
+        if(context != null){
+            Utility.hideKeypad(context);
 
-        Utility.hideKeypad(context);
+            new Flashbar.Builder(context)
+                    .gravity(Flashbar.Gravity.TOP)
+                    .title(context.getString(R.string.error))
+                    .titleTypeface(Typeface.createFromAsset(context.getAssets(),"Fonts/AzoSans-Bold.otf"))
+                    .titleSizeInSp(15)
+                    .message(message)
+                    //.messageTypeface(Typeface.createFromAsset(getAssets(),"fonts/CatamaraBold.ttf"))
+                    .backgroundDrawable(context.getResources().getDrawable(R.drawable.error_toast_background))
+                    .duration(3000)
+                    .enableSwipeToDismiss()
+                    .castShadow(false)
+                    .enterAnimation(FlashAnim.with(context)
+                            .animateBar()
+                            .duration(750)
+                            .alpha()
+                            .overshoot())
+                    .exitAnimation(FlashAnim.with(context)
+                            .animateBar()
+                            .duration(400)
+                            .accelerateDecelerate())
+                    .build().show();
+        }
 
-        new Flashbar.Builder(context)
-                .gravity(Flashbar.Gravity.TOP)
-                .title(context.getString(R.string.error))
-                .titleTypeface(Typeface.createFromAsset(context.getAssets(),"Fonts/AzoSans-Bold.otf"))
-                .titleSizeInSp(15)
-                .message(message)
-                //.messageTypeface(Typeface.createFromAsset(getAssets(),"fonts/CatamaraBold.ttf"))
-                .backgroundDrawable(context.getResources().getDrawable(R.drawable.error_toast_background))
-                .duration(3000)
-                .enableSwipeToDismiss()
-                .castShadow(false)
-                .enterAnimation(FlashAnim.with(context)
-                        .animateBar()
-                        .duration(750)
-                        .alpha()
-                        .overshoot())
-                .exitAnimation(FlashAnim.with(context)
-                        .animateBar()
-                        .duration(400)
-                        .accelerateDecelerate())
-                .build().show();
     }
     public static String GetSharedPreferences(Context context, String key){
         String val="";

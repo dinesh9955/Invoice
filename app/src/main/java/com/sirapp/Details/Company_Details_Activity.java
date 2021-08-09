@@ -65,6 +65,10 @@ public class Company_Details_Activity extends BaseActivity {
         tabs.getTabAt(1).setCustomView(addwarehouse);
         tabs.getTabAt(2).setCustomView(addcustomer);
 
+        if (getIntent().hasExtra("key")){
+            viewPager.setCurrentItem(1);
+        }
+
         if (getIntent().hasExtra("warehouse")){
             viewPager.setCurrentItem(2);
         }
