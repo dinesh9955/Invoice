@@ -47,7 +47,10 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden|adjustPan"
         tools:replace="android:supportsRtl,icon"
+        tools:targetApi="n"
         >
+
+
 
         <activity
             android:name="com.sirapp.Invoice.ViewInvoice_Activity"
@@ -71,13 +74,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="my_scheme" android:host="my_host" />
             </intent-filter>
 
         </activity>

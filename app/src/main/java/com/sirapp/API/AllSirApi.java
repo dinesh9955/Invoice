@@ -2,6 +2,9 @@ package com.sirapp.API;
 
 public class AllSirApi {
 
+    public static final String BASE_LEVEL_HTTP ="https://sir-app.com/";
+
+
     public static final String BASE_LEVEL ="https://sir-app.com/";
     public static final String BASE = BASE_LEVEL+"app/";
     public static final String BASE_URL = BASE+"api/";

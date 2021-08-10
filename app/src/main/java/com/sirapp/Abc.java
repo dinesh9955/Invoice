@@ -78,6 +78,7 @@ import com.sirapp.Utils.HtmlService.domain.HtmlFile;
 import com.sirapp.Utils.HtmlService.task.CreateHtmlTask;
 import com.sirapp.Utils.SublimePickerFragment;
 import com.sirapp.R;
+import com.sirapp.Utils.Utility;
 //import com.tejpratapsingh.pdfcreator.utils.FileManager;
 
 //import net.roganjosh.mailcraft.ComposeActivity;
@@ -190,7 +191,53 @@ public class Abc extends BaseActivity implements CreateHtmlTask.OnTaskFinishedLi
                 intent.setType("text/html");
 
                 Intent mailer = Intent.createChooser(intent, null);
-                startActivity(mailer);
+//                startActivity(mailer);
+
+
+
+
+                Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+
+                File mFile2 = new File("/sdcard/share.jpg");
+                Uri imageUri2 = FileProvider.getUriForFile(
+                        Abc.this,
+                        BuildConfig.APPLICATION_ID + ".provider",
+                        mFile2);
+
+//                File fileWithinMyDir = new File(message);
+//                Uri imageUri1 = FileProvider.getUriForFile(context,
+//                        BuildConfig.APPLICATION_ID + ".provider",
+//                        fileWithinMyDir);
+//
+//                if(fileWithinMyDir.exists()) {
+//                    ArrayList<Uri> uriArrayList = new ArrayList<>();
+//                    uriArrayList.add(imageUri1);
+//                    uriArrayList.add(imageUri2);
+//
+//                    if (paypal.equalsIgnoreCase("1")) {
+//                        uriArrayList.add(html.getFilePath());
+//                    }
+//
+//                    if (stripe.equalsIgnoreCase("1")) {
+//                        uriArrayList.add(html2.getFilePath());
+//                    }
+
+                 //   intentShareFile.setType("application/pdf/*|image/*|text/html");
+                intentShareFile.setType("application/octet-stream");
+                  //  intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+
+                    intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "subject");
+
+                    intentShareFile.putExtra(Intent.EXTRA_TEXT, "https://stackoverflow.com/questions/55842939/how-to-open-gmail-in-android/55843634");
+
+                    if (Utility.isAppAvailable(Abc.this, "com.google.android.gm")) {
+                        intentShareFile.setPackage("com.google.android.gm");
+                    }
+                    startActivity(intentShareFile);
+
+
+
+
 
 
 //                Intent intent = new Intent(Abc.this, ComposeActivity.class);

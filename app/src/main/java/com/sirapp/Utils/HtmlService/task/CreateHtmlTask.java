@@ -68,8 +68,8 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 //			builder.append("<body>");
 //			builder.append("<p>");
 //			builder.append("Hello ");
-//			builder.append("<a href=\"http://www.stackoverflow.com\">\n" +
-//					"  <input type=\"button\" value=\"Button\" />\n" +
+//			builder.append("<a href=\"http://myhost.com/v/page1?id=123;scheme=my_scheme;action=android.intent.action.VIEW;end\">\n" +
+//					"    Go to Mail!\n" +
 //					"</a>");
 //			builder.append("<button type=\"button\">Click Me!</button>");
 ////			builder.append("<img src=\"http://developer.android.com/images/jb-android-4.1.png\"/>");
@@ -80,7 +80,7 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 
 
 
-					String ss = "<!DOCTYPE html>\n" +
+					String content = "<!DOCTYPE html>\n" +
 					"<html>\n" +
 					"  <head>\n" +
 					"    <title>Title of the document</title>\n" +
@@ -101,12 +101,14 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 					"  </head>\n" +
 					"  <body>\n" +
 					"    <a href=\""+link+"\" class=\"button\">"+linkWitch+"</a>\n" +
-//					"    <a href=\"https://google.com\" class=\"button\">"+linkWitch+"</a>\n" +
+
+//							"    <a href=\"http://myhost.com/v/page1?id=123;scheme=my_scheme;action=android.intent.action.VIEW;end\" class=\"button\">"+linkWitch+"</a>\n" +
+
 					"  </body>\n" +
 					"</html>";
 
 
-			File file = createTempFile(folder, linkWitch+".html", ss);
+			File file = createTempFile(folder, linkWitch+".html", content);
 			// Create our domain object wrapping the file
 			htmlFile = new HtmlFile(file);
 		} catch (IOException e) {
