@@ -17,6 +17,7 @@ import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Home.Home_Activity;
 import com.sirapp.SignupSignin.Signin_Activity;
+import com.sirapp.SignupSignin.WalkThroughActivity;
 import com.sirapp.Utils.Utility;
 import com.sirapp.R;
 
@@ -117,12 +118,11 @@ public class Splash_Activity extends BaseActivity {
 
         LOGGED_IN = preferences.getBoolean(Constant.LOGGED_IN, false);
         if (LOGGED_IN) {
-
             Intent i = new Intent(Splash_Activity.this, Home_Activity.class);
             startActivity(i);
         }
         else {
-            Intent i = new Intent(Splash_Activity.this, Signin_Activity.class);
+            Intent i = new Intent(Splash_Activity.this, WalkThroughActivity.class);
             startActivity(i);
         }
     }

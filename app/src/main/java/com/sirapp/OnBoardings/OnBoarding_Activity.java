@@ -58,7 +58,7 @@ public class OnBoarding_Activity extends AppCompatActivity {
 
         Signupvaluesave();
 
-        fragments.add(new OnBooarding_Fragment1());
+       // fragments.add(new OnBooarding_Fragment1());
         fragments.add(new OnBooarding_Fragment2());
         fragments.add(new OnBooarding_Fragment3());
         fragments.add(new OnBooarding_Fragment4());
@@ -77,7 +77,7 @@ public class OnBoarding_Activity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 3){
+                if(position == 2){
 
                     indicator.setVisibility(View.GONE);
                     txtskip.setVisibility(View.GONE);

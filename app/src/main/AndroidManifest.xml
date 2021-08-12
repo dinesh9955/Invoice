@@ -77,6 +77,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".SignupSignin.WalkThroughActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash">
+
+        </activity>
 
 
         <activity

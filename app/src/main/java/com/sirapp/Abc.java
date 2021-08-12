@@ -112,23 +112,32 @@ public class Abc extends BaseActivity {
             @Override
             public void onClick(View v) {
 
+                Uri uri = Uri.parse("content://com.sirapp/file:///android_asset/po.html");
 
-//                String string = "<table border='1' align='center'><tr style='color:blue'><th>Day</th><th>Date</th><th>Start Time</th><th>End Time</th><th>Total Time</th></tr><tr><td align='center'>Sunday</td><td align='center'>19/07/2011</td><td align='center'>13:00</td><td align='center'>19:00</td><td align='center'>06:00</td></tr></table>";
-//                Intent intent = new Intent(Intent.ACTION_SEND);
-//                intent.setType("text/html");
-//
-//                intent.putExtra(Intent.EXTRA_SUBJECT, getText(R.string.app_name));
-//                intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(string));
-//                startActivity(intent);
+                String string = "<table border='1' align='center'><tr style='color:blue'><th>Day</th><th>Date</th><th>Start Time</th><th>End Time</th><th>Total Time</th></tr><tr><td align='center'>Sunday</td><td align='center'>19/07/2011</td><td align='center'>13:00</td><td align='center'>19:00</td><td align='center'>06:00</td></tr></table>";
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("*/*");
+
+                intent.putExtra(Intent.EXTRA_SUBJECT, getText(R.string.app_name));
+                intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(string));
+
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.putExtra(Intent.EXTRA_STREAM, uri);
+
+                startActivity(intent);
 
 
-                Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                sendIntent.setType("text/html");
-                sendIntent.putExtra(android.content.Intent.EXTRA_TEXT,"test text");
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT,"test subject");
-                sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                sendIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file:///android_asset/po.html"));
-                startActivity(Intent.createChooser(sendIntent, "Send email..."));
+//                Intent sendIntent = new Intent(Intent.ACTION_SEND);
+//             //   sendIntent.setType("text/html");
+//                sendIntent.putExtra(android.content.Intent.EXTRA_TEXT,Html.fromHtml("<p><b>Some Content</b></p>" +
+//                        "http://www.google.com" + "<small><p>More content</p></small>"));
+//                sendIntent.putExtra(Intent.EXTRA_SUBJECT,"test subject");
+//                sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                sendIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file:///android_asset/po.html"));
+//                startActivity(Intent.createChooser(sendIntent, "Send email..."));
+
+
+
 
             }
         });
