@@ -39,6 +39,7 @@ import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Home.Home_Activity;
+import com.sirapp.Invoice.SavePref;
 import com.sirapp.OnBoardings.OnBoarding_Activity;
 import com.sirapp.R;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -108,9 +109,21 @@ public class Signin_Activity extends BaseActivity {
         txtsignuphere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Signin_Activity.this,OnBoarding_Activity.class);
-                intent.putExtra("signup","signup");
-                startActivity(intent);
+                SavePref pref = new SavePref();
+                pref.SavePref(Signin_Activity.this);
+                if(pref.getSignIn() == false){
+                    pref.setSignIn(true);
+                    Intent intent = new Intent(Signin_Activity.this,OnBoarding_Activity.class);
+                    intent.putExtra("signup","signup");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Intent intent = new Intent(Signin_Activity.this,Signup_Activity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+
             }
         });
 

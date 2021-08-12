@@ -106,7 +106,13 @@ public class GoProActivity extends BaseActivity {
             }
         });
 
+        Calendar myCalendar = Calendar.getInstance();
+        String myFormat = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        String dateCurrent = sdf.format(myCalendar.getTime());
 
+
+        //callAPI(productID, "orderIDXYZ", dateCurrent);
 
 
         bp = new BillingProcessor(this, AllSirApi.LICENSE_KEY, new BillingProcessor.IBillingHandler() {

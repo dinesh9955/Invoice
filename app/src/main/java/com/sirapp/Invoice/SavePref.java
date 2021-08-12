@@ -1393,4 +1393,22 @@ public class SavePref {
 
 
 
+
+	public void setSignIn(boolean string) {
+		// TODO Auto-generated method stub
+		editor.putBoolean("setSignIn",string);
+		editor.commit();
+		Log.d(TAG, "setSignIn received");
+	}
+
+
+	public boolean getSignIn() {
+		// TODO Auto-generated method stub
+		boolean name = preferences.getBoolean("setSignIn",false);
+		Log.d(TAG, "setSignIn received "+name);
+		return name;
+	}
+
+
+
 }
