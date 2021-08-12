@@ -3,17 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
-    tools:context="com.sirapp.com.sir.OnBoardings.OnBooarding_Fragment3">
+>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
-        android:text="INSTANT INVOICES"
+        android:text="Your Business Snapshot in a Glance"
         android:textColor="@color/dark_blue"
         android:textSize="26dp"
         android:id="@+id/txtonboardheading3"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
         />
 
     <TextView

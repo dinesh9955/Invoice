@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
-    tools:context="com.sirapp.com.sir.OnBoardings.OnBooarding_Fragment4">
+>
 
 
     <TextView
@@ -11,10 +11,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
-        android:text="CUSTOM REPORTS"
+        android:text="Pay &amp; Track Taxes"
         android:textColor="@color/dark_blue"
         android:textSize="26dp"
         android:id="@+id/txtonboardheading4"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
         />
 
     <TextView

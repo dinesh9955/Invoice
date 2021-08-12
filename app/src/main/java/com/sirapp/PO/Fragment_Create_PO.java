@@ -95,6 +95,7 @@ import com.sirapp.Model.Service_list;
 import com.sirapp.Model.Tax_List;
 import com.sirapp.Product.Product_Activity;
 import com.sirapp.Service.Service_Activity;
+import com.sirapp.Stock.Stock_Movement;
 import com.sirapp.Tax.CustomTaxAdapter;
 import com.sirapp.Tax.Tax_Activity;
 import com.sirapp.Utils.Utility;
@@ -167,7 +168,9 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
     String invoicetaxamount;
     ImageView imgsigsuccess, imgrecsuccess, imgstampsuccess, attachmenttxtimg;
     BottomSheetDialog bottomSheetDialog, bottomSheetDialog2, bottomSheetDialog3;
-    AwesomeSpinner selectwarehouse;
+//    AwesomeSpinner selectwarehouse;
+
+    Button selectwarehouse;
 
     Products_Adapter products_adapter;
     ArrayList<String> quantity = new ArrayList<>();
@@ -918,15 +921,47 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             }
         });
 
-        selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
-            @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                selectwarehouseId = wids.get(position);
-                Log.e("selectwarehouseId", selectwarehouseId);
-                productget(selectedCompanyId);
 
+
+//        selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                selectwarehouseId = wids.get(position);
+//                Log.e("selectwarehouseId", selectwarehouseId);
+//                productget(selectedCompanyId);
+//
+//            }
+//        });
+
+
+        selectwarehouse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter2 mAdapter;
+
+                final Dialog mybuilder = new Dialog(getActivity());
+                mybuilder.setContentView(R.layout.select_company_dialog_2);
+
+
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter2(wnames, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
+
+
+
 
         invoicerecipnt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2772,6 +2807,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         });
     }
 
+
     public void warehouse_list(String selectedCompanyId) {
         wids.clear();
         wnames.clear();
@@ -2780,7 +2816,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         if (this.selectedCompanyId.equals("") || this.selectedCompanyId.equals("null")) {
             Constant.ErrorToast(getActivity(), getString(R.string.select_company));
         } else {
-            params.add("company_id", this.selectedCompanyId);
+            params.add("company_id", selectedCompanyId);
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
@@ -2815,16 +2851,18 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                                 selectButton.setVisibility(View.GONE);
                             }
 
+                            Log.e(TAG, "selectwarehouseNU " +selectwarehouse);
+
+//                             if(selectwarehouse != null){
+//                                 if(wnames.size() > 0){
+//                                     if (getActivity()!=null){
+//                                         ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+//                                         selectwarehouse.setAdapter(namesadapter);
+//                                     }
+//                                  }
+//                             }
 
 
-                                    if(selectwarehouse != null){
-                                        if(wnames.size() > 0){
-                                            if (getActivity()!=null){
-                                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                                                selectwarehouse.setAdapter(namesadapter);
-                                            }
-                                        }
-                                    }
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -4930,6 +4968,85 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
 
     }
+
+
+
+
+    public class MenuAdapter2 extends RecyclerView.Adapter<MenuAdapter2.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter2(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter2.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter2.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter2.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+
+                    selectwarehouse.setText(wnames.get(i));
+                    selectwarehouseId = wids.get(i);
+                    Log.e("selectwarehouseId", selectwarehouseId);
+                    productget(selectedCompanyId);
+
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
+
+
 
 
 
