@@ -77,11 +77,11 @@ public class WebShowActivity extends BaseActivity {
 
         String url = "";
         if(key == 8){
-            url = AllSirApi.BASE_LEVEL_HTTP+"wp-content/api/about-app.php";
+            url = AllSirApi.BASE_LEVEL+"wp-content/api/about-app.php";
         } else if(key == 10){
-            url = AllSirApi.BASE_LEVEL_HTTP+"wp-content/api/term-of-use.php";
+            url = AllSirApi.BASE_LEVEL+"wp-content/api/term-of-use.php";
         }else if(key == 11){
-            url = AllSirApi.BASE_LEVEL_HTTP+"wp-content/api/privacy-policy.php";
+            url = AllSirApi.BASE_LEVEL+"wp-content/api/privacy-policy.php";
         }
 
 
@@ -103,7 +103,7 @@ public class WebShowActivity extends BaseActivity {
         client.addHeader("Access-Token", token);
         RequestParams params = new RequestParams();
         params.add("language", ""+getLanguage());
-      //  params.add("device_type", "android");
+//        params.add("device_type", "android");
 
         client.post(url, params, new AsyncHttpResponseHandler() {
             @Override
@@ -140,7 +140,7 @@ public class WebShowActivity extends BaseActivity {
 //                                webView.loadUrl("document.getElementById('iosVer').style.display='none';})()");
 //                                webView.loadUrl("javascript:(function() { " +
 //                                        "document.getElementsByClassName('iosVer')[0].style.display='none'; })()");
-//                                webView.loadUrl("javascript:document.body.style.padding= \"2%\"; void 0");
+                                webView.loadUrl("javascript:document.body.style.padding= \"2%\"; void 0");
 
                             }
                         });

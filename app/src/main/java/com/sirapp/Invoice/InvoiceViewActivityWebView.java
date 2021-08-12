@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.sirapp.API.AllSirApi;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Invoice.response.InvoiceCompanyDto;
 import com.sirapp.Invoice.response.InvoiceCustomerDto;
@@ -435,7 +436,15 @@ public class InvoiceViewActivityWebView extends BaseActivity {
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
-        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+
+
+        if(AllSirApi.FONT_INVOICE == true){
+            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+        }else{
+            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        }
+
+//        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + 6);
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

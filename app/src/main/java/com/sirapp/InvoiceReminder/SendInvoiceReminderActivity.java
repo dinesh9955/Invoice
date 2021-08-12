@@ -451,6 +451,12 @@ public class SendInvoiceReminderActivity extends BaseActivity {
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
+        if(AllSirApi.FONT_INVOICE == true){
+            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+        }else{
+            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        }
+
 //        invoiceweb.setWebViewClient(new WebViewClient() {
 //            public boolean shouldOverrideUrlLoading(WebView view, String url) {
 //                return false;

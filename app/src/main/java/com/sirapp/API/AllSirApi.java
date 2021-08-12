@@ -2,7 +2,7 @@ package com.sirapp.API;
 
 public class AllSirApi {
 
-    public static final String BASE_LEVEL_HTTP ="https://sir-app.com/";
+//    public static final String BASE_LEVEL_HTTP ="https://sir-app.com/";
 
 
     public static final String BASE_LEVEL ="https://sir-app.com/";
@@ -23,6 +23,8 @@ public class AllSirApi {
 
 //    https://sir-app.com/app/api/user/login
 
+    public static final boolean FONT_INVOICE = true;
+    public static final int FONT_SIZE = 7;
 
 //    public static final String BASE_URL ="http://13.126.22.0/saad/app/index.php/api/";
 

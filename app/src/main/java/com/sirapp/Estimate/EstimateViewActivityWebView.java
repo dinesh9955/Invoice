@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.sirapp.API.AllSirApi;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
 import com.sirapp.Base.BaseActivity;
@@ -385,7 +386,11 @@ public class EstimateViewActivityWebView extends BaseActivity {
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
-        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        if(AllSirApi.FONT_INVOICE == true){
+            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+        }else{
+            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        }
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

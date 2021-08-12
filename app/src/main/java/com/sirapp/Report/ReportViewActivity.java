@@ -313,8 +313,22 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
-        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        //invoiceweb.getSettings().setTextSize(WebSettings.TextSize.LARGER);
 
+//        webSettings.setDefaultFontSize(50);
+
+//        invoiceweb.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+//        invoiceweb.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+//        webSettings.setDefaultFontSize(50);
+//        invoiceweb.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
+       // webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+
+        if(AllSirApi.FONT_INVOICE == true){
+            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+        }else{
+            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        }
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -322,6 +336,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             }
             @Override
             public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
                 final File savedPDFFile = FileManager.getInstance().createTempFile(ReportViewActivity.this, fileName+".pdf", true);
                 PDFUtil.generatePDFFromWebView(savedPDFFile, invoiceweb, new PDFPrint.OnPDFPrintListener() {
                     @Override
@@ -329,7 +344,6 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                         Log.e(TAG, "fileWithinMyDir "+fileWithinMyDir);
                         fileWithinMyDir = file;
                         //Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-
                     }
                     @Override
                     public void onError(Exception exception) {
