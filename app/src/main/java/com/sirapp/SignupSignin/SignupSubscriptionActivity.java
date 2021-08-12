@@ -35,7 +35,9 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -123,12 +125,18 @@ public class SignupSubscriptionActivity extends BaseActivity {
                 String productID = details.productId;
                 String orderID = details.orderId;
                 String purchaseToken = details.purchaseToken;
-                Date purchaseTime = details.purchaseTime;
-                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-                Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
-                String date = simple.format(purchaseTime);
+//                Date purchaseTime = details.purchaseTime;
+//                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+//                Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
+//                String date = simple.format(purchaseTime);
 
-                callAPI(productId, orderID, date);
+                Calendar myCalendar = Calendar.getInstance();
+                String myFormat = "yyyy-MM-dd";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                String dateCurrent = sdf.format(myCalendar.getTime());
+
+
+                callAPI(productId, orderID, dateCurrent);
 
 
 //                SkuDetails dd = bp.getPurchaseListingDetails("");
@@ -157,7 +165,7 @@ public class SignupSubscriptionActivity extends BaseActivity {
                 //updateTextViews();
             }
         });
-
+        bp.initialize();
 
 
     }

@@ -35,7 +35,9 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -119,7 +121,7 @@ public class GoProActivity extends BaseActivity {
                 String productID = details.productId;
                 String orderID = details.orderId;
                 String purchaseToken = details.purchaseToken;
-                Date purchaseTime = details.purchaseTime;
+               // Date purchaseTime = details.purchaseTime;
 
                // Date date = new Date(Long.parseLong(details.purchaseTime));
 
@@ -132,14 +134,21 @@ public class GoProActivity extends BaseActivity {
                 Log.e(TAG , "productID"+productID);
                 Log.e(TAG , "orderID"+orderID);
                 Log.e(TAG , "purchaseToken"+purchaseToken);
-                Log.e(TAG , "purchaseTime"+purchaseTime);
+               // Log.e(TAG , "purchaseTime"+purchaseTime);
 
 
-                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-                Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
-                String date = simple.format(purchaseTime);
+//                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+//                Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
+//                String date = simple.format(purchaseTime);
 
-                callAPI(productID, orderID, date);
+
+                Calendar myCalendar = Calendar.getInstance();
+                String myFormat = "yyyy-MM-dd";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                String dateCurrent = sdf.format(myCalendar.getTime());
+
+
+                callAPI(productID, orderID, dateCurrent);
 
 
 //                SkuDetails dd = bp.getPurchaseListingDetails(details.productId);

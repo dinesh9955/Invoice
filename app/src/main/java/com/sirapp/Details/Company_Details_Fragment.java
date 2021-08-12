@@ -695,8 +695,9 @@ public class Company_Details_Fragment extends BaseFragment {
                                 @Override
                                 public void run() {
                                     Intent intent = new Intent(getActivity(),Companies_Activity.class);
-                                    //intent.putExtra("add","add");
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
+
                                 }
                             },1000);
                         }

@@ -3551,6 +3551,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                                 switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                        Log.e(TAG, "onCheckedChanged "+isChecked);
                                         if(isChecked == true){
                                             radioGroupPaypal.setVisibility(View.VISIBLE);
                                             booleanSwitchPaypal = true;
@@ -3592,7 +3593,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                                 switchStripe.setVisibility(View.VISIBLE);
                                 //switchStripe.setChecked(true);
                                 // booleanSwitchStripe = true;
-                                switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                switchStripe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                         if(isChecked == true){
