@@ -13,6 +13,41 @@
 
     <string name="invoice_SelectWarehouseForProduct">حدد المستودع (للمنتجات)</string>
 
+
+    <string name="stock_Select_Product_2">حدد المنتج<font color='#FF0000'>*</font></string>
+    <string name="company_Company_Name_2">اسم الشركة<font color='#FF0000'>*</font></string>
+    <string name="company_Choose_Default_Currency_2">اختر العملة الافتراضية<font color='#FF0000'>*</font></string>
+    <string name="company_Enter_IBAN_2">أدخل رقم الحساب المصرفي الدولي</string>
+    <string name="company_Enter_Bank_Name_2">أدخل اسم البنك</string>
+    <string name="company_Enter_Swift_BIC_2">أدخل Swift BIC</string>
+    <string name="product_Product_Name_2">اسم المنتج<font color='#FF0000'>*</font></string>
+    <string name="product_Per_Unit_Price_2">سعر الوحدة<font color='#FF0000'>*</font></string>
+    <string name="product_Product_Category_2">فئة المنتج<font color='#FF0000'>*</font></string>
+    <string name="product_Measurement_Unit_2">وحدة قياس<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Name_2">اسم العنصر<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Rate_2">سعر البند<font color='#FF0000'>*</font></string>
+    <string name="item_Select_Category_2">اختر الفئة<font color='#FF0000'>*</font></string>
+    <string name="item_Measurement_Unit_2">وحدة قياس<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Name_2">الاسم الضريبي<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Rate_2">معدل الضريبة(٪)<font color='#FF0000'>*</font></string>
+    <string name="customer_CustomerCompany_Name_2">اسم العميل / الشركة<font color='#FF0000'>*</font></string>
+    <string name="supplier_SupplierCompany_Name_2">المورد / اسم الشركة<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_from_warehouse_2">أرسل من المستودع<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_to_warehouse_2">أرسل إلى المستودع<font color='#FF0000'>*</font></string>
+    <string name="stock_Enter_Quantity_2">أدخل الكمية<font color='#FF0000'>*</font></string>
+    <string name="stock_SelectWarehouse_2">حدد المستودعات<font color='#FF0000'>*</font></string>
+    <string name="invoiceInv_2">Inv #<font color='#FF0000'>*</font></string>
+    <string name="invoiceDDMMYYYY_2">DD-MM-YYYY<font color='#FF0000'>*</font></string>
+    <string name="invoice_EnterName_2">أدخل الاسم<font color='#FF0000'>*</font></string>
+    <string name="invoice_0days_2">0أيام<font color='#FF0000'>*</font></string>
+    <string name="invoiceEst_2">Est #<font color='#FF0000'>*</font></string>
+    <string name="poNo_2">PO No.<font color='#FF0000'>*</font></string>
+    <string name="pvNo_2">PV No.<font color='#FF0000'>*</font></string>
+    <string name="stock_Select_Warehouse_2">حدد المستودع<font color='#FF0000'>*</font></string>
+    <string name="invoiceXDC10220_2">XDC 102-20<font color='#FF0000'>*</font></string>
+
+
+
     <string name="home_lets">هيا نبدأ</string>
     <string name="home_AddyourBusiness">أضف معلومات عملك</string>
     <string name="home_AddyourCustomer">أضف عملائك</string>
@@ -681,7 +716,7 @@
     <string name="setting_CommaFormatSelection">تحديد تنسيق الفاصلة</string>
     <string name="setting_OnlinePaymentGateway">بوابة الدفع عبر الإنترنت</string>
     <string name="setting_Subscribe">الإشتراك</string>
-    <string name="setting_Upgrade">رفع مستوى</string>
+    <string name="setting_Upgrade">الإضافات</string>
     <string name="setting_RestorePurchases">استعادة المشتريات</string>
     <string name="setting_InviteFriends">ادعو أصدقاء</string>
     <string name="setting_FAQs">أسئلة وأجوبة</string>
@@ -995,6 +1030,10 @@
         <item> الإسبانية </item>
         <item> البرتغالية </item>
     </string-array>
+    <string name="setting_UpgradePlanMonthly">قم بالترقية إلى ميزة تتبع المخزون الحصرية لدينا مقابل 2.99 دولارًا أمريكيًا شهريًا إضافيًا</string>
+    <string name="setting_UpgradePlanYearly">قم بالترقية إلى ميزة تتبع المخزون الحصرية لدينا مقابل 2.99 دولار أمريكي سنويًا</string>
+    <string name="setting_UPGRADETODAY">قم بالترقية اليوم</string>
+    <string name="setting_SKIP">تخطى</string>
 
 
 </resources>

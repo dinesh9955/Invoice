@@ -15,6 +15,39 @@
 
     <string name="invoice_SelectWarehouseForProduct">Sélectionnez l\'entrepôt (pour les produits)</string>
 
+    <string name="stock_Select_Product_2">Sélectionner un produit<font color='#FF0000'>*</font></string>
+    <string name="company_Company_Name_2">Nom de l\'entreprise<font color='#FF0000'>*</font></string>
+    <string name="company_Choose_Default_Currency_2">Choisissez la devise par défaut<font color='#FF0000'>*</font></string>
+    <string name="company_Enter_IBAN_2">Entrez IBAN</string>
+    <string name="company_Enter_Bank_Name_2">Entrez Bank Name</string>
+    <string name="company_Enter_Swift_BIC_2">Entrez Swift BIC</string>
+    <string name="product_Product_Name_2">Nom du produit<font color='#FF0000'>*</font></string>
+    <string name="product_Per_Unit_Price_2">Prix unitaire<font color='#FF0000'>*</font></string>
+    <string name="product_Product_Category_2">catégorie de produit<font color='#FF0000'>*</font></string>
+    <string name="product_Measurement_Unit_2">Unité de mesure<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Name_2">Nom de l\'article<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Rate_2">Tarif de l\'article<font color='#FF0000'>*</font></string>
+    <string name="item_Select_Category_2">Choisir une catégorie<font color='#FF0000'>*</font></string>
+    <string name="item_Measurement_Unit_2">Unité de mesure<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Name_2">Nom de la taxe<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Rate_2">Taux d\'imposition(%)<font color='#FF0000'>*</font></string>
+    <string name="customer_CustomerCompany_Name_2">Nom du client/de l\'entreprise<font color='#FF0000'>*</font></string>
+    <string name="supplier_SupplierCompany_Name_2">Nom du fournisseur/de l\'entreprise<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_from_warehouse_2">Envoi depuis l\'entrepôt<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_to_warehouse_2">Envoyer à l\'entrepôt<font color='#FF0000'>*</font></string>
+    <string name="stock_Enter_Quantity_2">Entrer la quantité<font color='#FF0000'>*</font></string>
+    <string name="stock_SelectWarehouse_2">Sélectionnez l\'entrepôt (s)<font color='#FF0000'>*</font></string>
+    <string name="invoiceInv_2">Inv #<font color='#FF0000'>*</font></string>
+    <string name="invoiceDDMMYYYY_2">DD-MM-YYYY<font color='#FF0000'>*</font></string>
+    <string name="invoice_EnterName_2">Entrez le nom<font color='#FF0000'>*</font></string>
+    <string name="invoice_0days_2">0journées<font color='#FF0000'>*</font></string>
+    <string name="invoiceEst_2">Est #<font color='#FF0000'>*</font></string>
+    <string name="poNo_2">PO No.<font color='#FF0000'>*</font></string>
+    <string name="pvNo_2">PV No.<font color='#FF0000'>*</font></string>
+    <string name="stock_Select_Warehouse_2">Sélectionnez l\'entrepôt<font color='#FF0000'>*</font></string>
+    <string name="invoiceXDC10220_2">XDC 102-20<font color='#FF0000'>*</font></string>
+
+
     <string name="home_lets">Commençons</string>
     <string name="home_AddyourBusiness">Ajoutez les informations de votre entreprise</string>
     <string name="home_AddyourCustomer">Ajoutez vos clients</string>
@@ -679,7 +712,7 @@
     <string name="setting_CommaFormatSelection">Sélection du format de virgule</string>
     <string name="setting_OnlinePaymentGateway">Passerelle de paiement en ligne</string>
     <string name="setting_Subscribe">S\'abonner</string>
-    <string name="setting_Upgrade">Améliorer</string>
+    <string name="setting_Upgrade">Modules complémentaires</string>
     <string name="setting_RestorePurchases">Restaurer les achats</string>
     <string name="setting_InviteFriends">Inviter des amis</string>
     <string name="setting_FAQs">FAQs</string>
@@ -993,6 +1026,10 @@
         <item>Espanol</item>
         <item>Portugais</item>
     </string-array>
+    <string name="setting_UpgradePlanMonthly">Passez à notre fonction exclusive de suivi des stocks pour 2,99 USD supplémentaires par mois</string>
+    <string name="setting_UpgradePlanYearly">Passez à notre fonction exclusive de suivi des stocks pour 2,99 USD supplémentaires par an</string>
+    <string name="setting_UPGRADETODAY">METTRE À JOUR AUJOURD\'HUI</string>
+    <string name="setting_SKIP">SAUTER</string>
 
 
 </resources>

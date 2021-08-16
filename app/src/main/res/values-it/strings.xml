@@ -15,6 +15,40 @@
 
     <string name="invoice_SelectWarehouseForProduct">Seleziona magazzino (per prodotti)</string>
 
+
+    <string name="stock_Select_Product_2">Seleziona prodotto<font color='#FF0000'>*</font></string>
+    <string name="company_Company_Name_2">Nome della ditta<font color='#FF0000'>*</font></string>
+    <string name="company_Choose_Default_Currency_2">Scegli la valuta predefinita<font color='#FF0000'>*</font></string>
+    <string name="company_Enter_IBAN_2">Inserisci IBAN</string>
+    <string name="company_Enter_Bank_Name_2">Inserisci il nome della banca</string>
+    <string name="company_Enter_Swift_BIC_2">Entra in Swift BIC</string>
+    <string name="product_Product_Name_2">nome del prodotto<font color='#FF0000'>*</font></string>
+    <string name="product_Per_Unit_Price_2">Prezzo unitario<font color='#FF0000'>*</font></string>
+    <string name="product_Product_Category_2">categoria di prodotto<font color='#FF0000'>*</font></string>
+    <string name="product_Measurement_Unit_2">Unità di misura<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Name_2">Nome dell\'oggetto<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Rate_2">Tasso dell\'articolo<font color='#FF0000'>*</font></string>
+    <string name="item_Select_Category_2">Seleziona categoria<font color='#FF0000'>*</font></string>
+    <string name="item_Measurement_Unit_2">Unità di misura<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Name_2">Nome fiscale<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Rate_2">Aliquota fiscale(%)<font color='#FF0000'>*</font></string>
+    <string name="customer_CustomerCompany_Name_2">Nome del cliente/azienda<font color='#FF0000'>*</font></string>
+    <string name="supplier_SupplierCompany_Name_2">Nome fornitore/azienda<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_from_warehouse_2">Invia da magazzino<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_to_warehouse_2">Invia al magazzino<font color='#FF0000'>*</font></string>
+    <string name="stock_Enter_Quantity_2">Inserisci la quantità<font color='#FF0000'>*</font></string>
+    <string name="stock_SelectWarehouse_2">Seleziona Magazzino (s)<font color='#FF0000'>*</font></string>
+    <string name="invoiceInv_2">Inv #<font color='#FF0000'>*</font></string>
+    <string name="invoiceDDMMYYYY_2">DD-MM-YYYY<font color='#FF0000'>*</font></string>
+    <string name="invoice_EnterName_2">Inserisci il nome<font color='#FF0000'>*</font></string>
+    <string name="invoice_0days_2">0giorni<font color='#FF0000'>*</font></string>
+    <string name="invoiceEst_2">Est #<font color='#FF0000'>*</font></string>
+    <string name="poNo_2">PO No.<font color='#FF0000'>*</font></string>
+    <string name="pvNo_2">PV No.<font color='#FF0000'>*</font></string>
+    <string name="stock_Select_Warehouse_2">Seleziona Magazzino<font color='#FF0000'>*</font></string>
+    <string name="invoiceXDC10220_2">XDC 102-20<font color='#FF0000'>*</font></string>
+
+
     <string name="home_lets">Cominciamo</string>
     <string name="home_AddyourBusiness">Aggiungi le informazioni sulla tua attività</string>
     <string name="home_AddyourCustomer">Aggiungi i tuoi clienti</string>
@@ -678,7 +712,7 @@
     <string name="setting_CommaFormatSelection">Selezione formato virgola</string>
     <string name="setting_OnlinePaymentGateway">Gateway di pagamento online</string>
     <string name="setting_Subscribe">sottoscrivi</string>
-    <string name="setting_Upgrade">Aggiorna</string>
+    <string name="setting_Upgrade">Componenti aggiuntivi</string>
     <string name="setting_RestorePurchases">Ripristinare gli acquisti</string>
     <string name="setting_InviteFriends">Invita gli amici</string>
     <string name="setting_FAQs">FAQ</string>
@@ -994,6 +1028,10 @@
         <item>Spagnolo</item>
         <item>Portoghese</item>
     </string-array>
+    <string name="setting_UpgradePlanMonthly">Esegui l\'upgrade alla nostra esclusiva funzione di monitoraggio delle scorte a 2,99 USD aggiuntivi al mese</string>
+    <string name="setting_UpgradePlanYearly">Esegui l\'upgrade alla nostra esclusiva funzione di monitoraggio delle scorte a 2,99 USD aggiuntivi all\'anno</string>
+    <string name="setting_UPGRADETODAY">AGGIORNA OGGI</string>
+    <string name="setting_SKIP">SALTA</string>
 
 
 </resources>

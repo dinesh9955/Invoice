@@ -14,6 +14,38 @@
 
     <string name="invoice_SelectWarehouseForProduct">Lager auswählen (für Produkte)</string>
 
+    <string name="stock_Select_Product_2">Ausgewähltes Produkt<font color='#FF0000'>*</font></string>
+    <string name="company_Company_Name_2">Name der Firma<font color='#FF0000'>*</font></string>
+    <string name="company_Choose_Default_Currency_2">Wählen Sie die Standardwährung<font color='#FF0000'>*</font></string>
+    <string name="company_Enter_IBAN_2">Eintreten IBAN</string>
+    <string name="company_Enter_Bank_Name_2">Eintreten Bank Name</string>
+    <string name="company_Enter_Swift_BIC_2">Eintreten Swift BIC</string>
+    <string name="product_Product_Name_2">Produktname<font color='#FF0000'>*</font></string>
+    <string name="product_Per_Unit_Price_2">Preis pro Einheit<font color='#FF0000'>*</font></string>
+    <string name="product_Product_Category_2">Produktkategorie<font color='#FF0000'>*</font></string>
+    <string name="product_Measurement_Unit_2">Maßeinheit<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Name_2">Artikelname<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Rate_2">Artikelpreis<font color='#FF0000'>*</font></string>
+    <string name="item_Select_Category_2">Kategorie wählen<font color='#FF0000'>*</font></string>
+    <string name="item_Measurement_Unit_2">Maßeinheit<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Name_2">Steuername<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Rate_2">Steuersatz(%)<font color='#FF0000'>*</font></string>
+    <string name="customer_CustomerCompany_Name_2">Kunden-/Firmenname<font color='#FF0000'>*</font></string>
+    <string name="supplier_SupplierCompany_Name_2">Lieferant/Firmenname<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_from_warehouse_2">Ab Lager versenden<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_to_warehouse_2">An Lager senden<font color='#FF0000'>*</font></string>
+    <string name="stock_Enter_Quantity_2">Menge eingeben<font color='#FF0000'>*</font></string>
+    <string name="stock_SelectWarehouse_2">Lager auswählen<font color='#FF0000'>*</font></string>
+    <string name="invoiceInv_2">Inv #<font color='#FF0000'>*</font></string>
+    <string name="invoiceDDMMYYYY_2">DD-MM-YYYY<font color='#FF0000'>*</font></string>
+    <string name="invoice_EnterName_2">Name eingeben<font color='#FF0000'>*</font></string>
+    <string name="invoice_0days_2">0Tage<font color='#FF0000'>*</font></string>
+    <string name="invoiceEst_2">Est #<font color='#FF0000'>*</font></string>
+    <string name="poNo_2">PO No.<font color='#FF0000'>*</font></string>
+    <string name="pvNo_2">PV No.<font color='#FF0000'>*</font></string>
+    <string name="stock_Select_Warehouse_2">Lager auswählen<font color='#FF0000'>*</font></string>
+    <string name="invoiceXDC10220_2">XDC 102-20<font color='#FF0000'>*</font></string>
+
     <string name="home_lets">Lass uns loslegen</string>
     <string name="home_AddyourBusiness">Fügen Sie Ihre Unternehmensinformationen hinzu</string>
     <string name="home_AddyourCustomer">Fügen Sie Ihre Kunden hinzu</string>
@@ -689,7 +721,7 @@
     <string name="setting_CommaFormatSelection">Auswahl des Kommaformats</string>
     <string name="setting_OnlinePaymentGateway">Online-Zahlungsgateway</string>
     <string name="setting_Subscribe">Abonnieren</string>
-    <string name="setting_Upgrade">Aktualisierung</string>
+    <string name="setting_Upgrade">Add-ons</string>
     <string name="setting_RestorePurchases">Käufe wiederherstellen</string>
     <string name="setting_InviteFriends">Freunde einladen</string>
     <string name="setting_FAQs">Häufig gestellte Fragen</string>
@@ -1003,5 +1035,9 @@
         <item>Spanisch</item>
         <item>Portugiesisch</item>
     </string-array>
+    <string name="setting_UpgradePlanMonthly">Upgrade auf unsere exklusive Bestandsverfolgungsfunktion für zusätzliche 2,99 USD monatlich</string>
+    <string name="setting_UpgradePlanYearly">Upgrade auf unsere exklusive Bestandsverfolgungsfunktion für zusätzliche 2,99 USD pro Jahr</string>
+    <string name="setting_UPGRADETODAY">HEUTE AKTUALISIEREN</string>
+    <string name="setting_SKIP">ÜBERSPRINGEN</string>
 
 </resources>

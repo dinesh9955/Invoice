@@ -14,6 +14,40 @@
 
     <string name="invoice_SelectWarehouseForProduct">Selecteer Magazijn (Voor Producten)</string>
 
+
+    <string name="stock_Select_Product_2">Selecteer product<font color='#FF0000'>*</font></string>
+    <string name="company_Company_Name_2">Bedrijfsnaam<font color='#FF0000'>*</font></string>
+    <string name="company_Choose_Default_Currency_2">Kies standaardvaluta<font color='#FF0000'>*</font></string>
+    <string name="company_Enter_IBAN_2">Voer IBAN in</string>
+    <string name="company_Enter_Bank_Name_2">Voer banknaam in</string>
+    <string name="company_Enter_Swift_BIC_2">Voer Swift BIC in</string>
+    <string name="product_Product_Name_2">productnaam<font color='#FF0000'>*</font></string>
+    <string name="product_Per_Unit_Price_2">Per eenheidsprijs<font color='#FF0000'>*</font></string>
+    <string name="product_Product_Category_2">product categorie<font color='#FF0000'>*</font></string>
+    <string name="product_Measurement_Unit_2">Meeteenheid<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Name_2">Itemnaam<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Rate_2">Artikeltarief<font color='#FF0000'>*</font></string>
+    <string name="item_Select_Category_2">selecteer categorie<font color='#FF0000'>*</font></string>
+    <string name="item_Measurement_Unit_2">Meeteenheid<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Name_2">Belastingnaam:<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Rate_2">Belastingtarief(%)<font color='#FF0000'>*</font></string>
+    <string name="customer_CustomerCompany_Name_2">Klant/Bedrijfsnaam<font color='#FF0000'>*</font></string>
+    <string name="supplier_SupplierCompany_Name_2">Leverancier/Bedrijfsnaam:<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_from_warehouse_2">Verzenden vanuit magazijn<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_to_warehouse_2">Verzenden naar magazijn<font color='#FF0000'>*</font></string>
+    <string name="stock_Enter_Quantity_2">Voer Hoeveelheid in<font color='#FF0000'>*</font></string>
+    <string name="stock_SelectWarehouse_2">Selecteer Magazijn (s)<font color='#FF0000'>*</font></string>
+    <string name="invoiceInv_2">Inv #<font color='#FF0000'>*</font></string>
+    <string name="invoiceDDMMYYYY_2">DD-MM-YYYY<font color='#FF0000'>*</font></string>
+    <string name="invoice_EnterName_2">Voer naam in<font color='#FF0000'>*</font></string>
+    <string name="invoice_0days_2">0dagen<font color='#FF0000'>*</font></string>
+    <string name="invoiceEst_2">Est #<font color='#FF0000'>*</font></string>
+    <string name="poNo_2">PO No.<font color='#FF0000'>*</font></string>
+    <string name="pvNo_2">PV No.<font color='#FF0000'>*</font></string>
+    <string name="stock_Select_Warehouse_2">Selecteer Magazijn<font color='#FF0000'>*</font></string>
+    <string name="invoiceXDC10220_2">XDC 102-20<font color='#FF0000'>*</font></string>
+
+
     <string name="home_lets">Laten we beginnen</string>
     <string name="home_AddyourBusiness">Voeg uw bedrijfsinformatie toe</string>
     <string name="home_AddyourCustomer">Voeg je klanten toe</string>
@@ -681,7 +715,7 @@
     <string name="setting_CommaFormatSelection">Selectie komma-indeling</string>
     <string name="setting_OnlinePaymentGateway">Online betalingsgateway</string>
     <string name="setting_Subscribe">Abonneren</string>
-    <string name="setting_Upgrade">Upgrade</string>
+    <string name="setting_Upgrade">Add-ons</string>
     <string name="setting_RestorePurchases">Aankopen herstellen</string>
     <string name="setting_InviteFriends">Nodig vrienden uit</string>
     <string name="setting_FAQs">Veelgestelde vragen</string>
@@ -997,6 +1031,10 @@
         <item>Spaans</item>
         <item>Portugees</item>
     </string-array>
+    <string name="setting_UpgradePlanMonthly">Upgrade naar onze exclusieve Stock Tracking-functie voor een extra bedrag van USD 2,99 per maand</string>
+    <string name="setting_UpgradePlanYearly">Upgrade naar onze exclusieve Stock Tracking-functie voor een extra bedrag van USD 2,99 per jaar</string>
+    <string name="setting_UPGRADETODAY">UPGRADE VANDAAG</string>
+    <string name="setting_SKIP">OVERSLAAN</string>
 
 
 </resources>

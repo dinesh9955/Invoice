@@ -13,6 +13,43 @@
 
     <string name = "go_pro">Torne-se Pro</string>
 
+
+
+    <string name="stock_Select_Product_2">Selecione o produto<font color='#FF0000'>*</font></string>
+    <string name="company_Company_Name_2">nome da empresa<font color='#FF0000'>*</font></string>
+    <string name="company_Choose_Default_Currency_2">Escolha a moeda padrão<font color='#FF0000'>*</font></string>
+    <string name="company_Enter_IBAN_2">Digite IBAN</string>
+    <string name="company_Enter_Bank_Name_2">Digite o nome do banco</string>
+    <string name="company_Enter_Swift_BIC_2">Digite Swift BIC</string>
+    <string name="product_Product_Name_2">Nome do Produto<font color='#FF0000'>*</font></string>
+    <string name="product_Per_Unit_Price_2">Preço por unidade<font color='#FF0000'>*</font></string>
+    <string name="product_Product_Category_2">Categoria de Produto<font color='#FF0000'>*</font></string>
+    <string name="product_Measurement_Unit_2">Unidade de medida<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Name_2">Nome do item<font color='#FF0000'>*</font></string>
+    <string name="item_Item_Rate_2">Taxa de item<font color='#FF0000'>*</font></string>
+    <string name="item_Select_Category_2">Selecione a Categoria<font color='#FF0000'>*</font></string>
+    <string name="item_Measurement_Unit_2">Unidade de medida<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Name_2">Nome Fiscal<font color='#FF0000'>*</font></string>
+    <string name="tax_Tax_Rate_2">Taxa de imposto(%)<font color='#FF0000'>*</font></string>
+    <string name="customer_CustomerCompany_Name_2">Cliente / Nome da Empresa<font color='#FF0000'>*</font></string>
+    <string name="supplier_SupplierCompany_Name_2">Fornecedor / Nome da Empresa<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_from_warehouse_2">Enviar do armazém:<font color='#FF0000'>*</font></string>
+    <string name="stock_Send_to_warehouse_2">Selecione o Armazém<font color='#FF0000'>*</font></string>
+    <string name="stock_Enter_Quantity_2">Insira a quantidade<font color='#FF0000'>*</font></string>
+    <string name="stock_SelectWarehouse_2">Selecione Armazém (s)<font color='#FF0000'>*</font></string>
+    <string name="invoiceInv_2">Inv #<font color='#FF0000'>*</font></string>
+    <string name="invoiceDDMMYYYY_2">DD-MM-YYYY<font color='#FF0000'>*</font></string>
+    <string name="invoice_EnterName_2">Insira o nome<font color='#FF0000'>*</font></string>
+    <string name="invoice_0days_2">0dias<font color='#FF0000'>*</font></string>
+    <string name="invoiceEst_2">Est #<font color='#FF0000'>*</font></string>
+    <string name="poNo_2">PO No.<font color='#FF0000'>*</font></string>
+    <string name="pvNo_2">PV No.<font color='#FF0000'>*</font></string>
+    <string name="stock_Select_Warehouse_2">Selecione o Armazém<font color='#FF0000'>*</font></string>
+    <string name="invoiceXDC10220_2">XDC 102-20<font color='#FF0000'>*</font></string>
+
+
+
+
     <string name="invoice_SelectWarehouseForProduct">Selecione Armazém (para produtos)</string>
 
     <string name = "home_lets">Vamos começar</string>
@@ -679,7 +716,7 @@
     <string name="setting_CommaFormatSelection">Seleção de formato de vírgula</string>
     <string name="setting_OnlinePaymentGateway">Gateway de pagamento online</string>
     <string name="setting_Subscribe">Se inscrever</string>
-    <string name="setting_Upgrade">Melhoria</string>
+    <string name="setting_Upgrade">Complementos</string>
     <string name="setting_RestorePurchases">Restaurar compras</string>
     <string name="setting_InviteFriends">Convide amigos</string>
     <string name="setting_FAQs">FAQs</string>
@@ -996,6 +1033,10 @@
         <item> espanhol </item>
         <item> português </item>
     </string-array>
+    <string name="setting_UpgradePlanMonthly">Faça upgrade para nosso recurso exclusivo de rastreamento de estoque por US $ 2,99 mensais adicionais</string>
+    <string name="setting_UpgradePlanYearly">Faça upgrade para nosso recurso exclusivo de rastreamento de estoque por US $ 2,99 adicionais anualmente</string>
+    <string name="setting_UPGRADETODAY">APRIMORE HOJE</string>
+    <string name="setting_SKIP">PULAR</string>
 
 
 </resources>
