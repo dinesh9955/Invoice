@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,8 @@ public class SettingsActivity extends BaseActivity {
     RecyclerView recycler_invoices;
 
     int imageClickID = 0;
+
+    String payKey = "";
 
     SettingsAdapter invoicelistAdapterdt;
 
@@ -116,6 +119,18 @@ public class SettingsActivity extends BaseActivity {
         invoicelistAdapterdt.notifyDataSetChanged();
 
 
+        if(getIntent().getExtras() != null){
+            if(getIntent().getExtras().getString("key").equalsIgnoreCase("user")){
+                payKey = "user";
+                upgradePackage();
+            }else{
+                payKey = "company";
+                upgradePackage();
+            }
+
+        }
+
+
 
         bp = new BillingProcessor(this, AllSirApi.LICENSE_KEY, new BillingProcessor.IBillingHandler() {
             @Override
@@ -137,7 +152,15 @@ public class SettingsActivity extends BaseActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 String dateCurrent = sdf.format(myCalendar.getTime());
 
-                callAPI(productID, orderID, dateCurrent, "1");
+
+
+                if(payKey.equalsIgnoreCase("user")){
+                    callAPIUSER("SUBUSER");
+                }else if(payKey.equalsIgnoreCase("company")){
+                    callAPIUSER("COMPANY");
+                }else{
+                    callAPI(productID, orderID, dateCurrent, "1");
+                }
 
             }
             @Override
@@ -212,6 +235,12 @@ public class SettingsActivity extends BaseActivity {
         ImageView imageView = (ImageView) mybuilder.findViewById(R.id.imageView);
         ImageView imageView2 = (ImageView) mybuilder.findViewById(R.id.imageView2);
 
+        RelativeLayout relativeLayoutUser = mybuilder.findViewById(R.id.relaive111);
+        RelativeLayout relativeLayoutCompany = mybuilder.findViewById(R.id.relaive222);
+
+
+
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -253,24 +282,13 @@ public class SettingsActivity extends BaseActivity {
             }
         });
 
-//        RecyclerView recycler_invoices = mybuilder.findViewById(R.id.recycler_list);
-//
-//        ArrayList<String> arrayListNames = new ArrayList<>();
-//        arrayListNames.add("1,000,000.00");
-//        arrayListNames.add("1,00,00,000.00");
-//        arrayListNames.add("1.000.000,00");
-//        arrayListNames.add("1 000 000,00");
-//
-//
-//        languagePostion = pref.getNumberFormatPosition();
-//
-//        NumberFormatAdapter invoicelistAdapterdt = new NumberFormatAdapter(mcontext, arrayListNames, settingsAdapter);
-//        recycler_invoices.setAdapter(invoicelistAdapterdt);
-//        invoicelistAdapterdt.updateLanguagePosition(languagePostion);
-//        recycler_invoices.setLayoutManager(new LinearLayoutManager(mcontext, LinearLayoutManager.VERTICAL, false));
-//        recycler_invoices.setHasFixedSize(true);
-//        invoicelistAdapterdt.notifyDataSetChanged();
-
+        if(payKey.equalsIgnoreCase("user")){
+            relativeLayoutUser.setVisibility(View.VISIBLE);
+            relativeLayoutCompany.setVisibility(View.GONE);
+        }else if(payKey.equalsIgnoreCase("company")){
+            relativeLayoutUser.setVisibility(View.GONE);
+            relativeLayoutCompany.setVisibility(View.VISIBLE);
+        }
 
 
         mybuilder.show();
@@ -381,6 +399,87 @@ public class SettingsActivity extends BaseActivity {
             }
         });
     }
+
+
+
+
+    private void callAPIUSER(String witch) {
+        final ProgressDialog progressDialog = new ProgressDialog(SettingsActivity.this);
+        progressDialog.setMessage("Please wait");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        RequestParams params = new RequestParams();
+
+        params.add("key", ""+witch);
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        String token = Constant.GetSharedPreferences(SettingsActivity.this, Constant.ACCESS_TOKEN);
+        client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "user/addtionalusercompany", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                progressDialog.dismiss();
+
+                Log.e(TAG, "CreateInvoicedata "+ response);
+                try {
+                    Log.e("Create Invoicedata", response);
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    String message = jsonObject.getString("message");
+                    if (status.equalsIgnoreCase("true")) {
+
+                        Constant.SuccessToast(SettingsActivity.this, message);
+
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK , intent);
+                                finish();
+                            }
+                        }, 500);
+
+                    }else{
+                        Constant.ErrorToast(SettingsActivity.this, message);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                progressDialog.dismiss();
+
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String status = jsonObject.getString("status");
+                        String message = jsonObject.getString("message");
+                        if (status.equals("1")) {
+                            // Constant.ErrorToast(SubscribeActivity.this, message);
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    //Constant.ErrorToast(PayPalActivity.this, "Something went wrong, try again!");
+                }
+            }
+        });
+    }
+
 
 
 

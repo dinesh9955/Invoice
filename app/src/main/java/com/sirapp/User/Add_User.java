@@ -52,6 +52,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
+import com.sirapp.Settings.SettingsActivity;
 import com.sirapp.Utils.Utility;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
@@ -564,6 +565,15 @@ public class Add_User extends BaseFragment {
             }
 
 
+
+
+            if (requestCode == 41) {
+                if (resultCode == Activity.RESULT_OK) {
+                    add_user();
+                }
+            }
+
+
         }
 
         private void dispatchTakePictureIntent() {
@@ -807,11 +817,13 @@ public class Add_User extends BaseFragment {
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent intent = new Intent(getActivity(), GoProActivity.class);
-                                            startActivity(intent);
+                                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                                            intent.putExtra("key", "user");
+                                            startActivityForResult(intent, 41);
                                         }
                                     }, 1000);
                                 }
+
                             }else{
 
                             }

@@ -47,8 +47,7 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden|adjustPan"
         tools:replace="android:supportsRtl,icon"
-        tools:targetApi="n"
-        >
+        tools:targetApi="n">
 
 
 

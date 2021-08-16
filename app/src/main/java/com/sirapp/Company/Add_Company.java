@@ -60,6 +60,7 @@ import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
 import com.sirapp.BuildConfig;
 import com.sirapp.R;
+import com.sirapp.Settings.SettingsActivity;
 import com.sirapp.Utils.Utility;
 import com.sirapp.API.SavePref;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -474,7 +475,14 @@ public class Add_Company extends BaseFragment {
 
             }
 
+        }
+
+
+        if (requestCode == 42) {
+            if (resultCode == Activity.RESULT_OK) {
+                addcompany();
             }
+        }
 
 
     }
@@ -716,7 +724,7 @@ public class Add_Company extends BaseFragment {
                                 public void run() {
                                     Intent intent = new Intent(getContext(), Companies_Activity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                   startActivity(intent);
+                                    startActivity(intent);
 
                                 }
                             },1000);
@@ -734,8 +742,9 @@ public class Add_Company extends BaseFragment {
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Intent intent = new Intent(getActivity(), GoProActivity.class);
-                                            startActivity(intent);
+                                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                                            intent.putExtra("key", "company");
+                                            startActivityForResult(intent, 42);
                                         }
                                     }, 1000);
                                 }
