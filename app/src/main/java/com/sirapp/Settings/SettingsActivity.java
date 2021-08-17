@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
@@ -32,6 +33,8 @@ import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.R;
+import com.sirapp.SignupSignin.SignupSubscriptionActivity;
+import com.sirapp.Utils.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -133,7 +136,6 @@ public class SettingsActivity extends BaseActivity {
                 payKey = "item";
                 upgradePackage();
             }
-
         }
 
 
@@ -158,6 +160,8 @@ public class SettingsActivity extends BaseActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 String dateCurrent = sdf.format(myCalendar.getTime());
 
+                String json22 = new Gson().toJson(details);
+                Utility.generateNoteOnSD(SettingsActivity.this , "settings_pro.txt", ""+json22.toString());
 
 
                 if(payKey.equalsIgnoreCase("user")){
@@ -338,6 +342,11 @@ public class SettingsActivity extends BaseActivity {
                 relativeLayoutMonthly.setVisibility(View.GONE);
                 relativeLayoutYearly.setVisibility(View.VISIBLE);
             }
+        }else{
+            relativeLayoutUser.setVisibility(View.VISIBLE);
+            relativeLayoutCompany.setVisibility(View.VISIBLE);
+            relativeLayoutMonthly.setVisibility(View.GONE);
+            relativeLayoutYearly.setVisibility(View.GONE);
         }
 
 

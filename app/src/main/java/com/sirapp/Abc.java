@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ShareCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Pair;
@@ -51,6 +52,7 @@ import com.google.gson.Gson;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -84,6 +86,8 @@ import com.sirapp.Utils.Utility;
 //import net.roganjosh.mailcraft.ComposeActivity;
 
 import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.util.ByteArrayBuffer;
 import okhttp3.ResponseBody;
@@ -112,19 +116,19 @@ public class Abc extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                Uri uri = Uri.parse("content://com.sirapp/file:///android_asset/po.html");
-
-                String string = "<table border='1' align='center'><tr style='color:blue'><th>Day</th><th>Date</th><th>Start Time</th><th>End Time</th><th>Total Time</th></tr><tr><td align='center'>Sunday</td><td align='center'>19/07/2011</td><td align='center'>13:00</td><td align='center'>19:00</td><td align='center'>06:00</td></tr></table>";
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("*/*");
-
-                intent.putExtra(Intent.EXTRA_SUBJECT, getText(R.string.app_name));
-                intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(string));
-
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.putExtra(Intent.EXTRA_STREAM, uri);
-
-                startActivity(intent);
+//                Uri uri = Uri.parse("content://com.sirapp/file:///android_asset/po.html");
+//
+//                String string = "<table border='1' align='center'><tr style='color:blue'><th>Day</th><th>Date</th><th>Start Time</th><th>End Time</th><th>Total Time</th></tr><tr><td align='center'>Sunday</td><td align='center'>19/07/2011</td><td align='center'>13:00</td><td align='center'>19:00</td><td align='center'>06:00</td></tr></table>";
+//                Intent intent = new Intent(Intent.ACTION_SEND);
+//                intent.setType("*/*");
+//
+//                intent.putExtra(Intent.EXTRA_SUBJECT, getText(R.string.app_name));
+//                intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(string));
+//
+//                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                intent.putExtra(Intent.EXTRA_STREAM, uri);
+//
+//                startActivity(intent);
 
 
 //                Intent sendIntent = new Intent(Intent.ACTION_SEND);
@@ -139,7 +143,85 @@ public class Abc extends BaseActivity {
 //                onemonth, onemonth_add, oneyear, oneyear_add
 
 
+                String html = "<html><body><b>bold</b><u>underline</u></body></html>";
+//                Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
+//                intent.setType("text/html");
+//                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+//                intent.putExtra(Intent.EXTRA_TEXT,
+//                        Html.fromHtml(html));
+//                startActivity(Intent.createChooser(intent, "Send Email"));
+
+
+
+//                String fileName = "image1.jpg";//Name of an image
+//                String externalStorageDirectory = Environment.getExternalStorageDirectory().toString();
+//                String myDir = externalStorageDirectory + "/"; // the file will be in saved_images
+//                Uri uri = Uri.parse("file:///" + myDir + fileName);
+//                Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+//                shareIntent.setType("text/html");
+//                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Test Mail");
+//                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Launcher");
+//                shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+//                startActivity(Intent.createChooser(shareIntent, "Share Deal"));
+
+//                ShareCompat.IntentBuilder.from(Abc.this)
+//                        .setType("text/html")
+//                        .setChooserTitle("Share URL")
+//                        .setText(Html.fromHtml(html))
+//                        .startChooser();
+
+
+//                String body = "<!DOCTYPE html><html><body><a href=\"http://www.w3schools.com\" target=\"_blank\">Visit W3Schools.com!</a></body></html>";
+//
+//                ShareCompat.IntentBuilder.from(Abc.this)
+//                        //.setType("message/rfc822")
+//                        .setType("text/html")
+//                        .setSubject("test")
+//                        .setHtmlText(body)
+//                        .setChooserTitle("Send Email")
+//                        .startChooser();
+
+                JSONObject obj = new JSONObject();
+                try {
+                    obj.put("id", "3");
+                    obj.put("name", "NAME OF STUDENT");
+                    obj.put("year", "3rd");
+                    obj.put("curriculum", "Arts");
+                    obj.put("birthday", "5/5/1993");
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+
+
+                generateNoteOnSD(Abc.this , "info.txt", ""+obj.toString());
+
             }
         });
+
+
+
+
+
     }
+
+
+    public void generateNoteOnSD(Context context, String sFileName, String sBody) {
+        try {
+            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, sFileName);
+            FileWriter writer = new FileWriter(gpxfile);
+            writer.append(sBody);
+            writer.flush();
+            writer.close();
+            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

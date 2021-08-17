@@ -443,7 +443,6 @@ public class Add_Services extends BaseFragment {
 
     public void categoriesget()
     {
-
         String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());

@@ -860,6 +860,8 @@ public class Add_Company extends BaseFragment {
         }
     }
 
+
+
     private boolean isEnter() {
 
         boolean isEntered = false;

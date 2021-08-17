@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -26,6 +27,7 @@ import com.sirapp.R;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.*;
@@ -957,4 +959,24 @@ public class Utility {
                 .placeholder(R.drawable.app_icon)
                 .into(image);
     }
+
+
+
+    public static void generateNoteOnSD(Context context, String sFileName, String sBody) {
+        try {
+            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, sFileName);
+            FileWriter writer = new FileWriter(gpxfile);
+            writer.append(sBody);
+            writer.flush();
+            writer.close();
+            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

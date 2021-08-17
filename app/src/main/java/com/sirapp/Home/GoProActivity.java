@@ -29,6 +29,7 @@ import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.R;
+import com.sirapp.Utils.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -153,6 +154,10 @@ public class GoProActivity extends BaseActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 String dateCurrent = sdf.format(myCalendar.getTime());
 
+
+                String json22 = new Gson().toJson(details);
+
+                Utility.generateNoteOnSD(GoProActivity.this , "go_pro.txt", ""+json22.toString());
 
                 callAPI(productID, orderID, dateCurrent);
 

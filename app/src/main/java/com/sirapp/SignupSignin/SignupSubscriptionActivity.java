@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
@@ -29,6 +30,7 @@ import com.sirapp.Base.BaseActivity;
 import com.sirapp.Home.GoProActivity;
 import com.sirapp.Home.Home_Activity;
 import com.sirapp.R;
+import com.sirapp.Utils.Utility;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -135,6 +137,9 @@ public class SignupSubscriptionActivity extends BaseActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 String dateCurrent = sdf.format(myCalendar.getTime());
 
+                String json22 = new Gson().toJson(details);
+
+                Utility.generateNoteOnSD(SignupSubscriptionActivity.this , "signup_pro.txt", ""+json22.toString());
 
                 callAPI(productId, orderID, dateCurrent);
 
