@@ -59,6 +59,7 @@ import com.sirapp.ImageResource.FileCompressor;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
 import com.sirapp.BuildConfig;
+import com.sirapp.Model.Company_list;
 import com.sirapp.R;
 import com.sirapp.Settings.SettingsActivity;
 import com.sirapp.Utils.Utility;
@@ -88,6 +89,8 @@ public class Add_Company extends BaseFragment {
 
 
     private static final String TAG = "Add_Company";
+
+    int companyList = 0;
 
     public Add_Company() {
         // Required empty public constructor
@@ -138,6 +141,7 @@ public class Add_Company extends BaseFragment {
         DefaultCurrencies();
         setListeners();
         setFonts();
+        companyget();
         mCompressor = new FileCompressor(getActivity());
 
 
@@ -287,10 +291,21 @@ public class Add_Company extends BaseFragment {
                 startActivity(intent);*/
             }
         });
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addcompany();
+                if(companyList == 0){
+                    addcompany();
+                }else{
+                    if(pref.getCompany().equalsIgnoreCase("company")){
+                        addcompany();
+                    }else{
+                        Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                        intent.putExtra("key", "company");
+                        startActivityForResult(intent, 42);
+                    }
+                }
             }
         });
 
@@ -449,6 +464,59 @@ public class Add_Company extends BaseFragment {
         getActivity().startActivityForResult(pickPhoto, GALLARY_aCTION_PICK_CODE);
     }
 
+
+
+    public void companyget()
+    {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
+        String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
+
+        Log.e("access token",token);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token",token);
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"company/listing", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                String response = new String(responseBody);
+                Log.e("responsecompany",response);
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true"))
+                    {
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        JSONArray company = data.getJSONArray("company");
+                        companyList = company.length();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if(responseBody!=null){
+                    String response = new String(responseBody);
+                }
+                else {
+                }
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
+
+            }
+        });
+    }
+
+
+
     @Override
     public  void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -480,7 +548,7 @@ public class Add_Company extends BaseFragment {
 
         if (requestCode == 42) {
             if (resultCode == Activity.RESULT_OK) {
-                addcompany();
+               // addcompany();
             }
         }
 
@@ -717,6 +785,8 @@ public class Add_Company extends BaseFragment {
                             params2.putString("event_name", "My Companies");
                             firebaseAnalytics.logEvent("companies_addnew", params2);
 
+                            pref.setCompany("");
+
                             Constant.SuccessToast(getActivity(), getString(R.string.dialog_CompanyCreatedSuccessfully));
 
                             new Handler().postDelayed(new Runnable() {
@@ -738,16 +808,16 @@ public class Add_Company extends BaseFragment {
                             if( jsonObject.has("code")){
                                 String code = jsonObject.getString("code");
 
-                                if(code.equalsIgnoreCase("subscription")){
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                                            intent.putExtra("key", "company");
-                                            startActivityForResult(intent, 42);
-                                        }
-                                    }, 1000);
-                                }
+//                                if(code.equalsIgnoreCase("subscription")){
+//                                    new Handler().postDelayed(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
+//                                            intent.putExtra("key", "company");
+//                                            startActivityForResult(intent, 42);
+//                                        }
+//                                    }, 1000);
+//                                }
                             }
                         }
 

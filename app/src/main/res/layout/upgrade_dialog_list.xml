@@ -137,4 +137,84 @@
 
     </RelativeLayout>
 
+
+
+    <RelativeLayout
+        android:id="@+id/relaive333"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="60dp"
+        android:layout_below="@+id/relaive222"
+        android:layout_marginTop="@dimen/_10sdp"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_UpgradePlanMonthly"
+            android:id="@+id/text_setting3"
+            android:textColor="@color/fragmentfont"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:textStyle="normal"
+            android:layout_toRightOf="@+id/imageView3"
+            />
+
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/radio_uncheck"
+            android:tint="@color/darkblue"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relaive444"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="60dp"
+        android:layout_below="@+id/relaive333"
+        android:layout_marginTop="@dimen/_10sdp"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_UpgradePlanYearly"
+            android:id="@+id/text_setting4"
+            android:textColor="@color/fragmentfont"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:textStyle="normal"
+            android:layout_toRightOf="@+id/imageView4"
+            />
+
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/radio_uncheck"
+            android:tint="@color/darkblue"/>
+
+    </RelativeLayout>
+
+
 </RelativeLayout>

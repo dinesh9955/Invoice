@@ -120,11 +120,17 @@ public class SettingsActivity extends BaseActivity {
 
 
         if(getIntent().getExtras() != null){
-            if(getIntent().getExtras().getString("key").equalsIgnoreCase("user")){
+            if(getIntent().getExtras().getString("key").equalsIgnoreCase("user")) {
                 payKey = "user";
                 upgradePackage();
-            }else{
+            }else if(getIntent().getExtras().getString("key").equalsIgnoreCase("company")){
                 payKey = "company";
+                upgradePackage();
+            }else if(getIntent().getExtras().getString("key").equalsIgnoreCase("product")){
+                payKey = "product";
+                upgradePackage();
+            }else if(getIntent().getExtras().getString("key").equalsIgnoreCase("item")){
+                payKey = "item";
                 upgradePackage();
             }
 
@@ -234,11 +240,14 @@ public class SettingsActivity extends BaseActivity {
 
         ImageView imageView = (ImageView) mybuilder.findViewById(R.id.imageView);
         ImageView imageView2 = (ImageView) mybuilder.findViewById(R.id.imageView2);
+        ImageView imageView3 = (ImageView) mybuilder.findViewById(R.id.imageView3);
+        ImageView imageView4 = (ImageView) mybuilder.findViewById(R.id.imageView4);
 
         RelativeLayout relativeLayoutUser = mybuilder.findViewById(R.id.relaive111);
         RelativeLayout relativeLayoutCompany = mybuilder.findViewById(R.id.relaive222);
 
-
+        RelativeLayout relativeLayoutMonthly = mybuilder.findViewById(R.id.relaive333);
+        RelativeLayout relativeLayoutYearly = mybuilder.findViewById(R.id.relaive444);
 
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -246,6 +255,8 @@ public class SettingsActivity extends BaseActivity {
             public void onClick(View v) {
                     imageView.setImageResource(R.drawable.radio_check);
                     imageView2.setImageResource(R.drawable.radio_uncheck);
+                    imageView3.setImageResource(R.drawable.radio_uncheck);
+                    imageView4.setImageResource(R.drawable.radio_uncheck);
                     imageClickID = 1;
             }
         });
@@ -255,7 +266,31 @@ public class SettingsActivity extends BaseActivity {
             public void onClick(View v) {
                 imageView.setImageResource(R.drawable.radio_uncheck);
                 imageView2.setImageResource(R.drawable.radio_check);
+                imageView3.setImageResource(R.drawable.radio_uncheck);
+                imageView4.setImageResource(R.drawable.radio_uncheck);
                 imageClickID = 2;
+            }
+        });
+
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.setImageResource(R.drawable.radio_uncheck);
+                imageView2.setImageResource(R.drawable.radio_uncheck);
+                imageView3.setImageResource(R.drawable.radio_check);
+                imageView4.setImageResource(R.drawable.radio_uncheck);
+                imageClickID = 3;
+            }
+        });
+
+        imageView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.setImageResource(R.drawable.radio_uncheck);
+                imageView2.setImageResource(R.drawable.radio_uncheck);
+                imageView3.setImageResource(R.drawable.radio_uncheck);
+                imageView4.setImageResource(R.drawable.radio_check);
+                imageClickID = 4;
             }
         });
 
@@ -275,6 +310,10 @@ public class SettingsActivity extends BaseActivity {
                     bp.purchase(SettingsActivity.this, "com.sir.oneuser");
                 }else if(imageClickID == 2){
                     bp.purchase(SettingsActivity.this, "com.sir.onecompany");
+                }else if(imageClickID == 3){
+                    bp.purchase(SettingsActivity.this, "com.sir.monthadditional");
+                }else if(imageClickID == 4){
+                    bp.purchase(SettingsActivity.this, "com.sir.oneyearadditions");
                 }else{
                     Constant.ErrorToast(SettingsActivity.this , getString(R.string.setting_SelectPlan));
                 }
@@ -282,12 +321,23 @@ public class SettingsActivity extends BaseActivity {
             }
         });
 
-        if(payKey.equalsIgnoreCase("user")){
+
+        if(payKey.equalsIgnoreCase("user") || payKey.equalsIgnoreCase("company")){
             relativeLayoutUser.setVisibility(View.VISIBLE);
-            relativeLayoutCompany.setVisibility(View.GONE);
-        }else if(payKey.equalsIgnoreCase("company")){
-            relativeLayoutUser.setVisibility(View.GONE);
             relativeLayoutCompany.setVisibility(View.VISIBLE);
+            relativeLayoutMonthly.setVisibility(View.GONE);
+            relativeLayoutYearly.setVisibility(View.GONE);
+        }else if(payKey.equalsIgnoreCase("product") || payKey.equalsIgnoreCase("item")){
+            relativeLayoutUser.setVisibility(View.GONE);
+            relativeLayoutCompany.setVisibility(View.GONE);
+            if(pref.getSubsType().equalsIgnoreCase("onemonth")){
+                relativeLayoutMonthly.setVisibility(View.VISIBLE);
+                relativeLayoutYearly.setVisibility(View.GONE);
+            }
+            if(pref.getSubsType().equalsIgnoreCase("oneyear")){
+                relativeLayoutMonthly.setVisibility(View.GONE);
+                relativeLayoutYearly.setVisibility(View.VISIBLE);
+            }
         }
 
 
@@ -310,10 +360,10 @@ public class SettingsActivity extends BaseActivity {
         RequestParams params = new RequestParams();
 
 
-        if(imageClickID == 1){
-            params.add("subscription_type", "oneuser");
-        } else if(imageClickID == 2){
-            params.add("subscription_type", "onecompany");
+        if(imageClickID == 3){
+            params.add("subscription_type", "onemonth_add");
+        } else if(imageClickID == 4){
+            params.add("subscription_type", "oneyear_add");
         } else {
             params.add("subscription_type", "restore");
         }
@@ -352,15 +402,25 @@ public class SettingsActivity extends BaseActivity {
                     if (status.equalsIgnoreCase("true")) {
                         if(witch.equalsIgnoreCase("1")){
                             Constant.SuccessToast(SettingsActivity.this, message);
+//                            pref.setSubsType("");
                         }else if(witch.equalsIgnoreCase("2")){
                             Constant.SuccessToast(SettingsActivity.this, "Restored successfully.");
                         }
 
+
+
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-//                                Intent intent = new Intent();
-//                                setResult(RESULT_OK , intent);
+                                if(payKey.equalsIgnoreCase("product")){
+                                    pref.setProduct(payKey);
+                                }
+                                if(payKey.equalsIgnoreCase("item")){
+                                    pref.setItem(payKey);
+                                }
+
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK , intent);
                                 finish();
                             }
                         }, 500);
@@ -439,6 +499,13 @@ public class SettingsActivity extends BaseActivity {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                if(payKey.equalsIgnoreCase("user")){
+                                    pref.setUser(payKey);
+                                }
+                                if(payKey.equalsIgnoreCase("item")){
+                                    pref.setCompany(payKey);
+                                }
+
                                 Intent intent = new Intent();
                                 setResult(RESULT_OK , intent);
                                 finish();

@@ -36,6 +36,7 @@ import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
 import com.sirapp.Home.GoProActivity;
 import com.sirapp.R;
+import com.sirapp.Settings.SettingsActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -289,7 +290,13 @@ public class Add_Services extends BaseFragment {
         addservice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddService();
+                if(pref.getItem().equalsIgnoreCase("item")){
+                    AddService();
+                }else{
+                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                    intent.putExtra("key", "item");
+                    startActivityForResult(intent, 44);
+                }
             }
         });
 
@@ -607,7 +614,7 @@ public class Add_Services extends BaseFragment {
                                 Bundle params2 = new Bundle();
                                 params2.putString("event_name", "My Services");
                                 firebaseAnalytics.logEvent("service_addnew", params2);
-
+                                pref.setItem("");
                                 Constant.SuccessToast(getActivity(), getString(R.string.dialog_ItemAdded));
                                 new Handler().postDelayed(new Runnable() {
                                     @Override

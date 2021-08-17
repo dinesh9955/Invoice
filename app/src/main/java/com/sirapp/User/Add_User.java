@@ -403,7 +403,13 @@ public class Add_User extends BaseFragment {
         adduser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              add_user();
+                if(pref.getUser().equalsIgnoreCase("user")){
+                    add_user();
+                }else{
+                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                    intent.putExtra("key", "user");
+                    startActivityForResult(intent, 41);
+                }
             }
         });
 
@@ -569,7 +575,7 @@ public class Add_User extends BaseFragment {
 
             if (requestCode == 41) {
                 if (resultCode == Activity.RESULT_OK) {
-                    add_user();
+                   // add_user();
                 }
             }
 
@@ -801,6 +807,8 @@ public class Add_User extends BaseFragment {
                             params2.putString("event_name", "Add new User");
                             firebaseAnalytics.logEvent("user_addnew", params2);
 
+                            pref.setUser("");
+
                             Constant.SuccessToast(getActivity(), getString(R.string.dialog_UserAddedSuccessfully));
                             Intent intent = new Intent(getContext(), User_Activity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -813,16 +821,16 @@ public class Add_User extends BaseFragment {
                             if( jsonObject.has("code")){
                                 String code = jsonObject.getString("code");
 
-                                if(code.equalsIgnoreCase("subscription")){
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                                            intent.putExtra("key", "user");
-                                            startActivityForResult(intent, 41);
-                                        }
-                                    }, 1000);
-                                }
+//                                if(code.equalsIgnoreCase("subscription")){
+//                                    new Handler().postDelayed(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
+//                                            intent.putExtra("key", "user");
+//                                            startActivityForResult(intent, 41);
+//                                        }
+//                                    }, 1000);
+//                                }
 
                             }else{
 

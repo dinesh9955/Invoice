@@ -1411,4 +1411,85 @@ public class SavePref {
 
 
 
+	public void setUser(String string) {
+		// TODO Auto-generated method stub
+		editor.putString("setUser",string);
+		editor.commit();
+		Log.d(TAG, "setUser received");
+	}
+
+
+	public String getUser() {
+		// TODO Auto-generated method stub
+		String name = preferences.getString("setUser","");
+		Log.d(TAG, "setUser received "+name);
+		return name;
+	}
+
+
+	public void setCompany(String string) {
+		// TODO Auto-generated method stub
+		editor.putString("setCompany",string);
+		editor.commit();
+		Log.d(TAG, "setCompany received");
+	}
+
+
+	public String getCompany() {
+		// TODO Auto-generated method stub
+		String name = preferences.getString("setCompany","");
+		Log.d(TAG, "setCompany received "+name);
+		return name;
+	}
+
+
+	public void setProduct(String string) {
+		// TODO Auto-generated method stub
+		editor.putString("setProduct",string);
+		editor.commit();
+		Log.d(TAG, "setProduct received");
+	}
+
+
+	public String getProduct() {
+		// TODO Auto-generated method stub
+		String name = preferences.getString("setProduct","");
+		Log.d(TAG, "setProduct received "+name);
+		return name;
+	}
+
+
+
+	public void setItem(String string) {
+		// TODO Auto-generated method stub
+		editor.putString("setItem",string);
+		editor.commit();
+		Log.d(TAG, "setItem received");
+	}
+
+
+	public String getItem() {
+		// TODO Auto-generated method stub
+		String name = preferences.getString("setItem","");
+		Log.d(TAG, "setItem received "+name);
+		return name;
+	}
+
+
+
+	public void setSubsType(String string) {
+		// TODO Auto-generated method stub
+		editor.putString("setSubsType",string);
+		editor.commit();
+		Log.d(TAG, "setSubsType received");
+	}
+
+
+	public String getSubsType() {
+		// TODO Auto-generated method stub
+		String name = preferences.getString("setSubsType","");
+		Log.d(TAG, "setSubsType received "+name);
+		return name;
+	}
+
 }

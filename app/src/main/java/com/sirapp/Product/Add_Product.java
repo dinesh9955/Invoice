@@ -57,6 +57,7 @@ import com.sirapp.Adapter.Select_Warehouse_Adapter;
 import com.sirapp.Base.BaseFragment;
 import com.sirapp.BuildConfig;
 import com.sirapp.R;
+import com.sirapp.Settings.SettingsActivity;
 import com.sirapp.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -360,7 +361,13 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
         addproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddProduct();
+                if(pref.getProduct().equalsIgnoreCase("product")){
+                    AddProduct();
+                }else{
+                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                    intent.putExtra("key", "product");
+                    startActivityForResult(intent, 43);
+                }
             }
         });
 
@@ -842,7 +849,7 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                                 Bundle params2 = new Bundle();
                                 params2.putString("event_name", "My Products");
                                 firebaseAnalytics.logEvent("product_addnew", params2);
-
+                                pref.setProduct("");
                                 Constant.SuccessToast(getActivity(), getString(R.string.dialog_ProductAdded));
                                 new Handler().postDelayed(new Runnable() {
                                     @Override

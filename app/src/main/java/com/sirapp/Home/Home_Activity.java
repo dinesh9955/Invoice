@@ -29,6 +29,7 @@ import com.andrognito.flashbar.Flashbar;
 import com.andrognito.flashbar.anim.FlashAnim;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
@@ -49,6 +50,7 @@ import com.sirapp.Invoice.InvoiceActivity;
 import com.sirapp.Product.Product_Activity;
 import com.sirapp.Service.Service_Activity;
 import com.sirapp.Settings.OnlinePaymentGatewayActivity;
+import com.sirapp.Utils.Utility;
 import com.sirapp.Vendor.Vendor_Activity;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.R;
@@ -61,6 +63,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -208,6 +211,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 //        }
 
         COMPANYListingApi();
+        getSubscriptionApi();
     }
 
     @Override
@@ -1020,6 +1024,72 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         mAsync.execute();
 
     }
+
+
+
+    private void getSubscriptionApi() {
+
+        Utility.hideKeypad(Home_Activity.this);
+
+            RequestParams params = new RequestParams();
+            params.add("language", getLanguage());
+
+            String token = Constant.GetSharedPreferences(Home_Activity.this, Constant.ACCESS_TOKEN);
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+            client.addHeader("Access-Token", token);
+            params.add("language", ""+getLanguage());
+            client.post(AllSirApi.BASE_URL + "subscription/get", params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                      String response111 = new String(responseBody);
+                      Log.e(TAG, "addproductResp1 "+response111);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response111);
+                        String status = jsonObject.getString("status");
+                        if (status.equals("true")) {
+                            JSONObject jsonObjectdata = jsonObject.getJSONObject("data");
+                            JSONArray jsonArraySubscription = jsonObjectdata.getJSONArray("subscription");
+
+                            if(jsonArraySubscription.length() > 0){
+                                for(int i = 0 ; i < jsonArraySubscription.length() ; i++){
+                                    JSONObject jsonObjectVal = jsonArraySubscription.getJSONObject(i);
+                                    String subscription_type = jsonObjectVal.getString("subscription_type");
+                                    if(subscription_type.equalsIgnoreCase("oneyear")){
+                                        Log.e(TAG, "subscription_type1 "+subscription_type);
+                                        pref.setSubsType(subscription_type);
+                                        break;
+                                    }else{
+                                        if(subscription_type.equalsIgnoreCase("onemonth")){
+                                            Log.e(TAG, "subscription_type2 "+subscription_type);
+                                            pref.setSubsType(subscription_type);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }else{
+                                pref.setSubsType("");
+                            }
+                        }
+                    }catch (Exception e){
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    String response111 = new String(responseBody);
+                    Log.e("addproductResp2 ", response111);
+                    pref.setSubsType("");
+                }
+            });
+
+
+    }
+
+
 
 
     Boolean twice = false;
