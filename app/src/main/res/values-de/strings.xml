@@ -14,6 +14,8 @@
 
     <string name="invoice_SelectWarehouseForProduct">Lager auswählen (für Produkte)</string>
 
+    <string name="dialog_Restored_successfully">Erfolgreich wiederhergestellt</string>
+
     <string name="stock_Select_Product_2">Ausgewähltes Produkt<font color='#FF0000'>*</font></string>
     <string name="company_Company_Name_2">Name der Firma<font color='#FF0000'>*</font></string>
     <string name="company_Choose_Default_Currency_2">Wählen Sie die Standardwährung<font color='#FF0000'>*</font></string>

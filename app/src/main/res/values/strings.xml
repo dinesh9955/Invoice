@@ -1084,7 +1084,7 @@
     <string name="dialog_PleaseEnterSwiftBIC">Please Enter Swift BIC</string>
     <string name="dialog_Companyupdated">Company updated</string>
 
-
+    <string name="dialog_Restored_successfully">Restored successfully</string>
 
 
     <string-array name="faqQuestionArray">

@@ -310,17 +310,18 @@ public class SettingsActivity extends BaseActivity {
         txtSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(imageClickID == 1){
-                    bp.purchase(SettingsActivity.this, "com.sir.oneuser");
-                }else if(imageClickID == 2){
-                    bp.purchase(SettingsActivity.this, "com.sir.onecompany");
-                }else if(imageClickID == 3){
-                    bp.purchase(SettingsActivity.this, "com.sir.monthadditional");
-                }else if(imageClickID == 4){
-                    bp.purchase(SettingsActivity.this, "com.sir.oneyearadditions");
-                }else{
-                    Constant.ErrorToast(SettingsActivity.this , getString(R.string.setting_SelectPlan));
-                }
+//                if(imageClickID == 1){
+//                    bp.purchase(SettingsActivity.this, "com.sir.oneuser");
+//                }else if(imageClickID == 2){
+//                    bp.purchase(SettingsActivity.this, "com.sir.onecompany");
+//                }else if(imageClickID == 3){
+//                    bp.purchase(SettingsActivity.this, "com.sir.monthadditional");
+//                }else if(imageClickID == 4){
+//                    bp.purchase(SettingsActivity.this, "com.sir.oneyearadditions");
+//                }else{
+//                    Constant.ErrorToast(SettingsActivity.this , getString(R.string.setting_SelectPlan));
+//                }
+                bp.purchase(SettingsActivity.this, "android.test.purchased");
                 mybuilder.dismiss();
             }
         });
@@ -412,27 +413,29 @@ public class SettingsActivity extends BaseActivity {
                         if(witch.equalsIgnoreCase("1")){
                             Constant.SuccessToast(SettingsActivity.this, message);
 //                            pref.setSubsType("");
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if(payKey.equalsIgnoreCase("product")){
+                                        pref.setProduct(payKey);
+                                    }
+                                    if(payKey.equalsIgnoreCase("item")){
+                                        pref.setItem(payKey);
+                                    }
+
+                                    Intent intent = new Intent();
+                                    setResult(RESULT_OK , intent);
+                                    finish();
+                                }
+                            }, 500);
                         }else if(witch.equalsIgnoreCase("2")){
-                            Constant.SuccessToast(SettingsActivity.this, "Restored successfully.");
+                            Constant.SuccessToast(SettingsActivity.this, getString(R.string.dialog_Restored_successfully));
                         }
 
 
 
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                if(payKey.equalsIgnoreCase("product")){
-                                    pref.setProduct(payKey);
-                                }
-                                if(payKey.equalsIgnoreCase("item")){
-                                    pref.setItem(payKey);
-                                }
 
-                                Intent intent = new Intent();
-                                setResult(RESULT_OK , intent);
-                                finish();
-                            }
-                        }, 500);
 
                     }else{
                         Constant.ErrorToast(SettingsActivity.this, message);

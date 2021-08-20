@@ -102,15 +102,15 @@ public class GoProActivity extends BaseActivity {
         buttonUpgrade_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bp.purchase(GoProActivity.this, productID);
-               // upgradePackage();
+//                bp.purchase(GoProActivity.this, productID);
+                bp.purchase(GoProActivity.this, "android.test.purchased");
             }
         });
 
-        Calendar myCalendar = Calendar.getInstance();
-        String myFormat = "yyyy-MM-dd";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        String dateCurrent = sdf.format(myCalendar.getTime());
+//        Calendar myCalendar = Calendar.getInstance();
+//        String myFormat = "yyyy-MM-dd";
+//        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//        String dateCurrent = sdf.format(myCalendar.getTime());
 
 
         //callAPI(productID, "orderIDXYZ", dateCurrent);

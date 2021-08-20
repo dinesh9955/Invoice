@@ -14,6 +14,8 @@
 
     <string name="invoice_SelectWarehouseForProduct">Selecteer Magazijn (Voor Producten)</string>
 
+    <string name="dialog_Restored_successfully">Succesvol hersteld</string>
+
 
     <string name="stock_Select_Product_2">Selecteer product<font color='#FF0000'>*</font></string>
     <string name="company_Company_Name_2">Bedrijfsnaam<font color='#FF0000'>*</font></string>

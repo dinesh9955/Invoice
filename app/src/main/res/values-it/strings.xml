@@ -48,6 +48,8 @@
     <string name="stock_Select_Warehouse_2">Seleziona Magazzino<font color='#FF0000'>*</font></string>
     <string name="invoiceXDC10220_2">XDC 102-20<font color='#FF0000'>*</font></string>
 
+    <string name="dialog_Restored_successfully">Ripristinato con successo</string>
+
 
     <string name="home_lets">Cominciamo</string>
     <string name="home_AddyourBusiness">Aggiungi le informazioni sulla tua attività</string>

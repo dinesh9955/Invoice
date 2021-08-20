@@ -13,6 +13,7 @@
 
     <string name="invoice_SelectWarehouseForProduct">حدد المستودع (للمنتجات)</string>
 
+    <string name="dialog_Restored_successfully">تمت الاستعادة بنجاح</string>
 
     <string name="stock_Select_Product_2">حدد المنتج<font color='#FF0000'>*</font></string>
     <string name="company_Company_Name_2">اسم الشركة<font color='#FF0000'>*</font></string>

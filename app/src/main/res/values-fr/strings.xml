@@ -15,6 +15,8 @@
 
     <string name="invoice_SelectWarehouseForProduct">Sélectionnez l\'entrepôt (pour les produits)</string>
 
+    <string name="dialog_Restored_successfully">Restauré avec succès</string>
+
     <string name="stock_Select_Product_2">Sélectionner un produit<font color='#FF0000'>*</font></string>
     <string name="company_Company_Name_2">Nom de l\'entreprise<font color='#FF0000'>*</font></string>
     <string name="company_Choose_Default_Currency_2">Choisissez la devise par défaut<font color='#FF0000'>*</font></string>
