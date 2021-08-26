@@ -290,13 +290,7 @@ public class Add_Services extends BaseFragment {
         addservice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(pref.getItem().equalsIgnoreCase("item")){
-                    AddService();
-                }else{
-                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                    intent.putExtra("key", "item");
-                    startActivityForResult(intent, 44);
-                }
+                AddService();
             }
         });
 
@@ -538,24 +532,24 @@ public class Add_Services extends BaseFragment {
             Constant.ErrorToast(getActivity(),getString(R.string.dialog_Item_category_required));
         }
         else {
+//            if(pref.getItem().equalsIgnoreCase("item")){
+                avi.smoothToShow();
+                avibackground.setVisibility(View.VISIBLE);
+                RequestParams params = new RequestParams();
+                params.add("name",pname);
+                params.add("price",price);
+                params.add("description",pdesc);
+                params.add("company_id",selectedCompanyId);
+                params.add("is_taxable",selectedTaxable);
+                params.add("product_type","SERVICE");
+                // params.add("weight_class_id",selectedMeasurementunit);
 
-            avi.smoothToShow();
-            avibackground.setVisibility(View.VISIBLE);
-            RequestParams params = new RequestParams();
-            params.add("name",pname);
-            params.add("price",price);
-            params.add("description",pdesc);
-            params.add("company_id",selectedCompanyId);
-            params.add("is_taxable",selectedTaxable);
-            params.add("product_type","SERVICE");
-           // params.add("weight_class_id",selectedMeasurementunit);
-
-            if (selectedMeasuremetnId.equals("19")) {
-                params.add("weight_class_id", selectedMeasuremetnId);
-                params.add("other_weight_unit", otherunitstr);
-            }else {
-                params.add("weight_class_id", selectedMeasuremetnId);
-            }
+                if (selectedMeasuremetnId.equals("19")) {
+                    params.add("weight_class_id", selectedMeasuremetnId);
+                    params.add("other_weight_unit", otherunitstr);
+                }else {
+                    params.add("weight_class_id", selectedMeasuremetnId);
+                }
 
 //            //params.add("weight",pweight);
 //            if (othercat.isEmpty()){
@@ -568,122 +562,129 @@ public class Add_Services extends BaseFragment {
 //                params.add("category_id",selectedCategoryId);
 //            }
 
-            if (!selectedCategoryId.equals("")) {
-                params.add("category_id", selectedCategoryId);
-            }
-
-            if (selectedCategoryId.equals("")) {
-                if (!othercat.isEmpty()) {
-                    params.add("custom_category", othercat);
+                if (!selectedCategoryId.equals("")) {
+                    params.add("category_id", selectedCategoryId);
                 }
-            }
 
-            Gson gson = new Gson();
-            String json = gson.toJson(params);
+                if (selectedCategoryId.equals("")) {
+                    if (!othercat.isEmpty()) {
+                        params.add("custom_category", othercat);
+                    }
+                }
 
-            Log.e(TAG, "jsonAA "+json);
+                Gson gson = new Gson();
+                String json = gson.toJson(params);
 
-            Log.e(TAG, "paramss"+params);
+                Log.e(TAG, "jsonAA "+json);
 
-            String token = Constant.GetSharedPreferences(getContext(),Constant.ACCESS_TOKEN);
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-            client.addHeader("Access-Token",token);
-            params.add("language", ""+getLanguage());
-            client.post(AllSirApi.BASE_URL + "product/add", params, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    avi.smoothToHide();
-                    avibackground.setVisibility(View.GONE);
+                Log.e(TAG, "paramss"+params);
 
-                    if(responseBody.length == 0){
-                        //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
-                    }else{
-                        String response = new String(responseBody);
-                        Log.e("addserviceResp",response);
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            String status = jsonObject.getString("status");
-                            if (status.equals("true")){
+                String token = Constant.GetSharedPreferences(getContext(),Constant.ACCESS_TOKEN);
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+                client.addHeader("Access-Token",token);
+                params.add("language", ""+getLanguage());
+                client.post(AllSirApi.BASE_URL + "product/add", params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        avi.smoothToHide();
+                        avibackground.setVisibility(View.GONE);
 
-                                Map<String, Object> eventValue = new HashMap<String, Object>();
-                                eventValue.put(AFInAppEventParameterName.PARAM_1, "service_addnew");
-                                AppsFlyerLib.getInstance().trackEvent(getActivity(), "service_addnew", eventValue);
+                        if(responseBody.length == 0){
+                            //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                        }else{
+                            String response = new String(responseBody);
+                            Log.e("addserviceResp",response);
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                String status = jsonObject.getString("status");
+                                if (status.equals("true")){
 
-                                Bundle params2 = new Bundle();
-                                params2.putString("event_name", "My Services");
-                                firebaseAnalytics.logEvent("service_addnew", params2);
-                                pref.setItem("");
-                                Constant.SuccessToast(getActivity(), getString(R.string.dialog_ItemAdded));
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent intent = new Intent(getContext(),Service_Activity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
+                                    Map<String, Object> eventValue = new HashMap<String, Object>();
+                                    eventValue.put(AFInAppEventParameterName.PARAM_1, "service_addnew");
+                                    AppsFlyerLib.getInstance().trackEvent(getActivity(), "service_addnew", eventValue);
+
+                                    Bundle params2 = new Bundle();
+                                    params2.putString("event_name", "My Services");
+                                    firebaseAnalytics.logEvent("service_addnew", params2);
+                                    pref.setItem("");
+                                    Constant.SuccessToast(getActivity(), getString(R.string.dialog_ItemAdded));
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(getContext(),Service_Activity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                        }
+                                    },1000);
+
+                                }
+
+                                if (status.equals("false")){
+
+                                    if(jsonObject.has("error")){
+                                        Constant.ErrorToast(getActivity(), jsonObject.getString("error"));
                                     }
-                                },1000);
 
-                            }
-
-                            if (status.equals("false")){
-
-                                if(jsonObject.has("error")){
-                                    Constant.ErrorToast(getActivity(), jsonObject.getString("error"));
-                                }
-
-                                if(jsonObject.has("message")){
-                                    Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
-                                }
+                                    if(jsonObject.has("message")){
+                                        Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                                    }
 
 
-                                if( jsonObject.has("code")){
-                                    String code = jsonObject.getString("code");
+                                    if( jsonObject.has("code")){
+                                        String code = jsonObject.getString("code");
 
-                                    if(code.equalsIgnoreCase("subscription")){
-                                        new Handler().postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Intent intent = new Intent(getActivity(), GoProActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        }, 1000);
+                                        if(code.equalsIgnoreCase("subscription")){
+                                            new Handler().postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Intent intent = new Intent(getActivity(), GoProActivity.class);
+                                                    startActivity(intent);
+                                                }
+                                            }, 1000);
+                                        }
                                     }
                                 }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
+
                     }
 
-                }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        avi.smoothToHide();
+                        avibackground.setVisibility(View.GONE);
+                        if(responseBody!=null) {
+                            String response = new String(responseBody);
+                            Log.e("addserviceRespF",response);
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                String status = jsonObject.getString("status");
+                                if (status.equals("false")){
 
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    avi.smoothToHide();
-                    avibackground.setVisibility(View.GONE);
-                    if(responseBody!=null) {
-                        String response = new String(responseBody);
-                        Log.e("addserviceRespF",response);
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            String status = jsonObject.getString("status");
-                            if (status.equals("false")){
+                                    Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
 
-                                Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
-
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
-                    else {
-                        //Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
-                    }
+                        else {
+                            //Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
+                        }
 
-                }
-            });
+                    }
+                });
+
+//            }else{
+//                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+//                intent.putExtra("key", "item");
+//                startActivityForResult(intent, 44);
+//            }
+
 
 
         }

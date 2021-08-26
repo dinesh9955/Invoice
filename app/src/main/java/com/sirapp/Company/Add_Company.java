@@ -295,17 +295,17 @@ public class Add_Company extends BaseFragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(companyList == 0){
+//                if(companyList == 0){
                     addcompany();
-                }else{
-                    if(pref.getCompany().equalsIgnoreCase("company")){
-                        addcompany();
-                    }else{
-                        Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                        intent.putExtra("key", "company");
-                        startActivityForResult(intent, 42);
-                    }
-                }
+//                }else{
+//                    if(pref.getCompany().equalsIgnoreCase("company")){
+//                        addcompany();
+//                    }else{
+//                        Intent intent = new Intent(getActivity(), SettingsActivity.class);
+//                        intent.putExtra("key", "company");
+//                        startActivityForResult(intent, 42);
+//                    }
+//                }
             }
         });
 
@@ -795,7 +795,6 @@ public class Add_Company extends BaseFragment {
                                     Intent intent = new Intent(getContext(), Companies_Activity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
-
                                 }
                             },1000);
                         }
@@ -808,16 +807,25 @@ public class Add_Company extends BaseFragment {
                             if( jsonObject.has("code")){
                                 String code = jsonObject.getString("code");
 
-//                                if(code.equalsIgnoreCase("subscription")){
-//                                    new Handler().postDelayed(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
-//                                            intent.putExtra("key", "company");
-//                                            startActivityForResult(intent, 42);
-//                                        }
-//                                    }, 1000);
-//                                }
+                                if(code.equalsIgnoreCase("subscription")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                if(jsonObject.getString("message").contains(" Extra Companies")){
+                                                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                                                    intent.putExtra("key", "company");
+                                                    startActivityForResult(intent, 42);
+                                                }else{
+                                                    Intent intent = new Intent(getActivity(), GoProActivity.class);
+                                                    startActivity(intent);
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }, 1000);
+                                }
                             }
                         }
 

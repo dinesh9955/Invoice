@@ -363,7 +363,8 @@
                     android:layout_centerHorizontal="true"
                     android:textSize="@dimen/_9sdp"
                     android:textColor="@color/darkgray"
-                    android:id="@+id/terms"/>
+                    android:id="@+id/terms"
+                    android:visibility="gone"/>
 
 
                 <LinearLayout
@@ -377,6 +378,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center_horizontal"
+                    android:visibility="gone"
                     >
 
                     <TextView

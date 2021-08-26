@@ -403,13 +403,13 @@ public class Add_User extends BaseFragment {
         adduser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(pref.getUser().equalsIgnoreCase("user")){
+//                if(pref.getUser().equalsIgnoreCase("user")){
                     add_user();
-                }else{
-                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                    intent.putExtra("key", "user");
-                    startActivityForResult(intent, 41);
-                }
+//                }else{
+//                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
+//                    intent.putExtra("key", "user");
+//                    startActivityForResult(intent, 41);
+//                }
             }
         });
 
@@ -821,16 +821,25 @@ public class Add_User extends BaseFragment {
                             if( jsonObject.has("code")){
                                 String code = jsonObject.getString("code");
 
-//                                if(code.equalsIgnoreCase("subscription")){
-//                                    new Handler().postDelayed(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
-//                                            intent.putExtra("key", "user");
-//                                            startActivityForResult(intent, 41);
-//                                        }
-//                                    }, 1000);
-//                                }
+                                if(code.equalsIgnoreCase("subscription")){
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                if(jsonObject.getString("message").contains(" Extra Users")){
+                                                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                                                    intent.putExtra("key", "user");
+                                                    startActivityForResult(intent, 41);
+                                                }else{
+                                                    Intent intent = new Intent(getActivity(), GoProActivity.class);
+                                                    startActivity(intent);
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }, 1000);
+                                }
 
                             }else{
 

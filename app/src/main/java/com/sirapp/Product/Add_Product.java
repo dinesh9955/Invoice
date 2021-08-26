@@ -56,6 +56,7 @@ import com.sirapp.API.AllSirApi;
 import com.sirapp.Adapter.Select_Warehouse_Adapter;
 import com.sirapp.Base.BaseFragment;
 import com.sirapp.BuildConfig;
+import com.sirapp.Model.Product_list;
 import com.sirapp.R;
 import com.sirapp.Settings.SettingsActivity;
 import com.sirapp.Utils.Utility;
@@ -80,7 +81,6 @@ import cz.msebera.android.httpclient.Header;
 import static android.content.Context.MODE_PRIVATE;
 
 public class Add_Product extends BaseFragment implements Select_Warehouse_Adapter.Callback {
-
 
     private static final int GALLARY_aCTION_PICK_CODE = 10;
     private static final int CAMERA_ACTION_PICK_CODE = 9;
@@ -129,6 +129,10 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
     String filepath = "";
     Uri image_uri;
     private AVLoadingIndicatorView avi;
+
+
+    int productCount = 0;
+
 
     public Add_Product() {
         // Required empty public constructor
@@ -361,13 +365,8 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
         addproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(pref.getProduct().equalsIgnoreCase("product")){
-                    AddProduct();
-                }else{
-                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                    intent.putExtra("key", "product");
-                    startActivityForResult(intent, 43);
-                }
+                Log.e(TAG, "productCount "+ productCount);
+                AddProduct();
             }
         });
 
@@ -606,7 +605,6 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
     }
 
     public void companyget() {
-
         final SharedPreferences preferences = getActivity().getSharedPreferences(Constant.PREF_BASE, MODE_PRIVATE);
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
@@ -645,6 +643,7 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                         if(company.length() == 1){
                             selectedCompanyId = cids.get(0);
                             selectcompany1.setText(cnames.get(0));
+                            productget(selectedCompanyId);
                         }
                     }
                 } catch (JSONException e) {
@@ -762,167 +761,323 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
         } else if (selectedCategoryId.equals("") && othercat.isEmpty()) {
             Constant.ErrorToast(getActivity(),getString(R.string.dialog_Product_category_required));
         } else {
+//
+//            if(productCount >= 4){
+//                if(pref.getProduct().equalsIgnoreCase("product")){
+//                    avi.smoothToShow();
+//                    avibackground.setVisibility(View.VISIBLE);
+//                    RequestParams params = new RequestParams();
+//                    params.add("name", pname);
+//                    params.add("price", price);
+//                    params.add("minimum", reorder);
+//
+//                    // params.add("weight",pweight);
+//                    params.add("description", pdesc);
+//                    params.add("company_id", selectedCompanyId);
+//                    params.add("is_taxable", selectedTaxable);
+//                    params.add("product_type", "PRODUCT");
+//                    if (selectedMeasuremetnId.equals("19")) {
+//                        params.add("weight_class_id", selectedMeasuremetnId);
+//                        params.add("other_weight_unit", otherunitstr);
+//                    }else {
+//                        params.add("weight_class_id", selectedMeasuremetnId);
+//                    }
+//
+//                    if (!selectedCategoryId.equals("")) {
+//                        params.add("category_id", selectedCategoryId);
+//                    }
+//
+//                    if (selectedCategoryId.equals("")) {
+//                        if (!othercat.isEmpty()) {
+//                            params.add("custom_category", othercat);
+//                        }
+//                    }
+//
+//                    if (fileimage != null) {
+//                        try {
+//                            params.put("image", fileimage);
+//                        } catch (FileNotFoundException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    Gson gson = new Gson();
+//                    String json = gson.toJson(params);
+//
+//                    Log.e(TAG, "jsonAA "+json);
+//
+//                    Log.e("paramss", String.valueOf(params));
+//
+//                    String token = Constant.GetSharedPreferences(getContext(), Constant.ACCESS_TOKEN);
+//                    AsyncHttpClient client = new AsyncHttpClient();
+//                    client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+//                    client.addHeader("Access-Token", token);
+//                    params.add("language", ""+getLanguage());
+//                    client.post(AllSirApi.BASE_URL + "product/add", params, new AsyncHttpResponseHandler() {
+//                        @Override
+//                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+//                            //  String response111 = new String(responseBody);
+//                            Log.e(TAG, "addproductResp1 "+responseBody.length);
+//                            Utility.hideKeypad(getActivity());
+//                            avi.smoothToHide();
+//                            avibackground.setVisibility(View.GONE);
+//
+//                            if(responseBody.length == 0){
+//                                // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+//                            }else{
+//                                String response = new String(responseBody);
+//                                Log.e("addproductResp", response);
+//                                try {
+//                                    JSONObject jsonObject = new JSONObject(response);
+//                                    String status = jsonObject.getString("status");
+//                                    if (status.equals("true")) {
+//
+//                                        Map<String, Object> eventValue = new HashMap<String, Object>();
+//                                        eventValue.put(AFInAppEventParameterName.PARAM_1, "product_addnew");
+//                                        AppsFlyerLib.getInstance().trackEvent(getActivity(), "product_addnew", eventValue);
+//
+//                                        Bundle params2 = new Bundle();
+//                                        params2.putString("event_name", "My Products");
+//                                        firebaseAnalytics.logEvent("product_addnew", params2);
+//                                        pref.setProduct("");
+//                                        Constant.SuccessToast(getActivity(), getString(R.string.dialog_ProductAdded));
+//                                        new Handler().postDelayed(new Runnable() {
+//                                            @Override
+//                                            public void run() {
+//                                                Intent intent = new Intent(getContext(), Product_Activity.class);
+//                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                                startActivity(intent);
+//                                            }
+//                                        }, 1000);
+//
+//                                    }
+//
+//                                    if (status.equals("false")) {
+//                                        if(jsonObject.has("error")){
+//                                            Constant.ErrorToast(getActivity(), jsonObject.getString("error"));
+//                                        }
+//
+//                                        if(jsonObject.has("message")){
+//                                            Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+//                                        }
+//
+//
+//                                        if( jsonObject.has("code")){
+//                                            String code = jsonObject.getString("code");
+//
+//                                            if(code.equalsIgnoreCase("subscription")){
+//                                                new Handler().postDelayed(new Runnable() {
+//                                                    @Override
+//                                                    public void run() {
+//                                                        Intent intent = new Intent(getActivity(), GoProActivity.class);
+//                                                        startActivity(intent);
+//                                                    }
+//                                                }, 1000);
+//                                            }
+//                                        }
+//                                    }
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//
+//
+//                        }
+//
+//                        @Override
+//                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+//                            String response111 = new String(responseBody);
+//                            Log.e("addproductResp2 ", response111);
+//                            Utility.hideKeypad(getActivity());
+//                            avi.smoothToHide();
+//                            avibackground.setVisibility(View.GONE);
+//                            if (responseBody != null) {
+//                                String response = new String(responseBody);
+//                                Log.e("addproductRespF", response);
+//                                try {
+//                                    JSONObject jsonObject = new JSONObject(response);
+//                                    String status = jsonObject.getString("status");
+//                                    if (status.equals("false")) {
+//
+//                                        Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+//
+//                                    }
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            } else {
+//                                //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+//                            }
+//
+//                        }
+//                    });
+//
+//                }else{
+//                    Intent intent = new Intent(getActivity(), SettingsActivity.class);
+//                    intent.putExtra("key", "product");
+//                    startActivityForResult(intent, 43);
+//                }
+//            }else{
+                avi.smoothToShow();
+                avibackground.setVisibility(View.VISIBLE);
+                RequestParams params = new RequestParams();
+                params.add("name", pname);
+                params.add("price", price);
+                params.add("minimum", reorder);
 
-
-            avi.smoothToShow();
-            avibackground.setVisibility(View.VISIBLE);
-            RequestParams params = new RequestParams();
-            params.add("name", pname);
-            params.add("price", price);
-            params.add("minimum", reorder);
-
-            // params.add("weight",pweight);
-            params.add("description", pdesc);
-            params.add("company_id", selectedCompanyId);
-            params.add("is_taxable", selectedTaxable);
-            params.add("product_type", "PRODUCT");
-            if (selectedMeasuremetnId.equals("19")) {
-                params.add("weight_class_id", selectedMeasuremetnId);
-                params.add("other_weight_unit", otherunitstr);
-            }else {
-                params.add("weight_class_id", selectedMeasuremetnId);
-            }
-
-
-//            if (othercat.isEmpty()) {
-//                params.add("category_id", selectedCategoryId);
-//            } else if (selectedCategoryId.equals("")) {
-//                params.add("category_name", othercat);
-//            } else {
-//                params.add("category_id", selectedCategoryId);
-//            }
-
-
-            if (!selectedCategoryId.equals("")) {
-                params.add("category_id", selectedCategoryId);
-            }
-
-            if (selectedCategoryId.equals("")) {
-                if (!othercat.isEmpty()) {
-                    params.add("custom_category", othercat);
+                // params.add("weight",pweight);
+                params.add("description", pdesc);
+                params.add("company_id", selectedCompanyId);
+                params.add("is_taxable", selectedTaxable);
+                params.add("product_type", "PRODUCT");
+                if (selectedMeasuremetnId.equals("19")) {
+                    params.add("weight_class_id", selectedMeasuremetnId);
+                    params.add("other_weight_unit", otherunitstr);
+                }else {
+                    params.add("weight_class_id", selectedMeasuremetnId);
                 }
-            }
 
-            if (fileimage != null) {
-                try {
-                    params.put("image", fileimage);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                if (!selectedCategoryId.equals("")) {
+                    params.add("category_id", selectedCategoryId);
                 }
-            }
 
-            Gson gson = new Gson();
-            String json = gson.toJson(params);
+                if (selectedCategoryId.equals("")) {
+                    if (!othercat.isEmpty()) {
+                        params.add("custom_category", othercat);
+                    }
+                }
 
-            Log.e(TAG, "jsonAA "+json);
+                if (fileimage != null) {
+                    try {
+                        params.put("image", fileimage);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
 
-            Log.e("paramss", String.valueOf(params));
+                Gson gson = new Gson();
+                String json = gson.toJson(params);
 
-            String token = Constant.GetSharedPreferences(getContext(), Constant.ACCESS_TOKEN);
-            AsyncHttpClient client = new AsyncHttpClient();
-            client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-            client.addHeader("Access-Token", token);
-            params.add("language", ""+getLanguage());
-            client.post(AllSirApi.BASE_URL + "product/add", params, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                  //  String response111 = new String(responseBody);
-                    Log.e(TAG, "addproductResp1 "+responseBody.length);
-                    Utility.hideKeypad(getActivity());
-                    avi.smoothToHide();
-                    avibackground.setVisibility(View.GONE);
+                Log.e(TAG, "jsonAA "+json);
 
-                    if(responseBody.length == 0){
-                       // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
-                    }else{
-                        String response = new String(responseBody);
-                        Log.e("addproductResp", response);
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            String status = jsonObject.getString("status");
-                            if (status.equals("true")) {
+                Log.e("paramss", String.valueOf(params));
 
-                                Map<String, Object> eventValue = new HashMap<String, Object>();
-                                eventValue.put(AFInAppEventParameterName.PARAM_1, "product_addnew");
-                                AppsFlyerLib.getInstance().trackEvent(getActivity(), "product_addnew", eventValue);
+                String token = Constant.GetSharedPreferences(getContext(), Constant.ACCESS_TOKEN);
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+                client.addHeader("Access-Token", token);
+                params.add("language", ""+getLanguage());
+                client.post(AllSirApi.BASE_URL + "product/add", params, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        //  String response111 = new String(responseBody);
+                        Log.e(TAG, "addproductResp1 "+responseBody.length);
+                        Utility.hideKeypad(getActivity());
+                        avi.smoothToHide();
+                        avibackground.setVisibility(View.GONE);
 
-                                Bundle params2 = new Bundle();
-                                params2.putString("event_name", "My Products");
-                                firebaseAnalytics.logEvent("product_addnew", params2);
-                                pref.setProduct("");
-                                Constant.SuccessToast(getActivity(), getString(R.string.dialog_ProductAdded));
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent intent = new Intent(getContext(), Product_Activity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
-                                    }
-                                }, 1000);
+                        if(responseBody.length == 0){
+                            // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                        }else{
+                            String response = new String(responseBody);
+                            Log.e("addproductResp", response);
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                String status = jsonObject.getString("status");
+                                if (status.equals("true")) {
 
-                            }
+                                    Map<String, Object> eventValue = new HashMap<String, Object>();
+                                    eventValue.put(AFInAppEventParameterName.PARAM_1, "product_addnew");
+                                    AppsFlyerLib.getInstance().trackEvent(getActivity(), "product_addnew", eventValue);
 
-                            if (status.equals("false")) {
-                                if(jsonObject.has("error")){
-                                    Constant.ErrorToast(getActivity(), jsonObject.getString("error"));
+                                    Bundle params2 = new Bundle();
+                                    params2.putString("event_name", "My Products");
+                                    firebaseAnalytics.logEvent("product_addnew", params2);
+                                    pref.setProduct("");
+                                    Constant.SuccessToast(getActivity(), getString(R.string.dialog_ProductAdded));
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Intent intent = new Intent(getContext(), Product_Activity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                        }
+                                    }, 1000);
+
                                 }
 
-                                if(jsonObject.has("message")){
+                                if (status.equals("false")) {
+                                    if(jsonObject.has("error")){
+                                        Constant.ErrorToast(getActivity(), jsonObject.getString("error"));
+                                    }
+
+                                    if(jsonObject.has("message")){
+                                        Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                                    }
+
+
+                                    if( jsonObject.has("code")){
+                                        String code = jsonObject.getString("code");
+
+                                        if(code.equalsIgnoreCase("subscription")){
+                                            new Handler().postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try {
+                                                        if(jsonObject.getString("message").contains("additional products")){
+                                                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                                                            intent.putExtra("key", "product");
+                                                            startActivityForResult(intent, 43);
+                                                        }else{
+                                                            Intent intent = new Intent(getActivity(), GoProActivity.class);
+                                                            startActivity(intent);
+                                                        }
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+
+                                                }
+                                            }, 1000);
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        String response111 = new String(responseBody);
+                        Log.e("addproductResp2 ", response111);
+                        Utility.hideKeypad(getActivity());
+                        avi.smoothToHide();
+                        avibackground.setVisibility(View.GONE);
+                        if (responseBody != null) {
+                            String response = new String(responseBody);
+                            Log.e("addproductRespF", response);
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                String status = jsonObject.getString("status");
+                                if (status.equals("false")) {
+
                                     Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+
                                 }
-
-
-                                if( jsonObject.has("code")){
-                                    String code = jsonObject.getString("code");
-
-                                    if(code.equalsIgnoreCase("subscription")){
-                                        new Handler().postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Intent intent = new Intent(getActivity(), GoProActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        }, 1000);
-                                    }
-                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        } else {
+                            //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                         }
+
                     }
-
-
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    String response111 = new String(responseBody);
-                    Log.e("addproductResp2 ", response111);
-                    Utility.hideKeypad(getActivity());
-                    avi.smoothToHide();
-                    avibackground.setVisibility(View.GONE);
-                    if (responseBody != null) {
-                        String response = new String(responseBody);
-                        Log.e("addproductRespF", response);
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            String status = jsonObject.getString("status");
-                            if (status.equals("false")) {
-
-                                Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
-
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
-                    }
-
-                }
-            });
-
-
+                });
+//            }
+//
         }
 
     }
@@ -1161,6 +1316,7 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                     mybuilder.dismiss();
                     selectcompany1.setText(cnames.get(i));
                     selectedCompanyId = cids.get(i);
+                    productget(selectedCompanyId);
                 }
             });
 
@@ -1195,6 +1351,58 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
 
 
     }
+
+
+
+
+
+    public void productget(String c_id)
+    {
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
+        RequestParams params = new RequestParams();
+        params.add("company_id",c_id);
+        String token = Constant.GetSharedPreferences(getActivity(),Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token",token);
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL+"product/getListingByCompany", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                String response = new String(responseBody);
+                Log.e("responseproduct",response);
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true"))
+                    {
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        String product_image_path = data.getString("product_image_path");
+                        JSONArray product = data.getJSONArray("product");
+                        productCount = product.length();
+                    }else{
+                        productCount = 0;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                productCount = 0;
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
+
 
 
 }
