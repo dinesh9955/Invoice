@@ -801,7 +801,7 @@ public class Add_Company extends BaseFragment {
 
                         if (status.equals("false"))
                         {
-                            Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
+                            Constant.ErrorToast(getActivity(), jsonObject.getString("message").replace("allow","allowed"));
 
 
                             if( jsonObject.has("code")){

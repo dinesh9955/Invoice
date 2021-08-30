@@ -283,7 +283,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
 
     //For Intent
-    String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "";
+
+    String company_id = "", company_name = "";
+    String  company_address = "", company_contact = "", company_email = "", company_website = "";
             String payment_bank_name = "", payment_currency = "",cheque_payable_to = ""  , payment_iban = "", payment_swift_bic = "",paypal_emailstr = "" ;
     String customer_name = "", customer_id = "", custoner_contact_name = "", customer_email = "", customer_contact = "", customer_address = "", customer_website = "", customer_phone_number = "";
     String invoice_no = "", invoice_due_date = "", invoice_date = "", credit_terms = "", reference_no = "";
@@ -677,6 +679,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                 selectedCompanyId = companyDto.getCompanyId();
                 Log.e("selectedCompanyId", selectedCompanyId);
 
+                company_id = companyDto.getCompanyId();
+                company_name = companyDto.getName();
+
                 // all mehodh get information-------
                 warehouse_list(selectedCompanyId);
                 customer_list(selectedCompanyId);
@@ -723,6 +728,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                 if(selectedTemplate != 0){
                     itemstxtTemplate.setText("Template "+selectedTemplate);
                 }
+
+
+
                 strnotes = invoiceDtoInvoice.getNotes();
                 ednotes.setText(Html.fromHtml(strnotes));
 
@@ -2355,6 +2363,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                     else {
                         Customer_list customer_lists = selected.get(0);
                         Log.e(TAG, "shippingfirstnameAA "+customer_lists.getShipping_firstname());
+                        Log.e(TAG, "selectedTemplateBBB "+selectedTemplate);
+                        Log.e(TAG, "companycolorBBB "+companycolor);
 
                         Intent intent = new Intent(ConvertToInvoiceActivity.this, EstimateToInvoiceWebview.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -2991,82 +3001,82 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         edduedate.setText(sdf.format(myCalendar.getTime()));
     }
 
-    public void companyget() {
-        avi.smoothToShow();
-        avibackground.setVisibility(View.VISIBLE);
-        cnames.clear();
-
-        cids.clear();
-        String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-        client.addHeader("Access-Token", token);
-        RequestParams params = new RequestParams();
-        params.add("language", ""+getLanguage());
-        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                avi.smoothToHide();
-                avibackground.setVisibility(View.GONE);
-                String response = new String(responseBody);
-                Log.e("responsecompany", response);
-
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String status = jsonObject.getString("status");
-                    if (status.equals("true")) {
-                        JSONObject data = jsonObject.getJSONObject("data");
-                        JSONArray company = data.getJSONArray("company");
-                        if (company.length() > 0) {
-                            for (int i = 0; i < company.length(); i++) {
-                                JSONObject item = company.getJSONObject(i);
-                                company_id = item.getString("company_id");
-                                company_name = item.getString("name");
-
-                                companycolor = item.getString("color");
-
-                                Log.e(TAG , "companycolor:: "+companycolor);
-
-                                cnames.add(company_name);
-                                cids.add(company_id);
-
-                            }
-                        }
-
-
-
-                        warehousePosition = wids.indexOf(selectwarehouseId);
-
-                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ConvertToInvoiceActivity.this, android.R.layout.simple_spinner_item, cnames);
-                        selectcompany.setAdapter(namesadapter);
-
-//                        selectwarehouse.setSelection(warehousePosition);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                avi.smoothToHide();
-                avibackground.setVisibility(View.GONE);
-                if (responseBody != null) {
-                    String response = new String(responseBody);
-                    Log.e("responsecompanyF", response);
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        String status = jsonObject.getString("status");
-                        if (status.equals("false")) {
-                            //Constant.ErrorToast(Home_Activity.this,jsonObject.getString("message"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-    }
+//    public void companyget() {
+//        avi.smoothToShow();
+//        avibackground.setVisibility(View.VISIBLE);
+//        cnames.clear();
+//
+//        cids.clear();
+//        String token = Constant.GetSharedPreferences(this, Constant.ACCESS_TOKEN);
+//        AsyncHttpClient client = new AsyncHttpClient();
+//        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+//        client.addHeader("Access-Token", token);
+//        RequestParams params = new RequestParams();
+//        params.add("language", ""+getLanguage());
+//        client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+//                avi.smoothToHide();
+//                avibackground.setVisibility(View.GONE);
+//                String response = new String(responseBody);
+//                Log.e("responsecompany", response);
+//
+//                try {
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    String status = jsonObject.getString("status");
+//                    if (status.equals("true")) {
+//                        JSONObject data = jsonObject.getJSONObject("data");
+//                        JSONArray company = data.getJSONArray("company");
+//                        if (company.length() > 0) {
+//                            for (int i = 0; i < company.length(); i++) {
+//                                JSONObject item = company.getJSONObject(i);
+//                                company_id = item.getString("company_id");
+//                                company_name = item.getString("name");
+//
+//                                companycolor = item.getString("color");
+//
+//                                Log.e(TAG , "companycolor:: "+companycolor);
+//
+//                                cnames.add(company_name);
+//                                cids.add(company_id);
+//
+//                            }
+//                        }
+//
+//
+//
+//                        warehousePosition = wids.indexOf(selectwarehouseId);
+//
+//                        ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(ConvertToInvoiceActivity.this, android.R.layout.simple_spinner_item, cnames);
+//                        selectcompany.setAdapter(namesadapter);
+//
+////                        selectwarehouse.setSelection(warehousePosition);
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+//                avi.smoothToHide();
+//                avibackground.setVisibility(View.GONE);
+//                if (responseBody != null) {
+//                    String response = new String(responseBody);
+//                    Log.e("responsecompanyF", response);
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response);
+//                        String status = jsonObject.getString("status");
+//                        if (status.equals("false")) {
+//                            //Constant.ErrorToast(Home_Activity.this,jsonObject.getString("message"));
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+//    }
 
     public void warehouse_list(String selectedCompanyId) {
         avi.smoothToShow();
@@ -3448,7 +3458,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
     private void CompanyInformation(String selectedCompanyId) {
         tax_list_array.clear();
         RequestParams params = new RequestParams();
-        params.add("company_id", this.selectedCompanyId);
+        params.add("company_id", selectedCompanyId);
         params.add("product", "1");
         params.add("service", "1");
         params.add("customer", "1");
@@ -4849,7 +4859,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
     @Override
     protected void onResume() {
         super.onResume();
-        companyget();
+        //companyget();
     }
 
 
@@ -5630,6 +5640,8 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         try {
 
             Log.e(TAG , "ShipingdetailAAA "+Shipingdetail);
+            Log.e(TAG , "selectedTemplateAAA "+selectedTemplate);
+
 
             content = IOUtils.toString(getAssets().open(name))
 

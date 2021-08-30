@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.sirapp.Details.User_Detail_Activity;
+import com.sirapp.Model.InvoiceData;
 import com.sirapp.Model.User_list;
 import com.sirapp.R;
 import com.sirapp.Utils.GlideApp;
@@ -30,7 +31,7 @@ public class User_Listing_Adapter extends RecyclerView.Adapter<User_Listing_Adap
 
     private Context mcontext ;
 
-    ArrayList<User_list> musername=new ArrayList<>();
+    ArrayList<User_list> musername = new ArrayList<>();
 
      String logourl;
 
@@ -174,4 +175,11 @@ public class User_Listing_Adapter extends RecyclerView.Adapter<User_Listing_Adap
     musername = list;
     notifyDataSetChanged();
 }*/
+
+
+    public void updateList(ArrayList<User_list> list){
+        musername = list;
+        notifyDataSetChanged();
+    }
+
 }

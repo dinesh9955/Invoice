@@ -25,6 +25,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.sirapp.Customer.Customer_Activity;
@@ -110,6 +111,9 @@ public class Constant {
 
         String username = Constant.GetSharedPreferences(activity, Constant.FULLNAME);
         String email = Constant.GetSharedPreferences(activity, Constant.EMAIL);
+        SavePref pref = new SavePref();
+        pref.SavePref(activity);
+
         AccountHeader header = null;
         Typeface myfont=Typeface.createFromAsset(activity.getAssets(),"Fonts/Ubuntu-Regular.ttf");
 
@@ -117,15 +121,22 @@ public class Constant {
                         .withActivity(activity)
                         .withAlternativeProfileHeaderSwitching(true)
                         .withCompactStyle(true)
-                        .withPaddingBelowHeader(true)
                         .withHeightDp(115)
-                        .withDividerBelowHeader(false)
-                        //.withPaddingBelowHeader(true)
+//                        .withDividerBelowHeader(false)
+//                        .withPaddingBelowHeader(true)
 
                         .withSelectionListEnabledForSingleProfile(false)
-                        .addProfiles(new ProfileDrawerItem().withName(username).withEmail(email).withTextColor(activity.getResources().getColor(R.color.white))
+                        .addProfiles(
+                                new ProfileDrawerItem().withName(username).withEmail(email).withTextColor(activity.getResources().getColor(R.color.white))
                                 .withTypeface(Typeface.createFromAsset(activity.getAssets(),"Fonts/AzoSans-Regular.otf"))
-                                .withIcon(R.mipmap.app_icon))
+                                .withIcon(R.mipmap.app_icon)
+                             //   ,new ProfileDrawerItem().withName("sepahdar ghorbani").withEmail("sepahdar.gh41@gmail.com")
+
+                                //(IProfile) new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.slide_mm).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE)
+
+                        )
+
+
 
                         .withOnAccountHeaderSelectionViewClickListener(new AccountHeader.OnAccountHeaderSelectionViewClickListener() {
                             @Override
@@ -167,9 +178,13 @@ public class Constant {
         PrimaryDrawerItem item21 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.thanku_note_2).withName(activity.getString(R.string.thank_you_note)).withTextColor(Color.WHITE);
         PrimaryDrawerItem item22 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.invoice_reminder_2).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE);
 
-        PrimaryDrawerItem item11 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item12 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
+      //  PrimaryDrawerItem item11 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.slide_mm).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE);
 
+        PrimaryDrawerItem item12 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
+        PrimaryDrawerItem item11 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
+
+//        PrimaryDrawerItem item111 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item122 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -187,7 +202,11 @@ public class Constant {
                 .withSliderBackgroundDrawable(activity.getResources().getDrawable(R.drawable.side_menu_bg))
                 .withSelectedItem(-1)
                 .addDrawerItems(
+                       // item11.withSelectable(false).withTypeface(myfont),
+//                        item122.withSelectable(false).withTypeface(myfont),
+
                         item11.withSelectable(false).withTypeface(myfont),
+                     //   item111.withSelectable(false).withTypeface(myfont),
                         item.withSelectable(false).withTypeface(myfont),
                         item2.withSelectable(false).withTypeface(myfont),
                         item3.withSelectable(false).withTypeface(myfont),
@@ -210,6 +229,8 @@ public class Constant {
 
                         item9.withSelectable(false).withTypeface(myfont),
                         item10.withSelectable(false).withTypeface(myfont)
+
+
 
                  ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
 

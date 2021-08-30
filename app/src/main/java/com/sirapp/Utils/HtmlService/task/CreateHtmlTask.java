@@ -41,9 +41,9 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 		this.folder = storageFolder;
 
 		if(linkWitch2.equalsIgnoreCase("Paypal")){
-			linkWitch = "Paypal";
+			linkWitch = "PayPal";
 		}else if(linkWitch2.equalsIgnoreCase("Stripe")){
-			linkWitch = "Stripe";
+			linkWitch = "Cards";
 		}
 
 		Log.e(TAG, "linkWitch2 "+linkWitch2);

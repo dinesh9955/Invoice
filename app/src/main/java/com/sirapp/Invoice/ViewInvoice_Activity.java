@@ -702,7 +702,7 @@ public class ViewInvoice_Activity extends BaseActivity {
 
         Log.e(TAG, "strpaid_amount:: "+strpaid_amount);
 
-        if (strpaid_amount.equals("0") || strpaid_amount.equals("0.00") || strpaid_amount.equals(".00Rs") || strpaid_amount.equals(".00")) {
+        if (strpaid_amount.equals("0") || strpaid_amount.equals("0.00") || strpaid_amount.equals(".00Rs") || strpaid_amount.equals(".00") || strpaid_amount.equals("")) {
             // Do you work here on success
             paidamountstrrepvalue = "";
             paidamountstrreptxt = "";
@@ -723,12 +723,17 @@ public class ViewInvoice_Activity extends BaseActivity {
 
         } else {
             // null response or Exception occur
-            paidamountstrrepvalue = strpaid_amount;
+            paidamountstrrepvalue = strpaid_amount+cruncycode;
 
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
                 paidamountstrreptxt = getString(R.string.html_PaidAmount);
             }else{
-                paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
+                if(Paymentamountdate.contains("0000")){
+                    paidamountstrreptxt = getString(R.string.html_PaidAmount);
+                }else{
+                    paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
+                }
+
             }
 
 

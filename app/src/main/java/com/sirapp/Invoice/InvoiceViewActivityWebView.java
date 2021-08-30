@@ -671,8 +671,21 @@ public class InvoiceViewActivityWebView extends BaseActivity {
             Log.e(TAG, "strpaid_amount2:: "+strpaid_amount);
 
             // null response or Exception occur
+//            paidamountstrrepvalue = strpaid_amount+currency_code;
+//            paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
+
             paidamountstrrepvalue = strpaid_amount+currency_code;
-            paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
+
+            if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
+                paidamountstrreptxt = getString(R.string.html_PaidAmount);
+            }else{
+                if(Paymentamountdate.contains("0000")){
+                    paidamountstrreptxt = getString(R.string.html_PaidAmount);
+                }else{
+                    paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
+                }
+
+            }
 
 
             pemailpaidstr = paypal_emailstr;

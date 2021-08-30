@@ -28,6 +28,7 @@ import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Adapter.User_Listing_Adapter;
 import com.sirapp.Constant.Constant;
+import com.sirapp.Model.InvoiceData;
 import com.sirapp.Model.User_list;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseFragment;
@@ -46,6 +47,7 @@ import cz.msebera.android.httpclient.Header;
 public class User_Listing extends BaseFragment {
 
 
+    private static final String TAG = "User_Listing";
 
     public User_Listing() {
         // Required empty public constructor
@@ -53,6 +55,7 @@ public class User_Listing extends BaseFragment {
 
     RecyclerView recycleruser;
     ArrayList<User_list> username=new ArrayList<>();
+    ArrayList<User_list> temp = new ArrayList();
 
     User_Listing_Adapter user_Listing_Adapter;
     EditText search;
@@ -62,6 +65,7 @@ public class User_Listing extends BaseFragment {
     ArrayList<String> cnames=new ArrayList<>();
     ArrayList<String> cids=new ArrayList<>();
     private AVLoadingIndicatorView avi;
+    TextView textViewMsg;
     ImageView avibackground;
 
     @Override
@@ -78,6 +82,18 @@ public class User_Listing extends BaseFragment {
         avi = view.findViewById(R.id.avi);
         avibackground = view.findViewById(R.id.avibackground);
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Light.otf"));
+        textViewMsg = view.findViewById(R.id.txtinvoice);
+        textViewMsg.setText(getString(R.string.home_NoUsers));
+        textViewMsg.setVisibility(View.VISIBLE);
+
+
+
+        user_Listing_Adapter = new User_Listing_Adapter(getContext(),username);
+        recycleruser.setAdapter(user_Listing_Adapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        recycleruser.setLayoutManager(layoutManager);
+        recycleruser.setHasFixedSize(true);
+
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -93,19 +109,12 @@ public class User_Listing extends BaseFragment {
             public void afterTextChanged(Editable s) {
 
                 if (username.size()>0){
-                   // filter(s.toString());
+                    filter(s.toString());
                 }
             }
         });
 
 
-
-
-        user_Listing_Adapter = new User_Listing_Adapter(getContext(),username);
-        recycleruser.setAdapter(user_Listing_Adapter);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recycleruser.setLayoutManager(layoutManager);
-        recycleruser.setHasFixedSize(true);
         //user_Listing_Adapter.notifyDataSetChanged();
         companyget();
 
@@ -160,6 +169,34 @@ public class User_Listing extends BaseFragment {
         user_Listing_Adapter.updateList(temp);
     }
 */
+
+
+
+    void filter(String text) {
+        temp.clear();
+
+        Log.e(TAG,  "usernameAAA "+username.size());
+
+
+        for (User_list d : username) {
+            //or use .equal(text) with you want equal match
+            //use .toLowerCase() for better matches
+            if (d.getFull_name().toLowerCase().contains(text.toLowerCase())) {
+                temp.add(d);
+            }
+        }
+        user_Listing_Adapter.updateList(temp);
+
+        if (temp.size() == 0){
+            textViewMsg.setVisibility(View.VISIBLE);
+        }else{
+            textViewMsg.setVisibility(View.GONE);
+        }
+    }
+
+
+
+
     public void companyget()
     {
 
@@ -322,6 +359,12 @@ public class User_Listing extends BaseFragment {
                             }
 
                         }
+
+                        if (username.size() == 0){
+                            textViewMsg.setVisibility(View.VISIBLE);
+                        }else{
+                            textViewMsg.setVisibility(View.GONE);
+                        }
                     }
 
                 } catch (JSONException e) {
@@ -337,17 +380,7 @@ public class User_Listing extends BaseFragment {
                     String response = new String(responseBody);
                     Log.e("responseusergetF",response);
 
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
 
-                        String status = jsonObject.getString("status");
-                        if (status.equals("false"))
-                        {
-                            Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                 }
                 else {
                     //Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
@@ -355,7 +388,7 @@ public class User_Listing extends BaseFragment {
 
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
-
+                textViewMsg.setVisibility(View.VISIBLE);
             }
         });
     }

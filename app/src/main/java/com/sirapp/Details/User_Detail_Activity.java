@@ -43,6 +43,7 @@ import com.sirapp.Base.BaseActivity;
 import com.sirapp.BuildConfig;
 import com.sirapp.Home.Home_Activity;
 import com.sirapp.R;
+import com.sirapp.User.Add_User;
 import com.sirapp.User.User_Activity;
 import com.sirapp.Utils.GlideApp;
 import com.sirapp.Utils.Utility;
@@ -870,8 +871,9 @@ public class User_Detail_Activity extends BaseActivity {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                Intent intent = new Intent(User_Detail_Activity.this,Home_Activity.class);
+                                Intent intent = new Intent(User_Detail_Activity.this, User_Activity.class);
                                 startActivity(intent);
+                               // finish();
                             }
                         },1000);
 

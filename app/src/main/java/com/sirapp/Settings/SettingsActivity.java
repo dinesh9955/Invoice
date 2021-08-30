@@ -428,7 +428,7 @@ public class SettingsActivity extends BaseActivity {
                                     setResult(RESULT_OK , intent);
                                     finish();
                                 }
-                            }, 500);
+                            }, 1000);
                         }else if(witch.equalsIgnoreCase("2")){
                             Constant.SuccessToast(SettingsActivity.this, getString(R.string.dialog_Restored_successfully));
                         }
@@ -505,7 +505,7 @@ public class SettingsActivity extends BaseActivity {
                     String message = jsonObject.getString("message");
                     if (status.equalsIgnoreCase("true")) {
 
-                        Constant.SuccessToast(SettingsActivity.this, message);
+                        Constant.SuccessToast(SettingsActivity.this, message.replace("allow", "allowed"));
 
 
                         new Handler().postDelayed(new Runnable() {
@@ -522,7 +522,7 @@ public class SettingsActivity extends BaseActivity {
                                 setResult(RESULT_OK , intent);
                                 finish();
                             }
-                        }, 500);
+                        }, 1000);
 
                     }else{
                         Constant.ErrorToast(SettingsActivity.this, message);

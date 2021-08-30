@@ -1364,8 +1364,11 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                   txt = getString(R.string.list_Invoiceviewed)+
                                     "\n\n" +newLink +
                                     "\n\n" +getString(R.string.list_Invoicepayment_link) ;
+                                  Log.e(TAG, "txt11" +txt);
                             }else{
-                                  txt = getString(R.string.list_Invoiceviewed);
+                                  txt = getString(R.string.list_Invoiceviewed)+
+                                    "\n\n" +newLink;
+                                Log.e(TAG, "txt22" +txt);
                             }
 
 
@@ -1375,62 +1378,11 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                     Toast.makeText(getActivity(), getString(R.string.list_NoFileFound), Toast.LENGTH_LONG).show();
                                 } else {
                                     BaseurlForShareInvoice = shareInvoicelink + sharelink;
-                                    //String finalurl =BaseurlForShareInvoice;
-
-//                                    String[] TO = {"email@server.com"};
-//                                    Uri uri = Uri.parse("mailto:email@server.com")
-//                                            .buildUpon()
-//                                            .appendQueryParameter("subject", subject)
-//                                            .appendQueryParameter("body", txt)
-//                                            .build();
-//                                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
-//
-//                                    emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-//                                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-
-
-//
-//
-//
-////                                    String to = "";
-////                                    //  String subject= "Hi I am subject";
-////                                    //  String body="Hi I am test body";
-////                                    String mailTo = "mailto:" + to +
-////                                            "?&subject=" + Uri.encode(subject) +
-////                                            "&body=" + Uri.encode(txt);
-////
-////                                    Intent intent = new Intent(Intent.ACTION_SENDTO);
-////                                    // intent.setType("text/plain");
-////                                    String message="File to be shared is " + "file_name" + ".";
-//////                                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-////                                    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
-//////                                intent.putExtra(Intent.EXTRA_TEXT, message);
-////                                    //intent.setData(Uri.parse("mailto:xyz@gmail.com"));
-////                                    intent.setData(Uri.parse(mailTo));
-////                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-////                                    startActivity(intent);
-//
-////                                    Intent share = new Intent(Intent.ACTION_SEND);
-////                                    share.setType("image/jpeg");
-////                                    share.putExtra(Intent.EXTRA_SUBJECT, subject);
-////                                    share.putExtra(Intent.EXTRA_TEXT, txt);
-////
-////                                    share.putExtra(Intent.EXTRA_STREAM,
-////                                            Uri.parse("file:///sdcard/share.jpg"));
-////
-////                                    if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")){
-////                                        share.setPackage("com.google.android.gm");
-////                                    }
-////                                    startActivity(share);
-//
                                     String url = urlPDF;
                                     //String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
                                     //Log.e(TAG, "linkWitchAA "+linkWitch);
                                     new DownloadFileAttach(getActivity(), subject, txt, link, finalPaypal, finalStripe).execute(url.replace("https", "http"));
                                 }
-
-
-
                             } catch (Exception e) {
                                 //e.toString();
                             }
@@ -2166,6 +2118,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 urlStripeName = "stripe";
             }
 
+            Log.e(TAG, "textXX "+text);
             Log.e(TAG, "paypalXX "+urlPaypalName);
             Log.e(TAG, "stripeXX "+urlStripeName);
 
