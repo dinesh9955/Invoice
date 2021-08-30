@@ -457,7 +457,7 @@
     <string name="stock_Remove_from_stock">Remove from stock</string>
 
 
-
+    <string name="report_SelectPermission">Select Permission</string>
     <string name="report_SelectCompany">Select Company</string>
     <string name="report_Previewit">Preview it</string>
     <string name="report_Print">Print</string>
@@ -1022,6 +1022,7 @@
     <string name="dialog_SelectAProduct">Select A Product</string>
     <string name="dialog_SelectSenderWarehouse">Select Sender Warehouse</string>
 
+   // <string name="dialog_SelectCompany">Please select comapany</string>
 
     <string name="dialog_CustomerAdded">Customer Added</string>
     <string name="dialog_StockMoved">Stock Moved</string>

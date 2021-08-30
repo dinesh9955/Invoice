@@ -144,12 +144,12 @@ public class Abc extends BaseActivity {
 
 
                 String html = "<html><body><b>bold</b><u>underline</u></body></html>";
-//                Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
-//                intent.setType("text/html");
-//                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-//                intent.putExtra(Intent.EXTRA_TEXT,
-//                        Html.fromHtml(html));
-//                startActivity(Intent.createChooser(intent, "Send Email"));
+                Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
+                intent.setType("text/html");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                intent.putExtra(Intent.EXTRA_TEXT,
+                        Html.fromHtml(html));
+                startActivity(Intent.createChooser(intent, "Send Email"));
 
 
 
@@ -195,7 +195,7 @@ public class Abc extends BaseActivity {
 
 
 
-                generateNoteOnSD(Abc.this , "info.txt", ""+obj.toString());
+               // generateNoteOnSD(Abc.this , "info.txt", ""+obj.toString());
 
             }
         });

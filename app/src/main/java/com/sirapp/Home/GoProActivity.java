@@ -31,6 +31,7 @@ import com.sirapp.Constant.Constant;
 import com.sirapp.R;
 import com.sirapp.Utils.Utility;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -52,6 +53,7 @@ public class GoProActivity extends BaseActivity {
 
     private BillingProcessor bp;
 
+    String subscription_typeNet = "";
 
     String productID = "com.sir.oneyear";
     String subscriptionType = "oneyear";
@@ -103,7 +105,33 @@ public class GoProActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 //                bp.purchase(GoProActivity.this, productID);
-                bp.purchase(GoProActivity.this, "android.test.purchased");
+
+            //    bp.purchase(GoProActivity.this, "android.test.purchased");
+
+                if(subscription_typeNet.equalsIgnoreCase("")) {
+                    Log.e(TAG, "emptyAA");
+                    bp.purchase(GoProActivity.this, "android.test.purchased");
+                }else{
+                    if(subscriptionType.equalsIgnoreCase("oneyear")) {
+                          if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
+                              Log.e(TAG, "emptyBB");
+                              Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
+                          }else{
+                              Log.e(TAG, "emptyBB22");
+                              bp.purchase(GoProActivity.this, "android.test.purchased");
+                          }
+                    }else if(subscriptionType.equalsIgnoreCase("onemonth")){
+                        if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
+                            Log.e(TAG, "emptyCC");
+                            Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
+                        }else{
+                            Log.e(TAG, "emptyCC22");
+                            Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
+                        }
+                    }
+                }
+
+
             }
         });
 
@@ -200,6 +228,92 @@ public class GoProActivity extends BaseActivity {
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSubscription();
+    }
+
+    private void getSubscription() {
+        final ProgressDialog progressDialog = new ProgressDialog(GoProActivity.this);
+        progressDialog.setMessage("Please wait");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        RequestParams params = new RequestParams();
+
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        String token = Constant.GetSharedPreferences(GoProActivity.this, Constant.ACCESS_TOKEN);
+        client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "subscription/get", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                progressDialog.dismiss();
+
+                Log.e(TAG, "CreateInvoicedata "+ response);
+                try {
+
+
+
+//                    Log.e("Create Invoicedata", response);
+//
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+//                    String message = jsonObject.getString("message");
+
+
+                    if (status.equalsIgnoreCase("true")) {
+
+                        JSONObject jsonObjectData = jsonObject.getJSONObject("data");
+                        JSONArray jsonArraySubscription = jsonObjectData.getJSONArray("subscription");
+
+                        if(jsonArraySubscription.length() > 0){
+                            JSONObject jsonObjectSubscriptionData = jsonArraySubscription.getJSONObject(0);
+                            subscription_typeNet = jsonObjectSubscriptionData.getString("subscription_type");
+                            Log.e(TAG, "subscription_typeNet "+subscription_typeNet);
+                        }else{
+                            subscription_typeNet = "";
+                        }
+
+                    }else{
+                       // Constant.ErrorToast(GoProActivity.this, message);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                progressDialog.dismiss();
+                subscription_typeNet = "";
+//                if (responseBody != null) {
+//                    String response = new String(responseBody);
+//                    Log.e("responsecustomersF", response);
+//
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response);
+//                        String status = jsonObject.getString("status");
+//                        String message = jsonObject.getString("message");
+//                        if (status.equals("1")) {
+//                            // Constant.ErrorToast(SubscribeActivity.this, message);
+//
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    //Constant.ErrorToast(PayPalActivity.this, "Something went wrong, try again!");
+//                }
+            }
+        });
+    }
 
 
 
