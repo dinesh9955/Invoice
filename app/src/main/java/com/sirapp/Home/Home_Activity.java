@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +30,10 @@ import com.andrognito.flashbar.Flashbar;
 import com.andrognito.flashbar.anim.FlashAnim;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
+import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
+import com.google.firebase.inappmessaging.FirebaseInAppMessagingDisplay;
+import com.google.firebase.inappmessaging.FirebaseInAppMessagingDisplayCallbacks;
+import com.google.firebase.inappmessaging.model.InAppMessage;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -39,6 +44,7 @@ import com.sirapp.Company.Companies_Activity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Customer.Customer_Activity;
 import com.sirapp.Details.Company_Details_Activity;
+import com.sirapp.FCM.MyMessageDisplayImplementation;
 import com.sirapp.Home.Model.CompanyModel;
 import com.sirapp.Home.Model.CustomerModel;
 import com.sirapp.Home.Model.InvoiceModel;
@@ -198,6 +204,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         Bundle params2 = new Bundle();
         params2.putString("event_name", "Home");
         firebaseAnalytics.logEvent("dashboard_view", params2);
+
+
 
     }
 
@@ -1235,4 +1243,27 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseInAppMessaging.getInstance().triggerEvent("App Open");
+        FirebaseInAppMessaging.getInstance().triggerEvent("first_open");
+        FirebaseInAppMessaging.getInstance().triggerEvent("dashboard_view");
+        Log.e(TAG, "onStart");
+
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+//        FirebaseInAppMessaging.getInstance().removeDisplayErrorListener(new FirebaseInAppMessagingDisplay(){
+//
+//            @Override
+//            public void displayMessage(@NonNull InAppMessage inAppMessage, @NonNull FirebaseInAppMessagingDisplayCallbacks firebaseInAppMessagingDisplayCallbacks) {
+//
+//            }
+//        });
+    }
 }

@@ -247,6 +247,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
 
+    implementation 'com.google.firebase:firebase-dynamic-links'
+    //Firebase dynamic links
+    implementation 'com.google.firebase:firebase-dynamic-links-ktx:20.1.0'
+
+    implementation 'com.google.firebase:firebase-inappmessaging-display'
+
+
 //    def billing_version = "3.0.0"
 //    implementation "com.android.billingclient:billing:$billing_version"
 
@@ -278,6 +285,7 @@ dependencies {
 //    }
 
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

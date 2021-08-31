@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
@@ -41,6 +42,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Abc;
+import com.sirapp.BuildConfig;
 import com.sirapp.ForgotResetPassword.ForgotPassword_Activity;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
@@ -156,6 +158,16 @@ public class Signin_Activity extends BaseActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
+
+
+
+
+
+
+
 
                 Signin();
 
@@ -613,22 +625,18 @@ public class Signin_Activity extends BaseActivity {
 
 
     private void callSocialLoginApi(GoogleSignInAccount account, String google) {
-
+        final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);
 
-
-        String email = edemail.getText().toString();
-        String password = edpassword.getText().toString();
-
         RequestParams params = new RequestParams();
 
-        params.add("firstName",account.getDisplayName());
-        params.add("lastName","");
-        params.add("provider","Google");
+        params.add("fullname",account.getDisplayName());
+        params.add("provider", google);
         params.add("providerId", account.getId());
         params.add("email", account.getEmail());
         params.add("deviceType","ANDROID");
+        params.add("device_token", refreshedToken);
         params.add("pushToken", refreshedToken);
         params.add("language","english");
 
@@ -655,55 +663,52 @@ public class Signin_Activity extends BaseActivity {
                     String status = jsonObject.getString("status");
                     if (status.equals("true"))
                     {
-                        final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
-                        JSONObject data22 = jsonObject.getJSONObject("data");
-                        JSONObject data = data22.getJSONObject("user");
-
-
+                        JSONObject data = jsonObject.getJSONObject("data");
                         String access_token = data.getString("access_token");
-                       // JSONObject profile = data.getJSONObject("profile");
-                        String fullname = data.getString("fullname");
-                        String email = data.getString("email");
+                        JSONObject profile = data.getJSONObject("profile");
+                        String fullname = profile.getString("fullname");
+                        String email = profile.getString("email");
                         pref.edit().putString(Constant.ACCESS_TOKEN,access_token).commit();
                         pref.edit().putString(Constant.FULLNAME,fullname).commit();
                         pref.edit().putString(Constant.EMAIL,email).commit();
                         pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
 
-//                        JSONObject permissions = data.getJSONObject("permission");
-//                        String invoice = permissions.getString("invoice");
-//                        String estimate = permissions.getString("estimate");
-//                        String stock = permissions.getString("stock");
-//                        String receipt = permissions.getString("receipt");
-//                        String purchase_order = permissions.getString("purchase_order");
-//                        String payment_voucher = permissions.getString("payment_voucher");
-//                        String tax = permissions.getString("tax");
-//                        String customer = permissions.getString("customer");
-//                        String supplier = permissions.getString("supplier");
-//                        String product = permissions.getString("product");
-//                        String service = permissions.getString("service");
-//                        String credit_note = permissions.getString("credit_note");
-//                        String sub_admin = permissions.getString("sub_admin");
-//
-//
-//                        Log.e("sub_admin",sub_admin);
-//                        Log.e("service",service);
-//                        pref.edit().putString(Constant.ACCESS_TOKEN,access_token).commit();
-//                        pref.edit().putString(Constant.FULLNAME,fullname).commit();
-//                        pref.edit().putString(Constant.EMAIL,email).commit();
-//                        pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
-//                        pref.edit().putString(Constant.SUB_ADMIN,sub_admin).commit();
-//                        pref.edit().putString(Constant.INVOICE,invoice).commit();
-//                        pref.edit().putString(Constant.ESTIMATE,estimate).commit();
-//                        pref.edit().putString(Constant.STOCK,stock).commit();
-//                        pref.edit().putString(Constant.RECEIPT,receipt).commit();
-//                        pref.edit().putString(Constant.PURCHASE_ORDER,purchase_order).commit();
-//                        pref.edit().putString(Constant.PAYMENT_VOUCHER,payment_voucher).commit();
-//                        pref.edit().putString(Constant.TAX,tax).commit();
-//                        pref.edit().putString(Constant.CUSTOMER,customer).commit();
-//                        pref.edit().putString(Constant.SUPPLIER,supplier).commit();
-//                        pref.edit().putString(Constant.PRODUCT,product).commit();
-//                        pref.edit().putString(Constant.SERVICE,service).commit();
-//                        pref.edit().putString(Constant.CREDIT_NOTE,credit_note).commit();
+                        JSONObject permissions = profile.getJSONObject("permission");
+                        String invoice = permissions.getString("invoice");
+                        String estimate = permissions.getString("estimate");
+                        String stock = permissions.getString("stock");
+                        String receipt = permissions.getString("receipt");
+                        String purchase_order = permissions.getString("purchase_order");
+                        String payment_voucher = permissions.getString("payment_voucher");
+                        String tax = permissions.getString("tax");
+                        String customer = permissions.getString("customer");
+                        String supplier = permissions.getString("supplier");
+                        String product = permissions.getString("product");
+                        String service = permissions.getString("service");
+                        String credit_note = permissions.getString("credit_note");
+                        String sub_admin = permissions.getString("sub_admin");
+
+
+                        Log.e("sub_admin",sub_admin);
+                        Log.e("service",service);
+
+                        pref.edit().putString(Constant.ACCESS_TOKEN,access_token).commit();
+                        pref.edit().putString(Constant.FULLNAME,fullname).commit();
+                        pref.edit().putString(Constant.EMAIL,email).commit();
+                        pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
+                        pref.edit().putString(Constant.SUB_ADMIN,sub_admin).commit();
+                        pref.edit().putString(Constant.INVOICE,invoice).commit();
+                        pref.edit().putString(Constant.ESTIMATE,estimate).commit();
+                        pref.edit().putString(Constant.STOCK,stock).commit();
+                        pref.edit().putString(Constant.RECEIPT,receipt).commit();
+                        pref.edit().putString(Constant.PURCHASE_ORDER,purchase_order).commit();
+                        pref.edit().putString(Constant.PAYMENT_VOUCHER,payment_voucher).commit();
+                        pref.edit().putString(Constant.TAX,tax).commit();
+                        pref.edit().putString(Constant.CUSTOMER,customer).commit();
+                        pref.edit().putString(Constant.SUPPLIER,supplier).commit();
+                        pref.edit().putString(Constant.PRODUCT,product).commit();
+                        pref.edit().putString(Constant.SERVICE,service).commit();
+                        pref.edit().putString(Constant.CREDIT_NOTE,credit_note).commit();
 
                         Map<String, Object> eventValue = new HashMap<String, Object>();
                         eventValue.put(AFInAppEventParameterName.PARAM_1, "signin_click");
@@ -727,7 +732,6 @@ public class Signin_Activity extends BaseActivity {
                         },1000);
 
                     }
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();

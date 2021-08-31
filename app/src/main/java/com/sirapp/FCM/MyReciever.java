@@ -62,7 +62,7 @@ public class MyReciever extends WakefulBroadcastReceiver
 
         String action = intent.getAction();
         for (String key : intent.getExtras().keySet()) {
-            Log.d(
+            Log.e(
                     "TAG",
                     "{UniversalFCM}->onReceive: key->"
                             + key + ", value->" + intent.getExtras().get(key)

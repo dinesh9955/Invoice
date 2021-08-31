@@ -13,8 +13,11 @@ import com.appsflyer.AppsFlyerLib;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
+import com.google.firebase.inappmessaging.FirebaseInAppMessagingDisplay;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
+import com.sirapp.FCM.MyMessageDisplayImplementation;
 import com.sirapp.Home.Home_Activity;
 import com.sirapp.SignupSignin.Signin_Activity;
 import com.sirapp.SignupSignin.WalkThroughActivity;
@@ -125,5 +128,14 @@ public class Splash_Activity extends BaseActivity {
             Intent i = new Intent(Splash_Activity.this, WalkThroughActivity.class);
             startActivity(i);
         }
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseInAppMessaging.getInstance().setMessageDisplayComponent(new MyMessageDisplayImplementation());
+        FirebaseInAppMessaging.getInstance().setMessagesSuppressed(false);
+
     }
 }

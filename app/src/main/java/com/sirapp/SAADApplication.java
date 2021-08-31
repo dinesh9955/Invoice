@@ -9,6 +9,8 @@ import androidx.multidex.MultiDex;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
+import com.sirapp.FCM.MyMessageDisplayImplementation;
 import com.sirapp.Model.Itemproductselect;
 
 import java.util.ArrayList;
@@ -162,6 +164,9 @@ public class SAADApplication extends Application {
 //                    }
 //                };
 
+        //FirebaseInAppMessaging.getInstance().setMessageDisplayComponent(new MyMessageDisplayImplementation());
+
+        FirebaseInAppMessaging.getInstance().setAutomaticDataCollectionEnabled(true);
 
         AppsFlyerConversionListener appsFlyerConversionListener = new AppsFlyerConversionListener(){
 
