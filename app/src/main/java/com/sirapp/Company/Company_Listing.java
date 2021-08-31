@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -58,6 +59,7 @@ public class Company_Listing extends BaseFragment {
 
     private AVLoadingIndicatorView avi;
     ImageView avibackground;
+    TextView textViewMsg;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,6 +71,12 @@ public class Company_Listing extends BaseFragment {
         avibackground = view.findViewById(R.id.avibackground);
         company = view.findViewById(R.id.company);
         search = view.findViewById(R.id.search);
+
+        textViewMsg = view.findViewById(R.id.txtinvoice);
+        textViewMsg.setText(getString(R.string.home_NoCompany));
+        textViewMsg.setVisibility(View.VISIBLE);
+
+
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Light.otf"));
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -123,6 +131,12 @@ public class Company_Listing extends BaseFragment {
             }
         }
         company_listing_adapter.updateList(temp);
+
+        if (temp.size() == 0){
+            textViewMsg.setVisibility(View.VISIBLE);
+        }else{
+            textViewMsg.setVisibility(View.GONE);
+        }
     }
 
     public void companyget()
@@ -204,7 +218,11 @@ public class Company_Listing extends BaseFragment {
                     }
 
 
-
+                    if (list.size() == 0){
+                        textViewMsg.setVisibility(View.VISIBLE);
+                    }else{
+                        textViewMsg.setVisibility(View.GONE);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -237,6 +255,7 @@ public class Company_Listing extends BaseFragment {
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
 
+                textViewMsg.setVisibility(View.VISIBLE);
             }
         });
     }

@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ShareCompat;
@@ -39,9 +40,25 @@ import androidx.fragment.app.DialogFragment;
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 //import com.itextpdf.text.Document;
 //import com.itextpdf.text.DocumentException;
@@ -71,6 +88,7 @@ import java.util.Locale;
 //import io.github.lucasfsc.html2pdf.Html2Pdf;
 
 //import com.lowagie.text.Font;
+import com.google.gson.GsonBuilder;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.POJO.Invoice.Root;
@@ -100,7 +118,10 @@ public class Abc extends BaseActivity {
 
     private static final String TAG = "Abc";
 
+    public GoogleSignInClient mGoogleSignInClient = null;
+    public GoogleSignInOptions gso;
 
+    public int RC_SIGN_IN = 120;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,13 +129,34 @@ public class Abc extends BaseActivity {
 
         setContentView(R.layout.abc);
 
-     //   textView = findViewById(R.id.textView3);
+
+        gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
 
         Button button = (Button) findViewById(R.id.button2);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build();
+
+
+                mGoogleSignInClient = GoogleSignIn.getClient(Abc.this, gso);
+
+                signOut();
+
+
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
 
 //                Uri uri = Uri.parse("content://com.sirapp/file:///android_asset/po.html");
 //
@@ -143,13 +185,13 @@ public class Abc extends BaseActivity {
 //                onemonth, onemonth_add, oneyear, oneyear_add
 
 
-                String html = "<html><body><b>bold</b><u>underline</u></body></html>";
-                Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
-                intent.setType("text/html");
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                intent.putExtra(Intent.EXTRA_TEXT,
-                        Html.fromHtml(html));
-                startActivity(Intent.createChooser(intent, "Send Email"));
+//                String html = "<html><body><b>bold</b><u>underline</u></body></html>";
+//                Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
+//                intent.setType("text/html");
+//                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+//                intent.putExtra(Intent.EXTRA_TEXT,
+//                        Html.fromHtml(html));
+//                startActivity(Intent.createChooser(intent, "Send Email"));
 
 
 
@@ -207,6 +249,21 @@ public class Abc extends BaseActivity {
     }
 
 
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        mAuth.addAuthStateListener(mAuthListener);
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        if (mAuthListener != null) {
+//            mAuth.removeAuthStateListener(mAuthListener);
+//        }
+//    }
+
     public void generateNoteOnSD(Context context, String sFileName, String sBody) {
         try {
             File root = new File(Environment.getExternalStorageDirectory(), "Notes");
@@ -223,5 +280,56 @@ public class Abc extends BaseActivity {
             e.printStackTrace();
         }
     }
+
+
+
+    private void signOut() {
+        if(mGoogleSignInClient != null){
+            mGoogleSignInClient.signOut();
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+
+
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            Log.e(TAG, "firebaseAuthWithGoogle:" + task.isSuccessful());
+
+            handleGoogleSignin(task);
+
+        }
+    }
+
+    private void handleGoogleSignin(Task<GoogleSignInAccount> task) {
+        try {
+            // Google Sign In was successful, authenticate with Firebase
+            GoogleSignInAccount account = task.getResult(ApiException.class);
+            Log.e(TAG, "firebaseAuthWithGoogle:" + account.getId());
+
+//            idOb.set(account.id)
+//            firstnameOb.set(account.givenName)
+//            lastNameOb.set(account.familyName)
+//            emailOb.set(account.email)
+//
+//            Log.e(TAG, "gt" + idOb.get().toString())
+//            Log.e(TAG, "gt" + firstnameOb.get().toString())
+//            Log.e(TAG, "gt" + lastNameOb.get().toString())
+//            Log.e(TAG, "gt" + emailOb.get().toString())
+//
+            callSocialLoginApi(account, "google");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void callSocialLoginApi(GoogleSignInAccount account, String google) {
+    }
+
 
 }

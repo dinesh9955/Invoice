@@ -81,4 +81,24 @@
         app:indicatorName="BallClipRotatePulseIndicator"
 
         />
+
+
+
+    <TextView
+        android:layout_marginTop="100dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home_NoCustomer"
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/darkgray"
+        android:id="@+id/txtinvoice"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
 </RelativeLayout>

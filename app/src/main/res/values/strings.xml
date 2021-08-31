@@ -715,6 +715,14 @@
     <string name="home_no_suppliers">No Suppliers</string>
     <string name="home_Invoice_Overdue">Invoice Overdue</string>
 
+
+    <string name="home_NoStock">No Stock</string>
+    <string name="home_NoSupplier">No Supplier</string>
+    <string name="home_NoCustomer">No Customer</string>
+    <string name="home_NoTax">No Tax</string>
+    <string name="home_NoItem">No Item</string>
+    <string name="home_NoProduct">No Product</string>
+    <string name="home_NoCompany">No Company</string>
     <string name="home_NoUsers">No Users</string>
     <string name="home_NoInvoice">No Invoices</string>
     <string name="home_NoCN">No Credit Notes</string>

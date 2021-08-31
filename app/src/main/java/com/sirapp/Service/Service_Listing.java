@@ -64,7 +64,7 @@ public class Service_Listing extends BaseFragment {
     ArrayList<String> cids=new ArrayList<>();
 
     String selectedCompanyId="";
-
+    TextView textViewMsg;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,6 +77,11 @@ public class Service_Listing extends BaseFragment {
         recyclerservice = view.findViewById(R.id.recyclerservice);
         selectcompany1 = view.findViewById(R.id.selectcompany2);
         search = view.findViewById(R.id.search);
+
+        textViewMsg = view.findViewById(R.id.txtinvoice);
+        textViewMsg.setText(getString(R.string.home_NoItem));
+        textViewMsg.setVisibility(View.VISIBLE);
+
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Light.otf"));
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -162,6 +167,12 @@ public class Service_Listing extends BaseFragment {
             }
         }
         service_Listing_Adapter.updateList(temp);
+
+        if (temp.size() == 0){
+            textViewMsg.setVisibility(View.VISIBLE);
+        }else{
+            textViewMsg.setVisibility(View.GONE);
+        }
     }
 
     public void companyget()
@@ -304,7 +315,11 @@ public class Service_Listing extends BaseFragment {
                         }
                     }
 
-
+                    if (list.size() == 0){
+                        textViewMsg.setVisibility(View.VISIBLE);
+                    }else{
+                        textViewMsg.setVisibility(View.GONE);
+                    }
 
 
                 } catch (JSONException e) {
@@ -338,6 +353,7 @@ public class Service_Listing extends BaseFragment {
                     //Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                 }
 
+                textViewMsg.setVisibility(View.VISIBLE);
 
             }
         });

@@ -64,6 +64,8 @@ public class Product_Listing extends BaseFragment {
 
     private AVLoadingIndicatorView avi;
     ImageView avibackground;
+    TextView textViewMsg;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,6 +79,10 @@ public class Product_Listing extends BaseFragment {
         recyclerproduct = view.findViewById(R.id.recyclerproduct);
         search = view.findViewById(R.id.search);
         selectcompany1 = view.findViewById(R.id.selectcompany2);
+
+        textViewMsg = view.findViewById(R.id.txtinvoice);
+        textViewMsg.setText(getString(R.string.home_NoProduct));
+        textViewMsg.setVisibility(View.VISIBLE);
 
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Light.otf"));
         search.addTextChangedListener(new TextWatcher() {
@@ -222,11 +228,15 @@ public class Product_Listing extends BaseFragment {
                             }
                         }
                         else {
-                            Constant.ErrorToast(getActivity(),jsonObject.getString("Product Not Found"));
+                           // Constant.ErrorToast(getActivity(),jsonObject.getString("Product Not Found"));
                         }
                     }
 
-
+                    if (list.size() == 0){
+                        textViewMsg.setVisibility(View.VISIBLE);
+                    }else{
+                        textViewMsg.setVisibility(View.GONE);
+                    }
 
 
                 } catch (JSONException e) {
@@ -248,7 +258,7 @@ public class Product_Listing extends BaseFragment {
                         String status = jsonObject.getString("status");
                         if (status.equals("false"))
                         {
-                            Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
+                           // Constant.ErrorToast(getActivity(),jsonObject.getString("message"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -260,6 +270,8 @@ public class Product_Listing extends BaseFragment {
 
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
+
+                textViewMsg.setVisibility(View.VISIBLE);
 
             }
         });
@@ -351,6 +363,12 @@ public class Product_Listing extends BaseFragment {
             }
         }
         product_Listing_Adapter.updateList(temp);
+
+        if (temp.size() == 0){
+            textViewMsg.setVisibility(View.VISIBLE);
+        }else{
+            textViewMsg.setVisibility(View.GONE);
+        }
     }
 
 

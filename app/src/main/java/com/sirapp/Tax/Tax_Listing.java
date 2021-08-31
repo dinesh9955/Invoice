@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -50,6 +51,9 @@ public class Tax_Listing extends BaseFragment {
 
     private AVLoadingIndicatorView avi;
     ImageView avibackground;
+
+    TextView textViewMsg;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,6 +66,12 @@ public class Tax_Listing extends BaseFragment {
         avibackground = view.findViewById(R.id.avibackground);
         recyclertax = view.findViewById(R.id.recyclertax);
         search = view.findViewById(R.id.search);
+
+
+        textViewMsg = view.findViewById(R.id.txtinvoice);
+        textViewMsg.setText(getString(R.string.home_NoTax));
+        textViewMsg.setVisibility(View.VISIBLE);
+
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Light.otf"));
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -103,6 +113,12 @@ public class Tax_Listing extends BaseFragment {
             }
         }
         tax_listing_adapter.updateList(temp);
+
+        if (list.size() == 0){
+            textViewMsg.setVisibility(View.VISIBLE);
+        }else{
+            textViewMsg.setVisibility(View.GONE);
+        }
     }
 
     public void taxget()
@@ -161,6 +177,13 @@ public class Tax_Listing extends BaseFragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+
+                if (list.size() == 0){
+                    textViewMsg.setVisibility(View.VISIBLE);
+                }else{
+                    textViewMsg.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -187,6 +210,7 @@ public class Tax_Listing extends BaseFragment {
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
 
+                textViewMsg.setVisibility(View.VISIBLE);
             }
         });
     }

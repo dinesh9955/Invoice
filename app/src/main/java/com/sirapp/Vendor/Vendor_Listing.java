@@ -67,6 +67,8 @@ public class Vendor_Listing extends BaseFragment {
     ArrayList<String> cids=new ArrayList<>();
 
     String selectedCompanyId="";
+
+    TextView textViewMsg;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -80,6 +82,11 @@ public class Vendor_Listing extends BaseFragment {
 //        selectcompany = view.findViewById(R.id.selectcompany);
         selectcompany1 = view.findViewById(R.id.selectcompany2);
         search = view.findViewById(R.id.search);
+
+        textViewMsg = view.findViewById(R.id.txtinvoice);
+        textViewMsg.setText(getString(R.string.home_NoSupplier));
+        textViewMsg.setVisibility(View.VISIBLE);
+
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Light.otf"));
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -164,6 +171,12 @@ public class Vendor_Listing extends BaseFragment {
             }
         }
         vendro_listing_adapter.updateList(temp);
+
+        if (list.size() == 0){
+            textViewMsg.setVisibility(View.VISIBLE);
+        }else{
+            textViewMsg.setVisibility(View.GONE);
+        }
     }
 
     public void companyget()
@@ -310,6 +323,12 @@ public class Vendor_Listing extends BaseFragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                if (list.size() == 0){
+                    textViewMsg.setVisibility(View.VISIBLE);
+                }else{
+                    textViewMsg.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -336,7 +355,7 @@ public class Vendor_Listing extends BaseFragment {
                 avi.smoothToHide();
                 avibackground.setVisibility(View.GONE);
 
-
+                textViewMsg.setVisibility(View.VISIBLE);
             }
         });
     }

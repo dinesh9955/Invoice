@@ -72,6 +72,9 @@ public class Stock_Product_List extends BaseFragment {
 
     String selectedCompanyId="";
 
+    TextView textViewMsg;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,6 +85,10 @@ public class Stock_Product_List extends BaseFragment {
         recyclerproduct = view.findViewById(R.id.recyclerproduct);
         search = view.findViewById(R.id.search);
         selectcompany1 = view.findViewById(R.id.selectcompany2);
+
+        textViewMsg = view.findViewById(R.id.txtinvoice);
+        textViewMsg.setText(getString(R.string.home_NoStock));
+        textViewMsg.setVisibility(View.VISIBLE);
 
         search.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"Fonts/AzoSans-Light.otf"));
 
@@ -308,6 +315,12 @@ public class Stock_Product_List extends BaseFragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                if (list.size() == 0){
+                    textViewMsg.setVisibility(View.VISIBLE);
+                }else{
+                    textViewMsg.setVisibility(View.GONE);
+                }
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
@@ -331,6 +344,7 @@ public class Stock_Product_List extends BaseFragment {
                     //Constant.ErrorToast(getActivity(),"Something went wrong, try again!");
                 }
 
+                textViewMsg.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -344,6 +358,12 @@ public class Stock_Product_List extends BaseFragment {
             }
         }
         product_Listing_Adapter.updateList(temp);
+
+        if (list.size() == 0){
+            textViewMsg.setVisibility(View.VISIBLE);
+        }else{
+            textViewMsg.setVisibility(View.GONE);
+        }
     }
 
 

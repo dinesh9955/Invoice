@@ -1990,6 +1990,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
         String link;
         String paypal;
         String stripe;
+
         DownloadFileAttach(Activity c, String sub, String txt, String newLink, String paypal2, String stripe2) {
             context = c;
             subject = sub;
@@ -2108,126 +2109,210 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             String urlPaypalName = "";
             String urlStripeName = "";
 
-           // String filterPage = "";
+            // String filterPage = "";
 
-            if(paypal.equalsIgnoreCase("1")){
+            if (paypal.equalsIgnoreCase("1")) {
                 urlPaypalName = "paypal";
             }
 
-            if(stripe.equalsIgnoreCase("1")){
+            if (stripe.equalsIgnoreCase("1")) {
                 urlStripeName = "stripe";
             }
 
-            Log.e(TAG, "textXX "+text);
-            Log.e(TAG, "paypalXX "+urlPaypalName);
-            Log.e(TAG, "stripeXX "+urlStripeName);
+            Log.e(TAG, "textXX " + text);
+            Log.e(TAG, "paypalXX " + urlPaypalName);
+            Log.e(TAG, "stripeXX " + urlStripeName);
 
-            String urlPaypal = AllSirApi.BASE+"view/"+urlPaypalName+"/"+link;
-            String urlStripe = AllSirApi.BASE+"view/"+urlStripeName+"/"+link;
-
-
-            String urlStripeNameFilter = urlStripeName;
+            String urlPaypal = AllSirApi.BASE + "view/" + urlPaypalName + "/" + link;
+            String urlStripe = AllSirApi.BASE + "view/" + urlStripeName + "/" + link;
 
 
-            new CreateHtmlTask(context.getCacheDir(), urlPaypalName, new CreateHtmlTask.OnTaskFinishedListener() {
-                @Override
-                public void onHtmlCreated(HtmlFile html) {
-
-                    new CreateHtmlTask(context.getCacheDir(), urlStripeNameFilter, new CreateHtmlTask.OnTaskFinishedListener() {
-                        @Override
-                        public void onHtmlCreated(HtmlFile html2) {
-                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
-
-                            File mFile2 = new File("/sdcard/share.jpg");
-                            Uri imageUri2 = FileProvider.getUriForFile(
-                                    context,
-                                    BuildConfig.APPLICATION_ID + ".provider",
-                                    mFile2);
-
-                            File fileWithinMyDir = new File(message);
-                            Uri imageUri1 = FileProvider.getUriForFile(context,
-                                    BuildConfig.APPLICATION_ID + ".provider",
-                                    fileWithinMyDir);
-
-                            if(fileWithinMyDir.exists()) {
-                                ArrayList<Uri> uriArrayList = new ArrayList<>();
-                                uriArrayList.add(imageUri1);
-                                uriArrayList.add(imageUri2);
-
-                                if(paypal.equalsIgnoreCase("1")){
-                                    uriArrayList.add(html.getFilePath());
-                                }
-
-                                if(stripe.equalsIgnoreCase("1")){
-                                    uriArrayList.add(html2.getFilePath());
-                                }
-
-                                intentShareFile.setType("application/pdf/*|image/*|text/html");
-                                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-
-                                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
-
-                                intentShareFile.putExtra(Intent.EXTRA_TEXT, text);
-
-                                if (Utility.isAppAvailable(context, "com.google.android.gm")) {
-                                    intentShareFile.setPackage("com.google.android.gm");
-                                }
-                                context.startActivity(intentShareFile);
-                            }
-
-                        }
-                    }).execute(urlStripe);
+            // String urlStripeNameFilter = urlStripeName;
 
 
+            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+
+            File mFile2 = new File("/sdcard/share.jpg");
+            Uri imageUri2 = FileProvider.getUriForFile(
+                    context,
+                    BuildConfig.APPLICATION_ID + ".provider",
+                    mFile2);
+
+            File fileWithinMyDir = new File(message);
+            Uri imageUri1 = FileProvider.getUriForFile(context,
+                    BuildConfig.APPLICATION_ID + ".provider",
+                    fileWithinMyDir);
+
+            if (fileWithinMyDir.exists()) {
+                ArrayList<Uri> uriArrayList = new ArrayList<>();
+                uriArrayList.add(imageUri1);
+                uriArrayList.add(imageUri2);
+
+                String content1 = "";
+
+                if (urlPaypalName.equalsIgnoreCase("Paypal")) {
+                    String linkWitch = "PayPal";
+                    content1 = "<!DOCTYPE html>\n" +
+                            "<html>\n" +
+                            "  <head>\n" +
+                            "    <title>Title of the document</title>\n" +
+                            "    <style>\n" +
+                            "      .button {\n" +
+                            "        background-color: #1c87c9;\n" +
+                            "        border: none;\n" +
+                            "        color: white;\n" +
+                            "        padding: 20px 34px;\n" +
+                            "        text-align: center;\n" +
+                            "        text-decoration: none;\n" +
+                            "        display: inline-block;\n" +
+                            "        font-size: 20px;\n" +
+                            "        margin: 4px 2px;\n" +
+                            "        cursor: pointer;\n" +
+                            "      }\n" +
+                            "    </style>\n" +
+                            "  </head>\n" +
+                            "  <body>\n" +
+                            "    <a href=\"" + urlPaypal + "\" class=\"button\">" + linkWitch + "</a>\n" +
+                            "  </body>\n" +
+                            "</html>";
 
                 }
-            }).execute(urlPaypal);
 
-            Log.e(TAG, "fileWithinMyDir "+message);
+                String content2 = "";
+                if (urlStripeName.equalsIgnoreCase("Stripe")) {
+                    String linkWitch = "Cards";
+                    content2 = "<!DOCTYPE html>\n" +
+                            "<html>\n" +
+                            "  <head>\n" +
+                            "    <title>Title of the document</title>\n" +
+                            "    <style>\n" +
+                            "      .button {\n" +
+                            "        background-color: #1c87c9;\n" +
+                            "        border: none;\n" +
+                            "        color: white;\n" +
+                            "        padding: 20px 34px;\n" +
+                            "        text-align: center;\n" +
+                            "        text-decoration: none;\n" +
+                            "        display: inline-block;\n" +
+                            "        font-size: 20px;\n" +
+                            "        margin: 4px 2px;\n" +
+                            "        cursor: pointer;\n" +
+                            "      }\n" +
+                            "    </style>\n" +
+                            "  </head>\n" +
+                            "  <body>\n" +
+                            "    <a href=\"" + urlStripe + "\" class=\"button\">" + linkWitch + "</a>\n" +
+                            "  </body>\n" +
+                            "</html>";
+                }
 
 
+                intentShareFile.setType("application/pdf/*|image/*");
+                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+
+                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+
+                String allData = text + "\n\n"+content1+content2;
+
+                intentShareFile.putExtra(Intent.EXTRA_HTML_TEXT, allData);
+
+                if (Utility.isAppAvailable(context, "com.samsung.android.email.provider")) {
+                    intentShareFile.setPackage("com.samsung.android.email.provider");
+                }
+                context.startActivity(intentShareFile);
 
             }
 
 
+
+
+
+
+//            String urlPaypalName = "";
+//            String urlStripeName = "";
+//
+//            // String filterPage = "";
+//
+//            if(paypal.equalsIgnoreCase("1")){
+//                urlPaypalName = "paypal";
+//            }
+//
+//            if(stripe.equalsIgnoreCase("1")){
+//                urlStripeName = "stripe";
+//            }
+//
+//            Log.e(TAG, "textXX "+text);
+//            Log.e(TAG, "paypalXX "+urlPaypalName);
+//            Log.e(TAG, "stripeXX "+urlStripeName);
+//
+//            String urlPaypal = AllSirApi.BASE+"view/"+urlPaypalName+"/"+link;
+//            String urlStripe = AllSirApi.BASE+"view/"+urlStripeName+"/"+link;
+//
+//
+//            String urlStripeNameFilter = urlStripeName;
+//
+//
+//            new CreateHtmlTask(context.getCacheDir(), urlPaypalName, new CreateHtmlTask.OnTaskFinishedListener() {
+//                @Override
+//                public void onHtmlCreated(HtmlFile html) {
+//
+//                    new CreateHtmlTask(context.getCacheDir(), urlStripeNameFilter, new CreateHtmlTask.OnTaskFinishedListener() {
+//                        @Override
+//                        public void onHtmlCreated(HtmlFile html2) {
+//                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+//
+//                            File mFile2 = new File("/sdcard/share.jpg");
+//                            Uri imageUri2 = FileProvider.getUriForFile(
+//                                    context,
+//                                    BuildConfig.APPLICATION_ID + ".provider",
+//                                    mFile2);
+//
+//                            File fileWithinMyDir = new File(message);
+//                            Uri imageUri1 = FileProvider.getUriForFile(context,
+//                                    BuildConfig.APPLICATION_ID + ".provider",
+//                                    fileWithinMyDir);
+//
+//                            if(fileWithinMyDir.exists()) {
+//                                ArrayList<Uri> uriArrayList = new ArrayList<>();
+//                                uriArrayList.add(imageUri1);
+//                                uriArrayList.add(imageUri2);
+//
+//                                if(paypal.equalsIgnoreCase("1")){
+//                                    uriArrayList.add(html.getFilePath());
+//                                }
+//
+//                                if(stripe.equalsIgnoreCase("1")){
+//                                    uriArrayList.add(html2.getFilePath());
+//                                }
+//
+//                                intentShareFile.setType("application/pdf/*|image/*|text/html");
+//                                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+//
+//                                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+//
+//                                intentShareFile.putExtra(Intent.EXTRA_TEXT, text);
+//
+//                                if (Utility.isAppAvailable(context, "com.google.android.gm")) {
+//                                    intentShareFile.setPackage("com.google.android.gm");
+//                                }
+//                                context.startActivity(intentShareFile);
+//                            }
+//
+//                        }
+//                    }).execute(urlStripe);
+//
+//
+//
+//                }
+//            }).execute(urlPaypal);
+//
+//            Log.e(TAG, "fileWithinMyDir "+message);
+//
+//
+//
+//        }
+        }
     }
-
-
-
-//    @Override
-//    public void onHtmlCreated(HtmlFile html) {
-//        startSendEmailIntent(html.getFilePath());
-//    }
-
-
-//    private void startSendEmailIntent(Uri attachmentUri) {
-//        File mFile2 = new File("/sdcard/share.jpg");
-//        Uri imageUri2 = FileProvider.getUriForFile(
-//                Abc.this,
-//                "com.sirapp.provider", //(use your app signature + ".provider" )
-//                mFile2);
-//
-//        ArrayList<Uri> uriArrayList = new ArrayList<>();
-//        uriArrayList.add(attachmentUri);
-//        // uriArrayList.add(imageUri2);
-//
-//
-//        Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-//        //intent.setType("text/html");
-//        intent.setType("application/pdf/*|image/*|text/html");
-//        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-////        intent.putExtra(Intent.EXTRA_STREAM, attachmentUri);
-//        intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-//        intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml("Message body. <b>Funky!</b> <i>not</i>"));
-//        Intent chooser = Intent.createChooser(intent, "Send Email");
-//        startActivity(chooser);
-//    }
-
-
-
-
-
-
 
 
 
