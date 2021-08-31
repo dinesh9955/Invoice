@@ -249,7 +249,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-dynamic-links'
     //Firebase dynamic links
-    implementation 'com.google.firebase:firebase-dynamic-links-ktx:20.1.0'
+//    implementation 'com.google.firebase:firebase-dynamic-links-ktx:20.1.0'
 
     implementation 'com.google.firebase:firebase-inappmessaging-display'
 

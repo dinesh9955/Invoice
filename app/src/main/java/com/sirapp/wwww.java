@@ -6,15 +6,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
 public class wwww extends AppCompatActivity {
 
@@ -41,35 +37,7 @@ public class wwww extends AppCompatActivity {
         });
 
 
-        FirebaseDynamicLinks.getInstance()
-                .getDynamicLink(getIntent())
-                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
-                    @Override
-                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-                        // Get deep link from result (may be null if no link is found)
-                        Uri deepLink = null;
-                        if (pendingDynamicLinkData != null) {
-                            deepLink = pendingDynamicLinkData.getLink();
-                            Log.e(TAG, "getDynamicLinkYES"+deepLink);
-                        }else{
-                            Log.e(TAG, "getDynamicLinkNO");
-                        }
 
-
-                        // Handle the deep link. For example, open the linked
-                        // content, or apply promotional credit to the user's
-                        // account.
-                        // ...
-
-                        // ...
-                    }
-                })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "getDynamicLink:onFailure", e);
-                    }
-                });
 
 
 
@@ -83,9 +51,10 @@ public class wwww extends AppCompatActivity {
                .setLink(Uri.parse(deepLink.toString()))
                .setDomainUriPrefix("https://rastogi.page.link")
                // Open links with this app on Android
-           //    .setAndroidParameters(new DynamicLink.AndroidParameters.Builder("com.sirapp").build())
+               .setAndroidParameters(new DynamicLink.AndroidParameters.Builder("com.sirapp").build())
                // Open links with com.example.ios on iOS
-             //  .setIosParameters(new DynamicLink.IosParameters.Builder("com.example.ios").build())
+               .setIosParameters(new DynamicLink.IosParameters.Builder("com.example.ios").build())
+
                .buildDynamicLink();
 
        Uri dynamicLinkUri = dynamicLink.getUri();
