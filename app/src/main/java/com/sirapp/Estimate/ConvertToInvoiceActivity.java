@@ -5739,7 +5739,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
                     .replaceAll(" Payment Details ", paimnetdetailstrtxt)
                     .replaceAll("By cheque :", bycheckstrtxt)
-                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("PayPal :", paypalstrtxt)
                     .replaceAll("Bank :", bankstrtxt)
 
 

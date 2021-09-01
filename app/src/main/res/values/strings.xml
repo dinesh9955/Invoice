@@ -15,11 +15,13 @@
     <string name="home_trackinventory">If you wish to track inventory</string>
     <string name="home_AddyourProducts">Add your Products</string>
     <string name="home_AddyourWarehouse">Add your Warehouse</string>
-    <string name="home_donttrackinventory">If you do not wish to track inventory</string>
+    <string name="home_donttrackinventory">If you wish to accept online payments</string>
     <string name="home_AddyourItems">Add your Items</string>
     <string name="home_SetupPayment">Set up Payment Gateway</string>
     <string name="home_CreateyourInvoice">Create your Invoice</string>
 
+    <string name="company_WarehouseName2">Warehouse Name<font color='#FF0000'>*</font></string>
+    <string name="company_WarehouseAddress2">Warehouse Address<font color='#FF0000'>*</font></string>
 
     <string name="stock_Select_Product_2">Select Product<font color='#FF0000'>*</font></string>
     <string name="company_Company_Name_2">Company Name<font color='#FF0000'>*</font></string>
@@ -315,6 +317,7 @@
     <string name="company_Cheque_Payable_To">Cheque Payable To</string>
     <string name="company_IBAN_Number">IBAN Number</string>
 
+    <string name="company_AddWarehouseTitle">If you have one or more warehouses, add them here to keep track of your inventory at different locations</string>
 
 
     <string name="product_Upload_product_image">Upload product image</string>
@@ -547,7 +550,7 @@
     <string name="html_PaidAmount">Paid Amount</string>
     <string name="html_PaymentDetails">Payment Details</string>
     <string name="html_Bycheque">By cheque:</string>
-    <string name="html_PayPal" translatable="false">Pay Pal:</string>
+    <string name="html_PayPal" translatable="false">PayPal:</string>
     <string name="html_Bank" translatable="false">Bank:</string>
     <string name="html_ShipTo">Ship To:</string>
     <string name="html_InvoiceDueDateReminder">Invoice Due Date Reminder</string>

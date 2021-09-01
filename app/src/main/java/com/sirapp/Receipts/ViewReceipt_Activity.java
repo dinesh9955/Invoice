@@ -690,7 +690,7 @@ public class ViewReceipt_Activity extends BaseActivity {
 
             paimnetdetailstrtxt= getString(R.string.html_PaymentDetails);
             bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
+            paypalstrtxt="PayPal :";
             bankstrtxt="Bank :";
 
 
@@ -879,7 +879,7 @@ public class ViewReceipt_Activity extends BaseActivity {
 
                     .replaceAll(" Payment Details ", paimnetdetailstrtxt)
                     .replaceAll("By cheque :", bycheckstrtxt)
-                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("PayPal :", paypalstrtxt)
                     .replaceAll("Bank :", bankstrtxt)
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
 

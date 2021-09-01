@@ -461,10 +461,10 @@ public class Wastage_Damage extends BaseFragment {
             quantity.setError(getString(R.string.dialog_Required));
             quantity.requestFocus();
         }
-        else if (reas.isEmpty()){
-            reason.setError(getString(R.string.dialog_Required));
-            reason.requestFocus();
-        }
+//        else if (reas.isEmpty()){
+//            reason.setError(getString(R.string.dialog_Required));
+//            reason.requestFocus();
+//        }
         else if (selectedCompanyId.equals("")){
             Constant.ErrorToast(getActivity(),getString(R.string.dialog_SelectACompany));
         }

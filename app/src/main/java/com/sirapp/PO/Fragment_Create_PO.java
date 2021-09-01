@@ -4561,7 +4561,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
-                paypalstrtxt= "Pay Pal :";
+                paypalstrtxt= "PayPal :";
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
@@ -4786,7 +4786,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
                     .replaceAll(" Payment Details ", paimnetdetailstrtxt)
                     .replaceAll("By cheque :", bycheckstrtxt)
-                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("PayPal :", paypalstrtxt)
                     .replaceAll("Bank :", bankstrtxt)
 
 

@@ -103,7 +103,7 @@ public class WebShowActivity extends BaseActivity {
         client.addHeader("Access-Token", token);
         RequestParams params = new RequestParams();
         params.add("language", ""+getLanguage());
-//        params.add("device_type", "android");
+        params.add("device_type", "android");
 
         client.post(url, params, new AsyncHttpResponseHandler() {
             @Override
@@ -138,8 +138,8 @@ public class WebShowActivity extends BaseActivity {
                                 super.onPageFinished(view, url);
 //                                webView.loadUrl("document.getElementById('iosVer').style.display = 'none';");
 //                                webView.loadUrl("document.getElementById('iosVer').style.display='none';})()");
-//                                webView.loadUrl("javascript:(function() { " +
-//                                        "document.getElementsByClassName('iosVer')[0].style.display='none'; })()");
+                                webView.loadUrl("javascript:(function() { " +
+                                        "document.getElementsByClassName('iosVer')[0].style.display='none'; })()");
                                 webView.loadUrl("javascript:document.body.style.padding= \"2%\"; void 0");
 
                             }

@@ -721,7 +721,7 @@ public class EstimateToInvoiceWebview extends BaseActivity {
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
-                paypalstrtxt="Pay Pal :";
+                paypalstrtxt="PayPal :";
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
@@ -918,7 +918,7 @@ public class EstimateToInvoiceWebview extends BaseActivity {
 
                     .replaceAll(" Payment Details ", paimnetdetailstrtxt)
                     .replaceAll("By cheque :", bycheckstrtxt)
-                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("PayPal :", paypalstrtxt)
                     .replaceAll("Bank :", bankstrtxt)
 
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));

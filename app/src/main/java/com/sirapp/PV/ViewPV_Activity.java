@@ -723,7 +723,7 @@ public class ViewPV_Activity extends BaseActivity {
 
             paimnetdetailstrtxt=" Payment Details ";
             bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
+            paypalstrtxt="PayPal :";
             bankstrtxt="Bank :";
 
 
@@ -891,12 +891,12 @@ public class ViewPV_Activity extends BaseActivity {
 
 //                    .replaceAll(" Payment Details ", paimnetdetailstrtxt)
 //                    .replaceAll("By cheque :", bycheckstrtxt)
-//                    .replaceAll("Pay Pal :", paypalstrtxt)
+//                    .replaceAll("PayPal :", paypalstrtxt)
 //                    .replaceAll("Bank :", bankstrtxt)
 
                     .replaceAll(" Payment Details ", "")
                     .replaceAll("By cheque :", "")
-                    .replaceAll("Pay Pal :", "")
+                    .replaceAll("PayPal :", "")
                     .replaceAll("Bank :", "")
 
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));

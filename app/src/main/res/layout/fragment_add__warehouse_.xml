@@ -11,13 +11,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/company_AddWarehouseTitle"
+            android:textColor="@color/bluecolor2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:padding="5dp"
+            android:id="@+id/title111"
+            android:layout_margin="@dimen/_20sdp"
+            android:textSize="16dp"
+            />
+
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/company_AddWarehouseCap"
             android:textColor="@color/lightpurple"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/invoicepricetxt"
+            android:layout_below="@+id/title111"
             android:layout_marginTop="0dp"
             android:padding="5dp"
             android:id="@+id/addwarehouse"
@@ -30,7 +46,7 @@
             android:layout_marginRight="20dp"
             android:layout_below="@+id/addwarehouse"
             android:layout_marginTop="40dp"
-            android:hint="@string/company_WarehouseName"
+            android:hint="@string/company_WarehouseName2"
             android:textColorHint="@color/dark_grey"
             android:textSize="14dp"
             android:id="@+id/edwarehousename"
@@ -49,7 +65,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="30dp"
-            android:hint="@string/company_WarehouseAddress"
+            android:hint="@string/company_WarehouseAddress2"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/dark_grey"
             android:textSize="14dp"

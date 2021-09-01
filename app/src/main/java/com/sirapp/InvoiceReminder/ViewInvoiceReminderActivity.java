@@ -989,7 +989,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
 
                         .replaceAll(" Payment Details ", paimnetdetailstrtxt)
                         .replaceAll("By cheque :", bycheckstrtxt)
-                        .replaceAll("Pay Pal :", paypalstrtxt)
+                        .replaceAll("PayPal :", paypalstrtxt)
                         .replaceAll("Bank :", bankstrtxt)
 
 

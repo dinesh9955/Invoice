@@ -171,7 +171,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:textColor="@color/lightpurple"
-                android:textSize="12sp"/>
+                android:textSize="12sp"
+                android:visibility="gone"/>
 
             <EditText
                 android:layout_marginTop="5dp"
@@ -186,7 +187,8 @@
                 android:background="@drawable/edittextshape"
                 android:elevation="2dp"
                 android:id="@+id/reason"
-                android:textColorHint="@color/dark_grey"/>
+                android:textColorHint="@color/dark_grey"
+                android:visibility="gone"/>
 
             <Button
                 android:layout_width="match_parent"

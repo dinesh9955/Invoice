@@ -5464,7 +5464,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
-                paypalstrtxt="Pay Pal :";
+                paypalstrtxt="PayPal :";
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
@@ -5671,7 +5671,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
                     .replaceAll(" Payment Details ", paimnetdetailstrtxt)
                     .replaceAll("By cheque :", bycheckstrtxt)
-                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("PayPal :", paypalstrtxt)
                     .replaceAll("Bank :", bankstrtxt)
 
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));

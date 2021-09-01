@@ -723,7 +723,7 @@ public class ViewInvoice_Activity extends BaseActivity {
 
         } else {
             // null response or Exception occur
-            paidamountstrrepvalue = strpaid_amount+cruncycode;
+            paidamountstrrepvalue = strpaid_amount;
 
             if(Utility.isEmptyNull(Paymentamountdate).equalsIgnoreCase("")){
                 paidamountstrreptxt = getString(R.string.html_PaidAmount);
@@ -980,7 +980,7 @@ public class ViewInvoice_Activity extends BaseActivity {
 
                     .replaceAll(" Payment Details ", paimnetdetailstrtxt)
                     .replaceAll("By cheque :", bycheckstrtxt)
-                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("PayPal :", paypalstrtxt)
                     .replaceAll("Bank :", bankstrtxt)
 
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));

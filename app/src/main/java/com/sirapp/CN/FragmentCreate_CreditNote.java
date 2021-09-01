@@ -4423,7 +4423,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
             paimnetdetailstrtxt= getString(R.string.html_PaymentDetails);
             bycheckstrtxt= getString(R.string.html_Bycheque);
-            paypalstrtxt="Pay Pal :";
+            paypalstrtxt="PayPal :";
             bankstrtxt="Bank :";
 
 
@@ -4591,7 +4591,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
                     .replaceAll(" Payment Details ", paimnetdetailstrtxt)
                     .replaceAll("By cheque :", bycheckstrtxt)
-                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("PayPal :", paypalstrtxt)
                     .replaceAll("Bank :", bankstrtxt)
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
 

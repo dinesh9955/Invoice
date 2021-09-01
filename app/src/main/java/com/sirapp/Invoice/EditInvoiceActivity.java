@@ -5580,7 +5580,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                 pemailpaidstr = "";
             }else{
                 pemailpaidstr = paypal_emailstr;
-                paypalstrtxt="Pay Pal :";
+                paypalstrtxt="PayPal :";
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
@@ -5792,7 +5792,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
 
                     .replaceAll(" Payment Details ", paimnetdetailstrtxt)
                     .replaceAll("By cheque :", bycheckstrtxt)
-                    .replaceAll("Pay Pal :", paypalstrtxt)
+                    .replaceAll("PayPal :", paypalstrtxt)
                     .replaceAll("Bank :", bankstrtxt)
 
 

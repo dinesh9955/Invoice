@@ -4548,7 +4548,7 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
 
             paimnetdetailstrtxt=" Payment Details ";
             bycheckstrtxt="By cheque :";
-            paypalstrtxt="Pay Pal :";
+            paypalstrtxt="PayPal :";
             bankstrtxt="Bank :";
 
 
@@ -4722,7 +4722,7 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
 
                     .replaceAll(" Payment Details ", "")
                     .replaceAll("By cheque :", "")
-                    .replaceAll("Pay Pal :", "")
+                    .replaceAll("PayPal :", "")
                     .replaceAll("Bank :", "")
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
 
