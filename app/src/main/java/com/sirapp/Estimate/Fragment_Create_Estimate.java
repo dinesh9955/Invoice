@@ -2468,8 +2468,6 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
 
     public boolean addSignatureToGallery(Bitmap signature) {
         boolean result = false;
-
-
         try {
             File photo = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.jpg", System.currentTimeMillis()));
             saveBitmapToJPG(signature, photo);
@@ -2479,15 +2477,19 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                 signatureofinvoicemaker = photo;
                 signature_of_issuer = photo.getAbsolutePath();
                 imgsigsuccess.setVisibility(View.VISIBLE);
+                Log.e(TAG, "addSignatureToGalleryissuer "+signature_of_issuer);
             }
             if (s_r.equals("2")) {
                 signaturinvoicereceiver = photo;
                 signatureofreceiverst = photo.getAbsolutePath();
                 imgrecsuccess.setVisibility(View.VISIBLE);
+                Log.e(TAG, "addSignatureToGalleryreceiver "+signatureofreceiverst);
             }
 
 
-            Log.e("Signature Of Issuer", signature_of_issuer);
+            Log.e(TAG,"SignatureOfIssuer "+signature_of_issuer);
+            Log.e(TAG,"SignatureOfReceiver "+signature_of_issuer);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -4660,8 +4662,6 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                     .replaceAll("PayPal :", paypalstrtxt)
                     .replaceAll("Bank :", bankstrtxt)
                     .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
-
-
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -753,7 +753,7 @@
     <string name="setting_UpgradePlan1">Assign additional users with limited or unlimited access for one time payment of USD 3.99 only per user</string>
     <string name="setting_UpgradePlan2">Create additional companies under the same credentials for one time payment of USD 11.99 only per additional company</string>
     <string name="setting_UpgradePlanMonthly">Upgrade to our exclusive Stock Tracking feature at additional USD 2.99 monthly</string>
-    <string name="setting_UpgradePlanYearly">Upgrade to our exclusive Stock Tracking feature at additional USD 2.99 yearly</string>
+    <string name="setting_UpgradePlanYearly">Upgrade to our exclusive Stock Tracking feature at additional USD 23.99 annually and get upto 33% off</string>
 
     <string name="setting_subscribePlan">You have not subscribe plan</string>
     <string name="setting_notsubscribePlan">You have already subscribe plan</string>

@@ -2727,8 +2727,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
     public void companyget() {
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);
-        cnames.clear();
 
+        cnames.clear();
         cids.clear();
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
@@ -2809,6 +2809,10 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
 
     public void warehouse_list(String selectedCompanyId) {
+
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
+
         wids.clear();
         wnames.clear();
 
@@ -2825,6 +2829,9 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
+
                     String response = new String(responseBody);
                     //Log.e("warehouseResp", response);
 
@@ -2871,6 +2878,9 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    avi.smoothToHide();
+                    avibackground.setVisibility(View.GONE);
+
                     if (responseBody != null) {
                         String response = new String(responseBody);
                         //  Log.e("responsevendorF", response);
