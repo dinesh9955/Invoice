@@ -3,6 +3,7 @@ package com.sirapp.Home;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -13,13 +14,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.SkuDetails;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.ShortDynamicLink;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -27,19 +35,24 @@ import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
+import com.sirapp.BuildConfig;
 import com.sirapp.Constant.Constant;
 import com.sirapp.R;
 import com.sirapp.Utils.Utility;
+import com.sirapp.Xyz;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -49,7 +62,7 @@ public class GoProActivity extends BaseActivity {
     LinearLayout linearLayout_12Month, linearLayout_1Month;
     Button buttonUpgrade_now;
 
-    ImageView imageViewPay;
+    ImageView imageViewPay, imageViewShare;
 
     private BillingProcessor bp;
 
@@ -68,7 +81,7 @@ public class GoProActivity extends BaseActivity {
         buttonUpgrade_now = (Button) findViewById(R.id.button_upgrade_now);
 
         imageViewPay = findViewById(R.id.imagePay);
-
+        imageViewShare = findViewById(R.id.shareButton);
 
 
         ImageView imageView = findViewById(R.id.backbtn);
@@ -78,6 +91,30 @@ public class GoProActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+
+        imageViewShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+//                        .setLink(Uri.parse("https://www.sirproject.page.link/"))
+                        .setLink(Uri.parse(buildDeepLink()))
+                        .setDomainUriPrefix("https://sirproject.page.link/")
+//                        .setDomainUriPrefix("https://sirproject.page.link/subscription")
+                        .setAndroidParameters(
+                                new DynamicLink.AndroidParameters.Builder("com.sirapp")
+                                        .setFallbackUrl(Uri.parse("https://www.sirproject.page.link/"))
+                                        .setMinimumVersion(1)
+                                        .build())
+                        .buildDynamicLink();
+
+                Uri dynamicLinkUri = dynamicLink.getUri();
+
+                Log.e(TAG, "dynamicLinkUri "+dynamicLinkUri);
+
+                shareDynamicLink(dynamicLinkUri);
+            }
+        });
+
 
         linearLayout_12Month.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +137,7 @@ public class GoProActivity extends BaseActivity {
               //  bp.purchase(GoProActivity.this, "com.sirapp.onemonth");
             }
         });
+
 
         buttonUpgrade_now.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,6 +265,88 @@ public class GoProActivity extends BaseActivity {
 
 
     }
+
+
+    public String buildDeepLink() {
+        // Get the unique appcode for this app.
+        String appCode = getString(R.string.app_name);
+
+        // Get this app's package name.
+        String packageName = getPackageName();
+
+        // Build the link with all required parameters
+        Uri.Builder builder = new Uri.Builder()
+                .scheme("https")
+                .authority("sirproject.page.link")
+                .path("/subscribtion")
+                .appendQueryParameter("subscribeID", "subscribe")
+//                .appendQueryParameter("apn", packageName)
+                ;
+
+        // Return the completed deep link.
+        return builder.build().toString();
+    }
+
+    public void shareDynamicLink(Uri dynamicLink)
+    {
+        Task<ShortDynamicLink> shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                .setLongLink(dynamicLink)
+                .buildShortDynamicLink()
+                .addOnCompleteListener(Objects.requireNonNull(GoProActivity.this), new OnCompleteListener<ShortDynamicLink>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<ShortDynamicLink> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            // Short link created
+                            Uri shortLink = Objects.requireNonNull(task.getResult()).getShortLink();
+                            Uri flowchartLink = task.getResult().getPreviewLink();
+
+                            Log.e("DynamicLink", "shortLink: " + shortLink + System.lineSeparator());
+                            Log.e("DynamicLink", "flowChartLink: " + flowchartLink + System.lineSeparator());
+
+//                            Intent shareIntent = new Intent();
+//                            String msg = "Check this out: " + shortLink;
+//                            shareIntent.setAction(Intent.ACTION_SEND);
+//                            shareIntent.putExtra(Intent.EXTRA_TEXT, msg);
+//                            shareIntent.setType("text/plain");
+//                            startActivity(shareIntent);
+
+                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+
+                            File mFile2 = new File("/sdcard/share.jpg");
+                            Uri imageUri2 = FileProvider.getUriForFile(
+                                    GoProActivity.this,
+                                    BuildConfig.APPLICATION_ID + ".provider",
+                                    mFile2);
+
+                            ArrayList<Uri> uriArrayList = new ArrayList<>();
+                            if (mFile2.exists()) {
+                                uriArrayList.add(imageUri2);
+                            }
+
+                            intentShareFile.setType("application/pdf/*|image/*");
+                            intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+
+                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "Sir-app");
+
+                            String allData = "Sir-app" + "\n\n"+shortLink;
+
+                            intentShareFile.putExtra(Intent.EXTRA_TEXT, allData);
+
+
+                            startActivity(intentShareFile);
+
+                        }
+                        else
+                        {
+                            Toast.makeText(GoProActivity.this, "Failed to share event.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
 
 
     @Override

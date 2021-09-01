@@ -193,6 +193,18 @@
         android:layout_margin="@dimen/_10sdp"/>
 
 
+    <ImageView
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/share_icon"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:id="@+id/shareButton"
+        android:padding="7dp"
+        android:tint="@color/white"
+        tools:ignore="UseAppTint"
+        android:layout_margin="@dimen/_10sdp"/>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

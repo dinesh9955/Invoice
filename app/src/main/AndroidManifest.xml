@@ -72,10 +72,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Splash">
 
-<!--                        <intent-filter>-->
-<!--                            <action android:name="android.intent.action.MAIN" />-->
-<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
-<!--                        </intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+
+
 
         </activity>
 
@@ -261,15 +264,20 @@
             android:name="com.sirapp.Xyz"
             android:screenOrientation="portrait"
             android:theme="@style/Splash">
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN" />
-                            <category android:name="android.intent.category.LAUNCHER" />
-                            <action android:name="android.intent.action.VIEW" />
-                            <category android:name="android.intent.category.DEFAULT"/>
-                            <category android:name="android.intent.category.BROWSABLE"/>
-                            <data android:host="sirproject.page.link"  android:scheme="https"/>
-                            <data android:host="sirproject.page.link" android:scheme="http"/>
-                        </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+
+<!--            </intent-filter>-->
+
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+<!--                <category android:name="android.intent.category.DEFAULT"/>-->
+<!--                <category android:name="android.intent.category.BROWSABLE"/>-->
+<!--                <data android:host="sirproject.page.link"  android:scheme="https"/>-->
+<!--                <data android:host="sirproject.page.link" android:scheme="http"/>-->
+<!--            </intent-filter>-->
+
 
         </activity>
 
@@ -323,7 +331,13 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/Settings" >
-
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="sirproject.page.link"  android:scheme="https"/>
+                <data android:host="sirproject.page.link" android:scheme="http"/>
+            </intent-filter>
         </activity>
         <activity
             android:name="com.sirapp.Estimate.EstimateActivity"

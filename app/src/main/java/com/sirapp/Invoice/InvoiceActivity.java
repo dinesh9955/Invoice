@@ -4,27 +4,46 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.ShortDynamicLink;
+import com.sirapp.BuildConfig;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Adapter.CustomViewPagerAdapter;
 import com.sirapp.Base.BaseActivity;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.R;
 import com.sirapp.Utils.LockableViewPager;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class InvoiceActivity extends BaseActivity {
 
     public static Activity activity;
 
-
+    ImageView imageViewShare;
     private static final String TAG = "Create_Invoice_Activity";
     LockableViewPager viewPager;
     TabLayout tabs;
@@ -52,6 +71,9 @@ public class InvoiceActivity extends BaseActivity {
 
         tabs.setupWithViewPager(viewPager);
 
+        imageViewShare = findViewById(R.id.shareButton);
+        imageViewShare.setVisibility(View.VISIBLE);
+
         TextView customers = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview, null);
         TextView addcustomer = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview, null);
 
@@ -76,6 +98,30 @@ public class InvoiceActivity extends BaseActivity {
         }
 
         viewPager.setSwipeable(false);
+
+
+        imageViewShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+//                        .setLink(Uri.parse("https://www.sirproject.page.link/"))
+                        .setLink(Uri.parse(buildDeepLink()))
+                        .setDomainUriPrefix("https://sirproject.page.link/")
+//                        .setDomainUriPrefix("https://sirproject.page.link/subscription")
+                        .setAndroidParameters(
+                                new DynamicLink.AndroidParameters.Builder("com.sirapp")
+                                        .setFallbackUrl(Uri.parse("https://www.sirproject.page.link/"))
+                                        .setMinimumVersion(1)
+                                        .build())
+                        .buildDynamicLink();
+
+                Uri dynamicLinkUri = dynamicLink.getUri();
+
+                Log.e(TAG, "dynamicLinkUri "+dynamicLinkUri);
+
+                shareDynamicLink(dynamicLinkUri);
+            }
+        });
     }
 
     public static Context getContextOfApplication()
@@ -92,6 +138,95 @@ public class InvoiceActivity extends BaseActivity {
 
 
    }
+
+
+
+
+
+
+
+    public String buildDeepLink() {
+        // Get the unique appcode for this app.
+        String appCode = getString(R.string.app_name);
+
+        // Get this app's package name.
+        String packageName = getPackageName();
+
+        // Build the link with all required parameters
+        Uri.Builder builder = new Uri.Builder()
+                .scheme("https")
+                .authority("sirproject.page.link")
+                .path("/invoice")
+                .appendQueryParameter("invoiceID", "invoice")
+//                .appendQueryParameter("apn", packageName)
+                ;
+
+        // Return the completed deep link.
+        return builder.build().toString();
+    }
+
+    public void shareDynamicLink(Uri dynamicLink)
+    {
+        Task<ShortDynamicLink> shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                .setLongLink(dynamicLink)
+                .buildShortDynamicLink()
+                .addOnCompleteListener(Objects.requireNonNull(InvoiceActivity.this), new OnCompleteListener<ShortDynamicLink>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<ShortDynamicLink> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            // Short link created
+                            Uri shortLink = Objects.requireNonNull(task.getResult()).getShortLink();
+                            Uri flowchartLink = task.getResult().getPreviewLink();
+
+                            Log.e("DynamicLink", "shortLink: " + shortLink + System.lineSeparator());
+                            Log.e("DynamicLink", "flowChartLink: " + flowchartLink + System.lineSeparator());
+
+//                            Intent shareIntent = new Intent();
+//                            String msg = "Check this out: " + shortLink;
+//                            shareIntent.setAction(Intent.ACTION_SEND);
+//                            shareIntent.putExtra(Intent.EXTRA_TEXT, msg);
+//                            shareIntent.setType("text/plain");
+//                            startActivity(shareIntent);
+
+                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+
+                            File mFile2 = new File("/sdcard/share.jpg");
+                            Uri imageUri2 = FileProvider.getUriForFile(
+                                    InvoiceActivity.this,
+                                    BuildConfig.APPLICATION_ID + ".provider",
+                                    mFile2);
+
+                            ArrayList<Uri> uriArrayList = new ArrayList<>();
+                            if (mFile2.exists()) {
+                                uriArrayList.add(imageUri2);
+                            }
+
+                            intentShareFile.setType("application/pdf/*|image/*");
+                            intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+
+                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "Sir-app");
+
+                            String allData = "Sir-app" + "\n\n"+shortLink;
+
+                            intentShareFile.putExtra(Intent.EXTRA_TEXT, allData);
+
+
+                            startActivity(intentShareFile);
+
+                        }
+                        else
+                        {
+                            Toast.makeText(InvoiceActivity.this, "Failed to share event.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

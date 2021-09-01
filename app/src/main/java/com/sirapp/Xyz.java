@@ -94,23 +94,23 @@ public class Xyz extends AppCompatActivity {
 //                        );
 
 
-                DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
-//                        .setLink(Uri.parse("https://www.sirproject.page.link/"))
-                        .setLink(Uri.parse(buildDeepLink()))
-                        .setDomainUriPrefix("https://sirproject.page.link/")
-//                        .setDomainUriPrefix("https://sirproject.page.link/subscription")
-                        .setAndroidParameters(
-                                new DynamicLink.AndroidParameters.Builder("com.sirapp")
-                                        .setFallbackUrl(Uri.parse("https://www.sirproject.page.link/"))
-                                        .setMinimumVersion(1)
-                                        .build())
-                        .buildDynamicLink();
-
-                Uri dynamicLinkUri = dynamicLink.getUri();
-
-                Log.e(TAG, "dynamicLinkUri "+dynamicLinkUri);
-
-                shareDynamicLink(dynamicLinkUri);
+//                DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+////                        .setLink(Uri.parse("https://www.sirproject.page.link/"))
+//                        .setLink(Uri.parse(buildDeepLink()))
+//                        .setDomainUriPrefix("https://sirproject.page.link/")
+////                        .setDomainUriPrefix("https://sirproject.page.link/subscription")
+//                        .setAndroidParameters(
+//                                new DynamicLink.AndroidParameters.Builder("com.sirapp")
+//                                        .setFallbackUrl(Uri.parse("https://www.sirproject.page.link/"))
+//                                        .setMinimumVersion(1)
+//                                        .build())
+//                        .buildDynamicLink();
+//
+//                Uri dynamicLinkUri = dynamicLink.getUri();
+//
+//                Log.e(TAG, "dynamicLinkUri "+dynamicLinkUri);
+//
+//                shareDynamicLink(dynamicLinkUri);
 
               /*  Intent shareIntent = new Intent();
                 String msg = "Check this out: " + dynamicLinkUri;
@@ -121,49 +121,23 @@ public class Xyz extends AppCompatActivity {
 
 
 
-//                FirebaseDynamicLinks.getInstance()
-//                        .getDynamicLink(getIntent())
-//                        .addOnSuccessListener(Xyz.this, new OnSuccessListener<PendingDynamicLinkData>() {
-//                                    @Override
-//                                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-//                                        if (pendingDynamicLinkData != null) {
-////                                            String uri = pendingDynamicLinkData.getExtensions().getQueryParameter("dynamic_link_link_name");
-////
-////
-////                                            Gson gson = new Gson();
-////                                            String json = gson.toJson(pendingDynamicLinkData);
-////                                            Log.e(TAG , "onSuccess "+uri.toString());
-//
-//
-//                                            Uri deepLink = null;
-//                                            if(pendingDynamicLinkData != null){
-//                                                deepLink = pendingDynamicLinkData.getLink();
-//                                            }
-//
-//                                            // trying to get from the intent
-//                                            if(deepLink != null){
-//
-//                                                Uri intentData = getIntent().getData();
-//                                                if(intentData != null){
-//
-//
-//
-//                                                    String code =  getIntent().getStringExtra("subscribeID"); // always returns null
-//                                                    Log.e(TAG , "onSuccess "+code.toString());
-//                                                }
-//                                            }
-//
-//                                        }
-//                                    }
-//                                }
-//                        )
-//                .addOnFailureListener(Xyz.this, new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.e(TAG , "onFailure "+e.getMessage());
-//                    }
-//                })
-//                ;
+                FirebaseDynamicLinks.getInstance()
+                        .getDynamicLink(getIntent())
+                        .addOnSuccessListener(Xyz.this, new OnSuccessListener<PendingDynamicLinkData>() {
+                                    @Override
+                                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                                        if (pendingDynamicLinkData != null) {
+                                            Log.e(TAG, "source : " + pendingDynamicLinkData.getLink().getQueryParameter("subscribeID"));
+                                        }
+                                    }
+                                }
+                        )
+                .addOnFailureListener(Xyz.this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG , "onFailure "+e.getMessage());
+                    }
+                });
 
             }
         });
@@ -181,10 +155,11 @@ public class Xyz extends AppCompatActivity {
         // Build the link with all required parameters
         Uri.Builder builder = new Uri.Builder()
                 .scheme("https")
-                .authority(appCode)
-                .path("/")
-                .appendQueryParameter("link", "abcsfd")
-                .appendQueryParameter("apn", packageName);
+                .authority("sirproject.page.link")
+                .path("/subscribtion")
+                .appendQueryParameter("subscribeID", "subscribe")
+//                .appendQueryParameter("apn", packageName)
+                ;
 
         // Return the completed deep link.
         return builder.build().toString();
