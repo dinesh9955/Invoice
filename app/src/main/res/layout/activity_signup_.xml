@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/relativelayoutshade"
-    tools:context="com.sirapp.com.sir.SignupSignin.Signup_Activity">
+>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:id="@+id/imgback"
-            />
+            tools:ignore="UseAppTint" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -167,13 +167,26 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="50dp"
+
         android:background="@drawable/buttonshape"
         android:text="Register"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:id="@+id/btnregister"
         />
+
+        <ImageView
+            android:id="@+id/imageView756756"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/google_plus_icon"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/btnregister"
+            android:layout_marginBottom="50dp"/>
+
+
     </RelativeLayout>
 
 

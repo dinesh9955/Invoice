@@ -824,7 +824,7 @@ public class Add_Company extends BaseFragment {
                                                 e.printStackTrace();
                                             }
                                         }
-                                    }, 1000);
+                                    }, 3000);
                                 }
                             }
                         }

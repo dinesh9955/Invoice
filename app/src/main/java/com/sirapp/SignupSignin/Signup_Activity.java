@@ -17,6 +17,12 @@ import android.widget.TextView;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -25,6 +31,7 @@ import com.loopj.android.http.RequestParams;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
+import com.sirapp.Home.Home_Activity;
 import com.sirapp.R;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -44,6 +51,13 @@ public class Signup_Activity extends BaseActivity {
     Button btnregister;
 
     String mail="";
+
+    ImageView imageViewGoogleSignIn;
+
+    public GoogleSignInClient mGoogleSignInClient = null;
+    public GoogleSignInOptions gso;
+
+    public int RC_SIGN_IN = 120;
 
     private AVLoadingIndicatorView avi;
     ImageView avibackground;
@@ -66,6 +80,8 @@ public class Signup_Activity extends BaseActivity {
         edpassword = findViewById(R.id.edpassword);
         btnregister = findViewById(R.id.btnregister);
         imgback = findViewById(R.id.imgback);
+
+        imageViewGoogleSignIn = findViewById(R.id.imageView756756);
 
         refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
@@ -97,6 +113,24 @@ public class Signup_Activity extends BaseActivity {
                 userregistration();
 
                // messagebar();
+            }
+        });
+
+
+        imageViewGoogleSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build();
+
+                mGoogleSignInClient = GoogleSignIn.getClient(Signup_Activity.this, gso);
+
+                signOut();
+
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
 
@@ -447,6 +481,204 @@ public class Signup_Activity extends BaseActivity {
 
 
         }
+    }
+
+
+
+
+    private void signOut() {
+        if(mGoogleSignInClient != null){
+            mGoogleSignInClient.signOut();
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+
+
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            Log.e(TAG, "firebaseAuthWithGoogle:" + task.isSuccessful());
+
+            handleGoogleSignin(task);
+
+        }
+    }
+
+    private void handleGoogleSignin(Task<GoogleSignInAccount> task) {
+        try {
+            // Google Sign In was successful, authenticate with Firebase
+            GoogleSignInAccount account = task.getResult(ApiException.class);
+            Log.e(TAG, "firebaseAuthWithGoogle:" + account.getId());
+
+//            idOb.set(account.id)
+//            firstnameOb.set(account.givenName)
+//            lastNameOb.set(account.familyName)
+//            emailOb.set(account.email)
+//
+//            Log.e(TAG, "gt" + idOb.get().toString())
+//            Log.e(TAG, "gt" + firstnameOb.get().toString())
+//            Log.e(TAG, "gt" + lastNameOb.get().toString())
+//            Log.e(TAG, "gt" + emailOb.get().toString())
+//
+            callSocialLoginApi(account, "google");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void callSocialLoginApi(GoogleSignInAccount account, String google) {
+        final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
+
+        RequestParams params = new RequestParams();
+
+        params.add("fullname",account.getDisplayName());
+        params.add("provider", google);
+        params.add("providerId", account.getId());
+        params.add("email", account.getEmail());
+        params.add("deviceType","ANDROID");
+        params.add("device_token", refreshedToken);
+        params.add("pushToken", refreshedToken);
+        params.add("language","english");
+
+
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.post(AllSirApi.BASE_URL+"user/sociallogin",params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                Log.e(TAG, "signinresponse# "+responseBody.length);
+
+                String response = new String(responseBody);
+
+                Log.e("signinresponse",response);
+
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true"))
+                    {
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        String access_token = data.getString("access_token");
+                        JSONObject profile = data.getJSONObject("profile");
+                        String fullname = profile.getString("fullname");
+                        String email = profile.getString("email");
+                        pref.edit().putString(Constant.ACCESS_TOKEN,access_token).commit();
+                        pref.edit().putString(Constant.FULLNAME,fullname).commit();
+                        pref.edit().putString(Constant.EMAIL,email).commit();
+                        pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
+
+                        JSONObject permissions = profile.getJSONObject("permission");
+                        String invoice = permissions.getString("invoice");
+                        String estimate = permissions.getString("estimate");
+                        String stock = permissions.getString("stock");
+                        String receipt = permissions.getString("receipt");
+                        String purchase_order = permissions.getString("purchase_order");
+                        String payment_voucher = permissions.getString("payment_voucher");
+                        String tax = permissions.getString("tax");
+                        String customer = permissions.getString("customer");
+                        String supplier = permissions.getString("supplier");
+                        String product = permissions.getString("product");
+                        String service = permissions.getString("service");
+                        String credit_note = permissions.getString("credit_note");
+                        String sub_admin = permissions.getString("sub_admin");
+
+
+                        Log.e("sub_admin",sub_admin);
+                        Log.e("service",service);
+
+                        pref.edit().putString(Constant.ACCESS_TOKEN,access_token).commit();
+                        pref.edit().putString(Constant.FULLNAME,fullname).commit();
+                        pref.edit().putString(Constant.EMAIL,email).commit();
+                        pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
+                        pref.edit().putString(Constant.SUB_ADMIN,sub_admin).commit();
+                        pref.edit().putString(Constant.INVOICE,invoice).commit();
+                        pref.edit().putString(Constant.ESTIMATE,estimate).commit();
+                        pref.edit().putString(Constant.STOCK,stock).commit();
+                        pref.edit().putString(Constant.RECEIPT,receipt).commit();
+                        pref.edit().putString(Constant.PURCHASE_ORDER,purchase_order).commit();
+                        pref.edit().putString(Constant.PAYMENT_VOUCHER,payment_voucher).commit();
+                        pref.edit().putString(Constant.TAX,tax).commit();
+                        pref.edit().putString(Constant.CUSTOMER,customer).commit();
+                        pref.edit().putString(Constant.SUPPLIER,supplier).commit();
+                        pref.edit().putString(Constant.PRODUCT,product).commit();
+                        pref.edit().putString(Constant.SERVICE,service).commit();
+                        pref.edit().putString(Constant.CREDIT_NOTE,credit_note).commit();
+
+                        Map<String, Object> eventValue = new HashMap<String, Object>();
+                        eventValue.put(AFInAppEventParameterName.PARAM_1, "signin_click");
+                        AppsFlyerLib.getInstance().trackEvent(Signup_Activity.this, "signin_click", eventValue);
+
+                        Bundle params2 = new Bundle();
+                        params2.putString("event_name", "signin_click");
+                        firebaseAnalytics.logEvent("signin_click", params2);
+
+                        Constant.SuccessToast(Signup_Activity.this,jsonObject.getString("message"));
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                Intent intent = new Intent(Signup_Activity.this, Home_Activity.class);
+                                intent.putExtra("login","login");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            }
+                        },1000);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if(responseBody!=null){
+                    String response = new String(responseBody);
+                    Log.e("signinresponseF",response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+
+                        String status = jsonObject.getString("status");
+                        if (status.equals("false"))
+                        {
+                            //JSONObject message = jsonObject.getJSONObject("message");
+                            String message = jsonObject.getString("message");
+                            Log.e("signinresponseF",response);
+                            //Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
+                            Constant.ErrorToast(Signup_Activity.this, message);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }else{
+                    // Constant.ErrorToast(Signin_Activity.this, "Something went wrong!");
+                }
+
+                avi.smoothToHide();
+                avibackground.setVisibility(View.GONE);
+
+            }
+        });
+
+
     }
 
 

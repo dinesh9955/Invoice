@@ -93,8 +93,6 @@ public class Add_Warehouse_Fragment extends BaseFragment {
     }
 
     private void setListeners(){
-
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

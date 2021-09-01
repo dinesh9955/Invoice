@@ -153,7 +153,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/google_plus"
+            android:src="@drawable/google_plus_icon"
             android:layout_weight="1"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_below="@+id/btnlogin"/>
