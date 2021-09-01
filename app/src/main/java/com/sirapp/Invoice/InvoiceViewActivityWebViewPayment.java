@@ -1077,7 +1077,9 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
 
         contentAll = content;
 
-        invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
+        Log.e(TAG, "contentAll "+contentAll);
+
+        invoiceweb.loadDataWithBaseURL(nameName, contentAll, "text/html", "UTF-8", null);
     }
 
 
