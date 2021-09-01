@@ -37,37 +37,30 @@
 
     <TextView
         android:id="@+id/productdistxt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="33dp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="20dp"
         android:text="Description"
         android:textColorHint="@color/dark_grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/quantity"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toTopOf="@+id/view5"
+        app:layout_constraintEnd_toStartOf="@+id/price"
         app:layout_constraintStart_toStartOf="@+id/quantity"
         app:layout_constraintTop_toBottomOf="@+id/quantity"
-        app:layout_constraintVertical_bias="0.727"
         android:visibility="visible"/>
 
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginHorizontal="10dp"
         android:text="0"
         android:textColor="@color/darkgray"
-
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintLeft_toRightOf="@+id/quantity"
-        app:layout_constraintStart_toEndOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/deleteimg" />
+        app:layout_constraintTop_toTopOf="@+id/productdistxt" />
 
     <View
         android:id="@+id/view5"
@@ -90,11 +83,9 @@
         android:layout_height="14dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        app:layout_constraintBottom_toTopOf="@+id/price"
-        app:layout_constraintEnd_toEndOf="@+id/price"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/name"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/code_error" />
