@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Constant.Constant;
 import com.sirapp.DN.ListOfDebitNotes;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.PO.List_of_PO;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
@@ -1361,13 +1363,52 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                             String txt = "";
                             if(finalPaypal.equalsIgnoreCase("1") || finalStripe.equalsIgnoreCase("1")){
-                                  txt = getString(R.string.list_Invoiceviewed)+
-                                    "\n\n" +newLink +
-                                    "\n\n" +getString(R.string.list_Invoicepayment_link) ;
+//                                  txt = getString(R.string.list_Invoiceviewed)+
+//                                    "\n\n" +newLink +
+//                                    "\n\n" +getString(R.string.list_Invoicepayment_link) ;
                                   Log.e(TAG, "txt11" +txt);
+
+                                String content3 = "<!DOCTYPE html>\n" +
+                                        "<html>\n" +
+                                        "  <body>\n" +
+                                        "    <p>" + getString(R.string.list_Invoiceviewed) + "</p><br/>\n" +
+                                        "  </body>\n" +
+                                        "</html>";
+
+                                String content4 = "<!DOCTYPE html>\n" +
+                                        "<html>\n" +
+                                        "  <body>\n" +
+                                        "    <p>" + newLink + "</p>\n" +
+                                        "  </body>\n" +
+                                        "</html>";
+
+                                String content5 = "<!DOCTYPE html>\n" +
+                                        "<html>\n" +
+                                        "  <body>\n" +
+                                        "    <p>" + getString(R.string.list_Invoicepayment_link) + "</p>\n" +
+                                        "  </body>\n" +
+                                        "</html>";
+                                txt = content3 + content4 + content5;
                             }else{
-                                  txt = getString(R.string.list_Invoiceviewed)+
-                                    "\n\n" +newLink;
+
+                                String content3 = "<!DOCTYPE html>\n" +
+                                        "<html>\n" +
+                                        "  <body>\n" +
+                                        "    <p>" + getString(R.string.list_Invoiceviewed) + "</p><br/>\n" +
+                                        "  </body>\n" +
+                                        "</html>";
+
+                                String content4 = "<!DOCTYPE html>\n" +
+                                        "<html>\n" +
+                                        "  <body>\n" +
+                                        "    <p>" + newLink + "</p><br/>\n" +
+                                        "  </body>\n" +
+                                        "</html>";
+
+//                                  txt = getString(R.string.list_Invoiceviewed)+
+//                                    "\n\n" +newLink;
+
+                                txt = content3 + content4;
                                 Log.e(TAG, "txt22" +txt);
                             }
 
@@ -2212,13 +2253,29 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
 
-                String allData = text + "\n\n"+content1+content2;
+
+
+                Log.e(TAG, "allData "+text);
+
+
+
+//               String content3 = "<!DOCTYPE html>\n" +
+//                        "<html>\n" +
+//                        "  <body>\n" +
+//                        "    <p>" + text + "</p><br/>\n" +
+//                        "  </body>\n" +
+//                        "</html>";
+
+                String allData = text+content1+content2;
 
                 intentShareFile.putExtra(Intent.EXTRA_HTML_TEXT, allData);
 
                 if (Utility.isAppAvailable(context, "com.samsung.android.email.provider")) {
                     intentShareFile.setPackage("com.samsung.android.email.provider");
+                }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
+                    intentShareFile.setPackage("com.google.android.gm");
                 }
+
                 context.startActivity(intentShareFile);
 
             }

@@ -99,6 +99,7 @@ import com.sirapp.Product.Product_Activity;
 import com.sirapp.R;
 import com.sirapp.Service.Service_Activity;
 import com.sirapp.Tax.CustomTaxAdapter;
+import com.sirapp.Tax.Tax_Activity;
 import com.sirapp.Utils.GlideApp;
 import com.sirapp.Utils.Utility;
 import com.tejpratapsingh.pdfcreator.utils.FileManager;
@@ -1687,6 +1688,15 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
 
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.tax_bottom_itemlayout, null);
 
+            TextView add_service_new = view.findViewById(R.id.add_service_new);
+            add_service_new.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), Tax_Activity.class);
+                    getActivity().startActivityForResult(intent, 126);
+                    bottomSheetDialog3.dismiss();
+                }
+            });
 
             taxrecycler = view.findViewById(R.id.taxrecycler);
             taxswitch = view.findViewById(R.id.taxswitch);

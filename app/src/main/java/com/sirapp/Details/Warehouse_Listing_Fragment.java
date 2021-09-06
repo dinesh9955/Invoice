@@ -124,6 +124,7 @@ public class Warehouse_Listing_Fragment extends BaseFragment {
 
     public void warehouseget()
     {
+        list.clear();
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);
 

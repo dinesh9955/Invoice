@@ -369,42 +369,58 @@ public class Signup_Activity extends BaseActivity {
                             pref.edit().putString(Constant.EMAIL,email).commit();
                             pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
 
-                            JSONObject permissions = profile.getJSONObject("permission");
-                            String invoice = permissions.getString("invoice");
-                            String estimate = permissions.getString("estimate");
-                            String stock = permissions.getString("stock");
-                            String receipt = permissions.getString("receipt");
-                            String purchase_order = permissions.getString("purchase_order");
-                            String payment_voucher = permissions.getString("payment_voucher");
-                            String tax = permissions.getString("tax");
-                            String customer = permissions.getString("customer");
-                            String supplier = permissions.getString("supplier");
-                            String product = permissions.getString("product");
-                            String service = permissions.getString("service");
-                            String credit_note = permissions.getString("credit_note");
-                            String sub_admin = permissions.getString("sub_admin");
+//                            JSONObject permissions = profile.getJSONObject("permission");
+//                            String invoice = permissions.getString("invoice");
+//                            String estimate = permissions.getString("estimate");
+//                            String stock = permissions.getString("stock");
+//                            String receipt = permissions.getString("receipt");
+//                            String purchase_order = permissions.getString("purchase_order");
+//                            String payment_voucher = permissions.getString("payment_voucher");
+//                            String tax = permissions.getString("tax");
+//                            String customer = permissions.getString("customer");
+//                            String supplier = permissions.getString("supplier");
+//                            String product = permissions.getString("product");
+//                            String service = permissions.getString("service");
+//                            String credit_note = permissions.getString("credit_note");
+//                            String sub_admin = permissions.getString("sub_admin");
 
 
-                            Log.e("sub_admin",sub_admin);
-                            Log.e("service",service);
+//                            Log.e("sub_admin",sub_admin);
+//                            Log.e("service",service);
 
                             pref.edit().putString(Constant.ACCESS_TOKEN,access_token).commit();
                             pref.edit().putString(Constant.FULLNAME,fullname).commit();
                             pref.edit().putString(Constant.EMAIL,email).commit();
                             pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
-                            pref.edit().putString(Constant.SUB_ADMIN,sub_admin).commit();
-                            pref.edit().putString(Constant.INVOICE,invoice).commit();
-                            pref.edit().putString(Constant.ESTIMATE,estimate).commit();
-                            pref.edit().putString(Constant.STOCK,stock).commit();
-                            pref.edit().putString(Constant.RECEIPT,receipt).commit();
-                            pref.edit().putString(Constant.PURCHASE_ORDER,purchase_order).commit();
-                            pref.edit().putString(Constant.PAYMENT_VOUCHER,payment_voucher).commit();
-                            pref.edit().putString(Constant.TAX,tax).commit();
-                            pref.edit().putString(Constant.CUSTOMER,customer).commit();
-                            pref.edit().putString(Constant.SUPPLIER,supplier).commit();
-                            pref.edit().putString(Constant.PRODUCT,product).commit();
-                            pref.edit().putString(Constant.SERVICE,service).commit();
-                            pref.edit().putString(Constant.CREDIT_NOTE,credit_note).commit();
+
+//                            pref.edit().putString(Constant.SUB_ADMIN,sub_admin).commit();
+//                            pref.edit().putString(Constant.INVOICE,invoice).commit();
+//                            pref.edit().putString(Constant.ESTIMATE,estimate).commit();
+//                            pref.edit().putString(Constant.STOCK,stock).commit();
+//                            pref.edit().putString(Constant.RECEIPT,receipt).commit();
+//                            pref.edit().putString(Constant.PURCHASE_ORDER,purchase_order).commit();
+//                            pref.edit().putString(Constant.PAYMENT_VOUCHER,payment_voucher).commit();
+//                            pref.edit().putString(Constant.TAX,tax).commit();
+//                            pref.edit().putString(Constant.CUSTOMER,customer).commit();
+//                            pref.edit().putString(Constant.SUPPLIER,supplier).commit();
+//                            pref.edit().putString(Constant.PRODUCT,product).commit();
+//                            pref.edit().putString(Constant.SERVICE,service).commit();
+//                            pref.edit().putString(Constant.CREDIT_NOTE,credit_note).commit();
+
+
+                            pref.edit().putString(Constant.SUB_ADMIN,"1").commit();
+                            pref.edit().putString(Constant.INVOICE,"1").commit();
+                            pref.edit().putString(Constant.ESTIMATE,"1").commit();
+                            pref.edit().putString(Constant.STOCK,"1").commit();
+                            pref.edit().putString(Constant.RECEIPT,"1").commit();
+                            pref.edit().putString(Constant.PURCHASE_ORDER,"1").commit();
+                            pref.edit().putString(Constant.PAYMENT_VOUCHER,"1").commit();
+                            pref.edit().putString(Constant.TAX,"1").commit();
+                            pref.edit().putString(Constant.CUSTOMER,"1").commit();
+                            pref.edit().putString(Constant.SUPPLIER,"1").commit();
+                            pref.edit().putString(Constant.PRODUCT,"1").commit();
+                            pref.edit().putString(Constant.SERVICE,"1").commit();
+                            pref.edit().putString(Constant.CREDIT_NOTE,"1").commit();
 
 
                             Constant.SuccessToast(Signup_Activity.this,jsonObject.getString("message"));

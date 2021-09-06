@@ -27,6 +27,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@+id/productcurrency"
+        android:textSize="14dp"
         />
     <TextView
         android:layout_width="wrap_content"

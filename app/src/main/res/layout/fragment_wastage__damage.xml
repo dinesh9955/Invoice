@@ -188,7 +188,7 @@
                 android:elevation="2dp"
                 android:id="@+id/reason"
                 android:textColorHint="@color/dark_grey"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
             <Button
                 android:layout_width="match_parent"

@@ -1161,7 +1161,10 @@
         <item>To move stock between warehouses, go to Stocks module from the main menu then select stock movement and then record the transaction.</item>
         <item>When an issued purchase order is marked as delivery received, stock items in the purchase order will be automatically added to the inventory stock. When a sales invoice is issued, stock items in the sales invoice will be automatically reduced from the inventory stock.</item>
         <item>Stock value is calculated as per the product rate entered while creating product in My Products module.</item>
-        <item>To create an Invoice, Go to Invoices Module from the side menu or from the tray icon, then click on create invoice at top right, then select company and enter the relevant details, then preview invoice if required by clicking on more icon next to create invoice, then click on create invoice, your Invoice will be created and can be viewed / shared from summary page of Invoices module.</item>
+        <item>View this tutorial to see how easy it is to
+        create an invoice with SIR! &lt;a href="https://youtu.be/WO4ZC5IVkWQ" &gt;https://youtu.be/WO4ZC5IVkWQ&lt;/a&gt;
+</item>
+<!--        <item>To create an Invoice, Go to Invoices Module from the side menu or from the tray icon, then click on create invoice at top right, then select company and enter the relevant details, then preview invoice if required by clicking on more icon next to create invoice, then click on create invoice, your Invoice will be created and can be viewed / shared from summary page of Invoices module.</item>-->
         <item>Warehouse should be selected only when product is selected to enable inventory tracking. If you select an item, do not select warehouse.</item>
 
         <item>To perform any of the above functions, go to Invoices, then select the company, then go to the specific Invoice and swipe left, then click on more and select your preference.</item>

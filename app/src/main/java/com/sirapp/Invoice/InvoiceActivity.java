@@ -34,6 +34,7 @@ import com.sirapp.Base.BaseActivity;
 import com.sirapp.Home.GoProActivity;
 import com.sirapp.R;
 import com.sirapp.Utils.LockableViewPager;
+import com.sirapp.Utils.Utility;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -213,7 +214,11 @@ public class InvoiceActivity extends BaseActivity {
 
                             intentShareFile.putExtra(Intent.EXTRA_TEXT, allData);
 
-
+                            if (Utility.isAppAvailable(InvoiceActivity.this, "com.samsung.android.email.provider")) {
+                                intentShareFile.setPackage("com.samsung.android.email.provider");
+                            }else if (Utility.isAppAvailable(InvoiceActivity.this, "com.google.android.gm")) {
+                                    intentShareFile.setPackage("com.google.android.gm");
+                            }
                             startActivity(intentShareFile);
 
                         }
