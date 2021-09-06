@@ -2,16 +2,21 @@ package com.sirapp.Constant;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -114,42 +119,42 @@ public class Constant {
         SavePref pref = new SavePref();
         pref.SavePref(activity);
 
-        AccountHeader header = null;
+//        AccountHeader header = null;
         Typeface myfont=Typeface.createFromAsset(activity.getAssets(),"Fonts/Ubuntu-Regular.ttf");
-
-                header = new AccountHeaderBuilder()
-                        .withActivity(activity)
-                        .withAlternativeProfileHeaderSwitching(true)
-                        .withCompactStyle(true)
-                        .withHeightDp(115)
-//                        .withDividerBelowHeader(false)
-//                        .withPaddingBelowHeader(true)
-
-                        .withSelectionListEnabledForSingleProfile(false)
-                        .addProfiles(
-                                new ProfileDrawerItem().withName(username).withEmail(email).withTextColor(activity.getResources().getColor(R.color.white))
-                                .withTypeface(Typeface.createFromAsset(activity.getAssets(),"Fonts/AzoSans-Regular.otf"))
-                                .withIcon(R.mipmap.app_icon)
-                             //   ,new ProfileDrawerItem().withName("sepahdar ghorbani").withEmail("sepahdar.gh41@gmail.com")
-
-                                //(IProfile) new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.slide_mm).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE)
-
-                        )
-
-
-
-                        .withOnAccountHeaderSelectionViewClickListener(new AccountHeader.OnAccountHeaderSelectionViewClickListener() {
-                            @Override
-                            public boolean onClick(View view, IProfile profile) {
-
-                                /*Intent intent = new Intent(activity, AgentProfileActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);*/
-
-                                return true;
-
-                            }
-                        }).build();
+//
+//                header = new AccountHeaderBuilder()
+//                        .withActivity(activity)
+//                        .withAlternativeProfileHeaderSwitching(true)
+//                        .withCompactStyle(true)
+//                        .withHeightDp(115)
+////                        .withDividerBelowHeader(false)
+////                        .withPaddingBelowHeader(true)
+//
+//                        .withSelectionListEnabledForSingleProfile(false)
+//                        .addProfiles(
+//                                new ProfileDrawerItem().withName(username).withEmail(email).withTextColor(activity.getResources().getColor(R.color.white))
+//                                .withTypeface(Typeface.createFromAsset(activity.getAssets(),"Fonts/AzoSans-Regular.otf"))
+//                                .withIcon(R.mipmap.app_icon)
+//                             //   ,new ProfileDrawerItem().withName("sepahdar ghorbani").withEmail("sepahdar.gh41@gmail.com")
+//
+//                                //(IProfile) new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.slide_mm).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE)
+//
+//                        )
+//
+//
+//
+//                        .withOnAccountHeaderSelectionViewClickListener(new AccountHeader.OnAccountHeaderSelectionViewClickListener() {
+//                            @Override
+//                            public boolean onClick(View view, IProfile profile) {
+//
+//                                /*Intent intent = new Intent(activity, AgentProfileActivity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);*/
+//
+//                                return true;
+//
+//                            }
+//                        }).build();
 
 
 
@@ -178,7 +183,12 @@ public class Constant {
         PrimaryDrawerItem item21 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.thanku_note_2).withName(activity.getString(R.string.thank_you_note)).withTextColor(Color.WHITE);
         PrimaryDrawerItem item22 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.invoice_reminder_2).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE);
 
-      //  PrimaryDrawerItem item11 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.slide_mm).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE);
+        PrimaryDrawerItem item111 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.slide_mm)
+                .withIcon(R.mipmap.app_icon)
+                .withName(activity.getString(R.string.invoice_reminders))
+                .withDescription("dgdfgdfg\nhfghj")
+                .withBadge("fdsffgfg")
+                .withTextColor(Color.WHITE);
 
         PrimaryDrawerItem item12 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
         PrimaryDrawerItem item11 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
@@ -191,21 +201,41 @@ public class Constant {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View lst_item_view = inflater.inflate(R.layout.custom_header, null);
+        TextView headerName = (TextView) lst_item_view.findViewById(R.id.headerName);
+        TextView headerEmail = (TextView) lst_item_view.findViewById(R.id.headerEmail);
+        TextView headerDesc = (TextView) lst_item_view.findViewById(R.id.headerDesc);
+
+        headerName.setText(""+username);
+        headerEmail.setText(""+email);
+        if(pref.getSubsType().equalsIgnoreCase("onemonth")){
+            headerDesc.setText("Monthly Subscription");
+        }else if(pref.getSubsType().equalsIgnoreCase("oneyear")){
+            headerDesc.setText("Yearly Subscription");
+        }else{
+            headerDesc.setText("");
+        }
+
+
         final Drawer result = new DrawerBuilder()
-                .withAccountHeader(header)
+                //.withAccountHeader(lst_item_view)
                 .withActivity(activity)
                 .withHeaderPadding(true)
-                .withDrawerWidthPx((width/2)+((width/2)/2))
-
+//                .withDrawerWidthPx((width/2)+((width/2)/2))
+             //   .withStickyHeader(lst_item_view)
+                .withHeader(lst_item_view)
+                .withTranslucentStatusBar(true)
+                .withDisplayBelowStatusBar(true)
                 //.withDrawerGravity(Gravity.RIGHT)
                 //.withSliderBackgroundColorRes(R.color.sidemenublue)
                 .withSliderBackgroundDrawable(activity.getResources().getDrawable(R.drawable.side_menu_bg))
                 .withSelectedItem(-1)
                 .addDrawerItems(
-                       // item11.withSelectable(false).withTypeface(myfont),
+//                        item111.withSelectable(false).withTypeface(myfont),
 //                        item122.withSelectable(false).withTypeface(myfont),
 
-                        item11.withSelectable(false).withTypeface(myfont),
+//                        item11.withSelectable(false).withTypeface(myfont),
                      //   item111.withSelectable(false).withTypeface(myfont),
                         item.withSelectable(false).withTypeface(myfont),
                         item2.withSelectable(false).withTypeface(myfont),
@@ -237,214 +267,181 @@ public class Constant {
                     //Actions to be performed after clicking drawer items
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-
                         SharedPreferences preferences = activity.getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
-                        if(position==2)
+
+                        if(position==1)
                         {
-                            String sub_user = preferences.getString(Constant.SUB_ADMIN,"");
-
-                            Log.e(TAG , "SubUser1 "+sub_user);
-
-//                            if (sub_user.equals("1"))
-//                            {
+                            if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                 Intent intent = new Intent(activity, User_Activity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivityForResult(intent,101);
-//                            }
-//                            else if (sub_user.equals("0"))
-//                            {
-//                                ErrorToast(activity,"Permission Denied");
-//                            }
+                                activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
+                            }
                         }
 
-                        if(position==3)
+                        if(position==2)
                         {
-
                                 Intent intent = new Intent(activity, Companies_Activity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                         }
 
-                        if(position==4)
+                        if(position==3)
                         {
-                            String product = preferences.getString(Constant.PRODUCT,"");
-                            Log.e("product",product);
-                            if (product.equals("1"))
-                            {
+                            if(preferences.getString(Constant.PRODUCT,"").equalsIgnoreCase("1")){
                                 Intent intent = new Intent(activity, Product_Activity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
-                            }
-                            else if (product.equals("0"))
-                            {
-                                ErrorToast(activity,"Permission Denied");
-                            }
-
-                        }
-
-                        if(position==5) {
-
-                            String service = preferences.getString(Constant.SERVICE,"");
-                            Log.e("service",service);
-                            if (service.equals("1"))
-                            {
-                                Intent intent = new Intent(activity, Service_Activity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }
-                            else if (service.equals("0"))
-                            {
-                            }
-                            else
-                            {
-                                Intent intent = new Intent(activity, Service_Activity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
                             }
                         }
 
-                        if(position==6){
+                        if(position==4) {
+                            if(preferences.getString(Constant.SERVICE,"").equalsIgnoreCase("1")){
+                                Intent intent = new Intent(activity, Service_Activity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
+                            }
+                        }
 
-                            String tax = preferences.getString(Constant.TAX,"");
-                            Log.e("tax",tax);
-                            if (tax.equals("1"))
-                            {
+                        if(position==5){
+                            if(preferences.getString(Constant.TAX,"").equalsIgnoreCase("1")){
                                 Intent intent = new Intent(activity, Tax_Activity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
                             }
-                            else if (tax.equals("0"))
-                            {
-                                ErrorToast(activity,"Permission Denied");
-                            }
-
-
                         }
-                        if(position==7)
+                        if(position==6)
                         {
-                            String customer = preferences.getString(Constant.CUSTOMER,"");
-                            Log.e("customer",customer);
-                            if (customer.equals("1"))
-                            {
+                            if(preferences.getString(Constant.CUSTOMER,"").equalsIgnoreCase("1")){
                                 Intent intent = new Intent(activity, Customer_Activity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
                             }
-                            else if (customer.equals("0"))
-                            {
-                                ErrorToast(activity,"Permission Denied");
+                        }
+                        if(position==7)
+                        {
+                            if(preferences.getString(Constant.SUPPLIER,"").equalsIgnoreCase("1")){
+                                Intent intent = new Intent(activity, Vendor_Activity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
                             }
-
-
-
                         }
                         if(position==8)
                         {
-                            Intent intent = new Intent(activity, Vendor_Activity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
-
-
-                        }
-                        if(position==9)
-                        {
-
-                            String stock = preferences.getString(Constant.STOCK,"");
-                            Log.e("stock",stock);
-                            if (stock.equals("1"))
-                            {
+                            if(preferences.getString(Constant.STOCK,"").equalsIgnoreCase("1")){
                                 Intent intent = new Intent(activity, Stock_Activity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
                             }
-                            else if (stock.equals("0"))
-                            {
-                                ErrorToast(activity,"Permission Denied");
-                            }
-
                         }
 
-                        if (position==10)
+                        if (position==9)
                         {
-                            String invoice = preferences.getString(Constant.INVOICE,"");
-                            Log.e("invoice",invoice);
-                            if (invoice.equals("1"))
-                            {
+                            if(preferences.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
                                 Intent intent = new Intent(activity, InvoiceActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
                             }
-                            else if (invoice.equals("0"))
-                            {
-                                ErrorToast(activity,"Permission Denied");
-                            }
-
-
-
                         }
 
+                        if(position==10)
+                        {
+                            if(preferences.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+                                Intent intent = new Intent(activity, EstimateActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
+                            }
+                        }
                         if(position==11)
                         {
-                            Intent intent = new Intent(activity, EstimateActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
-
+                            if(preferences.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
+                                Intent intent = new Intent(activity, POActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
+                            }
                         }
                         if(position==12)
                         {
-                            Intent intent = new Intent(activity, POActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
-
+                            if(preferences.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+                                Intent intent = new Intent(activity, ReceiptsActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
+                            }
                         }
                         if(position==13)
                         {
-                            Intent intent = new Intent(activity, ReceiptsActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
-
+                            if(preferences.getString(Constant.PAYMENT_VOUCHER,"").equalsIgnoreCase("1")){
+                                Intent intent = new Intent(activity, PVActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
+                            }
                         }
                         if(position==14)
-                        {
-                            Intent intent = new Intent(activity, PVActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
-                        }
-                        if(position==15)
                         {
                             Intent intent = new Intent(activity, ReportActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             activity.startActivity(intent);
                         }
+                        if(position==15)
+                        {
+                            if(preferences.getString(Constant.CREDIT_NOTE,"").equalsIgnoreCase("1")){
+                                Intent intent = new Intent(activity, CreditNotesActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
+                            }
+
+                        }
                         if(position==16)
                         {
-                            Intent intent = new Intent(activity, CreditNotesActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
+                            if(preferences.getString(Constant.DEBIT_NOTE,"").equalsIgnoreCase("1")){
+                                Intent intent = new Intent(activity, DebitNotesActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
+                            }
                         }
 
                         if(position==17)
-                        {
-                            Intent intent = new Intent(activity, DebitNotesActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
-                        }
-
-                        if(position==18)
                         {
                             Intent intent = new Intent(activity, ThankYouNoteActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             activity.startActivity(intent);
                         }
 
-                        if(position==19)
+                        if(position==18)
                         {
                             Intent intent = new Intent(activity, InvoiceReminderActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             activity.startActivity(intent);
                         }
 
-                        if(position==21)
+                        if(position==20)
                         {
                             Intent intent = new Intent(activity, SettingsActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -452,7 +449,7 @@ public class Constant {
                         }
 
 
-                        if(position==22)
+                        if(position==21)
                         {
 
                             preferences.edit().remove(Constant.LOGGED_IN).commit();
@@ -588,7 +585,7 @@ public class Constant {
 
     public static void bottomNav(final Activity activity, int position){
 
-
+        final SharedPreferences pref = activity.getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
 
        // ImageView addproperty = activity.findViewById(R.id.addprop);
 
@@ -630,29 +627,35 @@ public class Constant {
                     activity.startActivity(intent);
                 }
                 else if(position==1){
-                   // Toast.makeText(activity,"Coming soon",Toast.LENGTH_SHORT).show();
-                       /* Intent intent = new Intent(activity, Create_Invoice_Activity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    if(pref.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(activity, EstimateActivity.class);
                         activity.startActivity(intent);
-*/
-                    Intent intent = new Intent(activity, EstimateActivity.class);
-                    activity.startActivity(intent);
-
+                    }else{
+                        createDialogOpenClass(activity);
+                    }
                 }
                 else if(position==2){
-
-                    Intent intent = new Intent(activity, InvoiceActivity.class);
-                    activity.startActivity(intent);
-
-
+                    if(pref.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(activity, InvoiceActivity.class);
+                        activity.startActivity(intent);
+                    }else{
+                        createDialogOpenClass(activity);
+                    }
                 }
-
                 else if(position==3){
-                    Intent intent = new Intent(activity, ReceiptsActivity.class);
-                    activity.startActivity(intent);
+                    if(pref.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(activity, ReceiptsActivity.class);
+                        activity.startActivity(intent);
+                    }else{
+                        createDialogOpenClass(activity);
+                    }
                 }else if(position==4){
-                    Intent intent = new Intent(activity, POActivity.class);
-                    activity.startActivity(intent);
+                    if(pref.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(activity, POActivity.class);
+                        activity.startActivity(intent);
+                    }else{
+                        createDialogOpenClass(activity);
+                    }
                 }
 
                 return false;
@@ -769,4 +772,56 @@ public class Constant {
         }
         return val;
     }
+
+
+
+
+    public static void createDialogOpenClass(final Activity splash) {
+        // TODO Auto-generated method stub
+
+        InputMethodManager imm = (InputMethodManager) splash.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = splash.getCurrentFocus();
+        if (view == null) {
+            view = new View(splash);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+
+        splash.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+//				 Builder dialog = new Builder(splash, AlertDialog.THEME_HOLO_LIGHT);
+//				 dialog.setTitle("Brain At Work");
+//				 dialog.setMessage(string);
+//				 dialog.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						// TODO Auto-generated method stub
+//						dialog.dismiss();
+//					}
+//				});
+//				 dialog.show();
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(splash);
+                builder.setTitle(splash.getString(R.string.permission_title));
+                builder.setMessage(splash.getString(R.string.permission_message))
+                        .setCancelable(false)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        });
+//				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+//					public void onClick(DialogInterface dialog, int id) {
+//						dialog.cancel();
+//					}
+//				});
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+    }
+
 }

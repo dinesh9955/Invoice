@@ -739,26 +739,29 @@ public class Add_User extends BaseFragment {
         }else if (!(password.getText().toString().trim().length() >= 6)) {
              password.setError(getString(R.string.dialog_PasswordCharacters));
              password.requestFocus();
-         } else if (selectedCompanyId.equalsIgnoreCase("")) {
+         }
+        else if (selectedCompanyId.equalsIgnoreCase("")) {
              Constant.ErrorToast(getActivity(), getString(R.string.report_SelectCompany));
-         } else if (invoice.equalsIgnoreCase("0") &&
-                 estimates.equalsIgnoreCase("0") &&
-                 stock.equalsIgnoreCase("0") &&
-                 receipts.equalsIgnoreCase("0") &&
-                 purchase.equalsIgnoreCase("0") &&
-                 payments.equalsIgnoreCase("0") &&
-                 taxes.equalsIgnoreCase("0") &&
-                 sadmin.equalsIgnoreCase("0") &&
-                 products.equalsIgnoreCase("0") &&
-                 services.equalsIgnoreCase("0") &&
-                 customers.equalsIgnoreCase("0") &&
-                 suppliers.equalsIgnoreCase("0") &&
-                 debit.equalsIgnoreCase("0") &&
-                 credit.equalsIgnoreCase("0")
-
-         ) {
-             Constant.ErrorToast(getActivity(), getString(R.string.report_SelectPermission));
-         } else {
+         }
+//        else if (invoice.equalsIgnoreCase("0") &&
+//                 estimates.equalsIgnoreCase("0") &&
+//                 stock.equalsIgnoreCase("0") &&
+//                 receipts.equalsIgnoreCase("0") &&
+//                 purchase.equalsIgnoreCase("0") &&
+//                 payments.equalsIgnoreCase("0") &&
+//                 taxes.equalsIgnoreCase("0") &&
+//                 sadmin.equalsIgnoreCase("0") &&
+//                 products.equalsIgnoreCase("0") &&
+//                 services.equalsIgnoreCase("0") &&
+//                 customers.equalsIgnoreCase("0") &&
+//                 suppliers.equalsIgnoreCase("0") &&
+//                 debit.equalsIgnoreCase("0") &&
+//                 credit.equalsIgnoreCase("0")
+//
+//         ) {
+//             Constant.ErrorToast(getActivity(), getString(R.string.report_SelectPermission));
+//         }
+        else {
 
             avi.smoothToShow();
             avibackground.setVisibility(View.VISIBLE);

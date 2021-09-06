@@ -345,6 +345,7 @@ public class Signin_Activity extends BaseActivity {
                                 pref.edit().putString(Constant.PRODUCT,product).commit();
                                 pref.edit().putString(Constant.SERVICE,service).commit();
                                 pref.edit().putString(Constant.CREDIT_NOTE,credit_note).commit();
+                                pref.edit().putString(Constant.DEBIT_NOTE,credit_note).commit();
 
                                 Map<String, Object> eventValue = new HashMap<String, Object>();
                                 eventValue.put(AFInAppEventParameterName.PARAM_1, "signin_click");

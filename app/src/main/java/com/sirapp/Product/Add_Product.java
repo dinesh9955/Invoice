@@ -1013,11 +1013,10 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
 
                                     if(jsonObject.has("message")){
                                         if(jsonObject.getString("message").contains("additional products")){
-                                            Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                                            Constant.ErrorToast(getActivity(), "You have exhausted your free usage allowance. Please upgrade to our exclusive stock tracking feature to continue enjoying our services.");
                                         }else{
-                                            Constant.ErrorToast(getActivity(), jsonObject.getString("You have exhausted your free usage allowance. Please upgrade to our exclusive stock tracking feature to continue enjoying our services."));
+                                            Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                                         }
-
                                     }
 
 
@@ -1028,21 +1027,29 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                                             new Handler().postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
+
+                                                    Log.e(TAG, "getSubsType "+pref.getSubsType());
+
                                                     try {
-                                                        if(jsonObject.getString("message").contains("additional products")){
-                                                            Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                                                            intent.putExtra("key", "product");
-                                                            startActivityForResult(intent, 43);
-                                                        }else{
+                                                        if(pref.getSubsType().equalsIgnoreCase("")){
                                                             Intent intent = new Intent(getActivity(), GoProActivity.class);
                                                             startActivity(intent);
+                                                        }else{
+                                                            if(jsonObject.getString("message").contains("additional products")){
+                                                                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                                                                intent.putExtra("key", "product");
+                                                                startActivityForResult(intent, 43);
+                                                            }else{
+                                                                Intent intent = new Intent(getActivity(), GoProActivity.class);
+                                                                startActivity(intent);
+                                                            }
                                                         }
                                                     } catch (JSONException e) {
                                                         e.printStackTrace();
                                                     }
 
                                                 }
-                                            }, 1000);
+                                            }, 3000);
                                         }
                                     }
                                 }

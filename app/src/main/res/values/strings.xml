@@ -20,7 +20,8 @@
     <string name="home_SetupPayment">Set up Payment Gateway</string>
     <string name="home_CreateyourInvoice">Create your Invoice</string>
 
-
+    <string name="permission_title">Permission Denied</string>
+    <string name="permission_message">You are not allowed to perform any action</string>
 
     <string name="user_Name_2">Name<font color='#FF0000'>*</font></string>
     <string name="user_Email_Addess_2">Email<font color='#FF0000'>*</font></string>

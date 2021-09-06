@@ -478,14 +478,7 @@ public class GoProActivity extends BaseActivity {
                     String message = jsonObject.getString("message");
                     if (status.equalsIgnoreCase("true")) {
                         Constant.SuccessToast(GoProActivity.this, message);
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-//                                Intent intent = new Intent();
-//                                setResult(RESULT_OK , intent);
-                                finish();
-                            }
-                        }, 500);
+                        getSubscriptionApi();
 
                     }else{
                         Constant.ErrorToast(GoProActivity.this, message);
@@ -657,6 +650,79 @@ public class GoProActivity extends BaseActivity {
 //                "title": "Sample Title"
 //    }
 
+
+
+    private void getSubscriptionApi() {
+
+        Utility.hideKeypad(GoProActivity.this);
+
+        RequestParams params = new RequestParams();
+        params.add("language", getLanguage());
+
+        String token = Constant.GetSharedPreferences(GoProActivity.this, Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "subscription/get", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response111 = new String(responseBody);
+                Log.e(TAG, "addproductResp1 "+response111);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response111);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true")) {
+                        JSONObject jsonObjectdata = jsonObject.getJSONObject("data");
+                        JSONArray jsonArraySubscription = jsonObjectdata.getJSONArray("subscription");
+
+                        if(jsonArraySubscription.length() > 0){
+                            for(int i = 0 ; i < jsonArraySubscription.length() ; i++){
+                                JSONObject jsonObjectVal = jsonArraySubscription.getJSONObject(i);
+                                String subscription_type = jsonObjectVal.getString("subscription_type");
+                                if(subscription_type.equalsIgnoreCase("oneyear")){
+                                    Log.e(TAG, "subscription_type1 "+subscription_type);
+                                    pref.setSubsType(subscription_type);
+                                    break;
+                                }else{
+                                    if(subscription_type.equalsIgnoreCase("onemonth")){
+                                        Log.e(TAG, "subscription_type2 "+subscription_type);
+                                        pref.setSubsType(subscription_type);
+                                        break;
+                                    }
+                                }
+                            }
+                        }else{
+                            pref.setSubsType("");
+                        }
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+//                                Intent intent = new Intent();
+//                                setResult(RESULT_OK , intent);
+                                finish();
+                            }
+                        }, 500);
+                    }
+                }catch (Exception e){
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                String response111 = new String(responseBody);
+                Log.e("addproductResp2 ", response111);
+                pref.setSubsType("");
+            }
+        });
+
+
+    }
 
 
 }
