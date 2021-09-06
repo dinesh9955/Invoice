@@ -149,8 +149,8 @@ public class GoProActivity extends BaseActivity {
 
                 if(subscription_typeNet.equalsIgnoreCase("")) {
                     Log.e(TAG, "emptyAA");
-//                    bp.purchase(GoProActivity.this, "android.test.purchased");
-                    bp.purchase(GoProActivity.this, productID);
+                    bp.purchase(GoProActivity.this, "android.test.purchased");
+//                    bp.purchase(GoProActivity.this, productID);
                 }else{
                     if(subscriptionType.equalsIgnoreCase("oneyear")) {
                           if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
@@ -158,8 +158,8 @@ public class GoProActivity extends BaseActivity {
                               Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
                           }else{
                               Log.e(TAG, "emptyBB22");
-//                              bp.purchase(GoProActivity.this, "android.test.purchased");
-                              bp.purchase(GoProActivity.this, productID);
+                              bp.purchase(GoProActivity.this, "android.test.purchased");
+//                              bp.purchase(GoProActivity.this, productID);
                           }
                     }else if(subscriptionType.equalsIgnoreCase("onemonth")){
                         if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
@@ -337,11 +337,12 @@ public class GoProActivity extends BaseActivity {
                             String allData = "Sir-app" + "\n\n"+shortLink;
 
                             intentShareFile.putExtra(Intent.EXTRA_TEXT, allData);
-                            if (Utility.isAppAvailable(GoProActivity.this, "com.samsung.android.email.provider")) {
-                                intentShareFile.setPackage("com.samsung.android.email.provider");
-                            }else if (Utility.isAppAvailable(GoProActivity.this, "com.google.android.gm")) {
-                                intentShareFile.setPackage("com.google.android.gm");
-                            }
+
+//                            if (Utility.isAppAvailable(GoProActivity.this, "com.samsung.android.email.provider")) {
+//                                intentShareFile.setPackage("com.samsung.android.email.provider");
+//                            }else if (Utility.isAppAvailable(GoProActivity.this, "com.google.android.gm")) {
+//                                intentShareFile.setPackage("com.google.android.gm");
+//                            }
 
                             startActivity(intentShareFile);
 

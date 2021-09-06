@@ -311,17 +311,17 @@ public class SettingsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(imageClickID == 1){
-                    bp.purchase(SettingsActivity.this, "com.sir.oneuser");
+//                    bp.purchase(SettingsActivity.this, "com.sir.oneuser");
                 }else if(imageClickID == 2){
-                    bp.purchase(SettingsActivity.this, "com.sir.onecompany");
+//                    bp.purchase(SettingsActivity.this, "com.sir.onecompany");
                 }else if(imageClickID == 3){
-                    bp.purchase(SettingsActivity.this, "com.sir.monthadditional");
+//                    bp.purchase(SettingsActivity.this, "com.sir.monthadditional");
                 }else if(imageClickID == 4){
-                    bp.purchase(SettingsActivity.this, "com.sir.oneyearadditions");
+//                    bp.purchase(SettingsActivity.this, "com.sir.oneyearadditions");
                 }else{
                     Constant.ErrorToast(SettingsActivity.this , getString(R.string.setting_SelectPlan));
                 }
-               //bp.purchase(SettingsActivity.this, "android.test.purchased");
+               bp.purchase(SettingsActivity.this, "android.test.purchased");
                 mybuilder.dismiss();
             }
         });

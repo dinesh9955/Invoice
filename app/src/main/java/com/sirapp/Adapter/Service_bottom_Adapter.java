@@ -201,7 +201,7 @@ public class Service_bottom_Adapter extends RecyclerView.Adapter<Service_bottom_
     public void servicedialog(int i)
     {
         final Dialog mybuilder=new Dialog(mcontext);
-        mybuilder.setContentView(R.layout.product_itemlayout);
+        mybuilder.setContentView(R.layout.service_itemlayout_2);
 
         TextView txtprice;
         final EditText edquantity,edprice;

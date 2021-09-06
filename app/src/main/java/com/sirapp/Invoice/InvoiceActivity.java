@@ -214,11 +214,12 @@ public class InvoiceActivity extends BaseActivity {
 
                             intentShareFile.putExtra(Intent.EXTRA_TEXT, allData);
 
-                            if (Utility.isAppAvailable(InvoiceActivity.this, "com.samsung.android.email.provider")) {
-                                intentShareFile.setPackage("com.samsung.android.email.provider");
-                            }else if (Utility.isAppAvailable(InvoiceActivity.this, "com.google.android.gm")) {
-                                    intentShareFile.setPackage("com.google.android.gm");
-                            }
+//                            if (Utility.isAppAvailable(InvoiceActivity.this, "com.samsung.android.email.provider")) {
+//                                intentShareFile.setPackage("com.samsung.android.email.provider");
+//                            }else if (Utility.isAppAvailable(InvoiceActivity.this, "com.google.android.gm")) {
+//                                    intentShareFile.setPackage("com.google.android.gm");
+//                            }
+
                             startActivity(intentShareFile);
 
                         }
