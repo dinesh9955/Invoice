@@ -4644,7 +4644,13 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
-        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        //invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+
+        if(AllSirApi.FONT_INVOICE == true){
+            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+        }else{
+            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        }
 
         String finalContent = content;
         invoiceweb.setWebViewClient(new WebViewClient() {
