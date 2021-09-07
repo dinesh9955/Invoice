@@ -472,7 +472,7 @@ public class Constant {
                             preferences.edit().remove(Constant.EMAIL).commit();
                             SavePref pref = new SavePref();
                             pref.SavePref(activity);
-
+                            pref.setSubsType("");
                             pref.setNumberFormatPosition(0);
                             pref.setLanguagePosition(0);
 

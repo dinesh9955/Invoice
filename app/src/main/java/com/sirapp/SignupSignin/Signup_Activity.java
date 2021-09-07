@@ -421,7 +421,7 @@ public class Signup_Activity extends BaseActivity {
                             pref.edit().putString(Constant.PRODUCT,"1").commit();
                             pref.edit().putString(Constant.SERVICE,"1").commit();
                             pref.edit().putString(Constant.CREDIT_NOTE,"1").commit();
-
+                            pref.edit().putString(Constant.DEBIT_NOTE,"1").commit();
 
                             Constant.SuccessToast(Signup_Activity.this,jsonObject.getString("message"));
                             new Handler().postDelayed(new Runnable() {
@@ -609,6 +609,7 @@ public class Signup_Activity extends BaseActivity {
                         String product = permissions.getString("product");
                         String service = permissions.getString("service");
                         String credit_note = permissions.getString("credit_note");
+                        String debit_note = permissions.getString("debit_note");
                         String sub_admin = permissions.getString("sub_admin");
 
 
@@ -632,6 +633,7 @@ public class Signup_Activity extends BaseActivity {
                         pref.edit().putString(Constant.PRODUCT,product).commit();
                         pref.edit().putString(Constant.SERVICE,service).commit();
                         pref.edit().putString(Constant.CREDIT_NOTE,credit_note).commit();
+                        pref.edit().putString(Constant.DEBIT_NOTE,debit_note).commit();
 
                         Map<String, Object> eventValue = new HashMap<String, Object>();
                         eventValue.put(AFInAppEventParameterName.PARAM_1, "signin_click");

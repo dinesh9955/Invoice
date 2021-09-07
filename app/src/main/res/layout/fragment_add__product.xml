@@ -99,7 +99,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:textSize="12dp"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"

@@ -128,6 +128,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -3870,14 +3871,26 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                 netamount.setText(Utility.getPatternFormat(""+numberPostion, netAmount)+""+cruncycode);
             }
 
-            grandAmountZZ = grandAmount;
-            discountAmountZZ = discountAmount;
-            subtotalAmountZZ = subtotalAmount;
-            taxAmountZZ = taxAmount;
-            afterTaxAmountZZ = afterTaxAmount;
-            shippingAmountZZ = shippingAmount;
-            netAmountZZ = netAmount;
+//            grandAmountZZ = grandAmount;
+//            discountAmountZZ = discountAmount;
+//            subtotalAmountZZ = subtotalAmount;
+//            taxAmountZZ = taxAmount;
+//            afterTaxAmountZZ = afterTaxAmount;
+//            shippingAmountZZ = shippingAmount;
+//            netAmountZZ = netAmount;
 
+            DecimalFormat formatter = new DecimalFormat("#0.00");
+            Log.e(TAG , "subtotalAmountZZ "+formatter.format(subtotalAmount));
+
+            grandAmountZZ = Double.parseDouble(formatter.format(grandAmount));
+            discountAmountZZ = Double.parseDouble(formatter.format(discountAmount));
+            subtotalAmountZZ = Double.parseDouble(formatter.format(subtotalAmount));
+            taxAmountZZ = Double.parseDouble(formatter.format(taxAmount));
+            afterTaxAmountZZ = Double.parseDouble(formatter.format(afterTaxAmount));
+            shippingAmountZZ = Double.parseDouble(formatter.format(shippingAmount));
+            netAmountZZ = Double.parseDouble(formatter.format(netAmount));
+//            paidAmountZZ = Double.parseDouble(formatter.format(paidAmount));
+//            balanceAmountZZ = Double.parseDouble(formatter.format(balanceAmount));
 
         } else {
 

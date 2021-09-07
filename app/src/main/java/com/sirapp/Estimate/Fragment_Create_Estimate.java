@@ -119,6 +119,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URLDecoder;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -3571,13 +3572,26 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                 netamount.setText(Utility.getPatternFormat(""+numberPostion, netAmount)+""+cruncycode);
             }
 
-            grandAmountZZ = grandAmount;
-            discountAmountZZ = discountAmount;
-            subtotalAmountZZ = subtotalAmount;
-            taxAmountZZ = taxAmount;
-            afterTaxAmountZZ = afterTaxAmount;
-            shippingAmountZZ = shippingAmount;
-            netAmountZZ = netAmount;
+//            grandAmountZZ = grandAmount;
+//            discountAmountZZ = discountAmount;
+//            subtotalAmountZZ = subtotalAmount;
+//            taxAmountZZ = taxAmount;
+//            afterTaxAmountZZ = afterTaxAmount;
+//            shippingAmountZZ = shippingAmount;
+//            netAmountZZ = netAmount;
+
+            DecimalFormat formatter = new DecimalFormat("#0.00");
+            Log.e(TAG , "subtotalAmountZZ "+formatter.format(subtotalAmount));
+
+            grandAmountZZ = Double.parseDouble(formatter.format(grandAmount));
+            discountAmountZZ = Double.parseDouble(formatter.format(discountAmount));
+            subtotalAmountZZ = Double.parseDouble(formatter.format(subtotalAmount));
+            taxAmountZZ = Double.parseDouble(formatter.format(taxAmount));
+            afterTaxAmountZZ = Double.parseDouble(formatter.format(afterTaxAmount));
+            shippingAmountZZ = Double.parseDouble(formatter.format(shippingAmount));
+            netAmountZZ = Double.parseDouble(formatter.format(netAmount));
+//            paidAmountZZ = Double.parseDouble(formatter.format(paidAmount));
+//            balanceAmountZZ = Double.parseDouble(formatter.format(balanceAmount));
 
         }else{
             grandAmount = 0.0;
@@ -3607,163 +3621,6 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
 
 
 
-
-
-
-
-//
-//
-//        double balanceamount = 0.0;
-//        Double netamountvalue = 0.0;
-//        Double Totatlvalue = 0.0;
-//        Double subtotalvalue = 0.0;
-//
-//
-//
-//
-//        if (tempList.size() > 0) {
-//
-//            String cruncycode = tempList.get(0).getCurrency_code();
-//            Log.e("cruncycode", cruncycode);
-//            Log.e("total_price", String.valueOf(this.total_price));
-//
-//            Double stratingvalue = this.total_price;
-//
-//
-//            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
-//
-//
-//
-//            grosstotal.setText(formatter.format(stratingvalue) +cruncycode);
-//
-//            netamount.setText(formatter.format(stratingvalue) +cruncycode);
-//            balance.setText(formatter.format(stratingvalue) +cruncycode);
-//            subtotalvalue = total_price;
-//            netamountvalue = total_price;
-//            balanceamount = total_price;
-//            if (strdiscount.equals("Percentage")) {
-//                subtotalvalue = 0.0;
-//                netamountvalue = 0.0;
-//                balanceamount = 0.0;
-//
-//                Log.e(TAG , "total_priceAA "+total_price);
-//                Log.e(TAG , "strdiscountvalueAA "+strdiscountvalue);
-//
-//                Totatlvalue = total_price * Double.parseDouble(Utility.getReplaceCurrency(strdiscountvalue, cruncycode)) / 100;
-//
-//
-//                discount.setText("-"+formatter.format(Totatlvalue) + cruncycode);
-//                subtotalvalue = total_price - Totatlvalue;
-//
-//
-//                netamountvalue = subtotalvalue;
-//
-//                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
-//
-//
-//                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
-//                balance.setText(formatter.format(subtotalvalue) + cruncycode);
-//                //  Log.e("DissCount value", String.valueOf(Totatlvalue)+ cruncycode);
-//            } else if (strdiscount.equals("Amount")) {
-//                subtotalvalue = 0.0;
-//                netamountvalue = 0.0;
-//                balanceamount = 0.0;
-//                try {
-//                    subtotalvalue = total_price - Double.parseDouble(strdiscountvalue.replace("Rs", ""));
-//                }catch (Exception e){
-//
-//                }
-//
-//                netamountvalue = subtotalvalue;
-//                double  strdiscountval=Double.parseDouble(strdiscountvalue);
-//
-//                discount.setText("-"+formatter.format(strdiscountval) + cruncycode);
-//                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
-//                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
-//                balance.setText(formatter.format(subtotalvalue) + cruncycode);
-//            } else {
-//
-//                discount.setText("0");
-//                subtotal.setText(formatter.format(subtotalvalue) + cruncycode);
-//                netamount.setText(formatter.format(subtotalvalue) + cruncycode);
-//                balance.setText(formatter.format(subtotalvalue) + cruncycode);
-//            }
-//
-//
-//            Log.e(TAG, "selectedtaxt.size() "+selectedtaxt.size());
-//
-//            if (selectedtaxt.size() > 0) {
-//                if (taxtypeclusive.equals("Inclusive")) { // exclude on
-//                    //netamountvalue = 0.0;
-//                    Double Totatlvalue1 = Double.parseDouble(taxtrateamt) * subtotalvalue/(100+ Double.parseDouble(taxtrateamt));
-//                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-//                    String subStrinng = taxrname + " " + taxtrateamt + "%";
-//                    txttax.setText(  subStrinng + " Incl" ); //Dont do any change
-//
-//                    //netamountvalue = subtotalvalue + Totatlvalue1;
-//
-//                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
-//                    balance.setText(formatter.format(netamountvalue) + cruncycode);
-//
-//                } else { // include off
-//
-//                    Double Totatlvalue1 = subtotalvalue * Double.parseDouble(taxtrateamt) / 100;
-//
-//                    tax.setText(formatter.format(Totatlvalue1) + cruncycode);
-//
-//                    String subStrinng = taxrname + " " + taxtrateamt + "%";
-//
-//                    txttax.setText(subStrinng); //Dont do any change
-//
-//                    netamountvalue = subtotalvalue + Totatlvalue1;
-//
-//                    netamount.setText(formatter.format(netamountvalue) + cruncycode);
-//                    balance.setText(formatter.format(netamountvalue) + cruncycode);
-//
-//                }
-//            }
-//
-//
-//
-//
-//            if (freight_cost.equals("")) {
-//
-//
-//            } else {
-//                balanceamount = netamountvalue + Double.parseDouble(freight_cost);
-//
-//                Double shipingvalue = Double.parseDouble(freight_cost);
-//
-//                freight.setText("+" + formatter.format(shipingvalue) + cruncycode);
-//                balance.setText(formatter.format(balanceamount) + cruncycode);
-//                netamount.setText(formatter.format(balanceamount) + cruncycode);
-//            }
-//            if (paidamountstr.isEmpty()) {
-//                //
-//                // Toast.makeText(getActivity(), "Empty ", Toast.LENGTH_LONG).show();
-//            } else {
-//                Log.e("balance", paidamountstr);
-//                Double paidindouble = Double.parseDouble(paidamountstr);
-//
-//                paidamount.setText(formatter.format(paidindouble) + cruncycode);
-//                balanceamount = balanceamount - Double.parseDouble(paidamountstr);
-//                Log.e("balance", String.valueOf(balanceamount));
-//
-//                balance.setText(formatter.format(balanceamount) + cruncycode);
-//            }
-//
-//
-//        } else {
-//            grosstotal.setText("0");
-//            subtotal.setText("0");
-//            discount.setText("0");
-//            freight.setText("0");
-//            paidamount.setText("0");
-//            netamount.setText("0");
-//            tax.setText("0");
-//            balance.setText("0");
-//
-//        }
 
     }
 
