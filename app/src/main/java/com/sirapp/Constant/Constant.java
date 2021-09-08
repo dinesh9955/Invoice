@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.andrognito.flashbar.Flashbar;
@@ -588,91 +589,154 @@ public class Constant {
         final SharedPreferences pref = activity.getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
 
        // ImageView addproperty = activity.findViewById(R.id.addprop);
-
-        AHBottomNavigation bottomNavigation = (AHBottomNavigation) activity.findViewById(R.id.bottom_navigation);
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(activity.getString(R.string.home), R.drawable.nav_home_2, R.color.white);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(activity.getString(R.string.estimate), R.drawable.nav_estimate_2, R.color.white);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(activity.getString(R.string.invoices), R.drawable.nav_invoice_2, R.color.white);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(activity.getString(R.string.receipts), R.drawable.nav_receipt_2, R.color.white);
-        AHBottomNavigationItem item5 = new AHBottomNavigationItem(activity.getString(R.string.po), R.drawable.nav_po_2, R.color.white);
-        bottomNavigation.addItem(item1);
-        bottomNavigation.addItem(item2);
-        bottomNavigation.addItem(item3);
-        bottomNavigation.addItem(item4);
-        bottomNavigation.addItem(item5);
-
-        bottomNavigation.setTitleTextSizeInSp (5, 10);
-
-
-
-//        addproperty.setOnClickListener(new View.OnClickListener() {
+//
+//        AHBottomNavigation bottomNavigation = (AHBottomNavigation) activity.findViewById(R.id.bottom_navigation);
+//        AHBottomNavigationItem item1 = new AHBottomNavigationItem(activity.getString(R.string.home), R.drawable.nav_home_2, R.color.white);
+//        AHBottomNavigationItem item2 = new AHBottomNavigationItem(activity.getString(R.string.estimate), R.drawable.nav_estimate_2, R.color.white);
+//        AHBottomNavigationItem item3 = new AHBottomNavigationItem(activity.getString(R.string.invoices), R.drawable.nav_invoice_2, R.color.white);
+//        AHBottomNavigationItem item4 = new AHBottomNavigationItem(activity.getString(R.string.receipts), R.drawable.nav_receipt_2, R.color.white);
+//        AHBottomNavigationItem item5 = new AHBottomNavigationItem(activity.getString(R.string.po), R.drawable.nav_po_2, R.color.white);
+//        bottomNavigation.addItem(item1);
+//        bottomNavigation.addItem(item2);
+//        bottomNavigation.addItem(item3);
+//        bottomNavigation.addItem(item4);
+//        bottomNavigation.addItem(item5);
+//
+//        bottomNavigation.setTitleTextSizeInSp (10, 10);
+//
+//
+//
+////        addproperty.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////
+////                Intent intent = new Intent(activity, Create_Invoice_Activity.class);
+////                activity.startActivity(intent);
+////
+////            }
+////        });
+//
+//
+//
+//
+//        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
 //            @Override
-//            public void onClick(View v) {
+//            public boolean onTabSelected(int position, boolean wasSelected) {
+//                if(position==0){
+//                    Intent intent = new Intent(activity, Home_Activity.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    activity.startActivity(intent);
+//                }
+//                else if(position==1){
+//                    if(pref.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+//                        Intent intent = new Intent(activity, EstimateActivity.class);
+//                        activity.startActivity(intent);
+//                    }else{
+//                        createDialogOpenClass(activity);
+//                    }
+//                }
+//                else if(position==2){
+//                    if(pref.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+//                        Intent intent = new Intent(activity, InvoiceActivity.class);
+//                        activity.startActivity(intent);
+//                    }else{
+//                        createDialogOpenClass(activity);
+//                    }
+//                }
+//                else if(position==3){
+//                    if(pref.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+//                        Intent intent = new Intent(activity, ReceiptsActivity.class);
+//                        activity.startActivity(intent);
+//                    }else{
+//                        createDialogOpenClass(activity);
+//                    }
+//                }else if(position==4){
+//                    if(pref.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
+//                        Intent intent = new Intent(activity, POActivity.class);
+//                        activity.startActivity(intent);
+//                    }else{
+//                        createDialogOpenClass(activity);
+//                    }
+//                }
 //
-//                Intent intent = new Intent(activity, Create_Invoice_Activity.class);
-//                activity.startActivity(intent);
-//
+//                return false;
 //            }
 //        });
+//
+//        //bottomNavigation.setDefaultBackgroundResource(R.drawable.bottomnavlayout);
+//    /*   bottomNavigation.setBehaviorTranslationEnabled(false);
+//       bottomNavigation.setAccentColor(R.color.red);
+//       bottomNavigation.setInactiveColor(Color.parseColor("#c5c5c5"));*/
+//        //bottomNavigation.setInactiveColor(Color.parseColor("#ffffff"));
+//        bottomNavigation.setCurrentItem(position, false);
+//        bottomNavigation.setBehaviorTranslationEnabled(false);
+//        bottomNavigation.setAccentColor(Color.parseColor("#1B60FB"));
+//        bottomNavigation.setInactiveColor(Color.parseColor("#6695FF"));
+//        bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
 
 
+        LinearLayout linearLayout1 = activity.findViewById(R.id.tab1);
+        LinearLayout linearLayout2 = activity.findViewById(R.id.tab2);
+        LinearLayout linearLayout3 = activity.findViewById(R.id.tab3);
+        LinearLayout linearLayout4 = activity.findViewById(R.id.tab4);
+        LinearLayout linearLayout5 = activity.findViewById(R.id.tab5);
 
-
-        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+        linearLayout1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTabSelected(int position, boolean wasSelected) {
-                if(position==0){
-                    Intent intent = new Intent(activity, Home_Activity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    activity.startActivity(intent);
-                }
-                else if(position==1){
-                    if(pref.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
-                        Intent intent = new Intent(activity, EstimateActivity.class);
-                        activity.startActivity(intent);
-                    }else{
-                        createDialogOpenClass(activity);
-                    }
-                }
-                else if(position==2){
-                    if(pref.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
-                        Intent intent = new Intent(activity, InvoiceActivity.class);
-                        activity.startActivity(intent);
-                    }else{
-                        createDialogOpenClass(activity);
-                    }
-                }
-                else if(position==3){
-                    if(pref.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
-                        Intent intent = new Intent(activity, ReceiptsActivity.class);
-                        activity.startActivity(intent);
-                    }else{
-                        createDialogOpenClass(activity);
-                    }
-                }else if(position==4){
-                    if(pref.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
-                        Intent intent = new Intent(activity, POActivity.class);
-                        activity.startActivity(intent);
-                    }else{
-                        createDialogOpenClass(activity);
-                    }
-                }
-
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, Home_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(intent);
             }
         });
 
-        //bottomNavigation.setDefaultBackgroundResource(R.drawable.bottomnavlayout);
-    /*   bottomNavigation.setBehaviorTranslationEnabled(false);
-       bottomNavigation.setAccentColor(R.color.red);
-       bottomNavigation.setInactiveColor(Color.parseColor("#c5c5c5"));*/
-        //bottomNavigation.setInactiveColor(Color.parseColor("#ffffff"));
-        bottomNavigation.setCurrentItem(position, false);
-        bottomNavigation.setBehaviorTranslationEnabled(false);
-        bottomNavigation.setAccentColor(Color.parseColor("#1B60FB"));
-        bottomNavigation.setInactiveColor(Color.parseColor("#6695FF"));
-        bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
+        linearLayout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pref.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(activity, EstimateActivity.class);
+                    activity.startActivity(intent);
+                }else{
+                    createDialogOpenClass(activity);
+                }
+            }
+        });
 
+        linearLayout3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pref.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(activity, InvoiceActivity.class);
+                    activity.startActivity(intent);
+                }else{
+                    createDialogOpenClass(activity);
+                }
+            }
+        });
+
+        linearLayout4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pref.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(activity, ReceiptsActivity.class);
+                    activity.startActivity(intent);
+                }else{
+                    createDialogOpenClass(activity);
+                }
+            }
+        });
+
+        linearLayout5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pref.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(activity, POActivity.class);
+                    activity.startActivity(intent);
+                }else{
+                    createDialogOpenClass(activity);
+                }
+            }
+        });
     }
 
     public static void SuccessToast(Activity context,String message){
