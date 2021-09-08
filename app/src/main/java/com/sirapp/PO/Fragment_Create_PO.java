@@ -4851,6 +4851,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
         }
 
+        String finalContent = content;
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
@@ -4892,6 +4893,38 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                         exception.printStackTrace();
                     }
                 });
+
+
+//                 PDFUtil.generatePDFFromHTML(getActivity(), savedPDFFile, finalContent, new PDFPrint.OnPDFPrintListener() {
+//                    @Override
+//                    public void onSuccess(File file) {
+//                        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//                        if(file.exists()) {
+////                            Uri photoURI = FileProvider.getUriForFile(getActivity(),
+////                                    "com.sirapp.provider",
+////                                    file);
+////                            intentShareFile.setType("application/pdf");
+////                            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse(""+photoURI));
+////
+////                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+////                                    "Share As Pdf");
+////
+////                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
+//
+//                            Log.e(TAG, "FILENAME" +file);
+//                            Log.e(TAG, "customer_name" +customer_name);
+//
+//                            createinvoicewithdetail(file);
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Exception exception) {
+//                        exception.printStackTrace();
+//                    }
+//                });
+
 
             }
         });

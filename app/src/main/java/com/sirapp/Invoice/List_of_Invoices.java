@@ -302,13 +302,13 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             @Override
             public void instantiateUnderlayButton(RecyclerView.ViewHolder viewHolder, List<UnderlayButton> underlayButtons) {
 
-                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                underlayButtons.add(new UnderlayButton(
                         getActivity(),
                         getString(R.string.list_More),
                         0,
                         Color.parseColor("#669933"),
 
-                        new SwipeHelper2.UnderlayButtonClickListener() {
+                        new UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
                                 if(temp.size() > 0){
@@ -412,12 +412,12 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                     markAsVoidTxt = getString(R.string.list_Mark_as_unvoid);
                 }
 
-                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                underlayButtons.add(new UnderlayButton(
                         getActivity(),
                         markAsVoidTxt,
                         0,
                         Color.parseColor(colorVoid),
-                        new SwipeHelper2.UnderlayButtonClickListener() {
+                        new UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
                                 if(temp.size() > 0){
@@ -504,12 +504,12 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                     markAsPaidTxt = getString(R.string.list_Mark_as_paid);
                 }
 
-                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+                underlayButtons.add(new UnderlayButton(
                         getActivity(),
                         markAsPaidTxt,
                         0,
                         Color.parseColor(colorPaid),
-                        new SwipeHelper2.UnderlayButtonClickListener() {
+                        new UnderlayButtonClickListener() {
                             @Override
                             public void onClick(final int pos) {
                                 if(temp.size() > 0){
@@ -1362,10 +1362,12 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
                             String txt = "";
+                            String txt2 = "";
                             if(finalPaypal.equalsIgnoreCase("1") || finalStripe.equalsIgnoreCase("1")){
-//                                  txt = getString(R.string.list_Invoiceviewed)+
-//                                    "\n\n" +newLink +
-//                                    "\n\n" +getString(R.string.list_Invoicepayment_link) ;
+                                txt2 = getString(R.string.list_Invoiceviewed)+
+                                    "\n\n" +newLink +
+                                    "\n\n" +getString(R.string.list_Invoicepayment_link) ;
+
                                   Log.e(TAG, "txt11" +txt);
 
                                 String content3 = "<!DOCTYPE html>\n" +
@@ -1405,8 +1407,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                         "  </body>\n" +
                                         "</html>";
 
-//                                  txt = getString(R.string.list_Invoiceviewed)+
-//                                    "\n\n" +newLink;
+                                txt2 = getString(R.string.list_Invoiceviewed)+
+                                    "\n\n" +newLink;
 
                                 txt = content3 + content4;
                                 Log.e(TAG, "txt22" +txt);
@@ -1422,7 +1424,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                     String url = urlPDF;
                                     //String subject = Utility.getRealValueInvoiceWithoutPlus(dataNo)+" from "+customerName;
                                     //Log.e(TAG, "linkWitchAA "+linkWitch);
-                                    new DownloadFileAttach(getActivity(), subject, txt, link, finalPaypal, finalStripe).execute(url.replace("https", "http"));
+                                    new DownloadFileAttach(getActivity(), subject, txt, txt2, link, finalPaypal, finalStripe).execute(url.replace("https", "http"));
                                 }
                             } catch (Exception e) {
                                 //e.toString();
@@ -2028,14 +2030,16 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
         String subject;
         String text;
+        String text2;
         String link;
         String paypal;
         String stripe;
 
-        DownloadFileAttach(Activity c, String sub, String txt, String newLink, String paypal2, String stripe2) {
+        DownloadFileAttach(Activity c, String sub, String txt, String txt2, String newLink, String paypal2, String stripe2) {
             context = c;
             subject = sub;
             text = txt;
+            text2 = txt2;
             link = newLink;
             paypal = paypal2;
             stripe = stripe2;
@@ -2184,102 +2188,93 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                     BuildConfig.APPLICATION_ID + ".provider",
                     fileWithinMyDir);
 
-            if (fileWithinMyDir.exists()) {
-                ArrayList<Uri> uriArrayList = new ArrayList<>();
-                uriArrayList.add(imageUri1);
-                uriArrayList.add(imageUri2);
-
-                String content1 = "";
-
-                if (urlPaypalName.equalsIgnoreCase("Paypal")) {
-                    String linkWitch = "PayPal";
-                    content1 = "<!DOCTYPE html>\n" +
-                            "<html>\n" +
-                            "  <head>\n" +
-                            "    <title>Title of the document</title>\n" +
-                            "    <style>\n" +
-                            "      .button {\n" +
-                            "        background-color: #1c87c9;\n" +
-                            "        border: none;\n" +
-                            "        color: white;\n" +
-                            "        padding: 20px 34px;\n" +
-                            "        text-align: center;\n" +
-                            "        text-decoration: none;\n" +
-                            "        display: inline-block;\n" +
-                            "        font-size: 20px;\n" +
-                            "        margin: 4px 2px;\n" +
-                            "        cursor: pointer;\n" +
-                            "      }\n" +
-                            "    </style>\n" +
-                            "  </head>\n" +
-                            "  <body>\n" +
-                            "    <a href=\"" + urlPaypal + "\" class=\"button\">" + linkWitch + "</a>\n" +
-                            "  </body>\n" +
-                            "</html>";
-
-                }
-
-                String content2 = "";
-                if (urlStripeName.equalsIgnoreCase("Stripe")) {
-                    String linkWitch = "Cards";
-                    content2 = "<!DOCTYPE html>\n" +
-                            "<html>\n" +
-                            "  <head>\n" +
-                            "    <title>Title of the document</title>\n" +
-                            "    <style>\n" +
-                            "      .button {\n" +
-                            "        background-color: #1c87c9;\n" +
-                            "        border: none;\n" +
-                            "        color: white;\n" +
-                            "        padding: 20px 34px;\n" +
-                            "        text-align: center;\n" +
-                            "        text-decoration: none;\n" +
-                            "        display: inline-block;\n" +
-                            "        font-size: 20px;\n" +
-                            "        margin: 4px 2px;\n" +
-                            "        cursor: pointer;\n" +
-                            "      }\n" +
-                            "    </style>\n" +
-                            "  </head>\n" +
-                            "  <body>\n" +
-                            "    <a href=\"" + urlStripe + "\" class=\"button\">" + linkWitch + "</a>\n" +
-                            "  </body>\n" +
-                            "</html>";
-                }
-
-
-                intentShareFile.setType("application/pdf/*|image/*");
-                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-
-                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
-
-
-
-                Log.e(TAG, "allData "+text);
-
-
-
-//               String content3 = "<!DOCTYPE html>\n" +
-//                        "<html>\n" +
-//                        "  <body>\n" +
-//                        "    <p>" + text + "</p><br/>\n" +
-//                        "  </body>\n" +
-//                        "</html>";
-
-                String allData = text+content1+content2;
-
-                intentShareFile.putExtra(Intent.EXTRA_HTML_TEXT, allData);
-
-                if (Utility.isAppAvailable(context, "com.samsung.android.email.provider")) {
-                    intentShareFile.setPackage("com.samsung.android.email.provider");
-                }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
-                    intentShareFile.setPackage("com.google.android.gm");
-                }
-
-                context.startActivity(intentShareFile);
-
-            }
-
+//            if (fileWithinMyDir.exists()) {
+//                ArrayList<Uri> uriArrayList = new ArrayList<>();
+//                uriArrayList.add(imageUri1);
+//                uriArrayList.add(imageUri2);
+//
+//                String content1 = "";
+//
+//                if (urlPaypalName.equalsIgnoreCase("Paypal")) {
+//                    String linkWitch = "PayPal";
+//                    content1 = "<!DOCTYPE html>\n" +
+//                            "<html>\n" +
+//                            "  <head>\n" +
+//                            "    <title>Title of the document</title>\n" +
+//                            "    <style>\n" +
+//                            "      .button {\n" +
+//                            "        background-color: #1c87c9;\n" +
+//                            "        border: none;\n" +
+//                            "        color: white;\n" +
+//                            "        padding: 20px 34px;\n" +
+//                            "        text-align: center;\n" +
+//                            "        text-decoration: none;\n" +
+//                            "        display: inline-block;\n" +
+//                            "        font-size: 20px;\n" +
+//                            "        margin: 4px 2px;\n" +
+//                            "        cursor: pointer;\n" +
+//                            "      }\n" +
+//                            "    </style>\n" +
+//                            "  </head>\n" +
+//                            "  <body>\n" +
+//                            "    <a href=\"" + urlPaypal + "\" class=\"button\">" + linkWitch + "</a>\n" +
+//                            "  </body>\n" +
+//                            "</html>";
+//
+//                }
+//
+//                String content2 = "";
+//                if (urlStripeName.equalsIgnoreCase("Stripe")) {
+//                    String linkWitch = "Cards";
+//                    content2 = "<!DOCTYPE html>\n" +
+//                            "<html>\n" +
+//                            "  <head>\n" +
+//                            "    <title>Title of the document</title>\n" +
+//                            "    <style>\n" +
+//                            "      .button {\n" +
+//                            "        background-color: #1c87c9;\n" +
+//                            "        border: none;\n" +
+//                            "        color: white;\n" +
+//                            "        padding: 20px 34px;\n" +
+//                            "        text-align: center;\n" +
+//                            "        text-decoration: none;\n" +
+//                            "        display: inline-block;\n" +
+//                            "        font-size: 20px;\n" +
+//                            "        margin: 4px 2px;\n" +
+//                            "        cursor: pointer;\n" +
+//                            "      }\n" +
+//                            "    </style>\n" +
+//                            "  </head>\n" +
+//                            "  <body>\n" +
+//                            "    <a href=\"" + urlStripe + "\" class=\"button\">" + linkWitch + "</a>\n" +
+//                            "  </body>\n" +
+//                            "</html>";
+//                }
+//
+//
+//                intentShareFile.setType("application/pdf/*|image/*");
+//                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+//
+//                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+//
+//
+//                Log.e(TAG, "allData "+text);
+//
+//
+//                String allData = text+content1+content2;
+//
+//                intentShareFile.putExtra(Intent.EXTRA_HTML_TEXT, allData);
+//
+//                if (Utility.isAppAvailable(context, "com.samsung.android.email.provider")) {
+//                    intentShareFile.setPackage("com.samsung.android.email.provider");
+//                }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
+//                    intentShareFile.setPackage("com.google.android.gm");
+//                }
+//
+//                context.startActivity(intentShareFile);
+//
+//            }
+//
 
 
 
@@ -2287,9 +2282,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 //            String urlPaypalName = "";
 //            String urlStripeName = "";
-//
-//            // String filterPage = "";
-//
+
+            // String filterPage = "";
+
 //            if(paypal.equalsIgnoreCase("1")){
 //                urlPaypalName = "paypal";
 //            }
@@ -2301,73 +2296,148 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //            Log.e(TAG, "textXX "+text);
 //            Log.e(TAG, "paypalXX "+urlPaypalName);
 //            Log.e(TAG, "stripeXX "+urlStripeName);
-//
+
 //            String urlPaypal = AllSirApi.BASE+"view/"+urlPaypalName+"/"+link;
 //            String urlStripe = AllSirApi.BASE+"view/"+urlStripeName+"/"+link;
-//
-//
-//            String urlStripeNameFilter = urlStripeName;
-//
-//
-//            new CreateHtmlTask(context.getCacheDir(), urlPaypalName, new CreateHtmlTask.OnTaskFinishedListener() {
-//                @Override
-//                public void onHtmlCreated(HtmlFile html) {
-//
-//                    new CreateHtmlTask(context.getCacheDir(), urlStripeNameFilter, new CreateHtmlTask.OnTaskFinishedListener() {
-//                        @Override
-//                        public void onHtmlCreated(HtmlFile html2) {
-//                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
-//
-//                            File mFile2 = new File("/sdcard/share.jpg");
-//                            Uri imageUri2 = FileProvider.getUriForFile(
-//                                    context,
-//                                    BuildConfig.APPLICATION_ID + ".provider",
-//                                    mFile2);
-//
-//                            File fileWithinMyDir = new File(message);
-//                            Uri imageUri1 = FileProvider.getUriForFile(context,
-//                                    BuildConfig.APPLICATION_ID + ".provider",
-//                                    fileWithinMyDir);
-//
-//                            if(fileWithinMyDir.exists()) {
-//                                ArrayList<Uri> uriArrayList = new ArrayList<>();
-//                                uriArrayList.add(imageUri1);
-//                                uriArrayList.add(imageUri2);
-//
-//                                if(paypal.equalsIgnoreCase("1")){
-//                                    uriArrayList.add(html.getFilePath());
-//                                }
-//
-//                                if(stripe.equalsIgnoreCase("1")){
-//                                    uriArrayList.add(html2.getFilePath());
-//                                }
-//
-//                                intentShareFile.setType("application/pdf/*|image/*|text/html");
-//                                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-//
-//                                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
-//
-//                                intentShareFile.putExtra(Intent.EXTRA_TEXT, text);
-//
-//                                if (Utility.isAppAvailable(context, "com.google.android.gm")) {
-//                                    intentShareFile.setPackage("com.google.android.gm");
-//                                }
-//                                context.startActivity(intentShareFile);
-//                            }
-//
-//                        }
-//                    }).execute(urlStripe);
-//
-//
-//
-//                }
-//            }).execute(urlPaypal);
-//
-//            Log.e(TAG, "fileWithinMyDir "+message);
-//
-//
-//
-//        }
+
+
+           // String urlStripeNameFilter = urlStripeName;
+
+
+            String finalUrlPaypalName = urlPaypalName;
+            String finalUrlStripeName = urlStripeName;
+            new CreateHtmlTask(context.getCacheDir(), urlPaypalName, new CreateHtmlTask.OnTaskFinishedListener() {
+                @Override
+                public void onHtmlCreated(HtmlFile html) {
+
+                    new CreateHtmlTask(context.getCacheDir(), finalUrlStripeName, new CreateHtmlTask.OnTaskFinishedListener() {
+                        @Override
+                        public void onHtmlCreated(HtmlFile html2) {
+                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+
+                            File mFile2 = new File("/sdcard/share.jpg");
+                            Uri imageUri2 = FileProvider.getUriForFile(
+                                    context,
+                                    BuildConfig.APPLICATION_ID + ".provider",
+                                    mFile2);
+
+                            File fileWithinMyDir = new File(message);
+                            Uri imageUri1 = FileProvider.getUriForFile(context,
+                                    BuildConfig.APPLICATION_ID + ".provider",
+                                    fileWithinMyDir);
+
+                            if(fileWithinMyDir.exists()) {
+                                ArrayList<Uri> uriArrayList = new ArrayList<>();
+                                uriArrayList.add(imageUri1);
+                                uriArrayList.add(imageUri2);
+
+
+                                 if (Utility.isAppAvailable(context, "com.samsung.android.email.provider")) {
+
+                                     String content1 = "";
+
+                                     if (finalUrlPaypalName.equalsIgnoreCase("Paypal")) {
+                                         String linkWitch = "PayPal";
+                                         content1 = "<!DOCTYPE html>\n" +
+                                                 "<html>\n" +
+                                                 "  <head>\n" +
+                                                 "    <title>Title of the document</title>\n" +
+                                                 "    <style>\n" +
+                                                 "      .button {\n" +
+                                                 "        background-color: #1c87c9;\n" +
+                                                 "        border: none;\n" +
+                                                 "        color: white;\n" +
+                                                 "        padding: 20px 34px;\n" +
+                                                 "        text-align: center;\n" +
+                                                 "        text-decoration: none;\n" +
+                                                 "        display: inline-block;\n" +
+                                                 "        font-size: 20px;\n" +
+                                                 "        margin: 4px 2px;\n" +
+                                                 "        cursor: pointer;\n" +
+                                                 "      }\n" +
+                                                 "    </style>\n" +
+                                                 "  </head>\n" +
+                                                 "  <body>\n" +
+                                                 "    <a href=\"" + urlPaypal + "\" class=\"button\">" + linkWitch + "</a>\n" +
+                                                 "  </body>\n" +
+                                                 "</html>";
+
+                                     }
+
+                                     String content2 = "";
+                                     if (finalUrlStripeName.equalsIgnoreCase("Stripe")) {
+                                         String linkWitch = "Cards";
+                                         content2 = "<!DOCTYPE html>\n" +
+                                                 "<html>\n" +
+                                                 "  <head>\n" +
+                                                 "    <title>Title of the document</title>\n" +
+                                                 "    <style>\n" +
+                                                 "      .button {\n" +
+                                                 "        background-color: #1c87c9;\n" +
+                                                 "        border: none;\n" +
+                                                 "        color: white;\n" +
+                                                 "        padding: 20px 34px;\n" +
+                                                 "        text-align: center;\n" +
+                                                 "        text-decoration: none;\n" +
+                                                 "        display: inline-block;\n" +
+                                                 "        font-size: 20px;\n" +
+                                                 "        margin: 4px 2px;\n" +
+                                                 "        cursor: pointer;\n" +
+                                                 "      }\n" +
+                                                 "    </style>\n" +
+                                                 "  </head>\n" +
+                                                 "  <body>\n" +
+                                                 "    <a href=\"" + urlStripe + "\" class=\"button\">" + linkWitch + "</a>\n" +
+                                                 "  </body>\n" +
+                                                 "</html>";
+                                     }
+
+                                     intentShareFile.setType("application/pdf/*|image/*");
+                                     intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+
+                                     intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+
+
+                                     Log.e(TAG, "allData "+text);
+
+
+                                     String allData = text+content1+content2;
+
+                                     intentShareFile.putExtra(Intent.EXTRA_HTML_TEXT, allData);
+                                     intentShareFile.setPackage("com.samsung.android.email.provider");
+                                }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
+                                    if(paypal.equalsIgnoreCase("1")){
+                                        uriArrayList.add(html.getFilePath());
+                                    }
+
+                                    if(stripe.equalsIgnoreCase("1")){
+                                        uriArrayList.add(html2.getFilePath());
+                                    }
+
+                                    intentShareFile.setType("application/pdf/*|image/*|text/html");
+                                    intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+
+                                    intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+
+                                    intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
+                                    intentShareFile.setPackage("com.google.android.gm");
+                                }
+                                context.startActivity(intentShareFile);
+                            }
+
+                        }
+                    }).execute(urlStripe);
+
+
+
+                }
+            }).execute(urlPaypal);
+
+            Log.e(TAG, "fileWithinMyDir "+message);
+
+
+
+
         }
     }
 
@@ -2391,15 +2461,15 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
         @Override
-        public MenuAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
             final View v = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.menu_item_2, viewGroup, false);
-            return new MenuAdapter.ViewHolder(v);
+            return new ViewHolder(v);
         }
 
 
         @Override
-        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
+        public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
             viewHolder.textViewName.setText(""+cnames.get(i));
             viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {

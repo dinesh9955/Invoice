@@ -68,8 +68,8 @@ public class PDFPrint {
     public static void generatePDFFromWebView(final File file, final WebView webView, final OnPDFPrintListener onPDFPrintListener) {
         PrintAttributes printAttributes = new PrintAttributes.Builder()
                 .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
-           //     .setResolution(new PrintAttributes.Resolution("RESOLUTION_ID", "RESOLUTION_ID", 600, 600))
-                .setResolution(new PrintAttributes.Resolution("id", Context.PRINT_SERVICE, 1024, 720))
+                .setResolution(new PrintAttributes.Resolution("RESOLUTION_ID", "RESOLUTION_ID", 600, 600))
+//                .setResolution(new PrintAttributes.Resolution("id", Context.PRINT_SERVICE, 1280, 1920))
                 .setMinMargins(PrintAttributes.Margins.NO_MARGINS)
                 .build();
 
