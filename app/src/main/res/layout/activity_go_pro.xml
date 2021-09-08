@@ -18,17 +18,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/_10sdp">
+
             <ImageView
                 android:id="@+id/imagePay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/pay2"
                 android:adjustViewBounds="true"
                 android:contentDescription="Specs"
-                android:scrollbars="vertical">
-            </ImageView>
+                android:scrollbars="vertical"
+                android:src="@drawable/pay2"></ImageView>
 
-        <RelativeLayout
+            <RelativeLayout
             android:id="@+id/relaive11_questions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

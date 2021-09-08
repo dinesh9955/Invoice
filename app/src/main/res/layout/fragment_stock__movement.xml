@@ -183,7 +183,7 @@ t            <com.isapanah.awesomespinner.AwesomeSpinner
                 android:background="@drawable/edittextshape"
                 android:elevation="2dp"
                 android:id="@+id/quantity"
-                android:inputType="numberDecimal"
+                android:inputType="number"
                 android:textColorHint="@color/dark_grey"/>
 
 

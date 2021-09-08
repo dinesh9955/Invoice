@@ -3,13 +3,13 @@
     android:layout_width="250dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingTop="30dp"
-    android:paddingBottom="30dp"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
+    android:paddingTop="@dimen/_20sdp"
+    android:paddingBottom="@dimen/_20sdp"
+    android:paddingLeft="@dimen/_15sdp"
+    android:paddingRight="@dimen/_15sdp"
     android:background="@drawable/businessactivites_curve"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginLeft="@dimen/_10sdp"
+    android:layout_marginRight="@dimen/_10sdp"
     android:elevation="5dp">
 
     <TextView
@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:text="@string/header_invoices"
         android:id="@+id/invoicestxt"
-        android:textColor="@color/lightwhite"/>
+        android:textColor="@color/lightwhite"
+        android:textSize="@dimen/_12sdp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,7 +27,7 @@
         android:id="@+id/amount"
         android:layout_below="@+id/invoicestxt"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="@dimen/_12sdp"
         />
 
 
@@ -36,7 +37,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/price"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="20dp"
+
         android:layout_centerVertical="true"/>
 
 

@@ -601,7 +601,7 @@ public class Constant {
         bottomNavigation.addItem(item4);
         bottomNavigation.addItem(item5);
 
-        bottomNavigation.setTitleTextSizeInSp (5, 13);
+        bottomNavigation.setTitleTextSizeInSp (5, 10);
 
 
 
