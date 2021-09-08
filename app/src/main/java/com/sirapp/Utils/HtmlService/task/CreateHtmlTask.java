@@ -89,21 +89,43 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 					"        background-color: #1c87c9;\n" +
 					"        border: none;\n" +
 					"        color: white;\n" +
-					"        padding: 20px 34px;\n" +
+					"        padding: 30px 60px;\n" +
 					"        text-align: center;\n" +
 					"        text-decoration: none;\n" +
 					"        display: inline-block;\n" +
-					"        font-size: 20px;\n" +
+					"        font-size: 35px;\n" +
 					"        margin: 4px 2px;\n" +
 					"        cursor: pointer;\n" +
+					"        border-radius: 10px;\n" +
 					"      }\n" +
+
+
+					"     html, body {\n" +
+					"      height: 100%;\n" +
+					"     }\n" +
+
+
+					"      .parent {\n" +
+					"        width: 100%;\n" +
+					"        height: 100%;\n" +
+					"        display: table;\n" +
+					"        text-align: center;\n" +
+					"     }\n" +
+
+
+					" 		.parent > .child {\n" +
+					"		display: table-cell;\n" +
+					"		vertical-align: middle;\n" +
+					"     }\n" +
+
 					"    </style>\n" +
 					"  </head>\n" +
 					"  <body>\n" +
-					"    <a href=\""+link+"\" class=\"button\">"+linkWitch+"</a>\n" +
-
-//							"    <a href=\"http://myhost.com/v/page1?id=123;scheme=my_scheme;action=android.intent.action.VIEW;end\" class=\"button\">"+linkWitch+"</a>\n" +
-
+					"  <section class=\"parent\">\n" +
+					"	 <div class=\"child\">\n" +
+					"      <a href=\""+link+"\" class=\"button\">"+linkWitch+"</a>\n" +
+					"	 </div>\n" +
+					"	</section>\n" +
 					"  </body>\n" +
 					"</html>";
 

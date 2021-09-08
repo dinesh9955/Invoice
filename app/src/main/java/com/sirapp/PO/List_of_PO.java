@@ -2057,42 +2057,6 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                                     Toast.makeText(getActivity(), getString(R.string.list_NoFileFound), Toast.LENGTH_LONG).show();
                                 } else {
                                     BaseurlForShareInvoice = shareInvoicelink + sharelink;
-                                    //String finalurl =BaseurlForShareInvoice;
-
-//                                    String[] TO = {"email@server.com"};
-//                                    Uri uri = Uri.parse("mailto:email@server.com")
-//                                            .buildUpon()
-//                                            .appendQueryParameter("subject", subject)
-//                                            .appendQueryParameter("body", txt)
-//                                            .build();
-//                                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, uri);
-//
-//                                    emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-//                                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-
-
-
-
-
-
-
-//                                    String to = "";
-//                                    //  String subject= "Hi I am subject";
-//                                    //  String body="Hi I am test body";
-//                                    String mailTo = "mailto:" + to +
-//                                            "?&subject=" + Uri.encode(subject) +
-//                                            "&body=" + Uri.encode(txt);
-//
-//                                    Intent intent = new Intent(Intent.ACTION_SENDTO);
-//                                    // intent.setType("text/plain");
-//                                    String message="File to be shared is " + "file_name" + ".";
-////                                intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-//                                    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
-////                                intent.putExtra(Intent.EXTRA_TEXT, message);
-//                                    //intent.setData(Uri.parse("mailto:xyz@gmail.com"));
-//                                    intent.setData(Uri.parse(mailTo));
-//                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                    startActivity(intent);
 
                                     Intent share = new Intent(Intent.ACTION_SEND);
                                     share.setType("image/jpeg");
@@ -2102,7 +2066,10 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                                     share.putExtra(Intent.EXTRA_STREAM,
                                             Uri.parse("file:///sdcard/share.jpg"));
 
-                                    if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")){
+                                    if (Utility.isAppAvailable(getActivity(), "com.samsung.android.email.provider")){
+                                        share.setPackage("com.samsung.android.email.provider");
+                                    }
+                                    else if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")) {
                                         share.setPackage("com.google.android.gm");
                                     }
                                     startActivity(share);

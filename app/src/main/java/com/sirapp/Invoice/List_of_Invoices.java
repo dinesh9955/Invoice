@@ -2012,7 +2012,14 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //                    intentShareFile.setPackage("com.google.android.gm");
 //                }
 //                context.startActivity(intentShareFile);
-                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+
+//                if (Utility.isAppAvailable(context, "com.samsung.android.email.provider")) {
+//                    intentShareFile.setPackage("com.samsung.android.email.provider");
+//                } else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
+//                    intentShareFile.setPackage("com.google.android.gm");
+//                }
+//                context.startActivity(intentShareFile);
+               context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
             }
 
         }

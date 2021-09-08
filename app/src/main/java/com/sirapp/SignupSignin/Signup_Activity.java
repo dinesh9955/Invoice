@@ -603,10 +603,6 @@ public class Signup_Activity extends BaseActivity {
 //                        Log.e("sub_admin",sub_admin);
 //                        Log.e("service",service);
 
-                        pref.edit().putString(Constant.ACCESS_TOKEN,access_token).commit();
-                        pref.edit().putString(Constant.FULLNAME,fullname).commit();
-                        pref.edit().putString(Constant.EMAIL,email).commit();
-                        pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
 
 //                        pref.edit().putString(Constant.SUB_ADMIN,sub_admin).commit();
 //                        pref.edit().putString(Constant.INVOICE,invoice).commit();

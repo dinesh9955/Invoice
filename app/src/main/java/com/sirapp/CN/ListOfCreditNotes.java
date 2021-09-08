@@ -990,9 +990,13 @@ public class ListOfCreditNotes extends BaseFragment {
                                 share.putExtra(Intent.EXTRA_STREAM,
                                         Uri.parse("file:///sdcard/share.jpg"));
 
-                                if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")){
+                                if (Utility.isAppAvailable(getActivity(), "com.samsung.android.email.provider")){
+                                    share.setPackage("com.samsung.android.email.provider");
+                                }
+                                else if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")) {
                                     share.setPackage("com.google.android.gm");
                                 }
+
                                 startActivity(share);
 
 

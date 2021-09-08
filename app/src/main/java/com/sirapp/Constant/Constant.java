@@ -283,9 +283,14 @@ public class Constant {
 
                         if(position==2)
                         {
+                            if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                 Intent intent = new Intent(activity, Companies_Activity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
+                            }else{
+                                createDialogOpenClass(activity);
+                            }
+
                         }
 
                         if(position==3)
