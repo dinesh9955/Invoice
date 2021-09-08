@@ -468,7 +468,7 @@
     <string name="stock_Remove_from_stock">Remove from stock</string>
 
 
-    <string name="report_SelectPermission">Select Permission</string>
+    <string name="report_SelectPermission">Please select atleast 1 access</string>
     <string name="report_SelectCompany">Select Company</string>
     <string name="report_Previewit">Preview it</string>
     <string name="report_Print">Print</string>

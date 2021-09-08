@@ -220,8 +220,8 @@ public class InvoiceActivity extends BaseActivity {
 //                                    intentShareFile.setPackage("com.google.android.gm");
 //                            }
 
-                            startActivity(intentShareFile);
-
+                           // startActivity(intentShareFile);
+                            startActivity(Intent.createChooser(intentShareFile, "Choose one"));
                         }
                         else
                         {

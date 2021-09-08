@@ -343,8 +343,8 @@ public class GoProActivity extends BaseActivity {
 //                            }else if (Utility.isAppAvailable(GoProActivity.this, "com.google.android.gm")) {
 //                                intentShareFile.setPackage("com.google.android.gm");
 //                            }
-
-                            startActivity(intentShareFile);
+                            startActivity(Intent.createChooser(intentShareFile, "Choose one"));
+//                            startActivity(intentShareFile);
 
                         }
                         else
