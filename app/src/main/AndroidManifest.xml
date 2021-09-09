@@ -20,6 +20,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name = "android.permission.MANAGE_EXTERNAL_STORAGE"/>
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -838,10 +839,10 @@
         </receiver>
 
 
-        <provider
-            android:name="com.sirapp.Utils.HtmlService.provider.CacheFileProvider"
-            android:authorities="com.sirapp.cacheFileProvider"
-            android:exported="true" />
+<!--        <provider-->
+<!--            android:name="com.sirapp.Utils.HtmlService.provider.CacheFileProvider"-->
+<!--            android:authorities="com.sirapp.cacheFileProvider"-->
+<!--            android:exported="true" />-->
 
 
 

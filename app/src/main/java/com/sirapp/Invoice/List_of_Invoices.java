@@ -2313,11 +2313,11 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
             String finalUrlPaypalName = urlPaypalName;
             String finalUrlStripeName = urlStripeName;
-            new CreateHtmlTask(context.getCacheDir(), urlPaypalName, new CreateHtmlTask.OnTaskFinishedListener() {
+            new CreateHtmlTask(context, context.getCacheDir(), urlPaypalName, new CreateHtmlTask.OnTaskFinishedListener() {
                 @Override
                 public void onHtmlCreated(HtmlFile html) {
 
-                    new CreateHtmlTask(context.getCacheDir(), finalUrlStripeName, new CreateHtmlTask.OnTaskFinishedListener() {
+                    new CreateHtmlTask(context, context.getCacheDir(), finalUrlStripeName, new CreateHtmlTask.OnTaskFinishedListener() {
                         @Override
                         public void onHtmlCreated(HtmlFile html2) {
                             Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);

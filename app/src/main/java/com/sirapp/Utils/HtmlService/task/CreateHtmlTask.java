@@ -7,6 +7,7 @@ import java.io.IOException;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -34,10 +35,13 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 	String linkWitch = "Cards";
 
 
+	Context context;
 
 	// Let the listener be set in the constructor (making it obvious to anyone using this class they can be informed when it is finished)
 	// Note they can still pass null to not listen
-	public CreateHtmlTask(File storageFolder, String linkWitch2, OnTaskFinishedListener taskFinishedListener) {
+	public CreateHtmlTask(Context context, File storageFolder, String linkWitch2, OnTaskFinishedListener taskFinishedListener) {
+
+		this.context = context;
 		this.folder = storageFolder;
 
 		if(linkWitch2.equalsIgnoreCase("Paypal")){
@@ -132,11 +136,14 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 
 			File file = createTempFile(folder, linkWitch+".html", content);
 			// Create our domain object wrapping the file
-			htmlFile = new HtmlFile(file);
+
+			Log.e(TAG , "fileCCC "+file);
+
+			htmlFile = new HtmlFile(file, context);
 		} catch (IOException e) {
 			Log.e("IOException - creating safe HtmlFile", ""+e);
 			// Create a 'NullSafe' HtmlFile object if an error occurs
-			htmlFile = new HtmlFile(null);
+			htmlFile = new HtmlFile(null, context);
 		}
 		return htmlFile;
 	}
