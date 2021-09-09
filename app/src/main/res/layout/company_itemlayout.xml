@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relativeLayout5"
     android:layout_width="match_parent"
     android:layout_centerInParent="true"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="45dp"
+    android:layout_marginBottom="@dimen/_20sdp"
     android:paddingLeft="20dp"
-    android:paddingRight="20dp">
+    android:paddingRight="20dp"
+    android:paddingTop="@dimen/_10sdp"
+    android:paddingBottom="@dimen/_10sdp">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/image"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/sir_app_logo"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,11 +25,13 @@
         android:id="@+id/companyname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="@dimen/_15sdp"
         android:text="Company Name"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/image"
-        app:layout_constraintTop_toTopOf="@+id/image" />
+        app:layout_constraintTop_toTopOf="@+id/image"
+        android:textSize="@dimen/_12sdp"
+        android:layout_toRightOf="@+id/image"/>
 
     <TextView
         android:id="@+id/name"
@@ -51,13 +53,17 @@
         android:layout_marginTop="4dp"
         android:text="Address"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintLeft_toRightOf="@+id/image"
         app:layout_constraintRight_toLeftOf="@+id/details"
         app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/companyname" />
+        app:layout_constraintHorizontal_bias="0.01"
+        android:layout_marginLeft="@dimen/_15sdp"
+        app:layout_constraintTop_toBottomOf="@+id/companyname"
+        android:layout_toRightOf="@+id/image"
+        android:layout_toLeftOf="@+id/details"
+        android:layout_below="@+id/companyname"/>
 
     <TextView
         android:id="@+id/details"
@@ -71,16 +77,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toTopOf="@+id/image" />
+        app:layout_constraintTop_toTopOf="@+id/image"
+        android:layout_alignParentRight="true"/>
 
     <View
         android:id="@+id/view8"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/_22sdp"
         android:background="@color/gray"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoicepricetxt">
+        app:layout_constraintTop_toBottomOf="@+id/invoicepricetxt"
+        android:layout_below="@+id/invoicepricetxt">
 
     </View>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -4,13 +4,13 @@
     android:layout_height="wrap_content"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:layout_marginBottom="45dp"
+    android:layout_marginBottom="@dimen/_20sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         android:src="@drawable/sir_app_logo"
         app:riv_corner_radius="100dp"
         android:id="@+id/image"
@@ -24,10 +24,11 @@
         android:textStyle="bold"
         android:id="@+id/productname"
         android:layout_toRightOf="@+id/image"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@+id/productcurrency"
+        android:textSize="@dimen/_12sdp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -35,13 +36,14 @@
         android:text="Category:Hardware"
         android:id="@+id/productcategory"
         android:layout_toRightOf="@+id/image"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="@dimen/_10sdp"
         android:layout_below="@+id/productname"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/productcurrency"
         android:layout_marginRight="5dp"
+
         />
     <TextView
         android:layout_width="wrap_content"
@@ -49,10 +51,10 @@
         android:text="@string/product_Reorder_Level_"
         android:id="@+id/status"
         android:layout_toRightOf="@+id/image"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="@dimen/_10sdp"
         android:layout_below="@+id/productcategory"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="5dp"
         />
     <TextView
@@ -63,7 +65,7 @@
         android:layout_toRightOf="@+id/status"
         android:layout_marginLeft="0dp"
         android:layout_below="@+id/productcategory"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/productcurrency"
         android:layout_marginRight="5dp"
@@ -72,26 +74,26 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
         android:text="120.00"
         android:textStyle="bold"
         android:id="@+id/productcurrency"
         android:layout_alignParentEnd="true"
         android:textColor="@color/lightpurple"
-        android:textSize="18sp"
+        android:textSize="@dimen/_9sdp"
 
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/productcurrency"
-        android:layout_marginRight="20dp"
+
         android:text="Qatari Rial"
         android:id="@+id/productcurrencyunit"
         android:layout_alignParentEnd="true"
         android:textColor="@color/lightpurple"
-        android:textSize="10sp"
-        android:padding="3dp"
+        android:textSize="@dimen/_9sdp"
+        android:layout_marginTop="@dimen/_3sdp"
 
         />
 
@@ -99,8 +101,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"
-        android:layout_below="@+id/status"
-        android:layout_marginTop="10dp">
+        android:layout_below="@+id/productstock"
+        android:layout_marginTop="@dimen/_10sdp">
 
     </View>
 

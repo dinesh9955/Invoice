@@ -41,9 +41,9 @@ public class Company_Details_Activity extends BaseActivity {
 
         tabs.setupWithViewPager(viewPager);
 
-        TextView customers = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview, null);
-        TextView addcustomer = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview, null);
-        TextView addwarehouse = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview, null);
+        TextView customers = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview_stock, null);
+        TextView addcustomer = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview_stock, null);
+        TextView addwarehouse = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview_stock, null);
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));
@@ -53,9 +53,9 @@ public class Company_Details_Activity extends BaseActivity {
         addwarehouse.setText(getString(R.string.header_company_detail_add_warehouse));
         addcustomer.setText(getString(R.string.header_company_detail_warehouse));
 
-        customers.setTextSize(12);
-        addcustomer.setTextSize(12);
-        addwarehouse.setTextSize(12);
+//        customers.setTextSize(12);
+//        addcustomer.setTextSize(12);
+//        addwarehouse.setTextSize(12);
 
         customers.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));
         addcustomer.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Regular.otf"));

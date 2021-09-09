@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.sirapp.com.sir.Tax.Tax_Listing"
     android:background="@color/white">
 
     <EditText
@@ -19,7 +18,8 @@
         android:background="@drawable/search_shape"
         android:elevation="3dp"
         android:maxLines="1"
-        android:textColorHint="@color/dark_grey"/>
+        android:textColorHint="@color/dark_grey"
+        android:textSize="@dimen/_10sdp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

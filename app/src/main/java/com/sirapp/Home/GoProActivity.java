@@ -75,7 +75,7 @@ public class GoProActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_go_pro);
-        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
+//        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
 
         linearLayout_12Month = (LinearLayout) findViewById(R.id.linear_12_month);
         linearLayout_1Month = (LinearLayout) findViewById(R.id.linear_1_month);
@@ -113,6 +113,8 @@ public class GoProActivity extends BaseActivity {
                 Log.e(TAG, "dynamicLinkUri "+dynamicLinkUri);
 
                 shareDynamicLink(dynamicLinkUri);
+
+
             }
         });
 
@@ -309,42 +311,53 @@ public class GoProActivity extends BaseActivity {
                             Log.e("DynamicLink", "shortLink: " + shortLink + System.lineSeparator());
                             Log.e("DynamicLink", "flowChartLink: " + flowchartLink + System.lineSeparator());
 
-//                            Intent shareIntent = new Intent();
-//                            String msg = "Check this out: " + shortLink;
-//                            shareIntent.setAction(Intent.ACTION_SEND);
-//                            shareIntent.putExtra(Intent.EXTRA_TEXT, msg);
-//                            shareIntent.setType("text/plain");
-//                            startActivity(shareIntent);
-
-                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
-
-                            File mFile2 = new File("/sdcard/share.jpg");
-                            Uri imageUri2 = FileProvider.getUriForFile(
-                                    GoProActivity.this,
-                                    BuildConfig.APPLICATION_ID + ".provider",
-                                    mFile2);
-
-                            ArrayList<Uri> uriArrayList = new ArrayList<>();
-                            if (mFile2.exists()) {
-                                uriArrayList.add(imageUri2);
-                            }
-
-                            intentShareFile.setType("application/pdf/*|image/*");
-                            intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-
-                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "Sir-app");
+////                            Intent shareIntent = new Intent();
+////                            String msg = "Check this out: " + shortLink;
+////                            shareIntent.setAction(Intent.ACTION_SEND);
+////                            shareIntent.putExtra(Intent.EXTRA_TEXT, msg);
+////                            shareIntent.setType("text/plain");
+////                            startActivity(shareIntent);
+//
+//                            Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//
+////                            File mFile2 = new File("/sdcard/share.jpg");
+////                            Uri imageUri2 = FileProvider.getUriForFile(
+////                                    GoProActivity.this,
+////                                    BuildConfig.APPLICATION_ID + ".provider",
+////                                    mFile2);
+//
+////                            ArrayList<Uri> uriArrayList = new ArrayList<>();
+////                            if (mFile2.exists()) {
+////                                uriArrayList.add(imageUri2);
+////                            }
+//
+//                           // intentShareFile.setType("application/pdf/*|image/*");
+//                            intentShareFile.setType("plain/text");
+//                          //  intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+//
+//                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "Sir-app");
+//
+//
+//                            intentShareFile.putExtra(Intent.EXTRA_TEXT, allData);
+//
+////                            if (Utility.isAppAvailable(GoProActivity.this, "com.samsung.android.email.provider")) {
+////                                intentShareFile.setPackage("com.samsung.android.email.provider");
+////                            }else if (Utility.isAppAvailable(GoProActivity.this, "com.google.android.gm")) {
+////                                intentShareFile.setPackage("com.google.android.gm");
+////                            }
+//                            startActivity(Intent.createChooser(intentShareFile, "Choose one"));
+////                            startActivity(intentShareFile);
 
                             String allData = "Sir-app" + "\n\n"+shortLink;
+                            Intent sendIntent = new Intent();
+                            sendIntent.setAction(Intent.ACTION_SEND);
+                            sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Sir-app");
+                            sendIntent.putExtra(Intent.EXTRA_TEXT, allData);
+                            sendIntent.setType("text/plain");
+                            startActivity(sendIntent);
 
-                            intentShareFile.putExtra(Intent.EXTRA_TEXT, allData);
 
-//                            if (Utility.isAppAvailable(GoProActivity.this, "com.samsung.android.email.provider")) {
-//                                intentShareFile.setPackage("com.samsung.android.email.provider");
-//                            }else if (Utility.isAppAvailable(GoProActivity.this, "com.google.android.gm")) {
-//                                intentShareFile.setPackage("com.google.android.gm");
-//                            }
-                            startActivity(Intent.createChooser(intentShareFile, "Choose one"));
-//                            startActivity(intentShareFile);
+
 
                         }
                         else

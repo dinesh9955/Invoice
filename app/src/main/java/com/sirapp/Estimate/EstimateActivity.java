@@ -32,7 +32,7 @@ public class EstimateActivity extends AppCompatActivity {
             setContentView(R.layout.activity_create__invoice_);
             //Constant.bottomNav(Create_Invoice_Activity.this,1);
 
-            overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
+//            overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
             Constant.toolbar(EstimateActivity.this,getString(R.string.header_estimates));

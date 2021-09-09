@@ -55,7 +55,7 @@ public class InvoiceActivity extends BaseActivity {
         setContentView(R.layout.activity_create__invoice_);
         //Constant.bottomNav(Create_Invoice_Activity.this,1);
 
-        overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
+//        overridePendingTransition(R.anim.flip_out,R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         Constant.toolbar(InvoiceActivity.this,getString(R.string.header_invoices));
@@ -185,43 +185,53 @@ public class InvoiceActivity extends BaseActivity {
                             Log.e("DynamicLink", "shortLink: " + shortLink + System.lineSeparator());
                             Log.e("DynamicLink", "flowChartLink: " + flowchartLink + System.lineSeparator());
 
-//                            Intent shareIntent = new Intent();
-//                            String msg = "Check this out: " + shortLink;
-//                            shareIntent.setAction(Intent.ACTION_SEND);
-//                            shareIntent.putExtra(Intent.EXTRA_TEXT, msg);
-//                            shareIntent.setType("text/plain");
-//                            startActivity(shareIntent);
+////                            Intent shareIntent = new Intent();
+////                            String msg = "Check this out: " + shortLink;
+////                            shareIntent.setAction(Intent.ACTION_SEND);
+////                            shareIntent.putExtra(Intent.EXTRA_TEXT, msg);
+////                            shareIntent.setType("text/plain");
+////                            startActivity(shareIntent);
+//
+//                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+//
+////                            File mFile2 = new File("/sdcard/share.jpg");
+////                            Uri imageUri2 = FileProvider.getUriForFile(
+////                                    InvoiceActivity.this,
+////                                    BuildConfig.APPLICATION_ID + ".provider",
+////                                    mFile2);
+////
+////                            ArrayList<Uri> uriArrayList = new ArrayList<>();
+////                            if (mFile2.exists()) {
+////                                uriArrayList.add(imageUri2);
+////                            }
+//
+//                            intentShareFile.setType("application/pdf/*|image/*");
+//                          //  intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+//
+//                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "Sir-app");
+//
+//                            String allData = "Sir-app" + "\n\n"+shortLink;
+//
+//                            intentShareFile.putExtra(Intent.EXTRA_TEXT, allData);
+//
+////                            if (Utility.isAppAvailable(InvoiceActivity.this, "com.samsung.android.email.provider")) {
+////                                intentShareFile.setPackage("com.samsung.android.email.provider");
+////                            }else if (Utility.isAppAvailable(InvoiceActivity.this, "com.google.android.gm")) {
+////                                    intentShareFile.setPackage("com.google.android.gm");
+////                            }
+//
+//                           // startActivity(intentShareFile);
+//                            startActivity(Intent.createChooser(intentShareFile, "Choose one"));
 
-                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
-
-                            File mFile2 = new File("/sdcard/share.jpg");
-                            Uri imageUri2 = FileProvider.getUriForFile(
-                                    InvoiceActivity.this,
-                                    BuildConfig.APPLICATION_ID + ".provider",
-                                    mFile2);
-
-                            ArrayList<Uri> uriArrayList = new ArrayList<>();
-                            if (mFile2.exists()) {
-                                uriArrayList.add(imageUri2);
-                            }
-
-                            intentShareFile.setType("application/pdf/*|image/*");
-                            intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-
-                            intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "Sir-app");
 
                             String allData = "Sir-app" + "\n\n"+shortLink;
+                            Intent sendIntent = new Intent();
+                            sendIntent.setAction(Intent.ACTION_SEND);
+                            sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Sir-app");
+                            sendIntent.putExtra(Intent.EXTRA_TEXT, allData);
+                            sendIntent.setType("text/plain");
+                            startActivity(sendIntent);
 
-                            intentShareFile.putExtra(Intent.EXTRA_TEXT, allData);
-
-//                            if (Utility.isAppAvailable(InvoiceActivity.this, "com.samsung.android.email.provider")) {
-//                                intentShareFile.setPackage("com.samsung.android.email.provider");
-//                            }else if (Utility.isAppAvailable(InvoiceActivity.this, "com.google.android.gm")) {
-//                                    intentShareFile.setPackage("com.google.android.gm");
-//                            }
-
-                           // startActivity(intentShareFile);
-                            startActivity(Intent.createChooser(intentShareFile, "Choose one"));
                         }
                         else
                         {

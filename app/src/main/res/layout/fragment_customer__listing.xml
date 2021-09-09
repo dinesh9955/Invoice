@@ -47,14 +47,15 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="@string/customer_Search_Customer"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/search"
         android:padding="10dp"
         android:background="@drawable/search_shape"
         android:elevation="3dp"
         android:maxLines="1"
         android:layout_below="@+id/selectcompany2"
-        android:textColorHint="@color/dark_grey"/>
+        android:textColorHint="@color/dark_grey"
+        android:textSize="@dimen/_10sdp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

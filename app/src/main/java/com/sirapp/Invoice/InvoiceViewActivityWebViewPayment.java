@@ -487,6 +487,7 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
             {
                 Log.e(TAG, "performClickPaypal");
                 String url = AllSirApi.BASE+"view/paypal/"+stringLink;
+                Log.e(TAG, "urlPAY " + url);
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);

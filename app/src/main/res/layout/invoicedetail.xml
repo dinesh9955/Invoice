@@ -5,9 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:layout_marginBottom="45dp"
+    android:layout_marginBottom="@dimen/_20sdp"
     android:background="@color/white">
-
 
 
     <TextView
@@ -18,8 +17,9 @@
         android:textStyle="bold"
         android:id="@+id/customernamtxt"
         android:layout_toRightOf="@+id/image"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
+        android:textSize="@dimen/_12sdp"
         />
     <TextView
 
@@ -29,10 +29,10 @@
         android:id="@+id/invoicenbtxt"
         android:padding="2dp"
         android:layout_toRightOf="@+id/image"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="5dp"
         android:layout_below="@+id/customernamtxt"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="5dp"
         />
     <TextView
@@ -45,7 +45,7 @@
         android:layout_marginLeft="3dp"
         android:layout_below="@+id/customernamtxt"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="5dp"
         />
 
@@ -61,14 +61,13 @@
         android:layout_marginStart="20dp"
         android:layout_below="@+id/name"
         android:textColor="@color/gray"
-        android:textSize="15sp"
+        android:textSize="@dimen/_9sdp"
 
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-
         android:id="@+id/statustxt"
         android:padding="2dp"
         android:layout_alignParentRight="true"
@@ -76,7 +75,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/invoicepricetxt"
         android:textColor="@color/gray"
-        android:textSize="15sp"
+        android:textSize="@dimen/_9sdp"
         android:layout_marginTop="5dp"
         />
 
@@ -87,11 +86,11 @@
         android:text="@string/invoiceReminder_Status"
         android:id="@+id/invoicestatus"
         android:layout_toRightOf="@+id/image"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="5dp"
         android:layout_below="@+id/invoicenbtxt"
         android:textColor="@color/gray"
         android:padding="2dp"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="5dp"
         />
     <TextView
@@ -104,7 +103,7 @@
         android:padding="2dp"
         android:layout_below="@+id/invoiceduetxt"
         android:textColor="@color/red"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="5dp"
         />
 

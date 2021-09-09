@@ -70,7 +70,8 @@ public class PDFPrint {
                 .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
                 .setResolution(new PrintAttributes.Resolution("RESOLUTION_ID", "RESOLUTION_ID", 600, 600))
 //                .setResolution(new PrintAttributes.Resolution("id", Context.PRINT_SERVICE, 1280, 1920))
-                .setMinMargins(PrintAttributes.Margins.NO_MARGINS)
+//                .setMinMargins(PrintAttributes.Margins.NO_MARGINS)
+                    .setMinMargins(new PrintAttributes.Margins(0, 0, 0, 0))
                 .build();
 
         final PrintDocumentAdapter documentAdapter = webView.createPrintDocumentAdapter(file.getName());

@@ -107,11 +107,7 @@ public class Signup_Activity extends BaseActivity {
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
                 userregistration();
-
                // messagebar();
             }
         });
@@ -644,15 +640,25 @@ public class Signup_Activity extends BaseActivity {
                         firebaseAnalytics.logEvent("signin_click", params2);
 
                         Constant.SuccessToast(Signup_Activity.this,jsonObject.getString("message"));
+
+                        String is_subscribed = profile.getString("is_subscribed");
+
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-
-                                Intent intent = new Intent(Signup_Activity.this, Home_Activity.class);
-                                intent.putExtra("login","login");
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                finish();
+                                if(is_subscribed.equalsIgnoreCase("1")){
+                                    Intent intent = new Intent(Signup_Activity.this, Home_Activity.class);
+                                    intent.putExtra("login","login");
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }else{
+                                    Intent intent = new Intent(Signup_Activity.this, SignupSubscriptionActivity.class);
+                                    intent.putExtra("login","login");
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }
                             }
                         },1000);
 

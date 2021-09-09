@@ -41,7 +41,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/search_shape"
         android:hint="@string/invoiceReminder_SelectCompany"
         android:spinnerMode="dialog"
@@ -68,6 +68,7 @@
         android:maxLines="1"
         android:padding="10dp"
         android:textColorHint="@color/dark_grey"
+        android:textSize="@dimen/_10sdp"
         />
 
 

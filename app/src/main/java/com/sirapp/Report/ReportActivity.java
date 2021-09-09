@@ -113,7 +113,7 @@ public class ReportActivity extends BaseActivity implements Customer_Bottom_Adap
         setContentView(R.layout.activity_report);
         //Constant.bottomNav(Create_Invoice_Activity.this,1);
 
-        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
+//        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         Constant.toolbar(ReportActivity.this, getString(R.string.header_report));

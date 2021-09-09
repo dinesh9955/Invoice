@@ -83,7 +83,7 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
         setContentView(R.layout.activity_online_payment_gateway);
         //Constant.bottomNav(Create_Invoice_Activity.this,1);
 
-        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
+//        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
 
@@ -226,6 +226,8 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
                     Intent intent = new Intent(OnlinePaymentGatewayActivity.this, PayPalActivity.class);
                     intent.putExtra("companyID", selectedCompanyId);
                     startActivityForResult(intent, 122);
+                }else{
+                    Constant.ErrorToast(OnlinePaymentGatewayActivity.this, getString(R.string.select_company));
                 }
             }
         });
@@ -240,6 +242,8 @@ public class OnlinePaymentGatewayActivity extends BaseActivity {
 //                    intent.putExtra("companyName", selectedCompanyName);
 //                    intent.putExtra("companyImage", selectedCompanyImage);
                     startActivityForResult(intent, 123);
+                }else{
+                    Constant.ErrorToast(OnlinePaymentGatewayActivity.this, getString(R.string.select_company));
                 }
             }
         });

@@ -89,11 +89,11 @@ public class CreateHtmlTask extends AsyncTask<String, Integer, HtmlFile>{
 					"        background-color: #1c87c9;\n" +
 					"        border: none;\n" +
 					"        color: white;\n" +
-					"        padding: 30px 60px;\n" +
+					"        padding: 60px 90px;\n" +
 					"        text-align: center;\n" +
 					"        text-decoration: none;\n" +
 					"        display: inline-block;\n" +
-					"        font-size: 35px;\n" +
+					"        font-size: 45px;\n" +
 					"        margin: 4px 2px;\n" +
 					"        cursor: pointer;\n" +
 					"        border-radius: 10px;\n" +

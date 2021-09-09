@@ -37,7 +37,7 @@ public class SupportActivity extends BaseActivity {
         setContentView(R.layout.activity_support);
         //Constant.bottomNav(Create_Invoice_Activity.this,1);
 
-        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
+//        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         Constant.toolbar(SupportActivity.this, getString(R.string.header_support));

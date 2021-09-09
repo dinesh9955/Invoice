@@ -20,6 +20,8 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.sirapp.Home.ItemLeftMenu;
 import com.sirapp.Model.ItemQuantity;
 import com.sirapp.Model.Product_list;
 import com.sirapp.R;
@@ -978,5 +980,131 @@ public class Utility {
             e.printStackTrace();
         }
     }
+
+
+
+
+    public ArrayList<ItemLeftMenu> getItemLeftMenuWithoutLoginUser(Activity activity) {
+        ArrayList<ItemLeftMenu> arrayList = new ArrayList<ItemLeftMenu>();
+
+        ItemLeftMenu vehicle1 = new ItemLeftMenu();
+        vehicle1.setName(activity.getString(R.string.add_new_user));
+        vehicle1.setIcon(R.drawable.add_new_user_2);
+        arrayList.add(vehicle1);
+
+        ItemLeftMenu vehicle11 = new ItemLeftMenu();
+        vehicle11.setName(activity.getString(R.string.my_companies));
+        vehicle11.setIcon(R.drawable.companies_2);
+        arrayList.add(vehicle11);
+
+
+        ItemLeftMenu vehicle2 = new ItemLeftMenu();
+        vehicle2.setName(activity.getString(R.string.my_products));
+        vehicle2.setIcon(R.drawable.products_2);
+        arrayList.add(vehicle2);
+
+
+        ItemLeftMenu vehicle22 = new ItemLeftMenu();
+        vehicle22.setName(activity.getString(R.string.my_items));
+        vehicle22.setIcon(R.drawable.items_2);
+        arrayList.add(vehicle22);
+
+
+
+        ItemLeftMenu vehicle221 = new ItemLeftMenu();
+        vehicle221.setName(activity.getString(R.string.add_taxes));
+        vehicle221.setIcon(R.drawable.tax_2);
+        arrayList.add(vehicle221);
+
+
+
+        ItemLeftMenu vehicle22s = new ItemLeftMenu();
+        vehicle22s.setName(activity.getString(R.string.home_customers));
+        vehicle22s.setIcon(R.drawable.customers_2);
+        arrayList.add(vehicle22s);
+
+
+        ItemLeftMenu vehicle221s = new ItemLeftMenu();
+        vehicle221s.setName(activity.getString(R.string.suppliers));
+        vehicle221s.setIcon(R.drawable.suppliers_2);
+        arrayList.add(vehicle221s);
+
+        ItemLeftMenu vehicle22s4 = new ItemLeftMenu();
+        vehicle22s4.setName(activity.getString(R.string.stocks));
+        vehicle22s4.setIcon(R.drawable.stocks_2);
+        arrayList.add(vehicle22s4);
+
+        ItemLeftMenu vehicle225s = new ItemLeftMenu();
+        vehicle225s.setName(activity.getString(R.string.invoices));
+        vehicle225s.setIcon(R.drawable.invoices_2);
+        arrayList.add(vehicle225s);
+
+
+        ItemLeftMenu vehicle2256s = new ItemLeftMenu();
+        vehicle2256s.setName(activity.getString(R.string.estimate));
+        vehicle2256s.setIcon(R.drawable.estimate_2);
+        arrayList.add(vehicle2256s);
+
+        ItemLeftMenu vehicle2258s = new ItemLeftMenu();
+        vehicle2258s.setName(activity.getString(R.string.purchase_orders));
+        vehicle2258s.setIcon(R.drawable.purchase_order_2);
+        arrayList.add(vehicle2258s);
+
+        ItemLeftMenu vehicle220s = new ItemLeftMenu();
+        vehicle220s.setName(activity.getString(R.string.receipts));
+        vehicle220s.setIcon(R.drawable.recepits_2);
+        arrayList.add(vehicle220s);
+
+
+        ItemLeftMenu vehicle2210s = new ItemLeftMenu();
+        vehicle2210s.setName(activity.getString(R.string.payment_vouchers));
+        vehicle2210s.setIcon(R.drawable.payment_vocher_2);
+        arrayList.add(vehicle2210s);
+
+        ItemLeftMenu vehicle2320s = new ItemLeftMenu();
+        vehicle2320s.setName(activity.getString(R.string.reports));
+        vehicle2320s.setIcon(R.drawable.reports_2);
+        arrayList.add(vehicle2320s);
+
+        ItemLeftMenu vehicle2270s = new ItemLeftMenu();
+        vehicle2270s.setName(activity.getString(R.string.credit_notes));
+        vehicle2270s.setIcon(R.drawable.credit_notes_2);
+        arrayList.add(vehicle2270s);
+
+
+        ItemLeftMenu vehicle80s = new ItemLeftMenu();
+        vehicle80s.setName(activity.getString(R.string.debit_notes));
+        vehicle80s.setIcon(R.drawable.debit_note_2);
+        arrayList.add(vehicle80s);
+
+        ItemLeftMenu vehicle8870s = new ItemLeftMenu();
+        vehicle8870s.setName(activity.getString(R.string.thank_you_note));
+        vehicle8870s.setIcon(R.drawable.thanku_note_2);
+        arrayList.add(vehicle8870s);
+
+        ItemLeftMenu vehicle00s = new ItemLeftMenu();
+        vehicle00s.setName(activity.getString(R.string.invoice_reminders));
+        vehicle00s.setIcon(R.drawable.invoice_reminder_2);
+        arrayList.add(vehicle00s);
+
+
+//        ItemLeftMenu vehicle00sss = new ItemLeftMenu();
+//        vehicle00sss.setName("");
+//       // vehicle00sss.setIcon(R.drawable.invoice_reminder_2);
+//        arrayList.add(vehicle00sss);
+
+        ItemLeftMenu vehicle110s = new ItemLeftMenu();
+        vehicle110s.setName(activity.getString(R.string.settings));
+        vehicle110s.setIcon(R.drawable.settings_2);
+        arrayList.add(vehicle110s);
+
+        ItemLeftMenu vehicle00ds = new ItemLeftMenu();
+        vehicle00ds.setName(activity.getString(R.string.logout));
+        vehicle00ds.setIcon(R.drawable.logout_2);
+        arrayList.add(vehicle00ds);
+
+        return arrayList;
+    }
+
 
 }

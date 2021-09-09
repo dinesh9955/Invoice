@@ -156,6 +156,7 @@ public class Company_Listing_Adapter extends RecyclerView.Adapter<Company_Listin
             public void onClick(View v) {
                 Intent intent = new Intent(mcontext, Company_Details_Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 pref.edit().putString(Constant.COMPANY_NAME,company_name).commit();
                 pref.edit().putString(Constant.COMPANY_LOGO,image_path).commit();
                 pref.edit().putString(Constant.COMPANY_EMAIL,company_email).commit();
@@ -172,9 +173,6 @@ public class Company_Listing_Adapter extends RecyclerView.Adapter<Company_Listin
                 pref.edit().putString(Constant.Cheque_payable_to,cheque_payableto).commit();
                 pref.edit().putString(Constant.Ibn_number,ibnnumber).commit();
                 pref.edit().putString("color",color).commit();
-
-
-
 
                 mcontext.startActivity(intent);
             }

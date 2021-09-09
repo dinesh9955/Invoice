@@ -44,7 +44,7 @@ public class LanguageActivity extends BaseActivity implements LanguageCallback{
         setContentView(R.layout.activity_language);
         //Constant.bottomNav(Create_Invoice_Activity.this,1);
 
-        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
+//        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
        // Constant.toolbar(LanguageActivity.this, "Select Language");

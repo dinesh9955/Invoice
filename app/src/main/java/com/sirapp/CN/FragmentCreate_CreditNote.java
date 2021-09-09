@@ -4471,17 +4471,17 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
             name = "credit.html";
             nameName = "file:///android_asset/credit.html";
         }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "invoice1.html";
-            nameName = "file:///android_asset/invoice1.html";
+            name = "credit.html";
+            nameName = "file:///android_asset/credit.html";
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "invoice2.html";
-            nameName = "file:///android_asset/invoice2.html";
+            name = "credit.html";
+            nameName = "file:///android_asset/credit.html";
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "invoice3.html";
-            nameName = "file:///android_asset/invoice3.html";
+            name = "credit.html";
+            nameName = "file:///android_asset/credit.html";
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "invoice4.html";
-            nameName = "file:///android_asset/invoice4.html";
+            name = "credit.html";
+            nameName = "file:///android_asset/credit.html";
         }
 
 

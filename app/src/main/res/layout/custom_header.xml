@@ -3,58 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/_50sdp"
-    android:paddingBottom="@dimen/_30sdp"
-    android:paddingLeft="@dimen/_10sdp"
-    android:paddingRight="@dimen/_10sdp"
+
   >
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_left"
-        android:layout_width="@dimen/_55sdp"
-        android:layout_height="@dimen/_55sdp"
-        android:src="@mipmap/app_icon"
-        android:scaleType="centerCrop"
 
-        />
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/headlay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/img_left"
-        android:orientation="vertical"
-
-        android:paddingLeft="@dimen/_15sdp"
+        android:paddingTop="@dimen/_50sdp"
+        android:paddingBottom="@dimen/_30sdp"
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
         >
-        <TextView
-            android:layout_width="wrap_content"
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_left"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:src="@mipmap/app_icon"
+            android:scaleType="centerCrop"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/headerName"
-            android:text=""
-            android:textColor="@color/white"
+            android:layout_toRightOf="@+id/img_left"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_2sdp"
             >
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/headerEmail"
-            android:text=""
-            android:textColor="@color/white"
-            android:layout_marginTop="@dimen/_3sdp"
-            >
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/headerDesc"
-            android:text=""
-            android:textColor="@color/white"
-            android:layout_marginTop="@dimen/_3sdp"
-            >
-        </TextView>
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/headerName"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                >
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/headerEmail"
+                android:text=""
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textSize="@dimen/_8sdp"
+                >
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/headerDesc"
+                android:text=""
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textSize="@dimen/_8sdp"
+                >
+            </TextView>
+        </LinearLayout>
 
 
+
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_viewMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:visibility="gone"
+        android:layout_below="@+id/headlay"
+
+        />
 
 
 

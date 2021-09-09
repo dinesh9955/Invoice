@@ -26,9 +26,10 @@
             android:layout_width="match_parent"
             app:tabBackground="@color/white"
             app:tabGravity="fill"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/_40sdp"
             android:background="@color/white"
             app:tabTextColor="@color/darkgray"
+
             />
 
     </com.google.android.material.appbar.AppBarLayout>

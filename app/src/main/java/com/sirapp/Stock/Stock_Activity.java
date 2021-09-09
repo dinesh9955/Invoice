@@ -34,15 +34,15 @@ public class Stock_Activity extends BaseActivity {
 
         tabs.setupWithViewPager(viewPager);
 
-        TextView customers = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview, null);
-        TextView addcustomer = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview, null);
-        TextView products = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview, null);
-        TextView wastage = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview, null);
+        TextView customers = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview_stock, null);
+        TextView addcustomer = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview_stock, null);
+        TextView products = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview_stock, null);
+        TextView wastage = (TextView) LayoutInflater.from(this).inflate(R.layout.tabview_stock, null);
 
-        customers.setTextSize(13);
-        addcustomer.setTextSize(13);
-        products.setTextSize(13);
-        wastage.setTextSize(13);
+//        customers.setTextSize(R.dimen._8sdp);
+//        addcustomer.setTextSize(R.dimen._8sdp);
+//        products.setTextSize(R.dimen._8sdp);
+//        wastage.setTextSize(R.dimen._8sdp);
 
         customers.setTextColor(getResources().getColor(R.color.lightpurple));
         addcustomer.setTextColor(getResources().getColor(R.color.lightpurple));

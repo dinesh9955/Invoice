@@ -30,6 +30,10 @@ import com.andrognito.flashbar.Flashbar;
 import com.andrognito.flashbar.anim.FlashAnim;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
 import com.google.firebase.inappmessaging.FirebaseInAppMessagingDisplay;
 import com.google.firebase.inappmessaging.FirebaseInAppMessagingDisplayCallbacks;
@@ -128,9 +132,41 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_);
-        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
+//        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
 
+        FirebaseDynamicLinks.getInstance()
+                .getDynamicLink(getIntent())
+                .addOnSuccessListener(Home_Activity.this, new OnSuccessListener<PendingDynamicLinkData>() {
+                            @Override
+                            public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                                if (pendingDynamicLinkData != null) {
+                                    if (pendingDynamicLinkData.getLink().toString().contains("subscribeID")) {
+                                        String subscribeID = pendingDynamicLinkData.getLink().getQueryParameter("subscribeID");
+                                        if (subscribeID.equalsIgnoreCase("subscribe")) {
+                                            Intent intent = new Intent(Home_Activity.this, GoProActivity.class);
+                                            // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                        }
+                                    }
 
+                                    if (pendingDynamicLinkData.getLink().toString().contains("invoiceID")) {
+                                        String invoiceID = pendingDynamicLinkData.getLink().getQueryParameter("invoiceID");
+                                        if (invoiceID.equalsIgnoreCase("invoice")) {
+                                            Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                )
+                .addOnFailureListener(Home_Activity.this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG , "onFailure "+e.getMessage());
+                    }
+                });
 
         if (getIntent().hasExtra("login")) {
             //messagebar();

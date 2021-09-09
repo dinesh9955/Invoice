@@ -1372,22 +1372,22 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                                 String content3 = "<!DOCTYPE html>\n" +
                                         "<html>\n" +
-                                        "  <body>\n" +
-                                        "    <p>" + getString(R.string.list_Invoiceviewed) + "</p><br/>\n" +
+                                        "  <body>\n" +getString(R.string.list_Invoiceviewed)+
+                                        "<br/><br/>\n" +
                                         "  </body>\n" +
                                         "</html>";
 
                                 String content4 = "<!DOCTYPE html>\n" +
                                         "<html>\n" +
-                                        "  <body>\n" +
-                                        "    <p>" + newLink + "</p>\n" +
+                                        "  <body>\n" +newLink+
+                                        "<br/><br/>\n" +
                                         "  </body>\n" +
                                         "</html>";
 
                                 String content5 = "<!DOCTYPE html>\n" +
                                         "<html>\n" +
-                                        "  <body>\n" +
-                                        "    <p>" + getString(R.string.list_Invoicepayment_link) + "</p>\n" +
+                                        "  <body>\n" + getString(R.string.list_Invoicepayment_link) +
+                                        "<br/><br/>\n" +
                                         "  </body>\n" +
                                         "</html>";
                                 txt = content3 + content4 + content5;
@@ -1395,15 +1395,15 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                                 String content3 = "<!DOCTYPE html>\n" +
                                         "<html>\n" +
-                                        "  <body>\n" +
-                                        "    <p>" + getString(R.string.list_Invoiceviewed) + "</p><br/>\n" +
+                                        "  <body>\n" +getString(R.string.list_Invoiceviewed) +
+                                        "<br/><br/>\n" +
                                         "  </body>\n" +
                                         "</html>";
 
                                 String content4 = "<!DOCTYPE html>\n" +
                                         "<html>\n" +
-                                        "  <body>\n" +
-                                        "    <p>" + newLink + "</p><br/>\n" +
+                                        "  <body>\n" + newLink +
+                                        "<br/><br/>\n" +
                                         "  </body>\n" +
                                         "</html>";
 
