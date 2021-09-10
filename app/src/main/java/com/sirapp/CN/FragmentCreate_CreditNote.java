@@ -4646,8 +4646,8 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         invoiceweb.getSettings().setUseWideViewPort(true);
         //invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
 
-        if(AllSirApi.FONT_INVOICE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+        if(AllSirApi.FONT_INVOICE_CREATE == true){
+            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
         }else{
             invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
         }

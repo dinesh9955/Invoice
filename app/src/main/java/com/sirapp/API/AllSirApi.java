@@ -26,6 +26,9 @@ public class AllSirApi {
     public static final boolean FONT_INVOICE = true;
     public static final int FONT_SIZE = 8;
 
+    public static final boolean FONT_INVOICE_CREATE = false;
+    public static final int FONT_SIZE_CREATE = 8;
+
 //    public static final String BASE_URL ="http://13.126.22.0/saad/app/index.php/api/";
 
 //    public static final String BASE_URL_PDF = "http://13.126.22.0/saad/app/uploads/invoice/pdf/";

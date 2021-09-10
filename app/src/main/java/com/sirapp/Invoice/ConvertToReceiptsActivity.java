@@ -5425,8 +5425,8 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
-        if(AllSirApi.FONT_INVOICE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+        if(AllSirApi.FONT_INVOICE_CREATE == true){
+            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
         }else{
             invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
         }
