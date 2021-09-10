@@ -21,7 +21,7 @@
             android:text="@string/setting_SelectNumberFormat"
             android:layout_marginLeft="10dp"
             android:textColor="@color/black"
-            android:textSize="@dimen/_15sdp"
+            android:textSize="@dimen/_13sdp"
             android:textStyle="bold"
             />
 
@@ -35,7 +35,7 @@
             android:layout_marginLeft="20dp"
             android:text="@string/back"
             android:textColor="@color/light_blue"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_11sdp"
             android:textStyle="bold"
             android:padding="10dp"
             android:layout_toLeftOf="@+id/txtSave"
@@ -52,7 +52,7 @@
             android:text="@string/all_Save"
             android:textColor="@color/light_blue"
             android:layout_alignParentRight="true"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_11sdp"
             android:textStyle="bold"
             android:padding="10dp"
             />

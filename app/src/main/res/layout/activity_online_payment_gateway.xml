@@ -108,7 +108,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stripe is an online payment processing platform that enables you to receive payments securely from your customers."
+                    android:text="@string/stripe_txt"
                     android:id="@+id/text_setting"
                     android:textColor="@color/fragmentfont"
                     android:layout_alignParentLeft="true"
@@ -173,7 +173,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Paypal is a quick and secure platform to receive funds or set up a merchant account."
+                        android:text="@string/paypal_txt"
                         android:id="@+id/text_setting2"
                         android:textColor="@color/fragmentfont"
                         android:layout_alignParentLeft="true"

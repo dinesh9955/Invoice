@@ -9,6 +9,10 @@
 
     <string name="go_pro">Go Pro</string>
 
+    <string name="stripe_txt">Stripe is an online payment processing platform that enables you to receive payments securely from your customers.</string>
+    <string name="paypal_txt">Paypal is a quick and secure platform to receive funds or set up a merchant account.</string>
+
+
     <string name="home_lets">Let\'s gets started</string>
     <string name="home_AddyourBusiness">Add your Business info</string>
     <string name="home_AddyourCustomer">Add your Customers</string>

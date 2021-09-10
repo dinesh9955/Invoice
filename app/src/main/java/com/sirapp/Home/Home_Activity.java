@@ -86,6 +86,8 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.sirapp.Constant.Constant.createDialogOpenClass;
+
 public class Home_Activity extends BaseActivity implements MenuDelegate{
 
     String TAG = "Home_Activity";
@@ -324,108 +326,139 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             }
         });
 
-
+        SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
 
         home_AddyourBusiness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home_Activity.this, Companies_Activity.class);
-                intent.putExtra("key" , "home");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(Home_Activity.this, Companies_Activity.class);
+                    intent.putExtra("key" , "home");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }else{
+                    createDialogOpenClass(Home_Activity.this);
+                }
+
             }
         });
 
         home_AddyourCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home_Activity.this, Customer_Activity.class);
-                intent.putExtra("key" , "home");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                if(preferences.getString(Constant.CUSTOMER,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(Home_Activity.this, Customer_Activity.class);
+                    intent.putExtra("key" , "home");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }else{
+                    createDialogOpenClass(Home_Activity.this);
+                }
             }
         });
 
         home_AddyourProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home_Activity.this, Product_Activity.class);
-                intent.putExtra("key" , "home");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                if(preferences.getString(Constant.PRODUCT,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(Home_Activity.this, Product_Activity.class);
+                    intent.putExtra("key" , "home");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }else{
+                    createDialogOpenClass(Home_Activity.this);
+                }
+
             }
         });
 
         home_AddyourWarehouse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home_Activity.this, Company_Details_Activity.class);
-                intent.putExtra("key" , "home");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(Home_Activity.this, Company_Details_Activity.class);
+                    intent.putExtra("key" , "home");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE, Context.MODE_PRIVATE);
-                CompanyModel companyModel = companyModelArrayList.get(companyPosition);
+                    final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE, Context.MODE_PRIVATE);
+                    CompanyModel companyModel = companyModelArrayList.get(companyPosition);
 
-                final String company_id = companyModel.getCompany_id();
-                final String company_email = companyModel.getEmail();
-                final String company_name = companyModel.getName();
-                final String company_phone = companyModel.getPhone_number();
-                final String company_website = companyModel.getWebsite();
-                final String currencyid = companyModel.getCurrency_id();
-                final String address = companyModel.getAddress();
-                final String bankname = companyModel.getPayment_bank_name();
-                final String paypalemail = companyModel.getPaypal_email();
-                final String payment_swiftbic = companyModel.getPayment_swift_bic();
-                final String cheque_payableto = companyModel.getCheque_payable_to();
-                final String ibnnumber = companyModel.getPayment_iban();
-                final String color = companyModel.getColor();
-                final String logo = companyModel.getLogo();
+                    final String company_id = companyModel.getCompany_id();
+                    final String company_email = companyModel.getEmail();
+                    final String company_name = companyModel.getName();
+                    final String company_phone = companyModel.getPhone_number();
+                    final String company_website = companyModel.getWebsite();
+                    final String currencyid = companyModel.getCurrency_id();
+                    final String address = companyModel.getAddress();
+                    final String bankname = companyModel.getPayment_bank_name();
+                    final String paypalemail = companyModel.getPaypal_email();
+                    final String payment_swiftbic = companyModel.getPayment_swift_bic();
+                    final String cheque_payableto = companyModel.getCheque_payable_to();
+                    final String ibnnumber = companyModel.getPayment_iban();
+                    final String color = companyModel.getColor();
+                    final String logo = companyModel.getLogo();
 
 
-                pref.edit().putString(Constant.COMPANY_NAME,company_name).commit();
-                pref.edit().putString(Constant.COMPANY_LOGO,logo).commit();
-                pref.edit().putString(Constant.COMPANY_EMAIL,company_email).commit();
-                pref.edit().putString(Constant.COMPANY_PHONE,company_phone).commit();
-                pref.edit().putString(Constant.COMPANY_WEB,company_website).commit();
-                pref.edit().putString(Constant.COMPANY_ID,company_id).commit();
-                pref.edit().putString(Constant.COMPANY_ADDRESS,address).commit();
-                pref.edit().putString(Constant.CURRENCY_ID,currencyid).commit();
-                pref.edit().putString(Constant.Payment_bank_name,bankname).commit();
-                pref.edit().putString(Constant.Paypal_email,paypalemail).commit();
-                pref.edit().putString(Constant.Payment_swift_bic,payment_swiftbic).commit();
-                pref.edit().putString(Constant.Cheque_payable_to,cheque_payableto).commit();
-                pref.edit().putString(Constant.Ibn_number,ibnnumber).commit();
-                pref.edit().putString("color",color).commit();
-                startActivity(intent);
+                    pref.edit().putString(Constant.COMPANY_NAME,company_name).commit();
+                    pref.edit().putString(Constant.COMPANY_LOGO,logo).commit();
+                    pref.edit().putString(Constant.COMPANY_EMAIL,company_email).commit();
+                    pref.edit().putString(Constant.COMPANY_PHONE,company_phone).commit();
+                    pref.edit().putString(Constant.COMPANY_WEB,company_website).commit();
+                    pref.edit().putString(Constant.COMPANY_ID,company_id).commit();
+                    pref.edit().putString(Constant.COMPANY_ADDRESS,address).commit();
+                    pref.edit().putString(Constant.CURRENCY_ID,currencyid).commit();
+                    pref.edit().putString(Constant.Payment_bank_name,bankname).commit();
+                    pref.edit().putString(Constant.Paypal_email,paypalemail).commit();
+                    pref.edit().putString(Constant.Payment_swift_bic,payment_swiftbic).commit();
+                    pref.edit().putString(Constant.Cheque_payable_to,cheque_payableto).commit();
+                    pref.edit().putString(Constant.Ibn_number,ibnnumber).commit();
+                    pref.edit().putString("color",color).commit();
+                    startActivity(intent);
+                   }else{
+                        createDialogOpenClass(Home_Activity.this);
+                   }
+
             }
         });
 
         home_AddyourItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home_Activity.this, Service_Activity.class);
-                intent.putExtra("key" , "home");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                if(preferences.getString(Constant.SERVICE,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(Home_Activity.this, Service_Activity.class);
+                    intent.putExtra("key" , "home");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }else{
+                    createDialogOpenClass(Home_Activity.this);
+                }
             }
         });
 
         home_SetupPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home_Activity.this, OnlinePaymentGatewayActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(Home_Activity.this, OnlinePaymentGatewayActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }else{
+                    createDialogOpenClass(Home_Activity.this);
+                }
             }
         });
 
         home_CreateyourInvoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
-                intent.putExtra("key" , "home");
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                if(preferences.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
+                    intent.putExtra("key" , "home");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+               }else{
+                    createDialogOpenClass(Home_Activity.this);
+               }
             }
         });
 
