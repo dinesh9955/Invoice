@@ -221,7 +221,7 @@
             android:layout_marginRight="@dimen/_20sdp"
             android:orientation="horizontal"
             android:background="@drawable/orange_shape"
-            android:text="UPGRADE TODAY"
+            android:text="@string/setting_UPGRADETODAY"
             android:textStyle="bold"
             android:textSize="@dimen/_16sdp"
             android:textColor="@color/white">

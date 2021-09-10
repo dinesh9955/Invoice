@@ -776,7 +776,7 @@
     <string name="setting_Subscribe">Subscribe</string>
 
     <string name="setting_Upgrade">Add-ons</string>
-    <string name="setting_UPGRADETODAY">UPGRADE TODAY</string>
+    <string name="setting_UPGRADETODAY">Start Free Trial</string>
     <string name="setting_SKIP">SKIP</string>
 
     <string name="setting_RestorePurchases">Restore Purchases</string>
