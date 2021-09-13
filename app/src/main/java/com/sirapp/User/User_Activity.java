@@ -31,7 +31,7 @@ public class User_Activity extends BaseActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
         Constant.toolbar(User_Activity.this, getString(R.string.header_users));
-        Constant.bottomNav(User_Activity.this,-1);
+//        Constant.bottomNav(User_Activity.this,-1);
 
         viewPager = findViewById(R.id.viewPagerLayout);
         tabs = findViewById(R.id.tabs);

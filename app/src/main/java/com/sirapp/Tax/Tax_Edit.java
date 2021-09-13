@@ -63,7 +63,7 @@ public class Tax_Edit extends BaseActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
         Constant.toolbar(Tax_Edit.this,getString(R.string.header_edit_tax));
-        Constant.bottomNav(Tax_Edit.this,-1);
+//        Constant.bottomNav(Tax_Edit.this,-1);
 
         FindByIds();
         setFonts();

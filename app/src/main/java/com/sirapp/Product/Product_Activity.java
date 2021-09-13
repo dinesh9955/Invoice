@@ -33,7 +33,7 @@ public class Product_Activity extends BaseActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
         Constant.toolbar(Product_Activity.this,getString(R.string.header_product));
-        Constant.bottomNav(Product_Activity.this,-1);
+//        Constant.bottomNav(Product_Activity.this,-1);
 
         viewPager = findViewById(R.id.viewPagerLayout);
         tabs = findViewById(R.id.tabs);

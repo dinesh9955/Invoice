@@ -4646,11 +4646,24 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         invoiceweb.getSettings().setUseWideViewPort(true);
         //invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
 
-        if(AllSirApi.FONT_INVOICE_CREATE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
+//        if(AllSirApi.FONT_INVOICE_CREATE == true){
+//            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
+//        }else{
+//            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//        }
+
+        if(Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi") ||
+                Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi") ||
+                Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
         }else{
-            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            if(AllSirApi.FONT_INVOICE_CREATE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }
+
 
         String finalContent = content;
         invoiceweb.setWebViewClient(new WebViewClient() {

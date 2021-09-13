@@ -22,19 +22,19 @@ public class wwww extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.abc);
+        setContentView(R.layout.home_act);
 
-        button = (Button) findViewById(R.id.button2);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri newDeepLink = buildDeepLink(Uri.parse(DEEP_LINK_URL));
-
-                Log.e(TAG, "newDeepLink "+newDeepLink);
-
-            }
-        });
+//        button = (Button) findViewById(R.id.button2);
+//
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Uri newDeepLink = buildDeepLink(Uri.parse(DEEP_LINK_URL));
+//
+//                Log.e(TAG, "newDeepLink "+newDeepLink);
+//
+//            }
+//        });
 
 
 

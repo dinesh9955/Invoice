@@ -5420,10 +5420,17 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
-        if(AllSirApi.FONT_INVOICE_CREATE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
-        }else{
+
+        if(Utility.getDensityName(EditEstimateActivity.this).equalsIgnoreCase("hdpi") ||
+                Utility.getDensityName(EditEstimateActivity.this).equalsIgnoreCase("mdpi") ||
+                Utility.getDensityName(EditEstimateActivity.this).equalsIgnoreCase("ldpi")){
             invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        }else{
+            if(AllSirApi.FONT_INVOICE_CREATE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }
 
         invoiceweb.setWebViewClient(new WebViewClient() {

@@ -32,7 +32,7 @@ public class Companies_Activity extends BaseActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         Constant.toolbar(Companies_Activity.this,getString(R.string.header_company));
-        Constant.bottomNav(Companies_Activity.this,-1);
+//        Constant.bottomNav(Companies_Activity.this,-1);
 
         viewPager = findViewById(R.id.viewPagerLayout);
         tabs = findViewById(R.id.tabs);

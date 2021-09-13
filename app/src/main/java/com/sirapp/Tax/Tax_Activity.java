@@ -26,7 +26,7 @@ public class Tax_Activity extends BaseActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
         Constant.toolbar(Tax_Activity.this, getString(R.string.header_tax));
-        Constant.bottomNav(Tax_Activity.this,-1);
+//        Constant.bottomNav(Tax_Activity.this,-1);
         viewPager = findViewById(R.id.viewPagerLayout);
         tabs = findViewById(R.id.tabs);
 

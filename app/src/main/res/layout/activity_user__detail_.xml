@@ -435,6 +435,7 @@
 
         />
 
-    <include layout="@layout/bottom_navigation">
+    <include layout="@layout/bottom_navigation"
+        android:visibility="gone">
     </include>
 </RelativeLayout>

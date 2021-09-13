@@ -72,6 +72,7 @@ import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
+import com.sirapp.PO.ConvertToPVActivity;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
 import com.sirapp.API.AllSirApi;
@@ -5246,10 +5247,17 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
-        if(AllSirApi.FONT_INVOICE_CREATE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
-        }else{
+
+        if(Utility.getDensityName(EditReceiptActivity.this).equalsIgnoreCase("hdpi") ||
+                Utility.getDensityName(EditReceiptActivity.this).equalsIgnoreCase("mdpi") ||
+                Utility.getDensityName(EditReceiptActivity.this).equalsIgnoreCase("ldpi")){
             invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        }else{
+            if(AllSirApi.FONT_INVOICE_CREATE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }
 
         invoiceweb.setWebViewClient(new WebViewClient() {

@@ -127,414 +127,414 @@ public class Constant {
 
     public static void toolbar(final Activity activity, String title){
 
-        ArrayList<ItemLeftMenu> contacts = new ArrayList<ItemLeftMenu>();
-
-        String username = Constant.GetSharedPreferences(activity, Constant.FULLNAME);
-        String email = Constant.GetSharedPreferences(activity, Constant.EMAIL);
-        SavePref pref = new SavePref();
-        pref.SavePref(activity);
-
-//        AccountHeader header = null;
-        Typeface myfont=Typeface.createFromAsset(activity.getAssets(),"Fonts/Ubuntu-Regular.ttf");
+//        ArrayList<ItemLeftMenu> contacts = new ArrayList<ItemLeftMenu>();
 //
-//                header = new AccountHeaderBuilder()
-//                        .withActivity(activity)
-//                        .withAlternativeProfileHeaderSwitching(true)
-//                        .withCompactStyle(true)
-//                        .withHeightDp(115)
-////                        .withDividerBelowHeader(false)
-////                        .withPaddingBelowHeader(true)
+//        String username = Constant.GetSharedPreferences(activity, Constant.FULLNAME);
+//        String email = Constant.GetSharedPreferences(activity, Constant.EMAIL);
+//        SavePref pref = new SavePref();
+//        pref.SavePref(activity);
 //
-//                        .withSelectionListEnabledForSingleProfile(false)
-//                        .addProfiles(
-//                                new ProfileDrawerItem().withName(username).withEmail(email).withTextColor(activity.getResources().getColor(R.color.white))
-//                                .withTypeface(Typeface.createFromAsset(activity.getAssets(),"Fonts/AzoSans-Regular.otf"))
-//                                .withIcon(R.mipmap.app_icon)
-//                             //   ,new ProfileDrawerItem().withName("sepahdar ghorbani").withEmail("sepahdar.gh41@gmail.com")
+////        AccountHeader header = null;
+//        Typeface myfont=Typeface.createFromAsset(activity.getAssets(),"Fonts/Ubuntu-Regular.ttf");
+////
+////                header = new AccountHeaderBuilder()
+////                        .withActivity(activity)
+////                        .withAlternativeProfileHeaderSwitching(true)
+////                        .withCompactStyle(true)
+////                        .withHeightDp(115)
+//////                        .withDividerBelowHeader(false)
+//////                        .withPaddingBelowHeader(true)
+////
+////                        .withSelectionListEnabledForSingleProfile(false)
+////                        .addProfiles(
+////                                new ProfileDrawerItem().withName(username).withEmail(email).withTextColor(activity.getResources().getColor(R.color.white))
+////                                .withTypeface(Typeface.createFromAsset(activity.getAssets(),"Fonts/AzoSans-Regular.otf"))
+////                                .withIcon(R.mipmap.app_icon)
+////                             //   ,new ProfileDrawerItem().withName("sepahdar ghorbani").withEmail("sepahdar.gh41@gmail.com")
+////
+////                                //(IProfile) new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.slide_mm).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE)
+////
+////                        )
+////
+////
+////
+////                        .withOnAccountHeaderSelectionViewClickListener(new AccountHeader.OnAccountHeaderSelectionViewClickListener() {
+////                            @Override
+////                            public boolean onClick(View view, IProfile profile) {
+////
+////                                /*Intent intent = new Intent(activity, AgentProfileActivity.class);
+////                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+////                                activity.startActivity(intent);*/
+////
+////                                return true;
+////
+////                            }
+////                        }).build();
 //
-//                                //(IProfile) new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.slide_mm).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE)
-//
-//                        )
 //
 //
 //
-//                        .withOnAccountHeaderSelectionViewClickListener(new AccountHeader.OnAccountHeaderSelectionViewClickListener() {
-//                            @Override
-//                            public boolean onClick(View view, IProfile profile) {
+//        //Drawer Items
+//        PrimaryDrawerItem item = new PrimaryDrawerItem().withIdentifier(1).withIcon(R.drawable.add_new_user_2).withName(activity.getString(R.string.add_new_user)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withIcon(R.drawable.companies_2).withName(activity.getString(R.string.my_companies)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withIcon(R.drawable.products_2).withName(activity.getString(R.string.my_products)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withIcon(R.drawable.items_2).withName(activity.getString(R.string.my_items)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.tax_2).withName(activity.getString(R.string.add_taxes)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(6).withIcon(R.drawable.customers_2).withName(activity.getString(R.string.home_customers)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item7 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.suppliers_2).withName(activity.getString(R.string.suppliers)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item8 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.stocks_2).withName(activity.getString(R.string.stocks)).withTextColor(Color.WHITE);
 //
-//                                /*Intent intent = new Intent(activity, AgentProfileActivity.class);
+//        //2 space
+//        PrimaryDrawerItem item9 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.settings_2).withName(activity.getString(R.string.settings)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item10 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.logout_2).withName(activity.getString(R.string.logout)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item13 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.invoices_2).withName(activity.getString(R.string.invoices)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item14 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.estimate_2).withName(activity.getString(R.string.estimate)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item15 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.purchase_order_2).withName(activity.getString(R.string.purchase_orders)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item16 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.recepits_2).withName(activity.getString(R.string.receipts)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item17 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.payment_vocher_2).withName(activity.getString(R.string.payment_vouchers)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item18 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.reports_2).withName(activity.getString(R.string.reports)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item19 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.credit_notes_2).withName(activity.getString(R.string.credit_notes)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item20 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.debit_note_2).withName(activity.getString(R.string.debit_notes)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item21 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.thanku_note_2).withName(activity.getString(R.string.thank_you_note)).withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item22 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.invoice_reminder_2).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE);
+//
+//        PrimaryDrawerItem item111 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.slide_mm)
+//                .withIcon(R.mipmap.app_icon)
+//                .withName(activity.getString(R.string.invoice_reminders))
+//                .withDescription("dgdfgdfg\nhfghj")
+//                .withBadge("fdsffgfg")
+//                .withTextColor(Color.WHITE);
+//
+//        PrimaryDrawerItem item12 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
+//        PrimaryDrawerItem item11 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
+//
+////        PrimaryDrawerItem item111 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
+////        PrimaryDrawerItem item122 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
+//
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int height = displayMetrics.heightPixels;
+//        int width = displayMetrics.widthPixels;
+//
+//        LayoutInflater inflater = activity.getLayoutInflater();
+//        View lst_item_view = inflater.inflate(R.layout.custom_header, null);
+//        TextView headerName = (TextView) lst_item_view.findViewById(R.id.headerName);
+//        TextView headerEmail = (TextView) lst_item_view.findViewById(R.id.headerEmail);
+//        TextView headerDesc = (TextView) lst_item_view.findViewById(R.id.headerDesc);
+//
+//        headerName.setText(""+username);
+//        headerEmail.setText(""+email);
+//        if(pref.getSubsType().equalsIgnoreCase("onemonth")){
+//            headerDesc.setText("Monthly Subscription");
+//        }else if(pref.getSubsType().equalsIgnoreCase("oneyear")){
+//            headerDesc.setText("Yearly Subscription");
+//        }else{
+//            headerDesc.setText("");
+//        }
+//
+//
+//
+////        RecyclerView recyclerView = (RecyclerView) lst_item_view.findViewById(R.id.recycler_viewMenu);
+////        recyclerView.setHasFixedSize(true);
+////        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+////
+////        LeftMenuAdapter mAdapter = new LeftMenuAdapter(activity, contacts);
+////        recyclerView.setAdapter(mAdapter);
+////
+////        contacts = new Utility().getItemLeftMenuWithoutLoginUser(activity);
+////        mAdapter.updateData(contacts);
+//
+//      //  final Drawer result = new DrawerBuilder().build();
+//
+//        final Drawer result = new DrawerBuilder()
+//                //.withAccountHeader(lst_item_view)
+//                .withActivity(activity)
+//                .withHeaderPadding(true)
+////                .withDrawerWidthPx((width/2)+((width/2)/2))
+//             //   .withStickyHeader(lst_item_view)
+//                .withHeader(lst_item_view)
+//                .withTranslucentStatusBar(true)
+//                .withStickyFooterDivider(false)
+//                .withDisplayBelowStatusBar(true)
+//                //.withDrawerGravity(Gravity.RIGHT)
+//                //.withSliderBackgroundColorRes(R.color.sidemenublue)
+//                .withSliderBackgroundDrawable(activity.getResources().getDrawable(R.drawable.side_menu_bg))
+//                .withSelectedItem(-1)
+//
+//
+//                .addDrawerItems(
+//                        item.withSelectable(false).withTypeface(myfont),
+//                        item2.withSelectable(false).withTypeface(myfont),
+//                        item3.withSelectable(false).withTypeface(myfont),
+//                        item4.withSelectable(false).withTypeface(myfont),
+//                        item5.withSelectable(false).withTypeface(myfont),
+//                        item6.withSelectable(false).withTypeface(myfont),
+//                        item7.withSelectable(false).withTypeface(myfont),
+//                        item8.withSelectable(false).withTypeface(myfont),
+//                        item13.withSelectable(false).withTypeface(myfont),
+//                        item14.withSelectable(false).withTypeface(myfont),
+//                        item15.withSelectable(false).withTypeface(myfont),
+//                        item16.withSelectable(false).withTypeface(myfont),
+//                        item17.withSelectable(false).withTypeface(myfont),
+//                        item18.withSelectable(false).withTypeface(myfont),
+//                        item19.withSelectable(false).withTypeface(myfont),
+//                        item20.withSelectable(false).withTypeface(myfont),
+//                        item21.withSelectable(false).withTypeface(myfont),
+//                        item22.withSelectable(false).withTypeface(myfont),
+//                        item12.withSelectable(false).withTypeface(myfont),
+//
+//                        item9.withSelectable(false).withTypeface(myfont),
+//                        item10.withSelectable(false).withTypeface(myfont)
+//
+//
+//
+//                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+//
+//                    //Actions to be performed after clicking drawer items
+//                    @Override
+//                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+//                        SharedPreferences preferences = activity.getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
+//
+//                        if(position==1)
+//                        {
+//                            if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, User_Activity.class);
 //                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                activity.startActivity(intent);*/
-//
-//                                return true;
-//
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
 //                            }
-//                        }).build();
-
-
-
-
-        //Drawer Items
-        PrimaryDrawerItem item = new PrimaryDrawerItem().withIdentifier(1).withIcon(R.drawable.add_new_user_2).withName(activity.getString(R.string.add_new_user)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withIcon(R.drawable.companies_2).withName(activity.getString(R.string.my_companies)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withIcon(R.drawable.products_2).withName(activity.getString(R.string.my_products)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withIcon(R.drawable.items_2).withName(activity.getString(R.string.my_items)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.tax_2).withName(activity.getString(R.string.add_taxes)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(6).withIcon(R.drawable.customers_2).withName(activity.getString(R.string.home_customers)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item7 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.suppliers_2).withName(activity.getString(R.string.suppliers)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item8 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.stocks_2).withName(activity.getString(R.string.stocks)).withTextColor(Color.WHITE);
-
-        //2 space
-        PrimaryDrawerItem item9 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.settings_2).withName(activity.getString(R.string.settings)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item10 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.logout_2).withName(activity.getString(R.string.logout)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item13 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.invoices_2).withName(activity.getString(R.string.invoices)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item14 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.estimate_2).withName(activity.getString(R.string.estimate)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item15 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.purchase_order_2).withName(activity.getString(R.string.purchase_orders)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item16 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.recepits_2).withName(activity.getString(R.string.receipts)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item17 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.payment_vocher_2).withName(activity.getString(R.string.payment_vouchers)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item18 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.reports_2).withName(activity.getString(R.string.reports)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item19 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.credit_notes_2).withName(activity.getString(R.string.credit_notes)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item20 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.debit_note_2).withName(activity.getString(R.string.debit_notes)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item21 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.thanku_note_2).withName(activity.getString(R.string.thank_you_note)).withTextColor(Color.WHITE);
-        PrimaryDrawerItem item22 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.invoice_reminder_2).withName(activity.getString(R.string.invoice_reminders)).withTextColor(Color.WHITE);
-
-        PrimaryDrawerItem item111 = new PrimaryDrawerItem().withIdentifier(5).withIcon(R.drawable.slide_mm)
-                .withIcon(R.mipmap.app_icon)
-                .withName(activity.getString(R.string.invoice_reminders))
-                .withDescription("dgdfgdfg\nhfghj")
-                .withBadge("fdsffgfg")
-                .withTextColor(Color.WHITE);
-
-        PrimaryDrawerItem item12 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
-        PrimaryDrawerItem item11 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
-
-//        PrimaryDrawerItem item111 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
-//        PrimaryDrawerItem item122 = new PrimaryDrawerItem().withIdentifier(5).withName("").withTextColor(Color.WHITE);
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        LayoutInflater inflater = activity.getLayoutInflater();
-        View lst_item_view = inflater.inflate(R.layout.custom_header, null);
-        TextView headerName = (TextView) lst_item_view.findViewById(R.id.headerName);
-        TextView headerEmail = (TextView) lst_item_view.findViewById(R.id.headerEmail);
-        TextView headerDesc = (TextView) lst_item_view.findViewById(R.id.headerDesc);
-
-        headerName.setText(""+username);
-        headerEmail.setText(""+email);
-        if(pref.getSubsType().equalsIgnoreCase("onemonth")){
-            headerDesc.setText("Monthly Subscription");
-        }else if(pref.getSubsType().equalsIgnoreCase("oneyear")){
-            headerDesc.setText("Yearly Subscription");
-        }else{
-            headerDesc.setText("");
-        }
-
-
-
-//        RecyclerView recyclerView = (RecyclerView) lst_item_view.findViewById(R.id.recycler_viewMenu);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+//                        }
 //
-//        LeftMenuAdapter mAdapter = new LeftMenuAdapter(activity, contacts);
-//        recyclerView.setAdapter(mAdapter);
+//                        if(position==2)
+//                        {
+//                            if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, Companies_Activity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
 //
-//        contacts = new Utility().getItemLeftMenuWithoutLoginUser(activity);
-//        mAdapter.updateData(contacts);
-
-      //  final Drawer result = new DrawerBuilder().build();
-
-        final Drawer result = new DrawerBuilder()
-                //.withAccountHeader(lst_item_view)
-                .withActivity(activity)
-                .withHeaderPadding(true)
-//                .withDrawerWidthPx((width/2)+((width/2)/2))
-             //   .withStickyHeader(lst_item_view)
-                .withHeader(lst_item_view)
-                .withTranslucentStatusBar(true)
-                .withStickyFooterDivider(false)
-                .withDisplayBelowStatusBar(true)
-                //.withDrawerGravity(Gravity.RIGHT)
-                //.withSliderBackgroundColorRes(R.color.sidemenublue)
-                .withSliderBackgroundDrawable(activity.getResources().getDrawable(R.drawable.side_menu_bg))
-                .withSelectedItem(-1)
-
-
-                .addDrawerItems(
-                        item.withSelectable(false).withTypeface(myfont),
-                        item2.withSelectable(false).withTypeface(myfont),
-                        item3.withSelectable(false).withTypeface(myfont),
-                        item4.withSelectable(false).withTypeface(myfont),
-                        item5.withSelectable(false).withTypeface(myfont),
-                        item6.withSelectable(false).withTypeface(myfont),
-                        item7.withSelectable(false).withTypeface(myfont),
-                        item8.withSelectable(false).withTypeface(myfont),
-                        item13.withSelectable(false).withTypeface(myfont),
-                        item14.withSelectable(false).withTypeface(myfont),
-                        item15.withSelectable(false).withTypeface(myfont),
-                        item16.withSelectable(false).withTypeface(myfont),
-                        item17.withSelectable(false).withTypeface(myfont),
-                        item18.withSelectable(false).withTypeface(myfont),
-                        item19.withSelectable(false).withTypeface(myfont),
-                        item20.withSelectable(false).withTypeface(myfont),
-                        item21.withSelectable(false).withTypeface(myfont),
-                        item22.withSelectable(false).withTypeface(myfont),
-                        item12.withSelectable(false).withTypeface(myfont),
-
-                        item9.withSelectable(false).withTypeface(myfont),
-                        item10.withSelectable(false).withTypeface(myfont)
-
-
-
-                 ).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-
-                    //Actions to be performed after clicking drawer items
-                    @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        SharedPreferences preferences = activity.getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
-
-                        if(position==1)
-                        {
-                            if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, User_Activity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-
-                        if(position==2)
-                        {
-                            if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, Companies_Activity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-
-                        }
-
-                        if(position==3)
-                        {
-                            if(preferences.getString(Constant.PRODUCT,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, Product_Activity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-
-                        if(position==4) {
-                            if(preferences.getString(Constant.SERVICE,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, Service_Activity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-
-                        if(position==5){
-                            if(preferences.getString(Constant.TAX,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, Tax_Activity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-                        if(position==6)
-                        {
-                            if(preferences.getString(Constant.CUSTOMER,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, Customer_Activity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-                        if(position==7)
-                        {
-                            if(preferences.getString(Constant.SUPPLIER,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, Vendor_Activity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-                        if(position==8)
-                        {
-                            if(preferences.getString(Constant.STOCK,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, Stock_Activity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-
-                        if (position==9)
-                        {
-                            if(preferences.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, InvoiceActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-
-                        if(position==10)
-                        {
-                            if(preferences.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, EstimateActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-                        if(position==11)
-                        {
-                            if(preferences.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, POActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-                        if(position==12)
-                        {
-                            if(preferences.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, ReceiptsActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-                        if(position==13)
-                        {
-                            if(preferences.getString(Constant.PAYMENT_VOUCHER,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, PVActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-                        if(position==14)
-                        {
-                            Intent intent = new Intent(activity, ReportActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
-                        }
-                        if(position==15)
-                        {
-                            if(preferences.getString(Constant.CREDIT_NOTE,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, CreditNotesActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-
-                        }
-                        if(position==16)
-                        {
-                            if(preferences.getString(Constant.DEBIT_NOTE,"").equalsIgnoreCase("1")){
-                                Intent intent = new Intent(activity, DebitNotesActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                activity.startActivity(intent);
-                            }else{
-                                createDialogOpenClass(activity);
-                            }
-                        }
-
-                        if(position==17)
-                        {
-                            Intent intent = new Intent(activity, ThankYouNoteActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
-                        }
-
-                        if(position==18)
-                        {
-                            Intent intent = new Intent(activity, InvoiceReminderActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
-                        }
-
-                        if(position==20)
-                        {
-                            Intent intent = new Intent(activity, SettingsActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
-                        }
-
-
-                        if(position==21)
-                        {
-
-                            preferences.edit().remove(Constant.LOGGED_IN).commit();
-                            preferences.edit().remove(Constant.INVOICE).commit();
-                            preferences.edit().remove(Constant.ESTIMATE).commit();
-                            preferences.edit().remove(Constant.STOCK).commit();
-                            preferences.edit().remove(Constant.RECEIPT).commit();
-                            preferences.edit().remove(Constant.PURCHASE_ORDER).commit();
-                            preferences.edit().remove(Constant.PAYMENT_VOUCHER).commit();
-                            preferences.edit().remove(Constant.TAX).commit();
-                            preferences.edit().remove(Constant.CUSTOMER).commit();
-                            preferences.edit().remove(Constant.SUPPLIER).commit();
-                            preferences.edit().remove(Constant.PRODUCT).commit();
-                            preferences.edit().remove(Constant.SERVICE).commit();
-                            preferences.edit().remove(Constant.DEBIT_NOTE).commit();
-                            preferences.edit().remove(Constant.CREDIT_NOTE).commit();
-                            preferences.edit().remove(Constant.SUB_ADMIN).commit();
-                            preferences.edit().remove(Constant.ACCESS_TOKEN).commit();
-                            preferences.edit().remove(Constant.FULLNAME).commit();
-                            preferences.edit().remove(Constant.EMAIL).commit();
-                            SavePref pref = new SavePref();
-                            pref.SavePref(activity);
-                            pref.setSubsType("");
-                            pref.setNumberFormatPosition(0);
-                            pref.setLanguagePosition(0);
-
-                            Context context = LocaleHelper.setLocale(activity, "en");
-                            Locale myLocale = new Locale("en");
-                            Resources res = context.getResources();
-                            DisplayMetrics dm = res.getDisplayMetrics();
-                            Configuration conf = res.getConfiguration();
-                            conf.locale = myLocale;
-                            res.updateConfiguration(conf, dm);
-
-
-
-                            Intent intent = new Intent(activity, Signin_Activity.class);
-                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            activity.startActivity(intent);
-                            activity.finishAffinity();
-                            activity.finish();
-
-                        }
-
-
-                        return false;
-                    }
-                })
-
-                .build();
-
-//                result.getDrawerLayout().setFitsSystemWindows(false);
-//                result.getSlider().setFitsSystemWindows(false);
-
+//                        }
+//
+//                        if(position==3)
+//                        {
+//                            if(preferences.getString(Constant.PRODUCT,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, Product_Activity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//
+//                        if(position==4) {
+//                            if(preferences.getString(Constant.SERVICE,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, Service_Activity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//
+//                        if(position==5){
+//                            if(preferences.getString(Constant.TAX,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, Tax_Activity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//                        if(position==6)
+//                        {
+//                            if(preferences.getString(Constant.CUSTOMER,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, Customer_Activity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//                        if(position==7)
+//                        {
+//                            if(preferences.getString(Constant.SUPPLIER,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, Vendor_Activity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//                        if(position==8)
+//                        {
+//                            if(preferences.getString(Constant.STOCK,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, Stock_Activity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//
+//                        if (position==9)
+//                        {
+//                            if(preferences.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, InvoiceActivity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//
+//                        if(position==10)
+//                        {
+//                            if(preferences.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, EstimateActivity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//                        if(position==11)
+//                        {
+//                            if(preferences.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, POActivity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//                        if(position==12)
+//                        {
+//                            if(preferences.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, ReceiptsActivity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//                        if(position==13)
+//                        {
+//                            if(preferences.getString(Constant.PAYMENT_VOUCHER,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, PVActivity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//                        if(position==14)
+//                        {
+//                            Intent intent = new Intent(activity, ReportActivity.class);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            activity.startActivity(intent);
+//                        }
+//                        if(position==15)
+//                        {
+//                            if(preferences.getString(Constant.CREDIT_NOTE,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, CreditNotesActivity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//
+//                        }
+//                        if(position==16)
+//                        {
+//                            if(preferences.getString(Constant.DEBIT_NOTE,"").equalsIgnoreCase("1")){
+//                                Intent intent = new Intent(activity, DebitNotesActivity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                activity.startActivity(intent);
+//                            }else{
+//                                createDialogOpenClass(activity);
+//                            }
+//                        }
+//
+//                        if(position==17)
+//                        {
+//                            Intent intent = new Intent(activity, ThankYouNoteActivity.class);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            activity.startActivity(intent);
+//                        }
+//
+//                        if(position==18)
+//                        {
+//                            Intent intent = new Intent(activity, InvoiceReminderActivity.class);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            activity.startActivity(intent);
+//                        }
+//
+//                        if(position==20)
+//                        {
+//                            Intent intent = new Intent(activity, SettingsActivity.class);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            activity.startActivity(intent);
+//                        }
+//
+//
+//                        if(position==21)
+//                        {
+//
+//                            preferences.edit().remove(Constant.LOGGED_IN).commit();
+//                            preferences.edit().remove(Constant.INVOICE).commit();
+//                            preferences.edit().remove(Constant.ESTIMATE).commit();
+//                            preferences.edit().remove(Constant.STOCK).commit();
+//                            preferences.edit().remove(Constant.RECEIPT).commit();
+//                            preferences.edit().remove(Constant.PURCHASE_ORDER).commit();
+//                            preferences.edit().remove(Constant.PAYMENT_VOUCHER).commit();
+//                            preferences.edit().remove(Constant.TAX).commit();
+//                            preferences.edit().remove(Constant.CUSTOMER).commit();
+//                            preferences.edit().remove(Constant.SUPPLIER).commit();
+//                            preferences.edit().remove(Constant.PRODUCT).commit();
+//                            preferences.edit().remove(Constant.SERVICE).commit();
+//                            preferences.edit().remove(Constant.DEBIT_NOTE).commit();
+//                            preferences.edit().remove(Constant.CREDIT_NOTE).commit();
+//                            preferences.edit().remove(Constant.SUB_ADMIN).commit();
+//                            preferences.edit().remove(Constant.ACCESS_TOKEN).commit();
+//                            preferences.edit().remove(Constant.FULLNAME).commit();
+//                            preferences.edit().remove(Constant.EMAIL).commit();
+//                            SavePref pref = new SavePref();
+//                            pref.SavePref(activity);
+//                            pref.setSubsType("");
+//                            pref.setNumberFormatPosition(0);
+//                            pref.setLanguagePosition(0);
+//
+//                            Context context = LocaleHelper.setLocale(activity, "en");
+//                            Locale myLocale = new Locale("en");
+//                            Resources res = context.getResources();
+//                            DisplayMetrics dm = res.getDisplayMetrics();
+//                            Configuration conf = res.getConfiguration();
+//                            conf.locale = myLocale;
+//                            res.updateConfiguration(conf, dm);
+//
+//
+//
+//                            Intent intent = new Intent(activity, Signin_Activity.class);
+//                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            activity.startActivity(intent);
+//                            activity.finishAffinity();
+//                            activity.finish();
+//
+//                        }
+//
+//
+//                        return false;
+//                    }
+//                })
+//
+//                .build();
+//
+////                result.getDrawerLayout().setFitsSystemWindows(false);
+////                result.getSlider().setFitsSystemWindows(false);
+//
 
 
         //tool bar
@@ -561,17 +561,17 @@ public class Constant {
                 }
             });
 
-            ham.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (result.isDrawerOpen()) {
-
-                        result.closeDrawer();
-                    } else {
-                        result.openDrawer();
-                    }
-                }
-            });
+//            ham.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (result.isDrawerOpen()) {
+//
+//                        result.closeDrawer();
+//                    } else {
+//                        result.openDrawer();
+//                    }
+//                }
+//            });
 
 
 
@@ -777,6 +777,9 @@ public class Constant {
             }
         });
     }
+
+
+
 
     public static void SuccessToast(Activity context,String message){
         if(context != null){

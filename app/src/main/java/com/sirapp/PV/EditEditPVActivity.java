@@ -97,6 +97,7 @@ import com.sirapp.Model.Service_list;
 import com.sirapp.Model.Tax_List;
 import com.sirapp.PO.EditPOActivity;
 import com.sirapp.Product.Product_Activity;
+import com.sirapp.Receipts.EditEditReceiptActivity;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
 import com.sirapp.Service.Service_Activity;
@@ -5446,10 +5447,17 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
-        if(AllSirApi.FONT_INVOICE_CREATE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
-        }else{
+
+        if(Utility.getDensityName(EditEditPVActivity.this).equalsIgnoreCase("hdpi") ||
+                Utility.getDensityName(EditEditPVActivity.this).equalsIgnoreCase("mdpi") ||
+                Utility.getDensityName(EditEditPVActivity.this).equalsIgnoreCase("ldpi")){
             invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        }else{
+            if(AllSirApi.FONT_INVOICE_CREATE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }
 
         invoiceweb.setWebViewClient(new WebViewClient() {

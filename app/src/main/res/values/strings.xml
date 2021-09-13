@@ -7,6 +7,8 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
+    <string name="open">open</string>
+    <string name="close">close</string>
     <string name="go_pro">Go Pro</string>
 
     <string name="stripe_txt">Stripe is an online payment processing platform that enables you to receive payments securely from your customers.</string>

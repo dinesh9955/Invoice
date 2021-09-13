@@ -55,7 +55,7 @@ public class Stock_Products_Detail extends BaseActivity {
         setContentView(R.layout.activity_stock__products__detail);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         Constant.toolbar(Stock_Products_Detail.this,getString(R.string.header_warehouses));
-        Constant.bottomNav(Stock_Products_Detail.this,-1);
+//        Constant.bottomNav(Stock_Products_Detail.this,-1);
         final SharedPreferences pref =getSharedPreferences(Constant.PREF_BASE, Context.MODE_PRIVATE);
         company_id = pref.getString(Constant.COMPANY_ID,"");
         avi = findViewById(R.id.avi);

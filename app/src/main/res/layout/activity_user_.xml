@@ -35,7 +35,8 @@
         android:layout_height="match_parent" />
 
 
-    <include layout="@layout/bottom_navigation">
+    <include layout="@layout/bottom_navigation"
+        android:visibility="gone">
     </include>
 
 

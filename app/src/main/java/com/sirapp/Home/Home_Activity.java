@@ -12,7 +12,10 @@ import android.os.Handler;
 import android.os.StrictMode;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -130,11 +133,55 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
     int companyPosition = 0;
 
+
+
+    DrawerLayout drawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_);
+        setContentView(R.layout.home_act);
 //        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        TextView titleView = toolbar.findViewById(R.id.title1);
+        titleView.setText("");
+        ImageView backbtn = toolbar.findViewById(R.id.backbtn);
+        ImageView ham = toolbar.findViewById(R.id.ham);
+        backbtn.setVisibility(View.GONE);
+        ham.setVisibility(View.VISIBLE);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.setDrawerListener(drawerToggle);
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        drawerToggle.syncState();
+
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG, "LEFTAAbackbtn "+drawerLayout.getDrawerElevation());
+                onBackPressed();
+            }
+        });
+
+        ham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             //   Log.e(TAG, "LEFTAA "+drawerLayout.getDrawerElevation());
+//                if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+//                    drawerLayout.closeDrawer(GravityCompat.START);
+//                } else {
+                    drawerLayout.openDrawer(GravityCompat.START);
+//                }
+
+            }
+        });
+
+
+        setLeftValues();
 
         FirebaseDynamicLinks.getInstance()
                 .getDynamicLink(getIntent())
@@ -175,13 +222,12 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         }
 
         Constant.bottomNav(Home_Activity.this, -1);
-        Constant.toolbar(Home_Activity.this, "");
+//        Constant.toolbar(Home_Activity.this, "");
         FindByIds();
         setListeners();
-        setFonts();
+//        setFonts();
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
 
         ImageView imageViewptint = toolbar.findViewById(R.id.imageViewptint);
         imageViewptint.setImageResource(R.drawable.search_2);
@@ -221,13 +267,9 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         String username = Constant.GetSharedPreferences(getApplicationContext(), Constant.FULLNAME);
 
         if (username.equals("")) {
-
             hello.setText(getString(R.string.home_hello));
-
         } else {
-
             hello.setText(getString(R.string.home_hello)+" " + username);
-
         }
 
 
@@ -246,6 +288,39 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         String size = Utility.getDensityName(Home_Activity.this);
         Log.e(TAG, "sizeSc "+size);
+
+    }
+
+    private void setLeftValues() {
+
+        String username = Constant.GetSharedPreferences(Home_Activity.this, Constant.FULLNAME);
+        String email = Constant.GetSharedPreferences(Home_Activity.this, Constant.EMAIL);
+
+        TextView headerName = (TextView) findViewById(R.id.headerName);
+        TextView headerEmail = (TextView) findViewById(R.id.headerEmail);
+        TextView headerDesc = (TextView) findViewById(R.id.headerDesc);
+
+        headerName.setText(""+username);
+        headerEmail.setText(""+email);
+        if(pref.getSubsType().equalsIgnoreCase("onemonth")){
+            headerDesc.setText("Monthly Subscription");
+        }else if(pref.getSubsType().equalsIgnoreCase("oneyear")){
+            headerDesc.setText("Yearly Subscription");
+        }else{
+            headerDesc.setText("");
+        }
+
+        ArrayList<ItemLeftMenu> contacts = new ArrayList<ItemLeftMenu>();
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(Home_Activity.this, LinearLayoutManager.VERTICAL, false));
+
+        LeftMenuAdapter mAdapter = new LeftMenuAdapter(Home_Activity.this, contacts);
+        recyclerView.setAdapter(mAdapter);
+
+        contacts = new Utility().getItemLeftMenuWithoutLoginUser(Home_Activity.this);
+        mAdapter.updateData(contacts);
+
 
     }
 
@@ -1155,8 +1230,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
                     }
 
-                    Constant.toolbar(Home_Activity.this, "");
-
+                   // Constant.toolbar(Home_Activity.this, "");
+                    setLeftValues();
                 }
 
                 @Override
@@ -1338,5 +1413,12 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 //
 //            }
 //        });
+    }
+
+
+    public void closeDrawer() {
+        if(drawerLayout != null){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
     }
 }

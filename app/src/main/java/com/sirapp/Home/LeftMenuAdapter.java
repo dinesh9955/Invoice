@@ -86,6 +86,8 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
             @Override
             public void onClick(View view) {
 
+                ((Home_Activity)activity).closeDrawer();
+
                 if(position==0)
                         {
                             if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
@@ -329,9 +331,6 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
 //
 //        }
     }
-
-
-
 
 
 

@@ -88,7 +88,7 @@ public class User_Detail_Activity extends BaseActivity {
         setContentView(R.layout.activity_user__detail_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
         Constant.toolbar(User_Detail_Activity.this,getString(R.string.header_details));
-        Constant.bottomNav(User_Detail_Activity.this,-1);
+//        Constant.bottomNav(User_Detail_Activity.this,-1);
         FindByIds();
         setFonts();
         mCompressor = new FileCompressor(this);

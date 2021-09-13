@@ -25,7 +25,7 @@ public class Stock_Activity extends BaseActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
         Constant.toolbar(Stock_Activity.this, getString(R.string.header_stock));
-        Constant.bottomNav(Stock_Activity.this,-1);
+//        Constant.bottomNav(Stock_Activity.this,-1);
 
         viewPager = findViewById(R.id.viewPagerLayout);
         tabs = findViewById(R.id.tabs);
