@@ -1108,7 +1108,7 @@ public class Utility {
 
 
 
-    private static String getDensityName(Context context) {
+    public static String getDensityName(Context context) {
         float density = context.getResources().getDisplayMetrics().density;
         if (density >= 4.0) {
             return "xxxhdpi";
