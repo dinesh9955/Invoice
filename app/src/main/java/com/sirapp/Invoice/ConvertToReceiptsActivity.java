@@ -3625,6 +3625,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_priceSSSS "+total_price);
 
+
         if(tempList.size() == 0){
             textViewNoItems.setVisibility(View.VISIBLE);
         }else{

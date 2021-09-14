@@ -421,27 +421,27 @@ public class Signin_Activity extends BaseActivity {
         }
     }
 
-    Boolean twice=false;
-    @Override
-    public void onBackPressed() {
-        if (twice==true){
-            Intent intent=new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-            System.exit(0);
-        }
-        twice=true;
-        Toast.makeText(getApplicationContext(),"Press back again to exit",Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                twice = false;
-            }
-        },3000);
-
-    }
+//    Boolean twice=false;
+//    @Override
+//    public void onBackPressed() {
+//        if (twice==true){
+//            Intent intent=new Intent(Intent.ACTION_MAIN);
+//            intent.addCategory(Intent.CATEGORY_HOME);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
+//            finish();
+//            System.exit(0);
+//        }
+//        twice=true;
+//        Toast.makeText(getApplicationContext(),"Press back again to exit",Toast.LENGTH_SHORT).show();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                twice = false;
+//            }
+//        },3000);
+//
+//    }
 
 
 

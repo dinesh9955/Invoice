@@ -3843,6 +3843,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
+
+        DecimalFormat formatter = new DecimalFormat("#0.00");
         Log.e(TAG,  "total_price: "+total_price);
 
         if(tempList.size() == 0){
@@ -3881,27 +3883,32 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
             subtotalAmount = grandAmount - discountAmount;
 
-            afterTaxAmount = subtotalAmount;
+            afterTaxAmount = Double.parseDouble(formatter.format(subtotalAmount));
+
+            Log.e(TAG, "afterTaxAmount "+afterTaxAmount);
 
             Log.e(TAG, "taxtrateamt "+taxtrateamt);
             if (selectedtaxt.size() > 0) {
                 if (taxtypeclusive.equals("Inclusive")) { // exclude on
                     taxAmount = Double.parseDouble(taxtrateamt) * subtotalAmount / (100+ Double.parseDouble(taxtrateamt));
+                    taxAmount = Double.parseDouble(formatter.format(taxAmount));
                     afterTaxAmount = subtotalAmount;
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
                     txttax.setText(  subStrinng + " incl." );
                     taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                 } else { // include off
                     taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
+                    taxAmount = Double.parseDouble(formatter.format(taxAmount));
                     afterTaxAmount = subtotalAmount + taxAmount;
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
                     txttax.setText(  subStrinng + "" );
                     taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
                 }
             }
-
+            Log.e(TAG, "taxAmount "+taxAmount);
 
             Log.e(TAG, "freight_cost "+freight_cost);
+
             if (freight_cost.equals("")) {
                 double value = 0.0;
                 shippingAmount = value;
@@ -3916,14 +3923,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
             balanceAmount = netAmount - paidAmount;
 
-            Log.e(TAG, "grandAmount "+grandAmount);
-            Log.e(TAG, "discountAmount "+discountAmount);
-            Log.e(TAG, "subtotalAmount "+subtotalAmount);
-            Log.e(TAG, "taxAmount "+taxAmount);
-            Log.e(TAG, "shippingAmount "+shippingAmount);
-            Log.e(TAG, "netAmount "+netAmount);
-            Log.e(TAG, "paidAmount "+paidAmount);
-            Log.e(TAG, "balanceAmount "+balanceAmount);
 
             if(grandAmount == 0){
                 grosstotal.setText("0");
@@ -3978,7 +3977,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 //            System.out.println(deciFormat.format(subtotalAmountZZ));
 
-            DecimalFormat formatter = new DecimalFormat("#0.00");
+
             Log.e(TAG , "subtotalAmountZZ "+formatter.format(subtotalAmount));
 
             grandAmountZZ = Double.parseDouble(formatter.format(grandAmount));
@@ -3991,6 +3990,14 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             paidAmountZZ = Double.parseDouble(formatter.format(paidAmount));
             balanceAmountZZ = Double.parseDouble(formatter.format(balanceAmount));
 
+            Log.e(TAG, "grandAmountZZ "+grandAmountZZ);
+            Log.e(TAG, "discountAmountZZ "+discountAmountZZ);
+            Log.e(TAG, "subtotalAmountZZ "+subtotalAmountZZ);
+            Log.e(TAG, "taxAmountZZ "+taxAmountZZ);
+            Log.e(TAG, "shippingAmountZZ "+shippingAmountZZ);
+            Log.e(TAG, "netAmountZZ "+netAmountZZ);
+            Log.e(TAG, "paidAmountZZ "+paidAmountZZ);
+            Log.e(TAG, "balanceAmountZZ "+balanceAmountZZ);
 
 
 

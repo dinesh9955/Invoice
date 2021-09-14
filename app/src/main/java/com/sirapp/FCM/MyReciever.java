@@ -184,6 +184,7 @@ public class MyReciever extends WakefulBroadcastReceiver
             notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
             notificationManager.createNotificationChannel(notificationChannel);
             builder = new NotificationCompat.Builder(context11, notificationChannel.getId());
+
         } else {
             builder = new NotificationCompat.Builder(context11);
         }
@@ -200,6 +201,8 @@ public class MyReciever extends WakefulBroadcastReceiver
                 // .setColor(ContextCompat.getColor(context, R.color.color))
                 .setWhen(System.currentTimeMillis())
                 .setContentTitle(context11.getString(R.string.app_name))
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(context11.getString(R.string.noti_invoice_seen)+" "+  pref.getCustomerName()))
                 .setContentText(context11.getString(R.string.noti_invoice_seen)+" "+  pref.getCustomerName())
                 // .setContentText("Level: "+level+"% | Remaining Time: "+(hour)+"h "+(min)+"min")
                 .setPriority(Notification.PRIORITY_MAX)

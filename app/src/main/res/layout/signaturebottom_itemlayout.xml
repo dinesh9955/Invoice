@@ -19,7 +19,7 @@
     <com.github.gcacace.signaturepad.views.SignaturePad
         android:id="@+id/signaturepad"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="@dimen/_250sdp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_below="@id/txtsignature"
@@ -31,7 +31,7 @@
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_marginTop="20dp"
+    android:padding="@dimen/_10sdp"
     android:layout_height="wrap_content"
     android:layout_below="@id/signaturepad"
     android:gravity="center">
@@ -40,7 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
         android:layout_toRightOf="@id/btnclear"
         android:background="@drawable/buttonshape"
         android:text="@string/all_Save"
@@ -55,14 +54,13 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/signaureback"
         android:text="@string/signature_Clear"
         android:textSize="@dimen/_10sdp"
         android:textAllCaps="false"
         android:textColor="@color/red"
         android:id="@+id/btnclear"
-        android:layout_marginBottom="40dp"
+
         />
 </RelativeLayout>
 

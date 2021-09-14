@@ -3446,6 +3446,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_price: "+total_price);
+        DecimalFormat formatter = new DecimalFormat("#0.00");
 
         if(tempList.size() == 0){
             textViewNoItems.setVisibility(View.VISIBLE);
@@ -3481,18 +3482,20 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
             subtotalAmount = grandAmount - discountAmount;
 
-            afterTaxAmount = subtotalAmount;
+            afterTaxAmount = Double.parseDouble(formatter.format(subtotalAmount));
 
             Log.e(TAG, "taxtrateamt "+taxtrateamt);
             if (selectedtaxt.size() > 0) {
                 if (taxtypeclusive.equals("Inclusive")) { // exclude on
                     taxAmount = Double.parseDouble(taxtrateamt) * subtotalAmount / (100+ Double.parseDouble(taxtrateamt));
+                    taxAmount = Double.parseDouble(formatter.format(taxAmount));
                     afterTaxAmount = subtotalAmount;
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
                     txttax.setText(  subStrinng + " incl." );
                     taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                 } else { // include off
                     taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
+                    taxAmount = Double.parseDouble(formatter.format(taxAmount));
                     afterTaxAmount = subtotalAmount + taxAmount;
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
                     txttax.setText(  subStrinng + "" );
@@ -3564,7 +3567,6 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 //            shippingAmountZZ = shippingAmount;
 //            netAmountZZ = netAmount;
 
-            DecimalFormat formatter = new DecimalFormat("#0.00");
             Log.e(TAG , "subtotalAmountZZ "+formatter.format(subtotalAmount));
 
             grandAmountZZ = Double.parseDouble(formatter.format(grandAmount));
