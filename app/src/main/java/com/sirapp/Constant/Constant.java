@@ -113,6 +113,7 @@ public class Constant {
     public static final String  SUB_ADMIN = "jxshoisxuo";
     public static final String CUSTOMER_NAME = "eijxdijiojx";
 
+    public static final String ROLE = "ROLE";
 
     public static final String Payment_bank_name = "xhkhtry";
     public static final String Paypal_email = "khjiojoiktry";
@@ -732,48 +733,72 @@ public class Constant {
         linearLayout2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pref.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+                if(pref.getString(Constant.ROLE,"").equalsIgnoreCase("USER")){
                     Intent intent = new Intent(activity, EstimateActivity.class);
                     activity.startActivity(intent);
                 }else{
-                    createDialogOpenClass(activity);
+                    if(pref.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(activity, EstimateActivity.class);
+                        activity.startActivity(intent);
+                    }else{
+                        createDialogOpenClass(activity);
+                    }
                 }
+
             }
         });
 
         linearLayout3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pref.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                if(pref.getString(Constant.ROLE,"").equalsIgnoreCase("USER")){
                     Intent intent = new Intent(activity, InvoiceActivity.class);
                     activity.startActivity(intent);
                 }else{
-                    createDialogOpenClass(activity);
+                    if(pref.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(activity, InvoiceActivity.class);
+                        activity.startActivity(intent);
+                    }else{
+                        createDialogOpenClass(activity);
+                    }
                 }
+
             }
         });
 
         linearLayout4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pref.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+                if(pref.getString(Constant.ROLE,"").equalsIgnoreCase("USER")){
                     Intent intent = new Intent(activity, ReceiptsActivity.class);
                     activity.startActivity(intent);
                 }else{
-                    createDialogOpenClass(activity);
+                    if(pref.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(activity, ReceiptsActivity.class);
+                        activity.startActivity(intent);
+                    }else{
+                        createDialogOpenClass(activity);
+                    }
                 }
+
             }
         });
 
         linearLayout5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pref.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
+                if(pref.getString(Constant.ROLE,"").equalsIgnoreCase("USER")){
                     Intent intent = new Intent(activity, POActivity.class);
                     activity.startActivity(intent);
                 }else{
-                    createDialogOpenClass(activity);
+                    if(pref.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(activity, POActivity.class);
+                        activity.startActivity(intent);
+                    }else{
+                        createDialogOpenClass(activity);
+                    }
                 }
+
             }
         });
     }

@@ -364,6 +364,8 @@ public class Signup_Activity extends BaseActivity {
                             pref.edit().putString(Constant.FULLNAME,fullname).commit();
                             pref.edit().putString(Constant.EMAIL,email).commit();
                             pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
+                            pref.edit().putString(Constant.EMAIL,profile.getString("email")).commit();
+
 
                             JSONObject permissions = profile.getJSONObject("permission");
                             String invoice = permissions.getString("invoice");
@@ -578,6 +580,7 @@ public class Signup_Activity extends BaseActivity {
                         pref.edit().putString(Constant.FULLNAME,fullname).commit();
                         pref.edit().putString(Constant.EMAIL,email).commit();
                         pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
+                        pref.edit().putString(Constant.ROLE,"USER").commit();
 
 //                        JSONObject permissions = profile.getJSONObject("permission");
 //                        String invoice = permissions.getString("invoice");
