@@ -61,6 +61,7 @@ import com.sirapp.Model.InvoiceData;
 //import com.sirapp.Model.Product_List;
 import com.sirapp.R;
 import com.sirapp.Utils.Utility;
+import com.sirapp.wwww;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -71,6 +72,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -2313,136 +2315,351 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
             String finalUrlPaypalName = urlPaypalName;
             String finalUrlStripeName = urlStripeName;
-            new CreateHtmlTask(context, context.getCacheDir(), urlPaypalName, new CreateHtmlTask.OnTaskFinishedListener() {
-                @Override
-                public void onHtmlCreated(HtmlFile html) {
-
-                    new CreateHtmlTask(context, context.getCacheDir(), finalUrlStripeName, new CreateHtmlTask.OnTaskFinishedListener() {
-                        @Override
-                        public void onHtmlCreated(HtmlFile html2) {
-                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
-
-                            File mFile2 = new File("/sdcard/share.jpg");
-                            Uri imageUri2 = FileProvider.getUriForFile(
-                                    context,
-                                    BuildConfig.APPLICATION_ID + ".provider",
-                                    mFile2);
-
-                            File fileWithinMyDir = new File(message);
-                            Uri imageUri1 = FileProvider.getUriForFile(context,
-                                    BuildConfig.APPLICATION_ID + ".provider",
-                                    fileWithinMyDir);
-
-                            if(fileWithinMyDir.exists()) {
-                                ArrayList<Uri> uriArrayList = new ArrayList<>();
-                                uriArrayList.add(imageUri1);
-                                uriArrayList.add(imageUri2);
-
-
-                                 if (Utility.isAppAvailable(context, "com.samsung.android.email.provider")) {
-
-                                     String content1 = "";
-
-                                     if (finalUrlPaypalName.equalsIgnoreCase("Paypal")) {
-                                         String linkWitch = "PayPal";
-                                         content1 = "<!DOCTYPE html>\n" +
-                                                 "<html>\n" +
-                                                 "  <head>\n" +
-                                                 "    <title>Title of the document</title>\n" +
-                                                 "    <style>\n" +
-                                                 "      .button {\n" +
-                                                 "        background-color: #1c87c9;\n" +
-                                                 "        border: none;\n" +
-                                                 "        color: white;\n" +
-                                                 "        padding: 20px 34px;\n" +
-                                                 "        text-align: center;\n" +
-                                                 "        text-decoration: none;\n" +
-                                                 "        display: inline-block;\n" +
-                                                 "        font-size: 20px;\n" +
-                                                 "        margin: 4px 2px;\n" +
-                                                 "        cursor: pointer;\n" +
-                                                 "      }\n" +
-                                                 "    </style>\n" +
-                                                 "  </head>\n" +
-                                                 "  <body>\n" +
-                                                 "    <a href=\"" + urlPaypal + "\" class=\"button\">" + linkWitch + "</a>\n" +
-                                                 "  </body>\n" +
-                                                 "</html>";
-
-                                     }
-
-                                     String content2 = "";
-                                     if (finalUrlStripeName.equalsIgnoreCase("Stripe")) {
-                                         String linkWitch = "Cards";
-                                         content2 = "<!DOCTYPE html>\n" +
-                                                 "<html>\n" +
-                                                 "  <head>\n" +
-                                                 "    <title>Title of the document</title>\n" +
-                                                 "    <style>\n" +
-                                                 "      .button {\n" +
-                                                 "        background-color: #1c87c9;\n" +
-                                                 "        border: none;\n" +
-                                                 "        color: white;\n" +
-                                                 "        padding: 20px 34px;\n" +
-                                                 "        text-align: center;\n" +
-                                                 "        text-decoration: none;\n" +
-                                                 "        display: inline-block;\n" +
-                                                 "        font-size: 20px;\n" +
-                                                 "        margin: 4px 2px;\n" +
-                                                 "        cursor: pointer;\n" +
-                                                 "      }\n" +
-                                                 "    </style>\n" +
-                                                 "  </head>\n" +
-                                                 "  <body>\n" +
-                                                 "    <a href=\"" + urlStripe + "\" class=\"button\">" + linkWitch + "</a>\n" +
-                                                 "  </body>\n" +
-                                                 "</html>";
-                                     }
-
-                                     intentShareFile.setType("application/pdf/*|image/*");
-                                     intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-
-                                     intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
-
-
-                                     Log.e(TAG, "allData "+text);
-
-
-                                     String allData = text+content1+content2;
-
-                                     intentShareFile.putExtra(Intent.EXTRA_HTML_TEXT, allData);
-                                     intentShareFile.setPackage("com.samsung.android.email.provider");
-                                }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
-                                    if(paypal.equalsIgnoreCase("1")){
-                                        uriArrayList.add(html.getFilePath());
-                                    }
-
-                                    if(stripe.equalsIgnoreCase("1")){
-                                        uriArrayList.add(html2.getFilePath());
-                                    }
-
-                                    intentShareFile.setType("application/pdf/*|image/*|text/html");
-                                    intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-
-                                    intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
-
-                                    intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
-                                    intentShareFile.setPackage("com.google.android.gm");
-                                }
-                                context.startActivity(intentShareFile);
-                            }
-
-                        }
-                    }).execute(urlStripe);
 
 
 
+            String content1 = "";
+            String content11 = "";
+
+            if (finalUrlPaypalName.equalsIgnoreCase("Paypal")) {
+                String linkWitch = "PayPal";
+                content1 = "<!DOCTYPE html>\n" +
+                        "<html>\n" +
+                        "  <head>\n" +
+                        "    <title>Title of the document</title>\n" +
+                        "    <style>\n" +
+                        "      .button {\n" +
+                        "        background-color: #1c87c9;\n" +
+                        "        border: none;\n" +
+                        "        color: white;\n" +
+                        "        padding: 20px 34px;\n" +
+                        "        text-align: center;\n" +
+                        "        text-decoration: none;\n" +
+                        "        display: inline-block;\n" +
+                        "        font-size: 20px;\n" +
+                        "        margin: 4px 2px;\n" +
+                        "        cursor: pointer;\n" +
+                        "      }\n" +
+                        "    </style>\n" +
+                        "  </head>\n" +
+                        "  <body>\n" +
+                        "    <a href=\"" + urlPaypal + "\" class=\"button\">" + linkWitch + "</a>\n" +
+                        "  </body>\n" +
+                        "</html>";
+
+
+                content11 = "<!DOCTYPE html>\n" +
+                        "<html>\n" +
+                        "  <head>\n" +
+                        "    <title>Title of the document</title>\n" +
+                        "    <style>\n" +
+                        "      .button {\n" +
+                        "        background-color: #1c87c9;\n" +
+                        "        border: none;\n" +
+                        "        color: white;\n" +
+                        "        padding: 60px 90px;\n" +
+                        "        text-align: center;\n" +
+                        "        text-decoration: none;\n" +
+                        "        display: inline-block;\n" +
+                        "        font-size: 45px;\n" +
+                        "        margin: 4px 2px;\n" +
+                        "        cursor: pointer;\n" +
+                        "        border-radius: 10px;\n" +
+                        "      }\n" +
+
+
+                        "     html, body {\n" +
+                        "      height: 100%;\n" +
+                        "     }\n" +
+
+
+                        "      .parent {\n" +
+                        "        width: 100%;\n" +
+                        "        height: 100%;\n" +
+                        "        display: table;\n" +
+                        "        text-align: center;\n" +
+                        "     }\n" +
+
+
+                        " 		.parent > .child {\n" +
+                        "		display: table-cell;\n" +
+                        "		vertical-align: middle;\n" +
+                        "     }\n" +
+
+                        "    </style>\n" +
+                        "  </head>\n" +
+                        "  <body>\n" +
+                        "  <section class=\"parent\">\n" +
+                        "	 <div class=\"child\">\n" +
+                        "      <a href=\""+urlPaypal+"\" class=\"button\">"+linkWitch+"</a>\n" +
+                        "	 </div>\n" +
+                        "	</section>\n" +
+                        "  </body>\n" +
+                        "</html>";
+
+                generateNoteOnSDPayPal(context , linkWitch+".html" , ""+content11.toString());
+
+            }
+
+            String content2 = "";
+            String content22 = "";
+
+            if (finalUrlStripeName.equalsIgnoreCase("Stripe")) {
+                String linkWitch = "Cards";
+                content2 = "<!DOCTYPE html>\n" +
+                        "<html>\n" +
+                        "  <head>\n" +
+                        "    <title>Title of the document</title>\n" +
+                        "    <style>\n" +
+                        "      .button {\n" +
+                        "        background-color: #1c87c9;\n" +
+                        "        border: none;\n" +
+                        "        color: white;\n" +
+                        "        padding: 20px 34px;\n" +
+                        "        text-align: center;\n" +
+                        "        text-decoration: none;\n" +
+                        "        display: inline-block;\n" +
+                        "        font-size: 20px;\n" +
+                        "        margin: 4px 2px;\n" +
+                        "        cursor: pointer;\n" +
+                        "      }\n" +
+                        "    </style>\n" +
+                        "  </head>\n" +
+                        "  <body>\n" +
+                        "    <a href=\"" + urlStripe + "\" class=\"button\">" + linkWitch + "</a>\n" +
+                        "  </body>\n" +
+                        "</html>";
+
+                content22 = "<!DOCTYPE html>\n" +
+                        "<html>\n" +
+                        "  <head>\n" +
+                        "    <title>Title of the document</title>\n" +
+                        "    <style>\n" +
+                        "      .button {\n" +
+                        "        background-color: #1c87c9;\n" +
+                        "        border: none;\n" +
+                        "        color: white;\n" +
+                        "        padding: 60px 90px;\n" +
+                        "        text-align: center;\n" +
+                        "        text-decoration: none;\n" +
+                        "        display: inline-block;\n" +
+                        "        font-size: 45px;\n" +
+                        "        margin: 4px 2px;\n" +
+                        "        cursor: pointer;\n" +
+                        "        border-radius: 10px;\n" +
+                        "      }\n" +
+
+
+                        "     html, body {\n" +
+                        "      height: 100%;\n" +
+                        "     }\n" +
+
+
+                        "      .parent {\n" +
+                        "        width: 100%;\n" +
+                        "        height: 100%;\n" +
+                        "        display: table;\n" +
+                        "        text-align: center;\n" +
+                        "     }\n" +
+
+
+                        " 		.parent > .child {\n" +
+                        "		display: table-cell;\n" +
+                        "		vertical-align: middle;\n" +
+                        "     }\n" +
+
+                        "    </style>\n" +
+                        "  </head>\n" +
+                        "  <body>\n" +
+                        "  <section class=\"parent\">\n" +
+                        "	 <div class=\"child\">\n" +
+                        "      <a href=\""+urlStripe+"\" class=\"button\">"+linkWitch+"</a>\n" +
+                        "	 </div>\n" +
+                        "	</section>\n" +
+                        "  </body>\n" +
+                        "</html>";
+                generateNoteOnSDStripe(context , linkWitch+".html" , ""+content22.toString());
+            }
+
+
+
+
+            ArrayList<Uri> uriArrayList = new ArrayList<>();
+            uriArrayList.add(imageUri1);
+            uriArrayList.add(imageUri2);
+
+            if (Utility.isAppAvailable(context, "com.samsung.android.email.provider")) {
+                intentShareFile.setType("application/pdf/*|image/*");
+                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+                Log.e(TAG, "allData "+text);
+                String allData = text+content1+content2;
+                intentShareFile.putExtra(Intent.EXTRA_HTML_TEXT, allData);
+                intentShareFile.setPackage("com.samsung.android.email.provider");
+            }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
+                File filePayPal = new File("/storage/emulated/0/Notes/PayPal.html");
+                File fileStripe = new File("/storage/emulated/0/Notes/Cards.html");
+                if(paypal.equalsIgnoreCase("1")){
+                    Uri imageUri3 = FileProvider.getUriForFile(
+                            context,
+                            BuildConfig.APPLICATION_ID + ".provider",
+                            filePayPal);
+                    uriArrayList.add(imageUri3);
                 }
-            }).execute(urlPaypal);
 
-            Log.e(TAG, "fileWithinMyDir "+message);
+                if(stripe.equalsIgnoreCase("1")){
+                    Uri imageUri4 = FileProvider.getUriForFile(
+                            context,
+                            BuildConfig.APPLICATION_ID + ".provider",
+                            fileStripe);
+                    uriArrayList.add(imageUri4);
+                }
+
+                intentShareFile.setType("application/pdf/*|image/*|text/html");
+                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+                intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
+                intentShareFile.setPackage("com.google.android.gm");
+            }
+            context.startActivity(intentShareFile);
 
 
+
+
+
+
+//
+//
+//            new CreateHtmlTask(context, context.getCacheDir(), urlPaypalName, new CreateHtmlTask.OnTaskFinishedListener() {
+//                @Override
+//                public void onHtmlCreated(HtmlFile html) {
+//
+//                    new CreateHtmlTask(context, context.getCacheDir(), finalUrlStripeName, new CreateHtmlTask.OnTaskFinishedListener() {
+//                        @Override
+//                        public void onHtmlCreated(HtmlFile html2) {
+//                            Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+//
+//                            File mFile2 = new File("/sdcard/share.jpg");
+//                            Uri imageUri2 = FileProvider.getUriForFile(
+//                                    context,
+//                                    BuildConfig.APPLICATION_ID + ".provider",
+//                                    mFile2);
+//
+//                            File fileWithinMyDir = new File(message);
+//                            Uri imageUri1 = FileProvider.getUriForFile(context,
+//                                    BuildConfig.APPLICATION_ID + ".provider",
+//                                    fileWithinMyDir);
+//
+//                            if(fileWithinMyDir.exists()) {
+//                                ArrayList<Uri> uriArrayList = new ArrayList<>();
+//                                uriArrayList.add(imageUri1);
+//                                uriArrayList.add(imageUri2);
+//
+//
+//                                 if (Utility.isAppAvailable(context, "com.samsung.android.email.provider")) {
+//
+//                                     String content1 = "";
+//
+//                                     if (finalUrlPaypalName.equalsIgnoreCase("Paypal")) {
+//                                         String linkWitch = "PayPal";
+//                                         content1 = "<!DOCTYPE html>\n" +
+//                                                 "<html>\n" +
+//                                                 "  <head>\n" +
+//                                                 "    <title>Title of the document</title>\n" +
+//                                                 "    <style>\n" +
+//                                                 "      .button {\n" +
+//                                                 "        background-color: #1c87c9;\n" +
+//                                                 "        border: none;\n" +
+//                                                 "        color: white;\n" +
+//                                                 "        padding: 20px 34px;\n" +
+//                                                 "        text-align: center;\n" +
+//                                                 "        text-decoration: none;\n" +
+//                                                 "        display: inline-block;\n" +
+//                                                 "        font-size: 20px;\n" +
+//                                                 "        margin: 4px 2px;\n" +
+//                                                 "        cursor: pointer;\n" +
+//                                                 "      }\n" +
+//                                                 "    </style>\n" +
+//                                                 "  </head>\n" +
+//                                                 "  <body>\n" +
+//                                                 "    <a href=\"" + urlPaypal + "\" class=\"button\">" + linkWitch + "</a>\n" +
+//                                                 "  </body>\n" +
+//                                                 "</html>";
+//
+//                                     }
+//
+//                                     String content2 = "";
+//                                     if (finalUrlStripeName.equalsIgnoreCase("Stripe")) {
+//                                         String linkWitch = "Cards";
+//                                         content2 = "<!DOCTYPE html>\n" +
+//                                                 "<html>\n" +
+//                                                 "  <head>\n" +
+//                                                 "    <title>Title of the document</title>\n" +
+//                                                 "    <style>\n" +
+//                                                 "      .button {\n" +
+//                                                 "        background-color: #1c87c9;\n" +
+//                                                 "        border: none;\n" +
+//                                                 "        color: white;\n" +
+//                                                 "        padding: 20px 34px;\n" +
+//                                                 "        text-align: center;\n" +
+//                                                 "        text-decoration: none;\n" +
+//                                                 "        display: inline-block;\n" +
+//                                                 "        font-size: 20px;\n" +
+//                                                 "        margin: 4px 2px;\n" +
+//                                                 "        cursor: pointer;\n" +
+//                                                 "      }\n" +
+//                                                 "    </style>\n" +
+//                                                 "  </head>\n" +
+//                                                 "  <body>\n" +
+//                                                 "    <a href=\"" + urlStripe + "\" class=\"button\">" + linkWitch + "</a>\n" +
+//                                                 "  </body>\n" +
+//                                                 "</html>";
+//                                     }
+//
+//                                     intentShareFile.setType("application/pdf/*|image/*");
+//                                     intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+//
+//                                     intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+//
+//
+//                                     Log.e(TAG, "allData "+text);
+//
+//
+//                                     String allData = text+content1+content2;
+//
+//                                     intentShareFile.putExtra(Intent.EXTRA_HTML_TEXT, allData);
+//                                     intentShareFile.setPackage("com.samsung.android.email.provider");
+//                                }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
+//                                    if(paypal.equalsIgnoreCase("1")){
+//                                        uriArrayList.add(html.getFilePath());
+//                                    }
+//
+//                                    if(stripe.equalsIgnoreCase("1")){
+//                                        uriArrayList.add(html2.getFilePath());
+//                                    }
+//
+//                                    intentShareFile.setType("application/pdf/*|image/*|text/html");
+//                                    intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+//
+//                                    intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+//
+//                                    intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
+//                                    intentShareFile.setPackage("com.google.android.gm");
+//                                }
+//                                context.startActivity(intentShareFile);
+//                            }
+//
+//                        }
+//                    }).execute(urlStripe);
+//
+//
+//
+//                }
+//            }).execute(urlPaypal);
+//
+//            Log.e(TAG, "fileWithinMyDir "+message);
+//
+//
 
 
         }
@@ -2530,6 +2747,41 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
 
+    public static void generateNoteOnSDPayPal(Context context, String sFileName, String sBody) {
+        try {
+            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, sFileName);
+            Log.e(TAG, "gpxfile "+gpxfile.toString());
+            FileWriter writer = new FileWriter(gpxfile);
+            writer.append(sBody);
+            writer.flush();
+            writer.close();
+           // Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+
+    public static void generateNoteOnSDStripe(Context context, String sFileName, String sBody) {
+        try {
+            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, sFileName);
+            Log.e(TAG, "gpxfile "+gpxfile.toString());
+            FileWriter writer = new FileWriter(gpxfile);
+            writer.append(sBody);
+            writer.flush();
+            writer.close();
+            // Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
