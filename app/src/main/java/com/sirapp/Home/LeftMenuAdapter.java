@@ -131,13 +131,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.PRODUCT,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, Product_Activity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.PRODUCT,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, Product_Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
 
                         }
@@ -148,13 +155,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.SERVICE,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, Service_Activity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.SERVICE,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, Service_Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
 
                         }
@@ -165,13 +179,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.TAX,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, Tax_Activity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.TAX,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, Tax_Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
 
                         }
@@ -182,13 +203,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.CUSTOMER,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, Customer_Activity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.CUSTOMER,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, Customer_Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
 
                         }
@@ -199,13 +227,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.SUPPLIER,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, Vendor_Activity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.SUPPLIER,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, Vendor_Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
 
                         }
@@ -216,13 +251,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.STOCK,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, Stock_Activity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.STOCK,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, Stock_Activity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
 
                         }
@@ -234,13 +276,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, InvoiceActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, InvoiceActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
 
                         }
@@ -252,13 +301,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, EstimateActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, EstimateActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
 
                         }
@@ -269,13 +325,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, POActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, POActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
 
                         }
@@ -286,13 +349,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, ReceiptsActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, ReceiptsActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
 
                         }
@@ -303,13 +373,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.PAYMENT_VOUCHER,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, PVActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.PAYMENT_VOUCHER,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, PVActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
 
                         }
@@ -326,13 +403,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.CREDIT_NOTE,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, CreditNotesActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.CREDIT_NOTE,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, CreditNotesActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
                         }
                         if(position==15)
@@ -342,13 +426,20 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
-                                if(preferences.getString(Constant.DEBIT_NOTE,"").equalsIgnoreCase("1")){
+                                if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                                     Intent intent = new Intent(activity, DebitNotesActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     activity.startActivity(intent);
                                 }else{
-                                    createDialogOpenClass(activity);
+                                    if(preferences.getString(Constant.DEBIT_NOTE,"").equalsIgnoreCase("1")){
+                                        Intent intent = new Intent(activity, DebitNotesActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }else{
+                                        createDialogOpenClass(activity);
+                                    }
                                 }
+
                             }
                         }
 

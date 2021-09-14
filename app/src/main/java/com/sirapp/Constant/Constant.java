@@ -737,12 +737,18 @@ public class Constant {
                     Intent intent = new Intent(activity, EstimateActivity.class);
                     activity.startActivity(intent);
                 }else{
-                    if(pref.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+                    if(pref.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                         Intent intent = new Intent(activity, EstimateActivity.class);
                         activity.startActivity(intent);
                     }else{
-                        createDialogOpenClass(activity);
+                        if(pref.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(activity, EstimateActivity.class);
+                            activity.startActivity(intent);
+                        }else{
+                            createDialogOpenClass(activity);
+                        }
                     }
+
                 }
 
             }
@@ -755,12 +761,18 @@ public class Constant {
                     Intent intent = new Intent(activity, InvoiceActivity.class);
                     activity.startActivity(intent);
                 }else{
-                    if(pref.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                    if(pref.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                         Intent intent = new Intent(activity, InvoiceActivity.class);
                         activity.startActivity(intent);
                     }else{
-                        createDialogOpenClass(activity);
+                        if(pref.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(activity, InvoiceActivity.class);
+                            activity.startActivity(intent);
+                        }else{
+                            createDialogOpenClass(activity);
+                        }
                     }
+
                 }
 
             }
@@ -773,12 +785,18 @@ public class Constant {
                     Intent intent = new Intent(activity, ReceiptsActivity.class);
                     activity.startActivity(intent);
                 }else{
-                    if(pref.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+                    if(pref.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                         Intent intent = new Intent(activity, ReceiptsActivity.class);
                         activity.startActivity(intent);
                     }else{
-                        createDialogOpenClass(activity);
+                        if(pref.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(activity, ReceiptsActivity.class);
+                            activity.startActivity(intent);
+                        }else{
+                            createDialogOpenClass(activity);
+                        }
                     }
+
                 }
 
             }
@@ -791,12 +809,18 @@ public class Constant {
                     Intent intent = new Intent(activity, POActivity.class);
                     activity.startActivity(intent);
                 }else{
-                    if(pref.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
+                    if(pref.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                         Intent intent = new Intent(activity, POActivity.class);
                         activity.startActivity(intent);
                     }else{
-                        createDialogOpenClass(activity);
+                        if(pref.getString(Constant.PURCHASE_ORDER,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(activity, POActivity.class);
+                            activity.startActivity(intent);
+                        }else{
+                            createDialogOpenClass(activity);
+                        }
                     }
+
                 }
 
             }

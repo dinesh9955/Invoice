@@ -437,14 +437,22 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }else{
-                    if(preferences.getString(Constant.CUSTOMER,"").equalsIgnoreCase("1")){
+                    if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                         Intent intent = new Intent(Home_Activity.this, Customer_Activity.class);
                         intent.putExtra("key" , "home");
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }else{
-                        createDialogOpenClass(Home_Activity.this);
+                        if(preferences.getString(Constant.CUSTOMER,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(Home_Activity.this, Customer_Activity.class);
+                            intent.putExtra("key" , "home");
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }else{
+                            createDialogOpenClass(Home_Activity.this);
+                        }
                     }
+
                 }
 
             }
@@ -459,14 +467,22 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }else{
-                    if(preferences.getString(Constant.PRODUCT,"").equalsIgnoreCase("1")){
+                    if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                         Intent intent = new Intent(Home_Activity.this, Product_Activity.class);
                         intent.putExtra("key" , "home");
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }else{
-                        createDialogOpenClass(Home_Activity.this);
+                        if(preferences.getString(Constant.PRODUCT,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(Home_Activity.this, Product_Activity.class);
+                            intent.putExtra("key" , "home");
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }else{
+                            createDialogOpenClass(Home_Activity.this);
+                        }
                     }
+
 
                 }
 
@@ -574,14 +590,22 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }else{
-                    if(preferences.getString(Constant.SERVICE,"").equalsIgnoreCase("1")){
+                    if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                         Intent intent = new Intent(Home_Activity.this, Service_Activity.class);
                         intent.putExtra("key" , "home");
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }else{
-                        createDialogOpenClass(Home_Activity.this);
+                        if(preferences.getString(Constant.SERVICE,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(Home_Activity.this, Service_Activity.class);
+                            intent.putExtra("key" , "home");
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }else{
+                            createDialogOpenClass(Home_Activity.this);
+                        }
                     }
+
                 }
 
             }
@@ -602,6 +626,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                     }else{
                         createDialogOpenClass(Home_Activity.this);
                     }
+
                 }
 
             }
@@ -616,14 +641,22 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }else{
-                    if(preferences.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                    if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
                         Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
                         intent.putExtra("key" , "home");
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }else{
-                        createDialogOpenClass(Home_Activity.this);
+                        if(preferences.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
+                            intent.putExtra("key" , "home");
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }else{
+                            createDialogOpenClass(Home_Activity.this);
+                        }
                     }
+
                 }
 
             }
