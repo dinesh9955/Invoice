@@ -23,7 +23,7 @@
             android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:openDrawer="end">
+            tools:openDrawer="start">
 
 
 
@@ -602,7 +602,7 @@
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:layout_width="match_parent"
-                                android:layout_height="110dp"
+                                android:layout_height="wrap_content"
                                 android:layout_below="@+id/quick"
                                 android:layout_marginTop="20dp"
                                 android:id="@+id/businessactivitiesRV"
@@ -626,27 +626,28 @@
 
 
                             <androidx.recyclerview.widget.RecyclerView
-
                                 android:layout_width="match_parent"
-                                android:layout_height="120dp"
+                                android:layout_height="wrap_content"
                                 android:layout_marginTop="20dp"
                                 android:id="@+id/invoiceoverdueRV"
                                 android:layout_below="@+id/businessactivitiesRV"
-                                android:layout_marginBottom="90dp">
+                                android:layout_marginBottom="20dp">
 
                             </androidx.recyclerview.widget.RecyclerView>
 
                             <TextView
                                 android:id="@+id/no_overduetxt"
                                 android:layout_marginTop="60dp"
+                                android:layout_marginBottom="60dp"
                                 android:layout_centerHorizontal="true"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/home_no_overdue_invoices"
                                 android:textSize="14dp"
                                 android:textColor="@color/darkgray"
-                                android:layout_below="@+id/businessactivitiesRV"
+                                android:layout_below="@+id/txtinvoice"
                                 android:visibility="gone"
+
                                 />
 
                             <RelativeLayout
@@ -982,7 +983,7 @@
 
             <com.google.android.material.navigation.NavigationView
                 android:id="@+id/nav_view"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_240sdp"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:background="@drawable/side_menu_bg"

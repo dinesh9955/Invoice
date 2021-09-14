@@ -2520,7 +2520,12 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
                 intentShareFile.setPackage("com.google.android.gm");
             }
-            context.startActivity(intentShareFile);
+
+            try{
+                context.startActivity(intentShareFile);
+            }catch (Exception e){
+            }
+
 
 
 
