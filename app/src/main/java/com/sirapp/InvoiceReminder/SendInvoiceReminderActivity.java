@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
+import com.sirapp.Invoice.InvoiceViewActivityWebView;
 import com.sirapp.Invoice.Invoice_image;
 import com.sirapp.Invoice.response.InvoiceCompanyDto;
 import com.sirapp.Invoice.response.InvoiceCustomerDto;
@@ -451,11 +452,24 @@ public class SendInvoiceReminderActivity extends BaseActivity {
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
-        if(AllSirApi.FONT_INVOICE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+        if(Utility.getDensityName(SendInvoiceReminderActivity.this).equalsIgnoreCase("hdpi") ||
+                Utility.getDensityName(SendInvoiceReminderActivity.this).equalsIgnoreCase("mdpi") ||
+                Utility.getDensityName(SendInvoiceReminderActivity.this).equalsIgnoreCase("ldpi") ){
+            Log.e(TAG, "TTTTTTTTTTTTTTT");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }else{
-            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            Log.e(TAG, "SSSSSSSSSSSSSSS");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }
+
 
 //        invoiceweb.setWebViewClient(new WebViewClient() {
 //            public boolean shouldOverrideUrlLoading(WebView view, String url) {

@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
+import com.sirapp.Invoice.InvoiceViewActivityWebView;
 import com.sirapp.R;
 import com.sirapp.Utils.Utility;
 
@@ -95,11 +96,30 @@ public class PreviewItActivity extends BaseActivity {
         invoiceweb.getSettings().setUseWideViewPort(true);
 //        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
         // webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-        if(AllSirApi.FONT_INVOICE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+//        if(AllSirApi.FONT_INVOICE == true){
+//            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+//        }else{
+//            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//        }
+
+        if(Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("hdpi") ||
+                Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("mdpi") ||
+                Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("ldpi") ){
+            Log.e(TAG, "TTTTTTTTTTTTTTT");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }else{
-            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            Log.e(TAG, "SSSSSSSSSSSSSSS");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }
+
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

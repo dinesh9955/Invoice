@@ -435,10 +435,23 @@ public class ViewCreditNote_Activity extends BaseActivity {
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
-        if(AllSirApi.FONT_INVOICE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+
+        if(Utility.getDensityName(ViewCreditNote_Activity.this).equalsIgnoreCase("hdpi") ||
+                Utility.getDensityName(ViewCreditNote_Activity.this).equalsIgnoreCase("mdpi") ||
+                Utility.getDensityName(ViewCreditNote_Activity.this).equalsIgnoreCase("ldpi") ){
+            Log.e(TAG, "TTTTTTTTTTTTTTT");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }else{
-            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            Log.e(TAG, "SSSSSSSSSSSSSSS");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }
 
         invoiceweb.setWebViewClient(new WebViewClient() {

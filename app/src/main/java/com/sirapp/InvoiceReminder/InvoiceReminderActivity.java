@@ -479,7 +479,7 @@ public class InvoiceReminderActivity extends BaseActivity {
 
                         String status = jsonObject.getString("status");
                         if (status.equals("false")) {
-                            Constant.ErrorToast(InvoiceReminderActivity.this, jsonObject.getString("message"));
+                           // Constant.ErrorToast(InvoiceReminderActivity.this, jsonObject.getString("message"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -487,6 +487,8 @@ public class InvoiceReminderActivity extends BaseActivity {
                 } else {
                    // Constant.ErrorToast(InvoiceReminderActivity.this, "Something went wrong, try again!");
                 }
+
+                textViewMessage.setVisibility(View.VISIBLE);
             }
         });
     }

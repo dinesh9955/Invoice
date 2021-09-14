@@ -43,6 +43,7 @@ import com.sirapp.Adapter.Customer_Bottom_Adapter;
 import com.sirapp.Adapter.Product_Bottom_Adapter;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Customer.Customer_Activity;
+import com.sirapp.Invoice.InvoiceViewActivityWebView;
 import com.sirapp.Invoice.SavePref;
 import com.sirapp.Product.Product_Activity;
 import com.sirapp.Vendor.Vendor_Activity;
@@ -324,11 +325,30 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
        // webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
 
-        if(AllSirApi.FONT_INVOICE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+//        if(AllSirApi.FONT_INVOICE == true){
+//            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+//        }else{
+//            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//        }
+
+        if(Utility.getDensityName(ReportViewActivity.this).equalsIgnoreCase("hdpi") ||
+                Utility.getDensityName(ReportViewActivity.this).equalsIgnoreCase("mdpi") ||
+                Utility.getDensityName(ReportViewActivity.this).equalsIgnoreCase("ldpi") ){
+            Log.e(TAG, "TTTTTTTTTTTTTTT");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }else{
-            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            Log.e(TAG, "SSSSSSSSSSSSSSS");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }
+
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

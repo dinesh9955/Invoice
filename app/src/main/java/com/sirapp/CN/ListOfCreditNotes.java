@@ -657,7 +657,7 @@ public class ListOfCreditNotes extends BaseFragment {
 
                         String status = jsonObject.getString("status");
                         if (status.equals("false")) {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                            //Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

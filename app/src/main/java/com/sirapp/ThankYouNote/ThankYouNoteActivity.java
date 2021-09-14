@@ -486,7 +486,7 @@ public class ThankYouNoteActivity extends BaseActivity {
 
                         String status = jsonObject.getString("status");
                         if (status.equals("false")) {
-                            Constant.ErrorToast(ThankYouNoteActivity.this, jsonObject.getString("message"));
+                            //Constant.ErrorToast(ThankYouNoteActivity.this, jsonObject.getString("message"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -494,6 +494,8 @@ public class ThankYouNoteActivity extends BaseActivity {
                 } else {
                     //Constant.ErrorToast(ThankYouNoteActivity.this, "Something went wrong, try again!");
                 }
+
+                textViewMessage.setVisibility(View.VISIBLE);
             }
         });
     }

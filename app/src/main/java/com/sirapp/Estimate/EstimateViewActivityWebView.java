@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.sirapp.API.AllSirApi;
+import com.sirapp.CN.CreditNotesViewActivityWebView;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
 import com.sirapp.Base.BaseActivity;
@@ -386,10 +387,23 @@ public class EstimateViewActivityWebView extends BaseActivity {
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
-        if(AllSirApi.FONT_INVOICE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+
+        if(Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("hdpi") ||
+                Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("mdpi") ||
+                Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("ldpi") ){
+            Log.e(TAG, "TTTTTTTTTTTTTTT");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }else{
-            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            Log.e(TAG, "SSSSSSSSSSSSSSS");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }
 
         invoiceweb.setWebViewClient(new WebViewClient() {

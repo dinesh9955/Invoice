@@ -944,7 +944,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                         String status = jsonObject.getString("status");
                         if (status.equals("false")) {
-                            Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                           // Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -1029,7 +1029,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                             String status = jsonObject.getString("status");
                             if (status.equals("false")) {
-                                Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                                //Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -2497,17 +2497,16 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 intentShareFile.putExtra(Intent.EXTRA_HTML_TEXT, allData);
                 intentShareFile.setPackage("com.samsung.android.email.provider");
             }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
-                File filePayPal = new File("/storage/emulated/0/Notes/PayPal.html");
-                File fileStripe = new File("/storage/emulated/0/Notes/Cards.html");
                 if(paypal.equalsIgnoreCase("1")){
+                    File filePayPal = new File("/storage/emulated/0/Notes/PayPal.html");
                     Uri imageUri3 = FileProvider.getUriForFile(
                             context,
                             BuildConfig.APPLICATION_ID + ".provider",
                             filePayPal);
                     uriArrayList.add(imageUri3);
                 }
-
                 if(stripe.equalsIgnoreCase("1")){
+                    File fileStripe = new File("/storage/emulated/0/Notes/Cards.html");
                     Uri imageUri4 = FileProvider.getUriForFile(
                             context,
                             BuildConfig.APPLICATION_ID + ".provider",

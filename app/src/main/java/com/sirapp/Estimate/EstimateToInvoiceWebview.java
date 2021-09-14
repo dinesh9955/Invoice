@@ -23,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.bumptech.glide.RequestManager;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
+import com.sirapp.CN.CreditNotesViewActivityWebView;
 import com.sirapp.Model.Customer_list;
 import com.sirapp.Model.Product_list;
 import com.sirapp.Model.View_invoice;
@@ -425,10 +426,23 @@ public class EstimateToInvoiceWebview extends BaseActivity {
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
-        if(AllSirApi.FONT_INVOICE == true){
-            webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+
+        if(Utility.getDensityName(EstimateToInvoiceWebview.this).equalsIgnoreCase("hdpi") ||
+                Utility.getDensityName(EstimateToInvoiceWebview.this).equalsIgnoreCase("mdpi") ||
+                Utility.getDensityName(EstimateToInvoiceWebview.this).equalsIgnoreCase("ldpi") ){
+            Log.e(TAG, "TTTTTTTTTTTTTTT");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }else{
-            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            Log.e(TAG, "SSSSSSSSSSSSSSS");
+            if(AllSirApi.FONT_INVOICE == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }
 
         invoiceweb.setWebViewClient(new WebViewClient() {
