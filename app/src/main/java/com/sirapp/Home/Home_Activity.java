@@ -250,6 +250,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         imageViewptint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 RecyclerView mRecyclerView;
                 MenuAdapter mAdapter;
 
@@ -271,11 +272,14 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                 mAdapter = new MenuAdapter(companyModelArrayList, mybuilder);
                 mRecyclerView.setAdapter(mAdapter);
 
-                mybuilder.show();
-                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-                Window window = mybuilder.getWindow();
-                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                window.setBackgroundDrawableResource(R.color.transparent);
+                if(companyModelArrayList.size() > 0){
+                    mybuilder.show();
+                    mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                    Window window = mybuilder.getWindow();
+                    window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    window.setBackgroundDrawableResource(R.color.transparent);
+                }
+
             }
         });
 
