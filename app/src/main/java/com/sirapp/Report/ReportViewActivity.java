@@ -41,6 +41,7 @@ import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Adapter.Customer_Bottom_Adapter;
 import com.sirapp.Adapter.Product_Bottom_Adapter;
+import com.sirapp.CN.CreditNotesViewActivityWebView;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Customer.Customer_Activity;
 import com.sirapp.Invoice.InvoiceViewActivityWebView;
@@ -2906,7 +2907,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
         //create object of print manager in your device
         PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
-
+        webView.getSettings().setMinimumFontSize(webView.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_PRINT);
         //create object of print adapter
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
 
@@ -4266,5 +4267,31 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
     }
 
 
+
+    @SuppressLint("LongLogTag")
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(invoiceweb != null){
+            if(Utility.getDensityName(ReportViewActivity.this).equalsIgnoreCase("hdpi") ||
+                    Utility.getDensityName(ReportViewActivity.this).equalsIgnoreCase("mdpi") ||
+                    Utility.getDensityName(ReportViewActivity.this).equalsIgnoreCase("ldpi") ){
+                Log.e(TAG, "TTTTTTTTTTTTTTT");
+                if(AllSirApi.FONT_INVOICE == true){
+                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+                }else{
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }
+            }else{
+                Log.e(TAG, "SSSSSSSSSSSSSSS");
+                if(AllSirApi.FONT_INVOICE == true){
+                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+                }else{
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }
+            }
+
+        }
+    }
 
 }

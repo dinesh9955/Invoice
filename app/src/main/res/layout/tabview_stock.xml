@@ -6,5 +6,5 @@
     android:gravity="center_horizontal"
     android:textColor="@color/white"
     android:id="@+id/tabview"
-    android:textSize="@dimen/_8sdp"
+    android:textSize="@dimen/_10sdp"
     ></TextView>

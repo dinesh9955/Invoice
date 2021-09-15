@@ -331,6 +331,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
 
         //create object of print manager in your device
         PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
+        webView.getSettings().setMinimumFontSize(webView.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_PRINT);
 
         //create object of print adapter
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
@@ -876,5 +877,32 @@ public class EstimateViewActivityWebView extends BaseActivity {
         invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
     }
 
+
+
+    @SuppressLint("LongLogTag")
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(invoiceweb != null){
+            if(Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("hdpi") ||
+                    Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("mdpi") ||
+                    Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("ldpi") ){
+                Log.e(TAG, "TTTTTTTTTTTTTTT");
+                if(AllSirApi.FONT_INVOICE == true){
+                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+                }else{
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }
+            }else{
+                Log.e(TAG, "SSSSSSSSSSSSSSS");
+                if(AllSirApi.FONT_INVOICE == true){
+                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+                }else{
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }
+            }
+
+        }
+    }
 
 }

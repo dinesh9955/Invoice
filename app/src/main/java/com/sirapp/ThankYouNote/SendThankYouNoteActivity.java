@@ -25,6 +25,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.Gson;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
+import com.sirapp.CN.CreditNotesViewActivityWebView;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Invoice.InvoiceViewActivityWebView;
 import com.sirapp.Invoice.Invoice_image;
@@ -404,6 +405,7 @@ public class SendThankYouNoteActivity extends BaseActivity {
 
         //create object of print manager in your device
         PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
+        webView.getSettings().setMinimumFontSize(webView.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_PRINT);
 
 
 
@@ -1119,5 +1121,32 @@ public class SendThankYouNoteActivity extends BaseActivity {
 
     }
 
+
+
+    @SuppressLint("LongLogTag")
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(invoiceweb != null){
+            if(Utility.getDensityName(SendThankYouNoteActivity.this).equalsIgnoreCase("hdpi") ||
+                    Utility.getDensityName(SendThankYouNoteActivity.this).equalsIgnoreCase("mdpi") ||
+                    Utility.getDensityName(SendThankYouNoteActivity.this).equalsIgnoreCase("ldpi") ){
+                Log.e(TAG, "TTTTTTTTTTTTTTT");
+                if(AllSirApi.FONT_INVOICE == true){
+                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+                }else{
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }
+            }else{
+                Log.e(TAG, "SSSSSSSSSSSSSSS");
+                if(AllSirApi.FONT_INVOICE == true){
+                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+                }else{
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }
+            }
+
+        }
+    }
 
 }

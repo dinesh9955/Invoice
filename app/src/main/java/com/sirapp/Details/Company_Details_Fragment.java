@@ -114,7 +114,7 @@ public class Company_Details_Fragment extends BaseFragment {
         final SharedPreferences pref =getActivity().getSharedPreferences(Constant.PREF_BASE, Context.MODE_PRIVATE);
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_company__details_, container, false);
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+//        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         avi = v.findViewById(R.id.avi);
         avibackground = v.findViewById(R.id.avibackground);
 

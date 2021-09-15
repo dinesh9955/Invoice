@@ -829,7 +829,7 @@
     <string name="dialog_ChooseAOption">Choose A Option</string>
     <string name="dialog_SendAsLink">Send As Link</string>
     <string name="dialog_SendAsPDF">Send As PDF</string>
-    <string name="dialog_SelectCreditTerms">Select Credit Term</string>
+    <string name="dialog_SelectCreditTerms">Select Credit Terms</string>
     <string name="dialog_EnterManually_days">Enter Manually(days)</string>
 
     <string name="dialog_SelectCustomer">Select Customer</string>
@@ -1123,7 +1123,7 @@
         <item>How to record opening stock?</item>
         <item>How to account physical stock taking records?</item>
         <item>How to move stock between warehouse?</item>
-        <item>How to inventory will be updated automaticallty?</item>
+        <item>How the inventory will be updated automaticallty?</item>
         <item>How is stock value calculated?</item>
         <item>How to create an invoice?</item>
         <item>When should I select warehouse while creating Invoice / Purchase order?</item>

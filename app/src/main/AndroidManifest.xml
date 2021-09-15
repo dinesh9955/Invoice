@@ -441,7 +441,7 @@
             android:name="com.sirapp.Details.Company_Details_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name="com.sirapp.Details.User_Detail_Activity"
             android:screenOrientation="portrait"

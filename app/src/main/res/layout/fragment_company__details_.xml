@@ -58,7 +58,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="?actionBarSize"
                 android:tint="@color/lightpurple"
-                />
+                tools:ignore="UseAppTint" />
 
             <TextView
                 android:visibility="gone"
