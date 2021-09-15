@@ -63,6 +63,8 @@ import com.sirapp.Invoice.InvoiceActivity;
 import com.sirapp.Product.Product_Activity;
 import com.sirapp.Service.Service_Activity;
 import com.sirapp.Settings.OnlinePaymentGatewayActivity;
+import com.sirapp.SignupSignin.Signin_Activity;
+import com.sirapp.Splash_Activity;
 import com.sirapp.Utils.Utility;
 import com.sirapp.Vendor.Vendor_Activity;
 import com.sirapp.Base.BaseActivity;
@@ -143,6 +145,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         setContentView(R.layout.home_act);
 //        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
 
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         TextView titleView = toolbar.findViewById(R.id.title1);
         titleView.setText("");
@@ -158,6 +162,16 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawerToggle.syncState();
 
+        FindByIds();
+
+        SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE, MODE_PRIVATE);
+        boolean LOGGED_IN  = preferences.getBoolean(Constant.LOGGED_IN, false);
+        if (!LOGGED_IN) {
+            Intent i = new Intent(Home_Activity.this, Signin_Activity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+            return;
+        }
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,6 +216,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                                         String invoiceID = pendingDynamicLinkData.getLink().getQueryParameter("invoiceID");
                                         if (invoiceID.equalsIgnoreCase("invoice")) {
                                             Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
+                                            intent.putExtra("key" , "home");
                                             startActivity(intent);
                                         }
                                     }
@@ -223,7 +238,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         Constant.bottomNav(Home_Activity.this, -1);
 //        Constant.toolbar(Home_Activity.this, "");
-        FindByIds();
+
         setListeners();
 //        setFonts();
 
