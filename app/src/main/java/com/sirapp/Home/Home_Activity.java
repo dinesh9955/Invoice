@@ -194,6 +194,9 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             }
         });
 
+        String ddd = Locale.getDefault().getLanguage();
+        Log.e(TAG, "dddXX "+ddd);
+
 
         setLeftValues();
 
@@ -305,8 +308,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         firebaseAnalytics.logEvent("dashboard_view", params2);
 
 
-        String size = Utility.getDensityName(Home_Activity.this);
-        Log.e(TAG, "sizeSc "+size);
+//        String size = Utility.getDensityName(Home_Activity.this);
+//        Log.e(TAG, "sizeSc "+size);
 
     }
 
@@ -333,7 +336,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(Home_Activity.this, LinearLayoutManager.VERTICAL, false));
-
+//        recyclerView.setNestedScrollingEnabled(false);
         LeftMenuAdapter mAdapter = new LeftMenuAdapter(Home_Activity.this, contacts);
         recyclerView.setAdapter(mAdapter);
 
@@ -1133,8 +1136,6 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);
 
-
-
         FormBody.Builder formBuilder = new FormBody.Builder();
         RequestBody formBody = formBuilder.build();
         GetAsyncPost mAsync = new GetAsyncPost(Home_Activity.this, AllSirApi.COMPANYListing, formBody, dialog, "") {
@@ -1240,6 +1241,15 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                         try {
 
                             JSONObject jsonObject = new JSONObject(result);
+
+                            Log.e(TAG , "jsonObjectAA "+jsonObject.toString());
+//                            if(jsonObject.getString("status").equalsIgnoreCase("false")){
+//                                if(jsonObject.getString("message").contains("Unauthorized Access")){
+//
+//                                }
+//                            }
+//
+//                            Unauthorized
                             // util.showToast(Home_Activity.this, jsonObject.getString("message"));
 
                         } catch (JSONException e) {
