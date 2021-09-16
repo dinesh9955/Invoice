@@ -778,12 +778,14 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
                 mAdapter = new MenuAdapter(cnames, cids , mybuilder);
                 mRecyclerView.setAdapter(mAdapter);
+                if(cnames.size() > 0){
+                    mybuilder.show();
+                    mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                    Window window = mybuilder.getWindow();
+                    window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    window.setBackgroundDrawableResource(R.color.transparent);
+                }
 
-                mybuilder.show();
-                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-                Window window = mybuilder.getWindow();
-                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                window.setBackgroundDrawableResource(R.color.transparent);
 
             }
         });

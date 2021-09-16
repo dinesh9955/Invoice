@@ -852,11 +852,14 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                 mAdapter = new MenuAdapter(cnames, cids , mybuilder);
                 mRecyclerView.setAdapter(mAdapter);
 
-                mybuilder.show();
-                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-                Window window = mybuilder.getWindow();
-                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                window.setBackgroundDrawableResource(R.color.transparent);
+                if(cnames.size() > 0){
+                    mybuilder.show();
+                    mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                    Window window = mybuilder.getWindow();
+                    window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    window.setBackgroundDrawableResource(R.color.transparent);
+                }
+
 
             }
         });

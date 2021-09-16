@@ -160,7 +160,7 @@
                     android:gravity="left|center_vertical"
                     android:paddingLeft="15dp"
                     android:textStyle="normal"
-                    android:textSize="13dp"
+                    android:textSize="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textAllCaps="false"
                     android:layout_below="@+id/customergroup"
