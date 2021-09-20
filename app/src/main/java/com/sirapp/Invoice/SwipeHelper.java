@@ -15,6 +15,8 @@ import android.view.View;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sirapp.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -24,7 +26,7 @@ import java.util.Queue;
 
 public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
 
-    public static final int BUTTON_WIDTH = 200;
+    public static int BUTTON_WIDTH = 200;
     private RecyclerView recycler_invoices;
     private List<UnderlayButton> buttons;
     private GestureDetector gestureDetector;
@@ -73,6 +75,7 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
 
     public SwipeHelper(Context context) {
         super(0, ItemTouchHelper.LEFT);
+        BUTTON_WIDTH = (int) context.getResources().getDimension(R.dimen._60sdp);
         this.buttons = new ArrayList<>();
         this.gestureDetector = new GestureDetector(context, gestureListener);
         buttonsBuffer = new HashMap<>();

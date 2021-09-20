@@ -26,7 +26,7 @@ import java.util.Queue;
 
 public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
 
-    public static final int BUTTON_WIDTH = 220;
+    public static int BUTTON_WIDTH = 220;
     private RecyclerView recyclerView;
     private List<UnderlayButton> buttons;
     private GestureDetector gestureDetector;
@@ -80,6 +80,7 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
 
     public SwipeHelper2(Context context1, RecyclerView recyclerView) {
         super(0, ItemTouchHelper.LEFT);
+        BUTTON_WIDTH = (int) context1.getResources().getDimension(R.dimen._70sdp);
         this.recyclerView = recyclerView;
         this.buttons = new ArrayList<>();
 
