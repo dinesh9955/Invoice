@@ -447,14 +447,14 @@ public class InvoiceViewActivityWebView extends BaseActivity {
             if(AllSirApi.FONT_INVOICE == true){
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
             }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
             }
         }else{
             Log.e(TAG, "SSSSSSSSSSSSSSS");
             if(AllSirApi.FONT_INVOICE == true){
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
             }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
             }
         }
 
@@ -1035,14 +1035,14 @@ public class InvoiceViewActivityWebView extends BaseActivity {
                 if(AllSirApi.FONT_INVOICE == true){
                     invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
                 }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
                 }
             }else{
                 Log.e(TAG, "SSSSSSSSSSSSSSS");
                 if(AllSirApi.FONT_INVOICE == true){
                     invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
                 }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
                 }
             }
 

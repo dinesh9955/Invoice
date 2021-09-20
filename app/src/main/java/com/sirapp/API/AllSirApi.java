@@ -23,12 +23,13 @@ public class AllSirApi {
 
 //    https://sir-app.com/app/api/user/login
 
-    public static final boolean FONT_INVOICE = true;
-    public static final int FONT_SIZE = 9;
+    public static final boolean FONT_INVOICE = false;
+    public static final int FONT_SIZE = 7;
 
-    public static final boolean FONT_INVOICE_CREATE = true;
-    public static final int FONT_SIZE_CREATE = 8;
+    public static final boolean FONT_INVOICE_CREATE = false;
+    public static final int FONT_SIZE_CREATE = 6;
 
+    public static final boolean FONT_SIZE_PRINT_VIEW = true;
     public static final int FONT_SIZE_PRINT = 6;
 
 //    public static final String BASE_URL ="http://13.126.22.0/saad/app/index.php/api/";

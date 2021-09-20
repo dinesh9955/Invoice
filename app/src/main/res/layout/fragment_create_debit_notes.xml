@@ -245,7 +245,7 @@
 
                 android:id="@+id/selectwarehouse"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_below="@id/itemstxtTemplate"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
@@ -259,7 +259,7 @@
             <Button
                 android:id="@+id/selectButton"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_below="@id/itemstxtTemplate"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"

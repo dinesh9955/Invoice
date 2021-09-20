@@ -308,8 +308,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         firebaseAnalytics.logEvent("dashboard_view", params2);
 
 
-//        String size = Utility.getDensityName(Home_Activity.this);
-//        Log.e(TAG, "sizeSc "+size);
+        String size = Utility.getDensityName(Home_Activity.this);
+        Log.e(TAG, "sizeSc "+size);
 
     }
 

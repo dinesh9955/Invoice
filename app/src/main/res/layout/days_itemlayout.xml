@@ -5,237 +5,254 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dialog_SelectCreditTerms"
-        android:textSize="@dimen/_12sdp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/dark_blue"
-        android:id="@+id/txtcredit"
-        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtcredit"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="40dp"
-        android:id="@+id/r1"
-        >
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radiogroup1"
-            >
-
-            <RadioButton
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dialog_DateNone"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/rnone"
-                />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/dialog_Date3days"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/r3days"
-                />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/dialog_Date14days"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/r14days"
-                />
-
-            <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/dialog_Date30days"
-                android:textSize="@dimen/_10sdp"
-            android:textColor="@color/dark_blue"
-            android:id="@+id/r30days"
-            />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/dialog_Date60days"
+                android:text="@string/dialog_SelectCreditTerms"
                 android:textSize="@dimen/_12sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/dark_blue"
-                android:id="@+id/r60days"
+                android:id="@+id/txtcredit"
                 />
 
-            <RadioButton
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/txtcredit"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginLeft="40dp"
+                android:id="@+id/r1"
+                >
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radiogroup1"
+                    >
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dialog_DateNone"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/rnone"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/dialog_Date3days"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/r3days"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/dialog_Date14days"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/r14days"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/dialog_Date30days"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/r30days"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/dialog_Date60days"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/r60days"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/dialog_Date120days"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/r120days"
+                        />
+
+
+                </RadioGroup>
+
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="310dp"
+                android:background="@color/dark_blue"
+                android:layout_below="@id/txtcredit"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginLeft="30dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/v1"
+                />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtcredit"
+                android:layout_toRightOf="@id/v1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="@dimen/_30sdp"
+                >
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radiogroup2"
+                    >
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dialog_DateDue_on_Receipt"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/rimmediately"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/dialog_Date7days"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/r7days"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/dialog_Date21days"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/r21days"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/dialog_Date45days"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/r45days"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/dialog_Date90days"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/r90days"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/dialog_Date365days"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/dark_blue"
+                        android:id="@+id/r365days"
+                        />
+
+
+                </RadioGroup>
+
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/v1"
                 android:layout_marginTop="20dp"
-                android:text="@string/dialog_Date120days"
-                android:textSize="@dimen/_10sdp"
+                android:layout_centerHorizontal="true"
+                android:text="@string/dialog_DateOR"
                 android:textColor="@color/dark_blue"
-                android:id="@+id/r120days"
+                android:textSize="@dimen/_12sdp"
+                android:id="@+id/txtor"
                 />
 
-
-        </RadioGroup>
-
-
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="1dp"
-        android:layout_height="310dp"
-        android:background="@color/dark_blue"
-        android:layout_below="@id/txtcredit"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="30dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/v1"
-        />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtcredit"
-        android:layout_toRightOf="@id/v1"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
-        >
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radiogroup2"
-            >
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dialog_DateDue_on_Receipt"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/rimmediately"
-                />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/txtor"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/dialog_Date7days"
+                android:hint="@string/dialog_EnterManually_days"
+                android:textColorHint="@color/dark_grey"
                 android:textSize="@dimen/_10sdp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/r7days"
+                android:paddingTop="0dp"
+                android:inputType="number"
+                android:paddingStart="10dp"
+                android:id="@+id/edmanual"
+                android:background="@drawable/edittextshape"
+                android:elevation="2dp"
+                tools:ignore="RtlSymmetry"
+                android:imeOptions="actionDone"
                 />
-
-            <RadioButton
-                android:layout_width="wrap_content"
+            <Button
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/edmanual"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/dialog_Date21days"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/r21days"
-                />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/dialog_Date45days"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/r45days"
-                />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/dialog_Date90days"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/r90days"
-                />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/dialog_Date365days"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/r365days"
+                android:background="@drawable/buttonshape"
+                android:text="@string/done"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:id="@+id/btndone"
+                android:textSize="@dimen/_12sdp"
                 />
 
 
-        </RadioGroup>
+
+        </RelativeLayout>
 
 
+    </ScrollView>
 
-    </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/v1"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/dialog_DateOR"
-        android:textColor="@color/dark_blue"
-        android:textSize="@dimen/_12sdp"
-        android:id="@+id/txtor"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/txtor"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:hint="@string/dialog_EnterManually_days"
-        android:textColorHint="@color/dark_grey"
-        android:textSize="@dimen/_10sdp"
-        android:paddingTop="0dp"
-        android:inputType="number"
-        android:paddingStart="10dp"
-        android:id="@+id/edmanual"
-        android:background="@drawable/edittextshape"
-        android:elevation="2dp"
-        tools:ignore="RtlSymmetry"
-        android:imeOptions="actionDone"
-        />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edmanual"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/buttonshape"
-        android:text="@string/done"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:id="@+id/btndone"
-        android:textSize="@dimen/_12sdp"
-        />
 
 
 

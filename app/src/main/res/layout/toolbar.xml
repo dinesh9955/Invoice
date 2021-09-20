@@ -68,7 +68,7 @@
                 android:layout_height="@dimen/_30sdp"
                 android:id="@+id/shareButton"
                 android:padding="4dp"
-                android:tint="@color/blue"
+                android:tint="@color/darkblue"
                 tools:ignore="UseAppTint"
                 android:layout_margin="@dimen/_10sdp"
                 android:visibility="gone"/>

@@ -82,6 +82,7 @@ import java.net.URLConnection;
 import java.security.cert.Certificate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -2488,11 +2489,13 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
             ArrayList<Uri> uriArrayList = new ArrayList<>();
-            uriArrayList.add(imageUri1);
-            uriArrayList.add(imageUri2);
+
 
             if (Utility.isAppAvailable(context, "com.samsung.android.email.provider")) {
                 intentShareFile.setType("application/pdf/*|image/*");
+                uriArrayList.add(imageUri1);
+                uriArrayList.add(imageUri2);
+                Collections.reverse(uriArrayList);
                 intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
                 Log.e(TAG, "allData "+text);
@@ -2516,6 +2519,10 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                             fileStripe);
                     uriArrayList.add(imageUri4);
                 }
+
+                uriArrayList.add(imageUri1);
+                uriArrayList.add(imageUri2);
+                Collections.reverse(uriArrayList);
 
                 intentShareFile.setType("application/pdf/*|image/*|text/html");
                 intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);

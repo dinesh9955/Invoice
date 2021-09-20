@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 
+import static com.sirapp.API.AllSirApi.FONT_SIZE_PRINT_VIEW;
+
 public class CreditNotesViewActivityWebView extends BaseActivity {
     private final String TAG = "CreditNotesViewActivityWebView";
     WebView invoiceweb;
@@ -362,8 +364,12 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
         //create object of print manager in your device
         PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
 
-        //create object of print adapter
-        webView.getSettings().setMinimumFontSize(webView.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_PRINT);
+        if(FONT_SIZE_PRINT_VIEW == true){
+           // webView.getSettings().setMinimumFontSize(webView.getSettings().getDefaultFontSize());
+            webView.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+        }
+
+
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
 
         //provide name to your newly generated pdf file
@@ -427,14 +433,14 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
             if(AllSirApi.FONT_INVOICE == true){
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
             }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
             }
         }else{
             Log.e(TAG, "SSSSSSSSSSSSSSS");
             if(AllSirApi.FONT_INVOICE == true){
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
             }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
             }
         }
 
@@ -930,14 +936,14 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
                 if(AllSirApi.FONT_INVOICE == true){
                     invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
                 }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
                 }
             }else{
                 Log.e(TAG, "SSSSSSSSSSSSSSS");
                 if(AllSirApi.FONT_INVOICE == true){
                     invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
                 }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
                 }
             }
 
