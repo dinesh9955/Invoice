@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:layout_marginBottom="45dp"
+    android:paddingLeft="@dimen/_10sdp"
+    android:paddingRight="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -14,7 +14,7 @@
         app:riv_corner_radius="100dp"
         android:id="@+id/image"
         android:scaleType="centerCrop"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="@dimen/_5sdp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@+id/productcurrency"
-        android:textSize="14dp"
+        android:textSize="@dimen/_11sdp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/productname"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_10sdp"
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/productcurrency"
         android:layout_marginRight="5dp"
@@ -53,7 +53,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/productquantity"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_10sdp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
         />
@@ -61,26 +61,24 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:text="120.00"
         android:textStyle="bold"
         android:id="@+id/productcurrency"
         android:layout_alignParentEnd="true"
         android:textColor="@color/lightpurple"
-        android:textSize="18sp"
+        android:textSize="@dimen/_11sdp"
 
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/productcurrency"
-        android:layout_marginRight="20dp"
         android:text="Qatari Rial"
         android:id="@+id/productcurrencyunit"
         android:layout_alignParentEnd="true"
         android:textColor="@color/lightpurple"
-        android:textSize="10sp"
+        android:textSize="@dimen/_8sdp"
         android:padding="3dp"
         />
 

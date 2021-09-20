@@ -12,7 +12,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/Tax"
         android:textColor="@color/dark_blue"
-        android:textSize="20sp" />
+        android:textSize="@dimen/_11sdp" />
 
     <TextView
         android:id="@+id/add_service_new"
@@ -24,7 +24,7 @@
         android:padding="5dp"
         android:text="@string/tax_Add"
         android:textColor="@color/dark_blue"
-        android:textSize="16sp"
+        android:textSize="@dimen/_10sdp"
         android:textStyle="bold" />
 
 
@@ -54,7 +54,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:checked="false"
-
+        android:textSize="@dimen/_10sdp"
         android:text="@string/tax_Inclusive"
         android:textColor="@color/dark_blue" />
 
@@ -67,6 +67,7 @@
         android:background="@drawable/buttonshape"
         android:text="@string/done"
         android:textAllCaps="false"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/_11sdp" />
 
 </RelativeLayout>

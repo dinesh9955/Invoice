@@ -2,8 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
 
@@ -29,8 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dialog_ViewInvoice"
-                android:textSize="15sp"
-                android:padding="10dp"
+                android:textSize="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
                 android:layout_marginStart="10dp"
                 android:layout_below="@+id/filtericon"
                 android:layout_marginTop="20dp"
@@ -45,7 +44,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/viewinvoicebotom"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="@dimen/_10sdp">
 
             </View>
 
@@ -65,8 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Change Templates"
-                android:textSize="15sp"
-                android:padding="10dp"
+                android:textSize="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
                 android:layout_marginLeft="10dp"
                 android:layout_below="@+id/filtericon"
                 android:layout_marginTop="20dp"
@@ -81,7 +80,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/viewinvoicetemplate"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="@dimen/_10sdp">
 
             </View>
 
@@ -99,9 +98,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dialog_DuplicateInvoice"
-                android:textSize="15sp"
+                android:textSize="@dimen/_10sdp"
                 android:layout_marginStart="10dp"
-                android:padding="10dp"
+                android:padding="@dimen/_10sdp"
                 android:layout_below="@+id/filtericon"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/dark_blue"
@@ -115,7 +114,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/duplicateinvoitxt"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="@dimen/_10sdp">
 
             </View>
 
@@ -132,9 +131,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dialog_ShareInvoice"
-                android:textSize="15sp"
+                android:textSize="@dimen/_10sdp"
                 android:layout_marginStart="10dp"
-                android:padding="10dp"
+                android:padding="@dimen/_10sdp"
                 android:layout_below="@+id/filtericon"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/dark_blue"
@@ -148,8 +147,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/shareinvoicetxt"
-
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="@dimen/_10sdp">
 
             </View>
 
@@ -166,14 +164,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
+                android:textSize="@dimen/_10sdp"
                 android:layout_marginLeft="10dp"
-                android:padding="10dp"
+                android:padding="@dimen/_10sdp"
                 android:layout_below="@+id/shareinvoice"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/dark_blue"
                 android:text="@string/dialog_ConvertToReceipt"
-
                 android:id="@+id/recepitsviewtxt"
                 />
             <View
@@ -183,9 +180,9 @@
                 android:background="@color/gray"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginBottom="20dp"
+
                 android:layout_below="@+id/recepitsviewtxt"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="@dimen/_10sdp">
 
             </View>
 

@@ -57,7 +57,8 @@
                 android:layout_below="@+id/selectcompany"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/ReceiptNo" />
+                android:text="@string/ReceiptNo"
+                android:textSize="@dimen/_10sdp"/>
 
             <EditText
                 android:id="@+id/invoivenum"
@@ -71,7 +72,7 @@
                 android:hint="XDC 102-20"
                 android:background="@drawable/nobackgroundedittext"
                 android:textColor="@color/lightpurple"
-                android:textSize="14sp"
+                android:textSize="@dimen/_10sdp"
 
                 />
 
@@ -84,7 +85,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:text="@string/ReceiptDate" />
+                android:text="@string/ReceiptDate"
+                android:textSize="@dimen/_10sdp"/>
 
             <TextView
                 android:id="@+id/duedate"
@@ -98,7 +100,8 @@
                 android:layout_marginRight="20dp"
                 android:gravity="end"
                 android:hint="DD-MM-YYYY"
-                android:textColor="@color/lightpurple" />
+                android:textColor="@color/lightpurple"
+                android:textSize="@dimen/_10sdp"/>
 
             <View
                 android:id="@+id/view"
@@ -119,7 +122,8 @@
                 android:layout_below="@+id/view"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
-                android:text="@string/credit_notes_Recipient" />
+                android:text="@string/credit_notes_Recipient"
+                android:textSize="@dimen/_10sdp"/>
 
             <TextView
                 android:id="@+id/invoicerecipnt"
@@ -129,7 +133,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:hint="@string/invoice_EnterName"
-                android:textColor="@color/lightpurple" />
+                android:textColor="@color/lightpurple"
+                android:textSize="@dimen/_10sdp"/>
 
             <TextView
                 android:id="@+id/txtcredit"
@@ -141,7 +146,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
                 android:text="@string/invoice_CreditTerms"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:textSize="@dimen/_10sdp"/>
 
             <TextView
                 android:id="@+id/txtdays"
@@ -156,7 +162,8 @@
                 android:layout_marginRight="20dp"
                 android:hint="7days"
                 android:textColor="@color/lightpurple"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:textSize="@dimen/_10sdp"/>
 
             <View
                 android:id="@+id/v3"
@@ -175,7 +182,8 @@
                 android:layout_below="@+id/v3"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
-                android:text="@string/invoice_ReferenceNo" />
+                android:text="@string/invoice_ReferenceNo"
+                android:textSize="@dimen/_10sdp"/>
 
             <EditText
                 android:id="@+id/edreferenceno"
@@ -187,7 +195,7 @@
                 android:background="@drawable/nobackgroundedittext"
                 android:hint="@string/invoice_EnterReferenceNo"
                 android:textColor="@color/lightpurple"
-                android:textSize="12sp" />
+                android:textSize="@dimen/_10sdp"/>
 
             <TextView
                 android:id="@+id/txtduedate"
@@ -199,7 +207,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
                 android:text="@string/DueDate"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:textSize="@dimen/_10sdp"/>
 
             <TextView
                 android:id="@+id/edduedate"
@@ -213,7 +222,8 @@
                 android:gravity="end"
                 android:hint="DD-MM-YYYY"
                 android:textColor="@color/lightpurple"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:textSize="@dimen/_10sdp"/>
 
 
             <TextView
@@ -228,14 +238,13 @@
                 android:text="@string/template"
                 android:textColor="@color/lightpurple"
                 android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="@dimen/_11sdp"
                 android:visibility="invisible"/>
 
 
 
 
             <com.isapanah.awesomespinner.AwesomeSpinner
-
                 android:id="@+id/selectwarehouse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -246,7 +255,8 @@
                 android:background="@drawable/edittextshape"
                 app:spinnerDirection="ltr"
                 app:spinnerHint="@string/invoice_SelectWarehouse"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:textSize="@dimen/_11sdp"/>
 
 
             <View
@@ -266,7 +276,7 @@
                 android:layout_marginTop="25dp"
                 android:text="@string/ITEMS"
                 android:textColor="@color/lightpurple"
-                android:textSize="16sp" />
+                android:textSize="@dimen/_11sdp" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -284,7 +294,7 @@
                 android:layout_marginTop="75dp"
                 android:text="@string/invoice_NoItems"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp"
+                android:textSize="@dimen/_11sdp"
                 android:layout_below="@+id/itemstxt"
                 android:visibility="gone"/>
 
@@ -299,7 +309,8 @@
                 android:background="@drawable/light_button_curve"
                 android:text="@string/additem"
                 android:textAllCaps="false"
-                android:textColor="@color/lightpurple" />
+                android:textColor="@color/lightpurple"
+                android:textSize="@dimen/_11sdp"/>
 
             <Button
                 android:id="@+id/addservice"
@@ -313,7 +324,8 @@
                 android:background="@drawable/light_button_curve"
                 android:text="@string/invoice_AddItems"
                 android:textAllCaps="false"
-                android:textColor="@color/lightpurple" />
+                android:textColor="@color/lightpurple"
+                android:textSize="@dimen/_11sdp"/>
 
             <View
                 android:id="@+id/view3"
@@ -332,7 +344,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/invoice_GrossAmount"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp" />
+                android:textSize="@dimen/_11sdp" />
 
             <TextView
                 android:id="@+id/grosstotal"
@@ -345,7 +357,7 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp" />
+                android:textSize="@dimen/_11sdp"/>
 
 
             <TextView
@@ -357,7 +369,7 @@
                 android:layout_marginTop="40dp"
                 android:text="@string/Discount"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp" />
+                android:textSize="@dimen/_11sdp" />
 
             <TextView
                 android:id="@+id/discount"
@@ -370,7 +382,7 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/red"
-                android:textSize="18sp"
+                android:textSize="@dimen/_11sdp"
                 android:minWidth="50dp"
                 android:gravity="right"/>
 
@@ -384,7 +396,7 @@
                 android:layout_marginTop="40dp"
                 android:text="@string/SubTotal"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp" />
+                android:textSize="@dimen/_11sdp"/>
 
             <TextView
                 android:id="@+id/subtotal"
@@ -397,7 +409,7 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp" />
+                android:textSize="@dimen/_11sdp" />
 
             <TextView
                 android:id="@+id/taxvalue"
@@ -408,7 +420,7 @@
                 android:layout_marginTop="40dp"
                 android:text="@string/invoice_Tax"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp"
+                android:textSize="@dimen/_11sdp"
                 android:visibility="visible"/>
 
             <TextView
@@ -421,7 +433,7 @@
                 android:layout_marginTop="40dp"
                 android:text="@string/invoice_Tax"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp"
+                android:textSize="@dimen/_11sdp"
                 android:visibility="gone"/>
 
             <TextView
@@ -435,7 +447,7 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/green"
-                android:textSize="18sp"
+                android:textSize="@dimen/_11sdp"
                 android:minWidth="50dp"
                 android:gravity="right"/>
 
@@ -448,7 +460,7 @@
                 android:layout_marginTop="40dp"
                 android:text="@string/invoice_Shipping"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp" />
+                android:textSize="@dimen/_11sdp" />
 
             <TextView
                 android:id="@+id/freight"
@@ -461,7 +473,7 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/green"
-                android:textSize="18sp"
+                android:textSize="@dimen/_11sdp"
                 android:minWidth="50dp"
                 android:gravity="right"/>
 
@@ -474,7 +486,7 @@
                 android:layout_marginTop="40dp"
                 android:text="@string/invoice_NetAmount"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp" />
+                android:textSize="@dimen/_11sdp"/>
 
             <TextView
                 android:id="@+id/netamount"
@@ -487,7 +499,7 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/green"
-                android:textSize="18sp" />
+                android:textSize="@dimen/_11sdp" />
 
             <TextView
                 android:id="@+id/txtpaidamount"
@@ -498,7 +510,7 @@
                 android:layout_marginTop="40dp"
                 android:text="@string/invoice_PaidAmount"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp"
+                android:textSize="@dimen/_11sdp"
                 android:visibility="gone"/>
 
             <TextView
@@ -513,7 +525,7 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/red"
-                android:textSize="18sp"
+                android:textSize="@dimen/_11sdp"
                 android:visibility="gone"/>
 
             <TextView
@@ -525,7 +537,7 @@
                 android:layout_marginTop="40dp"
                 android:text="@string/invoice_BalanceDue"
                 android:textColor="@color/darkgray"
-                android:textSize="18sp"
+                android:textSize="@dimen/_11sdp"
                 android:visibility="gone"/>
 
             <TextView
@@ -539,7 +551,7 @@
                 android:layout_marginRight="20dp"
                 android:text="0"
                 android:textColor="@color/green"
-                android:textSize="18sp"
+                android:textSize="@dimen/_11sdp"
                 android:visibility="gone"/>
 
             <View
@@ -563,7 +575,7 @@
                 android:layout_marginTop="25dp"
                 android:text="@string/invoice_Signature_of_invoice_maker"
                 android:textColor="@color/lightpurple"
-                android:textSize="16sp"
+                android:textSize="@dimen/_11sdp"
                 android:visibility="gone"/>
 
             <ImageView
@@ -587,7 +599,7 @@
                 android:layout_marginTop="25dp"
                 android:text="@string/invoice_Signature_of_Receiver"
                 android:textColor="@color/lightpurple"
-                android:textSize="16sp" />
+                android:textSize="@dimen/_11sdp" />
 
             <ImageView
                 android:id="@+id/imgrecsuccess"
@@ -610,7 +622,7 @@
                 android:layout_marginTop="25dp"
                 android:text="@string/invoice_Upload_Company_Seal"
                 android:textColor="@color/lightpurple"
-                android:textSize="16sp" />
+                android:textSize="@dimen/_11sdp" />
 
             <ImageView
                 android:id="@+id/imgstampsuccess"
@@ -635,7 +647,7 @@
                 android:layout_marginTop="25dp"
                 android:text="@string/invoice_Upload_Invoice_Images"
                 android:textColor="@color/lightpurple"
-                android:textSize="16sp"
+                android:textSize="@dimen/_11sdp"
                 android:visibility="gone"/>
 
             <ImageView
@@ -668,7 +680,7 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
                 android:paddingRight="10dp"
-                android:textSize="12dp"
+                android:textSize="@dimen/_11sdp"
 
                 />
 
@@ -693,7 +705,7 @@
                     android:layout_weight=".5"
                     android:background="@drawable/blue_btn_curve"
                     android:text="@string/createreceipt"
-
+                    android:textSize="@dimen/_11sdp"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
 
@@ -710,8 +722,7 @@
                     android:drawableLeft="@drawable/ic_options"
                     android:paddingLeft="25dp"
                     android:textColor="@color/lightpurple"
-                    android:textSize="20sp"
-
+                    android:textSize="@dimen/_11sdp"
                     />
 
 

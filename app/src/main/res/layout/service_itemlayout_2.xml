@@ -23,7 +23,7 @@
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:text="@string/dialog_EnterPriceQuantity"
-            android:textSize="22sp"
+            android:textSize="@dimen/_14sdp"
             android:textColor="@color/black"
             android:id="@+id/txtprice"
             />
@@ -37,7 +37,7 @@
             android:layout_marginTop="20dp"
             android:hint="@string/dialog_EnterPrice"
             android:textColorHint="@color/d_grey"
-            android:textSize="14dp"
+            android:textSize="@dimen/_11sdp"
             android:paddingTop="0dp"
             android:paddingLeft="10dp"
             android:id="@+id/edprice"
@@ -56,7 +56,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:hint="@string/stock_Enter_Quantity"
-            android:textSize="14dp"
+            android:textSize="@dimen/_11sdp"
             android:paddingTop="0dp"
             android:inputType="numberDecimal"
             android:paddingStart="10dp"
@@ -80,6 +80,7 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:id="@+id/btnok"
+            android:textSize="@dimen/_10sdp"
             />
 
         <Button
@@ -95,6 +96,7 @@
             android:textColor="@color/black"
             android:id="@+id/btncancel"
             android:layout_marginBottom="40dp"
+            android:textSize="@dimen/_10sdp"
             />
     </RelativeLayout>
 

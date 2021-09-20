@@ -24,7 +24,7 @@
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:text="@string/service_ShippingAmount"
-            android:textSize="22sp"
+            android:textSize="@dimen/_14sdp"
             android:textColor="@color/black"
             android:id="@+id/txtfreight"
 
@@ -39,6 +39,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/txtfreightdes"
             android:textColor="@color/dark_grey"
+            android:textSize="@dimen/_10sdp"
             />
 
         <EditText
@@ -48,10 +49,10 @@
             android:layout_below="@id/txtfreightdes"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="@dimen/_30sdp"
             android:hint="@string/service_EnterShippingAmount"
             android:textColorHint="@color/dark_grey"
-            android:textSize="14dp"
+            android:textSize="@dimen/_10sdp"
             android:paddingTop="0dp"
             android:paddingLeft="10dp"
             android:id="@+id/edfreight"
@@ -76,7 +77,7 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:id="@+id/btnok"
-
+            android:textSize="@dimen/_10sdp"
             />
 
         <Button
@@ -93,7 +94,7 @@
             android:textColor="@color/black"
             android:id="@+id/btncancel"
             android:layout_marginBottom="40dp"
-
+            android:textSize="@dimen/_10sdp"
             />
 
     </RelativeLayout>

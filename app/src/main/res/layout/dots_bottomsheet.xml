@@ -15,6 +15,7 @@
         android:layout_marginTop="20dp"
         android:id="@+id/btnviewinvoice"
         android:background="@drawable/cancelbuttonshape"
+        android:textSize="@dimen/_10sdp"
         />
 
     <Button
@@ -30,6 +31,7 @@
         android:id="@+id/btnclear"
         android:background="@drawable/cancelbuttonshape"
         android:layout_marginBottom="20dp"
+        android:textSize="@dimen/_10sdp"
         />
 
     <Button
@@ -45,6 +47,7 @@
         android:id="@+id/btndotcancel"
         android:background="@drawable/buttonshape"
         android:layout_marginBottom="40dp"
+        android:textSize="@dimen/_10sdp"
         />
 
 

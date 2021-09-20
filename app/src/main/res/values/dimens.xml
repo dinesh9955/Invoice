@@ -3,4 +3,6 @@
     <dimen name="design_bottom_navigation_height" tools:override="true">72dp</dimen>
 <!--    <dimen name="material_drawer_item_primary_text">15sp</dimen>-->
 <!--    <dimen name="material_header_item_primary_text">15sp</dimen>-->
+
+    <dimen name="awesomeSpinner_hintTextSize">@dimen/_10sdp</dimen>
 </resources>

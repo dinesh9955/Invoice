@@ -13,6 +13,7 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/dark_blue"
         android:id="@+id/txtpaid"
+        android:textSize="@dimen/_11sdp"
         />
 
     <TextView
@@ -24,6 +25,7 @@
     android:textColor="@color/dark_blue"
     android:layout_below="@id/txtpaid"
     android:id="@+id/txtamount"
+        android:textSize="@dimen/_10sdp"
     />
 
 
@@ -55,6 +57,7 @@
         android:textColor="@color/dark_blue"
         android:layout_below="@id/edamount"
         android:id="@+id/txtdate"
+        android:textSize="@dimen/_10sdp"
         />
 
 
@@ -66,10 +69,10 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:hint="@string/Date"
-android:layout_alignParentLeft="true"
+        android:layout_alignParentLeft="true"
         android:padding="10dp"
         android:textColorHint="@color/dark_grey"
-        android:textSize="14dp"
+        android:textSize="@dimen/_10sdp"
         android:paddingTop="0dp"
         android:paddingLeft="10dp"
         android:id="@+id/eddate"
@@ -84,10 +87,11 @@ android:layout_alignParentLeft="true"
         android:layout_height="wrap_content"
         app:spinnerDirection="ltr"
         app:spinnerHint="@string/service_SelectPaymentMode"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/edittextshape"
+        android:textSize="@dimen/_10sdp"
         />
 
 
@@ -104,6 +108,7 @@ android:layout_alignParentLeft="true"
         android:textColor="@color/white"
         android:id="@+id/btndone2"
         android:layout_marginBottom="200dp"
+        android:textSize="@dimen/_10sdp"
         />
 
 

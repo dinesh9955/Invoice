@@ -545,10 +545,9 @@ public class SettingsActivity extends BaseActivity {
                         JSONObject jsonObject = new JSONObject(response);
                         String status = jsonObject.getString("status");
                         String message = jsonObject.getString("message");
-                        if (status.equals("1")) {
-                            // Constant.ErrorToast(SubscribeActivity.this, message);
-
-                        }
+                       // if (status.equals("false")) {
+                             Constant.ErrorToast(SettingsActivity.this, message);
+                       // }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

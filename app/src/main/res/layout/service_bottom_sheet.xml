@@ -22,7 +22,7 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/dark_blue"
         android:id="@+id/txtservices"
-        android:textSize="16sp"
+        android:textSize="@dimen/_11sdp"
         android:textStyle="bold"
         />
 
@@ -41,7 +41,8 @@
         android:background="@drawable/edittextshape"
         android:elevation="3dp"
         android:maxLines="1"
-        android:textColorHint="@color/dark_grey"/>
+        android:textColorHint="@color/dark_grey"
+        android:textSize="@dimen/_10sdp"/>
 
 
         <TextView
@@ -54,7 +55,7 @@
             android:id="@+id/add_service_new"
             android:layout_below="@+id/search_service"
             android:padding="5dp"
-            android:textSize="16sp"
+            android:textSize="@dimen/_10sdp"
             android:textStyle="bold"
             />
 
