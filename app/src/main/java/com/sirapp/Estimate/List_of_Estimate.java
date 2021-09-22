@@ -934,10 +934,6 @@ public class List_of_Estimate extends BaseFragment {
 
 
 
-
-
-
-
                     txtSHAREvalue.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

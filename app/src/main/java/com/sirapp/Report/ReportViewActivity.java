@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.print.PDFPrint;
 import android.print.PrintAttributes;
@@ -19,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -339,19 +341,23 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
             if(AllSirApi.FONT_INVOICE == true){
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
             }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
             }
         }else{
             Log.e(TAG, "SSSSSSSSSSSSSSS");
             if(AllSirApi.FONT_INVOICE == true){
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
             }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
             }
         }
 
 
         invoiceweb.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed(); // Ignore SSL certificate errors
+            }
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
@@ -4280,14 +4286,14 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 if(AllSirApi.FONT_INVOICE == true){
                     invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
                 }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
                 }
             }else{
                 Log.e(TAG, "SSSSSSSSSSSSSSS");
                 if(AllSirApi.FONT_INVOICE == true){
                     invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
                 }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
                 }
             }
 

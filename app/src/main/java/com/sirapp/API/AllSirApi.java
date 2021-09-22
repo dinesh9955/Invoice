@@ -26,8 +26,11 @@ public class AllSirApi {
     public static final boolean FONT_INVOICE = false;
     public static final int FONT_SIZE = 7;
 
-    public static final boolean FONT_INVOICE_CREATE = false;
+    public static final boolean FONT_INVOICE_CREATE = true;
     public static final int FONT_SIZE_CREATE = 6;
+
+    public static final boolean FONT_INVOICE_CREATE_LDPI = false;
+    public static final int FONT_SIZE_CREATE_LDPI = 4;
 
     public static final boolean FONT_SIZE_PRINT_VIEW = true;
     public static final int FONT_SIZE_PRINT = 6;

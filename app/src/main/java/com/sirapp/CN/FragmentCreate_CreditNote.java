@@ -21,6 +21,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -40,6 +41,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -4661,18 +4663,28 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         if(Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi") ||
                 Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi") ||
                 Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
+            if(AllSirApi.FONT_INVOICE_CREATE_LDPI == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_LDPI);
+            }else{
                 invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
+            Log.e(TAG, "MMMMMMMM");
         }else{
             if(AllSirApi.FONT_INVOICE_CREATE == true){
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
             }else{
                 invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
             }
+            Log.e(TAG, "LLLLLLLL");
         }
 
 
         String finalContent = content;
         invoiceweb.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed(); // Ignore SSL certificate errors
+            }
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }

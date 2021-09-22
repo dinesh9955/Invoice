@@ -18,6 +18,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -36,6 +37,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -4776,7 +4778,11 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
         if(Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi") ||
                 Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi") ||
                 Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
-            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            if(AllSirApi.FONT_INVOICE_CREATE_LDPI == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_LDPI);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }else{
             if(AllSirApi.FONT_INVOICE_CREATE == true){
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
@@ -4786,6 +4792,10 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
         }
 
         invoiceweb.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed(); // Ignore SSL certificate errors
+            }
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }

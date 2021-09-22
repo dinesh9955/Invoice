@@ -61,6 +61,7 @@
                     android:textColor="@color/lightpurple"
                     android:drawableRight="@drawable/import_contact"
                     android:layout_marginBottom="10dp"
+                    android:textSize="@dimen/_10sdp"
                     />
 
 

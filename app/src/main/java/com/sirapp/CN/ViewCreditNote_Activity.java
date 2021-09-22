@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -11,6 +12,7 @@ import android.print.PrintManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -436,6 +438,13 @@ public class ViewCreditNote_Activity extends BaseActivity {
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
+//        invoiceweb.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+//        invoiceweb.getSettings().setDomStorageEnabled(true);
+//        invoiceweb.getSettings().setAppCacheEnabled(true);
+//        invoiceweb.getSettings().setLoadsImagesAutomatically(true);
+//        webSettings.setAllowUniversalAccessFromFileURLs(true);
+//        webSettings.setAllowFileAccessFromFileURLs(true);
+
 
         if(Utility.getDensityName(ViewCreditNote_Activity.this).equalsIgnoreCase("hdpi") ||
                 Utility.getDensityName(ViewCreditNote_Activity.this).equalsIgnoreCase("mdpi") ||
@@ -456,6 +465,11 @@ public class ViewCreditNote_Activity extends BaseActivity {
         }
 
         invoiceweb.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed(); // Ignore SSL certificate errors
+            }
+
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
@@ -813,6 +827,8 @@ public class ViewCreditNote_Activity extends BaseActivity {
             String htmlview_Attachments = getString(R.string.htmlview_Attachments);
             String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
 
+            Log.e(TAG, "companyimagelogopath " +companyimagelogopath);
+
 
         String content = null;
         try {
@@ -915,7 +931,7 @@ public class ViewCreditNote_Activity extends BaseActivity {
 
         }
 
-        Log.e("ViewInvoice__", ""+content);
+        Log.e("ViewInvoice__", "AAAAAAACC "+content);
 
 //        final File savedPDFFile = FileManager.getInstance().createTempFile(ViewInvoice_Activity.this, "pdf", false);
 //

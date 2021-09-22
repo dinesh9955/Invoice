@@ -19,6 +19,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -37,6 +38,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -5430,7 +5432,11 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         if(Utility.getDensityName(ConvertToReceiptsActivity.this).equalsIgnoreCase("hdpi") ||
                 Utility.getDensityName(ConvertToReceiptsActivity.this).equalsIgnoreCase("mdpi") ||
                 Utility.getDensityName(ConvertToReceiptsActivity.this).equalsIgnoreCase("ldpi")){
-            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            if(AllSirApi.FONT_INVOICE_CREATE_LDPI == true){
+                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_LDPI);
+            }else{
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+            }
         }else{
             if(AllSirApi.FONT_INVOICE_CREATE == true){
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
@@ -5440,6 +5446,11 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         }
 
         invoiceweb.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed(); // Ignore SSL certificate errors
+            }
+
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }

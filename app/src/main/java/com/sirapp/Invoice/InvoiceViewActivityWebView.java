@@ -3,6 +3,7 @@ package com.sirapp.Invoice;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 //import android.content.Context;
+import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
@@ -10,6 +11,7 @@ import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
 import android.util.Log;
 import android.view.View;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -461,6 +463,10 @@ public class InvoiceViewActivityWebView extends BaseActivity {
 //        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + 6);
 
         invoiceweb.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed(); // Ignore SSL certificate errors
+            }
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }

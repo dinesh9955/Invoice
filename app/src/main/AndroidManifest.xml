@@ -72,21 +72,19 @@
             android:name="com.sirapp.Splash_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Splash">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
-
         </activity>
 
 
         <activity
             android:name=".wwww"
             android:screenOrientation="portrait"
-            android:theme="@style/Splash">
+            android:theme="@style/Splash"
+            android:windowSoftInputMode="adjustResize" >
+
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
@@ -349,8 +347,15 @@
             android:name="com.sirapp.Invoice.InvoiceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
-
+            android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/pdf/*" />
+                <data android:mimeType="image/*" />
+                <data android:mimeType="text/html" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.sirapp.Invoice.ConvertToReceiptsActivity"

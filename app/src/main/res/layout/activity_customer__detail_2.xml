@@ -38,7 +38,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="?actionBarSize"
                     android:tint="@color/lightpurple"
-                    />
+                    tools:ignore="UseAppTint" />
 
                 <TextView
                     android:visibility="gone"
@@ -644,7 +644,8 @@
                     android:text="@string/customer_IMPORT_CUSTOMER_FROM_CONTACT"
                     android:textColor="@color/lightpurple"
                     android:drawableRight="@drawable/import_contact"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="70dp"
+                    android:textSize="@dimen/_10sdp"
                     />
 
 

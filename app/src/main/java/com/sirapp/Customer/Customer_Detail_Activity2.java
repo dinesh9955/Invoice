@@ -298,8 +298,10 @@ public class Customer_Detail_Activity2 extends BaseActivity {
 
 
         contacts.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onClick(View v) {
+                Log.e(TAG , "setOnClickListener");
                 askForContactPermission();
             }
         });

@@ -2769,6 +2769,10 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             }
             File gpxfile = new File(root, sFileName);
             Log.e(TAG, "gpxfile "+gpxfile.toString());
+            if (!gpxfile.exists()) {
+                gpxfile.mkdirs();
+            }
+
             FileWriter writer = new FileWriter(gpxfile);
             writer.append(sBody);
             writer.flush();
@@ -2776,6 +2780,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
            // Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
+            Log.e(TAG, "generateNoteOnSDPayPal "+e.getMessage());
         }
     }
 
@@ -2788,6 +2793,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             }
             File gpxfile = new File(root, sFileName);
             Log.e(TAG, "gpxfile "+gpxfile.toString());
+            if (!gpxfile.exists()) {
+                gpxfile.mkdirs();
+            }
             FileWriter writer = new FileWriter(gpxfile);
             writer.append(sBody);
             writer.flush();
@@ -2795,6 +2803,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             // Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
+            Log.e(TAG, "generateNoteOnSDStripe "+e.getMessage());
         }
     }
 

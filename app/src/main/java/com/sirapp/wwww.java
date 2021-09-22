@@ -1,17 +1,23 @@
 package com.sirapp;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 
@@ -64,7 +70,26 @@ public class wwww extends AppCompatActivity {
                         "  </body>\n" +
                         "</html>";
 
-                generateNoteOnSD(wwww.this , "track.html", ""+content1.toString());
+                //generateNoteOnSD(wwww.this , "track.html", ""+content1.toString());
+
+                BottomSheetDialog bottomSheetDialog;
+                bottomSheetDialog = new BottomSheetDialog(wwww.this);
+
+                View view = LayoutInflater.from(wwww.this).inflate(R.layout.aaaaa, null);
+//                BottomSheetBehavior behavior = BottomSheetBehavior.from(view);
+                BottomSheetBehavior.from(view)
+                        .setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                bottomSheetDialog.setContentView(view);
+                bottomSheetDialog.show();
+
+//                final Dialog mybuilder=new Dialog(wwww.this);
+//                mybuilder.setContentView(R.layout.aaaaa);
+//                mybuilder.show();
+//                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+//                Window window = mybuilder.getWindow();
+//                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+               // window.setBackgroundDrawableResource(R.color.transparent);
 
             }
         });
