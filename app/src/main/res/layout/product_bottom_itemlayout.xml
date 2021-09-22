@@ -38,7 +38,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/productname"
         android:textColor="@color/gray"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_9sdp"
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/productcurrency"
         android:layout_marginRight="5dp"
@@ -53,7 +53,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/productquantity"
         android:textColor="@color/gray"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_9sdp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
         />

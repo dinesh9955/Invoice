@@ -1212,7 +1212,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 recepitsviewtxt.setVisibility(View.VISIBLE);
             }
             if (ilnvoiceStatus.equals("1")) {
-                recepitsviewtxt.setVisibility(View.INVISIBLE);
+                recepitsviewtxt.setVisibility(View.GONE);
                 viewinvoicerecipts.setVisibility(View.GONE);
             }
 

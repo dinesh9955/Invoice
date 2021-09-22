@@ -851,8 +851,8 @@ public class ListOfReceipts extends BaseFragment {
                 recepitsviewtxt.setVisibility(View.VISIBLE);
             }
             if (ilnvoiceStatus.equals("1")) {
-                recepitsviewtxt.setVisibility(View.INVISIBLE);
-                viewinvoicerecipts.setVisibility(View.INVISIBLE);
+                recepitsviewtxt.setVisibility(View.GONE);
+                viewinvoicerecipts.setVisibility(View.GONE);
             }
             viewinvoicebotom = view.findViewById(R.id.viewinvoicebotom);
             viewinvoicetemplate = view.findViewById(R.id.viewinvoicetemplate);
