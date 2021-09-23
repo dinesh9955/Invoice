@@ -646,6 +646,7 @@
                     android:drawableRight="@drawable/import_contact"
                     android:layout_marginBottom="70dp"
                     android:textSize="@dimen/_10sdp"
+                    android:visibility="gone"
                     />
 
 

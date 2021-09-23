@@ -171,6 +171,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
     String invoicetaxamount;
     ImageView imgsigsuccess, imgrecsuccess, imgstampsuccess, attachmenttxtimg;
     BottomSheetDialog bottomSheetDialog, bottomSheetDialog2, bottomSheetDialog3;
+    Dialog bottomSheetDialog4;
 //    AwesomeSpinner selectwarehouse;
 
     Button selectwarehouse;
@@ -469,6 +470,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             }
         });
 
+        bottomSheetDialog4 = new Dialog(getActivity());
         bottomSheetDialog = new BottomSheetDialog(getActivity());
         bottomSheetDialog2 = new BottomSheetDialog(getActivity());
         bottomSheetDialog3 = new BottomSheetDialog(getActivity());
@@ -669,7 +671,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             @Override
             public void onClick(View view) {
                 createbottomsheet_days();
-                bottomSheetDialog.show();
+                bottomSheetDialog4.show();
 
             }
         });
@@ -2291,7 +2293,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
     }
 
     public void createbottomsheet_days() {
-        if (bottomSheetDialog != null) {
+        if (bottomSheetDialog4 != null) {
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.days_itemlayout, null);
             txtcredit1 = view.findViewById(R.id.txtcredit);
             radiogroup1 = view.findViewById(R.id.radiogroup1);
@@ -2399,13 +2401,13 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                                 txtdays.setText(dayswith);
                                 edduedate.setText(duedate.getText().toString());
                             }
-                            bottomSheetDialog.dismiss();
+                            bottomSheetDialog4.dismiss();
                         }else if (!credit_terms.equals("")) {
 
                             if (credit_terms.equals(getString(R.string.dialog_DateNone))) {
                                 txtdays.setText(credit_terms);
                                 edduedate.setClickable(true);
-                                bottomSheetDialog.dismiss();
+                                bottomSheetDialog4.dismiss();
 
                                 edduedate.setText(duedate.getText().toString());
 
@@ -2417,7 +2419,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                                 edduedate.setClickable(false);
                                 txtdays.setText(credit_terms);
 
-                                bottomSheetDialog.dismiss();
+                                bottomSheetDialog4.dismiss();
                             } else {
 
 
@@ -2450,7 +2452,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                                     edduedate.setText(duedate.getText().toString());
                                 }
 
-                                bottomSheetDialog.dismiss();
+                                bottomSheetDialog4.dismiss();
 
                             }
 
@@ -2485,8 +2487,11 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
             r365days.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
             edmanual.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
             btndone1.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Regular.otf"));
-            bottomSheetDialog = new BottomSheetDialog(getActivity());
-            bottomSheetDialog.setContentView(view);
+            bottomSheetDialog4 = new Dialog(getActivity());
+            bottomSheetDialog4.setContentView(view);
+            bottomSheetDialog4.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            Window window = bottomSheetDialog4.getWindow();
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
     }
 

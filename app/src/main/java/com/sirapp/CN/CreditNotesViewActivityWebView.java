@@ -427,6 +427,16 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
+//        invoiceweb.setPadding(0, 0, 0, 0);
+//        invoiceweb.setInitialScale(Utility.getScale(CreditNotesViewActivityWebView.this , invoiceweb));
+//        invoiceweb.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
+       // invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//
+//        Log.e(TAG, "setInitialScale "+Utility.getScale(CreditNotesViewActivityWebView.this , invoiceweb));
+//
+//        invoiceweb.getSettings().setDefaultFontSize(30);
+//        invoiceweb.setInitialScale(100);
 
         if(Utility.getDensityName(CreditNotesViewActivityWebView.this).equalsIgnoreCase("hdpi") ||
                 Utility.getDensityName(CreditNotesViewActivityWebView.this).equalsIgnoreCase("mdpi") ||

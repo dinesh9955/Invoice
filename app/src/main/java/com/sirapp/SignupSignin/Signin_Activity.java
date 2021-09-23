@@ -308,7 +308,7 @@ public class Signin_Activity extends BaseActivity {
                                 pref.edit().putString(Constant.FULLNAME,fullname).commit();
                                 pref.edit().putString(Constant.EMAIL,email).commit();
                                 pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
-                                pref.edit().putString(Constant.ROLE,profile.getString("email")).commit();
+                                pref.edit().putString(Constant.ROLE,profile.getString("role")).commit();
 
 
 

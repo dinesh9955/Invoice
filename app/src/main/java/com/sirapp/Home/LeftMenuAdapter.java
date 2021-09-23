@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -90,15 +91,17 @@ public class LeftMenuAdapter extends RecyclerView.Adapter<LeftMenuAdapter.ViewHo
 
                 if(position==0)
                         {
+                            Log.e(TAG, "Constant.ROLE "+Constant.ROLE);
                             if(preferences.getString(Constant.ROLE,"").equalsIgnoreCase("USER")){
                                 Intent intent = new Intent(activity, User_Activity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
                             }else{
                                 if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
-                                    Intent intent = new Intent(activity, User_Activity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    activity.startActivity(intent);
+//                                    Intent intent = new Intent(activity, User_Activity.class);
+//                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                    activity.startActivity(intent);
+                                    createDialogOpenClass(activity);
                                 }else{
                                     createDialogOpenClass(activity);
                                 }

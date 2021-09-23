@@ -2201,122 +2201,6 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                     BuildConfig.APPLICATION_ID + ".provider",
                     fileWithinMyDir);
 
-//            if (fileWithinMyDir.exists()) {
-//                ArrayList<Uri> uriArrayList = new ArrayList<>();
-//                uriArrayList.add(imageUri1);
-//                uriArrayList.add(imageUri2);
-//
-//                String content1 = "";
-//
-//                if (urlPaypalName.equalsIgnoreCase("Paypal")) {
-//                    String linkWitch = "PayPal";
-//                    content1 = "<!DOCTYPE html>\n" +
-//                            "<html>\n" +
-//                            "  <head>\n" +
-//                            "    <title>Title of the document</title>\n" +
-//                            "    <style>\n" +
-//                            "      .button {\n" +
-//                            "        background-color: #1c87c9;\n" +
-//                            "        border: none;\n" +
-//                            "        color: white;\n" +
-//                            "        padding: 20px 34px;\n" +
-//                            "        text-align: center;\n" +
-//                            "        text-decoration: none;\n" +
-//                            "        display: inline-block;\n" +
-//                            "        font-size: 20px;\n" +
-//                            "        margin: 4px 2px;\n" +
-//                            "        cursor: pointer;\n" +
-//                            "      }\n" +
-//                            "    </style>\n" +
-//                            "  </head>\n" +
-//                            "  <body>\n" +
-//                            "    <a href=\"" + urlPaypal + "\" class=\"button\">" + linkWitch + "</a>\n" +
-//                            "  </body>\n" +
-//                            "</html>";
-//
-//                }
-//
-//                String content2 = "";
-//                if (urlStripeName.equalsIgnoreCase("Stripe")) {
-//                    String linkWitch = "Cards";
-//                    content2 = "<!DOCTYPE html>\n" +
-//                            "<html>\n" +
-//                            "  <head>\n" +
-//                            "    <title>Title of the document</title>\n" +
-//                            "    <style>\n" +
-//                            "      .button {\n" +
-//                            "        background-color: #1c87c9;\n" +
-//                            "        border: none;\n" +
-//                            "        color: white;\n" +
-//                            "        padding: 20px 34px;\n" +
-//                            "        text-align: center;\n" +
-//                            "        text-decoration: none;\n" +
-//                            "        display: inline-block;\n" +
-//                            "        font-size: 20px;\n" +
-//                            "        margin: 4px 2px;\n" +
-//                            "        cursor: pointer;\n" +
-//                            "      }\n" +
-//                            "    </style>\n" +
-//                            "  </head>\n" +
-//                            "  <body>\n" +
-//                            "    <a href=\"" + urlStripe + "\" class=\"button\">" + linkWitch + "</a>\n" +
-//                            "  </body>\n" +
-//                            "</html>";
-//                }
-//
-//
-//                intentShareFile.setType("application/pdf/*|image/*");
-//                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-//
-//                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
-//
-//
-//                Log.e(TAG, "allData "+text);
-//
-//
-//                String allData = text+content1+content2;
-//
-//                intentShareFile.putExtra(Intent.EXTRA_HTML_TEXT, allData);
-//
-//                if (Utility.isAppAvailable(context, "com.samsung.android.email.provider")) {
-//                    intentShareFile.setPackage("com.samsung.android.email.provider");
-//                }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
-//                    intentShareFile.setPackage("com.google.android.gm");
-//                }
-//
-//                context.startActivity(intentShareFile);
-//
-//            }
-//
-
-
-
-
-
-//            String urlPaypalName = "";
-//            String urlStripeName = "";
-
-            // String filterPage = "";
-
-//            if(paypal.equalsIgnoreCase("1")){
-//                urlPaypalName = "paypal";
-//            }
-//
-//            if(stripe.equalsIgnoreCase("1")){
-//                urlStripeName = "stripe";
-//            }
-//
-//            Log.e(TAG, "textXX "+text);
-//            Log.e(TAG, "paypalXX "+urlPaypalName);
-//            Log.e(TAG, "stripeXX "+urlStripeName);
-
-//            String urlPaypal = AllSirApi.BASE+"view/"+urlPaypalName+"/"+link;
-//            String urlStripe = AllSirApi.BASE+"view/"+urlStripeName+"/"+link;
-
-
-           // String urlStripeNameFilter = urlStripeName;
-
-
             String finalUrlPaypalName = urlPaypalName;
             String finalUrlStripeName = urlStripeName;
 
@@ -2495,6 +2379,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 intentShareFile.setType("application/pdf/*|image/*");
                 uriArrayList.add(imageUri1);
                 uriArrayList.add(imageUri2);
+//                uriArrayList.add(Uri.fromFile(new File("/sdcard/share.jpg")));
+//                uriArrayList.add(Uri.fromFile(new File(message)));
+
                 Collections.reverse(uriArrayList);
                 intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
@@ -2504,20 +2391,36 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 intentShareFile.setPackage("com.samsung.android.email.provider");
             }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
                 if(paypal.equalsIgnoreCase("1")){
-                    File filePayPal = new File("/storage/emulated/0/Notes/PayPal.html");
-                    Uri imageUri3 = FileProvider.getUriForFile(
+////                    File filePayPal = new File("/storage/emulated/0/Notes/PayPal.html");
+//                    File filePayPal = new File("/sdcard/Notes/PayPal.html");
+////                    Uri imageUri3 = FileProvider.getUriForFile(
+////                            context,
+////                            BuildConfig.APPLICATION_ID + ".provider",
+////                            filePayPal);
+////                    uriArrayList.add(imageUri3);
+//                    uriArrayList.add(Uri.fromFile(filePayPal));
+
+                    File mFile22 = new File("/sdcard/Notes/PayPal.html");
+                    Uri imageUri22 = FileProvider.getUriForFile(
                             context,
                             BuildConfig.APPLICATION_ID + ".provider",
-                            filePayPal);
-                    uriArrayList.add(imageUri3);
+                            mFile22);
+                    uriArrayList.add(imageUri22);
                 }
                 if(stripe.equalsIgnoreCase("1")){
-                    File fileStripe = new File("/storage/emulated/0/Notes/Cards.html");
-                    Uri imageUri4 = FileProvider.getUriForFile(
+                   // File fileStripe = new File("/sdcard/Notes/Cards.html");
+//                    Uri imageUri4 = FileProvider.getUriForFile(
+//                            context,
+//                            BuildConfig.APPLICATION_ID + ".provider",
+//                            fileStripe);
+                    //uriArrayList.add(imageUri4);
+                  //  uriArrayList.add(Uri.fromFile(fileStripe));
+                    File mFile22 = new File("/sdcard/Notes/Cards.html");
+                    Uri imageUri22 = FileProvider.getUriForFile(
                             context,
                             BuildConfig.APPLICATION_ID + ".provider",
-                            fileStripe);
-                    uriArrayList.add(imageUri4);
+                            mFile22);
+                    uriArrayList.add(imageUri22);
                 }
 
                 uriArrayList.add(imageUri1);
@@ -2763,15 +2666,15 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
     public static void generateNoteOnSDPayPal(Context context, String sFileName, String sBody) {
         try {
-            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            File root = new File(Environment.getExternalStorageDirectory(), "Notes/");
             if (!root.exists()) {
                 root.mkdirs();
             }
             File gpxfile = new File(root, sFileName);
             Log.e(TAG, "gpxfile "+gpxfile.toString());
-            if (!gpxfile.exists()) {
-                gpxfile.mkdirs();
-            }
+//            if (!gpxfile.exists()) {
+//                gpxfile.mkdirs();
+//            }
 
             FileWriter writer = new FileWriter(gpxfile);
             writer.append(sBody);
@@ -2787,15 +2690,15 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
     public static void generateNoteOnSDStripe(Context context, String sFileName, String sBody) {
         try {
-            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            File root = new File(Environment.getExternalStorageDirectory(), "Notes/");
             if (!root.exists()) {
                 root.mkdirs();
             }
             File gpxfile = new File(root, sFileName);
             Log.e(TAG, "gpxfile "+gpxfile.toString());
-            if (!gpxfile.exists()) {
-                gpxfile.mkdirs();
-            }
+//            if (!gpxfile.exists()) {
+//                gpxfile.mkdirs();
+//            }
             FileWriter writer = new FileWriter(gpxfile);
             writer.append(sBody);
             writer.flush();

@@ -471,7 +471,7 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
                     multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
 
 
-                            .replaceAll("#ATTACHMENT_1#", atchemntimg.get(i));
+                            .replaceAll("#ATTACHMENT_1#", atchemntimg.get(i).replace("https", "http"));
 
 
                     multipleimage = multipleimage + multipagepath;

@@ -365,7 +365,7 @@ public class Signup_Activity extends BaseActivity {
                             pref.edit().putString(Constant.EMAIL,email).commit();
                             pref.edit().putBoolean(Constant.LOGGED_IN,true).commit();
                             pref.edit().putString(Constant.EMAIL,profile.getString("email")).commit();
-
+                            pref.edit().putString(Constant.ROLE,profile.getString("role")).commit();
 
                             JSONObject permissions = profile.getJSONObject("permission");
                             String invoice = permissions.getString("invoice");
@@ -439,7 +439,6 @@ public class Signup_Activity extends BaseActivity {
                         e.printStackTrace();
                     }
 
-
                 }
 
                 @Override
@@ -447,7 +446,6 @@ public class Signup_Activity extends BaseActivity {
                     if(responseBody!=null){
                         String response = new String(responseBody);
                         Log.e("signinresponseFAA ",response);
-
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
@@ -464,7 +462,6 @@ public class Signup_Activity extends BaseActivity {
 
                                 //Toast.makeText(getApplicationContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
                             //    Constant.ErrorToast(Signup_Activity.this, message);
-
 
                             }
 

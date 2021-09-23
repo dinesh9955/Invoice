@@ -10,8 +10,11 @@ import android.graphics.*;
 
 import android.os.Environment;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -1128,4 +1131,14 @@ public class Utility {
         return "ldpi";
     }
 
+
+
+    public static int getScale(Context context, WebView webView){
+        int PIC_WIDTH= webView.getRight()-webView.getLeft();
+        Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int width = display.getWidth();
+        Double val = new Double(width)/new Double(PIC_WIDTH);
+        val = val * 100d;
+        return val.intValue();
+    }
 }
