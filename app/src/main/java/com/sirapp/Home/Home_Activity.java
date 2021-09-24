@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
 
@@ -78,7 +79,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -92,6 +95,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.sirapp.Constant.Constant.createDialogOpenClass;
+import static project.aamir.sheikh.circletextview.Model.getContext;
 
 public class Home_Activity extends BaseActivity implements MenuDelegate{
 
@@ -163,6 +167,17 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         drawerToggle.syncState();
 
         FindByIds();
+
+        Utility.deleteDirectory();
+
+//        File mFile = new File(Environment.getExternalStorageDirectory() + "/Notes");
+//        try {
+//            deleteFolder(mFile);
+//        } catch (IOException e) {
+//           // Toast.makeText(Home_Activity.this, "Unable to delete folder", Toast.LENGTH_SHORT).show();
+//        }
+
+
 
         SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE, MODE_PRIVATE);
         boolean LOGGED_IN  = preferences.getBoolean(Constant.LOGGED_IN, false);
@@ -1579,4 +1594,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
+
+
+
 }

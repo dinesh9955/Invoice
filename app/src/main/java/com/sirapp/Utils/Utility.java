@@ -31,6 +31,7 @@ import com.sirapp.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -984,6 +985,26 @@ public class Utility {
         }
     }
 
+    public static void deleteDirectory() {
+        File mFile = new File(Environment.getExternalStorageDirectory() + "/Notes");
+        try {
+            deleteFolder(mFile);
+        } catch (IOException e) {
+            // Toast.makeText(Home_Activity.this, "Unable to delete folder", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public static void deleteFolder(File folder) throws IOException {
+        if (folder.isDirectory()) {
+            for (File ct : folder.listFiles()){
+                deleteFolder(ct);
+            }
+        }
+        if (!folder.delete()) {
+            throw new FileNotFoundException("Unable to delete: " + folder);
+        }
+    }
 
 
 

@@ -2578,9 +2578,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             }
             File gpxfile = new File(root, sFileName);
             Log.e(TAG, "gpxfile "+gpxfile.toString());
-            if (!gpxfile.exists()) {
-                gpxfile.mkdirs();
-            }
+//            if (!gpxfile.exists()) {
+//                gpxfile.mkdirs();
+//            }
 
             FileWriter writer = new FileWriter(gpxfile);
             writer.append(sBody);
@@ -2602,9 +2602,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             }
             File gpxfile = new File(root, sFileName);
             Log.e(TAG, "gpxfile "+gpxfile.toString());
-            if (!gpxfile.exists()) {
-                gpxfile.mkdirs();
-            }
+//            if (!gpxfile.exists()) {
+//                gpxfile.mkdirs();
+//            }
             FileWriter writer = new FileWriter(gpxfile);
             writer.append(sBody);
             writer.flush();
