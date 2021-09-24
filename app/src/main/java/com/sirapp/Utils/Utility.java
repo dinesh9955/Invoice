@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.*;
 
 import android.os.Environment;
@@ -1161,5 +1162,12 @@ public class Utility {
         Double val = new Double(width)/new Double(PIC_WIDTH);
         val = val * 100d;
         return val.intValue();
+    }
+
+
+    public static boolean isTablet(Context context) {
+        boolean xlarge = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == 4);
+        boolean large = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE);
+        return (xlarge || large);
     }
 }

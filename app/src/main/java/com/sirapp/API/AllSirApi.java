@@ -35,6 +35,17 @@ public class AllSirApi {
     public static final boolean FONT_SIZE_PRINT_VIEW = true;
     public static final int FONT_SIZE_PRINT = 6;
 
+    public static final boolean FONT_INVOICE_CREATE_TAB = true;
+    public static final int FONT_SIZE_CREATE_TAB_7 = 9;
+    public static final int FONT_SIZE_CREATE_TAB_10 = 5;
+
+    public static final int FONT_SIZE_CREATE_L = 3;
+    public static final int FONT_SIZE_CREATE_M = 4;
+    public static final int FONT_SIZE_CREATE_H = 5;
+    public static final int FONT_SIZE_CREATE_X = 6;
+    public static final int FONT_SIZE_CREATE_XX = 7;
+    public static final int FONT_SIZE_CREATE_XXX = 8;
+
 //    public static final String BASE_URL ="http://13.126.22.0/saad/app/index.php/api/";
 
 //    public static final String BASE_URL_PDF = "http://13.126.22.0/saad/app/uploads/invoice/pdf/";

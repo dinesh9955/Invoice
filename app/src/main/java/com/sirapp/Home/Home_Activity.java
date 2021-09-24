@@ -326,6 +326,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         String size = Utility.getDensityName(Home_Activity.this);
         Log.e(TAG, "sizeSc "+size);
 
+        Log.e(TAG, "isTablet "+Utility.isTablet(Home_Activity.this));
+
     }
 
     private void setLeftValues() {
