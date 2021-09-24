@@ -216,8 +216,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     Button selectcompany;
 
 
-
-
     //days bottom sheet
     Button btndone2;
     Button btnviewinvoice, btnclear, btndotcancel;
@@ -264,14 +262,14 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     String Grossamount_str = "";
 
 
-    String Selectedcustomer_id="";
+    String Selectedcustomer_id = "";
     String customer_id = "";
     String customer_name = "";
 
     String custoner_contact_name = "";
     String customer_email = "";
     String customer_contact = "";
-    String customer_address =  "";
+    String customer_address = "";
     String customer_website = "";
 
     ArrayList<String> rate = new ArrayList<>();
@@ -301,9 +299,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     //    int invoicenovalue;
     // Company logo path
     String companylogopath = "", Subtotalamount = "";
-    String taxtypeclusive = "", taxtype = "", taxtrateamt = "" , taxID = "";
-
-
+    String taxtypeclusive = "", taxtype = "", taxtrateamt = "", taxID = "";
 
 
 //    int selectedItemOfMySpinner;
@@ -357,7 +353,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     String stringToken = "";
 
 
-
     View viewPayment;
     RelativeLayout relativeLayoutPaymentButtons, relativeLayoutPaymentSetup;
     TextView textViewSetUp;
@@ -402,7 +397,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-       // getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 //        getActivity().getWindow().setSoftInputMode(
 //                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -414,7 +409,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         viewPayment.setVisibility(View.GONE);
         relativeLayoutPaymentButtons = view.findViewById(R.id.rel_footer);
         relativeLayoutPaymentSetup = view.findViewById(R.id.rel_footer2);
-        textViewSetUp  = view.findViewById(R.id.textView3_4);
+        textViewSetUp = view.findViewById(R.id.textView3_4);
         switchPaypal = view.findViewById(R.id.switch1);
         switchStripe = view.findViewById(R.id.switch2);
         radioGroupPaypal = view.findViewById(R.id.radioGroup);
@@ -435,7 +430,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //
 //            }
 //        });
-
 
 
         selectButton = view.findViewById(R.id.selectButton);
@@ -511,10 +505,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         invoicenum.setEnabled(false);
 
 
-
-
-
-
         s_invoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -535,9 +525,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         products_adapter = new Products_Adapter(getActivity(), product_bottom, tempList, this::onClick, tempQuantity, producprice);
         productsRecycler.setAdapter(products_adapter);
 
-        if(tempList.size() == 0){
+        if (tempList.size() == 0) {
             textViewNoItems.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             textViewNoItems.setVisibility(View.GONE);
         }
 
@@ -588,7 +578,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         itemstxtTemplate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e(TAG, "companycolor: "+companycolor);
+                Log.e(TAG, "companycolor: " + companycolor);
 //                defaultClick = 1;
                 Intent intent = new Intent(getActivity(), ChooseTemplate.class);
                 intent.putExtra("companycolor", companycolor);
@@ -734,7 +724,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         });
 
 
-
         invoicenum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -800,36 +789,36 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
                 if (multimgpath != null) {
-                    Log.e(TAG, "multimgpathAA "+multimgpath.size());
+                    Log.e(TAG, "multimgpathAA " + multimgpath.size());
                     for (int i = 0; i < multimgpath.size(); i++) {
-                        if(i == 0){
+                        if (i == 0) {
                             File imgFile = new File(multimgpath.get(i));
-                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
-                                imgFile = new File(""+Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
+                                imgFile = new File("" + Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
-                        }else if(i == 1){
+                        } else if (i == 1) {
                             File imgFile = new File(multimgpath.get(i));
-                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
-                                imgFile = new File(""+Utility.getJPEGtoPNGImage2(new File(multimgpath.get(i))));
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
+                                imgFile = new File("" + Utility.getJPEGtoPNGImage2(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
-                        }else if(i == 2){
+                        } else if (i == 2) {
                             File imgFile = new File(multimgpath.get(i));
-                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
-                                imgFile = new File(""+Utility.getJPEGtoPNGImage3(new File(multimgpath.get(i))));
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
+                                imgFile = new File("" + Utility.getJPEGtoPNGImage3(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
-                        }else if(i == 3){
+                        } else if (i == 3) {
                             File imgFile = new File(multimgpath.get(i));
-                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
-                                imgFile = new File(""+Utility.getJPEGtoPNGImage4(new File(multimgpath.get(i))));
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
+                                imgFile = new File("" + Utility.getJPEGtoPNGImage4(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
-                        }else if(i == 4){
+                        } else if (i == 4) {
                             File imgFile = new File(multimgpath.get(i));
-                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
-                                imgFile = new File(""+Utility.getJPEGtoPNGImage5(new File(multimgpath.get(i))));
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
+                                imgFile = new File("" + Utility.getJPEGtoPNGImage5(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
                         }
@@ -883,7 +872,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         });
 
 
-
         selectcompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -897,7 +885,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 txtAddCompany.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(),Companies_Activity.class);
+                        Intent intent = new Intent(getActivity(), Companies_Activity.class);
                         getActivity().startActivityForResult(intent, 200);
                         mybuilder.dismiss();
                     }
@@ -915,10 +903,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
-                mAdapter = new MenuAdapter(cnames, cids , mybuilder);
+                mAdapter = new MenuAdapter(cnames, cids, mybuilder);
                 mRecyclerView.setAdapter(mAdapter);
 
-                if(cnames.size() > 0){
+                if (cnames.size() > 0) {
                     mybuilder.show();
                     mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                     Window window = mybuilder.getWindow();
@@ -969,7 +957,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //        });
 
 
-
 //        selectwarehouse.setOnKeyListener(new View.OnKeyListener() {
 //            @Override
 //            public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -1005,7 +992,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             public void onClick(View v) {
                 Log.e(TAG, "setOnClickListener");
                 int ddd = wids.size();
-                if(ddd == 0){
+                if (ddd == 0) {
                     Constant.ErrorToast(getActivity(), getString(R.string.item_NoWarehouseFound));
                 }
             }
@@ -1062,7 +1049,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
     private void showUriList(List<Uri> uriList) {
 
-        Log.e(TAG, "uriListA "+uriList.size());
+        Log.e(TAG, "uriListA " + uriList.size());
 
         attchmentimage.clear();
         for (Uri uri : uriList) {
@@ -1089,7 +1076,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         }
 
-        Log.e(TAG, "uri Image "+ String.valueOf(attchmentimage));
+        Log.e(TAG, "uri Image " + String.valueOf(attchmentimage));
 
     }
 
@@ -1097,7 +1084,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         avi.smoothToShow();
 
         //Log.e(TAG , "invoicenovalue::"+getInvoiceValue(invoicenum.getText().toString()));
-        Log.e(TAG , "credit_terms::"+credit_terms);
+        Log.e(TAG, "credit_terms::" + credit_terms);
 
 
         if (selectedCompanyId.equals("") || selectedCompanyId.equals("0")) {
@@ -1106,7 +1093,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         } else if (Utility.getRealValue(invoicenum.getText().toString(), Utility.DEFAULT_INVOICE).equalsIgnoreCase("")) {
             Constant.ErrorToast(getActivity(), getString(R.string.dialog_InvoiceDigits));
             createinvoice.setEnabled(true);
-        }else if (invoice_date.equals("")) {
+        } else if (invoice_date.equals("")) {
             Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectInvoiceDate));
             createinvoice.setEnabled(true);
         } else if (customer_name.equals("")) {
@@ -1128,12 +1115,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         else if (tempList.size() == 0) {
             Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectProductFirst));
             createinvoice.setEnabled(true);
-        }
-
-
-
-
-        else {
+        } else {
 
             final ProgressDialog progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage(getString(R.string.dialog_Please_wait));
@@ -1154,9 +1136,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             params.add("credit_terms", credit_terms);
 //            params.add("freight_cost", freight_cost);
 //            params.add("discount", Utility.getReplaceCurrency(strdiscountvalue, cruncycode));
-            params.add("freight_cost", ""+shippingAmountZZ);
-            params.add("discount", ""+discountAmountZZ);
-            Log.e(TAG, "strpaid_amountAA "+paidamountstr);
+            params.add("freight_cost", "" + shippingAmountZZ);
+            params.add("discount", "" + discountAmountZZ);
+            Log.e(TAG, "strpaid_amountAA " + paidamountstr);
             params.add("paid_amount", paidamountstr);
 
             params.add("paid_amount_date", Paymentamountdate);
@@ -1175,28 +1157,27 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             params.add("cheque_payable_to", cheque_payable_to);
             params.add("paypal_email", paypal_emailstr);
 
-            Log.e(TAG,"payment_bank_name "+payment_bank_name);
-            Log.e(TAG,"payment_currency "+payment_currency);
-            Log.e(TAG,"payment_iban "+payment_iban);
-            Log.e(TAG,"payment_swift_bic "+payment_swift_bic);
-            Log.e(TAG,"cheque_payable_to "+cheque_payable_to);
-            Log.e(TAG,"paypal_emailstr "+paypal_emailstr);
+            Log.e(TAG, "payment_bank_name " + payment_bank_name);
+            Log.e(TAG, "payment_currency " + payment_currency);
+            Log.e(TAG, "payment_iban " + payment_iban);
+            Log.e(TAG, "payment_swift_bic " + payment_swift_bic);
+            Log.e(TAG, "cheque_payable_to " + cheque_payable_to);
+            Log.e(TAG, "paypal_emailstr " + paypal_emailstr);
 
 
             params.add("logo", "logofile");
-            params.add("template_type", ""+selectedTemplate);
+            params.add("template_type", "" + selectedTemplate);
 
 
-
-            if (file!=null){
+            if (file != null) {
                 try {
-                    params.put("pdf",file);
+                    params.put("pdf", file);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
 
-            Log.e(TAG, "posting_params"+params.toString());
+            Log.e(TAG, "posting_params" + params.toString());
 
             if (company_stampFileimage != null) {
                 try {
@@ -1243,32 +1224,31 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 params.add("product[" + i + "]" + "[price]", producprice.get(i));
                 params.add("product[" + i + "]" + "[quantity]", tempQuantity.get(i));
 
-                Log.e("tempListpid",tempList.get(i).getProduct_id());
+                Log.e("tempListpid", tempList.get(i).getProduct_id());
                 Log.e("tempListprice", producprice.get(i));
-                Log.e("tempQuantity",tempQuantity.get(i));
+                Log.e("tempQuantity", tempQuantity.get(i));
 
 
-
-                Log.e("productdetails",params.toString());
+                Log.e("productdetails", params.toString());
 
 
             }
 
 
-            Log.e(TAG, "selectedtaxtAAA "+selectedtaxt.size());
+            Log.e(TAG, "selectedtaxtAAA " + selectedtaxt.size());
 
             //default = "" , off = Exclisive , on = Inclisive,
-            Log.e(TAG, "taxtypeclusiveAAA "+taxtypeclusive);
+            Log.e(TAG, "taxtypeclusiveAAA " + taxtypeclusive);
 
 
             if (selectedtaxt.size() > 0) {
                 for (int i = 0; i < selectedtaxt.size(); i++) {
 
-                    Log.e(TAG, "selectedtaxtAAA3 "+selectedtaxt.get(i).getTaxname());
+                    Log.e(TAG, "selectedtaxtAAA3 " + selectedtaxt.get(i).getTaxname());
 
 
                     params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                    params.add("tax[" + i + "]" + "[amount]", ""+taxAmountZZ);
+                    params.add("tax[" + i + "]" + "[amount]", "" + taxAmountZZ);
                     params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
 
                     params.add("tax[" + i + "]" + "[title]", selectedtaxt.get(i).getTaxname());
@@ -1303,7 +1283,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             }
 
 
-
             if (multiple.length > 0) {
 
 //                try {
@@ -1333,12 +1312,12 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 //params.put("images["+0+"]", "/storage/emulated/0/Pictures/AndroidDvlpr/1621343613248.png");
 
                 for (int k = 0; k < multiple.length; k++) {
-                    Log.e(TAG, "multiple[k] "+multiple[k]);
+                    Log.e(TAG, "multiple[k] " + multiple[k]);
 
 
                     try {
-                        if(multiple[k] != null){
-                            params.put("images["+k+"]", multiple[k]);
+                        if (multiple[k] != null) {
+                            params.put("images[" + k + "]", multiple[k]);
 //                            params.add("images", "[" + k + "]");
 //                            params.add("images", "[" + multiple[k] + "]");
 //                            params.put("fileName:", "" + multiple[k] + "");
@@ -1361,39 +1340,46 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
             }
 
-            if(booleanSwitchPaypal == true){
-                if(!stringPaypalSendType.equalsIgnoreCase("")){
+            if (booleanSwitchPaypal == true) {
+                if (!stringPaypalSendType.equalsIgnoreCase("")) {
                     params.put("paypal", "1");
-                    params.put("paypal_type", ""+stringPaypalSendType);
-                    params.put("payment_type", ""+stringPaypalSendType);
+                    params.put("paypal_type", "" + stringPaypalSendType);
+                    params.put("payment_type", "" + stringPaypalSendType);
                 }
             }
-            Log.e(TAG, "booleanSwitchPaypal "+booleanSwitchPaypal);
+            Log.e(TAG, "booleanSwitchPaypal " + booleanSwitchPaypal);
 
 
-            if(booleanSwitchStripe == true){
+            if (booleanSwitchStripe == true) {
                 params.put("stripe", "1");
             }
-            Log.e(TAG, "booleanSwitchStripe "+booleanSwitchStripe);
+            Log.e(TAG, "booleanSwitchStripe " + booleanSwitchStripe);
 
-            Log.e(TAG, "postingallparams"+params.toString());
+            Log.e(TAG, "postingallparams" + params.toString());
 
             Gson gson = new Gson();
             String json = gson.toJson(params.toString());
 
-            Log.e(TAG, "jsonDD "+json);
+            Log.e(TAG, "jsonDD " + json);
 
             String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
             Log.e("token", token);
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            params.add("language", ""+getLanguage());
+            params.add("language", "" + getLanguage());
             client.post(AllSirApi.BASE_URL + "invoice/add", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    try {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     String response = new String(responseBody);
-                    progressDialog.dismiss();
+
                     avi.smoothToHide();
                     Log.e("Create Invoicedata", response);
                     try {
@@ -1431,10 +1417,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                             createinvoice.setEnabled(true);
 
-                            if( jsonObject.has("code")){
+                            if (jsonObject.has("code")) {
                                 String code = jsonObject.getString("code");
 
-                                if(code.equalsIgnoreCase("subscription")){
+                                if (code.equalsIgnoreCase("subscription")) {
                                     new Handler().postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -1455,7 +1441,13 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    progressDialog.dismiss();
+                    try {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                     if (responseBody != null) {
                         String response = new String(responseBody);
@@ -1495,7 +1487,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //
 //         }
 //    }
-
 
 
 //    private boolean getTrueValue(String toString) {
@@ -1569,7 +1560,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //    }
 
 
-
     private void requestStoragePermission() {
         Dexter.withActivity(getActivity()).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                 .withListener(new MultiplePermissionsListener() {
@@ -1634,8 +1624,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Log.e(TAG, "onActivityResult requestCode:: "+requestCode);
-
+        Log.e(TAG, "onActivityResult requestCode:: " + requestCode);
 
 
         if (resultCode == Activity.RESULT_OK) {
@@ -1674,50 +1663,50 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         }
 
-        Log.e(TAG, "requestCode Path"+requestCode);
-        Log.e(TAG, "resultCode Path"+resultCode);
+        Log.e(TAG, "requestCode Path" + requestCode);
+        Log.e(TAG, "resultCode Path" + resultCode);
 
-        if(requestCode == 120){
+        if (requestCode == 120) {
 
 //            if(defaultClick == 0){
 //                companyget();
 //            }
 
             selectedTemplate = pref.getTemplate();
-            Log.e(TAG, "onResume selectedTemplate"+selectedTemplate);
+            Log.e(TAG, "onResume selectedTemplate" + selectedTemplate);
 
-            if(selectedTemplate != 0){
-                itemstxtTemplate.setText(getString(R.string.header_template)+" "+selectedTemplate);
-            }else{
+            if (selectedTemplate != 0) {
+                itemstxtTemplate.setText(getString(R.string.header_template) + " " + selectedTemplate);
+            } else {
                 itemstxtTemplate.setText(getString(R.string.header_choose_template));
             }
 
         }
 
-        if(requestCode == 123){
-            Log.e(TAG, "requestCode "+requestCode);
+        if (requestCode == 123) {
+            Log.e(TAG, "requestCode " + requestCode);
             customer_list(selectedCompanyId);
         }
 
-        if(requestCode == 124){
-            Log.e(TAG, "requestCode "+requestCode);
+        if (requestCode == 124) {
+            Log.e(TAG, "requestCode " + requestCode);
             Log.e("selectwarehouseIdAA ", selectwarehouseId);
             // additem.setClickable(false);
             productget(selectwarehouseId);
         }
 
-        if(requestCode == 125){
-            Log.e(TAG, "requestCode "+requestCode);
+        if (requestCode == 125) {
+            Log.e(TAG, "requestCode " + requestCode);
             serviceget(selectedCompanyId);
         }
 
-        if(requestCode == 126){
-            Log.e(TAG, "requestCode_CompanyInformation"+requestCode);
+        if (requestCode == 126) {
+            Log.e(TAG, "requestCode_CompanyInformation" + requestCode);
             CompanyInformation(selectedCompanyId);
         }
 
 
-        if(requestCode == 128){
+        if (requestCode == 128) {
             CompanyInformation(selectedCompanyId);
         }
 
@@ -1816,7 +1805,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             recycler_products.setLayoutManager(layoutManager);
             recycler_products.setHasFixedSize(true);
 
-            product_bottom_adapter = new Product_Bottom_Adapter(getActivity(), product_bottom, this, bottomSheetDialog ,"invoice");
+            product_bottom_adapter = new Product_Bottom_Adapter(getActivity(), product_bottom, this, bottomSheetDialog, "invoice");
             recycler_products.setAdapter(product_bottom_adapter);
             product_bottom_adapter.notifyDataSetChanged();
 
@@ -1901,9 +1890,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
             imgincome = view.findViewById(R.id.txttax);
 
-            if(taxtypeclusive.equalsIgnoreCase("Inclusive")){
+            if (taxtypeclusive.equalsIgnoreCase("Inclusive")) {
                 taxswitch.setChecked(true);
-            }else{
+            } else {
                 taxswitch.setChecked(false);
             }
 
@@ -1923,7 +1912,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             taxrecycler.setLayoutManager(layoutManager);
             taxrecycler.setHasFixedSize(true);
 
-            Log.e(TAG,  "tax_list_array "+tax_list_array.size());
+            Log.e(TAG, "tax_list_array " + tax_list_array.size());
 
             customTaxAdapter = new CustomTaxAdapter(getActivity(), tax_list_array, this);
             taxrecycler.setAdapter(customTaxAdapter);
@@ -2011,16 +2000,16 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                                       int monthOfYear, int dayOfMonth) {
 
                                     int month = monthOfYear + 1;
-                                    String realMonth = ""+month;
-                                    if(realMonth.length() == 1){
-                                        realMonth = "0"+month;
+                                    String realMonth = "" + month;
+                                    if (realMonth.length() == 1) {
+                                        realMonth = "0" + month;
                                     }
 
 
                                     int day = dayOfMonth;
-                                    String realDay = ""+day;
-                                    if(realDay.length() == 1){
-                                        realDay = "0"+day;
+                                    String realDay = "" + day;
+                                    if (realDay.length() == 1) {
+                                        realDay = "0" + day;
                                     }
 
                                     eddate.setText(year + "-" + realMonth + "-" + realDay);
@@ -2052,9 +2041,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         Constant.ErrorToastTop(getActivity(), getString(R.string.dialog_PaymentModeRequired));
                     } else {
                         if (paidamountstr != null) {
-                            try{
+                            try {
                                 paidAmountDD = Double.parseDouble(paidamountstr);
-                            }catch (Exception e){
+                            } catch (Exception e) {
 
                             }
                             calculateTotalAmount(total_price);
@@ -2082,7 +2071,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 public void onClick(View view) {
                     avi.smoothToShow();
 
-                    Log.e(TAG, "selectedTemplateAA "+selectedTemplate);
+                    Log.e(TAG, "selectedTemplateAA " + selectedTemplate);
 
                     selectedShip();
 
@@ -2130,15 +2119,14 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     else if (tempList.size() == 0) {
                         Constant.ErrorToast(getActivity(), getString(R.string.dialog_SelectProductFirst));
                         bottomSheetDialog2.dismiss();
-                    }
-                    else {
+                    } else {
 
 //                        defaultClick = 1;
                         Intent intent = new Intent(getContext(), ViewInvoice_Activity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("taxText", txttax.getText().toString());
                         intent.putExtra("companycolor", companycolor);
-                        intent.putExtra("selectedTemplate", ""+selectedTemplate);
+                        intent.putExtra("selectedTemplate", "" + selectedTemplate);
                         intent.putExtra("company_id", selectedCompanyId);
                         intent.putExtra("invoice_date", invoice_date);
                         intent.putExtra("netamount", netamountvalue);
@@ -2158,8 +2146,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         intent.putExtra("paid_amount", strpaid_amount);
                         intent.putExtra("paid_amount_date", Paymentamountdate);
 
-                        Log.e(TAG, "stringBuilderBillTo1 "+stringBuilderBillTo);
-                        Log.e(TAG, "stringBuilderShipTo1 "+stringBuilderShipTo);
+                        Log.e(TAG, "stringBuilderBillTo1 " + stringBuilderBillTo);
+                        Log.e(TAG, "stringBuilderShipTo1 " + stringBuilderShipTo);
 
                         intent.putExtra("shipping_firstname", shippingfirstname);
                         intent.putExtra("shipping_lastname", shippinglastname);
@@ -2177,8 +2165,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         intent.putExtra("cheque_payable_to", cheque_payable_to);
 
 
-
-                        Log.e(TAG, "companyimagelogopathAA "+companylogopath);
+                        Log.e(TAG, "companyimagelogopathAA " + companylogopath);
                         intent.putExtra("company_logo", companylogopath);
                         intent.putExtra("company_name", Selectedcompanyname);
                         intent.putExtra("company_address", company_address);
@@ -2206,15 +2193,14 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         intent.putExtra("rate_list", rate);
                         intent.putExtra("attchemnt", attchmentimage);
 
-                        Log.e("invoiceDataCheck",producprice.toString() +"   "+totalpriceproduct.toString());
+                        Log.e("invoiceDataCheck", producprice.toString() + "   " + totalpriceproduct.toString());
 
                         startActivity(intent);
 
-                        Log.e(TAG, "signature_of_issuerZZ "+signature_of_issuer);
-                        Log.e(TAG, "signatureofreceiverstZZ "+signatureofreceiverst);
-                        Log.e(TAG, "company_stampZZ "+company_stamp);
+                        Log.e(TAG, "signature_of_issuerZZ " + signature_of_issuer);
+                        Log.e(TAG, "signatureofreceiverstZZ " + signatureofreceiverst);
+                        Log.e(TAG, "company_stampZZ " + company_stamp);
                         //viewPDF();
-
 
 
                         bottomSheetDialog2.dismiss();
@@ -2252,14 +2238,14 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                     totalpriceproduct.clear();
 
-                    if(tempList.size() == 0){
+                    if (tempList.size() == 0) {
                         textViewNoItems.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         textViewNoItems.setVisibility(View.GONE);
                     }
 
                     products_adapter.notifyDataSetChanged();
-                    Log.e("tempList", ""+String.valueOf(tempList.size()));
+                    Log.e("tempList", "" + String.valueOf(tempList.size()));
                     imgsigsuccess.setVisibility(View.INVISIBLE);
                     imgrecsuccess.setVisibility(View.INVISIBLE);
                     imgstampsuccess.setVisibility(View.INVISIBLE);
@@ -2281,10 +2267,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             bottomSheetDialog2.setContentView(view);
         }
     }
-
-
-
-
 
 
     public void freightdialog() {
@@ -2374,10 +2356,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     strdiscount = rb.getText().toString();
                     Log.e("Radio Button value", strdiscount);
 
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))){
+                    if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Percentage))) {
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinPercent));
                     }
-                    if(strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))){
+                    if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))) {
                         eddisount.setHint(getString(R.string.dialog_EnterDiscountinAmount));
                     }
                 }
@@ -2391,7 +2373,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 strdiscountvalue = eddisount.getText().toString();
                 try {
                     discountAmountDD = Double.parseDouble(eddisount.getText().toString());
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
                 if (strdiscountvalue.matches("")) {
@@ -2470,11 +2452,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     radiogroup1.clearCheck();
                     credit_terms = "";
 
-                    Log.e("Credit_terms",credit_terms);
+                    Log.e("Credit_terms", credit_terms);
                 }
             });
-
-
 
 
             btndone1.setOnClickListener(new View.OnClickListener() {
@@ -2482,16 +2462,16 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 public void onClick(View view) {
                     dayss = edmanual.getText().toString();
 
-                    Log.e(TAG, "dayss"+dayss);
-                    Log.e(TAG, "credit_terms"+credit_terms);
+                    Log.e(TAG, "dayss" + dayss);
+                    Log.e(TAG, "credit_terms" + credit_terms);
                     DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
 
                     String xxDate = duedate.getText().toString();
 
-                    if(xxDate.equalsIgnoreCase("")){
+                    if (xxDate.equalsIgnoreCase("")) {
                         Toast.makeText(getActivity(), getString(R.string.dialog_PleaseSelectDate), Toast.LENGTH_LONG).show();
-                    }else{
-                        if(!dayss.equals("")){
+                    } else {
+                        if (!dayss.equals("")) {
                             String replaceString = dayss.replaceAll(getString(R.string.dialog_days), "");
                             String dayswith = replaceString.trim();
 
@@ -2503,7 +2483,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 Date date = simple.parse(xxDate);
                                 datemillis = date.getTime();
 
-                                Log.e(TAG, "datemillisAAA "+datemillis);
+                                Log.e(TAG, "datemillisAAA " + datemillis);
 
                                 long sumresult = (long) (result + datemillis);
                                 // Creating date format
@@ -2513,13 +2493,13 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 Log.e("Date Long22", simple.format(sumresultdate));
                                 edduedate.setText(simple.format(sumresultdate));
                                 edduedate.setClickable(false);
-                                txtdays.setText(dayss+" "+getString(R.string.dialog_days));
-                            }catch (Exception e){
+                                txtdays.setText(dayss + " " + getString(R.string.dialog_days));
+                            } catch (Exception e) {
                                 txtdays.setText(dayswith);
                                 edduedate.setText(duedate.getText().toString());
                             }
                             bottomSheetDialog4.dismiss();
-                        }else if (!credit_terms.equals("")) {
+                        } else if (!credit_terms.equals("")) {
 
                             if (credit_terms.equals(getString(R.string.dialog_DateNone))) {
                                 txtdays.setText(credit_terms);
@@ -2570,12 +2550,11 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 }
 
 
-
                                 bottomSheetDialog4.dismiss();
 
                             }
 
-                        }else{
+                        } else {
                             Toast.makeText(getActivity(), getString(R.string.dialog_PleaseSelectOneValue), Toast.LENGTH_LONG).show();
                         }
                     }
@@ -2588,9 +2567,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     return days * 24 * 60 * 60 * 1000;
                 }
             });
-
-
-
 
 
             txtcredit1.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "Fonts/AzoSans-Bold.otf"));
@@ -2787,9 +2763,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             Date date = sdf1.parse(myDate);
             datemillis = date.getTime();
 
-            if (dayss != null && credit_terms.equals(""))
-            {
-                Log.e("getDays",dayss.toString());
+            if (dayss != null && credit_terms.equals("")) {
+                Log.e("getDays", dayss.toString());
                 String dayswith = dayss.trim();
 
                 double daysvalue = Double.parseDouble(dayswith);
@@ -2807,11 +2782,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 edduedate.setClickable(true);
                 txtdays.setText(dayss + " " + getString(R.string.dialog_days));
                 edduedate.setClickable(false);
-            }
-            else if (credit_terms != null && dayss.equals(""))
-            {
-                if (credit_terms.equals(getString(R.string.dialog_DateNone)))
-                {
+            } else if (credit_terms != null && dayss.equals("")) {
+                if (credit_terms.equals(getString(R.string.dialog_DateNone))) {
                     txtdays.setText(credit_terms);
                     edduedate.setClickable(true);
                 } else if (credit_terms.equals(getString(R.string.dialog_immediately))) {
@@ -2871,7 +2843,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
         RequestParams params = new RequestParams();
-        params.add("language", ""+getLanguage());
+        params.add("language", "" + getLanguage());
         client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2902,17 +2874,15 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //                                selectcompany.setAdapter(namesadapter);
 
 
-
                             }
                         }
 
 
-
-                        if(company.length() == 1){
+                        if (company.length() == 1) {
                             selectedCompanyId = cids.get(0);
-                            selectcompany.setText(""+cnames.get(0));
+                            selectcompany.setText("" + cnames.get(0));
                             CompanyInformation(selectedCompanyId);
-                            if(warehouseChange == false){
+                            if (warehouseChange == false) {
                                 warehouseChange = true;
                                 warehouse_list(selectedCompanyId);
                             }
@@ -2960,7 +2930,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             AsyncHttpClient client = new AsyncHttpClient();
             client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
             client.addHeader("Access-Token", token);
-            params.add("language", ""+getLanguage());
+            params.add("language", "" + getLanguage());
             client.post(AllSirApi.BASE_URL + "warehouse/listing", params, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -2983,16 +2953,16 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 wnames.add(warehouse_name);
                             }
 
-                            if(wids.size() == 0){
+                            if (wids.size() == 0) {
                                 selectButton.setVisibility(View.VISIBLE);
-                            }else{
+                            } else {
                                 selectButton.setVisibility(View.GONE);
                             }
 
 
-                            if(selectwarehouse != null){
-                                if(wnames != null){
-                                    if (getActivity()!=null){
+                            if (selectwarehouse != null) {
+                                if (wnames != null) {
+                                    if (getActivity() != null) {
                                         ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
                                         selectwarehouse.setAdapter(namesadapter);
                                     }
@@ -3021,9 +2991,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         }
                     }
 
-                    if(wids.size() == 0){
+                    if (wids.size() == 0) {
                         selectButton.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         selectButton.setVisibility(View.GONE);
                     }
                 }
@@ -3042,7 +3012,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
+        params.add("language", "" + getLanguage());
         client.post(AllSirApi.BASE_URL + "product/getListingByWarehouse", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3077,7 +3047,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 String quantity = item.getString("quantity");
 
                                 String measurement_unit = item.getString("measurement_unit");
-                                Log.e(TAG, "measurement_unit: "+measurement_unit);
+                                Log.e(TAG, "measurement_unit: " + measurement_unit);
 
                                 String minimum = item.getString("minimum");
 
@@ -3103,7 +3073,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                             }
 
-                            if(product_bottom_adapter != null){
+                            if (product_bottom_adapter != null) {
                                 product_bottom_adapter.notifyDataSetChanged();
                             }
 
@@ -3164,7 +3134,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
+        params.add("language", "" + getLanguage());
         client.post(AllSirApi.BASE_URL + "service/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3213,7 +3183,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                             }
 
-                            if(service_bottom_adapter != null){
+                            if (service_bottom_adapter != null) {
                                 service_bottom_adapter.notifyDataSetChanged();
                             }
                         } else {
@@ -3344,12 +3314,12 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
+        params.add("language", "" + getLanguage());
         client.post(AllSirApi.BASE_URL + "company/info", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
-                Log.e(TAG, "Company_Information"+ response);
+                Log.e(TAG, "Company_Information" + response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -3398,11 +3368,11 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             stringStripe = item.getString("stripe");
                             stringToken = item.getString("stripe_token");
 
-                            Log.e(TAG , "stringPaypal "+stringPaypal);
-                            Log.e(TAG , "stringPaypalEmail_2 "+stringPaypalEmail_2);
-                            Log.e(TAG , "stringPaypalEmail_2_Type "+stringPaypalEmail_2_Type);
-                            Log.e(TAG , "stringStripe "+stringStripe);
-                            Log.e(TAG , "stringToken "+stringToken);
+                            Log.e(TAG, "stringPaypal " + stringPaypal);
+                            Log.e(TAG, "stringPaypalEmail_2 " + stringPaypalEmail_2);
+                            Log.e(TAG, "stringPaypalEmail_2_Type " + stringPaypalEmail_2_Type);
+                            Log.e(TAG, "stringStripe " + stringStripe);
+                            Log.e(TAG, "stringToken " + stringToken);
 
                             companylogopath = company_image_path + logo;
                             Log.e("companylogopath", companylogopath);
@@ -3413,7 +3383,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 //                        stringPaypal = "0";
 //                        stringStripe = "0";
-                        if(stringPaypal.equalsIgnoreCase("0") && stringStripe.equalsIgnoreCase("0")){
+                        if (stringPaypal.equalsIgnoreCase("0") && stringStripe.equalsIgnoreCase("0")) {
                             viewPayment.setVisibility(View.VISIBLE);
                             relativeLayoutPaymentButtons.setVisibility(View.GONE);
                             relativeLayoutPaymentSetup.setVisibility(View.VISIBLE);
@@ -3421,17 +3391,17 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             textViewSetUp.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Intent intent = new Intent(getActivity() , OnlinePaymentGatewayActivity.class);
-                                    startActivityForResult(intent , 128);
+                                    Intent intent = new Intent(getActivity(), OnlinePaymentGatewayActivity.class);
+                                    startActivityForResult(intent, 128);
                                 }
                             });
 
-                        }else{
-                            Log.e(TAG , "stringPaypalAA "+stringPaypal);
+                        } else {
+                            Log.e(TAG, "stringPaypalAA " + stringPaypal);
                             relativeLayoutPaymentButtons.setVisibility(View.VISIBLE);
                             relativeLayoutPaymentSetup.setVisibility(View.GONE);
                             radioGroupPaypal.setVisibility(View.GONE);
-                            if(stringPaypal.equalsIgnoreCase("1")){
+                            if (stringPaypal.equalsIgnoreCase("1")) {
                                 viewPayment.setVisibility(View.VISIBLE);
                                 switchPaypal.setVisibility(View.VISIBLE);
 //                                switchPaypal.setChecked(true);
@@ -3439,10 +3409,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 switchPaypal.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                        if(isChecked == true){
+                                        if (isChecked == true) {
                                             radioGroupPaypal.setVisibility(View.VISIBLE);
                                             booleanSwitchPaypal = true;
-                                        }else{
+                                        } else {
                                             radioGroupPaypal.setVisibility(View.GONE);
                                             booleanSwitchPaypal = false;
                                         }
@@ -3466,14 +3436,14 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                         stringPaypalSendType = "BUSINESS";
                                     }
                                 });
-                            }else{
+                            } else {
                                 switchPaypal.setVisibility(View.GONE);
                                 radioGroupPaypal.setVisibility(View.GONE);
                                 booleanSwitchPaypal = false;
                             }
 
-                            Log.e(TAG , "stringStripeAA "+stringStripe);
-                            if(stringStripe.equalsIgnoreCase("1")){
+                            Log.e(TAG, "stringStripeAA " + stringStripe);
+                            if (stringStripe.equalsIgnoreCase("1")) {
                                 viewPayment.setVisibility(View.VISIBLE);
                                 switchStripe.setVisibility(View.VISIBLE);
 //                                switchStripe.setChecked(true);
@@ -3481,15 +3451,15 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 switchStripe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
                                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                        if(isChecked == true){
+                                        if (isChecked == true) {
                                             booleanSwitchStripe = true;
-                                        }else{
+                                        } else {
                                             booleanSwitchStripe = false;
                                         }
                                     }
                                 });
 
-                            }else{
+                            } else {
                                 switchStripe.setVisibility(View.GONE);
                                 switchStripe.setChecked(false);
                                 booleanSwitchStripe = false;
@@ -3497,34 +3467,30 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         }
 
 
-
-
-
-
                         //  JSONArray customer = data.getJSONArray("customer");
 
                         JSONArray invoice = data.getJSONArray("invoice");
 
-                        if(invoice.length() == 0){
-                            if(numberChange == false){
+                        if (invoice.length() == 0) {
+                            if (numberChange == false) {
                                 invoicenum.setText(Utility.DEFAULT_INVOICE);
                             }
 
                             invoicenum.setEnabled(true);
-                        }else{
+                        } else {
                             for (int i = 0; i < invoice.length(); i++) {
                                 JSONObject item = invoice.getJSONObject(i);
 
                                 String invoice_nocompany = item.getString("invoice_no");
 
-                                if(i == invoice.length() - 1){
-                                    Log.e(TAG, "zzzz0 "+invoice_nocompany);
-                                    Log.e(TAG, "zzzz1 "+i);
-                                    Log.e(TAG, "zzzz2 "+invoice.length());
+                                if (i == invoice.length() - 1) {
+                                    Log.e(TAG, "zzzz0 " + invoice_nocompany);
+                                    Log.e(TAG, "zzzz1 " + i);
+                                    Log.e(TAG, "zzzz2 " + invoice.length());
 
                                     String sss = Utility.getRealValue(invoice_nocompany, Utility.DEFAULT_INVOICE);
 
-                                    if(numberChange == false){
+                                    if (numberChange == false) {
                                         invoicenum.setText(sss);
                                     }
 
@@ -3534,7 +3500,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                             }
                         }
-
 
 
                         //  for (int i = 0; i < customer.length(); i++) {
@@ -3566,7 +3531,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         }
 
 
-                        if(customTaxAdapter != null){
+                        if (customTaxAdapter != null) {
                             customTaxAdapter.notifyDataSetChanged();
                         }
 
@@ -3574,7 +3539,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         Gson gson = new Gson();
                         String json2 = gson.toJson(tax_list_array);
 
-                        Log.e(TAG, "jsonAA "+json2);
+                        Log.e(TAG, "jsonAA " + json2);
                         // Log.e("Taxt array", tax_list_array.toString());
                         //  }
 
@@ -3658,7 +3623,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-        params.add("language", ""+getLanguage());
+        params.add("language", "" + getLanguage());
         client.post(AllSirApi.BASE_URL + "customer/getListingByCompany", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -3730,10 +3695,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                         }
 
-                        if(customer_bottom_adapter != null){
+                        if (customer_bottom_adapter != null) {
                             customer_bottom_adapter.notifyDataSetChanged();
                         }
-
 
 
                     }
@@ -3780,7 +3744,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     }
 
 
-
     @Override
     public void onPostExecute(Customer_list customer_list) {
         customerinfo.add(customer_list);
@@ -3790,7 +3753,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             // createbottomsheet_customers();
             invoicerecipnt.setText(customer_list.getCustomer_name());
             customer_name = customer_list.getCustomer_name();
-            Selectedcustomer_id=customer_list.getCustomer_id();
+            Selectedcustomer_id = customer_list.getCustomer_id();
 
 
         } else {
@@ -3825,14 +3788,13 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     public void onPostExecutecall(Product_list selected_item, String s, String price) {
 
 
-
         bottomSheetDialog.dismiss();
 
         producprice.add(price);
         tempList.add(selected_item);
         tempQuantity.add(s);
 
-        Log.e(TAG, "tempQuantityAA "+s);
+        Log.e(TAG, "tempQuantityAA " + s);
         total_price = total_price + (Double.parseDouble(price) * Double.parseDouble(s));
 
         double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
@@ -3845,22 +3807,18 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         //Utility.hideKeypad(getActivity());
 
 
-
     }
-
-
-
 
 
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
 
         DecimalFormat formatter = new DecimalFormat("#0.00");
-        Log.e(TAG,  "total_price: "+total_price);
+        Log.e(TAG, "total_price: " + total_price);
 
-        if(tempList.size() == 0){
+        if (tempList.size() == 0) {
             textViewNoItems.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             textViewNoItems.setVisibility(View.GONE);
         }
 
@@ -3887,7 +3845,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             } else if (strdiscount.equalsIgnoreCase(getString(R.string.dialog_Amount))) {
                 double value = discountAmountDD;
                 discountAmount = value;
-            }else{
+            } else {
                 double value = 0.0;
                 discountAmount = value;
             }
@@ -3896,29 +3854,29 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
             afterTaxAmount = Double.parseDouble(formatter.format(subtotalAmount));
 
-            Log.e(TAG, "afterTaxAmount "+afterTaxAmount);
+            Log.e(TAG, "afterTaxAmount " + afterTaxAmount);
 
-            Log.e(TAG, "taxtrateamt "+taxtrateamt);
+            Log.e(TAG, "taxtrateamt " + taxtrateamt);
             if (selectedtaxt.size() > 0) {
                 if (taxtypeclusive.equals("Inclusive")) { // exclude on
-                    taxAmount = Double.parseDouble(taxtrateamt) * subtotalAmount / (100+ Double.parseDouble(taxtrateamt));
+                    taxAmount = Double.parseDouble(taxtrateamt) * subtotalAmount / (100 + Double.parseDouble(taxtrateamt));
                     taxAmount = Double.parseDouble(formatter.format(taxAmount));
                     afterTaxAmount = subtotalAmount;
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
-                    txttax.setText(  subStrinng + " incl." );
+                    txttax.setText(subStrinng + " incl.");
                     taxvalueText.setText("Tax (" + subStrinng + " incl." + ")"); //Dont do any change
                 } else { // include off
                     taxAmount = subtotalAmount * Double.parseDouble(taxtrateamt) / 100;
                     taxAmount = Double.parseDouble(formatter.format(taxAmount));
                     afterTaxAmount = subtotalAmount + taxAmount;
                     String subStrinng = taxrname + " " + taxtrateamt + "%";
-                    txttax.setText(  subStrinng + "" );
+                    txttax.setText(subStrinng + "");
                     taxvalueText.setText("Tax (" + subStrinng + " " + ")"); //Dont do any change
                 }
             }
-            Log.e(TAG, "taxAmount "+taxAmount);
+            Log.e(TAG, "taxAmount " + taxAmount);
 
-            Log.e(TAG, "freight_cost "+freight_cost);
+            Log.e(TAG, "freight_cost " + freight_cost);
 
             if (freight_cost.equals("")) {
                 double value = 0.0;
@@ -3928,59 +3886,59 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 shippingAmount = value;
             }
 
-            netAmount  = afterTaxAmount + shippingAmount;
+            netAmount = afterTaxAmount + shippingAmount;
 
             paidAmount = paidAmountDD;
 
             balanceAmount = netAmount - paidAmount;
 
 
-            if(grandAmount == 0){
+            if (grandAmount == 0) {
                 grosstotal.setText("0");
-            }else{
-                grosstotal.setText(Utility.getPatternFormat(""+numberPostion, grandAmount)+""+cruncycode);
+            } else {
+                grosstotal.setText(Utility.getPatternFormat("" + numberPostion, grandAmount) + "" + cruncycode);
             }
 
-            if(discountAmount == 0){
+            if (discountAmount == 0) {
                 discount.setText("0");
-            }else{
-                discount.setText("-"+Utility.getPatternFormat(""+numberPostion, discountAmount)+""+cruncycode);
+            } else {
+                discount.setText("-" + Utility.getPatternFormat("" + numberPostion, discountAmount) + "" + cruncycode);
             }
 
-            if(subtotalAmount == 0){
+            if (subtotalAmount == 0) {
                 subtotal.setText("0");
-            }else{
-                subtotal.setText(Utility.getPatternFormat(""+numberPostion, subtotalAmount)+""+cruncycode);
+            } else {
+                subtotal.setText(Utility.getPatternFormat("" + numberPostion, subtotalAmount) + "" + cruncycode);
             }
 
-            if(taxAmount == 0){
+            if (taxAmount == 0) {
                 tax.setText("0");
-            }else{
-                tax.setText(Utility.getPatternFormat(""+numberPostion, taxAmount)+""+cruncycode);
+            } else {
+                tax.setText(Utility.getPatternFormat("" + numberPostion, taxAmount) + "" + cruncycode);
             }
 
-            if(shippingAmount == 0){
+            if (shippingAmount == 0) {
                 freight.setText("0");
-            }else{
-                freight.setText(Utility.getPatternFormat(""+numberPostion, shippingAmount)+""+cruncycode);
+            } else {
+                freight.setText(Utility.getPatternFormat("" + numberPostion, shippingAmount) + "" + cruncycode);
             }
 
-            if(netAmount == 0){
+            if (netAmount == 0) {
                 netamount.setText("0");
-            }else{
-                netamount.setText(Utility.getPatternFormat(""+numberPostion, netAmount)+""+cruncycode);
+            } else {
+                netamount.setText(Utility.getPatternFormat("" + numberPostion, netAmount) + "" + cruncycode);
             }
 
-            if(paidAmount == 0){
+            if (paidAmount == 0) {
                 paidamount.setText("0");
-            }else{
-                paidamount.setText(Utility.getPatternFormat(""+numberPostion, paidAmount)+""+cruncycode);
+            } else {
+                paidamount.setText(Utility.getPatternFormat("" + numberPostion, paidAmount) + "" + cruncycode);
             }
 
-            if(balanceAmount == 0){
+            if (balanceAmount == 0) {
                 balance.setText("0");
-            }else{
-                balance.setText(Utility.getPatternFormat(""+numberPostion, balanceAmount)+""+cruncycode);
+            } else {
+                balance.setText(Utility.getPatternFormat("" + numberPostion, balanceAmount) + "" + cruncycode);
             }
 
 //            DecimalFormat deciFormat = new DecimalFormat();
@@ -3989,7 +3947,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //            System.out.println(deciFormat.format(subtotalAmountZZ));
 
 
-            Log.e(TAG , "subtotalAmountZZ "+formatter.format(subtotalAmount));
+            Log.e(TAG, "subtotalAmountZZ " + formatter.format(subtotalAmount));
 
             grandAmountZZ = Double.parseDouble(formatter.format(grandAmount));
             discountAmountZZ = Double.parseDouble(formatter.format(discountAmount));
@@ -4001,18 +3959,17 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             paidAmountZZ = Double.parseDouble(formatter.format(paidAmount));
             balanceAmountZZ = Double.parseDouble(formatter.format(balanceAmount));
 
-            Log.e(TAG, "grandAmountZZ "+grandAmountZZ);
-            Log.e(TAG, "discountAmountZZ "+discountAmountZZ);
-            Log.e(TAG, "subtotalAmountZZ "+subtotalAmountZZ);
-            Log.e(TAG, "taxAmountZZ "+taxAmountZZ);
-            Log.e(TAG, "shippingAmountZZ "+shippingAmountZZ);
-            Log.e(TAG, "netAmountZZ "+netAmountZZ);
-            Log.e(TAG, "paidAmountZZ "+paidAmountZZ);
-            Log.e(TAG, "balanceAmountZZ "+balanceAmountZZ);
+            Log.e(TAG, "grandAmountZZ " + grandAmountZZ);
+            Log.e(TAG, "discountAmountZZ " + discountAmountZZ);
+            Log.e(TAG, "subtotalAmountZZ " + subtotalAmountZZ);
+            Log.e(TAG, "taxAmountZZ " + taxAmountZZ);
+            Log.e(TAG, "shippingAmountZZ " + shippingAmountZZ);
+            Log.e(TAG, "netAmountZZ " + netAmountZZ);
+            Log.e(TAG, "paidAmountZZ " + paidAmountZZ);
+            Log.e(TAG, "balanceAmountZZ " + balanceAmountZZ);
 
 
-
-        }else{
+        } else {
             grandAmount = 0.0;
             discountAmount = 0.0;
             subtotalAmount = 0.0;
@@ -4020,7 +3977,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             afterTaxAmount = 0.0;
             shippingAmount = 0.0;
             netAmount = 0.0;
-            paidAmount= 0.0;
+            paidAmount = 0.0;
             balanceAmount = 0.0;
 
             grandAmountZZ = 0.0;
@@ -4044,11 +4001,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         }
 
 
-
     }
-
-
-
 
 
 //    @SuppressLint("SetTextI18n")
@@ -4242,8 +4195,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //        products_adapter.notifyDataSetChanged();
 
 
-
-
         Product_list product_list = new Product_list();
         product_list.setProduct_name(selected_item.getService_name());
         product_list.setProduct_id(selected_item.getService_id());
@@ -4260,8 +4211,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         double newPrice = Double.parseDouble(price) * Double.parseDouble(s);
         totalpriceproduct.add(String.valueOf(newPrice));
 
-        Log.e(TAG, "tempQuantityBB "+total_price);
-
+        Log.e(TAG, "tempQuantityBB " + total_price);
 
 
         calculateTotalAmount(total_price);
@@ -4271,14 +4221,13 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         bottomSheetDialog2.dismiss();
 
 
-
     }
 
 
     // clear button clear the data
 
     @Override
-    public void onClick(int str,String type) {
+    public void onClick(int str, String type) {
 
         producprice.remove(str);
         tempList.remove(str);
@@ -4287,24 +4236,24 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         products_adapter.notifyDataSetChanged();
 
-        Log.e(TAG, "ccAAA "+tempList.size());
-        Log.e(TAG, "ccBBB "+tempQuantity.size());
+        Log.e(TAG, "ccAAA " + tempList.size());
+        Log.e(TAG, "ccBBB " + tempQuantity.size());
 
 
         double total_price2 = 0;
 
-        if(tempList.size() > 0){
-            if(tempQuantity.size() > 0){
-                for(int i = 0 ; i < tempList.size() ; i++){
-                    Log.e(TAG, "ccDDD "+producprice.get(i) + " DDDD "+ tempQuantity.get(i));
+        if (tempList.size() > 0) {
+            if (tempQuantity.size() > 0) {
+                for (int i = 0; i < tempList.size(); i++) {
+                    Log.e(TAG, "ccDDD " + producprice.get(i) + " DDDD " + tempQuantity.get(i));
                     total_price2 = total_price2 + Double.parseDouble(producprice.get(i)) * Double.parseDouble(tempQuantity.get(i));
                 }
             }
         }
 
-        Log.e(TAG, "productCal "+total_price2);
+        Log.e(TAG, "productCal " + total_price2);
 
-        if(tempList.size() == 0) {
+        if (tempList.size() == 0) {
             total_price2 = 0.0;
         }
 
@@ -4313,8 +4262,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         calculateTotalAmount(total_price);
 
     }
-
-
 
 
     @Override
@@ -4463,7 +4410,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     StringBuilder stringBuilderShipTo = new StringBuilder();
 
 
-    String  sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
+    String sltcustonername = "", sltcustomer_email = "", sltcustomer_contact = "", sltcustomer_address = "", sltcustomer_website = "", sltcustomer_phone_number = "";
     //    String  taxamount = "";
     String shippingzone = "";
 
@@ -4483,8 +4430,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
         selectedShip2();
-
-
 
 
         if (tempQuantity.size() > 0) {
@@ -4561,8 +4506,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         }
 
 
-
-
         for (int i = 0; i < quantity.size(); i++) {
             String qty = String.valueOf(quantity);
             Log.e("logqty", qty);
@@ -4573,12 +4516,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     }
 
 
-
-
     private void selectedShip() {
 
-        stringBuilderBillTo.delete(0,stringBuilderBillTo.length());
-        stringBuilderShipTo.delete(0,stringBuilderShipTo.length());
+        stringBuilderBillTo.delete(0, stringBuilderBillTo.length());
+        stringBuilderShipTo.delete(0, stringBuilderShipTo.length());
 
         if (selected.size() > 0) {
             for (int i = 0; i < selected.size(); i++) {
@@ -4601,26 +4542,26 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
             }
 
-            if(!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustonername+"</br>");
+            if (!Utility.isEmptyNull(sltcustonername).equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustonername + "</br>");
             }
-            if(!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_address+"</br>");
+            if (!Utility.isEmptyNull(sltcustomer_address).equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustomer_address + "</br>");
             }
-            if(!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+            if (!Utility.isEmptyNull(sltcustomer_contact).equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustomer_contact + "</br>");
             }
-            if(!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
+            if (!Utility.isEmptyNull(sltcustomer_phone_number).equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustomer_phone_number + "</br>");
             }
-            if(!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_website+"</br>");
+            if (!Utility.isEmptyNull(sltcustomer_website).equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustomer_website + "</br>");
             }
-            if(!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_email+"");
+            if (!Utility.isEmptyNull(sltcustomer_email).equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustomer_email + "");
             }
 
-            Log.e(TAG, "stringBuilderBillTo "+stringBuilderBillTo.toString());
+            Log.e(TAG, "stringBuilderBillTo " + stringBuilderBillTo.toString());
 
         }
 
@@ -4629,17 +4570,17 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         } else {
             Shiping_tostr = getString(R.string.html_ShipTo);
 
-            if(!shippingfirstname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
+            if (!shippingfirstname.equalsIgnoreCase("")) {
+                stringBuilderShipTo.append(shippingfirstname + " " + shippinglastname + "</br>");
             }
-            if(!shippingpostcode.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingpostcode+"</br>");
+            if (!shippingpostcode.equalsIgnoreCase("")) {
+                stringBuilderShipTo.append(shippingpostcode + "</br>");
             }
-            if(!shippingcity.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcity+", "+shippingcountry+"</br>");
+            if (!shippingcity.equalsIgnoreCase("")) {
+                stringBuilderShipTo.append(shippingcity + ", " + shippingcountry + "</br>");
             }
-            if(!shippingaddress1.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress1+", "+shippingaddress2+"</br>");
+            if (!shippingaddress1.equalsIgnoreCase("")) {
+                stringBuilderShipTo.append(shippingaddress1 + ", " + shippingaddress2 + "</br>");
             }
 
             // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
@@ -4647,13 +4588,12 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
     }
-
 
 
     private void selectedShip2() {
 
-        stringBuilderBillTo.delete(0,stringBuilderBillTo.length());
-        stringBuilderShipTo.delete(0,stringBuilderShipTo.length());
+        stringBuilderBillTo.delete(0, stringBuilderBillTo.length());
+        stringBuilderShipTo.delete(0, stringBuilderShipTo.length());
 
         if (selected.size() > 0) {
             for (int i = 0; i < selected.size(); i++) {
@@ -4676,26 +4616,26 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
             }
 
-            if(!sltcustonername.equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustonername+"</br>");
+            if (!sltcustonername.equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustonername + "</br>");
             }
-            if(!sltcustomer_address.equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_address+"</br>");
+            if (!sltcustomer_address.equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustomer_address + "</br>");
             }
-            if(!sltcustomer_contact.equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_contact+"</br>");
+            if (!sltcustomer_contact.equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustomer_contact + "</br>");
             }
-            if(!sltcustomer_phone_number.equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_phone_number+"</br>");
+            if (!sltcustomer_phone_number.equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustomer_phone_number + "</br>");
             }
-            if(!sltcustomer_website.equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_website+"</br>");
+            if (!sltcustomer_website.equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustomer_website + "</br>");
             }
-            if(!sltcustomer_email.equalsIgnoreCase("")){
-                stringBuilderBillTo.append(sltcustomer_email+"");
+            if (!sltcustomer_email.equalsIgnoreCase("")) {
+                stringBuilderBillTo.append(sltcustomer_email + "");
             }
 
-            Log.e(TAG, "stringBuilderBillTo "+stringBuilderBillTo.toString());
+            Log.e(TAG, "stringBuilderBillTo " + stringBuilderBillTo.toString());
 
         }
 
@@ -4704,17 +4644,17 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         } else {
             Shiping_tostr = getString(R.string.html_ShipTo);
 
-            if(!shippingfirstname.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingfirstname+" "+shippinglastname+"</br>");
+            if (!shippingfirstname.equalsIgnoreCase("")) {
+                stringBuilderShipTo.append(shippingfirstname + " " + shippinglastname + "</br>");
             }
-            if(!shippingpostcode.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingpostcode+"</br>");
+            if (!shippingpostcode.equalsIgnoreCase("")) {
+                stringBuilderShipTo.append(shippingpostcode + "</br>");
             }
-            if(!shippingcity.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingcity+", "+shippingcountry+"</br>");
+            if (!shippingcity.equalsIgnoreCase("")) {
+                stringBuilderShipTo.append(shippingcity + ", " + shippingcountry + "</br>");
             }
-            if(!shippingaddress1.equalsIgnoreCase("")){
-                stringBuilderShipTo.append(shippingaddress1+", "+shippingaddress2+"</br>");
+            if (!shippingaddress1.equalsIgnoreCase("")) {
+                stringBuilderShipTo.append(shippingaddress1 + ", " + shippingaddress2 + "</br>");
             }
 
             // Shipingdetail = shippingfirstname + "<br>\n" + shippinglastname + "<br>\n" + shippingaddress1 + "<br>\n" + shippingaddress2 + "<br>\n" + shippingcity + "<br>\n" + shippingcountry + "<br>\n" + shippingpostcode;
@@ -4722,7 +4662,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
     }
-
 
 
     String attchedmentimagepath;
@@ -4795,13 +4734,13 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             for (int i = 0; i < tempList.size(); i++) {
                 cruncycode = tempList.get(i).getCurrency_code();
 
-                Log.e(TAG, "NAME "+tempList.get(i).getProduct_name());
-                Log.e(TAG, "DESC "+tempList.get(i).getProduct_description());
-                Log.e(TAG, "UNIT "+tempList.get(i).getProduct_measurement_unit());
-                Log.e(TAG, "QUANTITY "+tempQuantity.get(i));
-                Log.e(TAG, "PRICE "+producprice.get(i));
-                Log.e(TAG, "TOTAL "+totalpriceproduct.get(i));
-                Log.e(TAG, "TOTAL2 "+tempList.get(i).getCurrency_code());
+                Log.e(TAG, "NAME " + tempList.get(i).getProduct_name());
+                Log.e(TAG, "DESC " + tempList.get(i).getProduct_description());
+                Log.e(TAG, "UNIT " + tempList.get(i).getProduct_measurement_unit());
+                Log.e(TAG, "QUANTITY " + tempQuantity.get(i));
+                Log.e(TAG, "PRICE " + producprice.get(i));
+                Log.e(TAG, "TOTAL " + totalpriceproduct.get(i));
+                Log.e(TAG, "TOTAL2 " + tempList.get(i).getCurrency_code());
 
                 //     DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
 
@@ -4811,22 +4750,22 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                 double totalAmount = producpriceRate * productQuantity;
 
-                String stringFormatQuantity = Utility.getPatternFormat(""+numberPostion, productQuantity);
-                String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
-                String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
+                String stringFormatQuantity = Utility.getPatternFormat("" + numberPostion, productQuantity);
+                String stringFormatRate = Utility.getPatternFormat("" + numberPostion, producpriceRate);
+                String stringFormatAmount = Utility.getPatternFormat("" + numberPostion, totalAmount);
 
                 productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
-                        .replaceAll("#QUANTITY#", ""+stringFormatQuantity)
-                        .replaceAll("#PRICE#", ""+stringFormatRate +"" + Utility.getReplaceDollor(cruncycode))
-                        .replaceAll("#TOTAL#", ""+stringFormatAmount +"" + Utility.getReplaceDollor(cruncycode));
+                        .replaceAll("#QUANTITY#", "" + stringFormatQuantity)
+                        .replaceAll("#PRICE#", "" + stringFormatRate + "" + Utility.getReplaceDollor(cruncycode))
+                        .replaceAll("#TOTAL#", "" + stringFormatAmount + "" + Utility.getReplaceDollor(cruncycode));
 
                 productitemlist = productitemlist + productitem;
             }
 
-            Log.e(TAG, "cruncycodeAA "+cruncycode);
+            Log.e(TAG, "cruncycodeAA " + cruncycode);
 
 
         } catch (Exception e) {
@@ -4850,39 +4789,39 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
         String companyname = "";
-        if (company_stamp.toLowerCase().endsWith(".gif") || company_stamp.toLowerCase().endsWith(".jpg") || company_stamp.toLowerCase().endsWith(".jpeg") || company_stamp.toLowerCase().endsWith(".png")){
-            if(company_stamp.toLowerCase().endsWith("white_img.png")){
+        if (company_stamp.toLowerCase().endsWith(".gif") || company_stamp.toLowerCase().endsWith(".jpg") || company_stamp.toLowerCase().endsWith(".jpeg") || company_stamp.toLowerCase().endsWith(".png")) {
+            if (company_stamp.toLowerCase().endsWith("white_img.png")) {
                 companyname = "";
-            }else{
+            } else {
                 companyname = getString(R.string.html_CompanySeal);
             }
-        }else{
+        } else {
             company_stamp = "/android_res/drawable/white_img.png";
             companyname = "";
         }
 
 
         String signature_of_receivername = "";
-        if (signatureofreceiverst.toLowerCase().endsWith(".gif") || signatureofreceiverst.toLowerCase().endsWith(".jpg") || signatureofreceiverst.toLowerCase().endsWith(".jpeg") || signatureofreceiverst.toLowerCase().endsWith(".png")){
-            if(signatureofreceiverst.toLowerCase().endsWith("white_img.png")){
+        if (signatureofreceiverst.toLowerCase().endsWith(".gif") || signatureofreceiverst.toLowerCase().endsWith(".jpg") || signatureofreceiverst.toLowerCase().endsWith(".jpeg") || signatureofreceiverst.toLowerCase().endsWith(".png")) {
+            if (signatureofreceiverst.toLowerCase().endsWith("white_img.png")) {
                 signature_of_receivername = "";
-            }else{
+            } else {
                 signature_of_receivername = getString(R.string.html_SignatureofReceiver);
             }
-        }else{
+        } else {
             signatureofreceiverst = "/android_res/drawable/white_img.png";
             signature_of_receivername = "";
         }
 
 
         String signature_of_issuername = "";
-        if (signature_of_issuer.toLowerCase().endsWith(".gif") || signature_of_issuer.toLowerCase().endsWith(".jpg") || signature_of_issuer.toLowerCase().endsWith(".jpeg") || signature_of_issuer.toLowerCase().endsWith(".png")){
-            if(signature_of_issuer.toLowerCase().endsWith("white_img.png")){
+        if (signature_of_issuer.toLowerCase().endsWith(".gif") || signature_of_issuer.toLowerCase().endsWith(".jpg") || signature_of_issuer.toLowerCase().endsWith(".jpeg") || signature_of_issuer.toLowerCase().endsWith(".png")) {
+            if (signature_of_issuer.toLowerCase().endsWith("white_img.png")) {
                 signature_of_issuername = "";
-            }else{
+            } else {
                 signature_of_issuername = getString(R.string.html_SignatureofIssuer);
             }
-        }else{
+        } else {
             signature_of_issuer = "/android_res/drawable/white_img.png";
             signature_of_issuername = "";
         }
@@ -4912,7 +4851,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxamount;
-            taxtamountstrvalue = ""+txttax.getText().toString();
+            taxtamountstrvalue = "" + txttax.getText().toString();
         }
 
         String discountvalue = "";
@@ -4930,19 +4869,16 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         }
 
 
-
-
         String subTotalTxt = "";
         String subTotalValueTxt = "";
 
-        if(strdiscountvalue.equalsIgnoreCase("0")){
+        if (strdiscountvalue.equalsIgnoreCase("0")) {
             subTotalTxt = "";
             subTotalValueTxt = "";
-        }else{
+        } else {
             subTotalTxt = getString(R.string.html_SubTotal);
             subTotalValueTxt = Utility.getReplaceDollor(Subtotalamount);
         }
-
 
 
         if (company_website != null) {
@@ -4973,12 +4909,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         } else {
             // null response or Exception occur
 
-            if (shipingcoast.startsWith("+") && shipingcoast.endsWith("Af"))
-            {
+            if (shipingcoast.startsWith("+") && shipingcoast.endsWith("Af")) {
                 Shipingcosstbyct = shipingcoast;
-            }
-            else
-            {
+            } else {
                 Shipingcosstbyct = "" + shipingcoast + cruncycode;
             }
 
@@ -4986,9 +4919,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             shipingvaluetxt = getString(R.string.html_Shipping);
         }
 
-        if (companylogopath.toLowerCase().endsWith(".gif") || companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")){
+        if (companylogopath.toLowerCase().endsWith(".gif") || companylogopath.toLowerCase().endsWith(".jpg") || companylogopath.toLowerCase().endsWith(".jpeg") || companylogopath.toLowerCase().endsWith(".png")) {
             companyimagelogopath = companylogopath;
-        }else{
+        } else {
             companyimagelogopath = "/android_res/drawable/white_img.png";
         }
 
@@ -5002,10 +4935,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         String payment_currencystr = "";
         String payment_swiftstr = "";
         String pemailpaidstr = "";
-        String paimnetdetailstrtxt="";
-        String bycheckstrtxt="";
-        String paypalstrtxt="";
-        String bankstrtxt="";
+        String paimnetdetailstrtxt = "";
+        String bycheckstrtxt = "";
+        String paypalstrtxt = "";
+        String bankstrtxt = "";
         String cheque_payableTo = "";
 
         if (strpaid_amount.equals("0")) {
@@ -5018,23 +4951,22 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             payment_currencystr = "";
             payment_swiftstr = "";
             pemailpaidstr = "";
-            paimnetdetailstrtxt="";
-            bycheckstrtxt="";
-            paypalstrtxt="";
-            bankstrtxt="";
+            paimnetdetailstrtxt = "";
+            bycheckstrtxt = "";
+            paypalstrtxt = "";
+            bankstrtxt = "";
             cheque_payableTo = "";
-            hiddenpaidrow="hidden";
-
+            hiddenpaidrow = "hidden";
 
 
         } else {
             // null response or Exception occur
-            paidamountstrrepvalue =strpaid_amount;
+            paidamountstrrepvalue = strpaid_amount;
             paidamountstrreptxt = getString(R.string.html_PaidAmount);
-            if(Paymentamountdate.equalsIgnoreCase("")){
+            if (Paymentamountdate.equalsIgnoreCase("")) {
                 paidamountstrreptxt = getString(R.string.html_PaidAmount);
-            }else{
-                paidamountstrreptxt = getString(R.string.html_PaidAmount)+" </br>"+"("+Paymentamountdate+")";
+            } else {
+                paidamountstrreptxt = getString(R.string.html_PaidAmount) + " </br>" + "(" + Paymentamountdate + ")";
             }
 
             pemailpaidstr = paypal_emailstr;
@@ -5045,126 +4977,123 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             cheque_payableTo = cheque_payable_to;
 
 
-            if ( Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")){
+            if (Utility.isEmptyNull(cheque_payableTo).equalsIgnoreCase("")) {
                 cheque_payableTo = "";
-            }else{
+            } else {
                 cheque_payableTo = cheque_payable_to;
                 bycheckstrtxt = getString(R.string.html_Bycheque);
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
-            if ( Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")){
+            if (Utility.isEmptyNull(pemailpaidstr).equalsIgnoreCase("")) {
                 pemailpaidstr = "";
-            }else{
+            } else {
                 pemailpaidstr = paypal_emailstr;
-                paypalstrtxt="PayPal :";
+                paypalstrtxt = "PayPal :";
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
-            if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")){
+            if (Utility.isEmptyNull(payment_bankstr).equalsIgnoreCase("")) {
                 payment_bankstr = "";
                 payment_currencystr = "";
-            }else{
+            } else {
                 payment_bankstr = payment_bank_name;
-                if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")){
+                if (!Utility.isEmptyNull(payment_currencystr).equalsIgnoreCase("")) {
                     payment_currencystr = payment_currency;
-                }else{
+                } else {
                     payment_currencystr = "";
                 }
-                bankstrtxt="Bank :";
+                bankstrtxt = "Bank :";
                 paimnetdetailstrtxt = getString(R.string.html_PaymentDetails);
             }
 
-            if ( Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")){
+            if (Utility.isEmptyNull(payment_ibanstr).equalsIgnoreCase("")) {
                 payment_ibanstr = "";
-            }else{
+            } else {
                 payment_ibanstr = payment_iban;
             }
 
-            if ( Utility.isEmptyNull(payment_swiftstr).equalsIgnoreCase("")){
+            if (Utility.isEmptyNull(payment_swiftstr).equalsIgnoreCase("")) {
                 payment_swiftstr = "";
-            }else{
+            } else {
                 payment_swiftstr = payment_swift_bic;
             }
 
-            hiddenpaidrow="";
+            hiddenpaidrow = "";
         }
 
 
+        Log.e(TAG, "paimnetdetailstrtxtCCC " + paimnetdetailstrtxt);
+        Log.e(TAG, "bycheckstrtxtCCC " + bycheckstrtxt);
+        Log.e(TAG, "paypalstrtxtCCC " + paypalstrtxt);
+        Log.e(TAG, "bankstrtxtCCC " + bankstrtxt);
 
-        Log.e(TAG,"paimnetdetailstrtxtCCC "+paimnetdetailstrtxt);
-        Log.e(TAG,"bycheckstrtxtCCC "+bycheckstrtxt);
-        Log.e(TAG,"paypalstrtxtCCC "+paypalstrtxt);
-        Log.e(TAG,"bankstrtxtCCC "+bankstrtxt);
-
-        Log.e(TAG,"cheque_payableToCCC "+cheque_payableTo);
-        Log.e(TAG,"payment_bankstrCCC "+payment_bankstr);
-        Log.e(TAG,"payment_ibanstrCCC "+payment_ibanstr);
-        Log.e(TAG,"payment_currencystrCCC "+payment_currencystr);
-        Log.e(TAG,"payment_swiftstrCCC "+payment_swiftstr);
-
+        Log.e(TAG, "cheque_payableToCCC " + cheque_payableTo);
+        Log.e(TAG, "payment_bankstrCCC " + payment_bankstr);
+        Log.e(TAG, "payment_ibanstrCCC " + payment_ibanstr);
+        Log.e(TAG, "payment_currencystrCCC " + payment_currencystr);
+        Log.e(TAG, "payment_swiftstrCCC " + payment_swiftstr);
 
 
-        String strreferencenovalue="";
-        String strreferencenotxtvalue="";
+        String strreferencenovalue = "";
+        String strreferencenotxtvalue = "";
 
         if (ref_no.isEmpty()) {
             // Do you work here on success
 
-            strreferencenovalue="";
-            strreferencenotxtvalue="";
+            strreferencenovalue = "";
+            strreferencenotxtvalue = "";
 
         } else {
             // null response or Exception occur
 
-            strreferencenovalue=ref_no;
+            strreferencenovalue = ref_no;
             strreferencenotxtvalue = getString(R.string.html_ReferenceNo);
 
 
         }
 
-        Log.e(TAG, "selectedTemplate "+selectedTemplate);
+        Log.e(TAG, "selectedTemplate " + selectedTemplate);
 
-        String selectedTemplate = ""+this.selectedTemplate;
+        String selectedTemplate = "" + this.selectedTemplate;
 
         String name = "invoice.html";
         String nameName = "file:///android_asset/invoice.html";
-        if(selectedTemplate.equalsIgnoreCase("0")){
+        if (selectedTemplate.equalsIgnoreCase("0")) {
             name = "invoice.html";
             nameName = "file:///android_asset/invoice.html";
-        }else if(selectedTemplate.equalsIgnoreCase("1")){
+        } else if (selectedTemplate.equalsIgnoreCase("1")) {
             name = "invoice1.html";
             nameName = "file:///android_asset/invoice1.html";
-        }else if(selectedTemplate.equalsIgnoreCase("2")){
+        } else if (selectedTemplate.equalsIgnoreCase("2")) {
             name = "invoice2.html";
             nameName = "file:///android_asset/invoice2.html";
-        }else if(selectedTemplate.equalsIgnoreCase("3")){
+        } else if (selectedTemplate.equalsIgnoreCase("3")) {
             name = "invoice3.html";
             nameName = "file:///android_asset/invoice3.html";
-        }else if(selectedTemplate.equalsIgnoreCase("4")){
+        } else if (selectedTemplate.equalsIgnoreCase("4")) {
             name = "invoice4.html";
             nameName = "file:///android_asset/invoice4.html";
         }
 
-        Log.e(TAG , "Grossamount_str "+Grossamount_str);
+        Log.e(TAG, "Grossamount_str " + Grossamount_str);
 
-        Log.e(TAG, "companyimagelogopathAA "+companyimagelogopath);
+        Log.e(TAG, "companyimagelogopathAA " + companyimagelogopath);
 
         StringBuilder stringBuilderCompany = new StringBuilder();
 
-        if(!company_address.equalsIgnoreCase("")){
-            stringBuilderCompany.append(company_address+"</br>");
+        if (!company_address.equalsIgnoreCase("")) {
+            stringBuilderCompany.append(company_address + "</br>");
         }
-        if(!company_contact.equalsIgnoreCase("")){
-            stringBuilderCompany.append(company_contact+"</br>");
+        if (!company_contact.equalsIgnoreCase("")) {
+            stringBuilderCompany.append(company_contact + "</br>");
         }
-        if(!company_website.equalsIgnoreCase("")){
-            stringBuilderCompany.append(company_website+"</br>");
+        if (!company_website.equalsIgnoreCase("")) {
+            stringBuilderCompany.append(company_website + "</br>");
         }
-        if(!company_email.equalsIgnoreCase("")){
-            stringBuilderCompany.append(company_email+"");
+        if (!company_email.equalsIgnoreCase("")) {
+            stringBuilderCompany.append(company_email + "");
         }
-
 
 
         String htmlview_credit_note = getString(R.string.htmlview_INVOICE);
@@ -5190,7 +5119,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         String htmlview_Attachments = getString(R.string.htmlview_Attachments);
         String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
         String htmlview_BalanceDue = getString(R.string.htmlview_BalanceDue);
-
 
 
         String content = null;
@@ -5223,7 +5151,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //                        .replaceAll("Attachments", htmlview_Attachments)
 
 
-
                     .replaceAll("Company Name", company_name)
                     .replaceAll("Address", stringBuilderCompany.toString())
 //                    .replaceAll("Contact No.", company_contact)
@@ -5237,21 +5164,21 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     .replaceAll("refNo", strreferencenovalue)
 
 
-                    .replaceAll("GrossAm-", ""+Utility.getContainsReplaceCurrency(Grossamount_str, cruncycode))
-                    .replaceAll("Discount-", ""+Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
+                    .replaceAll("GrossAm-", "" + Utility.getContainsReplaceCurrency(Grossamount_str, cruncycode))
+                    .replaceAll("Discount-", "" + Utility.getContainsReplaceCurrency(discountvalue, cruncycode))
                     .replaceAll("SubTotal-", subTotalValueTxt)
-                    .replaceAll("Txses-", ""+Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
-                    .replaceAll("Shipping-", ""+Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
-                    .replaceAll("Total Amount-", ""+Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
-                    .replaceAll("PaidsAmount", ""+Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
+                    .replaceAll("Txses-", "" + Utility.getContainsReplaceCurrency(taxtamountstr, cruncycode))
+                    .replaceAll("Shipping-", "" + Utility.getRemovePlus(Utility.getContainsReplaceCurrency(Shipingcosstbyct, cruncycode)))
+                    .replaceAll("Total Amount-", "" + Utility.getContainsReplaceCurrency(netamountvalue, cruncycode))
+                    .replaceAll("PaidsAmount", "" + Utility.getContainsReplaceCurrency(paidamountstrrepvalue, cruncycode))
                     .replaceAll("Paid Amount", paidamountstrreptxt)
-                    .replaceAll("Balance Due-", ""+Utility.getContainsReplaceCurrency(Blanceamountstr, cruncycode))
+                    .replaceAll("Balance Due-", "" + Utility.getContainsReplaceCurrency(Blanceamountstr, cruncycode))
 
 
                     .replaceAll("SubTotal", subTotalTxt)
 
 
-                    .replaceAll("Client N", ""+stringBuilderBillTo.toString())
+                    .replaceAll("Client N", "" + stringBuilderBillTo.toString())
 //                    .replaceAll("Client A", sltcustomer_address)
 //                    .replaceAll("Client C P", sltcustomer_contact)
 //                    .replaceAll("Client C N", sltcustomer_phone_number)
@@ -5260,7 +5187,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     .replaceAll("Notes-", strnotes)
                     .replaceAll("#SIGNATURES#", Signatureincoicestr)
                     .replaceAll("#ITEMS#", productitemlist)
-                    .replaceAll("#Shipp", ""+stringBuilderShipTo.toString())
+                    .replaceAll("#Shipp", "" + stringBuilderShipTo.toString())
                     .replaceAll("#ATTACHMENTS#", multipleimage)
                     .replaceAll("Attachments", attachmentimage)
                     .replaceAll("Notes:", notestringvalue)
@@ -5293,11 +5220,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         }
 
-        Log.e("ViewInvoice__",content);
+        Log.e("ViewInvoice__", content);
 
         // invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
-
-
 
 
         WebSettings webSettings = invoiceweb.getSettings();
@@ -5315,18 +5240,18 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
-        if(Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi") ||
+        if (Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi") ||
                 Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi") ||
-                Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
-            if(AllSirApi.FONT_INVOICE_CREATE_LDPI == true){
+                Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")) {
+            if (AllSirApi.FONT_INVOICE_CREATE_LDPI == true) {
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_LDPI);
-            }else{
+            } else {
                 invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
             }
-        }else{
-            if(AllSirApi.FONT_INVOICE_CREATE == true){
+        } else {
+            if (AllSirApi.FONT_INVOICE_CREATE == true) {
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
-            }else{
+            } else {
                 invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
             }
         }
@@ -5336,6 +5261,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
                 handler.proceed(); // Ignore SSL certificate errors
             }
+
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
@@ -5351,7 +5277,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     @Override
                     public void onSuccess(File file) {
                         Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-                        if(file.exists()) {
+                        if (file.exists()) {
 //                            Uri photoURI = FileProvider.getUriForFile(getActivity(),
 //                                    "com.sirapp.provider",
 //                                    file);
@@ -5363,8 +5289,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //
 //                            startActivity(Intent.createChooser(intentShareFile, "Share File"));
 
-                            Log.e(TAG, "FILENAME" +file);
-                            Log.e(TAG, "customer_name" +customer_name);
+                            Log.e(TAG, "FILENAME" + file);
+                            Log.e(TAG, "customer_name" + customer_name);
 
 //                            invoiceweb.setVisibility(View.VISIBLE);
                             createinvoicewithdetail(file);
@@ -5394,9 +5320,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     }
 
 
-
-
-
     public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
         private static final String TAG = "MenuAdapter";
@@ -5412,7 +5335,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             this.cids = cids;
             this.mybuilder = mybuilder;
         }
-
 
 
         @Override
@@ -5432,7 +5354,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         @Override
         public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
 
-            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.textViewName.setText("" + cnames.get(i));
             viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -5442,7 +5364,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                     selectedCompanyId = cids.get(i);
 
-                    selectcompany.setText(""+cnames.get(i));
+                    selectcompany.setText("" + cnames.get(i));
 
                     CompanyInformation(selectedCompanyId);
                     warehouse_list(selectedCompanyId);
@@ -5460,10 +5382,11 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             return cnames.size();
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder{
+        public class ViewHolder extends RecyclerView.ViewHolder {
             View view11 = null;
             TextView textViewName;
             RelativeLayout realtive1;
+
             public ViewHolder(View itemView) {
                 super(itemView);
                 view11 = itemView;
@@ -5472,7 +5395,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             }
 
         }
-
 
 
         public void updateData(ArrayList<String> cnames) {
@@ -5485,10 +5407,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     }
 
 
-
     @Override
     public void closeDialog() {
-        if(bottomSheetDialog != null){
+        if (bottomSheetDialog != null) {
             bottomSheetDialog.dismiss();
         }
     }

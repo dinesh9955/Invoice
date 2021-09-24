@@ -521,46 +521,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE, Context.MODE_PRIVATE);
-                    CompanyModel companyModel = companyModelArrayList.get(companyPosition);
-
-                    final String company_id = companyModel.getCompany_id();
-                    final String company_email = companyModel.getEmail();
-                    final String company_name = companyModel.getName();
-                    final String company_phone = companyModel.getPhone_number();
-                    final String company_website = companyModel.getWebsite();
-                    final String currencyid = companyModel.getCurrency_id();
-                    final String address = companyModel.getAddress();
-                    final String bankname = companyModel.getPayment_bank_name();
-                    final String paypalemail = companyModel.getPaypal_email();
-                    final String payment_swiftbic = companyModel.getPayment_swift_bic();
-                    final String cheque_payableto = companyModel.getCheque_payable_to();
-                    final String ibnnumber = companyModel.getPayment_iban();
-                    final String color = companyModel.getColor();
-                    final String logo = companyModel.getLogo();
-
-
-                    pref.edit().putString(Constant.COMPANY_NAME,company_name).commit();
-                    pref.edit().putString(Constant.COMPANY_LOGO,logo).commit();
-                    pref.edit().putString(Constant.COMPANY_EMAIL,company_email).commit();
-                    pref.edit().putString(Constant.COMPANY_PHONE,company_phone).commit();
-                    pref.edit().putString(Constant.COMPANY_WEB,company_website).commit();
-                    pref.edit().putString(Constant.COMPANY_ID,company_id).commit();
-                    pref.edit().putString(Constant.COMPANY_ADDRESS,address).commit();
-                    pref.edit().putString(Constant.CURRENCY_ID,currencyid).commit();
-                    pref.edit().putString(Constant.Payment_bank_name,bankname).commit();
-                    pref.edit().putString(Constant.Paypal_email,paypalemail).commit();
-                    pref.edit().putString(Constant.Payment_swift_bic,payment_swiftbic).commit();
-                    pref.edit().putString(Constant.Cheque_payable_to,cheque_payableto).commit();
-                    pref.edit().putString(Constant.Ibn_number,ibnnumber).commit();
-                    pref.edit().putString("color",color).commit();
-                    startActivity(intent);
-                }else{
-                    if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
-                        Intent intent = new Intent(Home_Activity.this, Company_Details_Activity.class);
-                        intent.putExtra("key" , "home");
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                        final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE, Context.MODE_PRIVATE);
+                    if(companyModelArrayList.size() > 0){
                         CompanyModel companyModel = companyModelArrayList.get(companyPosition);
 
                         final String company_id = companyModel.getCompany_id();
@@ -594,6 +555,51 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                         pref.edit().putString(Constant.Ibn_number,ibnnumber).commit();
                         pref.edit().putString("color",color).commit();
                         startActivity(intent);
+                    }
+
+                }else{
+                    if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(Home_Activity.this, Company_Details_Activity.class);
+                        intent.putExtra("key" , "home");
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        final SharedPreferences pref = getSharedPreferences(Constant.PREF_BASE, Context.MODE_PRIVATE);
+                        if(companyModelArrayList.size() > 0){
+                            CompanyModel companyModel = companyModelArrayList.get(companyPosition);
+
+                            final String company_id = companyModel.getCompany_id();
+                            final String company_email = companyModel.getEmail();
+                            final String company_name = companyModel.getName();
+                            final String company_phone = companyModel.getPhone_number();
+                            final String company_website = companyModel.getWebsite();
+                            final String currencyid = companyModel.getCurrency_id();
+                            final String address = companyModel.getAddress();
+                            final String bankname = companyModel.getPayment_bank_name();
+                            final String paypalemail = companyModel.getPaypal_email();
+                            final String payment_swiftbic = companyModel.getPayment_swift_bic();
+                            final String cheque_payableto = companyModel.getCheque_payable_to();
+                            final String ibnnumber = companyModel.getPayment_iban();
+                            final String color = companyModel.getColor();
+                            final String logo = companyModel.getLogo();
+
+
+                            pref.edit().putString(Constant.COMPANY_NAME,company_name).commit();
+                            pref.edit().putString(Constant.COMPANY_LOGO,logo).commit();
+                            pref.edit().putString(Constant.COMPANY_EMAIL,company_email).commit();
+                            pref.edit().putString(Constant.COMPANY_PHONE,company_phone).commit();
+                            pref.edit().putString(Constant.COMPANY_WEB,company_website).commit();
+                            pref.edit().putString(Constant.COMPANY_ID,company_id).commit();
+                            pref.edit().putString(Constant.COMPANY_ADDRESS,address).commit();
+                            pref.edit().putString(Constant.CURRENCY_ID,currencyid).commit();
+                            pref.edit().putString(Constant.Payment_bank_name,bankname).commit();
+                            pref.edit().putString(Constant.Paypal_email,paypalemail).commit();
+                            pref.edit().putString(Constant.Payment_swift_bic,payment_swiftbic).commit();
+                            pref.edit().putString(Constant.Cheque_payable_to,cheque_payableto).commit();
+                            pref.edit().putString(Constant.Ibn_number,ibnnumber).commit();
+                            pref.edit().putString("color",color).commit();
+                            startActivity(intent);
+                        }
+
                     }else{
                         createDialogOpenClass(Home_Activity.this);
                     }
@@ -1388,8 +1394,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    String response111 = new String(responseBody);
-                    Log.e("addproductResp2 ", response111);
+//                    String response111 = new String(responseBody);
+//                    Log.e("addproductResp2 ", response111);
                     pref.setSubsType("");
                 }
             });

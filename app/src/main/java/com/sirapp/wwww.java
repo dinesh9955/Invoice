@@ -2,6 +2,7 @@ package com.sirapp;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,15 +16,19 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.sirapp.Utils.Utility;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class wwww extends AppCompatActivity {
 
@@ -72,16 +77,16 @@ public class wwww extends AppCompatActivity {
 
                 //generateNoteOnSD(wwww.this , "track.html", ""+content1.toString());
 
-                BottomSheetDialog bottomSheetDialog;
-                bottomSheetDialog = new BottomSheetDialog(wwww.this);
-
-                View view = LayoutInflater.from(wwww.this).inflate(R.layout.aaaaa, null);
-//                BottomSheetBehavior behavior = BottomSheetBehavior.from(view);
-                BottomSheetBehavior.from(view)
-                        .setState(BottomSheetBehavior.STATE_EXPANDED);
-
-                bottomSheetDialog.setContentView(view);
-                bottomSheetDialog.show();
+//                BottomSheetDialog bottomSheetDialog;
+//                bottomSheetDialog = new BottomSheetDialog(wwww.this);
+//
+//                View view = LayoutInflater.from(wwww.this).inflate(R.layout.aaaaa, null);
+////                BottomSheetBehavior behavior = BottomSheetBehavior.from(view);
+//                BottomSheetBehavior.from(view)
+//                        .setState(BottomSheetBehavior.STATE_EXPANDED);
+//
+//                bottomSheetDialog.setContentView(view);
+//                bottomSheetDialog.show();
 
 //                final Dialog mybuilder=new Dialog(wwww.this);
 //                mybuilder.setContentView(R.layout.aaaaa);
@@ -89,9 +94,47 @@ public class wwww extends AppCompatActivity {
 //                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 //                Window window = mybuilder.getWindow();
 //                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-               // window.setBackgroundDrawableResource(R.color.transparent);
+                // window.setBackgroundDrawableResource(R.color.transparent);
+
+//                File mFile2 = new File("/sdcard/share.jpg");
+//                Uri imageUri2 = FileProvider.getUriForFile(
+//                        wwww.this,
+//                        BuildConfig.APPLICATION_ID + ".provider",
+//                        mFile2);
+//
+//                Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+//                ArrayList<Uri> uriArrayList = new ArrayList<>();
+//                uriArrayList.add(imageUri2);
+//                uriArrayList.add(imageUri2);
+//                Collections.reverse(uriArrayList);
+//
+//                intentShareFile.setType("application/pdf/*|image/*|text/html");
+//                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "subject");
+//                intentShareFile.putExtra(Intent.EXTRA_TEXT, "text2");
+//                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+//                intentShareFile.setPackage("com.google.android.gm");
+//                Log.e(TAG, "paypalXX10 ");
+//                try {
+//                    startActivity(intentShareFile);
+//                    Log.e(TAG, "paypalXX72 ");
+//                } catch (Exception e) {
+//                    Log.e(TAG, "paypalXX32 " + e.getMessage());
+//                }
+
+
+               // Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+//                ArrayList<Uri> uriArrayList = new ArrayList<>();
+//                uriArrayList.add(imageUri2);
+//                uriArrayList.add(imageUri2);
+//                Collections.reverse(uriArrayList);
+//
+               // intentShareFile.setType("application/pdf/*|image/*|text/html");
 
             }
+
+
+
+
         });
 
 
