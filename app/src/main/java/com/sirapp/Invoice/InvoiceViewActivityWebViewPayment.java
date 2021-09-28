@@ -545,11 +545,7 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
                 try {
 
                     multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
-
-
                             .replaceAll("#ATTACHMENT_1#", invoice_image_path+invoice_imageDto.get(i).getImage().replace("https", "http"));
-
-
                     multipleimage = multipleimage + multipagepath;
                 } catch (Exception e) {
 

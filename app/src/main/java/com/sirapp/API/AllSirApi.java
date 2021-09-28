@@ -36,15 +36,30 @@ public class AllSirApi {
     public static final int FONT_SIZE_PRINT = 6;
 
     public static final boolean FONT_INVOICE_CREATE_TAB = true;
-    public static final int FONT_SIZE_CREATE_TAB_7 = 9;
-    public static final int FONT_SIZE_CREATE_TAB_10 = 5;
+
+
+    public static final int FONT_SIZE_CREATE_TAB_10 = 4;
+    public static final int FONT_SIZE_CREATE_TAB_7 = 7;
 
     public static final int FONT_SIZE_CREATE_L = 3;
     public static final int FONT_SIZE_CREATE_M = 4;
     public static final int FONT_SIZE_CREATE_H = 5;
     public static final int FONT_SIZE_CREATE_X = 6;
-    public static final int FONT_SIZE_CREATE_XX = 7;
-    public static final int FONT_SIZE_CREATE_XXX = 8;
+    public static final int FONT_SIZE_CREATE_XX = 6;
+    public static final int FONT_SIZE_CREATE_XXX = 6;
+
+
+
+    public static final int FONT_SIZE_CREATE_TAB_10_V = 6;
+    public static final int FONT_SIZE_CREATE_TAB_7_V = 9;
+
+    public static final int FONT_SIZE_CREATE_L_V = 7;
+    public static final int FONT_SIZE_CREATE_M_V = 8;
+    public static final int FONT_SIZE_CREATE_H_V = 9;
+    public static final int FONT_SIZE_CREATE_X_V = 10;
+    public static final int FONT_SIZE_CREATE_XX_V = 10;
+    public static final int FONT_SIZE_CREATE_XXX_V = 10;
+
 
 //    public static final String BASE_URL ="http://13.126.22.0/saad/app/index.php/api/";
 

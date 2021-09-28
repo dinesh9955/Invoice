@@ -3,12 +3,21 @@ package com.sirapp.Invoice;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 //import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Picture;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
+import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.webkit.SslErrorHandler;
@@ -39,6 +48,8 @@ import com.sirapp.Utils.Utility;
 
 import org.apache.commons.io.IOUtils;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -442,23 +453,26 @@ public class InvoiceViewActivityWebView extends BaseActivity {
         invoiceweb.getSettings().setUseWideViewPort(true);
 
 
-        if(Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("hdpi") ||
-                Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("mdpi") ||
-                Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("ldpi") ){
-            Log.e(TAG, "TTTTTTTTTTTTTTT");
-            if(AllSirApi.FONT_INVOICE == true){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
-            }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
-            }
-        }else{
-            Log.e(TAG, "SSSSSSSSSSSSSSS");
-            if(AllSirApi.FONT_INVOICE == true){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
-            }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
-            }
-        }
+        callForWeb();
+
+
+//        if(Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("hdpi") ||
+//                Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("mdpi") ||
+//                Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("ldpi") ){
+//            Log.e(TAG, "TTTTTTTTTTTTTTT");
+//            if(AllSirApi.FONT_INVOICE == true){
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+//            }else{
+//                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+//            }
+//        }else{
+//            Log.e(TAG, "SSSSSSSSSSSSSSS");
+//            if(AllSirApi.FONT_INVOICE == true){
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+//            }else{
+//                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+//            }
+//        }
 
 //        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + 6);
 
@@ -473,9 +487,23 @@ public class InvoiceViewActivityWebView extends BaseActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-
+//                view.saveWebArchive(Environment.getExternalStorageDirectory()
+//                        + File.separator +"myArchive"+".html");
                 //if page loaded successfully then show print button
                 //findViewById(R.id.fab).setVisibility(View.VISIBLE);
+
+//                Bitmap bitmap = getBitmapOfWebView(view);
+//                String pathofBmp = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "data", null);
+//                Uri bmpUri = Uri.parse(pathofBmp);
+//                final Intent emailIntent1 = new Intent(android.content.Intent.ACTION_SEND);
+//                emailIntent1.setType("image/png");
+//                emailIntent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                emailIntent1.putExtra(Intent.EXTRA_STREAM, bmpUri);
+//
+//                startActivity(emailIntent1);
+
+
+
             }
         });
 
@@ -508,11 +536,7 @@ public class InvoiceViewActivityWebView extends BaseActivity {
                 try {
 
                     multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
-
-
                             .replaceAll("#ATTACHMENT_1#", invoice_image_path+invoice_imageDto.get(i).getImage().replace("https", "http"));
-
-
                     multipleimage = multipleimage + multipagepath;
                 } catch (Exception e) {
 
@@ -1033,25 +1057,84 @@ public class InvoiceViewActivityWebView extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        callForWeb();
+    }
+
+    @SuppressLint("LongLogTag")
+    private void callForWeb() {
         if(invoiceweb != null){
-            if(Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("hdpi") ||
-                    Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("mdpi") ||
-                    Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("ldpi") ){
-                Log.e(TAG, "TTTTTTTTTTTTTTT");
-                if(AllSirApi.FONT_INVOICE == true){
-                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
-                }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+//            if(Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("hdpi") ||
+//                    Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("mdpi") ||
+//                    Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("ldpi") ){
+//                Log.e(TAG, "TTTTTTTTTTTTTTT");
+//                if(AllSirApi.FONT_INVOICE == true){
+//                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+//                }else{
+//                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+//                }
+//            }else{
+//                Log.e(TAG, "SSSSSSSSSSSSSSS");
+//                if(AllSirApi.FONT_INVOICE == true){
+//                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+//                }else{
+//                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+//                }
+//            }
+
+            WebSettings webSettings = invoiceweb.getSettings();
+
+            Log.e(TAG, "isTablet "+Utility.isTablet(InvoiceViewActivityWebView.this));
+            if(Utility.isTablet(InvoiceViewActivityWebView.this) == true){ // tab
+                DisplayMetrics metrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                int widthPixels = metrics.widthPixels;
+                int heightPixels = metrics.heightPixels;
+                float scaleFactor = metrics.density;
+                float widthDp = widthPixels / scaleFactor;
+                float heightDp = heightPixels / scaleFactor;
+                float smallestWidth = Math.min(widthDp, heightDp);
+
+                if (smallestWidth > 720) {
+                    //Device is a 10" tablet
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_10_V);
                 }
-            }else{
-                Log.e(TAG, "SSSSSSSSSSSSSSS");
-                if(AllSirApi.FONT_INVOICE == true){
-                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+                else if (smallestWidth > 600) {
+                    //Device is a 7" tablet
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_7_V);
                 }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }
+
+            }else{
+                if (Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("ldpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L_V);
+                }else if (Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("mdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M_V);
+                }else if (Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("hdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H_V);
+                }else if (Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("xhdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X_V);
+                }else if (Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("xxhdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX_V);
+                }else if (Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("xxxhdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX_V);
+                }else{
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
                 }
             }
 
         }
+    }
+
+
+    private Bitmap getBitmapOfWebView(final WebView webView) {
+        Picture picture = webView.capturePicture();
+        Bitmap bitmap = Bitmap.createBitmap(picture.getWidth(), picture.getHeight(), Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawColor(Color.WHITE);
+
+        picture.draw(canvas);
+        return bitmap;
     }
 }

@@ -15,6 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Picture;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -1057,7 +1058,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             attchmentimage.add(uri.toString());
             attachmenttxtimg.setVisibility(View.VISIBLE);
         }
-        int sizen = attchmentimage.size();
+        //int sizen = attchmentimage.size();
         String attchedmentimagepath;
         if (attchmentimage != null) {
             for (int i = 0; i < attchmentimage.size(); i++) {
@@ -5281,18 +5282,15 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             }
 
         }else{
-//            if (AllSirApi.FONT_INVOICE_CREATE == true) { // 6.5
-//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
-//            } else {
-//                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-//            }
-
             if (Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L);
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L);
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
             }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi")){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M);
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M);
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
             }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi")){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H);
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H);
+                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
             }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xhdpi")){
                 webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X);
             }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxhdpi")){
@@ -5302,10 +5300,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             }else{
                 invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
             }
-
         }
 
-
+        Bitmap btmp = invoiceweb.getDrawingCache(true);
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             @Override
@@ -5329,6 +5326,25 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     public void onSuccess(File file) {
                         Intent intentShareFile = new Intent(Intent.ACTION_SEND);
                         if (file.exists()) {
+
+//                            Picture picture = view.capturePicture();
+//                            Bitmap b = Bitmap.createBitmap(
+//                                    picture.getWidth(), picture.getHeight(), Bitmap.Config.ARGB_8888);
+//                            Canvas c = new Canvas(b);
+//                            picture.draw(c);
+//
+//                            FileOutputStream fos = null;
+//                            try {
+//                                fos = new FileOutputStream( "/sdcard/"  + "page.jpg" );
+//                                if ( fos != null ) {
+//                                    b.compress(Bitmap.CompressFormat.JPEG, 90, fos );
+//                                    fos.close();
+//                                }
+//                            }
+//                            catch( Exception e ) {
+//                                System.out.println("-----error--"+e);
+//                            }
+
 //                            Uri photoURI = FileProvider.getUriForFile(getActivity(),
 //                                    "com.sirapp.provider",
 //                                    file);

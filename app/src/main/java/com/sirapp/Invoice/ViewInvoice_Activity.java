@@ -324,7 +324,7 @@ public class ViewInvoice_Activity extends BaseActivity {
             customer_website = getIntent().getStringExtra("customer_website");
             //invoice_name = getIntent().getStringExtra("invoice_name");
 
-            companylogopath = getIntent().getStringExtra("company_logo");
+
             //products = getIntent().getStringArrayListExtra("products_list");
             quantity = getIntent().getStringArrayListExtra("quantity_list");
             rate = getIntent().getStringArrayListExtra("rate_list");
@@ -332,10 +332,10 @@ public class ViewInvoice_Activity extends BaseActivity {
 
             atchemntimg = getIntent().getStringArrayListExtra("attchemnt");
 
-            signature_of_issuer = getIntent().getStringExtra("signature_issuer");
-
-            signature_of_receiver = getIntent().getStringExtra("signature_of_receiver");
-            company_stamp = getIntent().getStringExtra("company_stamp");
+            companylogopath = getIntent().getStringExtra("company_logo").replace("https", "http");
+            signature_of_issuer = getIntent().getStringExtra("signature_issuer").replace("https", "http");
+            signature_of_receiver = getIntent().getStringExtra("signature_of_receiver").replace("https", "http");
+            company_stamp = getIntent().getStringExtra("company_stamp").replace("https", "http");
 
 
 

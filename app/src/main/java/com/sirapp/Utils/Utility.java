@@ -868,7 +868,7 @@ public class Utility {
     public static File getJPEGtoPNGImage1(File fileimage) {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
         File f = new File(Environment.getExternalStorageDirectory()
                 + File.separator + "image1.jpg");
         try {
@@ -887,7 +887,7 @@ public class Utility {
     public static File getJPEGtoPNGImage2(File fileimage) {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
         File f = new File(Environment.getExternalStorageDirectory()
                 + File.separator + "image2.jpg");
         try {
@@ -905,7 +905,7 @@ public class Utility {
     public static File getJPEGtoPNGImage3(File fileimage) {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
         File f = new File(Environment.getExternalStorageDirectory()
                 + File.separator + "image3.jpg");
         try {
@@ -923,7 +923,7 @@ public class Utility {
     public static File getJPEGtoPNGImage4(File fileimage) {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
         File f = new File(Environment.getExternalStorageDirectory()
                 + File.separator + "image4.jpg");
         try {
@@ -941,7 +941,7 @@ public class Utility {
     public static File getJPEGtoPNGImage5(File fileimage) {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
         File f = new File(Environment.getExternalStorageDirectory()
                 + File.separator + "image5.jpg");
         try {

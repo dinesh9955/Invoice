@@ -2399,6 +2399,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 }
             }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
                 Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                intentShareFile.setType("*/*");
+
                 if (paypal.equalsIgnoreCase("1")) {
                     File mFile22 = new File("/sdcard/Notes/PayPal.html");
                     Uri imageUri22 = FileProvider.getUriForFile(
@@ -2406,6 +2408,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                             BuildConfig.APPLICATION_ID + ".provider",
                             mFile22);
                     uriArrayList.add(imageUri22);
+//                    intentShareFile.putExtra(Intent.EXTRA_STREAM,
+//                            Uri.parse("file:///sdcard/Notes/PayPal.html"));
                 }
                 if (stripe.equalsIgnoreCase("1")) {
                     File mFile22 = new File("/sdcard/Notes/Cards.html");
@@ -2414,18 +2418,21 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                             BuildConfig.APPLICATION_ID + ".provider",
                             mFile22);
                     uriArrayList.add(imageUri22);
+//                    intentShareFile.putExtra(Intent.EXTRA_STREAM,
+//                            Uri.parse("file:///sdcard/Notes/Cards.html"));
                 }
 
                 uriArrayList.add(imageUri1);
                 uriArrayList.add(imageUri2);
                 Collections.reverse(uriArrayList);
 
-                intentShareFile.setType("*/*");
+
                 //intentShareFile.setType("*application/octet-stream*");
                // intentShareFile.setType("application/pdf/*|image/*|text/html");
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
                 intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
                 intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+
                 intentShareFile.setPackage("com.google.android.gm");
                 Log.e(TAG, "paypalXX10 ");
                 try {

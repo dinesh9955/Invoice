@@ -25,6 +25,8 @@
                 android:layout_marginRight="10dp"
                 android:padding="8dp"
                 app:srcCompat="@drawable/menu_icon"
+                android:tint="@color/darkblue"
+                tools:ignore="UseAppTint"
                 android:visibility="gone"/>
 
             <ImageView
