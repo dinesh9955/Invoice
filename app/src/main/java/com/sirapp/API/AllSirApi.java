@@ -45,8 +45,8 @@ public class AllSirApi {
     public static final int FONT_SIZE_CREATE_M = 4;
     public static final int FONT_SIZE_CREATE_H = 5;
     public static final int FONT_SIZE_CREATE_X = 6;
-    public static final int FONT_SIZE_CREATE_XX = 6;
-    public static final int FONT_SIZE_CREATE_XXX = 6;
+    public static final int FONT_SIZE_CREATE_XX = 5;
+    public static final int FONT_SIZE_CREATE_XXX = 4;
 
 
 
@@ -87,3 +87,5 @@ public class AllSirApi {
     public static String BASE_URL_PAYMENT = "http://prod.webdevelopmentsolution.net/saad/app/index.php/api/";
 
 }
+
+

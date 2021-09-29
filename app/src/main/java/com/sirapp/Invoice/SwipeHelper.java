@@ -27,6 +27,7 @@ import java.util.Queue;
 public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
 
     public static int BUTTON_WIDTH = 200;
+    public static int TEXT_SIZE = 10;
     private RecyclerView recycler_invoices;
     private List<UnderlayButton> buttons;
     private GestureDetector gestureDetector;
@@ -76,6 +77,7 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
     public SwipeHelper(Context context) {
         super(0, ItemTouchHelper.LEFT);
         BUTTON_WIDTH = (int) context.getResources().getDimension(R.dimen._60sdp);
+        TEXT_SIZE = (int) context.getResources().getDimension(R.dimen._10sdp);
         this.buttons = new ArrayList<>();
         this.gestureDetector = new GestureDetector(context, gestureListener);
         buttonsBuffer = new HashMap<>();
@@ -238,7 +240,9 @@ public abstract class SwipeHelper extends ItemTouchHelper.SimpleCallback {
             // Draw Text
             p.setColor(Color.WHITE);
             //p.setTextSize(LayoutHelper.getPx(MyApplication.getAppContext(), 12));
-            p.setTextSize(Resources.getSystem().getDisplayMetrics().density * 12);
+          //  p.setTextSize(Resources.getSystem().getDisplayMetrics().density * 12);
+
+            p.setTextSize(TEXT_SIZE);
 
             Rect r = new Rect();
             float cHeight = rect.height();

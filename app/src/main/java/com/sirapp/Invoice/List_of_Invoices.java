@@ -576,6 +576,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
 //                underlayButtons.add(new SwipeHelper2.UnderlayButton(
+//                        getActivity(),
 //                        "Delete",
 //                        0,
 //                        Color.parseColor("#ff0000"),
@@ -2429,9 +2430,12 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                 //intentShareFile.setType("*application/octet-stream*");
                // intentShareFile.setType("application/pdf/*|image/*|text/html");
+                intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intentShareFile.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
                 intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
                 intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+
 
                 intentShareFile.setPackage("com.google.android.gm");
                 Log.e(TAG, "paypalXX10 ");

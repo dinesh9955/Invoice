@@ -311,9 +311,9 @@ public class SettingsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(imageClickID == 1){
-//                    bp.purchase(SettingsActivity.this, "com.sir.oneuser");
+//                    bp.purchase(SettingsActivity.this, "com.sir.one_user");
                 }else if(imageClickID == 2){
-//                    bp.purchase(SettingsActivity.this, "com.sir.onecompany");
+//                    bp.purchase(SettingsActivity.this, "com.sir.one_company");
                 }else if(imageClickID == 3){
 //                    bp.purchase(SettingsActivity.this, "com.sir.monthadditional");
                 }else if(imageClickID == 4){

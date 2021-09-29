@@ -799,6 +799,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 imgFile = new File("" + Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
+//                            Log.e(TAG, "multipleAA " + multiple[i]);
                         } else if (i == 1) {
                             File imgFile = new File(multimgpath.get(i));
                             if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
@@ -1052,10 +1053,13 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     private void showUriList(List<Uri> uriList) {
 
         Log.e(TAG, "uriListA " + uriList.size());
-
+        multimgpath.clear();
         attchmentimage.clear();
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
+            File auxFile = new File(uri.getPath());
+            multimgpath.add(auxFile.toString());
+            Log.e(TAG, "auxFile.toString() "+auxFile.toString());
             attachmenttxtimg.setVisibility(View.VISIBLE);
         }
         //int sizen = attchmentimage.size();
@@ -1064,10 +1068,11 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             for (int i = 0; i < attchmentimage.size(); i++) {
                 attchedmentimagepath = attchmentimage.get(i);
                 try {
+                    Log.e(TAG, "attchedmentimagepathA " + attchedmentimagepath);
+//                    String decoded = URLDecoder.decode(attchedmentimagepath, "UTF-8");
+//                    String replaceString = decoded.replaceAll("file://", "");
+//                    Log.e(TAG, "replaceString " + replaceString);
 
-                    String decoded = URLDecoder.decode(attchedmentimagepath, "UTF-8");
-                    String replaceString = decoded.replaceAll("file://", "");
-                    multimgpath.add(replaceString);
 
                 } catch (Exception e) {
 
@@ -1078,7 +1083,33 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         }
 
-        Log.e(TAG, "uri Image " + String.valueOf(attchmentimage));
+
+
+//        Log.e(TAG, "uriListA " + uriList.size());
+//        multimgpath.clear();
+//        for (Uri uri : uriList) {
+//            attachmenttxtimg.setVisibility(View.VISIBLE);
+//        }
+//        //int sizen = attchmentimage.size();
+//        String attchedmentimagepath;
+//        if (uriList != null) {
+//            for (int i = 0; i < uriList.size(); i++) {
+//                attchedmentimagepath = attchmentimage.get(i);
+//                try {
+//                    Log.e(TAG, "attchedmentimagepathA " + attchedmentimagepath);
+//                    String decoded = URLDecoder.decode(attchedmentimagepath, "UTF-8");
+//                    String replaceString = decoded.replaceAll("file://", "");
+//                    Log.e(TAG, "replaceString " + replaceString);
+//                    multimgpath.add(replaceString);
+//
+//                } catch (Exception e) {
+//
+//                }
+//
+//            }
+//        } else {
+//
+//        }
 
     }
 

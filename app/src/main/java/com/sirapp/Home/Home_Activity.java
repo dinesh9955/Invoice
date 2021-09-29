@@ -20,6 +20,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -327,6 +329,21 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         Log.e(TAG, "sizeSc "+size);
 
         Log.e(TAG, "isTablet "+Utility.isTablet(Home_Activity.this));
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = displayMetrics.widthPixels;
+        int height = displayMetrics.heightPixels;
+
+        Log.e(TAG, "width "+width);
+        Log.e(TAG, "height "+height);
+
+        final float scale = getResources().getDisplayMetrics().density;
+
+        Log.e(TAG, "scale "+scale);
+        float GESTURE_THRESHOLD_DP = 3.0f;
+       int mGestureThreshold = (int) (GESTURE_THRESHOLD_DP * scale + 0.5f);
+        Log.e(TAG, "mGestureThreshold "+mGestureThreshold);
 
     }
 

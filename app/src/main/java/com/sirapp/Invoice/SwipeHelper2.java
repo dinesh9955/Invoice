@@ -27,6 +27,10 @@ import java.util.Queue;
 public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
 
     public static int BUTTON_WIDTH = 220;
+    public static int TEXT_SIZE = 10;
+    public static int TEXT_TOP = 30;
+    public static int TEXT_TOP_2 = 10;
+
     private RecyclerView recyclerView;
     private List<UnderlayButton> buttons;
     private GestureDetector gestureDetector;
@@ -81,6 +85,10 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
     public SwipeHelper2(Context context1, RecyclerView recyclerView) {
         super(0, ItemTouchHelper.LEFT);
         BUTTON_WIDTH = (int) context1.getResources().getDimension(R.dimen._70sdp);
+        TEXT_SIZE = (int) context1.getResources().getDimension(R.dimen._9sdp);
+        TEXT_TOP = (int) context1.getResources().getDimension(R.dimen._10sdp);
+        TEXT_TOP_2 = (int) context1.getResources().getDimension(R.dimen._7sdp);
+
         this.recyclerView = recyclerView;
         this.buttons = new ArrayList<>();
 
@@ -264,7 +272,10 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
 
             // Draw Text
             p.setColor(Color.WHITE);
-            p.setTextSize(Resources.getSystem().getDisplayMetrics().density * 11);
+       //     p.setTextSize(Resources.getSystem().getDisplayMetrics().density * 11);
+
+
+            p.setTextSize(TEXT_SIZE);
 
             Rect r = new Rect();
             float cHeight = rect.height();
@@ -283,7 +294,7 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
                 c.drawText(t1, rect.left + x, rect.top + y, p);
                 c.drawText(t2, rect.left + x, rect.top + y + 30, p);
             } else if(text.equalsIgnoreCase(context.getString(R.string.list_Delivery_received))){
-                c.drawText(text, rect.left + x, rect.top + y+10, p);
+                c.drawText(text, rect.left + x, rect.top + y + 10, p);
             } else if(text.equalsIgnoreCase(context.getString(R.string.list_Mark_as_void))){
                 String t1 = context.getString(R.string.list_Mark_as_void1);
                 String t2 = context.getString(R.string.list_Mark_as_void2);
@@ -305,7 +316,7 @@ public abstract class SwipeHelper2 extends ItemTouchHelper.SimpleCallback {
                 c.drawText(t1, rect.left + x, rect.top + y, p);
                 c.drawText(t2, rect.left + x, rect.top + y + 30, p);
             } else{
-                c.drawText(text, rect.left + x, rect.top + y+10, p);
+                c.drawText(text, rect.left + x, rect.top + y + 10, p);
             }
 
 //            c.drawText(t1, rect.left + x, rect.top + y, p);
