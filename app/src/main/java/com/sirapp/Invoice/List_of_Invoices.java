@@ -2189,11 +2189,18 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             // String urlStripeNameFilter = urlStripeName;
 
 
-            File mFile2 = new File("/sdcard/share.jpg");
+//            File mFile2 = new File("/sdcard/share.jpg");
+//            Uri imageUri2 = FileProvider.getUriForFile(
+//                    context,
+//                    BuildConfig.APPLICATION_ID + ".provider",
+//                    mFile2);
+
+            File root1 = new File(Environment.getExternalStorageDirectory(), "SIR/");
+            File gpxfile2 = new File(root1, "share.jpg");
             Uri imageUri2 = FileProvider.getUriForFile(
                     context,
                     BuildConfig.APPLICATION_ID + ".provider",
-                    mFile2);
+                    gpxfile2);
 
             File fileWithinMyDir = new File(message);
             Uri imageUri1 = FileProvider.getUriForFile(context,

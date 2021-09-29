@@ -591,7 +591,22 @@ public class Utility {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return f;
+    }
 
+    public static File getFileLogo2(Activity activity) {
+        Bitmap icon = BitmapFactory.decodeResource(activity.getResources(), R.drawable.thanksimg);
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "SIR/share.jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return f;
     }
 

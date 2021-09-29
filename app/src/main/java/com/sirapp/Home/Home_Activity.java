@@ -156,6 +156,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             myDirectory.mkdirs();
         }
 
+        File logoPath = Utility.getFileLogo2(Home_Activity.this);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         TextView titleView = toolbar.findViewById(R.id.title1);

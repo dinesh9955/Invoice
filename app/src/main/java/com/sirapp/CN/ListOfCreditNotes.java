@@ -133,7 +133,8 @@ public class ListOfCreditNotes extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        File logoPath = Utility.getFileLogo(getActivity());
+        Utility.getFileLogo(getActivity());
+        Utility.getFileLogo2(getActivity());
     }
 
     @Override
