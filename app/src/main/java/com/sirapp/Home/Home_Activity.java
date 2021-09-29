@@ -150,7 +150,11 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_act);
 //        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
-
+//        File myDirectory = new File(getExternalFilesDir("FolderName"),"YOUR_DIR");
+        File myDirectory = new File(Environment.getExternalStorageDirectory(), "SIR");
+        if(!myDirectory.exists()) {
+            myDirectory.mkdirs();
+        }
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -170,7 +174,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         FindByIds();
 
-        Utility.deleteDirectory();
+//        Utility.deleteDirectory();
 
 //        File mFile = new File(Environment.getExternalStorageDirectory() + "/Notes");
 //        try {

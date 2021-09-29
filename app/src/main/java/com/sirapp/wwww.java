@@ -1,6 +1,7 @@
 package com.sirapp;
 
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -122,13 +124,51 @@ public class wwww extends AppCompatActivity {
 //                }
 
 
-               // Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
-//                ArrayList<Uri> uriArrayList = new ArrayList<>();
+                Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+                ArrayList<Uri> uriArrayList = new ArrayList<>();
+                String MEDIA_PATH = new String(Environment.getExternalStorageDirectory() + "/SIR" );
+//                File mFile22 = new File("/sdcard/Notes/PayPal.html");
 //                uriArrayList.add(imageUri2);
 //                uriArrayList.add(imageUri2);
-//                Collections.reverse(uriArrayList);
+//               // Collections.reverse(uriArrayList);
+
+                final File files = new File(MEDIA_PATH);
+
+                File list[] = files.listFiles();
+                for (int i = 0; i < list.length; i++) {
+                    Log.e(TAG, "listAA "+list[i]);
+                   // uriArrayList.add(list[i].getName());
+                   // File mFile2 = new File(list[i].getAbsoluteFile());
+                    Uri imageUri2 = FileProvider.getUriForFile(
+                            wwww.this,
+                            BuildConfig.APPLICATION_ID + ".provider",
+                            list[i].getAbsoluteFile());
+                    uriArrayList.add(imageUri2);
+                }
+
+
+              //  intentShareFile.setType("application/pdf/*|image/*|text/html");
+
+//                shareIntent.putExtra(Intent.EXTRA_STREAM, pictureUri);
+
+//                File mFile2 = new File("/sdcard/share.jpg");
 //
-               // intentShareFile.setType("application/pdf/*|image/*|text/html");
+//                Uri imageUri2 = FileProvider.getUriForFile(
+//                        wwww.this,
+//                        BuildConfig.APPLICATION_ID + ".provider",
+//                        mFile2);
+
+                intentShareFile.putExtra(Intent.EXTRA_STREAM, uriArrayList);
+//                intentShareFile.putExtra(Intent.EXTRA_STREAM, imageUri2);
+                intentShareFile.setType("*/*");
+                intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intentShareFile.setPackage("com.google.android.gm");
+                startActivity(intentShareFile);
+
+
+
+
+
 
             }
 
@@ -180,5 +220,15 @@ public class wwww extends AppCompatActivity {
        Uri dynamicLinkUri = dynamicLink.getUri();
 
         return dynamicLinkUri;
+    }
+
+
+    public static String getMimeType(File file, Context context)
+    {
+        Uri uri = Uri.fromFile(file);
+        ContentResolver cR = context.getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        String type = mime.getExtensionFromMimeType(cR.getType(uri));
+        return type;
     }
 }
