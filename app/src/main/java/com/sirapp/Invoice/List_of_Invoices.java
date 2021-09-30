@@ -1345,11 +1345,6 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
 
-
-
-
-
-
                     txtSHAREvalue.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -2461,53 +2456,118 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                     Log.e(TAG, "paypalXX32 " + e.getMessage());
                 }
 
-
-
-//              //  intentShareFile.setType("*/*");
-//                intentShareFile.setType("*application/octet-stream*");
-//                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
-//                intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
-//                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-//                intentShareFile.setPackage("com.google.android.gm");
-//                context.startActivity(intentShareFile);
-
             }
-//            }else{
-//                Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
-//                if(paypal.equalsIgnoreCase("1")){
-//                    File mFile22 = new File("/sdcard/Notes/PayPal.html");
-//                    Uri imageUri22 = FileProvider.getUriForFile(
-//                            context,
-//                            BuildConfig.APPLICATION_ID + ".provider",
-//                            mFile22);
-//                    uriArrayList.add(imageUri22);
-//                }
-//                if(stripe.equalsIgnoreCase("1")){
-//                    File mFile22 = new File("/sdcard/Notes/Cards.html");
-//                    Uri imageUri22 = FileProvider.getUriForFile(
-//                            context,
-//                            BuildConfig.APPLICATION_ID + ".provider",
-//                            mFile22);
-//                    uriArrayList.add(imageUri22);
-//                }
-//
-//                uriArrayList.add(imageUri1);
-//                uriArrayList.add(imageUri2);
-//                Collections.reverse(uriArrayList);
-//
-//                intentShareFile.setType("application/pdf/*|image/*|text/html");
-//                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
-//                intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
-//                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-//
-//                if (Utility.isAppAvailable(context, "com.google.android.gm")){
-//                    intentShareFile.setPackage("com.google.android.gm");
-//                }
-//                try{
-//                    context.startActivity(intentShareFile);
-//                }catch (Exception e){
-//                }
-//            }
+            else if (Utility.isAppAvailable(context, "com.android.email")) {
+
+                if (paypal.equalsIgnoreCase("1")) {
+                    File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+                    File gpxfile = new File(root, "PayPal.html");
+
+                    // File mFile22 = new File("/sdcard/SIR/PayPal.html");
+                    Uri imageUri22 = FileProvider.getUriForFile(
+                            context,
+                            BuildConfig.APPLICATION_ID + ".provider",
+                            gpxfile);
+                    uriArrayList.add(imageUri22);
+//                    intentShareFile.putExtra(Intent.EXTRA_STREAM,
+//                            Uri.parse("file:///sdcard/Notes/PayPal.html"));
+                }
+                if (stripe.equalsIgnoreCase("1")) {
+//                    File mFile22 = new File("/sdcard/SIR/Cards.html");
+                    File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+                    File gpxfile = new File(root, "Cards.html");
+                    Uri imageUri22 = FileProvider.getUriForFile(
+                            context,
+                            BuildConfig.APPLICATION_ID + ".provider",
+                            gpxfile);
+                    uriArrayList.add(imageUri22);
+//                    intentShareFile.putExtra(Intent.EXTRA_STREAM,
+//                            Uri.parse("file:///sdcard/Notes/Cards.html"));
+                }
+
+                uriArrayList.add(imageUri1);
+                uriArrayList.add(imageUri2);
+                Collections.reverse(uriArrayList);
+
+
+                //intentShareFile.setType("*application/octet-stream*");
+                // intentShareFile.setType("application/pdf/*|image/*|text/html");
+//                intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                intentShareFile.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+
+                Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                intentShareFile.setType("*/*");
+                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+                intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
+                intentShareFile.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+
+
+                intentShareFile.setPackage("com.android.email");
+                Log.e(TAG, "paypalXX10 ");
+                try {
+                    context.startActivity(intentShareFile);
+                    Log.e(TAG, "paypalXX72 ");
+                } catch (Exception e) {
+                    Log.e(TAG, "paypalXX32 " + e.getMessage());
+                }
+
+            }else{
+                if (paypal.equalsIgnoreCase("1")) {
+                    File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+                    File gpxfile = new File(root, "PayPal.html");
+
+                    // File mFile22 = new File("/sdcard/SIR/PayPal.html");
+                    Uri imageUri22 = FileProvider.getUriForFile(
+                            context,
+                            BuildConfig.APPLICATION_ID + ".provider",
+                            gpxfile);
+                    uriArrayList.add(imageUri22);
+//                    intentShareFile.putExtra(Intent.EXTRA_STREAM,
+//                            Uri.parse("file:///sdcard/Notes/PayPal.html"));
+                }
+                if (stripe.equalsIgnoreCase("1")) {
+//                    File mFile22 = new File("/sdcard/SIR/Cards.html");
+                    File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+                    File gpxfile = new File(root, "Cards.html");
+                    Uri imageUri22 = FileProvider.getUriForFile(
+                            context,
+                            BuildConfig.APPLICATION_ID + ".provider",
+                            gpxfile);
+                    uriArrayList.add(imageUri22);
+//                    intentShareFile.putExtra(Intent.EXTRA_STREAM,
+//                            Uri.parse("file:///sdcard/Notes/Cards.html"));
+                }
+
+                uriArrayList.add(imageUri1);
+                uriArrayList.add(imageUri2);
+                Collections.reverse(uriArrayList);
+
+
+                //intentShareFile.setType("*application/octet-stream*");
+                // intentShareFile.setType("application/pdf/*|image/*|text/html");
+//                intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                intentShareFile.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+
+                Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                intentShareFile.setType("*/*");
+                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
+                intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
+                intentShareFile.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+
+
+              // intentShareFile.setPackage("com.android.email");
+                Log.e(TAG, "paypalXX10 ");
+                try {
+                    context.startActivity(intentShareFile);
+                    Log.e(TAG, "paypalXX72 ");
+                } catch (Exception e) {
+                    Log.e(TAG, "paypalXX32 " + e.getMessage());
+                }
+            }
 
             Log.e(TAG, "paypalXX6 ");
 

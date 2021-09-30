@@ -34,6 +34,7 @@ import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -53,6 +54,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,6 +86,7 @@ import com.loopj.android.http.RequestParams;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Customer.Customer_Activity;
 import com.sirapp.Home.GoProActivity;
+import com.sirapp.Home.Home_Activity;
 import com.sirapp.ImageResource.FileCompressor;
 import com.sirapp.Product.Product_Activity;
 import com.sirapp.Service.Service_Activity;
@@ -150,6 +153,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     boolean numberChange = false;
     boolean warehouseChange = false;
 
+    boolean isTAB = false;
+
     //    public static int defaultClick = 0;
 //    int selectComapanyCount = 0;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -157,10 +162,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     private static final int CAMERA_ACTION_PICK_CODE = 9;
     private static final String[] PERMISSION_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private static final String TAG = "Fragment_Create_Invoice";
-    TextView invoicenumtxt, duedatetxt, duedate, invoicetotxt, invoicerecipnt, itemstxt, subtotaltxt, subtotal, discounttxt, discount, txttax, tax, txtcredit, txtdays, txtreferenceno, edreferenceno, txtduedate, edduedate, txtgrossamount, grosstotal, txtfreight, freight, txtnetamount, netamount, txtpaidamount, paidamount, txtbalance, balance, s_invoice, s_receiver, c_stamp, attachmenttxt, itemstxtTemplate;
+    TextView invoicenumtxt, duedatetxt, duedate, invoicetotxt, invoicerecipnt, itemstxt, subtotaltxt, subtotal, discounttxt, discount, txttax, tax, txtcredit, txtdays, txtreferenceno, txtduedate, edduedate, txtgrossamount, grosstotal, txtfreight, freight, txtnetamount, netamount, txtpaidamount, paidamount, txtbalance, balance, s_invoice, s_receiver, c_stamp, attachmenttxt, itemstxtTemplate;
     Button additem, createinvoice, options, addservice;
     RecyclerView productsRecycler;
-    EditText ednotes, invoicenum;
+    EditText ednotes, invoicenum, edreferenceno;
     ArrayList<Product_list> tempList = new ArrayList<Product_list>();
     ArrayList<Service_list> Servicetem = new ArrayList<Service_list>();
     ArrayList<String> tempQuantity = new ArrayList<String>();
@@ -418,6 +423,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         radioButton1 = view.findViewById(R.id.radioButton);
         radioButton2 = view.findViewById(R.id.radioButton2);
 
+        isTAB = Utility.isTablet(getActivity());
 
 //        switchPaypal.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -505,6 +511,25 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
 
         invoicenum.setEnabled(false);
+
+        ScrollView scroll = (ScrollView)view.findViewById(R.id.scrollView);
+        scroll.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (invoicenum.hasFocus()) {
+                    invoicenum.clearFocus();
+                }
+                if (edreferenceno.hasFocus()) {
+                    edreferenceno.clearFocus();
+                }
+                if (ednotes.hasFocus()) {
+                    ednotes.clearFocus();
+                }
+                return false;
+            }
+        });
 
 
         s_invoice.setOnClickListener(new View.OnClickListener() {
@@ -799,6 +824,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 imgFile = new File("" + Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name_image_22", isTAB+" "+   multiple[i]);
+                            firebaseAnalytics.logEvent("image_upload_22", params2);
 //                            Log.e(TAG, "multipleAA " + multiple[i]);
                         } else if (i == 1) {
                             File imgFile = new File(multimgpath.get(i));
@@ -1051,7 +1079,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     }
 
     private void showUriList(List<Uri> uriList) {
-
         Log.e(TAG, "uriListA " + uriList.size());
         multimgpath.clear();
         attchmentimage.clear();
@@ -1061,27 +1088,30 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             multimgpath.add(auxFile.toString());
             Log.e(TAG, "auxFile.toString() "+auxFile.toString());
             attachmenttxtimg.setVisibility(View.VISIBLE);
+            Bundle params2 = new Bundle();
+            params2.putString("event_name_image_23", isTAB+" "+  auxFile.toString());
+            firebaseAnalytics.logEvent("image_upload_23", params2);
         }
-        //int sizen = attchmentimage.size();
-        String attchedmentimagepath;
-        if (attchmentimage != null) {
-            for (int i = 0; i < attchmentimage.size(); i++) {
-                attchedmentimagepath = attchmentimage.get(i);
-                try {
-                    Log.e(TAG, "attchedmentimagepathA " + attchedmentimagepath);
-//                    String decoded = URLDecoder.decode(attchedmentimagepath, "UTF-8");
-//                    String replaceString = decoded.replaceAll("file://", "");
-//                    Log.e(TAG, "replaceString " + replaceString);
-
-
-                } catch (Exception e) {
-
-                }
-
-            }
-        } else {
-
-        }
+//        //int sizen = attchmentimage.size();
+//        String attchedmentimagepath;
+//        if (attchmentimage != null) {
+//            for (int i = 0; i < attchmentimage.size(); i++) {
+//                attchedmentimagepath = attchmentimage.get(i);
+//                try {
+//                    Log.e(TAG, "attchedmentimagepathA " + attchedmentimagepath);
+////                    String decoded = URLDecoder.decode(attchedmentimagepath, "UTF-8");
+////                    String replaceString = decoded.replaceAll("file://", "");
+////                    Log.e(TAG, "replaceString " + replaceString);
+//
+//
+//                } catch (Exception e) {
+//
+//                }
+//
+//            }
+//        } else {
+//
+//        }
 
 
 
@@ -1355,6 +1385,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 //                            params.add("images", "[" + multiple[k] + "]");
 //                            params.put("fileName:", "" + multiple[k] + "");
 //                            params.add("mimeType:", "image/png");
+                            Bundle params2 = new Bundle();
+                            params2.putString("event_name_image", isTAB+" "+ multiple[k]);
+                            firebaseAnalytics.logEvent("image_upload", params2);
                         }
 
                         // params.add("images", "[" + multiple[k] + "]");
@@ -1367,6 +1400,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Bundle params2 = new Bundle();
+                        params2.putString("event_name_image_error", isTAB+" "+ multiple[k]);
+                        firebaseAnalytics.logEvent("image_upload_error", params2);
                     }
 
                 }
@@ -5313,24 +5349,40 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             }
 
         }else{
-            if (Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
-//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L);
+            DisplayMetrics dm = new DisplayMetrics();
+            getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+            int width1=dm.widthPixels;
+            int height1=dm.heightPixels;
+            double wi=(double)width1/(double)dm.xdpi;
+            double hi=(double)height1/(double)dm.ydpi;
+            double x = Math.pow(wi,2);
+            double y = Math.pow(hi,2);
+            double screenInches = Math.sqrt(x+y);
+            if(screenInches > 4.9 && screenInches < 5.4){
+                Log.e(TAG, "screenInches1 "+screenInches);
                 invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-            }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi")){
-//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M);
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-            }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi")){
-//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H);
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-            }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xhdpi")){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X);
-            }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxhdpi")){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX);
-            }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxxhdpi")){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX);
             }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                Log.e(TAG, "screenInches2 "+screenInches);
+                if (Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi")){
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi")){
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xhdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X);
+                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxhdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX);
+                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxxhdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX);
+                }else{
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }
             }
+
         }
 
         Bitmap btmp = invoiceweb.getDrawingCache(true);

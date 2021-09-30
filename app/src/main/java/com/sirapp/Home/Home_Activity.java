@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
@@ -88,6 +90,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -351,6 +354,36 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
        int mGestureThreshold = (int) (GESTURE_THRESHOLD_DP * scale + 0.5f);
         Log.e(TAG, "mGestureThreshold "+mGestureThreshold);
 
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width1=dm.widthPixels;
+        int height1=dm.heightPixels;
+        double wi=(double)width1/(double)dm.xdpi;
+        double hi=(double)height1/(double)dm.ydpi;
+        double x = Math.pow(wi,2);
+        double y = Math.pow(hi,2);
+        double screenInches = Math.sqrt(x+y);
+        //double screenInches = 5.1;
+        Log.e(TAG, "screenInches "+screenInches);
+
+
+        if(screenInches > 4.9 && screenInches < 5.5){
+            Log.e(TAG, "screenInches1 "+screenInches);
+        }else{
+            Log.e(TAG, "screenInches2 "+screenInches);
+        }
+
+
+        final PackageManager pm = getPackageManager();
+//get a list of installed apps.
+        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+
+        for (ApplicationInfo packageInfo : packages) {
+            Log.e(TAG, "Installed package :" + packageInfo.packageName);
+            Log.e(TAG, "Source dir : " + packageInfo.sourceDir);
+            Log.e(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
+        }
     }
 
     private void setLeftValues() {
