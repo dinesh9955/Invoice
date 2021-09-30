@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.webkit.SslErrorHandler;
@@ -21,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.sirapp.API.AllSirApi;
 import com.sirapp.CN.CreditNotesViewActivityWebView;
+import com.sirapp.CN.ViewCreditNote_Activity;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
 import com.sirapp.Base.BaseActivity;
@@ -391,23 +393,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
-        if(Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("hdpi") ||
-                Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("mdpi") ||
-                Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("ldpi") ){
-            Log.e(TAG, "TTTTTTTTTTTTTTT");
-            if(AllSirApi.FONT_INVOICE == true){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
-            }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
-            }
-        }else{
-            Log.e(TAG, "SSSSSSSSSSSSSSS");
-            if(AllSirApi.FONT_INVOICE == true){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
-            }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
-            }
-        }
+        callForWeb();
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             @Override
@@ -889,26 +875,57 @@ public class EstimateViewActivityWebView extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        callForWeb();
+    }
+
+
+
+    @SuppressLint("LongLogTag")
+    private void callForWeb() {
         if(invoiceweb != null){
-            if(Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("hdpi") ||
-                    Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("mdpi") ||
-                    Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("ldpi") ){
-                Log.e(TAG, "TTTTTTTTTTTTTTT");
-                if(AllSirApi.FONT_INVOICE == true){
-                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
-                }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+
+            WebSettings webSettings = invoiceweb.getSettings();
+
+            Log.e(TAG, "isTablet "+Utility.isTablet(EstimateViewActivityWebView.this));
+            if(Utility.isTablet(EstimateViewActivityWebView.this) == true){ // tab
+                DisplayMetrics metrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                int widthPixels = metrics.widthPixels;
+                int heightPixels = metrics.heightPixels;
+                float scaleFactor = metrics.density;
+                float widthDp = widthPixels / scaleFactor;
+                float heightDp = heightPixels / scaleFactor;
+                float smallestWidth = Math.min(widthDp, heightDp);
+
+                if (smallestWidth > 720) {
+                    //Device is a 10" tablet
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_10_V);
                 }
-            }else{
-                Log.e(TAG, "SSSSSSSSSSSSSSS");
-                if(AllSirApi.FONT_INVOICE == true){
-                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+                else if (smallestWidth > 600) {
+                    //Device is a 7" tablet
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_7_V);
                 }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }
+
+            }else{
+                if (Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("ldpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L_V);
+                }else if (Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("mdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M_V);
+                }else if (Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("hdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H_V);
+                }else if (Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("xhdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X_V);
+                }else if (Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("xxhdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX_V);
+                }else if (Utility.getDensityName(EstimateViewActivityWebView.this).equalsIgnoreCase("xxxhdpi")){
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX_V);
+                }else{
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
                 }
             }
 
         }
     }
-
 }
