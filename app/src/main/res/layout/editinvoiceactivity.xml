@@ -27,6 +27,7 @@
     <include layout="@layout/toolbar" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/appbar"
         android:layout_width="match_parent"

@@ -1023,23 +1023,37 @@ public class InvoiceToReceiptsWebview extends BaseActivity {
                 }else{
                     invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
                 }
-
             }else{
-                if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("ldpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L_V);
-                }else if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("mdpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M_V);
-                }else if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("hdpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H_V);
-                }else if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("xhdpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X_V);
-                }else if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("xxhdpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX_V);
-                }else if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("xxxhdpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX_V);
-                }else{
+                DisplayMetrics dm = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(dm);
+                int width1=dm.widthPixels;
+                int height1=dm.heightPixels;
+                double wi=(double)width1/(double)dm.xdpi;
+                double hi=(double)height1/(double)dm.ydpi;
+                double x = Math.pow(wi,2);
+                double y = Math.pow(hi,2);
+                double screenInches = Math.sqrt(x+y);
+                if(screenInches > 4.9 && screenInches < 5.4){
+                    Log.e(TAG, "screenInches1 "+screenInches);
                     invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                }else{
+                    if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("ldpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L_V);
+                    }else if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("mdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M_V);
+                    }else if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("hdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H_V);
+                    }else if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("xhdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X_V);
+                    }else if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("xxhdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX_V);
+                    }else if (Utility.getDensityName(InvoiceToReceiptsWebview.this).equalsIgnoreCase("xxxhdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX_V);
+                    }else{
+                        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    }
                 }
+
             }
 
         }

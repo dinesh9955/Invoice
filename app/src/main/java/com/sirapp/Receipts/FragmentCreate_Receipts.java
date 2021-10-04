@@ -33,6 +33,7 @@ import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -51,6 +52,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -442,7 +444,23 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
         invoicenum.setEnabled(false);
 
 
+        ScrollView scroll = (ScrollView)view.findViewById(R.id.scrollView);
+        scroll.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
 
+                if (invoicenum.hasFocus()) {
+                    invoicenum.clearFocus();
+                }
+                if (edreferenceno.hasFocus()) {
+                    edreferenceno.clearFocus();
+                }
+                if (ednotes.hasFocus()) {
+                    ednotes.clearFocus();
+                }
+                return false;
+            }
+        });
 
 
         s_invoice.setOnClickListener(new View.OnClickListener() {

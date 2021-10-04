@@ -179,7 +179,7 @@
             android:paddingLeft="@dimen/_10sdp"
             android:paddingRight="@dimen/_10sdp"
             android:layout_below="@id/r1"
-            android:layout_marginTop="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_50sdp"
             >
 
             <View
@@ -219,8 +219,8 @@
 
         <ImageView
             android:id="@+id/imageView756756"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/google_plus_icon"
             android:layout_weight="1"

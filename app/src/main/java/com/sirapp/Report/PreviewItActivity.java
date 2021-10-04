@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.webkit.SslErrorHandler;
@@ -24,6 +25,7 @@ import com.sirapp.Base.BaseActivity;
 import com.sirapp.CN.CreditNotesViewActivityWebView;
 import com.sirapp.Invoice.InvoiceViewActivityWebView;
 import com.sirapp.R;
+import com.sirapp.Receipts.ViewReceipt_Activity;
 import com.sirapp.Utils.Utility;
 
 import org.apache.commons.io.IOUtils;
@@ -105,23 +107,7 @@ public class PreviewItActivity extends BaseActivity {
 //            invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
 //        }
 
-        if(Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("hdpi") ||
-                Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("mdpi") ||
-                Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("ldpi") ){
-            Log.e(TAG, "TTTTTTTTTTTTTTT");
-            if(AllSirApi.FONT_INVOICE == true){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
-            }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
-            }
-        }else{
-            Log.e(TAG, "SSSSSSSSSSSSSSS");
-            if(AllSirApi.FONT_INVOICE == true){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
-            }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
-            }
-        }
+        callForWeb();
 
 
         invoiceweb.setWebViewClient(new WebViewClient() {
@@ -1307,25 +1293,75 @@ public class PreviewItActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        callForWeb();
+    }
+
+
+
+
+    @SuppressLint("LongLogTag")
+    private void callForWeb() {
         if(invoiceweb != null){
-            if(Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("hdpi") ||
-                    Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("mdpi") ||
-                    Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("ldpi") ){
-                Log.e(TAG, "TTTTTTTTTTTTTTT");
-                if(AllSirApi.FONT_INVOICE == true){
-                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+
+            WebSettings webSettings = invoiceweb.getSettings();
+
+            Log.e(TAG, "isTablet "+Utility.isTablet(PreviewItActivity.this));
+            if(Utility.isTablet(PreviewItActivity.this) == true){ // tab
+                DisplayMetrics metrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                int widthPixels = metrics.widthPixels;
+                int heightPixels = metrics.heightPixels;
+                float scaleFactor = metrics.density;
+                float widthDp = widthPixels / scaleFactor;
+                float heightDp = heightPixels / scaleFactor;
+                float smallestWidth = Math.min(widthDp, heightDp);
+
+                if (smallestWidth > 720) {
+                    //Device is a 10" tablet
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_10_V);
+                }
+                else if (smallestWidth > 600) {
+                    //Device is a 7" tablet
+                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_7_V);
                 }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
                 }
             }else{
-                Log.e(TAG, "SSSSSSSSSSSSSSS");
-                if(AllSirApi.FONT_INVOICE == true){
-                    invoiceweb.getSettings().setMinimumFontSize(invoiceweb.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE);
+                DisplayMetrics dm = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(dm);
+                int width1=dm.widthPixels;
+                int height1=dm.heightPixels;
+                double wi=(double)width1/(double)dm.xdpi;
+                double hi=(double)height1/(double)dm.ydpi;
+                double x = Math.pow(wi,2);
+                double y = Math.pow(hi,2);
+                double screenInches = Math.sqrt(x+y);
+                if(screenInches > 4.9 && screenInches < 5.4){
+                    Log.e(TAG, "screenInches1 "+screenInches);
+                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
                 }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+                    if (Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("ldpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L_V);
+                    }else if (Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("mdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M_V);
+                    }else if (Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("hdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H_V);
+                    }else if (Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("xhdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X_V);
+                    }else if (Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("xxhdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX_V);
+                    }else if (Utility.getDensityName(PreviewItActivity.this).equalsIgnoreCase("xxxhdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX_V);
+                    }else{
+                        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    }
                 }
+
             }
 
         }
     }
+
+
+
 }

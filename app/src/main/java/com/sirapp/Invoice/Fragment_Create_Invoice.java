@@ -514,7 +514,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         ScrollView scroll = (ScrollView)view.findViewById(R.id.scrollView);
         scroll.setOnTouchListener(new View.OnTouchListener() {
-
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
