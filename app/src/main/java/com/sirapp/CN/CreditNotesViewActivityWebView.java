@@ -426,8 +426,11 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
         invoiceweb.getSettings().setLoadsImagesAutomatically(true);
         invoiceweb.getSettings().setJavaScriptEnabled(true);
         invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
+
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
+
+//        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
 
 //        invoiceweb.setPadding(0, 0, 0, 0);
 //        invoiceweb.setInitialScale(Utility.getScale(CreditNotesViewActivityWebView.this , invoiceweb));
@@ -443,7 +446,6 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
         callForWeb();
 
 
-
         invoiceweb.setWebViewClient(new WebViewClient() {
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
@@ -455,6 +457,9 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
+               // invoiceweb.loadUrl("javascript:document.style.invoice-box.fontSize ='30pt'");
+               // invoiceweb.loadUrl("javascript:document.body.style.background ='red';");
+                //invoiceweb.loadUrl("javascript:document.body.style.color ='yellow';");
 
                 //if page loaded successfully then show print button
                 //findViewById(R.id.fab).setVisibility(View.VISIBLE);
@@ -524,7 +529,6 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
                 productitem = IOUtils.toString(getAssets().open("single_item.html"))
-
                         .replaceAll("#NAME#", productsItemDtos.get(i).getName())
                         .replaceAll("#DESC#", productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
@@ -865,6 +869,7 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
 //                        .replaceAll("Balance Due-", Blanceamountstr + currency_code)
                         .replaceAll("Balance Due-", Blanceamountstr + Utility.getReplaceDollor(currency_code))
 
+
                         .replaceAll("SubTotal", subTotalTxt)
 //                        .replaceAll("Checkto", chektopaidmaount)
                         .replaceAll("Checkto", "")
@@ -939,10 +944,9 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
 
     @SuppressLint("LongLogTag")
     private void callForWeb() {
+
         if(invoiceweb != null){
-
             WebSettings webSettings = invoiceweb.getSettings();
-
             Log.e(TAG, "isTablet "+Utility.isTablet(CreditNotesViewActivityWebView.this));
             if(Utility.isTablet(CreditNotesViewActivityWebView.this) == true){ // tab
                 DisplayMetrics metrics = new DisplayMetrics();
@@ -998,6 +1002,7 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
             }
 
         }
+
     }
 
 }

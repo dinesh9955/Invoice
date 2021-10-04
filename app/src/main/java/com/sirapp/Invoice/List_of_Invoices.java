@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -39,6 +40,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.gson.Gson;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -2458,7 +2460,6 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
             }
             else if (Utility.isAppAvailable(context, "com.android.email")) {
-
                 if (paypal.equalsIgnoreCase("1")) {
                     File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
                     File gpxfile = new File(root, "PayPal.html");
@@ -2500,7 +2501,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 intentShareFile.setType("*/*");
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
                 intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
-                intentShareFile.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            //    intentShareFile.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
 
 
@@ -2555,18 +2556,31 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 intentShareFile.setType("*/*");
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
                 intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
-                intentShareFile.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+             //   intentShareFile.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
 
 
-              // intentShareFile.setPackage("com.android.email");
-                Log.e(TAG, "paypalXX10 ");
-                try {
-                    context.startActivity(intentShareFile);
-                    Log.e(TAG, "paypalXX72 ");
-                } catch (Exception e) {
-                    Log.e(TAG, "paypalXX32 " + e.getMessage());
+                final PackageManager pm = context.getPackageManager();
+                List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+                for (ApplicationInfo packageInfo : packages) {
+                    String ccc = new Gson().toJson(packageInfo);
+                    Log.e(TAG, "Source_dir : " + ccc);
+                    if(ccc.toString().toLowerCase().contains("mail")){
+                        Log.e(TAG, "LaunchActivity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
+                        Log.e(TAG, "Installedpackage :" + packageInfo.packageName);
+                        Log.e(TAG, "paypalXX10 ");
+                        try {
+                            intentShareFile.setPackage(""+packageInfo.packageName);
+                            context.startActivity(intentShareFile);
+                            Log.e(TAG, "paypalXX72 ");
+                        } catch (Exception e) {
+                            Log.e(TAG, "paypalXX32 " + e.getMessage());
+                        }
+                        return;
+                    }
                 }
+
+
             }
 
             Log.e(TAG, "paypalXX6 ");

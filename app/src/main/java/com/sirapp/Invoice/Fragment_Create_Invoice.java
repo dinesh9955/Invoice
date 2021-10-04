@@ -72,6 +72,8 @@ import com.appsflyer.AppsFlyerLib;
 import com.bumptech.glide.RequestManager;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.karumi.dexter.Dexter;
@@ -280,6 +282,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     String customer_website = "";
 
     ArrayList<String> rate = new ArrayList<>();
+
+//    private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+
 
 
     // pick image from galary and
@@ -827,6 +832,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             params2.putString("event_name_image_22", isTAB+" "+   multiple[i]);
                             firebaseAnalytics.logEvent("image_upload_22", params2);
 //                            Log.e(TAG, "multipleAA " + multiple[i]);
+//                            DatabaseReference mDatabaseReference = mDatabase.getReference();
+//                            mDatabaseReference = mDatabase.getReference().child("image_upload_22");
+//                            mDatabaseReference.setValue("event_name_image_22", isTAB+" "+   multiple[i]);
+
                         } else if (i == 1) {
                             File imgFile = new File(multimgpath.get(i));
                             if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
@@ -1090,6 +1099,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             Bundle params2 = new Bundle();
             params2.putString("event_name_image_23", isTAB+" "+  auxFile.toString());
             firebaseAnalytics.logEvent("image_upload_23", params2);
+//            DatabaseReference mDatabaseReference = mDatabase.getReference();
+//            mDatabaseReference = mDatabase.getReference().child("image_upload_23");
+//            mDatabaseReference.setValue("event_name_image_23", isTAB+" "+  auxFile.toString());
         }
 //        //int sizen = attchmentimage.size();
 //        String attchedmentimagepath;
@@ -1387,6 +1399,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             Bundle params2 = new Bundle();
                             params2.putString("event_name_image", isTAB+" "+ multiple[k]);
                             firebaseAnalytics.logEvent("image_upload", params2);
+
+//                            DatabaseReference mDatabaseReference = mDatabase.getReference();
+//                            mDatabaseReference = mDatabase.getReference().child("image_upload");
+//                            mDatabaseReference.setValue("event_name_image", isTAB+" "+ multiple[k]);
                         }
 
                         // params.add("images", "[" + multiple[k] + "]");
@@ -1402,6 +1418,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         Bundle params2 = new Bundle();
                         params2.putString("event_name_image_error", isTAB+" "+ multiple[k]);
                         firebaseAnalytics.logEvent("image_upload_error", params2);
+
+//                        DatabaseReference mDatabaseReference = mDatabase.getReference();
+//                        mDatabaseReference = mDatabase.getReference().child("image_upload_error");
+//                        mDatabaseReference.setValue("event_name_image_error", isTAB+" "+ multiple[k]);
                     }
 
                 }
@@ -4775,13 +4795,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             for (int i = 0; i < attchmentimage.size(); i++) {
                 attchedmentimagepath = attchmentimage.get(i);
                 try {
-
                     multipagepath = IOUtils.toString(getActivity().getAssets().open("attchment.html"))
-
-
                             .replaceAll("#ATTACHMENT_1#", attchmentimage.get(i));
-
-
                     multipleimage = multipleimage + multipagepath;
                 } catch (Exception e) {
 

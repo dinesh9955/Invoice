@@ -40,6 +40,8 @@ import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
@@ -380,10 +382,27 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 
         for (ApplicationInfo packageInfo : packages) {
-            Log.e(TAG, "Installed package :" + packageInfo.packageName);
-            Log.e(TAG, "Source dir : " + packageInfo.sourceDir);
-            Log.e(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
+            String ccc = new Gson().toJson(packageInfo);
+            Log.e(TAG, "Source_dir : " + ccc);
+//            Log.e(TAG, "Installed package :" + packageInfo.packageName);
+//            Log.e(TAG, "Source dir : " + packageInfo.sourceDir);
+        //    Log.e(TAG, "Source_dir : " + pm.getLaunchIntentForPackage(packageInfo.packageName).toString());
+
+            //Log.e(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
+            if(ccc.toString().toLowerCase().contains("mail")){
+                Log.e(TAG, "LaunchActivity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
+                Log.e(TAG, "Installedpackage :" + packageInfo.packageName);
+                return;
+            }
         }
+
+
+
+//        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+//
+//        DatabaseReference mDatabaseReference = mDatabase.getReference();
+//        mDatabaseReference = mDatabase.getReference().child("image_upload_error111");
+//        mDatabaseReference.setValue("event_name_image_error11");
     }
 
     private void setLeftValues() {
