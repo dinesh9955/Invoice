@@ -20,6 +20,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -824,7 +825,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     for (int i = 0; i < multimgpath.size(); i++) {
                         if (i == 0) {
                             File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
                                 imgFile = new File("" + Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
@@ -838,25 +839,25 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                         } else if (i == 1) {
                             File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
                                 imgFile = new File("" + Utility.getJPEGtoPNGImage2(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
                         } else if (i == 2) {
                             File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
                                 imgFile = new File("" + Utility.getJPEGtoPNGImage3(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
                         } else if (i == 3) {
                             File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
                                 imgFile = new File("" + Utility.getJPEGtoPNGImage4(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
                         } else if (i == 4) {
                             File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")) {
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
                                 imgFile = new File("" + Utility.getJPEGtoPNGImage5(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
@@ -1391,14 +1392,21 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                     try {
                         if (multiple[k] != null) {
+
+//                            File fileWithinMyDir = new File(message);
+//                            Uri imageUri1 = FileProvider.getUriForFile(context,
+//                                    BuildConfig.APPLICATION_ID + ".provider",
+//                                    fileWithinMyDir);
+
+
                             params.put("images[" + k + "]", multiple[k]);
 //                            params.add("images", "[" + k + "]");
 //                            params.add("images", "[" + multiple[k] + "]");
 //                            params.put("fileName:", "" + multiple[k] + "");
 //                            params.add("mimeType:", "image/png");
-                            Bundle params2 = new Bundle();
-                            params2.putString("event_name_image", isTAB+" "+ multiple[k]);
-                            firebaseAnalytics.logEvent("image_upload", params2);
+//                            Bundle params2 = new Bundle();
+//                            params2.putString("event_name_image", isTAB+" "+ multiple[k]);
+//                            firebaseAnalytics.logEvent("image_upload", params2);
 
 //                            DatabaseReference mDatabaseReference = mDatabase.getReference();
 //                            mDatabaseReference = mDatabase.getReference().child("image_upload");
@@ -5363,39 +5371,45 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             }
 
         }else{
-            DisplayMetrics dm = new DisplayMetrics();
-            getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-            int width1=dm.widthPixels;
-            int height1=dm.heightPixels;
-            double wi=(double)width1/(double)dm.xdpi;
-            double hi=(double)height1/(double)dm.ydpi;
-            double x = Math.pow(wi,2);
-            double y = Math.pow(hi,2);
-            double screenInches = Math.sqrt(x+y);
-            if(screenInches > 4.9 && screenInches < 5.4){
-                Log.e(TAG, "screenInches1 "+screenInches);
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL+ " " + Build.BRAND+ " " + Build.DEVICE;
+            if(manufacturerModel.toLowerCase().contains("j7")){
                 invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
             }else{
-                Log.e(TAG, "screenInches2 "+screenInches);
-                if (Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
-//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L);
+                DisplayMetrics dm = new DisplayMetrics();
+                getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+                int width1=dm.widthPixels;
+                int height1=dm.heightPixels;
+                double wi=(double)width1/(double)dm.xdpi;
+                double hi=(double)height1/(double)dm.ydpi;
+                double x = Math.pow(wi,2);
+                double y = Math.pow(hi,2);
+                double screenInches = Math.sqrt(x+y);
+                if(screenInches > 4.8 && screenInches < 5.5){
+                    Log.e(TAG, "screenInches1 "+screenInches);
                     invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi")){
-//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M);
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi")){
-//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H);
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xhdpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X);
-                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxhdpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX);
-                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxxhdpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX);
                 }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    Log.e(TAG, "screenInches2 "+screenInches);
+                    if (Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L);
+                        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi")){
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M);
+                        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi")){
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H);
+                        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xhdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X);
+                    }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxhdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX);
+                    }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxxhdpi")){
+                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX);
+                    }else{
+                        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+                    }
                 }
             }
+
 
         }
 

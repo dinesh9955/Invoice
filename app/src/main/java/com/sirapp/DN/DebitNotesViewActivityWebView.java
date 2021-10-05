@@ -50,6 +50,9 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
     String templateSelect = "";
     String colorCode = "#ffffff";
 
+    int BUTTON_WIDTH = 0;
+    int BUTTON_WIDTH_2 = 0;
+
     ApiInterface apiInterface;
     String company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency = "", payment_iban = "", payment_swift_bic = "";
 
@@ -370,7 +373,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
 
         //create object of print manager in your device
         PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
-        webView.getSettings().setMinimumFontSize(webView.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_PRINT);
+      //  webView.getSettings().setMinimumFontSize(webView.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_PRINT);
 
         //create object of print adapter
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
@@ -889,6 +892,10 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
 //                        .replaceAll("By cheque :", bycheckstrtxt)
 //                        .replaceAll("PayPal :", paypalstrtxt)
 //                        .replaceAll("Bank :", bankstrtxt)
+
+                        .replaceAll("14px", BUTTON_WIDTH+"px")
+                        .replaceAll("10.0pt", BUTTON_WIDTH+"px")
+                        .replaceAll("7.0pt", BUTTON_WIDTH_2+"px")
                         .replaceAll(" Payment Details ", "")
                         .replaceAll("By cheque :", "")
                         .replaceAll("PayPal :", "")
@@ -919,65 +926,94 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
 
     @SuppressLint("LongLogTag")
     private void callForWeb() {
-        if(invoiceweb != null){
-
+        if(invoiceweb != null) {
+            invoiceweb = findViewById(R.id.invoiceweb);
             WebSettings webSettings = invoiceweb.getSettings();
 
-            Log.e(TAG, "isTablet "+Utility.isTablet(DebitNotesViewActivityWebView.this));
-            if(Utility.isTablet(DebitNotesViewActivityWebView.this) == true){ // tab
-                DisplayMetrics metrics = new DisplayMetrics();
-                getWindowManager().getDefaultDisplay().getMetrics(metrics);
-                int widthPixels = metrics.widthPixels;
-                int heightPixels = metrics.heightPixels;
-                float scaleFactor = metrics.density;
-                float widthDp = widthPixels / scaleFactor;
-                float heightDp = heightPixels / scaleFactor;
-                float smallestWidth = Math.min(widthDp, heightDp);
-
-                if (smallestWidth > 720) {
-                    //Device is a 10" tablet
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_10_V);
-                }
-                else if (smallestWidth > 600) {
-                    //Device is a 7" tablet
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_7_V);
-                }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-                }
-            }else{
-                DisplayMetrics dm = new DisplayMetrics();
-                getWindowManager().getDefaultDisplay().getMetrics(dm);
-                int width1=dm.widthPixels;
-                int height1=dm.heightPixels;
-                double wi=(double)width1/(double)dm.xdpi;
-                double hi=(double)height1/(double)dm.ydpi;
-                double x = Math.pow(wi,2);
-                double y = Math.pow(hi,2);
-                double screenInches = Math.sqrt(x+y);
-                if(screenInches > 4.9 && screenInches < 5.4){
-                    Log.e(TAG, "screenInches1 "+screenInches);
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-                }else{
-                    if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("ldpi")){
-                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L_V);
-                    }else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("mdpi")){
-                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M_V);
-                    }else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("hdpi")){
-                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H_V);
-                    }else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("xhdpi")){
-                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X_V);
-                    }else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("xxhdpi")){
-                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX_V);
-                    }else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("xxxhdpi")){
-                        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX_V);
-                    }else{
-                        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-                    }
-                }
-
+            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._2sdp);
+            BUTTON_WIDTH_2 = (int) getResources().getDimension(R.dimen._1sdp);
+            if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("ldpi")) {
+                BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._3sdp);
+                BUTTON_WIDTH_2 = (int) getResources().getDimension(R.dimen._2sdp);
+            } else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("mdpi")) {
+                BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._4sdp);
+                BUTTON_WIDTH_2 = (int) getResources().getDimension(R.dimen._3sdp);
+            } else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("hdpi")) {
+                BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._5sdp);
+                BUTTON_WIDTH_2 = (int) getResources().getDimension(R.dimen._4sdp);
+            } else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("xhdpi")) {
+                BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._5sdp);
+                BUTTON_WIDTH_2 = (int) getResources().getDimension(R.dimen._4sdp);
+            } else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("xxhdpi")) {
+                BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._4sdp);
+                BUTTON_WIDTH_2 = (int) getResources().getDimension(R.dimen._3sdp);
+            } else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("xxxhdpi")) {
+                BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._3sdp);
+                BUTTON_WIDTH_2 = (int) getResources().getDimension(R.dimen._2sdp);
+            } else {
+                BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._5sdp);
+                BUTTON_WIDTH_2 = (int) getResources().getDimension(R.dimen._4sdp);
             }
+            Log.e(TAG, "BUTTON_WIDTH " + BUTTON_WIDTH);
+           // webSettings.setTextZoom(BUTTON_WIDTH);
 
         }
+
+//            Log.e(TAG, "isTablet "+Utility.isTablet(DebitNotesViewActivityWebView.this));
+//            if(Utility.isTablet(DebitNotesViewActivityWebView.this) == true){ // tab
+//                DisplayMetrics metrics = new DisplayMetrics();
+//                getWindowManager().getDefaultDisplay().getMetrics(metrics);
+//                int widthPixels = metrics.widthPixels;
+//                int heightPixels = metrics.heightPixels;
+//                float scaleFactor = metrics.density;
+//                float widthDp = widthPixels / scaleFactor;
+//                float heightDp = heightPixels / scaleFactor;
+//                float smallestWidth = Math.min(widthDp, heightDp);
+//
+//                if (smallestWidth > 720) {
+//                    //Device is a 10" tablet
+//                    webSettings.setMinimumLogicalFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_10_V);
+//                }
+//                else if (smallestWidth > 600) {
+//                    //Device is a 7" tablet
+//                    webSettings.setMinimumLogicalFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_7_V);
+//                }else{
+//                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//                }
+//            }else{
+//                DisplayMetrics dm = new DisplayMetrics();
+//                getWindowManager().getDefaultDisplay().getMetrics(dm);
+//                int width1=dm.widthPixels;
+//                int height1=dm.heightPixels;
+//                double wi=(double)width1/(double)dm.xdpi;
+//                double hi=(double)height1/(double)dm.ydpi;
+//                double x = Math.pow(wi,2);
+//                double y = Math.pow(hi,2);
+//                double screenInches = Math.sqrt(x+y);
+//                if(screenInches > 4.9 && screenInches < 5.4){
+//                    Log.e(TAG, "screenInches1 "+screenInches);
+//                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//                }else{
+//                    if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("ldpi")){
+//                        webSettings.setMinimumLogicalFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L_V);
+//                    }else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("mdpi")){
+//                        webSettings.setMinimumLogicalFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M_V);
+//                    }else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("hdpi")){
+//                        webSettings.setMinimumLogicalFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H_V);
+//                    }else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("xhdpi")){
+//                        webSettings.setMinimumLogicalFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X_V);
+//                    }else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("xxhdpi")){
+//                        webSettings.setMinimumLogicalFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX_V);
+//                    }else if (Utility.getDensityName(DebitNotesViewActivityWebView.this).equalsIgnoreCase("xxxhdpi")){
+//                        webSettings.setMinimumLogicalFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX_V);
+//                    }else{
+//                        invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//                    }
+//                }
+//
+//            }
+//
+//        }
     }
 
 

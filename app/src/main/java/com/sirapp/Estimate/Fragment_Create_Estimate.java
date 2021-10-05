@@ -751,31 +751,31 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                     for (int i = 0; i < multimgpath.size(); i++) {
                         if(i == 0){
                             File imgFile = new File(multimgpath.get(i));
-                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
                                 imgFile = new File(""+ Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
                         }else if(i == 1){
                             File imgFile = new File(multimgpath.get(i));
-                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
                                 imgFile = new File(""+Utility.getJPEGtoPNGImage2(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
                         }else if(i == 2){
                             File imgFile = new File(multimgpath.get(i));
-                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
                                 imgFile = new File(""+Utility.getJPEGtoPNGImage3(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
                         }else if(i == 3){
                             File imgFile = new File(multimgpath.get(i));
-                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
                                 imgFile = new File(""+Utility.getJPEGtoPNGImage4(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;
                         }else if(i == 4){
                             File imgFile = new File(multimgpath.get(i));
-                            if(multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif")){
+                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
                                 imgFile = new File(""+Utility.getJPEGtoPNGImage5(new File(multimgpath.get(i))));
                             }
                             multiple[i] = imgFile;

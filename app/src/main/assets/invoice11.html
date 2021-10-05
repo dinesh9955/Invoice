@@ -3,6 +3,8 @@
 
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta name="viewport" content="width=654.54" />
+
     <title>Invoice</title>
     <style>
         p {
@@ -10,10 +12,10 @@
         }
         
         .invoice-box {
-            max-width: 100%;
+             max-width: 100%;
             margin: auto;
-            padding: 0px;
-            font-size:16px;
+             padding: 0px;
+            font-size: 16px;
             line-height: 24px;
             font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             color: #000;
@@ -34,7 +36,7 @@
         .invoice-box table td {
             padding: 5px;
             vertical-align: top;
-            font-size: 14px;
+            font-size: 14px;	
 			
 			
         }
@@ -242,7 +244,7 @@
                         <table>
                             <tbody>
                                 <tr>
-                                    <td style="width:60px">Recipient:</td>
+                                    <td style="width:60px">Bill To:</td>
                                     <td class="text-left">
                                         Client N
                                     </td>
@@ -264,12 +266,13 @@
                                 <tr>
                                     <td>
                                         <!--Ship To:<br/>-->
-                                        Debit Note No:<br /> Debit Note Date:<br /> Reference No:<br />
+                                        Invoice No:<br /> Invoice Date:<br />Terms:<br /> Due Date:<br /> Reference No:<br />
                                     </td>
                                     <td style="text-align:right;">
                                         <!-- CusName<br/>-->
                                         INV-564<br /> invD
-                                       
+                                        <br /> crTerms
+                                        <br /> DueDate
                                         <br /> refNo
                                     </td>
                                 </tr>
@@ -307,27 +310,45 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                               
+
                                 <td colspan="3" class="no_border" style="padding-left: 10px;">
-                                    <h4 style="margin-bottom:0px;margin-top:0px;"></h4>
-                                    <p style="width:20%; display: inline-block; vertical-align: inherit;"></p>
-                                    <span style="width:70%; display: inline-block;">
-                                        <p width="50%"></p>
+
+
+                                    <span class="hide" style="margin-bottom:0px;margin-top:0px;">
+                                       <h4 class="hide" style="margin-bottom:0px;margin-top:0px;"> Payment Details </h4>
                                     </span>
-                                    <p style="width:20%; display: inline-block; vertical-align: inherit;"></p>
-                                    <span style="width:70%; display: inline-block;">
-                                        <p width="50%"></p>
+
+                                    <span class="hide" style="width:20%; display: inline-block; vertical-align: inherit;">
+                                        <p class="hide" width="50%">By cheque :</p>
                                     </span>
-                                    <p style="width:20%; display: inline-block; vertical-align: inherit;"></p>
-                                    <span style="width:48%; display: inline-block;">
-                                        <p width="50%"></p>
-                                        <p width="50%"></p>
-                                        <p width="50%"></p>
-                                        <p width="50%"></p>
+
+                                    <span  class="hide" style="width:70%; display: inline-block;">
+                                        <p class="hide" width="50%">Checkto</p>
+                                    </span>
+
+
+                                    <span class="hide" style="width:20%; display: inline-block; vertical-align: inherit;">
+                                        <p class="hide" width="50%">PayPal :</p>
+                                    </span>
+
+                                    <span  class="hide" style="width:70%; display: inline-block;">
+                                        <p class="hide" width="50%">Pemail</p>
+                                    </span>
+
+
+                                    <span class="hidd" style="width:20%; display: inline-block; vertical-align: inherit;">
+                                        <p class="hidd" width="50%">Bank :</p>
+                                    </span>
+
+                                    <span class="hide" style="width:48%; display: inline-block;">
+                                        <p class="hide" width="50%">BankName</p>
+                                        <p class="hide" width="50%">IBAN</p>
+                                        <p class="hide" width="50%">Currency</p>
+                                        <p class="hide" width="50%">Swift/BICCode</p>
                                         </span>
+
                                 </td>
-								
-								
+                                
                                 <td class="text-left" style="padding-left: 10px;">
                                     <b>Gross Amount</b>
                                     <p> Discount </p>
@@ -349,7 +370,11 @@
                             </tr>
 
                             <tr class="hide"><td colspan="3" class="no_border"></td><td  style="padding-left: 10px;text-align:left;">Paid Amount</td><td style="padding-right: 10px;text-align:right;padding-right:10px;">PaidsAmount</td></tr>
-
+                            <tr>
+                                <td colspan="3" class="no_border"></td>
+                                <td class="balance_due" style="padding-left: 10px; background-color: #799f6e;"><b>Balance Due_</b></td>
+                                <td class="balance_due" style="padding-right: 10px;text-align:right;padding-right:10px; background-color: #799f6e;"><b>Balance Due-</b></td>
+                            </tr>
                         </tfoot>
                     </table>
                 </td>

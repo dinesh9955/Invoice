@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.MimeTypeMap;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -26,6 +29,8 @@ import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.sirapp.Utils.Utility;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -38,145 +43,190 @@ public class wwww extends AppCompatActivity {
     private String DEEP_LINK_URL = "https://sirproject.page.link";
 
     Button button;
-
+    WebView webView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.abc);
 
         button = (Button) findViewById(R.id.button2);
+        webView = findViewById(R.id.invoiceweb);
 
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient());
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(true);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+
+
+       // String content = null;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-//                Uri newDeepLink = buildDeepLink(Uri.parse(DEEP_LINK_URL));
+            public void onClick(View view) {
+//                String name = "invoice.html";
+//                String nameName = "file:///android_asset/invoice.html";
 //
-//                Log.e(TAG, "newDeepLink "+newDeepLink);
-
-                String content1 = "<!DOCTYPE html>\n" +
-                        "<html>\n" +
-                        "  <head>\n" +
-                        "    <title>Title of the document</title>\n" +
-                        "    <style>\n" +
-                        "      .button {\n" +
-                        "        background-color: #1c87c9;\n" +
-                        "        border: none;\n" +
-                        "        color: white;\n" +
-                        "        padding: 20px 34px;\n" +
-                        "        text-align: center;\n" +
-                        "        text-decoration: none;\n" +
-                        "        display: inline-block;\n" +
-                        "        font-size: 20px;\n" +
-                        "        margin: 4px 2px;\n" +
-                        "        cursor: pointer;\n" +
-                        "      }\n" +
-                        "    </style>\n" +
-                        "  </head>\n" +
-                        "  <body>\n" +
-                        "    <a href=\"" + "urlPaypal" + "\" class=\"button\">" + "linkWitch" + "</a>\n" +
-                        "  </body>\n" +
-                        "</html>";
-
-                //generateNoteOnSD(wwww.this , "track.html", ""+content1.toString());
-
-//                BottomSheetDialog bottomSheetDialog;
-//                bottomSheetDialog = new BottomSheetDialog(wwww.this);
-//
-//                View view = LayoutInflater.from(wwww.this).inflate(R.layout.aaaaa, null);
-////                BottomSheetBehavior behavior = BottomSheetBehavior.from(view);
-//                BottomSheetBehavior.from(view)
-//                        .setState(BottomSheetBehavior.STATE_EXPANDED);
-//
-//                bottomSheetDialog.setContentView(view);
-//                bottomSheetDialog.show();
-
-//                final Dialog mybuilder=new Dialog(wwww.this);
-//                mybuilder.setContentView(R.layout.aaaaa);
-//                mybuilder.show();
-//                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-//                Window window = mybuilder.getWindow();
-//                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                // window.setBackgroundDrawableResource(R.color.transparent);
-
-//                File mFile2 = new File("/sdcard/share.jpg");
-//                Uri imageUri2 = FileProvider.getUriForFile(
-//                        wwww.this,
-//                        BuildConfig.APPLICATION_ID + ".provider",
-//                        mFile2);
-//
-//                Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
-//                ArrayList<Uri> uriArrayList = new ArrayList<>();
-//                uriArrayList.add(imageUri2);
-//                uriArrayList.add(imageUri2);
-//                Collections.reverse(uriArrayList);
-//
-//                intentShareFile.setType("application/pdf/*|image/*|text/html");
-//                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "subject");
-//                intentShareFile.putExtra(Intent.EXTRA_TEXT, "text2");
-//                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
-//                intentShareFile.setPackage("com.google.android.gm");
-//                Log.e(TAG, "paypalXX10 ");
 //                try {
-//                    startActivity(intentShareFile);
-//                    Log.e(TAG, "paypalXX72 ");
-//                } catch (Exception e) {
-//                    Log.e(TAG, "paypalXX32 " + e.getMessage());
-//                }
-
-
-                Intent intentShareFile = new Intent(Intent.ACTION_SEND);
-                ArrayList<Uri> uriArrayList = new ArrayList<>();
-                String MEDIA_PATH = new String(Environment.getExternalStorageDirectory() + "/SIR" );
-//                File mFile22 = new File("/sdcard/Notes/PayPal.html");
-//                uriArrayList.add(imageUri2);
-//                uriArrayList.add(imageUri2);
-//               // Collections.reverse(uriArrayList);
-
-                final File files = new File(MEDIA_PATH);
-
-                File list[] = files.listFiles();
-                for (int i = 0; i < list.length; i++) {
-                    Log.e(TAG, "listAA "+list[i]);
-                   // uriArrayList.add(list[i].getName());
-                   // File mFile2 = new File(list[i].getAbsoluteFile());
-                    Uri imageUri2 = FileProvider.getUriForFile(
-                            wwww.this,
-                            BuildConfig.APPLICATION_ID + ".provider",
-                            list[i].getAbsoluteFile());
-                    uriArrayList.add(imageUri2);
-                }
-
-
-              //  intentShareFile.setType("application/pdf/*|image/*|text/html");
-
-//                shareIntent.putExtra(Intent.EXTRA_STREAM, pictureUri);
-
-//                File mFile2 = new File("/sdcard/share.jpg");
+//                    String content = IOUtils.toString(getAssets().open(name));
+//                    invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
 //
-//                Uri imageUri2 = FileProvider.getUriForFile(
-//                        wwww.this,
-//                        BuildConfig.APPLICATION_ID + ".provider",
-//                        mFile2);
-
-                intentShareFile.putExtra(Intent.EXTRA_STREAM, uriArrayList);
-//                intentShareFile.putExtra(Intent.EXTRA_STREAM, imageUri2);
-                intentShareFile.setType("*/*");
-                intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intentShareFile.setPackage("com.google.android.gm");
-                startActivity(intentShareFile);
-
-
-
-
-
-
+//                }catch (Exception e){
+//
+//                }
             }
-
-
-
-
         });
 
+       // webView.setInitialScale(20);
+        String name = "invoice11.html";
+        String nameName = "file:///android_asset/invoice11.html";
+
+        try {
+            String content = IOUtils.toString(getAssets().open(name));
+            webView.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
+
+        }catch (Exception e){
+
+        }
+
+
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Uri newDeepLink = buildDeepLink(Uri.parse(DEEP_LINK_URL));
+////
+////                Log.e(TAG, "newDeepLink "+newDeepLink);
+//
+//                String content1 = "<!DOCTYPE html>\n" +
+//                        "<html>\n" +
+//                        "  <head>\n" +
+//                        "    <title>Title of the document</title>\n" +
+//                        "    <style>\n" +
+//                        "      .button {\n" +
+//                        "        background-color: #1c87c9;\n" +
+//                        "        border: none;\n" +
+//                        "        color: white;\n" +
+//                        "        padding: 20px 34px;\n" +
+//                        "        text-align: center;\n" +
+//                        "        text-decoration: none;\n" +
+//                        "        display: inline-block;\n" +
+//                        "        font-size: 20px;\n" +
+//                        "        margin: 4px 2px;\n" +
+//                        "        cursor: pointer;\n" +
+//                        "      }\n" +
+//                        "    </style>\n" +
+//                        "  </head>\n" +
+//                        "  <body>\n" +
+//                        "    <a href=\"" + "urlPaypal" + "\" class=\"button\">" + "linkWitch" + "</a>\n" +
+//                        "  </body>\n" +
+//                        "</html>";
+//
+//                //generateNoteOnSD(wwww.this , "track.html", ""+content1.toString());
+//
+////                BottomSheetDialog bottomSheetDialog;
+////                bottomSheetDialog = new BottomSheetDialog(wwww.this);
+////
+////                View view = LayoutInflater.from(wwww.this).inflate(R.layout.aaaaa, null);
+//////                BottomSheetBehavior behavior = BottomSheetBehavior.from(view);
+////                BottomSheetBehavior.from(view)
+////                        .setState(BottomSheetBehavior.STATE_EXPANDED);
+////
+////                bottomSheetDialog.setContentView(view);
+////                bottomSheetDialog.show();
+//
+////                final Dialog mybuilder=new Dialog(wwww.this);
+////                mybuilder.setContentView(R.layout.aaaaa);
+////                mybuilder.show();
+////                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+////                Window window = mybuilder.getWindow();
+////                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//                // window.setBackgroundDrawableResource(R.color.transparent);
+//
+////                File mFile2 = new File("/sdcard/share.jpg");
+////                Uri imageUri2 = FileProvider.getUriForFile(
+////                        wwww.this,
+////                        BuildConfig.APPLICATION_ID + ".provider",
+////                        mFile2);
+////
+////                Intent intentShareFile = new Intent(Intent.ACTION_SEND_MULTIPLE);
+////                ArrayList<Uri> uriArrayList = new ArrayList<>();
+////                uriArrayList.add(imageUri2);
+////                uriArrayList.add(imageUri2);
+////                Collections.reverse(uriArrayList);
+////
+////                intentShareFile.setType("application/pdf/*|image/*|text/html");
+////                intentShareFile.putExtra(Intent.EXTRA_SUBJECT, "subject");
+////                intentShareFile.putExtra(Intent.EXTRA_TEXT, "text2");
+////                intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
+////                intentShareFile.setPackage("com.google.android.gm");
+////                Log.e(TAG, "paypalXX10 ");
+////                try {
+////                    startActivity(intentShareFile);
+////                    Log.e(TAG, "paypalXX72 ");
+////                } catch (Exception e) {
+////                    Log.e(TAG, "paypalXX32 " + e.getMessage());
+////                }
+//
+//
+//                Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+//                ArrayList<Uri> uriArrayList = new ArrayList<>();
+//                String MEDIA_PATH = new String(Environment.getExternalStorageDirectory() + "/SIR" );
+////                File mFile22 = new File("/sdcard/Notes/PayPal.html");
+////                uriArrayList.add(imageUri2);
+////                uriArrayList.add(imageUri2);
+////               // Collections.reverse(uriArrayList);
+//
+//                final File files = new File(MEDIA_PATH);
+//
+//                File list[] = files.listFiles();
+//                for (int i = 0; i < list.length; i++) {
+//                    Log.e(TAG, "listAA "+list[i]);
+//                   // uriArrayList.add(list[i].getName());
+//                   // File mFile2 = new File(list[i].getAbsoluteFile());
+//                    Uri imageUri2 = FileProvider.getUriForFile(
+//                            wwww.this,
+//                            BuildConfig.APPLICATION_ID + ".provider",
+//                            list[i].getAbsoluteFile());
+//                    uriArrayList.add(imageUri2);
+//                }
+//
+//
+//              //  intentShareFile.setType("application/pdf/*|image/*|text/html");
+//
+////                shareIntent.putExtra(Intent.EXTRA_STREAM, pictureUri);
+//
+////                File mFile2 = new File("/sdcard/share.jpg");
+////
+////                Uri imageUri2 = FileProvider.getUriForFile(
+////                        wwww.this,
+////                        BuildConfig.APPLICATION_ID + ".provider",
+////                        mFile2);
+//
+//                intentShareFile.putExtra(Intent.EXTRA_STREAM, uriArrayList);
+////                intentShareFile.putExtra(Intent.EXTRA_STREAM, imageUri2);
+//                intentShareFile.setType("*/*");
+//                intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                intentShareFile.setPackage("com.google.android.gm");
+//                startActivity(intentShareFile);
+//
+//
+//
+//
+//
+//
+//            }
+//
+//
+//
+//
+//        });
+//
 
 
 

@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -389,14 +390,15 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         //    Log.e(TAG, "Source_dir : " + pm.getLaunchIntentForPackage(packageInfo.packageName).toString());
 
             //Log.e(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
-            if(ccc.toString().toLowerCase().contains("mail")){
-                Log.e(TAG, "LaunchActivity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
-                Log.e(TAG, "Installedpackage :" + packageInfo.packageName);
-                return;
-            }
+//            if(ccc.toString().toLowerCase().contains("mail")){
+//                Log.e(TAG, "LaunchActivity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
+//                Log.e(TAG, "Installedpackage :" + packageInfo.packageName);
+//                return;
+//            }
         }
 
-
+        String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL+ " " + Build.BRAND+ " " + Build.DEVICE;
+        Log.e(TAG, "manufacturerModel :" + manufacturerModel);
 
 //        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 //
