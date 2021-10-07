@@ -369,7 +369,7 @@ public class ReceiptViewActivityWebView extends BaseActivity {
 
         //create object of print manager in your device
         PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
-        webView.getSettings().setMinimumFontSize(webView.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_PRINT);
+      //  webView.getSettings().setMinimumFontSize(webView.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_PRINT);
 
         //create object of print adapter
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
@@ -422,7 +422,7 @@ public class ReceiptViewActivityWebView extends BaseActivity {
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
-        callForWeb();
+       // callForWeb();
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             @Override
@@ -892,7 +892,7 @@ public class ReceiptViewActivityWebView extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        callForWeb();
+       // callForWeb();
     }
 
 

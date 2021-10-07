@@ -391,7 +391,7 @@ public class InvoiceViewActivityWebView extends BaseActivity {
 
         //create object of print manager in your device
         PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(PRINT_SERVICE);
-        webView.getSettings().setMinimumFontSize(webView.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_PRINT);
+       // webView.getSettings().setMinimumFontSize(webView.getSettings().getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_PRINT);
 
 
 
@@ -453,7 +453,7 @@ public class InvoiceViewActivityWebView extends BaseActivity {
         invoiceweb.getSettings().setUseWideViewPort(true);
 
 
-        callForWeb();
+       // callForWeb();
 
 
 //        if(Utility.getDensityName(InvoiceViewActivityWebView.this).equalsIgnoreCase("hdpi") ||
@@ -1058,7 +1058,7 @@ public class InvoiceViewActivityWebView extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        callForWeb();
+       // callForWeb();
     }
 
     @SuppressLint("LongLogTag")

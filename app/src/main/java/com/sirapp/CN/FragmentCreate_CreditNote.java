@@ -101,6 +101,7 @@ import com.sirapp.Model.Product_list;
 import com.sirapp.Model.SelectedTaxlist;
 import com.sirapp.Model.Service_list;
 import com.sirapp.Model.Tax_List;
+import com.sirapp.PO.Fragment_Create_PO;
 import com.sirapp.Product.Product_Activity;
 import com.sirapp.Service.Service_Activity;
 import com.sirapp.Tax.CustomTaxAdapter;
@@ -172,7 +173,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
     String invoicetaxamount;
     ImageView imgsigsuccess, imgrecsuccess, imgstampsuccess, attachmenttxtimg;
     BottomSheetDialog bottomSheetDialog, bottomSheetDialog2, bottomSheetDialog3;
-    AwesomeSpinner selectwarehouse;
+    Button selectwarehouse;
 
     Products_Adapter products_adapter;
     ArrayList<String> quantity = new ArrayList<>();
@@ -861,15 +862,45 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
             }
         });
 
-        selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//        selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                selectwarehouseId = wids.get(position);
+//                Log.e("selectwarehouseId", selectwarehouseId);
+//             //   productget(selectwarehouseId);
+//                productget(selectedCompanyId);
+//            }
+//        });
+
+
+
+        selectwarehouse.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                selectwarehouseId = wids.get(position);
-                Log.e("selectwarehouseId", selectwarehouseId);
-             //   productget(selectwarehouseId);
-                productget(selectedCompanyId);
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter2 mAdapter;
+
+                final Dialog mybuilder = new Dialog(getActivity());
+                mybuilder.setContentView(R.layout.select_company_dialog_2);
+
+
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter2(wnames, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
+
+
 
         invoicerecipnt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2671,10 +2702,10 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                                 selectButton.setVisibility(View.GONE);
                             }
 
-                            if (getActivity() != null){
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                                selectwarehouse.setAdapter(namesadapter);
-                            }
+//                            if (getActivity() != null){
+//                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+//                                selectwarehouse.setAdapter(namesadapter);
+//                            }
 
                         }
                     } catch (JSONException e) {
@@ -4679,27 +4710,27 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 //        }
 
 
-        int BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._20sdp);
-
-        if (Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
-            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._45sdp);
-        }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi")){
-            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._40sdp);
-        }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi")){
-            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._45sdp);
-        }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xhdpi")){
-            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._30sdp);
-        }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxhdpi")){
-            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._25sdp);
-        }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxxhdpi")){
-            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._20sdp);
-        }else{
-            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._15sdp);
-        }
-
-        Log.e(TAG, "BUTTON_WIDTH "+BUTTON_WIDTH);
-
-        webSettings.setTextZoom(BUTTON_WIDTH);
+//        int BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._20sdp);
+//
+//        if (Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
+//            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._45sdp);
+//        }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi")){
+//            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._40sdp);
+//        }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi")){
+//            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._45sdp);
+//        }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xhdpi")){
+//            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._30sdp);
+//        }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxhdpi")){
+//            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._25sdp);
+//        }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxxhdpi")){
+//            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._20sdp);
+//        }else{
+//            BUTTON_WIDTH = (int) getResources().getDimension(R.dimen._15sdp);
+//        }
+//
+//        Log.e(TAG, "BUTTON_WIDTH "+BUTTON_WIDTH);
+//
+//        webSettings.setTextZoom(BUTTON_WIDTH);
 
 //        Log.e(TAG, "isTablet "+Utility.isTablet(getActivity()));
 //        if(Utility.isTablet(getActivity()) == true){ // tab
@@ -5009,5 +5040,83 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
             bottomSheetDialog.dismiss();
         }
     }
+
+
+
+
+
+    public class MenuAdapter2 extends RecyclerView.Adapter<MenuAdapter2.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter2(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter2.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter2.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter2.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+
+                    selectwarehouse.setText(wnames.get(i));
+                    selectwarehouseId = wids.get(i);
+                    Log.e("selectwarehouseId", selectwarehouseId);
+                    productget(selectedCompanyId);
+
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
 
 }

@@ -243,7 +243,7 @@
 
 
             <com.isapanah.awesomespinner.AwesomeSpinner
-                android:id="@+id/selectwarehouse"
+                android:id="@+id/selectwarehouse2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_below="@id/itemstxtTemplate"
@@ -253,10 +253,29 @@
                 android:background="@drawable/edittextshape"
                 app:spinnerDirection="ltr"
                 app:spinnerHint="@string/invoice_SelectWarehouseForProduct"
+                android:visibility="gone"
 
                />
 
+            <Button
+                android:id="@+id/selectwarehouse"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/edittextshape"
+                android:hint="@string/invoice_SelectWarehouseForProduct"
+                android:spinnerMode="dialog"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="10dp"
+                android:textStyle="normal"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:layout_below="@id/itemstxtTemplate"
+                android:textAllCaps="false"
 
+                />
 
             <Button
                 android:id="@+id/selectButton"

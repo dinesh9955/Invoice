@@ -97,6 +97,7 @@ import com.sirapp.Model.Product_list;
 import com.sirapp.Model.SelectedTaxlist;
 import com.sirapp.Model.Service_list;
 import com.sirapp.Model.Tax_List;
+import com.sirapp.PO.Fragment_Create_PO;
 import com.sirapp.Product.Product_Activity;
 import com.sirapp.Service.Service_Activity;
 import com.sirapp.Tax.CustomTaxAdapter;
@@ -170,7 +171,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
     String invoicetaxamount;
     ImageView imgsigsuccess, imgrecsuccess, imgstampsuccess, attachmenttxtimg;
     BottomSheetDialog bottomSheetDialog, bottomSheetDialog2, bottomSheetDialog3;
-    AwesomeSpinner selectwarehouse;
+    Button selectwarehouse;
 
     Products_Adapter products_adapter;
     ArrayList<String> quantity = new ArrayList<>();
@@ -933,15 +934,44 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
             }
         });
 
-        selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
-            @Override
-            public void onItemSelected(int position, String itemAtPosition) {
-                selectwarehouseId = wids.get(position);
-                Log.e("selectwarehouseId", selectwarehouseId);
-                productget(selectwarehouseId);
+//        selectwarehouse.setOnSpinnerItemClickListener(new AwesomeSpinner.onSpinnerItemClickListener<String>() {
+//            @Override
+//            public void onItemSelected(int position, String itemAtPosition) {
+//                selectwarehouseId = wids.get(position);
+//                Log.e("selectwarehouseId", selectwarehouseId);
+//                productget(selectwarehouseId);
+//
+//            }
+//        });
 
+
+        selectwarehouse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RecyclerView mRecyclerView;
+                MenuAdapter2 mAdapter;
+
+                final Dialog mybuilder = new Dialog(getActivity());
+                mybuilder.setContentView(R.layout.select_company_dialog_2);
+
+
+                mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+                mAdapter = new MenuAdapter2(wnames, mybuilder);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
             }
         });
+
+
 
         invoicerecipnt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -2728,10 +2758,10 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                                 selectButton.setVisibility(View.GONE);
                             }
 
-                            if (getActivity()!=null){
-                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
-                                selectwarehouse.setAdapter(namesadapter);
-                            }
+//                            if (getActivity()!=null){
+//                                ArrayAdapter<String> namesadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, wnames);
+//                                selectwarehouse.setAdapter(namesadapter);
+//                            }
 
                         }
                     } catch (JSONException e) {
@@ -4735,64 +4765,67 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         invoiceweb.getSettings().setUseWideViewPort(true);
 
 
-        Log.e(TAG, "isTablet "+Utility.isTablet(getActivity()));
-        if(Utility.isTablet(getActivity()) == true){ // tab
-            DisplayMetrics metrics = new DisplayMetrics();
-            getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-            int widthPixels = metrics.widthPixels;
-            int heightPixels = metrics.heightPixels;
-            float scaleFactor = metrics.density;
-            float widthDp = widthPixels / scaleFactor;
-            float heightDp = heightPixels / scaleFactor;
-            float smallestWidth = Math.min(widthDp, heightDp);
 
-            if (smallestWidth > 720) {
-                //Device is a 10" tablet
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_10);
-            }
-            else if (smallestWidth > 600) {
-                //Device is a 7" tablet
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_7);
-            }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-            }
 
-        }else{
-            DisplayMetrics dm = new DisplayMetrics();
-            getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-            int width1=dm.widthPixels;
-            int height1=dm.heightPixels;
-            double wi=(double)width1/(double)dm.xdpi;
-            double hi=(double)height1/(double)dm.ydpi;
-            double x = Math.pow(wi,2);
-            double y = Math.pow(hi,2);
-            double screenInches = Math.sqrt(x+y);
-            if(screenInches > 4.9 && screenInches < 5.4){
-                Log.e(TAG, "screenInches1 "+screenInches);
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-            }else{
-                Log.e(TAG, "screenInches2 "+screenInches);
-                if (Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
-//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L);
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi")){
-//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M);
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi")){
-//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H);
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xhdpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X);
-                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxhdpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX);
-                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxxhdpi")){
-                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX);
-                }else{
-                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-                }
-            }
 
-        }
+//        Log.e(TAG, "isTablet "+Utility.isTablet(getActivity()));
+//        if(Utility.isTablet(getActivity()) == true){ // tab
+//            DisplayMetrics metrics = new DisplayMetrics();
+//            getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+//            int widthPixels = metrics.widthPixels;
+//            int heightPixels = metrics.heightPixels;
+//            float scaleFactor = metrics.density;
+//            float widthDp = widthPixels / scaleFactor;
+//            float heightDp = heightPixels / scaleFactor;
+//            float smallestWidth = Math.min(widthDp, heightDp);
+//
+//            if (smallestWidth > 720) {
+//                //Device is a 10" tablet
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_10);
+//            }
+//            else if (smallestWidth > 600) {
+//                //Device is a 7" tablet
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_TAB_7);
+//            }else{
+//                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//            }
+//
+//        }else{
+//            DisplayMetrics dm = new DisplayMetrics();
+//            getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+//            int width1=dm.widthPixels;
+//            int height1=dm.heightPixels;
+//            double wi=(double)width1/(double)dm.xdpi;
+//            double hi=(double)height1/(double)dm.ydpi;
+//            double x = Math.pow(wi,2);
+//            double y = Math.pow(hi,2);
+//            double screenInches = Math.sqrt(x+y);
+//            if(screenInches > 4.9 && screenInches < 5.4){
+//                Log.e(TAG, "screenInches1 "+screenInches);
+//                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//            }else{
+//                Log.e(TAG, "screenInches2 "+screenInches);
+//                if (Utility.getDensityName(getActivity()).equalsIgnoreCase("ldpi")){
+////                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_L);
+//                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("mdpi")){
+////                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_M);
+//                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("hdpi")){
+////                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_H);
+//                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xhdpi")){
+//                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_X);
+//                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxhdpi")){
+//                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XX);
+//                }else if (Utility.getDensityName(getActivity()).equalsIgnoreCase("xxxhdpi")){
+//                    webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_XXX);
+//                }else{
+//                    invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//                }
+//            }
+//
+//        }
 
 
         invoiceweb.setWebViewClient(new WebViewClient() {
@@ -4950,5 +4983,82 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
             bottomSheetDialog.dismiss();
         }
     }
+
+
+
+
+    public class MenuAdapter2 extends RecyclerView.Adapter<MenuAdapter2.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter2(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter2.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter2.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter2.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+
+                    selectwarehouse.setText(wnames.get(i));
+                    selectwarehouseId = wids.get(i);
+                    Log.e("selectwarehouseId", selectwarehouseId);
+                    productget(selectedCompanyId);
+
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
 
 }

@@ -99,6 +99,9 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
         TextView titleView = toolbar.findViewById(R.id.title1);
         ImageView backbtn = toolbar.findViewById(R.id.backbtn);
         ImageView printimg = toolbar.findViewById(R.id.imageViewptint);
+        invoiceweb = findViewById(R.id.invoiceweb);
+
+
         apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
         invoiceId = getIntent().getStringExtra("invoiceID");
         templatestr = getIntent().getStringExtra("templatestr");
@@ -123,6 +126,8 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
         });
         setSupportActionBar(toolbar);
         titleView.setText(getString(R.string.preview));
+
+
 
 
         getinvoicedata();
@@ -430,7 +435,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
-        callForWeb();
+//        callForWeb();
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             @Override
@@ -758,37 +763,36 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
 
         String name = "debit.html";
         String nameName = "file:///android_asset/debit.html";
+
+
         if(templatestr.equals("1")) {
 
 
-                name = "debit.html";
-                nameName = "file:///android_asset/debit.html";
-
+            name = "debit.html";
+            nameName = "file:///android_asset/debit.html";
 
 
             StringBuilder stringBuilderCompany = new StringBuilder();
 
-            if(!company_address.equalsIgnoreCase("")){
-                stringBuilderCompany.append(company_address+"</br>");
+            if (!company_address.equalsIgnoreCase("")) {
+                stringBuilderCompany.append(company_address + "</br>");
             }
-            if(!company_contact.equalsIgnoreCase("")){
-                stringBuilderCompany.append(company_contact+"</br>");
+            if (!company_contact.equalsIgnoreCase("")) {
+                stringBuilderCompany.append(company_contact + "</br>");
             }
-            if(!company_website.equalsIgnoreCase("")){
-                stringBuilderCompany.append(company_website+"</br>");
+            if (!company_website.equalsIgnoreCase("")) {
+                stringBuilderCompany.append(company_website + "</br>");
             }
-            if(!company_email.equalsIgnoreCase("")){
-                stringBuilderCompany.append(company_email+"");
+            if (!company_email.equalsIgnoreCase("")) {
+                stringBuilderCompany.append(company_email + "");
             }
-
-
 
 
             String htmlview_debit_note = getString(R.string.htmlview_debit_note);
             String htmlview_Recipient = getString(R.string.htmlview_Recipient);
             String htmlview_DebitNoteNo = getString(R.string.htmlview_DebitNoteNo);
             String htmlview_DebitNoteDate = getString(R.string.htmlview_DebitNoteDate);
-          //  String htmlview_ReferenceNo = getString(R.string.htmlview_ReferenceNo);
+            //  String htmlview_ReferenceNo = getString(R.string.htmlview_ReferenceNo);
             String htmlview_SUMMARY = getString(R.string.htmlview_SUMMARY);
             String htmlview_ProductItem = getString(R.string.htmlview_ProductItem);
             String htmlview_UnitofMeasurement = getString(R.string.htmlview_UnitofMeasurement);
@@ -806,10 +810,22 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
             String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
 
 
+//        String name = "debit.html";
+//        String nameName = "file:///android_asset/debit.html";
+
+//            try {
+//                content = IOUtils.toString(getAssets().open(name));
+//                invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
+//
+//            } catch (Exception e) {
+//
+//            }
+//
+//        }
 
 
             try {
-                content = IOUtils.toString(getAssets().open(name))
+                 content = IOUtils.toString(getAssets().open(name))
 
                         .replaceAll("Title_", htmlview_debit_note)
                         .replaceAll("Recipient", htmlview_Recipient)
@@ -893,9 +909,9 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
 //                        .replaceAll("PayPal :", paypalstrtxt)
 //                        .replaceAll("Bank :", bankstrtxt)
 
-                        .replaceAll("14px", BUTTON_WIDTH+"px")
-                        .replaceAll("10.0pt", BUTTON_WIDTH+"px")
-                        .replaceAll("7.0pt", BUTTON_WIDTH_2+"px")
+//                        .replaceAll("14px", BUTTON_WIDTH+"px")
+//                        .replaceAll("10.0pt", BUTTON_WIDTH+"px")
+//                        .replaceAll("7.0pt", BUTTON_WIDTH_2+"px")
                         .replaceAll(" Payment Details ", "")
                         .replaceAll("By cheque :", "")
                         .replaceAll("PayPal :", "")
@@ -921,7 +937,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        callForWeb();
+      //  callForWeb();
     }
 
     @SuppressLint("LongLogTag")

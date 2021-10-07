@@ -72,7 +72,10 @@
             android:name="com.sirapp.Splash_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Splash">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 
@@ -82,10 +85,7 @@
             android:theme="@style/Splash"
             android:windowSoftInputMode="adjustResize" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->

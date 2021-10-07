@@ -5868,21 +5868,21 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
         invoiceweb.getSettings().setLoadWithOverviewMode(true);
         invoiceweb.getSettings().setUseWideViewPort(true);
 
-        if(Utility.getDensityName(EditInvoiceActivity.this).equalsIgnoreCase("hdpi") ||
-                Utility.getDensityName(EditInvoiceActivity.this).equalsIgnoreCase("mdpi") ||
-                Utility.getDensityName(EditInvoiceActivity.this).equalsIgnoreCase("ldpi")){
-            if(AllSirApi.FONT_INVOICE_CREATE_LDPI == true){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_LDPI);
-            }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-            }
-        }else{
-            if(AllSirApi.FONT_INVOICE_CREATE == true){
-                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
-            }else{
-                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
-            }
-        }
+//        if(Utility.getDensityName(EditInvoiceActivity.this).equalsIgnoreCase("hdpi") ||
+//                Utility.getDensityName(EditInvoiceActivity.this).equalsIgnoreCase("mdpi") ||
+//                Utility.getDensityName(EditInvoiceActivity.this).equalsIgnoreCase("ldpi")){
+//            if(AllSirApi.FONT_INVOICE_CREATE_LDPI == true){
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE_LDPI);
+//            }else{
+//                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//            }
+//        }else{
+//            if(AllSirApi.FONT_INVOICE_CREATE == true){
+//                webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + AllSirApi.FONT_SIZE_CREATE);
+//            }else{
+//                invoiceweb.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+//            }
+//        }
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             @Override

@@ -448,7 +448,7 @@ public class ViewCreditNote_Activity extends BaseActivity {
 //        webSettings.setAllowFileAccessFromFileURLs(true);
 
 
-        callForWeb();
+      //  callForWeb();
 
         invoiceweb.setWebViewClient(new WebViewClient() {
             @Override
@@ -1019,7 +1019,7 @@ public class ViewCreditNote_Activity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        callForWeb();
+       // callForWeb();
     }
 
 

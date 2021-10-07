@@ -1,12 +1,18 @@
 package com.sirapp;
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.print.PrintAttributes;
+import android.print.PrintDocumentAdapter;
+import android.print.PrintManager;
+import android.print.pdf.PrintedPdfDocument;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,17 +33,19 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.sirapp.Base.BaseActivity;
 import com.sirapp.Utils.Utility;
 
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class wwww extends AppCompatActivity {
+public class wwww extends BaseActivity {
 
     private String TAG = "wwww";
     private String DEEP_LINK_URL = "https://sirproject.page.link";
@@ -66,26 +74,10 @@ public class wwww extends AppCompatActivity {
         webView.getSettings().setUseWideViewPort(true);
 
 
-       // String content = null;
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                String name = "invoice.html";
-//                String nameName = "file:///android_asset/invoice.html";
-//
-//                try {
-//                    String content = IOUtils.toString(getAssets().open(name));
-//                    invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
-//
-//                }catch (Exception e){
-//
-//                }
-            }
-        });
 
        // webView.setInitialScale(20);
-        String name = "invoice11.html";
-        String nameName = "file:///android_asset/invoice11.html";
+        String name = "debit.html";
+        String nameName = "file:///android_asset/debit.html";
 
         try {
             String content = IOUtils.toString(getAssets().open(name));
@@ -94,6 +86,30 @@ public class wwww extends AppCompatActivity {
         }catch (Exception e){
 
         }
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
+//
+//                PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
+//
+//                //provide name to your newly generated pdf file
+//                String jobName = getString(R.string.app_name) + " Print Test";
+//
+//                PrintAttributes.Builder builder = new PrintAttributes.Builder();
+//                builder.setMediaSize( PrintAttributes.MediaSize.ISO_A4);
+//             //   builder.setResolution(new PrintAttributes.Resolution("zooey", PRINT_SERVICE,600,600));
+//               // builder.setResolution(PrintAttributes.Resolution("pdf","pdf", 600, 600));
+//               // builder.setMinMargins(PrintAttributes.Margins.NO_MARGINS);
+//                builder.setMinMargins(new PrintAttributes.Margins(0, 0, 0, 0));
+//                 printManager.print(jobName, printAdapter, builder.build());
+
+                generatePdf();
+            }
+        });
+
 
 
 //        button.setOnClickListener(new View.OnClickListener() {
@@ -280,5 +296,30 @@ public class wwww extends AppCompatActivity {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         String type = mime.getExtensionFromMimeType(cR.getType(uri));
         return type;
+    }
+
+
+    @TargetApi(19)
+    private void generatePdf() {
+        PrintAttributes.Builder builder = new PrintAttributes.Builder();
+        //builder.setColorMode(PrintAttributes.COLOR_MODE_COLOR);
+        builder.setMediaSize(PrintAttributes.MediaSize.ISO_A4); // or ISO_A0
+        builder.setMinMargins(PrintAttributes.Margins.NO_MARGINS);
+        builder.setResolution(new PrintAttributes.Resolution("1", "label", 1080, 1080));
+        PrintedPdfDocument document = new PrintedPdfDocument(this, builder.build());
+        PdfDocument.Page page = document.startPage(1);
+        View content = webView;
+        content.draw(page.getCanvas());
+        document.finishPage(page);
+        try {
+            File f = new File(Environment.getExternalStorageDirectory()
+                    + File.separator + "document.pdf");
+
+           // File file = new File(getExternalFilesDir(null).getAbsolutePath(), "document.pdf");
+            document.writeTo(new FileOutputStream(f));
+        } catch (IOException e) {
+            Log.e("cannot generate pdf", e.getMessage());
+        }
+        document.close();
     }
 }

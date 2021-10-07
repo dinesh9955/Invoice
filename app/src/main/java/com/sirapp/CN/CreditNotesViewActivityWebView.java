@@ -445,7 +445,7 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
 //        invoiceweb.getSettings().setDefaultFontSize(30);
 //        invoiceweb.setInitialScale(100);
 
-        callForWeb();
+      //  callForWeb();
 
 
         invoiceweb.setWebViewClient(new WebViewClient() {
@@ -937,7 +937,7 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        callForWeb();
+       // callForWeb();
     }
 
 

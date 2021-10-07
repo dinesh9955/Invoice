@@ -253,7 +253,7 @@
             <Button
                 android:id="@+id/selectwarehouse"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="20dp"
@@ -262,10 +262,12 @@
                 android:spinnerMode="dialog"
                 android:gravity="left|center_vertical"
                 android:paddingLeft="10dp"
-                android:textStyle="bold"
-                android:textSize="@dimen/_11sdp"
+                android:textStyle="normal"
+                android:textSize="@dimen/_10sdp"
                 android:textColor="@color/black"
                 android:layout_below="@id/itemstxtTemplate"
+                android:textAllCaps="false"
+
                 />
 
 
