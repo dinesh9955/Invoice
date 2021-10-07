@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -51,6 +52,9 @@ import static com.sirapp.API.AllSirApi.FONT_SIZE_PRINT_VIEW;
 
 public class CreditNotesViewActivityWebView extends BaseActivity {
     private final String TAG = "CreditNotesViewActivityWebView";
+
+    String htmlZoom = "1.0";
+
     WebView invoiceweb;
     String invoiceId = "";
     String templateSelect = "";
@@ -128,8 +132,26 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
         titleView.setText(getString(R.string.preview));
 
 
+        deviceCheck();
+
+
+
+
         getinvoicedata();
 
+    }
+
+    private void deviceCheck() {
+        if(Utility.isTablet(CreditNotesViewActivityWebView.this) == true){
+            htmlZoom = "1.0";
+        }else{
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL+ " " + Build.BRAND+ " " + Build.DEVICE;
+            if(manufacturerModel.toLowerCase().contains("j7")){
+                htmlZoom = "0.7";
+            }else{
+                htmlZoom = "0.5";
+            }
+        }
     }
 
     private void getinvoicedata() {
@@ -849,7 +871,7 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
 //                        .replaceAll("Attachments", htmlview_Attachments)
 
 
-
+                        .replaceAll("1.0", htmlZoom)
                         .replaceAll("Company Name", company_name)
                         .replaceAll("Address", stringBuilderCompany.toString())
 //                        .replaceAll("Contact No.", company_contact)
