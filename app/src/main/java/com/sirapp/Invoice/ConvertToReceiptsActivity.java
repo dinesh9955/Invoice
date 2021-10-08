@@ -21,6 +21,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -77,6 +78,7 @@ import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Customer.Customer_Activity;
+import com.sirapp.Estimate.ConvertToInvoiceActivity;
 import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
 import com.sirapp.Invoice.response.InvoiceCompanyDto;
@@ -150,6 +152,12 @@ import retrofit2.Callback;
 
 public class ConvertToReceiptsActivity extends BaseActivity implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
     private static final String TAG = "ConvertToReceipts";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "receipt.html";
+
     String companycolor = "#ffffff";
     int selectedTemplate = 0;
 //    int defaultClick = 0;
@@ -584,10 +592,35 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 //        companyget();
+
+        checkDevice();
+
         getinvoicedata();
 
 
+    }
 
+
+    private void checkDevice() {
+        if(Utility.isTablet(ConvertToReceiptsActivity.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "receipt.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/receipt.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/receipt.html";
+            }
+        }
     }
 
 
@@ -4973,7 +5006,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                 attchedmentimagepath = attchmentimage.get(i);
                 try {
 
-                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getAssets().open(attachmentHtml))
 
 
                             .replaceAll("#ATTACHMENT_1#", attchmentimage.get(i));
@@ -5009,7 +5042,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getAssets().open(singleItemHtml))
 
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
@@ -5086,7 +5119,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
         String signatureinvoice = null;
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
@@ -5265,24 +5298,24 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "receipt.html";
-        String nameName = "file:///android_asset/receipt.html";
-        if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "receipt.html";
-            nameName = "file:///android_asset/receipt.html";
-        }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "receipt.html";
-            nameName = "file:///android_asset/receipt.html";
-        }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "receipt.html";
-            nameName = "file:///android_asset/receipt.html";
-        }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "receipt.html";
-            nameName = "file:///android_asset/receipt.html";
-        }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "receipt.html";
-            nameName = "file:///android_asset/receipt.html";
-        }
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
+//        if(selectedTemplate.equalsIgnoreCase("0")){
+//            name = "receipt.html";
+//            nameName = "file:///android_asset/receipt.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("1")){
+//            name = "receipt.html";
+//            nameName = "file:///android_asset/receipt.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("2")){
+//            name = "receipt.html";
+//            nameName = "file:///android_asset/receipt.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("3")){
+//            name = "receipt.html";
+//            nameName = "file:///android_asset/receipt.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("4")){
+//            name = "receipt.html";
+//            nameName = "file:///android_asset/receipt.html";
+//        }
 
         StringBuilder stringBuilderCompany = new StringBuilder();
 

@@ -151,6 +151,14 @@ import io.reactivex.disposables.Disposable;
 public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
 
     //SavePref pref = new SavePref();
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "invoice.html";
+    String mainHtml1 = "invoice1.html";
+    String mainHtml2 = "invoice2.html";
+    String mainHtml3 = "invoice3.html";
+    String mainHtml4 = "invoice4.html";
 
     int selectedTemplate = 0;
 
@@ -641,9 +649,49 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 
+        checkDevice();
+
         return view;
 
     }
+
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(getActivity()) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "invoice.html";
+            mainHtml1 = "invoice1.html";
+            mainHtml2 = "invoice2.html";
+            mainHtml3 = "invoice3.html";
+            mainHtml4 = "invoice4.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/invoice.html";
+                mainHtml1 = "5/invoice1.html";
+                mainHtml2 = "5/invoice2.html";
+                mainHtml3 = "5/invoice3.html";
+                mainHtml4 = "5/invoice4.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/invoice.html";
+                mainHtml1 = "6/invoice1.html";
+                mainHtml2 = "6/invoice2.html";
+                mainHtml3 = "6/invoice3.html";
+                mainHtml4 = "6/invoice4.html";
+            }
+        }
+    }
+
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -4833,7 +4881,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             for (int i = 0; i < attchmentimage.size(); i++) {
                 attchedmentimagepath = attchmentimage.get(i);
                 try {
-                    multipagepath = IOUtils.toString(getActivity().getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getActivity().getAssets().open(attachmentHtml))
                             .replaceAll("#ATTACHMENT_1#", attchmentimage.get(i));
                     multipleimage = multipleimage + multipagepath;
                 } catch (Exception e) {
@@ -4875,7 +4923,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 String stringFormatRate = Utility.getPatternFormat("" + numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat("" + numberPostion, totalAmount);
 
-                productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getActivity().getAssets().open(singleItemHtml))
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
@@ -4950,7 +4998,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         String signatureinvoice = null;
         try {
-            signatureinvoice = IOUtils.toString(getActivity().getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getActivity().getAssets().open(signatureHtml))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
@@ -5178,23 +5226,24 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
         String selectedTemplate = "" + this.selectedTemplate;
 
-        String name = "invoice.html";
-        String nameName = "file:///android_asset/invoice.html";
-        if (selectedTemplate.equalsIgnoreCase("0")) {
-            name = "invoice.html";
-            nameName = "file:///android_asset/invoice.html";
-        } else if (selectedTemplate.equalsIgnoreCase("1")) {
-            name = "invoice1.html";
-            nameName = "file:///android_asset/invoice1.html";
-        } else if (selectedTemplate.equalsIgnoreCase("2")) {
-            name = "invoice2.html";
-            nameName = "file:///android_asset/invoice2.html";
-        } else if (selectedTemplate.equalsIgnoreCase("3")) {
-            name = "invoice3.html";
-            nameName = "file:///android_asset/invoice3.html";
-        } else if (selectedTemplate.equalsIgnoreCase("4")) {
-            name = "invoice4.html";
-            nameName = "file:///android_asset/invoice4.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
+
+        if(selectedTemplate.equalsIgnoreCase("0")){
+            name = mainHtml;
+            nameName = "file:///android_asset/"+mainHtml;
+        }else if(selectedTemplate.equalsIgnoreCase("1")){
+            name = mainHtml1;
+            nameName = "file:///android_asset/"+mainHtml1;
+        }else if(selectedTemplate.equalsIgnoreCase("2")){
+            name = mainHtml2;
+            nameName = "file:///android_asset/"+mainHtml2;
+        }else if(selectedTemplate.equalsIgnoreCase("3")){
+            name = mainHtml3;
+            nameName = "file:///android_asset/"+mainHtml3;
+        }else if(selectedTemplate.equalsIgnoreCase("4")){
+            name = mainHtml4;
+            nameName = "file:///android_asset/"+mainHtml4;
         }
 
         Log.e(TAG, "Grossamount_str " + Grossamount_str);
