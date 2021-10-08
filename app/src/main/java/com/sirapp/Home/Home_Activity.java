@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -182,6 +184,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         FindByIds();
 
+
+
 //        Utility.deleteDirectory();
 
 //        File mFile = new File(Environment.getExternalStorageDirectory() + "/Notes");
@@ -191,7 +195,9 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 //           // Toast.makeText(Home_Activity.this, "Unable to delete folder", Toast.LENGTH_SHORT).show();
 //        }
 
-
+//
+//        Settings.System.putFloat(getContentResolver(),
+//                Settings.System.FONT_SCALE, (float) 1.0);
 
         SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE, MODE_PRIVATE);
         boolean LOGGED_IN  = preferences.getBoolean(Constant.LOGGED_IN, false);

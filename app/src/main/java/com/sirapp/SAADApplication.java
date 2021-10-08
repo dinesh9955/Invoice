@@ -2,7 +2,10 @@ package com.sirapp;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.WindowManager;
 
 import androidx.multidex.MultiDex;
 
@@ -202,6 +205,22 @@ public class SAADApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+//        final Configuration override = new Configuration(base.getResources().getConfiguration());
+//        override.fontScale = 1.0f;
+//        applyOverrideConfiguration(override);
+       // adjustFontScale( getResources().getConfiguration(),0.5f);
     }
 
+
+
+    public  void adjustFontScale( Configuration configuration,float scale) {
+
+        configuration.fontScale = scale;
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(metrics);
+        metrics.scaledDensity = configuration.fontScale * metrics.density;
+        getBaseContext().getResources().updateConfiguration(configuration, metrics);
+
+    }
 }

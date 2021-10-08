@@ -270,6 +270,8 @@ public class Utility {
 //        int fineLocartion = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
         int callPhone = ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
         int readContacts = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS);
+        int writeSettings = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_SETTINGS);
+        int writeSecureSettings = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS);
         int manageExternalStorage = ContextCompat.checkSelfPermission(context, Manifest.permission.MANAGE_EXTERNAL_STORAGE);
 
         List<String> listPermissionsNeeded = new ArrayList<>();
@@ -292,6 +294,12 @@ public class Utility {
 //        if (fineLocartion != PackageManager.PERMISSION_GRANTED) {
 //            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
 //        }
+        if (writeSettings != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.WRITE_SETTINGS);
+        }
+        if (writeSecureSettings != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.WRITE_SECURE_SETTINGS);
+        }
         if (callPhone != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.CALL_PHONE);
         }
@@ -315,6 +323,8 @@ public class Utility {
                 ActivityCompat.checkSelfPermission(splashScreen, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(splashScreen, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(splashScreen, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(splashScreen, Manifest.permission.WRITE_SETTINGS) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(splashScreen, Manifest.permission.WRITE_SECURE_SETTINGS) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(splashScreen, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
                 ) {
             return true;
@@ -334,6 +344,8 @@ public class Utility {
         perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
         perms.put(Manifest.permission.MANAGE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
         perms.put(Manifest.permission.CALL_PHONE, PackageManager.PERMISSION_GRANTED);
+        perms.put(Manifest.permission.WRITE_SETTINGS, PackageManager.PERMISSION_GRANTED);
+        perms.put(Manifest.permission.WRITE_SECURE_SETTINGS, PackageManager.PERMISSION_GRANTED);
         perms.put(Manifest.permission.READ_CONTACTS, PackageManager.PERMISSION_GRANTED);
 
         if (grantResults.length > 0) {
@@ -347,6 +359,8 @@ public class Utility {
                     perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED &&
+                    perms.get(Manifest.permission.WRITE_SETTINGS) == PackageManager.PERMISSION_GRANTED &&
+                    perms.get(Manifest.permission.WRITE_SECURE_SETTINGS) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
                     ) {
                 //   Log.d(TAG, "Please allow access to all asked permissions. Due to the nature of the friendlywagon app, access to these areas on your mobile devices are necessary  for the app to function properly.");
@@ -364,6 +378,8 @@ public class Utility {
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.MANAGE_EXTERNAL_STORAGE) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.CALL_PHONE) ||
+                        ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.WRITE_SETTINGS) ||
+                        ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.WRITE_SECURE_SETTINGS) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.READ_CONTACTS)
                         ) {
 //                    showDialogOK(splashScreen, "Please allow access to all asked permissions, access to your mobile devices are necessary for the app to function properly.",
