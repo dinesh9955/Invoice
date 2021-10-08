@@ -580,7 +580,9 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         productsRecycler.setHasFixedSize(true);
 
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         return view;
 

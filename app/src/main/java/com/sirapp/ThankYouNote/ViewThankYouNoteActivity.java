@@ -150,7 +150,9 @@ public class ViewThankYouNoteActivity extends BaseActivity {
         params2.putString("event_name", "Thank you notes");
         firebaseAnalytics.logEvent("thankyounotes_view", params2);
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 

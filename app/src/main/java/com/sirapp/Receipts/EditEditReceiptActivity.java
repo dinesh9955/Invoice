@@ -585,7 +585,9 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
 
         companyget();
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 

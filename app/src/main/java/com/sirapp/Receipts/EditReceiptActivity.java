@@ -585,7 +585,9 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
         productsRecycler.setHasFixedSize(true);
         companyget();
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 

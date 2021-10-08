@@ -129,6 +129,10 @@ public class POViewActivityWebView extends BaseActivity {
         titleView.setText(getString(R.string.preview));
 
 
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
+
         getinvoicedata();
 
     }

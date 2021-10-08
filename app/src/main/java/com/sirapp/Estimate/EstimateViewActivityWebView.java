@@ -130,7 +130,9 @@ public class EstimateViewActivityWebView extends BaseActivity {
         titleView.setText(getString(R.string.preview));
 
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
 
         getinvoicedata();

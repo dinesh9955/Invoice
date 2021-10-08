@@ -376,7 +376,9 @@ public class POToPVWebview extends BaseActivity {
 
         }
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         view_invoice();
 

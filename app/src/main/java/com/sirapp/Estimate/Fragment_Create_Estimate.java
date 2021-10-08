@@ -575,7 +575,9 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         return view;
 

@@ -136,7 +136,9 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
 
 
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 

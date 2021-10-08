@@ -146,7 +146,9 @@ public class SendInvoiceReminderActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         titleView.setText(getString(R.string.preview));
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 

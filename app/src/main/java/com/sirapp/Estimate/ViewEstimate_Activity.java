@@ -376,7 +376,9 @@ public class ViewEstimate_Activity extends BaseActivity {
 
         }
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         view_invoice();
 

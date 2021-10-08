@@ -105,7 +105,9 @@ public class PreviewItActivity extends BaseActivity {
 
         titleView.setText(getString(R.string.preview));
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         WebSettings webSettings = invoiceweb.getSettings();
 

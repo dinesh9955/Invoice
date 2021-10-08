@@ -593,7 +593,9 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
         productsRecycler.setHasFixedSize(true);
 //        companyget();
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 

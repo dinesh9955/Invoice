@@ -588,7 +588,9 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         return view;
 

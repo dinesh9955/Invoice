@@ -610,7 +610,9 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 //        companyget();
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 

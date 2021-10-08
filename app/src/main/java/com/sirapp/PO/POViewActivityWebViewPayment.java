@@ -369,6 +369,10 @@ public class POViewActivityWebViewPayment extends BaseActivity {
 
                 }
 
+                if(AllSirApi.ALL_FONT == true){
+                    checkDevice();
+                }
+
                 view_invoice();
 
 

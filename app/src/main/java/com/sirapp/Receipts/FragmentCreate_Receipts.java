@@ -574,7 +574,9 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         return view;
 

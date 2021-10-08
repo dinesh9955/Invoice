@@ -599,7 +599,10 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 //        companyget();
-        checkDevice();
+
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 

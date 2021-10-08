@@ -199,7 +199,9 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
         bottomSheetDialog = new BottomSheetDialog(ReportViewActivity.this);
         bottomSheetDialog3 = new BottomSheetDialog(ReportViewActivity.this);
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
 //        invoiceweb.setWebViewClient(new WebViewClient() {
 //            public boolean shouldOverrideUrlLoading(WebView view, String url) {

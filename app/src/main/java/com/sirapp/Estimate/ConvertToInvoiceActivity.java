@@ -634,7 +634,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 

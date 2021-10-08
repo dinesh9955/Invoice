@@ -671,7 +671,9 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
         //companyget();
         getinvoicedata();
 

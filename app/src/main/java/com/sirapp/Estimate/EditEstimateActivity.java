@@ -585,7 +585,9 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
 
         companyget();
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 

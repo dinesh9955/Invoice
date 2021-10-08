@@ -149,7 +149,9 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
         params2.putString("event_name", "Invoice remainder");
         firebaseAnalytics.logEvent("invoiceRemainder_view", params2);
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 

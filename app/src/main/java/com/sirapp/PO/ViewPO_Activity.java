@@ -382,6 +382,9 @@ public class ViewPO_Activity extends BaseActivity {
 
         }
 
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         view_invoice();
 

@@ -586,7 +586,9 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
         productsRecycler.setHasFixedSize(true);
         companyget();
 
-        checkDevice();
+        if(AllSirApi.ALL_FONT == true){
+            checkDevice();
+        }
 
         getinvoicedata();
 
