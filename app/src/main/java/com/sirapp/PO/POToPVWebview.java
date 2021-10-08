@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -42,8 +43,13 @@ import java.util.ArrayList;
 
 public class POToPVWebview extends BaseActivity {
 
-
     private static final String TAG = "POToPVWebview";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "pv.html";
+
     WebView invoiceweb;
 
     String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency, payment_iban, payment_swift_bic;
@@ -370,10 +376,35 @@ public class POToPVWebview extends BaseActivity {
 
         }
 
+        checkDevice();
 
         view_invoice();
 
     }
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(POToPVWebview.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "pv.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/pv.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/pv.html";
+            }
+        }
+    }
+
 
     String convertBitmapToBase64(String path) {
 
@@ -463,7 +494,7 @@ public class POToPVWebview extends BaseActivity {
                 // Log.e(TAG, "invoice_imageDtoAA "+invoice_imageDto.get(i).getImage());
                 try {
 
-                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getAssets().open(attachmentHtml))
 
 
                             .replaceAll("#ATTACHMENT_1#", atchemntimg.get(i).replace("https", "http"));
@@ -499,7 +530,7 @@ public class POToPVWebview extends BaseActivity {
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getAssets().open(singleItemHtml))
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", myList.get(i).getProduct_measurement_unit())
@@ -557,7 +588,7 @@ public class POToPVWebview extends BaseActivity {
         }
 
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
@@ -755,8 +786,8 @@ public class POToPVWebview extends BaseActivity {
 
         Log.e(TAG, "selectedTemplate "+selectedTemplate);
 
-        String name = "pv.html";
-        String nameName = "file:///android_asset/pv.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
 //        if(selectedTemplate.equalsIgnoreCase("0")){
 //            name = "invoice.html";
 //            nameName = "file:///android_asset/invoice.html";

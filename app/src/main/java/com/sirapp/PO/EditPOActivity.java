@@ -21,6 +21,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -82,6 +83,7 @@ import com.sirapp.Adapter.Product_Bottom_Adapter;
 import com.sirapp.Adapter.Products_Adapter;
 import com.sirapp.Adapter.Service_bottom_Adapter;
 import com.sirapp.Base.BaseActivity;
+import com.sirapp.CN.CreditNotesViewActivityWebView;
 import com.sirapp.Company.Companies_Activity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Estimate.EditEditEstimateActivity;
@@ -150,6 +152,12 @@ import retrofit2.Callback;
 
 public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
     private static final String TAG = "EditPOActivity";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "po.html";
+
     String companycolor = "#ffffff";
     int selectedTemplate = 0;
 //    int defaultClick = 0;
@@ -602,10 +610,35 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 //        companyget();
+        checkDevice();
+
         getinvoicedata();
 
 
 
+    }
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(EditPOActivity.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "po.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/po.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/po.html";
+            }
+        }
     }
 
 
@@ -5225,7 +5258,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                 attchedmentimagepath = attchmentimage.get(i);
                 try {
 
-                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getAssets().open(attachmentHtml))
 
 
                             .replaceAll("#ATTACHMENT_1#", attchmentimage.get(i));
@@ -5260,7 +5293,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getAssets().open(singleItemHtml))
 
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
@@ -5334,7 +5367,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
         String signatureinvoice = null;
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
@@ -5564,8 +5597,8 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "po.html";
-        String nameName = "file:///android_asset/po.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
 //        if(selectedTemplate.equalsIgnoreCase("0")){
 //            name = "invoice.html";
 //            nameName = "file:///android_asset/invoice.html";

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -49,7 +50,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class InvoiceViewActivityWebViewPayment extends BaseActivity {
+
     private final String TAG = "InvoiceViewActivityWebView";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "invoicePay.html";
+    String mainHtml1 = "invoicePay1.html";
+    String mainHtml2 = "invoicePay2.html";
+    String mainHtml3 = "invoicePay3.html";
+    String mainHtml4 = "invoicePay4.html";
+
     WebView invoiceweb;
     String invoiceId = "";
     String templateSelect = "";
@@ -132,10 +144,49 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
         setSupportActionBar(toolbar);
         titleView.setText(getString(R.string.preview));
 
+        checkDevice();
 
         getinvoicedata();
 
     }
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(InvoiceViewActivityWebViewPayment.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "invoicePay.html";
+            mainHtml1 = "invoicePay1.html";
+            mainHtml2 = "invoicePay2.html";
+            mainHtml3 = "invoicePay3.html";
+            mainHtml4 = "invoicePay4.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/invoicePay.html";
+                mainHtml1 = "5/invoicePay1.html";
+                mainHtml2 = "5/invoicePay2.html";
+                mainHtml3 = "5/invoicePay3.html";
+                mainHtml4 = "5/invoicePay4.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/invoicePay.html";
+                mainHtml1 = "6/invoicePay1.html";
+                mainHtml2 = "6/invoicePay2.html";
+                mainHtml3 = "6/invoicePay3.html";
+                mainHtml4 = "6/invoicePay4.html";
+            }
+        }
+    }
+
+
+
 
     private void getinvoicedata() {
 
@@ -529,7 +580,7 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
 
                 try {
 
-                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getAssets().open(attachmentHtml))
                             .replaceAll("#ATTACHMENT_1#", invoice_image_path+invoice_imageDto.get(i).getImage().replace("https", "http"));
                     multipleimage = multipleimage + multipagepath;
                 } catch (Exception e) {
@@ -559,7 +610,7 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getAssets().open(singleItemHtml))
                         .replaceAll("#NAME#", ""+productsItemDtos.get(i).getName())
                         .replaceAll("#DESC#", ""+productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", ""+productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
@@ -634,7 +685,7 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
         }
 
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
                     .replaceAll("SignatureofIssuer", signature_of_issuername)
@@ -884,24 +935,24 @@ public class InvoiceViewActivityWebViewPayment extends BaseActivity {
             companylogopathdto = "/android_res/drawable/white_img.png";
         }
 
-        String name = "invoicePay.html";
-        String nameName = "file:///android_asset/invoicePay.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
         if(templatestr.equals("1")) {
             if(templateSelect.equalsIgnoreCase("0")){
-                name = "invoicePay.html";
-                nameName = "file:///android_asset/invoicePay.html";
+                name = mainHtml;
+                nameName = "file:///android_asset/"+mainHtml;
             }else if(templateSelect.equalsIgnoreCase("1")){
-                name = "invoicePay1.html";
-                nameName = "file:///android_asset/invoicePay1.html";
+                name = mainHtml1;
+                nameName = "file:///android_asset/"+mainHtml1;
             }else if(templateSelect.equalsIgnoreCase("2")){
-                name = "invoicePay2.html";
-                nameName = "file:///android_asset/invoicePay2.html";
+                name = mainHtml2;
+                nameName = "file:///android_asset/"+mainHtml2;
             }else if(templateSelect.equalsIgnoreCase("3")){
-                name = "invoicePay3.html";
-                nameName = "file:///android_asset/invoicePay3.html";
+                name = mainHtml3;
+                nameName = "file:///android_asset/"+mainHtml3;
             }else if(templateSelect.equalsIgnoreCase("4")){
-                name = "invoicePay4.html";
-                nameName = "file:///android_asset/invoicePay4.html";
+                name = mainHtml4;
+                nameName = "file:///android_asset/"+mainHtml4;
             }
 
             Log.e(TAG, "templateSelectZZZ "+templateSelect);

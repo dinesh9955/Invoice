@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -42,8 +43,18 @@ import java.util.ArrayList;
 
 public class ViewEstimate_Activity extends BaseActivity {
 
-
     private static final String TAG = "ViewEstimate_Activity";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "estimate.html";
+    String mainHtml1 = "estimate1.html";
+    String mainHtml2 = "estimate2.html";
+    String mainHtml3 = "estimate3.html";
+    String mainHtml4 = "estimate4.html";
+
+
     WebView invoiceweb;
 
     String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency, payment_iban, payment_swift_bic;
@@ -365,10 +376,48 @@ public class ViewEstimate_Activity extends BaseActivity {
 
         }
 
+        checkDevice();
 
         view_invoice();
 
     }
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(ViewEstimate_Activity.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "estimate.html";
+            mainHtml1 = "estimate1.html";
+            mainHtml2 = "estimate2.html";
+            mainHtml3 = "estimate3.html";
+            mainHtml4 = "estimate4.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/estimate.html";
+                mainHtml1 = "5/estimate1.html";
+                mainHtml2 = "5/estimate2.html";
+                mainHtml3 = "5/estimate3.html";
+                mainHtml4 = "5/estimate4.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/estimate.html";
+                mainHtml1 = "6/estimate1.html";
+                mainHtml2 = "6/estimate2.html";
+                mainHtml3 = "6/estimate3.html";
+                mainHtml4 = "6/estimate4.html";
+            }
+        }
+    }
+
+
 
     String convertBitmapToBase64(String path) {
 
@@ -456,7 +505,7 @@ public class ViewEstimate_Activity extends BaseActivity {
                 attchedmentimagepath = atchemntimg.get(i);
                 try {
 
-                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getAssets().open(attachmentHtml))
 
 
                             .replaceAll("#ATTACHMENT_1#", atchemntimg.get(i).replace("https", "http"));
@@ -494,7 +543,7 @@ public class ViewEstimate_Activity extends BaseActivity {
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, producpriceAmount);
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getAssets().open(singleItemHtml))
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", myList.get(i).getProduct_measurement_unit())
@@ -554,7 +603,7 @@ public class ViewEstimate_Activity extends BaseActivity {
         }
 
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
@@ -730,24 +779,25 @@ public class ViewEstimate_Activity extends BaseActivity {
 
         Log.e(TAG, "selectedTemplate "+selectedTemplate);
 
-        String name = "estimate.html";
-        String nameName = "file:///android_asset/estimate.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "estimate.html";
-            nameName = "file:///android_asset/estimate.html";
+            name = mainHtml;
+            nameName = "file:///android_asset/"+mainHtml;
         }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "estimate1.html";
-            nameName = "file:///android_asset/estimate1.html";
+            name = mainHtml1;
+            nameName = "file:///android_asset/"+mainHtml1;
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "estimate2.html";
-            nameName = "file:///android_asset/estimate2.html";
+            name = mainHtml2;
+            nameName = "file:///android_asset/"+mainHtml2;
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "estimate3.html";
-            nameName = "file:///android_asset/estimate3.html";
+            name = mainHtml3;
+            nameName = "file:///android_asset/"+mainHtml3;
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "estimate4.html";
-            nameName = "file:///android_asset/estimate4.html";
+            name = mainHtml4;
+            nameName = "file:///android_asset/"+mainHtml4;
         }
+
 
         StringBuilder stringBuilderCompany = new StringBuilder();
 

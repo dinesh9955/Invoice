@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -45,6 +46,12 @@ import retrofit2.Callback;
 
 public class DebitNotesViewActivityWebView extends BaseActivity {
     private final String TAG = "DebitNotesViewActivityWebView";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "debit.html";
+
     WebView invoiceweb;
     String invoiceId = "";
     String templateSelect = "";
@@ -129,10 +136,35 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
 
 
 
+        checkDevice();
 
         getinvoicedata();
 
     }
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(DebitNotesViewActivityWebView.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "debit.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/debit.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/debit.html";
+            }
+        }
+    }
+
 
     private void getinvoicedata() {
 
@@ -482,7 +514,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
 
                 try {
 
-                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getAssets().open(attachmentHtml))
 
 
                             .replaceAll("#ATTACHMENT_1#", invoice_image_path+invoice_imageDto.get(i).getImage());
@@ -516,7 +548,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getAssets().open(singleItemHtml))
 
                         .replaceAll("#NAME#", productsItemDtos.get(i).getName())
                         .replaceAll("#DESC#", productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
@@ -583,7 +615,7 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
         }
 
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
                     .replaceAll("SignatureofIssuer", signature_of_issuername)
@@ -761,15 +793,15 @@ public class DebitNotesViewActivityWebView extends BaseActivity {
 
 
 
-        String name = "debit.html";
-        String nameName = "file:///android_asset/debit.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
 
 
         if(templatestr.equals("1")) {
 
 
-            name = "debit.html";
-            nameName = "file:///android_asset/debit.html";
+            name = mainHtml;
+            nameName = "file:///android_asset/"+mainHtml;
 
 
             StringBuilder stringBuilderCompany = new StringBuilder();

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -42,8 +43,13 @@ import java.util.ArrayList;
 
 public class ViewCreditNote_Activity extends BaseActivity {
 
-
     private static final String TAG = "ViewCreditNote_Activity";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "credit.html";
+
     WebView invoiceweb;
 
     String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency, payment_iban, payment_swift_bic;
@@ -101,6 +107,7 @@ public class ViewCreditNote_Activity extends BaseActivity {
         TextView titleView = toolbar.findViewById(R.id.title1);
         ImageView backbtn = toolbar.findViewById(R.id.backbtn);
         ImageView printimg = toolbar.findViewById(R.id.imageViewptint);
+
 
 
         backbtn.setOnClickListener(new View.OnClickListener() {
@@ -369,10 +376,36 @@ public class ViewCreditNote_Activity extends BaseActivity {
 
         }
 
-
+        checkDevice();
         view_invoice();
 
     }
+
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(ViewCreditNote_Activity.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "credit.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/credit.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/credit.html";
+            }
+        }
+    }
+
+
 
     String convertBitmapToBase64(String path) {
 

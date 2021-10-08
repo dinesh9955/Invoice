@@ -3,6 +3,7 @@ package com.sirapp.InvoiceReminder;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -58,6 +59,12 @@ import retrofit2.Callback;
 
 public class ViewInvoiceReminderActivity extends BaseActivity {
     private final String TAG = "ViewThankYouNoteActivity";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "duedatereminder.html";
+
     WebView invoiceweb;
     String invoiceId = "";
     String templateSelect = "";
@@ -142,10 +149,36 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
         params2.putString("event_name", "Invoice remainder");
         firebaseAnalytics.logEvent("invoiceRemainder_view", params2);
 
+        checkDevice();
 
         getinvoicedata();
 
     }
+
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(ViewInvoiceReminderActivity.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "duedatereminder.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/duedatereminder.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/duedatereminder.html";
+            }
+        }
+    }
+
 
     private void getinvoicedata() {
 
@@ -509,7 +542,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
 
                 try {
 
-                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getAssets().open(attachmentHtml))
 
 
                             .replaceAll("#ATTACHMENT_1#", AllSirApi.BASE+"uploads/invoice/"+invoice_imageDto.get(i).getImage());
@@ -543,7 +576,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, producpriceAmount);
 
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getAssets().open(singleItemHtml))
                         .replaceAll("#NAME#", ""+productsItemDtos.get(i).getName())
                         .replaceAll("#DESC#", ""+productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", ""+productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
@@ -619,7 +652,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
 
         String signatureinvoice = null;
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open(singleItemHtml))
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
                     .replaceAll("SignatureofIssuer", signature_of_issuername)
@@ -852,8 +885,8 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
             companylogopathdto = "/android_res/drawable/white_img.png";
         }
 
-        String name = "notes/duedatereminder.html";
-        String nameName = "file:///android_asset/notes/duedatereminder.html";
+        String name = "notes/"+mainHtml;
+        String nameName = "file:///android_asset/notes/"+mainHtml;
         if(templatestr.equals("1")) {
 
 //            if(templateSelect.equalsIgnoreCase("0")){

@@ -28,11 +28,11 @@ import com.bumptech.glide.RequestManager;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.CN.CreditNotesViewActivityWebView;
-import com.sirapp.InvoiceReminder.ViewInvoiceActivity;
 import com.sirapp.Model.Customer_list;
 import com.sirapp.Model.Product_list;
 import com.sirapp.Model.View_invoice;
 import com.sirapp.R;
+import com.sirapp.ThankYouNote.ViewInvoiceActivity;
 import com.sirapp.Utils.Utility;
 
 import org.apache.commons.io.IOUtils;
@@ -43,8 +43,17 @@ import java.util.ArrayList;
 
 public class ViewInvoice_Activity extends BaseActivity {
 
-
     private static final String TAG = "ViewInvoice_Activity";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "invoice.html";
+    String mainHtml1 = "invoice1.html";
+    String mainHtml2 = "invoice2.html";
+    String mainHtml3 = "invoice3.html";
+    String mainHtml4 = "invoice4.html";
+
     WebView invoiceweb;
 
     String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "";
@@ -404,10 +413,50 @@ public class ViewInvoice_Activity extends BaseActivity {
 
         }
 
+        checkDevice();
 
         view_invoice();
 
     }
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(ViewInvoice_Activity.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "invoice.html";
+            mainHtml1 = "invoice1.html";
+            mainHtml2 = "invoice2.html";
+            mainHtml3 = "invoice3.html";
+            mainHtml4 = "invoice4.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/invoice.html";
+                mainHtml1 = "5/invoice1.html";
+                mainHtml2 = "5/invoice2.html";
+                mainHtml3 = "5/invoice3.html";
+                mainHtml4 = "5/invoice4.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/invoice.html";
+                mainHtml1 = "6/invoice1.html";
+                mainHtml2 = "6/invoice2.html";
+                mainHtml3 = "6/invoice3.html";
+                mainHtml4 = "6/invoice4.html";
+            }
+        }
+    }
+
+
+
+
 
     String convertBitmapToBase64(String path) {
 
@@ -496,7 +545,7 @@ public class ViewInvoice_Activity extends BaseActivity {
                // Log.e(TAG, "invoice_imageDtoAA "+invoice_imageDto.get(i).getImage());
                 try {
 
-                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getAssets().open(attachmentHtml))
 
 
                             .replaceAll("#ATTACHMENT_1#", atchemntimg.get(i).replace("https", "http"));
@@ -529,7 +578,7 @@ public class ViewInvoice_Activity extends BaseActivity {
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, producpriceAmount);
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getAssets().open(singleItemHtml))
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", myList.get(i).getProduct_measurement_unit())
@@ -588,7 +637,7 @@ public class ViewInvoice_Activity extends BaseActivity {
         }
 
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
@@ -835,23 +884,23 @@ public class ViewInvoice_Activity extends BaseActivity {
 
         Log.e(TAG, "selectedTemplate "+selectedTemplate);
 
-        String name = "invoice.html";
-        String nameName = "file:///android_asset/invoice.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "invoice.html";
-            nameName = "file:///android_asset/invoice.html";
+            name = mainHtml;
+            nameName = "file:///android_asset/"+mainHtml;
         }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "invoice1.html";
-            nameName = "file:///android_asset/invoice1.html";
+            name = mainHtml1;
+            nameName = "file:///android_asset/"+mainHtml1;
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "invoice2.html";
-            nameName = "file:///android_asset/invoice2.html";
+            name = mainHtml2;
+            nameName = "file:///android_asset/"+mainHtml2;
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "invoice3.html";
-            nameName = "file:///android_asset/invoice3.html";
+            name = mainHtml3;
+            nameName = "file:///android_asset/"+mainHtml3;
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "invoice4.html";
-            nameName = "file:///android_asset/invoice4.html";
+            name = mainHtml4;
+            nameName = "file:///android_asset/"+mainHtml4;
         }
 
         StringBuilder stringBuilderCompany = new StringBuilder();

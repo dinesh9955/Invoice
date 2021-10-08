@@ -28,6 +28,7 @@ import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Home.Home_Activity;
+import com.sirapp.Invoice.InvoiceViewActivityWebView;
 import com.sirapp.Invoice.Invoice_image;
 import com.sirapp.Invoice.ViewInvoice_Activity;
 import com.sirapp.Invoice.response.InvoiceCompanyDto;
@@ -53,7 +54,10 @@ import static com.sirapp.API.AllSirApi.FONT_SIZE_PRINT_VIEW;
 public class CreditNotesViewActivityWebView extends BaseActivity {
     private final String TAG = "CreditNotesViewActivityWebView";
 
-    String htmlZoom = "1.0";
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "credit.html";
 
     WebView invoiceweb;
     String invoiceId = "";
@@ -132,24 +136,32 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
         titleView.setText(getString(R.string.preview));
 
 
-        deviceCheck();
 
-
+        checkDevice();
 
 
         getinvoicedata();
 
     }
 
-    private void deviceCheck() {
+    private void checkDevice() {
         if(Utility.isTablet(CreditNotesViewActivityWebView.this) == true){
-            htmlZoom = "1.0";
-        }else{
-            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL+ " " + Build.BRAND+ " " + Build.DEVICE;
-            if(manufacturerModel.toLowerCase().contains("j7")){
-                htmlZoom = "0.7";
-            }else{
-                htmlZoom = "0.5";
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "credit.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/credit.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/credit.html";
             }
         }
     }
@@ -516,14 +528,11 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
                 Log.e(TAG, "invoice_imageDtoAA "+invoice_imageDto.get(i).getImage());
                 // Log.e(TAG, "invoice_imageDtoBB "+invoice_imageDto.get(i).getImage());
 
+
+
                 try {
-
-                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
-
-
+                    multipagepath = IOUtils.toString(getAssets().open(attachmentHtml))
                             .replaceAll("#ATTACHMENT_1#", invoice_image_path+invoice_imageDto.get(i).getImage());
-
-
                     multipleimage = multipleimage + multipagepath;
                 } catch (Exception e) {
 
@@ -552,7 +561,9 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+
+
+                productitem = IOUtils.toString(getAssets().open(singleItemHtml))
                         .replaceAll("#NAME#", productsItemDtos.get(i).getName())
                         .replaceAll("#DESC#", productsItemDtos.get(i).getDescription() == null ? "" : productsItemDtos.get(i).getDescription())
                         .replaceAll("#UNIT#", productsItemDtos.get(i).getMeasurementUnit() == null ? "" : productsItemDtos.get(i).getMeasurementUnit())
@@ -617,8 +628,9 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
         }
 
 
+
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
                     .replaceAll("SignatureofIssuer", signature_of_issuername)
@@ -794,16 +806,16 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
         }
 
 
-        String name = "credit.html";
-        String nameName = "file:///android_asset/credit.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
         if(templatestr.equals("1")) {
 
 //            if(getLanguage().equalsIgnoreCase("french")){
 //                name = "credit_fr.html";
 //                nameName = "file:///android_asset/credit_fr.html";
 //            }else {
-                name = "credit.html";
-                nameName = "file:///android_asset/credit.html";
+                name = mainHtml;
+                nameName = "file:///android_asset/"+mainHtml;
 //            }
 
 
@@ -871,7 +883,7 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
 //                        .replaceAll("Attachments", htmlview_Attachments)
 
 
-                        .replaceAll("1.0", htmlZoom)
+
                         .replaceAll("Company Name", company_name)
                         .replaceAll("Address", stringBuilderCompany.toString())
 //                        .replaceAll("Contact No.", company_contact)

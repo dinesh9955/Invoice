@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -42,8 +43,13 @@ import java.util.ArrayList;
 
 public class ViewDebitNote_Activity extends BaseActivity {
 
-
     private static final String TAG = "ViewDebitNote_Activity";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "debit.html";
+
     WebView invoiceweb;
 
     String company_id = "", company_name = "", company_address = "", company_contact = "", company_email = "", company_website = "", payment_bank_name = "", payment_currency, payment_iban, payment_swift_bic;
@@ -377,6 +383,7 @@ public class ViewDebitNote_Activity extends BaseActivity {
 
         }
 
+        checkDevice();
 
         view_invoice();
 
@@ -420,6 +427,30 @@ public class ViewDebitNote_Activity extends BaseActivity {
         // Log.e("attchmentbase64",attchmentbase64);
         return attchmentbase64;
     }
+
+    private void checkDevice() {
+        if(Utility.isTablet(ViewDebitNote_Activity.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "debit.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/debit.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/debit.html";
+            }
+        }
+    }
+
+
 
     public void view_invoice() {
         invoiceweb = findViewById(R.id.invoiceweb);
@@ -469,7 +500,7 @@ public class ViewDebitNote_Activity extends BaseActivity {
                 // Log.e(TAG, "invoice_imageDtoAA "+invoice_imageDto.get(i).getImage());
                 try {
 
-                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getAssets().open(attachmentHtml))
 
 
                             .replaceAll("#ATTACHMENT_1#", atchemntimg.get(i));
@@ -505,7 +536,7 @@ public class ViewDebitNote_Activity extends BaseActivity {
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, producpriceAmount);
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getAssets().open(singleItemHtml))
 
                         .replaceAll("#NAME#", myList.get(i).getProduct_name())
                         .replaceAll("#DESC#", myList.get(i).getProduct_description())
@@ -566,7 +597,7 @@ public class ViewDebitNote_Activity extends BaseActivity {
         }
 
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
@@ -745,11 +776,11 @@ public class ViewDebitNote_Activity extends BaseActivity {
 
         Log.e(TAG, "selectedTemplate "+selectedTemplate);
 
-        String name = "debit.html";
-        String nameName = "file:///android_asset/debit.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "debit.html";
-            nameName = "file:///android_asset/debit.html";
+            name = mainHtml;
+            nameName = "file:///android_asset/"+mainHtml;
         }
 
 //        else if(selectedTemplate.equalsIgnoreCase("1")){

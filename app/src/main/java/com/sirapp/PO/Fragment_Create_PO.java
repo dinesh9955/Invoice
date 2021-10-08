@@ -19,6 +19,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -87,6 +88,7 @@ import com.sirapp.Adapter.Product_Bottom_Adapter;
 import com.sirapp.Adapter.Products_Adapter;
 import com.sirapp.Adapter.Service_bottom_Adapter;
 import com.sirapp.Base.BaseFragment;
+import com.sirapp.CN.CreditNotesViewActivityWebView;
 import com.sirapp.Company.Companies_Activity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Home.GoProActivity;
@@ -144,6 +146,10 @@ import io.reactivex.disposables.Disposable;
 public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
 
    // SavePref pref = new SavePref();
+   String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "po.html";
 
     int selectedTemplate = 0;
 
@@ -582,9 +588,35 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 
+        checkDevice();
+
         return view;
 
     }
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(getActivity()) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "po.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/po.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/po.html";
+            }
+        }
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -4330,7 +4362,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 attchedmentimagepath = attchmentimage.get(i);
                 try {
 
-                    multipagepath = IOUtils.toString(getActivity().getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getActivity().getAssets().open(attachmentHtml))
 
 
                             .replaceAll("#ATTACHMENT_1#", attchmentimage.get(i));
@@ -4375,7 +4407,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
-                productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getActivity().getAssets().open(singleItemHtml))
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
@@ -4450,7 +4482,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
         String signatureinvoice = null;
         try {
-            signatureinvoice = IOUtils.toString(getActivity().getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getActivity().getAssets().open(signatureHtml))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
@@ -4688,8 +4720,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "po.html";
-        String nameName = "file:///android_asset/po.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
 //        if(selectedTemplate.equalsIgnoreCase("0")){
 //            name = "invoice.html";
 //            nameName = "file:///android_asset/invoice.html";

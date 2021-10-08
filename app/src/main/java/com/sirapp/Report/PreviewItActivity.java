@@ -3,6 +3,7 @@ package com.sirapp.Report;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
@@ -36,6 +37,25 @@ import java.util.ArrayList;
 public class PreviewItActivity extends BaseActivity {
 
     private static final String TAG = "PreviewItActivity";
+
+    String CustomerReportHtml = "CustomerReport.html";
+    String SupplierReportHtml = "SupplierReport.html";
+    String SalesReportHtml = "SalesReport.html";
+    String PurchaseReportHtml = "PurchaseReport.html";
+    String CustomerAgingReportHtml = "CustomerAgingReport.html";
+    String TaxCollectedReportHtml = "TaxCollectedReport.html";
+    String StockReportHtml = "StockReport.html";
+    String ProductMovementReportHtml = "ProductMovementReport.html";
+
+    String customer_single_itemHtml = "customer_single_item.html";
+    String Supplier_single_itemHtml = "customer_single_item.html";
+    String total_sales_single_itemHtml = "total_sales_single_item.html";
+    String total_purchase_single_itemHtml = "total_sales_single_item.html";
+    String customer_ageing_single_itemHtml = "customer_ageing_single_item.html";
+    String tax_collection_single_itemHtml = "tax_collection_single_item.html";
+    String stock_single_itemHtml = "stock_single_item.html";
+    String product_movement_single_itemHtml = "product_movement_single_item.html";
+
     WebView invoiceweb;
 
     int positionNext = -1;
@@ -84,6 +104,8 @@ public class PreviewItActivity extends BaseActivity {
 
 
         titleView.setText(getString(R.string.preview));
+
+        checkDevice();
 
         WebSettings webSettings = invoiceweb.getSettings();
 
@@ -194,6 +216,69 @@ public class PreviewItActivity extends BaseActivity {
 
 
 
+    private void checkDevice() {
+        if(Utility.isTablet(PreviewItActivity.this) == true){
+            CustomerReportHtml = "CustomerReport.html";
+            SupplierReportHtml = "SupplierReport.html";
+            SalesReportHtml = "SalesReport.html";
+            PurchaseReportHtml = "PurchaseReport.html";
+            CustomerAgingReportHtml = "CustomerAgingReport.html";
+            TaxCollectedReportHtml = "TaxCollectedReport.html";
+            StockReportHtml = "StockReport.html";
+            ProductMovementReportHtml = "ProductMovementReport.html";
+
+            customer_single_itemHtml = "customer_single_item.html";
+            Supplier_single_itemHtml = "customer_single_item.html";
+            total_sales_single_itemHtml = "total_sales_single_item.html";
+            total_purchase_single_itemHtml = "total_sales_single_item.html";
+            customer_ageing_single_itemHtml = "customer_ageing_single_item.html";
+            tax_collection_single_itemHtml = "tax_collection_single_item.html";
+            stock_single_itemHtml = "stock_single_item.html";
+            product_movement_single_itemHtml = "product_movement_single_item.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                CustomerReportHtml = "5/CustomerReport.html";
+                SupplierReportHtml = "5/SupplierReport.html";
+                SalesReportHtml = "5/SalesReport.html";
+                PurchaseReportHtml = "5/PurchaseReport.html";
+                CustomerAgingReportHtml = "5/CustomerAgingReport.html";
+                TaxCollectedReportHtml = "5/TaxCollectedReport.html";
+                StockReportHtml = "5/StockReport.html";
+                ProductMovementReportHtml = "5/ProductMovementReport.html";
+
+                customer_single_itemHtml = "5/customer_single_item.html";
+                Supplier_single_itemHtml = "5/customer_single_item.html";
+                total_sales_single_itemHtml = "5/total_sales_single_item.html";
+                total_purchase_single_itemHtml = "5/total_sales_single_item.html";
+                customer_ageing_single_itemHtml = "5/customer_ageing_single_item.html";
+                tax_collection_single_itemHtml = "5/tax_collection_single_item.html";
+                stock_single_itemHtml = "5/stock_single_item.html";
+                product_movement_single_itemHtml = "5/product_movement_single_item.html";
+            } else {
+                CustomerReportHtml = "6/CustomerReport.html";
+                SupplierReportHtml = "6/SupplierReport.html";
+                SalesReportHtml = "6/SalesReport.html";
+                PurchaseReportHtml = "6/PurchaseReport.html";
+                CustomerAgingReportHtml = "6/CustomerAgingReport.html";
+                TaxCollectedReportHtml = "6/TaxCollectedReport.html";
+                StockReportHtml = "6/StockReport.html";
+                ProductMovementReportHtml = "6/ProductMovementReport.html";
+
+                customer_single_itemHtml = "6/customer_single_item.html";
+                Supplier_single_itemHtml = "6/customer_single_item.html";
+                total_sales_single_itemHtml = "6/total_sales_single_item.html";
+                total_purchase_single_itemHtml = "6/total_sales_single_item.html";
+                customer_ageing_single_itemHtml = "6/customer_ageing_single_item.html";
+                tax_collection_single_itemHtml = "6/tax_collection_single_item.html";
+                stock_single_itemHtml = "6/stock_single_item.html";
+                product_movement_single_itemHtml = "6/product_movement_single_item.html";
+            }
+        }
+    }
+
+
+
 
 
     private void customerReportWeb(CustomerItem customerItem, ArrayList<CustomerReportItem> customerReportItemArrayList) {
@@ -202,8 +287,8 @@ public class PreviewItActivity extends BaseActivity {
 
         double balanceAmount = 0.0;
 
-        String name = "report/CustomerReport.html";
-        String nameName = "file:///android_asset/report/CustomerReport.html";
+        String name = "report/"+CustomerReportHtml;
+        String nameName = "file:///android_asset/report/"+CustomerReportHtml;
 
         String productitem = null;
         String productitemlist = "";
@@ -255,7 +340,7 @@ public class PreviewItActivity extends BaseActivity {
 
 
 
-                productitem = IOUtils.toString(getAssets().open("report/customer_single_item.html"))
+                productitem = IOUtils.toString(getAssets().open("report/"+customer_single_itemHtml))
                         .replaceAll("#DATE#", customerReportItemArrayList.get(i).getCreated_date())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getParticular())
                         .replaceAll("#DebitAmount#", stringDebit)
@@ -327,8 +412,8 @@ public class PreviewItActivity extends BaseActivity {
 
         double totalAmount = 0.0;
         double balanceAmount = 0.0;
-        String name = "report/SupplierReport.html";
-        String nameName = "file:///android_asset/report/SupplierReport.html";
+        String name = "report/"+SupplierReportHtml;
+        String nameName = "file:///android_asset/report/"+SupplierReportHtml;
 
         String productitem = null;
         String productitemlist = "";
@@ -376,7 +461,7 @@ public class PreviewItActivity extends BaseActivity {
                 }
 
 
-                productitem = IOUtils.toString(getAssets().open("report/customer_single_item.html"))
+                productitem = IOUtils.toString(getAssets().open("report/"+customer_single_itemHtml))
                         .replaceAll("#DATE#", customerReportItemArrayList.get(i).getCreated_date())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getParticular())
                         .replaceAll("#DebitAmount#", stringDebit)
@@ -446,8 +531,8 @@ public class PreviewItActivity extends BaseActivity {
 
         double totalAmount = 0.0;
 
-        String name = "report/SalesReport.html";
-        String nameName = "file:///android_asset/report/SalesReport.html";
+        String name = "report/"+SalesReportHtml;
+        String nameName = "file:///android_asset/report/"+SalesReportHtml;
 
         String productitem = null;
         String productitemlist = "";
@@ -481,7 +566,7 @@ public class PreviewItActivity extends BaseActivity {
                 }
 
 
-                productitem = IOUtils.toString(getAssets().open("report/total_sales_single_item.html"))
+                productitem = IOUtils.toString(getAssets().open("report/"+total_sales_single_itemHtml))
                         .replaceAll("#DATE#", customerReportItemArrayList.get(i).getInvoice_date())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getInvoice_no())
                         .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getCustomer_name())
@@ -548,8 +633,8 @@ public class PreviewItActivity extends BaseActivity {
 
         double totalAmount = 0.0;
 
-        String name = "report/PurchaseReport.html";
-        String nameName = "file:///android_asset/report/PurchaseReport.html";
+        String name = "report/"+PurchaseReportHtml;
+        String nameName = "file:///android_asset/report/"+PurchaseReportHtml;
 
         String productitem = null;
         String productitemlist = "";
@@ -583,7 +668,7 @@ public class PreviewItActivity extends BaseActivity {
                 }
 
 
-                productitem = IOUtils.toString(getAssets().open("report/total_sales_single_item.html"))
+                productitem = IOUtils.toString(getAssets().open("report/"+total_sales_single_itemHtml))
                         .replaceAll("#DATE#", customerReportItemArrayList.get(i).getOrder_date())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getPurchase_order_no())
                         .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getSupplier_name())
@@ -651,8 +736,8 @@ public class PreviewItActivity extends BaseActivity {
 
         double totalAmount = 0.0;
 
-        String name = "report/CustomerAgingReport.html";
-        String nameName = "file:///android_asset/report/CustomerAgingReport.html";
+        String name = "report/"+CustomerAgingReportHtml;
+        String nameName = "file:///android_asset/report/"+CustomerAgingReportHtml;
 
         String productitem = null;
         String productitemlist = "";
@@ -765,7 +850,7 @@ public class PreviewItActivity extends BaseActivity {
                 }
 
 
-                productitem = IOUtils.toString(getAssets().open("report/customer_ageing_single_item.html"))
+                productitem = IOUtils.toString(getAssets().open("report/"+customer_ageing_single_itemHtml))
                         .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getCustomer_name())
                         .replaceAll("#Currentdue#", stringNotDue)
                         .replaceAll("#Slab1#", slab1Txt)
@@ -837,8 +922,8 @@ public class PreviewItActivity extends BaseActivity {
 
         double totalAmount = 0.0;
 
-        String name = "report/TaxCollectedReport.html";
-        String nameName = "file:///android_asset/report/TaxCollectedReport.html";
+        String name = "report/"+TaxCollectedReportHtml;
+        String nameName = "file:///android_asset/report/"+TaxCollectedReportHtml;
 
         String productitem = null;
         String productitemlist = "";
@@ -868,7 +953,7 @@ public class PreviewItActivity extends BaseActivity {
 
 
 
-                productitem = IOUtils.toString(getAssets().open("report/tax_collection_single_item.html"))
+                productitem = IOUtils.toString(getAssets().open("report/"+tax_collection_single_itemHtml))
                         .replaceAll("#DATE#", customerReportItemArrayList.get(i).getDate_added())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getParticulars())
                         .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getCustomer_name())
@@ -947,8 +1032,8 @@ public class PreviewItActivity extends BaseActivity {
 
         double totalAmount = 0.0;
 
-        String name = "report/StockReport.html";
-        String nameName = "file:///android_asset/report/StockReport.html";
+        String name = "report/"+StockReportHtml;
+        String nameName = "file:///android_asset/report/"+StockReportHtml;
 
         String productitem = null;
         String productitemlist = "";
@@ -1020,7 +1105,7 @@ public class PreviewItActivity extends BaseActivity {
 //                String valueS = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(customerReportItemArrayList.get(i).getValue()));
 
 
-                productitem = IOUtils.toString(getAssets().open("report/stock_single_item.html"))
+                productitem = IOUtils.toString(getAssets().open("report/"+stock_single_itemHtml))
                         .replaceAll("#SNo#", ""+(i+1))
                         .replaceAll("#Product#", customerReportItemArrayList.get(i).getName())
                         .replaceAll("#ReorderLevel#", minimumTxt)
@@ -1092,8 +1177,8 @@ public class PreviewItActivity extends BaseActivity {
 
         double lastQuantity = 0.0;
 
-        String name = "report/ProductMovementReport.html";
-        String nameName = "file:///android_asset/report/ProductMovementReport.html";
+        String name = "report/"+ProductMovementReportHtml;
+        String nameName = "file:///android_asset/report/"+ProductMovementReportHtml;
 
         String productitem = null;
         String productitemlist = "";
@@ -1150,7 +1235,7 @@ public class PreviewItActivity extends BaseActivity {
                 }
 
 
-                productitem = IOUtils.toString(getAssets().open("report/product_movement_single_item.html"))
+                productitem = IOUtils.toString(getAssets().open("report/"+product_movement_single_itemHtml))
                         .replaceAll("#DATE#", customerReportItemArrayList.get(i).getDate_added())
                         .replaceAll("#Particulars#", customerReportItemArrayList.get(i).getParticulars())
                         .replaceAll("#OpeningStock#", ""+openingStockTxt)

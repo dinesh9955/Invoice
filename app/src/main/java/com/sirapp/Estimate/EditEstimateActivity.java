@@ -21,6 +21,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -148,6 +149,16 @@ import retrofit2.Callback;
 
 public class EditEstimateActivity extends BaseActivity implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
     private static final String TAG = "EditEstimateActivity";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "estimate.html";
+    String mainHtml1 = "estimate1.html";
+    String mainHtml2 = "estimate2.html";
+    String mainHtml3 = "estimate3.html";
+    String mainHtml4 = "estimate4.html";
+
     String companycolor = "#ffffff";
     int selectedTemplate = 0;
 //    int defaultClick = 0;
@@ -571,10 +582,51 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
+
         companyget();
+
+        checkDevice();
+
         getinvoicedata();
 
     }
+
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(EditEstimateActivity.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "estimate.html";
+            mainHtml1 = "estimate1.html";
+            mainHtml2 = "estimate2.html";
+            mainHtml3 = "estimate3.html";
+            mainHtml4 = "estimate4.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/estimate.html";
+                mainHtml1 = "5/estimate1.html";
+                mainHtml2 = "5/estimate2.html";
+                mainHtml3 = "5/estimate3.html";
+                mainHtml4 = "5/estimate4.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/estimate.html";
+                mainHtml1 = "6/estimate1.html";
+                mainHtml2 = "6/estimate2.html";
+                mainHtml3 = "6/estimate3.html";
+                mainHtml4 = "6/estimate4.html";
+            }
+        }
+    }
+
 
 
     private void getinvoicedata() {
@@ -4957,7 +5009,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                 attchedmentimagepath = attchmentimage.get(i);
                 try {
 
-                    multipagepath = IOUtils.toString(getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getAssets().open(attachmentHtml))
 
 
                             .replaceAll("#ATTACHMENT_1#", attchmentimage.get(i));
@@ -4994,7 +5046,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
 
-                productitem = IOUtils.toString(getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getAssets().open(singleItemHtml))
 
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
@@ -5069,7 +5121,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
 
         String signatureinvoice = null;
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
@@ -5246,23 +5298,23 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "estimate.html";
-        String nameName = "file:///android_asset/estimate.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
         if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "estimate.html";
-            nameName = "file:///android_asset/estimate.html";
+            name = mainHtml;
+            nameName = "file:///android_asset/"+mainHtml;
         }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "estimate1.html";
-            nameName = "file:///android_asset/estimate1.html";
+            name = mainHtml1;
+            nameName = "file:///android_asset/"+mainHtml1;
         }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "estimate2.html";
-            nameName = "file:///android_asset/estimate2.html";
+            name = mainHtml2;
+            nameName = "file:///android_asset/"+mainHtml2;
         }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "estimate3.html";
-            nameName = "file:///android_asset/estimate3.html";
+            name = mainHtml3;
+            nameName = "file:///android_asset/"+mainHtml3;
         }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "estimate4.html";
-            nameName = "file:///android_asset/estimate4.html";
+            name = mainHtml4;
+            nameName = "file:///android_asset/"+mainHtml4;
         }
 
         StringBuilder stringBuilderCompany = new StringBuilder();

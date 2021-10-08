@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.print.PDFPrint;
 import android.print.PrintAttributes;
@@ -61,6 +62,12 @@ import retrofit2.Callback;
 
 public class SendThankYouNoteActivity extends BaseActivity {
     private final String TAG = "SendThankYouNoteActivity";
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "thankyounote.html";
+
     WebView invoiceweb;
     String invoiceId = "";
     String templateSelect = "";
@@ -142,10 +149,35 @@ public class SendThankYouNoteActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         titleView.setText(getString(R.string.preview));
 
+        checkDevice();
 
         getinvoicedata();
 
     }
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(SendThankYouNoteActivity.this) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "thankyounote.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/thankyounote.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/thankyounote.html";
+            }
+        }
+    }
+
 
     private void getinvoicedata() {
 

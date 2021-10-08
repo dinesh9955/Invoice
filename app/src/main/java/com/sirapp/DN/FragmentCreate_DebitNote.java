@@ -19,6 +19,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -140,6 +141,11 @@ import gun0912.tedbottompicker.TedRxBottomPicker;
 import io.reactivex.disposables.Disposable;
 
 public class FragmentCreate_DebitNote extends BaseFragment implements Customer_Bottom_Adapter.Callback, Products_Adapter.onItemClickListner, Product_Bottom_Adapter.Callback, Service_bottom_Adapter.Callback, CustomTaxAdapter.Callback {
+
+    String attachmentHtml = "attchment.html";
+    String singleItemHtml = "single_item.html";
+    String signatureHtml = "Signatures.html";
+    String mainHtml = "debit.html";
 
   //  SavePref pref = new SavePref();
 
@@ -569,9 +575,37 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
         productsRecycler.setLayoutManager(layoutManager);
         productsRecycler.setHasFixedSize(true);
 
+        checkDevice();
+
+
         return view;
 
     }
+
+
+    private void checkDevice() {
+        if(Utility.isTablet(getActivity()) == true){
+            attachmentHtml = "attchment.html";
+            singleItemHtml = "single_item.html";
+            signatureHtml = "Signatures.html";
+            mainHtml = "debit.html";
+        }else {
+            String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL + " " + Build.BRAND + " " + Build.DEVICE;
+            if (manufacturerModel.toLowerCase().contains("j7")) {
+                attachmentHtml = "5/attchment.html";
+                singleItemHtml = "5/single_item.html";
+                signatureHtml = "5/Signatures.html";
+                mainHtml = "5/debit.html";
+            } else {
+                attachmentHtml = "6/attchment.html";
+                singleItemHtml = "6/single_item.html";
+                signatureHtml = "6/Signatures.html";
+                mainHtml = "6/debit.html";
+            }
+        }
+    }
+
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -4293,7 +4327,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                 attchedmentimagepath = attchmentimage.get(i);
                 try {
 
-                    multipagepath = IOUtils.toString(getActivity().getAssets().open("attchment.html"))
+                    multipagepath = IOUtils.toString(getActivity().getAssets().open(attachmentHtml))
 
 
                             .replaceAll("#ATTACHMENT_1#", attchmentimage.get(i));
@@ -4329,7 +4363,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                 String stringFormatRate = Utility.getPatternFormat(""+numberPostion, producpriceRate);
                 String stringFormatAmount = Utility.getPatternFormat(""+numberPostion, totalAmount);
 
-                productitem = IOUtils.toString(getActivity().getAssets().open("single_item.html"))
+                productitem = IOUtils.toString(getActivity().getAssets().open(singleItemHtml))
                         .replaceAll("#NAME#", tempList.get(i).getProduct_name())
                         .replaceAll("#DESC#", tempList.get(i).getProduct_description())
                         .replaceAll("#UNIT#", tempList.get(i).getProduct_measurement_unit())
@@ -4404,7 +4438,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
         String signatureinvoice = null;
         try {
-            signatureinvoice = IOUtils.toString(getActivity().getAssets().open("Signatures.html"))
+            signatureinvoice = IOUtils.toString(getActivity().getAssets().open(signatureHtml))
                     .replaceAll("dataimageCompany_Stamp", "file://" + company_stamp)
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
@@ -4582,24 +4616,25 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
         String selectedTemplate = ""+this.selectedTemplate;
 
-        String name = "debit.html";
-        String nameName = "file:///android_asset/debit.html";
-        if(selectedTemplate.equalsIgnoreCase("0")){
-            name = "debit.html";
-            nameName = "file:///android_asset/debit.html";
-        }else if(selectedTemplate.equalsIgnoreCase("1")){
-            name = "debit.html";
-            nameName = "file:///android_asset/debit.html";
-        }else if(selectedTemplate.equalsIgnoreCase("2")){
-            name = "debit.html";
-            nameName = "file:///android_asset/debit.html";
-        }else if(selectedTemplate.equalsIgnoreCase("3")){
-            name = "debit.html";
-            nameName = "file:///android_asset/debit.html";
-        }else if(selectedTemplate.equalsIgnoreCase("4")){
-            name = "debit.html";
-            nameName = "file:///android_asset/debit.html";
-        }
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
+
+//        if(selectedTemplate.equalsIgnoreCase("0")){
+//            name = "debit.html";
+//            nameName = "file:///android_asset/debit.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("1")){
+//            name = "debit.html";
+//            nameName = "file:///android_asset/debit.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("2")){
+//            name = "debit.html";
+//            nameName = "file:///android_asset/debit.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("3")){
+//            name = "debit.html";
+//            nameName = "file:///android_asset/debit.html";
+//        }else if(selectedTemplate.equalsIgnoreCase("4")){
+//            name = "debit.html";
+//            nameName = "file:///android_asset/debit.html";
+//        }
 
 
         StringBuilder stringBuilderCompany = new StringBuilder();
