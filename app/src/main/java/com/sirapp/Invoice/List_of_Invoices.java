@@ -2565,7 +2565,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 for (ApplicationInfo packageInfo : packages) {
                     String ccc = new Gson().toJson(packageInfo);
                     Log.e(TAG, "Source_dir : " + ccc);
-                    if(ccc.toString().toLowerCase().contains("mail")){
+                    if(ccc.toLowerCase().contains("mail")){
                         Log.e(TAG, "LaunchActivity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
                         Log.e(TAG, "Installedpackage :" + packageInfo.packageName);
                         Log.e(TAG, "paypalXX10 ");
