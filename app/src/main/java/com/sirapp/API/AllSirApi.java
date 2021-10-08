@@ -61,7 +61,7 @@ public class AllSirApi {
     public static final int FONT_SIZE_CREATE_XXX_V = 10;
 
 
-    public static final boolean ALL_FONT= false;
+    public static final boolean ALL_FONT = true;
 
 
 //    public static final String BASE_URL ="http://13.126.22.0/saad/app/index.php/api/";

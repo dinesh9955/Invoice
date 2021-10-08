@@ -400,6 +400,10 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL+ " " + Build.BRAND+ " " + Build.DEVICE;
         Log.e(TAG, "manufacturerModel :" + manufacturerModel);
 
+
+        float scaleAA = getResources().getConfiguration().fontScale;
+        Log.e(TAG, "manufacturerModelscaleAA :" + scaleAA);
+
 //        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 //
 //        DatabaseReference mDatabaseReference = mDatabase.getReference();
