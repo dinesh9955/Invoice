@@ -1,9 +1,12 @@
 package com.sirapp.Home;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -407,8 +410,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         Log.e(TAG, "manufacturerModel :" + manufacturerModel);
 
 
-        float scaleAA = getResources().getConfiguration().fontScale;
-        Log.e(TAG, "manufacturerModelscaleAA :" + scaleAA);
+
+
 
 //        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 //
@@ -458,6 +461,9 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 //        if(compantId != null){
 //            HomeApi(compantId);
 //        }
+
+
+        checkFontSize();
 
         COMPANYListingApi();
         getSubscriptionApi();
@@ -1683,6 +1689,55 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             drawerLayout.closeDrawer(GravityCompat.START);
         }
     }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        checkFontSize();
+
+    }
+
+
+
+    public void checkFontSize(){
+        float scaleAA = getResources().getConfiguration().fontScale;
+        Log.e(TAG, "manufacturerModelscaleAA :" + scaleAA);
+
+        if(1.0 < scaleAA){
+            Log.e(TAG, "manufacturerModelscaleAA11 :" + scaleAA);
+            showDialogOK(Home_Activity.this, "App font size is not compatible, Please reduce your font size.",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    dialog.dismiss();
+                                    startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
+                                    break;
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    dialog.dismiss();
+                                    break;
+                            }
+                        }
+                    });
+        }else{
+            Log.e(TAG, "manufacturerModelscaleAA22 :" + scaleAA);
+        }
+    }
+
+
+    private static void showDialogOK(Activity splashScreen, String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(splashScreen)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+         //       .setNegativeButton("CANCEL", okListener)
+                .setCancelable(false)
+                .create()
+                .show();
+    }
+
 
 
 
