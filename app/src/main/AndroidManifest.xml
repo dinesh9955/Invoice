@@ -535,7 +535,7 @@
 
         <activity
             android:name="com.sirapp.Receipts.ReceiptViewActivityWebView"
-            android:configChanges="fontScale"
+            android:configChanges="density"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
