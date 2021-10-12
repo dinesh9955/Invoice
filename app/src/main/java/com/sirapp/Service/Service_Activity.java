@@ -10,11 +10,12 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.crystalviewpager.widgets.CrystalViewPager;
+import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Adapter.CustomViewPagerAdapter;
 import com.sirapp.R;
 
-public class Service_Activity extends AppCompatActivity {
+public class Service_Activity extends BaseActivity {
     CrystalViewPager viewPager;
     TabLayout tabs;
     @Override

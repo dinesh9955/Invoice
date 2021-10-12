@@ -463,7 +463,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 //        }
 
 
-        checkFontSize();
+//        checkFontSize();
 
         COMPANYListingApi();
         getSubscriptionApi();
@@ -1695,48 +1695,48 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
     protected void onRestart() {
         super.onRestart();
 
-        checkFontSize();
+//        checkFontSize();
 
     }
 
 
 
-    public void checkFontSize(){
-        float scaleAA = getResources().getConfiguration().fontScale;
-        Log.e(TAG, "manufacturerModelscaleAA :" + scaleAA);
-
-        if(1.0 < scaleAA){
-            Log.e(TAG, "manufacturerModelscaleAA11 :" + scaleAA);
-            showDialogOK(Home_Activity.this, "App font size is not compatible, Please reduce your font size.",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which) {
-                                case DialogInterface.BUTTON_POSITIVE:
-                                    dialog.dismiss();
-                                    startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
-                                    break;
-                                case DialogInterface.BUTTON_NEGATIVE:
-                                    dialog.dismiss();
-                                    break;
-                            }
-                        }
-                    });
-        }else{
-            Log.e(TAG, "manufacturerModelscaleAA22 :" + scaleAA);
-        }
-    }
-
-
-    private static void showDialogOK(Activity splashScreen, String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(splashScreen)
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-         //       .setNegativeButton("CANCEL", okListener)
-                .setCancelable(false)
-                .create()
-                .show();
-    }
+//    public void checkFontSize(){
+//        float scaleAA = getResources().getConfiguration().fontScale;
+//        Log.e(TAG, "manufacturerModelscaleAA :" + scaleAA);
+//
+//        if(1.0 < scaleAA){
+//            Log.e(TAG, "manufacturerModelscaleAA11 :" + scaleAA);
+//            showDialogOK(Home_Activity.this, "App font size is not compatible, Please reduce your font size.",
+//                    new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            switch (which) {
+//                                case DialogInterface.BUTTON_POSITIVE:
+//                                    dialog.dismiss();
+//                                    startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
+//                                    break;
+//                                case DialogInterface.BUTTON_NEGATIVE:
+//                                    dialog.dismiss();
+//                                    break;
+//                            }
+//                        }
+//                    });
+//        }else{
+//            Log.e(TAG, "manufacturerModelscaleAA22 :" + scaleAA);
+//        }
+//    }
+//
+//
+//    private static void showDialogOK(Activity splashScreen, String message, DialogInterface.OnClickListener okListener) {
+//        new AlertDialog.Builder(splashScreen)
+//                .setMessage(message)
+//                .setPositiveButton("OK", okListener)
+//         //       .setNegativeButton("CANCEL", okListener)
+//                .setCancelable(false)
+//                .create()
+//                .show();
+//    }
 
 
 

@@ -20,6 +20,8 @@ public class BaseFragment extends Fragment {
         firebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
         numberPostion = pref.getNumberFormatPosition();
         languagePosition = pref.getLanguagePosition();
+
+
     }
 
 
@@ -46,4 +48,14 @@ public class BaseFragment extends Fragment {
         }
         return languageName;
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        BaseActivity activity = (BaseActivity)getActivity();
+        activity.checkFontSize();
+    }
+
+
 }

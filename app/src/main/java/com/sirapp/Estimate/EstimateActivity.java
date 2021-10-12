@@ -15,11 +15,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.sirapp.Adapter.CustomViewPagerAdapter;
+import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.R;
 import com.sirapp.Utils.LockableViewPager;
 
-public class EstimateActivity extends AppCompatActivity {
+public class EstimateActivity extends BaseActivity {
 
     public static Activity activity;
 

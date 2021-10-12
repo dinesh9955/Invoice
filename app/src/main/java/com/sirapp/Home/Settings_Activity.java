@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.R;
 
-public class Settings_Activity extends AppCompatActivity {
+public class Settings_Activity extends BaseActivity {
 
     TextView description;
     TextView invite,customize,faqs,language,about,rate,terms,privacy,support;

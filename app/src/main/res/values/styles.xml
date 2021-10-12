@@ -12,6 +12,13 @@
 
     </style>
 
+
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/dark_blue</item>
+    </style>
+
     <style name="spinnerItemStyle">
         <item name="android:padding">10dp</item>
         <item name="android:textSize">@dimen/_50sdp</item>
