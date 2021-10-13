@@ -8,10 +8,15 @@
         <item name="colorAccent">@color/dark_blue</item>
         <!-- For the resting Spinner style -->
 
-
-
     </style>
 
+    <style name="MyDialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowTitleStyle">@style/DialogTitle</item>
+    </style>
+
+    <style name="DialogTitle" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">15sp</item>
+    </style>
 
     <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorPrimary">@color/colorPrimary</item>

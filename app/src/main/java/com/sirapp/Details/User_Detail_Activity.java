@@ -3,6 +3,7 @@ package com.sirapp.Details;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +18,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -37,6 +41,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Constant.Constant;
+import com.sirapp.Customer.Customer_Detail_Activity2;
 import com.sirapp.ImageResource.FileCompressor;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
@@ -650,26 +655,62 @@ public class User_Detail_Activity extends BaseActivity {
 */
     }
     private void SelectImage() {
-        final CharSequence[] items={getString(R.string.dialog_Camera), getString(R.string.dialog_Gallery), getString(R.string.dialog_Cancel)};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.dialog_AddImage));
+        Dialog bottomSheetDialog4 = new Dialog(User_Detail_Activity.this);
+        View view = LayoutInflater.from(User_Detail_Activity.this).inflate(R.layout.add_image, null);
+        bottomSheetDialog4.setContentView(view);
+        bottomSheetDialog4.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        Window window = bottomSheetDialog4.getWindow();
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        bottomSheetDialog4.show();
 
-        builder.setItems(items, new DialogInterface.OnClickListener() {
+        TextView textViewCamera = bottomSheetDialog4.findViewById(R.id.camera);
+        TextView textViewGallery = bottomSheetDialog4.findViewById(R.id.gallery);
+        TextView textViewCancel = bottomSheetDialog4.findViewById(R.id.cancel);
 
+        textViewCamera.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (items[i].equals(getString(R.string.dialog_Camera))) {
-                    requestStoragePermission(true);
-                } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
-
-                    requestStoragePermission(false);
-                } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
-                    dialogInterface.dismiss();
-                }
+            public void onClick(View view) {
+                bottomSheetDialog4.dismiss();
+                requestStoragePermission(true);
             }
         });
-        builder.show();
+
+        textViewGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog4.dismiss();
+                requestStoragePermission(false);
+            }
+        });
+
+        textViewCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog4.dismiss();
+            }
+        });
+
+//        final CharSequence[] items={getString(R.string.dialog_Camera), getString(R.string.dialog_Gallery), getString(R.string.dialog_Cancel)};
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle(getString(R.string.dialog_AddImage));
+//
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                if (items[i].equals(getString(R.string.dialog_Camera))) {
+//                    requestStoragePermission(true);
+//                } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
+//
+//                    requestStoragePermission(false);
+//                } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
+//                    dialogInterface.dismiss();
+//                }
+//            }
+//        });
+//        builder.show();
 
     }
 

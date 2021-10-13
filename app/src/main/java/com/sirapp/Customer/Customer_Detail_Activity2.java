@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,7 +21,10 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -443,34 +447,70 @@ public class Customer_Detail_Activity2 extends BaseActivity {
 
 
     private void SelectImage() {
-        final CharSequence[] items={getString(R.string.dialog_Camera),getString(R.string.dialog_Gallery),getString(R.string.dialog_Cancel)};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(getString(R.string.dialog_AddImage));
+        Dialog bottomSheetDialog4 = new Dialog(Customer_Detail_Activity2.this);
+        View view = LayoutInflater.from(Customer_Detail_Activity2.this).inflate(R.layout.add_image, null);
+        bottomSheetDialog4.setContentView(view);
+        bottomSheetDialog4.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        Window window = bottomSheetDialog4.getWindow();
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        bottomSheetDialog4.show();
 
-        builder.setItems(items, new DialogInterface.OnClickListener() {
+        TextView textViewCamera = bottomSheetDialog4.findViewById(R.id.camera);
+        TextView textViewGallery = bottomSheetDialog4.findViewById(R.id.gallery);
+        TextView textViewCancel = bottomSheetDialog4.findViewById(R.id.cancel);
 
+        textViewCamera.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (items[i].equals(getString(R.string.dialog_Camera))) {
-
-                    // Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    //  startActivityForResult(intent, REQUEST_CAMERA);
-                    requestStoragePermission(true);
-                } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
-
-                    requestStoragePermission(false);
-
-//                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                    intent.setType("image/*");
-//                    startActivityForResult(intent, SELECT_FILE);
-
-                } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
-                    dialogInterface.dismiss();
-                }
+            public void onClick(View view) {
+                bottomSheetDialog4.dismiss();
+                requestStoragePermission(true);
             }
         });
-        builder.show();
+
+        textViewGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog4.dismiss();
+                requestStoragePermission(false);
+            }
+        });
+
+        textViewCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog4.dismiss();
+            }
+        });
+
+//        final CharSequence[] items={getString(R.string.dialog_Camera),getString(R.string.dialog_Gallery),getString(R.string.dialog_Cancel)};
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+//        builder.setTitle(getString(R.string.dialog_AddImage));
+//
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                if (items[i].equals(getString(R.string.dialog_Camera))) {
+//
+//                    // Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    //  startActivityForResult(intent, REQUEST_CAMERA);
+//                    requestStoragePermission(true);
+//                } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
+//
+//                    requestStoragePermission(false);
+//
+////                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+////                    intent.setType("image/*");
+////                    startActivityForResult(intent, SELECT_FILE);
+//
+//                } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
+//                    dialogInterface.dismiss();
+//                }
+//            }
+//        });
+//        builder.show();
 
     }
 

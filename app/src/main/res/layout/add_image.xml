@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/createdialog_curve"
+        android:id="@+id/r1"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_AddImage"
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_Camera"
+            android:textSize="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:id="@+id/camera"
+            android:textStyle="normal"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_Gallery"
+            android:textSize="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:id="@+id/gallery"
+            android:textStyle="normal"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_Cancel"
+            android:textSize="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:id="@+id/cancel"
+            android:textStyle="normal"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -462,26 +462,62 @@ public class Add_User extends BaseFragment {
     }
 
     private void SelectImage() {
-            final CharSequence[] items={getString(R.string.dialog_Camera), getString(R.string.dialog_Gallery), getString(R.string.dialog_Cancel)};
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(getString(R.string.dialog_AddImage));
+        Dialog bottomSheetDialog4 = new Dialog(getActivity());
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.add_image, null);
+        bottomSheetDialog4.setContentView(view);
+        bottomSheetDialog4.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        Window window = bottomSheetDialog4.getWindow();
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        bottomSheetDialog4.show();
 
-            builder.setItems(items, new DialogInterface.OnClickListener() {
+        TextView textViewCamera = bottomSheetDialog4.findViewById(R.id.camera);
+        TextView textViewGallery = bottomSheetDialog4.findViewById(R.id.gallery);
+        TextView textViewCancel = bottomSheetDialog4.findViewById(R.id.cancel);
 
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    if (items[i].equals(getString(R.string.dialog_Camera))) {
-                       requestStoragePermission(true);
-                    } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
+        textViewCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog4.dismiss();
+                requestStoragePermission(true);
+            }
+        });
 
-                        requestStoragePermission(false);
-                   } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
-                        dialogInterface.dismiss();
-                    }
-                }
-            });
-            builder.show();
+        textViewGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog4.dismiss();
+                requestStoragePermission(false);
+            }
+        });
+
+        textViewCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog4.dismiss();
+            }
+        });
+
+//            final CharSequence[] items={getString(R.string.dialog_Camera), getString(R.string.dialog_Gallery), getString(R.string.dialog_Cancel)};
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            builder.setTitle(getString(R.string.dialog_AddImage));
+//
+//            builder.setItems(items, new DialogInterface.OnClickListener() {
+//
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    if (items[i].equals(getString(R.string.dialog_Camera))) {
+//                       requestStoragePermission(true);
+//                    } else if (items[i].equals(getString(R.string.dialog_Gallery))) {
+//
+//                        requestStoragePermission(false);
+//                   } else if (items[i].equals(getString(R.string.dialog_Cancel))) {
+//                        dialogInterface.dismiss();
+//                    }
+//                }
+//            });
+//            builder.show();
 
         }
 
