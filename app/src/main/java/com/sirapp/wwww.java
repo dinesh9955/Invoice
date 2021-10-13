@@ -91,6 +91,10 @@ public class wwww extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                float scaleAA = getResources().getConfiguration().fontScale;
+                Log.e(TAG, "manufacturerModelscaleAA :" + scaleAA);
+
 //                PrintManager printManager = (PrintManager) primaryBaseActivity.getSystemService(Context.PRINT_SERVICE);
 //
 //                PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
@@ -106,7 +110,7 @@ public class wwww extends BaseActivity {
 //                builder.setMinMargins(new PrintAttributes.Margins(0, 0, 0, 0));
 //                 printManager.print(jobName, printAdapter, builder.build());
 
-                generatePdf();
+                //generatePdf();
             }
         });
 

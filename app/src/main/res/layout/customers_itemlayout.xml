@@ -5,14 +5,13 @@
     android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="45dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/image"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginStart="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/placeholder_big"
@@ -29,7 +28,8 @@
         android:text="Company Name"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/image"
-        app:layout_constraintTop_toTopOf="@+id/image" />
+        app:layout_constraintTop_toTopOf="@+id/image"
+        android:textSize="@dimen/_10sdp"/>
 
     <TextView
         android:id="@+id/name"
@@ -38,7 +38,7 @@
         android:layout_marginTop="8dp"
         android:text="Username"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="@+id/companyname"
         app:layout_constraintTop_toBottomOf="@+id/companyname" />
 
@@ -53,7 +53,7 @@
         android:layout_marginRight="5dp"
         android:text="Address"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:visibility="visible"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/image"
@@ -78,7 +78,7 @@
         android:id="@+id/view7"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="0dp"
         android:background="@color/gray"
         app:layout_constraintStart_toStartOf="parent"

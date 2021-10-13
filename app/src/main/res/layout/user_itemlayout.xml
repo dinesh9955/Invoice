@@ -4,15 +4,16 @@
     android:id="@+id/relativeLayout4"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="45dp"
+    android:layout_marginTop="@dimen/_10sdp"
+
     android:paddingLeft="20dp"
     android:paddingRight="20dp">
 
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/image"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         android:scaleType="centerCrop"
         android:src="@drawable/sir_app_logo"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +28,7 @@
         android:layout_marginTop="10dp"
         android:text="Enter Name"
         android:textStyle="bold"
-
+android:textSize="@dimen/_10sdp"
         app:layout_constraintLeft_toRightOf="@+id/image"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,7 +41,7 @@
         android:layout_marginRight="5dp"
         android:text="Super Admin"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toRightOf="@+id/image"
         app:layout_constraintRight_toLeftOf="@+id/userdetail"
@@ -65,7 +66,7 @@
         android:id="@+id/view6"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@color/gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userrole"></View>

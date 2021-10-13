@@ -139,7 +139,9 @@ public class BaseActivity extends AppCompatActivity {
         if(1.0 < scaleAA){
             if(count == 0){
                 count = 1;
-                alertDialog.show();
+                if(alertDialog != null){
+                    alertDialog.show();
+                }
             }
         }else{
 

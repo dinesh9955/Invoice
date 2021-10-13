@@ -37,6 +37,7 @@
                 android:textColor="@color/darkgray"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:textSize="@dimen/_10sdp"
                 />
 
 
@@ -101,7 +102,7 @@
                 android:gravity="left|center_vertical"
                 android:paddingLeft="15dp"
                 android:textStyle="normal"
-                android:textSize="13dp"
+                android:textSize="@dimen/_10sdp"
                 android:textColor="@color/black"
                 android:textAllCaps="false"
                 android:layout_below="@+id/selectcompany2"
@@ -118,7 +119,8 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="20dp"
                 android:text="@string/stock_Select_Warehouse_2"
-                android:textColor="@color/lightpurple" />
+                android:textColor="@color/lightpurple"
+                android:textSize="@dimen/_10sdp"/>
 
             <com.isapanah.awesomespinner.AwesomeSpinner
                 android:id="@+id/fromwarehousespinner"
@@ -144,7 +146,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:textColor="@color/lightpurple"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/_10sdp"/>
             <EditText
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/quantitydescription"
@@ -153,7 +155,7 @@
                 android:hint="@string/stock_Enter_Quantity_2"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:textSize="12dp"
+                android:textSize="@dimen/_10sdp"
                 android:padding="15dp"
                 android:background="@drawable/edittextshape"
                 android:elevation="2dp"
@@ -182,7 +184,7 @@
                 android:hint="@string/stock_EnterReason"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:textSize="12dp"
+                android:textSize="@dimen/_10sdp"
                 android:padding="15dp"
                 android:background="@drawable/edittextshape"
                 android:elevation="2dp"
@@ -204,6 +206,7 @@
                 android:background="@drawable/buttonshape"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_marginBottom="90dp"
+                android:textSize="@dimen/_10sdp"
                 />
 
 

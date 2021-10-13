@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,20 +10,37 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:gravity="center"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
         android:background="@drawable/createdialog_curve"
         android:id="@+id/r1"
-
+        android:paddingLeft="@dimen/_10sdp"
+        android:paddingRight="@dimen/_10sdp"
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:id="@+id/viewinvoice"
             android:gravity="left"
             android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+          >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="left|center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+         >
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/view_in"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:id="@+id/shareButton"
+                android:padding="@dimen/_3sdp"
+                android:layout_margin="@dimen/_10sdp"/>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -30,12 +48,14 @@
                 android:text="@string/dialog_ViewInvoice"
                 android:textSize="@dimen/_10sdp"
                 android:padding="@dimen/_10sdp"
-                android:layout_marginStart="10dp"
+
                 android:layout_below="@+id/filtericon"
-                android:layout_marginTop="20dp"
                 android:textColor="@color/dark_blue"
                 android:id="@+id/viewinvoicebotom"
                 />
+        </LinearLayout>
+
+
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
@@ -44,7 +64,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/viewinvoicebotom"
-                android:layout_marginTop="@dimen/_10sdp">
+                >
 
             </View>
 
@@ -60,18 +80,36 @@
             android:layout_height="wrap_content"
             >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="left|center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp">
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/edit_in"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:id="@+id/shareButton"
+                android:padding="@dimen/_3sdp"
+                android:layout_margin="@dimen/_10sdp"
+                tools:ignore="DuplicateIds" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Change Templates"
                 android:textSize="@dimen/_10sdp"
                 android:padding="@dimen/_10sdp"
-                android:layout_marginLeft="10dp"
                 android:layout_below="@+id/filtericon"
-                android:layout_marginTop="20dp"
                 android:textColor="@color/dark_blue"
                 android:id="@+id/viewinvoicetemplate"
                 />
+        </LinearLayout>
+
+
             <View
                 android:id="@+id/viewa"
                 android:layout_width="match_parent"
@@ -80,11 +118,12 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/viewinvoicetemplate"
-                android:layout_marginTop="@dimen/_10sdp">
+               >
 
             </View>
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,20 +131,38 @@
             android:id="@+id/viewiceduplicate"
             android:gravity="left"
             android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+        >
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                android:text="@string/dialog_DuplicateInvoice"
-                android:textSize="@dimen/_10sdp"
-                android:layout_marginStart="10dp"
-                android:padding="@dimen/_10sdp"
-                android:layout_below="@+id/filtericon"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/duplicateinvoitxt"
-                />
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp">
+                <ImageView
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/duplicate_in"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:id="@+id/shareButton"
+                    android:padding="@dimen/_3sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    tools:ignore="DuplicateIds" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_DuplicateInvoice"
+                    android:textSize="@dimen/_10sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_below="@+id/filtericon"
+                    android:textColor="@color/dark_blue"
+                    android:id="@+id/duplicateinvoitxt"
+                    />
+            </LinearLayout>
+
+
             <View
                 android:id="@+id/duplicate"
                 android:layout_width="match_parent"
@@ -114,31 +171,54 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/duplicateinvoitxt"
-                android:layout_marginTop="@dimen/_10sdp">
+              >
 
             </View>
 
         </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_below="@+id/viewiceduplicate"
             android:id="@+id/shareinvoice"
             android:gravity="left"
             android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+   >
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                android:text="@string/dialog_ShareInvoice"
-                android:textSize="@dimen/_10sdp"
-                android:layout_marginStart="10dp"
-                android:padding="@dimen/_10sdp"
-                android:layout_below="@+id/filtericon"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/shareinvoicetxt"
-                />
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp">
+
+                <ImageView
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/share_in"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:id="@+id/shareButton"
+                    android:padding="@dimen/_3sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    tools:ignore="DuplicateIds" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dialog_ShareInvoice"
+                    android:textSize="@dimen/_10sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_below="@+id/filtericon"
+                    android:textColor="@color/dark_blue"
+                    android:id="@+id/shareinvoicetxt"
+                    />
+
+            </LinearLayout>
+
+
             <View
                 android:id="@+id/duplicatedt"
                 android:layout_width="match_parent"
@@ -147,32 +227,52 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/shareinvoicetxt"
-                android:layout_marginTop="@dimen/_10sdp">
+             >
 
             </View>
 
         </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:id="@+id/viewinvoicerecipts"
             android:layout_below="@+id/shareinvoice"
             android:gravity="left"
-
             android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+          >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="left|center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp">
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/charge_in"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:id="@+id/shareButton"
+                android:padding="@dimen/_3sdp"
+                android:layout_margin="@dimen/_10sdp"
+                tools:ignore="DuplicateIds" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_10sdp"
-                android:layout_marginLeft="10dp"
                 android:padding="@dimen/_10sdp"
                 android:layout_below="@+id/shareinvoice"
-                android:layout_marginTop="20dp"
                 android:textColor="@color/dark_blue"
                 android:text="@string/dialog_ConvertToReceipt"
                 android:id="@+id/recepitsviewtxt"
                 />
+        </LinearLayout>
+
             <View
                 android:id="@+id/view11"
                 android:layout_width="match_parent"
@@ -180,13 +280,13 @@
                 android:background="@color/gray"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
-
                 android:layout_below="@+id/recepitsviewtxt"
-                android:layout_marginTop="@dimen/_10sdp">
+       >
 
             </View>
 
         </LinearLayout>
+
     </RelativeLayout>
 
 

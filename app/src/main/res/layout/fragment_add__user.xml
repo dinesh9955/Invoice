@@ -64,10 +64,10 @@
                     android:layout_marginLeft="20dp"
                     android:layout_below="@+id/uploadimage"
                     android:layout_marginTop="20dp"
-                    android:textSize="14sp"
                     android:id="@+id/imagedescription"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@color/dark_grey"/>
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp"/>
 
                 <EditText
                     android:layout_marginTop="?actionBarSize"
@@ -77,7 +77,7 @@
                     android:hint="@string/user_Name_2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -94,7 +94,7 @@
                     android:hint="@string/user_Email_Addess_2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -112,7 +112,7 @@
                     android:hint="@string/user_Password_2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -146,17 +146,17 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-
                     android:background="@drawable/search_shape"
                     android:hint="@string/user_Select_Company"
                     android:spinnerMode="dialog"
                     android:gravity="left|center_vertical"
-                    android:paddingLeft="15dp"
+
                     android:textStyle="normal"
                     android:textSize="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textAllCaps="false"
                     android:layout_below="@+id/password"
+                    android:padding="15dp"
                     />
 
 
@@ -171,6 +171,7 @@
                     android:layout_marginTop="30dp"
                     android:text="@string/user_ACCESS_RIGHTS"
                     android:textColor="@color/lightpurple"
+                    android:textSize="@dimen/_11sdp"
                     />
 
             </RelativeLayout>
@@ -197,6 +198,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
                 <CheckBox
@@ -211,6 +213,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
 
@@ -227,6 +230,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
 
@@ -244,6 +248,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
 
@@ -260,6 +265,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
 
@@ -275,6 +281,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
                 <CheckBox
@@ -289,6 +296,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
 
@@ -316,6 +324,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
                 <CheckBox
@@ -330,6 +339,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
 
@@ -346,6 +356,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
 
@@ -363,6 +374,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
 
@@ -379,6 +391,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                 >
             </CheckBox>
 
@@ -394,6 +407,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
 
@@ -409,6 +423,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:textSize="@dimen/_10sdp"
                     >
                 </CheckBox>
 
@@ -430,6 +445,8 @@
                 android:id="@+id/adduser"
                 android:background="@drawable/buttonshape"
                 style="?android:attr/borderlessButtonStyle"
+                android:textSize="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
                 />
 
             <TextView
