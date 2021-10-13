@@ -370,6 +370,10 @@ public class Add_Company extends BaseFragment {
     private void SelectImage() {
         final CharSequence[] items={getString(R.string.dialog_Camera),getString(R.string.dialog_Gallery),getString(R.string.dialog_Cancel)};
 
+        final TextView myView = new TextView(getActivity());
+        myView.setText("myLongText");
+        myView.setTextSize(12);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.dialog_AddImage));
 

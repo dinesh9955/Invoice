@@ -28,7 +28,7 @@
         android:hint="@string/tax_Tax_Name"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textSize="12dp"
+        android:textSize="@dimen/_10sdp"
         android:padding="15dp"
         android:background="@drawable/edittextshape"
         android:elevation="2dp"
@@ -43,7 +43,7 @@
         android:hint="@string/tax_Tax_Rate"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textSize="12dp"
+        android:textSize="@dimen/_10sdp"
         android:padding="15dp"
         android:background="@drawable/edittextshape"
         android:elevation="2dp"
@@ -62,6 +62,7 @@
         android:layout_marginTop="30dp"
         android:text="@string/tax_Tax_Calculation"
         android:textColor="@color/lightpurple"
+        android:textSize="@dimen/_10sdp"
         />
 
     <RadioGroup
@@ -79,7 +80,8 @@
             android:layout_marginLeft="10dp"
             android:textColor="@color/d_grey"
             android:buttonTint="@color/lightpurple"
-            android:text="@string/tax_Inclusive" />
+            android:text="@string/tax_Inclusive"
+            android:textSize="@dimen/_10sdp"/>
 
         <RadioButton
             android:textColor="@color/d_grey"
@@ -89,6 +91,7 @@
             android:buttonTint="@color/lightpurple"
             android:layout_marginLeft="80dp"
             android:id="@+id/rexclusive"
+            android:textSize="@dimen/_10sdp"
             />
 
     </RadioGroup>
@@ -107,6 +110,7 @@
         android:id="@+id/add"
         android:background="@drawable/buttonshape"
         style="?android:attr/borderlessButtonStyle"
+        android:textSize="@dimen/_10sdp"
         />
 
     <ImageView

@@ -21,7 +21,7 @@
             android:id="@+id/text_setting"
             android:textColor="@color/fragmentfont"
             android:layout_alignParentLeft="true"
-            android:textSize="17sp"
+            android:textSize="@dimen/_12sdp"
             android:layout_centerVertical="true"
             android:textStyle="normal"
             android:layout_toLeftOf="@+id/imageView"
@@ -37,7 +37,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/directional25"
-            android:tint="@color/black"/>
+            android:tint="@color/black"
+            tools:ignore="UseAppTint" />
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -59,7 +60,7 @@
                 android:letterSpacing="0.1"
                 android:lineSpacingExtra="10dp"
                 android:textColor="@color/black"
-                android:textSize="13dp"
+                android:textSize="@dimen/_10sdp"
                 android:textStyle="normal"
                 android:id="@+id/name"
                 android:layout_marginLeft="10dp"

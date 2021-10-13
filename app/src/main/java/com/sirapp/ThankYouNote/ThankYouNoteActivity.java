@@ -597,8 +597,8 @@ public class ThankYouNoteActivity extends BaseActivity {
             shareinvoicetxt.setTypeface(Typeface.createFromAsset(getAssets(), "Fonts/AzoSans-Bold.otf"));
             recepitsviewtxt.setTypeface(Typeface.createFromAsset(getAssets(), "Fonts/AzoSans-Bold.otf"));
 
-//            LinearLayout linearLayoutChangeTemp= view.findViewById(R.id.viewicetemplate);
-//            linearLayoutChangeTemp.setVisibility(View.GONE);
+            LinearLayout linearLayoutshareinvoice= view.findViewById(R.id.shareinvoice);
+            linearLayoutshareinvoice.setVisibility(View.GONE);
 
 
             viewinvoicebotom.setOnClickListener(new View.OnClickListener() {

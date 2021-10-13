@@ -19,14 +19,16 @@
         android:background="@drawable/search_shape"
         android:textColorHint="@color/dark_grey"
         android:elevation="3dp"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:textSize="@dimen/_10sdp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/warehouse"
         android:layout_marginTop="45dp"
-        android:layout_below="@+id/search">
+        android:layout_below="@+id/search"
+        tools:listitem="@layout/warehouse_itemlayout">
 
     </androidx.recyclerview.widget.RecyclerView>
 

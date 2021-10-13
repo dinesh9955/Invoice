@@ -62,7 +62,8 @@
         android:id="@+id/recyclerproduct"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="45dp"
-        android:layout_below="@+id/search">
+        android:layout_below="@+id/search"
+        tools:listitem="@layout/product_listing_itemlayout">
     </androidx.recyclerview.widget.RecyclerView>
 
     <ImageView

@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:layout_marginBottom="@dimen/_20sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -80,7 +81,7 @@
         android:id="@+id/productcurrency"
         android:layout_alignParentEnd="true"
         android:textColor="@color/lightpurple"
-        android:textSize="@dimen/_9sdp"
+        android:textSize="@dimen/_12sdp"
 
         />
     <TextView
@@ -102,7 +103,7 @@
         android:layout_height="1dp"
         android:background="@color/gray"
         android:layout_below="@+id/productstock"
-        android:layout_marginTop="@dimen/_10sdp">
+        android:layout_marginTop="@dimen/_15sdp">
 
     </View>
 

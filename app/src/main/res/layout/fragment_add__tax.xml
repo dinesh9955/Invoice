@@ -47,7 +47,7 @@
         android:hint="@string/tax_Tax_Name_2"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textSize="12dp"
+        android:textSize="@dimen/_10sdp"
         android:padding="15dp"
         android:background="@drawable/search_shape"
         android:elevation="2dp"
@@ -66,7 +66,7 @@
         android:hint="@string/tax_Tax_Rate_2"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textSize="12dp"
+        android:textSize="@dimen/_10sdp"
         android:padding="15dp"
         android:background="@drawable/search_shape"
         android:elevation="2dp"
@@ -151,6 +151,7 @@
         android:id="@+id/add"
         android:background="@drawable/buttonshape"
         style="?android:attr/borderlessButtonStyle"
+        android:textSize="@dimen/_10sdp"
         />
 
     <ImageView

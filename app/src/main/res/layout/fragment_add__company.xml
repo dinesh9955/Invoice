@@ -48,14 +48,14 @@
                     android:layout_marginLeft="20dp"
                     android:layout_below="@+id/heading"
                     android:layout_marginTop="30dp"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_10sdp"
                     android:id="@+id/description"/>
 
 
 
                 <com.makeramen.roundedimageview.RoundedImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="70dp"
                     android:id="@+id/uploadimage"
@@ -71,7 +71,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_below="@+id/uploadimage"
                     android:layout_marginTop="20dp"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_10sdp"
                     android:id="@+id/imagedescription"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/dark_grey"/>
@@ -84,7 +84,7 @@
                     android:hint="@string/company_Company_Name_2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -101,7 +101,7 @@
                     android:hint="@string/company_Company_Email_Address"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -119,7 +119,7 @@
                     android:hint="@string/company_Company_Phone_Number"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -137,7 +137,7 @@
                     android:hint="@string/company_Website"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -155,7 +155,7 @@
                     android:hint="@string/company_Company_Address"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -197,7 +197,7 @@
                     android:gravity="left|center_vertical"
                     android:paddingLeft="15dp"
                     android:textStyle="normal"
-                    android:textSize="13dp"
+                    android:textSize="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textAllCaps="false"
                     android:layout_below="@+id/CompanyAddress"
@@ -220,7 +220,7 @@
                     android:text="@string/choose_color"
                     android:textColor="@color/darkgray"
                     android:textStyle="bold"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/_10sdp"
                     android:textAllCaps="false"
                     android:background="@drawable/edittextshape"/>
 
@@ -234,6 +234,7 @@
                     android:layout_marginTop="30dp"
                     android:text="@string/company_PAYMENT_DETAILS"
                     android:textColor="@color/lightpurple"
+                    android:textSize="@dimen/_10sdp"
                     />
 
                 <EditText
@@ -244,7 +245,7 @@
                     android:hint="@string/company_Enter_IBAN_2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -264,7 +265,7 @@
                     android:hint="@string/company_Enter_Bank_Name_2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -283,7 +284,7 @@
                     android:hint="@string/company_Enter_Swift_BIC_2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -303,7 +304,7 @@
                     android:hint="@string/company_Paypal_Email_Address"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -326,7 +327,7 @@
                     android:hint="@string/company_Make_Cheque_Payable_To"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -351,7 +352,7 @@
                     android:id="@+id/save"
                     android:background="@drawable/buttonshape"
                     style="?android:attr/borderlessButtonStyle"
-
+                    android:textSize="@dimen/_10sdp"
                     />
 
                 <TextView
@@ -411,7 +412,7 @@
                 android:text="Have on or more warehouses?"
                 android:layout_marginTop="50dp"
                 android:layout_centerHorizontal="true"
-                android:textSize="12sp"
+                android:textSize="@dimen/_10sdp"
                 android:textColor="@color/darkgray"
                 android:id="@+id/haveoneormore"/>
 
@@ -424,7 +425,7 @@
                 android:text="List them here"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
-                android:textSize="12sp"
+                android:textSize="@dimen/_10sdp"
                 android:textColor="@color/darkblue"
                 android:id="@+id/list"
                 />
@@ -442,6 +443,7 @@
                 android:id="@+id/addwarehouse"
                 android:background="@drawable/buttonshape"
                 android:layout_marginBottom="20dp"
+                android:textSize="@dimen/_10sdp"
                 />
 
         </RelativeLayout>

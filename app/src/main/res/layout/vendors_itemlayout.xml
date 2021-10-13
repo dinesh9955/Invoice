@@ -5,11 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:layout_marginBottom="45dp">
+    android:layout_marginTop="@dimen/_10sdp"
+  >
 
     <com.makeramen.roundedimageview.RoundedImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         android:src="@drawable/sir_app_logo"
         app:riv_corner_radius="100dp"
         android:id="@+id/image"
@@ -23,6 +24,7 @@
         android:id="@+id/companyname"
         android:layout_toRightOf="@+id/image"
         android:layout_marginLeft="20dp"
+        android:textSize="@dimen/_10sdp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -33,7 +35,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/companyname"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="5dp"
         />
     <TextView
@@ -45,7 +47,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/name"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/details"
         android:layout_marginRight="5dp"
@@ -69,7 +71,7 @@
         android:layout_height="1dp"
         android:background="@color/gray"
         android:layout_below="@+id/invoicepricetxt"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="@dimen/_15sdp">
 
     </View>
 </RelativeLayout>

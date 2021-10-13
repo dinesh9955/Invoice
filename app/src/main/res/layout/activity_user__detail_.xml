@@ -90,8 +90,8 @@
                 android:tint="@color/lightpurple"
                 />
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
                 android:src="@drawable/company_01_big"
                 app:riv_corner_radius="200dp"
                 android:scaleType="centerCrop"

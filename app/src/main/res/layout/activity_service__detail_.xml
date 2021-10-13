@@ -23,10 +23,10 @@
                 android:textColor="@color/darkgray"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="?actionBarSize"
-                android:textSize="18sp"
+                android:textSize="@dimen/_11sdp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-     android:padding="10dp"
+                android:padding="10dp"
                 android:background="@drawable/edittextshape"
                 android:textStyle="bold"
                 android:id="@+id/servicename"/>
@@ -41,7 +41,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/servicename"
                 android:layout_marginTop="30dp"
-
+                android:textSize="@dimen/_10sdp"
                 android:padding="10dp"
                 android:background="@drawable/edittextshape"
                 android:id="@+id/serviceprice"/>
@@ -56,7 +56,7 @@
                 android:layout_marginTop="60dp"
                 android:padding="10dp"
                 android:background="@drawable/edittextshape"
-
+                android:textSize="@dimen/_10sdp"
                 android:id="@+id/servicedepart"
                 android:textColor="@color/gray"/>
 
@@ -67,7 +67,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/servicedepart"
                 android:layout_marginTop="30dp"
-
+                android:textSize="@dimen/_10sdp"
                 android:padding="10dp"
                 android:background="@drawable/edittextshape"
                 android:id="@+id/measurement"
@@ -80,7 +80,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/measurement"
                 android:layout_marginTop="30dp"
-
+                android:textSize="@dimen/_10sdp"
                 android:padding="10dp"
                 android:background="@drawable/edittextshape"
                 android:id="@+id/servicedescription"
@@ -95,7 +95,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/servicedescription"
                 android:layout_marginTop="30dp"
-
+                android:textSize="@dimen/_10sdp"
                 android:id="@+id/servicetaxable"
                 android:padding="10dp"
                 android:background="@drawable/edittextshape"

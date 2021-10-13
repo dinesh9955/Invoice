@@ -27,6 +27,7 @@
         android:id="@+id/servicename"
         android:layout_toLeftOf="@+id/servicecurrency"
         android:layout_marginRight="5dp"
+        android:textSize="@dimen/_10sdp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -36,7 +37,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/servicename"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_10sdp"
         android:layout_marginTop="5dp"
         android:visibility="gone"
         />
@@ -49,10 +50,11 @@
         android:layout_marginLeft="11dp"
         android:layout_below="@+id/servicecompany"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/servicecurrency"
         android:layout_marginRight="5dp"
+
         />
     <TextView
         android:layout_width="wrap_content"
@@ -63,7 +65,7 @@
         android:id="@+id/servicecurrency"
         android:layout_alignParentEnd="true"
         android:textColor="@color/lightpurple"
-        android:textSize="18sp"
+        android:textSize="@dimen/_10sdp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -74,8 +76,8 @@
         android:id="@+id/servicecurrencyunit"
         android:layout_alignParentEnd="true"
         android:textColor="@color/lightpurple"
-        android:textSize="10sp"
-        android:padding="3dp"
+        android:textSize="@dimen/_8sdp"
+
         />
 
 
@@ -88,7 +90,7 @@
         android:layout_marginLeft="11dp"
         android:layout_below="@+id/servicecategory"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_8sdp"
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/servicecurrency"
         android:layout_marginRight="5dp"

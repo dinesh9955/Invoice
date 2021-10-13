@@ -15,6 +15,7 @@
         android:textStyle="bold"
         android:id="@+id/taxname"
         android:layout_marginLeft="20dp"
+        android:textSize="@dimen/_11sdp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -24,7 +25,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/taxname"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_10sdp"
         android:layout_marginTop="5dp"
         />
     <TextView
@@ -35,7 +36,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/taxpercent"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_10sdp"
         android:layout_marginTop="5dp"
         />
     <TextView
@@ -46,7 +47,7 @@
         android:layout_below="@+id/taxpercent"
         android:layout_alignParentEnd="true"
         android:textColor="@color/lightpurple"
-        android:textSize="12sp"
+        android:textSize="@dimen/_10sdp"
         android:layout_marginTop="5dp"
         android:padding="3dp"
         />

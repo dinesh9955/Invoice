@@ -22,7 +22,7 @@
             android:padding="5dp"
             android:id="@+id/title111"
             android:layout_margin="@dimen/_20sdp"
-            android:textSize="16dp"
+            android:textSize="@dimen/_10sdp"
             />
 
 
@@ -37,6 +37,7 @@
             android:layout_marginTop="0dp"
             android:padding="5dp"
             android:id="@+id/addwarehouse"
+            android:textSize="@dimen/_10sdp"
             />
 
         <EditText
@@ -48,7 +49,7 @@
             android:layout_marginTop="40dp"
             android:hint="@string/company_WarehouseName2"
             android:textColorHint="@color/dark_grey"
-            android:textSize="14dp"
+            android:textSize="@dimen/_10sdp"
             android:id="@+id/edwarehousename"
             android:background="@drawable/edittextshape"
             android:padding="15dp"
@@ -68,7 +69,7 @@
             android:hint="@string/company_WarehouseAddress2"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/dark_grey"
-            android:textSize="14dp"
+            android:textSize="@dimen/_10sdp"
             android:id="@+id/edwarehouseaddress"
             android:background="@drawable/edittextshape"
             android:padding="15dp"
@@ -89,6 +90,7 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:id="@+id/add"
+            android:textSize="@dimen/_10sdp"
             />
 
     </RelativeLayout>

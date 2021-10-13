@@ -52,8 +52,8 @@
 
 
                 <com.makeramen.roundedimageview.RoundedImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="70dp"
                     android:id="@+id/uploadimage"
@@ -68,7 +68,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_below="@+id/uploadimage"
                     android:layout_marginTop="20dp"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_10sdp"
                     android:id="@+id/imagedescription"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/dark_grey"/>
@@ -81,7 +81,7 @@
                     android:hint="@string/product_Product_Name_2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -98,7 +98,7 @@
                     android:hint="@string/product_Per_Unit_Price_2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:inputType="number"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
@@ -117,7 +117,7 @@
                     android:hint="@string/product_Reorder_Level"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:inputType="number"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
@@ -161,7 +161,7 @@
                     android:gravity="left|center_vertical"
                     android:paddingLeft="15dp"
                     android:textStyle="normal"
-                    android:textSize="13dp"
+                    android:textSize="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textAllCaps="false"
                     android:layout_below="@+id/reorderlevel"
@@ -176,7 +176,7 @@
                     android:hint="@string/product_Other_Category_if_not_listed"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -217,7 +217,7 @@
                     android:gravity="left|center_vertical"
                     android:paddingLeft="15dp"
                     android:textStyle="normal"
-                    android:textSize="13dp"
+                    android:textSize="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textAllCaps="false"
                     android:layout_below="@+id/othercategory"
@@ -232,7 +232,7 @@
                     android:hint="@string/product_Other_Measurement_unit"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -251,7 +251,7 @@
                     android:hint="@string/product_Product_Description"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_10sdp"
                     android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
@@ -308,6 +308,7 @@
                     android:textColor="@color/lightpurple"
                     android:alpha="0"
                     android:visibility="gone"
+                    android:textSize="@dimen/_10sdp"
                     />
 
                 <TextView
@@ -320,6 +321,7 @@
                     android:layout_marginTop="30dp"
                     android:text="@string/product_TAXABLE"
                     android:textColor="@color/lightpurple"
+                    android:textSize="@dimen/_10sdp"
                     />
 
                 <RadioGroup
@@ -336,7 +338,8 @@
                         android:layout_marginLeft="10dp"
                         android:textColor="@color/bluecolor"
                         android:buttonTint="@color/lightpurple"
-                        android:text="@string/yes" />
+                        android:text="@string/yes"
+                        android:textSize="@dimen/_10sdp"/>
                     <RadioButton
                         android:textColor="@color/bluecolor"
                         android:layout_width="wrap_content"
@@ -345,6 +348,7 @@
                         android:buttonTint="@color/lightpurple"
                         android:layout_marginLeft="80dp"
                         android:id="@+id/rno"
+                        android:textSize="@dimen/_10sdp"
                         />
                 </RadioGroup>
                 <Button
@@ -360,11 +364,9 @@
                     android:id="@+id/addprodduct"
                     android:background="@drawable/buttonshape"
                     android:layout_marginBottom="20dp"
-
+                    android:textSize="@dimen/_10sdp"
                     />
-
-
-
+                
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
