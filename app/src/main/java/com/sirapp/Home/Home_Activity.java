@@ -393,7 +393,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         for (ApplicationInfo packageInfo : packages) {
             String ccc = new Gson().toJson(packageInfo);
-            Log.e(TAG, "Source_dir : " + ccc);
+            //Log.e(TAG, "Source_dir : " + ccc);
 //            Log.e(TAG, "Installed package :" + packageInfo.packageName);
 //            Log.e(TAG, "Source dir : " + packageInfo.sourceDir);
         //    Log.e(TAG, "Source_dir : " + pm.getLaunchIntentForPackage(packageInfo.packageName).toString());

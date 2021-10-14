@@ -1,21 +1,47 @@
 package com.sirapp.FCM;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.sirapp.Invoice.InvoiceActivity;
+import com.sirapp.Invoice.SavePref;
+import com.sirapp.R;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
 
+    String NOTIFICATION_CHANNEL_ID2 = "2000";
+
+    String NOTIFICATION_CHANNEL_NAME2 = "FullBatteryAlarm2";
+
+    SavePref pref = new SavePref();
 
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
         Log.e("NEW_TOKEN",s);
+
+        pref.SavePref(getApplicationContext());
+        pref.setDeviceToken(""+s);
+
     }
 
+    @Override
+    public void handleIntent(Intent intent) {
+        super.handleIntent(intent);
+        Log.e(TAG, "handleIntent: " + intent);
+    }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -28,6 +54,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());
             //handleNotification(remoteMessage.getNotification().getBody());
+            sendNotification(getApplicationContext(), remoteMessage.getNotification().getBody());
         }
 
 //        // Check if message contains a data payload.
@@ -42,89 +69,55 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //            }
 //        }
     }
-//
-//    private void handleNotification(String message) {
-//        if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
-//            // app is in foreground, broadcast the push message
-//            Intent pushNotification = new Intent(Config.PUSH_NOTIFICATION);
-//            pushNotification.putExtra("message", message);
-//            LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
-//
-//            // play notification sound
-//            NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
-//            notificationUtils.playNotificationSound();
-//        }else{
-//            // If the app is in background, firebase itself handles the notification
-//        }
-//    }
-//
-//    private void handleDataMessage(JSONObject json) {
-//        Log.e(TAG, "push json: " + json.toString());
-//
-//        try {
-//            JSONObject data = json.getJSONObject("data");
-//
-//            String title = data.getString("title");
-//            String message = data.getString("message");
-//            boolean isBackground = data.getBoolean("is_background");
-//            String imageUrl = data.getString("image");
-//            String timestamp = data.getString("timestamp");
-//            JSONObject payload = data.getJSONObject("payload");
-//
-//            Log.e(TAG, "title: " + title);
-//            Log.e(TAG, "message: " + message);
-//            Log.e(TAG, "isBackground: " + isBackground);
-//            Log.e(TAG, "payload: " + payload.toString());
-//            Log.e(TAG, "imageUrl: " + imageUrl);
-//            Log.e(TAG, "timestamp: " + timestamp);
-//
-//
-//            if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
-//                // app is in foreground, broadcast the push message
-//                Intent pushNotification = new Intent(Config.PUSH_NOTIFICATION);
-//                pushNotification.putExtra("message", message);
-//                LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
-//
-//                // play notification sound
-//                NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
-//                notificationUtils.playNotificationSound();
-//            } else {
-//                // app is in background, show the notification in notification tray
-//                Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
-//                resultIntent.putExtra("message", message);
-//
-//                // check for image attachment
-//                if (TextUtils.isEmpty(imageUrl)) {
-//                    showNotificationMessage(getApplicationContext(), title, message, timestamp, resultIntent);
-//                } else {
-//                    // image is present, show notification with image
-//                    showNotificationMessageWithBigImage(getApplicationContext(), title, message, timestamp, resultIntent, imageUrl);
-//                }
-//            }
-//        } catch (JSONException e) {
-//            Log.e(TAG, "Json Exception: " + e.getMessage());
-//        } catch (Exception e) {
-//            Log.e(TAG, "Exception: " + e.getMessage());
-//        }
-//    }
-//
-//    /**
-//     * Showing notification with text only
-//     */
-//    private void showNotificationMessage(Context context, String title, String message, String timeStamp, Intent intent) {
-//        notificationUtils = new NotificationUtils(context);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        notificationUtils.showNotificationMessage(title, message, timeStamp, intent);
-//    }
-//
-//    /**
-//     * Showing notification with text and image
-//     */
-//    private void showNotificationMessageWithBigImage(Context context, String title, String message, String timeStamp, Intent intent, String imageUrl) {
-//        notificationUtils = new NotificationUtils(context);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        notificationUtils.showNotificationMessage(title, message, timeStamp, intent, imageUrl);
-//    }
+
+
+
+    private void sendNotification(Context context11, String msg) {
+
+        NotificationManager notificationManager = (NotificationManager) context11.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID2, NOTIFICATION_CHANNEL_NAME2, importance);
+            notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+            notificationManager.createNotificationChannel(notificationChannel);
+            builder = new NotificationCompat.Builder(context11, notificationChannel.getId());
+
+        } else {
+            builder = new NotificationCompat.Builder(context11);
+        }
+
+
+
+        Intent notificationIntent = new Intent(context11, InvoiceActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context11, 0, notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        builder = builder
+                .setSmallIcon(R.mipmap.noti_icon)
+                // .setColor(ContextCompat.getColor(context, R.color.color))
+                .setWhen(System.currentTimeMillis())
+                .setContentTitle(context11.getString(R.string.app_name))
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(msg))
+                .setContentText(msg)
+                // .setContentText("Level: "+level+"% | Remaining Time: "+(hour)+"h "+(min)+"min")
+                .setPriority(Notification.PRIORITY_MAX)
+//                .setCategory(Notification.CATEGORY_SERVICE)
+//                .setTicker("VINlocity")
+//                .setContentText("VINlocity Driver is tracking.")
+//                .setDefaults(Notification.DEFAULT_ALL)
+                .setOnlyAlertOnce(true)
+                .setSound(null)
+                .setAutoCancel(true)
+                .setOngoing(true);
+        notificationManager.notify(11, builder.build());
+        // startForeground(11, builder.build());
+
+
+
+    }
 
 
 }

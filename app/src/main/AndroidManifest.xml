@@ -26,6 +26,9 @@
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
+<!--    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
+<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -817,35 +820,36 @@
         <service
             android:name="com.sirapp.FCM.MyFirebaseMessagingService"
             android:stopWithTask="false"
-            android:enabled="true"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
 
-        <receiver android:name="com.sirapp.FCM.MyReciever"
-            android:stopWithTask="false"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-                <category android:name="android.intent.category.HOME" />
-            </intent-filter>
+<!--        <receiver android:name="com.sirapp.FCM.MyReciever"-->
+<!--            android:stopWithTask="false"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.BOOT_COMPLETED"></action>-->
+<!--                <category android:name="android.intent.category.HOME" />-->
+<!--            </intent-filter>-->
 
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
-                <category android:name="com.sirapp"/>
-            </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>-->
+<!--                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>-->
+<!--                <category android:name="com.sirapp"/>-->
+<!--            </intent-filter>-->
 
-        </receiver>
+<!--        </receiver>-->
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="default_channel_id"/>
 
-
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
 
         <receiver android:name="com.appsflyer.SingleInstallBroadcastReceiver" android:exported="true">

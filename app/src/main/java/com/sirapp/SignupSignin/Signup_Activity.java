@@ -85,7 +85,13 @@ public class Signup_Activity extends BaseActivity {
 
         imageViewGoogleSignIn = findViewById(R.id.imageView756756);
 
-        refreshedToken = FirebaseInstanceId.getInstance().getToken();
+//        refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+        if(FirebaseInstanceId.getInstance().getToken() != null){
+            pref.setDeviceToken(""+FirebaseInstanceId.getInstance().getToken());
+        }
+
+        refreshedToken = pref.getDeviceToken();
 
         Log.e(TAG, "refreshedToken "+refreshedToken);
 

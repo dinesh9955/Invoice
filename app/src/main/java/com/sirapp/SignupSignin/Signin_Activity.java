@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
@@ -34,8 +35,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.karan.churi.PermissionManager.PermissionManager;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -100,7 +103,13 @@ public class Signin_Activity extends BaseActivity {
         setContentView(R.layout.activity_signin_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        //refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
+        if(FirebaseInstanceId.getInstance().getToken() != null){
+            pref.setDeviceToken(""+FirebaseInstanceId.getInstance().getToken());
+        }
+
+        refreshedToken = pref.getDeviceToken();
 
         Log.e(TAG, "refreshedToken "+refreshedToken);
 
@@ -220,7 +229,25 @@ public class Signin_Activity extends BaseActivity {
 
         fonts();
 
+
+//        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+//                if (!task.isSuccessful()) {
+//                    Log.w("fcm_task", "getInstanceId failed", task.getException());
+//                    return;
+//                }
+//                // Get new Instance ID token
+//               String fcmToken = task.getResult().getToken();
+//                Log.e(TAG, "fcmToken "+fcmToken);
+//            }
+//        });
+
+
     }
+
+
+
     public void fonts()
     {
         txtsignin.setTypeface(Typeface.createFromAsset(getAssets(),"Fonts/AzoSans-Bold.otf"));

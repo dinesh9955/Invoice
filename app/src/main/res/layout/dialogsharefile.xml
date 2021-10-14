@@ -23,7 +23,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/dialog_ChooseAOption"
             android:textColor="@color/light_blue"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="@dimen/_14sdp"
 
             />
 
