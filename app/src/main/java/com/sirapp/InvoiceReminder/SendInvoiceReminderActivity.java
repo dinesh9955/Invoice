@@ -951,7 +951,7 @@ public class SendInvoiceReminderActivity extends BaseActivity {
                         .replaceAll("Invoice No", htmlview_InvoiceNo)
                         .replaceAll("InvoiceDate", htmlview_InvoiceDate)
                         .replaceAll("Credit Terms", htmlview_CreditTerms)
-                        .replaceAll("DueDate", htmlview_DueDate)
+                        .replaceAll("DueData", htmlview_DueDate)
                         .replaceAll("We would like to bring to your notice that the above mentioned Invoice number is now overdue for payment.", htmlview_Wewouldliketobring)
                         .replaceAll("We hereby request you to kindly make immediate settlement of the same.", htmlview_Weherebyrequest)
                         .replaceAll("We look forward to hearing from you in this regard.", htmlview_Welookforward)
