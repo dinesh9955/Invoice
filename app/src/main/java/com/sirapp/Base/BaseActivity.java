@@ -140,7 +140,7 @@ public class BaseActivity extends AppCompatActivity {
                     startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
                 }
             });
-          //  builder.setCancelable(false);
+            builder.setCancelable(false);
             alertDialog = builder.create();
 
             float scaleAA = getResources().getConfiguration().fontScale;
