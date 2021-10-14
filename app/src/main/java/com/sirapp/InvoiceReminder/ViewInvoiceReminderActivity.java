@@ -654,7 +654,7 @@ public class ViewInvoiceReminderActivity extends BaseActivity {
 
         String signatureinvoice = null;
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open(singleItemHtml))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
                     .replaceAll("SignatureofIssuer", signature_of_issuername)
