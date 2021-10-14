@@ -60,6 +60,8 @@ public class SignupSubscriptionActivity extends BaseActivity {
         setContentView(R.layout.activity_signup_subscription);
 //        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
 
+        isWorking = false;
+
         linearLayout_12Month = (LinearLayout) findViewById(R.id.linear_12_month);
         linearLayout_1Month = (LinearLayout) findViewById(R.id.linear_1_month);
         buttonUpgrade_now = (Button) findViewById(R.id.button_upgrade_now);

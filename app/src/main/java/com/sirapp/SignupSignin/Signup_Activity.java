@@ -69,6 +69,8 @@ public class Signup_Activity extends BaseActivity {
         setContentView(R.layout.activity_signup_);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
+        isWorking = false;
+
         avi = findViewById(R.id.avi);
         avibackground = findViewById(R.id.avibackground);
         txtsignup = findViewById(R.id.txtsignup);

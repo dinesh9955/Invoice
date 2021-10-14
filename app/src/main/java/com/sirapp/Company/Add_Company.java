@@ -828,6 +828,8 @@ public class Add_Company extends BaseFragment {
 
                             Constant.SuccessToast(getActivity(), getString(R.string.dialog_CompanyCreatedSuccessfully));
 
+
+
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {

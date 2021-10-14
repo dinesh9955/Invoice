@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sirapp.Base.BaseActivity;
 import com.sirapp.Invoice.SavePref;
 import com.sirapp.SignupSignin.Signin_Activity;
 import com.sirapp.SignupSignin.Signup_Activity;
@@ -30,7 +31,7 @@ import me.relex.circleindicator.CircleIndicator;
 
 
 
-public class OnBoarding_Activity extends AppCompatActivity {
+public class OnBoarding_Activity extends BaseActivity {
 
 
     ViewPager pager;
@@ -53,6 +54,8 @@ public class OnBoarding_Activity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_on_boarding_);
+
+        isWorking = false;
 
         SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
         preferences.edit().putString(Constant.FIRST_TIME,"f").commit();

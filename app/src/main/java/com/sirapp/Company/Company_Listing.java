@@ -220,9 +220,13 @@ public class Company_Listing extends BaseFragment {
 
                     if (list.size() == 0){
                         textViewMsg.setVisibility(View.VISIBLE);
+                        pref.setFontDialog("");
                     }else{
                         textViewMsg.setVisibility(View.GONE);
+                        pref.setFontDialog("1");
                     }
+
+                    callCheckFontSize();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

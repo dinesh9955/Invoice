@@ -1492,4 +1492,20 @@ public class SavePref {
 		return name;
 	}
 
+
+	public void setFontDialog(String string) {
+		// TODO Auto-generated method stub
+		editor.putString("getFontDialog",string);
+		editor.commit();
+		Log.d(TAG, "getFontDialog received");
+	}
+
+
+	public String getFontDialog() {
+		// TODO Auto-generated method stub
+		String name = preferences.getString("getFontDialog","");
+		Log.d(TAG, "getFontDialog received "+name);
+		return name;
+	}
+
 }

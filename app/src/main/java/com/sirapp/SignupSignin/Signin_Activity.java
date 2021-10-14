@@ -104,6 +104,7 @@ public class Signin_Activity extends BaseActivity {
 
         Log.e(TAG, "refreshedToken "+refreshedToken);
 
+        isWorking = false;
 //
 //        permissionManager = new PermissionManager() {
 //        };

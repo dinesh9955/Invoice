@@ -53,9 +53,12 @@ public class BaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        callCheckFontSize();
+    }
+
+    public void callCheckFontSize(){
         BaseActivity activity = (BaseActivity)getActivity();
         activity.checkFontSize();
     }
-
 
 }

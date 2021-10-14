@@ -38,6 +38,8 @@ public class Splash_Activity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        isWorking = false;
+
         //fullscreen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -138,4 +140,18 @@ public class Splash_Activity extends BaseActivity {
         FirebaseInAppMessaging.getInstance().setMessagesSuppressed(false);
 
     }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        isWorking = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isWorking = false;
+    }
+
 }

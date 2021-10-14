@@ -187,7 +187,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         FindByIds();
 
-
+     //   pref.setFontDialog("");
 
 //        Utility.deleteDirectory();
 
@@ -1422,15 +1422,23 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                         no_customer.setVisibility(View.VISIBLE);
                     }
 
+
+
                 }
 
 
 
                 if(companyModelArrayList.size() > 0){
                     imageView_AddyourBusiness.setImageResource(R.drawable.radio_check);
+                    pref.setFontDialog("1");
                 }else{
                     imageView_AddyourBusiness.setImageResource(R.drawable.radio_uncheck);
+                    pref.setFontDialog("");
                 }
+
+                checkFontSize();
+
+                Log.e(TAG, "SSSSSSSSSSSSSSS");
 
 
             }

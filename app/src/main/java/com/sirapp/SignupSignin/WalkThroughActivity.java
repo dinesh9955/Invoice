@@ -24,6 +24,8 @@ public class WalkThroughActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_walk);
 
+        isWorking = false;
+
         RelativeLayout relativeLayout = findViewById(R.id.relaive11);
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
