@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txtsignin"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:text="Sign In to generate executive invoices for your business."
             android:id="@+id/txtsignindes"
             android:textColor="@color/dark_grey"
@@ -157,7 +157,7 @@
             android:layout_below="@id/btnlogin"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Forgot Password?"
@@ -173,7 +173,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:id="@+id/r122"
             android:elevation="10dp"
             android:orientation="horizontal"
@@ -181,7 +181,7 @@
             android:paddingLeft="@dimen/_10sdp"
             android:paddingRight="@dimen/_10sdp"
             android:layout_below="@id/r1"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_30sdp"
             >
 
             <View

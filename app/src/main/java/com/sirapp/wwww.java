@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,11 +14,14 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
 import android.print.pdf.PrintedPdfDocument;
+import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -52,6 +56,21 @@ public class wwww extends BaseActivity {
 
     Button button;
     WebView webView;
+
+
+    public  void adjustFontScale( Configuration configuration,float scale) {
+
+        configuration.fontScale = scale;
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(metrics);
+        metrics.scaledDensity = configuration.fontScale * metrics.density;
+        getBaseContext().getResources().updateConfiguration(configuration, metrics);
+
+    }
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +110,19 @@ public class wwww extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //adjustFontScale(getResources().getConfiguration(),2.0f);
+
+              //  Settings.System.putFloat(getBaseContext().getContentResolver(), Settings.System.FONT_SCALE, (float) 1.0);
+
+//                Configuration configuration = wwww.this.getResources().getConfiguration();
+//                // This will apply to all text like -> Your given text size * fontScale
+//                configuration.fontScale = 2.0f;
+//
+//                createConfigurationContext(configuration);
+
+
+
 
                 float scaleAA = getResources().getConfiguration().fontScale;
                 Log.e(TAG, "manufacturerModelscaleAA :" + scaleAA);

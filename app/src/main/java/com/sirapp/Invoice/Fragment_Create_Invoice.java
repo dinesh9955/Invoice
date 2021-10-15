@@ -757,12 +757,12 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 if (selectwarehouseId.equals("")) {
                     Constant.ErrorToast(getActivity(), getString(R.string.stock_Select_Warehouse));
                 } else {
-                    createbottomsheet_products();
-                    bottomSheetDialog.show();
-                    bottomSheetDialog2.dismiss();
-
+                  //  if(product_bottom.size() > 0){
+                        createbottomsheet_products();
+                        bottomSheetDialog.show();
+                        bottomSheetDialog2.dismiss();
+                  //  }
                 }
-
             }
         });
 
@@ -1968,8 +1968,6 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                 @Override
                 public void afterTextChanged(Editable s) {
-
-
                     if (product_bottom.size() > 0) {
                         filter(s.toString());
                     }
@@ -3180,6 +3178,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
     public void productget(String selectedCompanyId) {
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);
+
+        Log.e("selectedCompanyIdAA ", selectedCompanyId);
 
         RequestParams params = new RequestParams();
         params.add("warehouse_id", selectedCompanyId);
@@ -5716,7 +5716,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     selectwarehouse.setText(wnames.get(i));
                     selectwarehouseId = wids.get(i);
                     Log.e("selectwarehouseId", selectwarehouseId);
-                    productget(selectedCompanyId);
+                    productget(selectwarehouseId);
 
                 }
             });

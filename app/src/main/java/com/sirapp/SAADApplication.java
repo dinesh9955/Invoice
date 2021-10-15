@@ -208,7 +208,10 @@ public class SAADApplication extends Application {
 //        final Configuration override = new Configuration(base.getResources().getConfiguration());
 //        override.fontScale = 1.0f;
 //        applyOverrideConfiguration(override);
-       // adjustFontScale( getResources().getConfiguration(),0.5f);
+      //  adjustFontScale( getResources().getConfiguration(),2.0f);
+
+
+
     }
 
 
@@ -223,4 +226,8 @@ public class SAADApplication extends Application {
         getBaseContext().getResources().updateConfiguration(configuration, metrics);
 
     }
+
+
+
+
 }
