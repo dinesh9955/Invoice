@@ -123,14 +123,12 @@ public class ReceiptViewActivityWebView extends BaseActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 onBackPressed();
             }
         });
         printimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 createWebPrintJob(invoiceweb);
             }
         });
@@ -185,7 +183,6 @@ public class ReceiptViewActivityWebView extends BaseActivity {
             @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<ReceiptResponseDto> call, retrofit2.Response<ReceiptResponseDto> response) {
-
 
                 // image path of all
                 company_image_path = response.body().getData().getCompany_image_path();
