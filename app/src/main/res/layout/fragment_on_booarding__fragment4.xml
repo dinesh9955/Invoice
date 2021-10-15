@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:text="Pay &amp; Track Taxes"
         android:textColor="@color/dark_blue"
-        android:textSize="26dp"
+        android:textSize="@dimen/_20sdp"
         android:id="@+id/txtonboardheading4"
         android:gravity="center_horizontal"
         android:layout_marginLeft="@dimen/_20sdp"

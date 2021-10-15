@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/grey"
-    tools:context="com.sirapp.com.sir.OnBoardings.OnBoarding_Activity">
+   >
 
     <com.crystalviewpager.widgets.CrystalViewPager
         android:id="@+id/viewPager"
@@ -43,13 +43,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="75dp"
+        android:layout_marginBottom="@dimen/_60sdp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_centerHorizontal="true"
         android:text="Skip"
         android:textColor="@color/dark_blue"
-        android:textSize="16dp"
+        android:textSize="@dimen/_13sdp"
         android:id="@+id/txtskip"
         />
 

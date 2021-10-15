@@ -16,8 +16,8 @@
 
         android:text="Send  As Link"
         android:textColor="@color/black"
-        android:textSize="15dp"
-android:layout_centerVertical="true"
+        android:textSize="@dimen/_11sdp"
+        android:layout_centerVertical="true"
         />
 
 </RelativeLayout>

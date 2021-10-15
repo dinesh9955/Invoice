@@ -11,7 +11,7 @@
     <com.isapanah.awesomespinner.AwesomeSpinner
         android:id="@+id/selectcompany"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_40sdp"
         app:spinnerDirection="ltr"
         app:spinnerHint="@string/tax_Select_Company"
         android:layout_marginTop="?actionBarSize"

@@ -34,7 +34,7 @@
             <EditText
                 android:id="@+id/login_email"
                 android:layout_width="fill_parent"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/_40sdp"
                 android:background="@drawable/fade_green_border_corner_round"
                 android:hint="@string/setting_Email"
                 android:inputType="textEmailAddress"
@@ -44,7 +44,7 @@
                 android:textColorHint="@color/dark_grey"
                 android:textColor="@color/black"
                 android:text=""
-                android:textSize="15dp"
+                android:textSize="@dimen/_12sdp"
                 android:singleLine="true"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
@@ -55,7 +55,7 @@
             <EditText
                 android:id="@+id/login_email_confirm"
                 android:layout_width="fill_parent"
-                android:layout_height="45dp"
+                android:layout_height="@dimen/_40sdp"
                 android:background="@drawable/fade_green_border_corner_round"
                 android:hint="@string/setting_ConfirmEmail"
                 android:inputType="textEmailAddress"
@@ -65,7 +65,7 @@
                 android:textColorHint="@color/dark_grey"
                 android:textColor="@color/black"
                 android:text=""
-                android:textSize="15dp"
+                android:textSize="@dimen/_12sdp"
                 android:layout_below="@+id/login_email"
                 android:singleLine="true"
                 android:layout_marginLeft="@dimen/_20sdp"
@@ -80,7 +80,7 @@
                 android:text="@string/setting_PaymentOptions"
                 android:id="@+id/customerstxt"
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="@dimen/_12sdp"
 
 
                 android:layout_marginTop="@dimen/_30sdp"
@@ -109,7 +109,7 @@
                     android:text="@string/setting_Standard"
                     android:id="@+id/radioButton_1"
                     android:checked="false"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:paddingLeft="@dimen/_10sdp"
                     android:background="@drawable/fade_green_border_corner_round"
                     android:layoutDirection="rtl"
@@ -124,7 +124,7 @@
                     android:text="@string/setting_Business"
                     android:id="@+id/radioButton_2"
                     android:checked="false"
-                    android:textSize="@dimen/_13sdp"
+                    android:textSize="@dimen/_12sdp"
                     android:paddingLeft="@dimen/_10sdp"
                     android:background="@drawable/fade_green_border_corner_round"
                     android:layoutDirection="rtl"
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:background="@drawable/blue_btn_curve"
                 android:text="@string/all_Save"
                 android:textColor="@color/white"
@@ -150,6 +150,7 @@
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_gravity="center_vertical"
                 android:layout_below="@+id/radioGroup_1"
+                android:textSize="@dimen/_12sdp"
                 />
 
 

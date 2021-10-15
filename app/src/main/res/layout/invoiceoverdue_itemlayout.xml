@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/invoiceoverduetxt"
-                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:layout_toRightOf="@+id/image"
                 android:text="Kenneth Erickson"
                 android:textSize="@dimen/_10sdp"

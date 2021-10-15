@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sirapp.com.sir.Home.Settings_Activity">
+ >
 
 
     <include layout="@layout/toolbar">
@@ -45,7 +45,8 @@
                     android:text="@string/InviteFriends"
                     android:drawableLeft="@drawable/settings_invite_friends_icon"
                     android:drawablePadding="25dp"
-                    android:id="@+id/invite"/>
+                    android:id="@+id/invite"
+                    android:textSize="@dimen/_11sdp"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -63,7 +64,8 @@
                     android:drawableLeft="@drawable/settings_customize_icon"
                     android:drawablePadding="25dp"
                     android:id="@+id/customize"
-                    android:layout_marginTop="15dp"/>
+                    android:layout_marginTop="15dp"
+                    android:textSize="@dimen/_11sdp"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -80,7 +82,8 @@
                     android:text="@string/FAQs"
                     android:drawableLeft="@drawable/settings_faqs_icon"
                     android:drawablePadding="25dp"
-                    android:id="@+id/faqs"/>
+                    android:id="@+id/faqs"
+                    android:textSize="@dimen/_11sdp"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -96,7 +99,8 @@
                     android:text="@string/Language"
                     android:drawableLeft="@drawable/settings_language_icon"
                     android:drawablePadding="25dp"
-                    android:id="@+id/language"/>
+                    android:id="@+id/language"
+                    android:textSize="@dimen/_11sdp"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -113,7 +117,8 @@
                     android:text="@string/Abouttheapp"
                     android:drawableLeft="@drawable/settings_about_app_icon"
                     android:drawablePadding="25dp"
-                    android:id="@+id/about"/>
+                    android:id="@+id/about"
+                    android:textSize="@dimen/_11sdp"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -130,7 +135,8 @@
                     android:text="@string/Ratetheapp"
                     android:drawableLeft="@drawable/settings_rate_app_icon"
                     android:drawablePadding="25dp"
-                    android:id="@+id/rate"/>
+                    android:id="@+id/rate"
+                    android:textSize="@dimen/_11sdp"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -147,7 +153,8 @@
                     android:text="@string/TermsofUse"
                     android:drawableLeft="@drawable/settings_terms_icon"
                     android:drawablePadding="25dp"
-                    android:id="@+id/terms"/>
+                    android:id="@+id/terms"
+                    android:textSize="@dimen/_11sdp"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -164,7 +171,8 @@
                     android:text="@string/PrivacyPolicy"
                     android:drawableLeft="@drawable/settings_privacy_icon"
                     android:drawablePadding="25dp"
-                    android:id="@+id/privacy"/>
+                    android:id="@+id/privacy"
+                    android:textSize="@dimen/_11sdp"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -180,7 +188,8 @@
                     android:text="@string/Support"
                     android:drawableLeft="@drawable/settings_support_icon"
                     android:drawablePadding="25dp"
-                    android:id="@+id/support"/>
+                    android:id="@+id/support"
+                    android:textSize="@dimen/_11sdp"/>
 
 
 

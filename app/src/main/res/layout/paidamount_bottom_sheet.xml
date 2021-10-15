@@ -84,7 +84,7 @@
         android:id="@+id/selectpaymentmode"
         android:layout_below="@id/eddate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_40sdp"
         app:spinnerDirection="ltr"
         app:spinnerHint="@string/service_SelectPaymentMode"
         android:layout_marginTop="@dimen/_20sdp"

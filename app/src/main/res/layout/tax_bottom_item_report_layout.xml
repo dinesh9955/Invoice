@@ -20,7 +20,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/tax_SelectTax"
                 android:textColor="@color/dark_blue"
-                android:textSize="20sp" />
+                android:textSize="@dimen/_11sdp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -36,7 +36,9 @@
                 android:background="@drawable/edittextshape"
                 android:elevation="3dp"
                 android:maxLines="1"
-                android:visibility="visible"/>
+                android:visibility="visible"
+                android:textSize="@dimen/_11sdp"
+                />
 
             <RelativeLayout
                 android:id="@+id/r1"

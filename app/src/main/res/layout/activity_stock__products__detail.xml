@@ -21,7 +21,8 @@
         android:background="@drawable/edittextshape"
         android:elevation="3dp"
         android:maxLines="1"
-        android:textColorHint="@color/dark_grey"/>
+        android:textColorHint="@color/dark_grey"
+        android:textSize="@dimen/_10sdp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

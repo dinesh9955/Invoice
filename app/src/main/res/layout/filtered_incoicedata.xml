@@ -47,7 +47,7 @@
                 android:text="@string/filter_Filter"
                 android:textSize="@dimen/_15sdp"
                 android:layout_below="@+id/filtericon"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:textColor="@color/dark_blue"
                 android:id="@+id/txtcredit"
                 />
@@ -59,7 +59,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_below="@+id/txtcredit"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 >
 
             </View>
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/filter_UnpaidInvoices"
                 android:textSize="@dimen/_11sdp"
-                android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
                 android:layout_centerInParent="true"
                 android:layout_below="@+id/main"
                 android:textColor="@color/dark_blue"
@@ -86,12 +86,12 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:layout_below="@+id/unpaidinvoicetxt"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="@dimen/_10sdp">
         </View>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/filter_PaidInvoices"
                 android:layout_centerInParent="true"
                 android:textSize="@dimen/_11sdp"
@@ -107,13 +107,13 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:layout_below="@+id/paidinvoicetxt"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="@dimen/_10sdp">
         </View>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/filter_ByDate"
                 android:layout_centerInParent="true"
                 android:layout_below="@+id/viewr1"
@@ -129,12 +129,12 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:layout_below="@+id/bydateinvoicetxt"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="@dimen/_10sdp">
         </View>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/filter_All"
                 android:layout_centerInParent="true"
                 android:layout_below="@+id/viewfr1"
@@ -150,12 +150,12 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:layout_below="@+id/allinvoicetxt"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="@dimen/_10sdp">
         </View>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/dialog_Cancel"
                 android:layout_centerInParent="true"
                 android:textSize="@dimen/_11sdp"
@@ -173,7 +173,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:layout_below="@+id/cancelinvoicetxt"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="@dimen/_10sdp">
         </View>
 
 

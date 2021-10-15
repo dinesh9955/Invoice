@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey"
-    tools:context="com.sirapp.com.sir.OnBoardings.OnBooarding_Fragment1">
+>
 
    <TextView
        android:layout_width="wrap_content"
@@ -12,7 +12,7 @@
        android:layout_centerHorizontal="true"
        android:text="BUSINESS INSIGHTS"
        android:textColor="@color/dark_blue"
-       android:textSize="26dp"
+       android:textSize="@dimen/_20sdp"
        android:id="@+id/txtonboardheading1"
        />
 

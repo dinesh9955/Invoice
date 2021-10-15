@@ -23,7 +23,7 @@
         android:textStyle="bold"
         android:id="@+id/companyname"
         android:layout_marginLeft="20dp"
-        android:textSize="18sp"
+        android:textSize="@dimen/_11sdp"
         android:layout_toRightOf="@+id/image"
         />
     <TextView
@@ -34,7 +34,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/companyname"
         android:textColor="@color/lightpurple"
-        android:textSize="12sp"
+        android:textSize="@dimen/_10sdp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/image"
         />
@@ -47,7 +47,7 @@
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/stock"
         android:textColor="@color/gray"
-        android:textSize="12sp"
+        android:textSize="@dimen/_10sdp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/image"
         />
@@ -60,7 +60,7 @@
         android:layout_below="@+id/stock"
         android:layout_alignParentEnd="true"
         android:textColor="@color/lightpurple"
-        android:textSize="10sp"
+        android:textSize="@dimen/_10sdp"
         android:layout_marginTop="5dp"
         android:padding="3dp"
         />
