@@ -2,6 +2,7 @@ package com.sirapp.PO;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
@@ -26,6 +28,7 @@ import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.CN.CreditNotesViewActivityWebView;
 import com.sirapp.Constant.Constant;
+import com.sirapp.Invoice.InvoiceViewActivityWebView;
 import com.sirapp.Invoice.Invoice_image;
 import com.sirapp.Invoice.response.InvoiceCompanyDto;
 import com.sirapp.Invoice.response.InvoiceDto;
@@ -475,10 +478,53 @@ public class POViewActivityWebView extends BaseActivity {
        // callForWeb();
 
         invoiceweb.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed(); // Ignore SSL certificate errors
-            }
+
+//            @Override
+//            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//               // handler.proceed(); // Ignore SSL certificate errors
+//                String msg="";
+//                if(error.getPrimaryError()==SslError.SSL_DATE_INVALID
+//                        || error.getPrimaryError()== SslError.SSL_EXPIRED
+//                        || error.getPrimaryError()== SslError.SSL_IDMISMATCH
+//                        || error.getPrimaryError()== SslError.SSL_INVALID
+//                        || error.getPrimaryError()== SslError.SSL_NOTYETVALID
+//                        || error.getPrimaryError()==SslError.SSL_UNTRUSTED) {
+//                    if(error.getPrimaryError()==SslError.SSL_DATE_INVALID){
+//                        msg="The date of the certificate is invalid";
+//                    }else if(error.getPrimaryError()==SslError.SSL_INVALID){
+//                        msg="A generic error occurred";
+//                    }
+//                    else if(error.getPrimaryError()== SslError.SSL_EXPIRED){
+//                        msg="The certificate has expired";
+//                    }else if(error.getPrimaryError()== SslError.SSL_IDMISMATCH){
+//                        msg="Hostname mismatch";
+//                    }
+//                    else if(error.getPrimaryError()== SslError.SSL_NOTYETVALID){
+//                        msg="The certificate is not yet valid";
+//                    }
+//                    else if(error.getPrimaryError()==SslError.SSL_UNTRUSTED){
+//                        msg="The certificate authority is not trusted";
+//                    }
+//                }
+//                final AlertDialog.Builder builder = new AlertDialog.Builder(POViewActivityWebView.this);
+//                builder.setMessage(msg);
+//                builder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        handler.proceed();
+//                    }
+//                });
+//                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        handler.cancel();
+//                    }
+//                });
+//                final AlertDialog dialog = builder.create();
+//                dialog.show();
+//            }
+//
+
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }

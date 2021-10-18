@@ -5499,10 +5499,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         Bitmap btmp = invoiceweb.getDrawingCache(true);
 
         invoiceweb.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed(); // Ignore SSL certificate errors
-            }
+//            @Override
+//            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                handler.proceed(); // Ignore SSL certificate errors
+//            }
 
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;

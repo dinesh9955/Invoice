@@ -3,6 +3,7 @@ package com.sirapp.Invoice;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 //import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -28,6 +29,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import com.sirapp.API.AllSirApi;
@@ -60,6 +62,9 @@ import retrofit2.Callback;
 public class InvoiceViewActivityWebView extends BaseActivity {
 
     private final String TAG = "InvoiceViewActivityWebView";
+
+
+    int webCounter = 0;
 
     String attachmentHtml = "attchment.html";
     String singleItemHtml = "single_item.html";
@@ -528,10 +533,57 @@ public class InvoiceViewActivityWebView extends BaseActivity {
 //        webSettings.setMinimumFontSize(webSettings.getMinimumLogicalFontSize() + 6);
 
         invoiceweb.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed(); // Ignore SSL certificate errors
-            }
+
+//            @Override
+//            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                //handler.proceed(); // Ignore SSL certificate errors
+//                String msg="";
+//                if(error.getPrimaryError()==SslError.SSL_DATE_INVALID
+//                        || error.getPrimaryError()== SslError.SSL_EXPIRED
+//                        || error.getPrimaryError()== SslError.SSL_IDMISMATCH
+//                        || error.getPrimaryError()== SslError.SSL_INVALID
+//                        || error.getPrimaryError()== SslError.SSL_NOTYETVALID
+//                        || error.getPrimaryError()==SslError.SSL_UNTRUSTED) {
+//                    if(error.getPrimaryError()==SslError.SSL_DATE_INVALID){
+//                        msg="The date of the certificate is invalid";
+//                    }else if(error.getPrimaryError()==SslError.SSL_INVALID){
+//                        msg="A generic error occurred";
+//                    }
+//                    else if(error.getPrimaryError()== SslError.SSL_EXPIRED){
+//                        msg="The certificate has expired";
+//                    }else if(error.getPrimaryError()== SslError.SSL_IDMISMATCH){
+//                        msg="Hostname mismatch";
+//                    }
+//                    else if(error.getPrimaryError()== SslError.SSL_NOTYETVALID){
+//                        msg="The certificate is not yet valid";
+//                    }
+//                    else if(error.getPrimaryError()==SslError.SSL_UNTRUSTED){
+//                        msg="The certificate authority is not trusted";
+//                    }
+//                }
+//                final AlertDialog.Builder builder = new AlertDialog.Builder(InvoiceViewActivityWebView.this);
+//                builder.setMessage(msg);
+//                builder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        handler.proceed();
+//                    }
+//                });
+//                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        handler.cancel();
+//                    }
+//                });
+//                final AlertDialog dialog = builder.create();
+////                if(webCounter == 0){
+////                    webCounter = 1;
+//                    dialog.show();
+////                }
+//
+//            }
+
+
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
@@ -700,13 +752,6 @@ public class InvoiceViewActivityWebView extends BaseActivity {
 
 
         String content = null;
-
-
-
-
-
-
-
 
 
 

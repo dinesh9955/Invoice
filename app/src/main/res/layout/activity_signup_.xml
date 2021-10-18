@@ -43,7 +43,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:text="SIGN UP"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="26dp"
         android:textColor="@color/dark_blue"
         android:id="@+id/txtsignup"
         android:layout_below="@+id/imgback"
@@ -54,9 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txtsignup"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="40dp"
         android:text="And start creating Invoices for your business."
-        android:textSize="@dimen/_12sdp"
+        android:textSize="16dp"
         android:id="@+id/txtsignupdes"
         android:textColor="@color/dark_grey"
         />
@@ -64,20 +64,20 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="40dp"
         android:layout_below="@id/txtsignupdes"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="40dp"
         android:hint="Full Name"
         android:textColorHint="@color/dark_grey"
+        android:textSize="14dp"
         android:paddingTop="0dp"
         android:paddingLeft="10dp"
         android:id="@+id/edfullname"
         android:background="@drawable/edittextshape"
         android:elevation="2dp"
         android:singleLine="true"
-        android:textSize="@dimen/_10sdp"
 
         />
 
@@ -98,19 +98,19 @@
     <EditText
         android:elevation="2dp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="40dp"
         android:layout_below="@id/viewfullname"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="20dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/dark_grey"
+        android:textSize="14dp"
         android:paddingTop="0dp"
         android:paddingLeft="10dp"
         android:id="@+id/edemail"
         android:background="@drawable/edittextshape"
-        android:textSize="@dimen/_10sdp"
         />
 
     <View
@@ -132,19 +132,19 @@
     <EditText
         android:elevation="2dp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="40dp"
         android:layout_below="@id/viewemail"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="20dp"
         android:hint="Password"
         android:textColorHint="@color/dark_grey"
+        android:textSize="14dp"
         android:paddingTop="0dp"
         android:paddingLeft="10dp"
         android:id="@+id/edpassword"
         android:inputType="textPassword"
         android:background="@drawable/edittextshape"
-        android:textSize="@dimen/_10sdp"
         />
 
     <View
@@ -162,18 +162,17 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/viewpassword"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/buttonshape"
         android:text="Register"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:id="@+id/btnregister"
         android:layout_marginBottom="45dp"
-        android:textSize="@dimen/_10sdp"
         />
 
 
@@ -185,7 +184,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:id="@+id/r122"
             android:elevation="10dp"
             android:orientation="horizontal"
@@ -193,7 +192,7 @@
             android:paddingLeft="@dimen/_10sdp"
             android:paddingRight="@dimen/_10sdp"
             android:layout_below="@id/r1"
-            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_50sdp"
             >
 
             <View
@@ -211,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:text="or sign up with"
                 android:layout_centerInParent="true"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="14dp"
                 android:textColor="@color/dark_grey"
                 android:id="@+id/orLogin"
                 android:layout_marginLeft="@dimen/_10sdp"
@@ -250,7 +249,7 @@
             android:layout_height="wrap_content"
             android:text="Already registered?"
             android:layout_centerInParent="true"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="14dp"
             android:textColor="@color/dark_grey"
             android:id="@+id/txtregistered"
             android:layout_below="@id/imageView756756"
@@ -262,15 +261,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtregistered"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Sign-in here"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="14dp"
             android:textColor="@color/dark_blue"
             android:id="@+id/txtsigninhere"
-            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginBottom="40dp"
             />
 
 

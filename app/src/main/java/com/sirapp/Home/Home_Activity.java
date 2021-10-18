@@ -2,7 +2,6 @@ package com.sirapp.Home;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -13,6 +12,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
+import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,6 +21,7 @@ import android.os.StrictMode;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -35,6 +36,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -73,6 +79,7 @@ import com.sirapp.Home.adapter.HomeCustomerAdapter;
 import com.sirapp.Home.adapter.HomeInvoiceAdapter;
 import com.sirapp.Home.adapter.HomeSupplierAdapter;
 import com.sirapp.Invoice.InvoiceActivity;
+import com.sirapp.Invoice.InvoiceViewActivityWebView;
 import com.sirapp.Product.Product_Activity;
 import com.sirapp.Service.Service_Activity;
 import com.sirapp.Settings.OnlinePaymentGatewayActivity;
@@ -87,6 +94,7 @@ import com.sirapp.API.GetAsyncPost;
 import com.sirapp.API.Parameters;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -186,6 +194,9 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         drawerToggle.syncState();
 
         FindByIds();
+
+
+        checkWebview();
 
      //   pref.setFontDialog("");
 
@@ -418,6 +429,91 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 //        DatabaseReference mDatabaseReference = mDatabase.getReference();
 //        mDatabaseReference = mDatabase.getReference().child("image_upload_error111");
 //        mDatabaseReference.setValue("event_name_image_error11");
+    }
+
+    private void checkWebview() {
+        WebView invoiceweb = findViewById(R.id.invoiceweb);
+        WebSettings webSettings = invoiceweb.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        invoiceweb.setWebChromeClient(new WebChromeClient());
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(true);
+        invoiceweb.getSettings().setLoadsImagesAutomatically(true);
+        invoiceweb.getSettings().setJavaScriptEnabled(true);
+        invoiceweb.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
+        invoiceweb.getSettings().setLoadWithOverviewMode(true);
+        invoiceweb.getSettings().setUseWideViewPort(true);
+
+        invoiceweb.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                //handler.proceed(); // Ignore SSL certificate errors
+                String msg="";
+                if(error.getPrimaryError()==SslError.SSL_DATE_INVALID
+                        || error.getPrimaryError()== SslError.SSL_EXPIRED
+                        || error.getPrimaryError()== SslError.SSL_IDMISMATCH
+                        || error.getPrimaryError()== SslError.SSL_INVALID
+                        || error.getPrimaryError()== SslError.SSL_NOTYETVALID
+                        || error.getPrimaryError()==SslError.SSL_UNTRUSTED) {
+                    if(error.getPrimaryError()==SslError.SSL_DATE_INVALID){
+                        msg="The date of the certificate is invalid";
+                    }else if(error.getPrimaryError()==SslError.SSL_INVALID){
+                        msg="A generic error occurred";
+                    }
+                    else if(error.getPrimaryError()== SslError.SSL_EXPIRED){
+                        msg="The certificate has expired";
+                    }else if(error.getPrimaryError()== SslError.SSL_IDMISMATCH){
+                        msg="Hostname mismatch";
+                    }
+                    else if(error.getPrimaryError()== SslError.SSL_NOTYETVALID){
+                        msg="The certificate is not yet valid";
+                    }
+                    else if(error.getPrimaryError()==SslError.SSL_UNTRUSTED){
+                        msg="The certificate authority is not trusted";
+                    }
+                }
+                final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(Home_Activity.this);
+                builder.setMessage(msg);
+                builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        handler.proceed();
+                    }
+                });
+//                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        handler.cancel();
+//                    }
+//                });
+                builder.setCancelable(false);
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+
+
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+            }
+        });
+
+        String mainHtml = "invoice.html";
+        String name = mainHtml;
+        String nameName = "file:///android_asset/"+mainHtml;
+        String content = null;
+        try {
+            content = IOUtils.toString(getAssets().open(name))
+                .replaceAll("#LOGO_IMAGE#", "https://sir-app.com/wp-content/uploads/2021/03/Group-89485.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        invoiceweb.loadDataWithBaseURL(nameName, content, "text/html", "UTF-8", null);
     }
 
     private void setLeftValues() {

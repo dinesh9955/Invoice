@@ -6,7 +6,12 @@
     android:layout_height="match_parent"
     >
 
-
+    <WebView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="20dp"
+        android:id="@+id/invoiceweb"
+        />
 
     <RelativeLayout
         android:id="@+id/main_relative"

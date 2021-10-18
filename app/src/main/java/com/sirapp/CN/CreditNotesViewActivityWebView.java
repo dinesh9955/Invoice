@@ -2,6 +2,7 @@ package com.sirapp.CN;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.net.http.SslError;
@@ -22,6 +23,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import com.sirapp.API.AllSirApi;
@@ -282,7 +284,11 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
                     grosamont = new ArrayList<InvoiceTotalsItemDto>(invoiceDtoInvoice.getTotals());
                 }
 
-                productsItemDtos = new ArrayList<ProductsItemDto>(invoiceDtoInvoice.getProducts());
+                if(invoiceDtoInvoice.getProducts() != null){
+                    productsItemDtos = new ArrayList<ProductsItemDto>(invoiceDtoInvoice.getProducts());
+                }
+
+
 //                invoice_imageDto = new ArrayList<Invoice_image>(data.getInvoiceImage());
 
                 Log.e(TAG, "invoice_imageDto"+invoice_imageDto.size());
@@ -485,10 +491,53 @@ public class CreditNotesViewActivityWebView extends BaseActivity {
 
 
         invoiceweb.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed(); // Ignore SSL certificate errors
-            }
+
+//            @Override
+//            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+////                handler.proceed(); // Ignore SSL certificate errors
+//                String msg="";
+//                if(error.getPrimaryError()==SslError.SSL_DATE_INVALID
+//                        || error.getPrimaryError()== SslError.SSL_EXPIRED
+//                        || error.getPrimaryError()== SslError.SSL_IDMISMATCH
+//                        || error.getPrimaryError()== SslError.SSL_INVALID
+//                        || error.getPrimaryError()== SslError.SSL_NOTYETVALID
+//                        || error.getPrimaryError()==SslError.SSL_UNTRUSTED) {
+//                    if(error.getPrimaryError()==SslError.SSL_DATE_INVALID){
+//                        msg="The date of the certificate is invalid";
+//                    }else if(error.getPrimaryError()==SslError.SSL_INVALID){
+//                        msg="A generic error occurred";
+//                    }
+//                    else if(error.getPrimaryError()== SslError.SSL_EXPIRED){
+//                        msg="The certificate has expired";
+//                    }else if(error.getPrimaryError()== SslError.SSL_IDMISMATCH){
+//                        msg="Hostname mismatch";
+//                    }
+//                    else if(error.getPrimaryError()== SslError.SSL_NOTYETVALID){
+//                        msg="The certificate is not yet valid";
+//                    }
+//                    else if(error.getPrimaryError()==SslError.SSL_UNTRUSTED){
+//                        msg="The certificate authority is not trusted";
+//                    }
+//                }
+//                final AlertDialog.Builder builder = new AlertDialog.Builder(CreditNotesViewActivityWebView.this);
+//                builder.setMessage(msg);
+//                builder.setPositiveButton("continue", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        handler.proceed();
+//                    }
+//                });
+//                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        handler.cancel();
+//                    }
+//                });
+//                final AlertDialog dialog = builder.create();
+//                dialog.show();
+//            }
+
+
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }

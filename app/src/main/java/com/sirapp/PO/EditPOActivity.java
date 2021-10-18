@@ -5842,10 +5842,10 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
 
 
         invoiceweb.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed(); // Ignore SSL certificate errors
-            }
+//            @Override
+//            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                handler.proceed(); // Ignore SSL certificate errors
+//            }
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }

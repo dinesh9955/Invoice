@@ -4866,10 +4866,10 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
 
         invoiceweb.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed(); // Ignore SSL certificate errors
-            }
+//            @Override
+//            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                handler.proceed(); // Ignore SSL certificate errors
+//            }
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }

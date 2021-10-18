@@ -135,10 +135,10 @@ public class PreviewItActivity extends BaseActivity {
 
 
         invoiceweb.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed(); // Ignore SSL certificate errors
-            }
+//            @Override
+//            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                handler.proceed(); // Ignore SSL certificate errors
+//            }
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
@@ -799,29 +799,8 @@ public class PreviewItActivity extends BaseActivity {
 
                 double doubleBalance = Double.parseDouble(customerReportItemArrayList.get(i).getTotal());
                 String stringBalance = "";
-//                if(doubleBalance == 0){
-//                    String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
-//                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
-//                }else{
-//                    String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
-//                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
-//                }
 
-//                double doubleNotDue = Double.parseDouble(customerReportItemArrayList.get(i).getNot_due());
                 String stringNotDue = "";
-//                if(doubleNotDue == 0){
-//                    stringNotDue = "";
-//                }else{
-//                    String stringNotDue1 = customerReportItemArrayList.get(i).getNot_due();
-//                    stringNotDue = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringNotDue1)) + Utility.getReplaceDollor(cruncycode);
-//                }
-
-//                if(slab1 != 0 || slab2 != 0 || slab3 != 0 || slab4 != 0){
-//                    stringNotDue = "0.0"+ Utility.getReplaceDollor(cruncycode);
-//                }else{
-//                    String stringNotDue1 = customerReportItemArrayList.get(i).getNot_due();
-//                    stringNotDue = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringNotDue1)) + Utility.getReplaceDollor(cruncycode);
-//                }
 
                 if(doubleBalance == 0){
                     String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
@@ -832,25 +811,35 @@ public class PreviewItActivity extends BaseActivity {
                 }
 
 
-                double totalDD = 0.0;
+                double totalDD1 = 0.0;
+                double totalDD2 = 0.0;
+                double totalDD3 = 0.0;
+                double totalDD4 = 0.0;
                 if(slab1 != 0){
-                    totalDD = slab1 + doubleBalance;
-                    stringBalance = Utility.getPatternFormat(""+numberPostion, totalDD) + Utility.getReplaceDollor(cruncycode);
-                } else if(slab2 != 0){
-                    totalDD = slab2 + doubleBalance;
-                    stringBalance = Utility.getPatternFormat(""+numberPostion, totalDD) + Utility.getReplaceDollor(cruncycode);
-                } else if(slab3 != 0){
-                    totalDD = slab3 + doubleBalance;
-                    stringBalance = Utility.getPatternFormat(""+numberPostion, totalDD) + Utility.getReplaceDollor(cruncycode);
-                } else if(slab4 != 0){
-                    totalDD = slab4 + doubleBalance;
-                    stringBalance = Utility.getPatternFormat(""+numberPostion, totalDD) + Utility.getReplaceDollor(cruncycode);
-                } else{
-                    String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
-                    totalDD = doubleBalance;
-                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
+                    totalDD1 = slab1;
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, totalDD1) + Utility.getReplaceDollor(cruncycode);
+                } if(slab2 != 0){
+                    totalDD2 = slab2 ;
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, totalDD2) + Utility.getReplaceDollor(cruncycode);
+                } if(slab3 != 0){
+                    totalDD3 = slab3 ;
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, totalDD3) + Utility.getReplaceDollor(cruncycode);
+                } if(slab4 != 0){
+                    totalDD4 = slab4 ;
+                    stringBalance = Utility.getPatternFormat(""+numberPostion, totalDD4) + Utility.getReplaceDollor(cruncycode);
+//                } else{
+//                    String stringBalance1 = customerReportItemArrayList.get(i).getTotal();
+//                    totalDD = doubleBalance;
+//                    stringBalance = Utility.getPatternFormat(""+numberPostion, Double.parseDouble(stringBalance1)) + Utility.getReplaceDollor(cruncycode);
                 }
 
+                double totalDDXX = doubleBalance + totalDD1 + totalDD2 + totalDD3 + totalDD4;
+
+                String stringTotalDDXX = "";
+
+                if(totalDDXX != 0){
+                    stringTotalDDXX = Utility.getPatternFormat(""+numberPostion, totalDDXX) + Utility.getReplaceDollor(cruncycode);
+                }
 
                 productitem = IOUtils.toString(getAssets().open("report/"+customer_ageing_single_itemHtml))
                         .replaceAll("#CustomerName#", customerReportItemArrayList.get(i).getCustomer_name())
@@ -859,18 +848,12 @@ public class PreviewItActivity extends BaseActivity {
                         .replaceAll("#Slab2#", slab2Txt)
                         .replaceAll("#Slab3#", slab3Txt)
                         .replaceAll("#Slab4#", slab4Txt)
-                        .replaceAll("#Amount#", stringBalance);
+                        .replaceAll("#Amount#", stringTotalDDXX);
                 productitemlist = productitemlist + productitem;
 
-//                double allAmount = 0.0;
-//
-//                try{
-//                    allAmount = Double.parseDouble(customerReportItemArrayList.get(i).getTotal());
-//                }catch (Exception e){
-//
-//                }
 
-                totalAmount =   totalAmount + totalDD;
+
+                totalAmount =   totalAmount + totalDDXX;
             }
 
 
@@ -898,6 +881,15 @@ public class PreviewItActivity extends BaseActivity {
         String content = null;
         try {
             content = IOUtils.toString(getAssets().open(name))
+
+                    .replaceAll("Customer Ageing Report", getString(R.string.report_CustomerAgeingReport))
+                    .replaceAll("Customer Name", getString(R.string.html_CustomerName))
+                    .replaceAll("Current due", getString(R.string.html_Currentdue))
+                    .replaceAll("days overdue", getString(R.string.html_daysoverdue))
+                    .replaceAll("Total_", getString(R.string.html_total))
+                    .replaceAll("Total Amount_", getString(R.string.html_TotalAmount))
+
+
                     .replaceAll("Company Name", customerItem.getName())
                     .replaceAll("Address", ""+stringBuilderBillTo.toString())
                     .replaceAll("#LOGO_IMAGE#", customerItem.getLogo())

@@ -50,7 +50,7 @@
             android:layout_marginLeft="20dp"
             android:layout_below="@id/imgback"
             android:text="SIGN IN"
-            android:textSize="@dimen/_20sdp"
+            android:textSize="26dp"
             android:textColor="@color/dark_blue"
             android:id="@+id/txtsignin"
             />
@@ -60,26 +60,26 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/txtsignin"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="40dp"
             android:text="Sign In to generate executive invoices for your business."
+            android:textSize="16dp"
             android:id="@+id/txtsignindes"
             android:textColor="@color/dark_grey"
-            android:textSize="@dimen/_12sdp"
             />
 
 
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="40dp"
             android:layout_below="@id/txtsignindes"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="40dp"
             android:hint="Email address"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/dark_grey"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="14dp"
             android:paddingTop="0dp"
             android:paddingLeft="10dp"
             android:id="@+id/edemail"
@@ -105,14 +105,14 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="40dp"
             android:layout_below="@id/viewemail"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="20dp"
             android:hint="Password"
             android:textColorHint="@color/dark_grey"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="14dp"
             android:paddingTop="0dp"
             android:paddingLeft="10dp"
             android:id="@+id/edpassword"
@@ -136,17 +136,16 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/viewpassword"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/buttonshape"
             android:text="Login"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:id="@+id/btnlogin"
-            android:textSize="@dimen/_10sdp"
             />
 
 
@@ -156,14 +155,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/btnlogin"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="45dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Forgot Password?"
             android:textColor="@color/dark_grey"
             android:id="@+id/txtforgotpassword"
-            android:textSize="@dimen/_10sdp"
             />
 
 
@@ -173,7 +171,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:id="@+id/r122"
             android:elevation="10dp"
             android:orientation="horizontal"
@@ -181,7 +179,7 @@
             android:paddingLeft="@dimen/_10sdp"
             android:paddingRight="@dimen/_10sdp"
             android:layout_below="@id/r1"
-            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_50sdp"
             >
 
             <View
@@ -199,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:text="or log in with"
                 android:layout_centerInParent="true"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="14dp"
                 android:textColor="@color/dark_grey"
                 android:id="@+id/orLogin"
                 android:layout_marginLeft="@dimen/_10sdp"
@@ -236,11 +234,11 @@
             android:layout_height="wrap_content"
             android:text="Don't have an account?"
             android:layout_centerInParent="true"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="14dp"
             android:textColor="@color/dark_grey"
             android:id="@+id/txtaccount"
             android:layout_below="@id/imageView756756"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="10dp"
             />
 
 
@@ -248,13 +246,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtaccount"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="40dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Sign-up here"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="14dp"
             android:textColor="@color/dark_blue"
             android:id="@+id/txtsignuphere"
             />

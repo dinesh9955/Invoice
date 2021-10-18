@@ -4891,10 +4891,10 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
 
 
         invoiceweb.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed(); // Ignore SSL certificate errors
-            }
+//            @Override
+//            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                handler.proceed(); // Ignore SSL certificate errors
+//            }
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
