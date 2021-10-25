@@ -23,7 +23,6 @@ import com.loopj.android.http.RequestParams;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
-import com.sirapp.Home.Go_Premium_Activity;
 import com.sirapp.R;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -303,11 +302,11 @@ public class Verification_Code_Activity extends BaseActivity {
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Intent intent = new Intent(Verification_Code_Activity.this, Go_Premium_Activity.class);
-                                    intent.putExtra("signup","signup");
-                                    intent.putExtra("mail",mail);
-                                    intent.putExtra("pwd",pwd);
-                                    startActivity(intent);
+//                                    Intent intent = new Intent(Verification_Code_Activity.this, Go_Premium_Activity.class);
+//                                    intent.putExtra("signup","signup");
+//                                    intent.putExtra("mail",mail);
+//                                    intent.putExtra("pwd",pwd);
+//                                    startActivity(intent);
                                 }
                             },1000);
 

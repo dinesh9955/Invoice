@@ -20,9 +20,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.SkuDetails;
-import com.anjlab.android.iab.v3.TransactionDetails;
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
+//import com.anjlab.android.iab.v3.BillingProcessor;
+//import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.dynamiclinks.DynamicLink;
@@ -41,6 +49,7 @@ import com.sirapp.Invoice.InvoiceActivity;
 import com.sirapp.R;
 import com.sirapp.Utils.Utility;
 import com.sirapp.Xyz;
+import com.sirapp.wwww;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,12 +61,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
 import cz.msebera.android.httpclient.Header;
 
-public class GoProActivity extends BaseActivity {
+public class GoProActivity extends BaseActivity implements PurchasesUpdatedListener,
+        BillingClientStateListener, SkuDetailsResponseListener {
 
     private static final String TAG = "GoProActivity";
     LinearLayout linearLayout_12Month, linearLayout_1Month;
@@ -65,12 +76,15 @@ public class GoProActivity extends BaseActivity {
 
     ImageView imageViewPay, imageViewShare;
 
-    private BillingProcessor bp;
+//    private BillingProcessor bp;
 
     String subscription_typeNet = "";
 
     String productID = "com.sir.oneyear";
     String subscriptionType = "oneyear";
+
+    BillingClient billingClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,6 +133,32 @@ public class GoProActivity extends BaseActivity {
         });
 
 
+        billingClient = BillingClient.newBuilder(GoProActivity.this).setListener(
+                this).enablePendingPurchases().build();
+        billingClient.startConnection(this);
+
+        billingClient.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingSetupFinished(BillingResult billingResult) {
+
+                if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
+                    // The BillingClient is ready. You can query purchases here.
+                    Log.e(TAG, "onBillingSetupFinished");
+
+                }
+            }
+            @Override
+            public void onBillingServiceDisconnected() {
+                // Try to restart the connection on the next request to
+                // Google Play by calling the startConnection() method.
+                Log.e(TAG, "onBillingServiceDisconnected");
+            }
+        });
+
+
+
+
+
         linearLayout_12Month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,7 +192,8 @@ public class GoProActivity extends BaseActivity {
                 if(subscription_typeNet.equalsIgnoreCase("")) {
                     Log.e(TAG, "emptyAA");
                     //bp.purchase(GoProActivity.this, "android.test.purchased");
-                    bp.purchase(GoProActivity.this, productID);
+                    //bp.purchase(GoProActivity.this, productID);
+                     callInnAPP();
                 }else{
                     if(subscriptionType.equalsIgnoreCase("oneyear")) {
                           if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
@@ -161,7 +202,8 @@ public class GoProActivity extends BaseActivity {
                           }else{
                               Log.e(TAG, "emptyBB22");
 //                              bp.purchase(GoProActivity.this, "android.test.purchased");
-                              bp.purchase(GoProActivity.this, productID);
+                              //bp.purchase(GoProActivity.this, productID);
+                              callInnAPP();
                           }
                     }else if(subscriptionType.equalsIgnoreCase("onemonth")){
                         if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
@@ -187,88 +229,125 @@ public class GoProActivity extends BaseActivity {
         //callAPI(productID, "orderIDXYZ", dateCurrent);
 
 
-        bp = new BillingProcessor(this, AllSirApi.LICENSE_KEY, new BillingProcessor.IBillingHandler() {
-            @Override
-            public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
-                Log.e(TAG, "onProductPurchased"+productId);
-//                showToast("onProductPurchased: " + productId);
-//                updateTextViews();
-
-
-
-                String productID = details.productId;
-                String orderID = details.orderId;
-                String purchaseToken = details.purchaseToken;
-               // Date purchaseTime = details.purchaseTime;
-
-               // Date date = new Date(Long.parseLong(details.purchaseTime));
-
-//                Gson gson = new Gson();
+//        bp = new BillingProcessor(this, AllSirApi.LICENSE_KEY, new BillingProcessor.IBillingHandler() {
+//            @Override
+//            public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
+//                Log.e(TAG, "onProductPurchased"+productId);
+////                showToast("onProductPurchased: " + productId);
+////                updateTextViews();
 //
-//                String json = gson.toJson(details.purchaseInfo.responseData);
-
-//                String json = gson.toJson(bp.consumePurchase(details.productId));
-
-                Log.e(TAG , "productID"+productID);
-                Log.e(TAG , "orderID"+orderID);
-                Log.e(TAG , "purchaseToken"+purchaseToken);
-               // Log.e(TAG , "purchaseTime"+purchaseTime);
-
-
-
-//                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-//                Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
-//                String date = simple.format(purchaseTime);
-
-
-                Calendar myCalendar = Calendar.getInstance();
-                String myFormat = "yyyy-MM-dd";
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                String dateCurrent = sdf.format(myCalendar.getTime());
-
-
-                String json22 = new Gson().toJson(details);
-
-                Utility.generateNoteOnSD(GoProActivity.this , "go_pro.txt", ""+json22.toString());
-
-                callAPI(productID, orderID, dateCurrent);
-
-
-//                SkuDetails dd = bp.getPurchaseListingDetails(details.productId);
 //
-//                String json22 = gson.toJson(dd);
-//                Log.e(TAG , "json22 "+json22);
+//
+//                String productID = details.productId;
+//                String orderID = details.orderId;
+//                String purchaseToken = details.purchaseToken;
+//               // Date purchaseTime = details.purchaseTime;
+//
+//               // Date date = new Date(Long.parseLong(details.purchaseTime));
+//
+////                Gson gson = new Gson();
+////
+////                String json = gson.toJson(details.purchaseInfo.responseData);
+//
+////                String json = gson.toJson(bp.consumePurchase(details.productId));
+//
+//                Log.e(TAG , "productID"+productID);
+//                Log.e(TAG , "orderID"+orderID);
+//                Log.e(TAG , "purchaseToken"+purchaseToken);
+//               // Log.e(TAG , "purchaseTime"+purchaseTime);
+//
+//
+//
+////                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+////                Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
+////                String date = simple.format(purchaseTime);
+//
+//
+//                Calendar myCalendar = Calendar.getInstance();
+//                String myFormat = "yyyy-MM-dd";
+//                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//                String dateCurrent = sdf.format(myCalendar.getTime());
+//
+//
+//                String json22 = new Gson().toJson(details);
+//
+//                //Utility.generateNoteOnSD(GoProActivity.this , "go_pro.txt", ""+json22.toString());
+//
+//                callAPI(productID, orderID, dateCurrent);
+//
+//
+////                SkuDetails dd = bp.getPurchaseListingDetails(details.productId);
+////
+////                String json22 = gson.toJson(dd);
+////                Log.e(TAG , "json22 "+json22);
+//
+////                SkuDetails dd = bp.getSubscriptionListingDetails("");
+////                TransactionDetails dd = bp.getSubscriptionTransactionDetails("");
+//            }
+//            @Override
+//            public void onBillingError(int errorCode, @Nullable Throwable error) {
+//                Log.e(TAG, "onBillingError");
+////                showToast("onBillingError: " + Integer.toString(errorCode));
+//                // Log.e(TAG, "onBillingError "+error.getMessage());
+//            }
+//            @Override
+//            public void onBillingInitialized() {
+//                Log.e(TAG, "onBillingInitialized");
+////                showToast("onBillingInitialized");
+////                readyToPurchase = true;
+////                updateTextViews();
+//            }
+//            @Override
+//            public void onPurchaseHistoryRestored() {
+//                Log.e(TAG, "onPurchaseHistoryRestored");
+//                //showToast("onPurchaseHistoryRestored");
+//                for(String sku : bp.listOwnedProducts())
+//                    Log.e(TAG, "Owned Managed Product: " + sku);
+//                for(String sku : bp.listOwnedSubscriptions())
+//                    Log.e(TAG, "Owned Subscription: " + sku);
+//                //updateTextViews();
+//            }
+//        });
+//        bp.initialize();
 
-//                SkuDetails dd = bp.getSubscriptionListingDetails("");
-//                TransactionDetails dd = bp.getSubscriptionTransactionDetails("");
-            }
-            @Override
-            public void onBillingError(int errorCode, @Nullable Throwable error) {
-                Log.e(TAG, "onBillingError");
-//                showToast("onBillingError: " + Integer.toString(errorCode));
-                // Log.e(TAG, "onBillingError "+error.getMessage());
-            }
-            @Override
-            public void onBillingInitialized() {
-                Log.e(TAG, "onBillingInitialized");
-//                showToast("onBillingInitialized");
-//                readyToPurchase = true;
-//                updateTextViews();
-            }
-            @Override
-            public void onPurchaseHistoryRestored() {
-                Log.e(TAG, "onPurchaseHistoryRestored");
-                //showToast("onPurchaseHistoryRestored");
-                for(String sku : bp.listOwnedProducts())
-                    Log.e(TAG, "Owned Managed Product: " + sku);
-                for(String sku : bp.listOwnedSubscriptions())
-                    Log.e(TAG, "Owned Subscription: " + sku);
-                //updateTextViews();
-            }
-        });
-        bp.initialize();
+
+    }
+
+    private void callInnAPP() {
+        List<String> skuList = new ArrayList<> ();
+        // skuList.add("android.test.purchased");
+        skuList.add("com.sir.oneyear");
+        skuList.add("com.sirapp.onemonth");
+//        skuList.add(productID);
+
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS);
+        billingClient.querySkuDetailsAsync(params.build(),
+                new SkuDetailsResponseListener() {
+                    @Override
+                    public void onSkuDetailsResponse(BillingResult billingResult,
+                                                     List<SkuDetails> skuDetailsList) {
+                        String ddd = new Gson().toJson(skuDetailsList);
+                        Log.e(TAG, "onSkuDetailsResponse "+ddd);
+                        if(skuDetailsList != null){
+                            for(int i = 0 ; i < skuDetailsList.size() ; i++){
+                                if(skuDetailsList.get(i).getSku().equals(productID)){
+                                    Log.e(TAG, "skuDetailsList "+skuDetailsList.get(i).getSku());
+                                    BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                                    .setSkuDetails(skuDetailsList.get(i))
+                                    .build();
+                                    int responseCode = billingClient.launchBillingFlow(GoProActivity.this, billingFlowParams).getResponseCode();
+                                }
+                            }
+                        }
 
 
+//
+//
+//                        int responseCode = billingClient.launchBillingFlow(GoProActivity.this, billingFlowParams).getResponseCode();
+                        //Log.e(TAG, "responseCode "+responseCode);
+                    }
+                });
     }
 
 
@@ -539,18 +618,18 @@ public class GoProActivity extends BaseActivity {
 
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!bp.handleActivityResult(requestCode, resultCode, data))
-            super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onDestroy() {
-        if (bp != null)
-            bp.release();
-        super.onDestroy();
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (!bp.handleActivityResult(requestCode, resultCode, data))
+//            super.onActivityResult(requestCode, resultCode, data);
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//        if (bp != null)
+//            bp.release();
+//        super.onDestroy();
+//    }
 
 
 
@@ -746,4 +825,79 @@ public class GoProActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onBillingServiceDisconnected() {
+
+    }
+
+    @Override
+    public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
+
+    }
+
+    @Override
+    public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> list) {
+
+        switch (billingResult.getResponseCode()) {
+            case BillingClient.BillingResponseCode.OK:
+                if (null != list) {
+                    Log.d(TAG, "PURCX");
+                    String ddd = new Gson().toJson(list);
+                    Log.e(TAG, "onSkuDetailsResponseXX "+ddd);
+
+                    Purchase purchase = list.get(0);
+
+                   // String productID = productID;
+                    String orderID = purchase.getOrderId();
+                    String purchaseToken = purchase.getPurchaseToken();
+
+
+                    Log.e(TAG , "productID"+productID);
+                    Log.e(TAG , "orderID"+orderID);
+                    Log.e(TAG , "purchaseToken"+purchaseToken);
+
+                    Calendar myCalendar = Calendar.getInstance();
+                    String myFormat = "yyyy-MM-dd";
+                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                    String dateCurrent = sdf.format(myCalendar.getTime());
+
+
+//                    String json22 = new Gson().toJson(ddd);
+
+                    //Utility.generateNoteOnSD(GoProActivity.this , "go_pro.txt", ""+json22.toString());
+
+                    callAPI(productID, orderID, dateCurrent);
+
+                    return;
+                } else {
+                    Log.d(TAG, "Null Purchase List Returned from OK response!");
+                }
+                break;
+            case BillingClient.BillingResponseCode.USER_CANCELED:
+                Log.i(TAG, "onPurchasesUpdated: User canceled the purchase");
+                break;
+            case BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED:
+                Log.i(TAG, "onPurchasesUpdated: The user already owns this item");
+                break;
+            case BillingClient.BillingResponseCode.DEVELOPER_ERROR:
+                Log.e(TAG, "onPurchasesUpdated: Developer error means that Google Play " +
+                        "does not recognize the configuration. If you are just getting started, " +
+                        "make sure you have configured the application correctly in the " +
+                        "Google Play Console. The SKU product ID must match and the APK you " +
+                        "are using must be signed with release keys."
+                );
+                break;
+            default:
+                Log.d(TAG, "BillingResult [" + billingResult.getResponseCode() + "]: "
+                        + billingResult.getDebugMessage());
+        }
+
+
+
+    }
+
+    @Override
+    public void onSkuDetailsResponse(@NonNull BillingResult billingResult, @Nullable List<SkuDetails> list) {
+
+    }
 }

@@ -20,13 +20,23 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.TransactionDetails;
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
+//import com.anjlab.android.iab.v3.BillingProcessor;
+//import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
+import com.sirapp.Home.GoProActivity;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
 import com.sirapp.API.AllSirApi;
@@ -49,7 +59,8 @@ import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
-public class SettingsActivity extends BaseActivity {
+public class SettingsActivity extends BaseActivity implements PurchasesUpdatedListener,
+        BillingClientStateListener, SkuDetailsResponseListener {
     private static final String TAG = "SettingsActivity" ;
     ApiInterface apiInterface;
     RecyclerView recycler_invoices;
@@ -63,8 +74,11 @@ public class SettingsActivity extends BaseActivity {
     ArrayList<String> arrayListNames = new ArrayList<>();
     ArrayList<Integer> arrayListIcons = new ArrayList<>();
 
-    private BillingProcessor bp;
+//    private BillingProcessor bp;
 
+    BillingClient billingClient;
+
+    String myPackage = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,88 +153,110 @@ public class SettingsActivity extends BaseActivity {
         }
 
 
+        billingClient = BillingClient.newBuilder(SettingsActivity.this).setListener(
+                this).enablePendingPurchases().build();
+        billingClient.startConnection(this);
 
-        bp = new BillingProcessor(this, AllSirApi.LICENSE_KEY, new BillingProcessor.IBillingHandler() {
+        billingClient.startConnection(new BillingClientStateListener() {
             @Override
-            public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
-                Log.e(TAG, "onProductPurchased");
-//                showToast("onProductPurchased: " + productId);
-//                updateTextViews();
+            public void onBillingSetupFinished(BillingResult billingResult) {
 
-                String productID = details.productId;
-                String orderID = details.orderId;
-                String purchaseToken = details.purchaseToken;
-//                Date purchaseTime = details.purchaseTime;
-//                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-//                Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
-//                String date = simple.format(purchaseTime);
-
-                Calendar myCalendar = Calendar.getInstance();
-                String myFormat = "yyyy-MM-dd";
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                String dateCurrent = sdf.format(myCalendar.getTime());
-
-                String json22 = new Gson().toJson(details);
-                Utility.generateNoteOnSD(SettingsActivity.this , "settings_pro.txt", ""+json22.toString());
-
-
-                if(payKey.equalsIgnoreCase("user")){
-                    callAPIUSER("SUBUSER");
-                }else if(payKey.equalsIgnoreCase("company")){
-                    callAPIUSER("COMPANY");
-                }else{
-                    callAPI(productID, orderID, dateCurrent, "1");
-                }
-
-            }
-            @Override
-            public void onBillingError(int errorCode, @Nullable Throwable error) {
-                Log.e(TAG, "onBillingError");
-//                showToast("onBillingError: " + Integer.toString(errorCode));
-                // Log.e(TAG, "onBillingError "+error.getMessage());
-            }
-            @Override
-            public void onBillingInitialized() {
-                Log.e(TAG, "onBillingInitialized");
-//                showToast("onBillingInitialized");
-//                readyToPurchase = true;
-//                updateTextViews();
-            }
-            @Override
-            public void onPurchaseHistoryRestored() {
-                boolean controlnumber = bp.loadOwnedPurchasesFromGoogle();
-                if(controlnumber) {
-                    for(String sku : bp.listOwnedSubscriptions()){
-                        TransactionDetails details = bp.getSubscriptionTransactionDetails(sku);
-
-                        if (details != null) {
-                            Log.d("TAG", "onBillingInitialized: active");
-                            String productID = details.productId;
-                            String orderID = details.orderId;
-                            String purchaseToken = details.purchaseToken;
-//                            Date purchaseTime = details.purchaseTime;
-//                            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-//                            Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
-//                            String date = simple.format(purchaseTime);
-
-                            Calendar myCalendar = Calendar.getInstance();
-                            String myFormat = "yyyy-MM-dd";
-                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                            String dateCurrent = sdf.format(myCalendar.getTime());
-
-                            callAPI(productID, orderID, dateCurrent, "2");
-                        }
-
-                    }
-
+                if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
+                    // The BillingClient is ready. You can query purchases here.
+                    Log.e(TAG, "onBillingSetupFinished");
 
                 }
-
-
+            }
+            @Override
+            public void onBillingServiceDisconnected() {
+                // Try to restart the connection on the next request to
+                // Google Play by calling the startConnection() method.
+                Log.e(TAG, "onBillingServiceDisconnected");
             }
         });
 
-        bp.initialize();
+
+//        bp = new BillingProcessor(this, AllSirApi.LICENSE_KEY, new BillingProcessor.IBillingHandler() {
+//            @Override
+//            public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
+//                Log.e(TAG, "onProductPurchased");
+////                showToast("onProductPurchased: " + productId);
+////                updateTextViews();
+//
+//                String productID = details.productId;
+//                String orderID = details.orderId;
+//                String purchaseToken = details.purchaseToken;
+////                Date purchaseTime = details.purchaseTime;
+////                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+////                Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
+////                String date = simple.format(purchaseTime);
+//
+//                Calendar myCalendar = Calendar.getInstance();
+//                String myFormat = "yyyy-MM-dd";
+//                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//                String dateCurrent = sdf.format(myCalendar.getTime());
+//
+//                String json22 = new Gson().toJson(details);
+////                Utility.generateNoteOnSD(SettingsActivity.this , "settings_pro.txt", ""+json22.toString());
+//
+//
+//                if(payKey.equalsIgnoreCase("user")){
+//                    callAPIUSER("SUBUSER");
+//                }else if(payKey.equalsIgnoreCase("company")){
+//                    callAPIUSER("COMPANY");
+//                }else{
+//                    callAPI(productID, orderID, dateCurrent, "1");
+//                }
+//
+//            }
+//            @Override
+//            public void onBillingError(int errorCode, @Nullable Throwable error) {
+//                Log.e(TAG, "onBillingError");
+////                showToast("onBillingError: " + Integer.toString(errorCode));
+//                // Log.e(TAG, "onBillingError "+error.getMessage());
+//            }
+//            @Override
+//            public void onBillingInitialized() {
+//                Log.e(TAG, "onBillingInitialized");
+////                showToast("onBillingInitialized");
+////                readyToPurchase = true;
+////                updateTextViews();
+//            }
+//            @Override
+//            public void onPurchaseHistoryRestored() {
+//                boolean controlnumber = bp.loadOwnedPurchasesFromGoogle();
+//                if(controlnumber) {
+//                    for(String sku : bp.listOwnedSubscriptions()){
+//                        TransactionDetails details = bp.getSubscriptionTransactionDetails(sku);
+//
+//                        if (details != null) {
+//                            Log.d("TAG", "onBillingInitialized: active");
+//                            String productID = details.productId;
+//                            String orderID = details.orderId;
+//                            String purchaseToken = details.purchaseToken;
+////                            Date purchaseTime = details.purchaseTime;
+////                            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
+////                            Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
+////                            String date = simple.format(purchaseTime);
+//
+//                            Calendar myCalendar = Calendar.getInstance();
+//                            String myFormat = "yyyy-MM-dd";
+//                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//                            String dateCurrent = sdf.format(myCalendar.getTime());
+//
+//                            callAPI(productID, orderID, dateCurrent, "2");
+//                        }
+//
+//                    }
+//
+//
+//                }
+//
+//
+//            }
+//        });
+//
+//        bp.initialize();
 
 
     }
@@ -229,12 +265,9 @@ public class SettingsActivity extends BaseActivity {
     public void restorePurchase() {
         Log.e(TAG, "restorePurchase ");
 
-       // bp.purchase(this, "android.test.purchased");
-//        BillingHelper.restoreTransactionInformation(BillingSecurity.generateNonce())
-//        bp.initialize();
 
-        bp.loadOwnedPurchasesFromGoogle();
-
+      //  bp.loadOwnedPurchasesFromGoogle();
+        callRestore();
     }
 
 
@@ -311,17 +344,28 @@ public class SettingsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(imageClickID == 1){
-                    bp.purchase(SettingsActivity.this, "com.sir.one_user");
+                    myPackage = "com.sir.one_user";
+//                    bp.purchase(SettingsActivity.this, "com.sir.one_user");
+                    callOne();
                 }else if(imageClickID == 2){
-                    bp.purchase(SettingsActivity.this, "com.sir.one_company");
+                    myPackage = "com.sir.one_company";
+//                    bp.purchase(SettingsActivity.this, "com.sir.one_company");
+                    callTwo();
                 }else if(imageClickID == 3){
-                    bp.purchase(SettingsActivity.this, "com.sir.monthadditional");
+                    myPackage = "com.sir.monthadditional";
+//                    bp.purchase(SettingsActivity.this, "com.sir.monthadditional");
+                    callThree();
                 }else if(imageClickID == 4){
-                    bp.purchase(SettingsActivity.this, "com.sir.oneyearadditions");
+                    myPackage = "com.sir.oneyearadditions";
+//                    bp.purchase(SettingsActivity.this, "com.sir.oneyearadditions");
+                    callFour();
                 }else{
                     Constant.ErrorToast(SettingsActivity.this , getString(R.string.setting_SelectPlan));
                 }
                //bp.purchase(SettingsActivity.this, "android.test.purchased");
+
+
+
                 mybuilder.dismiss();
             }
         });
@@ -359,6 +403,157 @@ public class SettingsActivity extends BaseActivity {
 
     }
 
+    private void callOne() {
+        List<String> skuList = new ArrayList<>();
+        skuList.add(myPackage);
+
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+        billingClient.querySkuDetailsAsync(params.build(),
+                new SkuDetailsResponseListener() {
+                    @Override
+                    public void onSkuDetailsResponse(BillingResult billingResult,
+                                                     List<SkuDetails> skuDetailsList) {
+                        String ddd = new Gson().toJson(skuDetailsList);
+                        Log.e(TAG, "onSkuDetailsResponse "+ddd);
+                        if(skuDetailsList != null){
+                            for(int i = 0 ; i < skuDetailsList.size() ; i++){
+                                if(skuDetailsList.get(i).getSku().equals(myPackage)){
+                                    Log.e(TAG, "skuDetailsList "+skuDetailsList.get(i).getSku());
+                                    BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                                            .setSkuDetails(skuDetailsList.get(i))
+                                            .build();
+                                    int responseCode = billingClient.launchBillingFlow(SettingsActivity.this, billingFlowParams).getResponseCode();
+                                }
+                            }
+                        }
+
+                    }
+                });
+    }
+
+
+    private void callTwo() {
+        List<String> skuList = new ArrayList<>();
+        skuList.add(myPackage);
+
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+        billingClient.querySkuDetailsAsync(params.build(),
+                new SkuDetailsResponseListener() {
+                    @Override
+                    public void onSkuDetailsResponse(BillingResult billingResult,
+                                                     List<SkuDetails> skuDetailsList) {
+                        String ddd = new Gson().toJson(skuDetailsList);
+                        Log.e(TAG, "onSkuDetailsResponse "+ddd);
+                        if(skuDetailsList != null){
+                            for(int i = 0 ; i < skuDetailsList.size() ; i++){
+                                if(skuDetailsList.get(i).getSku().equals(myPackage)){
+                                    Log.e(TAG, "skuDetailsList "+skuDetailsList.get(i).getSku());
+                                    BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                                            .setSkuDetails(skuDetailsList.get(i))
+                                            .build();
+                                    int responseCode = billingClient.launchBillingFlow(SettingsActivity.this, billingFlowParams).getResponseCode();
+                                }
+                            }
+                        }
+
+                    }
+                });
+    }
+
+
+    private void callThree() {
+        List<String> skuList = new ArrayList<>();
+        skuList.add(myPackage);
+
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS);
+        billingClient.querySkuDetailsAsync(params.build(),
+                new SkuDetailsResponseListener() {
+                    @Override
+                    public void onSkuDetailsResponse(BillingResult billingResult,
+                                                     List<SkuDetails> skuDetailsList) {
+                        String ddd = new Gson().toJson(skuDetailsList);
+                        Log.e(TAG, "onSkuDetailsResponse "+ddd);
+                        if(skuDetailsList != null){
+                            for(int i = 0 ; i < skuDetailsList.size() ; i++){
+                                if(skuDetailsList.get(i).getSku().equals(myPackage)){
+                                    Log.e(TAG, "skuDetailsList "+skuDetailsList.get(i).getSku());
+                                    BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                                            .setSkuDetails(skuDetailsList.get(i))
+                                            .build();
+                                    int responseCode = billingClient.launchBillingFlow(SettingsActivity.this, billingFlowParams).getResponseCode();
+                                }
+                            }
+                        }
+
+                    }
+                });
+    }
+
+
+    private void callFour() {
+        List<String> skuList = new ArrayList<>();
+        skuList.add(myPackage);
+
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS);
+        billingClient.querySkuDetailsAsync(params.build(),
+                new SkuDetailsResponseListener() {
+                    @Override
+                    public void onSkuDetailsResponse(BillingResult billingResult,
+                                                     List<SkuDetails> skuDetailsList) {
+                        String ddd = new Gson().toJson(skuDetailsList);
+                        Log.e(TAG, "onSkuDetailsResponse "+ddd);
+                        if(skuDetailsList != null){
+                            for(int i = 0 ; i < skuDetailsList.size() ; i++){
+                                if(skuDetailsList.get(i).getSku().equals(myPackage)){
+                                    Log.e(TAG, "skuDetailsList "+skuDetailsList.get(i).getSku());
+                                    BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                                            .setSkuDetails(skuDetailsList.get(i))
+                                            .build();
+                                    int responseCode = billingClient.launchBillingFlow(SettingsActivity.this, billingFlowParams).getResponseCode();
+                                }
+                            }
+                        }
+
+                    }
+                });
+    }
+
+
+    private void callRestore() {
+        List<String> skuList = new ArrayList<>();
+        skuList.add("com.sir.oneyear");
+        skuList.add("com.sirapp.onemonth");
+        skuList.add("com.sir.monthadditional");
+        skuList.add("com.sirapp.oneyearadditions");
+
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS);
+        billingClient.querySkuDetailsAsync(params.build(),
+                new SkuDetailsResponseListener() {
+                    @Override
+                    public void onSkuDetailsResponse(BillingResult billingResult,
+                                                     List<SkuDetails> skuDetailsList) {
+                        String ddd = new Gson().toJson(skuDetailsList);
+                        Log.e(TAG, "onSkuDetailsResponse "+ddd);
+                        if(skuDetailsList != null){
+                            for(int i = 0 ; i < skuDetailsList.size() ; i++){
+                                if(skuDetailsList.get(i).getSku().equals(myPackage)){
+                                    Log.e(TAG, "skuDetailsList "+skuDetailsList.get(i).getSku());
+                                    BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                                            .setSkuDetails(skuDetailsList.get(i))
+                                            .build();
+                                    int responseCode = billingClient.launchBillingFlow(SettingsActivity.this, billingFlowParams).getResponseCode();
+                                }
+                            }
+                        }
+
+                    }
+                });
+    }
 
 
     private void callAPI(String productId, String purchaseToken, String date, String witch) {
@@ -562,10 +757,101 @@ public class SettingsActivity extends BaseActivity {
 
 
 
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+////        if (!bp.handleActivityResult(requestCode, resultCode, data))
+////            super.onActivityResult(requestCode, resultCode, data);
+//    }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!bp.handleActivityResult(requestCode, resultCode, data))
-            super.onActivityResult(requestCode, resultCode, data);
+    public void onBillingServiceDisconnected() {
+
     }
 
+    @Override
+    public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
+
+    }
+
+    @Override
+    public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> list) {
+        switch (billingResult.getResponseCode()) {
+            case BillingClient.BillingResponseCode.OK:
+                if (null != list) {
+                    Log.d(TAG, "PURCX");
+                    String ddd = new Gson().toJson(list);
+                    Log.e(TAG, "onSkuDetailsResponseXX "+ddd);
+
+                    Purchase purchase = list.get(0);
+
+                //    String productID = details.productId;
+                    String orderID = purchase.getOrderId();
+                    String purchaseToken = purchase.getPurchaseToken();
+
+
+                    Calendar myCalendar = Calendar.getInstance();
+                    String myFormat = "yyyy-MM-dd";
+                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                    String dateCurrent = sdf.format(myCalendar.getTime());
+
+
+                    if(payKey.equalsIgnoreCase("user")){
+                        callAPIUSER("SUBUSER");
+                    }else if(payKey.equalsIgnoreCase("company")){
+                        callAPIUSER("COMPANY");
+                    }else{
+                        callAPI(myPackage, orderID, dateCurrent, "1");
+                    }
+
+
+                    return;
+                } else {
+                    Log.d(TAG, "Null Purchase List Returned from OK response!");
+                }
+                break;
+            case BillingClient.BillingResponseCode.USER_CANCELED:
+                Log.i(TAG, "onPurchasesUpdated: User canceled the purchase");
+                break;
+            case BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED:
+                Log.i(TAG, "onPurchasesUpdated: The user already owns this item");
+                break;
+            case BillingClient.BillingResponseCode.DEVELOPER_ERROR:
+                Log.e(TAG, "onPurchasesUpdated: Developer error means that Google Play " +
+                        "does not recognize the configuration. If you are just getting started, " +
+                        "make sure you have configured the application correctly in the " +
+                        "Google Play Console. The SKU product ID must match and the APK you " +
+                        "are using must be signed with release keys."
+                );
+                break;
+            default:
+                Log.d(TAG, "BillingResult [" + billingResult.getResponseCode() + "]: "
+                        + billingResult.getDebugMessage());
+        }
+    }
+
+    @Override
+    public void onSkuDetailsResponse(@NonNull BillingResult billingResult, @Nullable List<SkuDetails> list) {
+//        boolean controlnumber = bp.loadOwnedPurchasesFromGoogle();
+//        if(controlnumber) {
+//            for(String sku : bp.listOwnedSubscriptions()){
+//                TransactionDetails details = bp.getSubscriptionTransactionDetails(sku);
+//
+//                if (details != null) {
+//                    Log.d("TAG", "onBillingInitialized: active");
+//                    String productID = details.productId;
+//                    String orderID = details.orderId;
+//                    String purchaseToken = details.purchaseToken;
+//
+//                    Calendar myCalendar = Calendar.getInstance();
+//                    String myFormat = "yyyy-MM-dd";
+//                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+//                    String dateCurrent = sdf.format(myCalendar.getTime());
+//
+//                    callAPI(productID, orderID, dateCurrent, "2");
+//                }
+//
+//            }
+//
+//        }
+    }
 }

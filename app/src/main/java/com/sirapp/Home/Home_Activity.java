@@ -101,6 +101,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -170,12 +171,22 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         setContentView(R.layout.home_act);
 //        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
 //        File myDirectory = new File(getExternalFilesDir("FolderName"),"YOUR_DIR");
-        File myDirectory = new File(Environment.getExternalStorageDirectory(), "SIR");
-        if(!myDirectory.exists()) {
-            myDirectory.mkdirs();
-        }
+       // File myDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr");
+
+        //File myDirectory = new File(Environment.getExternalStorageDirectory(), "SIR");
+//        if(!myDirectory.exists()) {
+//            myDirectory.mkdirs();
+//        }
 
         File logoPath = Utility.getFileLogo2(Home_Activity.this);
+
+//        File mydir = getDir("SIR", Context.MODE_PRIVATE); //Creating an internal dir;
+//        if (!mydir.exists())
+//        {
+//            mydir.mkdirs();
+//        }
+
+
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -404,10 +415,10 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         for (ApplicationInfo packageInfo : packages) {
             String ccc = new Gson().toJson(packageInfo);
-            //Log.e(TAG, "Source_dir : " + ccc);
-//            Log.e(TAG, "Installed package :" + packageInfo.packageName);
-//            Log.e(TAG, "Source dir : " + packageInfo.sourceDir);
-        //    Log.e(TAG, "Source_dir : " + pm.getLaunchIntentForPackage(packageInfo.packageName).toString());
+            Log.e(TAG, "Source_dir : " + ccc);
+            Log.e(TAG, "Installed package :" + packageInfo.packageName);
+            Log.e(TAG, "Source dir : " + packageInfo.sourceDir);
+//            Log.e(TAG, "Source_dir : " + pm.getLaunchIntentForPackage(packageInfo.packageName).toString());
 
             //Log.e(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
 //            if(ccc.toString().toLowerCase().contains("mail")){

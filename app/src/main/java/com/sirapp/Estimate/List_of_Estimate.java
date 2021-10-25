@@ -969,7 +969,7 @@ public class List_of_Estimate extends BaseFragment {
                                 if (Utility.isAppAvailable(getActivity(), "com.samsung.android.email.provider")){
                                     share.setPackage("com.samsung.android.email.provider");
                                 }
-                                else if (Utility.isAppAvailable(getActivity(), "com.google.android.gm")) {
+                                else if (Utility.isAppAvailable(getActivity(), "com.google.android.gms")) {
                                     share.setPackage("com.google.android.gm");
                                 }
 
@@ -1542,7 +1542,7 @@ public class List_of_Estimate extends BaseFragment {
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStorageDirectory() + File.separator + "SIR/";
+                folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString()+"/";
 
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);

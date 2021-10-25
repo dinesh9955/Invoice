@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -1929,8 +1930,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStorageDirectory() + File.separator + "SIR/";
-
+                //folder = Environment.getExternalStorageDirectory() + File.separator + "Download/";
+                folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString()+"/";
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);
 
@@ -2104,8 +2105,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStorageDirectory() + File.separator + "SIR/";
-
+              //  folder = Environment.getExternalStorageDirectory() + File.separator + "Download/";
+                folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString()+"/";
+                Log.e(TAG, "folderfolderfolder "+folder);
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);
 
@@ -2192,7 +2194,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //                    BuildConfig.APPLICATION_ID + ".provider",
 //                    mFile2);
 
-            File root1 = new File(Environment.getExternalStorageDirectory(), "SIR/");
+           // File root1 = new File(Environment.getExternalStorageDirectory(), "Download/");
+            File root1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
             File gpxfile2 = new File(root1, "share.jpg");
             Uri imageUri2 = FileProvider.getUriForFile(
                     context,
@@ -2204,11 +2207,18 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                     BuildConfig.APPLICATION_ID + ".provider",
                     fileWithinMyDir);
 
+            Log.e(TAG, "imageUri2 "+imageUri2);
+            Log.e(TAG, "imageUri1 "+imageUri1);
+
             String finalUrlPaypalName = urlPaypalName;
             String finalUrlStripeName = urlStripeName;
 
 
             Log.e(TAG, "paypalXX8 ");
+
+
+
+
 
             String content1 = "";
             String content11 = "";
@@ -2402,10 +2412,11 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 }catch (Exception e){
                     Log.e(TAG, "paypalXX31 " + e.getMessage());
                 }
-            }else if (Utility.isAppAvailable(context, "com.google.android.gm")) {
-
+            }else if (Utility.isAppAvailable(context, "com.google.android.gms")) {
+                Log.e(TAG, "paypalXX101 ");
                 if (paypal.equalsIgnoreCase("1")) {
-                    File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+                   // File root = new File(Environment.getExternalStorageDirectory(), "Download/");
+                    File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
                     File gpxfile = new File(root, "PayPal.html");
 
                    // File mFile22 = new File("/sdcard/SIR/PayPal.html");
@@ -2419,7 +2430,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 }
                 if (stripe.equalsIgnoreCase("1")) {
 //                    File mFile22 = new File("/sdcard/SIR/Cards.html");
-                    File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+                  //  File root = new File(Environment.getExternalStorageDirectory(), "Download/");
+                    File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
                     File gpxfile = new File(root, "Cards.html");
                     Uri imageUri22 = FileProvider.getUriForFile(
                             context,
@@ -2450,6 +2462,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
                 intentShareFile.setPackage("com.google.android.gm");
+
                 Log.e(TAG, "paypalXX10 ");
                 try {
                     context.startActivity(intentShareFile);
@@ -2461,7 +2474,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             }
             else if (Utility.isAppAvailable(context, "com.android.email")) {
                 if (paypal.equalsIgnoreCase("1")) {
-                    File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+                    //File root = new File(Environment.getExternalStorageDirectory(), "Download/");
+                    File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
                     File gpxfile = new File(root, "PayPal.html");
 
                     // File mFile22 = new File("/sdcard/SIR/PayPal.html");
@@ -2475,7 +2489,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 }
                 if (stripe.equalsIgnoreCase("1")) {
 //                    File mFile22 = new File("/sdcard/SIR/Cards.html");
-                    File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+                    //File root = new File(Environment.getExternalStorageDirectory(), "Download/");
+                    File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
                     File gpxfile = new File(root, "Cards.html");
                     Uri imageUri22 = FileProvider.getUriForFile(
                             context,
@@ -2516,7 +2531,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
             }else{
                 if (paypal.equalsIgnoreCase("1")) {
-                    File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+                    File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
                     File gpxfile = new File(root, "PayPal.html");
 
                     // File mFile22 = new File("/sdcard/SIR/PayPal.html");
@@ -2530,7 +2545,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 }
                 if (stripe.equalsIgnoreCase("1")) {
 //                    File mFile22 = new File("/sdcard/SIR/Cards.html");
-                    File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+                    //File root = new File(Environment.getExternalStorageDirectory(), "Download/");
+                    File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
                     File gpxfile = new File(root, "Cards.html");
                     Uri imageUri22 = FileProvider.getUriForFile(
                             context,
@@ -2564,11 +2580,11 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
                 for (ApplicationInfo packageInfo : packages) {
                     String ccc = new Gson().toJson(packageInfo);
-                    Log.e(TAG, "Source_dir : " + ccc);
+                   // Log.e(TAG, "Source_dir : " + ccc);
                     if(ccc.toLowerCase().contains("mail")){
-                        Log.e(TAG, "LaunchActivity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
-                        Log.e(TAG, "Installedpackage :" + packageInfo.packageName);
-                        Log.e(TAG, "paypalXX10 ");
+//                        Log.e(TAG, "LaunchActivity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
+//                        Log.e(TAG, "Installedpackage :" + packageInfo.packageName);
+//                        Log.e(TAG, "paypalXX10 ");
                         try {
                             intentShareFile.setPackage(""+packageInfo.packageName);
                             context.startActivity(intentShareFile);
@@ -2672,7 +2688,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
     public static void generateNoteOnSDPayPal(Context context, String sFileName, String sBody) {
         try {
-            File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+            //File root = new File(Environment.getExternalStorageDirectory(), "Download/");
+            File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
             if (!root.exists()) {
                 root.mkdirs();
             }
@@ -2694,9 +2711,11 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
     }
 
 
+
     public static void generateNoteOnSDStripe(Context context, String sFileName, String sBody) {
+        File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
         try {
-            File root = new File(Environment.getExternalStorageDirectory(), "SIR/");
+            //File root = new File(Environment.getExternalStorageDirectory(), "Download/");
             if (!root.exists()) {
                 root.mkdirs();
             }

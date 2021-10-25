@@ -598,7 +598,9 @@ public class Utility {
         Bitmap icon = BitmapFactory.decodeResource(activity.getResources(), R.drawable.thanksimg);
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
+//        File f = new File(Environment.getExternalStorageDirectory()
+//                + File.separator + "share.jpg");
+        File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
                 + File.separator + "share.jpg");
         try {
             f.createNewFile();
@@ -614,8 +616,10 @@ public class Utility {
         Bitmap icon = BitmapFactory.decodeResource(activity.getResources(), R.drawable.thanksimg);
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "SIR/share.jpg");
+//        File f = new File(Environment.getExternalStorageDirectory()
+//                + File.separator + "SIR/share.jpg");
+        File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                + File.separator + "share.jpg");
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -1007,22 +1011,22 @@ public class Utility {
 
 
 
-    public static void generateNoteOnSD(Context context, String sFileName, String sBody) {
-        try {
-            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
-            if (!root.exists()) {
-                root.mkdirs();
-            }
-            File gpxfile = new File(root, sFileName);
-            FileWriter writer = new FileWriter(gpxfile);
-            writer.append(sBody);
-            writer.flush();
-            writer.close();
-            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void generateNoteOnSD(Context context, String sFileName, String sBody) {
+//        try {
+//            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+//            if (!root.exists()) {
+//                root.mkdirs();
+//            }
+//            File gpxfile = new File(root, sFileName);
+//            FileWriter writer = new FileWriter(gpxfile);
+//            writer.append(sBody);
+//            writer.flush();
+//            writer.close();
+//            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public static void deleteDirectory() {
         File mFile = new File(Environment.getExternalStorageDirectory() + "/Notes");

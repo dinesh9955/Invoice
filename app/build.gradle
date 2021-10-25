@@ -8,8 +8,8 @@ android {
     defaultConfig {
         applicationId "com.sirapp"
         minSdkVersion 23
-        targetSdkVersion 29
-        versionCode 6
+        targetSdkVersion 30
+        versionCode 7
         versionName "2.21.01"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
@@ -274,7 +274,7 @@ dependencies {
 
 
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
-
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
 //    implementation 'com.github.james3burke:android-mailcraft:0.1.2'
 
@@ -287,7 +287,7 @@ dependencies {
 //        exclude group:'com.google.guava'
 //    }
 
-    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation "com.android.billingclient:billing:4.0.0"
 
 }
 apply plugin: 'com.google.gms.google-services'

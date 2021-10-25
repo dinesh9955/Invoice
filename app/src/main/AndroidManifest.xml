@@ -43,6 +43,8 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
 
+
+
     <application
         android:name="com.sirapp.SAADApplication"
         android:allowBackup="true"
@@ -331,13 +333,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Settings" />
         <activity
-            android:name="com.sirapp.Home.Go_Premium_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/GoPremium" >
-
-
-        </activity>
-        <activity
             android:name="com.sirapp.Home.Home_Activity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -402,42 +397,6 @@
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
 
-        <!--
-   <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_provider_paths" />
-        </provider>
-        -->
-        <!--
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.com.mvc.imagepicker.provider"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            tools:replace="android:authorities">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
-        -->
-        <!--
- <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.mvc.imagepicker.provider"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            tools:replace="android:authorities">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"
-                tools:replace="android:resource" />
-        </provider>
-        -->
         <activity
             android:name="com.sirapp.Customer.Customer_Activity"
             android:screenOrientation="portrait"

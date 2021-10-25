@@ -29,14 +29,25 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.gson.Gson;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Utils.Utility;
 
@@ -48,8 +59,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
-public class wwww extends BaseActivity {
+public class wwww extends BaseActivity implements PurchasesUpdatedListener,
+        BillingClientStateListener, SkuDetailsResponseListener {
 
     private String TAG = "wwww";
     private String DEEP_LINK_URL = "https://sirproject.page.link";
@@ -57,6 +70,7 @@ public class wwww extends BaseActivity {
     Button button;
     WebView webView;
 
+    BillingClient billingClient;
 
     public  void adjustFontScale( Configuration configuration,float scale) {
 
@@ -70,6 +84,12 @@ public class wwww extends BaseActivity {
     }
 
 
+    private PurchasesUpdatedListener purchasesUpdatedListener = new PurchasesUpdatedListener() {
+        @Override
+        public void onPurchasesUpdated(BillingResult billingResult, List<Purchase> purchases) {
+            // To be implemented in a later section.
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,9 +127,73 @@ public class wwww extends BaseActivity {
         }
 
 
+
+        billingClient = BillingClient.newBuilder(wwww.this).setListener(
+                this).enablePendingPurchases().build();
+        billingClient.startConnection(this);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                billingClient.startConnection(new BillingClientStateListener() {
+                    @Override
+                    public void onBillingSetupFinished(BillingResult billingResult) {
+
+                        if (billingResult.getResponseCode() ==  BillingClient.BillingResponseCode.OK) {
+                            // The BillingClient is ready. You can query purchases here.
+                            Log.e(TAG, "onBillingSetupFinished");
+
+                        }
+                    }
+                    @Override
+                    public void onBillingServiceDisconnected() {
+                        // Try to restart the connection on the next request to
+                        // Google Play by calling the startConnection() method.
+                        Log.e(TAG, "onBillingServiceDisconnected");
+                    }
+                });
+
+                List<String> skuList = new ArrayList<> ();
+                skuList.add("android.test.purchased");
+//                skuList.add("com.sir.oneyear");
+//                skuList.add("com.sirapp.onemonth");
+              //  skuList.add("gas");
+                SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+                params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+//                params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS);
+                billingClient.querySkuDetailsAsync(params.build(),
+                        new SkuDetailsResponseListener() {
+                            @Override
+                            public void onSkuDetailsResponse(BillingResult billingResult,
+                                                             List<SkuDetails> skuDetailsList) {
+
+//                                String ddd = new Gson().toJson(skuDetailsList);
+//                                Log.e(TAG, "onSkuDetailsResponse "+ddd);
+//                                if(skuDetailsList != null){
+//                                    for(int i = 0 ; i < skuDetailsList.size() ; i++){
+//                                        if(skuDetailsList.get(i).getSku().equals("com.sir.oneyear")){
+//                                            Log.e(TAG, "skuDetailsList "+skuDetailsList.get(i).getSku());
+//                                        }
+//                                    }
+//                                }
+
+                                // Process the result.
+                                String ddd = new Gson().toJson(skuDetailsList);
+                                Log.e(TAG, "onSkuDetailsResponse "+ddd);
+                                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                                .setSkuDetails(skuDetailsList.get(0))
+                                .build();
+
+                                int responseCode = billingClient.launchBillingFlow(wwww.this, billingFlowParams).getResponseCode();
+                                Log.e(TAG, "responseCode "+responseCode);
+                            }
+                        });
+
+//                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+//                        .setSkuDetails(skuDetails)
+//                        .build();
+//                int responseCode = billingClient.launchBillingFlow(activity, billingFlowParams).getResponseCode();
 
                 //adjustFontScale(getResources().getConfiguration(),2.0f);
 
@@ -357,5 +441,64 @@ public class wwww extends BaseActivity {
             Log.e("cannot generate pdf", e.getMessage());
         }
         document.close();
+    }
+
+    @Override
+    public void onBillingServiceDisconnected() {
+        Log.e(TAG, "onBillingServiceDisconnected");
+    }
+
+    @Override
+    public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
+        Log.e(TAG, "onBillingSetupFinished");
+    }
+
+    @Override
+    public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> list) {
+
+        Log.e(TAG, "onPurchasesUpdated");
+
+        switch (billingResult.getResponseCode()) {
+            case BillingClient.BillingResponseCode.OK:
+                if (null != list) {
+                    Log.d(TAG, "PURCX");
+                    String ddd = new Gson().toJson(list);
+                    Log.e(TAG, "onSkuDetailsResponseXX "+ddd);
+                   // processPurchaseList(list, null);
+
+//
+//                    Purchase purchase = list.get(0);
+//
+//                    String productID = purchase.getSkus();
+
+                    return;
+                } else {
+                    Log.d(TAG, "Null Purchase List Returned from OK response!");
+                }
+                break;
+            case BillingClient.BillingResponseCode.USER_CANCELED:
+                Log.i(TAG, "onPurchasesUpdated: User canceled the purchase");
+                break;
+            case BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED:
+                Log.i(TAG, "onPurchasesUpdated: The user already owns this item");
+                break;
+            case BillingClient.BillingResponseCode.DEVELOPER_ERROR:
+                Log.e(TAG, "onPurchasesUpdated: Developer error means that Google Play " +
+                        "does not recognize the configuration. If you are just getting started, " +
+                        "make sure you have configured the application correctly in the " +
+                        "Google Play Console. The SKU product ID must match and the APK you " +
+                        "are using must be signed with release keys."
+                );
+                break;
+            default:
+                Log.d(TAG, "BillingResult [" + billingResult.getResponseCode() + "]: "
+                        + billingResult.getDebugMessage());
+        }
+
+    }
+
+    @Override
+    public void onSkuDetailsResponse(@NonNull BillingResult billingResult, @Nullable List<SkuDetails> list) {
+        Log.e(TAG, "onSkuDetailsResponse");
     }
 }
