@@ -272,7 +272,7 @@ public class Utility {
         int readContacts = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS);
         int writeSettings = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_SETTINGS);
         int writeSecureSettings = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS);
-        int manageExternalStorage = ContextCompat.checkSelfPermission(context, Manifest.permission.MANAGE_EXTERNAL_STORAGE);
+     //   int manageExternalStorage = ContextCompat.checkSelfPermission(context, Manifest.permission.MANAGE_EXTERNAL_STORAGE);
 
         List<String> listPermissionsNeeded = new ArrayList<>();
 
@@ -285,9 +285,9 @@ public class Utility {
         if (readExternalStorage != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
-        if (manageExternalStorage != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.MANAGE_EXTERNAL_STORAGE);
-        }
+//        if (manageExternalStorage != PackageManager.PERMISSION_GRANTED) {
+//            listPermissionsNeeded.add(Manifest.permission.MANAGE_EXTERNAL_STORAGE);
+//        }
 //        if (coarseLocartion != PackageManager.PERMISSION_GRANTED) {
 //            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION);
 //        }
@@ -342,7 +342,7 @@ public class Utility {
 //        perms.put(Manifest.permission.ACCESS_COARSE_LOCATION, PackageManager.PERMISSION_GRANTED);
         perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
         perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
-        perms.put(Manifest.permission.MANAGE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+       // perms.put(Manifest.permission.MANAGE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
         perms.put(Manifest.permission.CALL_PHONE, PackageManager.PERMISSION_GRANTED);
         perms.put(Manifest.permission.WRITE_SETTINGS, PackageManager.PERMISSION_GRANTED);
         perms.put(Manifest.permission.WRITE_SECURE_SETTINGS, PackageManager.PERMISSION_GRANTED);
@@ -357,7 +357,7 @@ public class Utility {
 //                    perms.get(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
-                    perms.get(Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                    //perms.get(Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.WRITE_SETTINGS) == PackageManager.PERMISSION_GRANTED &&
                     perms.get(Manifest.permission.WRITE_SECURE_SETTINGS) == PackageManager.PERMISSION_GRANTED &&
@@ -376,7 +376,7 @@ public class Utility {
 //                        ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.ACCESS_COARSE_LOCATION) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.READ_EXTERNAL_STORAGE) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
-                        ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.MANAGE_EXTERNAL_STORAGE) ||
+                      //  ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.MANAGE_EXTERNAL_STORAGE) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.CALL_PHONE) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.WRITE_SETTINGS) ||
                         ActivityCompat.shouldShowRequestPermissionRationale(splashScreen, Manifest.permission.WRITE_SECURE_SETTINGS) ||
