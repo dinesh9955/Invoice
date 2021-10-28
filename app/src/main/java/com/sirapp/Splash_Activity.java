@@ -1,5 +1,6 @@
 package com.sirapp;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -7,14 +8,20 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
 import com.appsflyer.AFInAppEventParameterName;
@@ -179,15 +186,51 @@ public class Splash_Activity extends BaseActivity {
 
 
     private void getLogin() {
-        SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE, MODE_PRIVATE);
-        LOGGED_IN = preferences.getBoolean(Constant.LOGGED_IN, false);
-        if (LOGGED_IN) {
-            Intent i = new Intent(Splash_Activity.this, Home_Activity.class);
-            startActivity(i);
+
+        requestPermission();
+    }
+
+
+    private void requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            try {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                intent.addCategory("android.intent.category.DEFAULT");
+                intent.setData(Uri.parse(String.format("package:%s",getApplicationContext().getPackageName())));
+                startActivityForResult(intent, 2296);
+            } catch (Exception e) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(intent, 2296);
+            }
+        } else {
+            //below android 11
+            ActivityCompat.requestPermissions(Splash_Activity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 234);
         }
-        else {
-            Intent i = new Intent(Splash_Activity.this, WalkThroughActivity.class);
-            startActivity(i);
+    }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2296) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE, MODE_PRIVATE);
+                    LOGGED_IN = preferences.getBoolean(Constant.LOGGED_IN, false);
+                    if (LOGGED_IN) {
+                        Intent i = new Intent(Splash_Activity.this, Home_Activity.class);
+                        startActivity(i);
+                    }
+                    else {
+                        Intent i = new Intent(Splash_Activity.this, WalkThroughActivity.class);
+                        startActivity(i);
+                    }
+                } else {
+                    Toast.makeText(this, "Allow permission for storage access!", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 
@@ -265,6 +308,9 @@ public class Splash_Activity extends BaseActivity {
 
 
     }
+
+
+
 
 
 }
