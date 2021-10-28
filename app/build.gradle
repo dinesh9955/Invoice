@@ -9,8 +9,8 @@ android {
         applicationId "com.sirapp"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 8
-        versionName "2.21.01"
+        versionCode 9
+        versionName "2.21.02"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
 //        ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64', 'armeabi'

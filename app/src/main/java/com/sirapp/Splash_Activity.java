@@ -1,11 +1,15 @@
 package com.sirapp;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -124,10 +128,31 @@ public class Splash_Activity extends BaseActivity {
 //        });
 
         new Handler().postDelayed(new Runnable() {
+            @SuppressLint("NewApi")
             @Override
             public void run() {
                 if(Utility.checkAndRequestPermissions(Splash_Activity.this, REQUEST_ID_MULTIPLE_PERMISSIONS)) {
-                    getLogin();
+                   // requestPermission();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        if (Environment.isExternalStorageManager()) {
+                            getLogin();
+                        } else {
+                            showDialogOK(Splash_Activity.this, "Allow permission for storage access!",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            switch (which) {
+                                                case DialogInterface.BUTTON_POSITIVE:
+                                                    requestPermission();
+                                                    break;
+                                                case DialogInterface.BUTTON_NEGATIVE:
+                                                    break;
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+
                 }else{
                 }
             }
@@ -170,6 +195,7 @@ public class Splash_Activity extends BaseActivity {
 
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -177,7 +203,27 @@ public class Splash_Activity extends BaseActivity {
         switch (requestCode) {
             case REQUEST_ID_MULTIPLE_PERMISSIONS: {
                 if(Utility.checkAdditionPermissionsCheck(Splash_Activity.this, permissions, grantResults, REQUEST_ID_MULTIPLE_PERMISSIONS)) {
-                    getLogin();
+                    //requestPermission();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        if (Environment.isExternalStorageManager()) {
+                            getLogin();
+                        } else {
+                            showDialogOK(this, "Allow permission for storage access!",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            switch (which) {
+                                                case DialogInterface.BUTTON_POSITIVE:
+                                                    requestPermission();
+                                                    break;
+                                                case DialogInterface.BUTTON_NEGATIVE:
+                                                    break;
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+
                 }
             }
         }
@@ -185,23 +231,38 @@ public class Splash_Activity extends BaseActivity {
     }
 
 
+    @SuppressLint("NewApi")
     private void getLogin() {
+        SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE, MODE_PRIVATE);
+        LOGGED_IN = preferences.getBoolean(Constant.LOGGED_IN, false);
+        if (LOGGED_IN) {
+            Intent i = new Intent(Splash_Activity.this, Home_Activity.class);
+            startActivity(i);
+        }
+        else {
+            Intent i = new Intent(Splash_Activity.this, WalkThroughActivity.class);
+            startActivity(i);
+        }
 
-        requestPermission();
     }
 
 
+    @SuppressLint("NewApi")
     private void requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            try {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                intent.addCategory("android.intent.category.DEFAULT");
-                intent.setData(Uri.parse(String.format("package:%s",getApplicationContext().getPackageName())));
-                startActivityForResult(intent, 2296);
-            } catch (Exception e) {
-                Intent intent = new Intent();
-                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                startActivityForResult(intent, 2296);
+            if (Environment.isExternalStorageManager()) {
+                getLogin();
+            }else{
+                try {
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                    intent.addCategory("android.intent.category.DEFAULT");
+                    intent.setData(Uri.parse(String.format("package:%s",getApplicationContext().getPackageName())));
+                    startActivityForResult(intent, 2296);
+                } catch (Exception e) {
+                    Intent intent = new Intent();
+                    intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                    startActivityForResult(intent, 2296);
+                }
             }
         } else {
             //below android 11
@@ -211,27 +272,43 @@ public class Splash_Activity extends BaseActivity {
 
 
 
+    @SuppressLint("NewApi")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2296) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 if (Environment.isExternalStorageManager()) {
-                    SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE, MODE_PRIVATE);
-                    LOGGED_IN = preferences.getBoolean(Constant.LOGGED_IN, false);
-                    if (LOGGED_IN) {
-                        Intent i = new Intent(Splash_Activity.this, Home_Activity.class);
-                        startActivity(i);
-                    }
-                    else {
-                        Intent i = new Intent(Splash_Activity.this, WalkThroughActivity.class);
-                        startActivity(i);
-                    }
+                    //Toast.makeText(this, "Allow permission for storage access!111111111", Toast.LENGTH_SHORT).show();
+                    getLogin();
                 } else {
-                    Toast.makeText(this, "Allow permission for storage access!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Allow permission for storage access!", Toast.LENGTH_SHORT).show();
+                    showDialogOK(this, "Allow permission for storage access!",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch (which) {
+                                        case DialogInterface.BUTTON_POSITIVE:
+                                            requestPermission();
+                                            break;
+                                        case DialogInterface.BUTTON_NEGATIVE:
+                                            break;
+                                    }
+                                }
+                            });
                 }
             }
         }
+    }
+
+    private static void showDialogOK(Activity splashScreen, String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(splashScreen)
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("CANCEL", okListener)
+                .create()
+                .show();
     }
 
 
