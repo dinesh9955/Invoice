@@ -99,6 +99,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
     private static final String TAG = "List_of_Invoices";
 
+
+
     String paidStatus = "";
     String colorPaid = "#ffffff";
     String markAsPaidTxt = "Mark as unpaid";
@@ -111,7 +113,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
     ApiInterface apiInterface;
     ImageView avibackground;
     ProgressDialog dialog;
-//    AwesomeSpinner selectcompany;
+    //    AwesomeSpinner selectcompany;
     Button selectcompany1;
     ArrayList<String> cnames = new ArrayList<>();
     ArrayList<String> cids = new ArrayList<>();
@@ -139,7 +141,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
     String receipt_count, estimate_count, invoice_useriddt, invoice_count;
     String templatestr = "1";
     String shareInvoicelink = AllSirApi.BASE_URL_INDEX+"view/invoice/";
-//  Shaare invoice lnk
+    //  Shaare invoice lnk
     String BaseurlForShareInvoice = "";
     String invoicelistbyurl = "";
     String parmsvalue = "";
@@ -232,9 +234,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
         recycler_invoices.setHasFixedSize(true);
         invoicelistAdapterdt.notifyDataSetChanged();
 
-      //  invoicelistAdapterdt.InvoiceCAll(this);
+        //  invoicelistAdapterdt.InvoiceCAll(this);
 
-       // enableSwipe();
+        // enableSwipe();
 
 
         enableSwipe();
@@ -541,7 +543,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                                     invoicelistAdapterdt.updateList(list);
                                     UpdateInvoiceStatusmethodh(invoiceidbypos, voidPassValue);
-                                   // markVoidInvoice(invoiceidbypos, voidPassValue);
+                                    // markVoidInvoice(invoiceidbypos, voidPassValue);
                                 }else{
                                     String invoiceidbypos = list.get(pos).getInvoice_userid();
 
@@ -604,7 +606,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 //        swipeHelper.attachToRecyclerView();
 
-      //  swipeHelper.attachToRecyclerView(recycler_invoices);
+        //  swipeHelper.attachToRecyclerView(recycler_invoices);
 
     }
 
@@ -858,10 +860,10 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                             if(item.has("customer_name")){
                                 customer_name = item.getString("customer_name");
                             }else{
-                                 String cc = item.getString("customer");
-                                 if(!cc.equalsIgnoreCase("null")){
-                                     JSONObject customerobj = item.getJSONObject("customer");
-                                        Log.e(TAG , "customerobj "+cc);
+                                String cc = item.getString("customer");
+                                if(!cc.equalsIgnoreCase("null")){
+                                    JSONObject customerobj = item.getJSONObject("customer");
+                                    Log.e(TAG , "customerobj "+cc);
                                     if(customerobj != null){
                                         customer_name = customerobj.getString("customer_name");
                                     }
@@ -909,9 +911,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
 
-                          //  if (list.size() < 20) {
+                            //  if (list.size() < 20) {
 
-                           // }
+                            // }
 
                         }
 
@@ -923,7 +925,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                         invoicelistAdapterdt.updateList(list);
                         invoicelistAdapterdt.notifyDataSetChanged();
 
-                      //  enableSwipe();
+                        //  enableSwipe();
 
                     }
 
@@ -952,14 +954,14 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
                         String status = jsonObject.getString("status");
                         if (status.equals("false")) {
-                           // Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                            // Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
                 } else {
-                   // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
 
                 textViewMsg.setVisibility(View.VISIBLE);
@@ -1043,7 +1045,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                             e.printStackTrace();
                         }
                     } else {
-                     //   Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                        //   Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                     }
                 }
             });
@@ -1061,63 +1063,63 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //            Constant.ErrorToast(getActivity(), "Invoice not found");
 //        } else {
 
-            params.add("invoice_id", s);
-          //  params.add("order_status_id", s);
+        params.add("invoice_id", s);
+        //  params.add("order_status_id", s);
 //
 //            Log.e("invoice_idupdate", invoice_idstr);
 //            Log.e("s order status", s);
-            String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
-            AsyncHttpClient client = new AsyncHttpClient();
+        String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
+        AsyncHttpClient client = new AsyncHttpClient();
         client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-            client.addHeader("Access-Token", token);
+        client.addHeader("Access-Token", token);
         params.add("language", ""+getLanguage());
-            client.post(AllSirApi.BASE_URL + "invoice/delete", params, new AsyncHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    String response = new String(responseBody);
-                    Log.e("invoice status", response);
-                    avi.smoothToHide();
+        client.post(AllSirApi.BASE_URL + "invoice/delete", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                Log.e("invoice status", response);
+                avi.smoothToHide();
 
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    if (status.equals("true")) {
+
+                        parmsvalue = "All";
+                        InvoicelistData(parmsvalue);
+                    }
+
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+                    avi.smoothToHide();
                     try {
                         JSONObject jsonObject = new JSONObject(response);
+
                         String status = jsonObject.getString("status");
-                        if (status.equals("true")) {
-
-                            parmsvalue = "All";
-                            InvoicelistData(parmsvalue);
+                        if (status.equals("false")) {
+                            Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                         }
-
-
-
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
+                } else {
+                    //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    if (responseBody != null) {
-                        String response = new String(responseBody);
-                        Log.e("responsecustomersF", response);
-                        avi.smoothToHide();
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-
-                            String status = jsonObject.getString("status");
-                            if (status.equals("false")) {
-                                Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        //Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
-                    }
-                }
-            });
+            }
+        });
 //        }
     }
 
@@ -1183,7 +1185,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                         e.printStackTrace();
                     }
                 } else {
-                   // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                    // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
                 }
             }
         });
@@ -1286,7 +1288,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 }
             });
 
-             duplicateinvoitxt.setOnClickListener(new View.OnClickListener() {
+            duplicateinvoitxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    Fragment_Create_Invoice.defaultClick = 1;
@@ -1370,10 +1372,10 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                             String txt2 = "";
                             if(finalPaypal.equalsIgnoreCase("1") || finalStripe.equalsIgnoreCase("1")){
                                 txt2 = getString(R.string.list_Invoiceviewed)+
-                                    "\n\n" +newLink +
-                                    "\n\n" +getString(R.string.list_Invoicepayment_link) ;
+                                        "\n\n" +newLink +
+                                        "\n\n" +getString(R.string.list_Invoicepayment_link) ;
 
-                                  Log.e(TAG, "txt11" +txt);
+                                Log.e(TAG, "txt11" +txt);
 
                                 String content3 = "<!DOCTYPE html>\n" +
                                         "<html>\n" +
@@ -1413,7 +1415,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                                         "</html>";
 
                                 txt2 = getString(R.string.list_Invoiceviewed)+
-                                    "\n\n" +newLink;
+                                        "\n\n" +newLink;
 
                                 txt = content3 + content4;
                                 Log.e(TAG, "txt22" +txt);
@@ -1545,37 +1547,24 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
           /*  String signature_of_issuername="/android_res/drawable/f_cc_visa.png";
-
             String Signatureincoicestr="";
-
-
-
 //
              String productitem = null;
-
         String productitemlist = null;
         try {
             for (int i = 0; i <2; i++) {
-
-
                 productitem = IOUtils.toString(getActivity().getAssets().open("customer_single_item.html"))
-
-
                         .replaceAll("#NAME#", "Dev")
                         .replaceAll("#DESC#", "Very nfjlsajfsajfdk")
                         .replaceAll("#UNIT#", "Pieces")
                         .replaceAll("#QUANTITY#", "12")
                         .replaceAll("#PRICE#", "25000")
                         .replaceAll("#TOTAL#", "270000");
-
                 productitemlist = productitemlist + productitem;
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
             try {
                 Signatureincoicestr = IOUtils.toString(getActivity().getAssets().open("Signatures.html"))
                         .replaceAll("dataimageCompany_Stamp", "file://" +signature_of_issuername)
@@ -1588,7 +1577,6 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             String content = null;
             try {
                 content = IOUtils.toString(getActivity().getAssets().open("template.html"))
-
                         .replaceAll("Company Name", "Tata Power")
                         .replaceAll("Address", "MOhali 8 B")
                         .replaceAll("Contact No.", "999999999")
@@ -1623,10 +1611,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                         .replaceAll("Notes-", "Very Usefull eamail all document related issue")
                         .replaceAll("#SIGNATURES#", Signatureincoicestr)
                         .replaceAll("#ITEMS#", productitemlist)
-
-
                                 .replaceAll("#TEMP3#", String.valueOf(R.color.blue));
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -1634,7 +1619,6 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             selectionimg2.loadDataWithBaseURL("file:///android_asset/template.html", content, "text/html", "UTF-8", null);
             selectionimg3.loadDataWithBaseURL("file:///android_asset/template.html", content, "text/html", "UTF-8", null);
             selectionimg4.loadDataWithBaseURL("file:///android_asset/template.html", content, "text/html", "UTF-8", null);
-
 */
             selectionimg1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1765,19 +1749,19 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
     }
 
-   private void companyget() {
+    private void companyget() {
 
         cnames.clear();
         cids.clear();
-       avi.smoothToShow();
-       avibackground.setVisibility(View.VISIBLE);
+        avi.smoothToShow();
+        avibackground.setVisibility(View.VISIBLE);
 
         String token = Constant.GetSharedPreferences(getActivity(), Constant.ACCESS_TOKEN);
         AsyncHttpClient client = new AsyncHttpClient();
-       client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
         client.addHeader("Access-Token", token);
-       RequestParams params = new RequestParams();
-       params.add("language", ""+getLanguage());
+        RequestParams params = new RequestParams();
+        params.add("language", ""+getLanguage());
         client.post(AllSirApi.BASE_URL + "company/listing", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -1878,16 +1862,18 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
     private static class DownloadFile extends AsyncTask<String, String, String> {
 
         private ProgressDialog progressDialog;
-        private String fileName;
+//        private String fileName;
         private String folder;
         private boolean isDownloaded;
         Context context;
 
         String subject;
+        String timestamp = "";
 
         DownloadFile(Context c, String sub) {
             context = c;
             subject = sub;
+            timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
         }
 
 
@@ -1921,17 +1907,17 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 // input stream to read file - with 8k buffer
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
-                String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+             //   String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
                 //Extract file name from URL
-                fileName = f_url[0].substring(f_url[0].lastIndexOf('/') + 1);
-
-                //Append timestamp to file name
-                fileName = timestamp + "_" + fileName;
+//                fileName = f_url[0].substring(f_url[0].lastIndexOf('/') + 1);
+//
+//                //Append timestamp to file name
+//                fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
                 //folder = Environment.getExternalStorageDirectory() + File.separator + "Download/";
-                folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString()+"/";
+                folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);
 
@@ -1989,7 +1975,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             this.progressDialog.dismiss();
 
             // Display File path after downloading
-          //  Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+            //  Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
 
 //                                    Intent shareIntent =   new Intent(android.content.Intent.ACTION_SEND);
@@ -2024,7 +2010,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //                    intentShareFile.setPackage("com.google.android.gm");
 //                }
 //                context.startActivity(intentShareFile);
-               context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
+                context.startActivity(Intent.createChooser(intentShareFile, "Share File"));
             }
 
         }
@@ -2035,7 +2021,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
     private static class DownloadFileAttach extends AsyncTask<String, String, String> {
 
         private ProgressDialog progressDialog;
-        private String fileName;
+//        private String fileName;
         private String folder;
         private boolean isDownloaded;
         Activity context;
@@ -2047,6 +2033,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
         String paypal;
         String stripe;
 
+        String timestamp = "";
+
         DownloadFileAttach(Activity c, String sub, String txt, String txt2, String newLink, String paypal2, String stripe2) {
             context = c;
             subject = sub;
@@ -2055,6 +2043,8 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             link = newLink;
             paypal = paypal2;
             stripe = stripe2;
+
+            timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 //            paypal = "0";
 //            stripe = "0";
         }
@@ -2096,17 +2086,18 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 // input stream to read file - with 8k buffer
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
-                String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+               // String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
-                //Extract file name from URL
-                fileName = f_url[0].substring(f_url[0].lastIndexOf('/') + 1);
-
-                //Append timestamp to file name
-                fileName = timestamp + "_" + fileName;
+//                //Extract file name from URL
+//                fileName = f_url[0].substring(f_url[0].lastIndexOf('/') + 1);
+//
+//                //Append timestamp to file name
+//                fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-              //  folder = Environment.getExternalStorageDirectory() + File.separator + "Download/";
-                folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString()+"/";
+                //  folder = Environment.getExternalStorageDirectory() + File.separator + "Download/";
+                folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
+
                 Log.e(TAG, "folderfolderfolder "+folder);
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);
@@ -2164,6 +2155,10 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             // dismiss the dialog after the file was downloaded
             this.progressDialog.dismiss();
 
+
+            String filePayPal = "";
+            String fileStripe = "";
+
             String urlPaypalName = "";
             String urlStripeName = "";
 
@@ -2194,7 +2189,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 //                    BuildConfig.APPLICATION_ID + ".provider",
 //                    mFile2);
 
-           // File root1 = new File(Environment.getExternalStorageDirectory(), "Download/");
+            // File root1 = new File(Environment.getExternalStorageDirectory(), "Download/");
             File root1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
             File gpxfile2 = new File(root1, "share.jpg");
             Uri imageUri2 = FileProvider.getUriForFile(
@@ -2299,7 +2294,10 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                         "  </body>\n" +
                         "</html>";
 
-                generateNoteOnSDPayPal(context , linkWitch+".html" , ""+content11.toString());
+                filePayPal = generateNoteOnSDPayPal(context , linkWitch+".html" , ""+content11.toString(), timestamp);
+
+                Log.e(TAG, "paypalXX100 " + filePayPal.toString());
+
 
                 Log.e(TAG, "paypalXX1 " + urlPaypalName);
 
@@ -2382,7 +2380,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                         "	</section>\n" +
                         "  </body>\n" +
                         "</html>";
-                generateNoteOnSDStripe(context , linkWitch+".html" , ""+content22.toString());
+                fileStripe = generateNoteOnSDStripe(context , linkWitch+".html" , ""+content22.toString(), timestamp);
                 Log.e(TAG, "paypalXX2 " + urlPaypalName);
             }
 
@@ -2415,11 +2413,12 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             }else if (Utility.isAppAvailable(context, "com.google.android.gms")) {
                 Log.e(TAG, "paypalXX101 ");
                 if (paypal.equalsIgnoreCase("1")) {
-                   // File root = new File(Environment.getExternalStorageDirectory(), "Download/");
-                    File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-                    File gpxfile = new File(root, "PayPal.html");
+                    // File root = new File(Environment.getExternalStorageDirectory(), "Download/");
+                    //File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
 
-                   // File mFile22 = new File("/sdcard/SIR/PayPal.html");
+                    File gpxfile = new File(new File(filePayPal), "PayPal.html");
+                    Log.e(TAG, "paypalXX101 "+gpxfile.toString());
+                    // File mFile22 = new File("/sdcard/SIR/PayPal.html");
                     Uri imageUri22 = FileProvider.getUriForFile(
                             context,
                             BuildConfig.APPLICATION_ID + ".provider",
@@ -2430,9 +2429,9 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 }
                 if (stripe.equalsIgnoreCase("1")) {
 //                    File mFile22 = new File("/sdcard/SIR/Cards.html");
-                  //  File root = new File(Environment.getExternalStorageDirectory(), "Download/");
-                    File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-                    File gpxfile = new File(root, "Cards.html");
+                    //  File root = new File(Environment.getExternalStorageDirectory(), "Download/");
+                   // File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+                    File gpxfile = new File(new File(fileStripe), "Cards.html");
                     Uri imageUri22 = FileProvider.getUriForFile(
                             context,
                             BuildConfig.APPLICATION_ID + ".provider",
@@ -2448,7 +2447,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
                 //intentShareFile.setType("*application/octet-stream*");
-               // intentShareFile.setType("application/pdf/*|image/*|text/html");
+                // intentShareFile.setType("application/pdf/*|image/*|text/html");
 //                intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 //                intentShareFile.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
@@ -2516,7 +2515,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 intentShareFile.setType("*/*");
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
                 intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
-            //    intentShareFile.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                //    intentShareFile.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
 
 
@@ -2572,7 +2571,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 intentShareFile.setType("*/*");
                 intentShareFile.putExtra(Intent.EXTRA_SUBJECT, subject);
                 intentShareFile.putExtra(Intent.EXTRA_TEXT, text2);
-             //   intentShareFile.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                //   intentShareFile.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intentShareFile.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriArrayList);
 
 
@@ -2580,7 +2579,7 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
                 List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
                 for (ApplicationInfo packageInfo : packages) {
                     String ccc = new Gson().toJson(packageInfo);
-                   // Log.e(TAG, "Source_dir : " + ccc);
+                    // Log.e(TAG, "Source_dir : " + ccc);
                     if(ccc.toLowerCase().contains("mail")){
 //                        Log.e(TAG, "LaunchActivity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
 //                        Log.e(TAG, "Installedpackage :" + packageInfo.packageName);
@@ -2686,10 +2685,11 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
 
 
 
-    public static void generateNoteOnSDPayPal(Context context, String sFileName, String sBody) {
+    public static String generateNoteOnSDPayPal(Context context, String sFileName, String sBody, String timestamp) {
         try {
             //File root = new File(Environment.getExternalStorageDirectory(), "Download/");
-            File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+         //   String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+            File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp);
             if (!root.exists()) {
                 root.mkdirs();
             }
@@ -2703,17 +2703,22 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             writer.append(sBody);
             writer.flush();
             writer.close();
-           // Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+            return root.toString();
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG, "generateNoteOnSDPayPal "+e.getMessage());
         }
+
+        return "";
+
     }
 
 
 
-    public static void generateNoteOnSDStripe(Context context, String sFileName, String sBody) {
-        File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+    public static String generateNoteOnSDStripe(Context context, String sFileName, String sBody, String timestamp) {
+      //  String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp);
         try {
             //File root = new File(Environment.getExternalStorageDirectory(), "Download/");
             if (!root.exists()) {
@@ -2729,10 +2734,13 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
             writer.flush();
             writer.close();
             // Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+            return root.toString();
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG, "generateNoteOnSDStripe "+e.getMessage());
         }
+
+        return "";
     }
 
 }

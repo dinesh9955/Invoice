@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.multidex.MultiDex;
 
 import com.appsflyer.AppsFlyerConversionListener;
@@ -19,7 +20,7 @@ import com.sirapp.Model.Itemproductselect;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class SAADApplication extends Application {
+public class SAADApplication extends Application implements Thread.UncaughtExceptionHandler {
 
 
     private static final String TAG = "GlobalVariabal";
@@ -107,6 +108,8 @@ public class SAADApplication extends Application {
             crashlytics.setCustomKey("Email", "saadkca@gmail.com");
         }catch (Exception e) {
             Log.e(TAG , "getMessage3 "+e.getMessage());
+        }finally {
+            Thread.setDefaultUncaughtExceptionHandler(this);
         }
 
 
@@ -228,6 +231,13 @@ public class SAADApplication extends Application {
     }
 
 
+    @Override
+    public void uncaughtException(@NonNull Thread thread, @NonNull Throwable throwable) {
+        try {
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
+    }
 }

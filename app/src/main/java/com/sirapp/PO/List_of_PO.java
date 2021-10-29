@@ -2524,10 +2524,12 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
         Context context;
 
         String subject;
-
+        String timestamp = "";
         DownloadFile(Context c, String sub) {
             context = c;
             subject = sub;
+            timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+
         }
 
 
@@ -2561,17 +2563,17 @@ public class List_of_PO extends BaseFragment implements InvoiceCallBack {
                 // input stream to read file - with 8k buffer
                 InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
-                String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-
-                //Extract file name from URL
-                fileName = f_url[0].substring(f_url[0].lastIndexOf('/') + 1);
-
-                //Append timestamp to file name
-                fileName = timestamp + "_" + fileName;
+//                String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+//
+//                //Extract file name from URL
+//                fileName = f_url[0].substring(f_url[0].lastIndexOf('/') + 1);
+//
+//                //Append timestamp to file name
+//                fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString()+"/";
-
+               // folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString()+"/";
+                folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);
 

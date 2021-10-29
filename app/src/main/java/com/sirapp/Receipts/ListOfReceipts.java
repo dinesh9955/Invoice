@@ -1504,11 +1504,12 @@ public class ListOfReceipts extends BaseFragment {
 
         String subject = "";
         String txt = "";
-
+        String timestamp = "";
         DownloadFile(Context c, String sub, String text) {
             context = c;
             subject = sub;
             txt = text;
+            timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
         }
 
 
@@ -1551,7 +1552,7 @@ public class ListOfReceipts extends BaseFragment {
                 fileName = timestamp + "_" + fileName;
 
                 //External directory path to save file
-                folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString()+"/";
+                folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
 
                 //Create androiddeft folder if it does not exist
                 File directory = new File(folder);
