@@ -1352,41 +1352,40 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
 
                 if (multimgpath.size() > 0) {
                     for (int i = 0; i < multimgpath.size(); i++) {
-//                        File imgFile = new File(multimgpath.get(i));
-//                        // company_stampFileimage=imgFile;
-//                        multiple[i] = imgFile;
+                        File imgFile = new File(multimgpath.get(i));
+                        multiple[i] = imgFile;
                         Log.e(TAG, "imgFile: "+multimgpath.get(i));
-                        if(i == 0){
-                            File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
-                                imgFile = new File(""+Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
-                            }
-                            multiple[i] = imgFile;
-                        }else if(i == 1){
-                            File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
-                                imgFile = new File(""+Utility.getJPEGtoPNGImage2(new File(multimgpath.get(i))));
-                            }
-                            multiple[i] = imgFile;
-                        }else if(i == 2){
-                            File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
-                                imgFile = new File(""+Utility.getJPEGtoPNGImage3(new File(multimgpath.get(i))));
-                            }
-                            multiple[i] = imgFile;
-                        }else if(i == 3){
-                            File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
-                                imgFile = new File(""+Utility.getJPEGtoPNGImage4(new File(multimgpath.get(i))));
-                            }
-                            multiple[i] = imgFile;
-                        }else if(i == 4){
-                            File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
-                                imgFile = new File(""+Utility.getJPEGtoPNGImage5(new File(multimgpath.get(i))));
-                            }
-                            multiple[i] = imgFile;
-                        }
+//                        if(i == 0){
+//                            File imgFile = new File(multimgpath.get(i));
+//                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
+//                                imgFile = new File(""+Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
+//                            }
+//                            multiple[i] = imgFile;
+//                        }else if(i == 1){
+//                            File imgFile = new File(multimgpath.get(i));
+//                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
+//                                imgFile = new File(""+Utility.getJPEGtoPNGImage2(new File(multimgpath.get(i))));
+//                            }
+//                            multiple[i] = imgFile;
+//                        }else if(i == 2){
+//                            File imgFile = new File(multimgpath.get(i));
+//                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
+//                                imgFile = new File(""+Utility.getJPEGtoPNGImage3(new File(multimgpath.get(i))));
+//                            }
+//                            multiple[i] = imgFile;
+//                        }else if(i == 3){
+//                            File imgFile = new File(multimgpath.get(i));
+//                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
+//                                imgFile = new File(""+Utility.getJPEGtoPNGImage4(new File(multimgpath.get(i))));
+//                            }
+//                            multiple[i] = imgFile;
+//                        }else if(i == 4){
+//                            File imgFile = new File(multimgpath.get(i));
+//                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
+//                                imgFile = new File(""+Utility.getJPEGtoPNGImage5(new File(multimgpath.get(i))));
+//                            }
+//                            multiple[i] = imgFile;
+//                        }
                     }
                 }
 
@@ -1537,35 +1536,58 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
 
     private void showUriList(List<Uri> uriList) {
 
+//        attchmentimage.clear();
+//        for (Uri uri : uriList) {
+//            attchmentimage.add(uri.toString());
+//            attachmenttxtimg.setVisibility(View.VISIBLE);
+//        }
+//        int sizen = attchmentimage.size();
+//
+//        attachmenttxtimg.setVisibility(View.VISIBLE);
+//        String attchedmentimagepath;
+//        if (attchmentimage != null) {
+//            for (int i = 0; i < attchmentimage.size(); i++) {
+//                attchedmentimagepath = attchmentimage.get(i);
+//                try {
+//
+//                    String decoded = URLDecoder.decode(attchedmentimagepath, "UTF-8");
+//                    String replaceString = decoded.replaceAll("file://", "");
+//                    multimgpath.add(replaceString);
+//
+//                } catch (Exception e) {
+//
+//                }
+//
+//            }
+//        } else {
+//
+//        }
+//
+//        Log.e("uri Image ", String.valueOf(attchmentimage));
+
+        multimgpath.clear();
         attchmentimage.clear();
+        int i = 0;
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
-            attachmenttxtimg.setVisibility(View.VISIBLE);
-        }
-        int sizen = attchmentimage.size();
+            File auxFile = new File(uri.getPath());
 
-        attachmenttxtimg.setVisibility(View.VISIBLE);
-        String attchedmentimagepath;
-        if (attchmentimage != null) {
-            for (int i = 0; i < attchmentimage.size(); i++) {
-                attchedmentimagepath = attchmentimage.get(i);
-                try {
-
-                    String decoded = URLDecoder.decode(attchedmentimagepath, "UTF-8");
-                    String replaceString = decoded.replaceAll("file://", "");
-                    multimgpath.add(replaceString);
-
-                } catch (Exception e) {
-
-                }
-
+            if(i == 0){
+                multimgpath.add(""+Utility.getJPEGtoPNGImage1(auxFile));
+            }else if(i == 1){
+                multimgpath.add(""+Utility.getJPEGtoPNGImage2(auxFile));
+            }else if(i == 2){
+                multimgpath.add(""+Utility.getJPEGtoPNGImage3(auxFile));
+            }else if(i == 3){
+                multimgpath.add(""+Utility.getJPEGtoPNGImage4(auxFile));
+            }else if(i == 4){
+                multimgpath.add(""+Utility.getJPEGtoPNGImage5(auxFile));
             }
-        } else {
 
+            Log.e(TAG, "auxFile.toString() "+auxFile.toString());
+            attachmenttxtimg.setVisibility(View.VISIBLE);
+            i ++;
         }
-
-        Log.e("uri Image ", String.valueOf(attchmentimage));
-
     }
 
     private void createinvoicewithdetail(File file) {
@@ -1675,7 +1697,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
 
             if (company_stampFileimage != null) {
                 try {
-                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
+                    //company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -1765,6 +1787,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                         taxT1 = taxT1.replace(isPecent, "");
                         taxT1 = taxT1.replace("incl." , "");
                         params.add("tax[" + i + "]" + "[title]", taxT1);
+                        params.add("tax[" + i + "]" + "[amount]", ""+taxAmountZZ);
                     }else{
                         Log.e(TAG, "WWWWWWWWWWWWW");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
@@ -2047,10 +2070,11 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
                     company_stamp = getRealPathFromUri(selectedImage);
 
                     try {
-                        company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+//                        company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+                        company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(new File(company_stamp));
                         Log.e("company_stamp Path", company_stamp);
 
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -4054,6 +4078,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_priceSSSS "+total_price);
 
+        DecimalFormat formatter = new DecimalFormat("#0.00");
 
         if(tempList.size() == 0){
             textViewNoItems.setVisibility(View.VISIBLE);
@@ -4212,8 +4237,8 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
             }
 
 
-
-
+//            taxAmount = Double.parseDouble(formatter.format(taxAmount));
+//            Log.e(TAG, "taxAmountOOOOO "+taxAmount);
 
             double value = Shippingamountdto;
             shippingAmount = value;
@@ -4297,7 +4322,7 @@ public class EditInvoiceActivity extends BaseActivity implements Customer_Bottom
 //            paidAmountZZ = paidAmount;
 //            balanceAmountZZ = balanceAmount;
 
-            DecimalFormat formatter = new DecimalFormat("#0.00");
+
             Log.e(TAG , "subtotalAmountZZ "+formatter.format(subtotalAmount));
 
             grandAmountZZ = Double.parseDouble(formatter.format(grandAmount));

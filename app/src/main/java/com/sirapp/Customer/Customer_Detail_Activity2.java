@@ -80,7 +80,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
 
     private static final int GALLARY_aCTION_PICK_CODE=10;
     private static final int CAMERA_ACTION_PICK_CODE=9;
-    FileCompressor mCompressor;
+ //   FileCompressor mCompressor;
     RoundedImageView uploadimage;
     TextView imagedescription,contacts,type,txtshiiping;
     EditText name,email,contactperson,phone,mobile,website,CompanyAddress,edfirstname,edlastname,edaddress1,edaddress2,edcity,edpostcode,edcountry;
@@ -127,7 +127,7 @@ public class Customer_Detail_Activity2 extends BaseActivity {
         setListeners();
 
 
-        mCompressor = new FileCompressor(activity);
+        //mCompressor = new FileCompressor(activity);
 
         selectedCompanyId = getIntent().getStringExtra("company_id");
         customer_id = getIntent().getStringExtra("customer_id");
@@ -584,8 +584,8 @@ public class Customer_Detail_Activity2 extends BaseActivity {
 
             if (requestCode == CAMERA_ACTION_PICK_CODE) {
                 try{
-                    fileimage= mCompressor.compressToFile(fileimage);
-                } catch (IOException e) {
+                    fileimage = fileimage;
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 Utility.glideSet(Customer_Detail_Activity2.this , fileimage , uploadimage);
@@ -593,8 +593,8 @@ public class Customer_Detail_Activity2 extends BaseActivity {
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
-                    fileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
-                } catch (IOException e) {
+                    fileimage = new File(getRealPathFromUri(selectedImage));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 Utility.glideSet(Customer_Detail_Activity2.this , fileimage , uploadimage);

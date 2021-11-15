@@ -105,7 +105,7 @@ public class Company_Details_Fragment extends BaseFragment {
    private static final int GALLARY_aCTION_PICK_CODE=10;
     private static final int CAMERA_ACTION_PICK_CODE=9;
     Context applicationContext = Company_Details_Activity.getContextOfApplication();
-    FileCompressor mCompressor;
+    //FileCompressor mCompressor;
     @SuppressLint("LongLogTag")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -164,7 +164,7 @@ public class Company_Details_Fragment extends BaseFragment {
                 .apply(options)
                 .into(image);
 
-        mCompressor = new FileCompressor(getActivity());
+        //mCompressor = new FileCompressor(getActivity());
 
         return v;
     }
@@ -519,8 +519,8 @@ public class Company_Details_Fragment extends BaseFragment {
 
             if (requestCode == CAMERA_ACTION_PICK_CODE) {
                 try{
-                    fileimage= mCompressor.compressToFile(fileimage);
-                } catch (IOException e) {
+                    fileimage= fileimage;
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 //                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(image);
@@ -535,10 +535,10 @@ public class Company_Details_Fragment extends BaseFragment {
 
                 Uri selectedImage = data.getData();
                 try {
-                    fileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+                    fileimage = new File(getRealPathFromUri(selectedImage));
 
                     //fileimage = Utility.getJPEGtoPNG(fileimage);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 

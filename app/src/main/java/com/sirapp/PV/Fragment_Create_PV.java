@@ -1131,7 +1131,7 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
 
             if (company_stampFileimage != null) {
                 try {
-                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
+                  //  company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -1524,10 +1524,11 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
                     company_stamp = getRealPathFromUri(selectedImage);
                     imgstampsuccess.setVisibility(View.VISIBLE);
                     try {
-                        company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+//                        company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+                        company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(new File(company_stamp));
                         Log.e("company_stamp Path", company_stamp);
 
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 

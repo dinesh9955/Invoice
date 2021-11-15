@@ -1511,7 +1511,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
 
             if (company_stampFileimage != null) {
                 try {
-                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
+//                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -1608,7 +1608,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                         taxT1 = taxT1.replace(isPecent, "");
                         taxT1 = taxT1.replace("incl." , "");
                         params.add("tax[" + i + "]" + "[title]", taxT1);
-
+                        params.add("tax[" + i + "]" + "[amount]", ""+taxAmountZZ);
                     }else{
                         Log.e(TAG, "WWWWWWWWWWWWW");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
@@ -1880,10 +1880,11 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                     company_stamp = getRealPathFromUri(selectedImage);
 
                     try {
-                        company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+                       // company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+                        company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(new File(company_stamp));
                         Log.e("company_stamp Path", company_stamp);
 
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 

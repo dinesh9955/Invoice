@@ -89,7 +89,7 @@ public class Add_User extends BaseFragment {
     Context applicationContext = User_Activity.getContextOfApplication();
     private static final int GALLARY_aCTION_PICK_CODE=10;
     private static final int CAMERA_ACTION_PICK_CODE=9;
-    FileCompressor mCompressor;
+   // FileCompressor mCompressor;
 
     EditText username,useremail,password;
 //    AwesomeSpinner userrole;
@@ -149,7 +149,7 @@ public class Add_User extends BaseFragment {
         avi = view.findViewById(R.id.avi);
         avibackground = view.findViewById(R.id.avibackground);
         setFonts();
-        mCompressor = new FileCompressor(getActivity());
+        //mCompressor = new FileCompressor(getActivity());
 
        uploadimage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -589,8 +589,8 @@ public class Add_User extends BaseFragment {
 
                 if (requestCode == CAMERA_ACTION_PICK_CODE) {
                     try{
-                        fileimage= mCompressor.compressToFile(fileimage);
-                    } catch (IOException e) {
+                        fileimage = fileimage;
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     //GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
@@ -598,8 +598,8 @@ public class Add_User extends BaseFragment {
                 } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                     Uri selectedImage = data.getData();
                     try {
-                        fileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
-                    } catch (IOException e) {
+                        fileimage = new File(getRealPathFromUri(selectedImage));
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     Utility.glideSet(getActivity(), fileimage, uploadimage);

@@ -113,7 +113,7 @@ public abstract class GetAsyncPost extends AsyncTask<Response, Void, Response> {
     protected void onPostExecute(Response result) {
         super.onPostExecute(result);
 
-        Log.e(TAG, "onPostExecute:: "+result);
+      //  Log.e(TAG, "onPostExecute:: "+result);
 
 //        if (result != null) {
             getValueParse(result);

@@ -90,7 +90,7 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
     final int PERMISSION_REQUEST_CONTACT = 10;
     // Select image from galary and camera compress file
     Context applicationContext = Product_Activity.getContextOfApplication();
-    FileCompressor mCompressor;
+    //FileCompressor mCompressor;
     RoundedImageView uploadimage;
     TextView imagedescription, selectwarehouse, taxable, select;
     EditText productname, productprice, productdescription, reorderlevel, othercategory,mesurementunitedittxt;
@@ -163,7 +163,7 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
 //        selectcompany.setDownArrowTintColor(getResources().getColor(R.color.lightpurple));
 //        selectcompany.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
 
-        mCompressor = new FileCompressor(getActivity());
+        //mCompressor = new FileCompressor(getActivity());
 
 
         return view;
@@ -510,8 +510,8 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
 
             if (requestCode == CAMERA_ACTION_PICK_CODE) {
                 try {
-                    fileimage = mCompressor.compressToFile(fileimage);
-                } catch (IOException e) {
+                    fileimage = fileimage;
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 //                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);
@@ -519,8 +519,8 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
-                    fileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
-                } catch (IOException e) {
+                    fileimage = new File(getRealPathFromUri(selectedImage));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 //                GlideApp.with(getActivity()).load(fileimage).apply(new RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.app_icon)).into(uploadimage);

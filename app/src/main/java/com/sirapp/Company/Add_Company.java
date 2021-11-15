@@ -124,7 +124,7 @@ public class Add_Company extends BaseFragment {
     String colorCode = "#ffffff";
 
     SavePref savePref;
-    FileCompressor mCompressor;
+//    FileCompressor mCompressor;
 
     Button defaultcurrency;
 
@@ -142,7 +142,7 @@ public class Add_Company extends BaseFragment {
         setListeners();
         setFonts();
         companyget();
-        mCompressor = new FileCompressor(getActivity());
+        //mCompressor = new FileCompressor(getActivity());
 
 
         return view;
@@ -563,8 +563,9 @@ public class Add_Company extends BaseFragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_ACTION_PICK_CODE) {
             try{
-            fileimage= mCompressor.compressToFile(fileimage);
-            } catch (IOException e) {
+           // fileimage = mCompressor.compressToFile(fileimage);
+                fileimage = fileimage;
+            } catch (Exception e) {
                 e.printStackTrace();
             }
                 Utility.glideSet(getActivity() , fileimage , uploadimage);
@@ -573,8 +574,9 @@ public class Add_Company extends BaseFragment {
 
                     Uri selectedImage = data.getData();
                 try {
-                    fileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
-                } catch (IOException e) {
+                    //fileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+                    fileimage = new File(getRealPathFromUri(selectedImage));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 Utility.glideSet(getActivity() , fileimage , uploadimage);

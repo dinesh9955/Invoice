@@ -134,7 +134,7 @@ public class ListOfCreditNotes extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         Utility.getFileLogo(getActivity());
-        Utility.getFileLogo2(getActivity());
+//        Utility.getFileLogo2(getActivity());
     }
 
     @Override

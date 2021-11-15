@@ -94,7 +94,7 @@ import com.sirapp.Company.Companies_Activity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Customer.Customer_Activity;
 import com.sirapp.Home.GoProActivity;
-import com.sirapp.ImageResource.FileCompressor;
+//import com.sirapp.ImageResource.FileCompressor;
 import com.sirapp.Invoice.ChooseTemplate;
 import com.sirapp.Model.Customer_list;
 import com.sirapp.Model.Moving;
@@ -236,7 +236,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
     //signaturepad
     DatePickerDialog datePickerDialog;
     DatePickerDialog datePickerDialog2;
-    File fileimage;
+//    File fileimage;
     ArrayList<String> cnames = new ArrayList<>();
     ArrayList<String> cids = new ArrayList<>();
     ArrayList<String> wnames = new ArrayList<>();
@@ -280,7 +280,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
     // pick image from galary and
     Context applicationContext = Companies_Activity.getContextOfApplication();
-    FileCompressor mCompressor;
+//    FileCompressor mCompressor;
     boolean check = true;
     String strdiscount = "", strdiscountvalue = "0";
 
@@ -448,7 +448,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
         verifyStroagePermissions(getActivity());
 
         requestManager = GlideApp.with(getContext());
-        mCompressor = new FileCompressor(getActivity());
+//        mCompressor = new FileCompressor(getActivity());
 
 
         invoicenum.setEnabled(false);
@@ -1111,7 +1111,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
 
             if (company_stampFileimage != null) {
                 try {
-                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
+                    //company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -1433,7 +1433,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                     // Get the path from the Uri
 
 
-                    fileimage = mCompressor.compressToFile(fileimage);
+//                    fileimage = mCompressor.compressToFile(fileimage);
 
                     signature_of_receiver = getRealPathFromUri(selectedImageUri);
                     Log.e("Image Path", signature_of_receiver);
@@ -1447,10 +1447,11 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                     company_stamp = getRealPathFromUri(selectedImage);
                     imgstampsuccess.setVisibility(View.VISIBLE);
                     try {
-                        company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
-                        Log.e("company_stamp Path", company_stamp);
-
-                    } catch (IOException e) {
+                        //company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+                        Log.e("company_stamp_Path111", company_stamp);
+                        company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(new File(company_stamp));
+                        Log.e("company_stamp_Path222", company_stamp);
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -1533,7 +1534,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                         BuildConfig.APPLICATION_ID + ".provider",
                         photoFile);
 
-                fileimage = photoFile;
+//                fileimage = photoFile;
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, CAMERA_ACTION_PICK_CODE);
 

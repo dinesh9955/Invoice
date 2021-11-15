@@ -37,6 +37,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -835,9 +836,12 @@ public class Utility {
     public static File getJPEGtoPNG(File fileimage) {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "upload.jpg");
+        icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
+//        File f = new File(Environment.getExternalStorageDirectory()
+//                + File.separator + "upload.jpg");
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
+        File f = new File(folder+ "upload.jpg");
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -854,9 +858,12 @@ public class Utility {
     public static File getJPEGtoPNGIssuer(File fileimage) {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "upload1.jpg");
+        icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
+//        File f = new File(Environment.getExternalStorageDirectory()
+//                + File.separator + "upload1.jpg");
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
+        File f = new File(folder+ "upload1.jpg");
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -872,9 +879,12 @@ public class Utility {
     public static File getJPEGtoPNGReceiver(File fileimage) {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "upload2.jpg");
+        icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
+//        File f = new File(Environment.getExternalStorageDirectory()
+//                + File.separator + "upload2.jpg");
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
+        File f = new File(folder+ "upload2.jpg");
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -888,11 +898,20 @@ public class Utility {
     }
 
     public static File getJPEGtoPNGCompanySeal(File fileimage) {
+        Log.e(TAG, "fileimage11111 "+fileimage.toString());
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        icon.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "upload3.jpg");
+        icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
+//        File f = new File(Environment.getExternalStorageDirectory()
+//                + File.separator + "upload3.jpg");
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
+        File directory = new File(folder);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        File f = new File(folder+ "upload3.jpg");
+        Log.e(TAG, "fileimage22222 "+f.toString());
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -911,8 +930,15 @@ public class Utility {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "image1.jpg");
+//        File f = new File(Environment.getExternalStorageDirectory()
+//                + File.separator + "image1.jpg");
+       String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
+        File directory = new File(folder);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        File f = new File(folder+ "image1.jpg");
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -930,8 +956,15 @@ public class Utility {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "image2.jpg");
+//        File f = new File(Environment.getExternalStorageDirectory()
+//                + File.separator + "image2.jpg");
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
+        File directory = new File(folder);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        File f = new File(folder+ "image2.jpg");
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -948,8 +981,15 @@ public class Utility {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "image3.jpg");
+//        File f = new File(Environment.getExternalStorageDirectory()
+//                + File.separator + "image3.jpg");
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
+        File directory = new File(folder);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        File f = new File(folder+ "image3.jpg");
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -966,8 +1006,15 @@ public class Utility {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "image4.jpg");
+//        File f = new File(Environment.getExternalStorageDirectory()
+//                + File.separator + "image4.jpg");
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
+        File directory = new File(folder);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        File f = new File(folder+ "image4.jpg");
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
@@ -984,8 +1031,15 @@ public class Utility {
         Bitmap icon = BitmapFactory.decodeFile(String.valueOf(fileimage));
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         icon.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
-        File f = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "image5.jpg");
+//        File f = new File(Environment.getExternalStorageDirectory()
+//                + File.separator + "image5.jpg");
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+timestamp).toString()+"/";
+        File directory = new File(folder);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        File f = new File(folder+ "image5.jpg");
         try {
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);

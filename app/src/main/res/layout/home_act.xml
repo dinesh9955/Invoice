@@ -616,7 +616,7 @@
                             </androidx.recyclerview.widget.RecyclerView>
 
                             <TextView
-                                android:layout_marginTop="60dp"
+                                android:layout_marginTop="@dimen/_60sdp"
                                 android:layout_centerVertical="true"
                                 android:layout_centerHorizontal="true"
                                 android:layout_below="@+id/quick"
@@ -642,7 +642,7 @@
 
                             <TextView
                                 android:id="@+id/no_overduetxt"
-                                android:layout_marginTop="60dp"
+                                android:layout_marginTop="@dimen/_60sdp"
                                 android:layout_marginBottom="60dp"
                                 android:layout_centerHorizontal="true"
                                 android:layout_width="wrap_content"
@@ -650,7 +650,7 @@
                                 android:text="@string/home_no_overdue_invoices"
                                 android:textSize="14dp"
                                 android:textColor="@color/darkgray"
-                                android:layout_below="@+id/txtinvoice"
+                                android:layout_below="@+id/businessactivitiesRV"
                                 android:visibility="gone"
 
                                 />
@@ -992,6 +992,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:background="@drawable/side_menu_bg"
+                android:visibility="visible"
                 >
 
 
@@ -1026,7 +1027,7 @@
                                     android:id="@+id/img_left"
                                     android:layout_width="@dimen/_50sdp"
                                     android:layout_height="@dimen/_50sdp"
-                                    android:src="@mipmap/app_icon"
+                                    android:src="@mipmap/ic_launcher"
                                     android:scaleType="centerCrop"
 
                                     />

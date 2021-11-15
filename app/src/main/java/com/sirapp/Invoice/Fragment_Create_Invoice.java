@@ -874,45 +874,41 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 if (multimgpath != null) {
                     Log.e(TAG, "multimgpathAA " + multimgpath.size());
                     for (int i = 0; i < multimgpath.size(); i++) {
-                        if (i == 0) {
-                            File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
-                                imgFile = new File("" + Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
-                            }
-                            multiple[i] = imgFile;
-                            Bundle params2 = new Bundle();
-                            params2.putString("event_name_image_22", isTAB+" "+   multiple[i]);
-                            firebaseAnalytics.logEvent("image_upload_22", params2);
-//                            Log.e(TAG, "multipleAA " + multiple[i]);
-//                            DatabaseReference mDatabaseReference = mDatabase.getReference();
-//                            mDatabaseReference = mDatabase.getReference().child("image_upload_22");
-//                            mDatabaseReference.setValue("event_name_image_22", isTAB+" "+   multiple[i]);
-
-                        } else if (i == 1) {
-                            File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
-                                imgFile = new File("" + Utility.getJPEGtoPNGImage2(new File(multimgpath.get(i))));
-                            }
-                            multiple[i] = imgFile;
-                        } else if (i == 2) {
-                            File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
-                                imgFile = new File("" + Utility.getJPEGtoPNGImage3(new File(multimgpath.get(i))));
-                            }
-                            multiple[i] = imgFile;
-                        } else if (i == 3) {
-                            File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
-                                imgFile = new File("" + Utility.getJPEGtoPNGImage4(new File(multimgpath.get(i))));
-                            }
-                            multiple[i] = imgFile;
-                        } else if (i == 4) {
-                            File imgFile = new File(multimgpath.get(i));
-                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
-                                imgFile = new File("" + Utility.getJPEGtoPNGImage5(new File(multimgpath.get(i))));
-                            }
-                            multiple[i] = imgFile;
-                        }
+                        File imgFile = new File(multimgpath.get(i));
+                        multiple[i] = imgFile;
+//                        if (i == 0) {
+//                            File imgFile = new File(multimgpath.get(i));
+//                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
+//                                Log.e(TAG, "multimgpathAAXX " + multimgpath.get(i));
+//                                Log.e(TAG, "multimgpathAAXXCC " + new File(multimgpath.get(i)));
+//                                imgFile = new File("" + Utility.getJPEGtoPNGImage1(new File(multimgpath.get(i))));
+//                            }
+//                            multiple[i] = imgFile;
+//                        } else if (i == 1) {
+//                            File imgFile = new File(multimgpath.get(i));
+//                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
+//                                imgFile = new File("" + Utility.getJPEGtoPNGImage2(new File(multimgpath.get(i))));
+//                            }
+//                            multiple[i] = imgFile;
+//                        } else if (i == 2) {
+//                            File imgFile = new File(multimgpath.get(i));
+//                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
+//                                imgFile = new File("" + Utility.getJPEGtoPNGImage3(new File(multimgpath.get(i))));
+//                            }
+//                            multiple[i] = imgFile;
+//                        } else if (i == 3) {
+//                            File imgFile = new File(multimgpath.get(i));
+//                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
+//                                imgFile = new File("" + Utility.getJPEGtoPNGImage4(new File(multimgpath.get(i))));
+//                            }
+//                            multiple[i] = imgFile;
+//                        } else if (i == 4) {
+//                            File imgFile = new File(multimgpath.get(i));
+//                            if (multimgpath.get(i).toLowerCase().endsWith(".jpeg") || multimgpath.get(i).toLowerCase().endsWith(".gif") || multimgpath.get(i).toLowerCase().endsWith(".jpg")) {
+//                                imgFile = new File("" + Utility.getJPEGtoPNGImage5(new File(multimgpath.get(i))));
+//                            }
+//                            multiple[i] = imgFile;
+//                        }
 
                     }
                 }
@@ -1171,19 +1167,29 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
         Log.e(TAG, "uriListA " + uriList.size());
         multimgpath.clear();
         attchmentimage.clear();
+        int i = 0;
         for (Uri uri : uriList) {
             attchmentimage.add(uri.toString());
             File auxFile = new File(uri.getPath());
-            multimgpath.add(auxFile.toString());
+
+            if(i == 0){
+                multimgpath.add(""+Utility.getJPEGtoPNGImage1(auxFile));
+            }else if(i == 1){
+                multimgpath.add(""+Utility.getJPEGtoPNGImage2(auxFile));
+            }else if(i == 2){
+                multimgpath.add(""+Utility.getJPEGtoPNGImage3(auxFile));
+            }else if(i == 3){
+                multimgpath.add(""+Utility.getJPEGtoPNGImage4(auxFile));
+            }else if(i == 4){
+                multimgpath.add(""+Utility.getJPEGtoPNGImage5(auxFile));
+            }
+
             Log.e(TAG, "auxFile.toString() "+auxFile.toString());
             attachmenttxtimg.setVisibility(View.VISIBLE);
-            Bundle params2 = new Bundle();
-            params2.putString("event_name_image_23", isTAB+" "+  auxFile.toString());
-            firebaseAnalytics.logEvent("image_upload_23", params2);
-//            DatabaseReference mDatabaseReference = mDatabase.getReference();
-//            mDatabaseReference = mDatabase.getReference().child("image_upload_23");
-//            mDatabaseReference.setValue("event_name_image_23", isTAB+" "+  auxFile.toString());
+            i ++;
         }
+
+
 //        //int sizen = attchmentimage.size();
 //        String attchedmentimagepath;
 //        if (attchmentimage != null) {
@@ -1336,7 +1342,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
             if (company_stampFileimage != null) {
                 try {
-                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
+                    //company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -1824,10 +1830,11 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     company_stamp = getRealPathFromUri(selectedImage);
                     imgstampsuccess.setVisibility(View.VISIBLE);
                     try {
-                        company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+//                        company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+                        company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(new File(company_stamp));
                         Log.e("company_stamp Path", company_stamp);
 
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 

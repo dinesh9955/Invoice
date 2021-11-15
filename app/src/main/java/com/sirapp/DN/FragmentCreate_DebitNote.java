@@ -1171,7 +1171,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
 
             if (company_stampFileimage != null) {
                 try {
-                    company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
+                    //company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(company_stampFileimage);
                     params.put("company_stamp", company_stampFileimage);
                     //  Log.e("company stamp", company_stamp);
                 } catch (FileNotFoundException e) {
@@ -1512,10 +1512,11 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                     company_stamp = getRealPathFromUri(selectedImage);
                     imgstampsuccess.setVisibility(View.VISIBLE);
                     try {
-                        company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+//                        company_stampFileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
+                        company_stampFileimage = Utility.getJPEGtoPNGCompanySeal(new File(company_stamp));
                         Log.e("company_stamp_Path", company_stampFileimage.toString());
 
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 

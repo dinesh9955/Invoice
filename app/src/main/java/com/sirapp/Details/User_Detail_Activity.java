@@ -83,7 +83,7 @@ public class User_Detail_Activity extends BaseActivity {
     Context applicationContext = User_Activity.getContextOfApplication();
     private static final int GALLARY_aCTION_PICK_CODE=10;
     private static final int CAMERA_ACTION_PICK_CODE=9;
-    FileCompressor mCompressor;
+//    FileCompressor mCompressor;
 // Image Url
     String image_path;
 
@@ -96,7 +96,7 @@ public class User_Detail_Activity extends BaseActivity {
 //        Constant.bottomNav(User_Detail_Activity.this,-1);
         FindByIds();
         setFonts();
-        mCompressor = new FileCompressor(this);
+      //  mCompressor = new FileCompressor(this);
         avi = findViewById(R.id.avi);
         avibackground = findViewById(R.id.avibackground);
 
@@ -782,8 +782,8 @@ public class User_Detail_Activity extends BaseActivity {
 
             if (requestCode == CAMERA_ACTION_PICK_CODE) {
                 try{
-                    fileimage= mCompressor.compressToFile(fileimage);
-                } catch (IOException e) {
+                    fileimage = fileimage;
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 Utility.glideSet(this, fileimage, image);
@@ -791,8 +791,8 @@ public class User_Detail_Activity extends BaseActivity {
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
-                    fileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
-                } catch (IOException e) {
+                    fileimage = new File(getRealPathFromUri(selectedImage));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 Utility.glideSet(this, fileimage, image);

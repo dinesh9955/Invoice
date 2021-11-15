@@ -21,7 +21,7 @@
             android:id="@+id/img_left"
             android:layout_width="@dimen/_55sdp"
             android:layout_height="@dimen/_55sdp"
-            android:src="@mipmap/app_icon"
+            android:src="@mipmap/ic_launcher"
             android:scaleType="centerCrop"
 
             />

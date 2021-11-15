@@ -368,68 +368,68 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         firebaseAnalytics.logEvent("dashboard_view", params2);
 
 
-        String size = Utility.getDensityName(Home_Activity.this);
-        Log.e(TAG, "sizeSc "+size);
+//        String size = Utility.getDensityName(Home_Activity.this);
+//        Log.e(TAG, "sizeSc "+size);
+//
+//        Log.e(TAG, "isTablet "+Utility.isTablet(Home_Activity.this));
+//
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int width = displayMetrics.widthPixels;
+//        int height = displayMetrics.heightPixels;
+//
+//        Log.e(TAG, "width "+width);
+//        Log.e(TAG, "height "+height);
+//
+//        final float scale = getResources().getDisplayMetrics().density;
+//
+//        Log.e(TAG, "scale "+scale);
+//        float GESTURE_THRESHOLD_DP = 3.0f;
+//       int mGestureThreshold = (int) (GESTURE_THRESHOLD_DP * scale + 0.5f);
+//        Log.e(TAG, "mGestureThreshold "+mGestureThreshold);
+//
+//
+//        DisplayMetrics dm = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        int width1=dm.widthPixels;
+//        int height1=dm.heightPixels;
+//        double wi=(double)width1/(double)dm.xdpi;
+//        double hi=(double)height1/(double)dm.ydpi;
+//        double x = Math.pow(wi,2);
+//        double y = Math.pow(hi,2);
+//        double screenInches = Math.sqrt(x+y);
+//        //double screenInches = 5.1;
+//        Log.e(TAG, "screenInches "+screenInches);
+//
+//
+//        if(screenInches > 4.9 && screenInches < 5.5){
+//            Log.e(TAG, "screenInches1 "+screenInches);
+//        }else{
+//            Log.e(TAG, "screenInches2 "+screenInches);
+//        }
+//
+//
+//        final PackageManager pm = getPackageManager();
+////get a list of installed apps.
+//        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+//
+//        for (ApplicationInfo packageInfo : packages) {
+//            String ccc = new Gson().toJson(packageInfo);
+////            Log.e(TAG, "Source_dir : " + ccc);
+////            Log.e(TAG, "Installed package :" + packageInfo.packageName);
+////            Log.e(TAG, "Source dir : " + packageInfo.sourceDir);
+////            Log.e(TAG, "Source_dir : " + pm.getLaunchIntentForPackage(packageInfo.packageName).toString());
+//
+//            //Log.e(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
+////            if(ccc.toString().toLowerCase().contains("mail")){
+////                Log.e(TAG, "LaunchActivity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
+////                Log.e(TAG, "Installedpackage :" + packageInfo.packageName);
+////                return;
+////            }
+//        }
 
-        Log.e(TAG, "isTablet "+Utility.isTablet(Home_Activity.this));
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int width = displayMetrics.widthPixels;
-        int height = displayMetrics.heightPixels;
-
-        Log.e(TAG, "width "+width);
-        Log.e(TAG, "height "+height);
-
-        final float scale = getResources().getDisplayMetrics().density;
-
-        Log.e(TAG, "scale "+scale);
-        float GESTURE_THRESHOLD_DP = 3.0f;
-       int mGestureThreshold = (int) (GESTURE_THRESHOLD_DP * scale + 0.5f);
-        Log.e(TAG, "mGestureThreshold "+mGestureThreshold);
-
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width1=dm.widthPixels;
-        int height1=dm.heightPixels;
-        double wi=(double)width1/(double)dm.xdpi;
-        double hi=(double)height1/(double)dm.ydpi;
-        double x = Math.pow(wi,2);
-        double y = Math.pow(hi,2);
-        double screenInches = Math.sqrt(x+y);
-        //double screenInches = 5.1;
-        Log.e(TAG, "screenInches "+screenInches);
-
-
-        if(screenInches > 4.9 && screenInches < 5.5){
-            Log.e(TAG, "screenInches1 "+screenInches);
-        }else{
-            Log.e(TAG, "screenInches2 "+screenInches);
-        }
-
-
-        final PackageManager pm = getPackageManager();
-//get a list of installed apps.
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-
-        for (ApplicationInfo packageInfo : packages) {
-            String ccc = new Gson().toJson(packageInfo);
-            Log.e(TAG, "Source_dir : " + ccc);
-            Log.e(TAG, "Installed package :" + packageInfo.packageName);
-            Log.e(TAG, "Source dir : " + packageInfo.sourceDir);
-//            Log.e(TAG, "Source_dir : " + pm.getLaunchIntentForPackage(packageInfo.packageName).toString());
-
-            //Log.e(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
-//            if(ccc.toString().toLowerCase().contains("mail")){
-//                Log.e(TAG, "LaunchActivity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
-//                Log.e(TAG, "Installedpackage :" + packageInfo.packageName);
-//                return;
-//            }
-        }
-
-        String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL+ " " + Build.BRAND+ " " + Build.DEVICE;
-        Log.e(TAG, "manufacturerModel :" + manufacturerModel);
+      //  String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL+ " " + Build.BRAND+ " " + Build.DEVICE;
+//        Log.e(TAG, "manufacturerModel :" + manufacturerModel);
 
 
 
@@ -981,7 +981,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                     try {
 
                         result = response.body().string();
-                        Log.e(TAG, "result:: "+result);
+//                        Log.e(TAG, "result:: "+result);
 
                     } catch (Exception e) {
 
@@ -1079,7 +1079,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                                 //  invoiceModel.setCustomer_name(customer_name);
                                 String customer_id = obj_invoice.getString("customer_id");
                                 String imageSS = getCustomerImageById(customerModelArrayList, customer_id);
-                                Log.e(TAG, "imageSS "+imageSS);
+                              //  Log.e(TAG, "imageSS "+imageSS);
                                 invoiceModel.setCustomer_logo(customer_image_path+imageSS);
 
                                 String due_date = obj_invoice.getString("due_date");
@@ -1289,7 +1289,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String response = new String(responseBody);
-                Log.e(TAG, "onSuccess11 "+response);
+               //Log.e(TAG, "onSuccess11 "+response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -1297,7 +1297,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
                     if (status.equals("true")) {
                         JSONObject data = jsonObject.getJSONObject("data");
-                        Log.e(TAG, "onSuccessdata11 " + data.toString());
+                   //     Log.e(TAG, "onSuccessdata11 " + data.toString());
 
                         JSONArray company = data.getJSONArray("company");
                         JSONArray product = data.getJSONArray("product");
@@ -1364,7 +1364,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         GetAsyncPost mAsync = new GetAsyncPost(Home_Activity.this, AllSirApi.COMPANYListing, formBody, dialog, "") {
             @Override
             public void getValueParse(Response response) {
-                Log.e(TAG, "getValueParse "+response);
+              //  Log.e(TAG, "getValueParse "+response);
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
                 avi.smoothToHide();
@@ -1390,7 +1390,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
                     }
 
-                    Log.e("CompanyListResponse", "result " + result);
+                   // Log.e("CompanyListResponse", "result " + result);
 
                     if (response.isSuccessful()) {
 
@@ -1580,7 +1580,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                       String response111 = new String(responseBody);
-                      Log.e(TAG, "addproductResp1 "+response111);
+                   //   Log.e(TAG, "addproductResp1 "+response111);
 
                     try {
                         JSONObject jsonObject = new JSONObject(response111);
@@ -1715,7 +1715,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
 
         @Override
-        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, final int i) {
+        public void onBindViewHolder(final MenuAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") final int i) {
 
             viewHolder.textViewName.setText(""+alName.get(i).getName());
             viewHolder.textViewName.setOnClickListener(new View.OnClickListener() {

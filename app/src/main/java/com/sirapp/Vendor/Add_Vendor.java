@@ -101,7 +101,7 @@ public class Add_Vendor extends BaseFragment {
    Context applicationContext = Vendor_Activity.getContextOfApplication();
     private static final int GALLARY_aCTION_PICK_CODE=10;
     private static final int CAMERA_ACTION_PICK_CODE=9;
-    FileCompressor mCompressor;
+    //FileCompressor mCompressor;
     RoundedImageView uploadimage;
     TextView imagedescription,contacts,type;
     EditText name,email,contactperson,phone,mobile,website,CompanyAddress;
@@ -139,7 +139,7 @@ public class Add_Vendor extends BaseFragment {
 //        selectcompany.setSelectedItemHintColor(getResources().getColor(R.color.lightpurple));
 
         companyget();
-        mCompressor = new FileCompressor(getActivity());
+        //mCompressor = new FileCompressor(getActivity());
         return view;
     }
     private void FindByIds(View view){
@@ -402,8 +402,8 @@ public class Add_Vendor extends BaseFragment {
 
             if (requestCode == CAMERA_ACTION_PICK_CODE) {
                 try{
-                    fileimage= mCompressor.compressToFile(fileimage);
-                } catch (IOException e) {
+                    fileimage = fileimage;
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 Utility.glideSet(getActivity() , fileimage , uploadimage);
@@ -411,8 +411,8 @@ public class Add_Vendor extends BaseFragment {
             } else if (requestCode == GALLARY_aCTION_PICK_CODE) {
                 Uri selectedImage = data.getData();
                 try {
-                    fileimage = mCompressor.compressToFile(new File(getRealPathFromUri(selectedImage)));
-                } catch (IOException e) {
+                    fileimage = new File(getRealPathFromUri(selectedImage));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 Utility.glideSet(getActivity() , fileimage , uploadimage);
