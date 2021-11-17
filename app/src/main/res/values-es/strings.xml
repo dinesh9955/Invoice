@@ -1032,6 +1032,26 @@
     <string name="setting_UpgradePlanYearly">Actualice a nuestra función exclusiva de seguimiento de existencias por 2,99 USD adicionales al año</string>
     <string name="setting_UPGRADETODAY">ACTUALICE HOY</string>
     <string name="setting_SKIP">SALTAR</string>
+    <string name="stripe_txt">Stripe es una plataforma de procesamiento de pagos en línea que le permite recibir pagos de forma segura de sus clientes.</string>
+    <string name="paypal_txt">Paypal es una plataforma rápida y segura para recibir fondos o configurar una cuenta de comerciante.</string>
+    <string name="already_subscribed">¡Ya te has suscrito!</string>
+    <string name="dialog_SelectCompany">Seleccione una empresa</string>
+    <string name="home_NoCompany">Sin compañía</string>
+    <string name="home_NoUsers">Sin usuarias</string>
+    <string name="home_NoProduct">Sin producto</string>
+    <string name="home_NoItem">Sin objeto</string>
+    <string name="home_NoTax">Sin impuestos</string>
+    <string name="home_NoCustomer">Ningún cliente</string>
+    <string name="home_NoSupplier">Sin proveedor</string>
+    <string name="home_NoStock">No hay stock</string>
+    <string name="report_SelectPermission">Seleccione al menos 1 derecho de acceso</string>
+    <string name="permission_message">No se le permite realizar ninguna acción.</string>
+    <string name="permission_title">Permiso denegado</string>
+    <string name="user_Name_2">Nombre<font color="#FF0000">*</font></string>
+    <string name="user_Email_Addess_2">Correo electrónico<font color="#FF0000">*</font></string>
+    <string name="user_Password_2">" Contraseña<font color="#FF0000">*</font>"</string>
+    <string name="company_WarehouseName2">" Dirección del almacén<font color="#FF0000">*</font>"</string>
+    <string name="company_WarehouseAddress2">Warehouse Address<font color="#FF0000">*</font></string>
 
 
 </resources>

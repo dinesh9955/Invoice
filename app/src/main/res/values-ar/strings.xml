@@ -1035,6 +1035,26 @@
     <string name="setting_UpgradePlanYearly">قم بالترقية إلى ميزة تتبع المخزون الحصرية لدينا مقابل 2.99 دولار أمريكي سنويًا</string>
     <string name="setting_UPGRADETODAY">قم بالترقية اليوم</string>
     <string name="setting_SKIP">تخطى</string>
+    <string name="stripe_txt">Stripe عبارة عن نظام أساسي لمعالجة الدفع عبر الإنترنت يمكّنك من تلقي المدفوعات بأمان من عملائك.</string>
+    <string name="paypal_txt">Paypal عبارة عن منصة سريعة وآمنة لتلقي الأموال أو إنشاء حساب تاجر.</string>
+    <string name="already_subscribed">لقد قمت بالاشتراك بالفعل!</string>
+    <string name="dialog_SelectCompany">الرجاء تحديد شركة</string>
+    <string name="home_NoCompany">بدون شريك</string>
+    <string name="home_NoUsers">لا مستخدمين</string>
+    <string name="home_NoProduct">لا يوجد منتج</string>
+    <string name="home_NoItem">لا عنصر</string>
+    <string name="home_NoTax">لا ضرائب</string>
+    <string name="home_NoCustomer">لا زبون</string>
+    <string name="home_NoSupplier">لا يوجد مورد</string>
+    <string name="home_NoStock">لا يوجد مخزون</string>
+    <string name="report_SelectPermission">يرجى تحديد حق الوصول 1 على الأقل</string>
+    <string name="permission_message">لا يسمح لك للقيام بأي عمل</string>
+    <string name="permission_title">تم رفض الإذن</string>
+    <string name="user_Name_2">الاسم<font color="#FF0000">*</font></string>
+    <string name="user_Email_Addess_2">البريد الإلكتروني<font color="#FF0000">*</font></string>
+    <string name="user_Password_2">كلمة المرور<font color="#FF0000">*</font></string>
+    <string name="company_WarehouseName2">اسم المستودع<font color="#FF0000">*</font></string>
+    <string name="company_WarehouseAddress2">عنوان المستودع<font color="#FF0000">*</font></string>
 
 
 </resources>

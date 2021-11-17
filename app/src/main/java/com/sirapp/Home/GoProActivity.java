@@ -198,7 +198,7 @@ public class GoProActivity extends BaseActivity implements PurchasesUpdatedListe
                     if(subscriptionType.equalsIgnoreCase("oneyear")) {
                           if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
                               Log.e(TAG, "emptyBB");
-                              Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
+                              Constant.ErrorToast(GoProActivity.this, getString(R.string.already_subscribed));
                           }else{
                               Log.e(TAG, "emptyBB22");
 //                              bp.purchase(GoProActivity.this, "android.test.purchased");
@@ -208,10 +208,10 @@ public class GoProActivity extends BaseActivity implements PurchasesUpdatedListe
                     }else if(subscriptionType.equalsIgnoreCase("onemonth")){
                         if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
                             Log.e(TAG, "emptyCC");
-                            Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
+                            Constant.ErrorToast(GoProActivity.this, getString(R.string.already_subscribed));
                         }else{
                             Log.e(TAG, "emptyCC22");
-                            Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
+                            Constant.ErrorToast(GoProActivity.this, getString(R.string.already_subscribed));
                         }
                     }
                 }

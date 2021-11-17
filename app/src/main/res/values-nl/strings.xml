@@ -1037,6 +1037,26 @@
     <string name="setting_UpgradePlanYearly">Upgrade naar onze exclusieve Stock Tracking-functie voor een extra bedrag van USD 2,99 per jaar</string>
     <string name="setting_UPGRADETODAY">UPGRADE VANDAAG</string>
     <string name="setting_SKIP">OVERSLAAN</string>
+    <string name="stripe_txt">Stripe is een online betalingsverwerkingsplatform waarmee u veilig betalingen van uw klanten kunt ontvangen.</string>
+    <string name="paypal_txt">Paypal is een snel en veilig platform om geld te ontvangen of een verkopersaccount aan te maken.</string>
+    <string name="already_subscribed">Je bent al geabonneerd!</string>
+    <string name="dialog_SelectCompany">Selecteer een bedrijf</string>
+    <string name="home_NoCompany">Geen bedrijf</string>
+    <string name="home_NoUsers">Geen gebruikers</string>
+    <string name="home_NoProduct">Geen product</string>
+    <string name="home_NoItem">Geen item</string>
+    <string name="home_NoTax">Geen belasting</string>
+    <string name="home_NoCustomer">Geen klant</string>
+    <string name="home_NoSupplier">Geen leverancier</string>
+    <string name="home_NoStock">Geen voorraad</string>
+    <string name="report_SelectPermission">Selecteer a.u.b. minimaal 1 toegangsrecht</string>
+    <string name="permission_message">U mag geen enkele actie uitvoeren</string>
+    <string name="permission_title">Toestemming geweigerd</string>
+    <string name="user_Name_2">Naam<font color="#FF0000">*</font></string>
+    <string name="user_Email_Addess_2">E-mail<font color="#FF0000">*</font></string>
+    <string name="user_Password_2">Wachtwoord<font color="#FF0000">*</font></string>
+    <string name="company_WarehouseName2">Magazijnnaam<font color="#FF0000">*</font></string>
+    <string name="company_WarehouseAddress2">Magazijnadres<font color="#FF0000">*</font></string>
 
 
 </resources>
