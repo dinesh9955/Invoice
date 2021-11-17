@@ -69,6 +69,7 @@ public class SignupSubscriptionActivity extends BaseActivity implements Purchase
 
     BillingClient billingClient;
 
+    @SuppressLint("LongLogTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,6 +143,7 @@ public class SignupSubscriptionActivity extends BaseActivity implements Purchase
         billingClient.startConnection(this);
 
         billingClient.startConnection(new BillingClientStateListener() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onBillingSetupFinished(BillingResult billingResult) {
 
@@ -151,6 +153,7 @@ public class SignupSubscriptionActivity extends BaseActivity implements Purchase
 
                 }
             }
+            @SuppressLint("LongLogTag")
             @Override
             public void onBillingServiceDisconnected() {
                 // Try to restart the connection on the next request to
@@ -406,6 +409,7 @@ public class SignupSubscriptionActivity extends BaseActivity implements Purchase
         params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS);
         billingClient.querySkuDetailsAsync(params.build(),
                 new SkuDetailsResponseListener() {
+                    @SuppressLint("LongLogTag")
                     @Override
                     public void onSkuDetailsResponse(BillingResult billingResult,
                                                      List<SkuDetails> skuDetailsList) {
@@ -443,6 +447,7 @@ public class SignupSubscriptionActivity extends BaseActivity implements Purchase
 
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> list) {
         switch (billingResult.getResponseCode()) {
