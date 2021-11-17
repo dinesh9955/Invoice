@@ -270,7 +270,7 @@ public class SettingsActivity extends BaseActivity implements PurchasesUpdatedLi
       //  bp.loadOwnedPurchasesFromGoogle();
        // callRestore();
 
-        billingClient.queryPurchasesAsync(BillingClient.SkuType.INAPP, new PurchasesResponseListener() {
+        billingClient.queryPurchasesAsync(BillingClient.SkuType.SUBS, new PurchasesResponseListener() {
             @Override
             public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> list) {
                 Log.e(TAG, "emptyAA "+ list.size());
