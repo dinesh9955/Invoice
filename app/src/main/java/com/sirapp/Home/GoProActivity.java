@@ -25,6 +25,9 @@ import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchaseHistoryRecord;
+import com.android.billingclient.api.PurchaseHistoryResponseListener;
+import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
@@ -189,32 +192,51 @@ public class GoProActivity extends BaseActivity implements PurchasesUpdatedListe
 
             //    bp.purchase(GoProActivity.this, "android.test.purchased");
 
-                if(subscription_typeNet.equalsIgnoreCase("")) {
-                    Log.e(TAG, "emptyAA");
-                    //bp.purchase(GoProActivity.this, "android.test.purchased");
-                    //bp.purchase(GoProActivity.this, productID);
-                     callInnAPP();
-                }else{
-                    if(subscriptionType.equalsIgnoreCase("oneyear")) {
-                          if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
-                              Log.e(TAG, "emptyBB");
-                              Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
-                          }else{
-                              Log.e(TAG, "emptyBB22");
-//                              bp.purchase(GoProActivity.this, "android.test.purchased");
-                              //bp.purchase(GoProActivity.this, productID);
-                              callInnAPP();
-                          }
-                    }else if(subscriptionType.equalsIgnoreCase("onemonth")){
-                        if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
-                            Log.e(TAG, "emptyCC");
-                            Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
-                        }else{
-                            Log.e(TAG, "emptyCC22");
-                            Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
-                        }
+
+
+
+                billingClient.queryPurchasesAsync(BillingClient.SkuType.INAPP, new PurchasesResponseListener() {
+                    @Override
+                    public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> list) {
+                        Log.e(TAG, "emptyAA "+ list.size());
                     }
-                }
+                });
+
+
+//                billingClient.queryPurchaseHistoryAsync(BillingClient.SkuType.INAPP, new PurchaseHistoryResponseListener() {
+//                    @Override
+//                    public void onPurchaseHistoryResponse(@NonNull BillingResult billingResult, @Nullable List<PurchaseHistoryRecord> list) {
+//                        Log.e(TAG, "emptyAA "+ list.size());
+//                    }
+//                });
+
+
+//                if(subscription_typeNet.equalsIgnoreCase("")) {
+//                    Log.e(TAG, "emptyAA");
+//                    //bp.purchase(GoProActivity.this, "android.test.purchased");
+//                    //bp.purchase(GoProActivity.this, productID);
+//                     callInnAPP();
+//                }else{
+//                    if(subscriptionType.equalsIgnoreCase("oneyear")) {
+//                          if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
+//                              Log.e(TAG, "emptyBB");
+//                              Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
+//                          }else{
+//                              Log.e(TAG, "emptyBB22");
+////                              bp.purchase(GoProActivity.this, "android.test.purchased");
+//                              //bp.purchase(GoProActivity.this, productID);
+//                              callInnAPP();
+//                          }
+//                    }else if(subscriptionType.equalsIgnoreCase("onemonth")){
+//                        if(subscription_typeNet.equalsIgnoreCase(subscriptionType)){
+//                            Log.e(TAG, "emptyCC");
+//                            Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
+//                        }else{
+//                            Log.e(TAG, "emptyCC22");
+//                            Constant.ErrorToast(GoProActivity.this, "You have already subscribed!");
+//                        }
+//                    }
+//                }
 
 
             }

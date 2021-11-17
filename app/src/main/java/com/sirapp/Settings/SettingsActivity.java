@@ -25,6 +25,7 @@ import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
@@ -267,7 +268,42 @@ public class SettingsActivity extends BaseActivity implements PurchasesUpdatedLi
 
 
       //  bp.loadOwnedPurchasesFromGoogle();
-        callRestore();
+       // callRestore();
+
+        billingClient.queryPurchasesAsync(BillingClient.SkuType.INAPP, new PurchasesResponseListener() {
+            @Override
+            public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> list) {
+                Log.e(TAG, "emptyAA "+ list.size());
+                if(list.size() > 0){
+                    for(int i = 0; i < list.size() ; i++){
+                        Purchase purchase = list.get(i);
+
+                        String orderID = purchase.getOrderId();
+
+                         Calendar myCalendar = Calendar.getInstance();
+                        String myFormat = "yyyy-MM-dd";
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                        String dateCurrent = sdf.format(myCalendar.getTime());
+
+                        if(purchase.getOrderId().equalsIgnoreCase("com.sir.oneyear")){
+                            callAPIRestore("com.sir.oneyear", orderID, dateCurrent, "1");
+                        }else if(purchase.getOrderId().equalsIgnoreCase("com.sirapp.onemonth")){
+                            callAPIRestore("com.sirapp.onemonth", orderID, dateCurrent, "1");
+                        }else if(purchase.getOrderId().equalsIgnoreCase("com.sir.monthadditional")){
+                            callAPIRestore("com.sir.monthadditional", orderID, dateCurrent, "1");
+                        }else if(purchase.getOrderId().equalsIgnoreCase("com.sirapp.oneyearadditions")){
+                            callAPIRestore("com.sirapp.oneyearadditions", orderID, dateCurrent, "1");
+                        }else if(purchase.getOrderId().equalsIgnoreCase("com.sir.one_user")){
+                            callAPIUSERRestore("SUBUSER");
+                        }else if(purchase.getOrderId().equalsIgnoreCase("com.sir.one_company")){
+                            callAPIUSERRestore("COMPANY");
+                        }
+
+                    }
+                }
+
+            }
+        });
     }
 
 
@@ -853,5 +889,203 @@ public class SettingsActivity extends BaseActivity implements PurchasesUpdatedLi
 //            }
 //
 //        }
+    }
+
+
+
+
+    private void callAPIRestore(String productId, String purchaseToken, String date, String witch) {
+        final ProgressDialog progressDialog = new ProgressDialog(SettingsActivity.this);
+        progressDialog.setMessage("Please wait");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        RequestParams params = new RequestParams();
+
+
+//        if(imageClickID == 3){
+//            params.add("subscription_type", "onemonth_add");
+//        } else if(imageClickID == 4){
+//            params.add("subscription_type", "oneyear_add");
+//        } else {
+//            params.add("subscription_type", "restore");
+//        }
+
+        params.add("subscription_type", "restore");
+        params.add("productId", productId);
+        params.add("quantity", "1");
+        params.add("transactionId", purchaseToken);
+        params.add("originalTransactionId", purchaseToken);
+        params.add("purchaseDate", date);
+        params.add("originalPurchaseDate", date);
+        params.add("webOrderLineItemId", "");
+        params.add("subscriptionExpirationDate", "");
+        params.add("cancellationDate", "");
+        params.add("isTrialPeriod", "false");
+        params.add("isInIntroOfferPeriod", "false");
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        String token = Constant.GetSharedPreferences(SettingsActivity.this, Constant.ACCESS_TOKEN);
+        client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "subscription/add", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                progressDialog.dismiss();
+
+                Log.e(TAG, "CreateInvoicedata "+ response);
+                try {
+                    Log.e("Create Invoicedata", response);
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    String message = jsonObject.getString("message");
+                    if (status.equalsIgnoreCase("true")) {
+                        if(witch.equalsIgnoreCase("1")){
+                            Constant.SuccessToast(SettingsActivity.this, message);
+//                            pref.setSubsType("");
+
+//                            new Handler().postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    if(payKey.equalsIgnoreCase("product")){
+//                                        pref.setProduct(payKey);
+//                                    }
+//                                    if(payKey.equalsIgnoreCase("item")){
+//                                        pref.setItem(payKey);
+//                                    }
+//
+//                                    Intent intent = new Intent();
+//                                    setResult(RESULT_OK , intent);
+//                                    finish();
+//                                }
+//                            }, 1000);
+                        }else if(witch.equalsIgnoreCase("2")){
+                            Constant.SuccessToast(SettingsActivity.this, getString(R.string.dialog_Restored_successfully));
+                        }
+
+
+
+
+
+                    }else{
+                        Constant.ErrorToast(SettingsActivity.this, message);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                progressDialog.dismiss();
+
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String status = jsonObject.getString("status");
+                        String message = jsonObject.getString("message");
+                        if (status.equals("1")) {
+                            // Constant.ErrorToast(SubscribeActivity.this, message);
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    //Constant.ErrorToast(PayPalActivity.this, "Something went wrong, try again!");
+                }
+            }
+        });
+    }
+
+
+    private void callAPIUSERRestore(String witch) {
+        final ProgressDialog progressDialog = new ProgressDialog(SettingsActivity.this);
+        progressDialog.setMessage("Please wait");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        RequestParams params = new RequestParams();
+
+        params.add("key", ""+witch);
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        String token = Constant.GetSharedPreferences(SettingsActivity.this, Constant.ACCESS_TOKEN);
+        client.addHeader("Access-Token", token);
+        params.add("language", ""+getLanguage());
+        client.post(AllSirApi.BASE_URL + "user/addtionalusercompany", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String response = new String(responseBody);
+                progressDialog.dismiss();
+
+                Log.e(TAG, "CreateInvoicedata "+ response);
+                try {
+                    Log.e("Create Invoicedata", response);
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+                    String message = jsonObject.getString("message");
+                    if (status.equalsIgnoreCase("true")) {
+
+                        Constant.SuccessToast(SettingsActivity.this, message.replace("allow", "allowed"));
+
+
+//                        new Handler().postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                if(payKey.equalsIgnoreCase("user")){
+//                                    pref.setUser(payKey);
+//                                }
+//                                if(payKey.equalsIgnoreCase("item")){
+//                                    pref.setCompany(payKey);
+//                                }
+//
+//                                Intent intent = new Intent();
+//                                setResult(RESULT_OK , intent);
+//                                finish();
+//                            }
+//                        }, 1000);
+
+                    }else{
+                        Constant.ErrorToast(SettingsActivity.this, message);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                progressDialog.dismiss();
+
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String status = jsonObject.getString("status");
+                        String message = jsonObject.getString("message");
+                        // if (status.equals("false")) {
+                        Constant.ErrorToast(SettingsActivity.this, message);
+                        // }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    //Constant.ErrorToast(PayPalActivity.this, "Something went wrong, try again!");
+                }
+            }
+        });
     }
 }
