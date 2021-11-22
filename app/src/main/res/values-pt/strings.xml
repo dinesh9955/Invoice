@@ -13,6 +13,8 @@
 
     <string name = "go_pro">Torne-se Pro</string>
 
+    <string name="Skip">Próxima</string>
+
     <string name="dialog_Restored_successfully">Restaurado com sucesso</string>
 
     <string name="stock_Select_Product_2">Selecione o produto<font color='#FF0000'>*</font></string>

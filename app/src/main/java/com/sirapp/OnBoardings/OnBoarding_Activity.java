@@ -45,6 +45,8 @@ public class OnBoarding_Activity extends BaseActivity {
 
     String signup="";
 
+    int counter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +83,7 @@ public class OnBoarding_Activity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
+                counter = position;
                 if(position == 2){
                     indicator.setVisibility(View.GONE);
                     txtskip.setVisibility(View.GONE);
@@ -95,28 +98,42 @@ public class OnBoarding_Activity extends BaseActivity {
         });
 
 
+
+
+
         txtskip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SavePref pref = new SavePref();
-                pref.SavePref(OnBoarding_Activity.this);
-                pref.setSignIn(true);
-
-//                if (signup.equals("yes")){
-                    Intent intent = new Intent(OnBoarding_Activity.this, Signup_Activity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-//
-//                }
-//                else{
-//
-//                    Intent intent = new Intent(OnBoarding_Activity.this, Signin_Activity.class);
-//                    startActivity(intent);
-//
-//                }
+                counter ++;
+                pager.setCurrentItem(counter);
             }
         });
 
+
+
+//
+//        txtskip.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                SavePref pref = new SavePref();
+//                pref.SavePref(OnBoarding_Activity.this);
+//                pref.setSignIn(true);
+//
+////                if (signup.equals("yes")){
+//                    Intent intent = new Intent(OnBoarding_Activity.this, Signup_Activity.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(intent);
+////
+////                }
+////                else{
+////
+////                    Intent intent = new Intent(OnBoarding_Activity.this, Signin_Activity.class);
+////                    startActivity(intent);
+////
+////                }
+//            }
+//        });
+//
 
         btncontinue.setOnClickListener(new View.OnClickListener() {
             @Override

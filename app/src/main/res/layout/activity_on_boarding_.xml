@@ -12,7 +12,8 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/indicator"
@@ -40,18 +41,17 @@
 
 
     <TextView
+        android:id="@+id/txtskip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/_60sdp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:layout_centerHorizontal="true"
-        android:text="Skip"
+        android:text="@string/Skip"
         android:textColor="@color/dark_blue"
-        android:textSize="@dimen/_13sdp"
-        android:id="@+id/txtskip"
-        />
+        android:textSize="@dimen/_13sdp" />
 
 
 

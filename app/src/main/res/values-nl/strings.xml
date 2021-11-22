@@ -12,6 +12,8 @@
 
     <string name="go_pro">Ga Pro</string>
 
+    <string name="Skip">Volgende</string>
+
     <string name="invoice_SelectWarehouseForProduct">Selecteer Magazijn (Voor Producten)</string>
 
     <string name="dialog_Restored_successfully">Succesvol hersteld</string>

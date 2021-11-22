@@ -403,7 +403,7 @@ public class SignupSubscriptionActivity extends BaseActivity implements Purchase
         // skuList.add("android.test.purchased");
         skuList.add("com.sir.oneyear");
         skuList.add("com.sirapp.onemonth");
-//        skuList.add(productID);
+//       skuList.add(productID);
 
         SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
         params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS);
@@ -472,7 +472,6 @@ public class SignupSubscriptionActivity extends BaseActivity implements Purchase
                     String myFormat = "yyyy-MM-dd";
                     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                     String dateCurrent = sdf.format(myCalendar.getTime());
-
 
 //                    String json22 = new Gson().toJson(ddd);
 

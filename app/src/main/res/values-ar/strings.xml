@@ -11,6 +11,8 @@
 
     <string name="go_pro">Go Pro</string>
 
+    <string name="Skip">التالي</string>
+
     <string name="invoice_SelectWarehouseForProduct">حدد المستودع (للمنتجات)</string>
 
     <string name="dialog_Restored_successfully">تمت الاستعادة بنجاح</string>

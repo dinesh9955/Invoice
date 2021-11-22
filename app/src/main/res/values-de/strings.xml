@@ -12,6 +12,8 @@
 
     <string name="go_pro">Go Pro</string>
 
+    <string name="Skip">Nächste</string>
+
     <string name="invoice_SelectWarehouseForProduct">Lager auswählen (für Produkte)</string>
 
     <string name="dialog_Restored_successfully">Erfolgreich wiederhergestellt</string>
