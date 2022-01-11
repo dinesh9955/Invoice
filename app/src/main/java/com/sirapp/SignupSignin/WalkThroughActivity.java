@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.sirapp.Base.BaseActivity;
@@ -26,8 +27,17 @@ public class WalkThroughActivity extends BaseActivity {
 
         isWorking = false;
 
-        RelativeLayout relativeLayout = findViewById(R.id.relaive11);
-        relativeLayout.setOnClickListener(new View.OnClickListener() {
+//        RelativeLayout relativeLayout = findViewById(R.id.relaive11);
+//        relativeLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(WalkThroughActivity.this, OnBoarding_Activity.class));
+//                finish();
+//            }
+//        });
+
+        Button button = findViewById(R.id.button_upgrade_now);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(WalkThroughActivity.this, OnBoarding_Activity.class));

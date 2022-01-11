@@ -126,12 +126,12 @@ public class Splash_Activity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(Utility.checkAndRequestPermissions(Splash_Activity.this, REQUEST_ID_MULTIPLE_PERMISSIONS)) {
+//                if(Utility.checkAndRequestPermissions(Splash_Activity.this, REQUEST_ID_MULTIPLE_PERMISSIONS)) {
                     getLogin();
-                }else{
-                }
+//                }else{
+//                }
             }
-        }, 500);
+        }, 2000);
 
 
         //   sendNotification(this);
@@ -170,19 +170,19 @@ public class Splash_Activity extends BaseActivity {
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        Log.d(TAG, "Permission callback called-------");
-        switch (requestCode) {
-            case REQUEST_ID_MULTIPLE_PERMISSIONS: {
-                if(Utility.checkAdditionPermissionsCheck(Splash_Activity.this, permissions, grantResults, REQUEST_ID_MULTIPLE_PERMISSIONS)) {
-                    getLogin();
-                }
-            }
-        }
-
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode,
+//                                           String permissions[], int[] grantResults) {
+//        Log.d(TAG, "Permission callback called-------");
+//        switch (requestCode) {
+//            case REQUEST_ID_MULTIPLE_PERMISSIONS: {
+//                if(Utility.checkAdditionPermissionsCheck(Splash_Activity.this, permissions, grantResults, REQUEST_ID_MULTIPLE_PERMISSIONS)) {
+//                    getLogin();
+//                }
+//            }
+//        }
+//
+//    }
 
 
     private void getLogin() {

@@ -790,7 +790,6 @@ public class List_of_Invoices extends BaseFragment implements InvoiceCallBack{
     }
 
     private void InvoicelistData(String paramsvalue) {
-
         list.clear();
         avi.smoothToShow();
         avibackground.setVisibility(View.VISIBLE);

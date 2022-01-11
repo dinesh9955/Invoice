@@ -25,6 +25,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?actionBarSize"
         android:fillViewport="true"
+        android:layout_above="@+id/delete_account"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -53,6 +54,34 @@
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/delete_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/_5sdp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:orientation="horizontal"
+            android:background="@drawable/light_shape"
+            android:text="@string/delete_account"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/black"
+            android:textAllCaps="false"
+            android:layout_marginBottom="@dimen/_5sdp">
+
+        </Button>
+    </LinearLayout>
 
 
 </RelativeLayout>

@@ -6,61 +6,59 @@
     android:layout_height="match_parent">
 
 
-
     <RelativeLayout
+        android:id="@+id/r1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/createdialog_curve"
-        android:id="@+id/r1"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
 
         >
+
         <LinearLayout
-            android:layout_width="match_parent"
             android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-             android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/filtericon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Filter "
-                android:textSize="24sp"
+                android:layout_marginTop="10dp"
 
                 android:background="@drawable/filtersortidev"
-                android:layout_marginTop="10dp"
+                android:text="Filter "
                 android:textColor="@color/dark_blue"
-                android:id="@+id/filtericon"
-                />
+                android:textSize="24sp" />
 
 
             <TextView
+                android:id="@+id/txtcredit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/filter_Filter"
-                android:textSize="@dimen/_15sdp"
                 android:layout_below="@+id/filtericon"
                 android:layout_marginTop="@dimen/_25sdp"
+                android:text="@string/filter_Filter"
                 android:textColor="@color/dark_blue"
-                android:id="@+id/txtcredit"
-                />
+                android:textSize="@dimen/_15sdp" />
+
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
                 android:layout_below="@+id/txtcredit"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="@dimen/_10sdp"
-                >
+                android:layout_marginRight="20dp"
+                android:background="@color/gray">
 
             </View>
 
@@ -68,113 +66,110 @@
 
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/filter_UnpaidInvoices"
-                android:textSize="@dimen/_11sdp"
+            android:id="@+id/unpaidinvoicetxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main"
+            android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/_10sdp"
-                android:layout_centerInParent="true"
-                android:layout_below="@+id/main"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/unpaidinvoicetxt"
-                />
+            android:text="@string/filter_UnpaidInvoices"
+            android:textColor="@color/dark_blue"
+            android:textSize="@dimen/_11sdp" />
+
         <View
             android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
             android:layout_below="@+id/unpaidinvoicetxt"
-            android:layout_marginTop="@dimen/_10sdp">
-        </View>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/filter_PaidInvoices"
-                android:layout_centerInParent="true"
-                android:textSize="@dimen/_11sdp"
-                android:layout_below="@+id/view1"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/paidinvoicetxt"
-                />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="20dp"
+            android:background="@color/gray"></View>
+
+        <TextView
+            android:id="@+id/paidinvoicetxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view1"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/filter_PaidInvoices"
+            android:textColor="@color/dark_blue"
+            android:textSize="@dimen/_11sdp" />
+
         <View
             android:id="@+id/viewr1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
             android:layout_below="@+id/paidinvoicetxt"
-            android:layout_marginTop="@dimen/_10sdp">
-        </View>
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="20dp"
+            android:background="@color/gray"></View>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/filter_ByDate"
-                android:layout_centerInParent="true"
-                android:layout_below="@+id/viewr1"
-                android:textSize="@dimen/_11sdp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/bydateinvoicetxt"
-                />
+        <TextView
+            android:id="@+id/bydateinvoicetxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewr1"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/filter_ByDate"
+            android:textColor="@color/dark_blue"
+            android:textSize="@dimen/_11sdp" />
+
         <View
             android:id="@+id/viewfr1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
             android:layout_below="@+id/bydateinvoicetxt"
-            android:layout_marginTop="@dimen/_10sdp">
-        </View>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/filter_All"
-                android:layout_centerInParent="true"
-                android:layout_below="@+id/viewfr1"
-                android:textSize="@dimen/_11sdp"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/allinvoicetxt"
-                />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="20dp"
+            android:background="@color/gray"></View>
+
+        <TextView
+            android:id="@+id/allinvoicetxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewfr1"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/filter_All"
+            android:textColor="@color/dark_blue"
+            android:textSize="@dimen/_11sdp" />
+
         <View
             android:id="@+id/viewdfr1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
             android:layout_below="@+id/allinvoicetxt"
-            android:layout_marginTop="@dimen/_10sdp">
-        </View>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/dialog_Cancel"
-                android:layout_centerInParent="true"
-                android:textSize="@dimen/_11sdp"
-                android:layout_below="@+id/viewdfr1"
-                android:textColor="@color/dark_blue"
-                android:id="@+id/cancelinvoicetxt"
-                />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="20dp"
+            android:background="@color/gray"></View>
+
+        <TextView
+            android:id="@+id/cancelinvoicetxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewdfr1"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/dialog_Cancel"
+            android:textColor="@color/dark_blue"
+            android:textSize="@dimen/_11sdp" />
 
 
         <View
             android:id="@+id/viewdfrff1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
             android:layout_below="@+id/cancelinvoicetxt"
-            android:layout_marginTop="@dimen/_10sdp">
-        </View>
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="20dp"
+            android:background="@color/gray"></View>
 
 
     </RelativeLayout>

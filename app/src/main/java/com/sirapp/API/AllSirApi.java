@@ -5,9 +5,16 @@ public class AllSirApi {
 //    public static final String BASE_LEVEL_HTTP ="https://sir-app.com/";
 
 
+//    public static final String BASE_LEVEL ="https://sir-app.com/";
+//    public static final String BASE = BASE_LEVEL+"app/";
+//    public static final String BASE_URL = BASE+"api/";
+
+
     public static final String BASE_LEVEL ="https://sir-app.com/";
-    public static final String BASE = BASE_LEVEL+"app/";
+    public static final String BASE_DEV = BASE_LEVEL+"saad_dev/";
+    public static final String BASE = BASE_DEV+"app/index.php/";
     public static final String BASE_URL = BASE+"api/";
+
 
 //    public static final String BASE_LEVEL ="http://prod.webdevelopmentsolution.net/saad/";
 //    public static final String BASE = BASE_LEVEL+"app/";

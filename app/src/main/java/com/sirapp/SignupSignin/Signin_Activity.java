@@ -54,6 +54,7 @@ import com.sirapp.Home.Home_Activity;
 import com.sirapp.Invoice.SavePref;
 import com.sirapp.OnBoardings.OnBoarding_Activity;
 import com.sirapp.R;
+import com.sirapp.Settings.SettingsActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
@@ -403,6 +404,9 @@ public class Signin_Activity extends BaseActivity {
                                     }
                                 },1000);
 
+                            }
+                            if (status.equals("false")){
+                                Constant.ErrorToast(Signin_Activity.this, jsonObject.getString("message"));
                             }
 
 

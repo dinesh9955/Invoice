@@ -123,6 +123,9 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
     String TAG = "Home_Activity";
 
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1999;
+
+
     RecyclerView businessactivitiesRV, invoiceoverdueRV, recycleCustomers,recyclerVinder;
    // Invoice_OverDue_Adapter invoice_overDue_adapter;
 //    HomeCustomerAdapter homeCustomerAdapter;
@@ -165,10 +168,32 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
     DrawerLayout drawerLayout;
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        Log.d(TAG, "Permission callback called-------");
+        switch (requestCode) {
+            case REQUEST_ID_MULTIPLE_PERMISSIONS: {
+                if(Utility.checkAdditionPermissionsCheck(Home_Activity.this, permissions, grantResults, REQUEST_ID_MULTIPLE_PERMISSIONS)) {
+                    //getLogin();
+                }
+            }
+        }
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_act);
+
+        if(Utility.checkAndRequestPermissions(Home_Activity.this, REQUEST_ID_MULTIPLE_PERMISSIONS)) {
+
+        }else{
+        }
+
 //        overridePendingTransition(R.anim.flip_out, R.anim.flip_in);
 //        File myDirectory = new File(getExternalFilesDir("FolderName"),"YOUR_DIR");
        // File myDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/AndroidDvlpr");
@@ -208,6 +233,7 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
 
         checkWebview();
+
 
      //   pref.setFontDialog("");
 
@@ -368,78 +394,6 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         firebaseAnalytics.logEvent("dashboard_view", params2);
 
 
-//        String size = Utility.getDensityName(Home_Activity.this);
-//        Log.e(TAG, "sizeSc "+size);
-//
-//        Log.e(TAG, "isTablet "+Utility.isTablet(Home_Activity.this));
-//
-//        DisplayMetrics displayMetrics = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-//        int width = displayMetrics.widthPixels;
-//        int height = displayMetrics.heightPixels;
-//
-//        Log.e(TAG, "width "+width);
-//        Log.e(TAG, "height "+height);
-//
-//        final float scale = getResources().getDisplayMetrics().density;
-//
-//        Log.e(TAG, "scale "+scale);
-//        float GESTURE_THRESHOLD_DP = 3.0f;
-//       int mGestureThreshold = (int) (GESTURE_THRESHOLD_DP * scale + 0.5f);
-//        Log.e(TAG, "mGestureThreshold "+mGestureThreshold);
-//
-//
-//        DisplayMetrics dm = new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(dm);
-//        int width1=dm.widthPixels;
-//        int height1=dm.heightPixels;
-//        double wi=(double)width1/(double)dm.xdpi;
-//        double hi=(double)height1/(double)dm.ydpi;
-//        double x = Math.pow(wi,2);
-//        double y = Math.pow(hi,2);
-//        double screenInches = Math.sqrt(x+y);
-//        //double screenInches = 5.1;
-//        Log.e(TAG, "screenInches "+screenInches);
-//
-//
-//        if(screenInches > 4.9 && screenInches < 5.5){
-//            Log.e(TAG, "screenInches1 "+screenInches);
-//        }else{
-//            Log.e(TAG, "screenInches2 "+screenInches);
-//        }
-//
-//
-//        final PackageManager pm = getPackageManager();
-////get a list of installed apps.
-//        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-//
-//        for (ApplicationInfo packageInfo : packages) {
-//            String ccc = new Gson().toJson(packageInfo);
-////            Log.e(TAG, "Source_dir : " + ccc);
-////            Log.e(TAG, "Installed package :" + packageInfo.packageName);
-////            Log.e(TAG, "Source dir : " + packageInfo.sourceDir);
-////            Log.e(TAG, "Source_dir : " + pm.getLaunchIntentForPackage(packageInfo.packageName).toString());
-//
-//            //Log.e(TAG, "Launch Activity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
-////            if(ccc.toString().toLowerCase().contains("mail")){
-////                Log.e(TAG, "LaunchActivity :" + pm.getLaunchIntentForPackage(packageInfo.packageName));
-////                Log.e(TAG, "Installedpackage :" + packageInfo.packageName);
-////                return;
-////            }
-//        }
-
-      //  String manufacturerModel = android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL+ " " + Build.BRAND+ " " + Build.DEVICE;
-//        Log.e(TAG, "manufacturerModel :" + manufacturerModel);
-
-
-
-
-
-//        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-//
-//        DatabaseReference mDatabaseReference = mDatabase.getReference();
-//        mDatabaseReference = mDatabase.getReference().child("image_upload_error111");
-//        mDatabaseReference.setValue("event_name_image_error11");
     }
 
     private void checkWebview() {

@@ -101,39 +101,39 @@ public class OnBoarding_Activity extends BaseActivity {
 
 
 
-        txtskip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                counter ++;
-                pager.setCurrentItem(counter);
-            }
-        });
-
-
-
-//
 //        txtskip.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                SavePref pref = new SavePref();
-//                pref.SavePref(OnBoarding_Activity.this);
-//                pref.setSignIn(true);
-//
-////                if (signup.equals("yes")){
-//                    Intent intent = new Intent(OnBoarding_Activity.this, Signup_Activity.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    startActivity(intent);
-////
-////                }
-////                else{
-////
-////                    Intent intent = new Intent(OnBoarding_Activity.this, Signin_Activity.class);
-////                    startActivity(intent);
-////
-////                }
+//                counter ++;
+//                pager.setCurrentItem(counter);
 //            }
 //        });
+
+
+
+
+        txtskip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SavePref pref = new SavePref();
+                pref.SavePref(OnBoarding_Activity.this);
+                pref.setSignIn(true);
+
+//                if (signup.equals("yes")){
+                    Intent intent = new Intent(OnBoarding_Activity.this, Signup_Activity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
 //
+//                }
+//                else{
+//
+//                    Intent intent = new Intent(OnBoarding_Activity.this, Signin_Activity.class);
+//                    startActivity(intent);
+//
+//                }
+            }
+        });
+
 
         btncontinue.setOnClickListener(new View.OnClickListener() {
             @Override

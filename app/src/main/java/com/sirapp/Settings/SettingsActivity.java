@@ -2,21 +2,29 @@ package com.sirapp.Settings;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,15 +46,20 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
 import com.loopj.android.http.RequestParams;
 import com.sirapp.Home.GoProActivity;
+import com.sirapp.Home.Home_Activity;
+import com.sirapp.Invoice.SavePref;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.R;
+import com.sirapp.SignupSignin.Signin_Activity;
 import com.sirapp.SignupSignin.SignupSubscriptionActivity;
+import com.sirapp.Utils.LocaleHelper;
 import com.sirapp.Utils.Utility;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -99,6 +112,82 @@ public class SettingsActivity extends BaseActivity implements PurchasesUpdatedLi
 
         apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
         recycler_invoices = findViewById(R.id.recycler_invoices);
+
+        Button button_delete = findViewById(R.id.button_delete);
+        button_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog mybuilder = new Dialog(SettingsActivity.this);
+                mybuilder.setContentView(R.layout.dialog_delete_account);
+
+                TextView softDelete = (TextView) mybuilder.findViewById(R.id.bydateinvoicetxt);
+                TextView hardDelete = (TextView) mybuilder.findViewById(R.id.allinvoicetxt);
+                TextView txtcancelvalue = (TextView) mybuilder.findViewById(R.id.txtcancelvalue);
+
+                softDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                        builder.setTitle(getString(R.string.app_name));
+                        builder.setMessage("Do you want to Soft Delete")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        mybuilder.dismiss();
+                                        dialog.dismiss();
+                                        invoicelistData("1", mybuilder);
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        mybuilder.dismiss();
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    }
+                });
+
+                hardDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                        builder.setTitle(getString(R.string.app_name));
+                        builder.setMessage("Do you want to Hard Delete")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        mybuilder.dismiss();
+                                        dialog.dismiss();
+                                        invoicelistData("2", mybuilder);
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        mybuilder.dismiss();
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    }
+                });
+
+                txtcancelvalue.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mybuilder.dismiss();
+                    }
+                });
+
+                mybuilder.show();
+                mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                Window window = mybuilder.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawableResource(R.color.transparent);
+            }
+        });
 
         arrayListIcons.add(R.drawable.comma_st);
         arrayListIcons.add(R.drawable.online_payment_st);
@@ -177,90 +266,137 @@ public class SettingsActivity extends BaseActivity implements PurchasesUpdatedLi
         });
 
 
-//        bp = new BillingProcessor(this, AllSirApi.LICENSE_KEY, new BillingProcessor.IBillingHandler() {
-//            @Override
-//            public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
-//                Log.e(TAG, "onProductPurchased");
-////                showToast("onProductPurchased: " + productId);
-////                updateTextViews();
-//
-//                String productID = details.productId;
-//                String orderID = details.orderId;
-//                String purchaseToken = details.purchaseToken;
-////                Date purchaseTime = details.purchaseTime;
-////                DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-////                Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
-////                String date = simple.format(purchaseTime);
-//
-//                Calendar myCalendar = Calendar.getInstance();
-//                String myFormat = "yyyy-MM-dd";
-//                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-//                String dateCurrent = sdf.format(myCalendar.getTime());
-//
-//                String json22 = new Gson().toJson(details);
-////                Utility.generateNoteOnSD(SettingsActivity.this , "settings_pro.txt", ""+json22.toString());
-//
-//
-//                if(payKey.equalsIgnoreCase("user")){
-//                    callAPIUSER("SUBUSER");
-//                }else if(payKey.equalsIgnoreCase("company")){
-//                    callAPIUSER("COMPANY");
-//                }else{
-//                    callAPI(productID, orderID, dateCurrent, "1");
-//                }
-//
-//            }
-//            @Override
-//            public void onBillingError(int errorCode, @Nullable Throwable error) {
-//                Log.e(TAG, "onBillingError");
-////                showToast("onBillingError: " + Integer.toString(errorCode));
-//                // Log.e(TAG, "onBillingError "+error.getMessage());
-//            }
-//            @Override
-//            public void onBillingInitialized() {
-//                Log.e(TAG, "onBillingInitialized");
-////                showToast("onBillingInitialized");
-////                readyToPurchase = true;
-////                updateTextViews();
-//            }
-//            @Override
-//            public void onPurchaseHistoryRestored() {
-//                boolean controlnumber = bp.loadOwnedPurchasesFromGoogle();
-//                if(controlnumber) {
-//                    for(String sku : bp.listOwnedSubscriptions()){
-//                        TransactionDetails details = bp.getSubscriptionTransactionDetails(sku);
-//
-//                        if (details != null) {
-//                            Log.d("TAG", "onBillingInitialized: active");
-//                            String productID = details.productId;
-//                            String orderID = details.orderId;
-//                            String purchaseToken = details.purchaseToken;
-////                            Date purchaseTime = details.purchaseTime;
-////                            DateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-////                            Log.e(TAG, "datemillis22 "+simple.format(purchaseTime));
-////                            String date = simple.format(purchaseTime);
-//
-//                            Calendar myCalendar = Calendar.getInstance();
-//                            String myFormat = "yyyy-MM-dd";
-//                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-//                            String dateCurrent = sdf.format(myCalendar.getTime());
-//
-//                            callAPI(productID, orderID, dateCurrent, "2");
-//                        }
-//
-//                    }
-//
-//
-//                }
-//
-//
-//            }
-//        });
-//
-//        bp.initialize();
-
 
     }
+
+
+
+
+        private void invoicelistData(String delete_type, Dialog dialog) {
+            dialog.dismiss();
+            ProgressDialog progressDialog = new ProgressDialog(SettingsActivity.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+
+            RequestParams params = new RequestParams();
+
+
+        String token = Constant.GetSharedPreferences(SettingsActivity.this, Constant.ACCESS_TOKEN);
+            Log.e("token",token);
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+        client.addHeader("Access-Token", token);
+        params.add("delete_type", delete_type);
+        params.add("language", ""+getLanguage());
+            Log.e("params",params.toString());
+        client.post(AllSirApi.BASE_URL + "user/deleteuser", params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                progressDialog.dismiss();
+                String response = new String(responseBody);
+                Log.e(TAG, "responsecustomers "+ response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String status = jsonObject.getString("status");
+
+                    Log.e(TAG, "responsecustomers22 "+ response);
+
+                    if (status.equals("true")) {
+//                        JSONObject data = jsonObject.getJSONObject("data");
+//                        JSONArray customer = data.getJSONArray("invoice");
+                      //  Log.e(TAG, "customerAA "+customer.length());
+                        Constant.SuccessToast(SettingsActivity.this, jsonObject.getString("message"));
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE, MODE_PRIVATE);
+                                preferences.edit().remove(Constant.LOGGED_IN).commit();
+                                preferences.edit().remove(Constant.INVOICE).commit();
+                                preferences.edit().remove(Constant.ESTIMATE).commit();
+                                preferences.edit().remove(Constant.STOCK).commit();
+                                preferences.edit().remove(Constant.RECEIPT).commit();
+                                preferences.edit().remove(Constant.PURCHASE_ORDER).commit();
+                                preferences.edit().remove(Constant.PAYMENT_VOUCHER).commit();
+                                preferences.edit().remove(Constant.TAX).commit();
+                                preferences.edit().remove(Constant.CUSTOMER).commit();
+                                preferences.edit().remove(Constant.SUPPLIER).commit();
+                                preferences.edit().remove(Constant.PRODUCT).commit();
+                                preferences.edit().remove(Constant.SERVICE).commit();
+                                preferences.edit().remove(Constant.DEBIT_NOTE).commit();
+                                preferences.edit().remove(Constant.CREDIT_NOTE).commit();
+                                preferences.edit().remove(Constant.SUB_ADMIN).commit();
+                                preferences.edit().remove(Constant.ACCESS_TOKEN).commit();
+                                preferences.edit().remove(Constant.FULLNAME).commit();
+                                preferences.edit().remove(Constant.EMAIL).commit();
+                                SavePref pref = new SavePref();
+                                pref.SavePref(SettingsActivity.this);
+                                pref.setSubsType("");
+                                pref.setNumberFormatPosition(0);
+                                pref.setLanguagePosition(0);
+
+                                Context context = LocaleHelper.setLocale(SettingsActivity.this, "en");
+                                Locale myLocale = new Locale("en");
+                                Resources res = context.getResources();
+                                DisplayMetrics dm = res.getDisplayMetrics();
+                                Configuration conf = res.getConfiguration();
+                                conf.locale = myLocale;
+                                res.updateConfiguration(conf, dm);
+
+                                Intent intent = new Intent(SettingsActivity.this, Signin_Activity.class);
+                                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finishAffinity();
+                                finish();
+                            }
+                        }, 500);
+
+
+                    }else{
+                        Constant.ErrorToast(SettingsActivity.this, jsonObject.getString("message"));
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                progressDialog.dismiss();
+                if (responseBody != null) {
+                    String response = new String(responseBody);
+                    Log.e("responsecustomersF", response);
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+
+                        String status = jsonObject.getString("status");
+                        if (status.equals("false")) {
+                             Constant.ErrorToast(SettingsActivity.this, jsonObject.getJSONObject("message").getString("access_token"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+                }
+
+            }
+        });
+    }
+
+
+
+
 
 
     public void restorePurchase() {

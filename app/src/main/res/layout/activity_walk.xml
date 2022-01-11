@@ -8,6 +8,29 @@
     android:id="@+id/relaive11"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/_15sdp"
+        android:orientation="horizontal"
+>
+
+        <Button
+            android:id="@+id/button_upgrade_now"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:orientation="horizontal"
+            android:background="@drawable/orange_shape"
+            android:text="@string/text_next"
+            android:textStyle="normal"
+            android:textSize="@dimen/_15sdp"
+            android:textColor="@color/white">
+
+        </Button>
+    </LinearLayout>
 
 
 </RelativeLayout>

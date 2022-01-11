@@ -33,6 +33,8 @@ import com.sirapp.Base.BaseActivity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Home.Home_Activity;
 import com.sirapp.R;
+import com.sirapp.Splash_Activity;
+import com.sirapp.Utils.Utility;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
@@ -58,6 +60,9 @@ public class Signup_Activity extends BaseActivity {
     public GoogleSignInOptions gso;
 
     public int RC_SIGN_IN = 120;
+
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1999;
+
 
     private AVLoadingIndicatorView avi;
     ImageView avibackground;
@@ -138,6 +143,11 @@ public class Signup_Activity extends BaseActivity {
             }
         });
 
+
+//        if(Utility.checkAndRequestPermissions(Splash_Activity.this, REQUEST_ID_MULTIPLE_PERMISSIONS)) {
+//            getLogin();
+//        }else{
+//        }
 
     }
 

@@ -783,6 +783,10 @@
     <string name="setting_UPGRADETODAY">Start Free Trial</string>
     <string name="setting_SKIP">SKIP</string>
 
+    <string name="delete_account">Delete Account</string>
+    <string name="delete_soft">Soft Delete</string>
+    <string name="delete_hard">Hard Delete</string>
+
     <string name="setting_RestorePurchases">Restore Purchases</string>
     <string name="setting_InviteFriends">Invite Friends</string>
     <string name="setting_FAQs">FAQs</string>
