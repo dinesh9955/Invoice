@@ -129,7 +129,7 @@ public class SettingsActivity extends BaseActivity implements PurchasesUpdatedLi
                     public void onClick(View v) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
                         builder.setTitle(getString(R.string.app_name));
-                        builder.setMessage("Do you want to Soft Delete")
+                        builder.setMessage("Soft delete will temporarily delete your account and all its data and can be recovered later by contacting support.")
                                 .setCancelable(false)
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
@@ -154,7 +154,7 @@ public class SettingsActivity extends BaseActivity implements PurchasesUpdatedLi
                     public void onClick(View v) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
                         builder.setTitle(getString(R.string.app_name));
-                        builder.setMessage("Do you want to Hard Delete")
+                        builder.setMessage("Hard delete will permanently delete your account and all its data and cannot be recovered later.")
                                 .setCancelable(false)
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {

@@ -11,7 +11,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 14
-        versionName "2.21.02"
+        versionName "2.21.05"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
 //        ndk.abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64', 'armeabi'
