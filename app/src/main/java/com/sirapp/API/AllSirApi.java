@@ -20,7 +20,7 @@ public class AllSirApi {
     public static final String BASE = BASE_APP+"index.php/";
     public static final String BASE_URL = BASE+"api/";
 
-    public static final String BASE_URL_INDEX = BASE_APP+"index.php/";
+    public static final String BASE_URL_INDEX = BASE_APP;
     public static String BASE_URL_PDF = BASE_APP+"uploads/invoice/pdf/";
 
 //    public static final String BASE_LEVEL ="http://prod.webdevelopmentsolution.net/saad/";
