@@ -5,23 +5,28 @@ public class AllSirApi {
 //    public static final String BASE_LEVEL_HTTP ="https://sir-app.com/";
 
 
-//    public static final String BASE_LEVEL ="https://sir-app.com/";
-//    public static final String BASE = BASE_LEVEL+"app/";
-//    public static final String BASE_URL = BASE+"api/";
-//
-//    public static final String BASE_URL_INDEX = BASE+"index.php/";
-//    public static String BASE_URL_PDF = BASE+"uploads/invoice/pdf/";
-
-
-
     public static final String BASE_LEVEL ="https://sir-app.com/";
-    public static final String BASE_DEV = BASE_LEVEL+"saad_dev/";
-    public static final String BASE_APP = BASE_DEV+"app/";
-    public static final String BASE = BASE_APP+"index.php/";
+    public static final String BASE = BASE_LEVEL+"app/";
     public static final String BASE_URL = BASE+"api/";
 
-    public static final String BASE_URL_INDEX = BASE_APP;
-    public static String BASE_URL_PDF = BASE_APP+"uploads/invoice/pdf/";
+    public static final String BASE_URL_INDEX = BASE+"index.php/";
+    public static String BASE_URL_PDF = BASE+"uploads/invoice/pdf/";
+
+    public static final String BASE_DEL = BASE_LEVEL+"saad_dev/app/";
+    public static final String BASE_URL_DEL = BASE+"api/";
+
+
+
+
+
+//    public static final String BASE_LEVEL ="https://sir-app.com/";
+//    public static final String BASE_DEV = BASE_LEVEL+"saad_dev/";
+//    public static final String BASE_APP = BASE_DEV+"app/";
+//    public static final String BASE = BASE_APP+"index.php/";
+//    public static final String BASE_URL = BASE+"api/";
+//
+//    public static final String BASE_URL_INDEX = BASE_APP;
+//    public static String BASE_URL_PDF = BASE_APP+"uploads/invoice/pdf/";
 
 //    public static final String BASE_LEVEL ="http://prod.webdevelopmentsolution.net/saad/";
 //    public static final String BASE = BASE_LEVEL+"app/";
