@@ -963,8 +963,16 @@ public class List_of_Estimate extends BaseFragment {
                                 share.putExtra(Intent.EXTRA_SUBJECT, subject);
                                 share.putExtra(Intent.EXTRA_TEXT, txt);
 
-                                share.putExtra(Intent.EXTRA_STREAM,
-                                        Uri.parse("file:///sdcard/share.jpg"));
+//                                share.putExtra(Intent.EXTRA_STREAM,
+//                                        Uri.parse("file:///sdcard/share.jpg"));
+
+                                File root1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+                                File gpxfile2 = new File(root1, "share.jpg");
+                                Uri imageUri2 = FileProvider.getUriForFile(
+                                        getActivity(),
+                                        BuildConfig.APPLICATION_ID + ".provider",
+                                        gpxfile2);
+                                share.putExtra(Intent.EXTRA_STREAM, imageUri2);
 
                                 if (Utility.isAppAvailable(getActivity(), "com.samsung.android.email.provider")){
                                     share.setPackage("com.samsung.android.email.provider");

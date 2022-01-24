@@ -135,13 +135,13 @@ public class ReceiptViewActivityWebView extends BaseActivity {
         setSupportActionBar(toolbar);
         titleView.setText(getString(R.string.preview));
 
-        Configuration configuration = getResources().getConfiguration();
-        configuration.fontScale=(float) 2; //0.85 small size, 1 normal size, 1,15 big etc
-
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        metrics.scaledDensity = configuration.fontScale * metrics.density;
-        getBaseContext().getResources().updateConfiguration(configuration, metrics);
+//        Configuration configuration = getResources().getConfiguration();
+//        configuration.fontScale=(float) 2; //0.85 small size, 1 normal size, 1,15 big etc
+//
+//        DisplayMetrics metrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+//        metrics.scaledDensity = configuration.fontScale * metrics.density;
+//        getBaseContext().getResources().updateConfiguration(configuration, metrics);
 
         if(AllSirApi.ALL_FONT == true){
             checkDevice();

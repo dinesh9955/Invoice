@@ -337,7 +337,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
                                     String link = shareInvoicelink+""+pdflink;
 
-                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, link, link);
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, link, link, sahrelink);
                                 }else{
                                     customerName = list.get(pos).getInvoicustomer_name();
                                     dataNo = list.get(pos).getInvoice_nobdt();
@@ -352,7 +352,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
                                     String link = shareInvoicelink+""+pdflink;
 
-                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, link, link);
+                                    createbottomsheet_invoiceop(invoiceidbypos, ilnvoiceStatus, link, link, sahrelink);
                                 }
 
                                 invoicelistAdapterdt.notifyDataSetChanged();
@@ -1043,7 +1043,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
 
 
 
-    private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink) {
+    private void createbottomsheet_invoiceop(String invoiceidbypos, String ilnvoiceStatus, String pdflink, String sharelink, String sharelink2) {
         // String urlPDF = Constant.BASE_URL_PDF + pdflink;
 
         if (bottomSheetDialog != null) {
@@ -1217,8 +1217,15 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
                                     share.putExtra(Intent.EXTRA_SUBJECT, subject);
                                     share.putExtra(Intent.EXTRA_TEXT, txt);
 
-                                    share.putExtra(Intent.EXTRA_STREAM,
-                                            Uri.parse("file:///sdcard/share.jpg"));
+//                                    share.putExtra(Intent.EXTRA_STREAM,
+//                                            Uri.parse("file:///sdcard/share.jpg"));
+                                    File root1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+                                    File gpxfile2 = new File(root1, "share.jpg");
+                                    Uri imageUri2 = FileProvider.getUriForFile(
+                                            getActivity(),
+                                            BuildConfig.APPLICATION_ID + ".provider",
+                                            gpxfile2);
+                                    share.putExtra(Intent.EXTRA_STREAM, imageUri2);
 
                                     if (Utility.isAppAvailable(getActivity(), "com.samsung.android.email.provider")){
                                         share.setPackage("com.samsung.android.email.provider");
@@ -1270,7 +1277,7 @@ public class List_of_PV extends BaseFragment implements InvoiceCallBack {
                                             //Get the URL entered
                                             String url = sharelink;
                                             String subject = Utility.getRealValuePVWithoutPlus(getActivity(), dataNo)+" "+getString(R.string.list_From)+" "+selectedCompanyName;
-                                            new DownloadFile(getActivity(), subject).execute(url.replace("https", "http"));
+                                            new DownloadFile(getActivity(), subject).execute(sharelink2.replace("https", "http"));
                                         } else {
 
                                         }

@@ -569,7 +569,7 @@
             android:name="com.sirapp.Customer.Customer_Detail_Activity2"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustResize" >
 
         </activity>
 

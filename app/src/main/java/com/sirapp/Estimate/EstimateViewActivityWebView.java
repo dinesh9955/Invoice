@@ -593,7 +593,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
         }
 
         try {
-            signatureinvoice = IOUtils.toString(getAssets().open(signatureinvoice))
+            signatureinvoice = IOUtils.toString(getAssets().open(signatureHtml))
                     .replaceAll("CompanyStamp", companyname)
                     .replaceAll("SignatureofReceiver", signature_of_receivername)
                     .replaceAll("SignatureofIssuer", signature_of_issuername)
