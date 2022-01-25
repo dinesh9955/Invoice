@@ -86,6 +86,7 @@ public class Signup_Activity extends BaseActivity {
         edemail = findViewById(R.id.edemail);
         edpassword = findViewById(R.id.edpassword);
         btnregister = findViewById(R.id.btnregister);
+
         imgback = findViewById(R.id.imgback);
 
         imageViewGoogleSignIn = findViewById(R.id.imageView756756);
@@ -204,6 +205,7 @@ public class Signup_Activity extends BaseActivity {
          Log.e(TAG, "value "+value);
 
          if(value == -1){
+             btnregister.setEnabled(false);
              avi.smoothToShow();
              avibackground.setVisibility(View.VISIBLE);
 
@@ -259,11 +261,13 @@ public class Signup_Activity extends BaseActivity {
 
                          if (status.equals("false")){
                              Constant.ErrorToast(Signup_Activity.this,jsonObject.getString("message"));
+                             btnregister.setEnabled(true);
                          }
 
 
                      } catch (JSONException e) {
                          e.printStackTrace();
+                         btnregister.setEnabled(true);
                      }
 
 
@@ -273,6 +277,7 @@ public class Signup_Activity extends BaseActivity {
 
                  @Override
                  public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                     btnregister.setEnabled(true);
                      if(responseBody!=null){
                          String response = new String(responseBody);
                          Log.e("signupresponseFBB",response);
