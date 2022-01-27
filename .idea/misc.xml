@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/drawable/createbottomsheet_curve.xml" value="0.20833333333333334" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/drawable/edittextshape.xml" value="0.13157894736842105" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/drawable/fade_green_border_corner_round.xml" value="0.13157894736842105" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/drawable/light_shape.xml" value="0.20512820512820512" />
@@ -15,7 +16,9 @@
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/dialog_delete_account.xml" value="0.33" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/dialog_list.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/filtered_incoicedata.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_fragment__create__invoice.xml" value="0.25" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/freight_amount_dialog.xml" value="0.33" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/service_bottom_sheet.xml" value="0.1921875" />
       </map>
     </option>
   </component>
