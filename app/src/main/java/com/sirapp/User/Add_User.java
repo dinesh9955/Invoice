@@ -645,6 +645,8 @@ public class Add_User extends BaseFragment {
             }
 
         }
+
+
         public String getRealPathFromUri(Uri contentUri) {
             Cursor cursor = null;
             try {

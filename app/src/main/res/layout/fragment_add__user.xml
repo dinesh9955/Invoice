@@ -48,14 +48,14 @@
 
 
                 <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/uploadimage"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"
+                    android:layout_below="@+id/description"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="70dp"
-                    android:id="@+id/uploadimage"
-                    android:src="@drawable/upload_company_logo"
-                    android:layout_below="@+id/description"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/upload_company_logo" />
 
                 <TextView
                     android:layout_width="wrap_content"

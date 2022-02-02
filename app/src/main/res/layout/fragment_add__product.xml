@@ -91,23 +91,22 @@
                     android:singleLine="true"/>
 
                 <EditText
-                    android:layout_marginTop="30dp"
+                    android:id="@+id/productprice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/productname"
-                    android:hint="@string/product_Per_Unit_Price_2"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:inputType="number"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/productprice"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/product_Per_Unit_Price_2"
                     android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:padding="15dp"
                     android:singleLine="true"
-                    />
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
                     android:layout_marginTop="30dp"
