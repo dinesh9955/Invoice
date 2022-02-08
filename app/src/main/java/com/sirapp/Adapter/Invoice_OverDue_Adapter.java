@@ -1,6 +1,12 @@
 package com.sirapp.Adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.sirapp.Constant.Constant.createDialogOpenClass;
+
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,8 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sirapp.Constant.Constant;
+import com.sirapp.Home.Home_Activity;
 import com.sirapp.Home.Model.InvoiceModel;
+import com.sirapp.Invoice.InvoiceActivity;
 import com.sirapp.R;
 import com.sirapp.Utils.GlideApp;
 
@@ -24,12 +34,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Invoice_OverDue_Adapter extends RecyclerView.Adapter<Invoice_OverDue_Adapter.ViewHolderForCat> {
 
-    private Context mcontext ;
+    private Activity mcontext ;
 
     public ArrayList<InvoiceModel> invoiceModelArrayList = new ArrayList<>() ;
 
 
-    public Invoice_OverDue_Adapter(Context mcontext){
+    public Invoice_OverDue_Adapter(Activity mcontext){
         this.mcontext = mcontext;
     }
 
@@ -53,12 +63,37 @@ public class Invoice_OverDue_Adapter extends RecyclerView.Adapter<Invoice_OverDu
         viewHolderForCat.name.setText(invoiceModelArrayList.get(i).getInvoice_no());
         viewHolderForCat.companyname.setText(invoiceModelArrayList.get(i).getCustomer_name());
 
-//        viewHolderForCat.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(mcontext,"Coming Soon",Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        viewHolderForCat.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Toast.makeText(mcontext,"Coming Soon",Toast.LENGTH_SHORT).show();
+                SharedPreferences preferences = mcontext.getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
+
+                if(preferences.getString(Constant.ROLE,"").equalsIgnoreCase("USER")){
+                    Intent intent = new Intent(mcontext, InvoiceActivity.class);
+                    intent.putExtra("keyList" , "keyList");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mcontext.startActivity(intent);
+                }else{
+                    if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(mcontext, InvoiceActivity.class);
+                        intent.putExtra("keyList" , "keyList");
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mcontext.startActivity(intent);
+                    }else{
+                        if(preferences.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(mcontext, InvoiceActivity.class);
+                            intent.putExtra("keyList" , "keyList");
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mcontext.startActivity(intent);
+                        }else{
+                            createDialogOpenClass(mcontext);
+                        }
+                    }
+
+                }
+            }
+        });
 
     }
 

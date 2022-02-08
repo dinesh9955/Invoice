@@ -2,6 +2,8 @@ package com.sirapp.Home.adapter;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,23 +35,27 @@ public class HomeSupplierAdapter extends RecyclerView.Adapter<HomeSupplierAdapte
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_supplier, parent, false);
-        return new MyViewHolder(itemView);
+//        itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.e("TAG","gdgfdg");
+//            }
+//        });
 
+        return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-
         GlideApp.with(context).load(supplierModelArrayList.get(position).getSupplier_image_path()+supplierModelArrayList.get(position).getImage()).placeholder(R.drawable.app_icon).into(holder.img_supplier);
         holder.txtCustomerName.setText(supplierModelArrayList.get(position).getSupplierName());
+
 
     }
 
     @Override
     public int getItemCount() {
-
         return supplierModelArrayList.size();
-
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

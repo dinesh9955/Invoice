@@ -89,6 +89,10 @@ public class InvoiceActivity extends BaseActivity {
         tabs.getTabAt(1).setCustomView(customers);
         tabs.getTabAt(0).setCustomView(addcustomer);
 
+        if (getIntent().hasExtra("keyList")){
+            viewPager.setCurrentItem(0);
+        }
+
         if (getIntent().hasExtra("key")){
             viewPager.setCurrentItem(1);
         }

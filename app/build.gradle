@@ -10,7 +10,7 @@ android {
         applicationId "com.sirapp"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 18
+        versionCode 19
         versionName "2.21.06"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
