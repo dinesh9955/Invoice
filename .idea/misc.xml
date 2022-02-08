@@ -6,25 +6,36 @@
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/drawable/createbottomsheet_curve.xml" value="0.20833333333333334" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/drawable/edittextshape.xml" value="0.13157894736842105" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/drawable/fade_green_border_corner_round.xml" value="0.13157894736842105" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/drawable/ic_back.xml" value="0.13796296296296295" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/drawable/light_shape.xml" value="0.20512820512820512" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/drawable/orange_shape.xml" value="0.20512820512820512" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/abc.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_add__item_.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_companies_.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_company__details_.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_customer_.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_customer__detail_2.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_go_pro.xml" value="0.12138157894736842" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_on_boarding_.xml" value="0.18" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_paypal.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_product_.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_settings.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_signup_.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_walk.xml" value="0.18" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/dialog_delete_account.xml" value="0.33" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/dialog_list.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/filtered_incoicedata.xml" value="0.1921875" />
-        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__product.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__product.xml" value="0.22" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__services.xml" value="0.18" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__user.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_fragment__create__invoice.xml" value="0.25" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_product__listing.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/freight_amount_dialog.xml" value="0.33" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/home_act.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/invoicedetail.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/layout_supplier.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/service_bottom_sheet.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/toolbar_language.xml" value="0.1921875" />
       </map>
     </option>
   </component>

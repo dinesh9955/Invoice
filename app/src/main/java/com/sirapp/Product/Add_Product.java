@@ -735,17 +735,13 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                                 String name = item.getString("name");
 
                                 if (!name.equals("qqq")) {
-
                                     catids.add(category_id);
                                     catnames.add(name);
-
                                 }
-
-//                                ArrayAdapter<String> catadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, catnames);
-//                                productcategory.setAdapter(catadapter);
-
-
                             }
+
+                            catids.add("-1");
+                            catnames.add("Other");
                         }
                     }
                 } catch (JSONException e) {
@@ -1206,6 +1202,12 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                     mybuilder.dismiss();
                     selectedCategoryId = catids.get(i);
                     productcategory1.setText(cnames.get(i));
+
+                    if(selectedCategoryId.equals("-1")){
+                        othercategory.setVisibility(View.VISIBLE);
+                    }else{
+                        othercategory.setVisibility(View.GONE);
+                    }
                 }
             });
 

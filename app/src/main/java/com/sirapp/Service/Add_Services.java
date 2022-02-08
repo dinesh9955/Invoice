@@ -468,11 +468,10 @@ public class Add_Services extends BaseFragment {
                                     catids.add(category_id);
                                     catnames.add(name);
                                 }
-
-//                                ArrayAdapter<String> catadapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,catnames);
-//                                selectcategory.setAdapter(catadapter);
-
                             }
+
+                            catids.add("-1");
+                            catnames.add("Other");
                         }
                     }
                 } catch (JSONException e) {
@@ -735,6 +734,12 @@ public class Add_Services extends BaseFragment {
                     mybuilder.dismiss();
                     selectedCategoryId = catids.get(i);
                     selectcategory1.setText(cnames.get(i));
+
+                    if(selectedCategoryId.equals("-1")){
+                        othercategory.setVisibility(View.VISIBLE);
+                    }else{
+                        othercategory.setVisibility(View.GONE);
+                    }
                 }
             });
 

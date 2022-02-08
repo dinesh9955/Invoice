@@ -1,27 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    android:layout_marginBottom="@dimen/_20sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
     android:background="@color/white">
+
+
+    <ImageView
+        android:id="@+id/backbtn1"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/id_swipe"
+        android:src="@drawable/both_arrow"
+        android:tint="@color/orange"
+        tools:ignore="UseAppTint"
+        android:layout_marginTop="@dimen/_2sdp"/>
+
 
 
     <TextView
         android:id="@+id/id_swipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="5dp"
+        android:drawablePadding="@dimen/_5sdp"
+        android:drawableTint="@color/orange"
         android:padding="2dp"
-        android:text="Swipe to manage"
-        android:textColor="@color/red"
-        android:textSize="@dimen/_10sdp"
+        android:text="@string/swipe_to_manage"
+        android:textColor="@color/orange"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold" />
+
+
+    <ImageView
+        android:id="@+id/backbtn2"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/id_swipe"
+        android:src="@drawable/both_arrow"
+        android:tint="@color/orange"
+        tools:ignore="UseAppTint"
+        android:layout_marginTop="@dimen/_2sdp"/>
 
 
     <TextView
@@ -98,7 +125,6 @@
         android:layout_height="wrap_content"
         android:text="@string/invoiceReminder_Status"
         android:id="@+id/invoicestatus"
-        android:layout_toRightOf="@+id/image"
         android:layout_marginLeft="5dp"
         android:layout_below="@+id/invoicenbtxt"
         android:textColor="@color/gray"
@@ -123,10 +149,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray"
         android:layout_below="@+id/invoicesttsuspend"
         android:layout_marginTop="10dp"
-        >
+        android:background="@color/gray">
 
     </View>
 </RelativeLayout>

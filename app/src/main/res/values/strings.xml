@@ -7,6 +7,12 @@
     <string name="facebook_app_id">1296888023851596</string>
     <string name="fb_login_protocol_scheme">fb1296888023851596</string>
 
+    <string name="update_stocks">Update stocks from stock module to start Invoicing</string>
+
+    <string name="swipe_to_manage">Swipe to manage</string>
+
+
+
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="go_pro">Go Pro</string>

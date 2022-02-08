@@ -1,14 +1,22 @@
 package com.sirapp.Home.adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.sirapp.Constant.Constant.createDialogOpenClass;
+
+import android.app.Activity;
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sirapp.Constant.Constant;
+import com.sirapp.Invoice.InvoiceActivity;
 import com.sirapp.Invoice.SavePref;
 import com.sirapp.Utils.Utility;
 import com.sirapp.Home.Model.InvoiceModel;
@@ -21,10 +29,10 @@ public class HomeInvoiceAdapter extends RecyclerView.Adapter<HomeInvoiceAdapter.
     private static final String TAG = "HomeInvoiceAdapter";
 
 
-    public Context context;
+    public Activity context;
     public ArrayList<InvoiceModel> invoiceModelArrayList = new ArrayList<>() ;
 
-    public HomeInvoiceAdapter(Context context) {
+    public HomeInvoiceAdapter(Activity context) {
         this.context = context;
     }
 
@@ -57,6 +65,40 @@ public class HomeInvoiceAdapter extends RecyclerView.Adapter<HomeInvoiceAdapter.
         String stringFormat = Utility.getPatternFormat(""+numberPostion, stratingvalue);
 
         holder.amount.setText(stringFormat + " "+invoiceModelArrayList.get(position).getPayment_currency());
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toast.makeText(mcontext,"Coming Soon",Toast.LENGTH_SHORT).show();
+                SharedPreferences preferences = context.getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
+
+                if(preferences.getString(Constant.ROLE,"").equalsIgnoreCase("USER")){
+                    Intent intent = new Intent(context, InvoiceActivity.class);
+                    intent.putExtra("keyList" , "keyList");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }else{
+                    if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(context, InvoiceActivity.class);
+                        intent.putExtra("keyList" , "keyList");
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }else{
+                        if(preferences.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(context, InvoiceActivity.class);
+                            intent.putExtra("keyList" , "keyList");
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        }else{
+                            createDialogOpenClass(context);
+                        }
+                    }
+
+                }
+            }
+        });
+
 
     }
 
