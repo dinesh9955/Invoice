@@ -41,19 +41,20 @@
         android:layout_marginTop="5dp"
         android:visibility="gone"
         />
+
     <TextView
+        android:id="@+id/servicecategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Milestone"
-        android:id="@+id/servicecategory"
-        android:layout_toRightOf="@+id/helper"
-        android:layout_marginLeft="11dp"
         android:layout_below="@+id/servicecompany"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/servicecurrency"
+        android:layout_toRightOf="@+id/helper"
+        android:text="Milestone"
         android:textColor="@color/gray"
         android:textSize="@dimen/_8sdp"
-        android:layout_marginTop="5dp"
-        android:layout_toLeftOf="@+id/servicecurrency"
-        android:layout_marginRight="5dp"
 
         />
     <TextView
@@ -82,19 +83,18 @@
 
 
     <TextView
+        android:id="@+id/serviceDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="following"
-        android:id="@+id/serviceDesc"
-        android:layout_toRightOf="@+id/helper"
-        android:layout_marginLeft="11dp"
         android:layout_below="@+id/servicecategory"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/_8sdp"
+        android:layout_marginLeft="11dp"
         android:layout_marginTop="5dp"
-        android:layout_toLeftOf="@+id/servicecurrency"
         android:layout_marginRight="5dp"
-        />
+        android:layout_toLeftOf="@+id/servicecurrency"
+        android:layout_toRightOf="@+id/helper"
+        android:text="following"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/_8sdp" />
 
     <View
         android:layout_width="match_parent"

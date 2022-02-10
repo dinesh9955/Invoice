@@ -108,7 +108,7 @@ public class Product_Listing_Adapter extends RecyclerView.Adapter<Product_Listin
        // Log.e(TAG, "numberPostionAA "+numberPostion);
         String stringFormat = Utility.getPatternFormat(""+numberPostion, doubleMinimum);
 
-        viewHolderForCat.productstock.setText(""+stringFormat);
+        viewHolderForCat.productstock.setText(" "+stringFormat);
 
 
         //reorder
@@ -145,7 +145,7 @@ public class Product_Listing_Adapter extends RecyclerView.Adapter<Product_Listin
         }
         else
         {
-            viewHolderForCat.productcategory.setText(mcontext.getString(R.string.invoice_Category)+""+product_category);
+            viewHolderForCat.productcategory.setText(mcontext.getString(R.string.invoice_Category)+" "+product_category);
         }
 
 

@@ -30,11 +30,14 @@
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__user.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_fragment__create__invoice.xml" value="0.25" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_product__listing.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_service__listing.xml" value="0.12138157894736842" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/freight_amount_dialog.xml" value="0.33" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/home_act.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/invoicedetail.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/layout_supplier.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/product_listing_itemlayout.xml" value="0.22" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/service_bottom_sheet.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/service_itemlayout.xml" value="0.22" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/toolbar_language.xml" value="0.1921875" />
       </map>
     </option>

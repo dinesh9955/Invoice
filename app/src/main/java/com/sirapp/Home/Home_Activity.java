@@ -80,9 +80,13 @@ import com.sirapp.Home.adapter.HomeInvoiceAdapter;
 import com.sirapp.Home.adapter.HomeSupplierAdapter;
 import com.sirapp.Invoice.InvoiceActivity;
 import com.sirapp.Invoice.InvoiceViewActivityWebView;
+import com.sirapp.Invoice.response.InvoiceResponseDto;
 import com.sirapp.Product.Product_Activity;
+import com.sirapp.RetrofitApi.ApiInterface;
+import com.sirapp.RetrofitApi.RetrofitInstance;
 import com.sirapp.Service.Service_Activity;
 import com.sirapp.Settings.OnlinePaymentGatewayActivity;
+import com.sirapp.Settings.SettingsActivity;
 import com.sirapp.SignupSignin.Signin_Activity;
 import com.sirapp.Splash_Activity;
 import com.sirapp.Utils.Utility;
@@ -110,11 +114,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import cz.msebera.android.httpclient.Header;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 import static com.sirapp.Constant.Constant.createDialogOpenClass;
 import static project.aamir.sheikh.circletextview.Model.getContext;
@@ -233,6 +243,76 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
 
         checkWebview();
+
+
+//        ApiInterface apiInterface;
+//        apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
+//
+//        RequestBody reqFileProfileURL = RequestBody.create(MediaType.parse("application/octet-stream"), logoPath);
+//        MultipartBody.Part bodyrofileURL = MultipartBody.Part.createFormData("file", "image2.png", reqFileProfileURL);
+//
+//        Call<ResponseBody> resposresult = apiInterface.uploadFile(bodyrofileURL);
+//        resposresult.enqueue(new Callback<ResponseBody>() {
+//
+//                                 @Override
+//                                 public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+//                                     Log.e(TAG , "responseCodeAA ");
+//                                     Gson gson = new Gson();
+//                                     String json = gson.toJson(call);
+//                                     Log.e("resss ", ""+json);
+//                                 }
+//
+//                                 @Override
+//                                 public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                                     Log.e(TAG , "responseCodeBB ");
+//                                 }
+//        });
+//
+
+
+
+       // File fileimage = new File("/sdcard/back1.png");
+//        RequestParams params = new RequestParams();
+//        if (logoPath != null) {
+//            try {
+//                params.put("file", logoPath);
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+
+//        String token = Constant.GetSharedPreferences(getContext(), Constant.ACCESS_TOKEN);
+//        AsyncHttpClient client = new AsyncHttpClient();
+//        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
+//      //  client.addHeader("Access-Token", token);
+//        client.post("http://3.6.201.59:8006/api/v1/user/uploadFile", params, new AsyncHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+//                //  String response111 = new String(responseBody);
+//                Log.e(TAG, "addproductResp1 "+responseBody.length);
+//                Utility.hideKeypad(Home_Activity.this);
+//                avi.smoothToHide();
+//                avibackground.setVisibility(View.GONE);
+//
+//                if(responseBody.length == 0){
+//                    // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
+//                }else{
+//                    String response = new String(responseBody);
+//                    Log.e("addproductResp", response);
+//
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+//                String response111 = new String(responseBody);
+//                Log.e("addproductResp2 ", response111);
+//
+//            }
+//        });
 
 
      //   pref.setFontDialog("");

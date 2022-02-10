@@ -470,7 +470,7 @@ public class Add_Services extends BaseFragment {
                                 }
                             }
 
-                            catids.add("-1");
+                            catids.add("");
                             catnames.add("Other");
                         }
                     }
@@ -735,7 +735,7 @@ public class Add_Services extends BaseFragment {
                     selectedCategoryId = catids.get(i);
                     selectcategory1.setText(cnames.get(i));
 
-                    if(selectedCategoryId.equals("-1")){
+                    if(selectedCategoryId.equals("")){
                         othercategory.setVisibility(View.VISIBLE);
                     }else{
                         othercategory.setVisibility(View.GONE);
