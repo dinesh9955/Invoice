@@ -25,6 +25,7 @@
             android:orientation="horizontal"
             android:background="@drawable/orange_shape"
             android:text="@string/text_next"
+            android:textAllCaps="false"
             android:textStyle="normal"
             android:textSize="@dimen/_15sdp"
             android:textColor="@color/white">

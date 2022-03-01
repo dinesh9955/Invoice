@@ -40,8 +40,12 @@ public class WalkThroughActivity extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(WalkThroughActivity.this, OnBoarding_Activity.class));
-                finish();
+//                startActivity(new Intent(WalkThroughActivity.this, OnBoarding_Activity.class));
+//                finish();
+
+                Intent intent = new Intent(WalkThroughActivity.this, Signup_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 
