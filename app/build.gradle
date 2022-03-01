@@ -3,13 +3,13 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 32
 //    useLibrary 'org.apache.http.legacy'
 //    buildToolsVersion "31.0.0"
     defaultConfig {
         applicationId "com.sirapp"
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 32
         versionCode 20
         versionName "2.21.07"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
