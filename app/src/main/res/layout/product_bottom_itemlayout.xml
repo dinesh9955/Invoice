@@ -17,32 +17,31 @@
         android:layout_marginTop="@dimen/_5sdp"/>
 
     <TextView
+        android:id="@+id/productname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Company Name"
-        android:textStyle="bold"
-        android:id="@+id/productname"
-        android:layout_toRightOf="@+id/image"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@+id/productcurrency"
+        android:layout_toRightOf="@+id/image"
+        android:text="Company Name"
         android:textSize="@dimen/_11sdp"
-        />
+        android:textStyle="bold" />
+
     <TextView
+        android:id="@+id/productquantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quantity Available:20"
-        android:id="@+id/productquantity"
-        android:layout_toRightOf="@+id/image"
-        android:layout_marginLeft="20dp"
         android:layout_below="@+id/productname"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/_9sdp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
-        android:layout_toLeftOf="@+id/productcurrency"
         android:layout_marginRight="5dp"
-        />
+        android:layout_toLeftOf="@+id/productcurrency"
+        android:layout_toRightOf="@+id/image"
+        android:text="Quantity Available:20"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/_9sdp" />
 
     <TextView
         android:layout_width="wrap_content"

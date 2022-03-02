@@ -18,16 +18,17 @@
         />
 
     <TextView
+        android:id="@+id/servicename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Company Name"
-        android:textStyle="bold"
-        android:id="@+id/servicename"
-        android:layout_toRightOf="@+id/image"
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
-        android:layout_toLeftOf="@+id/productcurrency"
+        android:layout_toLeftOf="@+id/servicecurrency"
+        android:layout_toRightOf="@+id/image"
+        android:text="Company Name"
         android:textSize="@dimen/_11sdp"
+        android:textStyle="bold"
+
         />
     <TextView
     android:layout_width="wrap_content"
@@ -41,24 +42,23 @@
         android:textSize="@dimen/_11sdp"
         android:visibility="gone"
     android:layout_marginTop="5dp"
-    android:layout_toLeftOf="@+id/servicecurrencyunit"
+    android:layout_toLeftOf="@+id/servicecurrency"
     android:layout_marginRight="5dp"
 
     />
 
     <TextView
+        android:id="@+id/serviceunit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Unit:Day"
-        android:id="@+id/serviceunit"
-        android:layout_toRightOf="@+id/image"
         android:layout_below="@+id/servicedescription"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/_9sdp"
         android:layout_marginTop="5dp"
-        android:layout_toLeftOf="@+id/productcurrency"
         android:layout_marginRight="5dp"
-        />
+        android:layout_toLeftOf="@+id/servicecurrencyunit"
+        android:layout_toRightOf="@+id/image"
+        android:text="Unit:Day"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/_9sdp" />
 
 
     <TextView
@@ -78,28 +78,28 @@
 
 
     <TextView
+        android:id="@+id/servicecurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
         android:text="120.00"
-        android:textStyle="bold"
-        android:id="@+id/servicecurrency"
-        android:layout_alignParentEnd="true"
         android:textColor="@color/lightpurple"
         android:textSize="@dimen/_11sdp"
+        android:textStyle="bold"
 
         />
+
     <TextView
+        android:id="@+id/servicecurrencyunit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/servicecurrency"
-        android:text="Qatari Rial"
-        android:id="@+id/servicecurrencyunit"
         android:layout_alignParentEnd="true"
-        android:textColor="@color/lightpurple"
-        android:textSize="@dimen/_8sdp"
         android:padding="3dp"
-        />
+        android:text="Qatari Rial"
+        android:textColor="@color/lightpurple"
+        android:textSize="@dimen/_8sdp" />
 
     <View
         android:layout_width="match_parent"
