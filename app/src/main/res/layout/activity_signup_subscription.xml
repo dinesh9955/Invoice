@@ -208,21 +208,23 @@
         <Button
             android:id="@+id/button_upgrade_now"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginRight="@dimen/_20sdp"
             android:orientation="horizontal"
             android:background="@drawable/orange_shape"
             android:text="@string/setting_UPGRADETODAY"
+            android:textAllCaps="false"
             android:textStyle="bold"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="@dimen/_24sdp"
+            android:padding="@dimen/_7sdp"
             android:textColor="@color/white">
         </Button>
 
         <Button
             android:id="@+id/button_skip"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginRight="@dimen/_20sdp"
             android:orientation="horizontal"
