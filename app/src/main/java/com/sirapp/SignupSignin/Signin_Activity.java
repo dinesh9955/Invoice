@@ -153,7 +153,6 @@ public class Signin_Activity extends BaseActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
-
             }
         });
 
@@ -169,16 +168,6 @@ public class Signin_Activity extends BaseActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-
-
-
-
-
-
-
 
                 Signin();
 
