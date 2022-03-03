@@ -71,13 +71,15 @@
         <activity
             android:name="com.sirapp.Invoice.ViewInvoice_Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/Settings" />
+            android:theme="@style/Settings"
+            android:exported="true"/>
 
 
         <activity
             android:name="com.sirapp.Receipts.ViewReceipt_Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/Settings" />
+            android:theme="@style/Settings"
+            android:exported="true"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -87,7 +89,8 @@
         <activity
             android:name="com.sirapp.Splash_Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/Splash">
+            android:theme="@style/Splash"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -99,7 +102,8 @@
             android:name=".wwww"
             android:screenOrientation="portrait"
             android:theme="@style/Splash"
-            android:windowSoftInputMode="adjustResize" >
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
 
 
 
@@ -122,7 +126,8 @@
         <activity
             android:name=".SignupSignin.WalkThroughActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Splash">
+            android:theme="@style/Splash"
+            android:exported="true">
 
         </activity>
 
@@ -130,6 +135,7 @@
         <activity
             android:name="com.sirapp.Home.GoProActivity"
             android:screenOrientation="portrait"
+            android:exported="true"
             android:theme="@style/Splash">
 
         </activity>
@@ -137,6 +143,7 @@
         <activity
             android:name="com.sirapp.SignupSignin.SignupSubscriptionActivity"
             android:screenOrientation="portrait"
+            android:exported="true"
             android:theme="@style/Splash">
 
         </activity>
@@ -146,21 +153,24 @@
             android:name="com.sirapp.CN.ViewCreditNote_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
         <activity
             android:name="com.sirapp.CN.CreditNotesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
         <activity
             android:name="com.sirapp.PO.POActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
 
         </activity>
 
@@ -168,7 +178,8 @@
             android:name="com.sirapp.PO.ViewPO_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
 
         </activity>
 
@@ -176,27 +187,31 @@
             android:name="com.sirapp.PO.POViewActivityWebView"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
         <activity
             android:name="com.sirapp.PO.POViewActivityWebViewPayment"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
         <activity
             android:name="com.sirapp.PO.EditPOActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
         <activity
             android:name="com.sirapp.PO.ConvertToPVActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
 
         </activity>
 
@@ -206,14 +221,16 @@
             android:name="com.sirapp.PV.PVActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
         <activity
             android:name="com.sirapp.PO.POToPVWebview"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
 
@@ -221,7 +238,8 @@
             android:name="com.sirapp.PV.ViewPV_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
 
@@ -229,14 +247,16 @@
             android:name="com.sirapp.PV.PVViewActivityWebView"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
         <activity
             android:name="com.sirapp.PV.EditEditPVActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
 
@@ -244,7 +264,8 @@
             android:name="com.sirapp.DN.DebitNotesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
 
@@ -252,14 +273,16 @@
             android:name="com.sirapp.DN.ViewDebitNote_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
         <activity
             android:name="com.sirapp.DN.DebitNotesViewActivityWebView"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
         </activity>
 
 
@@ -268,7 +291,8 @@
             android:name="com.sirapp.Receipts.EditReceiptActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
-            android:windowSoftInputMode="adjustPan|adjustResize" >
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:exported="true">
 
         </activity>
 
@@ -276,6 +300,7 @@
         <activity
             android:name="com.sirapp.MainActivity"
             android:screenOrientation="portrait"
+            android:exported="true"
             android:theme="@style/Splash">
 
         </activity>
@@ -283,6 +308,7 @@
         <activity
             android:name="com.sirapp.Xyz"
             android:screenOrientation="portrait"
+            android:exported="true"
             android:theme="@style/Splash">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
@@ -313,37 +339,45 @@
 
         <activity
             android:name="com.sirapp.OnBoardings.OnBoarding_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings" />
         <activity
             android:name="com.sirapp.SignupSignin.Signup_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings" />
         <activity
             android:name="com.sirapp.SignupSignin.Signin_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings" />
         <activity
             android:name="com.sirapp.ForgotResetPassword.ResetPassword_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings" />
         <activity
             android:name="com.sirapp.ForgotResetPassword.ForgotPassword_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings" />
         <activity
             android:name="com.sirapp.SignupSignin.Verification_Code_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings" />
         <activity
             android:name="com.sirapp.Home.Settings_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings" />
         <activity
             android:name="com.sirapp.Home.Home_Activity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/Settings" >
+            android:theme="@style/Settings"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -354,12 +388,14 @@
         </activity>
         <activity
             android:name="com.sirapp.Estimate.EstimateActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <activity
             android:name="com.sirapp.Invoice.InvoiceActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustResize" >
@@ -374,12 +410,14 @@
         </activity>
         <activity
             android:name="com.sirapp.Invoice.ConvertToReceiptsActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <activity
             android:name="com.sirapp.Estimate.ConvertToInvoiceActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
@@ -387,18 +425,21 @@
 
         <activity
             android:name="com.sirapp.Invoice.InvoiceToReceiptsWebview"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <activity
             android:name="com.sirapp.Estimate.EstimateToInvoiceWebview"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <activity
             android:name="com.sirapp.CN.CreditNotesViewActivityWebView"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
@@ -406,16 +447,19 @@
 
         <activity
             android:name="com.sirapp.Customer.Customer_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Vendor.Vendor_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Company.Companies_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustResize" >
@@ -423,96 +467,113 @@
         </activity>
         <activity
             android:name="com.sirapp.Details.Company_Details_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name="com.sirapp.Details.User_Detail_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Details.Product_Detail_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Details.Customer_Detail_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Details.Vendor_Detail_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Tax.Tax_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Service.Service_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Product.Product_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.User.User_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Details.Service_Detail_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Stock.Stock_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Tax.Tax_Edit"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Details.Stock_Products_Detail"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Invoice.Add_Item_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Invoice.InvoiceViewActivityWebView"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.sirapp.Invoice.InvoiceViewActivityWebViewPayment"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <activity
             android:name="com.sirapp.Receipts.ReceiptViewActivityWebView"
+            android:exported="true"
             android:configChanges="density"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
-
         </activity>
 
         <activity
             android:name="com.sirapp.Invoice.EditInvoiceActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
@@ -520,18 +581,21 @@
 
         <activity
             android:name="com.sirapp.Receipts.ReceiptsActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <activity
             android:name="com.sirapp.Estimate.EstimateViewActivityWebView"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <activity
             android:name="com.sirapp.Estimate.EditEstimateActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
@@ -539,12 +603,14 @@
 
         <activity
             android:name="com.sirapp.Receipts.EditEditReceiptActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <activity
             android:name="com.sirapp.Estimate.EditEditEstimateActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
@@ -552,12 +618,14 @@
 
         <activity
             android:name="com.sirapp.Estimate.ViewEstimate_Activity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" />
 
         <activity
             android:name="com.sirapp.Invoice.ChooseTemplate"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -567,6 +635,7 @@
 
         <activity
             android:name="com.sirapp.Customer.Customer_Detail_Activity2"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustResize" >
@@ -576,6 +645,7 @@
 
         <activity
             android:name="com.sirapp.Report.ReportActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -585,6 +655,7 @@
 
         <activity
             android:name="com.sirapp.Report.ReportViewActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -593,6 +664,7 @@
 
         <activity
             android:name="com.sirapp.Report.PreviewItActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -606,6 +678,7 @@
 
         <activity
             android:name="com.sirapp.InvoiceReminder.InvoiceReminderActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -614,6 +687,7 @@
 
         <activity
             android:name="com.sirapp.InvoiceReminder.ViewInvoiceReminderActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -622,6 +696,7 @@
 
         <activity
             android:name="com.sirapp.InvoiceReminder.ViewInvoiceActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -630,6 +705,7 @@
 
         <activity
             android:name="com.sirapp.InvoiceReminder.SendInvoiceReminderActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -642,6 +718,7 @@
 
         <activity
             android:name="com.sirapp.ThankYouNote.ThankYouNoteActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -650,6 +727,7 @@
 
         <activity
             android:name="com.sirapp.ThankYouNote.ViewThankYouNoteActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -659,6 +737,7 @@
 
         <activity
             android:name="com.sirapp.ThankYouNote.ViewInvoiceActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -668,6 +747,7 @@
 
         <activity
             android:name="com.sirapp.ThankYouNote.SendThankYouNoteActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -678,6 +758,7 @@
 
         <activity
             android:name="com.sirapp.Settings.SettingsActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -687,6 +768,7 @@
 
         <activity
             android:name="com.sirapp.Settings.WebShowActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -695,6 +777,7 @@
 
         <activity
             android:name="com.sirapp.Settings.SupportActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -704,6 +787,7 @@
 
         <activity
             android:name="com.sirapp.Settings.LanguageActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -713,6 +797,7 @@
 
         <activity
             android:name="com.sirapp.Settings.FAQsActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -721,6 +806,7 @@
 
         <activity
             android:name="com.sirapp.Settings.OnlinePaymentGatewayActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -729,6 +815,7 @@
 
         <activity
             android:name="com.sirapp.Settings.PayPalActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize">
@@ -737,6 +824,7 @@
 
         <activity
             android:name="com.sirapp.Settings.StripeWebActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize">
@@ -758,6 +846,7 @@
 
         <activity
             android:name="com.sirapp.Abc"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -767,6 +856,7 @@
 
         <activity
             android:name="com.sirapp.mno"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Settings"
             android:windowSoftInputMode="adjustPan|adjustResize" >
@@ -777,7 +867,8 @@
 
 
         <service
-            android:name="com.sirapp.FCM.MyFirebaseInstanceIDService">
+            android:name="com.sirapp.FCM.MyFirebaseInstanceIDService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
@@ -818,7 +909,8 @@
             android:value="@integer/google_play_services_version" />
 
 
-        <receiver android:name="com.appsflyer.SingleInstallBroadcastReceiver" android:exported="true">
+        <receiver android:name="com.appsflyer.SingleInstallBroadcastReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
