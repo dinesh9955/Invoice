@@ -113,12 +113,14 @@ public class Product_Detail_Activity extends BaseActivity {
                         String product_name = product.getString("name");
                         String p_image = product.getString("image");
                         String p_price = product.getString("price");
+                        String minimum = product.getString("minimum");
                         String currency_code = product.getString("currency_code");
                         String p_category = product.getString("category");
                         String measurement_unit = product.getString("measurement_unit");
                         String desc = product.getString("description");
                         String is_taxable = product.getString("is_taxable");
                         String product_image_path = data.getString("product_image_path");
+
 
                         String otherproductmeasrement = product.getString("measurement_unit_short");
 
@@ -158,25 +160,34 @@ public class Product_Detail_Activity extends BaseActivity {
                             description.setText(desc);
                         }
 
-                        if (measurement_unit.equals("") || measurement_unit.equals("null")) {
-                            measurement.setText("");
-                        } else {
-                            if(measurement_unit.equals(getString(R.string.item_Other))) {
-                                measurement.setText(getString(R.string.item_MeasurementUnitDots)+" " + otherproductmeasrement);
-                            }else {
-                                measurement.setText(getString(R.string.item_MeasurementUnitDots)+" " + measurement_unit);
-                            }
+                        double doubleMinimum = 0.0;
+                        try{
+                            doubleMinimum = Double.parseDouble(minimum);
+                        }catch (Exception e){
+
                         }
 
-                        if (is_taxable.equals("") || measurement_unit.equals("null")) {
+                        measurement.setText(getString(R.string.product_Reorder_Level_)+" "+doubleMinimum);
 
-                            taxable.setText("");
-                        }
-                        else if (is_taxable.equals("0")) {
-                            taxable.setText(getString(R.string.item_TaxableNo));
-                        } else if (is_taxable.equals("1")) {
-                            taxable.setText(getString(R.string.item_TaxableYes));
-                        }
+//                        if (measurement_unit.equals("") || measurement_unit.equals("null")) {
+//                            measurement.setText("");
+//                        } else {
+//                            if(measurement_unit.equals(getString(R.string.item_Other))) {
+//                                measurement.setText(getString(R.string.item_MeasurementUnitDots)+" " + otherproductmeasrement);
+//                            }else {
+//                                measurement.setText(getString(R.string.item_MeasurementUnitDots)+" " + measurement_unit);
+//                            }
+//                        }
+
+//                        if (is_taxable.equals("") || measurement_unit.equals("null")) {
+//
+//                            taxable.setText("");
+//                        }
+//                        else if (is_taxable.equals("0")) {
+//                            taxable.setText(getString(R.string.item_TaxableNo));
+//                        } else if (is_taxable.equals("1")) {
+//                            taxable.setText(getString(R.string.item_TaxableYes));
+//                        }
 
                         RequestOptions options = new RequestOptions();
                         options.centerCrop();

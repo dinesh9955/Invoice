@@ -15,16 +15,17 @@
         android:layout_marginStart="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/placeholder_big"
-        app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:riv_corner_radius="100dp" />
+        app:riv_corner_radius="100dp"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/companyname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="@dimen/_10sdp"
         android:text="Company Name"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/image"
@@ -48,7 +49,7 @@
         android:id="@+id/invoicepricetxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginTop="4dp"
         android:layout_marginRight="5dp"
         android:text="Address"

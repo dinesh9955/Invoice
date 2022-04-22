@@ -4691,7 +4691,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                     .replaceAll("Debit Note Date", htmlview_DebitNoteDate)
                     // .replaceAll("Reference No", htmlview_ReferenceNo)
                     .replaceAll("SUMMARY", htmlview_SUMMARY)
-                    .replaceAll("Product/Item", htmlview_ProductItem)
+                    .replaceAll("Description", htmlview_ProductItem)
                     .replaceAll("Unit of Measurement", htmlview_UnitofMeasurement)
                     .replaceAll("Quantity", htmlview_Quantity)
                     .replaceAll("Rate", htmlview_Rate)

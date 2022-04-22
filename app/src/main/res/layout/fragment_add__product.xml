@@ -163,7 +163,8 @@
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"
+                    android:visibility="gone"/>
 
 
                 <EditText
@@ -201,25 +202,24 @@
                     />
 
 
-
                 <Button
                     android:id="@+id/measurementunit1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/othercategory"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edittextshape"
-                    android:hint="@string/product_Measurement_Unit_2"
-                    android:spinnerMode="dialog"
                     android:gravity="left|center_vertical"
+                    android:hint="@string/product_Measurement_Unit_2"
                     android:paddingLeft="15dp"
-                    android:textStyle="normal"
-                    android:textSize="@dimen/_10sdp"
-                    android:textColor="@color/black"
+                    android:spinnerMode="dialog"
                     android:textAllCaps="false"
-                    android:layout_below="@+id/othercategory"
-                    />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="normal"
+                    android:visibility="gone"/>
 
 
                 <EditText
@@ -242,23 +242,22 @@
                     />
 
                 <EditText
-                    android:layout_marginTop="30dp"
+                    android:id="@+id/productdescription"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_below="@+id/mesurementunitedittxt"
-                    android:hint="@string/product_Product_Description"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/productdescription"
                     android:gravity="start"
-                    android:maxHeight="150dp"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/product_Product_Description"
                     android:imeOptions="actionDone"
-                    />
+                    android:maxHeight="150dp"
+                    android:padding="15dp"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
                 <com.isapanah.awesomespinner.AwesomeSpinner
                     android:id="@+id/selectcompany"
                     android:layout_width="match_parent"
@@ -310,17 +309,17 @@
                     />
 
                 <TextView
+                    android:id="@+id/taxable"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/taxable"
                     android:layout_below="@+id/selectwarehouse"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
                     android:text="@string/product_TAXABLE"
                     android:textColor="@color/lightpurple"
                     android:textSize="@dimen/_10sdp"
-                    />
+                    android:visibility="gone"/>
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -328,7 +327,8 @@
                     android:layout_marginTop="10dp"
                     android:id="@+id/radiogroup"
                     android:orientation="horizontal"
-                    android:layout_below="@id/taxable">
+                    android:layout_below="@id/taxable"
+                    android:visibility="gone">
                     <RadioButton
                         android:id="@+id/ryes"
                         android:layout_width="wrap_content"

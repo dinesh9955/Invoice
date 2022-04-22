@@ -7,13 +7,12 @@
     <title>Invoice</title>
     <style>
             html {
-             zoom: 0.9;
+          zoom: 0.9;
         }
-
         p {
             margin: 0px;
         }
-        
+
         .invoice-box {
              max-width: 100%;
             margin: auto;
@@ -24,7 +23,7 @@
             color: #000;
 <!--            box-shadow: 0 3px 6px #00000017;-->
         }
-        
+
         :root{
                 --theme-color:#FAC45D;
             }
@@ -32,122 +31,122 @@
             width: 100%;
             line-height: inherit;
             text-align: left;
-			
-			
+
+
         }
-        
+
         .invoice-box table td {
             padding: 5px;
             vertical-align: top;
             font-size: 14px;
-			
-			
+
+
         }
         .invoice-box table th{
 			padding:10px;
-			
-			
+
+
 		}
         .invoice-box table tr.top table td {
             padding-bottom: 20px;
-			
+
         }
-        
+
         .invoice-box table tr.top table td.title {
             font-size: 45px;
             line-height: 45px;
             color: #000;
-			
+
         }
-        
+
         .invoice-box table tr.information table td {
             padding-bottom: 40px;
-			
+
         }
-        
+
         .invoice-box table tr.heading td {
             background: #eee;
             border-bottom: 1px solid #ddd;
             font-weight: bold;
-			
+
         }
-        
+
         .invoice-box table tr.details td {
             padding-bottom: 20px;
-			
+
         }
-        
+
         .invoice-box table tr.item td {
             border-bottom: 1px solid #eee;
-			
+
         }
-        
+
         .invoice-box table tr.item.last td {
             border-bottom: none;
-			
+
         }
-        
+
         .invoice-box table tr.total td:nth-child(2) {
             border-top: 2px solid #eee;
             font-weight: bold;
-			
+
         }
-        
+
         .text-left {
             text-align: left !important;
-			
+
         }
-        
+
         .text-right {
             text-align: right !important;
-			
+
         }
-        
+
         table.border,
         .border td,
         .border th {
             border: 1px solid #000;
             border-collapse: collapse;
-			
+
         }
 		.column img{
 		width:150px;
 		position:relative;
-		
+
 		}
-		
-		
-        
+
+
+
         table.summary,
         .summary td {
             border: 1px solid #000;
             border-collapse: collapse;
-			
+
         }
         /* template 2 */
          #TEMP2#
-        
+
         /* template 2 end */
         /* template 3 */
-         #TEMP3# 
-        
-        
+         #TEMP3#
+
+
         /* template 3 end */
-        
+
         table.summary th,
         table.summary td {
             padding: 5px;
             font-size: 14px;
-			
+
         }
-        
+
         td.no_border {
             border: none;
-			
+
         }
         /* template 1 */
-         #TEMP1# 
-         #TEMP4# 
+         #TEMP1#
+         #TEMP4#
         /* template 1 end */
         .temp_4{
            width:33%;
@@ -159,13 +158,13 @@
                 width: 100%;
                 display: block;
                 text-align: center;
-				
+
             }
             .invoice-box table tr.information table td {
                 width: 100%;
                 display: block;
                 text-align: center;
-				
+
             }
         }
 
@@ -199,7 +198,7 @@
                                 <tr>
                                     <td>
                                         <b>Company Name</b><br/>Address
-                                       
+
                                     </td>
                                     <td>
                                         <table>
@@ -223,7 +222,7 @@
                         <table>
                             <tbody>
                                 <tr>
-                                   
+
                                 </tr>
                             </tbody>
                         </table>
@@ -301,8 +300,8 @@
                     <table border="solid 1px #000" class="summary" style="padding: 15px;">
                         <thead >
                             <tr>
-                                <th width="20%">Product/Item</th>
-                                <th width="25%">Unit of Measurement</th>
+                                <th width="35%">Description</th>
+<!--                                <th width="25%">Unit of Measurement</th>-->
                                 <th>Quantity</th>
                                 <th width="22%">Rate</th>
                                 <th width="20%" style="padding-right: 10px;text-align:right;padding-right:10px;">Amount_</th>
@@ -314,7 +313,7 @@
                         <tfoot>
                             <tr>
 
-                                <td colspan="3" class="no_border" style="padding-left: 10px;">
+                                <td colspan="2" class="no_border" style="padding-left: 10px;">
 
 
                                     <span class="hide" style="margin-bottom:0px;margin-top:0px;">
@@ -351,7 +350,7 @@
                                         </span>
 
                                 </td>
-                                
+
                                 <td class="text-left" style="padding-left: 10px;">
                                     <b>Gross Amount</b>
                                     <p> Discount </p>
@@ -367,14 +366,14 @@
                                     <p> Shipping- </p>
                                 </td>
                             </tr>
-                                <td colspan="3" class="no_border"></td>
+                                <td colspan="2" class="no_border"></td>
                                 <td class="text-left" style="padding-left: 10px;"><b>Net Amount</b></td>
                                 <td class="" style="padding-right: 10px;text-align:right;padding-right:10px;"><b>Total Amount-</b></td>
                             </tr>
 
-                            <tr class="hide"><td colspan="3" class="no_border"></td><td  style="padding-left: 10px;text-align:left;">Paid Amount</td><td style="padding-right: 10px;text-align:right;padding-right:10px;">PaidsAmount</td></tr>
+                            <tr class="hide"><td colspan="2" class="no_border"></td><td  style="padding-left: 10px;text-align:left;">Paid Amount</td><td style="padding-right: 10px;text-align:right;padding-right:10px;">PaidsAmount</td></tr>
                             <tr>
-                                <td colspan="3" class="no_border"></td>
+                                <td colspan="2" class="no_border"></td>
                                 <td class="balance_due" style="padding-left: 10px;"><b>Balance Due_</b></td>
                                 <td class="balance_due" style="padding-right: 10px;text-align:right;padding-right:10px;"><b>Balance Due-</b></td>
                             </tr>
@@ -397,7 +396,7 @@
             <!--                </tr>-->
             <!-- #PAYMENTS# #MAKEPAYABLE# -->
             <td>#SIGNATURES#</td>
-            
+
             <tr>
                 <td colspan="5">
                     <table>

@@ -786,14 +786,14 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
         } else if (price.isEmpty()) {
             productprice.setError(getString(R.string.dialog_Required));
             productprice.requestFocus();
-        }  else if (selectedMeasuremetnId.equals("")) {
-            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Measurement_Unit_required));
+//        }  else if (selectedMeasuremetnId.equals("")) {
+//            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Measurement_Unit_required));
         } else if (selectedCompanyId.equals("")) {
             Constant.ErrorToast(getActivity(),getString(R.string.dialog_Company_required));
 //        } else if (selectedTaxable.equals("")) {
 //            Constant.ErrorToast(getActivity(), "Tax information is required");
-        } else if (selectedCategoryId.equals("") && othercat.isEmpty()) {
-            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Product_category_required));
+//        } else if (selectedCategoryId.equals("") && othercat.isEmpty()) {
+//            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Product_category_required));
         } else {
                 avi.smoothToShow();
                 avibackground.setVisibility(View.VISIBLE);

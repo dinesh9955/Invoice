@@ -189,10 +189,11 @@ public class SettingsActivity extends BaseActivity implements PurchasesUpdatedLi
             }
         });
 
+        arrayListIcons.add(R.drawable.support_st);
         arrayListIcons.add(R.drawable.comma_st);
         arrayListIcons.add(R.drawable.online_payment_st);
         arrayListIcons.add(R.drawable.subscribe_st);
-        arrayListIcons.add(R.drawable.upgrade_st);
+//        arrayListIcons.add(R.drawable.upgrade_st);
         arrayListIcons.add(R.drawable.restore_purchase_st);
         arrayListIcons.add(R.drawable.invite_friend_st);
         arrayListIcons.add(R.drawable.faq_st);
@@ -201,13 +202,14 @@ public class SettingsActivity extends BaseActivity implements PurchasesUpdatedLi
         arrayListIcons.add(R.drawable.rate_st);
         arrayListIcons.add(R.drawable.terms_st);
         arrayListIcons.add(R.drawable.privacy_st);
-        arrayListIcons.add(R.drawable.support_st);
 
 
+
+        arrayListNames.add(getString(R.string.setting_Support));
         arrayListNames.add(getString(R.string.setting_CommaFormatSelection));
         arrayListNames.add(getString(R.string.setting_OnlinePaymentGateway));
         arrayListNames.add(getString(R.string.setting_Subscribe));
-        arrayListNames.add(getString(R.string.setting_Upgrade));
+//        arrayListNames.add(getString(R.string.setting_Upgrade));
         arrayListNames.add(getString(R.string.setting_RestorePurchases));
         arrayListNames.add(getString(R.string.setting_InviteFriends));
         arrayListNames.add(getString(R.string.setting_FAQs));
@@ -216,7 +218,7 @@ public class SettingsActivity extends BaseActivity implements PurchasesUpdatedLi
         arrayListNames.add(getString(R.string.setting_Ratetheapp));
         arrayListNames.add(getString(R.string.setting_Termsofuse));
         arrayListNames.add(getString(R.string.setting_PrivacyPolicy));
-        arrayListNames.add(getString(R.string.setting_Support));
+
 
 
         invoicelistAdapterdt = new SettingsAdapter(SettingsActivity.this, arrayListIcons, arrayListNames);

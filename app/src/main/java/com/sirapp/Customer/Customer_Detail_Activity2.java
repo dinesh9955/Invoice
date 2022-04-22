@@ -335,8 +335,8 @@ public class Customer_Detail_Activity2 extends BaseActivity {
             public void onClick(View view) {
                 save.setVisibility(View.VISIBLE);
                 cancel.setVisibility(View.VISIBLE);
-                editbtn.setVisibility(View.GONE);
-                imagedescription.setVisibility(View.VISIBLE);
+                editbtn.setVisibility(View.INVISIBLE);
+               // imagedescription.setVisibility(View.VISIBLE);
 
                 RequestOptions options = new RequestOptions();
                 options.centerCrop();
@@ -373,8 +373,8 @@ public class Customer_Detail_Activity2 extends BaseActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                save.setVisibility(View.GONE);
-                cancel.setVisibility(View.GONE);
+                save.setVisibility(View.INVISIBLE);
+                cancel.setVisibility(View.INVISIBLE);
                 editbtn.setVisibility(View.VISIBLE);
                 imagedescription.setVisibility(View.GONE);
 

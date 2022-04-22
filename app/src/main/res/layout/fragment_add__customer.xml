@@ -18,113 +18,109 @@
                 android:id="@+id/bluerelative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingBottom="30dp"
-                android:elevation="10dp"
                 android:layout_marginBottom="50dp"
-                >
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:paddingBottom="30dp">
 
                 <TextView
-                    android:visibility="gone"
+                    android:id="@+id/heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="?actionBarSize"
                     android:text="COMPANY SETUP"
                     android:textColor="@color/darkblue"
                     android:textSize="26sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="?actionBarSize"
-                    android:layout_marginLeft="20dp"
-                    android:id="@+id/heading">
-                </TextView>
+                    android:visibility="gone"></TextView>
 
                 <TextView
-                    android:visibility="gone"
+                    android:id="@+id/description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="You need to complete the company setup in order\nto make the most of the SIR app."
-                    android:layout_marginLeft="20dp"
                     android:layout_below="@+id/heading"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
+                    android:text="You need to complete the company setup in order\nto make the most of the SIR app."
                     android:textSize="12sp"
-                    android:id="@+id/description"/>
+                    android:visibility="gone" />
 
 
                 <TextView
+                    android:id="@+id/contacts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/contacts"
                     android:layout_below="@+id/description"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="70dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:drawableRight="@drawable/import_contact"
                     android:text="@string/customer_IMPORT_CUSTOMER_FROM_CONTACT"
                     android:textColor="@color/lightpurple"
-                    android:drawableRight="@drawable/import_contact"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="@dimen/_10sdp"
-                    />
+                    android:textSize="@dimen/_10sdp" />
 
 
                 <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/uploadimage"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"
+                    android:layout_below="@+id/contacts"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
-                    android:id="@+id/uploadimage"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/upload_company_logo"
-                    android:layout_below="@+id/contacts"
-                    android:scaleType="centerCrop"/>
+                    android:visibility="gone"/>
 
                 <TextView
+                    android:id="@+id/imagedescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/customer_Upload_customer_logo"
-                    android:layout_marginLeft="20dp"
                     android:layout_below="@+id/uploadimage"
-                    android:layout_marginTop="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:id="@+id/imagedescription"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@color/dark_grey"/>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/customer_Upload_customer_logo"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility="gone"/>
 
 
                 <RadioGroup
-                    android:visibility="gone"
                     android:id="@+id/customergroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imagedescription"
                     android:layout_marginTop="30dp"
-                    android:orientation="horizontal"
                     android:gravity="center"
-                    >
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Customer Type:   "
-                        android:textSize="12sp"
-                        />
+                        android:textSize="12sp" />
 
                     <RadioButton
                         android:id="@+id/individual"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/customer_Inclusive"
                         android:layout_gravity="start"
-                        android:textSize="12sp"
-                        />
+                        android:text="@string/customer_Inclusive"
+                        android:textSize="12sp" />
 
                     <RadioButton
                         android:id="@+id/company"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/customer_Exclusiven"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="15dp"
-                        android:textSize="12sp"
                         android:checked="true"
+                        android:text="@string/customer_Exclusiven"
+                        android:textSize="12sp"
 
                         />
 
@@ -136,361 +132,343 @@
                     android:id="@+id/selectcompany"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:spinnerDirection="ltr"
-                    app:spinnerHint="@string/customer_Select_Company"
-                    android:layout_marginTop="30dp"
+                    android:layout_below="@+id/customergroup"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edittextshape"
-                    android:layout_below="@+id/customergroup"
                     android:visibility="gone"
-                    />
+                    app:spinnerDirection="ltr"
+                    app:spinnerHint="@string/customer_Select_Company" />
 
 
                 <Button
                     android:id="@+id/selectcompany2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/customergroup"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:padding="@dimen/_5sdp"
                     android:background="@drawable/search_shape"
-                    android:hint="@string/customer_Select_Company"
-                    android:spinnerMode="dialog"
                     android:gravity="left|center_vertical"
-                    android:textStyle="normal"
-                    android:textSize="@dimen/_10sdp"
-                    android:textColor="@color/black"
+                    android:hint="@string/customer_Select_Company"
+                    android:padding="@dimen/_5sdp"
+                    android:spinnerMode="dialog"
                     android:textAllCaps="false"
-                    android:layout_below="@+id/customergroup"
-                    />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="normal" />
 
 
                 <EditText
-                    android:layout_marginTop="30dp"
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/selectcompany2"
-                    android:hint="@string/customer_CustomerCompany_Name_2"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/name"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/customer_CustomerCompany_Name_2"
                     android:imeOptions="actionNext"
-                    android:singleLine="true"/>
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
-                    android:layout_marginTop="30dp"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/name"
-                    android:hint="@string/customer_CustomerCompany_EmailAddress"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/email"
-                    android:inputType="textEmailAddress"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/customer_CustomerCompany_EmailAddress"
                     android:imeOptions="actionNext"
-                    android:singleLine="true"/>
+                    android:inputType="textEmailAddress"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
 
                 <EditText
-                    android:layout_marginTop="30dp"
+                    android:id="@+id/contactperson"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/email"
-                    android:hint="@string/customer_Contact_Person"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/contactperson"
-                    android:inputType="textEmailAddress"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/customer_Contact_Person"
                     android:imeOptions="actionNext"
-                    android:singleLine="true"/>
+                    android:inputType="textEmailAddress"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
-                    android:layout_marginTop="30dp"
+                    android:id="@+id/phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/contactperson"
-                    android:hint="@string/customer_Phone_Number"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/phone"
-                    android:inputType="phone"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/customer_Phone_Number"
                     android:imeOptions="actionNext"
-                    android:singleLine="true"/>
+                    android:inputType="phone"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
-                    android:layout_marginTop="30dp"
+                    android:id="@+id/mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/phone"
-                    android:hint="@string/customer_Mobile_Number"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="12dp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/mobile"
-                    android:inputType="phone"
-                    android:visibility="gone"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/customer_Mobile_Number"
                     android:imeOptions="actionNext"
-                    android:singleLine="true"/>
+                    android:inputType="phone"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="12dp"
+                    android:visibility="gone" />
 
                 <EditText
-                    android:layout_marginTop="30dp"
+                    android:id="@+id/website"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/mobile"
-                    android:hint="@string/customer_Website"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/website"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/customer_Website"
                     android:imeOptions="actionNext"
+                    android:padding="15dp"
                     android:singleLine="true"
-                    />
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
-                    android:layout_marginTop="30dp"
+                    android:id="@+id/CompanyAddress"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_below="@+id/website"
-                    android:hint="@string/customer_CustomerCompany_Address"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/CompanyAddress"
                     android:gravity="start"
-                    android:maxHeight="150dp"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/customer_CustomerCompany_Address"
                     android:imeOptions="actionNext"
-                    />
+                    android:maxHeight="150dp"
+                    android:padding="15dp"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
 
                 <com.isapanah.awesomespinner.AwesomeSpinner
-                    android:visibility="gone"
                     android:id="@+id/defaultcurrency"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    app:spinnerDirection="ltr"
-                    app:spinnerHint="@string/customer_Choose_Default_Currency"
                     android:layout_below="@+id/CompanyAddress"
-                    android:layout_marginTop="10dp"
+                    android:layout_centerInParent="true"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edittextshape"
-                    />
+                    android:visibility="gone"
+                    app:spinnerDirection="ltr"
+                    app:spinnerHint="@string/customer_Choose_Default_Currency" />
+
                 <TextView
+                    android:id="@+id/txtshiiping"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtshiiping"
                     android:layout_below="@+id/defaultcurrency"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
                     android:text="@string/customer_SHIPPING_DETAILS"
                     android:textColor="@color/lightpurple"
-                    android:textSize="@dimen/_10sdp"
-                    />
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
-                android:layout_marginTop="20dp"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtshiiping"
-                android:hint="@string/customer_First_Name"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="0dp"
-                    android:textSize="@dimen/_10sdp"
-                android:padding="15dp"
-                android:background="@drawable/edittextshape"
-                android:elevation="2dp"
-                android:id="@+id/edfirstname"
-                android:gravity="start"
-                android:maxHeight="150dp"
-                    android:textColorHint="@color/dark_grey"
-                    android:imeOptions="actionNext"
-                    android:singleLine="true"
-                />
-
-                <EditText
-                    android:layout_marginTop="20dp"
+                    android:id="@+id/edfirstname"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txtshiiping"
-                    android:layout_toRightOf="@id/edfirstname"
-                    android:hint="@string/customer_Last_Name"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="0dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/edlastname"
                     android:gravity="start"
-                    android:maxHeight="150dp"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/customer_First_Name"
                     android:imeOptions="actionNext"
+                    android:maxHeight="150dp"
+                    android:padding="15dp"
                     android:singleLine="true"
-                    />
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
+                    android:id="@+id/edlastname"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtshiiping"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@id/edfirstname"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:gravity="start"
+                    android:hint="@string/customer_Last_Name"
+                    android:imeOptions="actionNext"
+                    android:maxHeight="150dp"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
+
+                <EditText
+                    android:id="@+id/edaddress1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/edlastname"
-                    android:hint="@string/customer_Shipping_Address_1"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/edaddress1"
                     android:gravity="start"
-                    android:maxHeight="150dp"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/customer_Shipping_Address_1"
                     android:imeOptions="actionNext"
+                    android:maxHeight="150dp"
+                    android:padding="15dp"
                     android:singleLine="true"
-                    />
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
 
                 <EditText
-                    android:layout_marginTop="20dp"
+                    android:id="@+id/edaddress2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/edaddress1"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:gravity="start"
                     android:hint="@string/customer_Shipping_Address_2"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
-                    android:background="@drawable/edittextshape"
-                    android:elevation="2dp"
-                    android:id="@+id/edaddress2"
-                    android:gravity="start"
-                    android:maxHeight="150dp"
-                    android:textColorHint="@color/dark_grey"
                     android:imeOptions="actionNext"
+                    android:maxHeight="150dp"
+                    android:padding="15dp"
                     android:singleLine="true"
-                    />
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
-                    android:layout_marginTop="20dp"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/edaddress2"
-                    android:hint="@string/customer_City"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="0dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
-                    android:background="@drawable/edittextshape"
-                    android:elevation="2dp"
                     android:id="@+id/edcity"
-                    android:gravity="start"
-                    android:maxHeight="150dp"
-                    android:textColorHint="@color/dark_grey"
-                    android:imeOptions="actionNext"
-                    android:singleLine="true"
-                    />
-
-
-                <EditText
-                    android:layout_marginTop="20dp"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/edaddress2"
-                    android:layout_toRightOf="@id/edcity"
-                    android:hint="@string/customer_Post_Code"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="0dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/edpostcode"
                     android:gravity="start"
-                    android:maxHeight="150dp"
-                    android:inputType="number"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/customer_City"
                     android:imeOptions="actionNext"
+                    android:maxHeight="150dp"
+                    android:padding="15dp"
                     android:singleLine="true"
-                    />
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
+
 
                 <EditText
-                    android:layout_marginTop="20dp"
+                    android:id="@+id/edpostcode"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/edaddress2"
-                    android:layout_toRightOf="@id/edpostcode"
-                    android:hint="@string/customer_Country"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_toRightOf="@id/edcity"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/edcountry"
                     android:gravity="start"
+                    android:hint="@string/customer_Post_Code"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
                     android:maxHeight="150dp"
-                    android:textColorHint="@color/dark_grey"
-                    android:imeOptions="actionDone"
+                    android:padding="15dp"
                     android:singleLine="true"
-                    />
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
-
-
+                <EditText
+                    android:id="@+id/edcountry"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edaddress2"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@id/edpostcode"
+                    android:background="@drawable/edittextshape"
+                    android:elevation="2dp"
+                    android:gravity="start"
+                    android:hint="@string/customer_Country"
+                    android:imeOptions="actionDone"
+                    android:maxHeight="150dp"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
 
                 <Button
+                    android:id="@+id/add"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/edcountry"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
+                    android:background="@drawable/buttonshape"
+                    android:padding="@dimen/_5sdp"
                     android:text="@string/customer_Add_Customer"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:layout_below="@+id/edcountry"
-                    android:layout_marginTop="30dp"
-                    android:id="@+id/add"
-                    android:background="@drawable/buttonshape"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="@dimen/_5sdp"
-                    />
-
-
+                    android:textSize="@dimen/_10sdp" />
 
 
             </RelativeLayout>

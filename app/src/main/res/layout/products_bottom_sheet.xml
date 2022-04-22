@@ -50,14 +50,13 @@
         />
 
 
-
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler_products"
+        android:layout_below="@+id/add_product_new"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="45dp"
-        android:layout_below="@+id/add_product_new">
+        android:layout_marginBottom="45dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 

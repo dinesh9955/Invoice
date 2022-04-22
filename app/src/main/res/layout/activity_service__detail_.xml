@@ -48,30 +48,32 @@
 
 
             <TextView
+                android:id="@+id/servicedepart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Software Development"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/serviceprice"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="60dp"
-                android:padding="10dp"
                 android:background="@drawable/edittextshape"
+                android:padding="10dp"
+                android:text="Software Development"
+                android:textColor="@color/gray"
                 android:textSize="@dimen/_10sdp"
-                android:id="@+id/servicedepart"
-                android:textColor="@color/gray"/>
+                android:visibility="gone"/>
 
             <TextView
+                android:id="@+id/measurement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Measurement Unit"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/servicedepart"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:textSize="@dimen/_10sdp"
-                android:padding="10dp"
                 android:background="@drawable/edittextshape"
-                android:id="@+id/measurement"
-                android:textColor="@color/gray"/>
+                android:padding="10dp"
+                android:text="Measurement Unit"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -87,23 +89,23 @@
                 android:textColor="@color/gray"/>
 
 
-
             <TextView
+                android:id="@+id/servicetaxable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Taxable: Yes"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/servicedescription"
-                android:layout_marginTop="30dp"
-                android:textSize="@dimen/_10sdp"
-                android:id="@+id/servicetaxable"
-                android:padding="10dp"
-                android:background="@drawable/edittextshape"
-                android:textColor="@color/gray"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="50dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="50dp"
+                android:layout_marginBottom="80dp"
+                android:background="@drawable/edittextshape"
                 android:gravity="center"
-                android:layout_marginBottom="80dp"/>
+                android:padding="10dp"
+                android:text="Taxable: Yes"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone"/>
 
 
 

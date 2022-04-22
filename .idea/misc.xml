@@ -19,30 +19,51 @@
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_on_boarding_.xml" value="0.18" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_paypal.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_product_.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_product__detail_.xml" value="0.18" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_service__detail_.xml" value="0.18" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_settings.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_signup_.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_signup_subscription.xml" value="0.12138157894736842" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_splash_.xml" value="0.12138157894736842" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_vendor__detail_.xml" value="0.12138157894736842" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_walk.xml" value="0.12138157894736842" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/customers_itemlayout.xml" value="0.25" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/dialog_delete_account.xml" value="0.33" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/dialog_list.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/edit_editpvactivity.xml" value="0.28828125" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/edit_estimate_activity.xml" value="0.28828125" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/editinvoiceactivity.xml" value="0.75" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/editpoactivity.xml" value="0.67" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/editreceiptactivity.xml" value="0.28828125" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/filtered_incoicedata.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__company.xml" value="0.25" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__customer.xml" value="0.15" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__product.xml" value="0.22" />
-        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__services.xml" value="0.18" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__services.xml" value="0.22" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__user.xml" value="0.1921875" />
-        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_fragment__create__invoice.xml" value="0.25" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__vendor.xml" value="0.15" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_convert_to_receipts.xml" value="0.28828125" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_create__credit_notes.xml" value="0.28828125" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_create__receipts.xml" value="0.40773480662983425" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_create_debit_notes.xml" value="0.28828125" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_create_estimate.xml" value="0.28828125" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_create_po.xml" value="0.67" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_create_pv.xml" value="0.28828125" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_fragment__create__invoice.xml" value="0.75" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_product__listing.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_service__listing.xml" value="0.12138157894736842" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/freight_amount_dialog.xml" value="0.33" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/home_act.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/invoicedetail.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/layout_supplier.xml" value="0.1921875" />
-        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/product_bottom_itemlayout.xml" value="0.12138157894736842" />
-        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/product_listing_itemlayout.xml" value="0.22" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/product_bottom_itemlayout.xml" value="0.5" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/product_listing_itemlayout.xml" value="0.25" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/products_bottom_sheet.xml" value="0.46125" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/service_bottom_itemlayout.xml" value="0.18" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/service_bottom_sheet.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/service_itemlayout.xml" value="0.25" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/toolbar_language.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/vendors_itemlayout.xml" value="0.22" />
       </map>
     </option>
   </component>

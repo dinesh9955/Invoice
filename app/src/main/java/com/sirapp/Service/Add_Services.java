@@ -520,18 +520,18 @@ public class Add_Services extends BaseFragment {
 //            servicedescription.setError("Required");
 //            servicedescription.requestFocus();
 //        }
-        else if (selectedMeasurementunit.equals("")){
-            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Measurement_Unit_required));
-        }
+//        else if (selectedMeasurementunit.equals("")){
+//            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Measurement_Unit_required));
+//        }
         else if (selectedCompanyId.equals("")){
             Constant.ErrorToast(getActivity(),getString(R.string.dialog_Company_required));
         }
 //        else if (selectedTaxable.equals("")){
 //            Constant.ErrorToast(getActivity(),"Tax information is required");
 //        }
-        else if (selectedCategoryId.equals("") && othercat.isEmpty()){
-            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Item_category_required));
-        }
+//        else if (selectedCategoryId.equals("") && othercat.isEmpty()){
+//            Constant.ErrorToast(getActivity(),getString(R.string.dialog_Item_category_required));
+//        }
         else {
 //            if(pref.getItem().equalsIgnoreCase("item")){
                 avi.smoothToShow();

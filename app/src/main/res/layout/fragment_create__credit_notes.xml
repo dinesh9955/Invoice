@@ -335,7 +335,7 @@
             <Button
                 android:id="@+id/additem"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_90sdp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/productrecyone"
                 android:layout_marginStart="20dp"
@@ -345,12 +345,12 @@
                 android:text="@string/additem"
                 android:textAllCaps="false"
                 android:textColor="@color/lightpurple"
-                android:textSize="@dimen/_11sdp"/>
+                android:textSize="@dimen/_11sdp" />
 
             <Button
                 android:id="@+id/addservice"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_90sdp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/productrecyone"
                 android:layout_alignParentEnd="true"
@@ -753,9 +753,8 @@
                     android:layout_marginStart="10dp"
                     android:layout_weight=".15"
                     android:background="@drawable/light_button_curve"
-                    android:drawable="@drawable/ic_options"
-                    android:drawableStart="@drawable/ic_options"
-                    android:paddingStart="25dp"
+                    android:text="@string/preview_2"
+                    android:textAllCaps="false"
                     android:textColor="@color/lightpurple"
                     android:textSize="@dimen/_11sdp"
 

@@ -53,59 +53,60 @@
 
 
             <TextView
+                android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/price"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="60dp"
                 android:padding="5dp"
-                android:id="@+id/category"
+                android:text="Category"
                 android:textColor="@color/gray"
-                android:textSize="@dimen/_10sdp"/>
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Measurement Unit"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/category"
-                android:layout_marginTop="30dp"
-                android:padding="5dp"
                 android:id="@+id/measurement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/category"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:text="@string/product_Reorder_Level_"
                 android:textColor="@color/gray"
-                android:textSize="@dimen/_10sdp"/>
+                android:textSize="@dimen/_10sdp" />
 
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Description"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/measurement"
-                android:layout_marginTop="30dp"
-                android:padding="5dp"
                 android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/measurement"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:text="Description"
                 android:textColor="@color/gray"
-                android:textSize="@dimen/_10sdp"/>
-
+                android:textSize="@dimen/_10sdp" />
 
 
             <TextView
+                android:id="@+id/taxable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Taxable"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/description"
-                android:layout_marginTop="30dp"
-                android:padding="5dp"
-                android:id="@+id/taxable"
-                android:textColor="@color/gray"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="50dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="50dp"
-                android:gravity="center"
                 android:layout_marginBottom="90dp"
-                android:textSize="@dimen/_10sdp"/>
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Taxable"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone"/>
 
 
 

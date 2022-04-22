@@ -5372,7 +5372,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                     .replaceAll("Receipt Date", htmlview_CreditNoteDate)
 //                        .replaceAll("Reference No", htmlview_ReferenceNo)
                     .replaceAll("SUMMARY", htmlview_SUMMARY)
-                    .replaceAll("Product/Item", htmlview_ProductItem)
+                    .replaceAll("Description", htmlview_ProductItem)
                     .replaceAll("Unit of Measurement", htmlview_UnitofMeasurement)
                     .replaceAll("Quantity", htmlview_Quantity)
                     .replaceAll("Rate", htmlview_Rate)

@@ -75,21 +75,22 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 if(i == 0){
-                    numberFormatDialog();
+                    Intent intent = new Intent(mcontext, SupportActivity.class);
+                    mcontext.startActivity(intent);
                 } else if(i == 1){
+                    numberFormatDialog();
+                } else if(i == 2){
                     Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
                     mcontext.startActivity(intent);
-                } else if(i == 2){
+                } else if(i == 3){
 //                    Intent intent = new Intent(mcontext, SubscribeActivity.class);
                     Intent intent = new Intent(mcontext, GoProActivity.class);
                     mcontext.startActivity(intent);
-                } else if(i == 3){
-//                    Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
-//                    mcontext.startActivity(intent);
-                    ((SettingsActivity)mcontext).upgradePackage();
+//                } else if(i == 4){
+////                    Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
+////                    mcontext.startActivity(intent);
+//                    ((SettingsActivity)mcontext).upgradePackage();
                 } else if(i == 4){
-//                    Intent intent = new Intent(mcontext, OnlinePaymentGatewayActivity.class);
-//                    mcontext.startActivity(intent);
                     ((SettingsActivity)mcontext).restorePurchase();
                 } else if(i == 5){
                     try {
@@ -136,9 +137,9 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.ViewHo
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("positionNext", i);
                     mcontext.startActivity(intent);
-                }else if(i == 12){
-                    Intent intent = new Intent(mcontext, SupportActivity.class);
-                    mcontext.startActivity(intent);
+//                }else if(i == 12){
+//                    Intent intent = new Intent(mcontext, SupportActivity.class);
+//                    mcontext.startActivity(intent);
                 }
             }
         });

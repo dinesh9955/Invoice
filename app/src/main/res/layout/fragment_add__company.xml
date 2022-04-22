@@ -65,51 +65,51 @@
 
 
                 <TextView
+                    android:id="@+id/imagedescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/company_Upload_company_logo"
-                    android:layout_marginLeft="20dp"
                     android:layout_below="@+id/uploadimage"
-                    android:layout_marginTop="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:id="@+id/imagedescription"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@color/dark_grey"/>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/company_Upload_company_logo"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
-                    android:layout_marginTop="?actionBarSize"
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imagedescription"
-                    android:hint="@string/company_Company_Name_2"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="?actionBarSize"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/name"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/company_Company_Name_2"
                     android:imeOptions="actionNext"
-                    android:singleLine="true"/>
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
-                    android:layout_marginTop="20dp"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/name"
-                    android:hint="@string/company_Company_Email_Address"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/email"
-                    android:inputType="textEmailAddress"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/company_Company_Email_Address"
                     android:imeOptions="actionNext"
-                    android:singleLine="true"/>
+                    android:inputType="textEmailAddress"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
                     android:layout_marginTop="20dp"
@@ -225,17 +225,16 @@
                     android:background="@drawable/edittextshape"/>
 
                 <TextView
+                    android:id="@+id/txtpayment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtpayment"
                     android:layout_below="@+id/itemstxtColor"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
                     android:text="@string/company_PAYMENT_DETAILS"
                     android:textColor="@color/lightpurple"
-                    android:textSize="@dimen/_10sdp"
-                    />
+                    android:textSize="@dimen/_10sdp" />
 
                 <EditText
                     android:layout_marginTop="20dp"

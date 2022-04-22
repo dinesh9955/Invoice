@@ -139,16 +139,16 @@ public class Product_Listing_Adapter extends RecyclerView.Adapter<Product_Listin
 
         }
 
-        if (product_category.equals("") || product_category.equals("null"))
-        {
-            viewHolderForCat.productcategory.setText(mcontext.getString(R.string.invoice_Category));
-        }
-        else
-        {
-            viewHolderForCat.productcategory.setText(mcontext.getString(R.string.invoice_Category)+" "+product_category);
-        }
+//        if (product_category.equals("") || product_category.equals("null"))
+//        {
+//            viewHolderForCat.productcategory.setText(mcontext.getString(R.string.invoice_Category));
+//        }
+//        else
+//        {
+//            viewHolderForCat.productcategory.setText(mcontext.getString(R.string.invoice_Category)+" "+product_category);
+//        }
 
-
+        viewHolderForCat.productcategory.setText(product_list.getProduct_description());
 
         RequestOptions options = new RequestOptions();
         options.centerCrop();

@@ -755,7 +755,27 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
             public void onClick(View view) {
 
                 if (selectwarehouseId.equals("")) {
-                    Constant.ErrorToast(getActivity(), getString(R.string.stock_Select_Warehouse));
+//                    Constant.ErrorToast(getActivity(), getString(R.string.stock_Select_Warehouse));
+                    RecyclerView mRecyclerView;
+                    MenuAdapter2 mAdapter;
+
+                    final Dialog mybuilder = new Dialog(getActivity());
+                    mybuilder.setContentView(R.layout.select_company_dialog_2);
+
+
+                    mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+                    mAdapter = new MenuAdapter2(wnames, mybuilder);
+                    mRecyclerView.setAdapter(mAdapter);
+
+                    mybuilder.show();
+                    mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                    Window window = mybuilder.getWindow();
+                    window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    window.setBackgroundDrawableResource(R.color.transparent);
                 } else {
                   //  if(product_bottom.size() > 0){
                         createbottomsheet_products();
@@ -763,6 +783,9 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         bottomSheetDialog2.dismiss();
                   //  }
                 }
+
+
+
             }
         });
 
@@ -3277,7 +3300,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 avibackground.setVisibility(View.GONE);
                 if (responseBody != null) {
                     String response = new String(responseBody);
-                    //  Log.e("responseproductF", response);
+                      Log.e("responseproductF", response);
 
                     try {
                         JSONObject jsonObject = new JSONObject(response);
@@ -5313,7 +5336,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     .replaceAll("Due Date:", htmlview_DueDate)
 //                        .replaceAll("Reference No", htmlview_ReferenceNo)
                     .replaceAll("SUMMARY", htmlview_SUMMARY)
-                    .replaceAll("Product/Item", htmlview_ProductItem)
+                    .replaceAll("Description", htmlview_ProductItem)
                     .replaceAll("Unit of Measurement", htmlview_UnitofMeasurement)
                     .replaceAll("Quantity", htmlview_Quantity)
                     .replaceAll("Rate", htmlview_Rate)

@@ -450,16 +450,16 @@
                 />
 
             <TextView
+                android:id="@+id/txtterms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/adduser"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:text="@string/Termsconditionsapply"
                 android:textColor="@color/dark_grey"
                 android:textSize="@dimen/_9sdp"
-                android:layout_below="@id/adduser"
-                android:id="@+id/txtterms"
-                />
+                android:visibility="gone"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -473,6 +473,7 @@
                 android:layout_marginBottom="80dp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
+                android:visibility="gone"
                 />
 
         </RelativeLayout>
