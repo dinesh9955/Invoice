@@ -45,16 +45,16 @@
                     android:padding="10dp"/>
 
                 <TextView
+                    android:id="@+id/hello"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/home_hello"
                     android:layout_below="@+id/menu"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
+                    android:text="@string/home_hello"
+                    android:textColor="@color/darkgray"
                     android:textSize="@dimen/_15sdp"
-                    android:textStyle="bold"
-                    android:id="@+id/hello"
-                    android:textColor="@color/darkgray"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -109,23 +109,22 @@
                     android:textSize="@dimen/_10sdp" />
 
                 <EditText
-                    android:layout_marginTop="30dp"
+                    android:id="@+id/reorderlevel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/productprice"
-                    android:hint="@string/product_Reorder_Level"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/_10sdp"
-                    android:inputType="number"
-                    android:padding="15dp"
                     android:background="@drawable/edittextshape"
                     android:elevation="2dp"
-                    android:id="@+id/reorderlevel"
-                    android:textColorHint="@color/dark_grey"
+                    android:hint="@string/product_Reorder_Level"
                     android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:padding="15dp"
                     android:singleLine="true"
-                    />
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="@dimen/_10sdp" />
 
 
 

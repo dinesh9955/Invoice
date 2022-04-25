@@ -15,7 +15,9 @@
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_company__details_.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_customer_.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_customer__detail_2.xml" value="0.1921875" />
-        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_go_pro.xml" value="0.18" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_go_pro.xml" value="0.33" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_go_pro_demo.xml" value="0.15775972637879435" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_home_.xml" value="0.15775972637879435" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_on_boarding_.xml" value="0.18" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_paypal.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_product_.xml" value="0.1921875" />
@@ -38,7 +40,7 @@
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/filtered_incoicedata.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__company.xml" value="0.25" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__customer.xml" value="0.15" />
-        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__product.xml" value="0.22" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__product.xml" value="0.33" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__services.xml" value="0.22" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__user.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/fragment_add__vendor.xml" value="0.15" />

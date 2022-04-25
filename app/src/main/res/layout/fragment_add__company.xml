@@ -188,20 +188,19 @@
                     android:id="@+id/defaultcurrency1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/CompanyAddress"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/edittextshape"
-                    android:hint="@string/company_Choose_Default_Currency_2"
-                    android:spinnerMode="dialog"
                     android:gravity="left|center_vertical"
+                    android:hint="@string/company_Choose_Default_Currency_2"
                     android:paddingLeft="15dp"
-                    android:textStyle="normal"
-                    android:textSize="@dimen/_10sdp"
-                    android:textColor="@color/black"
+                    android:spinnerMode="dialog"
                     android:textAllCaps="false"
-                    android:layout_below="@+id/CompanyAddress"
-                    />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="normal" />
 
 
                 <Button

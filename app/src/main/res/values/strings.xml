@@ -345,7 +345,7 @@
     <string name="product_Upload_product_image">Upload product image</string>
     <string name="product_Product_Name">Product Name</string>
     <string name="product_Per_Unit_Price">Per Unit Price</string>
-    <string name="product_Reorder_Level">Reorder Level</string>
+    <string name="product_Reorder_Level">Reorder Level (Optional)</string>
     <string name="product_Product_Category">Product Category</string>
     <string name="product_Other_Category_if_not_listed">Other Category if not listed</string>
     <string name="product_Measurement_Unit">Measurement Unit</string>
@@ -971,7 +971,7 @@
     <string name="ITEMS">ITEMS</string>
     <string name="INVOICEITEMS">INVOICE ITEMS</string>
     <string name="template">Choose Template</string>
-    <string name="choose_color">Choose Color</string>
+    <string name="choose_color">Choose Brand Color (for Invoice Templates)</string>
 
     <string name="additem">Add Products</string>
     <string name="SubTotal">Sub Total</string>
