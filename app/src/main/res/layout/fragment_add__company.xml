@@ -338,20 +338,19 @@
                     />
 
                 <Button
+                    android:id="@+id/save"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/edcheque"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
+                    android:background="@drawable/buttonshape"
                     android:text="@string/company_Save_and_continue"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:layout_below="@+id/edcheque"
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/save"
-                    android:background="@drawable/buttonshape"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:textSize="@dimen/_10sdp"
-                    />
+                    android:textSize="@dimen/_10sdp" />
 
                 <TextView
                     android:layout_width="wrap_content"

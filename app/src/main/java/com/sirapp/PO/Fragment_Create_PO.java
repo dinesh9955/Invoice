@@ -693,12 +693,14 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
 
                     mAdapter = new MenuAdapter2(wnames, mybuilder);
                     mRecyclerView.setAdapter(mAdapter);
+                    if (wnames.size() != 0){
+                        mybuilder.show();
+                        mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                        Window window = mybuilder.getWindow();
+                        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        window.setBackgroundDrawableResource(R.color.transparent);
+                    }
 
-                    mybuilder.show();
-                    mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-                    Window window = mybuilder.getWindow();
-                    window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    window.setBackgroundDrawableResource(R.color.transparent);
                 } else {
                     createbottomsheet_products();
                     bottomSheetDialog.show();
@@ -3090,6 +3092,10 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                             if(product_bottom_adapter != null){
                                 product_bottom_adapter.notifyDataSetChanged();
                             }
+
+                            createbottomsheet_products();
+                            bottomSheetDialog.show();
+                            bottomSheetDialog2.dismiss();
 
                         } else {
                             Constant.ErrorToast(getActivity(), getString(R.string.dialog_ProductNotFound));

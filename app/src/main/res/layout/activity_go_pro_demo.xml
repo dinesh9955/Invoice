@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -22,23 +23,22 @@
             <RelativeLayout
                 android:id="@+id/rela1"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
-                android:background="@color/orange"
-                >
+                android:layout_height="@dimen/_80sdp"
+                android:background="@color/orange">
 
                 <TextView
                     android:id="@+id/text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginBottom="@dimen/_20sdp"
                     android:text="Get more for your money!"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_20sdp"
-                    android:textStyle="bold"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/_20sdp"/>
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -46,12 +46,812 @@
             <RelativeLayout
                 android:id="@+id/rela2"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_400sdp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rela1"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/_19437d">
+                android:visibility="visible"
+                android:background="@color/_19437d"
+                android:padding="@dimen/_15sdp">
+
+                <ImageView
+                    android:id="@+id/check1"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:src="@drawable/check"
+                    android:tint="@color/orange"
+                    tools:ignore="UseAppTint" />
+
+
+                <TextView
+                    android:id="@+id/text112"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/check1"
+                    android:text="Get Paid Faster"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp"
+                    app:fontFamily="@font/proxima_nova_semi_bold" />
+
+
+                <TextView
+                    android:id="@+id/text113"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text112"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/check1"
+                    android:text="Accept online or in-person payments via credit card, debit card, or PayPal."
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="normal"
+                    app:fontFamily="@font/proxima_nova_reg" />
+
+
+                <ImageView
+                    android:id="@+id/check2"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_below="@+id/text113"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:src="@drawable/check"
+                    android:tint="@color/orange"
+                    tools:ignore="UseAppTint" />
+
+
+                <TextView
+                    android:id="@+id/text1112"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text113"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_toRightOf="@+id/check2"
+                    android:text="Simple Invoice Maker"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp"
+                    app:fontFamily="@font/proxima_nova_semi_bold" />
+
+
+                <TextView
+                    android:id="@+id/text1113"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text1112"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/check2"
+                    android:text="Issue professional-looking Invoices in seconds and get a read notice."
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/proxima_nova_reg" />
+
+
+                <ImageView
+                    android:id="@+id/check3"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_below="@+id/text1113"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:src="@drawable/check"
+                    android:tint="@color/orange"
+                    tools:ignore="UseAppTint" />
+
+
+                <TextView
+                    android:id="@+id/text1114"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text1113"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_toRightOf="@+id/check3"
+                    android:text="One Tap to Convert Estimates to Invoices"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp"
+                    app:fontFamily="@font/proxima_nova_semi_bold" />
+
+
+                <TextView
+                    android:id="@+id/text11163"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text1114"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/check3"
+                    android:text="Create instant Estimates with as many details that can guarantee you get the job."
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/proxima_nova_reg" />
+
+
+                <ImageView
+                    android:id="@+id/check4"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_below="@+id/text11163"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:src="@drawable/check"
+                    android:tint="@color/orange"
+                    tools:ignore="UseAppTint" />
+
+
+                <TextView
+                    android:id="@+id/text1144"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text11163"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/check4"
+                    android:text="Inventory Management"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp"
+                    app:fontFamily="@font/proxima_nova_semi_bold" />
+
+
+                <TextView
+                    android:id="@+id/text14163"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text1144"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/check4"
+                    android:text="Get a glimpse of available Inventory with quantity, value, and warehouse location."
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/proxima_nova_reg" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rela3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rela2"
+                android:background="@color/white"
+                android:padding="@dimen/_15sdp"
+                android:visibility="visible">
+
+
+                <TextView
+                    android:id="@+id/text1324"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="SumonXRD"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp"
+                    app:fontFamily="@font/worksans_semibold" />
+
+                <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                    android:id="@+id/rating_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text1324"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:srb_borderColor="@color/orange"
+                    app:srb_fillColor="@color/orange"
+                    app:srb_numberOfStars="5"
+                    app:srb_rating="5"
+                    app:srb_starSize="@dimen/_15sdp"
+                    app:srb_starsSeparation="@dimen/_7sdp"
+                    app:srb_stepSize="1"
+                    android:isIndicator="true"
+                    />
+
+                <TextView
+                    android:id="@+id/text13r4524"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rating_bar"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="Quick and Efficient"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/proxima_nova_semi_bold" />
+
+                <TextView
+                    android:id="@+id/text1654654"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text13r4524"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="I am very thankful and happy that I discovered this app as this is life-changing! I am a freelance online business manager and this app just helped me look like I'm a real professional when sending invoices to my clients. It's customizable (I can add branding and logo) and I can even send these things over on the go...straight from my phone. Fantastic!"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="normal"
+                    app:fontFamily="@font/proxima_nova_reg" />
+
+
+                <TextView
+                    android:id="@+id/text1343424"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text1654654"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="Robert@NY"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp"
+                    app:fontFamily="@font/worksans_semibold" />
+
+                <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                    android:id="@+id/rating_bar23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text1343424"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:srb_borderColor="@color/orange"
+                    app:srb_fillColor="@color/orange"
+                    app:srb_numberOfStars="5"
+                    app:srb_rating="5"
+                    app:srb_starSize="@dimen/_15sdp"
+                    app:srb_starsSeparation="@dimen/_7sdp"
+                    app:srb_stepSize="1"
+                    android:isIndicator="true"
+                    />
+
+                <TextView
+                    android:id="@+id/text13657"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rating_bar23"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="Get Paid Fast"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/proxima_nova_semi_bold" />
+
+                <TextView
+                    android:id="@+id/text77879"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text13657"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:text="I manage a couple of businesses and I think this app is the best one in creating inventories, doing estimates and sending invoices. It's new but it's a pro and I love how it's getting me paid fast!"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="normal"
+                    app:fontFamily="@font/proxima_nova_reg" />
 
             </RelativeLayout>
+
+            <View
+                android:id="@+id/rela4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/rela3"
+                android:background="@color/d_grey">
+            </View>
+
+
+            <TextView
+                android:id="@+id/text1434"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rela4"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:gravity="center_horizontal"
+                android:text="More features for\nhalf the price"
+                android:textColor="@color/fade_green"
+                android:textSize="@dimen/_20sdp"
+                app:fontFamily="@font/worksans_semibold" />
+
+
+            <RelativeLayout
+                android:id="@+id/rela5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text1434"
+                android:background="@color/white"
+                android:visibility="visible"
+                android:layout_marginTop="@dimen/_15sdp">
+
+                <LinearLayout
+                    android:id="@+id/rela61"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight=".4">
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="0.94">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="BASIC"
+                            android:textColor="@color/darkbluefont"
+                            android:textSize="@dimen/_14sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="0.94">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PRO"
+                            android:textColor="@color/orange"
+                            android:textSize="@dimen/_14sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rela62"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_below="@+id/rela61"
+                    android:background="@color/_222222"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_weight=".4">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Professional Invoice templates"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_regular"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:src="@drawable/check"
+                            android:tint="@color/white"
+                            tools:ignore="UseAppTint" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="0.9">
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:src="@drawable/check"
+                            android:tint="@color/white"
+                            tools:ignore="UseAppTint" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rela63"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_below="@+id/rela62"
+                    android:background="@color/_353535"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_weight=".4">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Product Inventory Tracking"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_regular"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="0.9">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Unlimited"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rela64"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_below="@+id/rela63"
+                    android:background="@color/_222222"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_weight=".4">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Number of Invoices &amp; Estimates"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_regular"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="0.9">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Unlimited"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rela65"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_below="@+id/rela64"
+                    android:background="@color/_353535"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_weight=".4">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Number of Receipts &amp; Purchase Orders"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_regular"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="0.9">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Unlimited"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rela66"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_below="@+id/rela65"
+                    android:background="@color/_222222"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_weight=".4">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Number of Customers &amp; Suppliers"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_regular"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="0.9">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Unlimited"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rela67"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_below="@+id/rela66"
+                    android:background="@color/_353535"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_weight=".4">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Number of Items &amp; Taxes"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_regular"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="0.9">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Unlimited"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/worksans_semibold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/relaive11_questions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/_10sdp"
+                android:paddingTop="@dimen/_20sdp"
+                android:paddingLeft="@dimen/_18sdp"
+                android:paddingRight="@dimen/_18sdp"
+                android:layout_below="@+id/rela5"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/txtHead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
+                    android:text="Frequently Asked\nQuestions"
+                    android:textColor="@color/fade_green"
+                    android:textSize="@dimen/_20sdp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/que1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtHead"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="Will this subscription renew automatically?"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All subscriptions renew automatically for your convenience and to avoid any interruption of sevice. Your subscriptions can be managed and auto-renewal turned off by going to your Play Store settings after purchase."
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="normal"
+                    android:textColor="@color/fragmentfont"
+                    android:id="@+id/ans1"
+                    android:layout_below="@+id/que1"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    />
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="How do I cancel my subscription?"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:id="@+id/que2"
+                    android:layout_below="@+id/ans1"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your subscription can be canceled through your Play Store account."
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="normal"
+                    android:textColor="@color/fragmentfont"
+                    android:id="@+id/ans2"
+                    android:layout_below="@+id/que2"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    />
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Can I get my money back if I change my mind?"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:id="@+id/que3"
+                    android:layout_below="@+id/ans2"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Payments via Play Store can only be approved and refunded by Google. To receive a refund you need to contact Play Store support within 14 days from the purchase date."
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="normal"
+                    android:textColor="@color/fragmentfont"
+                    android:id="@+id/ans3"
+                    android:layout_below="@+id/que3"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    />
+
+
+                <LinearLayout
+                    android:id="@+id/linear_upgrade_now"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80sdp"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    android:layout_below="@+id/ans3">
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
 
         </RelativeLayout>
 
@@ -103,8 +903,8 @@
             android:textStyle="bold"
             android:padding="@dimen/_7sdp"
             android:textAllCaps="false"
-            android:textSize="@dimen/_24sdp"
-            android:textColor="@color/white">
+            android:textSize="@dimen/_16sdp"
+            android:textColor="@color/darkblue">
 
         </Button>
     </LinearLayout>

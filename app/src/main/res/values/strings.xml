@@ -969,6 +969,7 @@
     <string name="Date">Date</string>
     <string name="InvoiceTo">Recipient</string>
     <string name="ITEMS">ITEMS</string>
+    <string name="Select_Warehouse">Select Warehouse</string>
     <string name="INVOICEITEMS">INVOICE ITEMS</string>
     <string name="template">Choose Template</string>
     <string name="choose_color">Choose Brand Color (for Invoice Templates)</string>

@@ -39,32 +39,29 @@
             android:layout_below="@+id/imagePay"
             android:background="@color/white">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/txtHead"
+                    android:layout_width="wrap_content"
 
-                android:text="Frequently Asked\nQuestions"
-                android:gravity="center_horizontal"
-                android:textSize="@dimen/_20sdp"
-                android:textStyle="bold"
-                android:textColor="@color/fade_green"
-                android:id="@+id/txtHead"
-                android:layout_centerHorizontal="true"
-                />
-
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
+                    android:text="Frequently Asked\nQuestions"
+                    android:textColor="@color/fade_green"
+                    android:textSize="@dimen/_20sdp"
+                    android:textStyle="bold" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Will this subscription renew automatically?"
-                android:textSize="@dimen/_11sdp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:id="@+id/que1"
-                android:layout_below="@+id/txtHead"
-                android:layout_marginTop="@dimen/_15sdp"
-                />
+                <TextView
+                    android:id="@+id/que1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtHead"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="Will this subscription renew automatically?"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"

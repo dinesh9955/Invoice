@@ -771,11 +771,15 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                     mAdapter = new MenuAdapter2(wnames, mybuilder);
                     mRecyclerView.setAdapter(mAdapter);
 
-                    mybuilder.show();
-                    mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-                    Window window = mybuilder.getWindow();
-                    window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    window.setBackgroundDrawableResource(R.color.transparent);
+                    if (wnames.size() != 0){
+                        mybuilder.show();
+                        mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                        Window window = mybuilder.getWindow();
+                        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        window.setBackgroundDrawableResource(R.color.transparent);
+                    }
+
+
                 } else {
                   //  if(product_bottom.size() > 0){
                         createbottomsheet_products();
@@ -3282,6 +3286,10 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                             if (product_bottom_adapter != null) {
                                 product_bottom_adapter.notifyDataSetChanged();
                             }
+
+                            createbottomsheet_products();
+                            bottomSheetDialog.show();
+                            bottomSheetDialog2.dismiss();
 
                         } else {
                             Constant.ErrorToast(getActivity(), getString(R.string.dialog_ProductNotFound));
