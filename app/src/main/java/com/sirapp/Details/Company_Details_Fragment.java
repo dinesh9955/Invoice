@@ -95,8 +95,8 @@ public class Company_Details_Fragment extends BaseFragment {
     ScrollView sv;
     RoundedImageView image;
     private AVLoadingIndicatorView avi;
-    ImageView avibackground,changepic,editbtn;
-    TextView save,cancel;
+    ImageView avibackground,changepic;
+    TextView save,cancel, editbtn;
     File fileimage;
 
     String StrIbnnumber,Strchequepayableto,StrPaymentswiftbic,StrPaymentbankname,StrPaypalemail,company_name,company_logo,company_email,company_phone,comapny_website,comapny_address,company_id,currencyid;

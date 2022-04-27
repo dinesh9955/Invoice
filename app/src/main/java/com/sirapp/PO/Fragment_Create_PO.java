@@ -699,6 +699,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                         Window window = mybuilder.getWindow();
                         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         window.setBackgroundDrawableResource(R.color.transparent);
+                    } else {
+                        Constant.ErrorToast(getActivity(), getString(R.string.item_Addwarehousefirstandupdatestocks));
                     }
 
                 } else {
@@ -1823,6 +1825,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     getActivity().startActivityForResult(intent, 125);
                     bottomSheetDialog2.dismiss();
                 }
@@ -3272,6 +3275,7 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), Vendor_Activity.class);
+                    intent.putExtra("key" , "home");
                     getActivity().startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

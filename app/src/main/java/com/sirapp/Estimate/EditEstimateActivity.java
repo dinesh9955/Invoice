@@ -2044,6 +2044,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditEstimateActivity.this, Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 125);
                     bottomSheetDialog2.dismiss();
                 }
@@ -3308,6 +3309,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditEstimateActivity.this, Customer_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

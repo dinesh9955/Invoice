@@ -2035,6 +2035,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditEditEstimateActivity.this, Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 125);
                     bottomSheetDialog2.dismiss();
                 }
@@ -3301,6 +3302,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditEditEstimateActivity.this, Customer_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

@@ -1696,6 +1696,7 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     getActivity().startActivityForResult(intent, 125);
                     bottomSheetDialog2.dismiss();
                 }
@@ -3078,6 +3079,7 @@ public class Fragment_Create_PV extends BaseFragment implements Customer_Bottom_
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), Vendor_Activity.class);
+                    intent.putExtra("key" , "home");
                     getActivity().startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

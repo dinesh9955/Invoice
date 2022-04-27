@@ -90,7 +90,8 @@ public class SignupSubscriptionActivity extends BaseActivity implements Purchase
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignupSubscriptionActivity.this, Home_Activity.class);
-                intent.putExtra("login","login");
+                intent.putExtra("key" , "home");
+//                intent.putExtra("login","login");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
@@ -130,7 +131,8 @@ public class SignupSubscriptionActivity extends BaseActivity implements Purchase
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignupSubscriptionActivity.this, Home_Activity.class);
-                intent.putExtra("login","login");
+                intent.putExtra("key" , "home");
+//                intent.putExtra("login","login");
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
@@ -270,7 +272,8 @@ public class SignupSubscriptionActivity extends BaseActivity implements Purchase
                         Constant.SuccessToast(SignupSubscriptionActivity.this, message);
 
                         Intent intent = new Intent(SignupSubscriptionActivity.this, Home_Activity.class);
-                        intent.putExtra("login","login");
+//                        intent.putExtra("login","login");
+                        intent.putExtra("key" , "home");
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();

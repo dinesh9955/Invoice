@@ -2022,6 +2022,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ConvertToReceiptsActivity.this, Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 125);
                     bottomSheetDialog.dismiss();
                 }
@@ -3286,6 +3287,7 @@ public class ConvertToReceiptsActivity extends BaseActivity implements Customer_
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ConvertToReceiptsActivity.this, Customer_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

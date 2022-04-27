@@ -1905,6 +1905,7 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditReceiptActivity.this, Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 125);
                     bottomSheetDialog2.dismiss();
                 }
@@ -3167,6 +3168,7 @@ public class EditReceiptActivity extends BaseActivity implements Customer_Bottom
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditReceiptActivity.this, Customer_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

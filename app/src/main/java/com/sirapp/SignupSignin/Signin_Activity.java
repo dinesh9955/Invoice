@@ -386,6 +386,7 @@ public class Signin_Activity extends BaseActivity {
                                     public void run() {
 
                                         Intent intent = new Intent(Signin_Activity.this, Home_Activity.class);
+//                                        intent.putExtra("key" , "home");
                                         intent.putExtra("login","login");
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);

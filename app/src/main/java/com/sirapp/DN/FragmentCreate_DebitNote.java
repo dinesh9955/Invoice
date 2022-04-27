@@ -1695,6 +1695,7 @@ public class FragmentCreate_DebitNote extends BaseFragment implements Customer_B
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     getActivity().startActivityForResult(intent, 125);
                     bottomSheetDialog2.dismiss();
                 }

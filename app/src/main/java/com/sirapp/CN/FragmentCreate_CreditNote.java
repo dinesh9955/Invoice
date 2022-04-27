@@ -1630,6 +1630,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     getActivity().startActivityForResult(intent, 125);
                     bottomSheetDialog2.dismiss();
                 }
@@ -3019,6 +3020,7 @@ public class FragmentCreate_CreditNote extends BaseFragment implements Customer_
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), Customer_Activity.class);
+                    intent.putExtra("key" , "home");
                     getActivity().startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

@@ -2185,6 +2185,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditPOActivity.this, Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 125);
                     bottomSheetDialog.dismiss();
                 }
@@ -3518,6 +3519,7 @@ public class EditPOActivity extends BaseActivity implements Customer_Bottom_Adap
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditPOActivity.this, Vendor_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

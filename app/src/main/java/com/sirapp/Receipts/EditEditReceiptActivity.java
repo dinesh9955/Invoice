@@ -1931,6 +1931,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditEditReceiptActivity.this, Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 125);
                     bottomSheetDialog2.dismiss();
                 }
@@ -3192,6 +3193,7 @@ public class EditEditReceiptActivity extends BaseActivity implements Customer_Bo
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditEditReceiptActivity.this, Customer_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

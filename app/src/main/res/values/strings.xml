@@ -241,6 +241,10 @@
     <string name="header_credit_notes_list">Credit Notes</string>
     <string name="header_credit_notes_create">Create Credit Note</string>
 
+    <string name="header_invoiceSS">Invoice</string>
+    <string name="header_receiptSS">Receipt</string>
+    <string name="header_estimateSS">Estimate</string>
+
     <string name="header_estimates">Estimates</string>
     <string name="header_estimates_list">Estimates</string>
     <string name="header_estimates_create">Create Estimate</string>
@@ -382,6 +386,9 @@
     <string name="item_TaxableYes">Taxable: Yes</string>
 
     <string name="item_NoWarehouseFound">No Warehouse Found</string>
+    <string name="item_Addwarehousefirstandupdatestocks">Add warehouse first and update stocks</string>
+    <string name="label_create">Create</string>
+
 
     <string name="tax_Select_Company">Select Business</string>
     <string name="tax_Tax_Name">Tax Name</string>

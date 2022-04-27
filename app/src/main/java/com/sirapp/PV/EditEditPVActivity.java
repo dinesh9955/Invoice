@@ -2044,6 +2044,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditEditPVActivity.this, Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 125);
                     bottomSheetDialog.dismiss();
                 }
@@ -3312,6 +3313,7 @@ public class EditEditPVActivity extends BaseActivity implements Customer_Bottom_
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(EditEditPVActivity.this, Vendor_Activity.class);
+                    intent.putExtra("key" , "home");
                     startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }

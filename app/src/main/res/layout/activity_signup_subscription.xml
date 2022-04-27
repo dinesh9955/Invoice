@@ -18,15 +18,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/_15sdp">
+
             <ImageView
+                android:id="@+id/imagePay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/pay2"
                 android:adjustViewBounds="true"
                 android:contentDescription="Specs"
                 android:scrollbars="vertical"
-                android:id="@+id/imagePay">
-            </ImageView>
+                android:layout_marginTop="@dimen/_minus15sdp"
+                android:src="@drawable/pay2"></ImageView>
 
 
             <RelativeLayout
@@ -214,11 +215,12 @@
             android:orientation="horizontal"
             android:background="@drawable/orange_shape"
             android:text="@string/setting_UPGRADETODAY"
-            android:textAllCaps="false"
             android:textStyle="bold"
-            android:textSize="@dimen/_24sdp"
-            android:padding="@dimen/_7sdp"
-            android:textColor="@color/white">
+            android:padding="@dimen/_10sdp"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_16sdp"
+            android:textColor="@color/darkblue">
+
         </Button>
 
         <Button

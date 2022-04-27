@@ -249,15 +249,14 @@
                     android:layout_below="@+id/text1324"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:isIndicator="true"
                     app:srb_borderColor="@color/orange"
                     app:srb_fillColor="@color/orange"
                     app:srb_numberOfStars="5"
                     app:srb_rating="5"
                     app:srb_starSize="@dimen/_15sdp"
                     app:srb_starsSeparation="@dimen/_7sdp"
-                    app:srb_stepSize="1"
-                    android:isIndicator="true"
-                    />
+                    app:srb_stepSize="1" />
 
                 <TextView
                     android:id="@+id/text13r4524"
@@ -307,15 +306,14 @@
                     android:layout_below="@+id/text1343424"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:isIndicator="true"
                     app:srb_borderColor="@color/orange"
                     app:srb_fillColor="@color/orange"
                     app:srb_numberOfStars="5"
                     app:srb_rating="5"
                     app:srb_starSize="@dimen/_15sdp"
                     app:srb_starsSeparation="@dimen/_7sdp"
-                    app:srb_stepSize="1"
-                    android:isIndicator="true"
-                    />
+                    app:srb_stepSize="1" />
 
                 <TextView
                     android:id="@+id/text13657"
@@ -901,7 +899,7 @@
             android:background="@drawable/orange_shape"
             android:text="@string/setting_UPGRADETODAY"
             android:textStyle="bold"
-            android:padding="@dimen/_7sdp"
+            android:padding="@dimen/_10sdp"
             android:textAllCaps="false"
             android:textSize="@dimen/_16sdp"
             android:textColor="@color/darkblue">

@@ -42,6 +42,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
@@ -70,6 +72,7 @@ import com.sirapp.Company.Companies_Activity;
 import com.sirapp.Constant.Constant;
 import com.sirapp.Customer.Customer_Activity;
 import com.sirapp.Details.Company_Details_Activity;
+import com.sirapp.Estimate.EstimateActivity;
 import com.sirapp.FCM.MyMessageDisplayImplementation;
 import com.sirapp.Home.Model.CompanyModel;
 import com.sirapp.Home.Model.CustomerModel;
@@ -82,6 +85,7 @@ import com.sirapp.Invoice.InvoiceActivity;
 import com.sirapp.Invoice.InvoiceViewActivityWebView;
 import com.sirapp.Invoice.response.InvoiceResponseDto;
 import com.sirapp.Product.Product_Activity;
+import com.sirapp.Receipts.ReceiptsActivity;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
 import com.sirapp.Service.Service_Activity;
@@ -96,6 +100,7 @@ import com.sirapp.R;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.API.GetAsyncPost;
 import com.sirapp.API.Parameters;
+import com.tuann.floatingactionbuttonexpandable.FloatingActionButtonExpandable;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.apache.commons.io.IOUtils;
@@ -199,6 +204,16 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_act);
 
+
+        if (getIntent().hasExtra("key")){
+            Intent intent = new Intent(Home_Activity.this, Companies_Activity.class);
+            intent.putExtra("key" , "home");
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+
+
+
         if(Utility.checkAndRequestPermissions(Home_Activity.this, REQUEST_ID_MULTIPLE_PERMISSIONS)) {
 
         }else{
@@ -241,94 +256,55 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         FindByIds();
 
+        RelativeLayout fab = findViewById(R.id.r1);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(Home_Activity.this);
+        View view = LayoutInflater.from(Home_Activity.this).inflate(R.layout.dialog_bottom_filter, null);
+        bottomSheetDialog.setContentView(view);
+
+        LinearLayout linearLayoutInvoice = bottomSheetDialog.findViewById(R.id.viewinvoice);
+        LinearLayout linearLayoutEstimate = bottomSheetDialog.findViewById(R.id.viewicetemplate);
+        LinearLayout linearLayoutReceipt = bottomSheetDialog.findViewById(R.id.viewiceduplicate);
+
+        linearLayoutInvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+                Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
+                intent.putExtra("key" , "home");
+                startActivity(intent);
+            }
+        });
+
+        linearLayoutEstimate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+                Intent intent = new Intent(Home_Activity.this, EstimateActivity.class);
+                intent.putExtra("key" , "home");
+                startActivity(intent);
+            }
+        });
+
+        linearLayoutReceipt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.dismiss();
+                Intent intent = new Intent(Home_Activity.this, ReceiptsActivity.class);
+                intent.putExtra("key" , "home");
+                startActivity(intent);
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog.show();
+            }
+        });
+
+
 
         checkWebview();
-
-
-//        ApiInterface apiInterface;
-//        apiInterface = RetrofitInstance.getRetrofitInstance().create(ApiInterface.class);
-//
-//        RequestBody reqFileProfileURL = RequestBody.create(MediaType.parse("application/octet-stream"), logoPath);
-//        MultipartBody.Part bodyrofileURL = MultipartBody.Part.createFormData("file", "image2.png", reqFileProfileURL);
-//
-//        Call<ResponseBody> resposresult = apiInterface.uploadFile(bodyrofileURL);
-//        resposresult.enqueue(new Callback<ResponseBody>() {
-//
-//                                 @Override
-//                                 public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-//                                     Log.e(TAG , "responseCodeAA ");
-//                                     Gson gson = new Gson();
-//                                     String json = gson.toJson(call);
-//                                     Log.e("resss ", ""+json);
-//                                 }
-//
-//                                 @Override
-//                                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                                     Log.e(TAG , "responseCodeBB ");
-//                                 }
-//        });
-//
-
-
-
-       // File fileimage = new File("/sdcard/back1.png");
-//        RequestParams params = new RequestParams();
-//        if (logoPath != null) {
-//            try {
-//                params.put("file", logoPath);
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-
-//        String token = Constant.GetSharedPreferences(getContext(), Constant.ACCESS_TOKEN);
-//        AsyncHttpClient client = new AsyncHttpClient();
-//        client.setSSLSocketFactory(MySSLSocketFactory.getFixedSocketFactory());
-//      //  client.addHeader("Access-Token", token);
-//        client.post("http://3.6.201.59:8006/api/v1/user/uploadFile", params, new AsyncHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-//                //  String response111 = new String(responseBody);
-//                Log.e(TAG, "addproductResp1 "+responseBody.length);
-//                Utility.hideKeypad(Home_Activity.this);
-//                avi.smoothToHide();
-//                avibackground.setVisibility(View.GONE);
-//
-//                if(responseBody.length == 0){
-//                    // Constant.ErrorToast(getActivity(), "Something went wrong, try again!");
-//                }else{
-//                    String response = new String(responseBody);
-//                    Log.e("addproductResp", response);
-//
-//                }
-//
-//
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-//                String response111 = new String(responseBody);
-//                Log.e("addproductResp2 ", response111);
-//
-//            }
-//        });
-
-
-     //   pref.setFontDialog("");
-
-//        Utility.deleteDirectory();
-
-//        File mFile = new File(Environment.getExternalStorageDirectory() + "/Notes");
-//        try {
-//            deleteFolder(mFile);
-//        } catch (IOException e) {
-//           // Toast.makeText(Home_Activity.this, "Unable to delete folder", Toast.LENGTH_SHORT).show();
-//        }
-
-//
-//        Settings.System.putFloat(getContentResolver(),
-//                Settings.System.FONT_SCALE, (float) 1.0);
 
         SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE, MODE_PRIVATE);
         boolean LOGGED_IN  = preferences.getBoolean(Constant.LOGGED_IN, false);
@@ -402,7 +378,9 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
                 });
 
         if (getIntent().hasExtra("login")) {
-            //messagebar();
+//            messagebar();
+
+//            intent.putExtra("key" , "home");
         }
 
         Constant.bottomNav(Home_Activity.this, -1);

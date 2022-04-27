@@ -290,6 +290,7 @@ dependencies {
 
     implementation "com.android.billingclient:billing:4.0.0"
     implementation 'com.iarcuschin:simpleratingbar:0.1.5'
+
 }
 apply plugin: 'com.google.gms.google-services'
 

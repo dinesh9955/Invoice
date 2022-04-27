@@ -62,7 +62,9 @@ public class ReceiptsActivity extends BaseActivity {
             viewPager.setCurrentItem(1);
         }
 
-
+        if (getIntent().hasExtra("key")){
+            viewPager.setCurrentItem(1);
+        }
 
         viewPager.setSwipeable(false);
 

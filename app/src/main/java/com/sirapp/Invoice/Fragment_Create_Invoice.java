@@ -777,6 +777,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                         Window window = mybuilder.getWindow();
                         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         window.setBackgroundDrawableResource(R.color.transparent);
+                    }else {
+                        Constant.ErrorToast(getActivity(), getString(R.string.item_Addwarehousefirstandupdatestocks));
                     }
 
 
@@ -2034,6 +2036,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), Service_Activity.class);
+                    intent.putExtra("key" , "home");
                     getActivity().startActivityForResult(intent, 125);
                     bottomSheetDialog2.dismiss();
                 }
@@ -3459,6 +3462,7 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), Customer_Activity.class);
+                    intent.putExtra("key" , "home");
                     getActivity().startActivityForResult(intent, 123);
                     bottomSheetDialog.dismiss();
                 }
