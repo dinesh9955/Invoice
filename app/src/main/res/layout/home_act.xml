@@ -998,7 +998,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:background="@drawable/side_menu_bg"
-                android:visibility="gone"
+                android:visibility="visible"
                 >
 
 
