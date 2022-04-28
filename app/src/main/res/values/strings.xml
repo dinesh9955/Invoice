@@ -773,6 +773,8 @@
     <string name="setting_enter_message">Enter Message</string>
     <string name="setting_Submit">Submit</string>
     <string name="setting_PaymentOptions">Payment Options</string>
+    <string name="Unlimited_7day_free_trial">Unlimited 7-day free trial</string>
+    <string name="Unlimited_3day_free_trial">Unlimited 3-day free trial</string>
     <string name="setting_Standard" translatable="false">Standard</string>
     <string name="setting_Business" translatable="false">Business</string>
     <string name="setting_SelectNumberFormat">Select Number Format</string>
@@ -793,7 +795,7 @@
     <string name="setting_Subscribe">Subscribe</string>
 
     <string name="setting_Upgrade">Add-ons</string>
-    <string name="setting_UPGRADETODAY">Start Free Trial</string>
+    <string name="setting_UPGRADETODAY"><font color='white'>Start Free Trial</font>\n<font size='16' color='#1B60FB'>2 taps to start, super easy to cancel</font></string>
     <string name="setting_SKIP">SKIP</string>
 
     <string name="delete_account">Delete Account</string>
@@ -1137,6 +1139,7 @@
 
     <string-array name="faqQuestionArray">
         <item>How to get started / How does the app function?</item>
+        <item> How your free trial works?</item>
         <item>If data is created from add new functionality directly from creation page, newly created data not display?</item>
         <item>How to add users?</item>
         <item>How to add a warehouse?</item>
@@ -1179,6 +1182,7 @@
 
     <string-array name="faqAnswerArray">
         <item>To get started, click on sign up here and create an account. Then log in with your credentials. First, you need to create a business from My businesses module. Enter as much details, logo, payment details, etc.; as required to display on Invoices and other documents. Then create products, services, taxes, customers, suppliers from respective modules in the side menu. You can edit any of these details at anytime. This is in accordance with the controlling feature of the app so the users can track any activity / inventory at anytime and have all available data stored within the app for future reference/ reporting. Once above is done, then you can create invoices, estimates, purchase orders, receipts, payment vouchers from respective modules in side menu or tray icons in the bottom of home screen within seconds.</item>
+        <item>Unlimited free access during trial period. You will be charged after trial period ends as per plan selected, cancel anytime before.</item>
         <item>If you add new businesses, customers, suppliers, products, items and taxes directly from Create Invoice or other pages, then you need to refresh by selecting the business name again on top, while creating invoice or other documents, to display the newly created data.</item>
         <item>To add new users, go to add new users module from the side menu, then click on add users on the top right, then enter the details and select single / multiple access rights to be granted, then click on add user. The new user added can access the app through the username and password entered while adding user. The new user can reset password from the login screen by clicking on forgot password and following the steps there to.</item>
         <item>To add a warehouse, go to My businesses module from the side menu, then click on the business in which warehouse should be added, then click on add warehouse from top right, then enter the details and click on save and continue.</item>

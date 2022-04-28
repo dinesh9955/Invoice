@@ -888,6 +888,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(),Companies_Activity.class);
+                        intent.putExtra("key" , "home");
                         getActivity().startActivityForResult(intent, 200);
                         mybuilder.dismiss();
                     }
@@ -908,13 +909,13 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                 mAdapter = new MenuAdapter(cnames, cids , mybuilder);
                 mRecyclerView.setAdapter(mAdapter);
 
-                if(cnames.size() > 0){
+//                if(cnames.size() > 0){
                     mybuilder.show();
                     mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                     Window window = mybuilder.getWindow();
                     window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                     window.setBackgroundDrawableResource(R.color.transparent);
-                }
+//                }
 
 
             }

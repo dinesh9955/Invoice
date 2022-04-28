@@ -23,10 +23,10 @@
                 android:id="@+id/imagePay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_minus15sdp"
                 android:adjustViewBounds="true"
                 android:contentDescription="Specs"
                 android:scrollbars="vertical"
-                android:layout_marginTop="@dimen/_minus15sdp"
                 android:src="@drawable/pay2"></ImageView>
 
             <RelativeLayout
@@ -145,9 +145,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_130sdp"
+                android:layout_height="@dimen/_140sdp"
                 android:contentDescription="Specs"
-                android:layout_marginTop="@dimen/_130sdp"
+                android:layout_marginTop="@dimen/_110sdp"
                 android:orientation="horizontal"
                 >
 
@@ -157,7 +157,31 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="bottom">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Unlimited_7day_free_trial"
+                            android:textColor="@color/orange"
+                            android:textSize="@dimen/_9sdp"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -166,7 +190,29 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/_20sdp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="bottom">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Unlimited_3day_free_trial"
+                            android:textColor="@color/orange"
+                            android:textSize="@dimen/_9sdp"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
@@ -217,13 +263,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:orientation="horizontal"
             android:background="@drawable/orange_shape"
             android:text="@string/setting_UPGRADETODAY"
             android:textStyle="bold"
             android:padding="@dimen/_10sdp"
             android:textAllCaps="false"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="@dimen/_18sdp"
             android:textColor="@color/darkblue">
 
         </Button>
