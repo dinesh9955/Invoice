@@ -69,16 +69,42 @@
                     />
 
                 <TextView
+                    android:id="@+id/ans1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/que1"
+                    android:layout_marginTop="@dimen/_1sdp"
                     android:text="All subscriptions renew automatically for your convenience and to avoid any interruption of sevice. Your subscriptions can be managed and auto-renewal turned off by going to your Play Store settings after purchase."
+                    android:textColor="@color/fragmentfont"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="normal" />
+
+
+
+
+                <TextView
+                    android:id="@+id/que11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ans1"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="How your free trial works?"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unlimited free access during trial period. You will be charged after trial period ends as per plan selected, cancel anytime before."
                     android:textSize="@dimen/_11sdp"
                     android:textStyle="normal"
                     android:textColor="@color/fragmentfont"
-                    android:id="@+id/ans1"
-                    android:layout_below="@+id/que1"
+                    android:id="@+id/ans11"
+                    android:layout_below="@+id/que11"
                     android:layout_marginTop="@dimen/_1sdp"
                     />
+
 
 
 
@@ -91,9 +117,10 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:id="@+id/que2"
-                    android:layout_below="@+id/ans1"
+                    android:layout_below="@+id/ans11"
                     android:layout_marginTop="@dimen/_15sdp"
                     />
+
 
                 <TextView
                     android:layout_width="wrap_content"
