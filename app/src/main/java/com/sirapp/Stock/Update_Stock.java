@@ -192,7 +192,8 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
 
                 final Dialog mybuilder = new Dialog(getActivity());
                 mybuilder.setContentView(R.layout.select_company_dialog_2);
-
+                TextView textViewHead = (TextView) mybuilder.findViewById(R.id.itemstxtTemplate45435);
+                textViewHead.setText(getActivity().getString(R.string.stock_Select_Product));
 
                 mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
 //                mRecyclerView.setHasFixedSize(true);

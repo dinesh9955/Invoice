@@ -179,9 +179,10 @@ public class Stock_Movement extends BaseFragment {
 
                 final Dialog mybuilder = new Dialog(getActivity());
                 mybuilder.setContentView(R.layout.select_company_dialog_2);
-
-
                 mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+
+                TextView textViewHead = (TextView) mybuilder.findViewById(R.id.itemstxtTemplate45435);
+                textViewHead.setText(getActivity().getString(R.string.stock_Select_Product));
 //                mRecyclerView.setHasFixedSize(true);
 
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));

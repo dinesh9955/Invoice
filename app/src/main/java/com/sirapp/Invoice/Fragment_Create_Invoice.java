@@ -761,7 +761,8 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
 
                     final Dialog mybuilder = new Dialog(getActivity());
                     mybuilder.setContentView(R.layout.select_company_dialog_2);
-
+                    TextView textViewHead = (TextView) mybuilder.findViewById(R.id.itemstxtTemplate45435);
+                    textViewHead.setText(getActivity().getString(R.string.stock_SearchWarehouse));
 
                     mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
 //                mRecyclerView.setHasFixedSize(true);

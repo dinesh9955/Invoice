@@ -1042,7 +1042,7 @@
 
     <string name="dialog_TaxNotFound">Tax Not Found</string>
     <string name="dialog_PerUnit">Per Unit</string>
-    <string name="select_currency">Select currency</string>
+    <string name="select_currency">Select Currency</string>
     <string name="dialog_Please_select_currency">Please select currency</string>
     <string name="dialog_CompanyCreatedSuccessfully">Business created successfully</string>
     <string name="dialog_Required">Required</string>

@@ -320,7 +320,8 @@ public class Add_Company extends BaseFragment {
 
                 final Dialog mybuilder = new Dialog(getActivity());
                 mybuilder.setContentView(R.layout.select_company_dialog_2);
-
+                TextView textViewHead = (TextView) mybuilder.findViewById(R.id.itemstxtTemplate45435);
+                textViewHead.setText(getActivity().getString(R.string.select_currency));
 
                 mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
 //                mRecyclerView.setHasFixedSize(true);
