@@ -260,20 +260,19 @@
                 android:id="@+id/selectwarehouse"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
+                android:layout_below="@id/itemstxtTemplate"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/edittextshape"
-                android:hint="@string/invoice_SelectWarehouseForProduct"
-                android:spinnerMode="dialog"
                 android:gravity="left|center_vertical"
+                android:hint="@string/invoice_SelectWarehouseForProduct"
                 android:paddingLeft="10dp"
-                android:textStyle="normal"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/black"
-                android:layout_below="@id/itemstxtTemplate"
+                android:spinnerMode="dialog"
                 android:textAllCaps="false"
-                />
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/selectButton"
