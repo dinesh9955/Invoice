@@ -262,13 +262,37 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
         LinearLayout linearLayoutEstimate = bottomSheetDialog.findViewById(R.id.viewicetemplate);
         LinearLayout linearLayoutReceipt = bottomSheetDialog.findViewById(R.id.viewiceduplicate);
 
+        SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE,MODE_PRIVATE);
+
         linearLayoutInvoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 bottomSheetDialog.dismiss();
-                Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
-                intent.putExtra("key" , "home");
-                startActivity(intent);
+
+
+                if(preferences.getString(Constant.ROLE,"").equalsIgnoreCase("USER")){
+                    Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
+                    intent.putExtra("key" , "home");
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }else{
+                    if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
+                        intent.putExtra("key" , "home");
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }else{
+                        if(preferences.getString(Constant.INVOICE,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
+                            intent.putExtra("key" , "home");
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }else{
+                            createDialogOpenClass(Home_Activity.this);
+                        }
+                    }
+
+                }
             }
         });
 
@@ -276,9 +300,18 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             @Override
             public void onClick(View view) {
                 bottomSheetDialog.dismiss();
-                Intent intent = new Intent(Home_Activity.this, EstimateActivity.class);
-                intent.putExtra("key" , "home");
-                startActivity(intent);
+//                Intent intent = new Intent(Home_Activity.this, EstimateActivity.class);
+//                intent.putExtra("key" , "home");
+//                startActivity(intent);
+
+                if(preferences.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(Home_Activity.this, EstimateActivity.class);
+                    intent.putExtra("key" , "home");
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }else{
+                    createDialogOpenClass(Home_Activity.this);
+                }
             }
         });
 
@@ -286,9 +319,16 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             @Override
             public void onClick(View view) {
                 bottomSheetDialog.dismiss();
-                Intent intent = new Intent(Home_Activity.this, ReceiptsActivity.class);
-                intent.putExtra("key" , "home");
-                startActivity(intent);
+//                Intent intent = new Intent(Home_Activity.this, ReceiptsActivity.class);
+//                intent.putExtra("key" , "home");
+//                startActivity(intent);
+                if(preferences.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+                    Intent intent = new Intent(Home_Activity.this, ReceiptsActivity.class);
+                    intent.putExtra("key" , "home");
+                    startActivity(intent);
+                }else{
+                    createDialogOpenClass(Home_Activity.this);
+                }
             }
         });
 
@@ -303,7 +343,6 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
         checkWebview();
 
-        SharedPreferences preferences = getSharedPreferences(Constant.PREF_BASE, MODE_PRIVATE);
         boolean LOGGED_IN  = preferences.getBoolean(Constant.LOGGED_IN, false);
         if (!LOGGED_IN) {
             Intent i = new Intent(Home_Activity.this, Signin_Activity.class);
