@@ -628,7 +628,9 @@ public class Add_Services extends BaseFragment {
                                     }
 
                                     if(jsonObject.has("message")){
-                                        Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+                                        Constant.ErrorToast(getActivity(), "You have exhausted your free usage allowance. Please subscribe to continue enjoying our services.");
+
+                                        //Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                                     }
 
 

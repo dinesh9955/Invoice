@@ -890,7 +890,7 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
 
                                     if(jsonObject.has("message")){
                                         if(jsonObject.getString("message").contains("additional products")){
-                                            Constant.ErrorToast(getActivity(), "You have exhausted your free usage allowance. Please upgrade to our exclusive stock tracking feature to continue enjoying our services.");
+                                            Constant.ErrorToast(getActivity(), "You have exhausted your free usage allowance. Please subscribe to continue enjoying our services.");
                                         }else{
                                             Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
                                         }

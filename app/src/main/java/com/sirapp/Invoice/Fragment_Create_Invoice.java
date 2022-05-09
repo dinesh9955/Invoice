@@ -1622,12 +1622,13 @@ public class Fragment_Create_Invoice extends BaseFragment implements Customer_Bo
                                 }
                             }, 500);
 
-                            JSONObject data = jsonObject.getJSONObject("data");
+                           // JSONObject data = jsonObject.getJSONObject("data");
 
 
                         }
                         if (status.equals("false")) {
                             Constant.ErrorToast(getActivity(), jsonObject.getString("message"));
+
                             createinvoice.setEnabled(true);
 
                             if (jsonObject.has("code")) {
