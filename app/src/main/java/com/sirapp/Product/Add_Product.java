@@ -912,16 +912,16 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                                                             Intent intent = new Intent(getActivity(), GoProActivity.class);
                                                             startActivity(intent);
                                                         }else{
-                                                            if(jsonObject.getString("message").contains("additional products")){
-                                                                Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                                                                intent.putExtra("key", "product");
-                                                                startActivityForResult(intent, 43);
-                                                            }else{
+//                                                            if(jsonObject.getString("message").contains("additional products")){
+//                                                                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+//                                                                intent.putExtra("key", "product");
+//                                                                startActivityForResult(intent, 43);
+//                                                            }else{
                                                                 Intent intent = new Intent(getActivity(), GoProActivity.class);
                                                                 startActivity(intent);
-                                                            }
+//                                                            }
                                                         }
-                                                    } catch (JSONException e) {
+                                                    } catch (Exception e) {
                                                         e.printStackTrace();
                                                     }
 

@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.gson.Gson;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.CN.CreditNotesViewActivityWebView;
 import com.sirapp.CN.ViewCreditNote_Activity;
@@ -112,7 +113,7 @@ public class EstimateViewActivityWebView extends BaseActivity {
         colorCode = getIntent().getStringExtra("colorCode");
 
         if (invoiceId != null) {
-            Log.e("invoiceId", invoiceId);
+            Log.e("invoiceIdXX", invoiceId);
         }
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,7 +197,10 @@ public class EstimateViewActivityWebView extends BaseActivity {
                 // customer data get
                 EstimateDto data = response.body().getData();
 
-                Log.e(TAG, "resssAA "+ ""+response.body().toString());
+                Gson gson = new Gson();
+                String json = gson.toJson(data);
+
+                Log.e(TAG, "resssAA "+ ""+json);
 
                 InvoiceCustomerDto invoiceCustomerDto = data.getEstimate().getCustomer();
                 sltcustonername = invoiceCustomerDto.getCustomerName();
@@ -346,6 +350,8 @@ public class EstimateViewActivityWebView extends BaseActivity {
 //                            DecimalFormat formatter = new DecimalFormat("##,##,##,##0.00");
                             invoicetaxvalue = Utility.getPatternFormat(""+numberPostion, vc);
                             taxTitle = title;
+                           // taxTitle = value;
+                            Log.e(TAG, "vcSS "+invoicetaxvalue);
                         }
                         //invoicetaxvalue = listobj.getValue();
                     }

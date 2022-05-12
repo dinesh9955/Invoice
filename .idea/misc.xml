@@ -27,6 +27,7 @@
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_paypal.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_product_.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_product__detail_.xml" value="0.18" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_report.xml" value="0.15775972637879435" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_service__detail_.xml" value="0.18" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_settings.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_signup_.xml" value="0.1921875" />
@@ -67,10 +68,11 @@
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/home_act.xml" value="0.15775972637879435" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/invoicedetail.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/item_faqs.xml" value="0.15775972637879435" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/item_report.xml" value="0.15775972637879435" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/layout_supplier.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/product_bottom_itemlayout.xml" value="0.5" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/product_listing_itemlayout.xml" value="0.25" />
-        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/products_bottom_sheet.xml" value="0.46125" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/products_bottom_sheet.xml" value="0.15775972637879435" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/select_company_dialog_2.xml" value="0.33" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/select_company_dialog_3.xml" value="0.15775972637879435" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/service_bottom_itemlayout.xml" value="0.18" />

@@ -1254,11 +1254,51 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 //                {
 //                    Constant.ErrorToast(EditEstimateActivity.this, "Select A Where House");
 //                } else {
-                createbottomsheet_products();
-                bottomSheetDialog.show();
-                bottomSheetDialog2.dismiss();
+//                createbottomsheet_products();
+//                bottomSheetDialog.show();
+//                bottomSheetDialog2.dismiss();
 //
 //                }
+
+                Log.e(TAG, "selectwarehouseId++ "+selectwarehouseId);
+
+                if (selectwarehouseId == null) {
+//                    Constant.ErrorToast(getActivity(), getString(R.string.stock_Select_Warehouse));
+                    RecyclerView mRecyclerView;
+                    MenuAdapter2 mAdapter;
+
+                    final Dialog mybuilder = new Dialog(ConvertToInvoiceActivity.this);
+                    mybuilder.setContentView(R.layout.select_company_dialog_2);
+                    TextView textViewHead = (TextView) mybuilder.findViewById(R.id.itemstxtTemplate45435);
+                    textViewHead.setText(getString(R.string.stock_Select_Warehouse));
+
+                    mRecyclerView = (RecyclerView) mybuilder.findViewById(R.id.recycler_list);
+//                mRecyclerView.setHasFixedSize(true);
+
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(ConvertToInvoiceActivity.this, LinearLayoutManager.VERTICAL, false));
+
+                    mAdapter = new MenuAdapter2(wnames, mybuilder);
+                    mRecyclerView.setAdapter(mAdapter);
+
+                    if (wnames.size() != 0){
+                        mybuilder.show();
+                        mybuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                        Window window = mybuilder.getWindow();
+                        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        window.setBackgroundDrawableResource(R.color.transparent);
+                    }else {
+                        Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.item_Addwarehousefirstandupdatestocks));
+                    }
+
+
+                } else {
+                    //  if(product_bottom.size() > 0){
+                    createbottomsheet_products();
+                    bottomSheetDialog.show();
+                    bottomSheetDialog2.dismiss();
+                    //  }
+                }
+
 
             }
         });
@@ -3291,7 +3331,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
                 String response = new String(responseBody);
-                Log.e("response product", response);
+                Log.e("responseproduct", response);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -3349,6 +3389,11 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
 
                             }
+
+                            createbottomsheet_products();
+                            bottomSheetDialog.show();
+                            bottomSheetDialog2.dismiss();
+
                         } else {
                             Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_ProductNotFound));
                         }
@@ -3363,7 +3408,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 if (responseBody != null) {
                     String response = new String(responseBody);
-                    //  Log.e("responseproductF", response);
+                      Log.e("responseproductF", response);
 
                     try {
                         JSONObject jsonObject = new JSONObject(response);
@@ -6023,5 +6068,85 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
             bottomSheetDialog.dismiss();
         }
     }
+
+
+
+
+
+
+
+    public class MenuAdapter2 extends RecyclerView.Adapter<MenuAdapter2.ViewHolder> {
+
+        private static final String TAG = "MenuAdapter";
+
+        ArrayList<String> cnames = new ArrayList<>();
+
+        Dialog mybuilder;
+
+        public MenuAdapter2(ArrayList<String> cnames, Dialog mybuilder) {
+            super();
+            this.cnames = cnames;
+            this.mybuilder = mybuilder;
+        }
+
+
+
+        @Override
+        public MenuAdapter2.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+            final View v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.menu_item_2, viewGroup, false);
+            return new MenuAdapter2.ViewHolder(v);
+        }
+
+
+        @Override
+        public void onBindViewHolder(final MenuAdapter2.ViewHolder viewHolder, final int i) {
+
+            viewHolder.textViewName.setText(""+cnames.get(i));
+            viewHolder.realtive1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mybuilder.dismiss();
+
+//                    selectwarehouse.setText(wnames.get(i));
+                    selectwarehouseId = wids.get(i);
+                    Log.e("selectwarehouseId", selectwarehouseId);
+                    productget(selectwarehouseId);
+
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return cnames.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            View view11 = null;
+            TextView textViewName;
+            RelativeLayout realtive1;
+            public ViewHolder(View itemView) {
+                super(itemView);
+                view11 = itemView;
+                realtive1 = (RelativeLayout) itemView.findViewById(R.id.realtive1);
+                textViewName = (TextView) itemView.findViewById(R.id.txtList);
+            }
+
+        }
+
+
+
+        public void updateData(ArrayList<String> cnames) {
+            // TODO Auto-generated method stub
+            this.cnames = cnames;
+            notifyDataSetChanged();
+        }
+
+
+    }
+
 
 }

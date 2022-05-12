@@ -1582,32 +1582,8 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                     if(selectedtaxt.get(i).getRateType().equalsIgnoreCase("p")){
                         Log.e(TAG, "QQQQQQQQQQQ");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
-                        // params.add("tax[" + i + "]" + "[amount]", Utility.getReplaceCurrency(invoicetaxamount, cruncycode));
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-////                        params.add("tax[" + i + "]" + "[title]", "zz");
-//
-////                        if(selectedtaxt.get(i).getTaxname().length() > 0){
-////                            if(selectedtaxt.get(i).getTaxname().contains(" ")){
-////                                String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
-////                                Log.e(TAG, "firstTaxAAA5 "+firstTax);
-////                                params.add("tax[" + i + "]" + "[title]", firstTax);
-////                            }else{
-//                                String isTaxRate = selectedtaxt.get(i).getTaxrate();
-//                                String isPecent = "%";
-//
-//                                String subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
-//
-//                                if(!subStrinng.contains(isTaxRate+isPecent)){
-//                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
-//                                }else if(subStrinng.contains(isTaxRate+isPecent)){
-//                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
-//                                }
-//
-//                                subStrinng = subStrinng.replace("incl." , "");
-//                                Log.e(TAG, "subStrinngAA "+subStrinng);
-//                                params.add("tax[" + i + "]" + "[title]", subStrinng);
-////                            }
-////                        }
+
                         String isTaxRate = selectedtaxt.get(i).getTaxrate();
                         String isPecent = "%";
                         String taxT1 = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
@@ -1615,35 +1591,12 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                         taxT1 = taxT1.replace(isPecent, "");
                         taxT1 = taxT1.replace("incl." , "");
                         params.add("tax[" + i + "]" + "[title]", taxT1);
-                        params.add("tax[" + i + "]" + "[amount]", ""+taxAmountZZ);
+                       // params.add("tax[" + i + "]" + "[amount]", ""+taxAmountZZ);
                     }else{
                         Log.e(TAG, "WWWWWWWWWWWWW");
                         params.add("tax[" + i + "]" + "[type]", taxtypeclusive.toLowerCase());
                         params.add("tax[" + i + "]" + "[amount]", ""+taxAmountZZ);
                         params.add("tax[" + i + "]" + "[rate]", selectedtaxt.get(i).getTaxrate());
-////                        params.add("tax[" + i + "]" + "[title]", "xx");
-//
-////                        if(selectedtaxt.get(i).getTaxname().length() > 0){
-////                            if(selectedtaxt.get(i).getTaxname().contains(" ")){
-////                                String firstTax = selectedtaxt.get(i).getTaxname().split(" ")[0].replace("(", "");
-////                                Log.e(TAG, "firstTaxAAA6 "+firstTax);
-////                                params.add("tax[" + i + "]" + "[title]", firstTax);
-////                            }else{
-//                                String isTaxRate = selectedtaxt.get(i).getTaxrate();
-//                                String isPecent = "%";
-//
-//                                String subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
-//
-//                                if(!subStrinng.contains(isTaxRate+isPecent)){
-//                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "") + " " + selectedtaxt.get(i).getTaxrate() + "%";
-//                                }else if(subStrinng.contains(isTaxRate+isPecent)){
-//                                    subStrinng = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "").replace(isTaxRate+isPecent, "");
-//                                }
-//
-//                                subStrinng = subStrinng.replace("incl." , "");
-//                                params.add("tax[" + i + "]" + "[title]", subStrinng);
-////                            }
-////                        }
                         String isTaxRate = selectedtaxt.get(i).getTaxrate();
                         String isPecent = "%";
                         String taxT1 = selectedtaxt.get(i).getTaxname().replace("(", "").replace(")", "");
@@ -1651,11 +1604,8 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
                         taxT1 = taxT1.replace(isPecent, "");
                         taxT1 = taxT1.replace("incl." , "");
                         params.add("tax[" + i + "]" + "[title]", taxT1);
+
                     }
-
-
-
-
 
 
                 }

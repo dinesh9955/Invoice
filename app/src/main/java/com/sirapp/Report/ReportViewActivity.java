@@ -628,14 +628,14 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
                        // if(filterID.equalsIgnoreCase("date")){
-//                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
-//                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
-//                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
-//                                }
-//                            });
+                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
+                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
+                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
+                                }
+                            });
                        // }
 
-                        //Collections.reverse(customerReportItemArrayList);
+                        Collections.reverse(customerReportItemArrayList);
 
                         customerItemAA = customerItem;
                         customerReportItemArrayListAA = customerReportItemArrayList;
@@ -2193,11 +2193,12 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
 
 //                        if(filterID.equalsIgnoreCase("date")){
-//                            Collections.sort(customerReportItemArrayList, new Comparator<TaxCollectedReportItem>() {
-//                                public int compare(TaxCollectedReportItem o1, TaxCollectedReportItem o2) {
-//                                    return o1.getDate_added().compareTo(o2.getDate_added());
-//                                }
-//                            });
+                            Collections.sort(customerReportItemArrayList, new Comparator<TaxCollectedReportItem>() {
+                                public int compare(TaxCollectedReportItem o1, TaxCollectedReportItem o2) {
+                                    return o1.getDate_added().compareTo(o2.getDate_added());
+                                }
+                            });
+                            Collections.reverse(customerReportItemArrayList);
 //                        }else if(filterID.equalsIgnoreCase("tax")){
 //                            Collections.sort(customerReportItemArrayList, new Comparator<TaxCollectedReportItem>() {
 //                                public int compare(TaxCollectedReportItem o1, TaxCollectedReportItem o2) {
