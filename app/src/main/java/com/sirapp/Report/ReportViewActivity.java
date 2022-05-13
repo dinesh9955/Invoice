@@ -635,7 +635,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                             });
                        // }
 
-                        Collections.reverse(customerReportItemArrayList);
+//                        Collections.reverse(customerReportItemArrayList);
 
                         customerItemAA = customerItem;
                         customerReportItemArrayListAA = customerReportItemArrayList;
@@ -2198,7 +2198,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                                     return o1.getDate_added().compareTo(o2.getDate_added());
                                 }
                             });
-                            Collections.reverse(customerReportItemArrayList);
+                           // Collections.reverse(customerReportItemArrayList);
 //                        }else if(filterID.equalsIgnoreCase("tax")){
 //                            Collections.sort(customerReportItemArrayList, new Comparator<TaxCollectedReportItem>() {
 //                                public int compare(TaxCollectedReportItem o1, TaxCollectedReportItem o2) {

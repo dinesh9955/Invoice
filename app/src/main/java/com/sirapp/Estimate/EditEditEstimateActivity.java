@@ -633,7 +633,7 @@ public class EditEditEstimateActivity extends BaseActivity implements Customer_B
 
 
     private void getinvoicedata() {
-        Log.e(TAG, "invoiceIdAAA "+invoiceId);
+        Log.e(TAG, "invoiceIdAAAXX "+invoiceId);
 
         String token = Constant.GetSharedPreferences(EditEditEstimateActivity.this, Constant.ACCESS_TOKEN);
         Call<EstimateResponseDto> resposresult = apiInterface.getEstimateDetail(token, invoiceId, ""+getLanguage());
