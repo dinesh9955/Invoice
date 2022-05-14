@@ -4759,7 +4759,7 @@ public class FragmentCreate_Receipts extends BaseFragment implements Customer_Bo
                     .replaceAll("Notes:", notestringvalue)
                   //  .replaceAll("Ship To:", Shiping_tostr)
                     .replaceAll(" Shipping ", shipingvaluetxt)
-                    .replaceAll("Tax", taxtamountstrvalue)
+                    .replaceAll(" Tax ", taxtamountstrvalue)
                     .replaceAll(" Discount ", discounttxtreplace)
                     .replaceAll("Reference No:", strreferencenotxtvalue)
                     .replaceAll("hide", hiddenpaidrow)
