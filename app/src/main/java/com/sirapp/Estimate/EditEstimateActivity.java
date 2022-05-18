@@ -3667,6 +3667,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
     @SuppressLint("SetTextI18n")
     private void calculateTotalAmount(Double total_price) {
         Log.e(TAG,  "total_priceSSSS "+total_price);
+        DecimalFormat formatter = new DecimalFormat("#0.00");
 
         if(tempList.size() == 0){
             textViewNoItems.setVisibility(View.VISIBLE);
@@ -3725,7 +3726,7 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
                 double value = Discountamountstrdto;
                 discountAmount = value;
             }
-
+            discountAmount = Double.parseDouble(formatter.format(discountAmount));
 
 
             subtotalAmount = grandAmount - discountAmount;
@@ -3891,7 +3892,6 @@ public class EditEstimateActivity extends BaseActivity implements Customer_Botto
 //            shippingAmountZZ = shippingAmount;
 //            netAmountZZ = netAmount;
 
-            DecimalFormat formatter = new DecimalFormat("#0.00");
             Log.e(TAG , "subtotalAmountZZ "+formatter.format(subtotalAmount));
 
             grandAmountZZ = Double.parseDouble(formatter.format(grandAmount));

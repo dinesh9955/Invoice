@@ -926,11 +926,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                         }
 
                     //    if(filterID.equalsIgnoreCase("date")){
-//                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
-//                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
-//                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
-//                                }
-//                            });
+                            Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
+                                public int compare(CustomerReportItem o1, CustomerReportItem o2) {
+                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
+                                }
+                            });
                       //  }
 
 

@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Invoice.iml" filepath="$PROJECT_DIR$/.idea/modules/Invoice.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Invoice.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Invoice.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Invoice.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Invoice.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Invoice.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Invoice.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Invoice.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Invoice.app.unitTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pdfcreator/Invoice.pdfcreator.iml" filepath="$PROJECT_DIR$/.idea/modules/pdfcreator/Invoice.pdfcreator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pdfcreator/Invoice.pdfcreator.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/pdfcreator/Invoice.pdfcreator.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pdfcreator/Invoice.pdfcreator.main.iml" filepath="$PROJECT_DIR$/.idea/modules/pdfcreator/Invoice.pdfcreator.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pdfcreator/Invoice.pdfcreator.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/pdfcreator/Invoice.pdfcreator.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SirProject.iml" filepath="$PROJECT_DIR$/.idea/modules/SirProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SirProject.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SirProject.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SirProject.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SirProject.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SirProject.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SirProject.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SirProject.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SirProject.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pdfcreator/SirProject.pdfcreator.iml" filepath="$PROJECT_DIR$/.idea/modules/pdfcreator/SirProject.pdfcreator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pdfcreator/SirProject.pdfcreator.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/pdfcreator/SirProject.pdfcreator.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pdfcreator/SirProject.pdfcreator.main.iml" filepath="$PROJECT_DIR$/.idea/modules/pdfcreator/SirProject.pdfcreator.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pdfcreator/SirProject.pdfcreator.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/pdfcreator/SirProject.pdfcreator.unitTest.iml" />
     </modules>
   </component>
 </project>

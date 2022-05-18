@@ -3602,6 +3602,9 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
                 discountAmount = value;
             }
 
+            discountAmount = Double.parseDouble(formatter.format(discountAmount));
+
+
             subtotalAmount = grandAmount - discountAmount;
 
             afterTaxAmount = Double.parseDouble(formatter.format(subtotalAmount));
@@ -3698,6 +3701,9 @@ public class Fragment_Create_Estimate extends BaseFragment implements Customer_B
             afterTaxAmountZZ = Double.parseDouble(formatter.format(afterTaxAmount));
             shippingAmountZZ = Double.parseDouble(formatter.format(shippingAmount));
             netAmountZZ = Double.parseDouble(formatter.format(netAmount));
+
+            Log.e(TAG , "netAmountZZSSS "+netAmountZZ);
+
 //            paidAmountZZ = Double.parseDouble(formatter.format(paidAmount));
 //            balanceAmountZZ = Double.parseDouble(formatter.format(balanceAmount));
 

@@ -3247,7 +3247,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                     avi.smoothToHide();
                     avibackground.setVisibility(View.GONE);
                     String response = new String(responseBody);
-                    //Log.e("warehouseResp", response);
+                    Log.e("warehouseRespXX", response);
 
                     try {
                         JSONObject jsonObject = new JSONObject(response);
@@ -3293,7 +3293,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                     avibackground.setVisibility(View.GONE);
                     if (responseBody != null) {
                         String response = new String(responseBody);
-                        //  Log.e("responsevendorF", response);
+                          Log.e("responsevendorFXX", response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.getString("status");
