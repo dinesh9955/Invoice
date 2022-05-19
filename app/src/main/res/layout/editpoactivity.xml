@@ -238,8 +238,6 @@
                 android:visibility="gone"/>
 
 
-
-
             <com.isapanah.awesomespinner.AwesomeSpinner
 
                 android:id="@+id/selectwarehouse"
@@ -251,7 +249,8 @@
                 android:layout_marginRight="20dp"
                 android:background="@drawable/edittextshape"
                 app:spinnerDirection="ltr"
-                app:spinnerHint="@string/invoice_SelectWarehouseForProduct" />
+                app:spinnerHint="@string/invoice_SelectWarehouseForProduct"
+                android:visibility="gone"/>
 
 
             <Button
