@@ -415,7 +415,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
         super.onCreate(savedInstanceState);
 //        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        setContentView(R.layout.editinvoiceactivity);
+        setContentView(R.layout.convert_to_invoice_activity);
         Constant.toolbar(ConvertToInvoiceActivity.this, getString(R.string.header_convert_to_invoice));
 
         viewPayment = findViewById(R.id.payment_id);
@@ -3390,9 +3390,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
                             }
 
-                            createbottomsheet_products();
-                            bottomSheetDialog.show();
-                            bottomSheetDialog2.dismiss();
+//                            createbottomsheet_products();
+//                            bottomSheetDialog.show();
+//                            bottomSheetDialog2.dismiss();
 
                         } else {
                             Constant.ErrorToast(ConvertToInvoiceActivity.this, getString(R.string.dialog_ProductNotFound));
