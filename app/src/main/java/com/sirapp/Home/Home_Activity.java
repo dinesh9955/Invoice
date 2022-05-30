@@ -269,7 +269,6 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
             public void onClick(View view) {
                 bottomSheetDialog.dismiss();
 
-
                 if(preferences.getString(Constant.ROLE,"").equalsIgnoreCase("USER")){
                     Intent intent = new Intent(Home_Activity.this, InvoiceActivity.class);
                     intent.putExtra("key" , "home");
@@ -304,13 +303,23 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 //                intent.putExtra("key" , "home");
 //                startActivity(intent);
 
-                if(preferences.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+
+                if(preferences.getString(Constant.ROLE,"").equalsIgnoreCase("USER")){
                     Intent intent = new Intent(Home_Activity.this, EstimateActivity.class);
-                    intent.putExtra("key" , "home");
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }else{
-                    createDialogOpenClass(Home_Activity.this);
+                    if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(Home_Activity.this, EstimateActivity.class);
+                        startActivity(intent);
+                    }else{
+                        if(preferences.getString(Constant.ESTIMATE,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(Home_Activity.this, EstimateActivity.class);
+                            startActivity(intent);
+                        }else{
+                            createDialogOpenClass(Home_Activity.this);
+                        }
+                    }
+
                 }
             }
         });
@@ -322,13 +331,25 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 //                Intent intent = new Intent(Home_Activity.this, ReceiptsActivity.class);
 //                intent.putExtra("key" , "home");
 //                startActivity(intent);
-                if(preferences.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+
+                if(preferences.getString(Constant.ROLE,"").equalsIgnoreCase("USER")){
                     Intent intent = new Intent(Home_Activity.this, ReceiptsActivity.class);
-                    intent.putExtra("key" , "home");
                     startActivity(intent);
                 }else{
-                    createDialogOpenClass(Home_Activity.this);
+                    if(preferences.getString(Constant.SUB_ADMIN,"").equalsIgnoreCase("1")){
+                        Intent intent = new Intent(Home_Activity.this, ReceiptsActivity.class);
+                        startActivity(intent);
+                    }else{
+                        if(preferences.getString(Constant.RECEIPT,"").equalsIgnoreCase("1")){
+                            Intent intent = new Intent(Home_Activity.this, ReceiptsActivity.class);
+                            startActivity(intent);
+                        }else{
+                            createDialogOpenClass(Home_Activity.this);
+                        }
+                    }
+
                 }
+
             }
         });
 

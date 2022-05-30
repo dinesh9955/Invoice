@@ -249,7 +249,7 @@
                 android:background="@drawable/edittextshape"
                 app:spinnerDirection="ltr"
                 app:spinnerHint="@string/invoice_SelectWarehouseForProduct"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/selectButton"
@@ -261,7 +261,7 @@
                 android:layout_marginRight="0dp"
                 android:background="@android:color/transparent"
                 android:textSize="@dimen/_11sdp"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <View
                 android:id="@+id/view2"
@@ -288,7 +288,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_below="@+id/itemstxt"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/txtnoitems"

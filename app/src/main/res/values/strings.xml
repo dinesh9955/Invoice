@@ -1049,7 +1049,7 @@
     <string name="dialog_DateRequired">Date Required</string>
     <string name="dialog_PaymentModeRequired">Payment Mode Required</string>
     <string name="dialog_ViewCreditNote">View Credit Note</string>
-    <string name="dialog_ViewRecepit">View Recepit</string>
+    <string name="dialog_ViewRecepit">View Receipt</string>
     <string name="dialog_ViewPaymentVoucher">View Payment Voucher</string>
     <string name="dialog_ViewPurchaseOrder">View Purchase Order</string>
 

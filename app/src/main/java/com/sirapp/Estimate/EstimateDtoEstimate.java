@@ -5,6 +5,7 @@ import com.sirapp.Invoice.response.InvoiceCompanyDto;
 import com.sirapp.Invoice.response.InvoiceCustomerDto;
 import com.sirapp.Invoice.response.InvoiceTotalsItemDto;
 import com.sirapp.Invoice.response.ProductsItemDto;
+import com.sirapp.Invoice.response.ServiceItemDto;
 
 import java.util.List;
 
@@ -61,6 +62,9 @@ public class EstimateDtoEstimate {
 
     @SerializedName("products")
     private List<ProductsItemDto> products;
+
+    @SerializedName("services")
+    private List<ServiceItemDto> services;
 
     @SerializedName("paid_amount_date")
     private String paidAmountDate;
@@ -279,6 +283,7 @@ public class EstimateDtoEstimate {
         this.paymentSwiftBic = paymentSwiftBic;
     }
 
+
     public List<ProductsItemDto> getProducts() {
         return products;
     }
@@ -286,6 +291,18 @@ public class EstimateDtoEstimate {
     public void setProducts(List<ProductsItemDto> products) {
         this.products = products;
     }
+
+
+    public void setServices(List<ServiceItemDto> services) {
+        this.services = services;
+    }
+
+    public List<ServiceItemDto> getServices() {
+        return services;
+    }
+
+
+
 
     public String getPaidAmountDate() {
         return paidAmountDate;

@@ -83,6 +83,7 @@ import com.sirapp.Home.GoProActivity;
 import com.sirapp.ImageResource.FileCompressor;
 import com.sirapp.Invoice.EditInvoiceActivity;
 import com.sirapp.Invoice.InvoiceViewActivityWebView;
+import com.sirapp.Invoice.response.ServiceItemDto;
 import com.sirapp.PO.ConvertToPVActivity;
 import com.sirapp.RetrofitApi.ApiInterface;
 import com.sirapp.RetrofitApi.RetrofitInstance;
@@ -695,7 +696,7 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
                 String ccc= gson.toJson(response.body());
 
-                Log.e(TAG, "cccccc "+ccc);
+                Log.e(TAG, "ccccccvvvss "+ccc);
 
                 company_image_pathdto = response.body().getData().getCompanyImagePath();
                 customer_image_pathdto = response.body().getData().getCustomerImagePath();
@@ -703,6 +704,35 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
                 invoice_image_pathdto = response.body().getData().getEstimateImagePath();
                 // customer data get
                 EstimateDto data = response.body().getData();
+
+
+                List<ProductsItemDto> productsItem = data.getEstimate().getProducts();
+                List<ServiceItemDto> serviceItem = data.getEstimate().getServices();
+
+                String json = gson.toJson(serviceItem);
+                boolean isProduct = false;
+                if(productsItem != null){
+                    for( int i = 0; i < productsItem.size() ; i++){
+                        if(json.contains(productsItem.get(i).getProductId())){
+                            isProduct = true;
+                        }
+                    }
+                }else{
+                    //hide
+                }
+
+                Log.e(TAG , "isProduct "+isProduct);
+
+                if(isProduct == true){
+                    selectwarehouse.setVisibility(View.GONE);
+                    selectButton.setVisibility(View.GONE);
+                }else{
+                    selectwarehouse.setVisibility(View.VISIBLE);
+                    selectButton.setVisibility(View.VISIBLE);
+                }
+
+
+
 
                 InvoiceCustomerDto invoiceCustomerDto = data.getEstimate().getCustomer();
 
@@ -759,6 +789,9 @@ public class ConvertToInvoiceActivity extends BaseActivity implements Customer_B
 
                 company_id = companyDto.getCompanyId();
                 company_name = companyDto.getName();
+
+
+
 
                 // all mehodh get information-------
                 warehouse_list(selectedCompanyId);
