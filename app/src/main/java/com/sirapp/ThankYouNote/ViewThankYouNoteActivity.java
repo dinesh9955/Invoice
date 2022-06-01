@@ -21,8 +21,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.google.gson.Gson;
 import com.sirapp.API.AllSirApi;
 import com.sirapp.Base.BaseActivity;
@@ -143,8 +143,8 @@ public class ViewThankYouNoteActivity extends BaseActivity {
         titleView.setText(getString(R.string.preview));
 
         Map<String, Object> eventValue = new HashMap<String, Object>();
-        eventValue.put(AFInAppEventParameterName.PARAM_1, "thankyounotes_view");
-        AppsFlyerLib.getInstance().trackEvent(ViewThankYouNoteActivity.this, "thankyounotes_view", eventValue);
+//        eventValue.put(AFInAppEventParameterName.PARAM_1, "thankyounotes_view");
+       // AppsFlyerLib.getInstance().start(ViewThankYouNoteActivity.this, "thankyounotes_view", eventValue);
 
         Bundle params2 = new Bundle();
         params2.putString("event_name", "Thank you notes");

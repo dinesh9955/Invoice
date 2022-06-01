@@ -43,8 +43,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -795,8 +795,8 @@ Context applicationContext = Customer_Activity.getContextOfApplication();
                             if (status.equals("true")){
 
                                 Map<String, Object> eventValue = new HashMap<String, Object>();
-                                eventValue.put(AFInAppEventParameterName.PARAM_1, "customer_addnew");
-                                AppsFlyerLib.getInstance().trackEvent(getActivity(), "customer_addnew", eventValue);
+                        //        eventValue.put(AFInAppEventParameterName.PARAM_1, "customer_addnew");
+                               // AppsFlyerLib.getInstance().start(getActivity(), "customer_addnew", eventValue);
 
                                 Bundle params2 = new Bundle();
                                 params2.putString("event_name", "Customers");

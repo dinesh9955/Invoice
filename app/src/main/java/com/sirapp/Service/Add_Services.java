@@ -24,8 +24,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -602,8 +602,8 @@ public class Add_Services extends BaseFragment {
                                 if (status.equals("true")){
 
                                     Map<String, Object> eventValue = new HashMap<String, Object>();
-                                    eventValue.put(AFInAppEventParameterName.PARAM_1, "service_addnew");
-                                    AppsFlyerLib.getInstance().trackEvent(getActivity(), "service_addnew", eventValue);
+//                                    eventValue.put(AFInAppEventParameterName.PARAM_1, "service_addnew");
+                                 //   AppsFlyerLib.getInstance().start(getActivity(), "service_addnew", eventValue);
 
                                     Bundle params2 = new Bundle();
                                     params2.putString("event_name", "My Services");

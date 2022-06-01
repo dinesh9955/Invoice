@@ -24,8 +24,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
@@ -104,8 +104,8 @@ public class Splash_Activity extends BaseActivity {
         FacebookSdk.fullyInitialize();
 
         Map<String, Object> eventValue = new HashMap<String, Object>();
-        eventValue.put(AFInAppEventParameterName.PARAM_1, "App_Open");
-        AppsFlyerLib.getInstance().trackEvent(Splash_Activity.this, "app_open", eventValue);
+//        eventValue.put(AFInAppEventParameterName.PARAM_1, "App_Open");
+     //   AppsFlyerLib.getInstance().start(Splash_Activity.this, "app_open", eventValue);
 
 
         Bundle params2 = new Bundle();

@@ -49,8 +49,8 @@ import android.widget.Toast;
 
 import com.andrognito.flashbar.Flashbar;
 import com.andrognito.flashbar.anim.FlashAnim;
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -507,8 +507,8 @@ public class Home_Activity extends BaseActivity implements MenuDelegate{
 
 
         Map<String, Object> eventValue = new HashMap<String, Object>();
-        eventValue.put(AFInAppEventParameterName.PARAM_1, "dashboard_view");
-        AppsFlyerLib.getInstance().trackEvent(Home_Activity.this, "dashboard_view", eventValue);
+//        eventValue.put(AFInAppEventParameterName.PARAM_1, "dashboard_view");
+      //  AppsFlyerLib.getInstance().start(Home_Activity.this, "dashboard_view", eventValue);
 
         Bundle params2 = new Bundle();
         params2.putString("event_name", "Home");

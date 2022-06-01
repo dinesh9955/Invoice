@@ -10,8 +10,8 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.multidex.MultiDex;
 
-import com.appsflyer.AppsFlyerConversionListener;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AppsFlyerConversionListener;
+//import com.appsflyer.AppsFlyerLib;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
 import com.sirapp.FCM.MyMessageDisplayImplementation;
@@ -174,33 +174,33 @@ public class SAADApplication extends Application implements Thread.UncaughtExcep
 
         FirebaseInAppMessaging.getInstance().setAutomaticDataCollectionEnabled(true);
 
-        AppsFlyerConversionListener appsFlyerConversionListener = new AppsFlyerConversionListener(){
-
-            @Override
-            public void onConversionDataSuccess(Map<String, Object> map) {
-                Log.e(TAG, "onConversionDataSuccess " +  map.toString());
-            }
-
-            @Override
-            public void onConversionDataFail(String s) {
-                Log.e(TAG, "onConversionDataFail " + s);
-            }
-
-            @Override
-            public void onAppOpenAttribution(Map<String, String> map) {
-                Log.e(TAG, "onAppOpenAttribution " + map.toString());
-
-            }
-
-            @Override
-            public void onAttributionFailure(String s) {
-                Log.e(TAG, "onAttributionFailure " + s);
-
-            }
-        };
-
-        AppsFlyerLib.getInstance().init(AF_DEV_KEY, appsFlyerConversionListener, this);
-        AppsFlyerLib.getInstance().startTracking(this);
+//        AppsFlyerConversionListener appsFlyerConversionListener = new AppsFlyerConversionListener(){
+//
+//            @Override
+//            public void onConversionDataSuccess(Map<String, Object> map) {
+//                Log.e(TAG, "onConversionDataSuccess " +  map.toString());
+//            }
+//
+//            @Override
+//            public void onConversionDataFail(String s) {
+//                Log.e(TAG, "onConversionDataFail " + s);
+//            }
+//
+//            @Override
+//            public void onAppOpenAttribution(Map<String, String> map) {
+//                Log.e(TAG, "onAppOpenAttribution " + map.toString());
+//
+//            }
+//
+//            @Override
+//            public void onAttributionFailure(String s) {
+//                Log.e(TAG, "onAttributionFailure " + s);
+//
+//            }
+//        };
+//
+//        AppsFlyerLib.getInstance().init(AF_DEV_KEY, appsFlyerConversionListener, this);
+//        AppsFlyerLib.getInstance().start(this);
 
     }
 

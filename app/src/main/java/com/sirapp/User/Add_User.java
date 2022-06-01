@@ -36,8 +36,8 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -862,8 +862,8 @@ public class Add_User extends BaseFragment {
 
                         if (status.equals("true")) {
                             Map<String, Object> eventValue = new HashMap<String, Object>();
-                            eventValue.put(AFInAppEventParameterName.PARAM_1, "user_addnew");
-                            AppsFlyerLib.getInstance().trackEvent(getActivity(), "user_addnew", eventValue);
+//                            eventValue.put(AFInAppEventParameterName.PARAM_1, "user_addnew");
+                          //  AppsFlyerLib.getInstance().start(getActivity(), "user_addnew", eventValue);
 
                             Bundle params2 = new Bundle();
                             params2.putString("event_name", "Add new User");

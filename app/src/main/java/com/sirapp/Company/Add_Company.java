@@ -39,8 +39,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -820,8 +820,8 @@ public class Add_Company extends BaseFragment {
                             savePref.setCompanyId(company_id);
 
                             Map<String, Object> eventValue = new HashMap<String, Object>();
-                            eventValue.put(AFInAppEventParameterName.PARAM_1, "companies_addnew");
-                            AppsFlyerLib.getInstance().trackEvent(getActivity(), "companies_addnew", eventValue);
+//                            eventValue.put(AFInAppEventParameterName.PARAM_1, "companies_addnew");
+                            //AppsFlyerLib.getInstance().start(getActivity(), "companies_addnew", eventValue);
 
                             Bundle params2 = new Bundle();
                             params2.putString("event_name", "My Companies");

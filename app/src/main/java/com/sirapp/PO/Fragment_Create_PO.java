@@ -66,8 +66,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.bumptech.glide.RequestManager;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -1416,8 +1416,8 @@ public class Fragment_Create_PO extends BaseFragment implements Customer_Bottom_
                         if (status.equals("true")) {
 
                             Map<String, Object> eventValue = new HashMap<String, Object>();
-                            eventValue.put(AFInAppEventParameterName.PARAM_1, "purchaseorder_create");
-                            AppsFlyerLib.getInstance().trackEvent(getActivity(), "purchaseorder_create", eventValue);
+//                            eventValue.put(AFInAppEventParameterName.PARAM_1, "purchaseorder_create");
+                      //      AppsFlyerLib.getInstance().start(getActivity(), "purchaseorder_create", eventValue);
 
                             Bundle params2 = new Bundle();
                             params2.putString("event_name", "Purchase Orders");

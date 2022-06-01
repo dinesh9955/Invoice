@@ -36,8 +36,8 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.google.gson.Gson;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -864,8 +864,8 @@ public class Add_Product extends BaseFragment implements Select_Warehouse_Adapte
                                 if (status.equals("true")) {
 
                                     Map<String, Object> eventValue = new HashMap<String, Object>();
-                                    eventValue.put(AFInAppEventParameterName.PARAM_1, "product_addnew");
-                                    AppsFlyerLib.getInstance().trackEvent(getActivity(), "product_addnew", eventValue);
+//                                    eventValue.put(AFInAppEventParameterName.PARAM_1, "product_addnew");
+                                  //  AppsFlyerLib.getInstance().start(getActivity(), "product_addnew", eventValue);
 
                                     Bundle params2 = new Bundle();
                                     params2.putString("event_name", "My Products");

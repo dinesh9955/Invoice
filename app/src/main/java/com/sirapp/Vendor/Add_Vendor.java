@@ -45,8 +45,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -686,8 +686,8 @@ public class Add_Vendor extends BaseFragment {
                             if (status.equals("true")){
 
                                 Map<String, Object> eventValue = new HashMap<String, Object>();
-                                eventValue.put(AFInAppEventParameterName.PARAM_1, "supplier_addnew");
-                                AppsFlyerLib.getInstance().trackEvent(getActivity(), "supplier_addnew", eventValue);
+//                                eventValue.put(AFInAppEventParameterName.PARAM_1, "supplier_addnew");
+//                                AppsFlyerLib.getInstance().start(getActivity(), "supplier_addnew", eventValue);
 
                                 Bundle params2 = new Bundle();
                                 params2.putString("event_name", "Suppliers");

@@ -23,8 +23,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -630,8 +630,8 @@ public class Update_Stock extends BaseFragment implements Select_Warehouse_Adapt
                         {
 
                             Map<String, Object> eventValue = new HashMap<String, Object>();
-                            eventValue.put(AFInAppEventParameterName.PARAM_1, "stocks_update");
-                            AppsFlyerLib.getInstance().trackEvent(getActivity(), "stocks_update", eventValue);
+//                            eventValue.put(AFInAppEventParameterName.PARAM_1, "stocks_update");
+                           // AppsFlyerLib.getInstance().start(getActivity(), "stocks_update", eventValue);
 
                             Bundle params2 = new Bundle();
                             params2.putString("event_name", "Stocks Update");

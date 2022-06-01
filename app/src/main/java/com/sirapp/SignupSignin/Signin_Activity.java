@@ -28,8 +28,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -373,8 +373,8 @@ public class Signin_Activity extends BaseActivity {
                                 pref.edit().putString(Constant.DEBIT_NOTE,debit_note).commit();
 
                                 Map<String, Object> eventValue = new HashMap<String, Object>();
-                                eventValue.put(AFInAppEventParameterName.PARAM_1, "signin_click");
-                                AppsFlyerLib.getInstance().trackEvent(Signin_Activity.this, "signin_click", eventValue);
+//                                eventValue.put(AFInAppEventParameterName.PARAM_1, "signin_click");
+                             //   AppsFlyerLib.getInstance().start(Signin_Activity.this, "signin_click", eventValue);
 
                                 Bundle params2 = new Bundle();
                                 params2.putString("event_name", "signin_click");
@@ -755,8 +755,8 @@ public class Signin_Activity extends BaseActivity {
                         pref.edit().putString(Constant.DEBIT_NOTE,"1").commit();
 
                         Map<String, Object> eventValue = new HashMap<String, Object>();
-                        eventValue.put(AFInAppEventParameterName.PARAM_1, "signin_click");
-                        AppsFlyerLib.getInstance().trackEvent(Signin_Activity.this, "signin_click", eventValue);
+//                        eventValue.put(AFInAppEventParameterName.PARAM_1, "signin_click");
+                       // AppsFlyerLib.getInstance().start(Signin_Activity.this, "signin_click", eventValue);
 
                         Bundle params2 = new Bundle();
                         params2.putString("event_name", "signin_click");

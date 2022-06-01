@@ -23,8 +23,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
@@ -292,8 +292,8 @@ public class Add_Tax extends BaseFragment {
                         if (status.equals("true")){
 
                             Map<String, Object> eventValue = new HashMap<String, Object>();
-                            eventValue.put(AFInAppEventParameterName.PARAM_1, "taxes_addnew");
-                            AppsFlyerLib.getInstance().trackEvent(getActivity(), "taxes_addnew", eventValue);
+//                            eventValue.put(AFInAppEventParameterName.PARAM_1, "taxes_addnew");
+                           // AppsFlyerLib.getInstance().start(getActivity(), "taxes_addnew", eventValue);
 
                             Bundle params2 = new Bundle();
                             params2.putString("event_name", "Add Taxes");

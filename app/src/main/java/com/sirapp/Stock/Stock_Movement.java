@@ -25,8 +25,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.appsflyer.AFInAppEventParameterName;
-import com.appsflyer.AppsFlyerLib;
+//import com.appsflyer.AFInAppEventParameterName;
+//import com.appsflyer.AppsFlyerLib;
 import com.isapanah.awesomespinner.AwesomeSpinner;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -519,8 +519,8 @@ public class Stock_Movement extends BaseFragment {
                         {
 
                             Map<String, Object> eventValue = new HashMap<String, Object>();
-                            eventValue.put(AFInAppEventParameterName.PARAM_1, "stocks_move");
-                            AppsFlyerLib.getInstance().trackEvent(getActivity(), "stocks_move", eventValue);
+//                            eventValue.put(AFInAppEventParameterName.PARAM_1, "stocks_move");
+                            //AppsFlyerLib.getInstance().start(getActivity(), "stocks_move", eventValue);
 
                             Bundle params2 = new Bundle();
                             params2.putString("event_name", "Stocks Move");
