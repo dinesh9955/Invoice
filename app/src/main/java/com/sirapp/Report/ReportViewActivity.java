@@ -989,13 +989,11 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                 String stringCredit = "";
                 String stringBalance = "";
 
-                balanceAmount = balanceAmount - getDebit;
-                Log.e(TAG, "balanceAmountBB "+balanceAmount);
-
-                balanceAmount = balanceAmount + getCredit;
+                balanceAmount = balanceAmount + getDebit;
                 Log.e(TAG, "balanceAmountAA "+balanceAmount);
 
-
+                balanceAmount = balanceAmount - getCredit;
+                Log.e(TAG, "balanceAmountBB "+balanceAmount);
 
 
                 if(getDebit == 0){
