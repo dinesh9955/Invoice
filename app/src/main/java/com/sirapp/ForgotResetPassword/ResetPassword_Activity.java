@@ -85,9 +85,9 @@ public class ResetPassword_Activity extends BaseActivity {
 
                 }
                 else {
-                    txtsuccess.setVisibility(View.VISIBLE);
-                    txtsuccess.setTextColor(Color.GREEN);
-                    txtsuccess.setText(getString(R.string.dialog_reset_your_password_sucessfully));
+//                    txtsuccess.setVisibility(View.VISIBLE);
+//                    txtsuccess.setTextColor(Color.GREEN);
+//                    txtsuccess.setText(getString(R.string.dialog_reset_your_password_sucessfully));
                     ResetPassword();
                 }
             }

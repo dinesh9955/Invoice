@@ -20,6 +20,7 @@
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_company__details_.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_customer_.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_customer__detail_2.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_forgot_password_.xml" value="0.2" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_go_pro.xml" value="0.12270200940572894" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_go_pro_demo.xml" value="0.25" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_home_.xml" value="0.15775972637879435" />
@@ -28,8 +29,10 @@
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_product_.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_product__detail_.xml" value="0.18" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_report.xml" value="0.15775972637879435" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_reset_password_.xml" value="0.15775972637879435" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_service__detail_.xml" value="0.18" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_settings.xml" value="0.1921875" />
+        <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_signin_.xml" value="0.15775972637879435" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_signup_.xml" value="0.1921875" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_signup_subscription.xml" value="0.33" />
         <entry key="..\:/Dinesh/3/SirProject/app/src/main/res/layout/activity_splash_.xml" value="0.12138157894736842" />

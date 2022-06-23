@@ -869,6 +869,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                             for (int i = 0; i < statement.length(); i++) {
                                 JSONObject item = statement.getJSONObject(i);
 
+                                String date_added = item.getString("date_added");
                                 String created_date = item.getString("created_date");
 //                                String invoice_id = item.getString("invoice_id");
                                 String particular = item.getString("particular");
@@ -882,7 +883,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
 
                                 CustomerReportItem customerReportItem = new CustomerReportItem();
                                 customerReportItem.setCreated_date(created_date);
-//                                customerReportItem.setInvoice_id(invoice_id);
+                                customerReportItem.setDate_added(date_added);
                                 customerReportItem.setParticular(particular);
                                 customerReportItem.setDebit(debit);
                                 customerReportItem.setCredit(credit);
@@ -928,7 +929,7 @@ public ArrayList<String> arrayListFilter = new ArrayList<>();
                     //    if(filterID.equalsIgnoreCase("date")){
                             Collections.sort(customerReportItemArrayList, new Comparator<CustomerReportItem>() {
                                 public int compare(CustomerReportItem o1, CustomerReportItem o2) {
-                                    return o1.getCreated_date().compareTo(o2.getCreated_date());
+                                    return o1.getDate_added().compareTo(o2.getDate_added());
                                 }
                             });
                       //  }

@@ -741,7 +741,13 @@ public class PVViewActivityWebView extends BaseActivity {
         } else {
             // null response or Exception occur
             taxtamountstr = invoicetaxvalue + currency_code;
-            taxtamountstrvalue = ""+taxTitle.replace("(", "").replace(")", "");
+            if(taxtamountstr.equals("0.00$")){
+                taxtamountstr = "";
+                taxtamountstrvalue = "";
+            }else{
+                taxtamountstr = invoicetaxvalue + currency_code;
+                taxtamountstrvalue = ""+taxTitle.replace("(", "").replace(")", "");
+            }
         }
 
         String discountvalue = "";
@@ -848,6 +854,9 @@ public class PVViewActivityWebView extends BaseActivity {
             String htmlview_PaidAmount = getString(R.string.htmlview_PaidAmount);
 
             pemailpaidstr = "";
+
+            Log.e(TAG , "taxtamountstrvalue "+taxtamountstrvalue);
+            Log.e(TAG , "taxtamountstr "+taxtamountstr);
 
             try {
                 content = IOUtils.toString(getAssets().open(name))

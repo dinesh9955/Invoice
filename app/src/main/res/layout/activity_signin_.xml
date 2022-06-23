@@ -149,8 +149,8 @@
             />
 
 
-
         <TextView
+            android:id="@+id/txtforgotpassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/btnlogin"
@@ -160,9 +160,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Forgot Password?"
-            android:textColor="@color/dark_grey"
-            android:id="@+id/txtforgotpassword"
-            />
+            android:textColor="@color/dark_grey" />
 
 
 

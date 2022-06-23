@@ -273,12 +273,12 @@ public class ForgotPassword_Activity extends BaseActivity {
                             Log.e("forgotUserid",user_id);
                             Constant.SuccessToast(ForgotPassword_Activity.this,jsonObject.getString("message"));
                             verifiction_code = profile.getString("verification_code");
-                            edv1.setText(Character.toString(verifiction_code.charAt(0)));
-                            edv2.setText(Character.toString(verifiction_code.charAt(1)));
-                            edv3.setText(Character.toString(verifiction_code.charAt(2)));
-                            edv4.setText(Character.toString(verifiction_code.charAt(3)));
-                            imgsucess.setVisibility(View.VISIBLE);
-                            imgsucess.setImageResource(R.drawable.code_success);
+//                            edv1.setText(Character.toString(verifiction_code.charAt(0)));
+//                            edv2.setText(Character.toString(verifiction_code.charAt(1)));
+//                            edv3.setText(Character.toString(verifiction_code.charAt(2)));
+//                            edv4.setText(Character.toString(verifiction_code.charAt(3)));
+//                            imgsucess.setVisibility(View.VISIBLE);
+//                            imgsucess.setImageResource(R.drawable.code_success);
 
 
 

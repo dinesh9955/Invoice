@@ -11,7 +11,16 @@ public class CustomerReportItem implements Serializable {
     String code = "";
     String customer_id = "";
     String balance = "";
+    String date_added = "";
 
+
+    public String getDate_added() {
+        return date_added;
+    }
+
+    public void setDate_added(String date_added) {
+        this.date_added = date_added;
+    }
 
     public String getCreated_date() {
         return created_date;
